@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:35:24.751Z",
+  "generated_at": "2026-07-07T10:38:24.753Z",
   "counts": {
     "providers": 51,
     "categories": 12,

@@ -207,70 +207,18 @@ function checksBlock(p: Provider): string {
 }
 
 const totalUnknown = providers.reduce((n, p) => n + unknownChecks(p).length, 0);
-const gapFields = ['llms_txt', 'openapi', 'mcp_official', 'agent_docs'] as const;
-const gaps = gapFields
-  .map((f) => ({ f, missing: providers.filter((p) => !p.entrypoints[f]).map((p) => p.id) }))
-  .filter((g) => g.missing.length > 0);
 
-const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
+// generated/providers.md — the full per-provider fact sheets (kept out of the README).
+const providersMd = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
 
-# Agent-Friendly Services
+# Provider Details
 
-An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
+Every known entry point and verified capability fact, with evidence links and dates.
+Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown.
+A missing link means **"no known URL"**, not "confirmed absent"; \`unknown\` means "checked, no reliable evidence found yet".
+Links are probed weekly ([link-health.json](./link-health.json)); machine-readable version: [providers.json](./providers.json).
 
-${badgeParts.join('\n')}
-
-**${providers.length} providers · ${activeCategories.length} categories · ${jsonOut.counts.entrypoint_urls} entry links (machine-probed weekly) · ${jsonOut.counts.checks_answered} capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
-
-## Use It In 30 Seconds
-
-### 🤖 You are an agent
-
-Add the MCP server (four tools: \`search_providers\`, \`get_provider\`, \`list_categories\`, \`get_stats\`; always serves the latest data from \`main\`):
-
-\`\`\`bash
-claude mcp add agent-friendly-services -- npx -y github:${REPO}
-\`\`\`
-
-Any other MCP client: command \`npx\`, args \`["-y", "github:${REPO}"]\`. Details in [\`mcp/\`](./mcp/).
-
-Or skip the server — the dataset is one JSON file, fetch it and go:
-
-\`\`\`bash
-curl -s ${RAW_JSON}
-\`\`\`
-
-Recipes:
-
-\`\`\`bash
-# Entry points for one provider (docs, API reference, MCP, pricing, status page…)
-curl -s ${RAW_JSON} | jq '.providers[] | select(.id == "stripe") | .entrypoints'
-
-# Providers with an official MCP server AND a working sandbox
-curl -s ${RAW_JSON} | jq '[.providers[] | select(.entrypoints.mcp_official and .checks.sandbox_or_test_mode.status == "supported") | .id]'
-
-# Every official MCP server in the index
-curl -s ${RAW_JSON} | jq '.providers[] | {id, mcp: .entrypoints.mcp_official} | select(.mcp)'
-\`\`\`
-
-[\`llms.txt\`](./llms.txt) is the map of this repo; [\`AGENTS.md\`](./AGENTS.md) is the contribution manual. The JSON **is** the API — the MCP server is just a convenient door to it.
-
-### 🧑‍💻 You are a human
-
-Browse the [service matrix](#service-matrix) below, see [how to read it](#how-to-read-this), or open [\`matrix.csv\`](./generated/matrix.csv) in a spreadsheet. Want to help? Every \`unknown\` in [Help Wanted](#help-wanted-) is a 15-minute contribution.
-
-### 🏢 You run one of these services
-
-Your entry may be incomplete — that is fixable in one small PR: set \`submitted_by: vendor\` and use documentation (not marketing pages) as evidence. Disagree with a status? Open an issue with official evidence — facts change when evidence changes. Promotional PRs are declined; see [contributing](./docs/contributing.md).
-
-## How To Read This
-
-- **URL = fact.** Most questions ("is there an OpenAPI spec?") are answered with the link itself. Links are probed weekly ([\`generated/link-health.json\`](./generated/link-health.json)).
-- **Checks** record behavior a URL can't express (self-serve signup, scoped tokens, idempotency…). \`supported\`/\`partial\` always carry an official evidence link and a verification date.
-- **A missing link means "no known URL"**, not "confirmed absent". \`unknown\` means "checked, no reliable evidence found yet". Nobody guesses.
-- Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown
-
-## Service Matrix
+## Matrix
 
 ${activeCategories
   .map((cat) => {
@@ -300,30 +248,87 @@ ${checksBlock(p)}
 ${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
   })
   .join('\n')}
+`;
+fs.writeFileSync(path.join(GENERATED_DIR, 'providers.md'), providersMd);
 
-## Help Wanted 🌱
+// README.md — awesome-style: one bullet per provider, details linked.
+const DETAILS = './generated/providers.md';
 
-The fastest way to contribute is to resolve an \`unknown\`: find official evidence, add the URL, open a PR. **${totalUnknown} unknowns are open right now.**
+function awesomeLinks(p: Provider): string {
+  const e = p.entrypoints;
+  const parts: string[] = [];
+  if (e.api_reference) parts.push(`[API](${e.api_reference})`);
+  if (e.graphql && !e.api_reference) parts.push(`[GraphQL](${e.graphql})`);
+  if (e.mcp_official) parts.push(`[MCP](${e.mcp_official})`);
+  if (e.llms_txt) parts.push(`[llms.txt](${e.llms_txt})`);
+  if (e.openapi) parts.push(`[OpenAPI](${e.openapi})`);
+  if (e.cli) parts.push(`[CLI](${e.cli})`);
+  parts.push(`[all facts →](${DETAILS}#${p.id})`);
+  return parts.join(' · ');
+}
 
-${gaps.map((g) => `- \`${g.f}\` link unknown for: ${g.missing.map((id) => `[${id}](#${id})`).join(', ')}`).join('\n')}
+function awesomeEntry(p: Provider): string {
+  const summary = p.summary.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
+  return `- **[${p.name}](${p.entrypoints.docs})** — ${summary}. ${awesomeLinks(p)}`;
+}
+
+// GitHub heading slugs: lowercase, strip punctuation, each space becomes one hyphen.
+const toc = activeCategories
+  .map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s/g, '-')})`)
+  .join(' · ');
+
+const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
+
+# Agent-Friendly Services
+
+Where AI agents plug into ${providers.length} popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date. No scores, no tiers — [facts only](./docs/methodology.md).
+
+${badgeParts.join('\n')}
+
+**🤖 Agents** — add the MCP server, or fetch the whole dataset as one JSON file:
+
+\`\`\`bash
+# MCP server — tools: search_providers, get_provider, list_categories, get_stats
+claude mcp add agent-friendly-services -- npx -y github:${REPO}
+
+# Or skip the server: the same data as one JSON file
+curl -s ${RAW_JSON}
+\`\`\`
+
+Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details](./mcp/)). Repo map: [\`llms.txt\`](./llms.txt) · contribution manual: [\`AGENTS.md\`](./AGENTS.md).
+
+**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
+
+**🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
+
+---
+
+${toc}
+
+${activeCategories
+  .map((cat) => {
+    const list = providers.filter((p) => p.category === cat.id);
+    return `## ${cat.name}
+
+${list.map(awesomeEntry).join('\n')}`;
+  })
+  .join('\n\n')}
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve an \`unknown\` (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical with readable errors; humans only review evidence quality. Full guide: [\`docs/contributing.md\`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **${totalUnknown} open \`unknown\`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [\`docs/contributing.md\`](./docs/contributing.md).
 
-Have a coding agent? Point it at a checkout of this repo and paste:
+Have a coding agent? Point it at a checkout and paste:
 
 \`\`\`text
-Read AGENTS.md, then resolve one "unknown" check from the Help Wanted section of
-README.md: find official evidence, update the provider YAML (or leave it unknown
-if evidence is genuinely missing), run \`npm run validate\`, and open a small PR.
+Read AGENTS.md, then resolve one "unknown" check: find official evidence, update
+the provider YAML (or leave it unknown if evidence is genuinely missing), run
+npm run validate, and open a small PR.
 \`\`\`
 
-## Methodology
+## Related
 
-Facts only, evidence required, \`unknown\` is honest, freshness is tracked per check, links are probed weekly. Full write-up: [\`docs/methodology.md\`](./docs/methodology.md).
-
-Related projects: [Fern Agent Score](https://buildwithfern.com/agent-score) and the [Agent-Friendly Docs Spec](https://github.com/fern-api/agent-score) (docs-site readiness scoring — we deliberately don't duplicate it), [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/), the [official MCP Registry](https://registry.modelcontextprotocol.io/) (authoritative MCP source we sync against), [llms.txt hub](https://llmstxthub.com/).
+[Fern Agent Score](https://buildwithfern.com/agent-score) (docs-site readiness scoring — we deliberately don't duplicate it) · [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/) · [official MCP Registry](https://registry.modelcontextprotocol.io/) · [llms.txt hub](https://llmstxthub.com/)
 
 ## License
 

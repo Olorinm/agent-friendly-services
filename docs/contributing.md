@@ -11,8 +11,9 @@ size:
 | 1–2 h | Add a provider | New YAML file, see below |
 | ongoing | Adopt a category as steward | Say hi in an issue |
 
-The README's **Help Wanted** section lists every open `unknown` — each one is a
-ready-made first contribution.
+Every open `unknown` is a ready-made first contribution: see each provider's
+**"Unknown (help wanted)"** line in [`generated/providers.md`](../generated/providers.md),
+or `derived.unknown_checks` in `generated/providers.json`.
 
 ## Add a provider
 
@@ -45,8 +46,8 @@ This repo is designed so a coding agent can contribute end-to-end. Paste this
 into Claude Code, Codex, or similar, from a checkout of this repo:
 
 ```text
-Read AGENTS.md. Then resolve one "unknown" check from the Help Wanted section
-of README.md: research official evidence on the provider's docs site, update
+Read AGENTS.md. Then resolve one "unknown" check (listed per provider in
+generated/providers.md): research official evidence on the provider's docs site, update
 the provider YAML accordingly (or leave it unknown if evidence is genuinely
 missing), run `npm run validate`, and prepare a one-line-change PR.
 ```

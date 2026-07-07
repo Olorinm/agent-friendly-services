@@ -28,7 +28,7 @@ You (an agent) can contribute to it end-to-end. This file tells you how.
 
 ## Resolve an `unknown` (the easiest contribution)
 
-1. Pick any check marked `unknown` (the README Help Wanted section lists them all).
+1. Pick any check marked `unknown` (each provider's "Unknown (help wanted)" line in [`generated/providers.md`](./generated/providers.md) lists them; machine-readable in `generated/providers.json` under `derived.unknown_checks`).
 2. Find official evidence (docs > API reference > official repo > changelog > official blog).
 3. Set the status, add `evidence` and `verified`, run `npm run validate`, open a PR.
 4. If you find no reliable evidence, leave it `unknown`. Do not guess.
