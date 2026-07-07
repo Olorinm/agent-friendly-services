@@ -4,10 +4,15 @@ browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
+gemini-api,Gemini API,ai-models,false,false,false,false,unknown,true,2026-07-07
 github,GitHub,developer-tools,true,false,true,true,unknown,true,2026-07-07
+groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
+hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
 neon,Neon,databases,true,true,false,true,supported,true,2026-07-07
 openai,OpenAI,ai-models,false,false,true,false,unknown,true,2026-07-07
+replicate,Replicate,ai-models,false,true,false,true,unknown,true,2026-07-07
 resend,Resend,communication,true,false,false,false,supported,true,2026-07-07
 stripe,Stripe,payments-billing,true,true,true,true,supported,true,2026-07-07
 supabase,Supabase,databases,true,true,false,true,partial,true,2026-07-07
+together-ai,Together AI,ai-models,false,true,false,false,unknown,true,2026-07-07
 vercel,Vercel,cloud-hosting,true,true,false,true,supported,true,2026-07-07

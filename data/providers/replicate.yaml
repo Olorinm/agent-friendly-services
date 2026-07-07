@@ -1,0 +1,75 @@
+id: replicate
+name: Replicate
+category: ai-models
+homepage: https://replicate.com
+summary: Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
+submitted_by: community
+
+tags:
+  - models
+  - inference
+  - open-source
+
+entrypoints:
+  docs: https://replicate.com/docs
+  api_reference: https://replicate.com/docs/reference/http
+  llms_txt: https://replicate.com/llms.txt
+  changelog: https://replicate.com/changelog
+  status_page: https://replicatestatus.com
+  pricing: https://replicate.com/pricing
+  signup: https://replicate.com/signin
+  api_keys: https://replicate.com/docs/reference/http
+  cli: https://github.com/replicate/cli
+  sdks: https://replicate.com/docs/reference/client-libraries
+  webhooks: https://replicate.com/docs/topics/webhooks
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://replicate.com/signin
+    verified: "2026-07-07"
+    notes: GitHub-based sign-in.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://replicate.com/docs/reference/http
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API tokens are the standard auth; no public OAuth flow for third parties documented.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: Tokens manageable in account settings; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated test mode documented.
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Pay-per-use billing; trial credits have varied over time and are not stably documented.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://replicate.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard shows predictions and spend; needs a docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: Models are content-versioned; API-level versioning policy not documented.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

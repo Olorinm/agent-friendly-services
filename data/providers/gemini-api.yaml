@@ -1,0 +1,78 @@
+id: gemini-api
+name: Gemini API
+category: ai-models
+homepage: https://ai.google.dev
+summary: Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
+submitted_by: community
+scope: "Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed."
+
+tags:
+  - llm
+  - gemini
+  - inference
+
+entrypoints:
+  docs: https://ai.google.dev/gemini-api/docs
+  api_reference: https://ai.google.dev/api
+  changelog: https://ai.google.dev/gemini-api/docs/changelog
+  pricing: https://ai.google.dev/gemini-api/docs/pricing
+  signup: https://aistudio.google.com
+  api_keys: https://ai.google.dev/gemini-api/docs/api-key
+  sdks: https://ai.google.dev/gemini-api/docs/libraries
+  agent_docs: https://ai.google.dev/gemini-api/docs/function-calling
+  rate_limits: https://ai.google.dev/gemini-api/docs/rate-limits
+  errors: https://ai.google.dev/gemini-api/docs/troubleshooting
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://aistudio.google.com
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://ai.google.dev/gemini-api/docs/api-key
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API keys via AI Studio are the standard auth; OAuth exists in the broader Google Cloud surface, out of scope here.
+
+  scoped_tokens:
+    status: unknown
+    notes: Keys are project-bound in AI Studio; no per-permission scoping documented on the Gemini API surface.
+
+  token_revocation:
+    status: unknown
+    notes: Keys can be deleted in AI Studio; needs a canonical docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated test mode; the free tier serves as a low-risk environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://ai.google.dev/gemini-api/docs/pricing
+    verified: "2026-07-07"
+    notes: Documented free tier with rate limits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://ai.google.dev/gemini-api/docs/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://ai.google.dev/gemini-api/docs/api-versions
+    verified: "2026-07-07"
+    notes: v1/v1beta versions are documented.
+
+  automation_permitted:
+    status: unknown
+    notes: Gemini API additional terms not yet reviewed and recorded.

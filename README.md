@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-12-2563eb)
+![Providers](https://img.shields.io/badge/providers-17-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**12 providers · 8 categories · 145 entry links (machine-probed weekly) · 91 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**17 providers · 8 categories · 196 entry links (machine-probed weekly) · 113 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -58,7 +58,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Gemini API](#gemini-api) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Groq](#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | 2026-07-07 |
 | [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
+| [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
 
 ### Code Execution
 
@@ -172,6 +177,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **N/A:** Idempotency — Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
+### Gemini API <a id="gemini-api"></a>
+
+> Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
+
+**Category:** AI Models · **Scope:** Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed. · `Agent Docs` `Self-serve`
+
+**Links:** [Documentation](https://ai.google.dev/gemini-api/docs) · [API Reference](https://ai.google.dev/api) · [Changelog](https://ai.google.dev/gemini-api/docs/changelog) · [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Signup](https://aistudio.google.com) · [API Keys](https://ai.google.dev/gemini-api/docs/api-key) · [SDKs](https://ai.google.dev/gemini-api/docs/libraries) · [Agent Docs](https://ai.google.dev/gemini-api/docs/function-calling) · [Rate Limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Errors](https://ai.google.dev/gemini-api/docs/troubleshooting)
+
+- **Supported:** [Self-serve signup](https://aistudio.google.com) · [Self-serve API keys](https://ai.google.dev/gemini-api/docs/api-key) · [Free tier / trial](https://ai.google.dev/gemini-api/docs/pricing) · [Self-serve upgrade](https://ai.google.dev/gemini-api/docs/pricing) · [Versioning policy](https://ai.google.dev/gemini-api/docs/api-versions)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
 ### GitHub <a id="github"></a>
 
 > Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
@@ -184,6 +200,28 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
 
 > Multi-product platform; this entry covers the core developer platform only (see scope).
+
+### Groq <a id="groq"></a>
+
+> Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://console.groq.com/docs) · [API Reference](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [Changelog](https://console.groq.com/docs/changelog) · [Status Page](https://groqstatus.com) · [Pricing](https://groq.com/pricing) · [Signup](https://console.groq.com) · [API Keys](https://console.groq.com/docs/quickstart) · [SDKs](https://console.groq.com/docs/libraries) · [Rate Limits](https://console.groq.com/docs/rate-limits) · [Errors](https://console.groq.com/docs/errors)
+
+- **Supported:** [Self-serve signup](https://console.groq.com) · [Self-serve API keys](https://console.groq.com/docs/quickstart) · [Free tier / trial](https://groq.com/pricing) · [Self-serve upgrade](https://groq.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Hugging Face <a id="hugging-face"></a>
+
+> Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.
+
+**Category:** AI Models · **Scope:** Hub + Hub API + Inference Providers; self-hosted libraries are not assessed. · `Official MCP` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://huggingface.co/docs) · [API Reference](https://huggingface.co/docs/hub/api) · [Status Page](https://status.huggingface.co) · [Pricing](https://huggingface.co/pricing) · [Signup](https://huggingface.co/join) · [API Keys](https://huggingface.co/docs/hub/security-tokens) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDKs](https://huggingface.co/docs/huggingface_hub) · [Official MCP](https://huggingface.co/mcp) · [Rate Limits](https://huggingface.co/docs/hub/rate-limits)
+
+- **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Neon <a id="neon"></a>
 
@@ -208,6 +246,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://platform.openai.com/signup) · [Self-serve API keys](https://platform.openai.com/docs/quickstart) · [Self-serve upgrade](https://platform.openai.com/docs/pricing) · [Versioning policy](https://platform.openai.com/docs/deprecations)
 - **Partial:** [Scoped tokens](https://platform.openai.com/docs/quickstart) — Project-scoped API keys separate projects; permission granularity is limited.
 - **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Replicate <a id="replicate"></a>
+
+> Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
+
+**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://replicate.com/docs) · [API Reference](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [Changelog](https://replicate.com/changelog) · [Status Page](https://replicatestatus.com) · [Pricing](https://replicate.com/pricing) · [Signup](https://replicate.com/signin) · [API Keys](https://replicate.com/docs/reference/http) · [CLI](https://github.com/replicate/cli) · [SDKs](https://replicate.com/docs/reference/client-libraries) · [Webhooks](https://replicate.com/docs/topics/webhooks)
+
+- **Supported:** [Self-serve signup](https://replicate.com/signin) · [Self-serve API keys](https://replicate.com/docs/reference/http) · [Self-serve upgrade](https://replicate.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Resend <a id="resend"></a>
 
@@ -246,6 +295,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Sandbox / test mode](https://supabase.com/docs/guides/cli) — Full local development stack via CLI; hosted branching is a paid feature.
 - **Unknown (help wanted):** `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Together AI <a id="together-ai"></a>
+
+> Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.together.ai) · [API Reference](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [Status Page](https://status.together.ai) · [Pricing](https://www.together.ai/pricing) · [Signup](https://api.together.ai) · [API Keys](https://docs.together.ai/docs/quickstart) · [Rate Limits](https://docs.together.ai/docs/rate-limits) · [Errors](https://docs.together.ai/docs/error-codes)
+
+- **Supported:** [Self-serve signup](https://api.together.ai) · [Self-serve API keys](https://docs.together.ai/docs/quickstart) · [Self-serve upgrade](https://www.together.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Vercel <a id="vercel"></a>
 
 > Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
@@ -262,12 +322,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **53 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **91 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [github](#github), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [neon](#neon), [resend](#resend), [supabase](#supabase), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [openai](#openai)
-- `agent_docs` link unknown for: [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [resend](#resend)
+- `llms_txt` link unknown for: [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
+- `openapi` link unknown for: [anthropic](#anthropic), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [neon](#neon), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [gemini-api](#gemini-api), [groq](#groq), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [replicate](#replicate), [resend](#resend), [together-ai](#together-ai)
 
 ## Contributing
 

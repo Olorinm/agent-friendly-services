@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T06:21:04.887Z",
+  "generated_at": "2026-07-07T07:02:19.490Z",
   "counts": {
-    "providers": 12,
+    "providers": 17,
     "categories": 12,
-    "entrypoint_urls": 145,
-    "checks_answered": 91
+    "entrypoint_urls": 196,
+    "checks_answered": 113
   },
   "categories": [
     {
@@ -742,6 +742,104 @@
       }
     },
     {
+      "id": "gemini-api",
+      "name": "Gemini API",
+      "category": "ai-models",
+      "homepage": "https://ai.google.dev",
+      "summary": "Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.",
+      "submitted_by": "community",
+      "scope": "Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed.",
+      "tags": [
+        "llm",
+        "gemini",
+        "inference"
+      ],
+      "entrypoints": {
+        "docs": "https://ai.google.dev/gemini-api/docs",
+        "api_reference": "https://ai.google.dev/api",
+        "changelog": "https://ai.google.dev/gemini-api/docs/changelog",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+        "signup": "https://aistudio.google.com",
+        "api_keys": "https://ai.google.dev/gemini-api/docs/api-key",
+        "sdks": "https://ai.google.dev/gemini-api/docs/libraries",
+        "agent_docs": "https://ai.google.dev/gemini-api/docs/function-calling",
+        "rate_limits": "https://ai.google.dev/gemini-api/docs/rate-limits",
+        "errors": "https://ai.google.dev/gemini-api/docs/troubleshooting"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://aistudio.google.com",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://ai.google.dev/gemini-api/docs/api-key",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys via AI Studio are the standard auth; OAuth exists in the broader Google Cloud surface, out of scope here."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Keys are project-bound in AI Studio; no per-permission scoping documented on the Gemini API surface."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys can be deleted in AI Studio; needs a canonical docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode; the free tier serves as a low-risk environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://ai.google.dev/gemini-api/docs/pricing",
+          "verified": "2026-07-07",
+          "notes": "Documented free tier with rate limits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://ai.google.dev/gemini-api/docs/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://ai.google.dev/gemini-api/docs/api-versions",
+          "verified": "2026-07-07",
+          "notes": "v1/v1beta versions are documented."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Gemini API additional terms not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Agent Docs",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "github",
       "name": "GitHub",
       "category": "developer-tools",
@@ -849,6 +947,201 @@
         "unknown_checks": [
           "sandbox_or_test_mode",
           "idempotency"
+        ]
+      }
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "category": "ai-models",
+      "homepage": "https://groq.com",
+      "summary": "Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "low-latency"
+      ],
+      "entrypoints": {
+        "docs": "https://console.groq.com/docs",
+        "api_reference": "https://console.groq.com/docs/api-reference",
+        "llms_txt": "https://console.groq.com/llms.txt",
+        "changelog": "https://console.groq.com/docs/changelog",
+        "status_page": "https://groqstatus.com",
+        "pricing": "https://groq.com/pricing",
+        "signup": "https://console.groq.com",
+        "api_keys": "https://console.groq.com/docs/quickstart",
+        "sdks": "https://console.groq.com/docs/libraries",
+        "rate_limits": "https://console.groq.com/docs/rate-limits",
+        "errors": "https://console.groq.com/docs/errors"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.groq.com",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://console.groq.com/docs/quickstart",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode; the free tier serves as a low-risk environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://groq.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free tier with rate limits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://groq.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Self-serve developer tier."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "hugging-face",
+      "name": "Hugging Face",
+      "category": "ai-models",
+      "homepage": "https://huggingface.co",
+      "summary": "Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.",
+      "submitted_by": "community",
+      "scope": "Hub + Hub API + Inference Providers; self-hosted libraries are not assessed.",
+      "tags": [
+        "models",
+        "inference",
+        "hub"
+      ],
+      "entrypoints": {
+        "docs": "https://huggingface.co/docs",
+        "api_reference": "https://huggingface.co/docs/hub/api",
+        "status_page": "https://status.huggingface.co",
+        "pricing": "https://huggingface.co/pricing",
+        "signup": "https://huggingface.co/join",
+        "api_keys": "https://huggingface.co/docs/hub/security-tokens",
+        "cli": "https://huggingface.co/docs/huggingface_hub/guides/cli",
+        "sdks": "https://huggingface.co/docs/huggingface_hub",
+        "mcp_official": "https://huggingface.co/mcp",
+        "rate_limits": "https://huggingface.co/docs/hub/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/join",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/docs/hub/security-tokens",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/docs/hub/oauth",
+          "verified": "2026-07-07",
+          "notes": "\"Sign in with Hugging Face\" OAuth/OpenID Connect for third-party apps."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/docs/hub/security-tokens",
+          "verified": "2026-07-07",
+          "notes": "Fine-grained tokens with per-repo and per-permission scoping."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/docs/hub/security-tokens",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated sandbox; free accounts serve as a test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://huggingface.co/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Billing/usage pages exist in settings; needs a public docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Hub ToS not yet reviewed for automated/agent usage; API automation is clearly normal practice."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
         ]
       }
     },
@@ -1053,6 +1346,104 @@
           "free_tier_or_trial",
           "usage_dashboard",
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "replicate",
+      "name": "Replicate",
+      "category": "ai-models",
+      "homepage": "https://replicate.com",
+      "summary": "Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "models",
+        "inference",
+        "open-source"
+      ],
+      "entrypoints": {
+        "docs": "https://replicate.com/docs",
+        "api_reference": "https://replicate.com/docs/reference/http",
+        "llms_txt": "https://replicate.com/llms.txt",
+        "changelog": "https://replicate.com/changelog",
+        "status_page": "https://replicatestatus.com",
+        "pricing": "https://replicate.com/pricing",
+        "signup": "https://replicate.com/signin",
+        "api_keys": "https://replicate.com/docs/reference/http",
+        "cli": "https://github.com/replicate/cli",
+        "sdks": "https://replicate.com/docs/reference/client-libraries",
+        "webhooks": "https://replicate.com/docs/topics/webhooks"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://replicate.com/signin",
+          "verified": "2026-07-07",
+          "notes": "GitHub-based sign-in."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://replicate.com/docs/reference/http",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API tokens are the standard auth; no public OAuth flow for third parties documented."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Tokens manageable in account settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode documented."
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "Pay-per-use billing; trial credits have varied over time and are not stably documented."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://replicate.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard shows predictions and spend; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "Models are content-versioned; API-level versioning policy not documented."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
           "automation_permitted"
         ]
       }
@@ -1370,6 +1761,98 @@
         "stale": false,
         "last_verified": "2026-07-07",
         "unknown_checks": [
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "together-ai",
+      "name": "Together AI",
+      "category": "ai-models",
+      "homepage": "https://www.together.ai",
+      "summary": "Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "open-source"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.together.ai",
+        "api_reference": "https://docs.together.ai/reference/chat-completions",
+        "llms_txt": "https://docs.together.ai/llms.txt",
+        "status_page": "https://status.together.ai",
+        "pricing": "https://www.together.ai/pricing",
+        "signup": "https://api.together.ai",
+        "api_keys": "https://docs.together.ai/docs/quickstart",
+        "rate_limits": "https://docs.together.ai/docs/rate-limits",
+        "errors": "https://docs.together.ai/docs/error-codes"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://api.together.ai",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.together.ai/docs/quickstart",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode documented."
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "Promotional credits have varied; no stable documented free tier."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.together.ai/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
           "usage_dashboard",
           "idempotency",
           "versioning_policy",

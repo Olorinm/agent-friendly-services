@@ -1,0 +1,80 @@
+id: hugging-face
+name: Hugging Face
+category: ai-models
+homepage: https://huggingface.co
+summary: Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.
+submitted_by: community
+scope: "Hub + Hub API + Inference Providers; self-hosted libraries are not assessed."
+
+tags:
+  - models
+  - inference
+  - hub
+
+entrypoints:
+  docs: https://huggingface.co/docs
+  api_reference: https://huggingface.co/docs/hub/api
+  status_page: https://status.huggingface.co
+  pricing: https://huggingface.co/pricing
+  signup: https://huggingface.co/join
+  api_keys: https://huggingface.co/docs/hub/security-tokens
+  cli: https://huggingface.co/docs/huggingface_hub/guides/cli
+  sdks: https://huggingface.co/docs/huggingface_hub
+  mcp_official: https://huggingface.co/mcp
+  rate_limits: https://huggingface.co/docs/hub/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://huggingface.co/join
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://huggingface.co/docs/hub/security-tokens
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://huggingface.co/docs/hub/oauth
+    verified: "2026-07-07"
+    notes: '"Sign in with Hugging Face" OAuth/OpenID Connect for third-party apps.'
+
+  scoped_tokens:
+    status: supported
+    evidence: https://huggingface.co/docs/hub/security-tokens
+    verified: "2026-07-07"
+    notes: Fine-grained tokens with per-repo and per-permission scoping.
+
+  token_revocation:
+    status: supported
+    evidence: https://huggingface.co/docs/hub/security-tokens
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated sandbox; free accounts serve as a test environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://huggingface.co/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://huggingface.co/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Billing/usage pages exist in settings; needs a public docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: Hub ToS not yet reviewed for automated/agent usage; API automation is clearly normal practice.

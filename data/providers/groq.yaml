@@ -1,0 +1,75 @@
+id: groq
+name: Groq
+category: ai-models
+homepage: https://groq.com
+summary: Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.
+submitted_by: community
+
+tags:
+  - llm
+  - inference
+  - low-latency
+
+entrypoints:
+  docs: https://console.groq.com/docs
+  api_reference: https://console.groq.com/docs/api-reference
+  llms_txt: https://console.groq.com/llms.txt
+  changelog: https://console.groq.com/docs/changelog
+  status_page: https://groqstatus.com
+  pricing: https://groq.com/pricing
+  signup: https://console.groq.com
+  api_keys: https://console.groq.com/docs/quickstart
+  sdks: https://console.groq.com/docs/libraries
+  rate_limits: https://console.groq.com/docs/rate-limits
+  errors: https://console.groq.com/docs/errors
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://console.groq.com
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://console.groq.com/docs/quickstart
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in console; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated test mode; the free tier serves as a low-risk environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://groq.com/pricing
+    verified: "2026-07-07"
+    notes: Free tier with rate limits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://groq.com/pricing
+    verified: "2026-07-07"
+    notes: Self-serve developer tier.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.
