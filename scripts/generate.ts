@@ -226,7 +226,15 @@ ${badgeParts.join('\n')}
 
 ### 🤖 You are an agent
 
-The dataset is one JSON file — fetch it and go:
+Add the MCP server (four tools: \`search_providers\`, \`get_provider\`, \`list_categories\`, \`get_stats\`; always serves the latest data from \`main\`):
+
+\`\`\`bash
+claude mcp add agent-friendly-services -- npx -y github:${REPO}
+\`\`\`
+
+Any other MCP client: command \`npx\`, args \`["-y", "github:${REPO}"]\`. Details in [\`mcp/\`](./mcp/).
+
+Or skip the server — the dataset is one JSON file, fetch it and go:
 
 \`\`\`bash
 curl -s ${RAW_JSON}
@@ -245,7 +253,7 @@ curl -s ${RAW_JSON} | jq '[.providers[] | select(.entrypoints.mcp_official and .
 curl -s ${RAW_JSON} | jq '.providers[] | {id, mcp: .entrypoints.mcp_official} | select(.mcp)'
 \`\`\`
 
-[\`llms.txt\`](./llms.txt) is the map of this repo; [\`AGENTS.md\`](./AGENTS.md) is the contribution manual. An MCP server exposing this index is on the roadmap — until then, the JSON **is** the API.
+[\`llms.txt\`](./llms.txt) is the map of this repo; [\`AGENTS.md\`](./AGENTS.md) is the contribution manual. The JSON **is** the API — the MCP server is just a convenient door to it.
 
 ### 🧑‍💻 You are a human
 

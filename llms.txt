@@ -8,6 +8,7 @@
 
 - [Providers JSON](./generated/providers.json): Full machine-readable dataset with derived badges and freshness. Start here.
 - Canonical raw URL for external agents: https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json
+- [MCP server](./mcp/README.md): `npx -y github:Olorinm/agent-friendly-services` — tools search_providers / get_provider / list_categories / get_stats over the same dataset.
 - [Provider sources](./data/providers/): One YAML per provider (source of truth).
 - [Field definitions](./data/fields.yaml): What every entrypoint and check means, and how each is verified.
 - [Categories](./data/categories.yaml): Canonical category list.

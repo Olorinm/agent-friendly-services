@@ -1,7 +1,7 @@
 {
   "name": "agent-friendly-services",
   "version": "0.1.0",
-  "description": "A community-maintained, evidence-backed directory of service entry points for AI agents",
+  "description": "Evidence-backed, machine-readable index of agent-friendly service providers, with an MCP server.",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -22,5 +22,15 @@
     "js-yaml": "^5.2.1",
     "tsx": "^4.23.0",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "bin": {
+    "agent-friendly-services-mcp": "mcp/server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
