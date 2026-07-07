@@ -5,7 +5,7 @@
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
 ![Providers](https://img.shields.io/badge/providers-51-2563eb)
-[![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-586_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -479,9 +479,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 **Category:** AI Models · `llms.txt` `OpenAPI` `Self-serve`
 
-**Links:** [Documentation](https://docs.mistral.ai) · [API Reference](https://docs.mistral.ai/api) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [llms.txt](https://docs.mistral.ai/llms.txt) · [Changelog](https://docs.mistral.ai/getting-started/changelog) · [Status Page](https://status.mistral.ai) · [Pricing](https://mistral.ai/pricing) · [Signup](https://console.mistral.ai) · [API Keys](https://docs.mistral.ai/getting-started/quickstart) · [SDKs](https://docs.mistral.ai/getting-started/clients)
+**Links:** [Documentation](https://docs.mistral.ai) · [API Reference](https://docs.mistral.ai/api) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [llms.txt](https://docs.mistral.ai/llms.txt) · [Changelog](https://docs.mistral.ai/getting-started/changelog) · [Status Page](https://status.mistral.ai) · [Pricing](https://mistral.ai/pricing) · [Signup](https://mistral.ai) · [API Keys](https://docs.mistral.ai/getting-started/quickstart) · [SDKs](https://docs.mistral.ai/getting-started/clients)
 
-- **Supported:** [Self-serve signup](https://console.mistral.ai) · [Self-serve API keys](https://docs.mistral.ai/getting-started/quickstart) · [Free tier / trial](https://mistral.ai/pricing) · [Self-serve upgrade](https://mistral.ai/pricing)
+- **Supported:** [Self-serve signup](https://mistral.ai) · [Self-serve API keys](https://docs.mistral.ai/getting-started/quickstart) · [Free tier / trial](https://mistral.ai/pricing) · [Self-serve upgrade](https://mistral.ai/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Modal <a id="modal"></a>

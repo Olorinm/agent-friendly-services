@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:04:19.184Z",
+  "generated_at": "2026-07-07T10:06:16.828Z",
   "counts": {
     "providers": 51,
     "categories": 12,
@@ -2717,15 +2717,16 @@
         "changelog": "https://docs.mistral.ai/getting-started/changelog",
         "status_page": "https://status.mistral.ai",
         "pricing": "https://mistral.ai/pricing",
-        "signup": "https://console.mistral.ai",
+        "signup": "https://mistral.ai",
         "api_keys": "https://docs.mistral.ai/getting-started/quickstart",
         "sdks": "https://docs.mistral.ai/getting-started/clients"
       },
       "checks": {
         "self_serve_signup": {
           "status": "supported",
-          "evidence": "https://console.mistral.ai",
-          "verified": "2026-07-07"
+          "evidence": "https://mistral.ai",
+          "verified": "2026-07-07",
+          "notes": "Console sign-up (console.mistral.ai) is self-serve but rejects automated probes at the network level, so the homepage is cited."
         },
         "api_key_self_serve": {
           "status": "supported",
