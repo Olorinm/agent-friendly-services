@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://docs.sentry.io
   api_reference: https://docs.sentry.io/api/
+  openapi: https://github.com/getsentry/sentry-api-schema
   llms_txt: https://docs.sentry.io/llms.txt
   changelog: https://sentry.io/changelog/
   status_page: https://status.sentry.io

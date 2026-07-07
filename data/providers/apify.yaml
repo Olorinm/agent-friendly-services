@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://docs.apify.com
   api_reference: https://docs.apify.com/api/v2
+  openapi: https://docs.apify.com/api/openapi.json
   llms_txt: https://docs.apify.com/llms.txt
   changelog: https://apify.com/change-log
   status_page: https://status.apify.com

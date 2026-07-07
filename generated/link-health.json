@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-07-07T10:30:29.876Z",
-  "total": 610,
-  "ok": 605,
+  "checked_at": "2026-07-07T10:35:23.078Z",
+  "total": 616,
+  "ok": 611,
   "inconclusive": 5,
   "broken": 0,
   "results": [
@@ -333,6 +333,14 @@
       "status": 200,
       "sources": [
         "slack:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://api.supabase.com/api/v1-json",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "supabase:entrypoints.openapi"
       ]
     },
     {
@@ -1151,6 +1159,14 @@
       ]
     },
     {
+      "url": "https://docs.apify.com/api/openapi.json",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.openapi"
+      ]
+    },
+    {
       "url": "https://docs.apify.com/api/v2",
       "class": "ok",
       "status": 200,
@@ -1604,6 +1620,14 @@
       "status": 200,
       "sources": [
         "gitlab:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/api/openapi/openapi_interactive",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.openapi"
       ]
     },
     {
@@ -2543,6 +2567,14 @@
       ]
     },
     {
+      "url": "https://github.com/getsentry/sentry-api-schema",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.openapi"
+      ]
+    },
+    {
       "url": "https://github.com/github/github-mcp-server",
       "class": "ok",
       "status": 200,
@@ -3258,6 +3290,14 @@
       ]
     },
     {
+      "url": "https://neon.tech/api_spec/release/v2.json",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "neon:entrypoints.openapi"
+      ]
+    },
+    {
       "url": "https://neonstatus.com",
       "class": "ok",
       "status": 200,
@@ -3353,6 +3393,14 @@
       "status": 200,
       "sources": [
         "openai:homepage"
+      ]
+    },
+    {
+      "url": "https://openapi.vercel.sh",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vercel:entrypoints.openapi"
       ]
     },
     {

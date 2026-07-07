@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://neon.com/docs
   api_reference: https://api-docs.neon.tech
+  openapi: https://neon.tech/api_spec/release/v2.json
   llms_txt: https://neon.com/llms.txt
   changelog: https://neon.com/docs/changelog
   status_page: https://neonstatus.com

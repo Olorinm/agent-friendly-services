@@ -5,11 +5,11 @@
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
 ![Providers](https://img.shields.io/badge/providers-51-2563eb)
-[![Link health](https://img.shields.io/badge/link_health-605_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**51 providers · 12 categories · 530 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**51 providers · 12 categories · 536 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -98,7 +98,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [GitLab](#gitlab) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Cloud / Hosting
@@ -108,24 +108,24 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
 | [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Vercel](#vercel) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Databases
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Neon](#neon) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 | [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Supabase](#supabase) | ✓ | ✓ | — | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Supabase](#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
 | [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Web Search / Data
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Apify](#apify) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | 2026-07-07 |
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
@@ -164,7 +164,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 
 ### Commerce / Marketing
 
@@ -204,9 +204,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.apify.com) · [API Reference](https://docs.apify.com/api/v2) · [llms.txt](https://docs.apify.com/llms.txt) · [Changelog](https://apify.com/change-log) · [Status Page](https://status.apify.com) · [Pricing](https://apify.com/pricing) · [Signup](https://console.apify.com/sign-up) · [API Keys](https://docs.apify.com/platform/integrations/api) · [CLI](https://docs.apify.com/cli) · [SDKs](https://docs.apify.com/sdk) · [Official MCP](https://docs.apify.com/platform/integrations/mcp) · [Webhooks](https://docs.apify.com/platform/integrations/webhooks)
+**Links:** [Documentation](https://docs.apify.com) · [API Reference](https://docs.apify.com/api/v2) · [OpenAPI](https://docs.apify.com/api/openapi.json) · [llms.txt](https://docs.apify.com/llms.txt) · [Changelog](https://apify.com/change-log) · [Status Page](https://status.apify.com) · [Pricing](https://apify.com/pricing) · [Signup](https://console.apify.com/sign-up) · [API Keys](https://docs.apify.com/platform/integrations/api) · [CLI](https://docs.apify.com/cli) · [SDKs](https://docs.apify.com/sdk) · [Official MCP](https://docs.apify.com/platform/integrations/mcp) · [Webhooks](https://docs.apify.com/platform/integrations/webhooks)
 
 - **Supported:** [Self-serve signup](https://console.apify.com/sign-up) · [Self-serve API keys](https://docs.apify.com/platform/integrations/api) · [Free tier / trial](https://apify.com/pricing) · [Self-serve upgrade](https://apify.com/pricing) · [Versioning policy](https://docs.apify.com/api/v2)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
@@ -422,9 +422,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
 
-**Category:** Developer Tools · **Scope:** gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed. · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Developer Tools · **Scope:** gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Official MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
+**Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [OpenAPI](https://docs.gitlab.com/api/openapi/openapi_interactive) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Official MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
 
 - **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
@@ -510,9 +510,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
 
-**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+**Category:** Databases · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Sandbox` `Self-serve`
 
-**Links:** [Documentation](https://neon.com/docs) · [API Reference](https://api-docs.neon.tech) · [llms.txt](https://neon.com/llms.txt) · [Changelog](https://neon.com/docs/changelog) · [Status Page](https://neonstatus.com) · [Pricing](https://neon.com/pricing) · [Signup](https://console.neon.tech/signup) · [API Keys](https://neon.com/docs/manage/api-keys) · [CLI](https://neon.com/docs/reference/neon-cli) · [Official MCP](https://github.com/neondatabase/mcp-server-neon) · [Agent Docs](https://neon.com/docs/ai/ai-intro)
+**Links:** [Documentation](https://neon.com/docs) · [API Reference](https://api-docs.neon.tech) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [llms.txt](https://neon.com/llms.txt) · [Changelog](https://neon.com/docs/changelog) · [Status Page](https://neonstatus.com) · [Pricing](https://neon.com/pricing) · [Signup](https://console.neon.tech/signup) · [API Keys](https://neon.com/docs/manage/api-keys) · [CLI](https://neon.com/docs/reference/neon-cli) · [Official MCP](https://github.com/neondatabase/mcp-server-neon) · [Agent Docs](https://neon.com/docs/ai/ai-intro)
 
 - **Supported:** [Self-serve signup](https://console.neon.tech/signup) · [Self-serve API keys](https://neon.com/docs/manage/api-keys) · [OAuth](https://neon.com/docs/guides/oauth-integration) · [Token revocation](https://neon.com/docs/manage/api-keys) · [Sandbox / test mode](https://neon.com/docs/introduction/branching) · [Free tier / trial](https://neon.com/pricing) · [Self-serve upgrade](https://neon.com/pricing) · [Usage dashboard](https://neon.com/docs/introduction/monitor-usage)
 - **Partial:** [Scoped tokens](https://neon.com/docs/manage/api-keys) — Organization- and project-scoped API keys; no per-permission scoping.
@@ -637,9 +637,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
 
-**Category:** Observability / Security · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Observability / Security · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.sentry.io) · [API Reference](https://docs.sentry.io/api/) · [llms.txt](https://docs.sentry.io/llms.txt) · [Changelog](https://sentry.io/changelog/) · [Status Page](https://status.sentry.io) · [Pricing](https://sentry.io/pricing/) · [Signup](https://sentry.io/signup/) · [API Keys](https://docs.sentry.io/api/auth/) · [CLI](https://docs.sentry.io/cli/) · [SDKs](https://docs.sentry.io/platforms/) · [Official MCP](https://docs.sentry.io/product/sentry-mcp/) · [Rate Limits](https://docs.sentry.io/api/ratelimits/)
+**Links:** [Documentation](https://docs.sentry.io) · [API Reference](https://docs.sentry.io/api/) · [OpenAPI](https://github.com/getsentry/sentry-api-schema) · [llms.txt](https://docs.sentry.io/llms.txt) · [Changelog](https://sentry.io/changelog/) · [Status Page](https://status.sentry.io) · [Pricing](https://sentry.io/pricing/) · [Signup](https://sentry.io/signup/) · [API Keys](https://docs.sentry.io/api/auth/) · [CLI](https://docs.sentry.io/cli/) · [SDKs](https://docs.sentry.io/platforms/) · [Official MCP](https://docs.sentry.io/product/sentry-mcp/) · [Rate Limits](https://docs.sentry.io/api/ratelimits/)
 
 - **Supported:** [Self-serve signup](https://sentry.io/signup/) · [Self-serve API keys](https://docs.sentry.io/api/auth/) · [Scoped tokens](https://docs.sentry.io/api/auth/) · [Token revocation](https://docs.sentry.io/api/auth/) · [Free tier / trial](https://sentry.io/pricing/) · [Self-serve upgrade](https://sentry.io/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -683,9 +683,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.
 
-**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Self-serve`
+**Category:** Databases · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Self-serve`
 
-**Links:** [Documentation](https://supabase.com/docs) · [API Reference](https://supabase.com/docs/reference/api/introduction) · [llms.txt](https://supabase.com/llms.txt) · [Changelog](https://supabase.com/changelog) · [Status Page](https://status.supabase.com) · [Pricing](https://supabase.com/pricing) · [Signup](https://supabase.com/dashboard/sign-up) · [API Keys](https://supabase.com/docs/guides/api/api-keys) · [CLI](https://supabase.com/docs/guides/cli) · [SDKs](https://supabase.com/docs/reference) · [Official MCP](https://supabase.com/docs/guides/getting-started/mcp) · [Agent Docs](https://supabase.com/docs/guides/getting-started/ai-prompts) · [Webhooks](https://supabase.com/docs/guides/database/webhooks)
+**Links:** [Documentation](https://supabase.com/docs) · [API Reference](https://supabase.com/docs/reference/api/introduction) · [OpenAPI](https://api.supabase.com/api/v1-json) · [llms.txt](https://supabase.com/llms.txt) · [Changelog](https://supabase.com/changelog) · [Status Page](https://status.supabase.com) · [Pricing](https://supabase.com/pricing) · [Signup](https://supabase.com/dashboard/sign-up) · [API Keys](https://supabase.com/docs/guides/api/api-keys) · [CLI](https://supabase.com/docs/guides/cli) · [SDKs](https://supabase.com/docs/reference) · [Official MCP](https://supabase.com/docs/guides/getting-started/mcp) · [Agent Docs](https://supabase.com/docs/guides/getting-started/ai-prompts) · [Webhooks](https://supabase.com/docs/guides/database/webhooks)
 
 - **Supported:** [Self-serve signup](https://supabase.com/dashboard/sign-up) · [Self-serve API keys](https://supabase.com/docs/guides/api/api-keys) · [OAuth](https://supabase.com/docs/guides/integrations/build-a-supabase-integration) · [Token revocation](https://supabase.com/docs/guides/api/api-keys) · [Free tier / trial](https://supabase.com/pricing) · [Self-serve upgrade](https://supabase.com/pricing)
 - **Partial:** [Scoped tokens](https://supabase.com/docs/guides/api/api-keys) — Publishable/secret key split and JWT roles; management-API tokens are account-wide.
@@ -757,9 +757,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Sandbox` `Self-serve`
 
-**Links:** [Documentation](https://vercel.com/docs) · [API Reference](https://vercel.com/docs/rest-api) · [llms.txt](https://vercel.com/llms.txt) · [Changelog](https://vercel.com/changelog) · [Status Page](https://www.vercel-status.com) · [Pricing](https://vercel.com/pricing) · [Signup](https://vercel.com/signup) · [API Keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [CLI](https://vercel.com/docs/cli) · [SDKs](https://vercel.com/docs/rest-api/sdk) · [Official MCP](https://vercel.com/docs/mcp/vercel-mcp) · [Agent Docs](https://vercel.com/docs/agents) · [Webhooks](https://vercel.com/docs/webhooks) · [Rate Limits](https://vercel.com/docs/limits) · [Errors](https://vercel.com/docs/errors)
+**Links:** [Documentation](https://vercel.com/docs) · [API Reference](https://vercel.com/docs/rest-api) · [OpenAPI](https://openapi.vercel.sh) · [llms.txt](https://vercel.com/llms.txt) · [Changelog](https://vercel.com/changelog) · [Status Page](https://www.vercel-status.com) · [Pricing](https://vercel.com/pricing) · [Signup](https://vercel.com/signup) · [API Keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [CLI](https://vercel.com/docs/cli) · [SDKs](https://vercel.com/docs/rest-api/sdk) · [Official MCP](https://vercel.com/docs/mcp/vercel-mcp) · [Agent Docs](https://vercel.com/docs/agents) · [Webhooks](https://vercel.com/docs/webhooks) · [Rate Limits](https://vercel.com/docs/limits) · [Errors](https://vercel.com/docs/errors)
 
 - **Supported:** [Self-serve signup](https://vercel.com/signup) · [Self-serve API keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [OAuth](https://vercel.com/docs/integrations) · [Token revocation](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [Sandbox / test mode](https://vercel.com/docs/deployments/environments) · [Free tier / trial](https://vercel.com/pricing) · [Self-serve upgrade](https://vercel.com/pricing) · [Usage dashboard](https://vercel.com/docs/pricing/understanding-my-invoice)
 - **Partial:** [Scoped tokens](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) — Tokens are scoped to account or team, not to fine-grained permissions.
@@ -783,7 +783,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **303 unknowns are open right now.**
 
 - `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [deepseek](#deepseek), [discord](#discord), [gemini-api](#gemini-api), [hugging-face](#hugging-face), [openai](#openai), [telegram](#telegram)
-- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepseek](#deepseek), [dropbox](#dropbox), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel), [zapier](#zapier)
+- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepseek](#deepseek), [dropbox](#dropbox), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [shopify](#shopify), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [zapier](#zapier)
 - `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [cohere](#cohere), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [gemini-api](#gemini-api), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
 - `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash), [zapier](#zapier)
 

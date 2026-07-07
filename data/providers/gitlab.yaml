@@ -15,6 +15,7 @@ entrypoints:
   docs: https://docs.gitlab.com
   api_reference: https://docs.gitlab.com/api/rest/
   graphql: https://docs.gitlab.com/api/graphql/
+  openapi: https://docs.gitlab.com/api/openapi/openapi_interactive
   llms_txt: https://docs.gitlab.com/llms.txt
   mcp_official: https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server
   changelog: https://about.gitlab.com/releases/

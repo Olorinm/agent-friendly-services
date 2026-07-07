@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://vercel.com/docs
   api_reference: https://vercel.com/docs/rest-api
+  openapi: https://openapi.vercel.sh
   llms_txt: https://vercel.com/llms.txt
   changelog: https://vercel.com/changelog
   status_page: https://www.vercel-status.com

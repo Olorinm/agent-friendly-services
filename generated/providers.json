@@ -12,11 +12,11 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:30:31.377Z",
+  "generated_at": "2026-07-07T10:35:24.751Z",
   "counts": {
     "providers": 51,
     "categories": 12,
-    "entrypoint_urls": 530,
+    "entrypoint_urls": 536,
     "checks_answered": 309
   },
   "categories": [
@@ -460,6 +460,7 @@
       "entrypoints": {
         "docs": "https://docs.apify.com",
         "api_reference": "https://docs.apify.com/api/v2",
+        "openapi": "https://docs.apify.com/api/openapi.json",
         "llms_txt": "https://docs.apify.com/llms.txt",
         "changelog": "https://apify.com/change-log",
         "status_page": "https://status.apify.com",
@@ -533,6 +534,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Self-serve"
         ],
@@ -2236,6 +2238,7 @@
         "docs": "https://docs.gitlab.com",
         "api_reference": "https://docs.gitlab.com/api/rest/",
         "graphql": "https://docs.gitlab.com/api/graphql/",
+        "openapi": "https://docs.gitlab.com/api/openapi/openapi_interactive",
         "llms_txt": "https://docs.gitlab.com/llms.txt",
         "mcp_official": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
         "changelog": "https://about.gitlab.com/releases/",
@@ -2309,6 +2312,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Self-serve"
         ],
@@ -3042,6 +3046,7 @@
       "entrypoints": {
         "docs": "https://neon.com/docs",
         "api_reference": "https://api-docs.neon.tech",
+        "openapi": "https://neon.tech/api_spec/release/v2.json",
         "llms_txt": "https://neon.com/llms.txt",
         "changelog": "https://neon.com/docs/changelog",
         "status_page": "https://neonstatus.com",
@@ -3116,6 +3121,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Agent Docs",
           "Sandbox",
@@ -4135,6 +4141,7 @@
       "entrypoints": {
         "docs": "https://docs.sentry.io",
         "api_reference": "https://docs.sentry.io/api/",
+        "openapi": "https://github.com/getsentry/sentry-api-schema",
         "llms_txt": "https://docs.sentry.io/llms.txt",
         "changelog": "https://sentry.io/changelog/",
         "status_page": "https://status.sentry.io",
@@ -4206,6 +4213,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Self-serve"
         ],
@@ -4565,6 +4573,7 @@
       "entrypoints": {
         "docs": "https://supabase.com/docs",
         "api_reference": "https://supabase.com/docs/reference/api/introduction",
+        "openapi": "https://api.supabase.com/api/v1-json",
         "llms_txt": "https://supabase.com/llms.txt",
         "changelog": "https://supabase.com/changelog",
         "status_page": "https://status.supabase.com",
@@ -4640,6 +4649,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Agent Docs",
           "Self-serve"
@@ -5157,6 +5167,7 @@
       "entrypoints": {
         "docs": "https://vercel.com/docs",
         "api_reference": "https://vercel.com/docs/rest-api",
+        "openapi": "https://openapi.vercel.sh",
         "llms_txt": "https://vercel.com/llms.txt",
         "changelog": "https://vercel.com/changelog",
         "status_page": "https://www.vercel-status.com",
@@ -5240,6 +5251,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "OpenAPI",
           "CLI",
           "Agent Docs",
           "Sandbox",

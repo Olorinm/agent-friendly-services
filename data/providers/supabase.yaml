@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://supabase.com/docs
   api_reference: https://supabase.com/docs/reference/api/introduction
+  openapi: https://api.supabase.com/api/v1-json
   llms_txt: https://supabase.com/llms.txt
   changelog: https://supabase.com/changelog
   status_page: https://status.supabase.com
