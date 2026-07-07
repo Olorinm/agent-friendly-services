@@ -4,15 +4,19 @@ apify,Apify,web-search-data,true,true,false,true,unknown,true,2026-07-07
 brave-search,Brave Search API,web-search-data,false,false,false,false,unknown,true,2026-07-07
 browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
+e2b,E2B,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
 gemini-api,Gemini API,ai-models,false,false,false,false,unknown,true,2026-07-07
 github,GitHub,developer-tools,true,false,true,true,unknown,true,2026-07-07
 groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
 hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
+modal,Modal,code-execution,false,true,false,true,supported,true,2026-07-07
+mongodb-atlas,MongoDB Atlas,databases,true,true,true,true,unknown,true,2026-07-07
 neon,Neon,databases,true,true,false,true,supported,true,2026-07-07
 openai,OpenAI,ai-models,false,false,true,false,unknown,true,2026-07-07
 perplexity,Perplexity API,web-search-data,true,true,false,false,unknown,true,2026-07-07
+pinecone,Pinecone,databases,true,true,false,false,unknown,true,2026-07-07
 replicate,Replicate,ai-models,false,true,false,true,unknown,true,2026-07-07
 resend,Resend,communication,true,false,false,false,supported,true,2026-07-07
 stripe,Stripe,payments-billing,true,true,true,true,supported,true,2026-07-07

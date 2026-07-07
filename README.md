@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-21-2563eb)
+![Providers](https://img.shields.io/badge/providers-25-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**21 providers · 8 categories · 229 entry links (machine-probed weekly) · 132 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**25 providers · 8 categories · 268 entry links (machine-probed weekly) · 158 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -70,6 +70,8 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
+| [E2B](#e2b) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
+| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Developer Tools
 
@@ -88,7 +90,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Neon](#neon) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| [Pinecone](#pinecone) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Supabase](#supabase) | ✓ | ✓ | — | ✓ | ◐ | ✓ | 2026-07-07 |
 
 ### Web Search / Data
@@ -184,6 +188,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Sandbox / test mode](https://developers.cloudflare.com/workers/wrangler/) — No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### E2B <a id="e2b"></a>
+
+> Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.
+
+**Category:** Code Execution · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev/dashboard) · [API Keys](https://e2b.dev/docs/api-key) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
+
+- **Supported:** [Self-serve signup](https://e2b.dev/dashboard) · [Self-serve API keys](https://e2b.dev/docs/api-key) · [Free tier / trial](https://e2b.dev/pricing) · [Self-serve upgrade](https://e2b.dev/pricing) · [Automation permitted](https://e2b.dev/docs)
+- **N/A:** Sandbox / test mode — The product itself is an isolated, ephemeral sandbox per session.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
 ### Exa <a id="exa"></a>
 
 > Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
@@ -254,6 +270,28 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Modal <a id="modal"></a>
+
+> Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
+
+**Category:** Code Execution · `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://modal.com/docs) · [API Reference](https://modal.com/docs/reference) · [llms.txt](https://modal.com/llms.txt) · [Changelog](https://modal.com/docs/reference/changelog) · [Status Page](https://status.modal.com) · [Pricing](https://modal.com/pricing) · [Signup](https://modal.com/signup) · [API Keys](https://modal.com/docs/reference/cli) · [CLI](https://modal.com/docs/reference/cli) · [Agent Docs](https://modal.com/docs/guide/sandbox)
+
+- **Supported:** [Self-serve signup](https://modal.com/signup) · [Self-serve API keys](https://modal.com/docs/reference/cli) · [Sandbox / test mode](https://modal.com/docs/guide/sandbox) · [Free tier / trial](https://modal.com/pricing) · [Self-serve upgrade](https://modal.com/pricing) · [Automation permitted](https://modal.com/docs/guide/sandbox)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+### MongoDB Atlas <a id="mongodb-atlas"></a>
+
+> Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.
+
+**Category:** Databases · **Scope:** Atlas managed cloud + Atlas Administration API; self-hosted MongoDB is not assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://www.mongodb.com/docs/atlas/) · [API Reference](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/) · [OpenAPI](https://github.com/mongodb/openapi) · [llms.txt](https://www.mongodb.com/docs/llms.txt) · [Changelog](https://www.mongodb.com/docs/atlas/release-notes/) · [Status Page](https://status.cloud.mongodb.com) · [Pricing](https://www.mongodb.com/pricing) · [Signup](https://www.mongodb.com/cloud/atlas/register) · [API Keys](https://www.mongodb.com/docs/atlas/configure-api-access/) · [CLI](https://www.mongodb.com/docs/atlas/cli/) · [SDKs](https://www.mongodb.com/docs/drivers/) · [Official MCP](https://github.com/mongodb-js/mongodb-mcp-server)
+
+- **Supported:** [Self-serve signup](https://www.mongodb.com/cloud/atlas/register) · [Self-serve API keys](https://www.mongodb.com/docs/atlas/configure-api-access/) · [OAuth](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Scoped tokens](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Token revocation](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Free tier / trial](https://www.mongodb.com/pricing) · [Self-serve upgrade](https://www.mongodb.com/pricing) · [Versioning policy](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
 ### Neon <a id="neon"></a>
 
 > Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
@@ -289,6 +327,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://docs.perplexity.ai/getting-started/quickstart) · [Self-serve API keys](https://docs.perplexity.ai/getting-started/quickstart) · [Self-serve upgrade](https://docs.perplexity.ai/getting-started/pricing)
 - **Partial:** [Free tier / trial](https://docs.perplexity.ai/getting-started/pricing) — No standalone free tier; Perplexity Pro subscribers receive monthly API credits.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Pinecone <a id="pinecone"></a>
+
+> Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.
+
+**Category:** Databases · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.pinecone.io) · [API Reference](https://docs.pinecone.io/reference/api/introduction) · [llms.txt](https://docs.pinecone.io/llms.txt) · [Changelog](https://docs.pinecone.io/release-notes) · [Status Page](https://status.pinecone.io) · [Pricing](https://www.pinecone.io/pricing/) · [Signup](https://app.pinecone.io) · [API Keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Official MCP](https://docs.pinecone.io/guides/operations/mcp-server)
+
+- **Supported:** [Self-serve signup](https://app.pinecone.io) · [Self-serve API keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Token revocation](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Free tier / trial](https://www.pinecone.io/pricing/) · [Self-serve upgrade](https://www.pinecone.io/pricing/) · [Versioning policy](https://docs.pinecone.io/reference/api/versioning)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### Replicate <a id="replicate"></a>
 
@@ -377,12 +426,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **120 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **142 unknowns are open right now.**
 
 - `llms_txt` link unknown for: [brave-search](#brave-search), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [neon](#neon), [perplexity](#perplexity), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [groq](#groq), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [perplexity](#perplexity), [replicate](#replicate), [resend](#resend), [tavily](#tavily), [together-ai](#together-ai)
+- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [modal](#modal), [neon](#neon), [perplexity](#perplexity), [pinecone](#pinecone), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [groq](#groq), [modal](#modal), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [mongodb-atlas](#mongodb-atlas), [perplexity](#perplexity), [pinecone](#pinecone), [replicate](#replicate), [resend](#resend), [tavily](#tavily), [together-ai](#together-ai)
 
 ## Contributing
 

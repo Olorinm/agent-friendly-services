@@ -1,0 +1,77 @@
+id: pinecone
+name: Pinecone
+category: databases
+homepage: https://www.pinecone.io
+summary: Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.
+submitted_by: community
+
+tags:
+  - vector-database
+  - rag
+  - search
+
+entrypoints:
+  docs: https://docs.pinecone.io
+  api_reference: https://docs.pinecone.io/reference/api/introduction
+  llms_txt: https://docs.pinecone.io/llms.txt
+  changelog: https://docs.pinecone.io/release-notes
+  status_page: https://status.pinecone.io
+  pricing: https://www.pinecone.io/pricing/
+  signup: https://app.pinecone.io
+  api_keys: https://docs.pinecone.io/guides/projects/manage-api-keys
+  mcp_official: https://docs.pinecone.io/guides/operations/mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://app.pinecone.io
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.pinecone.io/guides/projects/manage-api-keys
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+    notes: Keys are project-scoped; permission granularity not confirmed from docs.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.pinecone.io/guides/projects/manage-api-keys
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The free starter plan serves as a low-risk environment; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.pinecone.io/pricing/
+    verified: "2026-07-07"
+    notes: Free starter plan.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.pinecone.io/pricing/
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.pinecone.io/reference/api/versioning
+    verified: "2026-07-07"
+    notes: Date-based API versioning is documented.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

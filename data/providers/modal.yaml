@@ -1,0 +1,79 @@
+id: modal
+name: Modal
+category: code-execution
+homepage: https://modal.com
+summary: Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
+submitted_by: community
+
+tags:
+  - serverless
+  - sandboxes
+  - gpu
+
+entrypoints:
+  docs: https://modal.com/docs
+  api_reference: https://modal.com/docs/reference
+  llms_txt: https://modal.com/llms.txt
+  changelog: https://modal.com/docs/reference/changelog
+  status_page: https://status.modal.com
+  pricing: https://modal.com/pricing
+  signup: https://modal.com/signup
+  api_keys: https://modal.com/docs/reference/cli
+  cli: https://modal.com/docs/reference/cli
+  agent_docs: https://modal.com/docs/guide/sandbox
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://modal.com/signup
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://modal.com/docs/reference/cli
+    verified: "2026-07-07"
+    notes: "Tokens are created self-serve via the CLI: modal token new."
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: Workspace-level tokens; finer scoping not confirmed from docs.
+
+  token_revocation:
+    status: unknown
+    notes: Tokens manageable in workspace settings; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://modal.com/docs/guide/sandbox
+    verified: "2026-07-07"
+    notes: Sandboxes are a first-class product feature for isolated code execution.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://modal.com/pricing
+    verified: "2026-07-07"
+    notes: Monthly free compute credits on the starter plan.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://modal.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard shows usage and spend; needs a docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: supported
+    evidence: https://modal.com/docs/guide/sandbox
+    verified: "2026-07-07"
+    notes: Running agent/generated workloads is a documented, first-class use case.
