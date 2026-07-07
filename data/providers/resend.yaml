@@ -12,6 +12,7 @@ tags:
 entrypoints:
   docs: https://resend.com/docs
   api_reference: https://resend.com/docs/api-reference/introduction
+  llms_txt: https://resend.com/llms.txt
   changelog: https://resend.com/changelog
   pricing: https://resend.com/pricing
   signup: https://resend.com/signup

@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-07-07T10:26:57.476Z",
-  "total": 601,
-  "ok": 596,
+  "checked_at": "2026-07-07T10:30:29.876Z",
+  "total": 610,
+  "ok": 605,
   "inconclusive": 5,
   "broken": 0,
   "results": [
@@ -1353,6 +1353,14 @@
       ]
     },
     {
+      "url": "https://docs.datadoghq.com/bits_ai/mcp_server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "datadog:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog",
       "class": "ok",
       "status": 200,
@@ -1527,6 +1535,14 @@
       ]
     },
     {
+      "url": "https://docs.github.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "github:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://docs.github.com/rest",
       "class": "ok",
       "status": 200,
@@ -1613,6 +1629,14 @@
       "status": 200,
       "sources": [
         "gitlab:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.mcp_official"
       ]
     },
     {
@@ -2407,6 +2431,14 @@
       ]
     },
     {
+      "url": "https://fly.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://github.blog/changelog/",
       "class": "ok",
       "status": 200,
@@ -2420,6 +2452,14 @@
       "status": 200,
       "sources": [
         "github:homepage"
+      ]
+    },
+    {
+      "url": "https://github.com/brave/brave-search-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "brave-search:entrypoints.mcp_official"
       ]
     },
     {
@@ -2599,11 +2639,27 @@
       ]
     },
     {
+      "url": "https://github.com/PaddleHQ/paddle-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/pinecone-io/cli",
       "class": "ok",
       "status": 200,
       "sources": [
         "pinecone:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://github.com/postmanlabs/postman-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.mcp_official"
       ]
     },
     {
@@ -3629,6 +3685,14 @@
       ]
     },
     {
+      "url": "https://resend.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "resend:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://resend.com/pricing",
       "class": "ok",
       "status": 200,
@@ -4589,6 +4653,14 @@
       "status": 200,
       "sources": [
         "dropbox:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://www.dropbox.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "dropbox:entrypoints.llms_txt"
       ]
     },
     {

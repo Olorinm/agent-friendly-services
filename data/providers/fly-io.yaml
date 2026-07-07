@@ -14,6 +14,7 @@ entrypoints:
   docs: https://fly.io/docs
   api_reference: https://fly.io/docs/machines/api/
   openapi: https://docs.machines.dev
+  llms_txt: https://fly.io/llms.txt
   status_page: https://status.flyio.net
   pricing: https://fly.io/docs/about/pricing/
   signup: https://fly.io/app/sign-up

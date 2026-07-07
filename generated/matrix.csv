@@ -2,24 +2,24 @@ id,name,category,mcp_official,llms_txt,openapi,cli,sandbox,self_serve,last_verif
 airtable,Airtable,productivity-storage,false,false,false,false,unknown,true,2026-07-07
 anthropic,Anthropic,ai-models,false,true,false,true,unknown,true,2026-07-07
 apify,Apify,web-search-data,true,true,false,true,unknown,true,2026-07-07
-brave-search,Brave Search API,web-search-data,false,false,false,false,unknown,true,2026-07-07
+brave-search,Brave Search API,web-search-data,true,false,false,false,unknown,true,2026-07-07
 browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
 cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
 composio,Composio,agent-tooling,true,true,false,false,unknown,false,2026-07-07
-datadog,Datadog,observability-security,false,true,false,true,unknown,true,2026-07-07
+datadog,Datadog,observability-security,true,true,false,true,unknown,true,2026-07-07
 deepgram,Deepgram,ai-models,false,true,true,false,unknown,true,2026-07-07
 deepseek,DeepSeek,ai-models,false,false,false,false,unknown,true,2026-07-07
 discord,Discord,communication,false,false,true,false,unknown,true,2026-07-07
-dropbox,Dropbox,productivity-storage,false,false,false,true,unknown,true,2026-07-07
+dropbox,Dropbox,productivity-storage,false,true,false,true,unknown,true,2026-07-07
 e2b,E2B,code-execution,true,true,false,true,not_applicable,true,2026-07-07
 elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
-fly-io,Fly.io,cloud-hosting,true,false,true,true,unknown,true,2026-07-07
+fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
 gemini-api,Gemini API,ai-models,false,false,false,true,unknown,true,2026-07-07
-github,GitHub,developer-tools,true,false,true,true,unknown,true,2026-07-07
-gitlab,GitLab,developer-tools,false,true,false,true,unknown,true,2026-07-07
+github,GitHub,developer-tools,true,true,true,true,unknown,true,2026-07-07
+gitlab,GitLab,developer-tools,true,true,false,true,unknown,true,2026-07-07
 groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
 hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
 lark,Lark,communication,true,true,false,true,unknown,true,2026-07-07
@@ -31,13 +31,13 @@ neon,Neon,databases,true,true,false,true,supported,true,2026-07-07
 netlify,Netlify,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
 notion,Notion,productivity-storage,true,true,false,false,unknown,true,2026-07-07
 openai,OpenAI,ai-models,false,false,true,false,unknown,true,2026-07-07
-paddle,Paddle,payments-billing,false,true,false,false,supported,false,2026-07-07
+paddle,Paddle,payments-billing,true,true,false,false,supported,false,2026-07-07
 perplexity,Perplexity API,web-search-data,true,true,false,false,unknown,true,2026-07-07
 pinecone,Pinecone,databases,true,true,false,true,unknown,true,2026-07-07
-postman,Postman,developer-tools,false,true,false,true,unknown,true,2026-07-07
+postman,Postman,developer-tools,true,true,false,true,unknown,true,2026-07-07
 qdrant,Qdrant,databases,true,true,false,false,unknown,true,2026-07-07
 replicate,Replicate,ai-models,false,true,false,true,unknown,true,2026-07-07
-resend,Resend,communication,true,false,false,false,supported,true,2026-07-07
+resend,Resend,communication,true,true,false,false,supported,true,2026-07-07
 sentry,Sentry,observability-security,true,true,false,true,unknown,true,2026-07-07
 shopify,Shopify,commerce-marketing,true,true,false,true,supported,true,2026-07-07
 slack,Slack,communication,false,true,true,true,unknown,true,2026-07-07

@@ -5,11 +5,11 @@
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
 ![Providers](https://img.shields.io/badge/providers-51-2563eb)
-[![Link health](https://img.shields.io/badge/link_health-596_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-605_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**51 providers · 12 categories · 521 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**51 providers · 12 categories · 530 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -97,16 +97,16 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [GitHub](#github) | ✓ | — | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [GitLab](#gitlab) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Postman](#postman) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [GitLab](#gitlab) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Cloud / Hosting
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
-| [Fly.io](#fly-io) | ✓ | — | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Vercel](#vercel) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 
@@ -126,7 +126,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Apify](#apify) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Brave Search API](#brave-search) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | 2026-07-07 |
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
@@ -136,7 +136,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Paddle](#paddle) | — | ✓ | — | — | ✓ | ◐ | 2026-07-07 |
+| [Paddle](#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | 2026-07-07 |
 | [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Communication
@@ -145,7 +145,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Discord](#discord) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
 | [Lark](#lark) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
+| [Resend](#resend) | ✓ | ✓ | — | — | ✓ | ✓ | 2026-07-07 |
 | [Slack](#slack) | — | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | 2026-07-07 |
 | [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
@@ -155,7 +155,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Airtable](#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
-| [Dropbox](#dropbox) | — | — | — | ✓ | — | ✓ | 2026-07-07 |
+| [Dropbox](#dropbox) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
@@ -163,7 +163,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Datadog](#datadog) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Commerce / Marketing
@@ -217,9 +217,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Independent web search index with a developer API, self-serve registration, and a free plan.
 
-**Category:** Web Search / Data · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Self-serve`
+**Category:** Web Search / Data · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Official MCP` `Self-serve`
 
-**Links:** [Documentation](https://api-dashboard.search.brave.com/app/documentation) · [Pricing](https://brave.com/search/api/) · [Signup](https://api-dashboard.search.brave.com/register)
+**Links:** [Documentation](https://api-dashboard.search.brave.com/app/documentation) · [Pricing](https://brave.com/search/api/) · [Signup](https://api-dashboard.search.brave.com/register) · [Official MCP](https://github.com/brave/brave-search-mcp-server)
 
 - **Supported:** [Self-serve signup](https://api-dashboard.search.brave.com/register) · [Self-serve API keys](https://api-dashboard.search.brave.com/app/documentation) · [Free tier / trial](https://brave.com/search/api/) · [Self-serve upgrade](https://brave.com/search/api/)
 - **N/A:** Idempotency — Read-only search API; requests are inherently repeatable.
@@ -280,9 +280,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
 
-**Category:** Observability / Security · `llms.txt` `CLI` `Self-serve`
+**Category:** Observability / Security · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [CLI](https://github.com/DataDog/datadog-ci) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
+**Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [CLI](https://github.com/DataDog/datadog-ci) · [Official MCP](https://docs.datadoghq.com/bits_ai/mcp_server) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
 
 - **Supported:** [Self-serve signup](https://www.datadoghq.com/free-datadog-trial) · [Self-serve API keys](https://docs.datadoghq.com/account_management/api-app-keys) · [OAuth](https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog) · [Free tier / trial](https://www.datadoghq.com/pricing) · [Self-serve upgrade](https://www.datadoghq.com/pricing)
 - **Partial:** [Versioning policy](https://docs.datadoghq.com/api/latest/) — Endpoints are path-versioned (v1/v2) in the reference; no formal deprecation-window policy page recorded.
@@ -329,9 +329,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
-**Category:** Productivity / Storage · `CLI` `Self-serve`
+**Category:** Productivity / Storage · `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [CLI](https://github.com/dropbox/dbxcli) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
+**Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [llms.txt](https://www.dropbox.com/llms.txt) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [CLI](https://github.com/dropbox/dbxcli) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
 
 - **Supported:** [Self-serve signup](https://www.dropbox.com/register) · [Self-serve API keys](https://www.dropbox.com/developers/apps) · [OAuth](https://developers.dropbox.com/oauth-guide) · [Scoped tokens](https://developers.dropbox.com/oauth-guide) · [Free tier / trial](https://www.dropbox.com/plans) · [Self-serve upgrade](https://www.dropbox.com/plans)
 - **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -387,9 +387,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
 
-**Category:** Cloud / Hosting · `Official MCP` `OpenAPI` `CLI` `Self-serve`
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://fly.io/docs) · [API Reference](https://fly.io/docs/machines/api/) · [OpenAPI](https://docs.machines.dev) · [Status Page](https://status.flyio.net) · [Pricing](https://fly.io/docs/about/pricing/) · [Signup](https://fly.io/app/sign-up) · [API Keys](https://fly.io/docs/security/tokens/) · [CLI](https://fly.io/docs/flyctl/) · [Official MCP](https://fly.io/docs/mcp/)
+**Links:** [Documentation](https://fly.io/docs) · [API Reference](https://fly.io/docs/machines/api/) · [OpenAPI](https://docs.machines.dev) · [llms.txt](https://fly.io/llms.txt) · [Status Page](https://status.flyio.net) · [Pricing](https://fly.io/docs/about/pricing/) · [Signup](https://fly.io/app/sign-up) · [API Keys](https://fly.io/docs/security/tokens/) · [CLI](https://fly.io/docs/flyctl/) · [Official MCP](https://fly.io/docs/mcp/)
 
 - **Supported:** [Self-serve signup](https://fly.io/app/sign-up) · [Self-serve API keys](https://fly.io/docs/security/tokens/) · [Scoped tokens](https://fly.io/docs/security/tokens/) · [Token revocation](https://fly.io/docs/security/tokens/) · [Self-serve upgrade](https://fly.io/docs/about/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -409,9 +409,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
 
-**Category:** Developer Tools · **Scope:** Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately. · `Official MCP` `OpenAPI` `CLI` `Self-serve`
+**Category:** Developer Tools · **Scope:** Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.github.com) · [API Reference](https://docs.github.com/rest) · [OpenAPI](https://github.com/github/rest-api-description) · [GraphQL](https://docs.github.com/graphql) · [Changelog](https://github.blog/changelog/) · [Status Page](https://www.githubstatus.com) · [Pricing](https://github.com/pricing) · [Signup](https://github.com/signup) · [API Keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [CLI](https://cli.github.com) · [SDKs](https://github.com/octokit) · [Official MCP](https://github.com/github/github-mcp-server) · [Webhooks](https://docs.github.com/webhooks) · [Rate Limits](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+**Links:** [Documentation](https://docs.github.com) · [API Reference](https://docs.github.com/rest) · [OpenAPI](https://github.com/github/rest-api-description) · [GraphQL](https://docs.github.com/graphql) · [llms.txt](https://docs.github.com/llms.txt) · [Changelog](https://github.blog/changelog/) · [Status Page](https://www.githubstatus.com) · [Pricing](https://github.com/pricing) · [Signup](https://github.com/signup) · [API Keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [CLI](https://cli.github.com) · [SDKs](https://github.com/octokit) · [Official MCP](https://github.com/github/github-mcp-server) · [Webhooks](https://docs.github.com/webhooks) · [Rate Limits](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api)
 
 - **Supported:** [Self-serve signup](https://github.com/signup) · [Self-serve API keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [OAuth](https://docs.github.com/apps/oauth-apps) · [Scoped tokens](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Token revocation](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Free tier / trial](https://github.com/pricing) · [Self-serve upgrade](https://github.com/pricing) · [Usage dashboard](https://docs.github.com/billing) · [Versioning policy](https://docs.github.com/rest/about-the-rest-api/api-versions) · [Automation permitted](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
@@ -422,9 +422,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
 
-**Category:** Developer Tools · **Scope:** gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed. · `llms.txt` `CLI` `Self-serve`
+**Category:** Developer Tools · **Scope:** gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed. · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
+**Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Official MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
 
 - **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
@@ -557,9 +557,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.
 
-**Category:** Payments / Billing · `llms.txt` `Sandbox`
+**Category:** Payments / Billing · `Official MCP` `llms.txt` `Sandbox`
 
-**Links:** [Documentation](https://developer.paddle.com) · [API Reference](https://developer.paddle.com/api-reference/overview) · [llms.txt](https://developer.paddle.com/llms.txt) · [Status Page](https://paddlestatus.com) · [Pricing](https://www.paddle.com/pricing) · [Signup](https://sandbox-login.paddle.com/signup) · [API Keys](https://developer.paddle.com/api-reference/about/authentication) · [Webhooks](https://developer.paddle.com/webhooks/overview)
+**Links:** [Documentation](https://developer.paddle.com) · [API Reference](https://developer.paddle.com/api-reference/overview) · [llms.txt](https://developer.paddle.com/llms.txt) · [Status Page](https://paddlestatus.com) · [Pricing](https://www.paddle.com/pricing) · [Signup](https://sandbox-login.paddle.com/signup) · [API Keys](https://developer.paddle.com/api-reference/about/authentication) · [Official MCP](https://github.com/PaddleHQ/paddle-mcp-server) · [Webhooks](https://developer.paddle.com/webhooks/overview)
 
 - **Supported:** [Self-serve API keys](https://developer.paddle.com/api-reference/about/authentication) · [Sandbox / test mode](https://sandbox-login.paddle.com/signup) · [Free tier / trial](https://www.paddle.com/pricing) · [Versioning policy](https://developer.paddle.com/api-reference/about/versioning)
 - **Partial:** [Self-serve signup](https://sandbox-login.paddle.com/signup) — Sandbox accounts are fully self-serve; live accounts require website verification (merchant-of-record model).
@@ -593,9 +593,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.
 
-**Category:** Developer Tools · **Scope:** Postman platform + Postman API; the desktop client features are not individually assessed. · `llms.txt` `CLI` `Self-serve`
+**Category:** Developer Tools · **Scope:** Postman platform + Postman API; the desktop client features are not individually assessed. · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://learning.postman.com) · [API Reference](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [llms.txt](https://learning.postman.com/llms.txt) · [Status Page](https://status.postman.com) · [Pricing](https://www.postman.com/pricing/) · [Signup](https://identity.getpostman.com/signup) · [API Keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/)
+**Links:** [Documentation](https://learning.postman.com) · [API Reference](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [llms.txt](https://learning.postman.com/llms.txt) · [Status Page](https://status.postman.com) · [Pricing](https://www.postman.com/pricing/) · [Signup](https://identity.getpostman.com/signup) · [API Keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) · [Official MCP](https://github.com/postmanlabs/postman-mcp-server)
 
 - **Supported:** [Self-serve signup](https://identity.getpostman.com/signup) · [Self-serve API keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [Free tier / trial](https://www.postman.com/pricing/) · [Self-serve upgrade](https://www.postman.com/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -626,9 +626,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.
 
-**Category:** Communication · `Official MCP` `Sandbox` `Self-serve` `Idempotent API`
+**Category:** Communication · `Official MCP` `llms.txt` `Sandbox` `Self-serve` `Idempotent API`
 
-**Links:** [Documentation](https://resend.com/docs) · [API Reference](https://resend.com/docs/api-reference/introduction) · [Changelog](https://resend.com/changelog) · [Pricing](https://resend.com/pricing) · [Signup](https://resend.com/signup) · [API Keys](https://resend.com/docs/dashboard/api-keys/introduction) · [SDKs](https://resend.com/docs/sdks) · [Official MCP](https://github.com/resend/mcp-send-email) · [Webhooks](https://resend.com/docs/dashboard/webhooks/introduction) · [Errors](https://resend.com/docs/api-reference/errors)
+**Links:** [Documentation](https://resend.com/docs) · [API Reference](https://resend.com/docs/api-reference/introduction) · [llms.txt](https://resend.com/llms.txt) · [Changelog](https://resend.com/changelog) · [Pricing](https://resend.com/pricing) · [Signup](https://resend.com/signup) · [API Keys](https://resend.com/docs/dashboard/api-keys/introduction) · [SDKs](https://resend.com/docs/sdks) · [Official MCP](https://github.com/resend/mcp-send-email) · [Webhooks](https://resend.com/docs/dashboard/webhooks/introduction) · [Errors](https://resend.com/docs/api-reference/errors)
 
 - **Supported:** [Self-serve signup](https://resend.com/signup) · [Self-serve API keys](https://resend.com/docs/dashboard/api-keys/introduction) · [Scoped tokens](https://resend.com/docs/dashboard/api-keys/introduction) · [Token revocation](https://resend.com/docs/dashboard/api-keys/introduction) · [Sandbox / test mode](https://resend.com/docs/dashboard/emails/send-test-emails) · [Free tier / trial](https://resend.com/pricing) · [Self-serve upgrade](https://resend.com/pricing) · [Idempotency](https://resend.com/docs/api-reference/introduction)
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
@@ -782,9 +782,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **303 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
+- `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [deepseek](#deepseek), [discord](#discord), [gemini-api](#gemini-api), [hugging-face](#hugging-face), [openai](#openai), [telegram](#telegram)
 - `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepseek](#deepseek), [dropbox](#dropbox), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel), [zapier](#zapier)
-- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
+- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [cohere](#cohere), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [gemini-api](#gemini-api), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
 - `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash), [zapier](#zapier)
 
 ## Contributing

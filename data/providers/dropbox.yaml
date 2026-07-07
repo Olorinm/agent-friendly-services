@@ -13,6 +13,7 @@ tags:
 entrypoints:
   docs: https://www.dropbox.com/developers/documentation
   api_reference: https://www.dropbox.com/developers/documentation/http/documentation
+  llms_txt: https://www.dropbox.com/llms.txt
   status_page: https://status.dropbox.com
   pricing: https://www.dropbox.com/plans
   signup: https://www.dropbox.com/register

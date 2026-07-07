@@ -16,6 +16,7 @@ entrypoints:
   api_reference: https://docs.gitlab.com/api/rest/
   graphql: https://docs.gitlab.com/api/graphql/
   llms_txt: https://docs.gitlab.com/llms.txt
+  mcp_official: https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server
   changelog: https://about.gitlab.com/releases/
   status_page: https://status.gitlab.com
   pricing: https://about.gitlab.com/pricing/

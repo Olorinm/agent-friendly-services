@@ -15,6 +15,7 @@ entrypoints:
   docs: https://docs.github.com
   api_reference: https://docs.github.com/rest
   openapi: https://github.com/github/rest-api-description
+  llms_txt: https://docs.github.com/llms.txt
   graphql: https://docs.github.com/graphql
   changelog: https://github.blog/changelog/
   status_page: https://www.githubstatus.com

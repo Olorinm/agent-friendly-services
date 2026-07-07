@@ -19,6 +19,7 @@ entrypoints:
   signup: https://www.datadoghq.com/free-datadog-trial
   api_keys: https://docs.datadoghq.com/account_management/api-app-keys
   cli: https://github.com/DataDog/datadog-ci
+  mcp_official: https://docs.datadoghq.com/bits_ai/mcp_server
   webhooks: https://docs.datadoghq.com/integrations/webhooks
   rate_limits: https://docs.datadoghq.com/api/latest/rate-limits
 

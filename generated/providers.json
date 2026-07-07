@@ -12,11 +12,11 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:26:58.942Z",
+  "generated_at": "2026-07-07T10:30:31.377Z",
   "counts": {
     "providers": 51,
     "categories": 12,
-    "entrypoint_urls": 521,
+    "entrypoint_urls": 530,
     "checks_answered": 309
   },
   "categories": [
@@ -563,6 +563,7 @@
       ],
       "entrypoints": {
         "docs": "https://api-dashboard.search.brave.com/app/documentation",
+        "mcp_official": "https://github.com/brave/brave-search-mcp-server",
         "pricing": "https://brave.com/search/api/",
         "signup": "https://api-dashboard.search.brave.com/register"
       },
@@ -624,6 +625,7 @@
       ],
       "derived": {
         "badges": [
+          "Official MCP",
           "Self-serve"
         ],
         "stale": false,
@@ -1050,6 +1052,7 @@
         "signup": "https://www.datadoghq.com/free-datadog-trial",
         "api_keys": "https://docs.datadoghq.com/account_management/api-app-keys",
         "cli": "https://github.com/DataDog/datadog-ci",
+        "mcp_official": "https://docs.datadoghq.com/bits_ai/mcp_server",
         "webhooks": "https://docs.datadoghq.com/integrations/webhooks",
         "rate_limits": "https://docs.datadoghq.com/api/latest/rate-limits"
       },
@@ -1114,6 +1117,7 @@
       },
       "derived": {
         "badges": [
+          "Official MCP",
           "llms.txt",
           "CLI",
           "Self-serve"
@@ -1439,6 +1443,7 @@
       "entrypoints": {
         "docs": "https://www.dropbox.com/developers/documentation",
         "api_reference": "https://www.dropbox.com/developers/documentation/http/documentation",
+        "llms_txt": "https://www.dropbox.com/llms.txt",
         "status_page": "https://status.dropbox.com",
         "pricing": "https://www.dropbox.com/plans",
         "signup": "https://www.dropbox.com/register",
@@ -1505,6 +1510,7 @@
       },
       "derived": {
         "badges": [
+          "llms.txt",
           "CLI",
           "Self-serve"
         ],
@@ -1918,6 +1924,7 @@
         "docs": "https://fly.io/docs",
         "api_reference": "https://fly.io/docs/machines/api/",
         "openapi": "https://docs.machines.dev",
+        "llms_txt": "https://fly.io/llms.txt",
         "status_page": "https://status.flyio.net",
         "pricing": "https://fly.io/docs/about/pricing/",
         "signup": "https://fly.io/app/sign-up",
@@ -1981,6 +1988,7 @@
       "derived": {
         "badges": [
           "Official MCP",
+          "llms.txt",
           "OpenAPI",
           "CLI",
           "Self-serve"
@@ -2115,6 +2123,7 @@
         "docs": "https://docs.github.com",
         "api_reference": "https://docs.github.com/rest",
         "openapi": "https://github.com/github/rest-api-description",
+        "llms_txt": "https://docs.github.com/llms.txt",
         "graphql": "https://docs.github.com/graphql",
         "changelog": "https://github.blog/changelog/",
         "status_page": "https://www.githubstatus.com",
@@ -2197,6 +2206,7 @@
       "derived": {
         "badges": [
           "Official MCP",
+          "llms.txt",
           "OpenAPI",
           "CLI",
           "Self-serve"
@@ -2227,6 +2237,7 @@
         "api_reference": "https://docs.gitlab.com/api/rest/",
         "graphql": "https://docs.gitlab.com/api/graphql/",
         "llms_txt": "https://docs.gitlab.com/llms.txt",
+        "mcp_official": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
         "changelog": "https://about.gitlab.com/releases/",
         "status_page": "https://status.gitlab.com",
         "pricing": "https://about.gitlab.com/pricing/",
@@ -2296,6 +2307,7 @@
       },
       "derived": {
         "badges": [
+          "Official MCP",
           "llms.txt",
           "CLI",
           "Self-serve"
@@ -3441,6 +3453,7 @@
         "pricing": "https://www.paddle.com/pricing",
         "signup": "https://sandbox-login.paddle.com/signup",
         "api_keys": "https://developer.paddle.com/api-reference/about/authentication",
+        "mcp_official": "https://github.com/PaddleHQ/paddle-mcp-server",
         "webhooks": "https://developer.paddle.com/webhooks/overview"
       },
       "checks": {
@@ -3502,6 +3515,7 @@
       },
       "derived": {
         "badges": [
+          "Official MCP",
           "llms.txt",
           "Sandbox"
         ],
@@ -3728,6 +3742,7 @@
         "docs": "https://learning.postman.com",
         "api_reference": "https://learning.postman.com/docs/developer/postman-api/intro-api/",
         "llms_txt": "https://learning.postman.com/llms.txt",
+        "mcp_official": "https://github.com/postmanlabs/postman-mcp-server",
         "status_page": "https://status.postman.com",
         "pricing": "https://www.postman.com/pricing/",
         "signup": "https://identity.getpostman.com/signup",
@@ -3787,6 +3802,7 @@
       },
       "derived": {
         "badges": [
+          "Official MCP",
           "llms.txt",
           "CLI",
           "Self-serve"
@@ -4015,6 +4031,7 @@
       "entrypoints": {
         "docs": "https://resend.com/docs",
         "api_reference": "https://resend.com/docs/api-reference/introduction",
+        "llms_txt": "https://resend.com/llms.txt",
         "changelog": "https://resend.com/changelog",
         "pricing": "https://resend.com/pricing",
         "signup": "https://resend.com/signup",
@@ -4088,6 +4105,7 @@
       "derived": {
         "badges": [
           "Official MCP",
+          "llms.txt",
           "Sandbox",
           "Self-serve",
           "Idempotent API"

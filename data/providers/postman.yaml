@@ -15,6 +15,7 @@ entrypoints:
   docs: https://learning.postman.com
   api_reference: https://learning.postman.com/docs/developer/postman-api/intro-api/
   llms_txt: https://learning.postman.com/llms.txt
+  mcp_official: https://github.com/postmanlabs/postman-mcp-server
   status_page: https://status.postman.com
   pricing: https://www.postman.com/pricing/
   signup: https://identity.getpostman.com/signup

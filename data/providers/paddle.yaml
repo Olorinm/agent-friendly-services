@@ -18,6 +18,7 @@ entrypoints:
   pricing: https://www.paddle.com/pricing
   signup: https://sandbox-login.paddle.com/signup
   api_keys: https://developer.paddle.com/api-reference/about/authentication
+  mcp_official: https://github.com/PaddleHQ/paddle-mcp-server
   webhooks: https://developer.paddle.com/webhooks/overview
 
 checks:

@@ -12,6 +12,7 @@ tags:
 
 entrypoints:
   docs: https://api-dashboard.search.brave.com/app/documentation
+  mcp_official: https://github.com/brave/brave-search-mcp-server
   pricing: https://brave.com/search/api/
   signup: https://api-dashboard.search.brave.com/register
 
