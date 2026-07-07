@@ -12,11 +12,11 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:06:16.828Z",
+  "generated_at": "2026-07-07T10:26:58.942Z",
   "counts": {
     "providers": 51,
     "categories": 12,
-    "entrypoint_urls": 511,
+    "entrypoint_urls": 521,
     "checks_answered": 309
   },
   "categories": [
@@ -1049,6 +1049,7 @@
         "pricing": "https://www.datadoghq.com/pricing",
         "signup": "https://www.datadoghq.com/free-datadog-trial",
         "api_keys": "https://docs.datadoghq.com/account_management/api-app-keys",
+        "cli": "https://github.com/DataDog/datadog-ci",
         "webhooks": "https://docs.datadoghq.com/integrations/webhooks",
         "rate_limits": "https://docs.datadoghq.com/api/latest/rate-limits"
       },
@@ -1114,6 +1115,7 @@
       "derived": {
         "badges": [
           "llms.txt",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -1441,6 +1443,7 @@
         "pricing": "https://www.dropbox.com/plans",
         "signup": "https://www.dropbox.com/register",
         "api_keys": "https://www.dropbox.com/developers/apps",
+        "cli": "https://github.com/dropbox/dbxcli",
         "webhooks": "https://www.dropbox.com/developers/reference/webhooks"
       },
       "checks": {
@@ -1502,6 +1505,7 @@
       },
       "derived": {
         "badges": [
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -1535,6 +1539,7 @@
         "pricing": "https://e2b.dev/pricing",
         "signup": "https://e2b.dev",
         "api_keys": "https://e2b.dev/docs/api-key",
+        "cli": "https://e2b.dev/docs/cli",
         "sdks": "https://e2b.dev/docs/sdk-reference",
         "mcp_official": "https://github.com/e2b-dev/mcp-server"
       },
@@ -1596,6 +1601,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -2013,6 +2019,7 @@
         "signup": "https://aistudio.google.com",
         "api_keys": "https://ai.google.dev/gemini-api/docs/api-key",
         "sdks": "https://ai.google.dev/gemini-api/docs/libraries",
+        "cli": "https://github.com/google-gemini/gemini-cli",
         "agent_docs": "https://ai.google.dev/gemini-api/docs/function-calling",
         "rate_limits": "https://ai.google.dev/gemini-api/docs/rate-limits",
         "errors": "https://ai.google.dev/gemini-api/docs/troubleshooting"
@@ -2074,6 +2081,7 @@
       },
       "derived": {
         "badges": [
+          "CLI",
           "Agent Docs",
           "Self-serve"
         ],
@@ -2502,7 +2510,7 @@
       "name": "Lark",
       "category": "communication",
       "homepage": "https://www.larksuite.com",
-      "summary": "Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.",
+      "summary": "Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.",
       "submitted_by": "community",
       "scope": "Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal.",
       "tags": [
@@ -2518,7 +2526,9 @@
         "pricing": "https://www.larksuite.com/en_us/plans",
         "signup": "https://www.larksuite.com",
         "api_keys": "https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token",
+        "cli": "https://github.com/larksuite/cli",
         "mcp_official": "https://github.com/larksuite/lark-openapi-mcp",
+        "agent_docs": "https://open.larksuite.com/document/mcp_open_tools/feishu-cli-let-ai-actually-do-your-work-in-feishu",
         "webhooks": "https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case",
         "rate_limits": "https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control"
       },
@@ -2586,6 +2596,8 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "CLI",
+          "Agent Docs",
           "Self-serve"
         ],
         "stale": false,
@@ -3621,6 +3633,7 @@
         "pricing": "https://www.pinecone.io/pricing/",
         "signup": "https://app.pinecone.io",
         "api_keys": "https://docs.pinecone.io/guides/projects/manage-api-keys",
+        "cli": "https://github.com/pinecone-io/cli",
         "mcp_official": "https://docs.pinecone.io/guides/operations/mcp-server"
       },
       "checks": {
@@ -3683,6 +3696,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -4322,6 +4336,7 @@
         "signup": "https://slack.com/get-started",
         "api_keys": "https://api.slack.com/authentication/token-types",
         "sdks": "https://tools.slack.dev",
+        "cli": "https://docs.slack.dev/tools/slack-cli",
         "webhooks": "https://api.slack.com/messaging/webhooks",
         "rate_limits": "https://api.slack.com/apis/rate-limits"
       },
@@ -4388,6 +4403,7 @@
         "badges": [
           "llms.txt",
           "OpenAPI",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -5030,6 +5046,7 @@
         "pricing": "https://upstash.com/pricing",
         "signup": "https://console.upstash.com",
         "api_keys": "https://upstash.com/docs/devops/developer-api/introduction",
+        "cli": "https://github.com/upstash/cli",
         "mcp_official": "https://github.com/upstash/mcp-server"
       },
       "checks": {
@@ -5090,6 +5107,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,
@@ -5235,6 +5253,7 @@
         "status_page": "https://status.zapier.com",
         "pricing": "https://zapier.com/pricing",
         "signup": "https://zapier.com/sign-up",
+        "cli": "https://github.com/zapier/zapier-platform",
         "mcp_official": "https://zapier.com/mcp"
       },
       "checks": {
@@ -5294,6 +5313,7 @@
         "badges": [
           "Official MCP",
           "llms.txt",
+          "CLI",
           "Self-serve"
         ],
         "stale": false,

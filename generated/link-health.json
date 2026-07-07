@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-07-07T10:06:15.135Z",
-  "total": 591,
-  "ok": 586,
+  "checked_at": "2026-07-07T10:26:57.476Z",
+  "total": 601,
+  "ok": 596,
   "inconclusive": 5,
   "broken": 0,
   "results": [
@@ -1919,6 +1919,14 @@
       ]
     },
     {
+      "url": "https://docs.slack.dev/tools/slack-cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://docs.stripe.com",
       "class": "ok",
       "status": 200,
@@ -2210,6 +2218,14 @@
       ]
     },
     {
+      "url": "https://e2b.dev/docs/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://e2b.dev/docs/sdk-reference",
       "class": "ok",
       "status": 200,
@@ -2431,6 +2447,14 @@
       ]
     },
     {
+      "url": "https://github.com/DataDog/datadog-ci",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "datadog:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://github.com/deepgram/deepgram-api-specs",
       "class": "ok",
       "status": 200,
@@ -2444,6 +2468,14 @@
       "status": 200,
       "sources": [
         "discord:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/dropbox/dbxcli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "dropbox:entrypoints.cli"
       ]
     },
     {
@@ -2484,6 +2516,22 @@
       "status": 200,
       "sources": [
         "github:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://github.com/larksuite/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lark:entrypoints.cli"
       ]
     },
     {
@@ -2548,6 +2596,14 @@
       "status": 200,
       "sources": [
         "openai:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/pinecone-io/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.cli"
       ]
     },
     {
@@ -2642,11 +2698,27 @@
       ]
     },
     {
+      "url": "https://github.com/upstash/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "upstash:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://github.com/upstash/mcp-server",
       "class": "ok",
       "status": 200,
       "sources": [
         "upstash:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/zapier/zapier-platform",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zapier:entrypoints.cli"
       ]
     },
     {
@@ -3161,6 +3233,14 @@
       "sources": [
         "lark:entrypoints.docs",
         "lark:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://open.larksuite.com/document/mcp_open_tools/feishu-cli-let-ai-actually-do-your-work-in-feishu",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lark:entrypoints.agent_docs"
       ]
     },
     {

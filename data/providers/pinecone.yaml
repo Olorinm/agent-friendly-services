@@ -19,6 +19,7 @@ entrypoints:
   pricing: https://www.pinecone.io/pricing/
   signup: https://app.pinecone.io
   api_keys: https://docs.pinecone.io/guides/projects/manage-api-keys
+  cli: https://github.com/pinecone-io/cli
   mcp_official: https://docs.pinecone.io/guides/operations/mcp-server
 
 checks:

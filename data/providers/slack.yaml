@@ -22,6 +22,7 @@ entrypoints:
   signup: https://slack.com/get-started
   api_keys: https://api.slack.com/authentication/token-types
   sdks: https://tools.slack.dev
+  cli: https://docs.slack.dev/tools/slack-cli
   webhooks: https://api.slack.com/messaging/webhooks
   rate_limits: https://api.slack.com/apis/rate-limits
 

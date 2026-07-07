@@ -19,6 +19,7 @@ entrypoints:
   signup: https://aistudio.google.com
   api_keys: https://ai.google.dev/gemini-api/docs/api-key
   sdks: https://ai.google.dev/gemini-api/docs/libraries
+  cli: https://github.com/google-gemini/gemini-cli
   agent_docs: https://ai.google.dev/gemini-api/docs/function-calling
   rate_limits: https://ai.google.dev/gemini-api/docs/rate-limits
   errors: https://ai.google.dev/gemini-api/docs/troubleshooting

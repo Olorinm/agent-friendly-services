@@ -17,6 +17,7 @@ entrypoints:
   pricing: https://www.dropbox.com/plans
   signup: https://www.dropbox.com/register
   api_keys: https://www.dropbox.com/developers/apps
+  cli: https://github.com/dropbox/dbxcli
   webhooks: https://www.dropbox.com/developers/reference/webhooks
 
 checks:

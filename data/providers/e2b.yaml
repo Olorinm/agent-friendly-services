@@ -17,6 +17,7 @@ entrypoints:
   pricing: https://e2b.dev/pricing
   signup: https://e2b.dev
   api_keys: https://e2b.dev/docs/api-key
+  cli: https://e2b.dev/docs/cli
   sdks: https://e2b.dev/docs/sdk-reference
   mcp_official: https://github.com/e2b-dev/mcp-server
 

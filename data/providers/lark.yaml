@@ -2,7 +2,7 @@ id: lark
 name: Lark
 category: communication
 homepage: https://www.larksuite.com
-summary: Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.
+summary: Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.
 submitted_by: community
 scope: "Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal."
 
@@ -19,7 +19,9 @@ entrypoints:
   pricing: https://www.larksuite.com/en_us/plans
   signup: https://www.larksuite.com
   api_keys: https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token
+  cli: https://github.com/larksuite/cli
   mcp_official: https://github.com/larksuite/lark-openapi-mcp
+  agent_docs: https://open.larksuite.com/document/mcp_open_tools/feishu-cli-let-ai-actually-do-your-work-in-feishu
   webhooks: https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case
   rate_limits: https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control
 

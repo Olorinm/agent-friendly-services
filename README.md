@@ -5,11 +5,11 @@
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
 ![Providers](https://img.shields.io/badge/providers-51-2563eb)
-[![Link health](https://img.shields.io/badge/link_health-586_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-596_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**51 providers · 12 categories · 511 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**51 providers · 12 categories · 521 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -70,7 +70,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
 | [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
-| [Gemini API](#gemini-api) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | 2026-07-07 |
 | [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
@@ -83,14 +83,14 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](#composio) | ✓ | ✓ | — | — | — | — | 2026-07-07 |
-| [Zapier](#zapier) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Code Execution
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
-| [E2B](#e2b) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
+| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | 2026-07-07 |
 | [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Developer Tools
@@ -116,10 +116,10 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Neon](#neon) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
-| [Pinecone](#pinecone) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Supabase](#supabase) | ✓ | ✓ | — | ✓ | ◐ | ✓ | 2026-07-07 |
-| [Upstash](#upstash) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Web Search / Data
 
@@ -144,9 +144,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Discord](#discord) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
-| [Lark](#lark) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Lark](#lark) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
-| [Slack](#slack) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [Slack](#slack) | — | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | 2026-07-07 |
 | [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 
@@ -155,7 +155,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Airtable](#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
-| [Dropbox](#dropbox) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Dropbox](#dropbox) | — | — | — | ✓ | — | ✓ | 2026-07-07 |
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
@@ -163,7 +163,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Datadog](#datadog) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Datadog](#datadog) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Commerce / Marketing
@@ -280,9 +280,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
 
-**Category:** Observability / Security · `llms.txt` `Self-serve`
+**Category:** Observability / Security · `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
+**Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [CLI](https://github.com/DataDog/datadog-ci) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
 
 - **Supported:** [Self-serve signup](https://www.datadoghq.com/free-datadog-trial) · [Self-serve API keys](https://docs.datadoghq.com/account_management/api-app-keys) · [OAuth](https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog) · [Free tier / trial](https://www.datadoghq.com/pricing) · [Self-serve upgrade](https://www.datadoghq.com/pricing)
 - **Partial:** [Versioning policy](https://docs.datadoghq.com/api/latest/) — Endpoints are path-versioned (v1/v2) in the reference; no formal deprecation-window policy page recorded.
@@ -329,9 +329,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
-**Category:** Productivity / Storage · `Self-serve`
+**Category:** Productivity / Storage · `CLI` `Self-serve`
 
-**Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
+**Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [CLI](https://github.com/dropbox/dbxcli) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
 
 - **Supported:** [Self-serve signup](https://www.dropbox.com/register) · [Self-serve API keys](https://www.dropbox.com/developers/apps) · [OAuth](https://developers.dropbox.com/oauth-guide) · [Scoped tokens](https://developers.dropbox.com/oauth-guide) · [Free tier / trial](https://www.dropbox.com/plans) · [Self-serve upgrade](https://www.dropbox.com/plans)
 - **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -340,9 +340,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.
 
-**Category:** Code Execution · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Code Execution · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev) · [API Keys](https://e2b.dev/docs/api-key) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
+**Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev) · [API Keys](https://e2b.dev/docs/api-key) · [CLI](https://e2b.dev/docs/cli) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
 
 - **Supported:** [Self-serve signup](https://e2b.dev) · [Self-serve API keys](https://e2b.dev/docs/api-key) · [Free tier / trial](https://e2b.dev/pricing) · [Self-serve upgrade](https://e2b.dev/pricing) · [Automation permitted](https://e2b.dev/docs)
 - **N/A:** Sandbox / test mode — The product itself is an isolated, ephemeral sandbox per session.
@@ -398,9 +398,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
 
-**Category:** AI Models · **Scope:** Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed. · `Agent Docs` `Self-serve`
+**Category:** AI Models · **Scope:** Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed. · `CLI` `Agent Docs` `Self-serve`
 
-**Links:** [Documentation](https://ai.google.dev/gemini-api/docs) · [API Reference](https://ai.google.dev/api) · [Changelog](https://ai.google.dev/gemini-api/docs/changelog) · [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Signup](https://aistudio.google.com) · [API Keys](https://ai.google.dev/gemini-api/docs/api-key) · [SDKs](https://ai.google.dev/gemini-api/docs/libraries) · [Agent Docs](https://ai.google.dev/gemini-api/docs/function-calling) · [Rate Limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Errors](https://ai.google.dev/gemini-api/docs/troubleshooting)
+**Links:** [Documentation](https://ai.google.dev/gemini-api/docs) · [API Reference](https://ai.google.dev/api) · [Changelog](https://ai.google.dev/gemini-api/docs/changelog) · [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Signup](https://aistudio.google.com) · [API Keys](https://ai.google.dev/gemini-api/docs/api-key) · [CLI](https://github.com/google-gemini/gemini-cli) · [SDKs](https://ai.google.dev/gemini-api/docs/libraries) · [Agent Docs](https://ai.google.dev/gemini-api/docs/function-calling) · [Rate Limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Errors](https://ai.google.dev/gemini-api/docs/troubleshooting)
 
 - **Supported:** [Self-serve signup](https://aistudio.google.com) · [Self-serve API keys](https://ai.google.dev/gemini-api/docs/api-key) · [Free tier / trial](https://ai.google.dev/gemini-api/docs/pricing) · [Self-serve upgrade](https://ai.google.dev/gemini-api/docs/pricing) · [Versioning policy](https://ai.google.dev/gemini-api/docs/api-versions)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
@@ -453,11 +453,11 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ### Lark <a id="lark"></a>
 
-> Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.
+> Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.
 
-**Category:** Communication · **Scope:** Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal. · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Communication · **Scope:** Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal. · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Self-serve`
 
-**Links:** [Documentation](https://open.larksuite.com/document/home/index) · [API Reference](https://open.larksuite.com/document/server-docs/getting-started/server-api-list) · [llms.txt](https://open.larksuite.com/llms.txt) · [Status Page](https://status.larksuite.com) · [Pricing](https://www.larksuite.com/en_us/plans) · [Signup](https://www.larksuite.com) · [API Keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [Official MCP](https://github.com/larksuite/lark-openapi-mcp) · [Webhooks](https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case) · [Rate Limits](https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control)
+**Links:** [Documentation](https://open.larksuite.com/document/home/index) · [API Reference](https://open.larksuite.com/document/server-docs/getting-started/server-api-list) · [llms.txt](https://open.larksuite.com/llms.txt) · [Status Page](https://status.larksuite.com) · [Pricing](https://www.larksuite.com/en_us/plans) · [Signup](https://www.larksuite.com) · [API Keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [CLI](https://github.com/larksuite/cli) · [Official MCP](https://github.com/larksuite/lark-openapi-mcp) · [Agent Docs](https://open.larksuite.com/document/mcp_open_tools/feishu-cli-let-ai-actually-do-your-work-in-feishu) · [Webhooks](https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case) · [Rate Limits](https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control)
 
 - **Supported:** [Self-serve signup](https://www.larksuite.com) · [Self-serve API keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [OAuth](https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authorize/get) · [Scoped tokens](https://open.larksuite.com/document/server-docs/application-scope/introduction) · [Free tier / trial](https://www.larksuite.com/en_us/plans) · [Automation permitted](https://open.larksuite.com/document/home/index)
 - **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`
@@ -582,9 +582,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.
 
-**Category:** Databases · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.pinecone.io) · [API Reference](https://docs.pinecone.io/reference/api/introduction) · [llms.txt](https://docs.pinecone.io/llms.txt) · [Changelog](https://docs.pinecone.io/release-notes) · [Status Page](https://status.pinecone.io) · [Pricing](https://www.pinecone.io/pricing/) · [Signup](https://app.pinecone.io) · [API Keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Official MCP](https://docs.pinecone.io/guides/operations/mcp-server)
+**Links:** [Documentation](https://docs.pinecone.io) · [API Reference](https://docs.pinecone.io/reference/api/introduction) · [llms.txt](https://docs.pinecone.io/llms.txt) · [Changelog](https://docs.pinecone.io/release-notes) · [Status Page](https://status.pinecone.io) · [Pricing](https://www.pinecone.io/pricing/) · [Signup](https://app.pinecone.io) · [API Keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [CLI](https://github.com/pinecone-io/cli) · [Official MCP](https://docs.pinecone.io/guides/operations/mcp-server)
 
 - **Supported:** [Self-serve signup](https://app.pinecone.io) · [Self-serve API keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Token revocation](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Free tier / trial](https://www.pinecone.io/pricing/) · [Self-serve upgrade](https://www.pinecone.io/pricing/) · [Versioning policy](https://docs.pinecone.io/reference/api/versioning)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
@@ -659,9 +659,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.
 
-**Category:** Communication · **Scope:** Slack platform APIs (Web API, Events API, apps); the chat product itself is not assessed. · `llms.txt` `OpenAPI` `Self-serve`
+**Category:** Communication · **Scope:** Slack platform APIs (Web API, Events API, apps); the chat product itself is not assessed. · `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://api.slack.com) · [API Reference](https://api.slack.com/methods) · [OpenAPI](https://github.com/slackapi/slack-api-specs) · [llms.txt](https://docs.slack.dev/llms.txt) · [Changelog](https://api.slack.com/changelog) · [Status Page](https://slack-status.com) · [Pricing](https://slack.com/pricing) · [Signup](https://slack.com/get-started) · [API Keys](https://api.slack.com/authentication/token-types) · [SDKs](https://tools.slack.dev) · [Webhooks](https://api.slack.com/messaging/webhooks) · [Rate Limits](https://api.slack.com/apis/rate-limits)
+**Links:** [Documentation](https://api.slack.com) · [API Reference](https://api.slack.com/methods) · [OpenAPI](https://github.com/slackapi/slack-api-specs) · [llms.txt](https://docs.slack.dev/llms.txt) · [Changelog](https://api.slack.com/changelog) · [Status Page](https://slack-status.com) · [Pricing](https://slack.com/pricing) · [Signup](https://slack.com/get-started) · [API Keys](https://api.slack.com/authentication/token-types) · [CLI](https://docs.slack.dev/tools/slack-cli) · [SDKs](https://tools.slack.dev) · [Webhooks](https://api.slack.com/messaging/webhooks) · [Rate Limits](https://api.slack.com/apis/rate-limits)
 
 - **Supported:** [Self-serve signup](https://slack.com/get-started) · [Self-serve API keys](https://api.slack.com/authentication/token-types) · [OAuth](https://api.slack.com/authentication/oauth-v2) · [Scoped tokens](https://api.slack.com/authentication/token-types) · [Token revocation](https://api.slack.com/authentication/token-types) · [Free tier / trial](https://slack.com/pricing) · [Self-serve upgrade](https://slack.com/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -746,9 +746,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.
 
-**Category:** Databases · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://upstash.com/docs) · [API Reference](https://upstash.com/docs/devops/developer-api/introduction) · [llms.txt](https://upstash.com/docs/llms.txt) · [Status Page](https://status.upstash.com) · [Pricing](https://upstash.com/pricing) · [Signup](https://console.upstash.com) · [API Keys](https://upstash.com/docs/devops/developer-api/introduction) · [Official MCP](https://github.com/upstash/mcp-server)
+**Links:** [Documentation](https://upstash.com/docs) · [API Reference](https://upstash.com/docs/devops/developer-api/introduction) · [llms.txt](https://upstash.com/docs/llms.txt) · [Status Page](https://status.upstash.com) · [Pricing](https://upstash.com/pricing) · [Signup](https://console.upstash.com) · [API Keys](https://upstash.com/docs/devops/developer-api/introduction) · [CLI](https://github.com/upstash/cli) · [Official MCP](https://github.com/upstash/mcp-server)
 
 - **Supported:** [Self-serve signup](https://console.upstash.com) · [Self-serve API keys](https://upstash.com/docs/devops/developer-api/introduction) · [Free tier / trial](https://upstash.com/pricing) · [Self-serve upgrade](https://upstash.com/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
@@ -770,9 +770,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.
 
-**Category:** Agent Tooling · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Agent Tooling · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [Official MCP](https://zapier.com/mcp)
+**Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [CLI](https://github.com/zapier/zapier-platform) · [Official MCP](https://zapier.com/mcp)
 
 - **Supported:** [Self-serve signup](https://zapier.com/sign-up) · [Self-serve API keys](https://zapier.com/mcp) · [Free tier / trial](https://zapier.com/pricing) · [Self-serve upgrade](https://zapier.com/pricing) · [Automation permitted](https://docs.zapier.com)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`
@@ -785,7 +785,7 @@ The fastest way to contribute is to resolve an `unknown`: find official evidence
 - `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
 - `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepseek](#deepseek), [dropbox](#dropbox), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel), [zapier](#zapier)
 - `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash), [zapier](#zapier)
+- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash), [zapier](#zapier)
 
 ## Contributing
 

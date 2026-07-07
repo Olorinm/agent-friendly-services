@@ -18,6 +18,7 @@ entrypoints:
   pricing: https://www.datadoghq.com/pricing
   signup: https://www.datadoghq.com/free-datadog-trial
   api_keys: https://docs.datadoghq.com/account_management/api-app-keys
+  cli: https://github.com/DataDog/datadog-ci
   webhooks: https://docs.datadoghq.com/integrations/webhooks
   rate_limits: https://docs.datadoghq.com/api/latest/rate-limits
 

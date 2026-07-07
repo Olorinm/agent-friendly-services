@@ -16,6 +16,7 @@ entrypoints:
   status_page: https://status.zapier.com
   pricing: https://zapier.com/pricing
   signup: https://zapier.com/sign-up
+  cli: https://github.com/zapier/zapier-platform
   mcp_official: https://zapier.com/mcp
 
 checks:

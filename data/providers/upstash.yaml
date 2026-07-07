@@ -18,6 +18,7 @@ entrypoints:
   pricing: https://upstash.com/pricing
   signup: https://console.upstash.com
   api_keys: https://upstash.com/docs/devops/developer-api/introduction
+  cli: https://github.com/upstash/cli
   mcp_official: https://github.com/upstash/mcp-server
 
 checks:
