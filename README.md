@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-30-2563eb)
+![Providers](https://img.shields.io/badge/providers-35-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**30 providers · 9 categories · 319 entry links (machine-probed weekly) · 186 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**35 providers · 10 categories · 372 entry links (machine-probed weekly) · 219 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -114,6 +114,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Paddle](#paddle) | — | ✓ | — | — | ✓ | ◐ | 2026-07-07 |
 | [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Communication
@@ -121,6 +122,15 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
+| [Slack](#slack) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+
+### Productivity / Storage
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
 ### Observability / Security
 
@@ -302,6 +312,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Linear <a id="linear"></a>
+
+> Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.
+
+**Category:** Productivity / Storage · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://linear.app/developers) · [GraphQL](https://linear.app/developers/graphql) · [llms.txt](https://linear.app/llms.txt) · [Changelog](https://linear.app/changelog) · [Status Page](https://linearstatus.com) · [Pricing](https://linear.app/pricing) · [Signup](https://linear.app/signup) · [API Keys](https://linear.app/developers/graphql) · [Official MCP](https://linear.app/docs/mcp) · [Webhooks](https://linear.app/developers/webhooks) · [Rate Limits](https://linear.app/developers/rate-limiting)
+
+- **Supported:** [Self-serve signup](https://linear.app/signup) · [Self-serve API keys](https://linear.app/developers/graphql) · [OAuth](https://linear.app/developers) · [Free tier / trial](https://linear.app/pricing) · [Self-serve upgrade](https://linear.app/pricing)
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Modal <a id="modal"></a>
 
 > Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
@@ -347,6 +368,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://app.netlify.com/signup) · [Self-serve API keys](https://docs.netlify.com/api/get-started/) · [OAuth](https://docs.netlify.com/api/get-started/) · [Free tier / trial](https://www.netlify.com/pricing/) · [Self-serve upgrade](https://www.netlify.com/pricing/)
 - **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Notion <a id="notion"></a>
+
+> Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.
+
+**Category:** Productivity / Storage · **Scope:** Notion API integrations; the editor product itself is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://developers.notion.com) · [API Reference](https://developers.notion.com/reference/intro) · [llms.txt](https://developers.notion.com/llms.txt) · [Status Page](https://status.notion.so) · [Pricing](https://www.notion.com/pricing) · [Signup](https://www.notion.com/signup) · [API Keys](https://developers.notion.com/docs/authorization) · [Official MCP](https://developers.notion.com/docs/mcp) · [Rate Limits](https://developers.notion.com/reference/request-limits) · [Errors](https://developers.notion.com/reference/status-codes)
+
+- **Supported:** [Self-serve signup](https://www.notion.com/signup) · [Self-serve API keys](https://developers.notion.com/docs/authorization) · [OAuth](https://developers.notion.com/docs/authorization) · [Free tier / trial](https://www.notion.com/pricing) · [Self-serve upgrade](https://www.notion.com/pricing) · [Versioning policy](https://developers.notion.com/reference/versioning)
+- **Partial:** [Scoped tokens](https://developers.notion.com/docs/authorization) — Integrations carry capability scopes (read/update/insert) and page-level access grants.
+- **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
 ### OpenAI <a id="openai"></a>
 
 > GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
@@ -358,6 +391,19 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://platform.openai.com/signup) · [Self-serve API keys](https://platform.openai.com/docs/quickstart) · [Self-serve upgrade](https://platform.openai.com/docs/pricing) · [Versioning policy](https://platform.openai.com/docs/deprecations)
 - **Partial:** [Scoped tokens](https://platform.openai.com/docs/quickstart) — Project-scoped API keys separate projects; permission granularity is limited.
 - **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Paddle <a id="paddle"></a>
+
+> Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.
+
+**Category:** Payments / Billing · `llms.txt` `Sandbox`
+
+**Links:** [Documentation](https://developer.paddle.com) · [API Reference](https://developer.paddle.com/api-reference/overview) · [llms.txt](https://developer.paddle.com/llms.txt) · [Status Page](https://paddlestatus.com) · [Pricing](https://www.paddle.com/pricing) · [Signup](https://sandbox-login.paddle.com/signup) · [API Keys](https://developer.paddle.com/api-reference/about/authentication) · [Webhooks](https://developer.paddle.com/webhooks/overview)
+
+- **Supported:** [Self-serve API keys](https://developer.paddle.com/api-reference/about/authentication) · [Sandbox / test mode](https://sandbox-login.paddle.com/signup) · [Free tier / trial](https://www.paddle.com/pricing) · [Versioning policy](https://developer.paddle.com/api-reference/about/versioning)
+- **Partial:** [Self-serve signup](https://sandbox-login.paddle.com/signup) — Sandbox accounts are fully self-serve; live accounts require website verification (merchant-of-record model).
+- **Partial:** [Self-serve upgrade](https://www.paddle.com/pricing) — Going live requires account approval; no sales call, but not instant.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### Perplexity API <a id="perplexity"></a>
 
@@ -426,6 +472,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://sentry.io/signup/) · [Self-serve API keys](https://docs.sentry.io/api/auth/) · [Scoped tokens](https://docs.sentry.io/api/auth/) · [Token revocation](https://docs.sentry.io/api/auth/) · [Free tier / trial](https://sentry.io/pricing/) · [Self-serve upgrade](https://sentry.io/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Slack <a id="slack"></a>
+
+> Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.
+
+**Category:** Communication · **Scope:** Slack platform APIs (Web API, Events API, apps); the chat product itself is not assessed. · `llms.txt` `OpenAPI` `Self-serve`
+
+**Links:** [Documentation](https://api.slack.com) · [API Reference](https://api.slack.com/methods) · [OpenAPI](https://github.com/slackapi/slack-api-specs) · [llms.txt](https://docs.slack.dev/llms.txt) · [Changelog](https://api.slack.com/changelog) · [Status Page](https://slack-status.com) · [Pricing](https://slack.com/pricing) · [Signup](https://slack.com/get-started) · [API Keys](https://api.slack.com/authentication/token-types) · [SDKs](https://tools.slack.dev) · [Webhooks](https://api.slack.com/messaging/webhooks) · [Rate Limits](https://api.slack.com/apis/rate-limits)
+
+- **Supported:** [Self-serve signup](https://slack.com/get-started) · [Self-serve API keys](https://api.slack.com/authentication/token-types) · [OAuth](https://api.slack.com/authentication/oauth-v2) · [Scoped tokens](https://api.slack.com/authentication/token-types) · [Token revocation](https://api.slack.com/authentication/token-types) · [Free tier / trial](https://slack.com/pricing) · [Self-serve upgrade](https://slack.com/pricing)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Stripe <a id="stripe"></a>
 
 > Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.
@@ -475,6 +532,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://api.together.ai) · [Self-serve API keys](https://docs.together.ai/docs/quickstart) · [Self-serve upgrade](https://www.together.ai/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Twilio <a id="twilio"></a>
+
+> Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.
+
+**Category:** Communication · **Scope:** Core messaging/voice APIs and IAM; the broader product family is not individually assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://www.twilio.com/docs) · [API Reference](https://www.twilio.com/docs/usage/api) · [OpenAPI](https://github.com/twilio/twilio-oai) · [llms.txt](https://www.twilio.com/docs/llms.txt) · [Status Page](https://status.twilio.com) · [Pricing](https://www.twilio.com/en-us/pricing) · [Signup](https://www.twilio.com/try-twilio) · [API Keys](https://www.twilio.com/docs/iam/api-keys) · [CLI](https://www.twilio.com/docs/twilio-cli) · [SDKs](https://www.twilio.com/docs/libraries) · [Official MCP](https://github.com/twilio-labs/mcp) · [Webhooks](https://www.twilio.com/docs/usage/webhooks)
+
+- **Supported:** [Self-serve signup](https://www.twilio.com/try-twilio) · [Self-serve API keys](https://www.twilio.com/docs/iam/api-keys) · [Token revocation](https://www.twilio.com/docs/iam/api-keys) · [Sandbox / test mode](https://www.twilio.com/docs/iam/test-credentials) · [Free tier / trial](https://www.twilio.com/try-twilio) · [Self-serve upgrade](https://www.twilio.com/en-us/pricing) · [Versioning policy](https://www.twilio.com/docs/usage/api)
+- **Partial:** [Scoped tokens](https://www.twilio.com/docs/iam/api-keys) — API keys are separate from account credentials; fine-grained restricted keys are limited-availability.
+- **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
 ### Vercel <a id="vercel"></a>
 
 > Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
@@ -491,12 +560,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **174 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **201 unknowns are open right now.**
 
 - `llms_txt` link unknown for: [brave-search](#brave-search), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [modal](#modal), [neon](#neon), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [postman](#postman), [replicate](#replicate), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [tavily](#tavily), [together-ai](#together-ai)
+- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [together-ai](#together-ai), [twilio](#twilio)
 
 ## Contributing
 

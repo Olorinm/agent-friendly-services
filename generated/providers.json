@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T07:14:35.192Z",
+  "generated_at": "2026-07-07T07:17:40.675Z",
   "counts": {
-    "providers": 30,
+    "providers": 35,
     "categories": 12,
-    "entrypoint_urls": 319,
-    "checks_answered": 186
+    "entrypoint_urls": 372,
+    "checks_answered": 219
   },
   "categories": [
     {
@@ -1630,6 +1630,103 @@
       }
     },
     {
+      "id": "linear",
+      "name": "Linear",
+      "category": "productivity-storage",
+      "homepage": "https://linear.app",
+      "summary": "Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "issues",
+        "project-management",
+        "graphql"
+      ],
+      "entrypoints": {
+        "docs": "https://linear.app/developers",
+        "graphql": "https://linear.app/developers/graphql",
+        "llms_txt": "https://linear.app/llms.txt",
+        "changelog": "https://linear.app/changelog",
+        "status_page": "https://linearstatus.com",
+        "pricing": "https://linear.app/pricing",
+        "signup": "https://linear.app/signup",
+        "api_keys": "https://linear.app/developers/graphql",
+        "mcp_official": "https://linear.app/docs/mcp",
+        "webhooks": "https://linear.app/developers/webhooks",
+        "rate_limits": "https://linear.app/developers/rate-limiting"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://linear.app/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://linear.app/developers/graphql",
+          "verified": "2026-07-07",
+          "notes": "Personal API keys are created in settings, documented in the GraphQL guide."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://linear.app/developers",
+          "verified": "2026-07-07",
+          "notes": "OAuth 2.0 for applications is documented in the developer docs."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free workspaces serve as test environments; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://linear.app/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://linear.app/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "modal",
       "name": "Modal",
       "category": "code-execution",
@@ -2040,6 +2137,107 @@
       }
     },
     {
+      "id": "notion",
+      "name": "Notion",
+      "category": "productivity-storage",
+      "homepage": "https://www.notion.com",
+      "summary": "Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.",
+      "submitted_by": "community",
+      "scope": "Notion API integrations; the editor product itself is not assessed.",
+      "tags": [
+        "docs",
+        "workspace",
+        "knowledge-base"
+      ],
+      "entrypoints": {
+        "docs": "https://developers.notion.com",
+        "api_reference": "https://developers.notion.com/reference/intro",
+        "llms_txt": "https://developers.notion.com/llms.txt",
+        "status_page": "https://status.notion.so",
+        "pricing": "https://www.notion.com/pricing",
+        "signup": "https://www.notion.com/signup",
+        "api_keys": "https://developers.notion.com/docs/authorization",
+        "mcp_official": "https://developers.notion.com/docs/mcp",
+        "rate_limits": "https://developers.notion.com/reference/request-limits",
+        "errors": "https://developers.notion.com/reference/status-codes"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.notion.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://developers.notion.com/docs/authorization",
+          "verified": "2026-07-07",
+          "notes": "Internal integration tokens are self-serve."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://developers.notion.com/docs/authorization",
+          "verified": "2026-07-07",
+          "notes": "OAuth flow for public integrations."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://developers.notion.com/docs/authorization",
+          "verified": "2026-07-07",
+          "notes": "Integrations carry capability scopes (read/update/insert) and page-level access grants."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Integrations can be removed in settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free workspaces serve as test environments; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.notion.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.notion.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://developers.notion.com/reference/versioning",
+          "verified": "2026-07-07",
+          "notes": "Notion-Version header with dated API versions."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "openai",
       "name": "OpenAI",
       "category": "ai-models",
@@ -2135,6 +2333,102 @@
           "token_revocation",
           "sandbox_or_test_mode",
           "free_tier_or_trial",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "paddle",
+      "name": "Paddle",
+      "category": "payments-billing",
+      "homepage": "https://www.paddle.com",
+      "summary": "Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "billing",
+        "merchant-of-record"
+      ],
+      "entrypoints": {
+        "docs": "https://developer.paddle.com",
+        "api_reference": "https://developer.paddle.com/api-reference/overview",
+        "llms_txt": "https://developer.paddle.com/llms.txt",
+        "status_page": "https://paddlestatus.com",
+        "pricing": "https://www.paddle.com/pricing",
+        "signup": "https://sandbox-login.paddle.com/signup",
+        "api_keys": "https://developer.paddle.com/api-reference/about/authentication",
+        "webhooks": "https://developer.paddle.com/webhooks/overview"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "partial",
+          "evidence": "https://sandbox-login.paddle.com/signup",
+          "verified": "2026-07-07",
+          "notes": "Sandbox accounts are fully self-serve; live accounts require website verification (merchant-of-record model)."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://developer.paddle.com/api-reference/about/authentication",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "API key permissions exist in Paddle Billing; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in dashboard; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://sandbox-login.paddle.com/signup",
+          "verified": "2026-07-07",
+          "notes": "Full separate sandbox environment with its own accounts and API hosts."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.paddle.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "No platform fee; sandbox is free; fees are per transaction."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "partial",
+          "evidence": "https://www.paddle.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Going live requires account approval; no sales call, but not instant."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://developer.paddle.com/api-reference/about/versioning",
+          "verified": "2026-07-07"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Sandbox"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
           "usage_dashboard",
           "idempotency",
           "automation_permitted"
@@ -2728,6 +3022,109 @@
       }
     },
     {
+      "id": "slack",
+      "name": "Slack",
+      "category": "communication",
+      "homepage": "https://slack.com",
+      "summary": "Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.",
+      "submitted_by": "community",
+      "scope": "Slack platform APIs (Web API, Events API, apps); the chat product itself is not assessed.",
+      "tags": [
+        "messaging",
+        "chat",
+        "platform"
+      ],
+      "entrypoints": {
+        "docs": "https://api.slack.com",
+        "api_reference": "https://api.slack.com/methods",
+        "openapi": "https://github.com/slackapi/slack-api-specs",
+        "llms_txt": "https://docs.slack.dev/llms.txt",
+        "changelog": "https://api.slack.com/changelog",
+        "status_page": "https://slack-status.com",
+        "pricing": "https://slack.com/pricing",
+        "signup": "https://slack.com/get-started",
+        "api_keys": "https://api.slack.com/authentication/token-types",
+        "sdks": "https://tools.slack.dev",
+        "webhooks": "https://api.slack.com/messaging/webhooks",
+        "rate_limits": "https://api.slack.com/apis/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://slack.com/get-started",
+          "verified": "2026-07-07",
+          "notes": "Workspace creation is self-serve; the page blocks automated probes (403), verified manually."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://api.slack.com/authentication/token-types",
+          "verified": "2026-07-07",
+          "notes": "Tokens are issued by creating an app, entirely self-serve."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://api.slack.com/authentication/oauth-v2",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://api.slack.com/authentication/token-types",
+          "verified": "2026-07-07",
+          "notes": "Bot and user tokens with granular OAuth scopes."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://api.slack.com/authentication/token-types",
+          "verified": "2026-07-07",
+          "notes": "Tokens can be revoked (auth.revoke API and app management)."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Developer-program sandboxes exist; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://slack.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://slack.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "Web API is unversioned with a changelog-driven deprecation practice; no formal policy page found."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Slack API ToS governs apps/bots explicitly; clause not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "OpenAPI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "stripe",
       "name": "Stripe",
       "category": "payments-billing",
@@ -3129,6 +3526,112 @@
           "usage_dashboard",
           "idempotency",
           "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "category": "communication",
+      "homepage": "https://www.twilio.com",
+      "summary": "Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.",
+      "submitted_by": "community",
+      "scope": "Core messaging/voice APIs and IAM; the broader product family is not individually assessed.",
+      "tags": [
+        "sms",
+        "voice",
+        "telephony"
+      ],
+      "entrypoints": {
+        "docs": "https://www.twilio.com/docs",
+        "api_reference": "https://www.twilio.com/docs/usage/api",
+        "openapi": "https://github.com/twilio/twilio-oai",
+        "llms_txt": "https://www.twilio.com/docs/llms.txt",
+        "status_page": "https://status.twilio.com",
+        "pricing": "https://www.twilio.com/en-us/pricing",
+        "signup": "https://www.twilio.com/try-twilio",
+        "api_keys": "https://www.twilio.com/docs/iam/api-keys",
+        "cli": "https://www.twilio.com/docs/twilio-cli",
+        "sdks": "https://www.twilio.com/docs/libraries",
+        "mcp_official": "https://github.com/twilio-labs/mcp",
+        "webhooks": "https://www.twilio.com/docs/usage/webhooks"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/try-twilio",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/docs/iam/api-keys",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://www.twilio.com/docs/iam/api-keys",
+          "verified": "2026-07-07",
+          "notes": "API keys are separate from account credentials; fine-grained restricted keys are limited-availability."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/docs/iam/api-keys",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/docs/iam/test-credentials",
+          "verified": "2026-07-07",
+          "notes": "Dedicated test credentials simulate API behavior without charges."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/try-twilio",
+          "verified": "2026-07-07",
+          "notes": "Free trial credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/en-us/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Console usage/billing pages exist; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://www.twilio.com/docs/usage/api",
+          "verified": "2026-07-07",
+          "notes": "Date-versioned APIs (e.g. 2010-04-01) with long stability guarantees."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Messaging compliance rules (A2P etc.) constrain usage; ToS clause not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "OpenAPI",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "usage_dashboard",
+          "idempotency",
           "automation_permitted"
         ]
       }

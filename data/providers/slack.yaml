@@ -1,0 +1,84 @@
+id: slack
+name: Slack
+category: communication
+homepage: https://slack.com
+summary: Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.
+submitted_by: community
+scope: "Slack platform APIs (Web API, Events API, apps); the chat product itself is not assessed."
+
+tags:
+  - messaging
+  - chat
+  - platform
+
+entrypoints:
+  docs: https://api.slack.com
+  api_reference: https://api.slack.com/methods
+  openapi: https://github.com/slackapi/slack-api-specs
+  llms_txt: https://docs.slack.dev/llms.txt
+  changelog: https://api.slack.com/changelog
+  status_page: https://slack-status.com
+  pricing: https://slack.com/pricing
+  signup: https://slack.com/get-started
+  api_keys: https://api.slack.com/authentication/token-types
+  sdks: https://tools.slack.dev
+  webhooks: https://api.slack.com/messaging/webhooks
+  rate_limits: https://api.slack.com/apis/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://slack.com/get-started
+    verified: "2026-07-07"
+    notes: Workspace creation is self-serve; the page blocks automated probes (403), verified manually.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://api.slack.com/authentication/token-types
+    verified: "2026-07-07"
+    notes: Tokens are issued by creating an app, entirely self-serve.
+
+  oauth_support:
+    status: supported
+    evidence: https://api.slack.com/authentication/oauth-v2
+    verified: "2026-07-07"
+
+  scoped_tokens:
+    status: supported
+    evidence: https://api.slack.com/authentication/token-types
+    verified: "2026-07-07"
+    notes: Bot and user tokens with granular OAuth scopes.
+
+  token_revocation:
+    status: supported
+    evidence: https://api.slack.com/authentication/token-types
+    verified: "2026-07-07"
+    notes: Tokens can be revoked (auth.revoke API and app management).
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Developer-program sandboxes exist; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://slack.com/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://slack.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: Web API is unversioned with a changelog-driven deprecation practice; no formal policy page found.
+
+  automation_permitted:
+    status: unknown
+    notes: Slack API ToS governs apps/bots explicitly; clause not yet reviewed and recorded.

@@ -1,0 +1,77 @@
+id: paddle
+name: Paddle
+category: payments-billing
+homepage: https://www.paddle.com
+summary: Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.
+submitted_by: community
+
+tags:
+  - payments
+  - billing
+  - merchant-of-record
+
+entrypoints:
+  docs: https://developer.paddle.com
+  api_reference: https://developer.paddle.com/api-reference/overview
+  llms_txt: https://developer.paddle.com/llms.txt
+  status_page: https://paddlestatus.com
+  pricing: https://www.paddle.com/pricing
+  signup: https://sandbox-login.paddle.com/signup
+  api_keys: https://developer.paddle.com/api-reference/about/authentication
+  webhooks: https://developer.paddle.com/webhooks/overview
+
+checks:
+  self_serve_signup:
+    status: partial
+    evidence: https://sandbox-login.paddle.com/signup
+    verified: "2026-07-07"
+    notes: Sandbox accounts are fully self-serve; live accounts require website verification (merchant-of-record model).
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://developer.paddle.com/api-reference/about/authentication
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: API key permissions exist in Paddle Billing; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in dashboard; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://sandbox-login.paddle.com/signup
+    verified: "2026-07-07"
+    notes: Full separate sandbox environment with its own accounts and API hosts.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.paddle.com/pricing
+    verified: "2026-07-07"
+    notes: No platform fee; sandbox is free; fees are per transaction.
+
+  self_serve_paid_upgrade:
+    status: partial
+    evidence: https://www.paddle.com/pricing
+    verified: "2026-07-07"
+    notes: Going live requires account approval; no sales call, but not instant.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://developer.paddle.com/api-reference/about/versioning
+    verified: "2026-07-07"
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.
