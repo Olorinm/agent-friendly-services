@@ -5,8 +5,11 @@ apify,Apify,web-search-data,true,true,false,true,unknown,true,2026-07-07
 brave-search,Brave Search API,web-search-data,false,false,false,false,unknown,true,2026-07-07
 browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
+cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
+deepgram,Deepgram,ai-models,false,true,true,false,unknown,true,2026-07-07
 discord,Discord,communication,false,false,true,false,unknown,true,2026-07-07
 e2b,E2B,code-execution,true,true,false,false,not_applicable,true,2026-07-07
+elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
 fly-io,Fly.io,cloud-hosting,true,false,true,true,unknown,true,2026-07-07
@@ -17,6 +20,7 @@ groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
 hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
 lark,Lark,communication,true,true,false,false,unknown,true,2026-07-07
 linear,Linear,productivity-storage,true,true,false,false,unknown,true,2026-07-07
+mistral,Mistral AI,ai-models,false,true,true,false,unknown,true,2026-07-07
 modal,Modal,code-execution,false,true,false,true,supported,true,2026-07-07
 mongodb-atlas,MongoDB Atlas,databases,true,true,true,true,unknown,true,2026-07-07
 neon,Neon,databases,true,true,false,true,supported,true,2026-07-07

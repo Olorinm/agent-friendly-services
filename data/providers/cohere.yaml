@@ -1,0 +1,79 @@
+id: cohere
+name: Cohere
+category: ai-models
+homepage: https://cohere.com
+summary: Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.
+submitted_by: community
+
+tags:
+  - llm
+  - embeddings
+  - rerank
+
+entrypoints:
+  docs: https://docs.cohere.com
+  api_reference: https://docs.cohere.com/reference/about
+  llms_txt: https://docs.cohere.com/llms.txt
+  changelog: https://docs.cohere.com/changelog
+  status_page: https://status.cohere.com
+  pricing: https://cohere.com/pricing
+  signup: https://dashboard.cohere.com/welcome/register
+  rate_limits: https://docs.cohere.com/docs/rate-limits
+  errors: https://docs.cohere.com/reference/errors
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.cohere.com/welcome/register
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.cohere.com/docs/rate-limits
+    verified: "2026-07-07"
+    notes: Trial and production keys are created self-serve in the dashboard (the rate-limit docs define both key types).
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in the dashboard; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: partial
+    evidence: https://docs.cohere.com/docs/rate-limits
+    verified: "2026-07-07"
+    notes: Free trial keys are explicitly positioned for evaluation/testing, rate-limited separately from production keys; no isolated sandbox environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://docs.cohere.com/docs/rate-limits
+    verified: "2026-07-07"
+    notes: Trial keys are free.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://cohere.com/pricing
+    verified: "2026-07-07"
+    notes: Production keys with pay-as-you-go billing are self-serve.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.cohere.com/reference/versioning
+    verified: "2026-07-07"
+    notes: Date-based API versions documented.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

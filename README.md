@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-39-2563eb)
+![Providers](https://img.shields.io/badge/providers-43-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**39 providers · 10 categories · 408 entry links (machine-probed weekly) · 250 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**43 providers · 10 categories · 448 entry links (machine-probed weekly) · 269 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -66,9 +66,13 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Cohere](#cohere) | — | ✓ | — | — | ◐ | ✓ | 2026-07-07 |
+| [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
 | [Gemini API](#gemini-api) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | 2026-07-07 |
+| [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
 | [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
 | [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
@@ -231,6 +235,29 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Sandbox / test mode](https://developers.cloudflare.com/workers/wrangler/) — No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Cohere <a id="cohere"></a>
+
+> Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.cohere.com) · [API Reference](https://docs.cohere.com/reference/about) · [llms.txt](https://docs.cohere.com/llms.txt) · [Changelog](https://docs.cohere.com/changelog) · [Status Page](https://status.cohere.com) · [Pricing](https://cohere.com/pricing) · [Signup](https://dashboard.cohere.com/welcome/register) · [Rate Limits](https://docs.cohere.com/docs/rate-limits) · [Errors](https://docs.cohere.com/reference/errors)
+
+- **Supported:** [Self-serve signup](https://dashboard.cohere.com/welcome/register) · [Self-serve API keys](https://docs.cohere.com/docs/rate-limits) · [Free tier / trial](https://docs.cohere.com/docs/rate-limits) · [Self-serve upgrade](https://cohere.com/pricing) · [Versioning policy](https://docs.cohere.com/reference/versioning)
+- **Partial:** [Sandbox / test mode](https://docs.cohere.com/docs/rate-limits) — Free trial keys are explicitly positioned for evaluation/testing, rate-limited separately from production keys; no isolated sandbox environment.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Deepgram <a id="deepgram"></a>
+
+> Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.
+
+**Category:** AI Models · `llms.txt` `OpenAPI` `Self-serve`
+
+**Links:** [Documentation](https://developers.deepgram.com/docs) · [API Reference](https://developers.deepgram.com/reference) · [OpenAPI](https://github.com/deepgram/deepgram-api-specs) · [llms.txt](https://developers.deepgram.com/llms.txt) · [Changelog](https://deepgram.com/changelog) · [Status Page](https://status.deepgram.com) · [Pricing](https://deepgram.com/pricing) · [Signup](https://console.deepgram.com/signup) · [API Keys](https://developers.deepgram.com/docs/create-additional-api-keys) · [SDKs](https://developers.deepgram.com/docs/deepgram-sdks) · [Rate Limits](https://developers.deepgram.com/reference/api-rate-limits)
+
+- **Supported:** [Self-serve signup](https://console.deepgram.com/signup) · [Self-serve API keys](https://developers.deepgram.com/docs/create-additional-api-keys) · [Scoped tokens](https://developers.deepgram.com/docs/create-additional-api-keys) · [Free tier / trial](https://deepgram.com/pricing) · [Self-serve upgrade](https://deepgram.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Discord <a id="discord"></a>
 
 > Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.
@@ -257,6 +284,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://e2b.dev) · [Self-serve API keys](https://e2b.dev/docs/api-key) · [Free tier / trial](https://e2b.dev/pricing) · [Self-serve upgrade](https://e2b.dev/pricing) · [Automation permitted](https://e2b.dev/docs)
 - **N/A:** Sandbox / test mode — The product itself is an isolated, ephemeral sandbox per session.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+### ElevenLabs <a id="elevenlabs"></a>
+
+> Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.
+
+**Category:** AI Models · `Official MCP` `llms.txt` `OpenAPI` `Self-serve`
+
+**Links:** [Documentation](https://elevenlabs.io/docs) · [API Reference](https://elevenlabs.io/docs/api-reference/introduction) · [OpenAPI](https://api.elevenlabs.io/openapi.json) · [llms.txt](https://elevenlabs.io/docs/llms.txt) · [Changelog](https://elevenlabs.io/docs/changelog) · [Status Page](https://status.elevenlabs.io) · [Pricing](https://elevenlabs.io/pricing) · [Signup](https://elevenlabs.io/app/sign-up) · [API Keys](https://elevenlabs.io/app/settings/api-keys) · [Official MCP](https://github.com/elevenlabs/elevenlabs-mcp)
+
+- **Supported:** [Self-serve signup](https://elevenlabs.io/app/sign-up) · [Self-serve API keys](https://elevenlabs.io/app/settings/api-keys) · [Free tier / trial](https://elevenlabs.io/pricing) · [Self-serve upgrade](https://elevenlabs.io/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Exa <a id="exa"></a>
 
@@ -371,6 +409,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 - **Supported:** [Self-serve signup](https://linear.app/signup) · [Self-serve API keys](https://linear.app/developers/graphql) · [OAuth](https://linear.app/developers) · [Free tier / trial](https://linear.app/pricing) · [Self-serve upgrade](https://linear.app/pricing)
 - **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Mistral AI <a id="mistral"></a>
+
+> European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.
+
+**Category:** AI Models · `llms.txt` `OpenAPI` `Self-serve`
+
+**Links:** [Documentation](https://docs.mistral.ai) · [API Reference](https://docs.mistral.ai/api) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [llms.txt](https://docs.mistral.ai/llms.txt) · [Changelog](https://docs.mistral.ai/getting-started/changelog) · [Status Page](https://status.mistral.ai) · [Pricing](https://mistral.ai/pricing) · [Signup](https://console.mistral.ai) · [API Keys](https://docs.mistral.ai/getting-started/quickstart) · [SDKs](https://docs.mistral.ai/getting-started/clients)
+
+- **Supported:** [Self-serve signup](https://console.mistral.ai) · [Self-serve API keys](https://docs.mistral.ai/getting-started/quickstart) · [Free tier / trial](https://mistral.ai/pricing) · [Self-serve upgrade](https://mistral.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Modal <a id="modal"></a>
 
@@ -624,12 +673,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **218 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **247 unknowns are open right now.**
 
 - `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [discord](#discord), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
-- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [discord](#discord), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio)
+- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [deepgram](#deepgram), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [deepgram](#deepgram), [discord](#discord), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio)
 
 ## Contributing
 
