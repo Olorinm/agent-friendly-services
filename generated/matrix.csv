@@ -6,9 +6,12 @@ brave-search,Brave Search API,web-search-data,false,false,false,false,unknown,tr
 browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
 cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
+composio,Composio,agent-tooling,true,true,false,false,unknown,false,2026-07-07
 datadog,Datadog,observability-security,false,true,false,false,unknown,true,2026-07-07
 deepgram,Deepgram,ai-models,false,true,true,false,unknown,true,2026-07-07
+deepseek,DeepSeek,ai-models,false,false,false,false,unknown,true,2026-07-07
 discord,Discord,communication,false,false,true,false,unknown,true,2026-07-07
+dropbox,Dropbox,productivity-storage,false,false,false,false,unknown,true,2026-07-07
 e2b,E2B,code-execution,true,true,false,false,not_applicable,true,2026-07-07
 elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
@@ -46,3 +49,4 @@ together-ai,Together AI,ai-models,false,true,false,false,unknown,true,2026-07-07
 twilio,Twilio,communication,true,true,true,true,supported,true,2026-07-07
 upstash,Upstash,databases,true,true,false,false,unknown,true,2026-07-07
 vercel,Vercel,cloud-hosting,true,true,false,true,supported,true,2026-07-07
+zapier,Zapier,agent-tooling,true,true,false,false,unknown,true,2026-07-07

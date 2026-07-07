@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T10:01:53.735Z",
+  "generated_at": "2026-07-07T10:04:19.184Z",
   "counts": {
-    "providers": 47,
+    "providers": 51,
     "categories": 12,
-    "entrypoint_urls": 488,
-    "checks_answered": 291
+    "entrypoint_urls": 511,
+    "checks_answered": 309
   },
   "categories": [
     {
@@ -942,6 +942,94 @@
       }
     },
     {
+      "id": "composio",
+      "name": "Composio",
+      "category": "agent-tooling",
+      "homepage": "https://composio.dev",
+      "summary": "Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.",
+      "submitted_by": "community",
+      "tags": [
+        "agent-tools",
+        "integrations",
+        "auth"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.composio.dev",
+        "llms_txt": "https://docs.composio.dev/llms.txt",
+        "pricing": "https://composio.dev/pricing",
+        "signup": "https://app.composio.dev",
+        "mcp_official": "https://mcp.composio.dev"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://app.composio.dev",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "unknown",
+          "notes": "API keys are created in the dashboard per the quickstart; needs the canonical docs link as evidence."
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "Composio manages OAuth to third-party apps on the agent's behalf; whether its own API offers OAuth is unverified."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://composio.dev/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free tier for developers."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://composio.dev/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://docs.composio.dev",
+          "verified": "2026-07-07",
+          "notes": "The product exists to let agents act on integrated apps."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "api_key_self_serve",
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy"
+        ]
+      }
+    },
+    {
       "id": "datadog",
       "name": "Datadog",
       "category": "observability-security",
@@ -1141,6 +1229,96 @@
       }
     },
     {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "category": "ai-models",
+      "homepage": "https://www.deepseek.com",
+      "summary": "OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "openai-compatible"
+      ],
+      "entrypoints": {
+        "docs": "https://api-docs.deepseek.com",
+        "pricing": "https://api-docs.deepseek.com/quick_start/pricing",
+        "changelog": "https://api-docs.deepseek.com/updates",
+        "signup": "https://platform.deepseek.com",
+        "api_keys": "https://platform.deepseek.com/api_keys"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://platform.deepseek.com",
+          "verified": "2026-07-07",
+          "notes": "Platform sign-up is self-serve; the console blocks automated probes (HTTP 405), so expect inconclusive link checks."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://platform.deepseek.com/api_keys",
+          "verified": "2026-07-07",
+          "notes": "Keys are created in the platform console; the page blocks automated probes (HTTP 405)."
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in the console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "Pricing is pay-per-token top-up; no standing free tier documented."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://api-docs.deepseek.com/quick_start/pricing",
+          "verified": "2026-07-07",
+          "notes": "Self-serve balance top-up; pay-per-token."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "Model versions are dated and announced in the changelog; no formal deprecation policy page recorded."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "discord",
       "name": "Discord",
       "category": "communication",
@@ -1241,6 +1419,100 @@
           "sandbox_or_test_mode",
           "usage_dashboard",
           "idempotency"
+        ]
+      }
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "category": "productivity-storage",
+      "homepage": "https://www.dropbox.com",
+      "summary": "File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "storage",
+        "files",
+        "sync"
+      ],
+      "entrypoints": {
+        "docs": "https://www.dropbox.com/developers/documentation",
+        "api_reference": "https://www.dropbox.com/developers/documentation/http/documentation",
+        "status_page": "https://status.dropbox.com",
+        "pricing": "https://www.dropbox.com/plans",
+        "signup": "https://www.dropbox.com/register",
+        "api_keys": "https://www.dropbox.com/developers/apps",
+        "webhooks": "https://www.dropbox.com/developers/reference/webhooks"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.dropbox.com/register",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://www.dropbox.com/developers/apps",
+          "verified": "2026-07-07",
+          "notes": "App creation in the developer console is self-serve; access tokens can be generated there for development."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://developers.dropbox.com/oauth-guide",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://developers.dropbox.com/oauth-guide",
+          "verified": "2026-07-07",
+          "notes": "Scoped access is the standard model; apps request granular scopes."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "An /auth/token/revoke endpoint exists in the HTTP reference (client-rendered, not probe-verifiable); needs a stable docs anchor as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Development apps with limited users serve as a de-facto test mode; needs the canonical docs framing as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.dropbox.com/plans",
+          "verified": "2026-07-07",
+          "notes": "Free Basic plan; the API works on it."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.dropbox.com/plans",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "API v2 is stable and additive; no formal deprecation policy page recorded."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
         ]
       }
     },
@@ -4941,6 +5213,98 @@
         "unknown_checks": [
           "idempotency",
           "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "category": "agent-tooling",
+      "homepage": "https://zapier.com",
+      "summary": "Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.",
+      "submitted_by": "community",
+      "tags": [
+        "automation",
+        "integrations",
+        "workflows"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.zapier.com",
+        "llms_txt": "https://docs.zapier.com/llms.txt",
+        "status_page": "https://status.zapier.com",
+        "pricing": "https://zapier.com/pricing",
+        "signup": "https://zapier.com/sign-up",
+        "mcp_official": "https://zapier.com/mcp"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://zapier.com/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://zapier.com/mcp",
+          "verified": "2026-07-07",
+          "notes": "A personal MCP endpoint/credentials are generated self-serve from the account."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "MCP endpoints can be regenerated in the account; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Zaps can be tested before publishing; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://zapier.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free plan with monthly task quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://zapier.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://docs.zapier.com",
+          "verified": "2026-07-07",
+          "notes": "Automation is the product; the developer platform and MCP endpoint exist for programmatic use."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy"
         ]
       }
     }

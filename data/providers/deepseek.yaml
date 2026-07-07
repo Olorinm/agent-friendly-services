@@ -1,0 +1,69 @@
+id: deepseek
+name: DeepSeek
+category: ai-models
+homepage: https://www.deepseek.com
+summary: OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.
+submitted_by: community
+
+tags:
+  - llm
+  - inference
+  - openai-compatible
+
+entrypoints:
+  docs: https://api-docs.deepseek.com
+  pricing: https://api-docs.deepseek.com/quick_start/pricing
+  changelog: https://api-docs.deepseek.com/updates
+  signup: https://platform.deepseek.com
+  api_keys: https://platform.deepseek.com/api_keys
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://platform.deepseek.com
+    verified: "2026-07-07"
+    notes: Platform sign-up is self-serve; the console blocks automated probes (HTTP 405), so expect inconclusive link checks.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://platform.deepseek.com/api_keys
+    verified: "2026-07-07"
+    notes: Keys are created in the platform console; the page blocks automated probes (HTTP 405).
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in the console; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Pricing is pay-per-token top-up; no standing free tier documented.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://api-docs.deepseek.com/quick_start/pricing
+    verified: "2026-07-07"
+    notes: Self-serve balance top-up; pay-per-token.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: Model versions are dated and announced in the changelog; no formal deprecation policy page recorded.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

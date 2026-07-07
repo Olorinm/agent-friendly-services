@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-47-2563eb)
+![Providers](https://img.shields.io/badge/providers-51-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**47 providers · 11 categories · 488 entry links (machine-probed weekly) · 291 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**51 providers · 12 categories · 511 entry links (machine-probed weekly) · 309 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -68,6 +68,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Cohere](#cohere) | — | ✓ | — | — | ◐ | ✓ | 2026-07-07 |
 | [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
 | [Gemini API](#gemini-api) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
@@ -76,6 +77,13 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
 | [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 | [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+
+### Agent Tooling
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Composio](#composio) | ✓ | ✓ | — | — | — | — | 2026-07-07 |
+| [Zapier](#zapier) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
 ### Code Execution
 
@@ -147,6 +155,7 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Airtable](#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Dropbox](#dropbox) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
@@ -256,6 +265,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Sandbox / test mode](https://docs.cohere.com/docs/rate-limits) — Free trial keys are explicitly positioned for evaluation/testing, rate-limited separately from production keys; no isolated sandbox environment.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Composio <a id="composio"></a>
+
+> Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.
+
+**Category:** Agent Tooling · `Official MCP` `llms.txt`
+
+**Links:** [Documentation](https://docs.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [Pricing](https://composio.dev/pricing) · [Signup](https://app.composio.dev) · [Official MCP](https://mcp.composio.dev)
+
+- **Supported:** [Self-serve signup](https://app.composio.dev) · [Free tier / trial](https://composio.dev/pricing) · [Self-serve upgrade](https://composio.dev/pricing) · [Automation permitted](https://docs.composio.dev)
+- **Unknown (help wanted):** `api_key_self_serve`, `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
 ### Datadog <a id="datadog"></a>
 
 > Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
@@ -279,6 +299,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://console.deepgram.com/signup) · [Self-serve API keys](https://developers.deepgram.com/docs/create-additional-api-keys) · [Scoped tokens](https://developers.deepgram.com/docs/create-additional-api-keys) · [Free tier / trial](https://deepgram.com/pricing) · [Self-serve upgrade](https://deepgram.com/pricing)
 - **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### DeepSeek <a id="deepseek"></a>
+
+> OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.
+
+**Category:** AI Models · `Self-serve`
+
+**Links:** [Documentation](https://api-docs.deepseek.com) · [Changelog](https://api-docs.deepseek.com/updates) · [Pricing](https://api-docs.deepseek.com/quick_start/pricing) · [Signup](https://platform.deepseek.com) · [API Keys](https://platform.deepseek.com/api_keys)
+
+- **Supported:** [Self-serve signup](https://platform.deepseek.com) · [Self-serve API keys](https://platform.deepseek.com/api_keys) · [Self-serve upgrade](https://api-docs.deepseek.com/quick_start/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Discord <a id="discord"></a>
 
 > Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.
@@ -293,6 +324,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`
 
 > The official OpenAPI spec is published by Discord but marked public preview / subject to change.
+
+### Dropbox <a id="dropbox"></a>
+
+> File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
+
+**Category:** Productivity / Storage · `Self-serve`
+
+**Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
+
+- **Supported:** [Self-serve signup](https://www.dropbox.com/register) · [Self-serve API keys](https://www.dropbox.com/developers/apps) · [OAuth](https://developers.dropbox.com/oauth-guide) · [Scoped tokens](https://developers.dropbox.com/oauth-guide) · [Free tier / trial](https://www.dropbox.com/plans) · [Self-serve upgrade](https://www.dropbox.com/plans)
+- **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### E2B <a id="e2b"></a>
 
@@ -724,15 +766,26 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Versioning policy](https://vercel.com/docs/rest-api) — Endpoints are individually versioned (v6, v13, ...); no single published deprecation policy found.
 - **Unknown (help wanted):** `idempotency`, `automation_permitted`
 
+### Zapier <a id="zapier"></a>
+
+> Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.
+
+**Category:** Agent Tooling · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [Official MCP](https://zapier.com/mcp)
+
+- **Supported:** [Self-serve signup](https://zapier.com/sign-up) · [Self-serve API keys](https://zapier.com/mcp) · [Free tier / trial](https://zapier.com/pricing) · [Self-serve upgrade](https://zapier.com/pricing) · [Automation permitted](https://docs.zapier.com)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **273 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **303 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [discord](#discord), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
-- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [datadog](#datadog), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel)
-- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [discord](#discord), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash)
+- `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
+- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepseek](#deepseek), [dropbox](#dropbox), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel), [zapier](#zapier)
+- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [composio](#composio), [datadog](#datadog), [deepgram](#deepgram), [deepseek](#deepseek), [discord](#discord), [dropbox](#dropbox), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash), [zapier](#zapier)
 
 ## Contributing
 

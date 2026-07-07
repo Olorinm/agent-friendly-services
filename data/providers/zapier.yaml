@@ -1,0 +1,71 @@
+id: zapier
+name: Zapier
+category: agent-tooling
+homepage: https://zapier.com
+summary: Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.
+submitted_by: community
+
+tags:
+  - automation
+  - integrations
+  - workflows
+
+entrypoints:
+  docs: https://docs.zapier.com
+  llms_txt: https://docs.zapier.com/llms.txt
+  status_page: https://status.zapier.com
+  pricing: https://zapier.com/pricing
+  signup: https://zapier.com/sign-up
+  mcp_official: https://zapier.com/mcp
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://zapier.com/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://zapier.com/mcp
+    verified: "2026-07-07"
+    notes: A personal MCP endpoint/credentials are generated self-serve from the account.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: MCP endpoints can be regenerated in the account; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Zaps can be tested before publishing; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://zapier.com/pricing
+    verified: "2026-07-07"
+    notes: Free plan with monthly task quota.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://zapier.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: supported
+    evidence: https://docs.zapier.com
+    verified: "2026-07-07"
+    notes: Automation is the product; the developer platform and MCP endpoint exist for programmatic use.
