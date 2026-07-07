@@ -1,0 +1,62 @@
+name: Add a provider
+description: Suggest a service for the index (or claim it and PR it yourself)
+title: "[provider] "
+labels: ["new-provider", "help wanted"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Provider name
+      description: Product precision, please ("Docker Hub", not "Docker")
+      placeholder: e.g. Modal
+    validations:
+      required: true
+
+  - type: input
+    id: homepage
+    attributes:
+      label: Homepage URL
+    validations:
+      required: true
+
+  - type: input
+    id: docs
+    attributes:
+      label: Docs URL
+      description: Must be readable without login
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - ai-models
+        - agent-tooling
+        - code-execution
+        - developer-tools
+        - cloud-hosting
+        - databases
+        - web-search-data
+        - payments-billing
+        - communication
+        - productivity-storage
+        - observability-security
+        - commerce-marketing
+    validations:
+      required: true
+
+  - type: textarea
+    id: entrypoints
+    attributes:
+      label: Known entry points
+      description: "Paste any URLs you already know: OpenAPI, llms.txt, MCP server, CLI, pricing, status page, signup…"
+
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Inclusion rules
+      options:
+        - label: This is a hosted service with an account system and an API surface (not a library or framework)
+          required: true

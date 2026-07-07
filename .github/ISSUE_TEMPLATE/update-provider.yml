@@ -1,0 +1,26 @@
+name: Update a provider
+description: A status changed, evidence moved, or something is wrong
+title: "[update] "
+labels: ["update"]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider id
+      placeholder: e.g. stripe
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What changed?
+      description: Which entrypoint or check, and what should it say now?
+    validations:
+      required: true
+
+  - type: input
+    id: evidence
+    attributes:
+      label: Evidence URL
+      description: Official source supporting the change

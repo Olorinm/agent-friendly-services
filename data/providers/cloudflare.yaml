@@ -1,0 +1,86 @@
+id: cloudflare
+name: Cloudflare
+category: cloud-hosting
+homepage: https://www.cloudflare.com
+summary: Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.
+submitted_by: community
+scope: Developer platform (Workers, R2, D1, AI) and core API. Enterprise network products not assessed.
+
+tags:
+  - edge
+  - serverless
+  - cdn
+
+entrypoints:
+  docs: https://developers.cloudflare.com
+  api_reference: https://developers.cloudflare.com/api/
+  openapi: https://github.com/cloudflare/api-schemas
+  llms_txt: https://developers.cloudflare.com/llms.txt
+  changelog: https://developers.cloudflare.com/changelog/
+  status_page: https://www.cloudflarestatus.com
+  pricing: https://www.cloudflare.com/plans/
+  signup: https://dash.cloudflare.com/sign-up
+  api_keys: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+  cli: https://developers.cloudflare.com/workers/wrangler/
+  sdks: https://developers.cloudflare.com/fundamentals/api/reference/sdks/
+  mcp_official: https://github.com/cloudflare/mcp-server-cloudflare
+  agent_docs: https://developers.cloudflare.com/agents/
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dash.cloudflare.com/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: No public OAuth flow for third-party apps found; API tokens are the standard auth.
+
+  scoped_tokens:
+    status: supported
+    evidence: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+    verified: "2026-07-07"
+    notes: API tokens support granular per-resource, per-permission scoping.
+
+  token_revocation:
+    status: supported
+    evidence: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: partial
+    evidence: https://developers.cloudflare.com/workers/wrangler/
+    verified: "2026-07-07"
+    notes: No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.cloudflare.com/plans/
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.cloudflare.com/plans/
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard analytics exist; need a canonical docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://developers.cloudflare.com/fundamentals/api/reference/deprecations/
+    verified: "2026-07-07"
+    notes: Stable v4 API plus a published deprecation process.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed for automated/agent account usage.

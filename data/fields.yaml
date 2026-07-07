@@ -1,0 +1,160 @@
+# Canonical definitions for every provider field.
+# This file is the single source of truth for what each entrypoint and check
+# means. Docs tables and the README are generated from it.
+#
+# verification:
+#   probe    — a script can verify it automatically (URL liveness)
+#   registry — synced/cross-checked against an external authoritative registry
+#   manual   — needs a human (or an agent with judgment) plus an evidence URL
+
+entrypoints:
+  docs:
+    name: Documentation
+    description: Main documentation site. Must be readable without login.
+    verification: probe
+
+  api_reference:
+    name: API Reference
+    description: Endpoint-level API reference.
+    verification: probe
+
+  openapi:
+    name: OpenAPI
+    description: OpenAPI/machine-readable interface definition (spec file or official repo).
+    verification: probe
+
+  graphql:
+    name: GraphQL
+    description: Public GraphQL schema or explorer.
+    verification: probe
+
+  llms_txt:
+    name: llms.txt
+    description: Official llms.txt index for the docs site.
+    verification: probe
+
+  changelog:
+    name: Changelog
+    description: Public changelog or release notes.
+    verification: probe
+
+  status_page:
+    name: Status Page
+    description: Public service status page.
+    verification: probe
+
+  pricing:
+    name: Pricing
+    description: Public pricing page or billing model description.
+    verification: probe
+
+  signup:
+    name: Signup
+    description: Self-serve account creation entry.
+    verification: probe
+
+  api_keys:
+    name: API Keys
+    description: Documentation for creating and managing API keys/tokens.
+    verification: probe
+
+  cli:
+    name: CLI
+    description: Official command-line tool that can perform core operations.
+    verification: probe
+
+  sdks:
+    name: SDKs
+    description: Index of officially maintained SDKs/client libraries.
+    verification: probe
+
+  mcp_official:
+    name: Official MCP
+    description: Official MCP server or officially supported MCP integration.
+    verification: registry
+
+  mcp_community:
+    name: Community MCP
+    description: Trusted community MCP servers (list). Informational only; never feeds a badge.
+    verification: probe
+
+  agent_docs:
+    name: Agent Docs
+    description: Documentation written specifically for agents/LLM tooling.
+    verification: probe
+
+  webhooks:
+    name: Webhooks
+    description: Webhook/event callback documentation.
+    verification: probe
+
+  rate_limits:
+    name: Rate Limits
+    description: Rate limit / quota documentation.
+    verification: probe
+
+  errors:
+    name: Errors
+    description: Error codes and error structure documentation.
+    verification: probe
+
+checks:
+  self_serve_signup:
+    name: Self-serve signup
+    description: An account can be created without sales involvement.
+    verification: manual
+
+  api_key_self_serve:
+    name: Self-serve API keys
+    description: Users can create API keys themselves.
+    verification: manual
+
+  oauth_support:
+    name: OAuth
+    description: Supports OAuth or an equivalent standard authorization flow.
+    verification: manual
+
+  scoped_tokens:
+    name: Scoped tokens
+    description: Tokens can be restricted in permission scope (incl. service accounts / machine identities — note specifics).
+    verification: manual
+
+  token_revocation:
+    name: Token revocation
+    description: Keys/tokens/sessions can be revoked.
+    verification: manual
+
+  sandbox_or_test_mode:
+    name: Sandbox / test mode
+    description: A test environment, test keys, or a sandbox exists.
+    verification: manual
+
+  free_tier_or_trial:
+    name: Free tier / trial
+    description: Can be tried at low or no cost.
+    verification: manual
+
+  self_serve_paid_upgrade:
+    name: Self-serve upgrade
+    description: Paying, upgrading, or topping up requires no sales contact.
+    verification: manual
+
+  usage_dashboard:
+    name: Usage dashboard
+    description: Users can inspect their API/product usage.
+    verification: manual
+
+  idempotency:
+    name: Idempotency
+    description: Supports idempotency keys or an equivalent safe-retry mechanism.
+    verification: manual
+
+  versioning_policy:
+    name: Versioning policy
+    description: API versioning or a clear breaking-change/deprecation policy exists.
+    verification: manual
+
+  automation_permitted:
+    name: Automation permitted
+    description: Terms of service allow automated/agent usage (evidence = ToS/bot policy clause).
+    verification: manual

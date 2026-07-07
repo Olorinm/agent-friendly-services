@@ -1,0 +1,95 @@
+id: stripe
+name: Stripe
+category: payments-billing
+homepage: https://stripe.com
+summary: Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.
+submitted_by: community
+
+tags:
+  - payments
+  - billing
+  - subscriptions
+
+entrypoints:
+  docs: https://docs.stripe.com
+  api_reference: https://docs.stripe.com/api
+  openapi: https://github.com/stripe/openapi
+  llms_txt: https://docs.stripe.com/llms.txt
+  changelog: https://docs.stripe.com/changelog
+  status_page: https://status.stripe.com
+  pricing: https://stripe.com/pricing
+  signup: https://dashboard.stripe.com/register
+  api_keys: https://docs.stripe.com/keys
+  cli: https://docs.stripe.com/stripe-cli
+  sdks: https://docs.stripe.com/sdks
+  mcp_official: https://docs.stripe.com/mcp
+  agent_docs: https://docs.stripe.com/agents
+  webhooks: https://docs.stripe.com/webhooks
+  rate_limits: https://docs.stripe.com/rate-limits
+  errors: https://docs.stripe.com/api/errors
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.stripe.com/register
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.stripe.com/keys
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://docs.stripe.com/connect/oauth-reference
+    verified: "2026-07-07"
+    notes: OAuth is part of Stripe Connect (platform integrations).
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.stripe.com/keys
+    verified: "2026-07-07"
+    notes: Restricted API keys support fine-grained per-resource permissions.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.stripe.com/keys
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://docs.stripe.com/testing
+    verified: "2026-07-07"
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://docs.stripe.com/testing
+    verified: "2026-07-07"
+    notes: Test mode is free and fully featured; live usage is pay-as-you-go.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://stripe.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: supported
+    evidence: https://docs.stripe.com/dashboard/basics
+    verified: "2026-07-07"
+
+  idempotency:
+    status: supported
+    evidence: https://docs.stripe.com/api/idempotent_requests
+    verified: "2026-07-07"
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.stripe.com/api/versioning
+    verified: "2026-07-07"
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed for automated/agent account usage.
+
+notes:
+  - Agent tooling (MCP, agent toolkit) evolves quickly; re-check quarterly.

@@ -1,0 +1,52 @@
+# Canonical category list. One primary category per provider; use tags for
+# cross-cutting attributes. Keep this list small — propose additions in an issue
+# before using a new id.
+
+categories:
+  - id: ai-models
+    name: AI Models
+    description: Model and inference APIs (LLMs, embeddings, media generation).
+
+  - id: agent-tooling
+    name: Agent Tooling
+    description: Agent infrastructure, MCP tooling, orchestration services.
+
+  - id: code-execution
+    name: Code Execution
+    description: Code sandboxes, ephemeral compute, browser automation.
+
+  - id: developer-tools
+    name: Developer Tools
+    description: Code hosting, CI, testing, API tooling, error tracking.
+
+  - id: cloud-hosting
+    name: Cloud / Hosting
+    description: Clouds, deployment platforms, edge and serverless hosting.
+
+  - id: databases
+    name: Databases
+    description: Databases, vector stores, data platforms.
+
+  - id: web-search-data
+    name: Web Search / Data
+    description: Search APIs, crawling and scraping, data providers.
+
+  - id: payments-billing
+    name: Payments / Billing
+    description: Payments, billing, subscription infrastructure.
+
+  - id: communication
+    name: Communication
+    description: Email, SMS, chat, notifications.
+
+  - id: productivity-storage
+    name: Productivity / Storage
+    description: Project management, documents, file storage.
+
+  - id: observability-security
+    name: Observability / Security
+    description: Monitoring, logging, identity, security services.
+
+  - id: commerce-marketing
+    name: Commerce / Marketing
+    description: CMS, e-commerce, CRM, marketing platforms.

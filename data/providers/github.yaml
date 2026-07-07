@@ -1,0 +1,94 @@
+id: github
+name: GitHub
+category: developer-tools
+homepage: https://github.com
+summary: Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
+submitted_by: community
+scope: Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately.
+
+tags:
+  - git
+  - code-hosting
+  - ci-cd
+
+entrypoints:
+  docs: https://docs.github.com
+  api_reference: https://docs.github.com/rest
+  openapi: https://github.com/github/rest-api-description
+  graphql: https://docs.github.com/graphql
+  changelog: https://github.blog/changelog/
+  status_page: https://www.githubstatus.com
+  pricing: https://github.com/pricing
+  signup: https://github.com/signup
+  api_keys: https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+  cli: https://cli.github.com
+  sdks: https://github.com/octokit
+  mcp_official: https://github.com/github/github-mcp-server
+  webhooks: https://docs.github.com/webhooks
+  rate_limits: https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://github.com/signup
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://docs.github.com/apps/oauth-apps
+    verified: "2026-07-07"
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+    verified: "2026-07-07"
+    notes: Fine-grained personal access tokens with per-repo, per-permission scoping; GitHub Apps for machine identities.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated API sandbox; free accounts and throwaway orgs are commonly used for testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://github.com/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://github.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: supported
+    evidence: https://docs.github.com/billing
+    verified: "2026-07-07"
+    notes: Billing/usage pages plus a rate-limit API endpoint for API quota introspection.
+
+  idempotency:
+    status: unknown
+    notes: No documented idempotency-key mechanism for the REST API.
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.github.com/rest/about-the-rest-api/api-versions
+    verified: "2026-07-07"
+    notes: Date-based API versioning with a documented deprecation process.
+
+  automation_permitted:
+    status: supported
+    evidence: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+    verified: "2026-07-07"
+    notes: API automation and bots are permitted within rate limits and acceptable-use rules; scraping restrictions apply.
+
+notes:
+  - Multi-product platform; this entry covers the core developer platform only (see scope).

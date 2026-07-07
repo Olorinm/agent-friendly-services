@@ -1,0 +1,72 @@
+id: firecrawl
+name: Firecrawl
+category: web-search-data
+homepage: https://www.firecrawl.dev
+summary: Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
+submitted_by: community
+
+tags:
+  - scraping
+  - crawling
+  - markdown
+
+entrypoints:
+  docs: https://docs.firecrawl.dev
+  api_reference: https://docs.firecrawl.dev/api-reference/introduction
+  llms_txt: https://docs.firecrawl.dev/llms.txt
+  pricing: https://www.firecrawl.dev/pricing
+  signup: https://www.firecrawl.dev/signin/signup
+  api_keys: https://docs.firecrawl.dev/introduction
+  sdks: https://docs.firecrawl.dev/sdks/overview
+  mcp_official: https://docs.firecrawl.dev/mcp-server
+  rate_limits: https://docs.firecrawl.dev/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.firecrawl.dev/pricing
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.firecrawl.dev/introduction
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API-key auth only, as far as documented.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Free credits serve as a low-risk trial; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.firecrawl.dev/pricing
+    verified: "2026-07-07"
+    notes: Free plan with monthly credits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.firecrawl.dev/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: not_applicable
+    notes: Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: The product exists for automation, but ToS/robots handling not yet reviewed and recorded.

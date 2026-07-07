@@ -1,0 +1,25 @@
+name: Report a broken link
+description: An entrypoint or evidence URL no longer works
+title: "[broken-link] "
+labels: ["link-health"]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider id
+      placeholder: e.g. neon
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Broken URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: seen
+    attributes:
+      label: What did you see?
+      placeholder: 404 / redirect to marketing page / content moved to …

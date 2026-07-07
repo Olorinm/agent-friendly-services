@@ -1,0 +1,40 @@
+name: generate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+      - 'schema/**'
+      - 'package.json'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run generate
+
+      - name: Commit regenerated outputs
+        run: |
+          if git diff --quiet README.md generated/; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "afs-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add README.md generated/
+          git commit -m "chore: regenerate outputs [skip ci]"
+          git push

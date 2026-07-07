@@ -1,0 +1,83 @@
+id: neon
+name: Neon
+category: databases
+homepage: https://neon.com
+summary: Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
+submitted_by: community
+
+tags:
+  - postgres
+  - serverless
+  - branching
+
+entrypoints:
+  docs: https://neon.com/docs
+  api_reference: https://api-docs.neon.tech
+  llms_txt: https://neon.com/llms.txt
+  changelog: https://neon.com/docs/changelog
+  status_page: https://neonstatus.com
+  pricing: https://neon.com/pricing
+  signup: https://console.neon.tech/signup
+  api_keys: https://neon.com/docs/manage/api-keys
+  cli: https://neon.com/docs/reference/neon-cli
+  mcp_official: https://github.com/neondatabase/mcp-server-neon
+  agent_docs: https://neon.com/docs/ai/ai-intro
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://console.neon.tech/signup
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://neon.com/docs/manage/api-keys
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://neon.com/docs/guides/oauth-integration
+    verified: "2026-07-07"
+    notes: OAuth integration flow for third-party platforms.
+
+  scoped_tokens:
+    status: partial
+    evidence: https://neon.com/docs/manage/api-keys
+    verified: "2026-07-07"
+    notes: Organization- and project-scoped API keys; no per-permission scoping.
+
+  token_revocation:
+    status: supported
+    evidence: https://neon.com/docs/manage/api-keys
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://neon.com/docs/introduction/branching
+    verified: "2026-07-07"
+    notes: Database branching creates instant, isolated copies for testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://neon.com/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://neon.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: supported
+    evidence: https://neon.com/docs/introduction/monitor-usage
+    verified: "2026-07-07"
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed for automated/agent account usage.

@@ -1,0 +1,26 @@
+{
+  "name": "agent-friendly-services",
+  "version": "0.1.0",
+  "description": "A community-maintained, evidence-backed directory of service entry points for AI agents",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Olorinm/agent-friendly-services.git"
+  },
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "probe": "tsx scripts/probe.ts",
+    "generate": "tsx scripts/generate.ts",
+    "test": "npm run validate"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.1.0",
+    "ajv": "^8.20.0",
+    "js-yaml": "^5.2.1",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
+  }
+}

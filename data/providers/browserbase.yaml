@@ -1,0 +1,77 @@
+id: browserbase
+name: Browserbase
+category: code-execution
+homepage: https://www.browserbase.com
+summary: Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.
+submitted_by: community
+
+tags:
+  - browsers
+  - automation
+  - headless
+
+entrypoints:
+  docs: https://docs.browserbase.com
+  api_reference: https://docs.browserbase.com/reference
+  llms_txt: https://docs.browserbase.com/llms.txt
+  status_page: https://status.browserbase.com
+  pricing: https://www.browserbase.com/pricing
+  signup: https://www.browserbase.com/sign-up
+  api_keys: https://docs.browserbase.com/introduction
+  sdks: https://docs.browserbase.com/reference
+  mcp_official: https://github.com/browserbase/mcp-server-browserbase
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.browserbase.com/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.browserbase.com/introduction
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API-key auth only, as far as documented.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: not_applicable
+    notes: The product itself is an ephemeral, isolated browser session — every run is a sandbox.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.browserbase.com/pricing
+    verified: "2026-07-07"
+    notes: Free plan with limited browser hours.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.browserbase.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard shows session usage; needs a docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: supported
+    evidence: https://www.browserbase.com
+    verified: "2026-07-07"
+    notes: Running automated browsers is the product's stated purpose; your obligations toward target sites remain your own.
+
+notes:
+  - Stagehand (the company's agent framework) is a separate open-source project and not assessed here.

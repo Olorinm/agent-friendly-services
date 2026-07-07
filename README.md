@@ -1,0 +1,249 @@
+<!-- GENERATED FILE — do not edit. Run `npm run generate`. Source of truth: data/ -->
+
+# Agent-Friendly Services
+
+A community-maintained, evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable, and how fresh that information is.
+
+**12 providers · 145 verified entry links · 91 evidence-backed capability checks**
+
+- 🤖 Agents: start with [`generated/providers.json`](./generated/providers.json) (full machine-readable dataset) and [`llms.txt`](./llms.txt)
+- 🧑‍💻 Humans: browse the matrix below
+- 🛠 Contributors: read [`AGENTS.md`](./AGENTS.md) and [`docs/contributing.md`](./docs/contributing.md) — every `unknown` below is a 15-minute contribution
+
+## How To Read This
+
+- **URL = fact.** Most questions ("is there an OpenAPI spec?") are answered with the link itself. Links are probed weekly ([`generated/link-health.json`](./generated/link-health.json)).
+- **Checks** record behavior a URL can't express (self-serve signup, scoped tokens, idempotency…). `supported`/`partial` always carry an official evidence link and a verification date.
+- **A missing link means "no known URL"**, not "confirmed absent". `unknown` means "checked, no reliable evidence found yet". Nobody guesses.
+- Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown
+- No scores, no tiers, no editorial ranking — only verifiable facts.
+
+## Service Matrix
+
+### AI Models
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
+
+### Code Execution
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
+
+### Developer Tools
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [GitHub](#github) | ✓ | — | ✓ | ✓ | — | ✓ | 2026-07-07 |
+
+### Cloud / Hosting
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Vercel](#vercel) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+
+### Databases
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Neon](#neon) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| [Supabase](#supabase) | ✓ | ✓ | — | ✓ | ◐ | ✓ | 2026-07-07 |
+
+### Web Search / Data
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+
+### Payments / Billing
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+
+### Communication
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
+
+## Providers
+
+### Anthropic <a id="anthropic"></a>
+
+> Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.
+
+**Category:** AI Models · `llms.txt` `CLI` `Agent Docs` `Self-serve`
+
+**Links:** [Documentation](https://docs.anthropic.com) · [API Reference](https://docs.anthropic.com/en/api) · [llms.txt](https://docs.anthropic.com/llms.txt) · [Changelog](https://docs.anthropic.com/en/release-notes/api) · [Status Page](https://status.anthropic.com) · [Pricing](https://www.anthropic.com/pricing) · [Signup](https://console.anthropic.com) · [API Keys](https://docs.anthropic.com/en/api/getting-started) · [CLI](https://docs.anthropic.com/en/docs/claude-code) · [SDKs](https://docs.anthropic.com/en/api/client-sdks) · [Agent Docs](https://docs.anthropic.com/en/docs/agents-and-tools) · [Rate Limits](https://docs.anthropic.com/en/api/rate-limits) · [Errors](https://docs.anthropic.com/en/api/errors)
+
+- **Supported:** [Self-serve signup](https://console.anthropic.com) · [Self-serve API keys](https://docs.anthropic.com/en/api/getting-started) · [Self-serve upgrade](https://www.anthropic.com/pricing) · [Usage dashboard](https://docs.anthropic.com/en/api/rate-limits) · [Versioning policy](https://docs.anthropic.com/en/api/versioning)
+- **Partial:** [Scoped tokens](https://docs.anthropic.com/en/api/rate-limits) — Keys are scoped per workspace (limits and separation per workspace); no per-permission scoping.
+- **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `idempotency`, `automation_permitted`
+
+> Anthropic authored the MCP standard; no first-party MCP server exposing the Anthropic API was found at review time (mcp_official intentionally absent).
+> Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI.
+
+### Browserbase <a id="browserbase"></a>
+
+> Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.
+
+**Category:** Code Execution · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.browserbase.com) · [API Reference](https://docs.browserbase.com/reference) · [llms.txt](https://docs.browserbase.com/llms.txt) · [Status Page](https://status.browserbase.com) · [Pricing](https://www.browserbase.com/pricing) · [Signup](https://www.browserbase.com/sign-up) · [API Keys](https://docs.browserbase.com/introduction) · [SDKs](https://docs.browserbase.com/reference) · [Official MCP](https://github.com/browserbase/mcp-server-browserbase)
+
+- **Supported:** [Self-serve signup](https://www.browserbase.com/sign-up) · [Self-serve API keys](https://docs.browserbase.com/introduction) · [Free tier / trial](https://www.browserbase.com/pricing) · [Self-serve upgrade](https://www.browserbase.com/pricing) · [Automation permitted](https://www.browserbase.com)
+- **N/A:** Sandbox / test mode — The product itself is an ephemeral, isolated browser session — every run is a sandbox.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+> Stagehand (the company's agent framework) is a separate open-source project and not assessed here.
+
+### Cloudflare <a id="cloudflare"></a>
+
+> Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.
+
+**Category:** Cloud / Hosting · **Scope:** Developer platform (Workers, R2, D1, AI) and core API. Enterprise network products not assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Self-serve`
+
+**Links:** [Documentation](https://developers.cloudflare.com) · [API Reference](https://developers.cloudflare.com/api/) · [OpenAPI](https://github.com/cloudflare/api-schemas) · [llms.txt](https://developers.cloudflare.com/llms.txt) · [Changelog](https://developers.cloudflare.com/changelog/) · [Status Page](https://www.cloudflarestatus.com) · [Pricing](https://www.cloudflare.com/plans/) · [Signup](https://dash.cloudflare.com/sign-up) · [API Keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [SDKs](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) · [Official MCP](https://github.com/cloudflare/mcp-server-cloudflare) · [Agent Docs](https://developers.cloudflare.com/agents/)
+
+- **Supported:** [Self-serve signup](https://dash.cloudflare.com/sign-up) · [Self-serve API keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Scoped tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Token revocation](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Free tier / trial](https://www.cloudflare.com/plans/) · [Self-serve upgrade](https://www.cloudflare.com/plans/) · [Versioning policy](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/)
+- **Partial:** [Sandbox / test mode](https://developers.cloudflare.com/workers/wrangler/) — No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
+- **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Exa <a id="exa"></a>
+
+> Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.exa.ai) · [API Reference](https://docs.exa.ai/reference/getting-started) · [llms.txt](https://docs.exa.ai/llms.txt) · [Changelog](https://docs.exa.ai/changelog) · [Pricing](https://exa.ai/pricing) · [Signup](https://dashboard.exa.ai) · [API Keys](https://docs.exa.ai/reference/getting-started) · [SDKs](https://docs.exa.ai/sdks/typescript-sdk-specification) · [Official MCP](https://github.com/exa-labs/exa-mcp-server) · [Rate Limits](https://docs.exa.ai/reference/rate-limits)
+
+- **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
+- **N/A:** Idempotency — Read-only search/retrieval API; requests are inherently repeatable.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+### Firecrawl <a id="firecrawl"></a>
+
+> Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.firecrawl.dev) · [API Reference](https://docs.firecrawl.dev/api-reference/introduction) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [Pricing](https://www.firecrawl.dev/pricing) · [Signup](https://www.firecrawl.dev/signin/signup) · [API Keys](https://docs.firecrawl.dev/introduction) · [SDKs](https://docs.firecrawl.dev/sdks/overview) · [Official MCP](https://docs.firecrawl.dev/mcp-server) · [Rate Limits](https://docs.firecrawl.dev/rate-limits)
+
+- **Supported:** [Self-serve signup](https://www.firecrawl.dev/pricing) · [Self-serve API keys](https://docs.firecrawl.dev/introduction) · [Free tier / trial](https://www.firecrawl.dev/pricing) · [Self-serve upgrade](https://www.firecrawl.dev/pricing)
+- **N/A:** Idempotency — Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+### GitHub <a id="github"></a>
+
+> Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
+
+**Category:** Developer Tools · **Scope:** Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately. · `Official MCP` `OpenAPI` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.github.com) · [API Reference](https://docs.github.com/rest) · [OpenAPI](https://github.com/github/rest-api-description) · [GraphQL](https://docs.github.com/graphql) · [Changelog](https://github.blog/changelog/) · [Status Page](https://www.githubstatus.com) · [Pricing](https://github.com/pricing) · [Signup](https://github.com/signup) · [API Keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [CLI](https://cli.github.com) · [SDKs](https://github.com/octokit) · [Official MCP](https://github.com/github/github-mcp-server) · [Webhooks](https://docs.github.com/webhooks) · [Rate Limits](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+
+- **Supported:** [Self-serve signup](https://github.com/signup) · [Self-serve API keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [OAuth](https://docs.github.com/apps/oauth-apps) · [Scoped tokens](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Token revocation](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Free tier / trial](https://github.com/pricing) · [Self-serve upgrade](https://github.com/pricing) · [Usage dashboard](https://docs.github.com/billing) · [Versioning policy](https://docs.github.com/rest/about-the-rest-api/api-versions) · [Automation permitted](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
+
+> Multi-product platform; this entry covers the core developer platform only (see scope).
+
+### Neon <a id="neon"></a>
+
+> Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
+
+**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://neon.com/docs) · [API Reference](https://api-docs.neon.tech) · [llms.txt](https://neon.com/llms.txt) · [Changelog](https://neon.com/docs/changelog) · [Status Page](https://neonstatus.com) · [Pricing](https://neon.com/pricing) · [Signup](https://console.neon.tech/signup) · [API Keys](https://neon.com/docs/manage/api-keys) · [CLI](https://neon.com/docs/reference/neon-cli) · [Official MCP](https://github.com/neondatabase/mcp-server-neon) · [Agent Docs](https://neon.com/docs/ai/ai-intro)
+
+- **Supported:** [Self-serve signup](https://console.neon.tech/signup) · [Self-serve API keys](https://neon.com/docs/manage/api-keys) · [OAuth](https://neon.com/docs/guides/oauth-integration) · [Token revocation](https://neon.com/docs/manage/api-keys) · [Sandbox / test mode](https://neon.com/docs/introduction/branching) · [Free tier / trial](https://neon.com/pricing) · [Self-serve upgrade](https://neon.com/pricing) · [Usage dashboard](https://neon.com/docs/introduction/monitor-usage)
+- **Partial:** [Scoped tokens](https://neon.com/docs/manage/api-keys) — Organization- and project-scoped API keys; no per-permission scoping.
+- **Unknown (help wanted):** `idempotency`, `versioning_policy`, `automation_permitted`
+
+### OpenAI <a id="openai"></a>
+
+> GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
+
+**Category:** AI Models · `OpenAPI` `Agent Docs` `Self-serve`
+
+**Links:** [Documentation](https://platform.openai.com/docs) · [API Reference](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [Changelog](https://platform.openai.com/docs/changelog) · [Status Page](https://status.openai.com) · [Pricing](https://platform.openai.com/docs/pricing) · [Signup](https://platform.openai.com/signup) · [API Keys](https://platform.openai.com/docs/quickstart) · [SDKs](https://platform.openai.com/docs/libraries) · [Agent Docs](https://platform.openai.com/docs/guides/agents) · [Rate Limits](https://platform.openai.com/docs/guides/rate-limits) · [Errors](https://platform.openai.com/docs/guides/error-codes)
+
+- **Supported:** [Self-serve signup](https://platform.openai.com/signup) · [Self-serve API keys](https://platform.openai.com/docs/quickstart) · [Self-serve upgrade](https://platform.openai.com/docs/pricing) · [Versioning policy](https://platform.openai.com/docs/deprecations)
+- **Partial:** [Scoped tokens](https://platform.openai.com/docs/quickstart) — Project-scoped API keys separate projects; permission granularity is limited.
+- **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Resend <a id="resend"></a>
+
+> Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.
+
+**Category:** Communication · `Official MCP` `Sandbox` `Self-serve` `Idempotent API`
+
+**Links:** [Documentation](https://resend.com/docs) · [API Reference](https://resend.com/docs/api-reference/introduction) · [Changelog](https://resend.com/changelog) · [Pricing](https://resend.com/pricing) · [Signup](https://resend.com/signup) · [API Keys](https://resend.com/docs/dashboard/api-keys/introduction) · [SDKs](https://resend.com/docs/sdks) · [Official MCP](https://github.com/resend/mcp-send-email) · [Webhooks](https://resend.com/docs/dashboard/webhooks/introduction) · [Errors](https://resend.com/docs/api-reference/errors)
+
+- **Supported:** [Self-serve signup](https://resend.com/signup) · [Self-serve API keys](https://resend.com/docs/dashboard/api-keys/introduction) · [Scoped tokens](https://resend.com/docs/dashboard/api-keys/introduction) · [Token revocation](https://resend.com/docs/dashboard/api-keys/introduction) · [Sandbox / test mode](https://resend.com/docs/dashboard/emails/send-test-emails) · [Free tier / trial](https://resend.com/pricing) · [Self-serve upgrade](https://resend.com/pricing) · [Idempotency](https://resend.com/docs/api-reference/introduction)
+- **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+### Stripe <a id="stripe"></a>
+
+> Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.
+
+**Category:** Payments / Billing · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Sandbox` `Self-serve` `Idempotent API`
+
+**Links:** [Documentation](https://docs.stripe.com) · [API Reference](https://docs.stripe.com/api) · [OpenAPI](https://github.com/stripe/openapi) · [llms.txt](https://docs.stripe.com/llms.txt) · [Changelog](https://docs.stripe.com/changelog) · [Status Page](https://status.stripe.com) · [Pricing](https://stripe.com/pricing) · [Signup](https://dashboard.stripe.com/register) · [API Keys](https://docs.stripe.com/keys) · [CLI](https://docs.stripe.com/stripe-cli) · [SDKs](https://docs.stripe.com/sdks) · [Official MCP](https://docs.stripe.com/mcp) · [Agent Docs](https://docs.stripe.com/agents) · [Webhooks](https://docs.stripe.com/webhooks) · [Rate Limits](https://docs.stripe.com/rate-limits) · [Errors](https://docs.stripe.com/api/errors)
+
+- **Supported:** [Self-serve signup](https://dashboard.stripe.com/register) · [Self-serve API keys](https://docs.stripe.com/keys) · [OAuth](https://docs.stripe.com/connect/oauth-reference) · [Scoped tokens](https://docs.stripe.com/keys) · [Token revocation](https://docs.stripe.com/keys) · [Sandbox / test mode](https://docs.stripe.com/testing) · [Free tier / trial](https://docs.stripe.com/testing) · [Self-serve upgrade](https://stripe.com/pricing) · [Usage dashboard](https://docs.stripe.com/dashboard/basics) · [Idempotency](https://docs.stripe.com/api/idempotent_requests) · [Versioning policy](https://docs.stripe.com/api/versioning)
+- **Unknown (help wanted):** `automation_permitted`
+
+> Agent tooling (MCP, agent toolkit) evolves quickly; re-check quarterly.
+
+### Supabase <a id="supabase"></a>
+
+> Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.
+
+**Category:** Databases · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Self-serve`
+
+**Links:** [Documentation](https://supabase.com/docs) · [API Reference](https://supabase.com/docs/reference/api/introduction) · [llms.txt](https://supabase.com/llms.txt) · [Changelog](https://supabase.com/changelog) · [Status Page](https://status.supabase.com) · [Pricing](https://supabase.com/pricing) · [Signup](https://supabase.com/dashboard/sign-up) · [API Keys](https://supabase.com/docs/guides/api/api-keys) · [CLI](https://supabase.com/docs/guides/cli) · [SDKs](https://supabase.com/docs/reference) · [Official MCP](https://supabase.com/docs/guides/getting-started/mcp) · [Agent Docs](https://supabase.com/docs/guides/getting-started/ai-prompts) · [Webhooks](https://supabase.com/docs/guides/database/webhooks)
+
+- **Supported:** [Self-serve signup](https://supabase.com/dashboard/sign-up) · [Self-serve API keys](https://supabase.com/docs/guides/api/api-keys) · [OAuth](https://supabase.com/docs/guides/integrations/build-a-supabase-integration) · [Token revocation](https://supabase.com/docs/guides/api/api-keys) · [Free tier / trial](https://supabase.com/pricing) · [Self-serve upgrade](https://supabase.com/pricing)
+- **Partial:** [Scoped tokens](https://supabase.com/docs/guides/api/api-keys) — Publishable/secret key split and JWT roles; management-API tokens are account-wide.
+- **Partial:** [Sandbox / test mode](https://supabase.com/docs/guides/cli) — Full local development stack via CLI; hosted branching is a paid feature.
+- **Unknown (help wanted):** `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Vercel <a id="vercel"></a>
+
+> Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
+
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://vercel.com/docs) · [API Reference](https://vercel.com/docs/rest-api) · [llms.txt](https://vercel.com/llms.txt) · [Changelog](https://vercel.com/changelog) · [Status Page](https://www.vercel-status.com) · [Pricing](https://vercel.com/pricing) · [Signup](https://vercel.com/signup) · [API Keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [CLI](https://vercel.com/docs/cli) · [SDKs](https://vercel.com/docs/rest-api/sdk) · [Official MCP](https://vercel.com/docs/mcp/vercel-mcp) · [Agent Docs](https://vercel.com/docs/agents) · [Webhooks](https://vercel.com/docs/webhooks) · [Rate Limits](https://vercel.com/docs/limits) · [Errors](https://vercel.com/docs/errors)
+
+- **Supported:** [Self-serve signup](https://vercel.com/signup) · [Self-serve API keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [OAuth](https://vercel.com/docs/integrations) · [Token revocation](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [Sandbox / test mode](https://vercel.com/docs/deployments/environments) · [Free tier / trial](https://vercel.com/pricing) · [Self-serve upgrade](https://vercel.com/pricing) · [Usage dashboard](https://vercel.com/docs/pricing/understanding-my-invoice)
+- **Partial:** [Scoped tokens](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) — Tokens are scoped to account or team, not to fine-grained permissions.
+- **Partial:** [Versioning policy](https://vercel.com/docs/rest-api) — Endpoints are individually versioned (v6, v13, ...); no single published deprecation policy found.
+- **Unknown (help wanted):** `idempotency`, `automation_permitted`
+
+
+## Help Wanted 🌱
+
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **53 unknowns are open right now.**
+
+- `llms_txt` link unknown for: [github](#github), [openai](#openai), [resend](#resend)
+- `openapi` link unknown for: [anthropic](#anthropic), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [neon](#neon), [resend](#resend), [supabase](#supabase), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [openai](#openai)
+- `agent_docs` link unknown for: [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [resend](#resend)
+
+You can also [add a provider](./docs/contributing.md#add-a-provider) (there is an issue form), report a broken link, or send your coding agent: this repo is designed so an agent pointed at [`AGENTS.md`](./AGENTS.md) can contribute end-to-end.
+
+## Methodology
+
+Facts only, evidence required, `unknown` is honest, freshness is tracked per check, links are probed weekly. Full write-up: [`docs/methodology.md`](./docs/methodology.md).
+
+Related projects: [Fern Agent Score](https://buildwithfern.com/agent-score) and the [Agent-Friendly Docs Spec](https://github.com/fern-api/agent-score) (docs-site readiness scoring — we deliberately don't duplicate it), [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/), the [official MCP Registry](https://registry.modelcontextprotocol.io/) (authoritative MCP source we sync against), [llms.txt hub](https://llmstxthub.com/).
+
+## License
+
+Code: [MIT](./LICENSE) · Data (`data/`, `generated/`): [CC BY 4.0](./LICENSE-DATA)

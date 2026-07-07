@@ -1,0 +1,75 @@
+id: exa
+name: Exa
+category: web-search-data
+homepage: https://exa.ai
+summary: Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
+submitted_by: community
+
+tags:
+  - search
+  - retrieval
+  - rag
+
+entrypoints:
+  docs: https://docs.exa.ai
+  api_reference: https://docs.exa.ai/reference/getting-started
+  llms_txt: https://docs.exa.ai/llms.txt
+  changelog: https://docs.exa.ai/changelog
+  pricing: https://exa.ai/pricing
+  signup: https://dashboard.exa.ai
+  api_keys: https://docs.exa.ai/reference/getting-started
+  sdks: https://docs.exa.ai/sdks/typescript-sdk-specification
+  mcp_official: https://github.com/exa-labs/exa-mcp-server
+  rate_limits: https://docs.exa.ai/reference/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.exa.ai
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.exa.ai/reference/getting-started
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API-key auth only, as far as documented.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in dashboard; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Free credits serve as a low-risk trial; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://exa.ai/pricing
+    verified: "2026-07-07"
+    notes: Free starter credits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://exa.ai/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard shows usage; needs a docs link as evidence.
+
+  idempotency:
+    status: not_applicable
+    notes: Read-only search/retrieval API; requests are inherently repeatable.
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed.

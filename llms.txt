@@ -1,0 +1,25 @@
+# Agent-Friendly Services Index
+
+> A community-maintained, evidence-backed directory of service entry points for
+> AI agents: where the docs are, how to authenticate, what is machine-readable,
+> and how fresh that information is.
+
+## Core Files
+
+- [Providers JSON](./generated/providers.json): Full machine-readable dataset with derived badges and freshness. Start here.
+- [Provider sources](./data/providers/): One YAML per provider (source of truth).
+- [Field definitions](./data/fields.yaml): What every entrypoint and check means, and how each is verified.
+- [Categories](./data/categories.yaml): Canonical category list.
+- [Schema](./schema/provider.schema.json): Provider file schema.
+- [Link health](./generated/link-health.json): Weekly probe results for every URL in the dataset.
+- [Methodology](./docs/methodology.md): Scope, principles, and how verification works.
+- [Contributing](./docs/contributing.md): How to add or update a provider.
+- [Agent instructions](./AGENTS.md): How to contribute to this repo as an agent.
+
+## Rules For Agents
+
+- `data/providers/*.yaml` is the source of truth; `generated/providers.json` is its faithful export.
+- A missing entrypoint means "no known URL", not "confirmed absent".
+- Check statuses: supported | partial | unsupported | unknown | not_applicable.
+- Every supported/partial check has an official evidence URL and a per-check `verified` date.
+- URL liveness is machine-checked weekly; human-verified facts carry their own dates. Trust accordingly.

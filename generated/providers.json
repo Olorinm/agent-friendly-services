@@ -1,0 +1,1492 @@
+{
+  "name": "agent-friendly-services",
+  "description": "A community-maintained, evidence-backed directory of service entry points for AI agents.",
+  "spec": {
+    "status_enum": [
+      "supported",
+      "partial",
+      "unsupported",
+      "unknown",
+      "not_applicable"
+    ],
+    "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
+    "stale_after_days": 180
+  },
+  "generated_at": "2026-07-07T06:05:25.988Z",
+  "counts": {
+    "providers": 12,
+    "categories": 12,
+    "entrypoint_urls": 145,
+    "checks_answered": 91
+  },
+  "categories": [
+    {
+      "id": "ai-models",
+      "name": "AI Models",
+      "description": "Model and inference APIs (LLMs, embeddings, media generation)."
+    },
+    {
+      "id": "agent-tooling",
+      "name": "Agent Tooling",
+      "description": "Agent infrastructure, MCP tooling, orchestration services."
+    },
+    {
+      "id": "code-execution",
+      "name": "Code Execution",
+      "description": "Code sandboxes, ephemeral compute, browser automation."
+    },
+    {
+      "id": "developer-tools",
+      "name": "Developer Tools",
+      "description": "Code hosting, CI, testing, API tooling, error tracking."
+    },
+    {
+      "id": "cloud-hosting",
+      "name": "Cloud / Hosting",
+      "description": "Clouds, deployment platforms, edge and serverless hosting."
+    },
+    {
+      "id": "databases",
+      "name": "Databases",
+      "description": "Databases, vector stores, data platforms."
+    },
+    {
+      "id": "web-search-data",
+      "name": "Web Search / Data",
+      "description": "Search APIs, crawling and scraping, data providers."
+    },
+    {
+      "id": "payments-billing",
+      "name": "Payments / Billing",
+      "description": "Payments, billing, subscription infrastructure."
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "description": "Email, SMS, chat, notifications."
+    },
+    {
+      "id": "productivity-storage",
+      "name": "Productivity / Storage",
+      "description": "Project management, documents, file storage."
+    },
+    {
+      "id": "observability-security",
+      "name": "Observability / Security",
+      "description": "Monitoring, logging, identity, security services."
+    },
+    {
+      "id": "commerce-marketing",
+      "name": "Commerce / Marketing",
+      "description": "CMS, e-commerce, CRM, marketing platforms."
+    }
+  ],
+  "fields": {
+    "entrypoints": {
+      "docs": {
+        "name": "Documentation",
+        "description": "Main documentation site. Must be readable without login.",
+        "verification": "probe"
+      },
+      "api_reference": {
+        "name": "API Reference",
+        "description": "Endpoint-level API reference.",
+        "verification": "probe"
+      },
+      "openapi": {
+        "name": "OpenAPI",
+        "description": "OpenAPI/machine-readable interface definition (spec file or official repo).",
+        "verification": "probe"
+      },
+      "graphql": {
+        "name": "GraphQL",
+        "description": "Public GraphQL schema or explorer.",
+        "verification": "probe"
+      },
+      "llms_txt": {
+        "name": "llms.txt",
+        "description": "Official llms.txt index for the docs site.",
+        "verification": "probe"
+      },
+      "changelog": {
+        "name": "Changelog",
+        "description": "Public changelog or release notes.",
+        "verification": "probe"
+      },
+      "status_page": {
+        "name": "Status Page",
+        "description": "Public service status page.",
+        "verification": "probe"
+      },
+      "pricing": {
+        "name": "Pricing",
+        "description": "Public pricing page or billing model description.",
+        "verification": "probe"
+      },
+      "signup": {
+        "name": "Signup",
+        "description": "Self-serve account creation entry.",
+        "verification": "probe"
+      },
+      "api_keys": {
+        "name": "API Keys",
+        "description": "Documentation for creating and managing API keys/tokens.",
+        "verification": "probe"
+      },
+      "cli": {
+        "name": "CLI",
+        "description": "Official command-line tool that can perform core operations.",
+        "verification": "probe"
+      },
+      "sdks": {
+        "name": "SDKs",
+        "description": "Index of officially maintained SDKs/client libraries.",
+        "verification": "probe"
+      },
+      "mcp_official": {
+        "name": "Official MCP",
+        "description": "Official MCP server or officially supported MCP integration.",
+        "verification": "registry"
+      },
+      "mcp_community": {
+        "name": "Community MCP",
+        "description": "Trusted community MCP servers (list). Informational only; never feeds a badge.",
+        "verification": "probe"
+      },
+      "agent_docs": {
+        "name": "Agent Docs",
+        "description": "Documentation written specifically for agents/LLM tooling.",
+        "verification": "probe"
+      },
+      "webhooks": {
+        "name": "Webhooks",
+        "description": "Webhook/event callback documentation.",
+        "verification": "probe"
+      },
+      "rate_limits": {
+        "name": "Rate Limits",
+        "description": "Rate limit / quota documentation.",
+        "verification": "probe"
+      },
+      "errors": {
+        "name": "Errors",
+        "description": "Error codes and error structure documentation.",
+        "verification": "probe"
+      }
+    },
+    "checks": {
+      "self_serve_signup": {
+        "name": "Self-serve signup",
+        "description": "An account can be created without sales involvement.",
+        "verification": "manual"
+      },
+      "api_key_self_serve": {
+        "name": "Self-serve API keys",
+        "description": "Users can create API keys themselves.",
+        "verification": "manual"
+      },
+      "oauth_support": {
+        "name": "OAuth",
+        "description": "Supports OAuth or an equivalent standard authorization flow.",
+        "verification": "manual"
+      },
+      "scoped_tokens": {
+        "name": "Scoped tokens",
+        "description": "Tokens can be restricted in permission scope (incl. service accounts / machine identities — note specifics).",
+        "verification": "manual"
+      },
+      "token_revocation": {
+        "name": "Token revocation",
+        "description": "Keys/tokens/sessions can be revoked.",
+        "verification": "manual"
+      },
+      "sandbox_or_test_mode": {
+        "name": "Sandbox / test mode",
+        "description": "A test environment, test keys, or a sandbox exists.",
+        "verification": "manual"
+      },
+      "free_tier_or_trial": {
+        "name": "Free tier / trial",
+        "description": "Can be tried at low or no cost.",
+        "verification": "manual"
+      },
+      "self_serve_paid_upgrade": {
+        "name": "Self-serve upgrade",
+        "description": "Paying, upgrading, or topping up requires no sales contact.",
+        "verification": "manual"
+      },
+      "usage_dashboard": {
+        "name": "Usage dashboard",
+        "description": "Users can inspect their API/product usage.",
+        "verification": "manual"
+      },
+      "idempotency": {
+        "name": "Idempotency",
+        "description": "Supports idempotency keys or an equivalent safe-retry mechanism.",
+        "verification": "manual"
+      },
+      "versioning_policy": {
+        "name": "Versioning policy",
+        "description": "API versioning or a clear breaking-change/deprecation policy exists.",
+        "verification": "manual"
+      },
+      "automation_permitted": {
+        "name": "Automation permitted",
+        "description": "Terms of service allow automated/agent usage (evidence = ToS/bot policy clause).",
+        "verification": "manual"
+      }
+    }
+  },
+  "providers": [
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "category": "ai-models",
+      "homepage": "https://www.anthropic.com",
+      "summary": "Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "claude",
+        "inference"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.anthropic.com",
+        "api_reference": "https://docs.anthropic.com/en/api",
+        "llms_txt": "https://docs.anthropic.com/llms.txt",
+        "changelog": "https://docs.anthropic.com/en/release-notes/api",
+        "status_page": "https://status.anthropic.com",
+        "pricing": "https://www.anthropic.com/pricing",
+        "signup": "https://console.anthropic.com",
+        "api_keys": "https://docs.anthropic.com/en/api/getting-started",
+        "cli": "https://docs.anthropic.com/en/docs/claude-code",
+        "sdks": "https://docs.anthropic.com/en/api/client-sdks",
+        "agent_docs": "https://docs.anthropic.com/en/docs/agents-and-tools",
+        "rate_limits": "https://docs.anthropic.com/en/api/rate-limits",
+        "errors": "https://docs.anthropic.com/en/api/errors"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.anthropic.com",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.anthropic.com/en/api/getting-started",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "No public OAuth flow for the API; API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://docs.anthropic.com/en/api/rate-limits",
+          "verified": "2026-07-07",
+          "notes": "Keys are scoped per workspace (limits and separation per workspace); no per-permission scoping."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys can be disabled in the console; needs a canonical docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode documented."
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "API is prepaid usage-based; no standing free tier documented."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.anthropic.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Prepaid credits and usage tiers are self-serve in the console."
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://docs.anthropic.com/en/api/rate-limits",
+          "verified": "2026-07-07",
+          "notes": "Console usage page; rate-limit headers expose remaining quota programmatically."
+        },
+        "idempotency": {
+          "status": "unknown",
+          "notes": "No documented idempotency-key mechanism."
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://docs.anthropic.com/en/api/versioning",
+          "verified": "2026-07-07",
+          "notes": "anthropic-version header with documented version behavior."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Usage policies not yet reviewed for autonomous agent account usage."
+        }
+      },
+      "notes": [
+        "Anthropic authored the MCP standard; no first-party MCP server exposing the Anthropic API was found at review time (mcp_official intentionally absent).",
+        "Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI."
+      ],
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Agent Docs",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "browserbase",
+      "name": "Browserbase",
+      "category": "code-execution",
+      "homepage": "https://www.browserbase.com",
+      "summary": "Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "browsers",
+        "automation",
+        "headless"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.browserbase.com",
+        "api_reference": "https://docs.browserbase.com/reference",
+        "llms_txt": "https://docs.browserbase.com/llms.txt",
+        "status_page": "https://status.browserbase.com",
+        "pricing": "https://www.browserbase.com/pricing",
+        "signup": "https://www.browserbase.com/sign-up",
+        "api_keys": "https://docs.browserbase.com/introduction",
+        "sdks": "https://docs.browserbase.com/reference",
+        "mcp_official": "https://github.com/browserbase/mcp-server-browserbase"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.browserbase.com/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.browserbase.com/introduction",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API-key auth only, as far as documented."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "not_applicable",
+          "notes": "The product itself is an ephemeral, isolated browser session — every run is a sandbox."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.browserbase.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free plan with limited browser hours."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.browserbase.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard shows session usage; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://www.browserbase.com",
+          "verified": "2026-07-07",
+          "notes": "Running automated browsers is the product's stated purpose; your obligations toward target sites remain your own."
+        }
+      },
+      "notes": [
+        "Stagehand (the company's agent framework) is a separate open-source project and not assessed here."
+      ],
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy"
+        ]
+      }
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "category": "cloud-hosting",
+      "homepage": "https://www.cloudflare.com",
+      "summary": "Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.",
+      "submitted_by": "community",
+      "scope": "Developer platform (Workers, R2, D1, AI) and core API. Enterprise network products not assessed.",
+      "tags": [
+        "edge",
+        "serverless",
+        "cdn"
+      ],
+      "entrypoints": {
+        "docs": "https://developers.cloudflare.com",
+        "api_reference": "https://developers.cloudflare.com/api/",
+        "openapi": "https://github.com/cloudflare/api-schemas",
+        "llms_txt": "https://developers.cloudflare.com/llms.txt",
+        "changelog": "https://developers.cloudflare.com/changelog/",
+        "status_page": "https://www.cloudflarestatus.com",
+        "pricing": "https://www.cloudflare.com/plans/",
+        "signup": "https://dash.cloudflare.com/sign-up",
+        "api_keys": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+        "cli": "https://developers.cloudflare.com/workers/wrangler/",
+        "sdks": "https://developers.cloudflare.com/fundamentals/api/reference/sdks/",
+        "mcp_official": "https://github.com/cloudflare/mcp-server-cloudflare",
+        "agent_docs": "https://developers.cloudflare.com/agents/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://dash.cloudflare.com/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "No public OAuth flow for third-party apps found; API tokens are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+          "verified": "2026-07-07",
+          "notes": "API tokens support granular per-resource, per-permission scoping."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "partial",
+          "evidence": "https://developers.cloudflare.com/workers/wrangler/",
+          "verified": "2026-07-07",
+          "notes": "No global sandbox; wrangler local dev and the Workers free plan serve as a test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.cloudflare.com/plans/",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.cloudflare.com/plans/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard analytics exist; need a canonical docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/",
+          "verified": "2026-07-07",
+          "notes": "Stable v4 API plus a published deprecation process."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed for automated/agent account usage."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "OpenAPI",
+          "CLI",
+          "Agent Docs",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "exa",
+      "name": "Exa",
+      "category": "web-search-data",
+      "homepage": "https://exa.ai",
+      "summary": "Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "retrieval",
+        "rag"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.exa.ai",
+        "api_reference": "https://docs.exa.ai/reference/getting-started",
+        "llms_txt": "https://docs.exa.ai/llms.txt",
+        "changelog": "https://docs.exa.ai/changelog",
+        "pricing": "https://exa.ai/pricing",
+        "signup": "https://dashboard.exa.ai",
+        "api_keys": "https://docs.exa.ai/reference/getting-started",
+        "sdks": "https://docs.exa.ai/sdks/typescript-sdk-specification",
+        "mcp_official": "https://github.com/exa-labs/exa-mcp-server",
+        "rate_limits": "https://docs.exa.ai/reference/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://dashboard.exa.ai",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.exa.ai/reference/getting-started",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API-key auth only, as far as documented."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in dashboard; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free credits serve as a low-risk trial; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://exa.ai/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free starter credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://exa.ai/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard shows usage; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "not_applicable",
+          "notes": "Read-only search/retrieval API; requests are inherently repeatable."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "firecrawl",
+      "name": "Firecrawl",
+      "category": "web-search-data",
+      "homepage": "https://www.firecrawl.dev",
+      "summary": "Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "scraping",
+        "crawling",
+        "markdown"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.firecrawl.dev",
+        "api_reference": "https://docs.firecrawl.dev/api-reference/introduction",
+        "llms_txt": "https://docs.firecrawl.dev/llms.txt",
+        "pricing": "https://www.firecrawl.dev/pricing",
+        "signup": "https://www.firecrawl.dev/signin/signup",
+        "api_keys": "https://docs.firecrawl.dev/introduction",
+        "sdks": "https://docs.firecrawl.dev/sdks/overview",
+        "mcp_official": "https://docs.firecrawl.dev/mcp-server",
+        "rate_limits": "https://docs.firecrawl.dev/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.firecrawl.dev/pricing",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.firecrawl.dev/introduction",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API-key auth only, as far as documented."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free credits serve as a low-risk trial; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.firecrawl.dev/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free plan with monthly credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.firecrawl.dev/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "not_applicable",
+          "notes": "Scrape/crawl jobs are re-runnable reads; no state mutation to protect."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "The product exists for automation, but ToS/robots handling not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "category": "developer-tools",
+      "homepage": "https://github.com",
+      "summary": "Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.",
+      "submitted_by": "community",
+      "scope": "Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately.",
+      "tags": [
+        "git",
+        "code-hosting",
+        "ci-cd"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.github.com",
+        "api_reference": "https://docs.github.com/rest",
+        "openapi": "https://github.com/github/rest-api-description",
+        "graphql": "https://docs.github.com/graphql",
+        "changelog": "https://github.blog/changelog/",
+        "status_page": "https://www.githubstatus.com",
+        "pricing": "https://github.com/pricing",
+        "signup": "https://github.com/signup",
+        "api_keys": "https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+        "cli": "https://cli.github.com",
+        "sdks": "https://github.com/octokit",
+        "mcp_official": "https://github.com/github/github-mcp-server",
+        "webhooks": "https://docs.github.com/webhooks",
+        "rate_limits": "https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://github.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/apps/oauth-apps",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "verified": "2026-07-07",
+          "notes": "Fine-grained personal access tokens with per-repo, per-permission scoping; GitHub Apps for machine identities."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated API sandbox; free accounts and throwaway orgs are commonly used for testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://github.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://github.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/billing",
+          "verified": "2026-07-07",
+          "notes": "Billing/usage pages plus a rate-limit API endpoint for API quota introspection."
+        },
+        "idempotency": {
+          "status": "unknown",
+          "notes": "No documented idempotency-key mechanism for the REST API."
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/rest/about-the-rest-api/api-versions",
+          "verified": "2026-07-07",
+          "notes": "Date-based API versioning with a documented deprecation process."
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://docs.github.com/site-policy/github-terms/github-terms-of-service",
+          "verified": "2026-07-07",
+          "notes": "API automation and bots are permitted within rate limits and acceptable-use rules; scraping restrictions apply."
+        }
+      },
+      "notes": [
+        "Multi-product platform; this entry covers the core developer platform only (see scope)."
+      ],
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "OpenAPI",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "idempotency"
+        ]
+      }
+    },
+    {
+      "id": "neon",
+      "name": "Neon",
+      "category": "databases",
+      "homepage": "https://neon.com",
+      "summary": "Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.",
+      "submitted_by": "community",
+      "tags": [
+        "postgres",
+        "serverless",
+        "branching"
+      ],
+      "entrypoints": {
+        "docs": "https://neon.com/docs",
+        "api_reference": "https://api-docs.neon.tech",
+        "llms_txt": "https://neon.com/llms.txt",
+        "changelog": "https://neon.com/docs/changelog",
+        "status_page": "https://neonstatus.com",
+        "pricing": "https://neon.com/pricing",
+        "signup": "https://console.neon.tech/signup",
+        "api_keys": "https://neon.com/docs/manage/api-keys",
+        "cli": "https://neon.com/docs/reference/neon-cli",
+        "mcp_official": "https://github.com/neondatabase/mcp-server-neon",
+        "agent_docs": "https://neon.com/docs/ai/ai-intro"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.neon.tech/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://neon.com/docs/manage/api-keys",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://neon.com/docs/guides/oauth-integration",
+          "verified": "2026-07-07",
+          "notes": "OAuth integration flow for third-party platforms."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://neon.com/docs/manage/api-keys",
+          "verified": "2026-07-07",
+          "notes": "Organization- and project-scoped API keys; no per-permission scoping."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://neon.com/docs/manage/api-keys",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://neon.com/docs/introduction/branching",
+          "verified": "2026-07-07",
+          "notes": "Database branching creates instant, isolated copies for testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://neon.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://neon.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://neon.com/docs/introduction/monitor-usage",
+          "verified": "2026-07-07"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed for automated/agent account usage."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Agent Docs",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "category": "ai-models",
+      "homepage": "https://openai.com",
+      "summary": "GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "gpt",
+        "inference"
+      ],
+      "entrypoints": {
+        "docs": "https://platform.openai.com/docs",
+        "api_reference": "https://platform.openai.com/docs/api-reference",
+        "openapi": "https://github.com/openai/openai-openapi",
+        "changelog": "https://platform.openai.com/docs/changelog",
+        "status_page": "https://status.openai.com",
+        "pricing": "https://platform.openai.com/docs/pricing",
+        "signup": "https://platform.openai.com/signup",
+        "api_keys": "https://platform.openai.com/docs/quickstart",
+        "sdks": "https://platform.openai.com/docs/libraries",
+        "agent_docs": "https://platform.openai.com/docs/guides/agents",
+        "rate_limits": "https://platform.openai.com/docs/guides/rate-limits",
+        "errors": "https://platform.openai.com/docs/guides/error-codes"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://platform.openai.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://platform.openai.com/docs/quickstart",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "No public OAuth flow for the platform API; API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://platform.openai.com/docs/quickstart",
+          "verified": "2026-07-07",
+          "notes": "Project-scoped API keys separate projects; permission granularity is limited."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys are deletable in the dashboard; needs a canonical docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode documented."
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "API is prepaid usage-based; free-credit promotions vary over time."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://platform.openai.com/docs/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Platform usage page exists behind login; needs a public docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown",
+          "notes": "No documented idempotency-key mechanism for the core API."
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://platform.openai.com/docs/deprecations",
+          "verified": "2026-07-07",
+          "notes": "Published deprecation schedule per model/endpoint."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Usage policies not yet reviewed for autonomous agent account usage."
+        }
+      },
+      "derived": {
+        "badges": [
+          "OpenAPI",
+          "Agent Docs",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "resend",
+      "name": "Resend",
+      "category": "communication",
+      "homepage": "https://resend.com",
+      "summary": "Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "email",
+        "transactional"
+      ],
+      "entrypoints": {
+        "docs": "https://resend.com/docs",
+        "api_reference": "https://resend.com/docs/api-reference/introduction",
+        "changelog": "https://resend.com/changelog",
+        "pricing": "https://resend.com/pricing",
+        "signup": "https://resend.com/signup",
+        "api_keys": "https://resend.com/docs/dashboard/api-keys/introduction",
+        "sdks": "https://resend.com/docs/sdks",
+        "mcp_official": "https://github.com/resend/mcp-send-email",
+        "webhooks": "https://resend.com/docs/dashboard/webhooks/introduction",
+        "errors": "https://resend.com/docs/api-reference/errors"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://resend.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://resend.com/docs/dashboard/api-keys/introduction",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API-key auth only, as far as documented."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://resend.com/docs/dashboard/api-keys/introduction",
+          "verified": "2026-07-07",
+          "notes": "Keys support full-access vs sending-only permission and per-domain scoping."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://resend.com/docs/dashboard/api-keys/introduction",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://resend.com/docs/dashboard/emails/send-test-emails",
+          "verified": "2026-07-07",
+          "notes": "Reserved test addresses simulate delivered/bounced/complained outcomes safely."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://resend.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free monthly email quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://resend.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard shows sending metrics; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "supported",
+          "evidence": "https://resend.com/docs/api-reference/introduction",
+          "verified": "2026-07-07",
+          "notes": "Idempotency-Key header on send endpoints."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed; anti-spam rules obviously constrain sending behavior."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "Sandbox",
+          "Self-serve",
+          "Idempotent API"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "usage_dashboard",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "category": "payments-billing",
+      "homepage": "https://stripe.com",
+      "summary": "Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "billing",
+        "subscriptions"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.stripe.com",
+        "api_reference": "https://docs.stripe.com/api",
+        "openapi": "https://github.com/stripe/openapi",
+        "llms_txt": "https://docs.stripe.com/llms.txt",
+        "changelog": "https://docs.stripe.com/changelog",
+        "status_page": "https://status.stripe.com",
+        "pricing": "https://stripe.com/pricing",
+        "signup": "https://dashboard.stripe.com/register",
+        "api_keys": "https://docs.stripe.com/keys",
+        "cli": "https://docs.stripe.com/stripe-cli",
+        "sdks": "https://docs.stripe.com/sdks",
+        "mcp_official": "https://docs.stripe.com/mcp",
+        "agent_docs": "https://docs.stripe.com/agents",
+        "webhooks": "https://docs.stripe.com/webhooks",
+        "rate_limits": "https://docs.stripe.com/rate-limits",
+        "errors": "https://docs.stripe.com/api/errors"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://dashboard.stripe.com/register",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/keys",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/connect/oauth-reference",
+          "verified": "2026-07-07",
+          "notes": "OAuth is part of Stripe Connect (platform integrations)."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/keys",
+          "verified": "2026-07-07",
+          "notes": "Restricted API keys support fine-grained per-resource permissions."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/keys",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/testing",
+          "verified": "2026-07-07"
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/testing",
+          "verified": "2026-07-07",
+          "notes": "Test mode is free and fully featured; live usage is pay-as-you-go."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://stripe.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/dashboard/basics",
+          "verified": "2026-07-07"
+        },
+        "idempotency": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/api/idempotent_requests",
+          "verified": "2026-07-07"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://docs.stripe.com/api/versioning",
+          "verified": "2026-07-07"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed for automated/agent account usage."
+        }
+      },
+      "notes": [
+        "Agent tooling (MCP, agent toolkit) evolves quickly; re-check quarterly."
+      ],
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "OpenAPI",
+          "CLI",
+          "Agent Docs",
+          "Sandbox",
+          "Self-serve",
+          "Idempotent API"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "category": "databases",
+      "homepage": "https://supabase.com",
+      "summary": "Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.",
+      "submitted_by": "community",
+      "tags": [
+        "postgres",
+        "auth",
+        "baas"
+      ],
+      "entrypoints": {
+        "docs": "https://supabase.com/docs",
+        "api_reference": "https://supabase.com/docs/reference/api/introduction",
+        "llms_txt": "https://supabase.com/llms.txt",
+        "changelog": "https://supabase.com/changelog",
+        "status_page": "https://status.supabase.com",
+        "pricing": "https://supabase.com/pricing",
+        "signup": "https://supabase.com/dashboard/sign-up",
+        "api_keys": "https://supabase.com/docs/guides/api/api-keys",
+        "cli": "https://supabase.com/docs/guides/cli",
+        "sdks": "https://supabase.com/docs/reference",
+        "mcp_official": "https://supabase.com/docs/guides/getting-started/mcp",
+        "agent_docs": "https://supabase.com/docs/guides/getting-started/ai-prompts",
+        "webhooks": "https://supabase.com/docs/guides/database/webhooks"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://supabase.com/dashboard/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://supabase.com/docs/guides/api/api-keys",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://supabase.com/docs/guides/integrations/build-a-supabase-integration",
+          "verified": "2026-07-07",
+          "notes": "OAuth apps for building integrations on top of Supabase."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://supabase.com/docs/guides/api/api-keys",
+          "verified": "2026-07-07",
+          "notes": "Publishable/secret key split and JWT roles; management-API tokens are account-wide."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://supabase.com/docs/guides/api/api-keys",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "partial",
+          "evidence": "https://supabase.com/docs/guides/cli",
+          "verified": "2026-07-07",
+          "notes": "Full local development stack via CLI; hosted branching is a paid feature."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://supabase.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://supabase.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Dashboard shows org usage; need a canonical docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed for automated/agent account usage."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Agent Docs",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "category": "cloud-hosting",
+      "homepage": "https://vercel.com",
+      "summary": "Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.",
+      "submitted_by": "community",
+      "tags": [
+        "deployment",
+        "serverless",
+        "frontend"
+      ],
+      "entrypoints": {
+        "docs": "https://vercel.com/docs",
+        "api_reference": "https://vercel.com/docs/rest-api",
+        "llms_txt": "https://vercel.com/llms.txt",
+        "changelog": "https://vercel.com/changelog",
+        "status_page": "https://www.vercel-status.com",
+        "pricing": "https://vercel.com/pricing",
+        "signup": "https://vercel.com/signup",
+        "api_keys": "https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token",
+        "cli": "https://vercel.com/docs/cli",
+        "sdks": "https://vercel.com/docs/rest-api/sdk",
+        "mcp_official": "https://vercel.com/docs/mcp/vercel-mcp",
+        "agent_docs": "https://vercel.com/docs/agents",
+        "webhooks": "https://vercel.com/docs/webhooks",
+        "rate_limits": "https://vercel.com/docs/limits",
+        "errors": "https://vercel.com/docs/errors"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://vercel.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://vercel.com/docs/integrations",
+          "verified": "2026-07-07",
+          "notes": "OAuth-based integration platform for third-party apps."
+        },
+        "scoped_tokens": {
+          "status": "partial",
+          "evidence": "https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token",
+          "verified": "2026-07-07",
+          "notes": "Tokens are scoped to account or team, not to fine-grained permissions."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://vercel.com/docs/deployments/environments",
+          "verified": "2026-07-07",
+          "notes": "Preview deployments give every change an isolated test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://vercel.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Hobby plan is free."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://vercel.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://vercel.com/docs/pricing/understanding-my-invoice",
+          "verified": "2026-07-07",
+          "notes": "Usage page in dashboard; invoice/usage docs."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "partial",
+          "evidence": "https://vercel.com/docs/rest-api",
+          "verified": "2026-07-07",
+          "notes": "Endpoints are individually versioned (v6, v13, ...); no single published deprecation policy found."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed for automated/agent account usage."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Agent Docs",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    }
+  ]
+}

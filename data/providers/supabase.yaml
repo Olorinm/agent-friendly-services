@@ -1,0 +1,84 @@
+id: supabase
+name: Supabase
+category: databases
+homepage: https://supabase.com
+summary: Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.
+submitted_by: community
+
+tags:
+  - postgres
+  - auth
+  - baas
+
+entrypoints:
+  docs: https://supabase.com/docs
+  api_reference: https://supabase.com/docs/reference/api/introduction
+  llms_txt: https://supabase.com/llms.txt
+  changelog: https://supabase.com/changelog
+  status_page: https://status.supabase.com
+  pricing: https://supabase.com/pricing
+  signup: https://supabase.com/dashboard/sign-up
+  api_keys: https://supabase.com/docs/guides/api/api-keys
+  cli: https://supabase.com/docs/guides/cli
+  sdks: https://supabase.com/docs/reference
+  mcp_official: https://supabase.com/docs/guides/getting-started/mcp
+  agent_docs: https://supabase.com/docs/guides/getting-started/ai-prompts
+  webhooks: https://supabase.com/docs/guides/database/webhooks
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://supabase.com/dashboard/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://supabase.com/docs/guides/api/api-keys
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://supabase.com/docs/guides/integrations/build-a-supabase-integration
+    verified: "2026-07-07"
+    notes: OAuth apps for building integrations on top of Supabase.
+
+  scoped_tokens:
+    status: partial
+    evidence: https://supabase.com/docs/guides/api/api-keys
+    verified: "2026-07-07"
+    notes: Publishable/secret key split and JWT roles; management-API tokens are account-wide.
+
+  token_revocation:
+    status: supported
+    evidence: https://supabase.com/docs/guides/api/api-keys
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: partial
+    evidence: https://supabase.com/docs/guides/cli
+    verified: "2026-07-07"
+    notes: Full local development stack via CLI; hosted branching is a paid feature.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://supabase.com/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://supabase.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Dashboard shows org usage; need a canonical docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed for automated/agent account usage.

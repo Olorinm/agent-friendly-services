@@ -1,0 +1,66 @@
+name: weekly-probe
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Probe all URLs
+        id: probe
+        run: |
+          if npm run probe; then
+            echo "broken=0" >> "$GITHUB_OUTPUT"
+          else
+            echo "broken=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit link health
+        run: |
+          git config user.name "afs-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add generated/link-health.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: weekly link health [skip ci]"
+            git push
+          fi
+
+      - name: Open issue for broken links
+        if: steps.probe.outputs.broken == '1'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const health = JSON.parse(fs.readFileSync('generated/link-health.json', 'utf8'));
+            const broken = health.results.filter(r => r.class === 'broken');
+            if (broken.length === 0) return;
+            const body = [
+              'The weekly probe found broken links. Inconclusive results (403/429, WAF blocks) are excluded — only real 404/410/5xx/network failures are listed.',
+              '',
+              ...broken.map(r => `- [ ] \`${r.status ?? r.detail}\` ${r.url}\n  - used by: ${r.sources.join(', ')}`),
+              '',
+              'How to fix: find the page\'s new official location; if it is gone for good, use a web.archive.org snapshot for evidence links or remove the entrypoint. See docs/contributing.md.',
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Broken links: ${broken.length} (${health.checked_at.slice(0, 10)})`,
+              body,
+              labels: ['link-health', 'help wanted'],
+            });

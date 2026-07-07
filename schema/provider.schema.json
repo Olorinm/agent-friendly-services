@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/schema/provider.schema.json",
+  "title": "Agent-Friendly Services provider",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "category", "homepage", "summary", "submitted_by", "entrypoints", "checks"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Stable lowercase id, must equal the filename without .yaml"
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "description": "Must exist in data/categories.yaml (checked by validate.ts)" },
+    "homepage": { "$ref": "#/definitions/httpsUrl" },
+    "summary": { "type": "string", "minLength": 10, "maxLength": 300 },
+    "submitted_by": { "type": "string", "enum": ["community", "vendor"] },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "uniqueItems": true
+    },
+    "scope": {
+      "type": "string",
+      "description": "Which product surface this entry covers (required for multi-product giants)"
+    },
+    "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "archived": { "type": "boolean" },
+    "archived_reason": { "type": "string" },
+    "entrypoints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["docs"],
+      "properties": {
+        "docs": { "$ref": "#/definitions/httpsUrl" },
+        "api_reference": { "$ref": "#/definitions/httpsUrl" },
+        "openapi": { "$ref": "#/definitions/httpsUrl" },
+        "graphql": { "$ref": "#/definitions/httpsUrl" },
+        "llms_txt": { "$ref": "#/definitions/httpsUrl" },
+        "changelog": { "$ref": "#/definitions/httpsUrl" },
+        "status_page": { "$ref": "#/definitions/httpsUrl" },
+        "pricing": { "$ref": "#/definitions/httpsUrl" },
+        "signup": { "$ref": "#/definitions/httpsUrl" },
+        "api_keys": { "$ref": "#/definitions/httpsUrl" },
+        "cli": { "$ref": "#/definitions/httpsUrl" },
+        "sdks": { "$ref": "#/definitions/httpsUrl" },
+        "mcp_official": { "$ref": "#/definitions/httpsUrl" },
+        "mcp_community": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/httpsUrl" },
+          "uniqueItems": true
+        },
+        "agent_docs": { "$ref": "#/definitions/httpsUrl" },
+        "webhooks": { "$ref": "#/definitions/httpsUrl" },
+        "rate_limits": { "$ref": "#/definitions/httpsUrl" },
+        "errors": { "$ref": "#/definitions/httpsUrl" }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "self_serve_signup": { "$ref": "#/definitions/check" },
+        "api_key_self_serve": { "$ref": "#/definitions/check" },
+        "oauth_support": { "$ref": "#/definitions/check" },
+        "scoped_tokens": { "$ref": "#/definitions/check" },
+        "token_revocation": { "$ref": "#/definitions/check" },
+        "sandbox_or_test_mode": { "$ref": "#/definitions/check" },
+        "free_tier_or_trial": { "$ref": "#/definitions/check" },
+        "self_serve_paid_upgrade": { "$ref": "#/definitions/check" },
+        "usage_dashboard": { "$ref": "#/definitions/check" },
+        "idempotency": { "$ref": "#/definitions/check" },
+        "versioning_policy": { "$ref": "#/definitions/check" },
+        "automation_permitted": { "$ref": "#/definitions/check" }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "definitions": {
+    "httpsUrl": {
+      "type": "string",
+      "pattern": "^https://[^\\s]+$"
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["supported", "partial", "unsupported", "unknown", "not_applicable"]
+        },
+        "evidence": { "$ref": "#/definitions/httpsUrl" },
+        "verified": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "description": "Date this check was last verified by a human, quoted string"
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

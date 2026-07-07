@@ -1,0 +1,81 @@
+id: openai
+name: OpenAI
+category: ai-models
+homepage: https://openai.com
+summary: GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
+submitted_by: community
+
+tags:
+  - llm
+  - gpt
+  - inference
+
+entrypoints:
+  docs: https://platform.openai.com/docs
+  api_reference: https://platform.openai.com/docs/api-reference
+  openapi: https://github.com/openai/openai-openapi
+  changelog: https://platform.openai.com/docs/changelog
+  status_page: https://status.openai.com
+  pricing: https://platform.openai.com/docs/pricing
+  signup: https://platform.openai.com/signup
+  api_keys: https://platform.openai.com/docs/quickstart
+  sdks: https://platform.openai.com/docs/libraries
+  agent_docs: https://platform.openai.com/docs/guides/agents
+  rate_limits: https://platform.openai.com/docs/guides/rate-limits
+  errors: https://platform.openai.com/docs/guides/error-codes
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://platform.openai.com/signup
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://platform.openai.com/docs/quickstart
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: No public OAuth flow for the platform API; API keys are the standard auth.
+
+  scoped_tokens:
+    status: partial
+    evidence: https://platform.openai.com/docs/quickstart
+    verified: "2026-07-07"
+    notes: Project-scoped API keys separate projects; permission granularity is limited.
+
+  token_revocation:
+    status: unknown
+    notes: Keys are deletable in the dashboard; needs a canonical docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated test mode documented.
+
+  free_tier_or_trial:
+    status: unknown
+    notes: API is prepaid usage-based; free-credit promotions vary over time.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://platform.openai.com/docs/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Platform usage page exists behind login; needs a public docs link as evidence.
+
+  idempotency:
+    status: unknown
+    notes: No documented idempotency-key mechanism for the core API.
+
+  versioning_policy:
+    status: supported
+    evidence: https://platform.openai.com/docs/deprecations
+    verified: "2026-07-07"
+    notes: Published deprecation schedule per model/endpoint.
+
+  automation_permitted:
+    status: unknown
+    notes: Usage policies not yet reviewed for autonomous agent account usage.
