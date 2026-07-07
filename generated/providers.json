@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T09:58:44.607Z",
+  "generated_at": "2026-07-07T10:01:53.735Z",
   "counts": {
-    "providers": 43,
+    "providers": 47,
     "categories": 12,
-    "entrypoint_urls": 448,
-    "checks_answered": 269
+    "entrypoint_urls": 488,
+    "checks_answered": 291
   },
   "categories": [
     {
@@ -935,6 +935,105 @@
           "oauth_support",
           "scoped_tokens",
           "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "datadog",
+      "name": "Datadog",
+      "category": "observability-security",
+      "homepage": "https://www.datadoghq.com",
+      "summary": "Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "observability",
+        "monitoring",
+        "logs"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.datadoghq.com",
+        "api_reference": "https://docs.datadoghq.com/api/latest/",
+        "llms_txt": "https://docs.datadoghq.com/llms.txt",
+        "status_page": "https://status.datadoghq.com",
+        "pricing": "https://www.datadoghq.com/pricing",
+        "signup": "https://www.datadoghq.com/free-datadog-trial",
+        "api_keys": "https://docs.datadoghq.com/account_management/api-app-keys",
+        "webhooks": "https://docs.datadoghq.com/integrations/webhooks",
+        "rate_limits": "https://docs.datadoghq.com/api/latest/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.datadoghq.com/free-datadog-trial",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.datadoghq.com/account_management/api-app-keys",
+          "verified": "2026-07-07",
+          "notes": "API keys and application keys are created self-serve in organization settings."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog",
+          "verified": "2026-07-07",
+          "notes": "OAuth2 for integrations and apps."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Application keys support scoping in newer accounts; the api-app-keys page did not confirm on probe — needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys are manageable in organization settings; the api-app-keys page did not confirm revocation wording on probe — needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Trial orgs serve as test environments; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.datadoghq.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free tier (limited hosts) and 14-day trial."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.datadoghq.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Pro/Enterprise per-host plans are self-serve; volume discounts go through sales."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "partial",
+          "evidence": "https://docs.datadoghq.com/api/latest/",
+          "verified": "2026-07-07",
+          "notes": "Endpoints are path-versioned (v1/v2) in the reference; no formal deprecation-window policy page recorded."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
           "usage_dashboard",
           "idempotency",
           "automation_permitted"
@@ -3420,6 +3519,104 @@
       }
     },
     {
+      "id": "qdrant",
+      "name": "Qdrant",
+      "category": "databases",
+      "homepage": "https://qdrant.tech",
+      "summary": "Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.",
+      "submitted_by": "community",
+      "scope": "Qdrant Cloud (managed); the open-source engine can also be self-hosted.",
+      "tags": [
+        "vector-database",
+        "search",
+        "embeddings"
+      ],
+      "entrypoints": {
+        "docs": "https://qdrant.tech/documentation",
+        "api_reference": "https://api.qdrant.tech",
+        "llms_txt": "https://qdrant.tech/llms.txt",
+        "changelog": "https://github.com/qdrant/qdrant/releases",
+        "status_page": "https://status.qdrant.io",
+        "pricing": "https://qdrant.tech/pricing",
+        "signup": "https://cloud.qdrant.io",
+        "api_keys": "https://qdrant.tech/documentation/cloud/authentication",
+        "mcp_official": "https://github.com/qdrant/mcp-server-qdrant",
+        "sdks": "https://qdrant.tech/documentation/interfaces"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://cloud.qdrant.io",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://qdrant.tech/documentation/cloud/authentication",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth for clusters."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Cloud offers database API keys with access controls; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in the cloud console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "The free cluster serves as a de-facto test environment; local/self-hosted mode also covers testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://qdrant.tech/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free 1GB managed cluster, no card required."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://qdrant.tech/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown",
+          "notes": "Point upserts are idempotent by point ID in practice; needs a docs statement as evidence."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "replicate",
       "name": "Replicate",
       "category": "ai-models",
@@ -3715,6 +3912,115 @@
           "usage_dashboard",
           "idempotency",
           "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "category": "commerce-marketing",
+      "homepage": "https://www.shopify.com",
+      "summary": "Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.",
+      "submitted_by": "community",
+      "scope": "The Shopify developer platform (Admin/Storefront APIs, apps); the merchant product itself is not assessed.",
+      "tags": [
+        "ecommerce",
+        "graphql",
+        "apps"
+      ],
+      "entrypoints": {
+        "docs": "https://shopify.dev/docs",
+        "api_reference": "https://shopify.dev/docs/api",
+        "graphql": "https://shopify.dev/docs/api/admin-graphql",
+        "llms_txt": "https://shopify.dev/llms.txt",
+        "changelog": "https://shopify.dev/changelog",
+        "status_page": "https://www.shopifystatus.com",
+        "pricing": "https://www.shopify.com/pricing",
+        "signup": "https://www.shopify.com/free-trial",
+        "api_keys": "https://shopify.dev/docs/apps/build/authentication-authorization",
+        "cli": "https://shopify.dev/docs/api/shopify-cli",
+        "mcp_official": "https://shopify.dev/docs/apps/build/storefront-mcp",
+        "webhooks": "https://shopify.dev/docs/apps/build/webhooks",
+        "rate_limits": "https://shopify.dev/docs/api/usage/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.shopify.com/free-trial",
+          "verified": "2026-07-07",
+          "notes": "Store/partner sign-up is self-serve (the accounts subdomain blocks probes, so the trial page is cited)."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://shopify.dev/docs/apps/build/authentication-authorization",
+          "verified": "2026-07-07",
+          "notes": "App credentials and access tokens are issued self-serve from the dev dashboard."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://shopify.dev/docs/apps/build/authentication-authorization",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://shopify.dev/docs/api/usage/access-scopes",
+          "verified": "2026-07-07",
+          "notes": "Granular access scopes per app/token."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Tokens can be revoked by uninstalling apps or rotating credentials; needs the canonical docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://shopify.dev/docs/api/development-stores",
+          "verified": "2026-07-07",
+          "notes": "Free development stores are the documented test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.shopify.com/free-trial",
+          "verified": "2026-07-07",
+          "notes": "Free trial for merchants; development stores are free for partners."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.shopify.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown",
+          "notes": "Some GraphQL mutations accept idempotency-style unique keys; no general policy page recorded yet."
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://shopify.dev/docs/api/usage/versioning",
+          "verified": "2026-07-07",
+          "notes": "Quarterly API versions with a documented support window."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "Partner Program agreement not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
           "automation_permitted"
         ]
       }
@@ -4427,6 +4733,102 @@
           "oauth_support",
           "usage_dashboard",
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "upstash",
+      "name": "Upstash",
+      "category": "databases",
+      "homepage": "https://upstash.com",
+      "summary": "Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "redis",
+        "serverless",
+        "vector-database"
+      ],
+      "entrypoints": {
+        "docs": "https://upstash.com/docs",
+        "api_reference": "https://upstash.com/docs/devops/developer-api/introduction",
+        "llms_txt": "https://upstash.com/docs/llms.txt",
+        "status_page": "https://status.upstash.com",
+        "pricing": "https://upstash.com/pricing",
+        "signup": "https://console.upstash.com",
+        "api_keys": "https://upstash.com/docs/devops/developer-api/introduction",
+        "mcp_official": "https://github.com/upstash/mcp-server"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.upstash.com",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://upstash.com/docs/devops/developer-api/introduction",
+          "verified": "2026-07-07",
+          "notes": "Management API keys are created self-serve in the console; per-database REST tokens are issued automatically."
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Per-database read-only REST tokens exist; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in the console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free databases serve as test environments; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://upstash.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free tier with daily command quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://upstash.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Pay-as-you-go is self-serve."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
           "automation_permitted"
         ]
       }

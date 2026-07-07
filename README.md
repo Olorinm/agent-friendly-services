@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-43-2563eb)
+![Providers](https://img.shields.io/badge/providers-47-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**43 providers · 10 categories · 448 entry links (machine-probed weekly) · 269 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**47 providers · 11 categories · 488 entry links (machine-probed weekly) · 291 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -109,7 +109,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Neon](#neon) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 | [Pinecone](#pinecone) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Supabase](#supabase) | ✓ | ✓ | — | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Upstash](#upstash) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
 ### Web Search / Data
 
@@ -152,7 +154,14 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Datadog](#datadog) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+
+### Commerce / Marketing
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Shopify](#shopify) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ## Providers
 
@@ -246,6 +255,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://dashboard.cohere.com/welcome/register) · [Self-serve API keys](https://docs.cohere.com/docs/rate-limits) · [Free tier / trial](https://docs.cohere.com/docs/rate-limits) · [Self-serve upgrade](https://cohere.com/pricing) · [Versioning policy](https://docs.cohere.com/reference/versioning)
 - **Partial:** [Sandbox / test mode](https://docs.cohere.com/docs/rate-limits) — Free trial keys are explicitly positioned for evaluation/testing, rate-limited separately from production keys; no isolated sandbox environment.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Datadog <a id="datadog"></a>
+
+> Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
+
+**Category:** Observability / Security · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
+
+- **Supported:** [Self-serve signup](https://www.datadoghq.com/free-datadog-trial) · [Self-serve API keys](https://docs.datadoghq.com/account_management/api-app-keys) · [OAuth](https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog) · [Free tier / trial](https://www.datadoghq.com/pricing) · [Self-serve upgrade](https://www.datadoghq.com/pricing)
+- **Partial:** [Versioning policy](https://docs.datadoghq.com/api/latest/) — Endpoints are path-versioned (v1/v2) in the reference; no formal deprecation-window policy page recorded.
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### Deepgram <a id="deepgram"></a>
 
@@ -537,6 +558,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://identity.getpostman.com/signup) · [Self-serve API keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [Free tier / trial](https://www.postman.com/pricing/) · [Self-serve upgrade](https://www.postman.com/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Qdrant <a id="qdrant"></a>
+
+> Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.
+
+**Category:** Databases · **Scope:** Qdrant Cloud (managed); the open-source engine can also be self-hosted. · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://qdrant.tech/documentation) · [API Reference](https://api.qdrant.tech) · [llms.txt](https://qdrant.tech/llms.txt) · [Changelog](https://github.com/qdrant/qdrant/releases) · [Status Page](https://status.qdrant.io) · [Pricing](https://qdrant.tech/pricing) · [Signup](https://cloud.qdrant.io) · [API Keys](https://qdrant.tech/documentation/cloud/authentication) · [SDKs](https://qdrant.tech/documentation/interfaces) · [Official MCP](https://github.com/qdrant/mcp-server-qdrant)
+
+- **Supported:** [Self-serve signup](https://cloud.qdrant.io) · [Self-serve API keys](https://qdrant.tech/documentation/cloud/authentication) · [Free tier / trial](https://qdrant.tech/pricing) · [Self-serve upgrade](https://qdrant.tech/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Replicate <a id="replicate"></a>
 
 > Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
@@ -569,6 +601,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 - **Supported:** [Self-serve signup](https://sentry.io/signup/) · [Self-serve API keys](https://docs.sentry.io/api/auth/) · [Scoped tokens](https://docs.sentry.io/api/auth/) · [Token revocation](https://docs.sentry.io/api/auth/) · [Free tier / trial](https://sentry.io/pricing/) · [Self-serve upgrade](https://sentry.io/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Shopify <a id="shopify"></a>
+
+> Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.
+
+**Category:** Commerce / Marketing · **Scope:** The Shopify developer platform (Admin/Storefront APIs, apps); the merchant product itself is not assessed. · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://shopify.dev/docs) · [API Reference](https://shopify.dev/docs/api) · [GraphQL](https://shopify.dev/docs/api/admin-graphql) · [llms.txt](https://shopify.dev/llms.txt) · [Changelog](https://shopify.dev/changelog) · [Status Page](https://www.shopifystatus.com) · [Pricing](https://www.shopify.com/pricing) · [Signup](https://www.shopify.com/free-trial) · [API Keys](https://shopify.dev/docs/apps/build/authentication-authorization) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [Official MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [Webhooks](https://shopify.dev/docs/apps/build/webhooks) · [Rate Limits](https://shopify.dev/docs/api/usage/rate-limits)
+
+- **Supported:** [Self-serve signup](https://www.shopify.com/free-trial) · [Self-serve API keys](https://shopify.dev/docs/apps/build/authentication-authorization) · [OAuth](https://shopify.dev/docs/apps/build/authentication-authorization) · [Scoped tokens](https://shopify.dev/docs/api/usage/access-scopes) · [Sandbox / test mode](https://shopify.dev/docs/api/development-stores) · [Free tier / trial](https://www.shopify.com/free-trial) · [Self-serve upgrade](https://www.shopify.com/pricing) · [Versioning policy](https://shopify.dev/docs/api/usage/versioning)
+- **Unknown (help wanted):** `token_revocation`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### Slack <a id="slack"></a>
 
@@ -657,6 +700,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Scoped tokens](https://www.twilio.com/docs/iam/api-keys) — API keys are separate from account credentials; fine-grained restricted keys are limited-availability.
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Upstash <a id="upstash"></a>
+
+> Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.
+
+**Category:** Databases · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://upstash.com/docs) · [API Reference](https://upstash.com/docs/devops/developer-api/introduction) · [llms.txt](https://upstash.com/docs/llms.txt) · [Status Page](https://status.upstash.com) · [Pricing](https://upstash.com/pricing) · [Signup](https://console.upstash.com) · [API Keys](https://upstash.com/docs/devops/developer-api/introduction) · [Official MCP](https://github.com/upstash/mcp-server)
+
+- **Supported:** [Self-serve signup](https://console.upstash.com) · [Self-serve API keys](https://upstash.com/docs/devops/developer-api/introduction) · [Free tier / trial](https://upstash.com/pricing) · [Self-serve upgrade](https://upstash.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Vercel <a id="vercel"></a>
 
 > Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
@@ -673,12 +727,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **247 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **273 unknowns are open right now.**
 
 - `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [discord](#discord), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
-- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [deepgram](#deepgram), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [deepgram](#deepgram), [discord](#discord), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio)
+- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [datadog](#datadog), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [upstash](#upstash), [vercel](#vercel)
+- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [mistral](#mistral), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [cohere](#cohere), [datadog](#datadog), [deepgram](#deepgram), [discord](#discord), [e2b](#e2b), [elevenlabs](#elevenlabs), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mistral](#mistral), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [qdrant](#qdrant), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [shopify](#shopify), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio), [upstash](#upstash)
 
 ## Contributing
 

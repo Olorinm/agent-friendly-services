@@ -1,0 +1,74 @@
+id: upstash
+name: Upstash
+category: databases
+homepage: https://upstash.com
+summary: Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.
+submitted_by: community
+
+tags:
+  - redis
+  - serverless
+  - vector-database
+
+entrypoints:
+  docs: https://upstash.com/docs
+  api_reference: https://upstash.com/docs/devops/developer-api/introduction
+  llms_txt: https://upstash.com/docs/llms.txt
+  status_page: https://status.upstash.com
+  pricing: https://upstash.com/pricing
+  signup: https://console.upstash.com
+  api_keys: https://upstash.com/docs/devops/developer-api/introduction
+  mcp_official: https://github.com/upstash/mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://console.upstash.com
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://upstash.com/docs/devops/developer-api/introduction
+    verified: "2026-07-07"
+    notes: Management API keys are created self-serve in the console; per-database REST tokens are issued automatically.
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+    notes: Per-database read-only REST tokens exist; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in the console; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Free databases serve as test environments; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://upstash.com/pricing
+    verified: "2026-07-07"
+    notes: Free tier with daily command quota.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://upstash.com/pricing
+    verified: "2026-07-07"
+    notes: Pay-as-you-go is self-serve.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

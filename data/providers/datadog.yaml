@@ -1,0 +1,80 @@
+id: datadog
+name: Datadog
+category: observability-security
+homepage: https://www.datadoghq.com
+summary: Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
+submitted_by: community
+
+tags:
+  - observability
+  - monitoring
+  - logs
+
+entrypoints:
+  docs: https://docs.datadoghq.com
+  api_reference: https://docs.datadoghq.com/api/latest/
+  llms_txt: https://docs.datadoghq.com/llms.txt
+  status_page: https://status.datadoghq.com
+  pricing: https://www.datadoghq.com/pricing
+  signup: https://www.datadoghq.com/free-datadog-trial
+  api_keys: https://docs.datadoghq.com/account_management/api-app-keys
+  webhooks: https://docs.datadoghq.com/integrations/webhooks
+  rate_limits: https://docs.datadoghq.com/api/latest/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.datadoghq.com/free-datadog-trial
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.datadoghq.com/account_management/api-app-keys
+    verified: "2026-07-07"
+    notes: API keys and application keys are created self-serve in organization settings.
+
+  oauth_support:
+    status: supported
+    evidence: https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog
+    verified: "2026-07-07"
+    notes: OAuth2 for integrations and apps.
+
+  scoped_tokens:
+    status: unknown
+    notes: Application keys support scoping in newer accounts; the api-app-keys page did not confirm on probe — needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+    notes: Keys are manageable in organization settings; the api-app-keys page did not confirm revocation wording on probe — needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Trial orgs serve as test environments; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.datadoghq.com/pricing
+    verified: "2026-07-07"
+    notes: Free tier (limited hosts) and 14-day trial.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.datadoghq.com/pricing
+    verified: "2026-07-07"
+    notes: Pro/Enterprise per-host plans are self-serve; volume discounts go through sales.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: partial
+    evidence: https://docs.datadoghq.com/api/latest/
+    verified: "2026-07-07"
+    notes: Endpoints are path-versioned (v1/v2) in the reference; no formal deprecation-window policy page recorded.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

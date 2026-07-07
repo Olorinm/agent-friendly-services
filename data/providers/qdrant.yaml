@@ -1,0 +1,76 @@
+id: qdrant
+name: Qdrant
+category: databases
+homepage: https://qdrant.tech
+summary: Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.
+submitted_by: community
+scope: "Qdrant Cloud (managed); the open-source engine can also be self-hosted."
+
+tags:
+  - vector-database
+  - search
+  - embeddings
+
+entrypoints:
+  docs: https://qdrant.tech/documentation
+  api_reference: https://api.qdrant.tech
+  llms_txt: https://qdrant.tech/llms.txt
+  changelog: https://github.com/qdrant/qdrant/releases
+  status_page: https://status.qdrant.io
+  pricing: https://qdrant.tech/pricing
+  signup: https://cloud.qdrant.io
+  api_keys: https://qdrant.tech/documentation/cloud/authentication
+  mcp_official: https://github.com/qdrant/mcp-server-qdrant
+  sdks: https://qdrant.tech/documentation/interfaces
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://cloud.qdrant.io
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://qdrant.tech/documentation/cloud/authentication
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth for clusters.
+
+  scoped_tokens:
+    status: unknown
+    notes: Cloud offers database API keys with access controls; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+    notes: Keys manageable in the cloud console; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The free cluster serves as a de-facto test environment; local/self-hosted mode also covers testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://qdrant.tech/pricing
+    verified: "2026-07-07"
+    notes: Free 1GB managed cluster, no card required.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://qdrant.tech/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+    notes: Point upserts are idempotent by point ID in practice; needs a docs statement as evidence.
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.
