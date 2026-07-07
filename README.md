@@ -2,13 +2,47 @@
 
 # Agent-Friendly Services
 
-A community-maintained, evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable, and how fresh that information is.
+An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-**12 providers · 145 verified entry links · 91 evidence-backed capability checks**
+![Providers](https://img.shields.io/badge/providers-12-2563eb)
+[![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-- 🤖 Agents: start with [`generated/providers.json`](./generated/providers.json) (full machine-readable dataset) and [`llms.txt`](./llms.txt)
-- 🧑‍💻 Humans: browse the matrix below
-- 🛠 Contributors: read [`AGENTS.md`](./AGENTS.md) and [`docs/contributing.md`](./docs/contributing.md) — every `unknown` below is a 15-minute contribution
+**12 providers · 8 categories · 145 entry links (machine-probed weekly) · 91 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+
+## Use It In 30 Seconds
+
+### 🤖 You are an agent
+
+The dataset is one JSON file — fetch it and go:
+
+```bash
+curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json
+```
+
+Recipes:
+
+```bash
+# Entry points for one provider (docs, API reference, MCP, pricing, status page…)
+curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json | jq '.providers[] | select(.id == "stripe") | .entrypoints'
+
+# Providers with an official MCP server AND a working sandbox
+curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json | jq '[.providers[] | select(.entrypoints.mcp_official and .checks.sandbox_or_test_mode.status == "supported") | .id]'
+
+# Every official MCP server in the index
+curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json | jq '.providers[] | {id, mcp: .entrypoints.mcp_official} | select(.mcp)'
+```
+
+[`llms.txt`](./llms.txt) is the map of this repo; [`AGENTS.md`](./AGENTS.md) is the contribution manual. An MCP server exposing this index is on the roadmap — until then, the JSON **is** the API.
+
+### 🧑‍💻 You are a human
+
+Browse the [service matrix](#service-matrix) below, see [how to read it](#how-to-read-this), or open [`matrix.csv`](./generated/matrix.csv) in a spreadsheet. Want to help? Every `unknown` in [Help Wanted](#help-wanted-) is a 15-minute contribution.
+
+### 🏢 You run one of these services
+
+Your entry may be incomplete — that is fixable in one small PR: set `submitted_by: vendor` and use documentation (not marketing pages) as evidence. Disagree with a status? Open an issue with official evidence — facts change when evidence changes. Promotional PRs are declined; see [contributing](./docs/contributing.md).
 
 ## How To Read This
 
@@ -16,7 +50,6 @@ A community-maintained, evidence-backed directory of **service entry points for 
 - **Checks** record behavior a URL can't express (self-serve signup, scoped tokens, idempotency…). `supported`/`partial` always carry an official evidence link and a verification date.
 - **A missing link means "no known URL"**, not "confirmed absent". `unknown` means "checked, no reliable evidence found yet". Nobody guesses.
 - Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown
-- No scores, no tiers, no editorial ranking — only verifiable facts.
 
 ## Service Matrix
 
@@ -236,7 +269,17 @@ The fastest way to contribute is to resolve an `unknown`: find official evidence
 - `mcp_official` link unknown for: [anthropic](#anthropic), [openai](#openai)
 - `agent_docs` link unknown for: [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [resend](#resend)
 
-You can also [add a provider](./docs/contributing.md#add-a-provider) (there is an issue form), report a broken link, or send your coding agent: this repo is designed so an agent pointed at [`AGENTS.md`](./AGENTS.md) can contribute end-to-end.
+## Contributing
+
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve an `unknown` (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical with readable errors; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+
+Have a coding agent? Point it at a checkout of this repo and paste:
+
+```text
+Read AGENTS.md, then resolve one "unknown" check from the Help Wanted section of
+README.md: find official evidence, update the provider YAML (or leave it unknown
+if evidence is genuinely missing), run `npm run validate`, and open a small PR.
+```
 
 ## Methodology
 

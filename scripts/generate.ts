@@ -7,6 +7,8 @@ import path from 'node:path';
 import { ROOT, GENERATED_DIR, loadFields, loadCategories, loadProviders, daysSince, type Provider, type Check } from './lib.ts';
 
 const STALE_DAYS = 180;
+const REPO = 'Olorinm/agent-friendly-services';
+const RAW_JSON = `https://raw.githubusercontent.com/${REPO}/main/generated/providers.json`;
 
 const fields = loadFields();
 const categories = loadCategories();
@@ -144,6 +146,29 @@ fs.writeFileSync(path.join(GENERATED_DIR, 'matrix.csv'), [csvCols.join(','), ...
 // ---------------------------------------------------------------------------
 const catName = (id: string) => categories.find((c) => c.id === id)?.name ?? id;
 
+// Link health (written by `npm run probe`); tolerate absence.
+let linkHealth: { checked_at: string; ok: number; inconclusive: number; broken: number } | null = null;
+try {
+  linkHealth = JSON.parse(fs.readFileSync(path.join(GENERATED_DIR, 'link-health.json'), 'utf8'));
+} catch {
+  /* no probe results yet */
+}
+
+function shieldText(s: string): string {
+  return encodeURIComponent(s.replace(/-/g, '--').replace(/_/g, '__')).replace(/%20/g, '_');
+}
+
+const badgeParts = [
+  `![Providers](https://img.shields.io/badge/providers-${providers.length}-2563eb)`,
+  linkHealth
+    ? `[![Link health](https://img.shields.io/badge/link_health-${shieldText(`${linkHealth.ok} ok, ${linkHealth.broken} broken`)}-${linkHealth.broken > 0 ? 'e11d48' : '10b981'})](./generated/link-health.json)`
+    : null,
+  `[![Last update](https://img.shields.io/github/last-commit/${REPO}?label=last%20update&color=8b5cf6)](https://github.com/${REPO}/commits/main)`,
+  `[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)`,
+].filter(Boolean);
+
+const activeCategories = categories.filter((c) => providers.some((p) => p.category === c.id));
+
 function providerRow(p: Provider): string {
   return `| [${p.name}](#${p.id}) | ${entrySym(p, 'mcp_official')} | ${entrySym(p, 'llms_txt')} | ${entrySym(p, 'openapi')} | ${entrySym(p, 'cli')} | ${SYM[checkStatus(p, 'sandbox_or_test_mode')]} | ${selfServeSym(p)} | ${lastVerified(p) ?? '—'} |`;
 }
@@ -191,13 +216,44 @@ const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. S
 
 # Agent-Friendly Services
 
-A community-maintained, evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable, and how fresh that information is.
+An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-**${providers.length} providers · ${jsonOut.counts.entrypoint_urls} verified entry links · ${jsonOut.counts.checks_answered} evidence-backed capability checks**
+${badgeParts.join('\n')}
 
-- 🤖 Agents: start with [\`generated/providers.json\`](./generated/providers.json) (full machine-readable dataset) and [\`llms.txt\`](./llms.txt)
-- 🧑‍💻 Humans: browse the matrix below
-- 🛠 Contributors: read [\`AGENTS.md\`](./AGENTS.md) and [\`docs/contributing.md\`](./docs/contributing.md) — every \`unknown\` below is a 15-minute contribution
+**${providers.length} providers · ${activeCategories.length} categories · ${jsonOut.counts.entrypoint_urls} entry links (machine-probed weekly) · ${jsonOut.counts.checks_answered} capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+
+## Use It In 30 Seconds
+
+### 🤖 You are an agent
+
+The dataset is one JSON file — fetch it and go:
+
+\`\`\`bash
+curl -s ${RAW_JSON}
+\`\`\`
+
+Recipes:
+
+\`\`\`bash
+# Entry points for one provider (docs, API reference, MCP, pricing, status page…)
+curl -s ${RAW_JSON} | jq '.providers[] | select(.id == "stripe") | .entrypoints'
+
+# Providers with an official MCP server AND a working sandbox
+curl -s ${RAW_JSON} | jq '[.providers[] | select(.entrypoints.mcp_official and .checks.sandbox_or_test_mode.status == "supported") | .id]'
+
+# Every official MCP server in the index
+curl -s ${RAW_JSON} | jq '.providers[] | {id, mcp: .entrypoints.mcp_official} | select(.mcp)'
+\`\`\`
+
+[\`llms.txt\`](./llms.txt) is the map of this repo; [\`AGENTS.md\`](./AGENTS.md) is the contribution manual. An MCP server exposing this index is on the roadmap — until then, the JSON **is** the API.
+
+### 🧑‍💻 You are a human
+
+Browse the [service matrix](#service-matrix) below, see [how to read it](#how-to-read-this), or open [\`matrix.csv\`](./generated/matrix.csv) in a spreadsheet. Want to help? Every \`unknown\` in [Help Wanted](#help-wanted-) is a 15-minute contribution.
+
+### 🏢 You run one of these services
+
+Your entry may be incomplete — that is fixable in one small PR: set \`submitted_by: vendor\` and use documentation (not marketing pages) as evidence. Disagree with a status? Open an issue with official evidence — facts change when evidence changes. Promotional PRs are declined; see [contributing](./docs/contributing.md).
 
 ## How To Read This
 
@@ -205,21 +261,18 @@ A community-maintained, evidence-backed directory of **service entry points for 
 - **Checks** record behavior a URL can't express (self-serve signup, scoped tokens, idempotency…). \`supported\`/\`partial\` always carry an official evidence link and a verification date.
 - **A missing link means "no known URL"**, not "confirmed absent". \`unknown\` means "checked, no reliable evidence found yet". Nobody guesses.
 - Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown
-- No scores, no tiers, no editorial ranking — only verifiable facts.
 
 ## Service Matrix
 
-${categories
+${activeCategories
   .map((cat) => {
     const list = providers.filter((p) => p.category === cat.id);
-    if (list.length === 0) return '';
     return `### ${cat.name}
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 ${list.map(providerRow).join('\n')}`;
   })
-  .filter(Boolean)
   .join('\n\n')}
 
 ## Providers
@@ -246,7 +299,17 @@ The fastest way to contribute is to resolve an \`unknown\`: find official eviden
 
 ${gaps.map((g) => `- \`${g.f}\` link unknown for: ${g.missing.map((id) => `[${id}](#${id})`).join(', ')}`).join('\n')}
 
-You can also [add a provider](./docs/contributing.md#add-a-provider) (there is an issue form), report a broken link, or send your coding agent: this repo is designed so an agent pointed at [\`AGENTS.md\`](./AGENTS.md) can contribute end-to-end.
+## Contributing
+
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve an \`unknown\` (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical with readable errors; humans only review evidence quality. Full guide: [\`docs/contributing.md\`](./docs/contributing.md).
+
+Have a coding agent? Point it at a checkout of this repo and paste:
+
+\`\`\`text
+Read AGENTS.md, then resolve one "unknown" check from the Help Wanted section of
+README.md: find official evidence, update the provider YAML (or leave it unknown
+if evidence is genuinely missing), run \`npm run validate\`, and open a small PR.
+\`\`\`
 
 ## Methodology
 

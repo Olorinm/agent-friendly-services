@@ -29,8 +29,10 @@ jobs:
 
       - name: Commit regenerated outputs
         run: |
-          if git diff --quiet README.md generated/; then
-            echo "Nothing to commit."
+          # -I ignores timestamp-only churn so we don't create noise commits.
+          if git diff -I '"generated_at"' --quiet README.md generated/; then
+            echo "No substantive changes."
+            git checkout -- README.md generated/
             exit 0
           fi
           git config user.name "afs-bot"
