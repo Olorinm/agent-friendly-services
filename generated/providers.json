@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T07:02:19.490Z",
+  "generated_at": "2026-07-07T07:04:17.571Z",
   "counts": {
-    "providers": 17,
+    "providers": 21,
     "categories": 12,
-    "entrypoint_urls": 196,
-    "checks_answered": 113
+    "entrypoint_urls": 229,
+    "checks_answered": 132
   },
   "categories": [
     {
@@ -344,6 +344,200 @@
           "sandbox_or_test_mode",
           "free_tier_or_trial",
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "apify",
+      "name": "Apify",
+      "category": "web-search-data",
+      "homepage": "https://apify.com",
+      "summary": "Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "scraping",
+        "automation",
+        "actors"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.apify.com",
+        "api_reference": "https://docs.apify.com/api/v2",
+        "llms_txt": "https://docs.apify.com/llms.txt",
+        "changelog": "https://apify.com/change-log",
+        "status_page": "https://status.apify.com",
+        "pricing": "https://apify.com/pricing",
+        "signup": "https://console.apify.com/sign-up",
+        "api_keys": "https://docs.apify.com/platform/integrations/api",
+        "cli": "https://docs.apify.com/cli",
+        "sdks": "https://docs.apify.com/sdk",
+        "mcp_official": "https://docs.apify.com/platform/integrations/mcp",
+        "webhooks": "https://docs.apify.com/platform/integrations/webhooks"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.apify.com/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.apify.com/platform/integrations/api",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Account-level API tokens; per-permission scoping not documented."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Tokens manageable in console settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "The free plan serves as a test environment; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://apify.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free plan with monthly platform credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://apify.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Console shows usage and billing; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://docs.apify.com/api/v2",
+          "verified": "2026-07-07",
+          "notes": "Versioned API (v2)."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "The platform exists for automation; ToS/target-site obligations not yet reviewed and recorded."
+        }
+      },
+      "notes": [
+        "mcp.apify.com hosts the official remote MCP server; the docs page above explains setup."
+      ],
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "brave-search",
+      "name": "Brave Search API",
+      "category": "web-search-data",
+      "homepage": "https://brave.com/search/api/",
+      "summary": "Independent web search index with a developer API, self-serve registration, and a free plan.",
+      "submitted_by": "community",
+      "scope": "Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed.",
+      "tags": [
+        "search",
+        "index"
+      ],
+      "entrypoints": {
+        "docs": "https://api-dashboard.search.brave.com/app/documentation",
+        "pricing": "https://brave.com/search/api/",
+        "signup": "https://api-dashboard.search.brave.com/register"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://api-dashboard.search.brave.com/register",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://api-dashboard.search.brave.com/app/documentation",
+          "verified": "2026-07-07",
+          "notes": "Keys are issued in the API dashboard after registration."
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "The free plan serves as a low-risk trial; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://brave.com/search/api/",
+          "verified": "2026-07-07",
+          "notes": "Free plan with monthly query quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://brave.com/search/api/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "The API dashboard shows usage; needs a public docs link as evidence."
+        },
+        "idempotency": {
+          "status": "not_applicable",
+          "notes": "Read-only search API; requests are inherently repeatable."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "API terms not yet reviewed and recorded."
+        }
+      },
+      "notes": [
+        "Detailed API docs live inside the dashboard domain but are publicly readable without login (verified at review time)."
+      ],
+      "derived": {
+        "badges": [
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "versioning_policy",
           "automation_permitted"
         ]
       }
@@ -1351,6 +1545,101 @@
       }
     },
     {
+      "id": "perplexity",
+      "name": "Perplexity API",
+      "category": "web-search-data",
+      "homepage": "https://www.perplexity.ai",
+      "summary": "Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.",
+      "submitted_by": "community",
+      "scope": "Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed.",
+      "tags": [
+        "search",
+        "answers",
+        "grounding"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.perplexity.ai",
+        "llms_txt": "https://docs.perplexity.ai/llms.txt",
+        "changelog": "https://docs.perplexity.ai/changelog",
+        "status_page": "https://status.perplexity.com",
+        "pricing": "https://docs.perplexity.ai/getting-started/pricing",
+        "api_keys": "https://docs.perplexity.ai/getting-started/quickstart",
+        "mcp_official": "https://github.com/ppl-ai/modelcontextprotocol",
+        "rate_limits": "https://docs.perplexity.ai/guides/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://docs.perplexity.ai/getting-started/quickstart",
+          "verified": "2026-07-07",
+          "notes": "Account plus API key are self-serve per the quickstart."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.perplexity.ai/getting-started/quickstart",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated test mode documented."
+        },
+        "free_tier_or_trial": {
+          "status": "partial",
+          "evidence": "https://docs.perplexity.ai/getting-started/pricing",
+          "verified": "2026-07-07",
+          "notes": "No standalone free tier; Perplexity Pro subscribers receive monthly API credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://docs.perplexity.ai/getting-started/pricing",
+          "verified": "2026-07-07",
+          "notes": "Prepaid credits are self-serve."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "API terms not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "replicate",
       "name": "Replicate",
       "category": "ai-models",
@@ -1763,6 +2052,101 @@
         "unknown_checks": [
           "usage_dashboard",
           "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "tavily",
+      "name": "Tavily",
+      "category": "web-search-data",
+      "homepage": "https://www.tavily.com",
+      "summary": "Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "rag",
+        "agents"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.tavily.com",
+        "api_reference": "https://docs.tavily.com/documentation/api-reference/introduction",
+        "llms_txt": "https://docs.tavily.com/llms.txt",
+        "status_page": "https://status.tavily.com",
+        "pricing": "https://www.tavily.com/pricing",
+        "signup": "https://app.tavily.com",
+        "api_keys": "https://docs.tavily.com/documentation/quickstart",
+        "sdks": "https://docs.tavily.com/sdk",
+        "mcp_official": "https://docs.tavily.com/documentation/mcp",
+        "rate_limits": "https://docs.tavily.com/documentation/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://app.tavily.com",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.tavily.com/documentation/quickstart",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "API keys are the standard auth."
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in the app dashboard; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free monthly credits serve as a low-risk trial; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.tavily.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Free plan with monthly API credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.tavily.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "not_applicable",
+          "notes": "Read-only search/extract API; requests are inherently repeatable."
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
           "versioning_policy",
           "automation_permitted"
         ]

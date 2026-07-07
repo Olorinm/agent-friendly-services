@@ -1,0 +1,82 @@
+id: apify
+name: Apify
+category: web-search-data
+homepage: https://apify.com
+summary: Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
+submitted_by: community
+
+tags:
+  - scraping
+  - automation
+  - actors
+
+entrypoints:
+  docs: https://docs.apify.com
+  api_reference: https://docs.apify.com/api/v2
+  llms_txt: https://docs.apify.com/llms.txt
+  changelog: https://apify.com/change-log
+  status_page: https://status.apify.com
+  pricing: https://apify.com/pricing
+  signup: https://console.apify.com/sign-up
+  api_keys: https://docs.apify.com/platform/integrations/api
+  cli: https://docs.apify.com/cli
+  sdks: https://docs.apify.com/sdk
+  mcp_official: https://docs.apify.com/platform/integrations/mcp
+  webhooks: https://docs.apify.com/platform/integrations/webhooks
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://console.apify.com/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.apify.com/platform/integrations/api
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: Account-level API tokens; per-permission scoping not documented.
+
+  token_revocation:
+    status: unknown
+    notes: Tokens manageable in console settings; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The free plan serves as a test environment; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://apify.com/pricing
+    verified: "2026-07-07"
+    notes: Free plan with monthly platform credits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://apify.com/pricing
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Console shows usage and billing; needs a docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.apify.com/api/v2
+    verified: "2026-07-07"
+    notes: Versioned API (v2).
+
+  automation_permitted:
+    status: unknown
+    notes: The platform exists for automation; ToS/target-site obligations not yet reviewed and recorded.
+
+notes:
+  - mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.

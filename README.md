@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-17-2563eb)
+![Providers](https://img.shields.io/badge/providers-21-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**17 providers · 8 categories · 196 entry links (machine-probed weekly) · 113 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**21 providers · 8 categories · 229 entry links (machine-probed weekly) · 132 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -95,8 +95,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Apify](#apify) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Brave Search API](#brave-search) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
 ### Payments / Billing
 
@@ -126,6 +130,33 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 > Anthropic authored the MCP standard; no first-party MCP server exposing the Anthropic API was found at review time (mcp_official intentionally absent).
 > Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI.
+
+### Apify <a id="apify"></a>
+
+> Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.apify.com) · [API Reference](https://docs.apify.com/api/v2) · [llms.txt](https://docs.apify.com/llms.txt) · [Changelog](https://apify.com/change-log) · [Status Page](https://status.apify.com) · [Pricing](https://apify.com/pricing) · [Signup](https://console.apify.com/sign-up) · [API Keys](https://docs.apify.com/platform/integrations/api) · [CLI](https://docs.apify.com/cli) · [SDKs](https://docs.apify.com/sdk) · [Official MCP](https://docs.apify.com/platform/integrations/mcp) · [Webhooks](https://docs.apify.com/platform/integrations/webhooks)
+
+- **Supported:** [Self-serve signup](https://console.apify.com/sign-up) · [Self-serve API keys](https://docs.apify.com/platform/integrations/api) · [Free tier / trial](https://apify.com/pricing) · [Self-serve upgrade](https://apify.com/pricing) · [Versioning policy](https://docs.apify.com/api/v2)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+> mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.
+
+### Brave Search API <a id="brave-search"></a>
+
+> Independent web search index with a developer API, self-serve registration, and a free plan.
+
+**Category:** Web Search / Data · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Self-serve`
+
+**Links:** [Documentation](https://api-dashboard.search.brave.com/app/documentation) · [Pricing](https://brave.com/search/api/) · [Signup](https://api-dashboard.search.brave.com/register)
+
+- **Supported:** [Self-serve signup](https://api-dashboard.search.brave.com/register) · [Self-serve API keys](https://api-dashboard.search.brave.com/app/documentation) · [Free tier / trial](https://brave.com/search/api/) · [Self-serve upgrade](https://brave.com/search/api/)
+- **N/A:** Idempotency — Read-only search API; requests are inherently repeatable.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+> Detailed API docs live inside the dashboard domain but are publicly readable without login (verified at review time).
 
 ### Browserbase <a id="browserbase"></a>
 
@@ -247,6 +278,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Scoped tokens](https://platform.openai.com/docs/quickstart) — Project-scoped API keys separate projects; permission granularity is limited.
 - **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Perplexity API <a id="perplexity"></a>
+
+> Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
+
+**Category:** Web Search / Data · **Scope:** Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.perplexity.ai) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [Changelog](https://docs.perplexity.ai/changelog) · [Status Page](https://status.perplexity.com) · [Pricing](https://docs.perplexity.ai/getting-started/pricing) · [API Keys](https://docs.perplexity.ai/getting-started/quickstart) · [Official MCP](https://github.com/ppl-ai/modelcontextprotocol) · [Rate Limits](https://docs.perplexity.ai/guides/rate-limits)
+
+- **Supported:** [Self-serve signup](https://docs.perplexity.ai/getting-started/quickstart) · [Self-serve API keys](https://docs.perplexity.ai/getting-started/quickstart) · [Self-serve upgrade](https://docs.perplexity.ai/getting-started/pricing)
+- **Partial:** [Free tier / trial](https://docs.perplexity.ai/getting-started/pricing) — No standalone free tier; Perplexity Pro subscribers receive monthly API credits.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Replicate <a id="replicate"></a>
 
 > Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
@@ -295,6 +338,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Sandbox / test mode](https://supabase.com/docs/guides/cli) — Full local development stack via CLI; hosted branching is a paid feature.
 - **Unknown (help wanted):** `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Tavily <a id="tavily"></a>
+
+> Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.tavily.com) · [API Reference](https://docs.tavily.com/documentation/api-reference/introduction) · [llms.txt](https://docs.tavily.com/llms.txt) · [Status Page](https://status.tavily.com) · [Pricing](https://www.tavily.com/pricing) · [Signup](https://app.tavily.com) · [API Keys](https://docs.tavily.com/documentation/quickstart) · [SDKs](https://docs.tavily.com/sdk) · [Official MCP](https://docs.tavily.com/documentation/mcp) · [Rate Limits](https://docs.tavily.com/documentation/rate-limits)
+
+- **Supported:** [Self-serve signup](https://app.tavily.com) · [Self-serve API keys](https://docs.tavily.com/documentation/quickstart) · [Free tier / trial](https://www.tavily.com/pricing) · [Self-serve upgrade](https://www.tavily.com/pricing)
+- **N/A:** Idempotency — Read-only search/extract API; requests are inherently repeatable.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
 ### Together AI <a id="together-ai"></a>
 
 > Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.
@@ -322,12 +377,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **91 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **120 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [neon](#neon), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [gemini-api](#gemini-api), [groq](#groq), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [replicate](#replicate), [resend](#resend), [together-ai](#together-ai)
+- `llms_txt` link unknown for: [brave-search](#brave-search), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
+- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [neon](#neon), [perplexity](#perplexity), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [groq](#groq), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [perplexity](#perplexity), [replicate](#replicate), [resend](#resend), [tavily](#tavily), [together-ai](#together-ai)
 
 ## Contributing
 

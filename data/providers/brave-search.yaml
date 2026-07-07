@@ -1,0 +1,71 @@
+id: brave-search
+name: Brave Search API
+category: web-search-data
+homepage: https://brave.com/search/api/
+summary: Independent web search index with a developer API, self-serve registration, and a free plan.
+submitted_by: community
+scope: "Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed."
+
+tags:
+  - search
+  - index
+
+entrypoints:
+  docs: https://api-dashboard.search.brave.com/app/documentation
+  pricing: https://brave.com/search/api/
+  signup: https://api-dashboard.search.brave.com/register
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://api-dashboard.search.brave.com/register
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://api-dashboard.search.brave.com/app/documentation
+    verified: "2026-07-07"
+    notes: Keys are issued in the API dashboard after registration.
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The free plan serves as a low-risk trial; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://brave.com/search/api/
+    verified: "2026-07-07"
+    notes: Free plan with monthly query quota.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://brave.com/search/api/
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: The API dashboard shows usage; needs a public docs link as evidence.
+
+  idempotency:
+    status: not_applicable
+    notes: Read-only search API; requests are inherently repeatable.
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: API terms not yet reviewed and recorded.
+
+notes:
+  - Detailed API docs live inside the dashboard domain but are publicly readable without login (verified at review time).

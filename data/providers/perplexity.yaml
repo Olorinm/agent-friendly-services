@@ -1,0 +1,73 @@
+id: perplexity
+name: Perplexity API
+category: web-search-data
+homepage: https://www.perplexity.ai
+summary: Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
+submitted_by: community
+scope: "Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed."
+
+tags:
+  - search
+  - answers
+  - grounding
+
+entrypoints:
+  docs: https://docs.perplexity.ai
+  llms_txt: https://docs.perplexity.ai/llms.txt
+  changelog: https://docs.perplexity.ai/changelog
+  status_page: https://status.perplexity.com
+  pricing: https://docs.perplexity.ai/getting-started/pricing
+  api_keys: https://docs.perplexity.ai/getting-started/quickstart
+  mcp_official: https://github.com/ppl-ai/modelcontextprotocol
+  rate_limits: https://docs.perplexity.ai/guides/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://docs.perplexity.ai/getting-started/quickstart
+    verified: "2026-07-07"
+    notes: Account plus API key are self-serve per the quickstart.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.perplexity.ai/getting-started/quickstart
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: API keys are the standard auth.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated test mode documented.
+
+  free_tier_or_trial:
+    status: partial
+    evidence: https://docs.perplexity.ai/getting-started/pricing
+    verified: "2026-07-07"
+    notes: No standalone free tier; Perplexity Pro subscribers receive monthly API credits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://docs.perplexity.ai/getting-started/pricing
+    verified: "2026-07-07"
+    notes: Prepaid credits are self-serve.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: API terms not yet reviewed and recorded.
