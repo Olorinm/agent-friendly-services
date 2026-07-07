@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T07:17:40.675Z",
+  "generated_at": "2026-07-07T07:21:40.382Z",
   "counts": {
     "providers": 35,
     "categories": 12,
@@ -763,7 +763,7 @@
         "llms_txt": "https://e2b.dev/llms.txt",
         "status_page": "https://status.e2b.dev",
         "pricing": "https://e2b.dev/pricing",
-        "signup": "https://e2b.dev/dashboard",
+        "signup": "https://e2b.dev",
         "api_keys": "https://e2b.dev/docs/api-key",
         "sdks": "https://e2b.dev/docs/sdk-reference",
         "mcp_official": "https://github.com/e2b-dev/mcp-server"
@@ -771,8 +771,9 @@
       "checks": {
         "self_serve_signup": {
           "status": "supported",
-          "evidence": "https://e2b.dev/dashboard",
-          "verified": "2026-07-07"
+          "evidence": "https://e2b.dev",
+          "verified": "2026-07-07",
+          "notes": "Sign-up is self-serve from the homepage; the dashboard URL redirect-loops for unauthenticated probes."
         },
         "api_key_self_serve": {
           "status": "supported",

@@ -5,7 +5,7 @@
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
 ![Providers](https://img.shields.io/badge/providers-35-2563eb)
-[![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -214,9 +214,9 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 **Category:** Code Execution · `Official MCP` `llms.txt` `Self-serve`
 
-**Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev/dashboard) · [API Keys](https://e2b.dev/docs/api-key) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
+**Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev) · [API Keys](https://e2b.dev/docs/api-key) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
 
-- **Supported:** [Self-serve signup](https://e2b.dev/dashboard) · [Self-serve API keys](https://e2b.dev/docs/api-key) · [Free tier / trial](https://e2b.dev/pricing) · [Self-serve upgrade](https://e2b.dev/pricing) · [Automation permitted](https://e2b.dev/docs)
+- **Supported:** [Self-serve signup](https://e2b.dev) · [Self-serve API keys](https://e2b.dev/docs/api-key) · [Free tier / trial](https://e2b.dev/pricing) · [Self-serve upgrade](https://e2b.dev/pricing) · [Automation permitted](https://e2b.dev/docs)
 - **N/A:** Sandbox / test mode — The product itself is an isolated, ephemeral sandbox per session.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
 

@@ -1,16 +1,285 @@
 {
-  "checked_at": "2026-07-07T06:05:21.989Z",
-  "total": 175,
-  "ok": 173,
-  "inconclusive": 2,
+  "checked_at": "2026-07-07T07:21:26.272Z",
+  "total": 428,
+  "ok": 425,
+  "inconclusive": 3,
   "broken": 0,
   "results": [
+    {
+      "url": "https://about.gitlab.com/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.pricing",
+        "gitlab:checks.self_serve_signup.evidence",
+        "gitlab:checks.free_tier_or_trial.evidence",
+        "gitlab:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://about.gitlab.com/releases/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:homepage"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/api-key",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.api_keys",
+        "gemini-api:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/api-versions",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/function-calling",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.agent_docs"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/libraries",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.pricing",
+        "gemini-api:checks.free_tier_or_trial.evidence",
+        "gemini-api:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/troubleshooting",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.errors"
+      ]
+    },
+    {
+      "url": "https://aistudio.google.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gemini-api:entrypoints.signup",
+        "gemini-api:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://api-dashboard.search.brave.com/app/documentation",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "brave-search:entrypoints.docs",
+        "brave-search:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://api-dashboard.search.brave.com/register",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "brave-search:entrypoints.signup",
+        "brave-search:checks.self_serve_signup.evidence"
+      ]
+    },
     {
       "url": "https://api-docs.neon.tech",
       "class": "ok",
       "status": 200,
       "sources": [
         "neon:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://api.slack.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/apis/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/authentication/oauth-v2",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/authentication/token-types",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.api_keys",
+        "slack:checks.api_key_self_serve.evidence",
+        "slack:checks.scoped_tokens.evidence",
+        "slack:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/messaging/webhooks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://api.slack.com/methods",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://api.together.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.signup",
+        "together-ai:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://apify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:homepage"
+      ]
+    },
+    {
+      "url": "https://apify.com/change-log",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://apify.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.pricing",
+        "apify:checks.free_tier_or_trial.evidence",
+        "apify:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://app.netlify.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.signup",
+        "netlify:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.pinecone.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.signup",
+        "pinecone:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.tavily.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.signup",
+        "tavily:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://brave.com/search/api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "brave-search:entrypoints.pricing",
+        "brave-search:checks.free_tier_or_trial.evidence",
+        "brave-search:checks.self_serve_paid_upgrade.evidence",
+        "brave-search:homepage"
       ]
     },
     {
@@ -28,6 +297,89 @@
       "sources": [
         "anthropic:entrypoints.signup",
         "anthropic:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://console.apify.com/sign-up",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.signup",
+        "apify:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://console.groq.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.signup",
+        "groq:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/errors",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.errors"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/libraries",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.api_keys",
+        "groq:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.llms_txt"
       ]
     },
     {
@@ -64,6 +416,55 @@
       "sources": [
         "stripe:entrypoints.signup",
         "stripe:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com/api-reference/about/authentication",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.api_keys",
+        "paddle:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com/api-reference/about/versioning",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com/api-reference/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://developer.paddle.com/webhooks/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.webhooks"
       ]
     },
     {
@@ -140,6 +541,73 @@
       "sources": [
         "cloudflare:entrypoints.cli",
         "cloudflare:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/docs/authorization",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.api_keys",
+        "notion:checks.api_key_self_serve.evidence",
+        "notion:checks.oauth_support.evidence",
+        "notion:checks.scoped_tokens.evidence"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/docs/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/intro",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/request-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/status-codes",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.errors"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/versioning",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:checks.versioning_policy.evidence"
       ]
     },
     {
@@ -231,6 +699,72 @@
       "status": 200,
       "sources": [
         "anthropic:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/api/v2",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.api_reference",
+        "apify:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/platform/integrations/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.api_keys",
+        "apify:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/platform/integrations/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/platform/integrations/webhooks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://docs.apify.com/sdk",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.sdks"
       ]
     },
     {
@@ -458,6 +992,309 @@
       ]
     },
     {
+      "url": "https://docs.gitlab.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/api/graphql/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.graphql"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/api/oauth2/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/api/rest/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.api_reference",
+        "gitlab:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/security/rate_limits/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/user/profile/personal_access_tokens/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.api_keys",
+        "gitlab:checks.api_key_self_serve.evidence",
+        "gitlab:checks.scoped_tokens.evidence",
+        "gitlab:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/user/project/integrations/webhooks/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://docs.machines.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://docs.netlify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.netlify.com/api/get-started/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.api_keys",
+        "netlify:checks.api_key_self_serve.evidence",
+        "netlify:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.netlify.com/cli/get-started/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://docs.netlify.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/getting-started/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.pricing",
+        "perplexity:checks.free_tier_or_trial.evidence",
+        "perplexity:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/getting-started/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.api_keys",
+        "perplexity:checks.self_serve_signup.evidence",
+        "perplexity:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/guides/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/guides/operations/mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/guides/projects/manage-api-keys",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.api_keys",
+        "pinecone:checks.api_key_self_serve.evidence",
+        "pinecone:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/reference/api/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/reference/api/versioning",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/release-notes",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/api/auth/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.api_keys",
+        "sentry:checks.api_key_self_serve.evidence",
+        "sentry:checks.scoped_tokens.evidence",
+        "sentry:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/api/ratelimits/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/cli/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/platforms/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://docs.sentry.io/product/sentry-mcp/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.slack.dev/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://docs.stripe.com",
       "class": "ok",
       "status": 200,
@@ -598,6 +1435,166 @@
       ]
     },
     {
+      "url": "https://docs.tavily.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/documentation/api-reference/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/documentation/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/documentation/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.api_keys",
+        "tavily:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/documentation/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/sdk",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai/docs/error-codes",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.errors"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai/docs/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.api_keys",
+        "together-ai:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai/docs/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.together.ai/reference/chat-completions",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://e2b.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.signup",
+        "e2b:checks.self_serve_signup.evidence",
+        "e2b:homepage"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.docs",
+        "e2b:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/docs/api-key",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.api_keys",
+        "e2b:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/docs/sdk-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.pricing",
+        "e2b:checks.free_tier_or_trial.evidence",
+        "e2b:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://exa.ai",
       "class": "ok",
       "status": 200,
@@ -613,6 +1610,75 @@
         "exa:entrypoints.pricing",
         "exa:checks.free_tier_or_trial.evidence",
         "exa:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://fly.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:homepage"
+      ]
+    },
+    {
+      "url": "https://fly.io/app/sign-up",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.signup",
+        "fly-io:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs/about/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.pricing",
+        "fly-io:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs/flyctl/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs/machines/api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs/mcp/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://fly.io/docs/security/tokens/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.api_keys",
+        "fly-io:checks.api_key_self_serve.evidence",
+        "fly-io:checks.scoped_tokens.evidence",
+        "fly-io:checks.token_revocation.evidence"
       ]
     },
     {
@@ -656,6 +1722,14 @@
       ]
     },
     {
+      "url": "https://github.com/e2b-dev/mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/exa-labs/exa-mcp-server",
       "class": "ok",
       "status": 200,
@@ -680,11 +1754,35 @@
       ]
     },
     {
+      "url": "https://github.com/mongodb-js/mongodb-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/mongodb/openapi",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.openapi"
+      ]
+    },
+    {
       "url": "https://github.com/neondatabase/mcp-server-neon",
       "class": "ok",
       "status": 200,
       "sources": [
         "neon:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/netlify/open-api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.openapi"
       ]
     },
     {
@@ -704,6 +1802,14 @@
       ]
     },
     {
+      "url": "https://github.com/ppl-ai/modelcontextprotocol",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/pricing",
       "class": "ok",
       "status": 200,
@@ -711,6 +1817,14 @@
         "github:entrypoints.pricing",
         "github:checks.free_tier_or_trial.evidence",
         "github:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://github.com/replicate/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.cli"
       ]
     },
     {
@@ -731,11 +1845,394 @@
       ]
     },
     {
+      "url": "https://github.com/slackapi/slack-api-specs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.openapi"
+      ]
+    },
+    {
       "url": "https://github.com/stripe/openapi",
       "class": "ok",
       "status": 200,
       "sources": [
         "stripe:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/twilio-labs/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/twilio/twilio-oai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://gitlab.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:homepage"
+      ]
+    },
+    {
+      "url": "https://gitlab.com/gitlab-org/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://groq.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:homepage"
+      ]
+    },
+    {
+      "url": "https://groq.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.pricing",
+        "groq:checks.free_tier_or_trial.evidence",
+        "groq:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://groqstatus.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "groq:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://huggingface.co",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:homepage"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/oauth",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/security-tokens",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.api_keys",
+        "hugging-face:checks.api_key_self_serve.evidence",
+        "hugging-face:checks.scoped_tokens.evidence",
+        "hugging-face:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/huggingface_hub",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/huggingface_hub/guides/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/join",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.signup",
+        "hugging-face:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.pricing",
+        "hugging-face:checks.free_tier_or_trial.evidence",
+        "hugging-face:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://identity.getpostman.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.signup",
+        "postman:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com/docs/developer/postman-api/authentication/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.api_keys",
+        "postman:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com/docs/developer/postman-api/intro-api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com/docs/postman-cli/postman-cli-overview/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://linear.app",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:homepage"
+      ]
+    },
+    {
+      "url": "https://linear.app/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://linear.app/developers",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.docs",
+        "linear:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://linear.app/developers/graphql",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.graphql",
+        "linear:entrypoints.api_keys",
+        "linear:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://linear.app/developers/rate-limiting",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://linear.app/developers/webhooks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://linear.app/docs/mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://linear.app/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://linear.app/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.pricing",
+        "linear:checks.free_tier_or_trial.evidence",
+        "linear:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://linear.app/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.signup",
+        "linear:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://linearstatus.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "linear:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://modal.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:homepage"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs/guide/sandbox",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.agent_docs",
+        "modal:checks.sandbox_or_test_mode.evidence",
+        "modal:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs/reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs/reference/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs/reference/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.api_keys",
+        "modal:entrypoints.cli",
+        "modal:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://modal.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://modal.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.pricing",
+        "modal:checks.free_tier_or_trial.evidence",
+        "modal:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://modal.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.signup",
+        "modal:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -840,11 +2337,27 @@
       ]
     },
     {
+      "url": "https://open-api.netlify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.api_reference"
+      ]
+    },
+    {
       "url": "https://openai.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "openai:homepage"
+      ]
+    },
+    {
+      "url": "https://paddlestatus.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.status_page"
       ]
     },
     {
@@ -937,6 +2450,90 @@
       "sources": [
         "openai:entrypoints.signup",
         "openai:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://replicate.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:homepage"
+      ]
+    },
+    {
+      "url": "https://replicate.com/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://replicate.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://replicate.com/docs/reference/client-libraries",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://replicate.com/docs/reference/http",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.api_reference",
+        "replicate:entrypoints.api_keys",
+        "replicate:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://replicate.com/docs/topics/webhooks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://replicate.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://replicate.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.pricing",
+        "replicate:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://replicate.com/signin",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.signup",
+        "replicate:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://replicatestatus.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "replicate:entrypoints.status_page"
       ]
     },
     {
@@ -1035,11 +2632,99 @@
       ]
     },
     {
+      "url": "https://sandbox-login.paddle.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.signup",
+        "paddle:checks.self_serve_signup.evidence",
+        "paddle:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://sentry.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:homepage"
+      ]
+    },
+    {
+      "url": "https://sentry.io/changelog/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://sentry.io/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.pricing",
+        "sentry:checks.free_tier_or_trial.evidence",
+        "sentry:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://sentry.io/signup/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.signup",
+        "sentry:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://slack-status.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://slack.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:homepage"
+      ]
+    },
+    {
+      "url": "https://slack.com/get-started",
+      "class": "inconclusive",
+      "status": 403,
+      "sources": [
+        "slack:entrypoints.signup",
+        "slack:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://slack.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.pricing",
+        "slack:checks.free_tier_or_trial.evidence",
+        "slack:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://status.anthropic.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "anthropic:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.apify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "apify:entrypoints.status_page"
       ]
     },
     {
@@ -1051,11 +2736,99 @@
       ]
     },
     {
+      "url": "https://status.cloud.mongodb.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.e2b.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "e2b:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.flyio.net",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fly-io:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.gitlab.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "gitlab:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.huggingface.co",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "hugging-face:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.modal.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "modal:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.notion.so",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.openai.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "openai:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.perplexity.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.pinecone.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.postman.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.sentry.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "sentry:entrypoints.status_page"
       ]
     },
     {
@@ -1072,6 +2845,30 @@
       "status": 200,
       "sources": [
         "supabase:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.tavily.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.together.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.twilio.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.status_page"
       ]
     },
     {
@@ -1208,6 +3005,14 @@
         "supabase:entrypoints.pricing",
         "supabase:checks.free_tier_or_trial.evidence",
         "supabase:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://tools.slack.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "slack:entrypoints.sdks"
       ]
     },
     {
@@ -1465,6 +3270,347 @@
       "status": 200,
       "sources": [
         "github:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/cloud/atlas/register",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.signup",
+        "mongodb-atlas:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/atlas/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/atlas/cli/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/atlas/configure-api-access/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.api_keys",
+        "mongodb-atlas:checks.api_key_self_serve.evidence",
+        "mongodb-atlas:checks.oauth_support.evidence",
+        "mongodb-atlas:checks.scoped_tokens.evidence",
+        "mongodb-atlas:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.api_reference",
+        "mongodb-atlas:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/atlas/release-notes/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/drivers/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/docs/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:entrypoints.pricing",
+        "mongodb-atlas:checks.free_tier_or_trial.evidence",
+        "mongodb-atlas:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.mongodb.com/products/platform/atlas-database",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mongodb-atlas:homepage"
+      ]
+    },
+    {
+      "url": "https://www.netlify.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:homepage"
+      ]
+    },
+    {
+      "url": "https://www.netlify.com/changelog/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://www.netlify.com/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.pricing",
+        "netlify:checks.free_tier_or_trial.evidence",
+        "netlify:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.netlifystatus.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "netlify:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://www.notion.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:homepage"
+      ]
+    },
+    {
+      "url": "https://www.notion.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.pricing",
+        "notion:checks.free_tier_or_trial.evidence",
+        "notion:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.notion.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "notion:entrypoints.signup",
+        "notion:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://www.paddle.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:homepage"
+      ]
+    },
+    {
+      "url": "https://www.paddle.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paddle:entrypoints.pricing",
+        "paddle:checks.free_tier_or_trial.evidence",
+        "paddle:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.perplexity.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "perplexity:homepage"
+      ]
+    },
+    {
+      "url": "https://www.pinecone.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:homepage"
+      ]
+    },
+    {
+      "url": "https://www.pinecone.io/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "pinecone:entrypoints.pricing",
+        "pinecone:checks.free_tier_or_trial.evidence",
+        "pinecone:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.postman.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:homepage"
+      ]
+    },
+    {
+      "url": "https://www.postman.com/pricing/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "postman:entrypoints.pricing",
+        "postman:checks.free_tier_or_trial.evidence",
+        "postman:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.tavily.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:homepage"
+      ]
+    },
+    {
+      "url": "https://www.tavily.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "tavily:entrypoints.pricing",
+        "tavily:checks.free_tier_or_trial.evidence",
+        "tavily:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.together.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:homepage"
+      ]
+    },
+    {
+      "url": "https://www.together.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "together-ai:entrypoints.pricing",
+        "together-ai:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:homepage"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/iam/api-keys",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.api_keys",
+        "twilio:checks.api_key_self_serve.evidence",
+        "twilio:checks.scoped_tokens.evidence",
+        "twilio:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/iam/test-credentials",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/libraries",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/twilio-cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/usage/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.api_reference",
+        "twilio:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/docs/usage/webhooks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.webhooks"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/en-us/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.pricing",
+        "twilio:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.twilio.com/try-twilio",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "twilio:entrypoints.signup",
+        "twilio:checks.self_serve_signup.evidence",
+        "twilio:checks.free_tier_or_trial.evidence"
       ]
     },
     {
