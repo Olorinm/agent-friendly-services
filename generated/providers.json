@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T07:12:02.975Z",
+  "generated_at": "2026-07-07T07:14:35.192Z",
   "counts": {
-    "providers": 25,
+    "providers": 30,
     "categories": 12,
-    "entrypoint_urls": 268,
-    "checks_answered": 158
+    "entrypoint_urls": 319,
+    "checks_answered": 186
   },
   "categories": [
     {
@@ -1029,6 +1029,102 @@
       }
     },
     {
+      "id": "fly-io",
+      "name": "Fly.io",
+      "category": "cloud-hosting",
+      "homepage": "https://fly.io",
+      "summary": "Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.",
+      "submitted_by": "community",
+      "tags": [
+        "vms",
+        "deployment",
+        "edge"
+      ],
+      "entrypoints": {
+        "docs": "https://fly.io/docs",
+        "api_reference": "https://fly.io/docs/machines/api/",
+        "openapi": "https://docs.machines.dev",
+        "status_page": "https://status.flyio.net",
+        "pricing": "https://fly.io/docs/about/pricing/",
+        "signup": "https://fly.io/app/sign-up",
+        "api_keys": "https://fly.io/docs/security/tokens/",
+        "cli": "https://fly.io/docs/flyctl/",
+        "mcp_official": "https://fly.io/docs/mcp/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://fly.io/app/sign-up",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://fly.io/docs/security/tokens/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://fly.io/docs/security/tokens/",
+          "verified": "2026-07-07",
+          "notes": "Macaroon-based tokens can be narrowly scoped (org, app, deploy-only)."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://fly.io/docs/security/tokens/",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated sandbox; cheap ephemeral machines are commonly used for testing."
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "Legacy free allowances were removed; current trial policy varies — needs a docs link."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://fly.io/docs/about/pricing/",
+          "verified": "2026-07-07",
+          "notes": "Pay-as-you-go billing is self-serve."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "OpenAPI",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "gemini-api",
       "name": "Gemini API",
       "category": "ai-models",
@@ -1234,6 +1330,107 @@
         "unknown_checks": [
           "sandbox_or_test_mode",
           "idempotency"
+        ]
+      }
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab",
+      "category": "developer-tools",
+      "homepage": "https://gitlab.com",
+      "summary": "DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.",
+      "submitted_by": "community",
+      "scope": "gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed.",
+      "tags": [
+        "git",
+        "ci-cd",
+        "devops"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.gitlab.com",
+        "api_reference": "https://docs.gitlab.com/api/rest/",
+        "graphql": "https://docs.gitlab.com/api/graphql/",
+        "llms_txt": "https://docs.gitlab.com/llms.txt",
+        "changelog": "https://about.gitlab.com/releases/",
+        "status_page": "https://status.gitlab.com",
+        "pricing": "https://about.gitlab.com/pricing/",
+        "api_keys": "https://docs.gitlab.com/user/profile/personal_access_tokens/",
+        "cli": "https://gitlab.com/gitlab-org/cli",
+        "webhooks": "https://docs.gitlab.com/user/project/integrations/webhooks/",
+        "rate_limits": "https://docs.gitlab.com/security/rate_limits/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://about.gitlab.com/pricing/",
+          "verified": "2026-07-07",
+          "notes": "Free-tier signup is self-serve; the signup page itself blocks HEAD probes, so the pricing page serves as evidence."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.gitlab.com/user/profile/personal_access_tokens/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://docs.gitlab.com/api/oauth2/",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://docs.gitlab.com/user/profile/personal_access_tokens/",
+          "verified": "2026-07-07",
+          "notes": "Personal, project, and group access tokens with documented scopes."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://docs.gitlab.com/user/profile/personal_access_tokens/",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No dedicated API sandbox; free accounts and throwaway groups are commonly used for testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://about.gitlab.com/pricing/",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://about.gitlab.com/pricing/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://docs.gitlab.com/api/rest/",
+          "verified": "2026-07-07",
+          "notes": "Stable v4 REST API with a documented deprecation and removals process."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "automation_permitted"
         ]
       }
     },
@@ -1743,6 +1940,106 @@
       }
     },
     {
+      "id": "netlify",
+      "name": "Netlify",
+      "category": "cloud-hosting",
+      "homepage": "https://www.netlify.com",
+      "summary": "Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "deployment",
+        "jamstack",
+        "serverless"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.netlify.com",
+        "api_reference": "https://open-api.netlify.com",
+        "openapi": "https://github.com/netlify/open-api",
+        "llms_txt": "https://docs.netlify.com/llms.txt",
+        "changelog": "https://www.netlify.com/changelog/",
+        "status_page": "https://www.netlifystatus.com",
+        "pricing": "https://www.netlify.com/pricing/",
+        "signup": "https://app.netlify.com/signup",
+        "api_keys": "https://docs.netlify.com/api/get-started/",
+        "cli": "https://docs.netlify.com/cli/get-started/",
+        "mcp_official": "https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://app.netlify.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.netlify.com/api/get-started/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://docs.netlify.com/api/get-started/",
+          "verified": "2026-07-07",
+          "notes": "OAuth2 flow documented for API access alongside personal access tokens."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Personal access tokens appear account-wide; per-permission scoping not documented."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Tokens manageable in user settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Deploy previews serve as isolated test environments; needs a docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.netlify.com/pricing/",
+          "verified": "2026-07-07",
+          "notes": "Free tier."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.netlify.com/pricing/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "OpenAPI",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "openai",
       "name": "OpenAI",
       "category": "ai-models",
@@ -2037,6 +2334,100 @@
       }
     },
     {
+      "id": "postman",
+      "name": "Postman",
+      "category": "developer-tools",
+      "homepage": "https://www.postman.com",
+      "summary": "API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.",
+      "submitted_by": "community",
+      "scope": "Postman platform + Postman API; the desktop client features are not individually assessed.",
+      "tags": [
+        "api-tooling",
+        "testing",
+        "collaboration"
+      ],
+      "entrypoints": {
+        "docs": "https://learning.postman.com",
+        "api_reference": "https://learning.postman.com/docs/developer/postman-api/intro-api/",
+        "llms_txt": "https://learning.postman.com/llms.txt",
+        "status_page": "https://status.postman.com",
+        "pricing": "https://www.postman.com/pricing/",
+        "signup": "https://identity.getpostman.com/signup",
+        "api_keys": "https://learning.postman.com/docs/developer/postman-api/authentication/",
+        "cli": "https://learning.postman.com/docs/postman-cli/postman-cli-overview/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://identity.getpostman.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://learning.postman.com/docs/developer/postman-api/authentication/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "API keys appear account-wide; per-permission scoping not documented."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "Keys manageable in account settings; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "The free plan serves as a test environment; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.postman.com/pricing/",
+          "verified": "2026-07-07",
+          "notes": "Free plan."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.postman.com/pricing/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "replicate",
       "name": "Replicate",
       "category": "ai-models",
@@ -2230,6 +2621,107 @@
         "unknown_checks": [
           "oauth_support",
           "usage_dashboard",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "category": "observability-security",
+      "homepage": "https://sentry.io",
+      "summary": "Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.",
+      "submitted_by": "community",
+      "tags": [
+        "error-tracking",
+        "observability",
+        "apm"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.sentry.io",
+        "api_reference": "https://docs.sentry.io/api/",
+        "llms_txt": "https://docs.sentry.io/llms.txt",
+        "changelog": "https://sentry.io/changelog/",
+        "status_page": "https://status.sentry.io",
+        "pricing": "https://sentry.io/pricing/",
+        "signup": "https://sentry.io/signup/",
+        "api_keys": "https://docs.sentry.io/api/auth/",
+        "cli": "https://docs.sentry.io/cli/",
+        "sdks": "https://docs.sentry.io/platforms/",
+        "mcp_official": "https://docs.sentry.io/product/sentry-mcp/",
+        "rate_limits": "https://docs.sentry.io/api/ratelimits/"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://sentry.io/signup/",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.sentry.io/api/auth/",
+          "verified": "2026-07-07"
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "Integration-platform OAuth exists; needs the canonical docs link as evidence."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://docs.sentry.io/api/auth/",
+          "verified": "2026-07-07",
+          "notes": "Organization and personal auth tokens with documented scopes."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://docs.sentry.io/api/auth/",
+          "verified": "2026-07-07"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "The free developer plan serves as a test environment; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://sentry.io/pricing/",
+          "verified": "2026-07-07",
+          "notes": "Free developer plan."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://sentry.io/pricing/",
+          "verified": "2026-07-07"
+        },
+        "usage_dashboard": {
+          "status": "unknown",
+          "notes": "Org stats/usage pages exist; needs a docs link as evidence."
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "oauth_support",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
           "versioning_policy",
           "automation_permitted"
         ]

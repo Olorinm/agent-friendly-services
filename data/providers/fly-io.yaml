@@ -1,0 +1,74 @@
+id: fly-io
+name: Fly.io
+category: cloud-hosting
+homepage: https://fly.io
+summary: Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
+submitted_by: community
+
+tags:
+  - vms
+  - deployment
+  - edge
+
+entrypoints:
+  docs: https://fly.io/docs
+  api_reference: https://fly.io/docs/machines/api/
+  openapi: https://docs.machines.dev
+  status_page: https://status.flyio.net
+  pricing: https://fly.io/docs/about/pricing/
+  signup: https://fly.io/app/sign-up
+  api_keys: https://fly.io/docs/security/tokens/
+  cli: https://fly.io/docs/flyctl/
+  mcp_official: https://fly.io/docs/mcp/
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://fly.io/app/sign-up
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://fly.io/docs/security/tokens/
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: supported
+    evidence: https://fly.io/docs/security/tokens/
+    verified: "2026-07-07"
+    notes: Macaroon-based tokens can be narrowly scoped (org, app, deploy-only).
+
+  token_revocation:
+    status: supported
+    evidence: https://fly.io/docs/security/tokens/
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated sandbox; cheap ephemeral machines are commonly used for testing.
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Legacy free allowances were removed; current trial policy varies — needs a docs link.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://fly.io/docs/about/pricing/
+    verified: "2026-07-07"
+    notes: Pay-as-you-go billing is self-serve.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

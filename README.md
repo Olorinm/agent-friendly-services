@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-25-2563eb)
+![Providers](https://img.shields.io/badge/providers-30-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-173_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**25 providers · 8 categories · 268 entry links (machine-probed weekly) · 158 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**30 providers · 9 categories · 319 entry links (machine-probed weekly) · 186 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -78,12 +78,16 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [GitHub](#github) | ✓ | — | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [GitLab](#gitlab) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Postman](#postman) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ### Cloud / Hosting
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Fly.io](#fly-io) | ✓ | — | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
 | [Vercel](#vercel) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Databases
@@ -117,6 +121,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
+
+### Observability / Security
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ## Providers
 
@@ -224,6 +234,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **N/A:** Idempotency — Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
+### Fly.io <a id="fly-io"></a>
+
+> Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
+
+**Category:** Cloud / Hosting · `Official MCP` `OpenAPI` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://fly.io/docs) · [API Reference](https://fly.io/docs/machines/api/) · [OpenAPI](https://docs.machines.dev) · [Status Page](https://status.flyio.net) · [Pricing](https://fly.io/docs/about/pricing/) · [Signup](https://fly.io/app/sign-up) · [API Keys](https://fly.io/docs/security/tokens/) · [CLI](https://fly.io/docs/flyctl/) · [Official MCP](https://fly.io/docs/mcp/)
+
+- **Supported:** [Self-serve signup](https://fly.io/app/sign-up) · [Self-serve API keys](https://fly.io/docs/security/tokens/) · [Scoped tokens](https://fly.io/docs/security/tokens/) · [Token revocation](https://fly.io/docs/security/tokens/) · [Self-serve upgrade](https://fly.io/docs/about/pricing/)
+- **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Gemini API <a id="gemini-api"></a>
 
 > Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
@@ -247,6 +268,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
 
 > Multi-product platform; this entry covers the core developer platform only (see scope).
+
+### GitLab <a id="gitlab"></a>
+
+> DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
+
+**Category:** Developer Tools · **Scope:** gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed. · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
+
+- **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### Groq <a id="groq"></a>
 
@@ -304,6 +336,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Partial:** [Scoped tokens](https://neon.com/docs/manage/api-keys) — Organization- and project-scoped API keys; no per-permission scoping.
 - **Unknown (help wanted):** `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Netlify <a id="netlify"></a>
+
+> Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.
+
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.netlify.com) · [API Reference](https://open-api.netlify.com) · [OpenAPI](https://github.com/netlify/open-api) · [llms.txt](https://docs.netlify.com/llms.txt) · [Changelog](https://www.netlify.com/changelog/) · [Status Page](https://www.netlifystatus.com) · [Pricing](https://www.netlify.com/pricing/) · [Signup](https://app.netlify.com/signup) · [API Keys](https://docs.netlify.com/api/get-started/) · [CLI](https://docs.netlify.com/cli/get-started/) · [Official MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/)
+
+- **Supported:** [Self-serve signup](https://app.netlify.com/signup) · [Self-serve API keys](https://docs.netlify.com/api/get-started/) · [OAuth](https://docs.netlify.com/api/get-started/) · [Free tier / trial](https://www.netlify.com/pricing/) · [Self-serve upgrade](https://www.netlify.com/pricing/)
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### OpenAI <a id="openai"></a>
 
 > GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
@@ -339,6 +382,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://app.pinecone.io) · [Self-serve API keys](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Token revocation](https://docs.pinecone.io/guides/projects/manage-api-keys) · [Free tier / trial](https://www.pinecone.io/pricing/) · [Self-serve upgrade](https://www.pinecone.io/pricing/) · [Versioning policy](https://docs.pinecone.io/reference/api/versioning)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Postman <a id="postman"></a>
+
+> API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.
+
+**Category:** Developer Tools · **Scope:** Postman platform + Postman API; the desktop client features are not individually assessed. · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://learning.postman.com) · [API Reference](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [llms.txt](https://learning.postman.com/llms.txt) · [Status Page](https://status.postman.com) · [Pricing](https://www.postman.com/pricing/) · [Signup](https://identity.getpostman.com/signup) · [API Keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/)
+
+- **Supported:** [Self-serve signup](https://identity.getpostman.com/signup) · [Self-serve API keys](https://learning.postman.com/docs/developer/postman-api/authentication/) · [Free tier / trial](https://www.postman.com/pricing/) · [Self-serve upgrade](https://www.postman.com/pricing/)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Replicate <a id="replicate"></a>
 
 > Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
@@ -360,6 +414,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 - **Supported:** [Self-serve signup](https://resend.com/signup) · [Self-serve API keys](https://resend.com/docs/dashboard/api-keys/introduction) · [Scoped tokens](https://resend.com/docs/dashboard/api-keys/introduction) · [Token revocation](https://resend.com/docs/dashboard/api-keys/introduction) · [Sandbox / test mode](https://resend.com/docs/dashboard/emails/send-test-emails) · [Free tier / trial](https://resend.com/pricing) · [Self-serve upgrade](https://resend.com/pricing) · [Idempotency](https://resend.com/docs/api-reference/introduction)
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+### Sentry <a id="sentry"></a>
+
+> Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
+
+**Category:** Observability / Security · `Official MCP` `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.sentry.io) · [API Reference](https://docs.sentry.io/api/) · [llms.txt](https://docs.sentry.io/llms.txt) · [Changelog](https://sentry.io/changelog/) · [Status Page](https://status.sentry.io) · [Pricing](https://sentry.io/pricing/) · [Signup](https://sentry.io/signup/) · [API Keys](https://docs.sentry.io/api/auth/) · [CLI](https://docs.sentry.io/cli/) · [SDKs](https://docs.sentry.io/platforms/) · [Official MCP](https://docs.sentry.io/product/sentry-mcp/) · [Rate Limits](https://docs.sentry.io/api/ratelimits/)
+
+- **Supported:** [Self-serve signup](https://sentry.io/signup/) · [Self-serve API keys](https://docs.sentry.io/api/auth/) · [Scoped tokens](https://docs.sentry.io/api/auth/) · [Token revocation](https://docs.sentry.io/api/auth/) · [Free tier / trial](https://sentry.io/pricing/) · [Self-serve upgrade](https://sentry.io/pricing/)
+- **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Stripe <a id="stripe"></a>
 
@@ -426,12 +491,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **142 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **174 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [brave-search](#brave-search), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [groq](#groq), [hugging-face](#hugging-face), [modal](#modal), [neon](#neon), [perplexity](#perplexity), [pinecone](#pinecone), [replicate](#replicate), [resend](#resend), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [groq](#groq), [modal](#modal), [openai](#openai), [replicate](#replicate), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [github](#github), [groq](#groq), [hugging-face](#hugging-face), [mongodb-atlas](#mongodb-atlas), [perplexity](#perplexity), [pinecone](#pinecone), [replicate](#replicate), [resend](#resend), [tavily](#tavily), [together-ai](#together-ai)
+- `llms_txt` link unknown for: [brave-search](#brave-search), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
+- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [modal](#modal), [neon](#neon), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [postman](#postman), [replicate](#replicate), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [tavily](#tavily), [together-ai](#together-ai)
 
 ## Contributing
 

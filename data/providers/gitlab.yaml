@@ -1,0 +1,83 @@
+id: gitlab
+name: GitLab
+category: developer-tools
+homepage: https://gitlab.com
+summary: DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
+submitted_by: community
+scope: "gitlab.com SaaS + REST/GraphQL APIs; self-managed GitLab is not assessed."
+
+tags:
+  - git
+  - ci-cd
+  - devops
+
+entrypoints:
+  docs: https://docs.gitlab.com
+  api_reference: https://docs.gitlab.com/api/rest/
+  graphql: https://docs.gitlab.com/api/graphql/
+  llms_txt: https://docs.gitlab.com/llms.txt
+  changelog: https://about.gitlab.com/releases/
+  status_page: https://status.gitlab.com
+  pricing: https://about.gitlab.com/pricing/
+  api_keys: https://docs.gitlab.com/user/profile/personal_access_tokens/
+  cli: https://gitlab.com/gitlab-org/cli
+  webhooks: https://docs.gitlab.com/user/project/integrations/webhooks/
+  rate_limits: https://docs.gitlab.com/security/rate_limits/
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://about.gitlab.com/pricing/
+    verified: "2026-07-07"
+    notes: Free-tier signup is self-serve; the signup page itself blocks HEAD probes, so the pricing page serves as evidence.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.gitlab.com/user/profile/personal_access_tokens/
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: supported
+    evidence: https://docs.gitlab.com/api/oauth2/
+    verified: "2026-07-07"
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.gitlab.com/user/profile/personal_access_tokens/
+    verified: "2026-07-07"
+    notes: Personal, project, and group access tokens with documented scopes.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.gitlab.com/user/profile/personal_access_tokens/
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No dedicated API sandbox; free accounts and throwaway groups are commonly used for testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://about.gitlab.com/pricing/
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://about.gitlab.com/pricing/
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://docs.gitlab.com/api/rest/
+    verified: "2026-07-07"
+    notes: Stable v4 REST API with a documented deprecation and removals process.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

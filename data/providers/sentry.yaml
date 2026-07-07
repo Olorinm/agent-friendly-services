@@ -1,0 +1,80 @@
+id: sentry
+name: Sentry
+category: observability-security
+homepage: https://sentry.io
+summary: Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
+submitted_by: community
+
+tags:
+  - error-tracking
+  - observability
+  - apm
+
+entrypoints:
+  docs: https://docs.sentry.io
+  api_reference: https://docs.sentry.io/api/
+  llms_txt: https://docs.sentry.io/llms.txt
+  changelog: https://sentry.io/changelog/
+  status_page: https://status.sentry.io
+  pricing: https://sentry.io/pricing/
+  signup: https://sentry.io/signup/
+  api_keys: https://docs.sentry.io/api/auth/
+  cli: https://docs.sentry.io/cli/
+  sdks: https://docs.sentry.io/platforms/
+  mcp_official: https://docs.sentry.io/product/sentry-mcp/
+  rate_limits: https://docs.sentry.io/api/ratelimits/
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://sentry.io/signup/
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.sentry.io/api/auth/
+    verified: "2026-07-07"
+
+  oauth_support:
+    status: unknown
+    notes: Integration-platform OAuth exists; needs the canonical docs link as evidence.
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.sentry.io/api/auth/
+    verified: "2026-07-07"
+    notes: Organization and personal auth tokens with documented scopes.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.sentry.io/api/auth/
+    verified: "2026-07-07"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The free developer plan serves as a test environment; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://sentry.io/pricing/
+    verified: "2026-07-07"
+    notes: Free developer plan.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://sentry.io/pricing/
+    verified: "2026-07-07"
+
+  usage_dashboard:
+    status: unknown
+    notes: Org stats/usage pages exist; needs a docs link as evidence.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.
