@@ -1,0 +1,83 @@
+id: lark
+name: Lark
+category: communication
+homepage: https://www.larksuite.com
+summary: Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.
+submitted_by: community
+scope: "Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal."
+
+tags:
+  - messaging
+  - collaboration
+  - bots
+
+entrypoints:
+  docs: https://open.larksuite.com/document/home/index
+  api_reference: https://open.larksuite.com/document/server-docs/getting-started/server-api-list
+  llms_txt: https://open.larksuite.com/llms.txt
+  status_page: https://status.larksuite.com
+  pricing: https://www.larksuite.com/en_us/plans
+  signup: https://www.larksuite.com
+  api_keys: https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token
+  mcp_official: https://github.com/larksuite/lark-openapi-mcp
+  webhooks: https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case
+  rate_limits: https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.larksuite.com
+    verified: "2026-07-07"
+    notes: Team sign-up is self-serve from the homepage; developer console access follows from any account.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token
+    verified: "2026-07-07"
+    notes: Creating a custom app in the developer console yields app_id/app_secret self-serve; tokens are exchanged via API.
+
+  oauth_support:
+    status: supported
+    evidence: https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authorize/get
+    verified: "2026-07-07"
+    notes: OAuth authorization-code flow for user_access_token.
+
+  scoped_tokens:
+    status: supported
+    evidence: https://open.larksuite.com/document/server-docs/application-scope/introduction
+    verified: "2026-07-07"
+    notes: Apps request granular API scopes that admins approve; tokens carry only granted scopes.
+
+  token_revocation:
+    status: unknown
+    notes: App secrets can be reset in the developer console; needs a docs link as evidence.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Developer documentation mentions test companies/sandbox tenants; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.larksuite.com/en_us/plans
+    verified: "2026-07-07"
+    notes: Free Starter plan; open platform APIs available on it.
+
+  self_serve_paid_upgrade:
+    status: unknown
+    notes: Pro plan pricing is published; whether upgrade completes without sales contact is unverified.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: Endpoints are path-versioned (v1/v2...); no formal deprecation policy page recorded yet.
+
+  automation_permitted:
+    status: supported
+    evidence: https://open.larksuite.com/document/home/index
+    verified: "2026-07-07"
+    notes: The open platform exists to build bots and integrations against workspace data.

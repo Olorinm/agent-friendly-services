@@ -1,0 +1,80 @@
+id: airtable
+name: Airtable
+category: productivity-storage
+homepage: https://www.airtable.com
+summary: Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
+submitted_by: community
+
+tags:
+  - database
+  - no-code
+  - spreadsheets
+
+entrypoints:
+  docs: https://airtable.com/developers
+  api_reference: https://airtable.com/developers/web/api/introduction
+  changelog: https://airtable.com/developers/web/api/changelog
+  status_page: https://status.airtable.com
+  pricing: https://airtable.com/pricing
+  signup: https://airtable.com/signup
+  api_keys: https://airtable.com/create/tokens
+  webhooks: https://airtable.com/developers/web/api/webhooks-overview
+  rate_limits: https://airtable.com/developers/web/api/rate-limits
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://airtable.com/signup
+    verified: "2026-07-07"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://airtable.com/developers/web/guides/personal-access-tokens
+    verified: "2026-07-07"
+    notes: Personal access tokens are created self-serve in the builder hub.
+
+  oauth_support:
+    status: supported
+    evidence: https://airtable.com/developers/web/api/oauth-reference
+    verified: "2026-07-07"
+
+  scoped_tokens:
+    status: supported
+    evidence: https://airtable.com/developers/web/guides/personal-access-tokens
+    verified: "2026-07-07"
+    notes: Tokens carry explicit scopes and are restricted to selected bases/workspaces.
+
+  token_revocation:
+    status: supported
+    evidence: https://airtable.com/developers/web/guides/personal-access-tokens
+    verified: "2026-07-07"
+    notes: Revocation is documented in the personal-access-token guide.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Free bases serve as test environments; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://airtable.com/pricing
+    verified: "2026-07-07"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://airtable.com/pricing
+    verified: "2026-07-07"
+    notes: Team plan upgrade is self-serve; Enterprise requires sales.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: An API changelog exists; no formal versioning/deprecation policy page recorded yet.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

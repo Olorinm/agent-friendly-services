@@ -1,0 +1,82 @@
+id: telegram
+name: Telegram Bot API
+category: communication
+homepage: https://telegram.org
+summary: Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.
+submitted_by: community
+scope: "The Bot API only; MTProto client APIs and the consumer app are not assessed."
+
+tags:
+  - messaging
+  - bots
+  - webhooks
+
+entrypoints:
+  docs: https://core.telegram.org/bots
+  api_reference: https://core.telegram.org/bots/api
+  changelog: https://core.telegram.org/bots/api-changelog
+  signup: https://t.me/botfather
+  api_keys: https://core.telegram.org/bots/features
+  webhooks: https://core.telegram.org/bots/webhooks
+  rate_limits: https://core.telegram.org/bots/faq
+
+checks:
+  self_serve_signup:
+    status: partial
+    evidence: https://core.telegram.org/bots/features
+    verified: "2026-07-07"
+    notes: Creating a bot is instant via BotFather, but requires a phone-verified Telegram account first.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://core.telegram.org/bots/features
+    verified: "2026-07-07"
+    notes: BotFather issues the bot token immediately on /newbot.
+
+  oauth_support:
+    status: not_applicable
+    notes: Bot API auth is token-only; the Telegram Login Widget covers user-facing auth separately.
+
+  scoped_tokens:
+    status: unknown
+    notes: Bot tokens are all-or-nothing for the bot's own API; per-chat permissions are set by admins. Needs a docs framing as evidence.
+
+  token_revocation:
+    status: supported
+    evidence: https://core.telegram.org/bots/features
+    verified: "2026-07-07"
+    notes: BotFather's /revoke regenerates the token, invalidating the old one.
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://core.telegram.org/bots/features
+    verified: "2026-07-07"
+    notes: A dedicated test environment with separate servers and bots is documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://core.telegram.org/bots/api
+    verified: "2026-07-07"
+    notes: The Bot API is free.
+
+  self_serve_paid_upgrade:
+    status: not_applicable
+    notes: No paid API tier; optional paid broadcast limits exist but are niche.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: partial
+    evidence: https://core.telegram.org/bots/api-changelog
+    verified: "2026-07-07"
+    notes: Versioned releases with a detailed changelog, but no formal deprecation-window policy.
+
+  automation_permitted:
+    status: supported
+    evidence: https://core.telegram.org/bots
+    verified: "2026-07-07"
+    notes: Bots are the product; automation through the Bot API is the intended use.

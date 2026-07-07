@@ -4,12 +4,12 @@
 
 An evidence-backed directory of **service entry points for AI agents**: where the docs are, how to authenticate, what is machine-readable — and how fresh every fact is.
 
-![Providers](https://img.shields.io/badge/providers-35-2563eb)
+![Providers](https://img.shields.io/badge/providers-39-2563eb)
 [![Link health](https://img.shields.io/badge/link_health-425_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
-**35 providers · 10 categories · 372 entry links (machine-probed weekly) · 219 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
+**39 providers · 10 categories · 408 entry links (machine-probed weekly) · 250 capability facts, each with evidence and a date.** No scores, no tiers, no editorial ranking.
 
 ## Use It In 30 Seconds
 
@@ -129,14 +129,18 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Discord](#discord) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
+| [Lark](#lark) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Resend](#resend) | ✓ | — | — | — | ✓ | ✓ | 2026-07-07 |
 | [Slack](#slack) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | 2026-07-07 |
 | [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
 
 ### Productivity / Storage
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Airtable](#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 | [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
 
@@ -147,6 +151,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 | [Sentry](#sentry) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
 
 ## Providers
+
+### Airtable <a id="airtable"></a>
+
+> Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
+
+**Category:** Productivity / Storage · `Self-serve`
+
+**Links:** [Documentation](https://airtable.com/developers) · [API Reference](https://airtable.com/developers/web/api/introduction) · [Changelog](https://airtable.com/developers/web/api/changelog) · [Status Page](https://status.airtable.com) · [Pricing](https://airtable.com/pricing) · [Signup](https://airtable.com/signup) · [API Keys](https://airtable.com/create/tokens) · [Webhooks](https://airtable.com/developers/web/api/webhooks-overview) · [Rate Limits](https://airtable.com/developers/web/api/rate-limits)
+
+- **Supported:** [Self-serve signup](https://airtable.com/signup) · [Self-serve API keys](https://airtable.com/developers/web/guides/personal-access-tokens) · [OAuth](https://airtable.com/developers/web/api/oauth-reference) · [Scoped tokens](https://airtable.com/developers/web/guides/personal-access-tokens) · [Token revocation](https://airtable.com/developers/web/guides/personal-access-tokens) · [Free tier / trial](https://airtable.com/pricing) · [Self-serve upgrade](https://airtable.com/pricing)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Anthropic <a id="anthropic"></a>
 
@@ -215,6 +230,21 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **Supported:** [Self-serve signup](https://dash.cloudflare.com/sign-up) · [Self-serve API keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Scoped tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Token revocation](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Free tier / trial](https://www.cloudflare.com/plans/) · [Self-serve upgrade](https://www.cloudflare.com/plans/) · [Versioning policy](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/)
 - **Partial:** [Sandbox / test mode](https://developers.cloudflare.com/workers/wrangler/) — No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
 - **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Discord <a id="discord"></a>
+
+> Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.
+
+**Category:** Communication · **Scope:** The Discord developer platform (bots, OAuth2 apps, webhooks); the consumer client is not assessed. · `OpenAPI` `Self-serve`
+
+**Links:** [Documentation](https://discord.com/developers/docs/intro) · [API Reference](https://discord.com/developers/docs/reference) · [OpenAPI](https://github.com/discord/discord-api-spec) · [Changelog](https://discord.com/developers/docs/change-log) · [Status Page](https://discordstatus.com) · [Signup](https://discord.com/register) · [API Keys](https://discord.com/developers/applications) · [Webhooks](https://discord.com/developers/docs/resources/webhook) · [Rate Limits](https://discord.com/developers/docs/topics/rate-limits) · [Errors](https://discord.com/developers/docs/topics/opcodes-and-status-codes)
+
+- **Supported:** [Self-serve signup](https://discord.com/register) · [Self-serve API keys](https://discord.com/developers/applications) · [OAuth](https://discord.com/developers/docs/topics/oauth2) · [Scoped tokens](https://discord.com/developers/docs/topics/oauth2) · [Token revocation](https://discord.com/developers/docs/topics/oauth2) · [Free tier / trial](https://discord.com/developers/docs/intro) · [Versioning policy](https://discord.com/developers/docs/reference)
+- **Partial:** [Automation permitted](https://discord.com/developers/docs/intro) — Automation through the bot API is the supported path; automating user accounts ("self-bots") is prohibited by the developer terms (ToS page blocks probes, so the docs portal is cited).
+- **N/A:** Self-serve upgrade — No paid API tier; monetization products are user-facing.
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`
+
+> The official OpenAPI spec is published by Discord but marked public preview / subject to change.
 
 ### E2B <a id="e2b"></a>
 
@@ -319,6 +349,17 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 - **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Lark <a id="lark"></a>
+
+> Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.
+
+**Category:** Communication · **Scope:** Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal. · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://open.larksuite.com/document/home/index) · [API Reference](https://open.larksuite.com/document/server-docs/getting-started/server-api-list) · [llms.txt](https://open.larksuite.com/llms.txt) · [Status Page](https://status.larksuite.com) · [Pricing](https://www.larksuite.com/en_us/plans) · [Signup](https://www.larksuite.com) · [API Keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [Official MCP](https://github.com/larksuite/lark-openapi-mcp) · [Webhooks](https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case) · [Rate Limits](https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control)
+
+- **Supported:** [Self-serve signup](https://www.larksuite.com) · [Self-serve API keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [OAuth](https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authorize/get) · [Scoped tokens](https://open.larksuite.com/document/server-docs/application-scope/introduction) · [Free tier / trial](https://www.larksuite.com/en_us/plans) · [Automation permitted](https://open.larksuite.com/document/home/index)
+- **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`
 
 ### Linear <a id="linear"></a>
 
@@ -529,6 +570,21 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 - **N/A:** Idempotency — Read-only search/extract API; requests are inherently repeatable.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
+### Telegram Bot API <a id="telegram"></a>
+
+> Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.
+
+**Category:** Communication · **Scope:** The Bot API only; MTProto client APIs and the consumer app are not assessed. · `Sandbox`
+
+**Links:** [Documentation](https://core.telegram.org/bots) · [API Reference](https://core.telegram.org/bots/api) · [Changelog](https://core.telegram.org/bots/api-changelog) · [Signup](https://t.me/botfather) · [API Keys](https://core.telegram.org/bots/features) · [Webhooks](https://core.telegram.org/bots/webhooks) · [Rate Limits](https://core.telegram.org/bots/faq)
+
+- **Supported:** [Self-serve API keys](https://core.telegram.org/bots/features) · [Token revocation](https://core.telegram.org/bots/features) · [Sandbox / test mode](https://core.telegram.org/bots/features) · [Free tier / trial](https://core.telegram.org/bots/api) · [Automation permitted](https://core.telegram.org/bots)
+- **Partial:** [Self-serve signup](https://core.telegram.org/bots/features) — Creating a bot is instant via BotFather, but requires a phone-verified Telegram account first.
+- **Partial:** [Versioning policy](https://core.telegram.org/bots/api-changelog) — Versioned releases with a detailed changelog, but no formal deprecation-window policy.
+- **N/A:** OAuth — Bot API auth is token-only; the Telegram Login Widget covers user-facing auth separately.
+- **N/A:** Self-serve upgrade — No paid API tier; optional paid broadcast limits exist but are niche.
+- **Unknown (help wanted):** `scoped_tokens`, `usage_dashboard`, `idempotency`
+
 ### Together AI <a id="together-ai"></a>
 
 > Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.
@@ -568,12 +624,12 @@ Your entry may be incomplete — that is fixable in one small PR: set `submitted
 
 ## Help Wanted 🌱
 
-The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **201 unknowns are open right now.**
+The fastest way to contribute is to resolve an `unknown`: find official evidence, add the URL, open a PR. **218 unknowns are open right now.**
 
-- `llms_txt` link unknown for: [brave-search](#brave-search), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend)
-- `openapi` link unknown for: [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [together-ai](#together-ai), [vercel](#vercel)
-- `mcp_official` link unknown for: [anthropic](#anthropic), [brave-search](#brave-search), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [together-ai](#together-ai)
-- `agent_docs` link unknown for: [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [linear](#linear), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [together-ai](#together-ai), [twilio](#twilio)
+- `llms_txt` link unknown for: [airtable](#airtable), [brave-search](#brave-search), [discord](#discord), [fly-io](#fly-io), [gemini-api](#gemini-api), [github](#github), [hugging-face](#hugging-face), [openai](#openai), [resend](#resend), [telegram](#telegram)
+- `openapi` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [modal](#modal), [neon](#neon), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [supabase](#supabase), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [vercel](#vercel)
+- `mcp_official` link unknown for: [airtable](#airtable), [anthropic](#anthropic), [brave-search](#brave-search), [discord](#discord), [gemini-api](#gemini-api), [gitlab](#gitlab), [groq](#groq), [modal](#modal), [openai](#openai), [paddle](#paddle), [postman](#postman), [replicate](#replicate), [slack](#slack), [telegram](#telegram), [together-ai](#together-ai)
+- `agent_docs` link unknown for: [airtable](#airtable), [apify](#apify), [brave-search](#brave-search), [browserbase](#browserbase), [discord](#discord), [e2b](#e2b), [exa](#exa), [firecrawl](#firecrawl), [fly-io](#fly-io), [github](#github), [gitlab](#gitlab), [groq](#groq), [hugging-face](#hugging-face), [lark](#lark), [linear](#linear), [mongodb-atlas](#mongodb-atlas), [netlify](#netlify), [notion](#notion), [paddle](#paddle), [perplexity](#perplexity), [pinecone](#pinecone), [postman](#postman), [replicate](#replicate), [resend](#resend), [sentry](#sentry), [slack](#slack), [tavily](#tavily), [telegram](#telegram), [together-ai](#together-ai), [twilio](#twilio)
 
 ## Contributing
 

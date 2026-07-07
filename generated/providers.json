@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-07T09:30:53.328Z",
+  "generated_at": "2026-07-07T09:55:45.876Z",
   "counts": {
-    "providers": 35,
+    "providers": 39,
     "categories": 12,
-    "entrypoint_urls": 372,
-    "checks_answered": 219
+    "entrypoint_urls": 408,
+    "checks_answered": 250
   },
   "categories": [
     {
@@ -238,6 +238,103 @@
     }
   },
   "providers": [
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "category": "productivity-storage",
+      "homepage": "https://www.airtable.com",
+      "summary": "Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.",
+      "submitted_by": "community",
+      "tags": [
+        "database",
+        "no-code",
+        "spreadsheets"
+      ],
+      "entrypoints": {
+        "docs": "https://airtable.com/developers",
+        "api_reference": "https://airtable.com/developers/web/api/introduction",
+        "changelog": "https://airtable.com/developers/web/api/changelog",
+        "status_page": "https://status.airtable.com",
+        "pricing": "https://airtable.com/pricing",
+        "signup": "https://airtable.com/signup",
+        "api_keys": "https://airtable.com/create/tokens",
+        "webhooks": "https://airtable.com/developers/web/api/webhooks-overview",
+        "rate_limits": "https://airtable.com/developers/web/api/rate-limits"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://airtable.com/signup",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://airtable.com/developers/web/guides/personal-access-tokens",
+          "verified": "2026-07-07",
+          "notes": "Personal access tokens are created self-serve in the builder hub."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://airtable.com/developers/web/api/oauth-reference",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://airtable.com/developers/web/guides/personal-access-tokens",
+          "verified": "2026-07-07",
+          "notes": "Tokens carry explicit scopes and are restricted to selected bases/workspaces."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://airtable.com/developers/web/guides/personal-access-tokens",
+          "verified": "2026-07-07",
+          "notes": "Revocation is documented in the personal-access-token guide."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Free bases serve as test environments; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://airtable.com/pricing",
+          "verified": "2026-07-07"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://airtable.com/pricing",
+          "verified": "2026-07-07",
+          "notes": "Team plan upgrade is self-serve; Enterprise requires sales."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "An API changelog exists; no formal versioning/deprecation policy page recorded yet."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
     {
       "id": "anthropic",
       "name": "Anthropic",
@@ -743,6 +840,110 @@
           "usage_dashboard",
           "idempotency",
           "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "communication",
+      "homepage": "https://discord.com",
+      "summary": "Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.",
+      "submitted_by": "community",
+      "scope": "The Discord developer platform (bots, OAuth2 apps, webhooks); the consumer client is not assessed.",
+      "tags": [
+        "chat",
+        "bots",
+        "community"
+      ],
+      "entrypoints": {
+        "docs": "https://discord.com/developers/docs/intro",
+        "api_reference": "https://discord.com/developers/docs/reference",
+        "openapi": "https://github.com/discord/discord-api-spec",
+        "changelog": "https://discord.com/developers/docs/change-log",
+        "status_page": "https://discordstatus.com",
+        "signup": "https://discord.com/register",
+        "api_keys": "https://discord.com/developers/applications",
+        "webhooks": "https://discord.com/developers/docs/resources/webhook",
+        "rate_limits": "https://discord.com/developers/docs/topics/rate-limits",
+        "errors": "https://discord.com/developers/docs/topics/opcodes-and-status-codes"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://discord.com/register",
+          "verified": "2026-07-07"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/applications",
+          "verified": "2026-07-07",
+          "notes": "Bot tokens are issued instantly when you create an application in the developer portal."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/docs/topics/oauth2",
+          "verified": "2026-07-07"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/docs/topics/oauth2",
+          "verified": "2026-07-07",
+          "notes": "OAuth2 scopes plus per-guild bot permission flags."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/docs/topics/oauth2",
+          "verified": "2026-07-07",
+          "notes": "Token revocation endpoint documented; bot tokens can be reset in the portal."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "No formal sandbox; standard practice is a private test server. Needs official guidance as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/docs/intro",
+          "verified": "2026-07-07",
+          "notes": "The API is free to use."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "not_applicable",
+          "notes": "No paid API tier; monetization products are user-facing."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "supported",
+          "evidence": "https://discord.com/developers/docs/reference",
+          "verified": "2026-07-07",
+          "notes": "Explicit API versioning (v10) with documented deprecation of old versions."
+        },
+        "automation_permitted": {
+          "status": "partial",
+          "evidence": "https://discord.com/developers/docs/intro",
+          "verified": "2026-07-07",
+          "notes": "Automation through the bot API is the supported path; automating user accounts (\"self-bots\") is prohibited by the developer terms (ToS page blocks probes, so the docs portal is cited)."
+        }
+      },
+      "notes": [
+        "The official OpenAPI spec is published by Discord but marked public preview / subject to change."
+      ],
+      "derived": {
+        "badges": [
+          "OpenAPI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency"
         ]
       }
     },
@@ -1627,6 +1828,109 @@
           "idempotency",
           "versioning_policy",
           "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "lark",
+      "name": "Lark",
+      "category": "communication",
+      "homepage": "https://www.larksuite.com",
+      "summary": "Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, scoped app permissions, and an official OpenAPI MCP server.",
+      "submitted_by": "community",
+      "scope": "Lark Open Platform (international larksuite.com edition); the Feishu (China) edition has a separate developer portal.",
+      "tags": [
+        "messaging",
+        "collaboration",
+        "bots"
+      ],
+      "entrypoints": {
+        "docs": "https://open.larksuite.com/document/home/index",
+        "api_reference": "https://open.larksuite.com/document/server-docs/getting-started/server-api-list",
+        "llms_txt": "https://open.larksuite.com/llms.txt",
+        "status_page": "https://status.larksuite.com",
+        "pricing": "https://www.larksuite.com/en_us/plans",
+        "signup": "https://www.larksuite.com",
+        "api_keys": "https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token",
+        "mcp_official": "https://github.com/larksuite/lark-openapi-mcp",
+        "webhooks": "https://open.larksuite.com/document/server-docs/event-subscription-guide/event-subscription-configure-/request-url-configuration-case",
+        "rate_limits": "https://open.larksuite.com/document/server-docs/getting-started/api-access-frequency-control"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://www.larksuite.com",
+          "verified": "2026-07-07",
+          "notes": "Team sign-up is self-serve from the homepage; developer console access follows from any account."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token",
+          "verified": "2026-07-07",
+          "notes": "Creating a custom app in the developer console yields app_id/app_secret self-serve; tokens are exchanged via API."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authorize/get",
+          "verified": "2026-07-07",
+          "notes": "OAuth authorization-code flow for user_access_token."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://open.larksuite.com/document/server-docs/application-scope/introduction",
+          "verified": "2026-07-07",
+          "notes": "Apps request granular API scopes that admins approve; tokens carry only granted scopes."
+        },
+        "token_revocation": {
+          "status": "unknown",
+          "notes": "App secrets can be reset in the developer console; needs a docs link as evidence."
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Developer documentation mentions test companies/sandbox tenants; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.larksuite.com/en_us/plans",
+          "verified": "2026-07-07",
+          "notes": "Free Starter plan; open platform APIs available on it."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "unknown",
+          "notes": "Pro plan pricing is published; whether upgrade completes without sales contact is unverified."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "Endpoints are path-versioned (v1/v2...); no formal deprecation policy page recorded yet."
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://open.larksuite.com/document/home/index",
+          "verified": "2026-07-07",
+          "notes": "The open platform exists to build bots and integrations against workspace data."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "self_serve_paid_upgrade",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy"
         ]
       }
     },
@@ -3436,6 +3740,103 @@
           "usage_dashboard",
           "versioning_policy",
           "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram Bot API",
+      "category": "communication",
+      "homepage": "https://telegram.org",
+      "summary": "Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.",
+      "submitted_by": "community",
+      "scope": "The Bot API only; MTProto client APIs and the consumer app are not assessed.",
+      "tags": [
+        "messaging",
+        "bots",
+        "webhooks"
+      ],
+      "entrypoints": {
+        "docs": "https://core.telegram.org/bots",
+        "api_reference": "https://core.telegram.org/bots/api",
+        "changelog": "https://core.telegram.org/bots/api-changelog",
+        "signup": "https://t.me/botfather",
+        "api_keys": "https://core.telegram.org/bots/features",
+        "webhooks": "https://core.telegram.org/bots/webhooks",
+        "rate_limits": "https://core.telegram.org/bots/faq"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "partial",
+          "evidence": "https://core.telegram.org/bots/features",
+          "verified": "2026-07-07",
+          "notes": "Creating a bot is instant via BotFather, but requires a phone-verified Telegram account first."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://core.telegram.org/bots/features",
+          "verified": "2026-07-07",
+          "notes": "BotFather issues the bot token immediately on /newbot."
+        },
+        "oauth_support": {
+          "status": "not_applicable",
+          "notes": "Bot API auth is token-only; the Telegram Login Widget covers user-facing auth separately."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Bot tokens are all-or-nothing for the bot's own API; per-chat permissions are set by admins. Needs a docs framing as evidence."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://core.telegram.org/bots/features",
+          "verified": "2026-07-07",
+          "notes": "BotFather's /revoke regenerates the token, invalidating the old one."
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://core.telegram.org/bots/features",
+          "verified": "2026-07-07",
+          "notes": "A dedicated test environment with separate servers and bots is documented."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://core.telegram.org/bots/api",
+          "verified": "2026-07-07",
+          "notes": "The Bot API is free."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "not_applicable",
+          "notes": "No paid API tier; optional paid broadcast limits exist but are niche."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "partial",
+          "evidence": "https://core.telegram.org/bots/api-changelog",
+          "verified": "2026-07-07",
+          "notes": "Versioned releases with a detailed changelog, but no formal deprecation-window policy."
+        },
+        "automation_permitted": {
+          "status": "supported",
+          "evidence": "https://core.telegram.org/bots",
+          "verified": "2026-07-07",
+          "notes": "Bots are the product; automation through the Bot API is the intended use."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Sandbox"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-07",
+        "unknown_checks": [
+          "scoped_tokens",
+          "usage_dashboard",
+          "idempotency"
         ]
       }
     },
