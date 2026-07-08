@@ -8,7 +8,7 @@ browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true
 cartesia,Cartesia,ai-models,true,true,false,false,unknown,true,2026-07-08
 cerebras,Cerebras Inference,ai-models,false,true,false,false,unknown,true,2026-07-08
 chroma,Chroma,databases,true,true,false,true,supported,true,2026-07-08
-cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
+cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-08
 cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
 composio,Composio,agent-tooling,true,true,false,false,unknown,false,2026-07-07
 datadog,Datadog,observability-security,true,true,false,true,unknown,true,2026-07-07
@@ -22,7 +22,7 @@ exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 fal,fal.ai,ai-models,false,true,false,true,unknown,true,2026-07-08
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
 fireworks,Fireworks AI,ai-models,false,true,false,true,unknown,true,2026-07-08
-fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
+fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-08
 gemini-api,Gemini API,ai-models,false,false,false,true,unknown,true,2026-07-07
 github,GitHub,developer-tools,true,true,true,true,unknown,true,2026-07-07
 gitlab,GitLab,developer-tools,true,true,true,true,unknown,true,2026-07-07
@@ -42,7 +42,7 @@ mongodb-atlas,MongoDB Atlas,databases,true,true,true,true,unknown,true,2026-07-0
 moonshot,Moonshot AI (Kimi),ai-models,false,false,false,true,unknown,true,2026-07-08
 n8n,n8n,agent-tooling,true,true,false,true,supported,true,2026-07-08
 neon,Neon,databases,true,true,true,true,supported,true,2026-07-07
-netlify,Netlify,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
+netlify,Netlify,cloud-hosting,true,true,true,true,supported,true,2026-07-08
 notion,Notion,productivity-storage,true,true,false,false,unknown,true,2026-07-07
 openai,OpenAI,ai-models,false,false,true,false,unknown,true,2026-07-07
 openrouter,OpenRouter,ai-models,false,true,false,false,unknown,true,2026-07-08
@@ -52,9 +52,9 @@ pinecone,Pinecone,databases,true,true,false,true,unknown,true,2026-07-07
 postman,Postman,developer-tools,true,true,false,true,unknown,true,2026-07-07
 qdrant,Qdrant,databases,true,true,false,false,unknown,true,2026-07-07
 qwen,Alibaba Qwen (Model Studio),ai-models,false,false,false,true,unknown,true,2026-07-08
-railway,Railway,cloud-hosting,false,true,false,true,unknown,true,2026-07-08
+railway,Railway,cloud-hosting,false,true,false,true,supported,true,2026-07-08
 redis,Redis (Redis Cloud),databases,true,true,false,true,supported,true,2026-07-08
-render,Render,cloud-hosting,true,true,false,true,unknown,true,2026-07-08
+render,Render,cloud-hosting,true,true,false,true,supported,true,2026-07-08
 replicate,Replicate,ai-models,false,true,false,true,unknown,true,2026-07-07
 resend,Resend,communication,true,true,false,false,supported,true,2026-07-07
 sentry,Sentry,observability-security,true,true,true,true,unknown,true,2026-07-07

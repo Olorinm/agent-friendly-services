@@ -69,8 +69,10 @@ checks:
     verified: "2026-07-07"
 
   usage_dashboard:
-    status: unknown
-    notes: Dashboard analytics exist; need a canonical docs link as evidence.
+    status: supported
+    evidence: https://developers.cloudflare.com/billing/
+    verified: "2026-07-08"
+    notes: Billing docs cover dashboard-based plan, subscription and usage management.
 
   idempotency:
     status: unknown

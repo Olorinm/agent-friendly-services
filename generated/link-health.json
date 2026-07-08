@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-07-08T08:30:56.162Z",
-  "total": 740,
-  "ok": 731,
-  "inconclusive": 9,
+  "checked_at": "2026-07-08T08:40:26.074Z",
+  "total": 823,
+  "ok": 813,
+  "inconclusive": 10,
   "broken": 0,
   "results": [
     {
@@ -396,12 +396,32 @@
       ]
     },
     {
+      "url": "https://app.fireworks.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.signup",
+        "fireworks:entrypoints.api_keys",
+        "fireworks:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
       "url": "https://app.lemonsqueezy.com/register",
       "class": "ok",
       "status": 200,
       "sources": [
         "lemonsqueezy:entrypoints.signup",
         "lemonsqueezy:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.mem0.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.signup",
+        "mem0:entrypoints.api_keys",
+        "mem0:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -420,6 +440,16 @@
       "sources": [
         "pinecone:entrypoints.signup",
         "pinecone:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.steel.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:entrypoints.signup",
+        "steel:entrypoints.api_keys",
+        "steel:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -443,11 +473,30 @@
       ]
     },
     {
+      "url": "https://cartesia.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:homepage"
+      ]
+    },
+    {
       "url": "https://cli.github.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "github:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://cloud.cerebras.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.signup",
+        "cerebras:entrypoints.api_keys",
+        "cerebras:checks.self_serve_signup.evidence",
+        "cerebras:homepage"
       ]
     },
     {
@@ -730,6 +779,16 @@
       "sources": [
         "stripe:entrypoints.signup",
         "stripe:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://dashboard.vapi.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.signup",
+        "vapi:entrypoints.api_keys",
+        "vapi:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -1344,6 +1403,38 @@
       ]
     },
     {
+      "url": "https://docs.cartesia.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.cartesia.ai/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.cartesia.ai/get-started/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.cartesia.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://docs.cohere.com",
       "class": "ok",
       "status": 200,
@@ -1593,6 +1684,46 @@
       ]
     },
     {
+      "url": "https://docs.fireworks.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.fireworks.ai/api-reference/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.fireworks.ai/getting-started/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.fireworks.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.fireworks.ai/tools-sdks/firectl/firectl",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://docs.github.com",
       "class": "ok",
       "status": 200,
@@ -1818,11 +1949,83 @@
       ]
     },
     {
+      "url": "https://docs.lumalabs.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.lumalabs.ai/docs/welcome",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.lumalabs.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.lumalabs.ai/reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:entrypoints.api_reference"
+      ]
+    },
+    {
       "url": "https://docs.machines.dev",
       "class": "ok",
       "status": 200,
       "sources": [
         "fly-io:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai/openmemory/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai/platform/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:checks.api_key_self_serve.evidence"
       ]
     },
     {
@@ -2195,6 +2398,38 @@
       ]
     },
     {
+      "url": "https://docs.steel.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.steel.dev/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.steel.dev/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.steel.dev/overview/intro-to-steel",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
       "url": "https://docs.stripe.com",
       "class": "ok",
       "status": 200,
@@ -2483,6 +2718,38 @@
       ]
     },
     {
+      "url": "https://docs.vapi.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.vapi.ai/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.vapi.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.vapi.ai/quickstart/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
       "url": "https://docs.weaviate.io",
       "class": "ok",
       "status": 200,
@@ -2544,6 +2811,48 @@
       "status": 200,
       "sources": [
         "xai:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.z.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.z.ai/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.z.ai/guides/overview/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.pricing",
+        "zai:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.z.ai/guides/overview/quick-start",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:checks.self_serve_signup.evidence",
+        "zai:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.z.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.llms_txt"
       ]
     },
     {
@@ -2765,6 +3074,24 @@
       ]
     },
     {
+      "url": "https://fireworks.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:homepage"
+      ]
+    },
+    {
+      "url": "https://fireworks.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.pricing",
+        "fireworks:checks.free_tier_or_trial.evidence",
+        "fireworks:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://fly.io",
       "class": "ok",
       "status": 200,
@@ -2879,6 +3206,14 @@
       "status": 200,
       "sources": [
         "browserbase:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/cartesia-ai/cartesia-mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.mcp_official"
       ]
     },
     {
@@ -3034,6 +3369,22 @@
       ]
     },
     {
+      "url": "https://github.com/mem0ai/mem0",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://github.com/MiniMax-AI/MiniMax-MCP",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "minimax:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/mistralai/platform-docs-public",
       "class": "ok",
       "status": 200,
@@ -3055,6 +3406,14 @@
       "status": 200,
       "sources": [
         "mongodb-atlas:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/MoonshotAI/kimi-cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "moonshot:entrypoints.cli"
       ]
     },
     {
@@ -3148,6 +3507,14 @@
       ]
     },
     {
+      "url": "https://github.com/QwenLM/qwen-code",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://github.com/railwayapp/cli",
       "class": "ok",
       "status": 200,
@@ -3221,6 +3588,14 @@
       ]
     },
     {
+      "url": "https://github.com/steel-dev/steel-browser",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
       "url": "https://github.com/stripe/openapi",
       "class": "ok",
       "status": 200,
@@ -3258,6 +3633,14 @@
       "status": 200,
       "sources": [
         "upstash:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/VapiAI/mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.mcp_official"
       ]
     },
     {
@@ -3519,6 +3902,38 @@
       ]
     },
     {
+      "url": "https://inference-docs.cerebras.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://inference-docs.cerebras.ai/api-reference/chat-completions",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://inference-docs.cerebras.ai/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://inference-docs.cerebras.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.llms_txt"
+      ]
+    },
+    {
       "url": "https://jina.ai",
       "class": "ok",
       "status": 200,
@@ -3676,11 +4091,56 @@
       ]
     },
     {
+      "url": "https://lumalabs.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:homepage"
+      ]
+    },
+    {
+      "url": "https://lumalabs.ai/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:entrypoints.signup",
+        "luma:entrypoints.api_keys",
+        "luma:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://lumalabs.ai/api/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "luma:entrypoints.pricing",
+        "luma:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://mcp.composio.dev",
       "class": "ok",
       "status": 200,
       "sources": [
         "composio:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://mem0.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:homepage"
+      ]
+    },
+    {
+      "url": "https://mem0.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.pricing",
+        "mem0:checks.free_tier_or_trial.evidence",
+        "mem0:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -3780,6 +4240,14 @@
       "sources": [
         "modal:entrypoints.signup",
         "modal:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://modelstudio.console.alibabacloud.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:entrypoints.signup"
       ]
     },
     {
@@ -3995,8 +4463,8 @@
     },
     {
       "url": "https://openai.com",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "openai:homepage"
       ]
@@ -4111,6 +4579,76 @@
       ]
     },
     {
+      "url": "https://platform.kimi.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "moonshot:entrypoints.signup",
+        "moonshot:homepage"
+      ]
+    },
+    {
+      "url": "https://platform.kimi.ai/console/api-keys",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "moonshot:entrypoints.api_keys",
+        "moonshot:checks.self_serve_signup.evidence",
+        "moonshot:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://platform.kimi.ai/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "moonshot:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://platform.kimi.ai/docs/api/chat",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "moonshot:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://platform.minimax.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "minimax:entrypoints.signup",
+        "minimax:homepage"
+      ]
+    },
+    {
+      "url": "https://platform.minimax.io/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "minimax:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://platform.minimax.io/docs/api-reference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "minimax:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://platform.minimax.io/user-center/basic-information/interface-key",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "minimax:entrypoints.api_keys",
+        "minimax:checks.self_serve_signup.evidence",
+        "minimax:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
       "url": "https://platform.openai.com/docs",
       "class": "ok",
       "status": 200,
@@ -4200,6 +4738,16 @@
       "sources": [
         "openai:entrypoints.signup",
         "openai:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://play.cartesia.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.signup",
+        "cartesia:entrypoints.api_keys",
+        "cartesia:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -4866,6 +5414,22 @@
       ]
     },
     {
+      "url": "https://status.cartesia.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.cerebras.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.cloud.mongodb.com",
       "class": "ok",
       "status": 200,
@@ -4930,6 +5494,14 @@
       ]
     },
     {
+      "url": "https://status.fireworks.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fireworks:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.flyio.net",
       "class": "ok",
       "status": 200,
@@ -4983,6 +5555,14 @@
       "status": 200,
       "sources": [
         "lemonsqueezy:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.mem0.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "mem0:entrypoints.status_page"
       ]
     },
     {
@@ -5146,11 +5726,37 @@
       ]
     },
     {
+      "url": "https://status.vapi.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.zapier.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "zapier:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://steel.dev",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:homepage"
+      ]
+    },
+    {
+      "url": "https://steel.dev/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "steel:entrypoints.pricing",
+        "steel:checks.free_tier_or_trial.evidence",
+        "steel:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -5366,6 +5972,24 @@
       ]
     },
     {
+      "url": "https://vapi.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:homepage"
+      ]
+    },
+    {
+      "url": "https://vapi.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "vapi:entrypoints.pricing",
+        "vapi:checks.free_tier_or_trial.evidence",
+        "vapi:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://vercel.com",
       "class": "ok",
       "status": 200,
@@ -5544,6 +6168,48 @@
       ]
     },
     {
+      "url": "https://www.alibabacloud.com/en/product/modelstudio",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:homepage"
+      ]
+    },
+    {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/get-api-key",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:entrypoints.api_keys",
+        "qwen:checks.self_serve_signup.evidence",
+        "qwen:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/models",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/new-free-quota",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "qwen:checks.free_tier_or_trial.evidence"
+      ]
+    },
+    {
       "url": "https://www.anthropic.com",
       "class": "ok",
       "status": 200,
@@ -5604,6 +6270,26 @@
       "sources": [
         "browserbase:entrypoints.signup",
         "browserbase:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://www.cartesia.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cartesia:entrypoints.pricing",
+        "cartesia:checks.free_tier_or_trial.evidence",
+        "cartesia:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.cerebras.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "cerebras:entrypoints.pricing",
+        "cerebras:checks.free_tier_or_trial.evidence",
+        "cerebras:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -6221,6 +6907,23 @@
       "status": 403,
       "sources": [
         "xai:homepage"
+      ]
+    },
+    {
+      "url": "https://z.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.signup",
+        "zai:homepage"
+      ]
+    },
+    {
+      "url": "https://z.ai/manage-apikey/apikey-list",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "zai:entrypoints.api_keys"
       ]
     },
     {

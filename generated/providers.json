@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:39:40.030Z",
+  "generated_at": "2026-07-08T08:53:26.587Z",
   "counts": {
     "providers": 76,
     "categories": 12,
     "entrypoint_urls": 716,
-    "checks_answered": 415
+    "checks_answered": 427
   },
   "categories": [
     {
@@ -1182,8 +1182,10 @@
           "verified": "2026-07-07"
         },
         "usage_dashboard": {
-          "status": "unknown",
-          "notes": "Dashboard analytics exist; need a canonical docs link as evidence."
+          "status": "supported",
+          "evidence": "https://developers.cloudflare.com/billing/",
+          "verified": "2026-07-08",
+          "notes": "Billing docs cover dashboard-based plan, subscription and usage management."
         },
         "idempotency": {
           "status": "unknown"
@@ -1209,10 +1211,9 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-07-08",
         "unknown_checks": [
           "oauth_support",
-          "usage_dashboard",
           "idempotency",
           "automation_permitted"
         ]
@@ -2516,8 +2517,10 @@
           "notes": "No dedicated sandbox; cheap ephemeral machines are commonly used for testing."
         },
         "free_tier_or_trial": {
-          "status": "unknown",
-          "notes": "Legacy free allowances were removed; current trial policy varies — needs a docs link."
+          "status": "unsupported",
+          "evidence": "https://fly.io/docs/about/pricing/",
+          "verified": "2026-07-08",
+          "notes": "Pay-as-you-go only for new customers; legacy Hobby/Launch/Scale free allowances are honored only for organizations that had them before sunset."
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -2526,7 +2529,10 @@
           "notes": "Pay-as-you-go billing is self-serve."
         },
         "usage_dashboard": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://fly.io/docs/about/billing/",
+          "verified": "2026-07-08",
+          "notes": "Per-org billing dashboard with invoices and per-second usage."
         },
         "idempotency": {
           "status": "unknown"
@@ -2536,9 +2542,12 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "notes": "ToS not yet reviewed; notably, fly.io/llms.txt carries an explicit AI-agent access policy asking automated LLM clients to identify themselves via an AI-Agent request header (telemetry only, not auth)."
         }
       },
+      "notes": [
+        "fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication)."
+      ],
       "derived": {
         "badges": [
           "Official MCP",
@@ -2548,12 +2557,10 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-07-08",
         "unknown_checks": [
           "oauth_support",
           "sandbox_or_test_mode",
-          "free_tier_or_trial",
-          "usage_dashboard",
           "idempotency",
           "versioning_policy",
           "automation_permitted"
@@ -4455,15 +4462,19 @@
         },
         "scoped_tokens": {
           "status": "unknown",
-          "notes": "Personal access tokens appear account-wide; per-permission scoping not documented."
+          "notes": "PATs support expiration dates and a SAML-team access toggle, but no granular permission scopes are documented."
         },
         "token_revocation": {
-          "status": "unknown",
-          "notes": "Tokens manageable in user settings; needs a docs link as evidence."
+          "status": "partial",
+          "evidence": "https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/",
+          "verified": "2026-07-08",
+          "notes": "Docs state a password reset permanently invalidates all PATs/OAuth tokens; tokens also take expiration dates. Manual per-token revocation is not explicitly documented on this page."
         },
         "sandbox_or_test_mode": {
-          "status": "unknown",
-          "notes": "Deploy previews serve as isolated test environments; needs a docs link as evidence."
+          "status": "supported",
+          "evidence": "https://docs.netlify.com/deploy/deploy-types/deploy-previews/",
+          "verified": "2026-07-08",
+          "notes": "Deploy Previews build every PR in an isolated preview before production."
         },
         "free_tier_or_trial": {
           "status": "supported",
@@ -4477,7 +4488,10 @@
           "verified": "2026-07-07"
         },
         "usage_dashboard": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://docs.netlify.com/manage/accounts-and-billing/team-management/overview/",
+          "verified": "2026-07-08",
+          "notes": "Team overview covers members, billing and usage; per-product usage pages exist for Functions/Edge Functions."
         },
         "idempotency": {
           "status": "unknown"
@@ -4496,15 +4510,13 @@
           "llms.txt",
           "OpenAPI",
           "CLI",
+          "Sandbox",
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-07-08",
         "unknown_checks": [
           "scoped_tokens",
-          "token_revocation",
-          "sandbox_or_test_mode",
-          "usage_dashboard",
           "idempotency",
           "versioning_policy",
           "automation_permitted"
@@ -5417,7 +5429,10 @@
           "notes": "Account/team/project tokens created self-serve in settings."
         },
         "oauth_support": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://docs.railway.com/integrations/oauth",
+          "verified": "2026-07-08",
+          "notes": "Login with Railway — OAuth 2.0 + OpenID Connect for third-party apps."
         },
         "scoped_tokens": {
           "status": "supported",
@@ -5429,8 +5444,10 @@
           "status": "unknown"
         },
         "sandbox_or_test_mode": {
-          "status": "unknown",
-          "notes": "PR/preview environments exist; needs the canonical docs link as evidence."
+          "status": "supported",
+          "evidence": "https://docs.railway.com/sandboxes",
+          "verified": "2026-07-08",
+          "notes": "First-class Sandboxes product — ephemeral isolated Linux environments via dashboard, CLI or SDK; PR environments also exist."
         },
         "free_tier_or_trial": {
           "status": "partial",
@@ -5444,7 +5461,9 @@
           "verified": "2026-07-08"
         },
         "usage_dashboard": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://docs.railway.com/projects/project-usage",
+          "verified": "2026-07-08"
         },
         "idempotency": {
           "status": "unknown"
@@ -5461,15 +5480,13 @@
         "badges": [
           "llms.txt",
           "CLI",
+          "Sandbox",
           "Self-serve"
         ],
         "stale": false,
         "last_verified": "2026-07-08",
         "unknown_checks": [
-          "oauth_support",
           "token_revocation",
-          "sandbox_or_test_mode",
-          "usage_dashboard",
           "idempotency",
           "versioning_policy",
           "automation_permitted"
@@ -5615,11 +5632,16 @@
           "status": "unknown"
         },
         "token_revocation": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://render.com/docs/api",
+          "verified": "2026-07-08",
+          "notes": "\"If you believe an API key has been compromised, revoke it in the Render Dashboard and create a new one.\""
         },
         "sandbox_or_test_mode": {
-          "status": "unknown",
-          "notes": "Preview environments exist; needs the canonical docs link as evidence."
+          "status": "supported",
+          "evidence": "https://render.com/docs/preview-environments",
+          "verified": "2026-07-08",
+          "notes": "Preview Environments — disposable copies of production for testing changes."
         },
         "free_tier_or_trial": {
           "status": "supported",
@@ -5633,7 +5655,9 @@
           "verified": "2026-07-08"
         },
         "usage_dashboard": {
-          "status": "unknown"
+          "status": "supported",
+          "evidence": "https://render.com/docs/render-dashboard",
+          "verified": "2026-07-08"
         },
         "idempotency": {
           "status": "unknown"
@@ -5647,11 +5671,15 @@
           "notes": "ToS not yet reviewed and recorded."
         }
       },
+      "notes": [
+        "The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions)."
+      ],
       "derived": {
         "badges": [
           "Official MCP",
           "llms.txt",
           "CLI",
+          "Sandbox",
           "Self-serve"
         ],
         "stale": false,
@@ -5659,9 +5687,6 @@
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",
-          "token_revocation",
-          "sandbox_or_test_mode",
-          "usage_dashboard",
           "idempotency",
           "versioning_policy",
           "automation_permitted"

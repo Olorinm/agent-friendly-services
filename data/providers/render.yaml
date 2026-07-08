@@ -39,11 +39,16 @@ checks:
     status: unknown
 
   token_revocation:
-    status: unknown
+    status: supported
+    evidence: https://render.com/docs/api
+    verified: "2026-07-08"
+    notes: '"If you believe an API key has been compromised, revoke it in the Render Dashboard and create a new one."' 
 
   sandbox_or_test_mode:
-    status: unknown
-    notes: Preview environments exist; needs the canonical docs link as evidence.
+    status: supported
+    evidence: https://render.com/docs/preview-environments
+    verified: "2026-07-08"
+    notes: Preview Environments — disposable copies of production for testing changes.
 
   free_tier_or_trial:
     status: supported
@@ -57,7 +62,9 @@ checks:
     verified: "2026-07-08"
 
   usage_dashboard:
-    status: unknown
+    status: supported
+    evidence: https://render.com/docs/render-dashboard
+    verified: "2026-07-08"
 
   idempotency:
     status: unknown
@@ -69,3 +76,6 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+notes:
+  - "The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions)."

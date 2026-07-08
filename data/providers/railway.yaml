@@ -33,7 +33,10 @@ checks:
     notes: Account/team/project tokens created self-serve in settings.
 
   oauth_support:
-    status: unknown
+    status: supported
+    evidence: https://docs.railway.com/integrations/oauth
+    verified: "2026-07-08"
+    notes: Login with Railway — OAuth 2.0 + OpenID Connect for third-party apps.
 
   scoped_tokens:
     status: supported
@@ -45,8 +48,10 @@ checks:
     status: unknown
 
   sandbox_or_test_mode:
-    status: unknown
-    notes: PR/preview environments exist; needs the canonical docs link as evidence.
+    status: supported
+    evidence: https://docs.railway.com/sandboxes
+    verified: "2026-07-08"
+    notes: First-class Sandboxes product — ephemeral isolated Linux environments via dashboard, CLI or SDK; PR environments also exist.
 
   free_tier_or_trial:
     status: partial
@@ -60,7 +65,9 @@ checks:
     verified: "2026-07-08"
 
   usage_dashboard:
-    status: unknown
+    status: supported
+    evidence: https://docs.railway.com/projects/project-usage
+    verified: "2026-07-08"
 
   idempotency:
     status: unknown

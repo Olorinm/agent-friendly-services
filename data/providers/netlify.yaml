@@ -42,15 +42,19 @@ checks:
 
   scoped_tokens:
     status: unknown
-    notes: Personal access tokens appear account-wide; per-permission scoping not documented.
+    notes: PATs support expiration dates and a SAML-team access toggle, but no granular permission scopes are documented.
 
   token_revocation:
-    status: unknown
-    notes: Tokens manageable in user settings; needs a docs link as evidence.
+    status: partial
+    evidence: https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/
+    verified: "2026-07-08"
+    notes: Docs state a password reset permanently invalidates all PATs/OAuth tokens; tokens also take expiration dates. Manual per-token revocation is not explicitly documented on this page.
 
   sandbox_or_test_mode:
-    status: unknown
-    notes: Deploy previews serve as isolated test environments; needs a docs link as evidence.
+    status: supported
+    evidence: https://docs.netlify.com/deploy/deploy-types/deploy-previews/
+    verified: "2026-07-08"
+    notes: Deploy Previews build every PR in an isolated preview before production.
 
   free_tier_or_trial:
     status: supported
@@ -64,7 +68,10 @@ checks:
     verified: "2026-07-07"
 
   usage_dashboard:
-    status: unknown
+    status: supported
+    evidence: https://docs.netlify.com/manage/accounts-and-billing/team-management/overview/
+    verified: "2026-07-08"
+    notes: Team overview covers members, billing and usage; per-product usage pages exist for Functions/Edge Functions.
 
   idempotency:
     status: unknown

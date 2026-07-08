@@ -52,8 +52,10 @@ checks:
     notes: No dedicated sandbox; cheap ephemeral machines are commonly used for testing.
 
   free_tier_or_trial:
-    status: unknown
-    notes: Legacy free allowances were removed; current trial policy varies — needs a docs link.
+    status: unsupported
+    evidence: https://fly.io/docs/about/pricing/
+    verified: "2026-07-08"
+    notes: Pay-as-you-go only for new customers; legacy Hobby/Launch/Scale free allowances are honored only for organizations that had them before sunset.
 
   self_serve_paid_upgrade:
     status: supported
@@ -62,7 +64,10 @@ checks:
     notes: Pay-as-you-go billing is self-serve.
 
   usage_dashboard:
-    status: unknown
+    status: supported
+    evidence: https://fly.io/docs/about/billing/
+    verified: "2026-07-08"
+    notes: Per-org billing dashboard with invoices and per-second usage.
 
   idempotency:
     status: unknown
@@ -72,4 +77,7 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed and recorded.
+    notes: ToS not yet reviewed; notably, fly.io/llms.txt carries an explicit AI-agent access policy asking automated LLM clients to identify themselves via an AI-Agent request header (telemetry only, not auth).
+
+notes:
+  - "fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication)."

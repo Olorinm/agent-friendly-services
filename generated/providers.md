@@ -70,11 +70,11 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
-| [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
-| [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
-| [Railway](#railway) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
-| [Render](#render) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-08 |
+| [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-08 |
+| [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Railway](#railway) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Render](#render) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Databases
@@ -268,9 +268,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://developers.cloudflare.com) · [API Reference](https://developers.cloudflare.com/api/) · [OpenAPI](https://github.com/cloudflare/api-schemas) · [llms.txt](https://developers.cloudflare.com/llms.txt) · [Changelog](https://developers.cloudflare.com/changelog/) · [Status Page](https://www.cloudflarestatus.com) · [Pricing](https://www.cloudflare.com/plans/) · [Signup](https://dash.cloudflare.com/sign-up) · [API Keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [SDKs](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) · [Official MCP](https://github.com/cloudflare/mcp-server-cloudflare) · [Agent Docs](https://developers.cloudflare.com/agents/)
 
-- **Supported:** [Self-serve signup](https://dash.cloudflare.com/sign-up) · [Self-serve API keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Scoped tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Token revocation](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Free tier / trial](https://www.cloudflare.com/plans/) · [Self-serve upgrade](https://www.cloudflare.com/plans/) · [Versioning policy](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/)
+- **Supported:** [Self-serve signup](https://dash.cloudflare.com/sign-up) · [Self-serve API keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Scoped tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Token revocation](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [Free tier / trial](https://www.cloudflare.com/plans/) · [Self-serve upgrade](https://www.cloudflare.com/plans/) · [Usage dashboard](https://developers.cloudflare.com/billing/) · [Versioning policy](https://developers.cloudflare.com/fundamentals/api/reference/deprecations/)
 - **Partial:** [Sandbox / test mode](https://developers.cloudflare.com/workers/wrangler/) — No global sandbox; wrangler local dev and the Workers free plan serve as a test environment.
-- **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `automation_permitted`
+- **Unknown (help wanted):** `oauth_support`, `idempotency`, `automation_permitted`
 
 ### Cohere <a id="cohere"></a>
 
@@ -432,8 +432,11 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://fly.io/docs) · [API Reference](https://fly.io/docs/machines/api/) · [OpenAPI](https://docs.machines.dev) · [llms.txt](https://fly.io/llms.txt) · [Status Page](https://status.flyio.net) · [Pricing](https://fly.io/docs/about/pricing/) · [Signup](https://fly.io/app/sign-up) · [API Keys](https://fly.io/docs/security/tokens/) · [CLI](https://fly.io/docs/flyctl/) · [Official MCP](https://fly.io/docs/mcp/)
 
-- **Supported:** [Self-serve signup](https://fly.io/app/sign-up) · [Self-serve API keys](https://fly.io/docs/security/tokens/) · [Scoped tokens](https://fly.io/docs/security/tokens/) · [Token revocation](https://fly.io/docs/security/tokens/) · [Self-serve upgrade](https://fly.io/docs/about/pricing/)
-- **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+- **Supported:** [Self-serve signup](https://fly.io/app/sign-up) · [Self-serve API keys](https://fly.io/docs/security/tokens/) · [Scoped tokens](https://fly.io/docs/security/tokens/) · [Token revocation](https://fly.io/docs/security/tokens/) · [Self-serve upgrade](https://fly.io/docs/about/pricing/) · [Usage dashboard](https://fly.io/docs/about/billing/)
+- **Not supported:** [Free tier / trial](https://fly.io/docs/about/pricing/) — Pay-as-you-go only for new customers; legacy Hobby/Launch/Scale free allowances are honored only for organizations that had them before sunset.
+- **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+> fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication).
 
 ### Gemini API <a id="gemini-api"></a>
 
@@ -662,12 +665,13 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.netlify.com) · [API Reference](https://open-api.netlify.com) · [OpenAPI](https://github.com/netlify/open-api) · [llms.txt](https://docs.netlify.com/llms.txt) · [Changelog](https://www.netlify.com/changelog/) · [Status Page](https://www.netlifystatus.com) · [Pricing](https://www.netlify.com/pricing/) · [Signup](https://app.netlify.com/signup) · [API Keys](https://docs.netlify.com/api/get-started/) · [CLI](https://docs.netlify.com/cli/get-started/) · [Official MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/)
 
-- **Supported:** [Self-serve signup](https://app.netlify.com/signup) · [Self-serve API keys](https://docs.netlify.com/api/get-started/) · [OAuth](https://docs.netlify.com/api/get-started/) · [Free tier / trial](https://www.netlify.com/pricing/) · [Self-serve upgrade](https://www.netlify.com/pricing/)
-- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+- **Supported:** [Self-serve signup](https://app.netlify.com/signup) · [Self-serve API keys](https://docs.netlify.com/api/get-started/) · [OAuth](https://docs.netlify.com/api/get-started/) · [Sandbox / test mode](https://docs.netlify.com/deploy/deploy-types/deploy-previews/) · [Free tier / trial](https://www.netlify.com/pricing/) · [Self-serve upgrade](https://www.netlify.com/pricing/) · [Usage dashboard](https://docs.netlify.com/manage/accounts-and-billing/team-management/overview/)
+- **Partial:** [Token revocation](https://docs.netlify.com/api-and-cli-guides/api-guides/get-started-with-api/) — Docs state a password reset permanently invalidates all PATs/OAuth tokens; tokens also take expiration dates. Manual per-token revocation is not explicitly documented on this page.
+- **Unknown (help wanted):** `scoped_tokens`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Notion <a id="notion"></a>
 
@@ -778,13 +782,13 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.
 
-**Category:** Cloud / Hosting · `llms.txt` `CLI` `Self-serve`
+**Category:** Cloud / Hosting · `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.railway.com) · [API Reference](https://docs.railway.com/reference/public-api) · [GraphQL](https://docs.railway.com/reference/public-api) · [llms.txt](https://docs.railway.com/llms.txt) · [Status Page](https://status.railway.com) · [Pricing](https://railway.com/pricing) · [Signup](https://railway.com/new) · [API Keys](https://docs.railway.com/reference/public-api) · [CLI](https://github.com/railwayapp/cli)
 
-- **Supported:** [Self-serve signup](https://railway.com/new) · [Self-serve API keys](https://docs.railway.com/reference/public-api) · [Scoped tokens](https://docs.railway.com/reference/public-api) · [Self-serve upgrade](https://railway.com/pricing)
+- **Supported:** [Self-serve signup](https://railway.com/new) · [Self-serve API keys](https://docs.railway.com/reference/public-api) · [OAuth](https://docs.railway.com/integrations/oauth) · [Scoped tokens](https://docs.railway.com/reference/public-api) · [Sandbox / test mode](https://docs.railway.com/sandboxes) · [Self-serve upgrade](https://railway.com/pricing) · [Usage dashboard](https://docs.railway.com/projects/project-usage)
 - **Partial:** [Free tier / trial](https://railway.com/pricing) — One-time trial credit; no standing free tier.
-- **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+- **Unknown (help wanted):** `token_revocation`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Redis (Redis Cloud) <a id="redis"></a>
 
@@ -801,12 +805,14 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://render.com/docs) · [API Reference](https://api-docs.render.com/reference/introduction) · [llms.txt](https://render.com/docs/llms.txt) · [Status Page](https://status.render.com) · [Pricing](https://render.com/pricing) · [Signup](https://dashboard.render.com/register) · [API Keys](https://render.com/docs/api) · [CLI](https://github.com/render-oss/cli) · [Official MCP](https://github.com/render-oss/render-mcp-server)
 
-- **Supported:** [Self-serve signup](https://dashboard.render.com/register) · [Self-serve API keys](https://render.com/docs/api) · [Free tier / trial](https://render.com/pricing) · [Self-serve upgrade](https://render.com/pricing)
-- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+- **Supported:** [Self-serve signup](https://dashboard.render.com/register) · [Self-serve API keys](https://render.com/docs/api) · [Token revocation](https://render.com/docs/api) · [Sandbox / test mode](https://render.com/docs/preview-environments) · [Free tier / trial](https://render.com/pricing) · [Self-serve upgrade](https://render.com/pricing) · [Usage dashboard](https://render.com/docs/render-dashboard)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+> The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions).
 
 ### Replicate <a id="replicate"></a>
 
