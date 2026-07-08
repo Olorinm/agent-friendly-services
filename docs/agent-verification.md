@@ -26,7 +26,21 @@ records all of the following, and runs with a different environment are
 different experiments:
 
 - **Machine**: a fresh environment with no prior state (no cached logins, no
-  provider SDKs preinstalled, no shell history).
+  provider SDKs preinstalled, no shell history). Calibration showed why: a
+  stray stored credential left on the machine surfaced next to the provisioned
+  one mid-run and had to be reasoned about by the agent.
+- **Per-rep isolation, both sides**: repetitions must not see each other.
+  *Machine side*: every rep is a fresh agent conversation in a fresh empty
+  working directory — no agent memory, no project instructions, no files from
+  earlier reps. *Provider side*: cleanup must actually remove created
+  artifacts (not just archive them), otherwise a later rep can imitate an
+  earlier rep's visible work instead of deriving it from docs; the runner
+  asserts before each rep that no earlier artifacts are visible through the
+  verification API and marks the rep `contaminated` if they are. Where a
+  provider offers no deletion API, use a fresh test resource per rep or record
+  the residue as a limitation. (Model training priors are the one form of
+  "memory" deliberately kept: the metric is whether *today's agents* can use
+  you, and they arrive with priors.)
 - **Agent + model**: pinned and recorded (e.g. Claude Code headless, model id).
 - **Tool surface**: pinned per access route (see below). The baseline route is
   web fetch/search + `curl` via shell — no provider SDKs, no provider CLIs —
@@ -139,9 +153,17 @@ designated test resources.
 
 ## Storage
 
-- `data/experiments/tasks/<category>.yaml` — pinned task definitions.
-- `data/experiments/first-call/<provider>.yaml` — latest result per provider.
-- `data/experiments/first-call/transcripts/<provider>-<date>.md` — evidence.
+- `data/experiments/tasks/<category>.yaml` — pinned task definitions,
+  including the runner's `verify_commands` (public, because they define what
+  counts as a pass).
+- `data/experiments/results/<provider>/<date>-<layer>[-<route>]-rep<N>.yaml`
+  (+ `.md` transcript) — run results. **Gitignored until the publication
+  protocol (ToS review, dispute/rerun rules) is settled.**
+- `data/experiments/first-call/` — legacy pilot layout, superseded by the
+  above.
+- Credentials and provisioning live outside the repo in `$AFS_CRED_DIR`
+  (default `~/.afs/credentials`): `<id>.curlrc`, `<id>.env`, `<id>.mcp.json`,
+  `<id>.provision.yaml`. Never committed.
 
 `generate.ts` will surface verified real-task passes as an **Agent-verified**
 badge once the first provisioned batch lands. Experiments never override
@@ -153,8 +175,13 @@ documented checks; they sit alongside them.
 # Recon (no credentials needed):
 npm run agent-verify -- --provider=groq
 
-# Real task (credential file required; never commit credentials):
-npm run agent-verify -- --provider=github --task=real
+# Dry-fire (no credentials needed):
+npm run agent-verify -- --provider=groq --layer=dry-fire --reps=3
+
+# Real task over each route (credential files in $AFS_CRED_DIR):
+npm run agent-verify -- --provider=github --layer=real --route=http --reps=3
+npm run agent-verify -- --provider=github --layer=real --route=cli --reps=3
+npm run agent-verify -- --provider=github --layer=real --route=mcp --reps=3
 ```
 
 The runner (`scripts/agent-verify.ts`) builds a standardized prompt from the
