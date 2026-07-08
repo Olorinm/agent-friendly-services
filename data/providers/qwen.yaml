@@ -1,0 +1,66 @@
+id: qwen
+name: Alibaba Qwen (Model Studio)
+category: ai-models
+homepage: https://www.alibabacloud.com/en/product/modelstudio
+summary: Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).
+submitted_by: community
+scope: International (Alibaba Cloud Model Studio / DashScope Intl)
+
+tags:
+  - llm
+  - qwen
+  - openai-compatible
+
+entrypoints:
+  docs: https://www.alibabacloud.com/help/en/model-studio/
+  api_reference: https://www.alibabacloud.com/help/en/model-studio/models
+  signup: https://modelstudio.console.alibabacloud.com
+  api_keys: https://www.alibabacloud.com/help/en/model-studio/get-api-key
+  cli: https://github.com/QwenLM/qwen-code
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.alibabacloud.com/help/en/model-studio/get-api-key
+    verified: "2026-07-08"
+    notes: Requires an Alibaba Cloud account; key creation is documented step-by-step.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://www.alibabacloud.com/help/en/model-studio/get-api-key
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: Alibaba Cloud RAM policies can scope access; needs the Model-Studio-specific docs link.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.alibabacloud.com/help/en/model-studio/new-free-quota
+    verified: "2026-07-08"
+    notes: Free quota for new users per model, time-limited.
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

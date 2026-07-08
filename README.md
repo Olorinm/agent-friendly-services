@@ -4,11 +4,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 65 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Where AI agents plug into 69 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
-![Providers](https://img.shields.io/badge/providers-65-2563eb)
+![Providers](https://img.shields.io/badge/providers-69-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-729_ok%2C_1_broken-e11d48)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-731_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -29,7 +29,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details open>
-<summary><b>Capability matrix</b> — all 65 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
+<summary><b>Capability matrix</b> — all 69 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 **AI Models**
 
@@ -44,12 +44,16 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [MiniMax](./generated/providers.md#minimax) | ✓ | — | — | — | — | ✓ | — | 2026-07-08 |
 | [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Moonshot AI (Kimi)](./generated/providers.md#moonshot) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [OpenAI](./generated/providers.md#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenRouter](./generated/providers.md#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Alibaba Qwen (Model Studio)](./generated/providers.md#qwen) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Replicate](./generated/providers.md#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](./generated/providers.md#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [xAI (Grok API)](./generated/providers.md#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
+| [Z.ai (GLM)](./generated/providers.md#zai) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 
 **Agent Tooling**
 
@@ -173,12 +177,16 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Gemini API](https://ai.google.dev/gemini-api/docs)** — Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning. [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [all facts →](./generated/providers.md#gemini-api)
 - **[Groq](https://console.groq.com/docs)** — Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier. [API](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [all facts →](./generated/providers.md#groq)
 - **[Hugging Face](https://huggingface.co/docs)** — Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API. [API](https://huggingface.co/docs/hub/api) · [MCP](https://huggingface.co/mcp) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [all facts →](./generated/providers.md#hugging-face)
+- **[MiniMax](https://platform.minimax.io/docs)** — MiniMax text, speech, video and music models via the international platform API, with an official MCP server. [API](https://platform.minimax.io/docs/api-reference) · [MCP](https://github.com/MiniMax-AI/MiniMax-MCP) · [all facts →](./generated/providers.md#minimax)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [all facts →](./generated/providers.md#mistral)
+- **[Moonshot AI (Kimi)](https://platform.kimi.ai/docs)** — Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli). [API](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli) · [all facts →](./generated/providers.md#moonshot)
 - **[OpenAI](https://platform.openai.com/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [all facts →](./generated/providers.md#openai)
 - **[OpenRouter](https://openrouter.ai/docs)** — Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt. [API](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [all facts →](./generated/providers.md#openrouter)
+- **[Alibaba Qwen (Model Studio)](https://www.alibabacloud.com/help/en/model-studio/)** — Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code). [API](https://www.alibabacloud.com/help/en/model-studio/models) · [CLI](https://github.com/QwenLM/qwen-code) · [all facts →](./generated/providers.md#qwen)
 - **[Replicate](https://replicate.com/docs)** — Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI. [API](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [CLI](https://github.com/replicate/cli) · [all facts →](./generated/providers.md#replicate)
 - **[Together AI](https://docs.together.ai)** — Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt. [API](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [all facts →](./generated/providers.md#together-ai)
 - **[xAI (Grok API)](https://docs.x.ai)** — xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. [API](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [all facts →](./generated/providers.md#xai)
+- **[Z.ai (GLM)](https://docs.z.ai)** — GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys. [API](https://docs.z.ai/api-reference) · [llms.txt](https://docs.z.ai/llms.txt) · [all facts →](./generated/providers.md#zai)
 
 ## Agent Tooling
 
@@ -265,7 +273,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **404 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **442 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
 
 Have a coding agent? Point it at a checkout and paste:
 

@@ -1,0 +1,61 @@
+id: minimax
+name: MiniMax
+category: ai-models
+homepage: https://platform.minimax.io
+summary: MiniMax text, speech, video and music models via the international platform API, with an official MCP server.
+submitted_by: community
+scope: International platform (platform.minimax.io)
+
+tags:
+  - llm
+  - speech
+  - video-generation
+
+entrypoints:
+  docs: https://platform.minimax.io/docs
+  api_reference: https://platform.minimax.io/docs/api-reference
+  signup: https://platform.minimax.io
+  api_keys: https://platform.minimax.io/user-center/basic-information/interface-key
+  mcp_official: https://github.com/MiniMax-AI/MiniMax-MCP
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://platform.minimax.io/user-center/basic-information/interface-key
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://platform.minimax.io/user-center/basic-information/interface-key
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

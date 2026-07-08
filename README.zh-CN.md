@@ -4,11 +4,11 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 65 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+AI 智能体接入 69 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
-![Providers](https://img.shields.io/badge/providers-65-2563eb)
+![Providers](https://img.shields.io/badge/providers-69-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-729_ok%2C_1_broken-e11d48)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-731_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details open>
-<summary><b>能力矩阵表</b> —— 65 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
+<summary><b>能力矩阵表</b> —— 69 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 **AI Models**
 
@@ -46,12 +46,16 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [MiniMax](./generated/providers.md#minimax) | ✓ | — | — | — | — | ✓ | — | 2026-07-08 |
 | [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Moonshot AI (Kimi)](./generated/providers.md#moonshot) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [OpenAI](./generated/providers.md#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenRouter](./generated/providers.md#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Alibaba Qwen (Model Studio)](./generated/providers.md#qwen) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Replicate](./generated/providers.md#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](./generated/providers.md#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [xAI (Grok API)](./generated/providers.md#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
+| [Z.ai (GLM)](./generated/providers.md#zai) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 
 **Agent Tooling**
 
@@ -175,12 +179,16 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Gemini API](https://ai.google.dev/gemini-api/docs)** — Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning. [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [全部事实 →](./generated/providers.md#gemini-api)
 - **[Groq](https://console.groq.com/docs)** — Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier. [API](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [全部事实 →](./generated/providers.md#groq)
 - **[Hugging Face](https://huggingface.co/docs)** — Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API. [API](https://huggingface.co/docs/hub/api) · [MCP](https://huggingface.co/mcp) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [全部事实 →](./generated/providers.md#hugging-face)
+- **[MiniMax](https://platform.minimax.io/docs)** — MiniMax text, speech, video and music models via the international platform API, with an official MCP server. [API](https://platform.minimax.io/docs/api-reference) · [MCP](https://github.com/MiniMax-AI/MiniMax-MCP) · [全部事实 →](./generated/providers.md#minimax)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [全部事实 →](./generated/providers.md#mistral)
+- **[Moonshot AI (Kimi)](https://platform.kimi.ai/docs)** — Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli). [API](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli) · [全部事实 →](./generated/providers.md#moonshot)
 - **[OpenAI](https://platform.openai.com/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [全部事实 →](./generated/providers.md#openai)
 - **[OpenRouter](https://openrouter.ai/docs)** — Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt. [API](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [全部事实 →](./generated/providers.md#openrouter)
+- **[Alibaba Qwen (Model Studio)](https://www.alibabacloud.com/help/en/model-studio/)** — Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code). [API](https://www.alibabacloud.com/help/en/model-studio/models) · [CLI](https://github.com/QwenLM/qwen-code) · [全部事实 →](./generated/providers.md#qwen)
 - **[Replicate](https://replicate.com/docs)** — Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI. [API](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [CLI](https://github.com/replicate/cli) · [全部事实 →](./generated/providers.md#replicate)
 - **[Together AI](https://docs.together.ai)** — Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt. [API](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [全部事实 →](./generated/providers.md#together-ai)
 - **[xAI (Grok API)](https://docs.x.ai)** — xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. [API](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [全部事实 →](./generated/providers.md#xai)
+- **[Z.ai (GLM)](https://docs.z.ai)** — GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys. [API](https://docs.z.ai/api-reference) · [llms.txt](https://docs.z.ai/llms.txt) · [全部事实 →](./generated/providers.md#zai)
 
 ## Agent Tooling
 
@@ -267,7 +275,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 参与贡献
 
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **404 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **442 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
 
 有编程智能体？让它打开本仓库的检出目录，然后粘贴：
 

@@ -30,9 +30,11 @@ jina,Jina AI,web-search-data,true,true,false,false,unknown,true,2026-07-08
 lark,Lark,communication,true,true,false,true,unknown,true,2026-07-07
 lemonsqueezy,Lemon Squeezy,payments-billing,false,false,false,false,supported,true,2026-07-08
 linear,Linear,productivity-storage,true,true,false,false,unknown,true,2026-07-07
+minimax,MiniMax,ai-models,true,false,false,false,unknown,true,2026-07-08
 mistral,Mistral AI,ai-models,false,true,true,false,unknown,true,2026-07-07
 modal,Modal,code-execution,false,true,false,true,supported,true,2026-07-07
 mongodb-atlas,MongoDB Atlas,databases,true,true,true,true,unknown,true,2026-07-07
+moonshot,Moonshot AI (Kimi),ai-models,false,false,false,true,unknown,true,2026-07-08
 n8n,n8n,agent-tooling,true,true,false,true,supported,true,2026-07-08
 neon,Neon,databases,true,true,true,true,supported,true,2026-07-07
 netlify,Netlify,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
@@ -44,6 +46,7 @@ perplexity,Perplexity API,web-search-data,true,true,false,false,unknown,true,202
 pinecone,Pinecone,databases,true,true,false,true,unknown,true,2026-07-07
 postman,Postman,developer-tools,true,true,false,true,unknown,true,2026-07-07
 qdrant,Qdrant,databases,true,true,false,false,unknown,true,2026-07-07
+qwen,Alibaba Qwen (Model Studio),ai-models,false,false,false,true,unknown,true,2026-07-08
 railway,Railway,cloud-hosting,false,true,false,true,unknown,true,2026-07-08
 redis,Redis (Redis Cloud),databases,true,true,false,true,supported,true,2026-07-08
 render,Render,cloud-hosting,true,true,false,true,unknown,true,2026-07-08
@@ -63,4 +66,5 @@ upstash,Upstash,databases,true,true,false,true,unknown,true,2026-07-07
 vercel,Vercel,cloud-hosting,true,true,true,true,supported,true,2026-07-07
 weaviate,Weaviate,databases,true,true,false,true,supported,true,2026-07-08
 xai,xAI (Grok API),ai-models,false,true,false,false,unknown,false,2026-07-08
+zai,Z.ai (GLM),ai-models,false,true,false,false,unknown,true,2026-07-08
 zapier,Zapier,agent-tooling,true,true,false,true,unknown,true,2026-07-07

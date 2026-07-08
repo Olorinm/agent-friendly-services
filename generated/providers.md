@@ -23,12 +23,16 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [MiniMax](#minimax) | ✓ | — | — | — | — | ✓ | — | 2026-07-08 |
 | [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Moonshot AI (Kimi)](#moonshot) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenRouter](#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Alibaba Qwen (Model Studio)](#qwen) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [xAI (Grok API)](#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
+| [Z.ai (GLM)](#zai) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 
 ### Agent Tooling
 
@@ -513,6 +517,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://linear.app/signup) · [Self-serve API keys](https://linear.app/developers/graphql) · [OAuth](https://linear.app/developers) · [Free tier / trial](https://linear.app/pricing) · [Self-serve upgrade](https://linear.app/pricing)
 - **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### MiniMax <a id="minimax"></a>
+
+> MiniMax text, speech, video and music models via the international platform API, with an official MCP server.
+
+**Category:** AI Models · **Scope:** International platform (platform.minimax.io) · `Official MCP` `Self-serve`
+
+**Links:** [Documentation](https://platform.minimax.io/docs) · [API Reference](https://platform.minimax.io/docs/api-reference) · [Signup](https://platform.minimax.io) · [API Keys](https://platform.minimax.io/user-center/basic-information/interface-key) · [Official MCP](https://github.com/MiniMax-AI/MiniMax-MCP)
+
+- **Supported:** [Self-serve signup](https://platform.minimax.io/user-center/basic-information/interface-key) · [Self-serve API keys](https://platform.minimax.io/user-center/basic-information/interface-key)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Mistral AI <a id="mistral"></a>
 
 > European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.
@@ -545,6 +560,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://www.mongodb.com/cloud/atlas/register) · [Self-serve API keys](https://www.mongodb.com/docs/atlas/configure-api-access/) · [OAuth](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Scoped tokens](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Token revocation](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Free tier / trial](https://www.mongodb.com/pricing) · [Self-serve upgrade](https://www.mongodb.com/pricing) · [Versioning policy](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### Moonshot AI (Kimi) <a id="moonshot"></a>
+
+> Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).
+
+**Category:** AI Models · **Scope:** International platform (platform.kimi.ai) · `CLI` `Self-serve`
+
+**Links:** [Documentation](https://platform.kimi.ai/docs) · [API Reference](https://platform.kimi.ai/docs/api/chat) · [Signup](https://platform.kimi.ai) · [API Keys](https://platform.kimi.ai/console/api-keys) · [CLI](https://github.com/MoonshotAI/kimi-cli)
+
+- **Supported:** [Self-serve signup](https://platform.kimi.ai/console/api-keys) · [Self-serve API keys](https://platform.kimi.ai/console/api-keys)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### n8n <a id="n8n"></a>
 
@@ -674,6 +700,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://cloud.qdrant.io) · [Self-serve API keys](https://qdrant.tech/documentation/cloud/authentication) · [Free tier / trial](https://qdrant.tech/pricing) · [Self-serve upgrade](https://qdrant.tech/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Alibaba Qwen (Model Studio) <a id="qwen"></a>
+
+> Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).
+
+**Category:** AI Models · **Scope:** International (Alibaba Cloud Model Studio / DashScope Intl) · `CLI` `Self-serve`
+
+**Links:** [Documentation](https://www.alibabacloud.com/help/en/model-studio/) · [API Reference](https://www.alibabacloud.com/help/en/model-studio/models) · [Signup](https://modelstudio.console.alibabacloud.com) · [API Keys](https://www.alibabacloud.com/help/en/model-studio/get-api-key) · [CLI](https://github.com/QwenLM/qwen-code)
+
+- **Supported:** [Self-serve signup](https://www.alibabacloud.com/help/en/model-studio/get-api-key) · [Self-serve API keys](https://www.alibabacloud.com/help/en/model-studio/get-api-key) · [Free tier / trial](https://www.alibabacloud.com/help/en/model-studio/new-free-quota)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Railway <a id="railway"></a>
 
@@ -896,6 +933,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve API keys](https://docs.x.ai/overview)
 - **Unknown (help wanted):** `self_serve_signup`, `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Z.ai (GLM) <a id="zai"></a>
+
+> GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.
+
+**Category:** AI Models · **Scope:** International platform (z.ai); the China platform is open.bigmodel.cn · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.z.ai) · [API Reference](https://docs.z.ai/api-reference) · [llms.txt](https://docs.z.ai/llms.txt) · [Pricing](https://docs.z.ai/guides/overview/pricing) · [Signup](https://z.ai) · [API Keys](https://z.ai/manage-apikey/apikey-list)
+
+- **Supported:** [Self-serve signup](https://docs.z.ai/guides/overview/quick-start) · [Self-serve API keys](https://docs.z.ai/guides/overview/quick-start) · [Self-serve upgrade](https://docs.z.ai/guides/overview/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Zapier <a id="zapier"></a>
 

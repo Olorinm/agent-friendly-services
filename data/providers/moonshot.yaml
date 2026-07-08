@@ -1,0 +1,62 @@
+id: moonshot
+name: Moonshot AI (Kimi)
+category: ai-models
+homepage: https://platform.kimi.ai
+summary: Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).
+submitted_by: community
+scope: International platform (platform.kimi.ai)
+
+tags:
+  - llm
+  - kimi
+  - openai-compatible
+
+entrypoints:
+  docs: https://platform.kimi.ai/docs
+  api_reference: https://platform.kimi.ai/docs/api/chat
+  signup: https://platform.kimi.ai
+  api_keys: https://platform.kimi.ai/console/api-keys
+  cli: https://github.com/MoonshotAI/kimi-cli
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://platform.kimi.ai/console/api-keys
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://platform.kimi.ai/console/api-keys
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Sign-up credit promotions have been offered; no standing free tier documented.
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

@@ -1,0 +1,65 @@
+id: zai
+name: Z.ai (GLM)
+category: ai-models
+homepage: https://z.ai
+summary: GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.
+submitted_by: community
+scope: International platform (z.ai); the China platform is open.bigmodel.cn
+
+tags:
+  - llm
+  - glm
+  - openai-compatible
+
+entrypoints:
+  docs: https://docs.z.ai
+  api_reference: https://docs.z.ai/api-reference
+  llms_txt: https://docs.z.ai/llms.txt
+  pricing: https://docs.z.ai/guides/overview/pricing
+  signup: https://z.ai
+  api_keys: https://z.ai/manage-apikey/apikey-list
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://docs.z.ai/guides/overview/quick-start
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.z.ai/guides/overview/quick-start
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Flash-tier models have been offered free at times; needs a canonical pricing statement as evidence.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://docs.z.ai/guides/overview/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

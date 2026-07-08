@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-07-08T08:29:40.416Z",
+  "checked_at": "2026-07-08T08:30:56.162Z",
   "total": 740,
-  "ok": 729,
-  "inconclusive": 10,
-  "broken": 1,
+  "ok": 731,
+  "inconclusive": 9,
+  "broken": 0,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -3995,8 +3995,8 @@
     },
     {
       "url": "https://openai.com",
-      "class": "inconclusive",
-      "status": 403,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "openai:homepage"
       ]
@@ -4788,14 +4788,6 @@
       "status": 200,
       "sources": [
         "shopify:entrypoints.webhooks"
-      ]
-    },
-    {
-      "url": "https://shopify.dev/llms.txt",
-      "class": "broken",
-      "status": 404,
-      "sources": [
-        "shopify:entrypoints.llms_txt"
       ]
     },
     {
@@ -6040,6 +6032,14 @@
         "shopify:entrypoints.signup",
         "shopify:checks.self_serve_signup.evidence",
         "shopify:checks.free_tier_or_trial.evidence"
+      ]
+    },
+    {
+      "url": "https://www.shopify.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "shopify:entrypoints.llms_txt"
       ]
     },
     {
