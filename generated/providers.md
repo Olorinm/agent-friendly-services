@@ -43,7 +43,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [Mem0](#mem0) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [n8n](#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Vapi](#vapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Code Execution
@@ -53,6 +55,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
 | [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
 | [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Steel](#steel) | — | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 
 ### Developer Tools
 
@@ -565,6 +568,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://lumalabs.ai/api) · [Self-serve API keys](https://docs.lumalabs.ai/docs/welcome) · [Self-serve upgrade](https://lumalabs.ai/api/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Mem0 <a id="mem0"></a>
+
+> Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.
+
+**Category:** Agent Tooling · **Scope:** Hosted platform + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.mem0.ai) · [API Reference](https://docs.mem0.ai/api-reference) · [llms.txt](https://docs.mem0.ai/llms.txt) · [Status Page](https://status.mem0.ai) · [Pricing](https://mem0.ai/pricing) · [Signup](https://app.mem0.ai) · [API Keys](https://app.mem0.ai) · [Official MCP](https://docs.mem0.ai/openmemory/overview)
+
+- **Supported:** [Self-serve signup](https://app.mem0.ai) · [Self-serve API keys](https://docs.mem0.ai/platform/quickstart) · [Sandbox / test mode](https://github.com/mem0ai/mem0) · [Free tier / trial](https://mem0.ai/pricing) · [Self-serve upgrade](https://mem0.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### MiniMax <a id="minimax"></a>
 
 > MiniMax text, speech, video and music models via the international platform API, with an official MCP server.
@@ -860,6 +874,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://slack.com/get-started) · [Self-serve API keys](https://api.slack.com/authentication/token-types) · [OAuth](https://api.slack.com/authentication/oauth-v2) · [Scoped tokens](https://api.slack.com/authentication/token-types) · [Token revocation](https://api.slack.com/authentication/token-types) · [Free tier / trial](https://slack.com/pricing) · [Self-serve upgrade](https://slack.com/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Steel <a id="steel"></a>
+
+> Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.
+
+**Category:** Code Execution · **Scope:** Steel Cloud + open-source · `llms.txt` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.steel.dev) · [API Reference](https://docs.steel.dev/api-reference) · [llms.txt](https://docs.steel.dev/llms.txt) · [Pricing](https://steel.dev/pricing) · [Signup](https://app.steel.dev) · [API Keys](https://app.steel.dev)
+
+- **Supported:** [Self-serve signup](https://app.steel.dev) · [Self-serve API keys](https://docs.steel.dev/overview/intro-to-steel) · [Sandbox / test mode](https://github.com/steel-dev/steel-browser) · [Free tier / trial](https://steel.dev/pricing) · [Self-serve upgrade](https://steel.dev/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Stripe <a id="stripe"></a>
 
 > Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.
@@ -945,6 +970,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 **Links:** [Documentation](https://upstash.com/docs) · [API Reference](https://upstash.com/docs/devops/developer-api/introduction) · [llms.txt](https://upstash.com/docs/llms.txt) · [Status Page](https://status.upstash.com) · [Pricing](https://upstash.com/pricing) · [Signup](https://console.upstash.com) · [API Keys](https://upstash.com/docs/devops/developer-api/introduction) · [CLI](https://github.com/upstash/cli) · [Official MCP](https://github.com/upstash/mcp-server)
 
 - **Supported:** [Self-serve signup](https://console.upstash.com) · [Self-serve API keys](https://upstash.com/docs/devops/developer-api/introduction) · [Free tier / trial](https://upstash.com/pricing) · [Self-serve upgrade](https://upstash.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Vapi <a id="vapi"></a>
+
+> Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.
+
+**Category:** Agent Tooling · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.vapi.ai) · [API Reference](https://docs.vapi.ai/api-reference) · [llms.txt](https://docs.vapi.ai/llms.txt) · [Status Page](https://status.vapi.ai) · [Pricing](https://vapi.ai/pricing) · [Signup](https://dashboard.vapi.ai) · [API Keys](https://dashboard.vapi.ai) · [Official MCP](https://github.com/VapiAI/mcp-server)
+
+- **Supported:** [Self-serve signup](https://dashboard.vapi.ai) · [Self-serve API keys](https://docs.vapi.ai/quickstart/introduction) · [Free tier / trial](https://vapi.ai/pricing) · [Self-serve upgrade](https://vapi.ai/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Vercel <a id="vercel"></a>

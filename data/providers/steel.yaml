@@ -1,0 +1,69 @@
+id: steel
+name: Steel
+category: code-execution
+homepage: https://steel.dev
+summary: Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.
+submitted_by: community
+scope: Steel Cloud + open-source
+
+tags:
+  - browser-automation
+  - headless-browser
+  - open-source
+
+entrypoints:
+  docs: https://docs.steel.dev
+  api_reference: https://docs.steel.dev/api-reference
+  llms_txt: https://docs.steel.dev/llms.txt
+  pricing: https://steel.dev/pricing
+  signup: https://app.steel.dev
+  api_keys: https://app.steel.dev
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://app.steel.dev
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.steel.dev/overview/intro-to-steel
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://github.com/steel-dev/steel-browser
+    verified: "2026-07-08"
+    notes: Open-source steel-browser self-hosts the same API for local testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://steel.dev/pricing
+    verified: "2026-07-08"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://steel.dev/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

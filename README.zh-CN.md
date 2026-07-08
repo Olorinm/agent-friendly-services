@@ -4,9 +4,9 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 73 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+AI 智能体接入 76 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
-![Providers](https://img.shields.io/badge/providers-73-2563eb)
+![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-731_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details open>
-<summary><b>能力矩阵表</b> —— 73 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
+<summary><b>能力矩阵表</b> —— 76 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 **AI Models**
 
@@ -66,7 +66,9 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](./generated/providers.md#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [Mem0](./generated/providers.md#mem0) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [n8n](./generated/providers.md#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Vapi](./generated/providers.md#vapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Zapier](./generated/providers.md#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 **Code Execution**
@@ -76,6 +78,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Browserbase](./generated/providers.md#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
 | [E2B](./generated/providers.md#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
 | [Modal](./generated/providers.md#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Steel](./generated/providers.md#steel) | — | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 
 **Developer Tools**
 
@@ -201,7 +204,9 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 ## Agent Tooling
 
 - **[Composio](https://docs.composio.dev)** — Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory. [MCP](https://mcp.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [全部事实 →](./generated/providers.md#composio)
+- **[Mem0](https://docs.mem0.ai)** — Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server. [API](https://docs.mem0.ai/api-reference) · [MCP](https://docs.mem0.ai/openmemory/overview) · [llms.txt](https://docs.mem0.ai/llms.txt) · [全部事实 →](./generated/providers.md#mem0)
 - **[n8n](https://docs.n8n.io)** — Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable. [API](https://docs.n8n.io/api/) · [MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server) · [llms.txt](https://docs.n8n.io/llms.txt) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [全部事实 →](./generated/providers.md#n8n)
+- **[Vapi](https://docs.vapi.ai)** — Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents. [API](https://docs.vapi.ai/api-reference) · [MCP](https://github.com/VapiAI/mcp-server) · [llms.txt](https://docs.vapi.ai/llms.txt) · [全部事实 →](./generated/providers.md#vapi)
 - **[Zapier](https://docs.zapier.com)** — Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. [MCP](https://zapier.com/mcp) · [llms.txt](https://docs.zapier.com/llms.txt) · [CLI](https://github.com/zapier/zapier-platform) · [全部事实 →](./generated/providers.md#zapier)
 
 ## Code Execution
@@ -209,6 +214,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Browserbase](https://docs.browserbase.com)** — Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server. [API](https://docs.browserbase.com/reference) · [MCP](https://github.com/browserbase/mcp-server-browserbase) · [llms.txt](https://docs.browserbase.com/llms.txt) · [全部事实 →](./generated/providers.md#browserbase)
 - **[E2B](https://e2b.dev/docs)** — Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys. [MCP](https://github.com/e2b-dev/mcp-server) · [llms.txt](https://e2b.dev/llms.txt) · [CLI](https://e2b.dev/docs/cli) · [全部事实 →](./generated/providers.md#e2b)
 - **[Modal](https://modal.com/docs)** — Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI. [API](https://modal.com/docs/reference) · [llms.txt](https://modal.com/llms.txt) · [CLI](https://modal.com/docs/reference/cli) · [全部事实 →](./generated/providers.md#modal)
+- **[Steel](https://docs.steel.dev)** — Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier. [API](https://docs.steel.dev/api-reference) · [llms.txt](https://docs.steel.dev/llms.txt) · [全部事实 →](./generated/providers.md#steel)
 
 ## Developer Tools
 
@@ -283,7 +289,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 参与贡献
 
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **475 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **497 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
 
 有编程智能体？让它打开本仓库的检出目录，然后粘贴：
 

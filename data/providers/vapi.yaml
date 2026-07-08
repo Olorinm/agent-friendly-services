@@ -1,0 +1,69 @@
+id: vapi
+name: Vapi
+category: agent-tooling
+homepage: https://vapi.ai
+summary: Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.
+submitted_by: community
+
+tags:
+  - voice-agents
+  - telephony
+
+entrypoints:
+  docs: https://docs.vapi.ai
+  api_reference: https://docs.vapi.ai/api-reference
+  llms_txt: https://docs.vapi.ai/llms.txt
+  status_page: https://status.vapi.ai
+  pricing: https://vapi.ai/pricing
+  signup: https://dashboard.vapi.ai
+  api_keys: https://dashboard.vapi.ai
+  mcp_official: https://github.com/VapiAI/mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.vapi.ai
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.vapi.ai/quickstart/introduction
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: Public/private key split exists; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Web-call testing in dashboard serves as a de facto test path.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://vapi.ai/pricing
+    verified: "2026-07-08"
+    notes: Trial credits for new accounts.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://vapi.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

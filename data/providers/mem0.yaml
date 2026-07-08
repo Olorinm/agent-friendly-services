@@ -1,0 +1,70 @@
+id: mem0
+name: Mem0
+category: agent-tooling
+homepage: https://mem0.ai
+summary: Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.
+submitted_by: community
+scope: Hosted platform + open-source
+
+tags:
+  - agent-memory
+  - open-source
+
+entrypoints:
+  docs: https://docs.mem0.ai
+  api_reference: https://docs.mem0.ai/api-reference
+  llms_txt: https://docs.mem0.ai/llms.txt
+  status_page: https://status.mem0.ai
+  pricing: https://mem0.ai/pricing
+  signup: https://app.mem0.ai
+  api_keys: https://app.mem0.ai
+  mcp_official: https://docs.mem0.ai/openmemory/overview
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://app.mem0.ai
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.mem0.ai/platform/quickstart
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://github.com/mem0ai/mem0
+    verified: "2026-07-08"
+    notes: Open-source mem0 runs locally as a full test environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://mem0.ai/pricing
+    verified: "2026-07-08"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://mem0.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

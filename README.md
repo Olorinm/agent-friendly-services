@@ -4,9 +4,9 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 73 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Where AI agents plug into 76 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
-![Providers](https://img.shields.io/badge/providers-73-2563eb)
+![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-731_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -29,7 +29,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details open>
-<summary><b>Capability matrix</b> — all 73 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
+<summary><b>Capability matrix</b> — all 76 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 **AI Models**
 
@@ -64,7 +64,9 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](./generated/providers.md#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [Mem0](./generated/providers.md#mem0) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [n8n](./generated/providers.md#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Vapi](./generated/providers.md#vapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Zapier](./generated/providers.md#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 **Code Execution**
@@ -74,6 +76,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Browserbase](./generated/providers.md#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
 | [E2B](./generated/providers.md#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
 | [Modal](./generated/providers.md#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Steel](./generated/providers.md#steel) | — | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 
 **Developer Tools**
 
@@ -199,7 +202,9 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 ## Agent Tooling
 
 - **[Composio](https://docs.composio.dev)** — Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory. [MCP](https://mcp.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [all facts →](./generated/providers.md#composio)
+- **[Mem0](https://docs.mem0.ai)** — Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server. [API](https://docs.mem0.ai/api-reference) · [MCP](https://docs.mem0.ai/openmemory/overview) · [llms.txt](https://docs.mem0.ai/llms.txt) · [all facts →](./generated/providers.md#mem0)
 - **[n8n](https://docs.n8n.io)** — Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable. [API](https://docs.n8n.io/api/) · [MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server) · [llms.txt](https://docs.n8n.io/llms.txt) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [all facts →](./generated/providers.md#n8n)
+- **[Vapi](https://docs.vapi.ai)** — Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents. [API](https://docs.vapi.ai/api-reference) · [MCP](https://github.com/VapiAI/mcp-server) · [llms.txt](https://docs.vapi.ai/llms.txt) · [all facts →](./generated/providers.md#vapi)
 - **[Zapier](https://docs.zapier.com)** — Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. [MCP](https://zapier.com/mcp) · [llms.txt](https://docs.zapier.com/llms.txt) · [CLI](https://github.com/zapier/zapier-platform) · [all facts →](./generated/providers.md#zapier)
 
 ## Code Execution
@@ -207,6 +212,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Browserbase](https://docs.browserbase.com)** — Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server. [API](https://docs.browserbase.com/reference) · [MCP](https://github.com/browserbase/mcp-server-browserbase) · [llms.txt](https://docs.browserbase.com/llms.txt) · [all facts →](./generated/providers.md#browserbase)
 - **[E2B](https://e2b.dev/docs)** — Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys. [MCP](https://github.com/e2b-dev/mcp-server) · [llms.txt](https://e2b.dev/llms.txt) · [CLI](https://e2b.dev/docs/cli) · [all facts →](./generated/providers.md#e2b)
 - **[Modal](https://modal.com/docs)** — Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI. [API](https://modal.com/docs/reference) · [llms.txt](https://modal.com/llms.txt) · [CLI](https://modal.com/docs/reference/cli) · [all facts →](./generated/providers.md#modal)
+- **[Steel](https://docs.steel.dev)** — Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier. [API](https://docs.steel.dev/api-reference) · [llms.txt](https://docs.steel.dev/llms.txt) · [all facts →](./generated/providers.md#steel)
 
 ## Developer Tools
 
@@ -281,7 +287,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **475 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **497 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
 
 Have a coding agent? Point it at a checkout and paste:
 
