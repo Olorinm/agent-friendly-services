@@ -1,0 +1,79 @@
+id: grafana
+name: Grafana (Grafana Cloud)
+category: observability-security
+homepage: https://grafana.com
+summary: Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.
+submitted_by: community
+scope: Grafana Cloud + open-source
+
+tags:
+  - observability
+  - dashboards
+  - open-source
+
+entrypoints:
+  docs: https://grafana.com/docs
+  api_reference: https://grafana.com/docs/grafana/latest/developers/http_api/
+  llms_txt: https://grafana.com/llms.txt
+  status_page: https://status.grafana.com
+  pricing: https://grafana.com/pricing
+  signup: https://grafana.com/auth/sign-up/create-user
+  api_keys: https://grafana.com/docs/grafana/latest/administration/service-accounts/
+  mcp_official: https://github.com/grafana/mcp-grafana
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://grafana.com/auth/sign-up/create-user
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://grafana.com/docs/grafana/latest/administration/service-accounts/
+    verified: "2026-07-08"
+    notes: Service-account tokens replace legacy API keys; created self-serve.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: supported
+    evidence: https://grafana.com/docs/grafana/latest/administration/service-accounts/
+    verified: "2026-07-08"
+    notes: Service accounts carry role-based (and RBAC) permissions.
+
+  token_revocation:
+    status: supported
+    evidence: https://grafana.com/docs/grafana/latest/administration/service-accounts/
+    verified: "2026-07-08"
+    notes: Tokens can be revoked/expired from the service-accounts UI.
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://grafana.com/docs/grafana/latest/setup-grafana/installation/
+    verified: "2026-07-08"
+    notes: Open-source Grafana runs locally as a full test environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://grafana.com/pricing
+    verified: "2026-07-08"
+    notes: Standing free Grafana Cloud tier.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://grafana.com/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

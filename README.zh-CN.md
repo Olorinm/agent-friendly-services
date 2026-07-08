@@ -4,9 +4,9 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 61 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+AI 智能体接入 65 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
-![Providers](https://img.shields.io/badge/providers-61-2563eb)
+![Providers](https://img.shields.io/badge/providers-65-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details open>
-<summary><b>能力矩阵表</b> —— 61 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
+<summary><b>能力矩阵表</b> —— 65 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 **AI Models**
 
@@ -73,6 +73,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Atlassian (Jira & Confluence)](./generated/providers.md#atlassian) | ✓ | — | — | ✓ | ◐ | ✓ | — | 2026-07-08 |
 | [GitHub](./generated/providers.md#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | [✓ h·c·m](./generated/agent-runs.md#github) | 2026-07-07 |
 | [GitLab](./generated/providers.md#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Postman](./generated/providers.md#postman) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
@@ -110,6 +111,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Brave Search API](./generated/providers.md#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
 | [Exa](./generated/providers.md#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Firecrawl](./generated/providers.md#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Jina AI](./generated/providers.md#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Perplexity API](./generated/providers.md#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [SerpApi](./generated/providers.md#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](./generated/providers.md#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
@@ -118,6 +120,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Lemon Squeezy](./generated/providers.md#lemonsqueezy) | — | — | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Paddle](./generated/providers.md#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | — | 2026-07-07 |
 | [Stripe](./generated/providers.md#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
@@ -146,6 +149,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Datadog](./generated/providers.md#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Grafana (Grafana Cloud)](./generated/providers.md#grafana) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Sentry](./generated/providers.md#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 
 **Commerce / Marketing**
@@ -192,6 +196,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## Developer Tools
 
+- **[Atlassian (Jira & Confluence)](https://developer.atlassian.com)** — Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI. [API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) · [MCP](https://github.com/atlassian/atlassian-mcp-server) · [CLI](https://developer.atlassian.com/cloud/acli/) · [全部事实 →](./generated/providers.md#atlassian)
 - **[GitHub](https://docs.github.com)** 🏆 — Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server. [API](https://docs.github.com/rest) · [MCP](https://github.com/github/github-mcp-server) · [llms.txt](https://docs.github.com/llms.txt) · [OpenAPI](https://github.com/github/rest-api-description) · [CLI](https://cli.github.com) · [全部事实 →](./generated/providers.md#github) · **[🤖✓ 实测验证](./generated/agent-runs.md#github)**
 - **[GitLab](https://docs.gitlab.com)** — DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI. [API](https://docs.gitlab.com/api/rest/) · [MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server) · [llms.txt](https://docs.gitlab.com/llms.txt) · [OpenAPI](https://docs.gitlab.com/api/openapi/openapi_interactive) · [CLI](https://gitlab.com/gitlab-org/cli) · [全部事实 →](./generated/providers.md#gitlab)
 - **[Postman](https://learning.postman.com)** — API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys. [API](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [MCP](https://github.com/postmanlabs/postman-mcp-server) · [llms.txt](https://learning.postman.com/llms.txt) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) · [全部事实 →](./generated/providers.md#postman)
@@ -223,12 +228,14 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Brave Search API](https://api-dashboard.search.brave.com/app/documentation)** — Independent web search index with a developer API, self-serve registration, and a free plan. [MCP](https://github.com/brave/brave-search-mcp-server) · [全部事实 →](./generated/providers.md#brave-search)
 - **[Exa](https://docs.exa.ai)** — Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server. [API](https://docs.exa.ai/reference/getting-started) · [MCP](https://github.com/exa-labs/exa-mcp-server) · [llms.txt](https://docs.exa.ai/llms.txt) · [全部事实 →](./generated/providers.md#exa)
 - **[Firecrawl](https://docs.firecrawl.dev)** — Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server. [API](https://docs.firecrawl.dev/api-reference/introduction) · [MCP](https://docs.firecrawl.dev/mcp-server) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [全部事实 →](./generated/providers.md#firecrawl)
+- **[Jina AI](https://docs.jina.ai)** — Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path. [API](https://docs.jina.ai) · [MCP](https://github.com/jina-ai/MCP) · [llms.txt](https://docs.jina.ai/llms.txt) · [全部事实 →](./generated/providers.md#jina)
 - **[Perplexity API](https://docs.perplexity.ai)** — Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers. [MCP](https://github.com/ppl-ai/modelcontextprotocol) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [全部事实 →](./generated/providers.md#perplexity)
 - **[SerpApi](https://serpapi.com/search-api)** — Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. [API](https://serpapi.com/search-api) · [MCP](https://github.com/serpapi/serpapi-mcp) · [llms.txt](https://serpapi.com/llms.txt) · [全部事实 →](./generated/providers.md#serpapi)
 - **[Tavily](https://docs.tavily.com)** — Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. [API](https://docs.tavily.com/documentation/api-reference/introduction) · [MCP](https://docs.tavily.com/documentation/mcp) · [llms.txt](https://docs.tavily.com/llms.txt) · [全部事实 →](./generated/providers.md#tavily)
 
 ## Payments / Billing
 
+- **[Lemon Squeezy](https://docs.lemonsqueezy.com)** — Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys. [API](https://docs.lemonsqueezy.com/api) · [全部事实 →](./generated/providers.md#lemonsqueezy)
 - **[Paddle](https://developer.paddle.com)** — Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks. [API](https://developer.paddle.com/api-reference/overview) · [MCP](https://github.com/PaddleHQ/paddle-mcp-server) · [llms.txt](https://developer.paddle.com/llms.txt) · [全部事实 →](./generated/providers.md#paddle)
 - **[Stripe](https://docs.stripe.com)** — Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface. [API](https://docs.stripe.com/api) · [MCP](https://docs.stripe.com/mcp) · [llms.txt](https://docs.stripe.com/llms.txt) · [OpenAPI](https://github.com/stripe/openapi) · [CLI](https://docs.stripe.com/stripe-cli) · [全部事实 →](./generated/providers.md#stripe)
 
@@ -251,6 +258,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 ## Observability / Security
 
 - **[Datadog](https://docs.datadoghq.com)** — Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks. [API](https://docs.datadoghq.com/api/latest/) · [MCP](https://docs.datadoghq.com/bits_ai/mcp_server) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [CLI](https://github.com/DataDog/datadog-ci) · [全部事实 →](./generated/providers.md#datadog)
+- **[Grafana (Grafana Cloud)](https://grafana.com/docs)** — Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier. [API](https://grafana.com/docs/grafana/latest/developers/http_api/) · [MCP](https://github.com/grafana/mcp-grafana) · [llms.txt](https://grafana.com/llms.txt) · [全部事实 →](./generated/providers.md#grafana)
 - **[Sentry](https://docs.sentry.io)** — Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API. [API](https://docs.sentry.io/api/) · [MCP](https://docs.sentry.io/product/sentry-mcp/) · [llms.txt](https://docs.sentry.io/llms.txt) · [OpenAPI](https://github.com/getsentry/sentry-api-schema) · [CLI](https://docs.sentry.io/cli/) · [全部事实 →](./generated/providers.md#sentry)
 
 ## Commerce / Marketing
@@ -259,7 +267,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 参与贡献
 
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **381 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **404 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
 
 有编程智能体？让它打开本仓库的检出目录，然后粘贴：
 

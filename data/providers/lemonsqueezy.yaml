@@ -1,0 +1,67 @@
+id: lemonsqueezy
+name: Lemon Squeezy
+category: payments-billing
+homepage: https://www.lemonsqueezy.com
+summary: Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.
+submitted_by: community
+
+tags:
+  - payments
+  - merchant-of-record
+  - saas-billing
+
+entrypoints:
+  docs: https://docs.lemonsqueezy.com
+  api_reference: https://docs.lemonsqueezy.com/api
+  status_page: https://status.lemonsqueezy.com
+  pricing: https://www.lemonsqueezy.com/pricing
+  signup: https://app.lemonsqueezy.com/register
+  api_keys: https://docs.lemonsqueezy.com/api#authentication
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://app.lemonsqueezy.com/register
+    verified: "2026-07-08"
+    notes: Store activation (to take live payments) involves a review step; test mode works immediately.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.lemonsqueezy.com/api#authentication
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://docs.lemonsqueezy.com/help/getting-started/test-mode
+    verified: "2026-07-08"
+    notes: Documented test mode with test cards, separate test-mode API keys.
+
+  free_tier_or_trial:
+    status: not_applicable
+    notes: Fee-per-transaction model; no subscription to trial.
+
+  self_serve_paid_upgrade:
+    status: not_applicable
+    notes: Pay-per-transaction (merchant-of-record fee).
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

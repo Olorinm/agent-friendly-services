@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:25:37.204Z",
+  "generated_at": "2026-07-08T08:26:54.249Z",
   "counts": {
-    "providers": 61,
+    "providers": 65,
     "categories": 12,
-    "entrypoint_urls": 615,
-    "checks_answered": 351
+    "entrypoint_urls": 644,
+    "checks_answered": 376
   },
   "categories": [
     {
@@ -547,6 +547,105 @@
           "sandbox_or_test_mode",
           "usage_dashboard",
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian (Jira & Confluence)",
+      "category": "developer-tools",
+      "homepage": "https://www.atlassian.com",
+      "summary": "Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.",
+      "submitted_by": "community",
+      "scope": "Atlassian Cloud (Jira, Confluence, JSM, Bitbucket)",
+      "tags": [
+        "issue-tracking",
+        "wiki",
+        "project-management"
+      ],
+      "entrypoints": {
+        "docs": "https://developer.atlassian.com",
+        "api_reference": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+        "status_page": "https://status.atlassian.com",
+        "pricing": "https://www.atlassian.com/software/jira/pricing",
+        "signup": "https://id.atlassian.com/signup",
+        "api_keys": "https://id.atlassian.com/manage-profile/security/api-tokens",
+        "cli": "https://developer.atlassian.com/cloud/acli/",
+        "mcp_official": "https://github.com/atlassian/atlassian-mcp-server"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://id.atlassian.com/signup",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://id.atlassian.com/manage-profile/security/api-tokens",
+          "verified": "2026-07-08",
+          "notes": "Personal API tokens created self-serve; the MCP server uses OAuth 2.1 or API tokens."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/",
+          "verified": "2026-07-08",
+          "notes": "OAuth 2.0 (3LO) apps; the official remote MCP server authenticates via OAuth 2.1."
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://developer.atlassian.com/cloud/jira/platform/scopes-for-oauth-2-3LO-and-forge-apps/",
+          "verified": "2026-07-08",
+          "notes": "Granular OAuth scopes; API tokens can also be scoped."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://id.atlassian.com/manage-profile/security/api-tokens",
+          "verified": "2026-07-08"
+        },
+        "sandbox_or_test_mode": {
+          "status": "partial",
+          "evidence": "https://support.atlassian.com/organization-administration/docs/manage-product-sandboxes/",
+          "verified": "2026-07-08",
+          "notes": "Product sandboxes are a Premium/Enterprise feature; free sites serve as informal test instances."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.atlassian.com/software/jira/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free plan for up to 10 users."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.atlassian.com/software/jira/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
           "automation_permitted"
         ]
       }
@@ -2512,6 +2611,105 @@
       }
     },
     {
+      "id": "grafana",
+      "name": "Grafana (Grafana Cloud)",
+      "category": "observability-security",
+      "homepage": "https://grafana.com",
+      "summary": "Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.",
+      "submitted_by": "community",
+      "scope": "Grafana Cloud + open-source",
+      "tags": [
+        "observability",
+        "dashboards",
+        "open-source"
+      ],
+      "entrypoints": {
+        "docs": "https://grafana.com/docs",
+        "api_reference": "https://grafana.com/docs/grafana/latest/developers/http_api/",
+        "llms_txt": "https://grafana.com/llms.txt",
+        "status_page": "https://status.grafana.com",
+        "pricing": "https://grafana.com/pricing",
+        "signup": "https://grafana.com/auth/sign-up/create-user",
+        "api_keys": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+        "mcp_official": "https://github.com/grafana/mcp-grafana"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://grafana.com/auth/sign-up/create-user",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+          "verified": "2026-07-08",
+          "notes": "Service-account tokens replace legacy API keys; created self-serve."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+          "verified": "2026-07-08",
+          "notes": "Service accounts carry role-based (and RBAC) permissions."
+        },
+        "token_revocation": {
+          "status": "supported",
+          "evidence": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+          "verified": "2026-07-08",
+          "notes": "Tokens can be revoked/expired from the service-accounts UI."
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://grafana.com/docs/grafana/latest/setup-grafana/installation/",
+          "verified": "2026-07-08",
+          "notes": "Open-source Grafana runs locally as a full test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://grafana.com/pricing",
+          "verified": "2026-07-08",
+          "notes": "Standing free Grafana Cloud tier."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://grafana.com/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "groq",
       "name": "Groq",
       "category": "ai-models",
@@ -2707,6 +2905,99 @@
       }
     },
     {
+      "id": "jina",
+      "name": "Jina AI",
+      "category": "web-search-data",
+      "homepage": "https://jina.ai",
+      "summary": "Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "embeddings",
+        "web-reader"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.jina.ai",
+        "api_reference": "https://docs.jina.ai",
+        "llms_txt": "https://docs.jina.ai/llms.txt",
+        "status_page": "https://status.jina.ai",
+        "signup": "https://jina.ai/api-dashboard",
+        "api_keys": "https://jina.ai/api-dashboard",
+        "mcp_official": "https://github.com/jina-ai/MCP"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://jina.ai/api-dashboard",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://jina.ai/api-dashboard",
+          "verified": "2026-07-08",
+          "notes": "Dashboard issues keys; a starter token quota works without registration for some endpoints (r.jina.ai)."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Rate-limited keyless access to Reader serves as a de facto trial; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://jina.ai/api-dashboard",
+          "verified": "2026-07-08",
+          "notes": "Free token allowance for new keys."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://jina.ai/api-dashboard",
+          "verified": "2026-07-08",
+          "notes": "Prepaid token packs purchasable self-serve."
+        },
+        "usage_dashboard": {
+          "status": "supported",
+          "evidence": "https://jina.ai/api-dashboard",
+          "verified": "2026-07-08"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "lark",
       "name": "Lark",
       "category": "communication",
@@ -2810,6 +3101,93 @@
           "usage_dashboard",
           "idempotency",
           "versioning_policy"
+        ]
+      }
+    },
+    {
+      "id": "lemonsqueezy",
+      "name": "Lemon Squeezy",
+      "category": "payments-billing",
+      "homepage": "https://www.lemonsqueezy.com",
+      "summary": "Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "merchant-of-record",
+        "saas-billing"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.lemonsqueezy.com",
+        "api_reference": "https://docs.lemonsqueezy.com/api",
+        "status_page": "https://status.lemonsqueezy.com",
+        "pricing": "https://www.lemonsqueezy.com/pricing",
+        "signup": "https://app.lemonsqueezy.com/register",
+        "api_keys": "https://docs.lemonsqueezy.com/api#authentication"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://app.lemonsqueezy.com/register",
+          "verified": "2026-07-08",
+          "notes": "Store activation (to take live payments) involves a review step; test mode works immediately."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.lemonsqueezy.com/api#authentication",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://docs.lemonsqueezy.com/help/getting-started/test-mode",
+          "verified": "2026-07-08",
+          "notes": "Documented test mode with test cards, separate test-mode API keys."
+        },
+        "free_tier_or_trial": {
+          "status": "not_applicable",
+          "notes": "Fee-per-transaction model; no subscription to trial."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "not_applicable",
+          "notes": "Pay-per-transaction (merchant-of-record fee)."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
         ]
       }
     },

@@ -1,0 +1,81 @@
+id: atlassian
+name: Atlassian (Jira & Confluence)
+category: developer-tools
+homepage: https://www.atlassian.com
+summary: Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.
+submitted_by: community
+scope: Atlassian Cloud (Jira, Confluence, JSM, Bitbucket)
+
+tags:
+  - issue-tracking
+  - wiki
+  - project-management
+
+entrypoints:
+  docs: https://developer.atlassian.com
+  api_reference: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/
+  status_page: https://status.atlassian.com
+  pricing: https://www.atlassian.com/software/jira/pricing
+  signup: https://id.atlassian.com/signup
+  api_keys: https://id.atlassian.com/manage-profile/security/api-tokens
+  cli: https://developer.atlassian.com/cloud/acli/
+  mcp_official: https://github.com/atlassian/atlassian-mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://id.atlassian.com/signup
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://id.atlassian.com/manage-profile/security/api-tokens
+    verified: "2026-07-08"
+    notes: Personal API tokens created self-serve; the MCP server uses OAuth 2.1 or API tokens.
+
+  oauth_support:
+    status: supported
+    evidence: https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/
+    verified: "2026-07-08"
+    notes: OAuth 2.0 (3LO) apps; the official remote MCP server authenticates via OAuth 2.1.
+
+  scoped_tokens:
+    status: supported
+    evidence: https://developer.atlassian.com/cloud/jira/platform/scopes-for-oauth-2-3LO-and-forge-apps/
+    verified: "2026-07-08"
+    notes: Granular OAuth scopes; API tokens can also be scoped.
+
+  token_revocation:
+    status: supported
+    evidence: https://id.atlassian.com/manage-profile/security/api-tokens
+    verified: "2026-07-08"
+
+  sandbox_or_test_mode:
+    status: partial
+    evidence: https://support.atlassian.com/organization-administration/docs/manage-product-sandboxes/
+    verified: "2026-07-08"
+    notes: Product sandboxes are a Premium/Enterprise feature; free sites serve as informal test instances.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.atlassian.com/software/jira/pricing
+    verified: "2026-07-08"
+    notes: Free plan for up to 10 users.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.atlassian.com/software/jira/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

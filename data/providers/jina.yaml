@@ -1,0 +1,72 @@
+id: jina
+name: Jina AI
+category: web-search-data
+homepage: https://jina.ai
+summary: Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
+submitted_by: community
+
+tags:
+  - search
+  - embeddings
+  - web-reader
+
+entrypoints:
+  docs: https://docs.jina.ai
+  api_reference: https://docs.jina.ai
+  llms_txt: https://docs.jina.ai/llms.txt
+  status_page: https://status.jina.ai
+  signup: https://jina.ai/api-dashboard
+  api_keys: https://jina.ai/api-dashboard
+  mcp_official: https://github.com/jina-ai/MCP
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://jina.ai/api-dashboard
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://jina.ai/api-dashboard
+    verified: "2026-07-08"
+    notes: Dashboard issues keys; a starter token quota works without registration for some endpoints (r.jina.ai).
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Rate-limited keyless access to Reader serves as a de facto trial; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://jina.ai/api-dashboard
+    verified: "2026-07-08"
+    notes: Free token allowance for new keys.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://jina.ai/api-dashboard
+    verified: "2026-07-08"
+    notes: Prepaid token packs purchasable self-serve.
+
+  usage_dashboard:
+    status: supported
+    evidence: https://jina.ai/api-dashboard
+    verified: "2026-07-08"
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

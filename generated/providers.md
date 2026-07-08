@@ -50,6 +50,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Atlassian (Jira & Confluence)](#atlassian) | ✓ | — | — | ✓ | ◐ | ✓ | — | 2026-07-08 |
 | [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | [✓ h·c·m](./agent-runs.md#github) | 2026-07-07 |
 | [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
@@ -87,6 +88,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [SerpApi](#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
@@ -95,6 +97,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Lemon Squeezy](#lemonsqueezy) | — | — | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Paddle](#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | — | 2026-07-07 |
 | [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
@@ -123,6 +126,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Grafana (Grafana Cloud)](#grafana) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Commerce / Marketing
@@ -171,6 +175,18 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 > mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.
+
+### Atlassian (Jira & Confluence) <a id="atlassian"></a>
+
+> Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.
+
+**Category:** Developer Tools · **Scope:** Atlassian Cloud (Jira, Confluence, JSM, Bitbucket) · `Official MCP` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://developer.atlassian.com) · [API Reference](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) · [Status Page](https://status.atlassian.com) · [Pricing](https://www.atlassian.com/software/jira/pricing) · [Signup](https://id.atlassian.com/signup) · [API Keys](https://id.atlassian.com/manage-profile/security/api-tokens) · [CLI](https://developer.atlassian.com/cloud/acli/) · [Official MCP](https://github.com/atlassian/atlassian-mcp-server)
+
+- **Supported:** [Self-serve signup](https://id.atlassian.com/signup) · [Self-serve API keys](https://id.atlassian.com/manage-profile/security/api-tokens) · [OAuth](https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/) · [Scoped tokens](https://developer.atlassian.com/cloud/jira/platform/scopes-for-oauth-2-3LO-and-forge-apps/) · [Token revocation](https://id.atlassian.com/manage-profile/security/api-tokens) · [Free tier / trial](https://www.atlassian.com/software/jira/pricing) · [Self-serve upgrade](https://www.atlassian.com/software/jira/pricing)
+- **Partial:** [Sandbox / test mode](https://support.atlassian.com/organization-administration/docs/manage-product-sandboxes/) — Product sandboxes are a Premium/Enterprise feature; free sites serve as informal test instances.
+- **Unknown (help wanted):** `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Brave Search API <a id="brave-search"></a>
 
@@ -418,6 +434,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### Grafana (Grafana Cloud) <a id="grafana"></a>
+
+> Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.
+
+**Category:** Observability / Security · **Scope:** Grafana Cloud + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://grafana.com/docs) · [API Reference](https://grafana.com/docs/grafana/latest/developers/http_api/) · [llms.txt](https://grafana.com/llms.txt) · [Status Page](https://status.grafana.com) · [Pricing](https://grafana.com/pricing) · [Signup](https://grafana.com/auth/sign-up/create-user) · [API Keys](https://grafana.com/docs/grafana/latest/administration/service-accounts/) · [Official MCP](https://github.com/grafana/mcp-grafana)
+
+- **Supported:** [Self-serve signup](https://grafana.com/auth/sign-up/create-user) · [Self-serve API keys](https://grafana.com/docs/grafana/latest/administration/service-accounts/) · [Scoped tokens](https://grafana.com/docs/grafana/latest/administration/service-accounts/) · [Token revocation](https://grafana.com/docs/grafana/latest/administration/service-accounts/) · [Sandbox / test mode](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) · [Free tier / trial](https://grafana.com/pricing) · [Self-serve upgrade](https://grafana.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Groq <a id="groq"></a>
 
 > Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.
@@ -440,6 +467,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Jina AI <a id="jina"></a>
+
+> Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.jina.ai) · [API Reference](https://docs.jina.ai) · [llms.txt](https://docs.jina.ai/llms.txt) · [Status Page](https://status.jina.ai) · [Signup](https://jina.ai/api-dashboard) · [API Keys](https://jina.ai/api-dashboard) · [Official MCP](https://github.com/jina-ai/MCP)
+
+- **Supported:** [Self-serve signup](https://jina.ai/api-dashboard) · [Self-serve API keys](https://jina.ai/api-dashboard) · [Free tier / trial](https://jina.ai/api-dashboard) · [Self-serve upgrade](https://jina.ai/api-dashboard) · [Usage dashboard](https://jina.ai/api-dashboard)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Lark <a id="lark"></a>
 
 > Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.
@@ -450,6 +488,19 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://www.larksuite.com) · [Self-serve API keys](https://open.larksuite.com/document/faq/trouble-shooting/how-to-obtain-app-access-token) · [OAuth](https://open.larksuite.com/document/uAjLw4CM/ukTMukTMukTM/reference/authen-v1/authorize/get) · [Scoped tokens](https://open.larksuite.com/document/server-docs/application-scope/introduction) · [Free tier / trial](https://www.larksuite.com/en_us/plans) · [Automation permitted](https://open.larksuite.com/document/home/index)
 - **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+### Lemon Squeezy <a id="lemonsqueezy"></a>
+
+> Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.
+
+**Category:** Payments / Billing · `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.lemonsqueezy.com) · [API Reference](https://docs.lemonsqueezy.com/api) · [Status Page](https://status.lemonsqueezy.com) · [Pricing](https://www.lemonsqueezy.com/pricing) · [Signup](https://app.lemonsqueezy.com/register) · [API Keys](https://docs.lemonsqueezy.com/api#authentication)
+
+- **Supported:** [Self-serve signup](https://app.lemonsqueezy.com/register) · [Self-serve API keys](https://docs.lemonsqueezy.com/api#authentication) · [Sandbox / test mode](https://docs.lemonsqueezy.com/help/getting-started/test-mode)
+- **N/A:** Free tier / trial — Fee-per-transaction model; no subscription to trial.
+- **N/A:** Self-serve upgrade — Pay-per-transaction (merchant-of-record fee).
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Linear <a id="linear"></a>
 
