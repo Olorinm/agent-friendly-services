@@ -4,6 +4,7 @@
 
 Every known entry point and verified capability fact, with evidence links and dates.
 Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown.
+Agent column: routes with a majority of independently verified real-task passes (h=http c=cli m=mcp; see [agent-runs.md](./agent-runs.md)).
 A missing link means **"no known URL"**, not "confirmed absent"; `unknown` means "checked, no reliable evidence found yet".
 Links are probed weekly ([link-health.json](./link-health.json)); machine-readable version: [providers.json](./providers.json).
 
@@ -11,114 +12,114 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 ### AI Models
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Cohere](#cohere) | — | ✓ | — | — | ◐ | ✓ | 2026-07-07 |
-| [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
-| [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | 2026-07-07 |
-| [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
-| [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | 2026-07-07 |
-| [Groq](#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | 2026-07-07 |
-| [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
-| [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
-| [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Cohere](#cohere) | — | ✓ | — | — | ◐ | ✓ | — | 2026-07-07 |
+| [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
+| [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Groq](#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 ### Agent Tooling
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Composio](#composio) | ✓ | ✓ | — | — | — | — | 2026-07-07 |
-| [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Composio](#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Code Execution
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
-| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | 2026-07-07 |
-| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
+| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
+| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Developer Tools
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | [✓ h·c·m](./agent-runs.md#github) | 2026-07-07 |
+| [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Cloud / Hosting
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
-| [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
+| [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Databases
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
-| [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Supabase](#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
-| [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Supabase](#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
+| [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Web Search / Data
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | 2026-07-07 |
-| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
+| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 ### Payments / Billing
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Paddle](#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | 2026-07-07 |
-| [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Paddle](#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | — | 2026-07-07 |
+| [Stripe](#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Communication
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Discord](#discord) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
-| [Lark](#lark) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Resend](#resend) | ✓ | ✓ | — | — | ✓ | ✓ | 2026-07-07 |
-| [Slack](#slack) | — | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
-| [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | 2026-07-07 |
-| [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Discord](#discord) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [Lark](#lark) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Resend](#resend) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-07 |
+| [Slack](#slack) | — | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | — | 2026-07-07 |
+| [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Productivity / Storage
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Airtable](#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
-| [Dropbox](#dropbox) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
-| [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Airtable](#airtable) | — | — | — | — | — | ✓ | — | 2026-07-07 |
+| [Dropbox](#dropbox) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 ### Observability / Security
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
-| [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Commerce / Marketing
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [Shopify](#shopify) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Shopify](#shopify) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ## Providers
 
@@ -363,6 +364,14 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://github.com/signup) · [Self-serve API keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [OAuth](https://docs.github.com/apps/oauth-apps) · [Scoped tokens](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Token revocation](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Free tier / trial](https://github.com/pricing) · [Self-serve upgrade](https://github.com/pricing) · [Usage dashboard](https://docs.github.com/billing) · [Versioning policy](https://docs.github.com/rest/about-the-rest-api/api-versions) · [Automation permitted](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
+
+**Agent runs** — a real agent ran this category's [pinned task](../data/experiments/tasks/developer-tools.yaml), independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#github)):
+
+| Layer · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| real · http | 3/3 pass | 8 | 39–85 s | $0.19–$0.33 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-http-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-http-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-http-rep3.md) |
+| real · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
+| real · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
 
 > Multi-product platform; this entry covers the core developer platform only (see scope).
 

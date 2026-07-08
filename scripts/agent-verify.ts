@@ -91,7 +91,8 @@ interface TaskDef {
   category: string; task: string; scenario: string;
   provisioning: { element: string; delivery: string }[];
   verification: { method: string; how: string };
-  verify_commands?: Record<string, string>; cleanup: string;
+  verify_commands?: Record<string, string>;
+  reset_commands?: Record<string, string>; cleanup: string;
   provider_overrides?: Record<string, string>;
 }
 
@@ -193,6 +194,15 @@ for (let rep = 1; rep <= reps; rep++) {
   if (fs.existsSync(`${base}.yaml`)) { console.log(`skip rep${rep} (exists: ${base}.yaml)`); continue; }
   const run = buildRun(rep);
   console.log(`[${id}] ${slug} rep ${rep}/${reps} (model: ${model}, max ${maxTurns} turns)...`);
+
+  // Provider-side reset: wipe artifacts from earlier runs before the rep so
+  // the agent cannot imitate visible prior work.
+  const resetCmd = taskDef?.reset_commands?.[id];
+  if (layer === 'real' && resetCmd) {
+    try {
+      execFileSync('bash', ['-c', interpolate(resetCmd, { NONCE: 'unused', CURLRC: requireFile(cred('curlrc'), 'reset runs over http'), ...provisionVars })], { encoding: 'utf8', timeout: 5 * 60_000 });
+    } catch { console.warn('  WARNING: provider-side reset failed'); }
+  }
 
   // Provider-side cleanliness assertion: if artifacts from earlier runs are
   // still visible through the verification API, later reps can imitate them

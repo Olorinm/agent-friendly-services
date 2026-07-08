@@ -15,6 +15,10 @@ verification:
 verify_commands:
   github: curl -s -K {{CURLRC}} "https://api.github.com/repos/{{provision.repo}}/issues?state=all&per_page=100"
   gitlab: curl -s -K {{CURLRC}} "https://gitlab.com/api/v4/projects/{{provision.project_id}}/issues?per_page=100"
-cleanup: runner deletes (or at minimum closes) the created issue so later reps cannot imitate earlier ones
+reset_commands:
+  # Deletes ALL issues in the sandbox repo before each rep (GraphQL — REST can only close). Requires jq.
+  github: |-
+    curl -s -K {{CURLRC}} "https://api.github.com/repos/{{provision.repo}}/issues?state=all&per_page=100" | jq -r '.[].node_id' | while read i; do curl -s -K {{CURLRC}} -X POST https://api.github.com/graphql -d "{\"query\":\"mutation{deleteIssue(input:{issueId:\\\"$i\\\"}){clientMutationId}}\"}" -o /dev/null; done
+cleanup: provider-side reset (reset_commands) wipes the sandbox before each rep; the last run's issue is removed by the next reset or manually
 provider_overrides:
   postman: variant — create a collection named "{{NONCE}}" in the designated workspace and read it back

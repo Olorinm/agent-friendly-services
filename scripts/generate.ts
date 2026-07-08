@@ -4,6 +4,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import * as yaml from 'js-yaml';
 import { ROOT, GENERATED_DIR, loadFields, loadCategories, loadProviders, daysSince, type Provider, type Check } from './lib.ts';
 
 const STALE_DAYS = 180;
@@ -15,6 +16,69 @@ const categories = loadCategories();
 const providers = loadProviders()
   .map((p) => p.data)
   .sort((a, b) => a.id.localeCompare(b.id));
+
+// ---------------------------------------------------------------------------
+// Agent runs (published subset of experiment results; docs/agent-verification.md)
+// ---------------------------------------------------------------------------
+interface AgentRun {
+  provider: string; layer: string; route?: string; task?: string; rep: number;
+  model: string; date: string; contaminated?: string; run_error?: string;
+  agent_claims: { result?: string; wrong_attempts?: number; friction_notes?: string[] } | null;
+  verified_independently: boolean | 'n/a'; num_turns: number; duration_ms: number;
+  total_cost_usd: number; transcript: string;
+}
+const PUBLISHED_DIR = path.join(ROOT, 'data/experiments/published');
+const AGENT_RUNS = './generated/agent-runs.md';
+const agentRunsByProvider = new Map<string, AgentRun[]>();
+if (fs.existsSync(PUBLISHED_DIR)) {
+  for (const pid of fs.readdirSync(PUBLISHED_DIR)) {
+    const dir = path.join(PUBLISHED_DIR, pid);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    const runs = fs.readdirSync(dir).filter((f) => f.endsWith('.yaml'))
+      .map((f) => yaml.load(fs.readFileSync(path.join(dir, f), 'utf8')) as AgentRun)
+      .filter((r) => r.layer === 'real' && !r.contaminated && !r.run_error && daysSince(r.date) <= STALE_DAYS);
+    if (runs.length) agentRunsByProvider.set(pid, runs);
+  }
+}
+
+const ROUTE_ORDER = ['http', 'cli', 'mcp'];
+const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
+
+interface RouteAgg {
+  route: string; reps: number; passes: number; majorityPass: boolean; medTurns: number;
+  secs: [number, number]; cost: [number, number]; models: string[]; date: string; runs: AgentRun[];
+}
+function routeAggs(pid: string): RouteAgg[] {
+  return ROUTE_ORDER.flatMap((route) => {
+    const rs = (agentRunsByProvider.get(pid) ?? []).filter((r) => r.route === route);
+    if (!rs.length) return [];
+    const passes = rs.filter((r) => r.verified_independently === true && r.agent_claims?.result === 'pass').length;
+    const secs = rs.map((r) => Math.round(r.duration_ms / 1000));
+    const cost = rs.map((r) => r.total_cost_usd);
+    return [{
+      route, reps: rs.length, passes, majorityPass: passes * 2 > rs.length,
+      medTurns: median(rs.map((r) => r.num_turns)),
+      secs: [Math.min(...secs), Math.max(...secs)] as [number, number],
+      cost: [Math.min(...cost), Math.max(...cost)] as [number, number],
+      models: [...new Set(rs.map((r) => r.model))],
+      date: rs.map((r) => r.date).sort().at(-1)!,
+      runs: rs,
+    }];
+  });
+}
+const isAgentVerified = (pid: string) => routeAggs(pid).some((a) => a.majorityPass);
+
+// 🏆 top measured per category — mechanically derived, never editorial:
+// majority-pass on the baseline (http) route, fewest median turns, then lowest cost.
+// It changes hands automatically whenever a better run lands.
+const topMeasured = new Map<string, string>();
+for (const cat of loadCategories()) {
+  const cands = providers
+    .map((p) => ({ p, http: routeAggs(p.id).find((a) => a.route === 'http') }))
+    .filter((x) => x.p.category === cat.id && x.http?.majorityPass)
+    .sort((a, b) => a.http!.medTurns - b.http!.medTurns || a.http!.cost[1] - b.http!.cost[1]);
+  if (cands.length) topMeasured.set(cat.id, cands[0].p.id);
+}
 
 // ---------------------------------------------------------------------------
 // Derivations
@@ -158,8 +222,11 @@ function shieldText(s: string): string {
   return encodeURIComponent(s.replace(/-/g, '--').replace(/_/g, '__')).replace(/%20/g, '_');
 }
 
+const verifiedCount = providers.filter((p) => isAgentVerified(p.id)).length;
+
 const badgeParts = [
   `![Providers](https://img.shields.io/badge/providers-${providers.length}-2563eb)`,
+  verifiedCount ? `[![Agent-verified](https://img.shields.io/badge/agent--verified-${verifiedCount}-10b981)](${AGENT_RUNS})` : null,
   linkHealth
     ? `[![Link health](https://img.shields.io/badge/link_health-${shieldText(`${linkHealth.ok} ok, ${linkHealth.broken} broken`)}-${linkHealth.broken > 0 ? 'e11d48' : '10b981'})](./generated/link-health.json)`
     : null,
@@ -169,8 +236,18 @@ const badgeParts = [
 
 const activeCategories = categories.filter((c) => providers.some((p) => p.category === c.id));
 
+function agentCell(p: Provider): string {
+  const routes = routeAggs(p.id).filter((a) => a.majorityPass).map((a) => a.route[0]);
+  return routes.length ? `[✓ ${routes.join('·')}](${AGENT_RUNS.replace('./generated/', './')}#${p.id})` : '—';
+}
+
 function providerRow(p: Provider, linkPrefix = ''): string {
-  return `| [${p.name}](${linkPrefix}#${p.id}) | ${entrySym(p, 'mcp_official')} | ${entrySym(p, 'llms_txt')} | ${entrySym(p, 'openapi')} | ${entrySym(p, 'cli')} | ${SYM[checkStatus(p, 'sandbox_or_test_mode')]} | ${selfServeSym(p)} | ${lastVerified(p) ?? '—'} |`;
+  // The Agent cell links relative to generated/ when the matrix is rendered there,
+  // and via the README prefix otherwise.
+  const agent = linkPrefix === ''
+    ? agentCell(p)
+    : agentCell(p).replace('(./', '(./generated/');
+  return `| [${p.name}](${linkPrefix}#${p.id}) | ${entrySym(p, 'mcp_official')} | ${entrySym(p, 'llms_txt')} | ${entrySym(p, 'openapi')} | ${entrySym(p, 'cli')} | ${SYM[checkStatus(p, 'sandbox_or_test_mode')]} | ${selfServeSym(p)} | ${agent} | ${lastVerified(p) ?? '—'} |`;
 }
 
 // linkPrefix: '' inside providers.md (anchors are local), DETAILS from the READMEs.
@@ -182,8 +259,8 @@ function matrixTables(linkPrefix: string, heading: (name: string) => string): st
       const list = providers.filter((p) => p.category === cat.id);
       return `${heading(cat.name)}
 
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 ${list.map((p) => providerRow(p, linkPrefix)).join('\n')}`;
     })
     .join('\n\n');
@@ -224,6 +301,18 @@ function checksBlock(p: Provider): string {
 
 const totalUnknown = providers.reduce((n, p) => n + unknownChecks(p).length, 0);
 
+// Per-provider "Agent runs" table (fact sheets + agent-runs.md). linkBase: path
+// prefix from the rendering file to the repo root.
+function agentRunsTable(p: Provider, linkBase: string): string {
+  const aggs = routeAggs(p.id);
+  if (!aggs.length) return '';
+  const rows = aggs.map((a) =>
+    `| real · ${a.route} | ${a.passes}/${a.reps} pass | ${a.medTurns} | ${a.secs[0]}–${a.secs[1]} s | $${a.cost[0].toFixed(2)}–$${a.cost[1].toFixed(2)} | ${a.models.join(', ')} | ${a.date} | ${a.runs.map((r, i) => `[${i + 1}](${linkBase}data/experiments/published/${p.id}/${r.transcript})`).join(' ')} |`);
+  return `| Layer · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+${rows.join('\n')}`;
+}
+
 // generated/providers.md — the full per-provider fact sheets (kept out of the README).
 const providersMd = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
 
@@ -231,6 +320,7 @@ const providersMd = `<!-- GENERATED FILE — do not edit. Run \`npm run generate
 
 Every known entry point and verified capability fact, with evidence links and dates.
 Symbols: ✓ supported/available · ◐ partial · ✗ not supported · n/a not applicable · — unknown.
+Agent column: routes with a majority of independently verified real-task passes (h=http c=cli m=mcp; see [agent-runs.md](./agent-runs.md)).
 A missing link means **"no known URL"**, not "confirmed absent"; \`unknown\` means "checked, no reliable evidence found yet".
 Links are probed weekly ([link-health.json](./link-health.json)); machine-readable version: [providers.json](./providers.json).
 
@@ -252,11 +342,56 @@ ${providers
 **Links:** ${entrypointLinks(p)}
 
 ${checksBlock(p)}
-${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
+${agentRunsTable(p, '../') ? `\n**Agent runs** — a real agent ran this category's [pinned task](../data/experiments/tasks/${p.category}.yaml), independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#${p.id})):\n\n${agentRunsTable(p, '../')}\n` : ''}${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
   })
   .join('\n')}
 `;
 fs.writeFileSync(path.join(GENERATED_DIR, 'providers.md'), providersMd);
+
+// generated/agent-runs.md — measured agent runs, route comparison first.
+const measured = providers.filter((p) => agentRunsByProvider.has(p.id));
+const routeCmpRows = measured.map((p) => {
+  const cells = ROUTE_ORDER.map((route) => {
+    const a = routeAggs(p.id).find((x) => x.route === route);
+    return a ? `${a.majorityPass ? '✓' : '✗'} ${a.passes}/${a.reps} · ${a.medTurns}t · $${a.cost[0].toFixed(2)}–${a.cost[1].toFixed(2)}` : '—';
+  });
+  const crown = topMeasured.get(p.category) === p.id ? ' 🏆' : '';
+  return `| [${p.name}](#${p.id})${crown} (${catName(p.category)}) | ${cells.join(' | ')} |`;
+});
+const agentRunsMd = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/experiments/published/ -->
+
+# Agent Runs
+
+Real AI agents executing each category's [pinned realistic task](../data/experiments/tasks/) against the live service — unattended, in a pinned clean environment, with the runner (not the agent) verifying the result through the provider's API. Method, environment and hard rules: [agent-verification.md](../docs/agent-verification.md).
+
+Every run publishes its model, date, metrics and full transcript. Results expire after ${STALE_DAYS} days. Providers can dispute any run by opening an issue — we rerun under the same pinned conditions.
+
+${measured.length === 0 ? 'No published runs yet — the first provisioned batch is in progress.\n' : `## Route comparison
+
+The same task, over each way an agent can reach the provider (**http** = official docs + raw API calls, the universal baseline · **cli** = the provider's official CLI · **mcp** = the provider's official MCP server). The route-vs-baseline delta shows whether a provider's agent tooling actually pays off. 🏆 = best measured result in its category (majority-pass on the baseline route, fewest median turns) — it changes hands automatically whenever a better run lands.
+
+| Provider | http (baseline) | cli | mcp |
+| --- | --- | --- | --- |
+${routeCmpRows.join('\n')}
+
+Cell format: verdict · passes/reps · median turns · cost per run.
+
+## Runs by provider
+
+${measured
+  .map((p) => {
+    const notes = routeAggs(p.id).flatMap((a) =>
+      a.runs.flatMap((r) => (r.agent_claims?.friction_notes ?? []).map((n) => `- *(${a.route} rep${r.rep})* ${n}`)));
+    return `### ${p.name} <a id="${p.id}"></a>
+
+Task: \`${(agentRunsByProvider.get(p.id) ?? [])[0]?.task}\` ([definition](../data/experiments/tasks/${p.category}.yaml)) · [provider facts](./providers.md#${p.id})
+
+${agentRunsTable(p, '../')}
+${notes.length ? `\n**Run notes** (agent-reported, verbatim):\n\n${notes.join('\n')}` : ''}`;
+  })
+  .join('\n\n')}`}
+`;
+fs.writeFileSync(path.join(GENERATED_DIR, 'agent-runs.md'), agentRunsMd);
 
 // README.md / README.zh-CN.md — awesome-style: one bullet per provider, details linked.
 // Provider names, summaries and category headings stay English in both languages
@@ -276,9 +411,11 @@ function awesomeLinks(p: Provider, allFactsLabel: string): string {
   return parts.join(' · ');
 }
 
-function awesomeEntry(p: Provider, allFactsLabel: string): string {
+function awesomeEntry(p: Provider, labels: { allFacts: string; verified: string }): string {
   const summary = p.summary.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
-  return `- **[${p.name}](${p.entrypoints.docs})** — ${summary}. ${awesomeLinks(p, allFactsLabel)}`;
+  const crown = topMeasured.get(p.category) === p.id ? ' 🏆' : '';
+  const badge = isAgentVerified(p.id) ? ` · **[🤖✓ ${labels.verified}](${AGENT_RUNS}#${p.id})**` : '';
+  return `- **[${p.name}](${p.entrypoints.docs})**${crown} — ${summary}. ${awesomeLinks(p, labels.allFacts)}${badge}`;
 }
 
 // GitHub heading slugs: lowercase, strip punctuation, each space becomes one hyphen.
@@ -286,13 +423,13 @@ const toc = activeCategories
   .map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s/g, '-')})`)
   .join(' · ');
 
-function categorySections(allFactsLabel: string): string {
+function categorySections(labels: { allFacts: string; verified: string }): string {
   return activeCategories
     .map((cat) => {
       const list = providers.filter((p) => p.category === cat.id);
       return `## ${cat.name}
 
-${list.map((p) => awesomeEntry(p, allFactsLabel)).join('\n')}`;
+${list.map((p) => awesomeEntry(p, labels)).join('\n')}`;
     })
     .join('\n\n');
 }
@@ -303,7 +440,7 @@ const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. S
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into ${providers.length} popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date. No scores, no tiers — [facts only](./docs/methodology.md).
+Where AI agents plug into ${providers.length} popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](${AGENT_RUNS})**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
 ${badgeParts.join('\n')}
 
@@ -319,12 +456,12 @@ curl -s ${RAW_JSON}
 
 Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details](./mcp/)). Repo map: [\`llms.txt\`](./llms.txt) · contribution manual: [\`AGENTS.md\`](./AGENTS.md).
 
-**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}#providers) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
+**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}#providers) · measured runs & route comparison: [agent runs](${AGENT_RUNS}) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
 
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details>
-<summary><b>Capability matrix</b> — all ${providers.length} providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown)</summary>
+<summary><b>Capability matrix</b> — all ${providers.length} providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
@@ -334,7 +471,7 @@ ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
 ${toc}
 
-${categorySections('all facts →')}
+${categorySections({ allFacts: 'all facts →', verified: 'agent-verified' })}
 
 ## Contributing
 
@@ -365,7 +502,7 @@ const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 ${providers.length} 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期。不打分、不分级 —— [只记录事实](./docs/methodology.md)。
+AI 智能体接入 ${providers.length} 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](${AGENT_RUNS})**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
 ${badgeParts.join('\n')}
 
@@ -381,14 +518,14 @@ curl -s ${RAW_JSON}
 
 其他 MCP 客户端：command \`npx\`，args \`["-y", "github:${REPO}"]\`（[详情](./mcp/)）。仓库地图：[\`llms.txt\`](./llms.txt) · 智能体贡献手册：[\`AGENTS.md\`](./AGENTS.md)。
 
-**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}#providers) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
+**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}#providers) · 实测运行与路线对比：[agent runs](${AGENT_RUNS}) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
 
 **🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
 
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details>
-<summary><b>能力矩阵表</b> —— ${providers.length} 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知）</summary>
+<summary><b>能力矩阵表</b> —— ${providers.length} 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
@@ -398,7 +535,7 @@ ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
 ${toc}
 
-${categorySections('全部事实 →')}
+${categorySections({ allFacts: '全部事实 →', verified: '实测验证' })}
 
 ## 参与贡献
 
@@ -423,5 +560,5 @@ npm run validate, and open a small PR.
 
 fs.writeFileSync(path.join(ROOT, 'README.zh-CN.md'), readmeZh);
 
-console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/matrix.csv`);
+console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/matrix.csv, generated/agent-runs.md`);
 console.log(`  ${providers.length} providers · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);

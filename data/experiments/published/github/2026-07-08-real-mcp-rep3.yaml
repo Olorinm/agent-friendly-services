@@ -1,0 +1,26 @@
+provider: github
+category: developer-tools
+layer: real
+route: mcp
+task: file-issue-and-confirm
+nonce: afs-github-mcp-r3-mrbspjoj
+rep: 3
+model: sonnet
+date: '2026-07-08'
+agent_claims:
+  result: pass
+  resource_id: https://github.com/Olorinm/afs-task-sandbox/issues/12
+  final_command: mcp__github__issue_read(method=get, owner=Olorinm, repo=afs-task-sandbox, issue_number=12)
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      issue_write returns a decimal 'id' (global GitHub node/issue id, 4835571491) distinct from the issue 'number' (12)
+      used for read-back and URL; no ambiguity encountered, just noting the two identifiers differ
+  docs_pages_used:
+    - https://docs.github.com/rest
+  confidence: high
+verified_independently: true
+num_turns: 4
+duration_ms: 15147
+total_cost_usd: 0.1423956
+transcript: 2026-07-08-real-mcp-rep3.md

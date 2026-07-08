@@ -1,0 +1,26 @@
+provider: github
+category: developer-tools
+layer: real
+route: cli
+task: file-issue-and-confirm
+nonce: afs-github-cli-r2-mrbsqhd4
+rep: 2
+model: sonnet
+date: '2026-07-08'
+agent_claims:
+  result: pass
+  resource_id: https://github.com/Olorinm/afs-task-sandbox/issues/14
+  final_command: gh issue view 14 --repo Olorinm/afs-task-sandbox --json id,number,title,body,url,state,author
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      gh auth status showed two logged-in accounts for github.com (env GH_TOKEN and stored hosts.yml), but both resolved
+      to the same Olorinm account so no ambiguity in practice
+  docs_pages_used:
+    - https://cli.github.com
+  confidence: high
+verified_independently: true
+num_turns: 5
+duration_ms: 19299
+total_cost_usd: 0.10835109999999999
+transcript: 2026-07-08-real-cli-rep2.md

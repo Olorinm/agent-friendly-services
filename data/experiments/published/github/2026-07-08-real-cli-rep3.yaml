@@ -1,0 +1,23 @@
+provider: github
+category: developer-tools
+layer: real
+route: cli
+task: file-issue-and-confirm
+nonce: afs-github-cli-r3-mrbsqzmp
+rep: 3
+model: sonnet
+date: '2026-07-08'
+agent_claims:
+  result: pass
+  resource_id: https://github.com/Olorinm/afs-task-sandbox/issues/15
+  final_command: gh issue view 15 --repo Olorinm/afs-task-sandbox --json number,id,title,url,body,state
+  wrong_attempts: 0
+  friction_notes: []
+  docs_pages_used:
+    - https://cli.github.com
+  confidence: high
+verified_independently: true
+num_turns: 4
+duration_ms: 15849
+total_cost_usd: 0.094274
+transcript: 2026-07-08-real-cli-rep3.md
