@@ -28,10 +28,9 @@ different experiments:
 - **Machine**: a fresh environment with no prior state (no cached logins, no
   provider SDKs preinstalled, no shell history).
 - **Agent + model**: pinned and recorded (e.g. Claude Code headless, model id).
-- **Tool surface**: web fetch/search + `curl` via shell. No provider SDKs, no
-  provider CLIs — the task must be solvable from HTTP + docs alone. (CLI
-  quality is already a documented check; mixing it in here would blur what is
-  being measured.)
+- **Tool surface**: pinned per access route (see below). The baseline route is
+  web fetch/search + `curl` via shell — no provider SDKs, no provider CLIs —
+  so the task must be solvable from HTTP + docs alone.
 - **Credentials as files, never env vars or prompt text**: each credential is
   provisioned as a curl config file (`curl -K <file>`), so the secret never
   appears in command text, transcripts, or the prompt, and restrictive shell
@@ -47,6 +46,31 @@ different experiments:
   documented).
 - **Harness pre-flight**: before a batch, the harness runs a known-good task
   end-to-end to prove the environment itself adds no friction.
+
+## Access routes
+
+A real task can be run over up to three routes — same scenario, same nonce,
+same independent verification; only the way the agent reaches the provider
+changes:
+
+| Route | Available for | Tool surface | Credential delivery |
+| --- | --- | --- | --- |
+| **HTTP + docs** (baseline) | every provider | web fetch/search + `curl` | curl config file (`-K`) |
+| **Official CLI** | providers shipping one | web fetch/search + the CLI only | the CLI's own native mechanism (env var / config file), never expanded in command text |
+| **Official MCP** | providers shipping one | the MCP server's tools only (no shell) | harness-side MCP config — the agent never touches the secret at all |
+
+The baseline keeps every provider comparable; the CLI and MCP routes measure
+whether the provider's agent-facing investments actually pay off. The
+route-vs-baseline delta (turns, wall time, cost, wrong attempts, docs
+consulted) is itself a published fact — calibration on one provider showed the
+official MCP server completing the task in 4 turns with zero documentation
+lookups where the HTTP baseline needed 8–13 turns, and that the MCP route is
+structurally safer because the credential never enters the agent's
+environment. An MCP/CLI route that *fails* where the baseline passes is
+recorded with the failure point — that is exactly the feedback those tools'
+maintainers need. If the MCP/CLI tools are insufficient for part of the task,
+the agent must report that as the failure reason, not work around it via other
+means.
 
 ## Task definitions
 
