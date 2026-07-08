@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-07-07T10:35:23.078Z",
-  "total": 616,
-  "ok": 611,
-  "inconclusive": 5,
-  "broken": 0,
+  "checked_at": "2026-07-08T08:29:40.416Z",
+  "total": 740,
+  "ok": 729,
+  "inconclusive": 10,
+  "broken": 1,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -261,6 +261,14 @@
       ]
     },
     {
+      "url": "https://api-docs.render.com/reference/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.api_reference"
+      ]
+    },
+    {
       "url": "https://api.elevenlabs.io/openapi.json",
       "class": "ok",
       "status": 200,
@@ -385,6 +393,15 @@
       "sources": [
         "composio:entrypoints.signup",
         "composio:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.lemonsqueezy.com/register",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.signup",
+        "lemonsqueezy:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -597,6 +614,25 @@
       ]
     },
     {
+      "url": "https://console.weaviate.cloud",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.signup",
+        "weaviate:entrypoints.api_keys",
+        "weaviate:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://console.x.ai",
+      "class": "inconclusive",
+      "status": 403,
+      "sources": [
+        "xai:entrypoints.signup",
+        "xai:entrypoints.api_keys"
+      ]
+    },
+    {
       "url": "https://core.telegram.org/bots",
       "class": "ok",
       "status": 200,
@@ -679,6 +715,15 @@
       ]
     },
     {
+      "url": "https://dashboard.render.com/register",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.signup",
+        "render:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
       "url": "https://dashboard.stripe.com/register",
       "class": "ok",
       "status": 200,
@@ -711,6 +756,46 @@
         "deepgram:entrypoints.pricing",
         "deepgram:checks.free_tier_or_trial.evidence",
         "deepgram:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com/cloud/acli/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com/cloud/jira/platform/scopes-for-oauth-2-3LO-and-forge-apps/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:checks.scoped_tokens.evidence"
       ]
     },
     {
@@ -1683,6 +1768,56 @@
       ]
     },
     {
+      "url": "https://docs.jina.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:entrypoints.docs",
+        "jina:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.jina.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.lemonsqueezy.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.lemonsqueezy.com/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.lemonsqueezy.com/api#authentication",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.api_keys",
+        "lemonsqueezy:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.lemonsqueezy.com/help/getting-started/test-mode",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
       "url": "https://docs.machines.dev",
       "class": "ok",
       "status": 200,
@@ -1737,6 +1872,63 @@
       "status": 200,
       "sources": [
         "mistral:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/api/authentication/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.api_keys",
+        "n8n:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/connect/connect-to-n8n-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/hosting/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/hosting/cli-commands/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.llms_txt"
       ]
     },
     {
@@ -1889,6 +2081,34 @@
       "status": 200,
       "sources": [
         "pinecone:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://docs.railway.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.railway.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.railway.com/reference/public-api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.api_reference",
+        "railway:entrypoints.graphql",
+        "railway:entrypoints.api_keys",
+        "railway:checks.api_key_self_serve.evidence",
+        "railway:checks.scoped_tokens.evidence"
       ]
     },
     {
@@ -2221,6 +2441,112 @@
       ]
     },
     {
+      "url": "https://docs.trychroma.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.trychroma.com/cloud/getting-started",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:checks.self_serve_signup.evidence",
+        "chroma:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.trychroma.com/docs/cli/install",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://docs.trychroma.com/docs/overview/introduction",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.api_reference",
+        "chroma:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.trychroma.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.weaviate.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.weaviate.io/cloud/manage-clusters/connect",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.weaviate.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.weaviate.io/weaviate/api/rest",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.x.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xai:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.x.ai/developers/rest-api-reference/inference",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xai:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.x.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xai:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.x.ai/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xai:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
       "url": "https://docs.zapier.com",
       "class": "ok",
       "status": 200,
@@ -2386,6 +2712,59 @@
       ]
     },
     {
+      "url": "https://fal.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.signup",
+        "fal:homepage"
+      ]
+    },
+    {
+      "url": "https://fal.ai/dashboard/keys",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.api_keys",
+        "fal:checks.self_serve_signup.evidence",
+        "fal:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://fal.ai/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://fal.ai/docs/model-apis",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://fal.ai/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://fal.ai/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.pricing",
+        "fal:checks.free_tier_or_trial.evidence",
+        "fal:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://fly.io",
       "class": "ok",
       "status": 200,
@@ -2479,6 +2858,14 @@
       ]
     },
     {
+      "url": "https://github.com/atlassian/atlassian-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/brave/brave-search-mcp-server",
       "class": "ok",
       "status": 200,
@@ -2492,6 +2879,14 @@
       "status": 200,
       "sources": [
         "browserbase:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/chroma-core/chroma-mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.mcp_official"
       ]
     },
     {
@@ -2567,6 +2962,14 @@
       ]
     },
     {
+      "url": "https://github.com/fal-ai/fal",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://github.com/getsentry/sentry-api-schema",
       "class": "ok",
       "status": 200,
@@ -2596,6 +2999,22 @@
       "status": 200,
       "sources": [
         "gemini-api:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://github.com/grafana/mcp-grafana",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/jina-ai/MCP",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:entrypoints.mcp_official"
       ]
     },
     {
@@ -2729,6 +3148,38 @@
       ]
     },
     {
+      "url": "https://github.com/railwayapp/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://github.com/redis/mcp-redis",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/render-oss/cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://github.com/render-oss/render-mcp-server",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/replicate/cli",
       "class": "ok",
       "status": 200,
@@ -2742,6 +3193,14 @@
       "status": 200,
       "sources": [
         "resend:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/serpapi/serpapi-mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.mcp_official"
       ]
     },
     {
@@ -2802,6 +3261,22 @@
       ]
     },
     {
+      "url": "https://github.com/weaviate/mcp-server-weaviate",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/weaviate/weaviate-cli",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.cli"
+      ]
+    },
+    {
       "url": "https://github.com/zapier/zapier-platform",
       "class": "ok",
       "status": 200,
@@ -2823,6 +3298,76 @@
       "status": 200,
       "sources": [
         "gitlab:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://grafana.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:homepage"
+      ]
+    },
+    {
+      "url": "https://grafana.com/auth/sign-up/create-user",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.signup",
+        "grafana:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://grafana.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.api_keys",
+        "grafana:checks.api_key_self_serve.evidence",
+        "grafana:checks.scoped_tokens.evidence",
+        "grafana:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://grafana.com/docs/grafana/latest/developers/http_api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://grafana.com/docs/grafana/latest/setup-grafana/installation/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://grafana.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://grafana.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.pricing",
+        "grafana:checks.free_tier_or_trial.evidence",
+        "grafana:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -2946,12 +3491,53 @@
       ]
     },
     {
+      "url": "https://id.atlassian.com/manage-profile/security/api-tokens",
+      "class": "ok",
+      "status": 202,
+      "sources": [
+        "atlassian:entrypoints.api_keys",
+        "atlassian:checks.api_key_self_serve.evidence",
+        "atlassian:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://id.atlassian.com/signup",
+      "class": "ok",
+      "status": 202,
+      "sources": [
+        "atlassian:entrypoints.signup",
+        "atlassian:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
       "url": "https://identity.getpostman.com/signup",
       "class": "ok",
       "status": 200,
       "sources": [
         "postman:entrypoints.signup",
         "postman:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://jina.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:homepage"
+      ]
+    },
+    {
+      "url": "https://jina.ai/api-dashboard",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:entrypoints.signup",
+        "jina:entrypoints.api_keys",
+        "jina:checks.self_serve_signup.evidence",
+        "jina:checks.api_key_self_serve.evidence",
+        "jina:checks.free_tier_or_trial.evidence",
+        "jina:checks.self_serve_paid_upgrade.evidence",
+        "jina:checks.usage_dashboard.evidence"
       ]
     },
     {
@@ -3197,6 +3783,26 @@
       ]
     },
     {
+      "url": "https://n8n.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.signup",
+        "n8n:homepage"
+      ]
+    },
+    {
+      "url": "https://n8n.io/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.pricing",
+        "n8n:checks.self_serve_signup.evidence",
+        "n8n:checks.free_tier_or_trial.evidence",
+        "n8n:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://neon.com",
       "class": "ok",
       "status": 200,
@@ -3389,8 +3995,8 @@
     },
     {
       "url": "https://openai.com",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "openai:homepage"
       ]
@@ -3401,6 +4007,81 @@
       "status": 200,
       "sources": [
         "vercel:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.signup",
+        "openrouter:homepage"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs/api-reference/authentication",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs/api-reference/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs/quickstart",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:checks.self_serve_signup.evidence",
+        "openrouter:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/docs/use-cases/oauth-pkce",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/models",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.pricing",
+        "openrouter:checks.free_tier_or_trial.evidence"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/settings/keys",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.api_keys"
       ]
     },
     {
@@ -3514,8 +4195,8 @@
     },
     {
       "url": "https://platform.openai.com/signup",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "openai:entrypoints.signup",
         "openai:checks.self_serve_signup.evidence"
@@ -3570,6 +4251,152 @@
         "qdrant:entrypoints.pricing",
         "qdrant:checks.free_tier_or_trial.evidence",
         "qdrant:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://railway.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:homepage"
+      ]
+    },
+    {
+      "url": "https://railway.com/new",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.signup",
+        "railway:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://railway.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.pricing",
+        "railway:checks.free_tier_or_trial.evidence",
+        "railway:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://redis.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:homepage"
+      ]
+    },
+    {
+      "url": "https://redis.io/docs/latest",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://redis.io/docs/latest/develop/tools/cli/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://redis.io/docs/latest/operate/rc/api/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://redis.io/docs/latest/operate/rc/api/get-started/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.api_keys",
+        "redis:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://redis.io/docs/latest/operate/rs/installing-upgrading/quickstarts/docker-quickstart/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:checks.sandbox_or_test_mode.evidence"
+      ]
+    },
+    {
+      "url": "https://redis.io/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://redis.io/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.pricing",
+        "redis:checks.free_tier_or_trial.evidence",
+        "redis:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://redis.io/try-free/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.signup",
+        "redis:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://render.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:homepage"
+      ]
+    },
+    {
+      "url": "https://render.com/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://render.com/docs/api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.api_keys",
+        "render:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://render.com/docs/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://render.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.pricing",
+        "render:checks.free_tier_or_trial.evidence",
+        "render:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -3805,6 +4632,67 @@
       ]
     },
     {
+      "url": "https://serpapi.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:homepage"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/manage-api-key",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.api_keys",
+        "serpapi:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.pricing",
+        "serpapi:checks.free_tier_or_trial.evidence",
+        "serpapi:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/search-api",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.docs",
+        "serpapi:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/status",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://serpapi.com/users/sign_up",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "serpapi:entrypoints.signup",
+        "serpapi:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
       "url": "https://shopify.dev/changelog",
       "class": "ok",
       "status": 200,
@@ -3904,8 +4792,8 @@
     },
     {
       "url": "https://shopify.dev/llms.txt",
-      "class": "ok",
-      "status": 200,
+      "class": "broken",
+      "status": 404,
       "sources": [
         "shopify:entrypoints.llms_txt"
       ]
@@ -3967,6 +4855,14 @@
       "status": 200,
       "sources": [
         "apify:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.atlassian.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.status_page"
       ]
     },
     {
@@ -4034,6 +4930,14 @@
       ]
     },
     {
+      "url": "https://status.fal.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "fal:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.flyio.net",
       "class": "ok",
       "status": 200,
@@ -4050,6 +4954,14 @@
       ]
     },
     {
+      "url": "https://status.grafana.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "grafana:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.huggingface.co",
       "class": "ok",
       "status": 200,
@@ -4058,11 +4970,27 @@
       ]
     },
     {
+      "url": "https://status.jina.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "jina:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.larksuite.com",
       "class": "ok",
       "status": 200,
       "sources": [
         "lark:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.lemonsqueezy.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.status_page"
       ]
     },
     {
@@ -4082,6 +5010,14 @@
       ]
     },
     {
+      "url": "https://status.n8n.cloud",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "n8n:entrypoints.status_page"
+      ]
+    },
+    {
       "url": "https://status.notion.so",
       "class": "ok",
       "status": 200,
@@ -4095,6 +5031,14 @@
       "status": 200,
       "sources": [
         "openai:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.openrouter.ai",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openrouter:entrypoints.status_page"
       ]
     },
     {
@@ -4127,6 +5071,30 @@
       "status": 200,
       "sources": [
         "qdrant:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.railway.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "railway:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.redis.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "redis:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://status.render.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "render:entrypoints.status_page"
       ]
     },
     {
@@ -4327,6 +5295,14 @@
         "supabase:entrypoints.pricing",
         "supabase:checks.free_tier_or_trial.evidence",
         "supabase:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://support.atlassian.com/organization-administration/docs/manage-product-sandboxes/",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:checks.sandbox_or_test_mode.evidence"
       ]
     },
     {
@@ -4549,6 +5525,25 @@
       ]
     },
     {
+      "url": "https://weaviate.io",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:homepage"
+      ]
+    },
+    {
+      "url": "https://weaviate.io/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "weaviate:entrypoints.pricing",
+        "weaviate:checks.sandbox_or_test_mode.evidence",
+        "weaviate:checks.free_tier_or_trial.evidence",
+        "weaviate:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
       "url": "https://www.airtable.com",
       "class": "ok",
       "status": 200,
@@ -4571,6 +5566,24 @@
       "sources": [
         "anthropic:entrypoints.pricing",
         "anthropic:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.atlassian.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:homepage"
+      ]
+    },
+    {
+      "url": "https://www.atlassian.com/software/jira/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "atlassian:entrypoints.pricing",
+        "atlassian:checks.free_tier_or_trial.evidence",
+        "atlassian:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -4785,6 +5798,22 @@
       ]
     },
     {
+      "url": "https://www.lemonsqueezy.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:homepage"
+      ]
+    },
+    {
+      "url": "https://www.lemonsqueezy.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "lemonsqueezy:entrypoints.pricing"
+      ]
+    },
+    {
       "url": "https://www.mongodb.com/cloud/atlas/register",
       "class": "ok",
       "status": 200,
@@ -4953,8 +5982,8 @@
     },
     {
       "url": "https://www.perplexity.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "perplexity:homepage"
       ]
@@ -5066,6 +6095,24 @@
       ]
     },
     {
+      "url": "https://www.trychroma.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.signup",
+        "chroma:homepage"
+      ]
+    },
+    {
+      "url": "https://www.trychroma.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "chroma:entrypoints.pricing",
+        "chroma:checks.free_tier_or_trial.evidence"
+      ]
+    },
+    {
       "url": "https://www.twilio.com",
       "class": "ok",
       "status": 200,
@@ -5166,6 +6213,14 @@
       "status": 200,
       "sources": [
         "vercel:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://x.ai",
+      "class": "inconclusive",
+      "status": 403,
+      "sources": [
+        "xai:homepage"
       ]
     },
     {

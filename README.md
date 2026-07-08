@@ -8,7 +8,7 @@ Where AI agents plug into 65 popular services: docs, APIs, official MCP servers,
 
 ![Providers](https://img.shields.io/badge/providers-65-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-729_ok%2C_1_broken-e11d48)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -261,7 +261,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Commerce / Marketing
 
-- **[Shopify](https://shopify.dev/docs)** — Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. [API](https://shopify.dev/docs/api) · [MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [llms.txt](https://shopify.dev/llms.txt) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [all facts →](./generated/providers.md#shopify)
+- **[Shopify](https://shopify.dev/docs)** — Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. [API](https://shopify.dev/docs/api) · [MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [llms.txt](https://www.shopify.com/llms.txt) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [all facts →](./generated/providers.md#shopify)
 
 ## Contributing
 

@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:26:54.249Z",
+  "generated_at": "2026-07-08T08:30:17.742Z",
   "counts": {
     "providers": 65,
     "categories": 12,
@@ -5377,7 +5377,7 @@
         "docs": "https://shopify.dev/docs",
         "api_reference": "https://shopify.dev/docs/api",
         "graphql": "https://shopify.dev/docs/api/admin-graphql",
-        "llms_txt": "https://shopify.dev/llms.txt",
+        "llms_txt": "https://www.shopify.com/llms.txt",
         "changelog": "https://shopify.dev/changelog",
         "status_page": "https://www.shopifystatus.com",
         "pricing": "https://www.shopify.com/pricing",

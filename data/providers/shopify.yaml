@@ -15,7 +15,7 @@ entrypoints:
   docs: https://shopify.dev/docs
   api_reference: https://shopify.dev/docs/api
   graphql: https://shopify.dev/docs/api/admin-graphql
-  llms_txt: https://shopify.dev/llms.txt
+  llms_txt: https://www.shopify.com/llms.txt
   changelog: https://shopify.dev/changelog
   status_page: https://www.shopifystatus.com
   pricing: https://www.shopify.com/pricing
