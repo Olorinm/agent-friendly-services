@@ -23,7 +23,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 其他 MCP 客户端：command `npx`，args `["-y", "github:Olorinm/agent-friendly-services"]`（[详情](./mcp/)）。仓库地图：[`llms.txt`](./llms.txt) · 智能体贡献手册：[`AGENTS.md`](./AGENTS.md)。
 
-**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](./generated/providers.md) · 表格版：[`matrix.csv`](./generated/matrix.csv)。
+**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。一眼对比各家能力：[能力矩阵表](./generated/providers.md#matrix) · 带证据和日期的完整事实表：[提供商详情](./generated/providers.md#providers) · 表格版：[`matrix.csv`](./generated/matrix.csv)。
 
 **🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
 

@@ -312,7 +312,7 @@ curl -s ${RAW_JSON}
 
 Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details](./mcp/)). Repo map: [\`llms.txt\`](./llms.txt) · contribution manual: [\`AGENTS.md\`](./AGENTS.md).
 
-**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
+**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). At-a-glance comparison: [capability matrix](${DETAILS}#matrix) · full fact sheets with evidence and dates: [provider details](${DETAILS}#providers) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
 
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
@@ -367,7 +367,7 @@ curl -s ${RAW_JSON}
 
 其他 MCP 客户端：command \`npx\`，args \`["-y", "github:${REPO}"]\`（[详情](./mcp/)）。仓库地图：[\`llms.txt\`](./llms.txt) · 智能体贡献手册：[\`AGENTS.md\`](./AGENTS.md)。
 
-**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
+**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。一眼对比各家能力：[能力矩阵表](${DETAILS}#matrix) · 带证据和日期的完整事实表：[提供商详情](${DETAILS}#providers) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
 
 **🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
 

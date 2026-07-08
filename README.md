@@ -23,7 +23,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-services"]` ([details](./mcp/)). Repo map: [`llms.txt`](./llms.txt) · contribution manual: [`AGENTS.md`](./AGENTS.md).
 
-**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](./generated/providers.md) · spreadsheet: [`matrix.csv`](./generated/matrix.csv).
+**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). At-a-glance comparison: [capability matrix](./generated/providers.md#matrix) · full fact sheets with evidence and dates: [provider details](./generated/providers.md#providers) · spreadsheet: [`matrix.csv`](./generated/matrix.csv).
 
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
