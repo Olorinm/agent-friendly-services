@@ -1,0 +1,73 @@
+id: railway
+name: Railway
+category: cloud-hosting
+homepage: https://railway.com
+summary: App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.
+submitted_by: community
+
+tags:
+  - paas
+  - deployment
+
+entrypoints:
+  docs: https://docs.railway.com
+  api_reference: https://docs.railway.com/reference/public-api
+  graphql: https://docs.railway.com/reference/public-api
+  llms_txt: https://docs.railway.com/llms.txt
+  status_page: https://status.railway.com
+  pricing: https://railway.com/pricing
+  signup: https://railway.com/new
+  api_keys: https://docs.railway.com/reference/public-api
+  cli: https://github.com/railwayapp/cli
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://railway.com/new
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.railway.com/reference/public-api
+    verified: "2026-07-08"
+    notes: Account/team/project tokens created self-serve in settings.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.railway.com/reference/public-api
+    verified: "2026-07-08"
+    notes: Distinct account, team, and project-scoped tokens are documented.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: PR/preview environments exist; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: partial
+    evidence: https://railway.com/pricing
+    verified: "2026-07-08"
+    notes: One-time trial credit; no standing free tier.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://railway.com/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

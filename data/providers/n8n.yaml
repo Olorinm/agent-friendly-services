@@ -1,0 +1,75 @@
+id: n8n
+name: n8n
+category: agent-tooling
+homepage: https://n8n.io
+summary: Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.
+submitted_by: community
+scope: n8n Cloud + self-hosted
+
+tags:
+  - workflow-automation
+  - agents
+  - self-hostable
+
+entrypoints:
+  docs: https://docs.n8n.io
+  api_reference: https://docs.n8n.io/api/
+  llms_txt: https://docs.n8n.io/llms.txt
+  status_page: https://status.n8n.cloud
+  pricing: https://n8n.io/pricing
+  signup: https://n8n.io
+  api_keys: https://docs.n8n.io/api/authentication/
+  cli: https://docs.n8n.io/hosting/cli-commands/
+  mcp_official: https://docs.n8n.io/connect/connect-to-n8n-mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://n8n.io/pricing
+    verified: "2026-07-08"
+    notes: Cloud trial is self-serve; self-hosted needs no account at all.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.n8n.io/api/authentication/
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: API key scopes documented for enterprise; needs verification of tiers.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://docs.n8n.io/hosting/
+    verified: "2026-07-08"
+    notes: Self-hosted/local instance serves as a full test environment.
+
+  free_tier_or_trial:
+    status: partial
+    evidence: https://n8n.io/pricing
+    verified: "2026-07-08"
+    notes: Cloud has a time-limited trial; the fair-code community edition is free to self-host.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://n8n.io/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

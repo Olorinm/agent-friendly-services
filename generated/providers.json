@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:24:41.869Z",
+  "generated_at": "2026-07-08T08:25:37.204Z",
   "counts": {
-    "providers": 56,
+    "providers": 61,
     "categories": 12,
-    "entrypoint_urls": 571,
-    "checks_answered": 328
+    "entrypoint_urls": 615,
+    "checks_answered": 351
   },
   "categories": [
     {
@@ -3217,6 +3217,104 @@
       }
     },
     {
+      "id": "n8n",
+      "name": "n8n",
+      "category": "agent-tooling",
+      "homepage": "https://n8n.io",
+      "summary": "Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.",
+      "submitted_by": "community",
+      "scope": "n8n Cloud + self-hosted",
+      "tags": [
+        "workflow-automation",
+        "agents",
+        "self-hostable"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.n8n.io",
+        "api_reference": "https://docs.n8n.io/api/",
+        "llms_txt": "https://docs.n8n.io/llms.txt",
+        "status_page": "https://status.n8n.cloud",
+        "pricing": "https://n8n.io/pricing",
+        "signup": "https://n8n.io",
+        "api_keys": "https://docs.n8n.io/api/authentication/",
+        "cli": "https://docs.n8n.io/hosting/cli-commands/",
+        "mcp_official": "https://docs.n8n.io/connect/connect-to-n8n-mcp-server"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://n8n.io/pricing",
+          "verified": "2026-07-08",
+          "notes": "Cloud trial is self-serve; self-hosted needs no account at all."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.n8n.io/api/authentication/",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "API key scopes documented for enterprise; needs verification of tiers."
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://docs.n8n.io/hosting/",
+          "verified": "2026-07-08",
+          "notes": "Self-hosted/local instance serves as a full test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "partial",
+          "evidence": "https://n8n.io/pricing",
+          "verified": "2026-07-08",
+          "notes": "Cloud has a time-limited trial; the fair-code community edition is free to self-host."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://n8n.io/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "neon",
       "name": "Neon",
       "category": "databases",
@@ -4205,6 +4303,292 @@
       }
     },
     {
+      "id": "railway",
+      "name": "Railway",
+      "category": "cloud-hosting",
+      "homepage": "https://railway.com",
+      "summary": "App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "paas",
+        "deployment"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.railway.com",
+        "api_reference": "https://docs.railway.com/reference/public-api",
+        "graphql": "https://docs.railway.com/reference/public-api",
+        "llms_txt": "https://docs.railway.com/llms.txt",
+        "status_page": "https://status.railway.com",
+        "pricing": "https://railway.com/pricing",
+        "signup": "https://railway.com/new",
+        "api_keys": "https://docs.railway.com/reference/public-api",
+        "cli": "https://github.com/railwayapp/cli"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://railway.com/new",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.railway.com/reference/public-api",
+          "verified": "2026-07-08",
+          "notes": "Account/team/project tokens created self-serve in settings."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "supported",
+          "evidence": "https://docs.railway.com/reference/public-api",
+          "verified": "2026-07-08",
+          "notes": "Distinct account, team, and project-scoped tokens are documented."
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "PR/preview environments exist; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "partial",
+          "evidence": "https://railway.com/pricing",
+          "verified": "2026-07-08",
+          "notes": "One-time trial credit; no standing free tier."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://railway.com/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "redis",
+      "name": "Redis (Redis Cloud)",
+      "category": "databases",
+      "homepage": "https://redis.io",
+      "summary": "In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.",
+      "submitted_by": "community",
+      "scope": "Redis Cloud + open-source",
+      "tags": [
+        "key-value",
+        "vector-database",
+        "caching"
+      ],
+      "entrypoints": {
+        "docs": "https://redis.io/docs/latest",
+        "api_reference": "https://redis.io/docs/latest/operate/rc/api/",
+        "llms_txt": "https://redis.io/llms.txt",
+        "status_page": "https://status.redis.io",
+        "pricing": "https://redis.io/pricing",
+        "signup": "https://redis.io/try-free/",
+        "api_keys": "https://redis.io/docs/latest/operate/rc/api/get-started/",
+        "cli": "https://redis.io/docs/latest/develop/tools/cli/",
+        "mcp_official": "https://github.com/redis/mcp-redis"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://redis.io/try-free/",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://redis.io/docs/latest/operate/rc/api/get-started/",
+          "verified": "2026-07-08",
+          "notes": "Cloud REST API keys are enabled and created in the console self-serve."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Role-based access control exists; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://redis.io/docs/latest/operate/rs/installing-upgrading/quickstarts/docker-quickstart/",
+          "verified": "2026-07-08",
+          "notes": "Open-source Redis runs locally (docker) as a test environment; free cloud tier also serves."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://redis.io/pricing",
+          "verified": "2026-07-08",
+          "notes": "30 MB free Redis Cloud database."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://redis.io/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "render",
+      "name": "Render",
+      "category": "cloud-hosting",
+      "homepage": "https://render.com",
+      "summary": "Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "paas",
+        "deployment"
+      ],
+      "entrypoints": {
+        "docs": "https://render.com/docs",
+        "api_reference": "https://api-docs.render.com/reference/introduction",
+        "llms_txt": "https://render.com/docs/llms.txt",
+        "status_page": "https://status.render.com",
+        "pricing": "https://render.com/pricing",
+        "signup": "https://dashboard.render.com/register",
+        "api_keys": "https://render.com/docs/api",
+        "cli": "https://github.com/render-oss/cli",
+        "mcp_official": "https://github.com/render-oss/render-mcp-server"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://dashboard.render.com/register",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://render.com/docs/api",
+          "verified": "2026-07-08",
+          "notes": "API keys created in the dashboard self-serve."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Preview environments exist; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://render.com/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free plan for web services (spins down on idle) and static sites."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://render.com/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown",
+          "notes": "REST API is versioned (v1 base path); no standalone deprecation-policy page found."
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "replicate",
       "name": "Replicate",
       "category": "ai-models",
@@ -4500,6 +4884,96 @@
         "last_verified": "2026-07-07",
         "unknown_checks": [
           "oauth_support",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "serpapi",
+      "name": "SerpApi",
+      "category": "web-search-data",
+      "homepage": "https://serpapi.com",
+      "summary": "Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "scraping"
+      ],
+      "entrypoints": {
+        "docs": "https://serpapi.com/search-api",
+        "api_reference": "https://serpapi.com/search-api",
+        "llms_txt": "https://serpapi.com/llms.txt",
+        "status_page": "https://serpapi.com/status",
+        "pricing": "https://serpapi.com/pricing",
+        "signup": "https://serpapi.com/users/sign_up",
+        "api_keys": "https://serpapi.com/manage-api-key",
+        "mcp_official": "https://github.com/serpapi/serpapi-mcp"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://serpapi.com/users/sign_up",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://serpapi.com/manage-api-key",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Playground exists for interactive testing; needs the canonical docs link as evidence."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://serpapi.com/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free plan with monthly search quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://serpapi.com/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
           "sandbox_or_test_mode",
           "usage_dashboard",
           "idempotency",

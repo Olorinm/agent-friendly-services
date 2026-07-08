@@ -1,0 +1,75 @@
+id: redis
+name: Redis (Redis Cloud)
+category: databases
+homepage: https://redis.io
+summary: In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.
+submitted_by: community
+scope: Redis Cloud + open-source
+
+tags:
+  - key-value
+  - vector-database
+  - caching
+
+entrypoints:
+  docs: https://redis.io/docs/latest
+  api_reference: https://redis.io/docs/latest/operate/rc/api/
+  llms_txt: https://redis.io/llms.txt
+  status_page: https://status.redis.io
+  pricing: https://redis.io/pricing
+  signup: https://redis.io/try-free/
+  api_keys: https://redis.io/docs/latest/operate/rc/api/get-started/
+  cli: https://redis.io/docs/latest/develop/tools/cli/
+  mcp_official: https://github.com/redis/mcp-redis
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://redis.io/try-free/
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://redis.io/docs/latest/operate/rc/api/get-started/
+    verified: "2026-07-08"
+    notes: Cloud REST API keys are enabled and created in the console self-serve.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+    notes: Role-based access control exists; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://redis.io/docs/latest/operate/rs/installing-upgrading/quickstarts/docker-quickstart/
+    verified: "2026-07-08"
+    notes: Open-source Redis runs locally (docker) as a test environment; free cloud tier also serves.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://redis.io/pricing
+    verified: "2026-07-08"
+    notes: 30 MB free Redis Cloud database.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://redis.io/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

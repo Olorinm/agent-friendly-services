@@ -1,0 +1,68 @@
+id: serpapi
+name: SerpApi
+category: web-search-data
+homepage: https://serpapi.com
+summary: Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
+submitted_by: community
+
+tags:
+  - search
+  - scraping
+
+entrypoints:
+  docs: https://serpapi.com/search-api
+  api_reference: https://serpapi.com/search-api
+  llms_txt: https://serpapi.com/llms.txt
+  status_page: https://serpapi.com/status
+  pricing: https://serpapi.com/pricing
+  signup: https://serpapi.com/users/sign_up
+  api_keys: https://serpapi.com/manage-api-key
+  mcp_official: https://github.com/serpapi/serpapi-mcp
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://serpapi.com/users/sign_up
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://serpapi.com/manage-api-key
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Playground exists for interactive testing; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://serpapi.com/pricing
+    verified: "2026-07-08"
+    notes: Free plan with monthly search quota.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://serpapi.com/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

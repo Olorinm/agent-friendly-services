@@ -1,0 +1,71 @@
+id: render
+name: Render
+category: cloud-hosting
+homepage: https://render.com
+summary: Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.
+submitted_by: community
+
+tags:
+  - paas
+  - deployment
+
+entrypoints:
+  docs: https://render.com/docs
+  api_reference: https://api-docs.render.com/reference/introduction
+  llms_txt: https://render.com/docs/llms.txt
+  status_page: https://status.render.com
+  pricing: https://render.com/pricing
+  signup: https://dashboard.render.com/register
+  api_keys: https://render.com/docs/api
+  cli: https://github.com/render-oss/cli
+  mcp_official: https://github.com/render-oss/render-mcp-server
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.render.com/register
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://render.com/docs/api
+    verified: "2026-07-08"
+    notes: API keys created in the dashboard self-serve.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Preview environments exist; needs the canonical docs link as evidence.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://render.com/pricing
+    verified: "2026-07-08"
+    notes: Free plan for web services (spins down on idle) and static sites.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://render.com/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+    notes: REST API is versioned (v1 base path); no standalone deprecation-policy page found.
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

@@ -35,6 +35,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [n8n](#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 ### Code Execution
@@ -60,6 +61,8 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Railway](#railway) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Render](#render) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Databases
@@ -71,6 +74,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Redis (Redis Cloud)](#redis) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Supabase](#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Weaviate](#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
@@ -84,6 +88,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [SerpApi](#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 ### Payments / Billing
@@ -490,6 +495,18 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://www.mongodb.com/cloud/atlas/register) · [Self-serve API keys](https://www.mongodb.com/docs/atlas/configure-api-access/) · [OAuth](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Scoped tokens](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Token revocation](https://www.mongodb.com/docs/atlas/configure-api-access/) · [Free tier / trial](https://www.mongodb.com/pricing) · [Self-serve upgrade](https://www.mongodb.com/pricing) · [Versioning policy](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
+### n8n <a id="n8n"></a>
+
+> Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.
+
+**Category:** Agent Tooling · **Scope:** n8n Cloud + self-hosted · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.n8n.io) · [API Reference](https://docs.n8n.io/api/) · [llms.txt](https://docs.n8n.io/llms.txt) · [Status Page](https://status.n8n.cloud) · [Pricing](https://n8n.io/pricing) · [Signup](https://n8n.io) · [API Keys](https://docs.n8n.io/api/authentication/) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [Official MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server)
+
+- **Supported:** [Self-serve signup](https://n8n.io/pricing) · [Self-serve API keys](https://docs.n8n.io/api/authentication/) · [Sandbox / test mode](https://docs.n8n.io/hosting/) · [Self-serve upgrade](https://n8n.io/pricing)
+- **Partial:** [Free tier / trial](https://n8n.io/pricing) — Cloud has a time-limited trial; the fair-code community edition is free to self-host.
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Neon <a id="neon"></a>
 
 > Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
@@ -607,6 +624,40 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://cloud.qdrant.io) · [Self-serve API keys](https://qdrant.tech/documentation/cloud/authentication) · [Free tier / trial](https://qdrant.tech/pricing) · [Self-serve upgrade](https://qdrant.tech/pricing)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
+### Railway <a id="railway"></a>
+
+> App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.
+
+**Category:** Cloud / Hosting · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.railway.com) · [API Reference](https://docs.railway.com/reference/public-api) · [GraphQL](https://docs.railway.com/reference/public-api) · [llms.txt](https://docs.railway.com/llms.txt) · [Status Page](https://status.railway.com) · [Pricing](https://railway.com/pricing) · [Signup](https://railway.com/new) · [API Keys](https://docs.railway.com/reference/public-api) · [CLI](https://github.com/railwayapp/cli)
+
+- **Supported:** [Self-serve signup](https://railway.com/new) · [Self-serve API keys](https://docs.railway.com/reference/public-api) · [Scoped tokens](https://docs.railway.com/reference/public-api) · [Self-serve upgrade](https://railway.com/pricing)
+- **Partial:** [Free tier / trial](https://railway.com/pricing) — One-time trial credit; no standing free tier.
+- **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Redis (Redis Cloud) <a id="redis"></a>
+
+> In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.
+
+**Category:** Databases · **Scope:** Redis Cloud + open-source · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://redis.io/docs/latest) · [API Reference](https://redis.io/docs/latest/operate/rc/api/) · [llms.txt](https://redis.io/llms.txt) · [Status Page](https://status.redis.io) · [Pricing](https://redis.io/pricing) · [Signup](https://redis.io/try-free/) · [API Keys](https://redis.io/docs/latest/operate/rc/api/get-started/) · [CLI](https://redis.io/docs/latest/develop/tools/cli/) · [Official MCP](https://github.com/redis/mcp-redis)
+
+- **Supported:** [Self-serve signup](https://redis.io/try-free/) · [Self-serve API keys](https://redis.io/docs/latest/operate/rc/api/get-started/) · [Sandbox / test mode](https://redis.io/docs/latest/operate/rs/installing-upgrading/quickstarts/docker-quickstart/) · [Free tier / trial](https://redis.io/pricing) · [Self-serve upgrade](https://redis.io/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Render <a id="render"></a>
+
+> Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.
+
+**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://render.com/docs) · [API Reference](https://api-docs.render.com/reference/introduction) · [llms.txt](https://render.com/docs/llms.txt) · [Status Page](https://status.render.com) · [Pricing](https://render.com/pricing) · [Signup](https://dashboard.render.com/register) · [API Keys](https://render.com/docs/api) · [CLI](https://github.com/render-oss/cli) · [Official MCP](https://github.com/render-oss/render-mcp-server)
+
+- **Supported:** [Self-serve signup](https://dashboard.render.com/register) · [Self-serve API keys](https://render.com/docs/api) · [Free tier / trial](https://render.com/pricing) · [Self-serve upgrade](https://render.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Replicate <a id="replicate"></a>
 
 > Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
@@ -639,6 +690,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://sentry.io/signup/) · [Self-serve API keys](https://docs.sentry.io/api/auth/) · [Scoped tokens](https://docs.sentry.io/api/auth/) · [Token revocation](https://docs.sentry.io/api/auth/) · [Free tier / trial](https://sentry.io/pricing/) · [Self-serve upgrade](https://sentry.io/pricing/)
 - **Unknown (help wanted):** `oauth_support`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### SerpApi <a id="serpapi"></a>
+
+> Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
+
+**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://serpapi.com/search-api) · [API Reference](https://serpapi.com/search-api) · [llms.txt](https://serpapi.com/llms.txt) · [Status Page](https://serpapi.com/status) · [Pricing](https://serpapi.com/pricing) · [Signup](https://serpapi.com/users/sign_up) · [API Keys](https://serpapi.com/manage-api-key) · [Official MCP](https://github.com/serpapi/serpapi-mcp)
+
+- **Supported:** [Self-serve signup](https://serpapi.com/users/sign_up) · [Self-serve API keys](https://serpapi.com/manage-api-key) · [Free tier / trial](https://serpapi.com/pricing) · [Self-serve upgrade](https://serpapi.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Shopify <a id="shopify"></a>
 

@@ -4,9 +4,9 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 56 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+AI 智能体接入 61 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
-![Providers](https://img.shields.io/badge/providers-56-2563eb)
+![Providers](https://img.shields.io/badge/providers-61-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details open>
-<summary><b>能力矩阵表</b> —— 56 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
+<summary><b>能力矩阵表</b> —— 61 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 **AI Models**
 
@@ -58,6 +58,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](./generated/providers.md#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [n8n](./generated/providers.md#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Zapier](./generated/providers.md#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 **Code Execution**
@@ -83,6 +84,8 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Cloudflare](./generated/providers.md#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Fly.io](./generated/providers.md#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Netlify](./generated/providers.md#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Railway](./generated/providers.md#railway) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Render](./generated/providers.md#render) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Vercel](./generated/providers.md#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 **Databases**
@@ -94,6 +97,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Neon](./generated/providers.md#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](./generated/providers.md#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](./generated/providers.md#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Redis (Redis Cloud)](./generated/providers.md#redis) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Supabase](./generated/providers.md#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](./generated/providers.md#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Weaviate](./generated/providers.md#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
@@ -107,6 +111,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Exa](./generated/providers.md#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Firecrawl](./generated/providers.md#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Perplexity API](./generated/providers.md#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [SerpApi](./generated/providers.md#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](./generated/providers.md#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 **Payments / Billing**
@@ -176,6 +181,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 ## Agent Tooling
 
 - **[Composio](https://docs.composio.dev)** — Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory. [MCP](https://mcp.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [全部事实 →](./generated/providers.md#composio)
+- **[n8n](https://docs.n8n.io)** — Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable. [API](https://docs.n8n.io/api/) · [MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server) · [llms.txt](https://docs.n8n.io/llms.txt) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [全部事实 →](./generated/providers.md#n8n)
 - **[Zapier](https://docs.zapier.com)** — Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. [MCP](https://zapier.com/mcp) · [llms.txt](https://docs.zapier.com/llms.txt) · [CLI](https://github.com/zapier/zapier-platform) · [全部事实 →](./generated/providers.md#zapier)
 
 ## Code Execution
@@ -195,6 +201,8 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Cloudflare](https://developers.cloudflare.com)** — Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers. [API](https://developers.cloudflare.com/api/) · [MCP](https://github.com/cloudflare/mcp-server-cloudflare) · [llms.txt](https://developers.cloudflare.com/llms.txt) · [OpenAPI](https://github.com/cloudflare/api-schemas) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [全部事实 →](./generated/providers.md#cloudflare)
 - **[Fly.io](https://fly.io/docs)** — Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs. [API](https://fly.io/docs/machines/api/) · [MCP](https://fly.io/docs/mcp/) · [llms.txt](https://fly.io/llms.txt) · [OpenAPI](https://docs.machines.dev) · [CLI](https://fly.io/docs/flyctl/) · [全部事实 →](./generated/providers.md#fly-io)
 - **[Netlify](https://docs.netlify.com)** — Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server. [API](https://open-api.netlify.com) · [MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/) · [llms.txt](https://docs.netlify.com/llms.txt) · [OpenAPI](https://github.com/netlify/open-api) · [CLI](https://docs.netlify.com/cli/get-started/) · [全部事实 →](./generated/providers.md#netlify)
+- **[Railway](https://docs.railway.com)** — App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing. [API](https://docs.railway.com/reference/public-api) · [llms.txt](https://docs.railway.com/llms.txt) · [CLI](https://github.com/railwayapp/cli) · [全部事实 →](./generated/providers.md#railway)
+- **[Render](https://render.com/docs)** — Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt. [API](https://api-docs.render.com/reference/introduction) · [MCP](https://github.com/render-oss/render-mcp-server) · [llms.txt](https://render.com/docs/llms.txt) · [CLI](https://github.com/render-oss/cli) · [全部事实 →](./generated/providers.md#render)
 - **[Vercel](https://vercel.com/docs)** — Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem. [API](https://vercel.com/docs/rest-api) · [MCP](https://vercel.com/docs/mcp/vercel-mcp) · [llms.txt](https://vercel.com/llms.txt) · [OpenAPI](https://openapi.vercel.sh) · [CLI](https://vercel.com/docs/cli) · [全部事实 →](./generated/providers.md#vercel)
 
 ## Databases
@@ -204,6 +212,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Neon](https://neon.com/docs)** — Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs. [API](https://api-docs.neon.tech) · [MCP](https://github.com/neondatabase/mcp-server-neon) · [llms.txt](https://neon.com/llms.txt) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [CLI](https://neon.com/docs/reference/neon-cli) · [全部事实 →](./generated/providers.md#neon)
 - **[Pinecone](https://docs.pinecone.io)** — Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. [API](https://docs.pinecone.io/reference/api/introduction) · [MCP](https://docs.pinecone.io/guides/operations/mcp-server) · [llms.txt](https://docs.pinecone.io/llms.txt) · [CLI](https://github.com/pinecone-io/cli) · [全部事实 →](./generated/providers.md#pinecone)
 - **[Qdrant](https://qdrant.tech/documentation)** — Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. [API](https://api.qdrant.tech) · [MCP](https://github.com/qdrant/mcp-server-qdrant) · [llms.txt](https://qdrant.tech/llms.txt) · [全部事实 →](./generated/providers.md#qdrant)
+- **[Redis (Redis Cloud)](https://redis.io/docs/latest)** — In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt. [API](https://redis.io/docs/latest/operate/rc/api/) · [MCP](https://github.com/redis/mcp-redis) · [llms.txt](https://redis.io/llms.txt) · [CLI](https://redis.io/docs/latest/develop/tools/cli/) · [全部事实 →](./generated/providers.md#redis)
 - **[Supabase](https://supabase.com/docs)** — Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs. [API](https://supabase.com/docs/reference/api/introduction) · [MCP](https://supabase.com/docs/guides/getting-started/mcp) · [llms.txt](https://supabase.com/llms.txt) · [OpenAPI](https://api.supabase.com/api/v1-json) · [CLI](https://supabase.com/docs/guides/cli) · [全部事实 →](./generated/providers.md#supabase)
 - **[Upstash](https://upstash.com/docs)** — Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. [API](https://upstash.com/docs/devops/developer-api/introduction) · [MCP](https://github.com/upstash/mcp-server) · [llms.txt](https://upstash.com/docs/llms.txt) · [CLI](https://github.com/upstash/cli) · [全部事实 →](./generated/providers.md#upstash)
 - **[Weaviate](https://docs.weaviate.io)** — Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. [API](https://docs.weaviate.io/weaviate/api/rest) · [MCP](https://github.com/weaviate/mcp-server-weaviate) · [llms.txt](https://docs.weaviate.io/llms.txt) · [CLI](https://github.com/weaviate/weaviate-cli) · [全部事实 →](./generated/providers.md#weaviate)
@@ -215,6 +224,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Exa](https://docs.exa.ai)** — Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server. [API](https://docs.exa.ai/reference/getting-started) · [MCP](https://github.com/exa-labs/exa-mcp-server) · [llms.txt](https://docs.exa.ai/llms.txt) · [全部事实 →](./generated/providers.md#exa)
 - **[Firecrawl](https://docs.firecrawl.dev)** — Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server. [API](https://docs.firecrawl.dev/api-reference/introduction) · [MCP](https://docs.firecrawl.dev/mcp-server) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [全部事实 →](./generated/providers.md#firecrawl)
 - **[Perplexity API](https://docs.perplexity.ai)** — Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers. [MCP](https://github.com/ppl-ai/modelcontextprotocol) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [全部事实 →](./generated/providers.md#perplexity)
+- **[SerpApi](https://serpapi.com/search-api)** — Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. [API](https://serpapi.com/search-api) · [MCP](https://github.com/serpapi/serpapi-mcp) · [llms.txt](https://serpapi.com/llms.txt) · [全部事实 →](./generated/providers.md#serpapi)
 - **[Tavily](https://docs.tavily.com)** — Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. [API](https://docs.tavily.com/documentation/api-reference/introduction) · [MCP](https://docs.tavily.com/documentation/mcp) · [llms.txt](https://docs.tavily.com/llms.txt) · [全部事实 →](./generated/providers.md#tavily)
 
 ## Payments / Billing
@@ -249,7 +259,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 参与贡献
 
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **344 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **381 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
 
 有编程智能体？让它打开本仓库的检出目录，然后粘贴：
 

@@ -4,9 +4,9 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 56 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Where AI agents plug into 61 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
-![Providers](https://img.shields.io/badge/providers-56-2563eb)
+![Providers](https://img.shields.io/badge/providers-61-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -29,7 +29,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details open>
-<summary><b>Capability matrix</b> — all 56 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
+<summary><b>Capability matrix</b> — all 61 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 **AI Models**
 
@@ -56,6 +56,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Composio](./generated/providers.md#composio) | ✓ | ✓ | — | — | — | — | — | 2026-07-07 |
+| [n8n](./generated/providers.md#n8n) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Zapier](./generated/providers.md#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
 **Code Execution**
@@ -81,6 +82,8 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Cloudflare](./generated/providers.md#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Fly.io](./generated/providers.md#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Netlify](./generated/providers.md#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Railway](./generated/providers.md#railway) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Render](./generated/providers.md#render) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Vercel](./generated/providers.md#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 **Databases**
@@ -92,6 +95,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Neon](./generated/providers.md#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](./generated/providers.md#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](./generated/providers.md#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Redis (Redis Cloud)](./generated/providers.md#redis) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Supabase](./generated/providers.md#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](./generated/providers.md#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Weaviate](./generated/providers.md#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
@@ -105,6 +109,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Exa](./generated/providers.md#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Firecrawl](./generated/providers.md#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Perplexity API](./generated/providers.md#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [SerpApi](./generated/providers.md#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](./generated/providers.md#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
 **Payments / Billing**
@@ -174,6 +179,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 ## Agent Tooling
 
 - **[Composio](https://docs.composio.dev)** — Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory. [MCP](https://mcp.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [all facts →](./generated/providers.md#composio)
+- **[n8n](https://docs.n8n.io)** — Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable. [API](https://docs.n8n.io/api/) · [MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server) · [llms.txt](https://docs.n8n.io/llms.txt) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [all facts →](./generated/providers.md#n8n)
 - **[Zapier](https://docs.zapier.com)** — Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. [MCP](https://zapier.com/mcp) · [llms.txt](https://docs.zapier.com/llms.txt) · [CLI](https://github.com/zapier/zapier-platform) · [all facts →](./generated/providers.md#zapier)
 
 ## Code Execution
@@ -193,6 +199,8 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Cloudflare](https://developers.cloudflare.com)** — Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers. [API](https://developers.cloudflare.com/api/) · [MCP](https://github.com/cloudflare/mcp-server-cloudflare) · [llms.txt](https://developers.cloudflare.com/llms.txt) · [OpenAPI](https://github.com/cloudflare/api-schemas) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [all facts →](./generated/providers.md#cloudflare)
 - **[Fly.io](https://fly.io/docs)** — Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs. [API](https://fly.io/docs/machines/api/) · [MCP](https://fly.io/docs/mcp/) · [llms.txt](https://fly.io/llms.txt) · [OpenAPI](https://docs.machines.dev) · [CLI](https://fly.io/docs/flyctl/) · [all facts →](./generated/providers.md#fly-io)
 - **[Netlify](https://docs.netlify.com)** — Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server. [API](https://open-api.netlify.com) · [MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/) · [llms.txt](https://docs.netlify.com/llms.txt) · [OpenAPI](https://github.com/netlify/open-api) · [CLI](https://docs.netlify.com/cli/get-started/) · [all facts →](./generated/providers.md#netlify)
+- **[Railway](https://docs.railway.com)** — App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing. [API](https://docs.railway.com/reference/public-api) · [llms.txt](https://docs.railway.com/llms.txt) · [CLI](https://github.com/railwayapp/cli) · [all facts →](./generated/providers.md#railway)
+- **[Render](https://render.com/docs)** — Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt. [API](https://api-docs.render.com/reference/introduction) · [MCP](https://github.com/render-oss/render-mcp-server) · [llms.txt](https://render.com/docs/llms.txt) · [CLI](https://github.com/render-oss/cli) · [all facts →](./generated/providers.md#render)
 - **[Vercel](https://vercel.com/docs)** — Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem. [API](https://vercel.com/docs/rest-api) · [MCP](https://vercel.com/docs/mcp/vercel-mcp) · [llms.txt](https://vercel.com/llms.txt) · [OpenAPI](https://openapi.vercel.sh) · [CLI](https://vercel.com/docs/cli) · [all facts →](./generated/providers.md#vercel)
 
 ## Databases
@@ -202,6 +210,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Neon](https://neon.com/docs)** — Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs. [API](https://api-docs.neon.tech) · [MCP](https://github.com/neondatabase/mcp-server-neon) · [llms.txt](https://neon.com/llms.txt) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [CLI](https://neon.com/docs/reference/neon-cli) · [all facts →](./generated/providers.md#neon)
 - **[Pinecone](https://docs.pinecone.io)** — Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. [API](https://docs.pinecone.io/reference/api/introduction) · [MCP](https://docs.pinecone.io/guides/operations/mcp-server) · [llms.txt](https://docs.pinecone.io/llms.txt) · [CLI](https://github.com/pinecone-io/cli) · [all facts →](./generated/providers.md#pinecone)
 - **[Qdrant](https://qdrant.tech/documentation)** — Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. [API](https://api.qdrant.tech) · [MCP](https://github.com/qdrant/mcp-server-qdrant) · [llms.txt](https://qdrant.tech/llms.txt) · [all facts →](./generated/providers.md#qdrant)
+- **[Redis (Redis Cloud)](https://redis.io/docs/latest)** — In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt. [API](https://redis.io/docs/latest/operate/rc/api/) · [MCP](https://github.com/redis/mcp-redis) · [llms.txt](https://redis.io/llms.txt) · [CLI](https://redis.io/docs/latest/develop/tools/cli/) · [all facts →](./generated/providers.md#redis)
 - **[Supabase](https://supabase.com/docs)** — Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs. [API](https://supabase.com/docs/reference/api/introduction) · [MCP](https://supabase.com/docs/guides/getting-started/mcp) · [llms.txt](https://supabase.com/llms.txt) · [OpenAPI](https://api.supabase.com/api/v1-json) · [CLI](https://supabase.com/docs/guides/cli) · [all facts →](./generated/providers.md#supabase)
 - **[Upstash](https://upstash.com/docs)** — Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. [API](https://upstash.com/docs/devops/developer-api/introduction) · [MCP](https://github.com/upstash/mcp-server) · [llms.txt](https://upstash.com/docs/llms.txt) · [CLI](https://github.com/upstash/cli) · [all facts →](./generated/providers.md#upstash)
 - **[Weaviate](https://docs.weaviate.io)** — Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. [API](https://docs.weaviate.io/weaviate/api/rest) · [MCP](https://github.com/weaviate/mcp-server-weaviate) · [llms.txt](https://docs.weaviate.io/llms.txt) · [CLI](https://github.com/weaviate/weaviate-cli) · [all facts →](./generated/providers.md#weaviate)
@@ -213,6 +222,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Exa](https://docs.exa.ai)** — Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server. [API](https://docs.exa.ai/reference/getting-started) · [MCP](https://github.com/exa-labs/exa-mcp-server) · [llms.txt](https://docs.exa.ai/llms.txt) · [all facts →](./generated/providers.md#exa)
 - **[Firecrawl](https://docs.firecrawl.dev)** — Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server. [API](https://docs.firecrawl.dev/api-reference/introduction) · [MCP](https://docs.firecrawl.dev/mcp-server) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [all facts →](./generated/providers.md#firecrawl)
 - **[Perplexity API](https://docs.perplexity.ai)** — Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers. [MCP](https://github.com/ppl-ai/modelcontextprotocol) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [all facts →](./generated/providers.md#perplexity)
+- **[SerpApi](https://serpapi.com/search-api)** — Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. [API](https://serpapi.com/search-api) · [MCP](https://github.com/serpapi/serpapi-mcp) · [llms.txt](https://serpapi.com/llms.txt) · [all facts →](./generated/providers.md#serpapi)
 - **[Tavily](https://docs.tavily.com)** — Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. [API](https://docs.tavily.com/documentation/api-reference/introduction) · [MCP](https://docs.tavily.com/documentation/mcp) · [llms.txt](https://docs.tavily.com/llms.txt) · [all facts →](./generated/providers.md#tavily)
 
 ## Payments / Billing
@@ -247,7 +257,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **344 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **381 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
 
 Have a coding agent? Point it at a checkout and paste:
 
