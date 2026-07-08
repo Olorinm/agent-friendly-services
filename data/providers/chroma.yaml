@@ -1,0 +1,70 @@
+id: chroma
+name: Chroma
+category: databases
+homepage: https://www.trychroma.com
+summary: Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.
+submitted_by: community
+scope: Chroma Cloud + open-source
+
+tags:
+  - vector-database
+  - embeddings
+  - open-source
+
+entrypoints:
+  docs: https://docs.trychroma.com
+  api_reference: https://docs.trychroma.com/docs/overview/introduction
+  llms_txt: https://docs.trychroma.com/llms.txt
+  pricing: https://www.trychroma.com/pricing
+  signup: https://www.trychroma.com
+  cli: https://docs.trychroma.com/docs/cli/install
+  mcp_official: https://github.com/chroma-core/chroma-mcp
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://docs.trychroma.com/cloud/getting-started
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.trychroma.com/cloud/getting-started
+    verified: "2026-07-08"
+    notes: Cloud getting-started flow issues API keys self-serve; CLI login also supported.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://docs.trychroma.com/docs/overview/introduction
+    verified: "2026-07-08"
+    notes: Open-source Chroma runs locally/in-memory, serving as a test environment.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.trychroma.com/pricing
+    verified: "2026-07-08"
+    notes: Chroma Cloud includes starter credits; open-source is free.
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

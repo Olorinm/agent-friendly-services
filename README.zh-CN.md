@@ -4,9 +4,9 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 51 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+AI 智能体接入 56 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
 
-![Providers](https://img.shields.io/badge/providers-51-2563eb)
+![Providers](https://img.shields.io/badge/providers-56-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -31,7 +31,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
 <details open>
-<summary><b>能力矩阵表</b> —— 51 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
+<summary><b>能力矩阵表</b> —— 56 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 **AI Models**
 
@@ -42,13 +42,16 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Deepgram](./generated/providers.md#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [DeepSeek](./generated/providers.md#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
 | [ElevenLabs](./generated/providers.md#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [fal.ai](./generated/providers.md#fal) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenAI](./generated/providers.md#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [OpenRouter](./generated/providers.md#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Replicate](./generated/providers.md#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](./generated/providers.md#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [xAI (Grok API)](./generated/providers.md#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
 
 **Agent Tooling**
 
@@ -86,12 +89,14 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Chroma](./generated/providers.md#chroma) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Neon](./generated/providers.md#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](./generated/providers.md#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](./generated/providers.md#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Supabase](./generated/providers.md#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](./generated/providers.md#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Weaviate](./generated/providers.md#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 
 **Web Search / Data**
 
@@ -157,13 +162,16 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[Deepgram](https://developers.deepgram.com/docs)** — Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card. [API](https://developers.deepgram.com/reference) · [llms.txt](https://developers.deepgram.com/llms.txt) · [OpenAPI](https://github.com/deepgram/deepgram-api-specs) · [全部事实 →](./generated/providers.md#deepgram)
 - **[DeepSeek](https://api-docs.deepseek.com)** — OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys. [全部事实 →](./generated/providers.md#deepseek)
 - **[ElevenLabs](https://elevenlabs.io/docs)** — Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier. [API](https://elevenlabs.io/docs/api-reference/introduction) · [MCP](https://github.com/elevenlabs/elevenlabs-mcp) · [llms.txt](https://elevenlabs.io/docs/llms.txt) · [OpenAPI](https://api.elevenlabs.io/openapi.json) · [全部事实 →](./generated/providers.md#elevenlabs)
+- **[fal.ai](https://fal.ai/docs)** — Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys. [API](https://fal.ai/docs/model-apis) · [llms.txt](https://fal.ai/llms.txt) · [CLI](https://github.com/fal-ai/fal) · [全部事实 →](./generated/providers.md#fal)
 - **[Gemini API](https://ai.google.dev/gemini-api/docs)** — Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning. [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [全部事实 →](./generated/providers.md#gemini-api)
 - **[Groq](https://console.groq.com/docs)** — Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier. [API](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [全部事实 →](./generated/providers.md#groq)
 - **[Hugging Face](https://huggingface.co/docs)** — Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API. [API](https://huggingface.co/docs/hub/api) · [MCP](https://huggingface.co/mcp) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [全部事实 →](./generated/providers.md#hugging-face)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [全部事实 →](./generated/providers.md#mistral)
 - **[OpenAI](https://platform.openai.com/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [全部事实 →](./generated/providers.md#openai)
+- **[OpenRouter](https://openrouter.ai/docs)** — Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt. [API](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [全部事实 →](./generated/providers.md#openrouter)
 - **[Replicate](https://replicate.com/docs)** — Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI. [API](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [CLI](https://github.com/replicate/cli) · [全部事实 →](./generated/providers.md#replicate)
 - **[Together AI](https://docs.together.ai)** — Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt. [API](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [全部事实 →](./generated/providers.md#together-ai)
+- **[xAI (Grok API)](https://docs.x.ai)** — xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. [API](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [全部事实 →](./generated/providers.md#xai)
 
 ## Agent Tooling
 
@@ -191,12 +199,14 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## Databases
 
+- **[Chroma](https://docs.trychroma.com)** — Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt. [API](https://docs.trychroma.com/docs/overview/introduction) · [MCP](https://github.com/chroma-core/chroma-mcp) · [llms.txt](https://docs.trychroma.com/llms.txt) · [CLI](https://docs.trychroma.com/docs/cli/install) · [全部事实 →](./generated/providers.md#chroma)
 - **[MongoDB Atlas](https://www.mongodb.com/docs/atlas/)** — Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server. [API](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/) · [MCP](https://github.com/mongodb-js/mongodb-mcp-server) · [llms.txt](https://www.mongodb.com/docs/llms.txt) · [OpenAPI](https://github.com/mongodb/openapi) · [CLI](https://www.mongodb.com/docs/atlas/cli/) · [全部事实 →](./generated/providers.md#mongodb-atlas)
 - **[Neon](https://neon.com/docs)** — Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs. [API](https://api-docs.neon.tech) · [MCP](https://github.com/neondatabase/mcp-server-neon) · [llms.txt](https://neon.com/llms.txt) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [CLI](https://neon.com/docs/reference/neon-cli) · [全部事实 →](./generated/providers.md#neon)
 - **[Pinecone](https://docs.pinecone.io)** — Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. [API](https://docs.pinecone.io/reference/api/introduction) · [MCP](https://docs.pinecone.io/guides/operations/mcp-server) · [llms.txt](https://docs.pinecone.io/llms.txt) · [CLI](https://github.com/pinecone-io/cli) · [全部事实 →](./generated/providers.md#pinecone)
 - **[Qdrant](https://qdrant.tech/documentation)** — Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. [API](https://api.qdrant.tech) · [MCP](https://github.com/qdrant/mcp-server-qdrant) · [llms.txt](https://qdrant.tech/llms.txt) · [全部事实 →](./generated/providers.md#qdrant)
 - **[Supabase](https://supabase.com/docs)** — Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs. [API](https://supabase.com/docs/reference/api/introduction) · [MCP](https://supabase.com/docs/guides/getting-started/mcp) · [llms.txt](https://supabase.com/llms.txt) · [OpenAPI](https://api.supabase.com/api/v1-json) · [CLI](https://supabase.com/docs/guides/cli) · [全部事实 →](./generated/providers.md#supabase)
 - **[Upstash](https://upstash.com/docs)** — Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. [API](https://upstash.com/docs/devops/developer-api/introduction) · [MCP](https://github.com/upstash/mcp-server) · [llms.txt](https://upstash.com/docs/llms.txt) · [CLI](https://github.com/upstash/cli) · [全部事实 →](./generated/providers.md#upstash)
+- **[Weaviate](https://docs.weaviate.io)** — Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. [API](https://docs.weaviate.io/weaviate/api/rest) · [MCP](https://github.com/weaviate/mcp-server-weaviate) · [llms.txt](https://docs.weaviate.io/llms.txt) · [CLI](https://github.com/weaviate/weaviate-cli) · [全部事实 →](./generated/providers.md#weaviate)
 
 ## Web Search / Data
 
@@ -239,7 +249,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 参与贡献
 
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **303 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **344 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
 
 有编程智能体？让它打开本仓库的检出目录，然后粘贴：
 

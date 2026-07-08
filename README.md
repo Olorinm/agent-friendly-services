@@ -4,9 +4,9 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 51 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Where AI agents plug into 56 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
-![Providers](https://img.shields.io/badge/providers-51-2563eb)
+![Providers](https://img.shields.io/badge/providers-56-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-611_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -29,7 +29,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details open>
-<summary><b>Capability matrix</b> — all 51 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
+<summary><b>Capability matrix</b> — all 56 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 **AI Models**
 
@@ -40,13 +40,16 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 | [Deepgram](./generated/providers.md#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [DeepSeek](./generated/providers.md#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
 | [ElevenLabs](./generated/providers.md#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [fal.ai](./generated/providers.md#fal) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenAI](./generated/providers.md#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [OpenRouter](./generated/providers.md#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Replicate](./generated/providers.md#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](./generated/providers.md#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [xAI (Grok API)](./generated/providers.md#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
 
 **Agent Tooling**
 
@@ -84,12 +87,14 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Chroma](./generated/providers.md#chroma) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Neon](./generated/providers.md#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](./generated/providers.md#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](./generated/providers.md#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Supabase](./generated/providers.md#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](./generated/providers.md#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Weaviate](./generated/providers.md#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 
 **Web Search / Data**
 
@@ -155,13 +160,16 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 - **[Deepgram](https://developers.deepgram.com/docs)** — Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card. [API](https://developers.deepgram.com/reference) · [llms.txt](https://developers.deepgram.com/llms.txt) · [OpenAPI](https://github.com/deepgram/deepgram-api-specs) · [all facts →](./generated/providers.md#deepgram)
 - **[DeepSeek](https://api-docs.deepseek.com)** — OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys. [all facts →](./generated/providers.md#deepseek)
 - **[ElevenLabs](https://elevenlabs.io/docs)** — Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier. [API](https://elevenlabs.io/docs/api-reference/introduction) · [MCP](https://github.com/elevenlabs/elevenlabs-mcp) · [llms.txt](https://elevenlabs.io/docs/llms.txt) · [OpenAPI](https://api.elevenlabs.io/openapi.json) · [all facts →](./generated/providers.md#elevenlabs)
+- **[fal.ai](https://fal.ai/docs)** — Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys. [API](https://fal.ai/docs/model-apis) · [llms.txt](https://fal.ai/llms.txt) · [CLI](https://github.com/fal-ai/fal) · [all facts →](./generated/providers.md#fal)
 - **[Gemini API](https://ai.google.dev/gemini-api/docs)** — Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning. [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [all facts →](./generated/providers.md#gemini-api)
 - **[Groq](https://console.groq.com/docs)** — Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier. [API](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [all facts →](./generated/providers.md#groq)
 - **[Hugging Face](https://huggingface.co/docs)** — Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API. [API](https://huggingface.co/docs/hub/api) · [MCP](https://huggingface.co/mcp) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [all facts →](./generated/providers.md#hugging-face)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [all facts →](./generated/providers.md#mistral)
 - **[OpenAI](https://platform.openai.com/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [all facts →](./generated/providers.md#openai)
+- **[OpenRouter](https://openrouter.ai/docs)** — Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt. [API](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [all facts →](./generated/providers.md#openrouter)
 - **[Replicate](https://replicate.com/docs)** — Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI. [API](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [CLI](https://github.com/replicate/cli) · [all facts →](./generated/providers.md#replicate)
 - **[Together AI](https://docs.together.ai)** — Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt. [API](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [all facts →](./generated/providers.md#together-ai)
+- **[xAI (Grok API)](https://docs.x.ai)** — xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. [API](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [all facts →](./generated/providers.md#xai)
 
 ## Agent Tooling
 
@@ -189,12 +197,14 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Databases
 
+- **[Chroma](https://docs.trychroma.com)** — Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt. [API](https://docs.trychroma.com/docs/overview/introduction) · [MCP](https://github.com/chroma-core/chroma-mcp) · [llms.txt](https://docs.trychroma.com/llms.txt) · [CLI](https://docs.trychroma.com/docs/cli/install) · [all facts →](./generated/providers.md#chroma)
 - **[MongoDB Atlas](https://www.mongodb.com/docs/atlas/)** — Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server. [API](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/) · [MCP](https://github.com/mongodb-js/mongodb-mcp-server) · [llms.txt](https://www.mongodb.com/docs/llms.txt) · [OpenAPI](https://github.com/mongodb/openapi) · [CLI](https://www.mongodb.com/docs/atlas/cli/) · [all facts →](./generated/providers.md#mongodb-atlas)
 - **[Neon](https://neon.com/docs)** — Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs. [API](https://api-docs.neon.tech) · [MCP](https://github.com/neondatabase/mcp-server-neon) · [llms.txt](https://neon.com/llms.txt) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [CLI](https://neon.com/docs/reference/neon-cli) · [all facts →](./generated/providers.md#neon)
 - **[Pinecone](https://docs.pinecone.io)** — Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. [API](https://docs.pinecone.io/reference/api/introduction) · [MCP](https://docs.pinecone.io/guides/operations/mcp-server) · [llms.txt](https://docs.pinecone.io/llms.txt) · [CLI](https://github.com/pinecone-io/cli) · [all facts →](./generated/providers.md#pinecone)
 - **[Qdrant](https://qdrant.tech/documentation)** — Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. [API](https://api.qdrant.tech) · [MCP](https://github.com/qdrant/mcp-server-qdrant) · [llms.txt](https://qdrant.tech/llms.txt) · [all facts →](./generated/providers.md#qdrant)
 - **[Supabase](https://supabase.com/docs)** — Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs. [API](https://supabase.com/docs/reference/api/introduction) · [MCP](https://supabase.com/docs/guides/getting-started/mcp) · [llms.txt](https://supabase.com/llms.txt) · [OpenAPI](https://api.supabase.com/api/v1-json) · [CLI](https://supabase.com/docs/guides/cli) · [all facts →](./generated/providers.md#supabase)
 - **[Upstash](https://upstash.com/docs)** — Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. [API](https://upstash.com/docs/devops/developer-api/introduction) · [MCP](https://github.com/upstash/mcp-server) · [llms.txt](https://upstash.com/docs/llms.txt) · [CLI](https://github.com/upstash/cli) · [all facts →](./generated/providers.md#upstash)
+- **[Weaviate](https://docs.weaviate.io)** — Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. [API](https://docs.weaviate.io/weaviate/api/rest) · [MCP](https://github.com/weaviate/mcp-server-weaviate) · [llms.txt](https://docs.weaviate.io/llms.txt) · [CLI](https://github.com/weaviate/weaviate-cli) · [all facts →](./generated/providers.md#weaviate)
 
 ## Web Search / Data
 
@@ -237,7 +247,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **303 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **344 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
 
 Have a coding agent? Point it at a checkout and paste:
 

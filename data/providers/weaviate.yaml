@@ -1,0 +1,73 @@
+id: weaviate
+name: Weaviate
+category: databases
+homepage: https://weaviate.io
+summary: Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.
+submitted_by: community
+scope: Weaviate Cloud + open-source
+
+tags:
+  - vector-database
+  - open-source
+
+entrypoints:
+  docs: https://docs.weaviate.io
+  api_reference: https://docs.weaviate.io/weaviate/api/rest
+  llms_txt: https://docs.weaviate.io/llms.txt
+  pricing: https://weaviate.io/pricing
+  signup: https://console.weaviate.cloud
+  api_keys: https://console.weaviate.cloud
+  cli: https://github.com/weaviate/weaviate-cli
+  mcp_official: https://github.com/weaviate/mcp-server-weaviate
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://console.weaviate.cloud
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.weaviate.io/cloud/manage-clusters/connect
+    verified: "2026-07-08"
+    notes: Cluster API keys issued in the Weaviate Cloud console.
+
+  oauth_support:
+    status: unknown
+    notes: OIDC auth is configurable for self-hosted; cloud uses API keys.
+
+  scoped_tokens:
+    status: unknown
+    notes: Admin/read-only cluster keys exist; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://weaviate.io/pricing
+    verified: "2026-07-08"
+    notes: Free 14-day cloud sandbox clusters; open-source runs locally for testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://weaviate.io/pricing
+    verified: "2026-07-08"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://weaviate.io/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

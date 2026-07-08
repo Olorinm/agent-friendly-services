@@ -1,0 +1,69 @@
+id: fal
+name: fal.ai
+category: ai-models
+homepage: https://fal.ai
+summary: Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.
+submitted_by: community
+
+tags:
+  - image-generation
+  - video-generation
+  - inference
+
+entrypoints:
+  docs: https://fal.ai/docs
+  api_reference: https://fal.ai/docs/model-apis
+  llms_txt: https://fal.ai/llms.txt
+  status_page: https://status.fal.ai
+  pricing: https://fal.ai/pricing
+  signup: https://fal.ai
+  api_keys: https://fal.ai/dashboard/keys
+  cli: https://github.com/fal-ai/fal
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://fal.ai/dashboard/keys
+    verified: "2026-07-08"
+    notes: GitHub-based self-serve signup; dashboard reachable immediately after.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://fal.ai/dashboard/keys
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://fal.ai/pricing
+    verified: "2026-07-08"
+    notes: Free credits for new accounts; pay-per-use afterwards.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://fal.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

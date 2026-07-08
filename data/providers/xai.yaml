@@ -1,0 +1,60 @@
+id: xai
+name: xAI (Grok API)
+category: ai-models
+homepage: https://x.ai
+summary: xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.
+submitted_by: community
+
+tags:
+  - llm
+  - grok
+
+entrypoints:
+  docs: https://docs.x.ai
+  api_reference: https://docs.x.ai/developers/rest-api-reference/inference
+  llms_txt: https://docs.x.ai/llms.txt
+  signup: https://console.x.ai
+  api_keys: https://console.x.ai
+
+checks:
+  self_serve_signup:
+    status: unknown
+    notes: console.x.ai rejects unauthenticated probes (WAF); signup mechanics unverified from docs alone.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.x.ai/overview
+    verified: "2026-07-08"
+    notes: Docs quickstart directs users to create API keys in the xAI console.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+    notes: Promotional credits have been offered; no standing free tier documented.
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

@@ -19,13 +19,16 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
 | [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [fal.ai](#fal) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [OpenAI](#openai) | — | — | ✓ | — | — | ✓ | — | 2026-07-07 |
+| [OpenRouter](#openrouter) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Replicate](#replicate) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Together AI](#together-ai) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [xAI (Grok API)](#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
 
 ### Agent Tooling
 
@@ -63,12 +66,14 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Chroma](#chroma) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Supabase](#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-07 |
 | [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Weaviate](#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 
 ### Web Search / Data
 
@@ -189,6 +194,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`
 
 > Stagehand (the company's agent framework) is a separate open-source project and not assessed here.
+
+### Chroma <a id="chroma"></a>
+
+> Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.
+
+**Category:** Databases · **Scope:** Chroma Cloud + open-source · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.trychroma.com) · [API Reference](https://docs.trychroma.com/docs/overview/introduction) · [llms.txt](https://docs.trychroma.com/llms.txt) · [Pricing](https://www.trychroma.com/pricing) · [Signup](https://www.trychroma.com) · [CLI](https://docs.trychroma.com/docs/cli/install) · [Official MCP](https://github.com/chroma-core/chroma-mcp)
+
+- **Supported:** [Self-serve signup](https://docs.trychroma.com/cloud/getting-started) · [Self-serve API keys](https://docs.trychroma.com/cloud/getting-started) · [Sandbox / test mode](https://docs.trychroma.com/docs/overview/introduction) · [Free tier / trial](https://www.trychroma.com/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Cloudflare <a id="cloudflare"></a>
 
@@ -319,6 +335,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
 - **N/A:** Idempotency — Read-only search/retrieval API; requests are inherently repeatable.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+
+### fal.ai <a id="fal"></a>
+
+> Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.
+
+**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://fal.ai/docs) · [API Reference](https://fal.ai/docs/model-apis) · [llms.txt](https://fal.ai/llms.txt) · [Status Page](https://status.fal.ai) · [Pricing](https://fal.ai/pricing) · [Signup](https://fal.ai) · [API Keys](https://fal.ai/dashboard/keys) · [CLI](https://github.com/fal-ai/fal)
+
+- **Supported:** [Self-serve signup](https://fal.ai/dashboard/keys) · [Self-serve API keys](https://fal.ai/dashboard/keys) · [Free tier / trial](https://fal.ai/pricing) · [Self-serve upgrade](https://fal.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Firecrawl <a id="firecrawl"></a>
 
@@ -509,6 +536,18 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://platform.openai.com/signup) · [Self-serve API keys](https://platform.openai.com/docs/quickstart) · [Self-serve upgrade](https://platform.openai.com/docs/pricing) · [Versioning policy](https://platform.openai.com/docs/deprecations)
 - **Partial:** [Scoped tokens](https://platform.openai.com/docs/quickstart) — Project-scoped API keys separate projects; permission granularity is limited.
 - **Unknown (help wanted):** `oauth_support`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `automation_permitted`
+
+### OpenRouter <a id="openrouter"></a>
+
+> Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://openrouter.ai/docs) · [API Reference](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [Status Page](https://status.openrouter.ai) · [Pricing](https://openrouter.ai/models) · [Signup](https://openrouter.ai) · [API Keys](https://openrouter.ai/settings/keys)
+
+- **Supported:** [Self-serve signup](https://openrouter.ai/docs/quickstart) · [Self-serve API keys](https://openrouter.ai/docs/api-reference/authentication) · [OAuth](https://openrouter.ai/docs/use-cases/oauth-pkce) · [Self-serve upgrade](https://openrouter.ai/docs/quickstart)
+- **Partial:** [Free tier / trial](https://openrouter.ai/models) — Selected models are free (":free" variants); the platform itself is pay-per-use credits.
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Paddle <a id="paddle"></a>
 
@@ -722,6 +761,28 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Partial:** [Scoped tokens](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) — Tokens are scoped to account or team, not to fine-grained permissions.
 - **Partial:** [Versioning policy](https://vercel.com/docs/rest-api) — Endpoints are individually versioned (v6, v13, ...); no single published deprecation policy found.
 - **Unknown (help wanted):** `idempotency`, `automation_permitted`
+
+### Weaviate <a id="weaviate"></a>
+
+> Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.
+
+**Category:** Databases · **Scope:** Weaviate Cloud + open-source · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+
+**Links:** [Documentation](https://docs.weaviate.io) · [API Reference](https://docs.weaviate.io/weaviate/api/rest) · [llms.txt](https://docs.weaviate.io/llms.txt) · [Pricing](https://weaviate.io/pricing) · [Signup](https://console.weaviate.cloud) · [API Keys](https://console.weaviate.cloud) · [CLI](https://github.com/weaviate/weaviate-cli) · [Official MCP](https://github.com/weaviate/mcp-server-weaviate)
+
+- **Supported:** [Self-serve signup](https://console.weaviate.cloud) · [Self-serve API keys](https://docs.weaviate.io/cloud/manage-clusters/connect) · [Sandbox / test mode](https://weaviate.io/pricing) · [Free tier / trial](https://weaviate.io/pricing) · [Self-serve upgrade](https://weaviate.io/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### xAI (Grok API) <a id="xai"></a>
+
+> xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.
+
+**Category:** AI Models · `llms.txt`
+
+**Links:** [Documentation](https://docs.x.ai) · [API Reference](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [Signup](https://console.x.ai) · [API Keys](https://console.x.ai)
+
+- **Supported:** [Self-serve API keys](https://docs.x.ai/overview)
+- **Unknown (help wanted):** `self_serve_signup`, `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `self_serve_paid_upgrade`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Zapier <a id="zapier"></a>
 

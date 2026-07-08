@@ -4,6 +4,7 @@ anthropic,Anthropic,ai-models,false,true,false,true,unknown,true,2026-07-07
 apify,Apify,web-search-data,true,true,true,true,unknown,true,2026-07-07
 brave-search,Brave Search API,web-search-data,true,false,false,false,unknown,true,2026-07-07
 browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
+chroma,Chroma,databases,true,true,false,true,supported,true,2026-07-08
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-07
 cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
 composio,Composio,agent-tooling,true,true,false,false,unknown,false,2026-07-07
@@ -15,6 +16,7 @@ dropbox,Dropbox,productivity-storage,false,true,false,true,unknown,true,2026-07-
 e2b,E2B,code-execution,true,true,false,true,not_applicable,true,2026-07-07
 elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
+fal,fal.ai,ai-models,false,true,false,true,unknown,true,2026-07-08
 firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-07-07
 fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
 gemini-api,Gemini API,ai-models,false,false,false,true,unknown,true,2026-07-07
@@ -31,6 +33,7 @@ neon,Neon,databases,true,true,true,true,supported,true,2026-07-07
 netlify,Netlify,cloud-hosting,true,true,true,true,unknown,true,2026-07-07
 notion,Notion,productivity-storage,true,true,false,false,unknown,true,2026-07-07
 openai,OpenAI,ai-models,false,false,true,false,unknown,true,2026-07-07
+openrouter,OpenRouter,ai-models,false,true,false,false,unknown,true,2026-07-08
 paddle,Paddle,payments-billing,true,true,false,false,supported,false,2026-07-07
 perplexity,Perplexity API,web-search-data,true,true,false,false,unknown,true,2026-07-07
 pinecone,Pinecone,databases,true,true,false,true,unknown,true,2026-07-07
@@ -49,4 +52,6 @@ together-ai,Together AI,ai-models,false,true,false,false,unknown,true,2026-07-07
 twilio,Twilio,communication,true,true,true,true,supported,true,2026-07-07
 upstash,Upstash,databases,true,true,false,true,unknown,true,2026-07-07
 vercel,Vercel,cloud-hosting,true,true,true,true,supported,true,2026-07-07
+weaviate,Weaviate,databases,true,true,false,true,supported,true,2026-07-08
+xai,xAI (Grok API),ai-models,false,true,false,false,unknown,false,2026-07-08
 zapier,Zapier,agent-tooling,true,true,false,true,unknown,true,2026-07-07

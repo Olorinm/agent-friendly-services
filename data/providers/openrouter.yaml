@@ -1,0 +1,74 @@
+id: openrouter
+name: OpenRouter
+category: ai-models
+homepage: https://openrouter.ai
+summary: Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.
+submitted_by: community
+
+tags:
+  - llm
+  - model-aggregator
+  - openai-compatible
+
+entrypoints:
+  docs: https://openrouter.ai/docs
+  api_reference: https://openrouter.ai/docs/api-reference/overview
+  llms_txt: https://openrouter.ai/docs/llms.txt
+  status_page: https://status.openrouter.ai
+  pricing: https://openrouter.ai/models
+  signup: https://openrouter.ai
+  api_keys: https://openrouter.ai/settings/keys
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://openrouter.ai/docs/quickstart
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://openrouter.ai/docs/api-reference/authentication
+    verified: "2026-07-08"
+    notes: Keys created self-serve at openrouter.ai/settings/keys; provisioning API for programmatic key management is documented.
+
+  oauth_support:
+    status: supported
+    evidence: https://openrouter.ai/docs/use-cases/oauth-pkce
+    verified: "2026-07-08"
+    notes: OAuth PKCE flow lets third-party apps request user-authorized keys.
+
+  scoped_tokens:
+    status: unknown
+    notes: Per-key credit limits exist; needs the canonical docs link as evidence.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Some models are offered at a free tier, which serves as a de facto test path; no separate sandbox documented.
+
+  free_tier_or_trial:
+    status: partial
+    evidence: https://openrouter.ai/models
+    verified: "2026-07-08"
+    notes: Selected models are free (":free" variants); the platform itself is pay-per-use credits.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://openrouter.ai/docs/quickstart
+    verified: "2026-07-08"
+    notes: Prepaid credits purchasable self-serve.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

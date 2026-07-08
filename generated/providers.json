@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:16:14.589Z",
+  "generated_at": "2026-07-08T08:24:41.869Z",
   "counts": {
-    "providers": 51,
+    "providers": 56,
     "categories": 12,
-    "entrypoint_urls": 536,
-    "checks_answered": 309
+    "entrypoint_urls": 571,
+    "checks_answered": 328
   },
   "categories": [
     {
@@ -737,6 +737,100 @@
           "usage_dashboard",
           "idempotency",
           "versioning_policy"
+        ]
+      }
+    },
+    {
+      "id": "chroma",
+      "name": "Chroma",
+      "category": "databases",
+      "homepage": "https://www.trychroma.com",
+      "summary": "Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "scope": "Chroma Cloud + open-source",
+      "tags": [
+        "vector-database",
+        "embeddings",
+        "open-source"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.trychroma.com",
+        "api_reference": "https://docs.trychroma.com/docs/overview/introduction",
+        "llms_txt": "https://docs.trychroma.com/llms.txt",
+        "pricing": "https://www.trychroma.com/pricing",
+        "signup": "https://www.trychroma.com",
+        "cli": "https://docs.trychroma.com/docs/cli/install",
+        "mcp_official": "https://github.com/chroma-core/chroma-mcp"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://docs.trychroma.com/cloud/getting-started",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.trychroma.com/cloud/getting-started",
+          "verified": "2026-07-08",
+          "notes": "Cloud getting-started flow issues API keys self-serve; CLI login also supported."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://docs.trychroma.com/docs/overview/introduction",
+          "verified": "2026-07-08",
+          "notes": "Open-source Chroma runs locally/in-memory, serving as a test environment."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.trychroma.com/pricing",
+          "verified": "2026-07-08",
+          "notes": "Chroma Cloud includes starter credits; open-source is free."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "unknown"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "self_serve_paid_upgrade",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
         ]
       }
     },
@@ -1812,6 +1906,97 @@
           "token_revocation",
           "sandbox_or_test_mode",
           "usage_dashboard",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "fal",
+      "name": "fal.ai",
+      "category": "ai-models",
+      "homepage": "https://fal.ai",
+      "summary": "Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "image-generation",
+        "video-generation",
+        "inference"
+      ],
+      "entrypoints": {
+        "docs": "https://fal.ai/docs",
+        "api_reference": "https://fal.ai/docs/model-apis",
+        "llms_txt": "https://fal.ai/llms.txt",
+        "status_page": "https://status.fal.ai",
+        "pricing": "https://fal.ai/pricing",
+        "signup": "https://fal.ai",
+        "api_keys": "https://fal.ai/dashboard/keys",
+        "cli": "https://github.com/fal-ai/fal"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://fal.ai/dashboard/keys",
+          "verified": "2026-07-08",
+          "notes": "GitHub-based self-serve signup; dashboard reachable immediately after."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://fal.ai/dashboard/keys",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://fal.ai/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free credits for new accounts; pay-per-use afterwards."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://fal.ai/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
           "versioning_policy",
           "automation_permitted"
         ]
@@ -3435,6 +3620,100 @@
           "free_tier_or_trial",
           "usage_dashboard",
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "category": "ai-models",
+      "homepage": "https://openrouter.ai",
+      "summary": "Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "model-aggregator",
+        "openai-compatible"
+      ],
+      "entrypoints": {
+        "docs": "https://openrouter.ai/docs",
+        "api_reference": "https://openrouter.ai/docs/api-reference/overview",
+        "llms_txt": "https://openrouter.ai/docs/llms.txt",
+        "status_page": "https://status.openrouter.ai",
+        "pricing": "https://openrouter.ai/models",
+        "signup": "https://openrouter.ai",
+        "api_keys": "https://openrouter.ai/settings/keys"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://openrouter.ai/docs/quickstart",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://openrouter.ai/docs/api-reference/authentication",
+          "verified": "2026-07-08",
+          "notes": "Keys created self-serve at openrouter.ai/settings/keys; provisioning API for programmatic key management is documented."
+        },
+        "oauth_support": {
+          "status": "supported",
+          "evidence": "https://openrouter.ai/docs/use-cases/oauth-pkce",
+          "verified": "2026-07-08",
+          "notes": "OAuth PKCE flow lets third-party apps request user-authorized keys."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Per-key credit limits exist; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Some models are offered at a free tier, which serves as a de facto test path; no separate sandbox documented."
+        },
+        "free_tier_or_trial": {
+          "status": "partial",
+          "evidence": "https://openrouter.ai/models",
+          "verified": "2026-07-08",
+          "notes": "Selected models are free (\":free\" variants); the platform itself is pay-per-use credits."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://openrouter.ai/docs/quickstart",
+          "verified": "2026-07-08",
+          "notes": "Prepaid credits purchasable self-serve."
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
           "automation_permitted"
         ]
       }
@@ -5261,6 +5540,185 @@
         "last_verified": "2026-07-07",
         "unknown_checks": [
           "idempotency",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "weaviate",
+      "name": "Weaviate",
+      "category": "databases",
+      "homepage": "https://weaviate.io",
+      "summary": "Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "scope": "Weaviate Cloud + open-source",
+      "tags": [
+        "vector-database",
+        "open-source"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.weaviate.io",
+        "api_reference": "https://docs.weaviate.io/weaviate/api/rest",
+        "llms_txt": "https://docs.weaviate.io/llms.txt",
+        "pricing": "https://weaviate.io/pricing",
+        "signup": "https://console.weaviate.cloud",
+        "api_keys": "https://console.weaviate.cloud",
+        "cli": "https://github.com/weaviate/weaviate-cli",
+        "mcp_official": "https://github.com/weaviate/mcp-server-weaviate"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://console.weaviate.cloud",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.weaviate.io/cloud/manage-clusters/connect",
+          "verified": "2026-07-08",
+          "notes": "Cluster API keys issued in the Weaviate Cloud console."
+        },
+        "oauth_support": {
+          "status": "unknown",
+          "notes": "OIDC auth is configurable for self-hosted; cloud uses API keys."
+        },
+        "scoped_tokens": {
+          "status": "unknown",
+          "notes": "Admin/read-only cluster keys exist; needs the canonical docs link as evidence."
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "supported",
+          "evidence": "https://weaviate.io/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free 14-day cloud sandbox clusters; open-source runs locally for testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://weaviate.io/pricing",
+          "verified": "2026-07-08"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://weaviate.io/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "CLI",
+          "Sandbox",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "xai",
+      "name": "xAI (Grok API)",
+      "category": "ai-models",
+      "homepage": "https://x.ai",
+      "summary": "xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "grok"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.x.ai",
+        "api_reference": "https://docs.x.ai/developers/rest-api-reference/inference",
+        "llms_txt": "https://docs.x.ai/llms.txt",
+        "signup": "https://console.x.ai",
+        "api_keys": "https://console.x.ai"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "unknown",
+          "notes": "console.x.ai rejects unauthenticated probes (WAF); signup mechanics unverified from docs alone."
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.x.ai/overview",
+          "verified": "2026-07-08",
+          "notes": "Docs quickstart directs users to create API keys in the xAI console."
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "Promotional credits have been offered; no standing free tier documented."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "unknown"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "self_serve_signup",
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
+          "self_serve_paid_upgrade",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
           "automation_permitted"
         ]
       }
