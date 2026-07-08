@@ -460,7 +460,7 @@ Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details]
 
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
-<details>
+<details open>
 <summary><b>Capability matrix</b> — all ${providers.length} providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 ${matrixTables(DETAILS, (name) => `**${name}**`)}
@@ -524,7 +524,7 @@ curl -s ${RAW_JSON}
 
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
-<details>
+<details open>
 <summary><b>能力矩阵表</b> —— ${providers.length} 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
 
 ${matrixTables(DETAILS, (name) => `**${name}**`)}
