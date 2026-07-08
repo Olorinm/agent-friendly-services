@@ -1,0 +1,68 @@
+id: fireworks
+name: Fireworks AI
+category: ai-models
+homepage: https://fireworks.ai
+summary: Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.
+submitted_by: community
+
+tags:
+  - inference
+  - open-models
+  - fine-tuning
+
+entrypoints:
+  docs: https://docs.fireworks.ai
+  api_reference: https://docs.fireworks.ai/api-reference/introduction
+  llms_txt: https://docs.fireworks.ai/llms.txt
+  status_page: https://status.fireworks.ai
+  pricing: https://fireworks.ai/pricing
+  signup: https://app.fireworks.ai
+  api_keys: https://app.fireworks.ai
+  cli: https://docs.fireworks.ai/tools-sdks/firectl/firectl
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://app.fireworks.ai
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.fireworks.ai/getting-started/introduction
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://fireworks.ai/pricing
+    verified: "2026-07-08"
+    notes: Free credits for new developers.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://fireworks.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

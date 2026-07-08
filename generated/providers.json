@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T08:38:57.547Z",
+  "generated_at": "2026-07-08T08:39:26.889Z",
   "counts": {
-    "providers": 69,
+    "providers": 73,
     "categories": 12,
-    "entrypoint_urls": 665,
-    "checks_answered": 386
+    "entrypoint_urls": 694,
+    "checks_answered": 401
   },
   "categories": [
     {
@@ -836,6 +836,184 @@
           "usage_dashboard",
           "idempotency",
           "versioning_policy"
+        ]
+      }
+    },
+    {
+      "id": "cartesia",
+      "name": "Cartesia",
+      "category": "ai-models",
+      "homepage": "https://cartesia.ai",
+      "summary": "Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "text-to-speech",
+        "speech-to-text",
+        "voice"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.cartesia.ai",
+        "api_reference": "https://docs.cartesia.ai/api-reference",
+        "llms_txt": "https://docs.cartesia.ai/llms.txt",
+        "status_page": "https://status.cartesia.ai",
+        "pricing": "https://www.cartesia.ai/pricing",
+        "signup": "https://play.cartesia.ai",
+        "api_keys": "https://play.cartesia.ai",
+        "mcp_official": "https://github.com/cartesia-ai/cartesia-mcp"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://play.cartesia.ai",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.cartesia.ai/get-started/overview",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown",
+          "notes": "Playground exists for interactive testing."
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.cartesia.ai/pricing",
+          "verified": "2026-07-08"
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.cartesia.ai/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "Official MCP",
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras Inference",
+      "category": "ai-models",
+      "homepage": "https://cloud.cerebras.ai",
+      "summary": "Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "inference",
+        "open-models",
+        "low-latency"
+      ],
+      "entrypoints": {
+        "docs": "https://inference-docs.cerebras.ai",
+        "api_reference": "https://inference-docs.cerebras.ai/api-reference/chat-completions",
+        "llms_txt": "https://inference-docs.cerebras.ai/llms.txt",
+        "status_page": "https://status.cerebras.ai",
+        "pricing": "https://www.cerebras.ai/pricing",
+        "signup": "https://cloud.cerebras.ai",
+        "api_keys": "https://cloud.cerebras.ai"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://cloud.cerebras.ai",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://inference-docs.cerebras.ai/introduction",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://www.cerebras.ai/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free tier with daily token quota."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://www.cerebras.ai/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
         ]
       }
     },
@@ -2195,6 +2373,96 @@
       }
     },
     {
+      "id": "fireworks",
+      "name": "Fireworks AI",
+      "category": "ai-models",
+      "homepage": "https://fireworks.ai",
+      "summary": "Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "inference",
+        "open-models",
+        "fine-tuning"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.fireworks.ai",
+        "api_reference": "https://docs.fireworks.ai/api-reference/introduction",
+        "llms_txt": "https://docs.fireworks.ai/llms.txt",
+        "status_page": "https://status.fireworks.ai",
+        "pricing": "https://fireworks.ai/pricing",
+        "signup": "https://app.fireworks.ai",
+        "api_keys": "https://app.fireworks.ai",
+        "cli": "https://docs.fireworks.ai/tools-sdks/firectl/firectl"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://app.fireworks.ai",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.fireworks.ai/getting-started/introduction",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "supported",
+          "evidence": "https://fireworks.ai/pricing",
+          "verified": "2026-07-08",
+          "notes": "Free credits for new developers."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://fireworks.ai/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "CLI",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
       "id": "fly-io",
       "name": "Fly.io",
       "category": "cloud-hosting",
@@ -3281,6 +3549,91 @@
           "scoped_tokens",
           "token_revocation",
           "sandbox_or_test_mode",
+          "usage_dashboard",
+          "idempotency",
+          "versioning_policy",
+          "automation_permitted"
+        ]
+      }
+    },
+    {
+      "id": "luma",
+      "name": "Luma AI (Dream Machine)",
+      "category": "ai-models",
+      "homepage": "https://lumalabs.ai",
+      "summary": "Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "video-generation",
+        "image-generation"
+      ],
+      "entrypoints": {
+        "docs": "https://docs.lumalabs.ai",
+        "api_reference": "https://docs.lumalabs.ai/reference",
+        "llms_txt": "https://docs.lumalabs.ai/llms.txt",
+        "pricing": "https://lumalabs.ai/api/pricing",
+        "signup": "https://lumalabs.ai/api",
+        "api_keys": "https://lumalabs.ai/api"
+      },
+      "checks": {
+        "self_serve_signup": {
+          "status": "supported",
+          "evidence": "https://lumalabs.ai/api",
+          "verified": "2026-07-08"
+        },
+        "api_key_self_serve": {
+          "status": "supported",
+          "evidence": "https://docs.lumalabs.ai/docs/welcome",
+          "verified": "2026-07-08"
+        },
+        "oauth_support": {
+          "status": "unknown"
+        },
+        "scoped_tokens": {
+          "status": "unknown"
+        },
+        "token_revocation": {
+          "status": "unknown"
+        },
+        "sandbox_or_test_mode": {
+          "status": "unknown"
+        },
+        "free_tier_or_trial": {
+          "status": "unknown",
+          "notes": "API is pay-per-use; consumer app has free generations, API trial status unverified."
+        },
+        "self_serve_paid_upgrade": {
+          "status": "supported",
+          "evidence": "https://lumalabs.ai/api/pricing",
+          "verified": "2026-07-08"
+        },
+        "usage_dashboard": {
+          "status": "unknown"
+        },
+        "idempotency": {
+          "status": "unknown"
+        },
+        "versioning_policy": {
+          "status": "unknown"
+        },
+        "automation_permitted": {
+          "status": "unknown",
+          "notes": "ToS not yet reviewed and recorded."
+        }
+      },
+      "derived": {
+        "badges": [
+          "llms.txt",
+          "Self-serve"
+        ],
+        "stale": false,
+        "last_verified": "2026-07-08",
+        "unknown_checks": [
+          "oauth_support",
+          "scoped_tokens",
+          "token_revocation",
+          "sandbox_or_test_mode",
+          "free_tier_or_trial",
           "usage_dashboard",
           "idempotency",
           "versioning_policy",

@@ -1,0 +1,67 @@
+id: cerebras
+name: Cerebras Inference
+category: ai-models
+homepage: https://cloud.cerebras.ai
+summary: Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.
+submitted_by: community
+
+tags:
+  - inference
+  - open-models
+  - low-latency
+
+entrypoints:
+  docs: https://inference-docs.cerebras.ai
+  api_reference: https://inference-docs.cerebras.ai/api-reference/chat-completions
+  llms_txt: https://inference-docs.cerebras.ai/llms.txt
+  status_page: https://status.cerebras.ai
+  pricing: https://www.cerebras.ai/pricing
+  signup: https://cloud.cerebras.ai
+  api_keys: https://cloud.cerebras.ai
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://cloud.cerebras.ai
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://inference-docs.cerebras.ai/introduction
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.cerebras.ai/pricing
+    verified: "2026-07-08"
+    notes: Free tier with daily token quota.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.cerebras.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

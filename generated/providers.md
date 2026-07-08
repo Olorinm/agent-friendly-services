@@ -15,14 +15,18 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Anthropic](#anthropic) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Cartesia](#cartesia) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Cerebras Inference](#cerebras) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Cohere](#cohere) | — | ✓ | — | — | ◐ | ✓ | — | 2026-07-07 |
 | [Deepgram](#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [DeepSeek](#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
 | [ElevenLabs](#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [fal.ai](#fal) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Fireworks AI](#fireworks) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Gemini API](#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Luma AI (Dream Machine)](#luma) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [MiniMax](#minimax) | ✓ | — | — | — | — | ✓ | — | 2026-07-08 |
 | [Mistral AI](#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [Moonshot AI (Kimi)](#moonshot) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
@@ -220,6 +224,28 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Stagehand (the company's agent framework) is a separate open-source project and not assessed here.
 
+### Cartesia <a id="cartesia"></a>
+
+> Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.
+
+**Category:** AI Models · `Official MCP` `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.cartesia.ai) · [API Reference](https://docs.cartesia.ai/api-reference) · [llms.txt](https://docs.cartesia.ai/llms.txt) · [Status Page](https://status.cartesia.ai) · [Pricing](https://www.cartesia.ai/pricing) · [Signup](https://play.cartesia.ai) · [API Keys](https://play.cartesia.ai) · [Official MCP](https://github.com/cartesia-ai/cartesia-mcp)
+
+- **Supported:** [Self-serve signup](https://play.cartesia.ai) · [Self-serve API keys](https://docs.cartesia.ai/get-started/overview) · [Free tier / trial](https://www.cartesia.ai/pricing) · [Self-serve upgrade](https://www.cartesia.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Cerebras Inference <a id="cerebras"></a>
+
+> Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://inference-docs.cerebras.ai) · [API Reference](https://inference-docs.cerebras.ai/api-reference/chat-completions) · [llms.txt](https://inference-docs.cerebras.ai/llms.txt) · [Status Page](https://status.cerebras.ai) · [Pricing](https://www.cerebras.ai/pricing) · [Signup](https://cloud.cerebras.ai) · [API Keys](https://cloud.cerebras.ai)
+
+- **Supported:** [Self-serve signup](https://cloud.cerebras.ai) · [Self-serve API keys](https://inference-docs.cerebras.ai/introduction) · [Free tier / trial](https://www.cerebras.ai/pricing) · [Self-serve upgrade](https://www.cerebras.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Chroma <a id="chroma"></a>
 
 > Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.
@@ -384,6 +410,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **N/A:** Idempotency — Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
+### Fireworks AI <a id="fireworks"></a>
+
+> Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.
+
+**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+
+**Links:** [Documentation](https://docs.fireworks.ai) · [API Reference](https://docs.fireworks.ai/api-reference/introduction) · [llms.txt](https://docs.fireworks.ai/llms.txt) · [Status Page](https://status.fireworks.ai) · [Pricing](https://fireworks.ai/pricing) · [Signup](https://app.fireworks.ai) · [API Keys](https://app.fireworks.ai) · [CLI](https://docs.fireworks.ai/tools-sdks/firectl/firectl)
+
+- **Supported:** [Self-serve signup](https://app.fireworks.ai) · [Self-serve API keys](https://docs.fireworks.ai/getting-started/introduction) · [Free tier / trial](https://fireworks.ai/pricing) · [Self-serve upgrade](https://fireworks.ai/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
 ### Fly.io <a id="fly-io"></a>
 
 > Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
@@ -516,6 +553,17 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 - **Supported:** [Self-serve signup](https://linear.app/signup) · [Self-serve API keys](https://linear.app/developers/graphql) · [OAuth](https://linear.app/developers) · [Free tier / trial](https://linear.app/pricing) · [Self-serve upgrade](https://linear.app/pricing)
 - **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+### Luma AI (Dream Machine) <a id="luma"></a>
+
+> Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.
+
+**Category:** AI Models · `llms.txt` `Self-serve`
+
+**Links:** [Documentation](https://docs.lumalabs.ai) · [API Reference](https://docs.lumalabs.ai/reference) · [llms.txt](https://docs.lumalabs.ai/llms.txt) · [Pricing](https://lumalabs.ai/api/pricing) · [Signup](https://lumalabs.ai/api) · [API Keys](https://lumalabs.ai/api)
+
+- **Supported:** [Self-serve signup](https://lumalabs.ai/api) · [Self-serve API keys](https://docs.lumalabs.ai/docs/welcome) · [Self-serve upgrade](https://lumalabs.ai/api/pricing)
+- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `free_tier_or_trial`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### MiniMax <a id="minimax"></a>
 

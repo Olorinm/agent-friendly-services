@@ -4,9 +4,9 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 69 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Where AI agents plug into 73 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
 
-![Providers](https://img.shields.io/badge/providers-69-2563eb)
+![Providers](https://img.shields.io/badge/providers-73-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
 [![Link health](https://img.shields.io/badge/link_health-731_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
@@ -29,21 +29,25 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 **🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
 
 <details open>
-<summary><b>Capability matrix</b> — all 69 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
+<summary><b>Capability matrix</b> — all 73 providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
 
 **AI Models**
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Anthropic](./generated/providers.md#anthropic) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Cartesia](./generated/providers.md#cartesia) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Cerebras Inference](./generated/providers.md#cerebras) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Cohere](./generated/providers.md#cohere) | — | ✓ | — | — | ◐ | ✓ | — | 2026-07-07 |
 | [Deepgram](./generated/providers.md#deepgram) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [DeepSeek](./generated/providers.md#deepseek) | — | — | — | — | — | ✓ | — | 2026-07-07 |
 | [ElevenLabs](./generated/providers.md#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [fal.ai](./generated/providers.md#fal) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
+| [Fireworks AI](./generated/providers.md#fireworks) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-08 |
 | [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Luma AI (Dream Machine)](./generated/providers.md#luma) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [MiniMax](./generated/providers.md#minimax) | ✓ | — | — | — | — | ✓ | — | 2026-07-08 |
 | [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | — | 2026-07-07 |
 | [Moonshot AI (Kimi)](./generated/providers.md#moonshot) | — | — | — | ✓ | — | ✓ | — | 2026-07-08 |
@@ -169,14 +173,18 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 ## AI Models
 
 - **[Anthropic](https://docs.anthropic.com)** — Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself. [API](https://docs.anthropic.com/en/api) · [llms.txt](https://docs.anthropic.com/llms.txt) · [CLI](https://docs.anthropic.com/en/docs/claude-code) · [all facts →](./generated/providers.md#anthropic)
+- **[Cartesia](https://docs.cartesia.ai)** — Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier. [API](https://docs.cartesia.ai/api-reference) · [MCP](https://github.com/cartesia-ai/cartesia-mcp) · [llms.txt](https://docs.cartesia.ai/llms.txt) · [all facts →](./generated/providers.md#cartesia)
+- **[Cerebras Inference](https://inference-docs.cerebras.ai)** — Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier. [API](https://inference-docs.cerebras.ai/api-reference/chat-completions) · [llms.txt](https://inference-docs.cerebras.ai/llms.txt) · [all facts →](./generated/providers.md#cerebras)
 - **[Cohere](https://docs.cohere.com)** — Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs. [API](https://docs.cohere.com/reference/about) · [llms.txt](https://docs.cohere.com/llms.txt) · [all facts →](./generated/providers.md#cohere)
 - **[Deepgram](https://developers.deepgram.com/docs)** — Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card. [API](https://developers.deepgram.com/reference) · [llms.txt](https://developers.deepgram.com/llms.txt) · [OpenAPI](https://github.com/deepgram/deepgram-api-specs) · [all facts →](./generated/providers.md#deepgram)
 - **[DeepSeek](https://api-docs.deepseek.com)** — OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys. [all facts →](./generated/providers.md#deepseek)
 - **[ElevenLabs](https://elevenlabs.io/docs)** — Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier. [API](https://elevenlabs.io/docs/api-reference/introduction) · [MCP](https://github.com/elevenlabs/elevenlabs-mcp) · [llms.txt](https://elevenlabs.io/docs/llms.txt) · [OpenAPI](https://api.elevenlabs.io/openapi.json) · [all facts →](./generated/providers.md#elevenlabs)
 - **[fal.ai](https://fal.ai/docs)** — Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys. [API](https://fal.ai/docs/model-apis) · [llms.txt](https://fal.ai/llms.txt) · [CLI](https://github.com/fal-ai/fal) · [all facts →](./generated/providers.md#fal)
+- **[Fireworks AI](https://docs.fireworks.ai)** — Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing. [API](https://docs.fireworks.ai/api-reference/introduction) · [llms.txt](https://docs.fireworks.ai/llms.txt) · [CLI](https://docs.fireworks.ai/tools-sdks/firectl/firectl) · [all facts →](./generated/providers.md#fireworks)
 - **[Gemini API](https://ai.google.dev/gemini-api/docs)** — Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning. [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [all facts →](./generated/providers.md#gemini-api)
 - **[Groq](https://console.groq.com/docs)** — Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier. [API](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [all facts →](./generated/providers.md#groq)
 - **[Hugging Face](https://huggingface.co/docs)** — Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API. [API](https://huggingface.co/docs/hub/api) · [MCP](https://huggingface.co/mcp) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [all facts →](./generated/providers.md#hugging-face)
+- **[Luma AI (Dream Machine)](https://docs.lumalabs.ai)** — Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing. [API](https://docs.lumalabs.ai/reference) · [llms.txt](https://docs.lumalabs.ai/llms.txt) · [all facts →](./generated/providers.md#luma)
 - **[MiniMax](https://platform.minimax.io/docs)** — MiniMax text, speech, video and music models via the international platform API, with an official MCP server. [API](https://platform.minimax.io/docs/api-reference) · [MCP](https://github.com/MiniMax-AI/MiniMax-MCP) · [all facts →](./generated/providers.md#minimax)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [all facts →](./generated/providers.md#mistral)
 - **[Moonshot AI (Kimi)](https://platform.kimi.ai/docs)** — Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli). [API](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli) · [all facts →](./generated/providers.md#moonshot)
@@ -273,7 +281,7 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Contributing
 
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **442 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
+One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **475 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).
 
 Have a coding agent? Point it at a checkout and paste:
 

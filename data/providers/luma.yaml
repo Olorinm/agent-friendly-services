@@ -1,0 +1,63 @@
+id: luma
+name: Luma AI (Dream Machine)
+category: ai-models
+homepage: https://lumalabs.ai
+summary: Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.
+submitted_by: community
+
+tags:
+  - video-generation
+  - image-generation
+
+entrypoints:
+  docs: https://docs.lumalabs.ai
+  api_reference: https://docs.lumalabs.ai/reference
+  llms_txt: https://docs.lumalabs.ai/llms.txt
+  pricing: https://lumalabs.ai/api/pricing
+  signup: https://lumalabs.ai/api
+  api_keys: https://lumalabs.ai/api
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://lumalabs.ai/api
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.lumalabs.ai/docs/welcome
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+
+  free_tier_or_trial:
+    status: unknown
+    notes: API is pay-per-use; consumer app has free generations, API trial status unverified.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://lumalabs.ai/api/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.

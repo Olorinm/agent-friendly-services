@@ -1,0 +1,68 @@
+id: cartesia
+name: Cartesia
+category: ai-models
+homepage: https://cartesia.ai
+summary: Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.
+submitted_by: community
+
+tags:
+  - text-to-speech
+  - speech-to-text
+  - voice
+
+entrypoints:
+  docs: https://docs.cartesia.ai
+  api_reference: https://docs.cartesia.ai/api-reference
+  llms_txt: https://docs.cartesia.ai/llms.txt
+  status_page: https://status.cartesia.ai
+  pricing: https://www.cartesia.ai/pricing
+  signup: https://play.cartesia.ai
+  api_keys: https://play.cartesia.ai
+  mcp_official: https://github.com/cartesia-ai/cartesia-mcp
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://play.cartesia.ai
+    verified: "2026-07-08"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.cartesia.ai/get-started/overview
+    verified: "2026-07-08"
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Playground exists for interactive testing.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.cartesia.ai/pricing
+    verified: "2026-07-08"
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.cartesia.ai/pricing
+    verified: "2026-07-08"
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: ToS not yet reviewed and recorded.
