@@ -1,0 +1,17 @@
+category: databases
+task: create-insert-query
+scenario: >
+  Create a collection/table named "afs_{{NONCE}}", insert 3 records (one of
+  which contains the value "{{NONCE}}"), then query that record back and report
+  it.
+provisioning:
+  - element: API key
+    delivery: curl config file
+  - element: database instance (cluster/project) where the provider has no instance-free API
+    delivery: created by human beforehand; whether this is needed is itself a recorded friction fact
+verification:
+  method: state
+  how: runner queries the collection/table itself and requires the nonce record
+cleanup: runner drops the collection/table
+provider_overrides:
+  qdrant: target the provisioned cluster's data plane (cluster URL is part of provisioning); the management plane is out of scope for this task

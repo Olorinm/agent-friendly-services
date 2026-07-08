@@ -2,79 +2,146 @@
 
 Everything else in this index is a **documented fact** with an official evidence
 URL. This track is different: we run an actual AI agent against the provider and
-record whether it completed a canonical task **without any human intervention**.
+record whether it completed a realistic task **without any human intervention**.
 That is the closest thing to a direct measurement of agent-friendliness — and
 because it is an *experiment result*, not a timeless fact, it is labeled and
 stored differently from checks.
 
-## What is measured
+## The three layers
 
-**The zero-touch first call:** starting from the provider's official docs and
-given nothing but a valid API key in an environment variable, can an agent make
-its first successful authenticated API call — choosing the right endpoint,
-auth scheme, and format from documentation alone, with no human answering
-questions?
-
-This deliberately measures the **post-credential** path. Account signup is out
-of scope: CAPTCHA, phone verification and card checks exist specifically to
-require a human, and we do not attempt or automate bypassing them. The signup
-gates themselves are recorded as documented facts (tier T0 below), not tested.
-
-## Tiers
-
-| Tier | Credentials | What the agent does | What it produces |
+| Layer | Credentials | What the agent does | What it produces |
 | --- | --- | --- | --- |
-| **T0** — docs recon | none | Reads official docs only; maps the path from "new user" to "first successful call"; lists every step that requires a human, with evidence URLs; writes the exact first-call command | Human-gate list (feeds normal checks), candidate command for T1 |
-| **T1** — live run | API key in env | Must achieve a documented 2xx authenticated call using only official docs; no human available | Pass/fail → the **Agent-verified** badge |
+| **Recon** (`t0`) | none | Reads official docs only; maps the path from "new user" to "first successful call"; lists every human gate with evidence URLs | Human-gate list, candidate first-call command |
+| **Dry-fire** | none | Builds the canonical first call from docs alone and EXECUTES it with an obviously-fake credential. Pass = the provider's documented auth-failure (401/403 with documented error shape) from the correct endpoint — proving endpoint, method, headers and request shape were derivable from docs | Verdict + friction facts; scales to every provider with zero provisioning |
+| **Real task** | provisioned | Completes a category-specific real user scenario end-to-end (see task definitions below) | Verdict + friction facts + cost — the strongest signal, only where credentials are provisioned |
 
-Hard rules baked into the task prompt for both tiers:
+The layers are complementary, not competing: dry-fire covers the whole index
+cheaply; real-task runs light up provider by provider as credentials are
+provisioned.
 
-- Never create accounts, never attempt signup, never try to get past any
-  human-verification mechanism.
-- No human is available. If information is missing, the run records `unknown`
-  or fails — it never guesses.
+## Standard measurement environment
+
+A run is only comparable if the environment is pinned. Every published result
+records all of the following, and runs with a different environment are
+different experiments:
+
+- **Machine**: a fresh environment with no prior state (no cached logins, no
+  provider SDKs preinstalled, no shell history).
+- **Agent + model**: pinned and recorded (e.g. Claude Code headless, model id).
+- **Tool surface**: web fetch/search + `curl` via shell. No provider SDKs, no
+  provider CLIs — the task must be solvable from HTTP + docs alone. (CLI
+  quality is already a documented check; mixing it in here would blur what is
+  being measured.)
+- **Credentials as files, never env vars or prompt text**: each credential is
+  provisioned as a curl config file (`curl -K <file>`), so the secret never
+  appears in command text, transcripts, or the prompt, and restrictive shell
+  permission matchers cannot block variable expansion. (Calibration found that
+  env-var injection can fail *inside the harness* and the failure then
+  masquerades as provider friction.)
+- **Turn cap**: 40 agent turns (calibration showed 25 is too tight for
+  higher-friction providers).
+- **Repetitions**: 3 independent runs per provider per task. The published
+  verdict is the majority; a split verdict is **recorded as a finding**, not
+  averaged away — disagreement usually means the provider's docs or API
+  structure genuinely confuse agents (e.g. multiple API planes with only one
+  documented).
+- **Harness pre-flight**: before a batch, the harness runs a known-good task
+  end-to-end to prove the environment itself adds no friction.
+
+## Task definitions
+
+Real-task scenarios live in `data/experiments/tasks/<category>.yaml` — one
+realistic user scenario per category, so results are comparable **within** a
+category (we never compare across categories; the index does not rank).
+
+Each task file pins, as reviewable data:
+
+- **scenario** — what a real user would ask an agent to do;
+- **provisioning** — the minimum a human must supply up front (a key, a test
+  store, a bot already in a channel …). This manifest is itself a core
+  friction fact: the more a human must pre-provide, the less autonomous the
+  agent can be;
+- **verification** — how the runner *independently* confirms success;
+- **cleanup** — how created state is removed (test modes and free tiers are
+  mandatory where they exist).
+
+Task definitions are data, so they are PR-challengeable like any other fact in
+this repo. Where a uniform category task is ambiguous for a specific provider
+(e.g. a provider with separate management and data planes), the target is
+pinned per provider in the task file rather than left to the agent's judgment
+mid-run — calibration showed verdicts flip on exactly this ambiguity.
+
+## Independent verification
+
+The runner never trusts the agent's self-report. After the agent finishes:
+
+- **Stateful tasks** (created an issue, a record, a deployment): the runner
+  fetches the created resource itself through the provider's API and checks it
+  matches (exact title/nonce), then performs cleanup.
+- **Stateless tasks** (an inference call, a search): the runner re-executes the
+  agent's final command and checks the response for the expected content.
+
+Only an independently verified pass is a pass.
+
+## Friction attribution
+
+The verdict alone has little discrimination (most major providers pass);
+the signal is in the friction: turns used, wrong attempts, wall time, cost,
+and the agent's friction notes. Before publishing, every friction note is
+attributed to one of:
+
+- **provider** — the thing this index measures (undocumented header, wrong
+  example in docs, auth scheme mismatch, only-dashboard flows …);
+- **harness** — our environment got in the way (permission matcher, sandbox
+  limits); these invalidate the run rather than count against the provider;
+- **model** — the agent misread or hallucinated despite correct docs; kept,
+  labeled, because "today's models get confused here" is real information for
+  providers, but it is never phrased as a provider defect.
 
 ## Honest labeling
 
-A run result is only meaningful with its context, so every recorded result
-carries: the **model** that ran it, the **date**, the **tier**, and a link to
-the full **transcript** committed to this repo. The badge renders as
-`Agent-verified (<model>, <YYYY-MM>)` — never as a bare checkmark. Results
-older than the standard staleness window (180 days) stop counting.
+Every recorded result carries: the **model**, the **agent harness**, the
+**date**, the **layer**, the run **metrics** (turns, wall time, cost, wrong
+attempts), and a link to the full **transcript** committed to this repo. The
+badge renders as `Agent-verified (<model>, <YYYY-MM>)` — never a bare
+checkmark. Results older than 180 days stop counting.
 
-A T1 failure is recorded too, with the failure point (wrong auth scheme in
-docs, undocumented required header, …). Failures are arguably the most useful
-signal this index can give a provider.
+Failures are recorded too, with the failure point — arguably the most useful
+signal this index can give a provider. Hard rules baked into every prompt:
+never create accounts, never attempt signup, never try to get past any
+human-verification mechanism (CAPTCHA, phone, card, KYC); official sources
+only; no human is available — say "unknown" rather than guess; mutate only the
+designated test resources.
 
 ## Storage
 
-- `data/experiments/first-call/<provider>.yaml` — latest result per provider
-  (result, tier, model, date, steps, transcript path, notes).
-- `data/experiments/first-call/transcripts/<provider>-<date>.md` — the run
-  transcript (evidence).
+- `data/experiments/tasks/<category>.yaml` — pinned task definitions.
+- `data/experiments/first-call/<provider>.yaml` — latest result per provider.
+- `data/experiments/first-call/transcripts/<provider>-<date>.md` — evidence.
 
-`generate.ts` will surface T1 passes as an **Agent-verified** badge once the
-first batch of keyed runs lands. Experiments never override documented checks;
-they sit alongside them.
+`generate.ts` will surface verified real-task passes as an **Agent-verified**
+badge once the first provisioned batch lands. Experiments never override
+documented checks; they sit alongside them.
 
 ## Running
 
 ```bash
-# T0 (no credentials needed):
+# Recon (no credentials needed):
 npm run agent-verify -- --provider=groq
 
-# T1 (key required; never commit keys):
-AFS_KEY_GROQ=... npm run agent-verify -- --provider=groq --tier=t1
+# Real task (credential file required; never commit credentials):
+npm run agent-verify -- --provider=github --task=real
 ```
 
 The runner (`scripts/agent-verify.ts`) builds a standardized prompt from the
-provider's entry in the dataset and executes it headlessly via `claude -p`
-with a capped number of turns. Same prompt for every provider — comparability
-is the point. Cadence: manual for now; monthly once keys are provisioned
-(weekly would be needless spend — this changes slowly).
+provider's dataset entry plus the category task file and executes it headlessly
+via `claude -p` with the pinned environment above. Cadence: manual for now;
+monthly once provisioned (weekly would be needless spend — this changes
+slowly).
 
 ## Why this is not a score
 
-One badge, mechanically earned, transcript attached. No ranking, no weighting,
-no aggregate number — a provider either completed the canonical task under the
-stated conditions or it didn't, and you can read the transcript to see why.
+Verdict + metrics + attributed friction facts + transcript. No ranking, no
+weighting, no aggregate number — a provider either completed the pinned task
+under the pinned conditions or it didn't, and you can read the transcript to
+see why.

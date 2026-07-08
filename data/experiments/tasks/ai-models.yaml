@@ -1,0 +1,18 @@
+category: ai-models
+task: run-one-inference
+scenario: >
+  Using the provider's documented API, get the model to reply with exactly the
+  word "{{NONCE}}" (instruct it to echo that word) via the simplest documented
+  text-generation endpoint. For speech providers, the variant is: transcribe
+  the provided public audio file (speech-to-text) or synthesize the word
+  "{{NONCE}}" (text-to-speech) and report the response metadata.
+provisioning:
+  - element: API key
+    delivery: curl config file
+verification:
+  method: re-execute
+  how: runner reruns the agent's final command and checks the response contains the nonce (or valid audio/transcript metadata for speech variants)
+cleanup: none needed (stateless)
+provider_overrides:
+  deepgram: variant speech-to-text — transcribe the provided public audio URL
+  elevenlabs: variant text-to-speech — synthesize the nonce, report voice/model metadata

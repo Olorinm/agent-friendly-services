@@ -1,0 +1,13 @@
+category: cloud-hosting
+task: deploy-hello-world
+scenario: >
+  Deploy a static page whose body contains exactly "{{NONCE}}" using the
+  provider's documented API-only path (no dashboard), and report the public
+  URL.
+provisioning:
+  - element: account API token
+    delivery: curl config file
+verification:
+  method: state
+  how: runner curls the reported public URL and requires the nonce in the response body
+cleanup: runner deletes the deployment/project via API and confirms the URL stops serving

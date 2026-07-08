@@ -1,0 +1,13 @@
+category: payments-billing
+task: test-mode-payment
+scenario: >
+  In TEST MODE ONLY: create a customer whose name is "{{NONCE}}", create a
+  payment/transaction for a small amount using the provider's documented test
+  card/method, and report the payment object's id and status.
+provisioning:
+  - element: test-mode API key (never a live key)
+    delivery: curl config file
+verification:
+  method: state
+  how: runner fetches the payment object by id and requires a documented success/pending status and the customer nonce
+cleanup: test-mode objects only; runner deletes the customer where the API allows
