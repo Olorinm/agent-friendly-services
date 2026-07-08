@@ -126,7 +126,11 @@ checks:
 
   sandbox_or_test_mode:
     name: Sandbox / test mode
-    description: A test environment, test keys, or a sandbox exists.
+    description: >-
+      A documented way to exercise the service without touching production
+      state or spend. Counts: test-mode keys, sandbox products, preview/PR
+      environments, or an official self-hostable/local runtime. Note which
+      form in `notes`. An interactive playground alone is `partial`.
     verification: manual
 
   free_tier_or_trial:
@@ -151,10 +155,23 @@ checks:
 
   versioning_policy:
     name: Versioning policy
-    description: API versioning or a clear breaking-change/deprecation policy exists.
+    description: >-
+      A written breaking-change/deprecation policy. A versioned URL or header
+      alone is NOT sufficient (that shows versioning exists, not what the
+      provider promises about it) — mark that `partial` and link the policy
+      page for `supported`.
     verification: manual
 
   automation_permitted:
     name: Automation permitted
-    description: Terms of service allow automated/agent usage (evidence = ToS/bot policy clause).
+    description: >-
+      The provider's terms permit programmatic/automated account usage.
+      Rubric — supported: ToS/AUP/API terms explicitly allow API or automated
+      access, or a published bot/agent policy exists; partial: automation
+      allowed with restrictions (rate/robot clauses, specific products only,
+      human-approval requirements) — quote the restriction; unsupported: an
+      explicit no-bots/no-automated-access clause covers the API surface;
+      unknown: terms not yet read. Evidence must link the terms/policy page
+      and `notes` must QUOTE the decisive clause. A public API existing is
+      not evidence by itself.
     verification: manual
