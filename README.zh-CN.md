@@ -23,11 +23,127 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 其他 MCP 客户端：command `npx`，args `["-y", "github:Olorinm/agent-friendly-services"]`（[详情](./mcp/)）。仓库地图：[`llms.txt`](./llms.txt) · 智能体贡献手册：[`AGENTS.md`](./AGENTS.md)。
 
-**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。一眼对比各家能力：[能力矩阵表](./generated/providers.md#matrix) · 带证据和日期的完整事实表：[提供商详情](./generated/providers.md#providers) · 表格版：[`matrix.csv`](./generated/matrix.csv)。
+**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](./generated/providers.md#providers) · 表格版：[`matrix.csv`](./generated/matrix.csv)。
 
 **🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
 
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
+
+<details>
+<summary><b>能力矩阵表</b> —— 51 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知）</summary>
+
+**AI Models**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Anthropic](./generated/providers.md#anthropic) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Cohere](./generated/providers.md#cohere) | — | ✓ | — | — | ◐ | ✓ | 2026-07-07 |
+| [Deepgram](./generated/providers.md#deepgram) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [DeepSeek](./generated/providers.md#deepseek) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [ElevenLabs](./generated/providers.md#elevenlabs) | ✓ | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [Gemini API](./generated/providers.md#gemini-api) | — | — | — | ✓ | — | ✓ | 2026-07-07 |
+| [Groq](./generated/providers.md#groq) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Hugging Face](./generated/providers.md#hugging-face) | ✓ | — | — | ✓ | — | ✓ | 2026-07-07 |
+| [Mistral AI](./generated/providers.md#mistral) | — | ✓ | ✓ | — | — | ✓ | 2026-07-07 |
+| [OpenAI](./generated/providers.md#openai) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
+| [Replicate](./generated/providers.md#replicate) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Together AI](./generated/providers.md#together-ai) | — | ✓ | — | — | — | ✓ | 2026-07-07 |
+
+**Agent Tooling**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Composio](./generated/providers.md#composio) | ✓ | ✓ | — | — | — | — | 2026-07-07 |
+| [Zapier](./generated/providers.md#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+
+**Code Execution**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Browserbase](./generated/providers.md#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | 2026-07-07 |
+| [E2B](./generated/providers.md#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | 2026-07-07 |
+| [Modal](./generated/providers.md#modal) | — | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+
+**Developer Tools**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [GitHub](./generated/providers.md#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [GitLab](./generated/providers.md#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Postman](./generated/providers.md#postman) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+
+**Cloud / Hosting**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cloudflare](./generated/providers.md#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Fly.io](./generated/providers.md#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Netlify](./generated/providers.md#netlify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Vercel](./generated/providers.md#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+
+**Databases**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Neon](./generated/providers.md#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+| [Pinecone](./generated/providers.md#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Qdrant](./generated/providers.md#qdrant) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Supabase](./generated/providers.md#supabase) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | 2026-07-07 |
+| [Upstash](./generated/providers.md#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+
+**Web Search / Data**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Apify](./generated/providers.md#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Brave Search API](./generated/providers.md#brave-search) | ✓ | — | — | — | — | ✓ | 2026-07-07 |
+| [Exa](./generated/providers.md#exa) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Firecrawl](./generated/providers.md#firecrawl) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Perplexity API](./generated/providers.md#perplexity) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Tavily](./generated/providers.md#tavily) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+
+**Payments / Billing**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Paddle](./generated/providers.md#paddle) | ✓ | ✓ | — | — | ✓ | ◐ | 2026-07-07 |
+| [Stripe](./generated/providers.md#stripe) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+
+**Communication**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Discord](./generated/providers.md#discord) | — | — | ✓ | — | — | ✓ | 2026-07-07 |
+| [Lark](./generated/providers.md#lark) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Resend](./generated/providers.md#resend) | ✓ | ✓ | — | — | ✓ | ✓ | 2026-07-07 |
+| [Slack](./generated/providers.md#slack) | — | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+| [Telegram Bot API](./generated/providers.md#telegram) | — | — | — | — | ✓ | ◐ | 2026-07-07 |
+| [Twilio](./generated/providers.md#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 2026-07-07 |
+
+**Productivity / Storage**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Airtable](./generated/providers.md#airtable) | — | — | — | — | — | ✓ | 2026-07-07 |
+| [Dropbox](./generated/providers.md#dropbox) | — | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Linear](./generated/providers.md#linear) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+| [Notion](./generated/providers.md#notion) | ✓ | ✓ | — | — | — | ✓ | 2026-07-07 |
+
+**Observability / Security**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Datadog](./generated/providers.md#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | 2026-07-07 |
+| [Sentry](./generated/providers.md#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | 2026-07-07 |
+
+**Commerce / Marketing**
+
+| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Checked |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Shopify](./generated/providers.md#shopify) | ✓ | ✓ | — | ✓ | ✓ | ✓ | 2026-07-07 |
+
+</details>
 
 ---
 
