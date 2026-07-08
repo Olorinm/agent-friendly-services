@@ -1,0 +1,24 @@
+{
+  "provider": "groq",
+  "task": "first_call",
+  "tier": "t0",
+  "model": "sonnet",
+  "date": "2026-07-08",
+  "transcript": "transcripts/groq-2026-07-08.md",
+  "summary": {
+    "tier": "t0",
+    "human_gates": [
+      {
+        "step": "Create/log into a GroqCloud account at console.groq.com to access the dashboard",
+        "evidence": "https://console.groq.com/docs/quickstart"
+      },
+      {
+        "step": "Generate an API key via the dashboard-only Keys page (console.groq.com/keys) — no programmatic key-creation endpoint documented",
+        "evidence": "https://console.groq.com/docs/quickstart"
+      }
+    ],
+    "first_call_command": "curl https://api.groq.com/openai/v1/models -H \"Authorization: Bearer $API_KEY\"",
+    "confidence": "medium",
+    "notes": "Confirmed via docs that no credit card/payment method is required for Free tier access (console.groq.com/docs/billing-faqs). Could not confirm the exact login/signup mechanics (OAuth providers, email verification, CAPTCHA) because console.groq.com/login is a client-rendered SPA that returned only a legal-acceptance shell to static fetch; account creation itself was not attempted per task rules, so that gate's specific human-verification sub-steps are unknown. Model list endpoint and curl example are directly from console.groq.com/docs/api-reference."
+  }
+}

@@ -13,7 +13,8 @@
     "validate": "tsx scripts/validate.ts",
     "probe": "tsx scripts/probe.ts",
     "generate": "tsx scripts/generate.ts",
-    "test": "npm run validate"
+    "test": "npm run validate",
+    "agent-verify": "tsx scripts/agent-verify.ts"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
