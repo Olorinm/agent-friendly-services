@@ -28,9 +28,9 @@ jobs:
         run: |
           git fetch origin "$GITHUB_BASE_REF" --depth=1
           CHANGED="$(git diff --name-only "origin/$GITHUB_BASE_REF"...HEAD)"
-          BLOCKED="$(echo "$CHANGED" | grep -E '^(README\.md|generated/)' || true)"
+          BLOCKED="$(echo "$CHANGED" | grep -E '^(README\.md|README\.zh-CN\.md|generated/)' || true)"
           if [ -n "$BLOCKED" ]; then
-            echo "::error::README.md and generated/ are build outputs — don't edit them in PRs. CI regenerates them on main."
+            echo "::error::README.md, README.zh-CN.md and generated/ are build outputs — don't edit them in PRs. CI regenerates them on main."
             echo "$BLOCKED"
             exit 1
           fi

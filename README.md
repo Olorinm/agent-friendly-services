@@ -2,6 +2,8 @@
 
 # Agent-Friendly Services
 
+English | [简体中文](./README.zh-CN.md)
+
 Where AI agents plug into 51 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date. No scores, no tiers — [facts only](./docs/methodology.md).
 
 ![Providers](https://img.shields.io/badge/providers-51-2563eb)

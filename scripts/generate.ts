@@ -1,6 +1,6 @@
 /**
- * Generates README.md, generated/providers.json and generated/matrix.csv
- * from data/. Never edit those outputs by hand.
+ * Generates README.md, README.zh-CN.md, generated/providers.json and
+ * generated/matrix.csv from data/. Never edit those outputs by hand.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -251,10 +251,12 @@ ${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
 `;
 fs.writeFileSync(path.join(GENERATED_DIR, 'providers.md'), providersMd);
 
-// README.md — awesome-style: one bullet per provider, details linked.
+// README.md / README.zh-CN.md — awesome-style: one bullet per provider, details linked.
+// Provider names, summaries and category headings stay English in both languages
+// (single-source data, stable anchors); only the surrounding prose is translated.
 const DETAILS = './generated/providers.md';
 
-function awesomeLinks(p: Provider): string {
+function awesomeLinks(p: Provider, allFactsLabel: string): string {
   const e = p.entrypoints;
   const parts: string[] = [];
   if (e.api_reference) parts.push(`[API](${e.api_reference})`);
@@ -263,13 +265,13 @@ function awesomeLinks(p: Provider): string {
   if (e.llms_txt) parts.push(`[llms.txt](${e.llms_txt})`);
   if (e.openapi) parts.push(`[OpenAPI](${e.openapi})`);
   if (e.cli) parts.push(`[CLI](${e.cli})`);
-  parts.push(`[all facts →](${DETAILS}#${p.id})`);
+  parts.push(`[${allFactsLabel}](${DETAILS}#${p.id})`);
   return parts.join(' · ');
 }
 
-function awesomeEntry(p: Provider): string {
+function awesomeEntry(p: Provider, allFactsLabel: string): string {
   const summary = p.summary.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
-  return `- **[${p.name}](${p.entrypoints.docs})** — ${summary}. ${awesomeLinks(p)}`;
+  return `- **[${p.name}](${p.entrypoints.docs})** — ${summary}. ${awesomeLinks(p, allFactsLabel)}`;
 }
 
 // GitHub heading slugs: lowercase, strip punctuation, each space becomes one hyphen.
@@ -277,9 +279,22 @@ const toc = activeCategories
   .map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s/g, '-')})`)
   .join(' · ');
 
+function categorySections(allFactsLabel: string): string {
+  return activeCategories
+    .map((cat) => {
+      const list = providers.filter((p) => p.category === cat.id);
+      return `## ${cat.name}
+
+${list.map((p) => awesomeEntry(p, allFactsLabel)).join('\n')}`;
+    })
+    .join('\n\n');
+}
+
 const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
 
 # Agent-Friendly Services
+
+English | [简体中文](./README.zh-CN.md)
 
 Where AI agents plug into ${providers.length} popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date. No scores, no tiers — [facts only](./docs/methodology.md).
 
@@ -305,14 +320,7 @@ Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details]
 
 ${toc}
 
-${activeCategories
-  .map((cat) => {
-    const list = providers.filter((p) => p.category === cat.id);
-    return `## ${cat.name}
-
-${list.map(awesomeEntry).join('\n')}`;
-  })
-  .join('\n\n')}
+${categorySections('all facts →')}
 
 ## Contributing
 
@@ -337,5 +345,62 @@ Code: [MIT](./LICENSE) · Data (\`data/\`, \`generated/\`): [CC BY 4.0](./LICENS
 
 fs.writeFileSync(path.join(ROOT, 'README.md'), readme);
 
-console.log(`✓ README.md, generated/providers.json, generated/matrix.csv`);
+const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate\`。数据源：data/ -->
+
+# Agent-Friendly Services（智能体友好服务索引）
+
+[English](./README.md) | 简体中文
+
+AI 智能体接入 ${providers.length} 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期。不打分、不分级 —— [只记录事实](./docs/methodology.md)。
+
+${badgeParts.join('\n')}
+
+**🤖 智能体** —— 添加 MCP 服务器，或直接把完整数据集当一个 JSON 文件拉取：
+
+\`\`\`bash
+# MCP 服务器 —— 工具：search_providers、get_provider、list_categories、get_stats
+claude mcp add agent-friendly-services -- npx -y github:${REPO}
+
+# 不装服务器也行：同一份数据就是一个 JSON 文件
+curl -s ${RAW_JSON}
+\`\`\`
+
+其他 MCP 客户端：command \`npx\`，args \`["-y", "github:${REPO}"]\`（[详情](./mcp/)）。仓库地图：[\`llms.txt\`](./llms.txt) · 智能体贡献手册：[\`AGENTS.md\`](./AGENTS.md)。
+
+**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
+
+**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
+
+> 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
+
+---
+
+${toc}
+
+${categorySections('全部事实 →')}
+
+## 参与贡献
+
+一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **${totalUnknown} 个待查 \`unknown\`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[\`docs/contributing.md\`](./docs/contributing.md)。
+
+有编程智能体？让它打开本仓库的检出目录，然后粘贴：
+
+\`\`\`text
+Read AGENTS.md, then resolve one "unknown" check: find official evidence, update
+the provider YAML (or leave it unknown if evidence is genuinely missing), run
+npm run validate, and open a small PR.
+\`\`\`
+
+## 相关项目
+
+[Fern Agent Score](https://buildwithfern.com/agent-score)（文档站就绪度打分 —— 我们刻意不重复它的工作） · [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/) · [官方 MCP Registry](https://registry.modelcontextprotocol.io/) · [llms.txt hub](https://llmstxthub.com/)
+
+## 许可证
+
+代码：[MIT](./LICENSE) · 数据（\`data/\`、\`generated/\`）：[CC BY 4.0](./LICENSE-DATA)
+`;
+
+fs.writeFileSync(path.join(ROOT, 'README.zh-CN.md'), readmeZh);
+
+console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/matrix.csv`);
 console.log(`  ${providers.length} providers · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);
