@@ -1,0 +1,76 @@
+id: paas-build
+name: paas.build
+category: payments-billing
+homepage: https://paas.build
+summary: Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.
+submitted_by: vendor
+
+tags:
+  - payments
+  - payfac
+  - checkout
+
+entrypoints:
+  docs: https://paas.build/agents
+  llms_txt: https://paas.build/llms.txt
+  pricing: https://paas.build/pricing
+  agent_docs: https://paas.build/SKILL.md
+  mcp_official: https://github.com/UNIPaaS/paas-build-mcp
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://paas.build/accept-payments-without-a-company
+    verified: "2026-07-10"
+    notes: Onboarding is agent- or API-driven via progressive KYB with no sales contact; individuals/sole traders are live immediately, capped at £1,500 until full verification (companies lift the cap to £2,500 after identity + document checks). UK/EU/US-registered businesses only.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://paas.build/SKILL.md
+    verified: "2026-07-10"
+    notes: The go_live tool/endpoint returns sandbox and production vendor access tokens headlessly — "No dashboard needed".
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: supported
+    evidence: https://paas.build/SKILL.md
+    verified: "2026-07-10"
+    notes: 'SKILL.md token rules: "Access tokens are scoped per vendor (checkout_create). Never expose platform keys - there are none client-side."'
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: supported
+    evidence: https://paas.build/SKILL.md
+    verified: "2026-07-10"
+    notes: Form is separate sandbox vendor accounts — go_live creates sandbox and production accounts in one call, each with its own access token; test cards documented ("Sandbox is free to play with").
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://paas.build/pricing
+    verified: "2026-07-10"
+    notes: No monthly fee, no setup fee; a single published 3.9% per-transaction rate; sandbox is free.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://paas.build/what-is-progressive-kyb
+    verified: "2026-07-10"
+    notes: Going live is the same self-serve progressive-KYB flow, no sales contact or manual approval wait; transaction caps apply until verification steps complete.
+
+  usage_dashboard:
+    status: unknown
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: supported
+    evidence: https://paas.build/SKILL.md
+    verified: "2026-07-10"
+    notes: 'Published agent policy (SKILL.md): "If you are an AI agent reading this: this is your complete guide to taking your user''s business live on payments with paas.build. No dashboard needed - you can do everything below yourself."'
