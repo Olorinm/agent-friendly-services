@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-07-13T09:28:36.274Z",
+  "checked_at": "2026-07-15T07:25:08.638Z",
   "total": 833,
-  "ok": 824,
-  "inconclusive": 8,
-  "broken": 1,
+  "ok": 823,
+  "inconclusive": 10,
+  "broken": 0,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -674,8 +674,8 @@
     },
     {
       "url": "https://console.x.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "xai:entrypoints.signup",
         "xai:entrypoints.api_keys"
@@ -1114,6 +1114,14 @@
       "status": 200,
       "sources": [
         "notion:checks.versioning_policy.evidence"
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "openai:entrypoints.docs"
       ]
     },
     {
@@ -3914,7 +3922,7 @@
     {
       "url": "https://huggingface.co/join",
       "class": "ok",
-      "status": 202,
+      "status": 200,
       "sources": [
         "hugging-face:entrypoints.signup",
         "hugging-face:checks.self_serve_signup.evidence"
@@ -4711,14 +4719,6 @@
         "minimax:entrypoints.api_keys",
         "minimax:checks.self_serve_signup.evidence",
         "minimax:checks.api_key_self_serve.evidence"
-      ]
-    },
-    {
-      "url": "https://platform.openai.com/docs",
-      "class": "broken",
-      "status": 404,
-      "sources": [
-        "openai:entrypoints.docs"
       ]
     },
     {
@@ -6985,8 +6985,8 @@
     },
     {
       "url": "https://x.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "xai:homepage"
       ]
