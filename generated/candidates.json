@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-07-15T07:28:13.732Z",
-  "count": 1,
+  "generated_at": "2026-07-15T07:28:40.554Z",
+  "count": 2,
   "candidates": [
     {
       "id": "paas-build",
@@ -16,6 +16,31 @@
         "pricing": "https://paas.build/pricing",
         "agent_docs": "https://paas.build/SKILL.md",
         "mcp_official": "https://github.com/UNIPaaS/paas-build-mcp"
+      },
+      "m1": null
+    },
+    {
+      "id": "xquik",
+      "name": "Xquik",
+      "category": "web-search-data",
+      "homepage": "https://xquik.com",
+      "summary": "Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.",
+      "submitted_by": "vendor",
+      "entrypoints": {
+        "docs": "https://docs.xquik.com",
+        "api_reference": "https://docs.xquik.com/api-reference/overview",
+        "openapi": "https://docs.xquik.com/openapi.yaml",
+        "llms_txt": "https://docs.xquik.com/llms.txt",
+        "changelog": "https://docs.xquik.com/changelog",
+        "pricing": "https://xquik.com/pricing",
+        "signup": "https://dashboard.xquik.com/signup",
+        "api_keys": "https://docs.xquik.com/api-reference/api-keys/create",
+        "sdks": "https://docs.xquik.com/sdks",
+        "mcp_official": "https://docs.xquik.com/mcp/overview",
+        "agent_docs": "https://docs.xquik.com/mcp/agent-handoff",
+        "webhooks": "https://docs.xquik.com/webhooks/overview",
+        "rate_limits": "https://docs.xquik.com/guides/rate-limits",
+        "errors": "https://docs.xquik.com/guides/error-handling"
       },
       "m1": null
     }

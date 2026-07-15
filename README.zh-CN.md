@@ -294,6 +294,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
 | --- | --- | --- | --- | --- |
 | [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | pending | [yaml](./data/candidates/xquik.yaml) |
 
 ## 参与贡献
 

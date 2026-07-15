@@ -292,6 +292,7 @@ Submitted, **not yet verified** — listed for transparency only ([how the pool 
 | Candidate | Category | Submitted by | M1 first-call | Claims |
 | --- | --- | --- | --- | --- |
 | [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | pending | [yaml](./data/candidates/xquik.yaml) |
 
 ## Contributing
 
