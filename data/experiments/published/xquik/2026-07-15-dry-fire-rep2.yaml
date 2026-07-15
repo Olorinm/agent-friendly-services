@@ -1,0 +1,35 @@
+provider: xquik
+category: web-search-data
+layer: dry-fire
+rep: 2
+model: sonnet
+date: '2026-07-15'
+agent_claims:
+  result: pass
+  http_status: 401
+  final_command: 'curl -s -i https://xquik.com/api/v1/account -H "x-api-key: xq_agent_pilot_dummy_key_0000000000"'
+  error_body_excerpt: '{"error":"unauthenticated","message":"Authentication required. Provide a valid API key or bearer token."}'
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      Docs list two possible header schemes (x-api-key vs Authorization: Bearer) with no explicit statement of which is
+      canonical for standard account keys vs guest/MPP keys — inferred x-api-key as primary from repeated example curl
+      commands
+    - >-
+      pricing page (xquik.com/pricing) appears JS-rendered; WebFetch could not extract payment/free-tier prerequisites,
+      left as unknown
+  human_gates:
+    - step: Sign up for a dashboard account
+      evidence: https://dashboard.xquik.com/signup
+    - step: Generate first API key via dashboard session cookie
+      evidence: https://docs.xquik.com/api-reference/api-keys/create
+    - step: Connect/re-authenticate an X account via OAuth (required for X-data/write endpoints)
+      evidence: https://docs.xquik.com/guides/error-handling
+    - step: Set up billing/subscription for paid endpoints
+      evidence: https://docs.xquik.com
+  confidence: high
+verified_independently: n/a
+num_turns: 8
+duration_ms: 52664
+total_cost_usd: 0.17411899999999997
+transcript: 2026-07-15-dry-fire-rep2.md

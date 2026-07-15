@@ -1,6 +1,6 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-07-15T07:28:40.554Z",
+  "generated_at": "2026-07-15T07:44:24.612Z",
   "count": 2,
   "candidates": [
     {
@@ -17,7 +17,13 @@
         "agent_docs": "https://paas.build/SKILL.md",
         "mcp_official": "https://github.com/UNIPaaS/paas-build-mcp"
       },
-      "m1": null
+      "m1": {
+        "verdict": "pass",
+        "passes": 2,
+        "reps": 3,
+        "date": "2026-07-15",
+        "transcript": "2026-07-15-dry-fire-rep3.md"
+      }
     },
     {
       "id": "xquik",
@@ -42,7 +48,13 @@
         "rate_limits": "https://docs.xquik.com/guides/rate-limits",
         "errors": "https://docs.xquik.com/guides/error-handling"
       },
-      "m1": null
+      "m1": {
+        "verdict": "pass",
+        "passes": 3,
+        "reps": 3,
+        "date": "2026-07-15",
+        "transcript": "2026-07-15-dry-fire-rep3.md"
+      }
     }
   ]
 }

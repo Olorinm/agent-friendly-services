@@ -293,8 +293,8 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 | 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
 | --- | --- | --- | --- | --- |
-| [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
-| [Xquik](https://xquik.com) | Web Search / Data | vendor | pending | [yaml](./data/candidates/xquik.yaml) |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
 
 ## 参与贡献
 

@@ -291,8 +291,8 @@ Submitted, **not yet verified** — listed for transparency only ([how the pool 
 
 | Candidate | Category | Submitted by | M1 first-call | Claims |
 | --- | --- | --- | --- | --- |
-| [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
-| [Xquik](https://xquik.com) | Web Search / Data | vendor | pending | [yaml](./data/candidates/xquik.yaml) |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
 
 ## Contributing
 

@@ -1,0 +1,51 @@
+provider: paas-build
+category: payments-billing
+layer: dry-fire
+rep: 2
+model: sonnet
+date: '2026-07-15'
+agent_claims:
+  result: fail
+  http_status: 502
+  final_command: >-
+    curl -sS -i -X POST https://paas.build/api/checkout -H "Content-Type: application/json" -d
+    '{"vendorId":"sk-agent-pilot-dummy-vendor-id-0000","amount":12,"currency":"GBP","description":"dry-fire verification
+    probe","env":"sandbox"}'
+  error_body_excerpt: '{"error":"checkout failed","status":401,"raw":{"statusCode":401,"message":"Unauthorized","code":401}}'
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      No REST 'list/read' endpoint exists at all — paas.build only exposes 3 POST endpoints (identify, go-live,
+      checkout); go-live is itself account creation/signup so it's off-limits for this test, leaving checkout as the
+      only crediential-consuming call.
+    - >-
+      Official docs (SKILL.md, llms-full.txt, /agents, llms.txt) never document an error-response shape or status code
+      for invalid credentials, so there is no documented 401/403 shape to match against.
+    - >-
+      Auth rejection for an invalid vendorId is returned as an outer HTTP 502 with the real 401/Unauthorized only
+      visible embedded in the JSON body ({"status":401,"raw":{...}}) — this is inconsistent with REST convention and
+      would cause naive retry-on-5xx client logic to misclassify a permanent auth failure as transient.
+    - >-
+      Confirmed via contrast tests that endpoint/method/headers/body-shape are correct: empty body gives a distinct 400
+      'vendorId and amount required', and a wrong path gives a clean 404 'not found', so the 502+embedded-401 on the
+      fake vendorId is a genuine, repeatable auth rejection and not a routing failure.
+    - >-
+      MCP server README (raw.githubusercontent.com/UNIPaaS/paas-build-mcp) contains no curl/header examples beyond
+      what's in SKILL.md; no Authorization header format is documented anywhere for the direct /api/checkout call, only
+      the vendorId in the JSON body.
+  human_gates:
+    - step: >-
+        Provide real business name, email, region and website to POST /api/go-live to create the actual
+        (immediately-live) merchant account — cannot be faked, and is out of scope for this dry-fire test under the
+        no-signup rule
+      evidence: https://paas.build/SKILL.md
+    - step: >-
+        Complete background KYB verification to lift the ~£1,500 progressive cap on the newly created account (exact
+        mechanism/steps not specified in official docs)
+      evidence: https://paas.build/SKILL.md
+  confidence: medium
+verified_independently: n/a
+num_turns: 13
+duration_ms: 186273
+total_cost_usd: 0.43645960000000006
+transcript: 2026-07-15-dry-fire-rep2.md

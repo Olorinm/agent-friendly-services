@@ -1,0 +1,56 @@
+provider: paas-build
+category: payments-billing
+layer: dry-fire
+rep: 1
+model: sonnet
+date: '2026-07-15'
+agent_claims:
+  result: pass
+  http_status: 502
+  final_command: >-
+    curl -s -i -X POST https://paas.build/api/checkout -H "Content-Type: application/json" -d
+    '{"vendorId":"sk-agent-pilot-dummy-key","amount":12,"currency":"GBP","description":"dry-fire verification
+    test","env":"sandbox"}'
+  error_body_excerpt: '{"error":"checkout failed","status":401,"raw":{"statusCode":401,"message":"Unauthorized","code":401}}'
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      No official doc (agents, llms.txt, SKILL.md, llms-full.txt, MCP repo) documents an error-response shape for
+      invalid credentials — had to infer correctness via live differential testing.
+    - >-
+      paas.build's own proxy wraps upstream auth failures in an undocumented outer HTTP 502 envelope, embedding the true
+      upstream statusCode (401) inside the JSON body instead of surfacing 401/403 directly.
+    - >-
+      No standalone GET 'list resources' endpoint is documented anywhere; the only authenticated read-equivalent is
+      create_checkout (POST), and its credential (vendorId) is only obtainable via go_live, which creates a REAL
+      merchant account — could not be exercised with a genuine credential under the no-signup rule.
+    - >-
+      An initial AI-summarized fetch of a third-party docs.unipaas.com page suggested an 'Authorization: Bearer
+      <PLATFORM_API_KEY>' header scheme; this was NOT corroborated by any paas.build-owned source and was contradicted
+      by the actual MCP server source code (no Authorization header sent) — discarded as non-official/unreliable.
+    - >-
+      Confirmed the 401 was credential-specific (not a generic malformed-request error) by comparing against a control
+      request omitting vendorId entirely, which returned a distinct 400 'vendorId and amount required'.
+  human_gates:
+    - step: >-
+        Provide real business identity (name, website, email, country/region) and invoke go_live to create a live
+        merchant account and mint vendorId/accessToken
+      evidence: https://paas.build/SKILL.md
+    - step: >-
+        Individuals/sole traders: supply identity details for progressive KYB verification in the background to lift the
+        ~£1,500 cap
+      evidence: https://paas.build/accept-payments-as-a-sole-trader
+    - step: >-
+        Companies: complete identity + incorporation document upload via the onboardingLink returned by go_live to lift
+        the cap to £2,500
+      evidence: https://paas.build/SKILL.md
+    - step: Access the merchant portal via a one-time email code (no dashboard password) to manage the live account
+      evidence: https://paas.build/accept-payments-as-a-sole-trader
+    - step: Confirm the business is registered in the UK, EU, or US (required coverage area)
+      evidence: https://paas.build/llms.txt
+  confidence: medium
+verified_independently: n/a
+num_turns: 18
+duration_ms: 161557
+total_cost_usd: 0.6152715
+transcript: 2026-07-15-dry-fire-rep1.md

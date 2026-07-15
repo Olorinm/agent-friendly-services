@@ -1,0 +1,44 @@
+provider: xquik
+category: web-search-data
+layer: dry-fire
+rep: 3
+model: sonnet
+date: '2026-07-15'
+agent_claims:
+  result: pass
+  http_status: 401
+  final_command: >-
+    curl -s -i -X GET "https://xquik.com/api/v1/account" -H "x-api-key:
+    xq_0000000000000000000000000000000000000000000000000000000000dead"
+  error_body_excerpt: '{"error":"unauthenticated","message":"Authentication required. Provide a valid API key or bearer token."}'
+  wrong_attempts: 0
+  friction_notes:
+    - >-
+      docs.xquik.com/llms.txt lists REST base URL as https://xquik.com/api/v1, not under docs.xquik.com — easy to miss
+      and hit docs domain by mistake
+    - >-
+      api-reference/api-keys/create page does not document signup/payment/KYC prerequisites, only key creation once
+      already authenticated
+    - >-
+      pricing page fetch returned no concrete tier/payment/API-access gating details despite llms.txt claiming /radar
+      'requires subscription'
+    - >-
+      actual 401 message text differs slightly from the error-handling guide's example message but error code and status
+      match exactly
+  human_gates:
+    - step: Create a Xquik account via dashboard signup
+      evidence: https://dashboard.xquik.com/signup
+    - step: >-
+        Authenticate to dashboard (session cookie) or obtain OAuth bearer token, then POST /api/v1/api-keys to generate
+        a real API key (fullKey shown only once)
+      evidence: https://docs.xquik.com/api-reference/api-keys/create
+    - step: >-
+        Possibly subscribe to a paid plan — llms.txt states some endpoints 'require subscription'; exact gating for
+        /account unconfirmed from public pricing page
+      evidence: https://xquik.com/pricing
+  confidence: high
+verified_independently: n/a
+num_turns: 8
+duration_ms: 68956
+total_cost_usd: 0.18669880000000003
+transcript: 2026-07-15-dry-fire-rep3.md

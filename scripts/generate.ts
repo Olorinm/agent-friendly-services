@@ -54,12 +54,12 @@ if (fs.existsSync(PUBLISHED_DIR)) {
 // Dry-fire runs carry no credential, so the pass evidence is the transcript
 // itself (a documented auth-error from the correct endpoint), reviewed before
 // publication — docs/publication-protocol.md.
-function m1Status(pid: string): { verdict: 'pass' | 'fail'; date: string; transcript: string } | null {
+function m1Status(pid: string): { verdict: 'pass' | 'fail'; passes: number; reps: number; date: string; transcript: string } | null {
   const runs = dryFireRunsByProvider.get(pid) ?? [];
   if (!runs.length) return null;
   const passes = runs.filter((r) => r.agent_claims?.result === 'pass').length;
   const latest = [...runs].sort((a, b) => a.date.localeCompare(b.date)).at(-1)!;
-  return { verdict: passes * 2 > runs.length ? 'pass' : 'fail', date: latest.date, transcript: latest.transcript };
+  return { verdict: passes * 2 > runs.length ? 'pass' : 'fail', passes, reps: runs.length, date: latest.date, transcript: latest.transcript };
 }
 
 const ROUTE_ORDER = ['http', 'cli', 'mcp'];
@@ -498,7 +498,7 @@ ${list.map((p) => awesomeEntry(p, labels)).join('\n')}`;
 function candidateRow(p: Provider): string {
   const m1 = m1Status(p.id);
   const m1Cell = m1
-    ? `[${m1.verdict === 'pass' ? '✓ pass' : '✗ fail'} · ${m1.date}](./data/experiments/published/${p.id}/${m1.transcript})`
+    ? `[${m1.verdict === 'pass' ? '✓ pass' : '✗ fail'} (${m1.passes}/${m1.reps}) · ${m1.date}](./data/experiments/published/${p.id}/${m1.transcript})`
     : 'pending';
   return `| [${p.name}](${p.homepage}) | ${catName(p.category)} | ${p.submitted_by} | ${m1Cell} | [yaml](./data/candidates/${p.id}.yaml) |`;
 }
