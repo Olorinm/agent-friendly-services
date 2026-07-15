@@ -26,7 +26,7 @@ const candidates = loadCandidates()
 // Agent runs (published subset of experiment results; docs/agent-verification.md)
 // ---------------------------------------------------------------------------
 interface AgentRun {
-  provider: string; layer: string; route?: string; task?: string; rep: number;
+  provider: string; layer: string; route?: string; milestone?: string; task?: string; rep: number;
   model: string; date: string; contaminated?: string; run_error?: string;
   agent_claims: { result?: string; wrong_attempts?: number; friction_notes?: string[] } | null;
   verified_independently: boolean | 'n/a'; num_turns: number; duration_ms: number;
@@ -63,15 +63,30 @@ function m1Status(pid: string): { verdict: 'pass' | 'fail'; date: string; transc
 }
 
 const ROUTE_ORDER = ['http', 'cli', 'mcp'];
+// Task-ladder milestones (data/experiments/tasks/): runs recorded before the
+// ladder existed carry no milestone field and count as "core".
+const MILESTONE_ORDER = ['core', 'lifecycle', 'billing'];
+const runMilestone = (r: AgentRun) => r.milestone ?? 'core';
 const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 
 interface RouteAgg {
   route: string; reps: number; passes: number; majorityPass: boolean; medTurns: number;
   secs: [number, number]; cost: [number, number]; models: string[]; date: string; runs: AgentRun[];
 }
-function routeAggs(pid: string): RouteAgg[] {
+function milestonesOf(pid: string): string[] {
+  const seen = [...new Set((agentRunsByProvider.get(pid) ?? []).map(runMilestone))];
+  return seen.sort((a, b) => {
+    const ia = MILESTONE_ORDER.indexOf(a); const ib = MILESTONE_ORDER.indexOf(b);
+    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib) || a.localeCompare(b);
+  });
+}
+
+// Aggregates one provider's runs for one route on one milestone. Badges, the
+// 🏆 marker and the route-comparison table are all pinned to the "core"
+// milestone so they stay comparable as ladders grow.
+function routeAggs(pid: string, milestoneId = 'core'): RouteAgg[] {
   return ROUTE_ORDER.flatMap((route) => {
-    const rs = (agentRunsByProvider.get(pid) ?? []).filter((r) => r.route === route);
+    const rs = (agentRunsByProvider.get(pid) ?? []).filter((r) => r.route === route && runMilestone(r) === milestoneId);
     if (!rs.length) return [];
     const passes = rs.filter((r) => r.verified_independently === true && r.agent_claims?.result === 'pass').length;
     const secs = rs.map((r) => Math.round(r.duration_ms / 1000));
@@ -347,11 +362,10 @@ const totalUnknown = providers.reduce((n, p) => n + unknownChecks(p).length, 0);
 // Per-provider "Agent runs" table (fact sheets + agent-runs.md). linkBase: path
 // prefix from the rendering file to the repo root.
 function agentRunsTable(p: Provider, linkBase: string): string {
-  const aggs = routeAggs(p.id);
-  if (!aggs.length) return '';
-  const rows = aggs.map((a) =>
-    `| real · ${a.route} | ${a.passes}/${a.reps} pass | ${a.medTurns} | ${a.secs[0]}–${a.secs[1]} s | $${a.cost[0].toFixed(2)}–$${a.cost[1].toFixed(2)} | ${a.models.join(', ')} | ${a.date} | ${a.runs.map((r, i) => `[${i + 1}](${linkBase}data/experiments/published/${p.id}/${r.transcript})`).join(' ')} |`);
-  return `| Layer · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
+  const rows = milestonesOf(p.id).flatMap((mid) => routeAggs(p.id, mid).map((a) =>
+    `| ${mid} · ${a.route} | ${a.passes}/${a.reps} pass | ${a.medTurns} | ${a.secs[0]}–${a.secs[1]} s | $${a.cost[0].toFixed(2)}–$${a.cost[1].toFixed(2)} | ${a.models.join(', ')} | ${a.date} | ${a.runs.map((r, i) => `[${i + 1}](${linkBase}data/experiments/published/${p.id}/${r.transcript})`).join(' ')} |`));
+  if (!rows.length) return '';
+  return `| Milestone · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 ${rows.join('\n')}`;
 }
@@ -385,7 +399,7 @@ ${providers
 **Links:** ${entrypointLinks(p)}
 
 ${checksBlock(p)}
-${agentRunsTable(p, '../') ? `\n**Agent runs** — a real agent ran this category's [pinned task](../data/experiments/tasks/${p.category}.yaml), independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#${p.id})):\n\n${agentRunsTable(p, '../')}\n` : ''}${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
+${agentRunsTable(p, '../') ? `\n**Agent runs** — a real agent climbed this category's [task ladder](../data/experiments/tasks/${p.category}.yaml), every result independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#${p.id})):\n\n${agentRunsTable(p, '../')}\n` : ''}${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
   })
   .join('\n')}
 `;
@@ -405,13 +419,13 @@ const agentRunsMd = `<!-- GENERATED FILE — do not edit. Run \`npm run generate
 
 # Agent Runs
 
-Real AI agents executing each category's [pinned realistic task](../data/experiments/tasks/) against the live service — unattended, in a pinned clean environment, with the runner (not the agent) verifying the result through the provider's API. Method, environment and hard rules: [agent-verification.md](../docs/agent-verification.md).
+Real AI agents climbing each category's [pinned task ladder](../data/experiments/tasks/) against the live service — unattended, in a pinned clean environment, with the runner (not the agent) verifying every result through the provider's API. Milestones: **core** = the category's basic realistic task · **lifecycle** = set up → use → evolve → tear down · **billing** = machine-readable usage/billing reality. Method, environment and hard rules: [agent-verification.md](../docs/agent-verification.md).
 
-Every run publishes its model, date, metrics and full transcript. Results expire after ${STALE_DAYS} days. Providers can dispute any run by opening an issue — we rerun under the same pinned conditions.
+Every run publishes its model, date, metrics and full transcript ([what gets published, and how](../docs/publication-protocol.md)). Results expire after ${STALE_DAYS} days. Providers can dispute any run by opening an issue — we rerun under the same pinned conditions.
 
 ${measured.length === 0 ? 'No published runs yet — the first provisioned batch is in progress.\n' : `## Route comparison
 
-The same task, over each way an agent can reach the provider (**http** = official docs + raw API calls, the universal baseline · **cli** = the provider's official CLI · **mcp** = the provider's official MCP server). The route-vs-baseline delta shows whether a provider's agent tooling actually pays off. 🏆 = best measured result in its category (majority-pass on the baseline route, fewest median turns) — it changes hands automatically whenever a better run lands.
+The same **core-milestone** task, over each way an agent can reach the provider (**http** = official docs + raw API calls, the universal baseline · **cli** = the provider's official CLI · **mcp** = the provider's official MCP server). The route-vs-baseline delta shows whether a provider's agent tooling actually pays off. 🏆 = best measured result in its category (majority-pass on the baseline route, fewest median turns) — it changes hands automatically whenever a better run lands.
 
 | Provider | http (baseline) | cli | mcp |
 | --- | --- | --- | --- |

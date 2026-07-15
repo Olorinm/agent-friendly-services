@@ -1,14 +1,17 @@
 category: commerce-marketing
-task: create-product-and-confirm
-scenario: >
-  In the designated development store, create a product titled "{{NONCE}}" via
-  the provider's documented API, read it back, and report its id.
 provisioning:
   - element: development store (never a live store)
     delivery: created by human beforehand
   - element: API access token for that store
     delivery: curl config file
-verification:
-  method: state
-  how: runner lists products via the API and requires one titled exactly the nonce
+milestones:
+  - id: core
+    task: create-product-and-confirm
+    scenario: >
+      In the designated development store, create a product titled "{{NONCE}}" via
+      the provider's documented API, read it back, and report its id.
+    verification:
+      method: state
+      how: runner lists products via the API and requires one titled exactly the nonce
+      expect: nonce
 cleanup: runner deletes the created product

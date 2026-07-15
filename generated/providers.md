@@ -460,13 +460,13 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 - **Supported:** [Self-serve signup](https://github.com/signup) · [Self-serve API keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [OAuth](https://docs.github.com/apps/oauth-apps) · [Scoped tokens](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Token revocation](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [Free tier / trial](https://github.com/pricing) · [Self-serve upgrade](https://github.com/pricing) · [Usage dashboard](https://docs.github.com/billing) · [Versioning policy](https://docs.github.com/rest/about-the-rest-api/api-versions) · [Automation permitted](https://docs.github.com/site-policy/github-terms/github-terms-of-service)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `idempotency`
 
-**Agent runs** — a real agent ran this category's [pinned task](../data/experiments/tasks/developer-tools.yaml), independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#github)):
+**Agent runs** — a real agent climbed this category's [task ladder](../data/experiments/tasks/developer-tools.yaml), every result independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#github)):
 
-| Layer · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
+| Milestone · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| real · http | 3/3 pass | 8 | 39–85 s | $0.19–$0.33 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-http-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-http-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-http-rep3.md) |
-| real · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
-| real · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
+| core · http | 3/3 pass | 8 | 39–85 s | $0.19–$0.33 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-http-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-http-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-http-rep3.md) |
+| core · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
+| core · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
 
 > Multi-product platform; this entry covers the core developer platform only (see scope).
 

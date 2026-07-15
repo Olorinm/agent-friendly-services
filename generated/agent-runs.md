@@ -2,13 +2,13 @@
 
 # Agent Runs
 
-Real AI agents executing each category's [pinned realistic task](../data/experiments/tasks/) against the live service — unattended, in a pinned clean environment, with the runner (not the agent) verifying the result through the provider's API. Method, environment and hard rules: [agent-verification.md](../docs/agent-verification.md).
+Real AI agents climbing each category's [pinned task ladder](../data/experiments/tasks/) against the live service — unattended, in a pinned clean environment, with the runner (not the agent) verifying every result through the provider's API. Milestones: **core** = the category's basic realistic task · **lifecycle** = set up → use → evolve → tear down · **billing** = machine-readable usage/billing reality. Method, environment and hard rules: [agent-verification.md](../docs/agent-verification.md).
 
-Every run publishes its model, date, metrics and full transcript. Results expire after 180 days. Providers can dispute any run by opening an issue — we rerun under the same pinned conditions.
+Every run publishes its model, date, metrics and full transcript ([what gets published, and how](../docs/publication-protocol.md)). Results expire after 180 days. Providers can dispute any run by opening an issue — we rerun under the same pinned conditions.
 
 ## Route comparison
 
-The same task, over each way an agent can reach the provider (**http** = official docs + raw API calls, the universal baseline · **cli** = the provider's official CLI · **mcp** = the provider's official MCP server). The route-vs-baseline delta shows whether a provider's agent tooling actually pays off. 🏆 = best measured result in its category (majority-pass on the baseline route, fewest median turns) — it changes hands automatically whenever a better run lands.
+The same **core-milestone** task, over each way an agent can reach the provider (**http** = official docs + raw API calls, the universal baseline · **cli** = the provider's official CLI · **mcp** = the provider's official MCP server). The route-vs-baseline delta shows whether a provider's agent tooling actually pays off. 🏆 = best measured result in its category (majority-pass on the baseline route, fewest median turns) — it changes hands automatically whenever a better run lands.
 
 | Provider | http (baseline) | cli | mcp |
 | --- | --- | --- | --- |
@@ -22,11 +22,11 @@ Cell format: verdict · passes/reps · median turns · cost per run.
 
 Task: `file-issue-and-confirm` ([definition](../data/experiments/tasks/developer-tools.yaml)) · [provider facts](./providers.md#github)
 
-| Layer · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
+| Milestone · route | Verdict | Median turns | Wall time | Cost/run | Model | Date | Transcripts |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| real · http | 3/3 pass | 8 | 39–85 s | $0.19–$0.33 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-http-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-http-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-http-rep3.md) |
-| real · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
-| real · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
+| core · http | 3/3 pass | 8 | 39–85 s | $0.19–$0.33 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-http-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-http-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-http-rep3.md) |
+| core · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
+| core · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
 
 **Run notes** (agent-reported, verbatim):
 
