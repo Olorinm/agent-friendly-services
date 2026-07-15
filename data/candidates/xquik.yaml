@@ -1,0 +1,85 @@
+id: xquik
+name: Xquik
+category: web-search-data
+homepage: https://xquik.com
+summary: Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.
+submitted_by: vendor
+
+tags:
+  - x-data
+  - social-media
+  - automation
+
+entrypoints:
+  docs: https://docs.xquik.com
+  api_reference: https://docs.xquik.com/api-reference/overview
+  openapi: https://docs.xquik.com/openapi.yaml
+  llms_txt: https://docs.xquik.com/llms.txt
+  changelog: https://docs.xquik.com/changelog
+  pricing: https://xquik.com/pricing
+  signup: https://dashboard.xquik.com/signup
+  api_keys: https://docs.xquik.com/api-reference/api-keys/create
+  sdks: https://docs.xquik.com/sdks
+  mcp_official: https://docs.xquik.com/mcp/overview
+  agent_docs: https://docs.xquik.com/mcp/agent-handoff
+  webhooks: https://docs.xquik.com/webhooks/overview
+  rate_limits: https://docs.xquik.com/guides/rate-limits
+  errors: https://docs.xquik.com/guides/error-handling
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://dashboard.xquik.com/signup
+    verified: "2026-07-10"
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.xquik.com/api-reference/api-keys/create
+    verified: "2026-07-10"
+
+  oauth_support:
+    status: supported
+    evidence: https://docs.xquik.com/oauth/overview
+    verified: "2026-07-10"
+    notes: OAuth 2.1 Authorization Code with PKCE is documented for browser-based MCP clients.
+
+  scoped_tokens:
+    status: unknown
+    notes: Public documentation does not currently describe per-key permission scopes.
+
+  token_revocation:
+    status: supported
+    evidence: https://docs.xquik.com/api-reference/api-keys/revoke
+    verified: "2026-07-10"
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No separate sandbox or test-mode credential is documented.
+
+  free_tier_or_trial:
+    status: unknown
+    notes: No no-cost API tier is documented on the current pricing page.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://docs.xquik.com/api-reference/account/subscribe
+    verified: "2026-07-10"
+
+  usage_dashboard:
+    status: unknown
+    notes: The dashboard exposes account usage, but a public evidence page has not been recorded.
+
+  idempotency:
+    status: unknown
+    notes: No general idempotency-key contract is documented.
+
+  versioning_policy:
+    status: unknown
+    notes: A versioned response contract exists, but no breaking-change or deprecation policy is documented.
+
+  automation_permitted:
+    status: unknown
+    notes: Public APIs and agent tooling exist, but the service terms have not been reviewed against this directory's automation rubric.
+
+notes:
+  - The official Streamable HTTP MCP endpoint is https://xquik.com/mcp and supports API key or OAuth authentication.
