@@ -22,7 +22,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import * as yaml from 'js-yaml';
-import { ROOT, loadProviders } from './lib.ts';
+import { ROOT, loadProviders, loadCandidates } from './lib.ts';
 
 const args = Object.fromEntries(
   process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => {
@@ -42,8 +42,10 @@ if (!['recon', 'dry-fire', 'real'].includes(layer)) throw new Error(`Unknown lay
 if (!['http', 'cli', 'mcp'].includes(route)) throw new Error(`Unknown route: ${route}`);
 if (layer !== 'real' && route !== 'http') throw new Error('Routes only apply to --layer=real');
 
-const provider = loadProviders().map((p) => p.data).find((p) => p.id === id);
-if (!provider) throw new Error(`Unknown provider id: ${id}`);
+// Candidate-pool entries are runnable too — the M1 dry-fire run over a
+// candidate is exactly what decides its promotion (docs/candidate-pool.md).
+const provider = [...loadProviders(), ...loadCandidates()].map((p) => p.data).find((p) => p.id === id);
+if (!provider) throw new Error(`Unknown provider id: ${id} (looked in data/providers/ and data/candidates/)`);
 
 const CRED_DIR = process.env.AFS_CRED_DIR ?? path.join(os.homedir(), '.afs/credentials');
 const cred = (ext: string) => path.join(CRED_DIR, `${id}.${ext}`);
@@ -76,6 +78,7 @@ const DRY_FIRE_TASK = `TASK (layer: dry-fire — no credentials available):
 1. Using ONLY official documentation (start from the docs entry point), determine the canonical first API call for this provider: the simplest documented authenticated read (list models/resources/objects, or the documented auth/token endpoint if that must come first).
 2. Construct the exact command and EXECUTE it with an obviously-fake credential (e.g. "sk-agent-pilot-dummy-key", or the provider's documented credential format with dummy values).
 3. PASS means: the response is the provider's DOCUMENTED authentication-failure for an invalid credential (e.g. 401/403 with the documented JSON error shape) coming from the CORRECT endpoint — proving your endpoint, method, headers and request shape are right. A 404, an HTML error page, a routing error, or a connection failure is a FAIL.
+3b. EXCEPTION — credential-less APIs: if the documentation states the basic endpoints need NO credential at all (fully public, or pay-per-call schemes like x402 where auth IS the payment handshake), skip the fake credential and instead EXECUTE the simplest documented harmless read (health, catalog, list). PASS means the DOCUMENTED response from the correct endpoint (a 2xx, or for x402 the documented 402-with-payment-requirements). Record which variant you used in friction_notes.
 4. If the endpoint cannot even be constructed without a per-account resource (a store domain, a cluster URL, a tenant id, ...), record that explicitly — result "blocked".
 5. Also list every step a brand-new user must have a human perform to get a real working credential, each with an official evidence URL.
 

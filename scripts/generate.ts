@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as yaml from 'js-yaml';
-import { ROOT, GENERATED_DIR, loadFields, loadCategories, loadProviders, daysSince, type Provider, type Check } from './lib.ts';
+import { ROOT, GENERATED_DIR, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
 
 const STALE_DAYS = 180;
 const REPO = 'Olorinm/agent-friendly-services';
@@ -14,6 +14,11 @@ const RAW_JSON = `https://raw.githubusercontent.com/${REPO}/main/generated/provi
 const fields = loadFields();
 const categories = loadCategories();
 const providers = loadProviders()
+  .map((p) => p.data)
+  .sort((a, b) => a.id.localeCompare(b.id));
+// Candidate pool: same schema, zero verification — rendered separately and
+// never mixed into providers.json/matrix (docs/candidate-pool.md).
+const candidates = loadCandidates()
   .map((p) => p.data)
   .sort((a, b) => a.id.localeCompare(b.id));
 
@@ -30,15 +35,31 @@ interface AgentRun {
 const PUBLISHED_DIR = path.join(ROOT, 'data/experiments/published');
 const AGENT_RUNS = './generated/agent-runs.md';
 const agentRunsByProvider = new Map<string, AgentRun[]>();
+const dryFireRunsByProvider = new Map<string, AgentRun[]>();
 if (fs.existsSync(PUBLISHED_DIR)) {
   for (const pid of fs.readdirSync(PUBLISHED_DIR)) {
     const dir = path.join(PUBLISHED_DIR, pid);
     if (!fs.statSync(dir).isDirectory()) continue;
-    const runs = fs.readdirSync(dir).filter((f) => f.endsWith('.yaml'))
+    const all = fs.readdirSync(dir).filter((f) => f.endsWith('.yaml'))
       .map((f) => yaml.load(fs.readFileSync(path.join(dir, f), 'utf8')) as AgentRun)
-      .filter((r) => r.layer === 'real' && !r.contaminated && !r.run_error && daysSince(r.date) <= STALE_DAYS);
-    if (runs.length) agentRunsByProvider.set(pid, runs);
+      .filter((r) => !r.contaminated && !r.run_error && daysSince(r.date) <= STALE_DAYS);
+    const real = all.filter((r) => r.layer === 'real');
+    const dryFire = all.filter((r) => r.layer === 'dry-fire');
+    if (real.length) agentRunsByProvider.set(pid, real);
+    if (dryFire.length) dryFireRunsByProvider.set(pid, dryFire);
   }
+}
+
+// M1 (first-call / dry-fire) verdict: majority over published dry-fire reps.
+// Dry-fire runs carry no credential, so the pass evidence is the transcript
+// itself (a documented auth-error from the correct endpoint), reviewed before
+// publication — docs/publication-protocol.md.
+function m1Status(pid: string): { verdict: 'pass' | 'fail'; date: string; transcript: string } | null {
+  const runs = dryFireRunsByProvider.get(pid) ?? [];
+  if (!runs.length) return null;
+  const passes = runs.filter((r) => r.agent_claims?.result === 'pass').length;
+  const latest = [...runs].sort((a, b) => a.date.localeCompare(b.date)).at(-1)!;
+  return { verdict: passes * 2 > runs.length ? 'pass' : 'fail', date: latest.date, transcript: latest.transcript };
 }
 
 const ROUTE_ORDER = ['http', 'cli', 'mcp'];
@@ -184,6 +205,28 @@ const jsonOut = {
   })),
 };
 fs.writeFileSync(path.join(GENERATED_DIR, 'providers.json'), JSON.stringify(jsonOut, null, 2) + '\n');
+
+// ---------------------------------------------------------------------------
+// generated/candidates.json — the unverified pool, deliberately a SEPARATE
+// file so providers.json consumers (MCP server, agents) never ingest
+// unverified claims by accident.
+// ---------------------------------------------------------------------------
+const candidatesOut = {
+  description: 'Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.',
+  generated_at: new Date().toISOString(),
+  count: candidates.length,
+  candidates: candidates.map((p) => ({
+    id: p.id,
+    name: p.name,
+    category: p.category,
+    homepage: p.homepage,
+    summary: p.summary,
+    submitted_by: p.submitted_by,
+    entrypoints: p.entrypoints,
+    m1: m1Status(p.id),
+  })),
+};
+fs.writeFileSync(path.join(GENERATED_DIR, 'candidates.json'), JSON.stringify(candidatesOut, null, 2) + '\n');
 
 // ---------------------------------------------------------------------------
 // generated/matrix.csv
@@ -337,7 +380,7 @@ ${providers
 
 > ${p.summary}
 
-**Category:** ${catName(p.category)}${p.scope ? ` · **Scope:** ${p.scope}` : ''}${b.length ? ` · ${b.map((x) => `\`${x}\``).join(' ')}` : ''}
+**Category:** ${catName(p.category)}${p.scope ? ` · **Scope:** ${p.scope}` : ''}${p.submitted_by === 'vendor' ? ' · *vendor-submitted*' : ''}${b.length ? ` · ${b.map((x) => `\`${x}\``).join(' ')}` : ''}
 
 **Links:** ${entrypointLinks(p)}
 
@@ -411,11 +454,12 @@ function awesomeLinks(p: Provider, allFactsLabel: string): string {
   return parts.join(' · ');
 }
 
-function awesomeEntry(p: Provider, labels: { allFacts: string; verified: string }): string {
+function awesomeEntry(p: Provider, labels: { allFacts: string; verified: string; vendor: string }): string {
   const summary = p.summary.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
   const crown = topMeasured.get(p.category) === p.id ? ' 🏆' : '';
   const badge = isAgentVerified(p.id) ? ` · **[🤖✓ ${labels.verified}](${AGENT_RUNS}#${p.id})**` : '';
-  return `- **[${p.name}](${p.entrypoints.docs})**${crown} — ${summary}. ${awesomeLinks(p, labels.allFacts)}${badge}`;
+  const vendor = p.submitted_by === 'vendor' ? ` · *${labels.vendor}*` : '';
+  return `- **[${p.name}](${p.entrypoints.docs})**${crown} — ${summary}. ${awesomeLinks(p, labels.allFacts)}${badge}${vendor}`;
 }
 
 // GitHub heading slugs: lowercase, strip punctuation, each space becomes one hyphen.
@@ -423,7 +467,7 @@ const toc = activeCategories
   .map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s/g, '-')})`)
   .join(' · ');
 
-function categorySections(labels: { allFacts: string; verified: string }): string {
+function categorySections(labels: { allFacts: string; verified: string; vendor: string }): string {
   return activeCategories
     .map((cat) => {
       const list = providers.filter((p) => p.category === cat.id);
@@ -433,6 +477,41 @@ ${list.map((p) => awesomeEntry(p, labels)).join('\n')}`;
     })
     .join('\n\n');
 }
+
+// Candidate-pool section: identity + M1 verdict only. Vendor claims stay in
+// the candidate's YAML until promotion — rendering them here would make them
+// look endorsed.
+function candidateRow(p: Provider): string {
+  const m1 = m1Status(p.id);
+  const m1Cell = m1
+    ? `[${m1.verdict === 'pass' ? '✓ pass' : '✗ fail'} · ${m1.date}](./data/experiments/published/${p.id}/${m1.transcript})`
+    : 'pending';
+  return `| [${p.name}](${p.homepage}) | ${catName(p.category)} | ${p.submitted_by} | ${m1Cell} | [yaml](./data/candidates/${p.id}.yaml) |`;
+}
+
+const candidatePoolEn = candidates.length
+  ? `## Candidate pool
+
+Submitted, **not yet verified** — listed for transparency only ([how the pool works](./docs/candidate-pool.md)). An entry is promoted into the index above once an agent passes the M1 first-call run against it and its evidence survives review; until then its claims live only in its YAML file.
+
+| Candidate | Category | Submitted by | M1 first-call | Claims |
+| --- | --- | --- | --- | --- |
+${candidates.map(candidateRow).join('\n')}
+
+`
+  : '';
+
+const candidatePoolZh = candidates.length
+  ? `## 候选池
+
+已提交、**尚未验证** —— 仅为透明而列出（[候选池规则](./docs/candidate-pool.md)）。条目要晋升进上方正式索引，必须先通过 M1 首次调用实测、且证据经得起复核；在此之前，其声明只存在于它自己的 YAML 文件里。
+
+| 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
+| --- | --- | --- | --- | --- |
+${candidates.map(candidateRow).join('\n')}
+
+`
+  : '';
 
 const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
 
@@ -458,7 +537,7 @@ Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details]
 
 **🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}#providers) · measured runs & route comparison: [agent runs](${AGENT_RUNS}) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
 
-**🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence; promotional PRs are declined ([rules](./docs/contributing.md)).
+**🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence. New services enter the [candidate pool](./docs/candidate-pool.md) and are promoted only after a measured agent run — claims are tested, not argued ([rules](./docs/contributing.md)).
 
 <details open>
 <summary><b>Capability matrix</b> — all ${providers.length} providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
@@ -471,9 +550,9 @@ ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
 ${toc}
 
-${categorySections({ allFacts: 'all facts →', verified: 'agent-verified' })}
+${categorySections({ allFacts: 'all facts →', verified: 'agent-verified', vendor: 'vendor-submitted' })}
 
-## Contributing
+${candidatePoolEn}## Contributing
 
 One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **${totalUnknown} open \`unknown\`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [\`docs/contributing.md\`](./docs/contributing.md).
 
@@ -520,7 +599,7 @@ curl -s ${RAW_JSON}
 
 **🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}#providers) · 实测运行与路线对比：[agent runs](${AGENT_RUNS}) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
 
-**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
+**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据。新服务先进入[候选池](./docs/candidate-pool.md)，通过 agent 实测后才晋升 —— 声明靠实测说话（[规则](./docs/contributing.md)）。
 
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
@@ -535,9 +614,9 @@ ${matrixTables(DETAILS, (name) => `**${name}**`)}
 
 ${toc}
 
-${categorySections({ allFacts: '全部事实 →', verified: '实测验证' })}
+${categorySections({ allFacts: '全部事实 →', verified: '实测验证', vendor: '厂商提交' })}
 
-## 参与贡献
+${candidatePoolZh}## 参与贡献
 
 一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **${totalUnknown} 个待查 \`unknown\`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[\`docs/contributing.md\`](./docs/contributing.md)。
 
@@ -560,5 +639,5 @@ npm run validate, and open a small PR.
 
 fs.writeFileSync(path.join(ROOT, 'README.zh-CN.md'), readmeZh);
 
-console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/matrix.csv, generated/agent-runs.md`);
-console.log(`  ${providers.length} providers · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);
+console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/candidates.json, generated/matrix.csv, generated/agent-runs.md`);
+console.log(`  ${providers.length} providers · ${candidates.length} candidates · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);

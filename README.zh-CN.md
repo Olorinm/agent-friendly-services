@@ -26,7 +26,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 **🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](./generated/providers.md#providers) · 实测运行与路线对比：[agent runs](./generated/agent-runs.md) · 表格版：[`matrix.csv`](./generated/matrix.csv)。
 
-**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据；推广性 PR 会被拒绝（[规则](./docs/contributing.md)）。
+**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据。新服务先进入[候选池](./docs/candidate-pool.md)，通过 agent 实测后才晋升 —— 声明靠实测说话（[规则](./docs/contributing.md)）。
 
 > 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
 
@@ -193,7 +193,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 - **[MiniMax](https://platform.minimax.io/docs)** — MiniMax text, speech, video and music models via the international platform API, with an official MCP server. [API](https://platform.minimax.io/docs/api-reference) · [MCP](https://github.com/MiniMax-AI/MiniMax-MCP) · [全部事实 →](./generated/providers.md#minimax)
 - **[Mistral AI](https://docs.mistral.ai)** — European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys. [API](https://docs.mistral.ai/api) · [llms.txt](https://docs.mistral.ai/llms.txt) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [全部事实 →](./generated/providers.md#mistral)
 - **[Moonshot AI (Kimi)](https://platform.kimi.ai/docs)** — Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli). [API](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli) · [全部事实 →](./generated/providers.md#moonshot)
-- **[OpenAI](https://platform.openai.com/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [全部事实 →](./generated/providers.md#openai)
+- **[OpenAI](https://developers.openai.com/api/docs)** — GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem. [API](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [全部事实 →](./generated/providers.md#openai)
 - **[OpenRouter](https://openrouter.ai/docs)** — Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt. [API](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [全部事实 →](./generated/providers.md#openrouter)
 - **[Alibaba Qwen (Model Studio)](https://www.alibabacloud.com/help/en/model-studio/)** — Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code). [API](https://www.alibabacloud.com/help/en/model-studio/models) · [CLI](https://github.com/QwenLM/qwen-code) · [全部事实 →](./generated/providers.md#qwen)
 - **[Replicate](https://replicate.com/docs)** — Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI. [API](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [CLI](https://github.com/replicate/cli) · [全部事实 →](./generated/providers.md#replicate)

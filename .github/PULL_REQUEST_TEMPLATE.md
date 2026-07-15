@@ -4,7 +4,7 @@
 
 ## What changed
 
-- [ ] Added a new provider
+- [ ] Added a new provider — **file goes in `data/candidates/`** ([candidate pool](../docs/candidate-pool.md))
 - [ ] Added or fixed entrypoint URLs
 - [ ] Resolved `unknown` checks
 - [ ] Fixed a broken link

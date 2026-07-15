@@ -55,14 +55,19 @@ documented limitation. "I couldn't find it" is `unknown`, not `unsupported`.
 
 ## Inclusion rules
 
-1. Hosted service with an account system and an API surface. Libraries,
-   frameworks, and self-hosted-only software don't qualify.
+1. Hosted service with an API surface and a self-serve access path — an
+   account system, or an agent-native pay-per-call scheme (e.g. x402) for
+   account-less services. Libraries, frameworks, and self-hosted-only software
+   don't qualify.
 2. Entries are named at product precision: `Docker Hub`, not `Docker`.
 3. Multi-product giants (AWS, GCP, Azure) need a `scope` field declaring which
    surface the entry covers — honest "all partial" rows carry no information.
    They are intentionally excluded from the seed set.
 4. Renames/acquisitions: keep the id, add `aliases`. Dead services: set
    `archived: true` with a reason — history stays.
+5. New services enter through the [candidate pool](./candidate-pool.md)
+   (`data/candidates/`) and are promoted into the index only after a passing
+   M1 agent run plus an evidence review.
 
 ## Related projects (and why we don't duplicate them)
 
