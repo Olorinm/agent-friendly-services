@@ -1,16 +1,19 @@
 category: code-execution
-task: run-code-in-sandbox
-scenario: >
-  Using the provider's documented API, start a sandbox/session, execute a
-  program that prints exactly "{{NONCE}}", capture the output, and report the
-  sandbox/session id. For browser providers, the variant is: open
-  https://example.com and return the page title plus the session id.
 provisioning:
   - element: API key
     delivery: curl config file
-verification:
-  method: state
-  how: runner checks the reported session id exists (or existed) via the provider's session/list API
+milestones:
+  - id: core
+    task: run-code-in-sandbox
+    scenario: >
+      Using the provider's documented API, start a sandbox/session, execute a
+      program that prints exactly "{{NONCE}}", capture the output, and report the
+      sandbox/session id. For browser providers, the variant is: open
+      https://example.com and return the page title plus the session id.
+    verification:
+      method: state
+      how: runner checks the reported session id exists (or existed) via the provider's session/list API
+      expect: nonce
+    provider_overrides:
+      browserbase: variant browser session — page title of https://example.com
 cleanup: agent must terminate the sandbox; runner verifies termination and force-kills otherwise
-provider_overrides:
-  browserbase: variant browser session — page title of https://example.com

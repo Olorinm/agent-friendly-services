@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Ajv from 'ajv';
-import { ROOT, loadFields, loadCategories, loadProviders } from './lib.ts';
+import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates } from './lib.ts';
 
 const errors: Map<string, string[]> = new Map();
 
@@ -42,11 +42,15 @@ const categoryIds = new Set(categories.map((c) => c.id));
 const ajv = new Ajv({ allErrors: true });
 const validateSchema = ajv.compile(schema);
 
+// Candidate-pool files (data/candidates/) follow the exact same schema and
+// rules — what makes them candidates is only that nobody has verified the
+// claims yet (docs/candidate-pool.md). Ids must be unique across both pools.
 const providers = loadProviders();
+const candidates = loadCandidates();
 const seenIds = new Map<string, string>();
 const today = new Date().toISOString().slice(0, 10);
 
-for (const { relFile, raw, data } of providers) {
+for (const { relFile, raw, data } of [...providers, ...candidates]) {
   // --- raw-text lint: YAML traps -------------------------------------------
   for (const [lineNo, line] of raw.split('\n').entries()) {
     const bareBool = line.match(/^\s*(status|archived)\s*:\s*(yes|no|on|off|Yes|No|True|False)\s*(#.*)?$/);
@@ -129,6 +133,7 @@ if (errors.size > 0) {
   console.error(`\n✗ ${count} error(s) in ${errors.size} file(s).`);
   process.exit(1);
 } else {
-  const nChecks = providers.reduce((n, p) => n + Object.keys(p.data.checks ?? {}).length, 0);
-  console.log(`✓ ${providers.length} providers, ${nChecks} checks, 0 errors.`);
+  const nChecks = [...providers, ...candidates].reduce((n, p) => n + Object.keys(p.data.checks ?? {}).length, 0);
+  const cand = candidates.length ? ` + ${candidates.length} candidate(s)` : '';
+  console.log(`✓ ${providers.length} providers${cand}, ${nChecks} checks, 0 errors.`);
 }

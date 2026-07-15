@@ -1,17 +1,114 @@
 category: databases
-task: create-insert-query
-scenario: >
-  Create a collection/table named "afs_{{NONCE}}", insert 3 records (one of
-  which contains the value "{{NONCE}}"), then query that record back and report
-  it.
 provisioning:
-  - element: API key
-    delivery: curl config file
-  - element: database instance (cluster/project) where the provider has no instance-free API
-    delivery: created by human beforehand; whether this is needed is itself a recorded friction fact
-verification:
-  method: state
-  how: runner queries the collection/table itself and requires the nonce record
-cleanup: runner drops the collection/table
+  - element: >-
+      data-plane credential for a throwaway instance — curl config file (http
+      route) / CLI-native env (cli route) / harness-side MCP config (mcp
+      route); "endpoint" in provision.yaml is the instance's data-plane URL.
+      For Redis-protocol services, "endpoint" is the credential-FREE URI shown
+      to the agent, and a separate "uri" key (with auth) exists only for the
+      runner's verify/reset commands — credentials never enter the prompt.
+    delivery: instance created by a human beforehand (free tiers exist across this category); reset_commands wipe afs-* artifacts between reps
+  - element: for Redis-protocol services, the official client binary (redis-cli) on PATH for the runner's verification step
+    delivery: installed on the standard measurement machine
+milestones:
+  - id: core
+    task: store-and-retrieve
+    scenario: >
+      On the provisioned empty database instance (data-plane endpoint:
+      {{provision.endpoint}}), set up storage for a notes tool: create a
+      collection (or this service's equivalent container) named exactly
+      "{{NONCE}}", store one record whose text content is exactly "{{NONCE}}",
+      read the record back, and report how a later process would fetch it
+      again.
+    verification:
+      method: state
+      how: runner lists containers / fetches the record through the provider's API and requires the nonce
+      expect: nonce
+    verify_commands:
+      qdrant: curl -s -K {{CURLRC}} "{{provision.endpoint}}/collections"
+      upstash: curl -s -K {{CURLRC}} "{{provision.endpoint}}/get/{{NONCE}}"
+      chroma: curl -s -K {{CURLRC}} "{{provision.endpoint}}/api/v2/tenants/{{provision.tenant}}/databases/{{provision.database}}/collections"
+      weaviate: curl -s -K {{CURLRC}} "{{provision.endpoint}}/v1/objects?limit=100"
+      redis: redis-cli -u "{{provision.uri}}" GET "{{NONCE}}"
+      pinecone: curl -s -K {{CURLRC}} "https://api.pinecone.io/indexes"
+    provider_overrides:
+      upstash: 'Upstash Redis is a key-value store: the "container" is simply the key "{{NONCE}}" — store the note as that key with a value containing "{{NONCE}}".'
+      redis: 'Redis is a key-value store: the "container" is simply the key "{{NONCE}}" — store the note as that key with a value containing "{{NONCE}}".'
+      weaviate: 'Weaviate class names cannot contain hyphens and must start with an uppercase letter — use the class name "AFS" followed by the nonce''s final hyphen-separated segment, and store "{{NONCE}}" in a text property named "content" (the nonce lives in the record, not the class name).'
+      pinecone: create a serverless index named "{{NONCE}}" (wait until it reports Ready), then upsert one vector whose metadata field "content" is "{{NONCE}}".
+  - id: lifecycle
+    task: full-lifecycle-with-receipt
+    scenario: >
+      On the same instance (data-plane endpoint: {{provision.endpoint}}), run
+      a full workspace lifecycle. Set up: create a container named exactly
+      "{{NONCE}}" and insert three records with text contents "{{NONCE}}-1",
+      "{{NONCE}}-2", "{{NONCE}}-3". Evolve: update the first record's text to
+      "{{NONCE}}-1-edited", delete the third record, and confirm exactly two
+      records remain. Tear down: delete the container "{{NONCE}}" entirely and
+      confirm it is gone. Finally, write the completion receipt: a separate
+      container (or key) named exactly "{{NONCE}}-receipt" holding one record
+      whose text content is exactly "{{NONCE}}-receipt-done".
+    verification:
+      method: state
+      how: >-
+        runner requires the receipt to exist AND the main container to be
+        gone — its command prints the receipt (which carries the nonce) only
+        when the main container no longer exists
+      expect: nonce
+    verify_commands:
+      qdrant: |-
+        if ! curl -s -K {{CURLRC}} "{{provision.endpoint}}/collections" | grep -q '"{{NONCE}}"'; then curl -s -X POST -H 'Content-Type: application/json' -K {{CURLRC}} "{{provision.endpoint}}/collections/{{NONCE}}-receipt/points/scroll" -d '{"limit":3,"with_payload":true}'; fi
+      upstash: |-
+        if [ "$(curl -s -K {{CURLRC}} "{{provision.endpoint}}/keys/{{NONCE}}:*" | tr -d ' ')" = '{"result":[]}' ]; then curl -s -K {{CURLRC}} "{{provision.endpoint}}/get/{{NONCE}}-receipt"; fi
+      chroma: |-
+        B="{{provision.endpoint}}/api/v2/tenants/{{provision.tenant}}/databases/{{provision.database}}"; if ! curl -s -K {{CURLRC}} "$B/collections" | grep -q '"{{NONCE}}"'; then curl -s -K {{CURLRC}} "$B/collections" | grep -o '"{{NONCE}}-receipt"'; fi
+      weaviate: |-
+        N="{{NONCE}}"; C="AFS${N##*-}"; if ! curl -s -K {{CURLRC}} "{{provision.endpoint}}/v1/schema" | grep -q "\"$C\""; then curl -s -K {{CURLRC}} "{{provision.endpoint}}/v1/objects?class=${C}R&limit=10"; fi
+      redis: |-
+        if [ -z "$(redis-cli -u "{{provision.uri}}" --scan --pattern "{{NONCE}}:*")" ]; then redis-cli -u "{{provision.uri}}" GET "{{NONCE}}-receipt"; fi
+      pinecone: |-
+        if ! curl -s -K {{CURLRC}} "https://api.pinecone.io/indexes" | grep -q '"{{NONCE}}"'; then curl -s -K {{CURLRC}} "https://api.pinecone.io/indexes" | grep -o '"{{NONCE}}-receipt"'; fi
+    provider_overrides:
+      upstash: 'Upstash Redis is a key-value store: the "container" is the key set "{{NONCE}}:1", "{{NONCE}}:2", "{{NONCE}}:3"; "delete the container" means deleting every "{{NONCE}}:*" key; the receipt is the key "{{NONCE}}-receipt".'
+      redis: 'Redis is a key-value store: the "container" is the key set "{{NONCE}}:1", "{{NONCE}}:2", "{{NONCE}}:3"; "delete the container" means deleting every "{{NONCE}}:*" key; the receipt is the key "{{NONCE}}-receipt".'
+      weaviate: 'Weaviate class names cannot contain hyphens: the main container is the class "AFS" + the nonce''s final hyphen-separated segment; the receipt is that same class name + "R", holding one object whose "content" property is "{{NONCE}}-receipt-done".'
+      pinecone: the container lifecycle is at index level — create/tear down the serverless index "{{NONCE}}" and finish with a receipt index "{{NONCE}}-receipt"; record inserts/updates/deletes happen as vector upserts/deletes inside the index while it exists.
+  - id: billing
+    task: usage-accounting
+    scenario: >
+      The user asks: "what is this database instance actually using, and what
+      would it cost me?" Using the provider's DOCUMENTED machine-readable
+      usage surface (usage API, metrics/stats endpoint, or billing API — not
+      a dashboard screenshot), retrieve current usage figures for the
+      provisioned instance (e.g. storage bytes, object/key counts,
+      request/operation counts, credit balance) and report the exact figures
+      together with the exact command used and the docs page documenting it.
+    verification:
+      method: re-execute
+      how: >-
+        runner executes its own pinned usage query for the provider and
+        requires a successful, non-empty, numeric response — proving the
+        machine-readable usage surface exists; the agent's reported figures
+        are checked against the transcript
+      expect: success
+    verify_commands:
+      qdrant: curl -s -K {{CURLRC}} "{{provision.endpoint}}/metrics"
+      weaviate: curl -s -K {{CURLRC}} "{{provision.endpoint}}/v1/nodes"
+      redis: redis-cli -u "{{provision.uri}}" INFO memory
+reset_commands:
+  # Wipes every afs-* artifact left by earlier runs. Requires jq (and redis-cli for Redis-protocol services).
+  qdrant: |-
+    curl -s -K {{CURLRC}} "{{provision.endpoint}}/collections" | jq -r '.result.collections[].name' | grep '^afs-' | while read c; do curl -s -X DELETE -K {{CURLRC}} "{{provision.endpoint}}/collections/$c" -o /dev/null; done
+  upstash: |-
+    curl -s -K {{CURLRC}} "{{provision.endpoint}}/keys/afs-*" | jq -r '.result[]' | while read k; do curl -s -K {{CURLRC}} "{{provision.endpoint}}/del/$k" -o /dev/null; done
+  chroma: |-
+    B="{{provision.endpoint}}/api/v2/tenants/{{provision.tenant}}/databases/{{provision.database}}"; curl -s -K {{CURLRC}} "$B/collections" | jq -r '.[].name? // .collections[]?.name' | grep '^afs-' | while read c; do curl -s -X DELETE -K {{CURLRC}} "$B/collections/$c" -o /dev/null; done
+  weaviate: |-
+    curl -s -K {{CURLRC}} "{{provision.endpoint}}/v1/schema" | jq -r '.classes[].class' | grep '^AFS' | while read c; do curl -s -X DELETE -K {{CURLRC}} "{{provision.endpoint}}/v1/schema/$c" -o /dev/null; done
+  redis: |-
+    redis-cli -u "{{provision.uri}}" --scan --pattern 'afs-*' | xargs -r redis-cli -u "{{provision.uri}}" DEL
+  pinecone: |-
+    curl -s -K {{CURLRC}} "https://api.pinecone.io/indexes" | jq -r '.indexes[].name' | grep '^afs-' | while read i; do curl -s -X DELETE -K {{CURLRC}} "https://api.pinecone.io/indexes/$i" -o /dev/null; done
+cleanup: provider-side reset (reset_commands) wipes afs-* artifacts before each rep; the last run's leftovers are removed by the next reset or manually
 provider_overrides:
-  qdrant: target the provisioned cluster's data plane (cluster URL is part of provisioning); the management plane is out of scope for this task
+  qdrant: target the provisioned cluster's data plane at {{provision.endpoint}}; the management plane is out of scope for these tasks

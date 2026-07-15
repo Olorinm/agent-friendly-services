@@ -1,15 +1,18 @@
 category: web-search-data
-task: answer-fixed-query
-scenario: >
-  Using the provider's documented search/extract API, run the query "official
-  website of the Python programming language" and report the top results.
 provisioning:
   - element: API key
     delivery: curl config file
-verification:
-  method: re-execute
-  how: runner reruns the final command and requires python.org among the results
+milestones:
+  - id: core
+    task: answer-fixed-query
+    scenario: >
+      Using the provider's documented search/extract API, run the query "official
+      website of the Python programming language" and report the top results.
+    verification:
+      method: re-execute
+      how: runner reruns the final command and requires python.org among the results
+      expect: nonce
+    provider_overrides:
+      firecrawl: variant — scrape https://example.com and return its title
+      apify: variant — run the provider's documented example actor on https://example.com and fetch the dataset
 cleanup: none needed (stateless)
-provider_overrides:
-  firecrawl: variant — scrape https://example.com and return its title
-  apify: variant — run the provider's documented example actor on https://example.com and fetch the dataset

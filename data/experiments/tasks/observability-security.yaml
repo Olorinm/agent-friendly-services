@@ -1,13 +1,16 @@
 category: observability-security
-task: submit-event-and-query-back
-scenario: >
-  Submit a custom event/error whose message is "{{NONCE}}" via the provider's
-  documented ingest API, then query it back through the provider's search/read
-  API and report it.
 provisioning:
   - element: API key (ingest + read scopes)
     delivery: curl config file
-verification:
-  method: state
-  how: runner queries the events API for the nonce, retrying up to 5 minutes to tolerate ingest delay
+milestones:
+  - id: core
+    task: submit-event-and-query-back
+    scenario: >
+      Submit a custom event/error whose message is "{{NONCE}}" via the provider's
+      documented ingest API, then query it back through the provider's search/read
+      API and report it.
+    verification:
+      method: state
+      how: runner queries the events API for the nonce, retrying up to 5 minutes to tolerate ingest delay
+      expect: nonce
 cleanup: none needed (events age out); test project recommended

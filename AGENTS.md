@@ -5,15 +5,16 @@ You (an agent) can contribute to it end-to-end. This file tells you how.
 
 ## Source of truth
 
-- Provider data: `data/providers/*.yaml` — one file per provider
+- Provider data: `data/providers/*.yaml` — one file per provider (verified index)
+- Candidate pool: `data/candidates/*.yaml` — same schema, unverified; new providers start here (`docs/candidate-pool.md`)
 - Field definitions: `data/fields.yaml` — what every entrypoint and check means
 - Categories: `data/categories.yaml`
 - `README.md` and `generated/` are **build outputs. Never edit them.** CI regenerates them on main.
 
-## Add a provider
+## Add a provider (goes to the candidate pool)
 
-1. Copy an existing file in `data/providers/`. Use a lowercase id equal to the filename (`modal.yaml` → `id: modal`).
-2. Check inclusion rules first: hosted service + account system + API surface. Libraries and frameworks don't qualify. Name the product precisely (`Docker Hub`, not `Docker`).
+1. Copy an existing file in `data/providers/` into `data/candidates/<id>.yaml`. Use a lowercase id equal to the filename (`modal.yaml` → `id: modal`). Promotion out of the pool happens later, after a passing M1 agent run + evidence review — not in your PR.
+2. Check inclusion rules first: hosted service + API surface + self-serve access path (an account system, or agent-native pay-per-call like x402). Libraries and frameworks don't qualify. Name the product precisely (`Docker Hub`, not `Docker`). Account-less services: mark account-shaped checks (signup, api keys, oauth, scoped tokens, revocation) `not_applicable` with a note — never `supported`.
 3. Fill `entrypoints` with public, login-free official URLs. **Omit what you cannot find** — a missing entrypoint means "no known URL", and that is fine.
 4. Fill the checks you can verify. Status enum: `supported | partial | unsupported | unknown | not_applicable`.
 5. Every `supported`/`partial` needs an official evidence URL and a `verified` date. `partial` and `not_applicable` also need `notes`.

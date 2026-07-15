@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-08T09:38:49.364Z",
+  "generated_at": "2026-07-15T07:25:17.959Z",
   "counts": {
     "providers": 76,
     "categories": 12,
@@ -177,27 +177,27 @@
     "checks": {
       "self_serve_signup": {
         "name": "Self-serve signup",
-        "description": "An account can be created without sales involvement.",
+        "description": "An account can be created without sales involvement. Account-less pay-per-call services (e.g. x402): not_applicable with a note, never supported.",
         "verification": "manual"
       },
       "api_key_self_serve": {
         "name": "Self-serve API keys",
-        "description": "Users can create API keys themselves.",
+        "description": "Users can create API keys themselves. Account-less pay-per-call services (e.g. x402): not_applicable with a note, never supported.",
         "verification": "manual"
       },
       "oauth_support": {
         "name": "OAuth",
-        "description": "Supports OAuth or an equivalent standard authorization flow.",
+        "description": "Supports OAuth or an equivalent standard authorization flow. Account-less pay-per-call services (e.g. x402): not_applicable with a note, never supported.",
         "verification": "manual"
       },
       "scoped_tokens": {
         "name": "Scoped tokens",
-        "description": "Tokens can be restricted in permission scope (incl. service accounts / machine identities — note specifics).",
+        "description": "Tokens can be restricted in permission scope (incl. service accounts / machine identities — note specifics). Account-less pay-per-call services (e.g. x402): not_applicable with a note, never supported.",
         "verification": "manual"
       },
       "token_revocation": {
         "name": "Token revocation",
-        "description": "Keys/tokens/sessions can be revoked.",
+        "description": "Keys/tokens/sessions can be revoked. Account-less pay-per-call services (e.g. x402): not_applicable with a note, never supported.",
         "verification": "manual"
       },
       "sandbox_or_test_mode": {
@@ -4637,7 +4637,7 @@
         "inference"
       ],
       "entrypoints": {
-        "docs": "https://platform.openai.com/docs",
+        "docs": "https://developers.openai.com/api/docs",
         "api_reference": "https://platform.openai.com/docs/api-reference",
         "openapi": "https://github.com/openai/openai-openapi",
         "changelog": "https://platform.openai.com/docs/changelog",

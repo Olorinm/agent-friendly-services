@@ -86,13 +86,28 @@ maintainers need. If the MCP/CLI tools are insufficient for part of the task,
 the agent must report that as the failure reason, not work around it via other
 means.
 
-## Task definitions
+## Task definitions — the milestone ladder
 
-Real-task scenarios live in `data/experiments/tasks/<category>.yaml` — one
-realistic user scenario per category, so results are comparable **within** a
-category (we never compare across categories; the index does not rank).
+Real-task scenarios live in `data/experiments/tasks/<category>.yaml` as a
+**ladder of milestones** per category, so results are comparable **within** a
+category (we never compare across categories; the index does not rank):
 
-Each task file pins, as reviewable data:
+- **core** — the category's basic realistic task (file an issue; store and
+  retrieve a record). This is the milestone all badges, the 🏆 marker and the
+  route comparison are pinned to.
+- **lifecycle** — a full workspace lifecycle: set up → use → evolve →
+  tear down → leave a verifiable completion receipt.
+- **billing** — the money-reality milestone: retrieve the instance's actual
+  usage/billing figures through a documented machine-readable surface. Where a
+  category supports safe real spending, this extends to completing a small
+  paid action and checking the charge shows up.
+
+A provider's ladder result reads like `core ✓ · lifecycle ✓ · billing ✗` —
+how far up the ladder today's agents get, and what each step costs. The runner
+climbs with `--ladder` (stops at the first milestone without a majority pass
+across reps) or runs one milestone with `--milestone=<id>`.
+
+Each milestone pins, as reviewable data:
 
 - **scenario** — what a real user would ask an agent to do;
 - **provisioning** — the minimum a human must supply up front (a key, a test
@@ -156,9 +171,10 @@ designated test resources.
 - `data/experiments/tasks/<category>.yaml` — pinned task definitions,
   including the runner's `verify_commands` (public, because they define what
   counts as a pass).
-- `data/experiments/results/<provider>/<date>-<layer>[-<route>]-rep<N>.yaml`
-  (+ `.md` transcript) — run results. **Gitignored until the publication
-  protocol (ToS review, dispute/rerun rules) is settled.**
+- `data/experiments/results/<provider>/<date>-<layer>[-<route>-<milestone>]-rep<N>.yaml`
+  (+ `.md` transcript) — run results. **Gitignored**; the subset that may move
+  to `data/experiments/published/` and how disputes/reruns work:
+  [publication-protocol.md](./publication-protocol.md).
 - `data/experiments/first-call/` — legacy pilot layout, superseded by the
   above.
 - Credentials and provisioning live outside the repo in `$AFS_CRED_DIR`
@@ -182,6 +198,11 @@ npm run agent-verify -- --provider=groq --layer=dry-fire --reps=3
 npm run agent-verify -- --provider=github --layer=real --route=http --reps=3
 npm run agent-verify -- --provider=github --layer=real --route=cli --reps=3
 npm run agent-verify -- --provider=github --layer=real --route=mcp --reps=3
+
+# One milestone, or the whole ladder (stops at the first milestone
+# without a majority pass):
+npm run agent-verify -- --provider=qdrant --layer=real --milestone=lifecycle --reps=3
+npm run agent-verify -- --provider=qdrant --layer=real --ladder --reps=3
 ```
 
 The runner (`scripts/agent-verify.ts`) builds a standardized prompt from the

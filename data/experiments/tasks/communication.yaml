@@ -1,17 +1,20 @@
 category: communication
-task: send-message-and-confirm
-scenario: >
-  Send the message "{{NONCE}}" to the designated test channel/recipient via the
-  provider's documented API and report the message id, then read it back.
 provisioning:
   - element: bot/app credential
     delivery: curl config file
   - element: designated test workspace/channel with the bot already added, or verified sender/recipient (email)
     delivery: prepared by human beforehand; the size of this setup is itself a recorded friction fact
-verification:
-  method: state
-  how: runner fetches the message (by id or channel history) and requires the nonce
+milestones:
+  - id: core
+    task: send-message-and-confirm
+    scenario: >
+      Send the message "{{NONCE}}" to the designated test channel/recipient via the
+      provider's documented API and report the message id, then read it back.
+    verification:
+      method: state
+      how: runner fetches the message (by id or channel history) and requires the nonce
+      expect: nonce
+    provider_overrides:
+      resend: variant email — send to the provider's documented test address; verification via the sent-email API object
+      twilio: variant SMS — use the provider's documented test credentials/magic numbers; verification via the message resource status
 cleanup: runner deletes the message where the API allows
-provider_overrides:
-  resend: variant email — send to the provider's documented test address; verification via the sent-email API object
-  twilio: variant SMS — use the provider's documented test credentials/magic numbers; verification via the message resource status

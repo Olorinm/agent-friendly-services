@@ -1,15 +1,18 @@
 category: productivity-storage
-task: create-record-and-confirm
-scenario: >
-  Create a record/page/file titled (or named) "{{NONCE}}" in the designated
-  test space via the provider's documented API, read it back, and report its
-  id and URL.
 provisioning:
   - element: API token
     delivery: curl config file
   - element: designated test space (base/workspace/folder) shared with the integration
     delivery: prepared by human beforehand
-verification:
-  method: state
-  how: runner fetches/searches the space and requires an item titled exactly the nonce
+milestones:
+  - id: core
+    task: create-record-and-confirm
+    scenario: >
+      Create a record/page/file titled (or named) "{{NONCE}}" in the designated
+      test space via the provider's documented API, read it back, and report its
+      id and URL.
+    verification:
+      method: state
+      how: runner fetches/searches the space and requires an item titled exactly the nonce
+      expect: nonce
 cleanup: runner deletes/archives the created item
