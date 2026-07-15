@@ -1,6 +1,23 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-07-15T07:25:17.966Z",
-  "count": 0,
-  "candidates": []
+  "generated_at": "2026-07-15T07:28:13.732Z",
+  "count": 1,
+  "candidates": [
+    {
+      "id": "paas-build",
+      "name": "paas.build",
+      "category": "payments-billing",
+      "homepage": "https://paas.build",
+      "summary": "Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.",
+      "submitted_by": "vendor",
+      "entrypoints": {
+        "docs": "https://paas.build/agents",
+        "llms_txt": "https://paas.build/llms.txt",
+        "pricing": "https://paas.build/pricing",
+        "agent_docs": "https://paas.build/SKILL.md",
+        "mcp_official": "https://github.com/UNIPaaS/paas-build-mcp"
+      },
+      "m1": null
+    }
+  ]
 }

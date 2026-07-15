@@ -285,6 +285,14 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 - **[Shopify](https://shopify.dev/docs)** — Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. [API](https://shopify.dev/docs/api) · [MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [llms.txt](https://www.shopify.com/llms.txt) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [all facts →](./generated/providers.md#shopify)
 
+## Candidate pool
+
+Submitted, **not yet verified** — listed for transparency only ([how the pool works](./docs/candidate-pool.md)). An entry is promoted into the index above once an agent passes the M1 first-call run against it and its evidence survives review; until then its claims live only in its YAML file.
+
+| Candidate | Category | Submitted by | M1 first-call | Claims |
+| --- | --- | --- | --- | --- |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
+
 ## Contributing
 
 One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **485 open `unknown`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [`docs/contributing.md`](./docs/contributing.md).

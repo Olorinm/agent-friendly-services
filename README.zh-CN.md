@@ -287,6 +287,14 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 - **[Shopify](https://shopify.dev/docs)** — Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. [API](https://shopify.dev/docs/api) · [MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [llms.txt](https://www.shopify.com/llms.txt) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [全部事实 →](./generated/providers.md#shopify)
 
+## 候选池
+
+已提交、**尚未验证** —— 仅为透明而列出（[候选池规则](./docs/candidate-pool.md)）。条目要晋升进上方正式索引，必须先通过 M1 首次调用实测、且证据经得起复核；在此之前，其声明只存在于它自己的 YAML 文件里。
+
+| 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
+| --- | --- | --- | --- | --- |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | pending | [yaml](./data/candidates/paas-build.yaml) |
+
 ## 参与贡献
 
 一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **485 个待查 `unknown`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[`docs/contributing.md`](./docs/contributing.md)。
