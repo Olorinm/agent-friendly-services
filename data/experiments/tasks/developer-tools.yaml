@@ -1,24 +1,27 @@
 category: developer-tools
-task: file-issue-and-confirm
-scenario: >
-  File an issue titled exactly "{{NONCE}}" in the test repository
-  {{provision.repo}}, with a short body noting it was filed autonomously by an
-  AI agent, then read it back and report its id and URL.
 provisioning:
   - element: API token scoped to the test repository/project
     delivery: curl config file (http route) / CLI-native env var (cli route) / harness-side MCP config (mcp route)
   - element: designated empty test repository/project ("repo" in provision.yaml)
     delivery: created by human beforehand, reset between reps
-verification:
-  method: state
-  how: runner fetches issues via the API and requires one whose title equals the nonce exactly
-verify_commands:
-  github: curl -s -K {{CURLRC}} "https://api.github.com/repos/{{provision.repo}}/issues?state=all&per_page=100"
-  gitlab: curl -s -K {{CURLRC}} "https://gitlab.com/api/v4/projects/{{provision.project_id}}/issues?per_page=100"
+milestones:
+  - id: core
+    task: file-issue-and-confirm
+    scenario: >
+      File an issue titled exactly "{{NONCE}}" in the test repository
+      {{provision.repo}}, with a short body noting it was filed autonomously by an
+      AI agent, then read it back and report its id and URL.
+    verification:
+      method: state
+      how: runner fetches issues via the API and requires one whose title equals the nonce exactly
+      expect: nonce
+    verify_commands:
+      github: curl -s -K {{CURLRC}} "https://api.github.com/repos/{{provision.repo}}/issues?state=all&per_page=100"
+      gitlab: curl -s -K {{CURLRC}} "https://gitlab.com/api/v4/projects/{{provision.project_id}}/issues?per_page=100"
+    provider_overrides:
+      postman: variant — create a collection named "{{NONCE}}" in the designated workspace and read it back
 reset_commands:
   # Deletes ALL issues in the sandbox repo before each rep (GraphQL — REST can only close). Requires jq.
   github: |-
     curl -s -K {{CURLRC}} "https://api.github.com/repos/{{provision.repo}}/issues?state=all&per_page=100" | jq -r '.[].node_id' | while read i; do curl -s -K {{CURLRC}} -X POST https://api.github.com/graphql -d "{\"query\":\"mutation{deleteIssue(input:{issueId:\\\"$i\\\"}){clientMutationId}}\"}" -o /dev/null; done
 cleanup: provider-side reset (reset_commands) wipes the sandbox before each rep; the last run's issue is removed by the next reset or manually
-provider_overrides:
-  postman: variant — create a collection named "{{NONCE}}" in the designated workspace and read it back

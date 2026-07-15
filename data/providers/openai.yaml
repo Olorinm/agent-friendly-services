@@ -11,7 +11,7 @@ tags:
   - inference
 
 entrypoints:
-  docs: https://platform.openai.com/docs
+  docs: https://developers.openai.com/api/docs
   api_reference: https://platform.openai.com/docs/api-reference
   openapi: https://github.com/openai/openai-openapi
   changelog: https://platform.openai.com/docs/changelog

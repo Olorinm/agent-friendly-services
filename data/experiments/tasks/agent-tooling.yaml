@@ -1,15 +1,18 @@
 category: agent-tooling
-task: list-and-run-one-action
-scenario: >
-  Using the provider's documented API, list the tools/actions available to the
-  provisioned account, then execute ONE action that has no external side
-  effects (e.g. a search, a time/utility action) and report its result.
 provisioning:
   - element: account with at least one no-side-effect action enabled
     delivery: prepared by human in dashboard
   - element: API key
     delivery: curl config file
-verification:
-  method: re-execute
-  how: runner reruns the list call and confirms the executed action exists; reruns the action if idempotent
+milestones:
+  - id: core
+    task: list-and-run-one-action
+    scenario: >
+      Using the provider's documented API, list the tools/actions available to the
+      provisioned account, then execute ONE action that has no external side
+      effects (e.g. a search, a time/utility action) and report its result.
+    verification:
+      method: re-execute
+      how: runner reruns the list call and confirms the executed action exists; reruns the action if idempotent
+      expect: nonce
 cleanup: none needed (no-side-effect action required by the task)

@@ -8,7 +8,7 @@ size:
 | 2 min | Report a broken or wrong link | [Issue form](../../issues/new/choose) |
 | 15 min | Resolve one `unknown` check | Find official evidence, PR one status change |
 | 15 min | Add a missing entrypoint URL (llms.txt, OpenAPI, MCP…) | PR one line |
-| 1–2 h | Add a provider | New YAML file, see below |
+| 1–2 h | Add a provider (enters the [candidate pool](./candidate-pool.md)) | New YAML file, see below |
 | ongoing | Adopt a category as steward | Say hi in an issue |
 
 Every open `unknown` is a ready-made first contribution: see each provider's
@@ -17,12 +17,18 @@ or `derived.unknown_checks` in `generated/providers.json`.
 
 ## Add a provider
 
+New providers land in `data/candidates/` — the [candidate pool](./candidate-pool.md).
+Entry is mechanical (schema + live URLs); promotion into the index happens after
+a passing M1 agent run plus an evidence review. Claims are tested, not argued.
+
 1. Check the [inclusion rules](./methodology.md#inclusion-rules): hosted
-   service + account system + API surface; product-precision naming.
-2. Copy the closest existing file in `data/providers/`; the filename is the id.
+   service + API surface + self-serve access path (account system, or
+   agent-native pay-per-call like x402); product-precision naming.
+2. Copy the closest existing file in `data/providers/` **into
+   `data/candidates/<id>.yaml`**; the filename is the id.
 3. Fill what you can verify; omit or mark `unknown` what you can't. A narrow,
    solid entry beats a complete-looking guessed one.
-4. `npm run validate` (schema + rules, readable errors) and optionally
+4. `npm run validate` (schema + rules, readable errors) and
    `npm run probe -- --only=<id>` (checks your URLs answer).
 5. Open a PR. One provider per PR.
 
@@ -61,6 +67,11 @@ You're welcome to maintain your own entry. Set `submitted_by: vendor`, use
 documentation (not marketing pages) as evidence, and expect maintainers to
 push back on optimistic `supported`s. Disagree with a status? Open an issue
 with official evidence.
+
+New vendor submissions go through the [candidate pool](./candidate-pool.md)
+like everyone else's — the fastest way to get promoted is to make your docs
+good enough that an agent's first call just works. Vendor-submitted entries
+are labeled `vendor-submitted` wherever they render.
 
 ## What maintainers review
 

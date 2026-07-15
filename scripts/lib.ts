@@ -5,6 +5,7 @@ import { load as yamlLoad } from 'js-yaml';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const PROVIDERS_DIR = path.join(ROOT, 'data', 'providers');
+export const CANDIDATES_DIR = path.join(ROOT, 'data', 'candidates');
 export const GENERATED_DIR = path.join(ROOT, 'generated');
 
 export interface Check {
@@ -60,12 +61,17 @@ export function loadCategories(): Category[] {
   return loadYamlFile<{ categories: Category[] }>(path.join(ROOT, 'data', 'categories.yaml')).categories;
 }
 
-export function providerFiles(): string[] {
+function yamlFiles(dir: string): string[] {
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(PROVIDERS_DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith('.yaml'))
     .sort()
-    .map((f) => path.join(PROVIDERS_DIR, f));
+    .map((f) => path.join(dir, f));
+}
+
+export function providerFiles(): string[] {
+  return yamlFiles(PROVIDERS_DIR);
 }
 
 export interface LoadedProvider {
@@ -75,8 +81,8 @@ export interface LoadedProvider {
   data: Provider;
 }
 
-export function loadProviders(): LoadedProvider[] {
-  return providerFiles().map((file) => {
+function loadDir(dir: string): LoadedProvider[] {
+  return yamlFiles(dir).map((file) => {
     const raw = fs.readFileSync(file, 'utf8');
     return {
       file,
@@ -85,6 +91,17 @@ export function loadProviders(): LoadedProvider[] {
       data: yamlLoad(raw) as Provider,
     };
   });
+}
+
+export function loadProviders(): LoadedProvider[] {
+  return loadDir(PROVIDERS_DIR);
+}
+
+/** Candidate-pool entries (data/candidates/): same schema as providers, but
+ *  unverified — nobody has reviewed the evidence and no agent run has passed.
+ *  See docs/candidate-pool.md for entry/promotion rules. */
+export function loadCandidates(): LoadedProvider[] {
+  return loadDir(CANDIDATES_DIR);
 }
 
 /** All URLs found in a provider file, tagged with where they came from. */

@@ -12,7 +12,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { GENERATED_DIR, loadProviders, providerUrls } from './lib.ts';
+import { GENERATED_DIR, loadProviders, loadCandidates, providerUrls } from './lib.ts';
 
 const UA = 'agent-friendly-services-probe/0.1 (link health check; non-commercial index)';
 const TIMEOUT_MS = 15_000;
@@ -81,7 +81,9 @@ async function probe(url: string): Promise<Omit<Result, 'sources' | 'url'>> {
 }
 
 async function main() {
-  const providers = loadProviders().filter((p) => !only || only.includes(p.data.id));
+  // Candidate-pool URLs are probed too — a dead link in a candidate is a fact
+  // worth surfacing before anyone reviews it.
+  const providers = [...loadProviders(), ...loadCandidates()].filter((p) => !only || only.includes(p.data.id));
   const byUrl = new Map<string, string[]>();
   for (const p of providers) {
     for (const { url, source } of providerUrls(p.data)) {
