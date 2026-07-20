@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-07-15T07:25:08.638Z",
-  "total": 833,
-  "ok": 823,
-  "inconclusive": 10,
+  "checked_at": "2026-07-20T08:59:17.688Z",
+  "total": 859,
+  "ok": 843,
+  "inconclusive": 16,
   "broken": 0,
   "results": [
     {
@@ -674,8 +674,8 @@
     },
     {
       "url": "https://console.x.ai",
-      "class": "inconclusive",
-      "status": 403,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "xai:entrypoints.signup",
         "xai:entrypoints.api_keys"
@@ -789,6 +789,15 @@
         "vapi:entrypoints.signup",
         "vapi:entrypoints.api_keys",
         "vapi:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://dashboard.xquik.com/signup",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.signup",
+        "xquik:checks.self_serve_signup.evidence"
       ]
     },
     {
@@ -1594,32 +1603,32 @@
     },
     {
       "url": "https://docs.exa.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.docs"
       ]
     },
     {
       "url": "https://docs.exa.ai/changelog",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.changelog"
       ]
     },
     {
       "url": "https://docs.exa.ai/llms.txt",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.llms_txt"
       ]
     },
     {
       "url": "https://docs.exa.ai/reference/getting-started",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.api_reference",
         "exa:entrypoints.api_keys",
@@ -1628,16 +1637,16 @@
     },
     {
       "url": "https://docs.exa.ai/reference/rate-limits",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.rate_limits"
       ]
     },
     {
       "url": "https://docs.exa.ai/sdks/typescript-sdk-specification",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.sdks"
       ]
@@ -2878,6 +2887,127 @@
       ]
     },
     {
+      "url": "https://docs.xquik.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/api-reference/account/subscribe",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/api-reference/api-keys/create",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.api_keys",
+        "xquik:checks.api_key_self_serve.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/api-reference/api-keys/revoke",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:checks.token_revocation.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/api-reference/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/changelog",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/guides/error-handling",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.errors"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/guides/rate-limits",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/mcp/agent-handoff",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.agent_docs"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/mcp/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/oauth/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:checks.oauth_support.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/openapi.yaml",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/sdks",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://docs.xquik.com/webhooks/overview",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.webhooks"
+      ]
+    },
+    {
       "url": "https://docs.z.ai",
       "class": "ok",
       "status": 200,
@@ -3068,16 +3198,16 @@
     },
     {
       "url": "https://exa.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:homepage"
       ]
     },
     {
       "url": "https://exa.ai/pricing",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "exa:entrypoints.pricing",
         "exa:checks.free_tier_or_trial.evidence",
@@ -3693,6 +3823,14 @@
       ]
     },
     {
+      "url": "https://github.com/UNIPaaS/paas-build-mcp",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:entrypoints.mcp_official"
+      ]
+    },
+    {
       "url": "https://github.com/upstash/cli",
       "class": "ok",
       "status": 200,
@@ -3922,7 +4060,7 @@
     {
       "url": "https://huggingface.co/join",
       "class": "ok",
-      "status": 200,
+      "status": 202,
       "sources": [
         "hugging-face:entrypoints.signup",
         "hugging-face:checks.self_serve_signup.evidence"
@@ -4623,6 +4761,67 @@
       "status": 200,
       "sources": [
         "openrouter:entrypoints.api_keys"
+      ]
+    },
+    {
+      "url": "https://paas.build",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:homepage"
+      ]
+    },
+    {
+      "url": "https://paas.build/accept-payments-without-a-company",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://paas.build/agents",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://paas.build/llms.txt",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://paas.build/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:entrypoints.pricing",
+        "paas-build:checks.free_tier_or_trial.evidence"
+      ]
+    },
+    {
+      "url": "https://paas.build/SKILL.md",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:entrypoints.agent_docs",
+        "paas-build:checks.api_key_self_serve.evidence",
+        "paas-build:checks.scoped_tokens.evidence",
+        "paas-build:checks.sandbox_or_test_mode.evidence",
+        "paas-build:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://paas.build/what-is-progressive-kyb",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "paas-build:checks.self_serve_paid_upgrade.evidence"
       ]
     },
     {
@@ -6985,10 +7184,26 @@
     },
     {
       "url": "https://x.ai",
-      "class": "inconclusive",
-      "status": 403,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "xai:homepage"
+      ]
+    },
+    {
+      "url": "https://xquik.com",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:homepage"
+      ]
+    },
+    {
+      "url": "https://xquik.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "sources": [
+        "xquik:entrypoints.pricing"
       ]
     },
     {
