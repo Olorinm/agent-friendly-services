@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-07-20T08:59:17.688Z",
+  "checked_at": "2026-07-27T09:53:02.448Z",
   "total": 859,
-  "ok": 843,
-  "inconclusive": 16,
+  "ok": 849,
+  "inconclusive": 10,
   "broken": 0,
   "results": [
     {
@@ -1603,32 +1603,32 @@
     },
     {
       "url": "https://docs.exa.ai",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.docs"
       ]
     },
     {
       "url": "https://docs.exa.ai/changelog",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.changelog"
       ]
     },
     {
       "url": "https://docs.exa.ai/llms.txt",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.llms_txt"
       ]
     },
     {
       "url": "https://docs.exa.ai/reference/getting-started",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.api_reference",
         "exa:entrypoints.api_keys",
@@ -1637,16 +1637,16 @@
     },
     {
       "url": "https://docs.exa.ai/reference/rate-limits",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.rate_limits"
       ]
     },
     {
       "url": "https://docs.exa.ai/sdks/typescript-sdk-specification",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.sdks"
       ]
@@ -3198,16 +3198,16 @@
     },
     {
       "url": "https://exa.ai",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:homepage"
       ]
     },
     {
       "url": "https://exa.ai/pricing",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "exa:entrypoints.pricing",
         "exa:checks.free_tier_or_trial.evidence",
@@ -3775,8 +3775,8 @@
     },
     {
       "url": "https://github.com/signup",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "github:entrypoints.signup",
         "github:checks.self_serve_signup.evidence"
@@ -5006,8 +5006,8 @@
     },
     {
       "url": "https://play.cartesia.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "cartesia:entrypoints.signup",
         "cartesia:entrypoints.api_keys",
