@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-07-27T09:53:02.448Z",
+  "checked_at": "2026-08-03T09:45:37.364Z",
   "total": 859,
-  "ok": 849,
-  "inconclusive": 10,
+  "ok": 842,
+  "inconclusive": 17,
   "broken": 0,
   "results": [
     {
@@ -646,8 +646,8 @@
     },
     {
       "url": "https://console.neon.tech/signup",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "sources": [
         "neon:entrypoints.signup",
         "neon:checks.self_serve_signup.evidence"
@@ -3216,8 +3216,8 @@
     },
     {
       "url": "https://fal.ai",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.signup",
         "fal:homepage"
@@ -3225,8 +3225,8 @@
     },
     {
       "url": "https://fal.ai/dashboard/keys",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.api_keys",
         "fal:checks.self_serve_signup.evidence",
@@ -3235,32 +3235,32 @@
     },
     {
       "url": "https://fal.ai/docs",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.docs"
       ]
     },
     {
       "url": "https://fal.ai/docs/model-apis",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.api_reference"
       ]
     },
     {
       "url": "https://fal.ai/llms.txt",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.llms_txt"
       ]
     },
     {
       "url": "https://fal.ai/pricing",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "fal:entrypoints.pricing",
         "fal:checks.free_tier_or_trial.evidence",
