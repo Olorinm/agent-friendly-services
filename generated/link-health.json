@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-08-03T09:45:37.364Z",
+  "checked_at": "2026-08-10T07:41:33.764Z",
   "total": 859,
-  "ok": 842,
-  "inconclusive": 17,
+  "ok": 845,
+  "inconclusive": 14,
   "broken": 0,
   "results": [
     {
@@ -1437,8 +1437,8 @@
     },
     {
       "url": "https://docs.cartesia.ai/api-reference",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "sources": [
         "cartesia:entrypoints.api_reference"
       ]
@@ -3235,32 +3235,32 @@
     },
     {
       "url": "https://fal.ai/docs",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.docs"
       ]
     },
     {
       "url": "https://fal.ai/docs/model-apis",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.api_reference"
       ]
     },
     {
       "url": "https://fal.ai/llms.txt",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.llms_txt"
       ]
     },
     {
       "url": "https://fal.ai/pricing",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.pricing",
         "fal:checks.free_tier_or_trial.evidence",
