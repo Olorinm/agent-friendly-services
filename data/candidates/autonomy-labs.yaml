@@ -1,0 +1,72 @@
+id: autonomy-labs
+name: Autonomy Labs Storefront
+category: commerce-marketing
+homepage: https://www.autonomylabsweb.tech
+summary: AI-agent-ready digital product storefront with machine-readable catalog (llms.txt, llms-full.txt, agents.txt) and account-less instant checkout via Stripe/x402 with automatic email fulfillment.
+submitted_by: vendor
+
+tags:
+  - ai-agents
+  - digital-products
+  - e-commerce
+  - x402
+  - storefront
+
+entrypoints:
+  homepage: https://www.autonomylabsweb.tech
+  llms_txt: https://www.autonomylabsweb.tech/llms.txt
+  pricing: https://www.autonomylabsweb.tech/index.html
+
+checks:
+  self_serve_signup:
+    status: not_applicable
+    notes: Account-less pay-per-download service; purchase via public Stripe payment links with automatic email fulfillment.
+
+  api_key_self_serve:
+    status: not_applicable
+    notes: No API key model; products are delivered by email after checkout.
+
+  oauth_support:
+    status: not_applicable
+    notes: No account authorization flow is required for purchase.
+
+  scoped_tokens:
+    status: not_applicable
+    notes: No API tokens are issued.
+
+  token_revocation:
+    status: not_applicable
+    notes: No API tokens are issued.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Stripe test mode exists but is not publicly documented for this storefront.
+
+  free_tier_or_trial:
+    status: unknown
+    notes: A free agent-readiness audit page exists (audit.html) but no recurring free tier is documented.
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://www.autonomylabsweb.tech/index.html
+    verified: "2026-08-06"
+    notes: Instant Stripe checkout with automatic email fulfillment; 12 digital products published.
+
+  usage_dashboard:
+    status: not_applicable
+    notes: No per-request usage metering.
+
+  idempotency:
+    status: not_applicable
+    notes: Not an API; purchases are one-time checkout events.
+
+  versioning_policy:
+    status: not_applicable
+    notes: Not an API with versioned endpoints.
+
+  automation_permitted:
+    status: unknown
+    notes: Machine-readable catalog (llms.txt, agents.txt, sitemap.xml) is served to agents; purchase automation terms not yet reviewed.
+
+notes:
+  - Publishes llms.txt, llms-full.txt, agents.txt, sitemap.xml, and .well-known/x402 for machine and agent discoverability.
