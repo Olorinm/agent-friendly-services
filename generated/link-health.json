@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-08-17T06:55:22.482Z",
+  "checked_at": "2026-08-24T06:58:10.117Z",
   "total": 859,
-  "ok": 845,
-  "inconclusive": 14,
-  "broken": 0,
+  "ok": 846,
+  "inconclusive": 12,
+  "broken": 1,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -3216,8 +3216,8 @@
     },
     {
       "url": "https://fal.ai",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.signup",
         "fal:homepage"
@@ -3225,8 +3225,8 @@
     },
     {
       "url": "https://fal.ai/dashboard/keys",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "fal:entrypoints.api_keys",
         "fal:checks.self_serve_signup.evidence",
@@ -4024,8 +4024,8 @@
     },
     {
       "url": "https://huggingface.co/docs/hub/rate-limits",
-      "class": "ok",
-      "status": 200,
+      "class": "broken",
+      "status": 500,
       "sources": [
         "hugging-face:entrypoints.rate_limits"
       ]
