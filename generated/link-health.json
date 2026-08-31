@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-08-24T06:58:10.117Z",
+  "checked_at": "2026-08-31T12:53:22.616Z",
   "total": 859,
-  "ok": 846,
+  "ok": 847,
   "inconclusive": 12,
-  "broken": 1,
+  "broken": 0,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -4024,8 +4024,8 @@
     },
     {
       "url": "https://huggingface.co/docs/hub/rate-limits",
-      "class": "broken",
-      "status": 500,
+      "class": "ok",
+      "status": 200,
       "sources": [
         "hugging-face:entrypoints.rate_limits"
       ]
