@@ -1,0 +1,79 @@
+id: xiurouter
+name: XiuRouter
+category: ai-models
+homepage: https://router.xiu.ai/
+summary: Hosted multi-model API for developers with native OpenAI, Anthropic, and Gemini routes, scoped keys, and request-level usage and cost records.
+submitted_by: vendor
+
+tags:
+  - llm-api
+  - model-routing
+  - protocol-compatibility
+  - usage-tracking
+
+entrypoints:
+  docs: https://docs.xiu.ai/router/
+  api_reference: https://docs.xiu.ai/router/api-compatibility/
+  llms_txt: https://docs.xiu.ai/llms.txt
+  pricing: https://router.xiu.ai/en/pricing
+  status_page: https://router-api.xiu.ai/api/status
+  api_keys: https://docs.xiu.ai/router/quickstart/
+  agent_docs: https://docs.xiu.ai/router/integrations/
+  errors: https://docs.xiu.ai/router/errors-and-production/
+
+checks:
+  self_serve_signup:
+    status: unknown
+    notes: The public quickstart documents the login and API-key path, but a login-free signup flow was not established from the official documentation.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://docs.xiu.ai/router/quickstart/
+    verified: "2026-09-02"
+    notes: The official quickstart instructs users to log in to XiuRouter, create an API key, select a service group, and set model, quota, expiry, and optional outbound-IP limits.
+
+  oauth_support:
+    status: unknown
+
+  scoped_tokens:
+    status: supported
+    evidence: https://docs.xiu.ai/router/quickstart/
+    verified: "2026-09-02"
+    notes: The quickstart explicitly describes creating a restricted API key and limiting its models, remaining quota, expiry, and required outbound IP.
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The quickstart warns that the final model request is billed. No separate sandbox credential or no-spend test mode was established.
+
+  free_tier_or_trial:
+    status: unknown
+    evidence: https://router.xiu.ai/en/pricing
+    verified: "2026-09-02"
+    notes: The public pricing surface was checked, but this candidate leaves free-tier eligibility unknown rather than inferring it from the absence of a free offer.
+
+  self_serve_paid_upgrade:
+    status: unknown
+
+  usage_dashboard:
+    status: supported
+    evidence: https://docs.xiu.ai/router/models-pricing-usage/
+    verified: "2026-09-02"
+    notes: The official documentation directs users to usage records to verify model, service group, tokens, cost, status, and result for a request.
+
+  idempotency:
+    status: unknown
+
+  versioning_policy:
+    status: unknown
+
+  automation_permitted:
+    status: unknown
+    notes: The public documentation describes API and agent integrations, but the provider terms were not used to infer a general automation policy.
+
+notes:
+  - "Vendor submission based only on official XiuRouter and XiuAI documentation checked on 2026-09-02."
+  - "This entry belongs in the candidate pool until a passing M1 agent run and evidence review promote it to the verified index."
+  - "No new model request was made for this contribution because the official quickstart states that model requests incur usage-based charges."
