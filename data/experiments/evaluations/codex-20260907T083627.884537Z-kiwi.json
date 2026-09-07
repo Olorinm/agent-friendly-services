@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T083627.884537Z-kiwi",
+  "service_id": "kiwi",
+  "route_id": "search-mcp",
+  "entry_url": "https://mcp.kiwi.com",
+  "task": {
+    "id": "flights-search-001",
+    "description": "找到9月25日米兰飞往荷兰的机票",
+    "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+    "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+    "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+    "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+    "file": "data/experiments/tasks/travel-flights.md",
+    "version": "v1",
+    "sha256": "d08dd9e778a6d35c3c8f33de4047431874264a4f797a4dab22bb0b86915a707c"
+  },
+  "prompt_sha256": "79d0fda918dee8c72ded515ae47c7170e92b2317dfad10d2dd44970e12dd7ef4",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T08:36:27.894085+00:00",
+  "ended_at": "2026-09-07T08:39:04.929334+00:00",
+  "elapsed_seconds": 156.912,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live"
+  },
+  "status": "completed",
+  "reason": "基础找票任务完成：3个提交方案与当次服务响应及任务参数相符。单次同机试跑，不代表其他入口或长期成功率。",
+  "usage": {
+    "input_tokens": 184152,
+    "cached_input_tokens": 129408,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3754,
+    "reasoning_output_tokens": 305
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent; session [CODEX_SESSION]; preserved pilot evidence rechecked",
+    "reviewed_at": "2026-09-07T09:08:17.367754+00:00",
+    "checks": [
+      {
+        "criterion": "实际调用指定服务并提供可核对的最终答案",
+        "passed": true,
+        "evidence": "已审阅events.jsonl和网络调用代码；选取answer.md与请求、真实响应，完整日志hash保留。"
+      },
+      {
+        "criterion": "2026-09-25由MXP/LIN/BGY飞往荷兰；各航段机场、航班号、当地时间符合要求",
+        "passed": true,
+        "evidence": "最终3个方案逐项对照原始响应；独立复核结果见本地review.json selected_options。"
+      },
+      {
+        "criterion": "1名成人，单程经济舱",
+        "passed": true,
+        "evidence": "Explicit request and response: 1 adult, 0 children, 0 infants; Explicit request M; returned Economy"
+      },
+      {
+        "criterion": "搜索报价与币种和真实响应一致",
+        "passed": true,
+        "evidence": "独立解析选取响应，对照answer.md中的3个报价与币种；不检查全网最低价或支付成功。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/answer.md",
+      "sha256": "c65c9ecdbd0ad91dd37423f2643d00b047547dded6b413be459722a569cdb5f3",
+      "note": "Measured final answer; local paths redacted in the public copy, original preserved locally.",
+      "source_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
+      "redactions": [
+        "local paths or Codex session identifiers"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/bgy-ein-request.json",
+      "sha256": "fe5d70bbb3b3cb5a54599de7d8ed790407abadceb393475424c29de712d155bd",
+      "note": "当次查询参数或真实服务响应"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/bgy-ein-response.txt",
+      "sha256": "ecd16979bb2095418a64b2464e40cc9e764e125a22241862add51e163bd08612",
+      "note": "当次查询参数或真实服务响应"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/lin-ams-request.json",
+      "sha256": "996abb87ad7a396b5b1b068bf18829a16d3b04133815415dfa770be056a4eefc",
+      "note": "当次查询参数或真实服务响应"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/lin-ams-response.txt",
+      "sha256": "c297c2242279f14fb831f7e5eb10927e54d553809d1ba69670fe8b0647a1f0a8",
+      "note": "当次查询参数或真实服务响应"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/mxp-ams-request.json",
+      "sha256": "ef4c8c8fae197a1ef381094d4908c851727840cae36abcc98e99dc68d48c46f4",
+      "note": "当次查询参数或真实服务响应"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/mxp-ams-response.txt",
+      "sha256": "4be837794633ebf4188f3b50482436cfc288bec38bf243dc63789e098f004b10",
+      "note": "当次查询参数或真实服务响应"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/travel-flights/codex-20260907T083627.884537Z-kiwi",
+    "run_sha256": "d33731e627b437638260f1316dfec5859127349b9dcb1fe835d3e4a809407408",
+    "events_sha256": "2f538d14890073f1a8bfa9ff84ce56a93f954fd2f595456d991a67671b3f53bb",
+    "answer_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
+    "review_sha256": "1e667f6f09f155cedb06b71f18bc1d9bd1a4faa13aaf52e43da81f69c3b2b63d",
+    "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

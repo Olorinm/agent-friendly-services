@@ -5,8 +5,11 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import Ajv from 'ajv';
+import { Ajv } from 'ajv';
 import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates } from './lib.ts';
+import { catalogErrors, taxonomyErrors } from './catalog.ts';
+import { loadResearch, researchIssues } from './research.ts';
+import { loadEvaluations, evaluationErrors } from './evaluations.ts';
 
 const errors: Map<string, string[]> = new Map();
 
@@ -35,16 +38,17 @@ if (JSON.stringify(schemaChecks) !== JSON.stringify(fieldChecks)) {
 }
 
 const categoryIds = new Set(categories.map((c) => c.id));
+for (const message of taxonomyErrors(categories)) fail('data/categories.yaml', message);
 
 // ---------------------------------------------------------------------------
 // Provider files
 // ---------------------------------------------------------------------------
 const ajv = new Ajv({ allErrors: true });
+ajv.addSchema(JSON.parse(fs.readFileSync(path.join(ROOT, 'schema', 'catalog.schema.json'), 'utf8')));
 const validateSchema = ajv.compile(schema);
 
-// Candidate-pool files (data/candidates/) follow the exact same schema and
-// rules — what makes them candidates is only that nobody has verified the
-// claims yet (docs/candidate-pool.md). Ids must be unique across both pools.
+// Both pools share identity and catalog fields. Candidates may lack docs or
+// callable routes; legacy index records still require their documentation URL.
 const providers = loadProviders();
 const candidates = loadCandidates();
 const seenIds = new Map<string, string>();
@@ -57,14 +61,15 @@ for (const { relFile, raw, data } of [...providers, ...candidates]) {
     if (bareBool && bareBool[1] === 'status') {
       fail(relFile, `line ${lineNo + 1}: status is "${bareBool[2]}", which is not a valid status and is a YAML 1.1 boolean trap.\n    Fix: use one of supported | partial | unsupported | unknown | not_applicable.`);
     }
-    const bareDate = line.match(/^\s*verified\s*:\s*(\d{4}-\d{2}-\d{2})\s*(#.*)?$/);
+    const bareDate = line.match(/^\s*(verified|checked_on)\s*:\s*(\d{4}-\d{2}-\d{2})\s*(#.*)?$/);
     if (bareDate) {
-      fail(relFile, `line ${lineNo + 1}: verified date must be a quoted string so every YAML parser reads it as text.\n    Fix: verified: "${bareDate[1]}"`);
+      fail(relFile, `line ${lineNo + 1}: ${bareDate[1]} must be a quoted date string.\n    Fix: ${bareDate[1]}: "${bareDate[2]}"`);
     }
   }
 
   // --- JSON schema ----------------------------------------------------------
-  if (!validateSchema(data)) {
+  const schemaValid = validateSchema(data);
+  if (!schemaValid) {
     for (const err of validateSchema.errors ?? []) {
       const where = err.instancePath.replaceAll('/', '.').replace(/^\./, '') || '(root)';
       let msg = `${where} ${err.message}`;
@@ -73,13 +78,18 @@ for (const { relFile, raw, data } of [...providers, ...candidates]) {
       } else if (err.keyword === 'pattern' && String(err.schema).startsWith('^https://')) {
         msg += `.\n    Fix: use a full https:// URL.`;
       } else if (err.keyword === 'additionalProperties') {
-        msg += ` ("${(err.params as { additionalProperty: string }).additionalProperty}").\n    Fix: only fields defined in data/fields.yaml are allowed.`;
+        msg += ` ("${(err.params as { additionalProperty: string }).additionalProperty}").\n    Fix: use fields defined in schema/provider.schema.json and schema/catalog.schema.json.`;
       }
       fail(relFile, msg);
     }
   }
 
-  if (!data || typeof data !== 'object') continue;
+  if (!schemaValid) continue;
+
+  const isProvider = relFile.startsWith('data/providers/');
+  if (isProvider && !data.entrypoints?.docs) fail(relFile, 'Index records require entrypoints.docs. Keep discovery-only services in data/candidates/.');
+  if (!isProvider && !data.catalog && !data.entrypoints?.docs) fail(relFile, 'New candidates need catalog sources/classifications, or a legacy documentation entrypoint.');
+  for (const message of catalogErrors(data, categories, today)) fail(relFile, `catalog: ${message}`);
 
   // --- id and category ------------------------------------------------------
   const expectedId = path.basename(relFile, '.yaml');
@@ -119,8 +129,26 @@ for (const { relFile, raw, data } of [...providers, ...candidates]) {
 }
 
 // ---------------------------------------------------------------------------
-// Report
+// User-demand research: independent from provider claims and test feasibility.
 // ---------------------------------------------------------------------------
+const research = loadResearch();
+for (const pack of research) {
+  const issues = pack.parseError ? [pack.parseError] : researchIssues(pack.data, pack.classification, categories, today);
+  for (const message of issues) console.warn(`${pack.relFile}: research advisory: ${message}`);
+}
+
+// Reviewed task results are distinct from both source claims and legacy badges.
+try {
+  for (const result of loadEvaluations()) {
+    for (const message of evaluationErrors(result, [...providers, ...candidates].map(p => p.data))) {
+      fail(`data/experiments/evaluations/${result.run_id}.json`, message);
+    }
+  }
+} catch (error) {
+  fail('data/experiments/evaluations', String(error));
+}
+
+// Report
 if (errors.size > 0) {
   let count = 0;
   for (const [file, msgs] of errors) {
@@ -135,5 +163,5 @@ if (errors.size > 0) {
 } else {
   const nChecks = [...providers, ...candidates].reduce((n, p) => n + Object.keys(p.data.checks ?? {}).length, 0);
   const cand = candidates.length ? ` + ${candidates.length} candidate(s)` : '';
-  console.log(`✓ ${providers.length} providers${cand}, ${nChecks} checks, 0 errors.`);
+  console.log(`✓ ${providers.length} providers${cand}, ${nChecks} checks, ${research.length} research brief(s), 0 errors.`);
 }

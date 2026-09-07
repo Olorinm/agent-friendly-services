@@ -1,0 +1,4348 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-07T11:07:30.208Z",
+  "description": "Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
+  "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
+  "categories": [
+    {
+      "id": "ai-models",
+      "name": "AI Models",
+      "description": "Model and inference APIs (LLMs, embeddings, media generation)."
+    },
+    {
+      "id": "agent-tooling",
+      "name": "Agent Tooling",
+      "description": "Agent infrastructure, MCP tooling, orchestration services."
+    },
+    {
+      "id": "code-execution",
+      "name": "Code Execution",
+      "description": "Code sandboxes, ephemeral compute, browser automation."
+    },
+    {
+      "id": "developer-tools",
+      "name": "Developer Tools",
+      "description": "Code hosting, CI, testing, API tooling, error tracking."
+    },
+    {
+      "id": "cloud-hosting",
+      "name": "Cloud / Hosting",
+      "description": "Clouds, deployment platforms, edge and serverless hosting."
+    },
+    {
+      "id": "databases",
+      "name": "Databases",
+      "description": "Databases, vector stores, data platforms."
+    },
+    {
+      "id": "web-search-data",
+      "name": "Web Search / Data",
+      "description": "Search APIs, crawling and scraping, data providers."
+    },
+    {
+      "id": "payments-billing",
+      "name": "Payments / Billing",
+      "description": "Payments, billing, subscription infrastructure."
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "description": "Email, SMS, chat, notifications."
+    },
+    {
+      "id": "productivity-storage",
+      "name": "Productivity / Storage",
+      "description": "Project management, documents, file storage."
+    },
+    {
+      "id": "observability-security",
+      "name": "Observability / Security",
+      "description": "Monitoring, logging, identity, security services."
+    },
+    {
+      "id": "commerce-marketing",
+      "name": "Commerce / Marketing",
+      "description": "CMS, e-commerce, CRM, marketing platforms."
+    },
+    {
+      "id": "travel",
+      "name": "Travel",
+      "description": "Services for planning and purchasing travel as an individual.",
+      "subcategories": [
+        {
+          "id": "flights",
+          "name": "Flights",
+          "description": "Flight offers, fare comparison, purchase links and ticketing.",
+          "capabilities": [
+            {
+              "id": "flights.search",
+              "description": "Search itineraries and fares matching travel constraints."
+            },
+            {
+              "id": "flights.reprice",
+              "description": "Recheck a selected offer's current price and availability."
+            },
+            {
+              "id": "flights.booking-link",
+              "description": "Return a link for purchasing a selected offer."
+            },
+            {
+              "id": "flights.ticketing",
+              "description": "Issue a ticket, beyond search or a purchase link."
+            }
+          ]
+        },
+        {
+          "id": "hotels",
+          "name": "Hotels",
+          "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
+          "capabilities": []
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "airgateway",
+      "name": "AirGateway Platform API",
+      "category": "travel",
+      "homepage": "https://airgateway.com/",
+      "summary": "Air distribution API with sandbox keys, production certification and an agency application.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "agencies": {
+            "url": "https://airgateway.com/agencies/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "agency-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "agencies"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "restricted",
+              "evidence": [
+                "agencies"
+              ],
+              "notes": "The discovered agency route requires a company and IATA number."
+            },
+            "requirements": {
+              "company": {
+                "value": "required",
+                "evidence": [
+                  "agencies"
+                ]
+              },
+              "industry_license": {
+                "value": "required",
+                "evidence": [
+                  "agencies"
+                ]
+              },
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "api"
+                ],
+                "notes": "Production certification follows sandbox setup."
+              }
+            },
+            "notes": "This does not prove the absence of other individual-facing AirGateway products.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "category": "productivity-storage",
+      "homepage": "https://www.airtable.com",
+      "summary": "Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.",
+      "submitted_by": "community",
+      "tags": [
+        "database",
+        "no-code",
+        "spreadsheets"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "amadeus-flights",
+      "name": "Amadeus Flight APIs",
+      "category": "travel",
+      "homepage": "https://developers.amadeus.com/",
+      "summary": "Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be re-established.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "notice": {
+            "url": "https://developers.amadeus.com/blog/comparing-open-source-flight-data-sources",
+            "checked_on": "2026-09-07",
+            "kind": "official_announcement",
+            "notes": "Official notice was visible in search-indexed text. Direct open redirected to the portal and returned no extractable body; no old keys were tested."
+          },
+          "portal": {
+            "url": "https://developers.amadeus.com/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "former-self-service",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.amadeus.com/blog/comparing-open-source-flight-data-sources",
+            "evidence": [
+              "notice"
+            ],
+            "availability": {
+              "value": "retired",
+              "evidence": [
+                "notice"
+              ],
+              "notes": "Official indexed notice says Self-Service was decommissioned July 17; current portal is Enterprise. Recheck the notice before onboarding."
+            },
+            "notes": "Retain this historical access path. Stale tutorials do not establish current self-service signup.",
+            "task_run_ids": []
+          },
+          {
+            "id": "enterprise-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.amadeus.com/",
+            "evidence": [
+              "portal"
+            ],
+            "notes": "Current portal lead; personal eligibility, application requirements, costs and current flight endpoints remain unknown.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "category": "ai-models",
+      "homepage": "https://www.anthropic.com",
+      "summary": "Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "claude",
+        "inference"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "apify",
+      "name": "Apify",
+      "category": "web-search-data",
+      "homepage": "https://apify.com",
+      "summary": "Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "scraping",
+        "automation",
+        "actors"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "apiheya-air-scraper",
+      "name": "apiheya Air Scraper",
+      "category": "travel",
+      "homepage": "https://rapidapi.com/apiheya/api/sky-scrapper/pricing",
+      "summary": "An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner API.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "endpoint": {
+            "url": "https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e",
+            "checked_on": "2026-09-07",
+            "kind": "publisher_listing"
+          },
+          "pricing": {
+            "url": "https://rapidapi.com/apiheya/api/sky-scrapper/pricing",
+            "checked_on": "2026-09-07",
+            "kind": "publisher_listing"
+          }
+        },
+        "routes": [
+          {
+            "id": "rapidapi-product",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e",
+            "evidence": [
+              "endpoint"
+            ],
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "endpoint"
+                ]
+              }
+            },
+            "requirements": {
+              "platform_account": {
+                "value": "required",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            },
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 20,
+                "unit": "requests",
+                "per": "month",
+                "scope": "Listed Basic plan; card requirements and included flight endpoints unverified.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "notes": "Publisher is apiheya; RapidAPI is the marketplace. Upstream identity is not established by a product slug.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian (Jira & Confluence)",
+      "category": "developer-tools",
+      "homepage": "https://www.atlassian.com",
+      "summary": "Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "issue-tracking",
+        "wiki",
+        "project-management"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "aviasales",
+      "name": "Aviasales via Travelpayouts",
+      "category": "travel",
+      "homepage": "https://www.aviasales.com/",
+      "summary": "Travelpayouts-distributed live flight search and a separately accessible historical price-data API.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "search": {
+            "url": "https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "token": {
+            "url": "https://support.travelpayouts.com/hc/en-us/articles/203956083-Requirements-for-Aviasales-data-API-access",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "data": {
+            "url": "https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "live-search-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API",
+            "evidence": [
+              "search"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "search"
+              ]
+            },
+            "personal_access": {
+              "value": "restricted",
+              "evidence": [
+                "search"
+              ],
+              "notes": "The ordinary-person persona has no project with 50,000+ confirmed monthly active users."
+            },
+            "requirements": {
+              "platform_account": {
+                "value": "required",
+                "evidence": [
+                  "search"
+                ]
+              },
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "search"
+                ]
+              },
+              "traffic": {
+                "value": "required",
+                "evidence": [
+                  "search"
+                ],
+                "notes": "50,000+ confirmed monthly active users."
+              }
+            },
+            "data_kind": {
+              "value": "live",
+              "evidence": [
+                "search"
+              ]
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "search"
+                ]
+              }
+            },
+            "task_run_ids": []
+          },
+          {
+            "id": "cached-data-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API",
+            "evidence": [
+              "data"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "token"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "token"
+              ]
+            },
+            "data_kind": {
+              "value": "cached",
+              "evidence": [
+                "data"
+              ]
+            },
+            "requirements": {
+              "platform_account": {
+                "value": "required",
+                "evidence": [
+                  "token"
+                ]
+              }
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "data"
+                ]
+              }
+            },
+            "notes": "Historical user-search cache for price trends and inspiration. Each method has its own time window; no fresh search is triggered.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "brave-search",
+      "name": "Brave Search API",
+      "category": "web-search-data",
+      "homepage": "https://brave.com/search/api/",
+      "summary": "Independent web search index with a developer API, self-serve registration, and a free plan.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "index"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "bright-data-serp",
+      "name": "Bright Data SERP API",
+      "category": "travel",
+      "homepage": "https://brightdata.com/",
+      "summary": "SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "flights": {
+            "url": "https://docs.brightdata.com/api-reference/serp/google-flights/currency",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "billing": {
+            "url": "https://docs.brightdata.com/general/account/billing-and-pricing/payment-verification",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "quickstart": {
+            "url": "https://docs.brightdata.com/cn/scraping-automation/serp-api/quickstart",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "google-flights-serp",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://docs.brightdata.com/api-reference/serp/google-flights/currency",
+            "evidence": [
+              "flights"
+            ],
+            "upstream": "google-flights",
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "quickstart"
+              ]
+            },
+            "requirements": {
+              "payment_method": {
+                "value": "unknown",
+                "evidence": [
+                  "billing",
+                  "quickstart"
+                ],
+                "notes": "Current account policy permits personal-email SERP trial credits; Chinese quickstart still requires payment setup."
+              }
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "unknown",
+                "evidence": [
+                  "flights"
+                ],
+                "notes": "Published example returns HTML in its body; complete structured flight results are not yet established."
+              }
+            },
+            "notes": "Requires a SERP zone. Do not apply other Bright Data products’ payment requirements to this route.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "browserbase",
+      "name": "Browserbase",
+      "category": "code-execution",
+      "homepage": "https://www.browserbase.com",
+      "summary": "Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "browsers",
+        "automation",
+        "headless"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "cartesia",
+      "name": "Cartesia",
+      "category": "ai-models",
+      "homepage": "https://cartesia.ai",
+      "summary": "Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "text-to-speech",
+        "speech-to-text",
+        "voice"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "cerebras",
+      "name": "Cerebras Inference",
+      "category": "ai-models",
+      "homepage": "https://cloud.cerebras.ai",
+      "summary": "Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "inference",
+        "open-models",
+        "low-latency"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "chroma",
+      "name": "Chroma",
+      "category": "databases",
+      "homepage": "https://www.trychroma.com",
+      "summary": "Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "vector-database",
+        "embeddings",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "category": "cloud-hosting",
+      "homepage": "https://www.cloudflare.com",
+      "summary": "Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.",
+      "submitted_by": "community",
+      "tags": [
+        "edge",
+        "serverless",
+        "cdn"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "category": "ai-models",
+      "homepage": "https://cohere.com",
+      "summary": "Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "embeddings",
+        "rerank"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "composio",
+      "name": "Composio",
+      "category": "agent-tooling",
+      "homepage": "https://composio.dev",
+      "summary": "Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.",
+      "submitted_by": "community",
+      "tags": [
+        "agent-tools",
+        "integrations",
+        "auth"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "ctrip-flights",
+      "name": "携程机票合作",
+      "category": "travel",
+      "homepage": "https://pages.ctrip.com/public/dlhz.htm",
+      "summary": "携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "cooperation": {
+            "url": "https://pages.ctrip.com/public/dlhz.htm",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "developer": {
+            "url": "https://developer.ctrip.com/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [],
+        "notes": [
+          "仅发现合作入口，未把开发者主页登记成已知可调用 API。公开资料不足不等于没有 API。"
+        ]
+      }
+    },
+    {
+      "id": "datadog",
+      "name": "Datadog",
+      "category": "observability-security",
+      "homepage": "https://www.datadoghq.com",
+      "summary": "Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "observability",
+        "monitoring",
+        "logs"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "deepgram",
+      "name": "Deepgram",
+      "category": "ai-models",
+      "homepage": "https://deepgram.com",
+      "summary": "Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.",
+      "submitted_by": "community",
+      "tags": [
+        "speech-to-text",
+        "voice",
+        "audio"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "category": "ai-models",
+      "homepage": "https://www.deepseek.com",
+      "summary": "OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "openai-compatible"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "communication",
+      "homepage": "https://discord.com",
+      "summary": "Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.",
+      "submitted_by": "community",
+      "tags": [
+        "chat",
+        "bots",
+        "community"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "category": "productivity-storage",
+      "homepage": "https://www.dropbox.com",
+      "summary": "File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "storage",
+        "files",
+        "sync"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "duffel-flights",
+      "name": "Duffel Flights API",
+      "category": "travel",
+      "homepage": "https://duffel.com/",
+      "summary": "Flight API whose self-serve test environment must be distinguished from live account activation.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "setup": {
+            "url": "https://duffel.com/guides/getting-started",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "test": {
+            "url": "https://duffel.com/docs/api/overview/test-mode",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "test-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://duffel.com/docs/api/overview/test-mode",
+            "evidence": [
+              "test"
+            ],
+            "data_kind": {
+              "value": "sandbox",
+              "evidence": [
+                "test"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "test"
+                ]
+              }
+            },
+            "notes": "Duffel Airways test prices and schedules are fictitious. Test-token success cannot establish live fare access.",
+            "task_run_ids": []
+          },
+          {
+            "id": "live-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://duffel.com/guides/getting-started",
+            "evidence": [
+              "setup"
+            ],
+            "personal_access": {
+              "value": "unknown",
+              "notes": "Individual/business verification is described; acceptance of this project’s ordinary-person persona is untested."
+            },
+            "requirements": {
+              "email_verification": {
+                "value": "required",
+                "evidence": [
+                  "setup"
+                ]
+              },
+              "identity_verification": {
+                "value": "required",
+                "evidence": [
+                  "setup"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Verify email and submit individual or business details",
+                "stage": "activation",
+                "evidence": [
+                  "setup"
+                ]
+              }
+            ],
+            "notes": "Live permissions, market coverage and pricing must be checked using a real eligible account.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "e2b",
+      "name": "E2B",
+      "category": "code-execution",
+      "homepage": "https://e2b.dev",
+      "summary": "Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "sandboxes",
+        "code-execution",
+        "agents"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "category": "ai-models",
+      "homepage": "https://elevenlabs.io",
+      "summary": "Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "voice",
+        "tts",
+        "speech"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "exa",
+      "name": "Exa",
+      "category": "web-search-data",
+      "homepage": "https://exa.ai",
+      "summary": "Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "retrieval",
+        "rag"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "expedia-xap-flights",
+      "name": "Expedia XAP Flight Listings",
+      "category": "travel",
+      "homepage": "https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started",
+      "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "setup": {
+            "url": "https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "flights": {
+            "url": "https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "flight-listings-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings",
+            "evidence": [
+              "flights"
+            ],
+            "availability": {
+              "value": "paused",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "personal_access": {
+              "value": "restricted",
+              "evidence": [
+                "setup"
+              ],
+              "notes": "New API applications are paused for this product; not a claim about all Expedia services."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "flights"
+                ]
+              },
+              "flights.booking-link": {
+                "value": "documented",
+                "evidence": [
+                  "flights"
+                ]
+              }
+            },
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "fal",
+      "name": "fal.ai",
+      "category": "ai-models",
+      "homepage": "https://fal.ai",
+      "summary": "Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "image-generation",
+        "video-generation",
+        "inference"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "firecrawl",
+      "name": "Firecrawl",
+      "category": "web-search-data",
+      "homepage": "https://www.firecrawl.dev",
+      "summary": "Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "scraping",
+        "crawling",
+        "markdown"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "fireworks",
+      "name": "Fireworks AI",
+      "category": "ai-models",
+      "homepage": "https://fireworks.ai",
+      "summary": "Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "inference",
+        "open-models",
+        "fine-tuning"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "fliggy-domestic-flights",
+      "name": "飞猪国内机票开放平台",
+      "category": "travel",
+      "homepage": "https://open.alitrip.com/businessDetail.htm?tagId=85",
+      "summary": "面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "eligibility": {
+            "url": "https://open.alitrip.com/businessDetail.htm?tagId=85",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "merchant": {
+            "url": "https://open.alitrip.com/docs/doc.htm?articleId=121782&docType=1&treeId=111",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "merchant-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://open.alitrip.com/businessDetail.htm?tagId=85",
+            "evidence": [
+              "eligibility"
+            ],
+            "personal_access": {
+              "value": "restricted",
+              "evidence": [
+                "eligibility"
+              ],
+              "notes": "已找到的路径要求企业与机票代理商资质，不符合普通个人画像。"
+            },
+            "requirements": {
+              "company": {
+                "value": "required",
+                "evidence": [
+                  "eligibility"
+                ]
+              },
+              "store": {
+                "value": "required",
+                "evidence": [
+                  "eligibility"
+                ]
+              },
+              "industry_license": {
+                "value": "required",
+                "evidence": [
+                  "eligibility"
+                ]
+              }
+            },
+            "notes": "商家店铺须绑定支付宝并使用聚石塔；不能将政策和订单接口记成消费者搜索能力。其他个人入口未知。",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "flight-mcp",
+      "name": "Flight MCP",
+      "category": "travel",
+      "homepage": "https://flight-mcp.com/",
+      "summary": "Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "docs": {
+            "url": "https://flight-mcp.com/docs",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "pricing": {
+            "url": "https://flight-mcp.com/pricing",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "authenticated-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://flight-mcp.com/docs",
+            "evidence": [
+              "docs"
+            ],
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "data_kind": {
+              "value": "mixed",
+              "evidence": [
+                "docs"
+              ],
+              "notes": "New fetches consume quota; cache hits are free. Freshness and upstream are unverified."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 300,
+                "unit": "new_fetches",
+                "per": "month",
+                "scope": "Authenticated free plan; cache hits do not consume this allowance.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          },
+          {
+            "id": "authenticated-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://flight-mcp.com/docs",
+            "evidence": [
+              "docs"
+            ],
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "data_kind": {
+              "value": "mixed",
+              "evidence": [
+                "docs"
+              ],
+              "notes": "New fetches consume quota; cache hits are free. Freshness and upstream are unverified."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 300,
+                "unit": "new_fetches",
+                "per": "month",
+                "scope": "Authenticated free plan; cache hits do not consume this allowance.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          },
+          {
+            "id": "public-cache-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://flight-mcp.com/docs",
+            "evidence": [
+              "docs"
+            ],
+            "auth": {
+              "value": "none",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "data_kind": {
+              "value": "cached",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "notes": "Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes.",
+            "task_run_ids": []
+          },
+          {
+            "id": "public-cache-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://flight-mcp.com/docs",
+            "evidence": [
+              "docs"
+            ],
+            "auth": {
+              "value": "none",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "data_kind": {
+              "value": "cached",
+              "evidence": [
+                "docs"
+              ]
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "notes": "Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "flightapi-io",
+      "name": "FlightAPI.io Flight Price API",
+      "category": "travel",
+      "homepage": "https://www.flightapi.io/",
+      "summary": "Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "setup": {
+            "url": "https://www.flightapi.io/documentation/getting-started/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "docs": {
+            "url": "https://www.flightapi.io/documentation/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "home": {
+            "url": "https://www.flightapi.io/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "price-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://www.flightapi.io/documentation/",
+            "evidence": [
+              "docs"
+            ],
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "home"
+              ]
+            },
+            "costs": [
+              {
+                "kind": "usage",
+                "amount": 2,
+                "unit": "credits",
+                "per": "request",
+                "scope": "One-way or round-trip flight-price query.",
+                "evidence": [
+                  "setup"
+                ]
+              },
+              {
+                "kind": "usage",
+                "amount": 5,
+                "unit": "credits",
+                "per": "request",
+                "scope": "Multi-city flight-price query.",
+                "evidence": [
+                  "setup"
+                ]
+              }
+            ],
+            "notes": "Trial quota units, card requirements and new-account endpoint access still need verification.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "fly-io",
+      "name": "Fly.io",
+      "category": "cloud-hosting",
+      "homepage": "https://fly.io",
+      "summary": "Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.",
+      "submitted_by": "community",
+      "tags": [
+        "vms",
+        "deployment",
+        "edge"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "gemini-api",
+      "name": "Gemini API",
+      "category": "ai-models",
+      "homepage": "https://ai.google.dev",
+      "summary": "Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "gemini",
+        "inference"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "category": "developer-tools",
+      "homepage": "https://github.com",
+      "summary": "Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "git",
+        "code-hosting",
+        "ci-cd"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab",
+      "category": "developer-tools",
+      "homepage": "https://gitlab.com",
+      "summary": "DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "git",
+        "ci-cd",
+        "devops"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana (Grafana Cloud)",
+      "category": "observability-security",
+      "homepage": "https://grafana.com",
+      "summary": "Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.",
+      "submitted_by": "community",
+      "tags": [
+        "observability",
+        "dashboards",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "category": "ai-models",
+      "homepage": "https://groq.com",
+      "summary": "Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "low-latency"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "hugging-face",
+      "name": "Hugging Face",
+      "category": "ai-models",
+      "homepage": "https://huggingface.co",
+      "summary": "Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.",
+      "submitted_by": "community",
+      "tags": [
+        "models",
+        "inference",
+        "hub"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "ignav",
+      "name": "Ignav Flights",
+      "category": "travel",
+      "homepage": "https://ignav.com/",
+      "summary": "Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_and_task_runs",
+      "route_tests": "recorded",
+      "task_runs": [
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260907T083644.877057Z-ignav",
+          "service_id": "ignav",
+          "route_id": "public-playground",
+          "entry_url": "https://ignav.com/playground",
+          "task": {
+            "id": "flights-search-001",
+            "description": "找到9月25日米兰飞往荷兰的机票",
+            "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+            "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+            "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+            "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+            "file": "data/experiments/tasks/travel-flights.md",
+            "version": "v1",
+            "sha256": "d08dd9e778a6d35c3c8f33de4047431874264a4f797a4dab22bb0b86915a707c"
+          },
+          "prompt_sha256": "31f72a5429f29337af7219f97fe4587e516013b96c2753e4a599bb39fcdcda8b",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-07T08:36:44.885519+00:00",
+          "ended_at": "2026-09-07T08:40:09.383809+00:00",
+          "elapsed_seconds": 204.375,
+          "budget_seconds": 600,
+          "environment": {
+            "host": null,
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "none",
+            "web_search": "live"
+          },
+          "status": "completed",
+          "reason": "基础找票任务完成：3个提交方案与当次服务响应及任务参数相符。单次同机试跑，不代表其他入口或长期成功率。",
+          "usage": {
+            "input_tokens": 207427,
+            "cached_input_tokens": 157696,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5517,
+            "reasoning_output_tokens": 913
+          },
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "external preparing Agent; session [CODEX_SESSION]; preserved pilot evidence rechecked",
+            "reviewed_at": "2026-09-07T09:08:17.395227+00:00",
+            "checks": [
+              {
+                "criterion": "实际调用指定服务并提供可核对的最终答案",
+                "passed": true,
+                "evidence": "已审阅events.jsonl和网络调用代码；选取answer.md与请求、真实响应，完整日志hash保留。"
+              },
+              {
+                "criterion": "2026-09-25由MXP/LIN/BGY飞往荷兰；各航段机场、航班号、当地时间符合要求",
+                "passed": true,
+                "evidence": "最终3个方案逐项对照原始响应；独立复核结果见本地review.json selected_options。"
+              },
+              {
+                "criterion": "1名成人，单程经济舱",
+                "passed": true,
+                "evidence": "Explicit request: 1 adult, 0 children/infants; response does not echo passenger count; Explicit request and response: economy"
+              },
+              {
+                "criterion": "搜索报价与币种和真实响应一致",
+                "passed": true,
+                "evidence": "独立解析选取响应，对照answer.md中的3个报价与币种；不检查全网最低价或支付成功。"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260907T083644.877057Z-ignav/answer.md",
+              "sha256": "45b698ae4bb83efcc012b065feffb9b51da4752067e8d5295f39781e9f6ac19c",
+              "note": "Measured final answer; local paths redacted in the public copy, original preserved locally.",
+              "source_sha256": "f43f36121f642753cdb538c8549f722430b03154c473d23f079095b0d3718b49",
+              "redactions": [
+                "local paths or Codex session identifiers"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083644.877057Z-ignav/workspace/evidence/fares-MXP-AMS-request.json",
+              "sha256": "d45c32a9ae2093b635eef7a96afa4104a978cbf94311c36978379a0158bd2098",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083644.877057Z-ignav/workspace/evidence/fares-MXP-AMS-response.json",
+              "sha256": "724db3deb9afd28c931cd0ca82344d11a331809badeae1a1be614d94c3636104",
+              "note": "当次查询参数或真实服务响应"
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/travel-flights/codex-20260907T083644.877057Z-ignav",
+            "run_sha256": "1a287986d9965c94abe2984d0f6f68d30950a765573476b3443cd125e0d34c6c",
+            "events_sha256": "8514f5f1b01c5b8c4a072d63220fe3679909e89cb4eda96a04ce859ce8bf9e9e",
+            "answer_sha256": "f43f36121f642753cdb538c8549f722430b03154c473d23f079095b0d3718b49",
+            "review_sha256": "802c65908e9c7f126a99e02797afca14bc690f373993803d1aea62e0f453bc50",
+            "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          }
+        }
+      ],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "playground": {
+            "url": "https://ignav.com/playground",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "signup": {
+            "url": "https://ignav.com/signup",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "pricing": {
+            "url": "https://ignav.com/pricing",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "api": {
+            "url": "https://ignav.com/docs",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "mcp": {
+            "url": "https://ignav.com/docs/mcp",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "scope": {
+            "url": "https://ignav.com/docs/amadeus-self-service-shutdown",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "public-playground",
+            "interface": "web",
+            "maintainer": "official",
+            "entry_url": "https://ignav.com/playground",
+            "docs": "https://ignav.com/docs",
+            "evidence": [
+              "playground",
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "playground",
+                "api"
+              ]
+            },
+            "auth": {
+              "value": "none",
+              "evidence": [
+                "api"
+              ],
+              "notes": "Docs advertise a no-signup playground. This is the guest website workflow, not customer API or MCP credentials."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "playground",
+                  "api"
+                ]
+              }
+            },
+            "notes": "Public trial UI; limits and selectable markets may differ from the customer API. Experimental observations remain separate from catalog claims.",
+            "task_run_ids": [
+              "codex-20260907T083644.877057Z-ignav"
+            ]
+          },
+          {
+            "id": "flights-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://ignav.com/docs",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "signup"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "signup"
+              ],
+              "notes": "Email signup without payment details is documented; this alone does not establish all later eligibility conditions."
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "requirements": {
+              "email_verification": {
+                "value": "required",
+                "evidence": [
+                  "signup"
+                ]
+              },
+              "payment_method": {
+                "value": "not_required",
+                "evidence": [
+                  "signup"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Verify signup email",
+                "stage": "signup",
+                "evidence": [
+                  "signup"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 1000,
+                "unit": "requests",
+                "per": "one_time",
+                "scope": "One-time account allowance, not monthly.",
+                "evidence": [
+                  "pricing"
+                ]
+              },
+              {
+                "kind": "usage",
+                "amount": 2,
+                "unit": "money",
+                "per": "1000 successful requests",
+                "scope": "Successful HTTP 200 responses; search and booking-link retrieval are separate calls.",
+                "evidence": [
+                  "pricing"
+                ],
+                "currency": "USD"
+              }
+            ],
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "flights.booking-link": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "flights.ticketing": {
+                "value": "unsupported",
+                "evidence": [
+                  "scope"
+                ],
+                "notes": "The API does not issue tickets."
+              }
+            },
+            "task_run_ids": []
+          },
+          {
+            "id": "official-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://ignav.com/docs/mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "via": "flights-api",
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "notes": "Uses Ignav credentials. The API route records published account pricing; MCP tool billing and coverage need confirmation.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "jina",
+      "name": "Jina AI",
+      "category": "web-search-data",
+      "homepage": "https://jina.ai",
+      "summary": "Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "embeddings",
+        "web-reader"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "kayak-affiliate",
+      "name": "KAYAK Affiliate API",
+      "category": "travel",
+      "homepage": "https://affiliates.kayak.com/",
+      "summary": "Affiliate flight APIs with a business application and an optional requested sandbox.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "apply": {
+            "url": "https://affiliates.kayak.com/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "docs": {
+            "url": "https://developers.kayak.com/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "affiliate-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.kayak.com/",
+            "evidence": [
+              "docs"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "apply"
+              ]
+            },
+            "requirements": {
+              "company": {
+                "value": "required",
+                "evidence": [
+                  "apply"
+                ]
+              },
+              "website": {
+                "value": "required",
+                "evidence": [
+                  "apply"
+                ]
+              },
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "apply"
+                ]
+              }
+            },
+            "personal_access": {
+              "value": "unknown",
+              "notes": "Form requests company, business email and website; acceptance of an individual is not established."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "docs"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Submit business application for review",
+                "stage": "activation",
+                "evidence": [
+                  "apply"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "kiwi",
+      "name": "Kiwi.com",
+      "category": "travel",
+      "homepage": "https://www.kiwi.com/",
+      "summary": "Flight search through a publicized MCP path and the separately gated Tequila partnership API.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_and_task_runs",
+      "route_tests": "recorded",
+      "task_runs": [
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260907T083627.884537Z-kiwi",
+          "service_id": "kiwi",
+          "route_id": "search-mcp",
+          "entry_url": "https://mcp.kiwi.com",
+          "task": {
+            "id": "flights-search-001",
+            "description": "找到9月25日米兰飞往荷兰的机票",
+            "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+            "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+            "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+            "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+            "file": "data/experiments/tasks/travel-flights.md",
+            "version": "v1",
+            "sha256": "d08dd9e778a6d35c3c8f33de4047431874264a4f797a4dab22bb0b86915a707c"
+          },
+          "prompt_sha256": "79d0fda918dee8c72ded515ae47c7170e92b2317dfad10d2dd44970e12dd7ef4",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-07T08:36:27.894085+00:00",
+          "ended_at": "2026-09-07T08:39:04.929334+00:00",
+          "elapsed_seconds": 156.912,
+          "budget_seconds": 600,
+          "environment": {
+            "host": null,
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "none",
+            "web_search": "live"
+          },
+          "status": "completed",
+          "reason": "基础找票任务完成：3个提交方案与当次服务响应及任务参数相符。单次同机试跑，不代表其他入口或长期成功率。",
+          "usage": {
+            "input_tokens": 184152,
+            "cached_input_tokens": 129408,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 3754,
+            "reasoning_output_tokens": 305
+          },
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "external preparing Agent; session [CODEX_SESSION]; preserved pilot evidence rechecked",
+            "reviewed_at": "2026-09-07T09:08:17.367754+00:00",
+            "checks": [
+              {
+                "criterion": "实际调用指定服务并提供可核对的最终答案",
+                "passed": true,
+                "evidence": "已审阅events.jsonl和网络调用代码；选取answer.md与请求、真实响应，完整日志hash保留。"
+              },
+              {
+                "criterion": "2026-09-25由MXP/LIN/BGY飞往荷兰；各航段机场、航班号、当地时间符合要求",
+                "passed": true,
+                "evidence": "最终3个方案逐项对照原始响应；独立复核结果见本地review.json selected_options。"
+              },
+              {
+                "criterion": "1名成人，单程经济舱",
+                "passed": true,
+                "evidence": "Explicit request and response: 1 adult, 0 children, 0 infants; Explicit request M; returned Economy"
+              },
+              {
+                "criterion": "搜索报价与币种和真实响应一致",
+                "passed": true,
+                "evidence": "独立解析选取响应，对照answer.md中的3个报价与币种；不检查全网最低价或支付成功。"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/answer.md",
+              "sha256": "c65c9ecdbd0ad91dd37423f2643d00b047547dded6b413be459722a569cdb5f3",
+              "note": "Measured final answer; local paths redacted in the public copy, original preserved locally.",
+              "source_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
+              "redactions": [
+                "local paths or Codex session identifiers"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/bgy-ein-request.json",
+              "sha256": "fe5d70bbb3b3cb5a54599de7d8ed790407abadceb393475424c29de712d155bd",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/bgy-ein-response.txt",
+              "sha256": "ecd16979bb2095418a64b2464e40cc9e764e125a22241862add51e163bd08612",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/lin-ams-request.json",
+              "sha256": "996abb87ad7a396b5b1b068bf18829a16d3b04133815415dfa770be056a4eefc",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/lin-ams-response.txt",
+              "sha256": "c297c2242279f14fb831f7e5eb10927e54d553809d1ba69670fe8b0647a1f0a8",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/mxp-ams-request.json",
+              "sha256": "ef4c8c8fae197a1ef381094d4908c851727840cae36abcc98e99dc68d48c46f4",
+              "note": "当次查询参数或真实服务响应"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T083627.884537Z-kiwi/workspace/evidence/mxp-ams-response.txt",
+              "sha256": "4be837794633ebf4188f3b50482436cfc288bec38bf243dc63789e098f004b10",
+              "note": "当次查询参数或真实服务响应"
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/travel-flights/codex-20260907T083627.884537Z-kiwi",
+            "run_sha256": "d33731e627b437638260f1316dfec5859127349b9dcb1fe835d3e4a809407408",
+            "events_sha256": "2f538d14890073f1a8bfa9ff84ce56a93f954fd2f595456d991a67671b3f53bb",
+            "answer_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
+            "review_sha256": "1e667f6f09f155cedb06b71f18bc1d9bd1a4faa13aaf52e43da81f69c3b2b63d",
+            "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          }
+        },
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260907T091621.435575Z-kiwi",
+          "service_id": "kiwi",
+          "route_id": "search-mcp",
+          "entry_url": "https://mcp.kiwi.com",
+          "task": {
+            "description": "找到9月25日米兰飞往荷兰的机票",
+            "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+            "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+            "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+            "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+            "id": "flights-search-001",
+            "version": "v1",
+            "sha256": "ab11d65b9c290491d37f443c7e077c1c6ac4dd0102b8e16cb6e47b016b401a61",
+            "file": "data/experiments/tasks/travel-flights.md"
+          },
+          "prompt_sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py",
+            "launcher_sha256": "df13723f3910eb545fe8a9535e82e5d36d42b67ca4e3c65cb4b3e130ba3caad7"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-07T09:16:21.457471+00:00",
+          "ended_at": "2026-09-07T09:16:22.457859+00:00",
+          "elapsed_seconds": 1,
+          "budget_seconds": 600,
+          "environment": {
+            "host": {
+              "system": "Darwin",
+              "release": "25.6.0",
+              "architecture": "arm64",
+              "python": "3.13.0"
+            },
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "none",
+            "web_search": "live"
+          },
+          "status": "invalid_run",
+          "reason": "本轮唯一一次启动在 Codex CLI 初始化阶段退出：stderr.log 报 failed to initialize in-process app-server client: Operation not permitted (os error 1)，同时有 PATH aliases 权限警告。run.json 记录 exit_code=1、elapsed_seconds=1.0、timed_out=false；events.jsonl 为空，无 thread.started、turn.completed、answer.md 或服务请求/响应，临时工作目录为空。执行环境阻碍导致无法评估 Kiwi search-mcp，不能作为服务失败或搜索成功。错误具体涉及的受限资源尚未定位；遵守只运行一次要求，未重试、未修改工具或任务。Agent token/费用及服务费用缺少当次用量或账单证据，均记未知。 2026-09-07费用口径修订：本字段统计本次调用服务的新增实付。本轮在初始化阶段退出，没有调用服务或付款，因此服务新增实付由未知修正为0；原始复核说明保留。",
+          "usage": null,
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "external preparing/reviewing Codex Agent in the current repository task; independent of the attempted measured session",
+            "reviewed_at": "2026-09-07T09:17:35.924010+00:00",
+            "checks": [
+              {
+                "criterion": "复用冻结的 flights-search-001 v1，指定 Kiwi search-mcp；固定 gpt-6-astra、xhigh、600 秒并独立启动一次",
+                "passed": true,
+                "evidence": "run.json 的 task、entry_url、model、reasoning_effort、seconds_limit、command 与 prompt.txt 一致；prompt SHA256 已复核。启动命令使用空临时目录、--ephemeral、--ignore-user-config、--ignore-rules，关闭项目指令/技能/插件/记忆注入。未传入研究、旧结果或调用脚本。记录的 harness 为 codex-cli 0.153.4；实际起止为 2026-09-07T09:16:21.457471+00:00 至 2026-09-07T09:16:22.457859+00:00（UTC）；对应 Asia/Shanghai 17:16:21.457471 至 17:16:22.457859。业务出发日期仍为 2026-09-25。启动失败，未产生被测会话事件。"
+              },
+              {
+                "criterion": "至少一个方案满足 MXP/LIN/BGY 出发、荷兰抵达、2026-09-25 当地出发日期、1 名成人、单程经济舱",
+                "passed": false,
+                "evidence": "answer.md 不存在，events.jsonl 为 0 字节，运行目录无 workspace/evidence，原临时工作目录为空；未取得可供核对的方案及旅客参数。此处 false 表示完成条件未获证实，原因是执行环境失败。"
+              },
+              {
+                "criterion": "提供各航段机场、航班号、当地起降日期时间、搜索报价、币种与查询来源，且与指定服务的真实请求/响应一致",
+                "passed": false,
+                "evidence": "未产生最终答复或服务请求/响应，无法核对关键信息；stderr.log 表明 CLI 在初始化 app-server 客户端时退出。未借用历史结果补齐答案。"
+              },
+              {
+                "criterion": "预算内完成任务；执行环境故障单列为无效运行",
+                "passed": false,
+                "evidence": "run.json 记录实际运行 1.0 秒、退出码 1、非超时；stderr.log 的 Operation not permitted 属于本机 Codex 初始化错误，不是 Kiwi 返回的错误。无 turn.completed/usage，不能把脚本返回或未知用量当作成功/零用量。"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/stderr.log",
+              "sha256": "2d8b902fb51c4fb0108c58a40b037f3ed52641f00cdae67901d7cbda9b4b8473",
+              "note": "CLI 初始化失败的原始标准错误；含 PATH aliases 权限警告及 app-server 客户端 Operation not permitted，无凭据。"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/events.jsonl",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "note": "原始事件流为 0 字节；本轮未记录会话启动、工具调用或用量事件。"
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/prompt.txt",
+              "sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+              "note": "本轮冻结的基础找票题、公开入口、预算与统一资源限制；无旧结果、研究资料或服务调用脚本。"
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/trials/codex-20260907T091621.435575Z-kiwi",
+            "run_sha256": "ba0048a3ad4a313c60ef299167f66373eefdd2624de8d0479548a601d8c395a4",
+            "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "answer_sha256": null,
+            "review_sha256": "fa65d54e4c9fd8b2b8f5e5082a966e67ceca1c371c07f413cbcb06c086b65022"
+          }
+        },
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260907T092329.724439Z-kiwi",
+          "service_id": "kiwi",
+          "route_id": "search-mcp",
+          "entry_url": "https://mcp.kiwi.com",
+          "task": {
+            "description": "找到9月25日米兰飞往荷兰的机票",
+            "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+            "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+            "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+            "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+            "id": "flights-search-001",
+            "version": "v1",
+            "sha256": "ab11d65b9c290491d37f443c7e077c1c6ac4dd0102b8e16cb6e47b016b401a61",
+            "file": "data/experiments/tasks/travel-flights.md"
+          },
+          "prompt_sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py",
+            "launcher_sha256": "3882d648e35afddf82400d171e650ee7edff8dc900254abd4d95924ea67e7fa5"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-07T09:23:29.733240+00:00",
+          "ended_at": "2026-09-07T09:27:01.957027+00:00",
+          "elapsed_seconds": 212.222,
+          "budget_seconds": 600,
+          "environment": {
+            "host": {
+              "system": "Darwin",
+              "release": "25.6.0",
+              "architecture": "arm64",
+              "python": "3.13.0"
+            },
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "none",
+            "web_search": "live"
+          },
+          "status": "completed",
+          "reason": "独立核对当次请求、完整服务SSE响应和最终答案，3个方案均满足 flights-search-001 v1：BGY→EIN FR3460 62 EUR、LIN→AMS U25405 68 EUR、MXP→AMS U23851 75 EUR，均为2026-09-25出发、1名成人单程经济舱。单次运行212.222秒内完成，执行中人工介入0。初次GET 406后MCP POST成功，无未解决执行阻碍；仅证明本次基础搜索完成，Agent与服务逐次实付费用未报告，保留未知。 2026-09-07费用口径修订：本字段统计本次调用服务的新增实付。实际使用无账户、无凭据的公开入口，且没有付款，因此将原先因缺账单填写的未知修正为0；原始复核说明保留，不涉及机票报价。",
+          "usage": {
+            "input_tokens": 204087,
+            "cached_input_tokens": 163968,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 5464,
+            "reasoning_output_tokens": 1056
+          },
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "External preparing Codex Agent for the user-requested single Kiwi trial; separate from measured thread [CODEX_SESSION]; reviewer session identifier unavailable.",
+            "reviewed_at": "2026-09-07T09:30:33.986667+00:00",
+            "checks": [
+              {
+                "criterion": "至少一个方案满足原题出发日期及路线范围",
+                "passed": true,
+                "evidence": "三组 search-*-request.json 均 departureDate=25/09/2026、departureDateFlexDays=0；各原始 search-*-response.txt 的 result.structuredContent.itineraries[0] 分别为 BGY→EIN、LIN→AMS、MXP→AMS，departureTime 均为 2026-09-25；segments[0].toCountry=Netherlands。三项均满足原题，允许中转而这三项为直飞。"
+              },
+              {
+                "criterion": "1名成人、单程、经济舱有请求与响应支持",
+                "passed": true,
+                "evidence": "三组请求 adults=1、children=0、infants=0、cabinClass=M 且未提供 returnDate；tools-list-response.txt 中 search-flight 明确 M=economy、省略 returnDate 为单程；三组响应 passengers 回显 1/0/0，所选 itinerary.inbound=null，outbound 与 segments[0].cabinClass 均为 Economy。"
+              },
+              {
+                "criterion": "最终答案包含各航段机场、航班号和当地起降日期时间，且与真实响应相符",
+                "passed": true,
+                "evidence": "独立解析三份原始 SSE 并核对 answer.md：itineraries[0].outbound.segments[0] 分别为 BGY→EIN FR3460 2026-09-25 06:40–08:20、LIN→AMS U25405 06:55–08:50、MXP→AMS U23851 06:10–08:05；每项仅一个航段。tools-list-response.txt 的 search-flight 描述明确 departureTime/arrivalTime 为当地 ISO 时间；各段机场名称、航司及航班号也与答案一致。"
+              },
+              {
+                "criterion": "搜索报价、币种和查询来源有真实服务响应支持",
+                "passed": true,
+                "evidence": "三组原始响应的 result.structuredContent.currency=EUR；itineraries[0].price/priceFormatted 分别为 62/62 EUR、68/68 EUR、75/75 EUR，bookingUrl 分别为 https://kiwi.com/u/gvdxmc、https://kiwi.com/u/dr8nqj、https://kiwi.com/u/p8kc4w，均与 answer.md 一致。请求和实际调用代码均指向 https://mcp.kiwi.com 的 search-flight，未推算报价或核验最低价/支付。"
+              },
+              {
+                "criterion": "独立复核实际调用证据，不能仅采信被测Agent自报或自写验收",
+                "passed": true,
+                "evidence": "外部准备Agent审阅 events.jsonl 的 item_6、item_8、item_9 及本轮生成的 kiwi_probe.py/search_flights.py，并独立解析原始 SSE；三组 result.content 中 JSON 与 structuredContent 相等。三份完整响应的前16000字符与 item_9 原始 stdout 逐字符一致；初始化和工具发现响应与 item_6 stdout 在仅统一换行后完整相等。查询 metadata 均 HTTP 200、response_redacted=false。保留完整响应及 execution-excerpts.json；未运行或采信被测 Agent 的 verify_results.py / selected-options.json。"
+              },
+              {
+                "criterion": "单次独立会话使用固定配置并在600秒预算内完成",
+                "passed": true,
+                "evidence": "run.json 和 prompt.txt 冻结 flights-search-001 v1、search-mcp、gpt-6-astra、xhigh、600秒；新临时目录、--ephemeral、--ignore-user-config、--ignore-rules、project_doc_max_bytes=0 等隔离配置已检查，原题及启动脚本未改。events.jsonl 只有一个 thread.started 和一个 turn.completed；exit_code=0、timed_out=false、耗时212.222秒。仅同机新目录隔离，非全新虚拟机；本次只启动一次被测任务。"
+              },
+              {
+                "criterion": "保留可复核证据，记录实际时间、开销与介入",
+                "passed": true,
+                "evidence": "运行起止 2026-09-07T09:23:29.733240+00:00 至 09:27:01.957027+00:00（UTC），对应 Asia/Shanghai 17:23:29.733240–17:27:01.957027；业务出发日期独立为 2026-09-25。输入204087、缓存输入163968、输出5464、其中推理输出1056来自 turn.completed.usage，与 run.json 一致。没有向执行会话追加消息，人工介入0。全程只观察到公开搜索/文档请求，无注册、订单或付款；未报告逐次服务账单，service_cost_usd=null，Agent逐次实付费用同样未知。初次GET 406为已解决的协议探测问题，后续POST 200；没有未解决的执行阻碍。"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/run.json",
+              "sha256": "831e844ba51f3a0b10a2533cb1596eef4ad64837e323b02065902db77f2639ad",
+              "note": "Frozen task, exact harness/model/effort, UTC runtime timestamps, budget, isolation and measured usage.",
+              "source_sha256": "b4c6b191e0ea4858d79ea676ab3351ce3540d7ba4f41989f15189066d636226c",
+              "redactions": [
+                "local paths or Codex session identifiers"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/prompt.txt",
+              "sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+              "note": "Exact prompt supplied to the one fresh measured session; contains no old result or prewritten calling code."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/answer.md",
+              "sha256": "a44eab97389a7364bd8c667c75c5e7c14d844e3a92c534be00132e905e729e02",
+              "note": "Measured final answer; local paths redacted in the public copy, original preserved locally.",
+              "source_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
+              "redactions": [
+                "local paths or Codex session identifiers"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/execution-excerpts.json",
+              "sha256": "c856b6e0202b4b7baef710f9f32bf3022a0dc86e71a5a3920eced8951a8b7d3f",
+              "note": "Original initialization/search execution events and usage event, selected by the external reviewer; complete logs stay local.",
+              "source_sha256": "2f3d4066b8baf54a9aa7a306f91da94bd5a0cac3776ac89d7e4ca4ba3494cf6d",
+              "redactions": [
+                "local paths or Codex session identifiers"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/kiwi_probe.py",
+              "sha256": "22bf6f226a60a9add227494113e4164c800dba0d9e5de2b7ba1c4e7d30d9aef1",
+              "note": "HTTP client written by the measured Agent during this run; saves service response bytes with credential redaction only."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search_flights.py",
+              "sha256": "b9a2837e9b381f203aa1cea300b7108b496671c2e79ef9a31f9aa5b89006c807",
+              "note": "Flight queries written by the measured Agent during this run; explicit date, passengers, economy and one-way parameters."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/entry-metadata.json",
+              "sha256": "c1417b4139b8b7f315e25fd3c3309f83ebd67b2e8c156eb9aef1580603c7aa04",
+              "note": "Initial GET request and HTTP 406 response status; later POST calls succeed."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/entry-response.txt",
+              "sha256": "2e36ef7d09d4bfe46439dcb0a8ec535f6a882656f2f63aae3c9c348f9b0fbaca",
+              "note": "Initial GET requires Accept: text/event-stream; a resolved protocol discovery step."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/initialize-request.json",
+              "sha256": "1d92eda91c0bbe7ca65ff6033aa5e0ba1302b7513167d7b704c3c647ccd2b2a3",
+              "note": "MCP initialization request to the designated URL."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/initialize-response.txt",
+              "sha256": "acbabb742a15f6dc5e5ebcbf7659fc0a94b36583f05b2147cf1fc88b1af83c32",
+              "note": "Kiwi server identity kiwicom-flight-search 1.28.1."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/tools-list-request.json",
+              "sha256": "6ab26a8d08c93377557d9316b881a2bdc66c15c1611ef827b2310fe8c868559f",
+              "note": "Tool discovery request to the designated URL."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/tools-list-response.txt",
+              "sha256": "f2d1cdf0d30a4a75947e43586db0aa5d2819afa110bc51a72eebe4f5fcde8453",
+              "note": "Actual service tool description: M=economy, omitted returnDate=one-way, timestamps are airport local times."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-request.json",
+              "sha256": "0bc7ba182917df5960e59c7382473329682e8e9ddd7b6d35c39f10257ce54efa",
+              "note": "Actual POST URL and exact search parameters."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-response.txt",
+              "sha256": "9ab3133e94bb8e555992b853eec5744332552b11a576f9ec4b06a4e15d8f7a16",
+              "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-metadata.json",
+              "sha256": "d7ceddd4a445322c96ce36af3b032765b39704e84062ea60316061915acf63d2",
+              "note": "HTTP 200, UTC response time and response_redacted=false."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-request.json",
+              "sha256": "536f6d4ad145aa08dd70b9a4351281b887cb37e94a1d82a537aff478470c924c",
+              "note": "Actual POST URL and exact search parameters."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-response.txt",
+              "sha256": "831ac6f92afacca6a9a6fdcbc460b783f5def624d29b3c23608b2072ed66fb18",
+              "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-metadata.json",
+              "sha256": "e191e29703099a66df57a4f3a4c1a978233844dbda22ba91a24f5e21ed2ec181",
+              "note": "HTTP 200, UTC response time and response_redacted=false."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-request.json",
+              "sha256": "51e60e93550939f257d263ca1fb31abf9a440722dd0473cbbe3be2be8fe907c9",
+              "note": "Actual POST URL and exact search parameters."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-response.txt",
+              "sha256": "dde5a46bd326b6d3dcf2f892ce6dba8dafc24cd693cd83210b59fd00e083afe7",
+              "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-metadata.json",
+              "sha256": "b210adbcb78157f21b4024d4e867b80dd2075885670b484065777d8571e51baa",
+              "note": "HTTP 200, UTC response time and response_redacted=false."
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/trials/codex-20260907T092329.724439Z-kiwi",
+            "run_sha256": "b4c6b191e0ea4858d79ea676ab3351ce3540d7ba4f41989f15189066d636226c",
+            "events_sha256": "4b70c33ea667a92248ca6b72569a39c8cc7d757ed1679731af74febcfd26b241",
+            "answer_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
+            "review_sha256": "dba51a04a317efb59bf950d63ce65b453b538dda09e8d36480c0c57cc41940e4",
+            "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          }
+        }
+      ],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "mcp": {
+            "url": "https://www.kiwi.com/en/pages/mcp/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "tequila": {
+            "url": "https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/",
+            "checked_on": "2026-09-07",
+            "kind": "official_announcement"
+          }
+        },
+        "routes": [
+          {
+            "id": "search-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://mcp.kiwi.com",
+            "evidence": [
+              "mcp"
+            ],
+            "docs": "https://www.kiwi.com/en/pages/mcp/",
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "flights.booking-link": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ],
+              "notes": "The published setup provides only a server URL. Connection experiments are recorded separately; later purchase gates are not established by these docs."
+            },
+            "auth": {
+              "value": "unknown",
+              "notes": "No key is listed in the setup. This catalog field reflects public documentation; observed authentication behavior belongs to the separate experiment record."
+            },
+            "task_run_ids": [
+              "codex-20260907T083627.884537Z-kiwi",
+              "codex-20260907T091621.435575Z-kiwi",
+              "codex-20260907T092329.724439Z-kiwi"
+            ]
+          },
+          {
+            "id": "tequila-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/",
+            "evidence": [
+              "tequila"
+            ],
+            "availability": {
+              "value": "invite_only",
+              "evidence": [
+                "tequila"
+              ]
+            },
+            "requirements": {
+              "invitation": {
+                "value": "required",
+                "evidence": [
+                  "tequila"
+                ]
+              }
+            },
+            "notes": "Keep invitation-only Tequila separate from the search MCP. Current endpoints and task coverage need further research.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "lark",
+      "name": "Lark",
+      "category": "communication",
+      "homepage": "https://www.larksuite.com",
+      "summary": "Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "messaging",
+        "collaboration",
+        "bots"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "lemonsqueezy",
+      "name": "Lemon Squeezy",
+      "category": "payments-billing",
+      "homepage": "https://www.lemonsqueezy.com",
+      "summary": "Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "merchant-of-record",
+        "saas-billing"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "letsfg",
+      "name": "LetsFG Personal Flight Search",
+      "category": "travel",
+      "homepage": "https://letsfg.co/",
+      "summary": "Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "current": {
+            "url": "https://letsfg.co/for-agents",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "repo": {
+            "url": "https://github.com/letsfg/letsfg",
+            "checked_on": "2026-09-07",
+            "kind": "official_repo",
+            "notes": "README still described the retired Stripe flow when reviewed; current site says it retired on 2026-09-02."
+          }
+        },
+        "routes": [
+          {
+            "id": "personal-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://letsfg.co/for-agents",
+            "evidence": [
+              "current"
+            ],
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "current"
+                ]
+              }
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "current"
+              ]
+            },
+            "auth": {
+              "value": "oauth",
+              "evidence": [
+                "current"
+              ]
+            },
+            "requirements": {
+              "payment_method": {
+                "value": "required",
+                "evidence": [
+                  "current"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Complete browser consent and connect a payment method",
+                "stage": "activation",
+                "evidence": [
+                  "current"
+                ],
+                "notes": "Zero-amount setup still authorizes a payment relationship; no consent or payment was performed in this research."
+              }
+            ],
+            "costs": [
+              {
+                "kind": "usage",
+                "amount": 0,
+                "unit": "money",
+                "per": "search",
+                "scope": "Personal flight-search claim only; excludes booking, payment authorization and the separate Developer API.",
+                "evidence": [
+                  "current"
+                ],
+                "currency": "USD"
+              }
+            ],
+            "task_run_ids": []
+          },
+          {
+            "id": "personal-cli",
+            "interface": "cli",
+            "maintainer": "official",
+            "entry_url": "https://github.com/letsfg/letsfg",
+            "evidence": [
+              "repo",
+              "current"
+            ],
+            "notes": "Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift.",
+            "task_run_ids": []
+          },
+          {
+            "id": "personal-sdk",
+            "interface": "sdk",
+            "maintainer": "official",
+            "entry_url": "https://github.com/letsfg/letsfg",
+            "evidence": [
+              "repo",
+              "current"
+            ],
+            "notes": "Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": [
+          "Documentation conflict: current site describes zero-amount Revolut/card setup; repository README described Stripe and older token lifetimes. Recheck current auth discovery before any onboarding. Developer API is a separate paid offering."
+        ]
+      }
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "category": "productivity-storage",
+      "homepage": "https://linear.app",
+      "summary": "Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "issues",
+        "project-management",
+        "graphql"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "lufthansa-partner",
+      "name": "Lufthansa Partner Fare API",
+      "category": "travel",
+      "homepage": "https://developer.lufthansa.com/page",
+      "summary": "Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "notice": {
+            "url": "https://developer.lufthansa.com/page",
+            "checked_on": "2026-09-07",
+            "kind": "official_announcement"
+          },
+          "directory": {
+            "url": "https://developer.lufthansa.com/docs",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "offers": {
+            "url": "https://developer.lufthansa.com/docs/read/api_partner/offers",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "open-api-registration",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developer.lufthansa.com/page",
+            "evidence": [
+              "notice"
+            ],
+            "availability": {
+              "value": "paused",
+              "evidence": [
+                "notice"
+              ],
+              "notes": "The notice pauses new Open API registrations, not every existing partner integration."
+            },
+            "notes": "Public schedule and status APIs are not evidence of consumer fare-search capability.",
+            "task_run_ids": []
+          },
+          {
+            "id": "partner-offers-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developer.lufthansa.com/docs/read/api_partner/offers",
+            "evidence": [
+              "offers"
+            ],
+            "availability": {
+              "value": "unknown",
+              "evidence": [
+                "notice"
+              ],
+              "notes": "Open API registration is on hold; whether a separate Partner application remains possible is unknown."
+            },
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "offers"
+                ]
+              }
+            },
+            "notes": "Public schedule/status APIs do not establish fare-search access. A readable registration form does not override the pause notice.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "luma",
+      "name": "Luma AI (Dream Machine)",
+      "category": "ai-models",
+      "homepage": "https://lumalabs.ai",
+      "summary": "Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "video-generation",
+        "image-generation"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "mem0",
+      "name": "Mem0",
+      "category": "agent-tooling",
+      "homepage": "https://mem0.ai",
+      "summary": "Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "agent-memory",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "minimax",
+      "name": "MiniMax",
+      "category": "ai-models",
+      "homepage": "https://platform.minimax.io",
+      "summary": "MiniMax text, speech, video and music models via the international platform API, with an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "speech",
+        "video-generation"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "category": "ai-models",
+      "homepage": "https://mistral.ai",
+      "summary": "European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "embeddings"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "category": "code-execution",
+      "homepage": "https://modal.com",
+      "summary": "Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "serverless",
+        "sandboxes",
+        "gpu"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "mongodb-atlas",
+      "name": "MongoDB Atlas",
+      "category": "databases",
+      "homepage": "https://www.mongodb.com/products/platform/atlas-database",
+      "summary": "Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "mongodb",
+        "nosql",
+        "managed-database"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "moonshot",
+      "name": "Moonshot AI (Kimi)",
+      "category": "ai-models",
+      "homepage": "https://platform.kimi.ai",
+      "summary": "Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "kimi",
+        "openai-compatible"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "category": "agent-tooling",
+      "homepage": "https://n8n.io",
+      "summary": "Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.",
+      "submitted_by": "community",
+      "tags": [
+        "workflow-automation",
+        "agents",
+        "self-hostable"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "neon",
+      "name": "Neon",
+      "category": "databases",
+      "homepage": "https://neon.com",
+      "summary": "Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.",
+      "submitted_by": "community",
+      "tags": [
+        "postgres",
+        "serverless",
+        "branching"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "netlify",
+      "name": "Netlify",
+      "category": "cloud-hosting",
+      "homepage": "https://www.netlify.com",
+      "summary": "Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "deployment",
+        "jamstack",
+        "serverless"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "category": "productivity-storage",
+      "homepage": "https://www.notion.com",
+      "summary": "Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "docs",
+        "workspace",
+        "knowledge-base"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "category": "ai-models",
+      "homepage": "https://openai.com",
+      "summary": "GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "gpt",
+        "inference"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "category": "ai-models",
+      "homepage": "https://openrouter.ai",
+      "summary": "Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "model-aggregator",
+        "openai-compatible"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "paas-build",
+      "name": "paas.build",
+      "category": "payments-billing",
+      "homepage": "https://paas.build",
+      "summary": "Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.",
+      "submitted_by": "vendor",
+      "tags": [
+        "payments",
+        "payfac",
+        "checkout"
+      ],
+      "record_pool": "candidate",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "paddle",
+      "name": "Paddle",
+      "category": "payments-billing",
+      "homepage": "https://www.paddle.com",
+      "summary": "Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "billing",
+        "merchant-of-record"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity API",
+      "category": "web-search-data",
+      "homepage": "https://www.perplexity.ai",
+      "summary": "Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "answers",
+        "grounding"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "pinecone",
+      "name": "Pinecone",
+      "category": "databases",
+      "homepage": "https://www.pinecone.io",
+      "summary": "Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "vector-database",
+        "rag",
+        "search"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "category": "developer-tools",
+      "homepage": "https://www.postman.com",
+      "summary": "API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "api-tooling",
+        "testing",
+        "collaboration"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "qdrant",
+      "name": "Qdrant",
+      "category": "databases",
+      "homepage": "https://qdrant.tech",
+      "summary": "Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.",
+      "submitted_by": "community",
+      "tags": [
+        "vector-database",
+        "search",
+        "embeddings"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "qunar-flights",
+      "name": "去哪儿机票合作",
+      "category": "travel",
+      "homepage": "https://www.qunar.com/site/zh/Cooperate_4.shtml",
+      "summary": "去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "contact": {
+            "url": "https://www.qunar.com/site/zh/Cooperate_4.shtml",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [],
+        "notes": [
+          "商务联系入口不证明禁止个人；酒店供应商 API 不作为机票搜索证据，routes 暂为空。"
+        ]
+      }
+    },
+    {
+      "id": "qwen",
+      "name": "Alibaba Qwen (Model Studio)",
+      "category": "ai-models",
+      "homepage": "https://www.alibabacloud.com/en/product/modelstudio",
+      "summary": "Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "qwen",
+        "openai-compatible"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "railway",
+      "name": "Railway",
+      "category": "cloud-hosting",
+      "homepage": "https://railway.com",
+      "summary": "App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.",
+      "submitted_by": "community",
+      "tags": [
+        "paas",
+        "deployment"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "redis",
+      "name": "Redis (Redis Cloud)",
+      "category": "databases",
+      "homepage": "https://redis.io",
+      "summary": "In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "key-value",
+        "vector-database",
+        "caching"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "render",
+      "name": "Render",
+      "category": "cloud-hosting",
+      "homepage": "https://render.com",
+      "summary": "Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "paas",
+        "deployment"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "replicate",
+      "name": "Replicate",
+      "category": "ai-models",
+      "homepage": "https://replicate.com",
+      "summary": "Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "models",
+        "inference",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "resend",
+      "name": "Resend",
+      "category": "communication",
+      "homepage": "https://resend.com",
+      "summary": "Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.",
+      "submitted_by": "community",
+      "tags": [
+        "email",
+        "transactional"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "sabre-air",
+      "name": "Sabre Air APIs",
+      "category": "travel",
+      "homepage": "https://developer.sabre.com/",
+      "summary": "Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "workflow": {
+            "url": "https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md",
+            "checked_on": "2026-09-07",
+            "kind": "official_repo"
+          },
+          "home": {
+            "url": "https://developer.sabre.com/",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "air-workflow-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md",
+            "evidence": [
+              "workflow"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "workflow"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "workflow"
+              ]
+            },
+            "human_steps": [
+              {
+                "step": "Contact sales to obtain EPR, IPCC and password",
+                "stage": "credentials",
+                "evidence": [
+                  "workflow"
+                ]
+              }
+            ],
+            "notes": "This older workflow is evidence for its own credential path only.",
+            "task_run_ids": []
+          },
+          {
+            "id": "agentic-mcp-lead",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://developer.sabre.com/",
+            "evidence": [
+              "home"
+            ],
+            "notes": "Current developer homepage advertises Agentic API/MCP. Exact product, tools and onboarding need research; do not copy legacy workflow gates onto it.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "scrapingdog-flights",
+      "name": "Scrapingdog Google Flights API",
+      "category": "travel",
+      "homepage": "https://www.scrapingdog.com/",
+      "summary": "Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "flights": {
+            "url": "https://www.scrapingdog.com/documentation/google-flights-api/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "setup": {
+            "url": "https://www.scrapingdog.com/documentation/",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "flights-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://www.scrapingdog.com/documentation/google-flights-api/",
+            "evidence": [
+              "flights"
+            ],
+            "upstream": "google-flights",
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "flights"
+                ]
+              }
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "costs": [
+              {
+                "kind": "usage",
+                "amount": 5,
+                "unit": "credits",
+                "per": "flight request",
+                "scope": "Do not equate platform free credits to the same number of flight searches.",
+                "evidence": [
+                  "flights"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "searchapi",
+      "name": "SearchApi Google Flights",
+      "category": "travel",
+      "homepage": "https://www.searchapi.io/",
+      "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "flights": {
+            "url": "https://www.searchapi.io/docs/google-flights-api",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "trial": {
+            "url": "https://www.searchapi.io/google-flights-api",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "mcp": {
+            "url": "https://www.searchapi.io/integrations/mcp",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "google-flights-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://www.searchapi.io/docs/google-flights-api",
+            "evidence": [
+              "flights"
+            ],
+            "upstream": "google-flights",
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "flights"
+                ]
+              }
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "flights"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "trial"
+              ]
+            },
+            "requirements": {
+              "payment_method": {
+                "value": "not_required",
+                "evidence": [
+                  "trial"
+                ],
+                "notes": "Trial page explicitly says no credit card."
+              }
+            },
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 100,
+                "unit": "requests",
+                "per": "trial",
+                "scope": "Product-page trial; whether shared across engines requires account verification.",
+                "evidence": [
+                  "trial"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          },
+          {
+            "id": "hosted-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://www.searchapi.io/mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "docs": "https://www.searchapi.io/integrations/mcp",
+            "notes": "Supports browser OAuth or a separate MCP token. Which tools expose the flight task remains untested.",
+            "human_steps": [
+              {
+                "step": "Authorize in browser when choosing OAuth",
+                "stage": "credentials",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "sentry",
+      "name": "Sentry",
+      "category": "observability-security",
+      "homepage": "https://sentry.io",
+      "summary": "Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.",
+      "submitted_by": "community",
+      "tags": [
+        "error-tracking",
+        "observability",
+        "apm"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "serpapi",
+      "name": "SerpApi",
+      "category": "web-search-data",
+      "homepage": "https://serpapi.com",
+      "summary": "Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "scraping"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "flights": {
+            "url": "https://serpapi.com/google-flights-api",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "signup": {
+            "url": "https://serpapi.com/users/sign_up",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "pricing": {
+            "url": "https://serpapi.com/pricing",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "mcp": {
+            "url": "https://github.com/serpapi/serpapi-mcp",
+            "checked_on": "2026-09-07",
+            "kind": "official_repo"
+          }
+        },
+        "routes": [
+          {
+            "id": "google-flights-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://serpapi.com/google-flights-api",
+            "evidence": [
+              "flights"
+            ],
+            "upstream": "google-flights",
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "flights"
+                ]
+              }
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "flights"
+              ]
+            },
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "signup"
+              ]
+            },
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 250,
+                "unit": "searches",
+                "per": "month",
+                "scope": "Platform search allowance; flight-endpoint entitlement and shared usage untested.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "notes": "A third-party Google Flights data service. Not a Google-operated API.",
+            "task_run_ids": []
+          },
+          {
+            "id": "official-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://github.com/serpapi/serpapi-mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "notes": "Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route results.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "category": "commerce-marketing",
+      "homepage": "https://www.shopify.com",
+      "summary": "Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "ecommerce",
+        "graphql",
+        "apps"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "skootle-google-flights",
+      "name": "Skootle Google Flights Scraper",
+      "category": "travel",
+      "homepage": "https://apify.com/skootle/google-flights-scraper",
+      "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "listing": {
+            "url": "https://apify.com/skootle/google-flights-scraper",
+            "checked_on": "2026-09-07",
+            "kind": "publisher_listing"
+          }
+        },
+        "routes": [
+          {
+            "id": "apify-actor-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://apify.com/skootle/google-flights-scraper",
+            "evidence": [
+              "listing"
+            ],
+            "upstream": "google-flights",
+            "capabilities": {
+              "flights.search": {
+                "value": "documented",
+                "evidence": [
+                  "listing"
+                ]
+              }
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "listing"
+              ]
+            },
+            "requirements": {
+              "platform_account": {
+                "value": "required",
+                "evidence": [
+                  "listing"
+                ]
+              }
+            },
+            "notes": "Publisher is Skootle; Apify is the host. Not operated by Google or Apify. Record-based fees, actor version and actual trial eligibility need verification.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "skyscanner",
+      "name": "Skyscanner Travel APIs",
+      "category": "travel",
+      "homepage": "https://www.skyscanner.net/",
+      "summary": "Partner flight APIs and an official MCP, with independently documented business-access paths.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://developers.skyscanner.net/docs/getting-started/authentication",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "mcp": {
+            "url": "https://developers.skyscanner.net/docs/mcp-server",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "partner-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.skyscanner.net/docs/getting-started/authentication",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "api"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "requirements": {
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "Partnership review; personal-use acceptance, fees and waiting time are unknown.",
+            "task_run_ids": []
+          },
+          {
+            "id": "partner-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://developers.skyscanner.net/docs/mcp-server",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "requirements": {
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Contact account manager or partnership team",
+                "stage": "activation",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            ],
+            "notes": "Case-by-case access; an official MCP does not establish personal self-service access.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "category": "communication",
+      "homepage": "https://slack.com",
+      "summary": "Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "messaging",
+        "chat",
+        "platform"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "steel",
+      "name": "Steel",
+      "category": "code-execution",
+      "homepage": "https://steel.dev",
+      "summary": "Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "browser-automation",
+        "headless-browser",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "category": "payments-billing",
+      "homepage": "https://stripe.com",
+      "summary": "Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.",
+      "submitted_by": "community",
+      "tags": [
+        "payments",
+        "billing",
+        "subscriptions"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "category": "databases",
+      "homepage": "https://supabase.com",
+      "summary": "Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.",
+      "submitted_by": "community",
+      "tags": [
+        "postgres",
+        "auth",
+        "baas"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "tavily",
+      "name": "Tavily",
+      "category": "web-search-data",
+      "homepage": "https://www.tavily.com",
+      "summary": "Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "search",
+        "rag",
+        "agents"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram Bot API",
+      "category": "communication",
+      "homepage": "https://telegram.org",
+      "summary": "Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.",
+      "submitted_by": "community",
+      "tags": [
+        "messaging",
+        "bots",
+        "webhooks"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "together-ai",
+      "name": "Together AI",
+      "category": "ai-models",
+      "homepage": "https://www.together.ai",
+      "summary": "Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "inference",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "tongcheng-flights",
+      "name": "同程机票合作",
+      "category": "travel",
+      "homepage": "https://www.ly.com/public/about17u/contactus",
+      "summary": "同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "contact": {
+            "url": "https://www.ly.com/public/about17u/contactus",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          },
+          "platform": {
+            "url": "https://flights.ly.com/open/home",
+            "checked_on": "2026-09-07",
+            "kind": "official_site"
+          }
+        },
+        "routes": [],
+        "notes": [
+          "开放平台页面动态内容无法提取；这不是停服或没有 API 的证据，routes 暂为空。"
+        ]
+      }
+    },
+    {
+      "id": "travelport-tripservices",
+      "name": "Travelport TripServices",
+      "category": "travel",
+      "homepage": "https://developer.travelport.com/",
+      "summary": "Travel distribution API requiring trial requests and provider-provisioned production credentials.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "setup": {
+            "url": "https://developer.travelport.com/docs/getting-started",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "auth": {
+            "url": "https://developer.travelport.com/docs/getting-started/authentication",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "tripservices-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developer.travelport.com/docs/getting-started",
+            "evidence": [
+              "setup"
+            ],
+            "availability": {
+              "value": "application",
+              "evidence": [
+                "setup"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "auth"
+              ]
+            },
+            "requirements": {
+              "approval": {
+                "value": "required",
+                "evidence": [
+                  "setup"
+                ]
+              }
+            },
+            "human_steps": [
+              {
+                "step": "Request trial access; contact sales for customer onboarding",
+                "stage": "activation",
+                "evidence": [
+                  "setup"
+                ]
+              }
+            ],
+            "notes": "Production/pre-production credentials and PCC/point-of-sale context are provisioned. Personal access and trial data realism remain unknown.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "trip-com-flights",
+      "name": "Trip.com Flight Distribution",
+      "category": "travel",
+      "homepage": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+      "summary": "Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "travel/flights"
+        ],
+        "sources": {
+          "supplier": {
+            "url": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+            "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "supplier-fare-maintenance",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+            "evidence": [
+              "supplier"
+            ],
+            "notes": "Supplier fare and rule maintenance with existing distribution permissions/support. Not evidence of consumer itinerary search; no flights.search capability is assigned.",
+            "task_run_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "category": "communication",
+      "homepage": "https://www.twilio.com",
+      "summary": "Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.",
+      "submitted_by": "community",
+      "tags": [
+        "sms",
+        "voice",
+        "telephony"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "upstash",
+      "name": "Upstash",
+      "category": "databases",
+      "homepage": "https://upstash.com",
+      "summary": "Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.",
+      "submitted_by": "community",
+      "tags": [
+        "redis",
+        "serverless",
+        "vector-database"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "vapi",
+      "name": "Vapi",
+      "category": "agent-tooling",
+      "homepage": "https://vapi.ai",
+      "summary": "Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.",
+      "submitted_by": "community",
+      "tags": [
+        "voice-agents",
+        "telephony"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "category": "cloud-hosting",
+      "homepage": "https://vercel.com",
+      "summary": "Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.",
+      "submitted_by": "community",
+      "tags": [
+        "deployment",
+        "serverless",
+        "frontend"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "weaviate",
+      "name": "Weaviate",
+      "category": "databases",
+      "homepage": "https://weaviate.io",
+      "summary": "Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.",
+      "submitted_by": "community",
+      "tags": [
+        "vector-database",
+        "open-source"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "xai",
+      "name": "xAI (Grok API)",
+      "category": "ai-models",
+      "homepage": "https://x.ai",
+      "summary": "xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "grok"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "xquik",
+      "name": "Xquik",
+      "category": "web-search-data",
+      "homepage": "https://xquik.com",
+      "summary": "Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.",
+      "submitted_by": "vendor",
+      "tags": [
+        "x-data",
+        "social-media",
+        "automation"
+      ],
+      "record_pool": "candidate",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "zai",
+      "name": "Z.ai (GLM)",
+      "category": "ai-models",
+      "homepage": "https://z.ai",
+      "summary": "GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.",
+      "submitted_by": "community",
+      "tags": [
+        "llm",
+        "glm",
+        "openai-compatible"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "category": "agent-tooling",
+      "homepage": "https://zapier.com",
+      "summary": "Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.",
+      "submitted_by": "community",
+      "tags": [
+        "automation",
+        "integrations",
+        "workflows"
+      ],
+      "record_pool": "provider",
+      "evidence_level": "legacy_record",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": null
+    }
+  ]
+}

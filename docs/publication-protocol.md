@@ -1,5 +1,7 @@
 # Publication protocol
 
+The `published/` and badge rules below describe the legacy experiment pipeline. The current [task workflow](../data/experiments/AGENTS.md) stages externally reviewed records in `evaluations/` and selected evidence in `evidence/`; local generated views include them for review. Staging and generating files do not commit, push, notify vendors, or authorize external publication.
+
 Every run first lands in `data/experiments/results/<id>/` — local,
 **gitignored**. Publication means a human copies a run's `.yaml` + `.md`
 transcript into `data/experiments/published/<id>/` and commits. The generated

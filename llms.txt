@@ -6,9 +6,15 @@
 
 ## Core Files
 
+- [Flight findings](./docs/flights.zh-CN.md): Discovery, tasks and independently reviewed local Codex trials; limited samples do not establish a general ranking.
+- [Task results](./generated/evaluations.json): Reviewed outcomes, harness/model/effort, timestamps, Agent token usage, service costs and selected evidence.
+- [Execution instructions](./data/experiments/AGENTS.md): Start a fresh measured session from a task, independently review evidence and record results.
+- [Research JSON](./generated/research.json): Cross-category demand research, not a benchmark or usage-frequency estimate.
+- [Research briefs](./data/research/): One source file per category/subcategory, validated by schema/research.schema.json.
+- [Service discovery](./generated/catalog.json): Candidates and documented access routes, with separately identified task observations for each tested route.
 - [Providers JSON](./generated/providers.json): Full machine-readable dataset with derived badges and freshness. Start here.
 - Canonical raw URL for external agents: https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json
-- [MCP server](./mcp/README.md): `npx -y github:Olorinm/agent-friendly-services` — tools search_providers / get_provider / list_categories / get_stats over the same dataset.
+- [MCP server](./mcp/README.md): `npx -y github:Olorinm/agent-friendly-services` — search_services / get_service expose discovery and task observations; search_providers / get_provider / list_categories / get_stats retain the legacy index.
 - [Provider details](./generated/providers.md): Human-readable fact sheets — all entry points, checks, evidence, dates, and open unknowns per provider.
 - [Provider sources](./data/providers/): One YAML per provider (source of truth).
 - [Field definitions](./data/fields.yaml): What every entrypoint and check means, and how each is verified.
@@ -16,8 +22,8 @@
 - [Schema](./schema/provider.schema.json): Provider file schema.
 - [Link health](./generated/link-health.json): Weekly probe results for every URL in the dataset.
 - [Methodology](./docs/methodology.md): Scope, principles, and how verification works.
-- [Contributing](./docs/contributing.md): How to add or update a provider.
-- [Agent instructions](./AGENTS.md): How to contribute to this repo as an agent.
+- [Contributing](./docs/contributing.md): How to maintain providers and user-needs research. Initialize a brief with `npm run research:init -- <category/subcategory>`.
+- [Agent instructions](./AGENTS.md): Core goals and evidence principles; retain durable findings without duplicate process reports.
 
 ## Rules For Agents
 

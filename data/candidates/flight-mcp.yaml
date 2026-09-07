@@ -1,0 +1,136 @@
+id: flight-mcp
+name: Flight MCP
+category: travel
+homepage: https://flight-mcp.com/
+summary: Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    docs:
+      url: https://flight-mcp.com/docs
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://flight-mcp.com/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: authenticated-api
+      interface: api
+      maintainer: official
+      entry_url: https://flight-mcp.com/docs
+      evidence:
+        - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      data_kind:
+        value: mixed
+        evidence:
+          - docs
+        notes: New fetches consume quota; cache hits are free. Freshness and upstream are unverified.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      costs:
+        - kind: free_allowance
+          amount: 300
+          unit: new_fetches
+          per: month
+          scope: Authenticated free plan; cache hits do not consume this allowance.
+          evidence:
+            - pricing
+    - id: authenticated-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://flight-mcp.com/docs
+      evidence:
+        - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      data_kind:
+        value: mixed
+        evidence:
+          - docs
+        notes: New fetches consume quota; cache hits are free. Freshness and upstream are unverified.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      costs:
+        - kind: free_allowance
+          amount: 300
+          unit: new_fetches
+          per: month
+          scope: Authenticated free plan; cache hits do not consume this allowance.
+          evidence:
+            - pricing
+    - id: public-cache-api
+      interface: api
+      maintainer: official
+      entry_url: https://flight-mcp.com/docs
+      evidence:
+        - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      data_kind:
+        value: cached
+        evidence:
+          - docs
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date
+        weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes.
+    - id: public-cache-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://flight-mcp.com/docs
+      evidence:
+        - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      data_kind:
+        value: cached
+        evidence:
+          - docs
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date
+        weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes.

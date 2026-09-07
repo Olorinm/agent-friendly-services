@@ -1,0 +1,72 @@
+id: duffel-flights
+name: Duffel Flights API
+category: travel
+homepage: https://duffel.com/
+summary: Flight API whose self-serve test environment must be distinguished from live account activation.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    setup:
+      url: https://duffel.com/guides/getting-started
+      checked_on: '2026-09-07'
+      kind: official_docs
+    test:
+      url: https://duffel.com/docs/api/overview/test-mode
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: test-api
+      interface: api
+      maintainer: official
+      entry_url: https://duffel.com/docs/api/overview/test-mode
+      evidence:
+        - test
+      data_kind:
+        value: sandbox
+        evidence:
+          - test
+      auth:
+        value: api_key
+        evidence:
+          - setup
+      availability:
+        value: self_serve
+        evidence:
+          - setup
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - test
+      notes: >-
+        Duffel Airways test prices and schedules are fictitious. Test-token success cannot establish live fare
+        access.
+    - id: live-api
+      interface: api
+      maintainer: official
+      entry_url: https://duffel.com/guides/getting-started
+      evidence:
+        - setup
+      personal_access:
+        value: unknown
+        notes: >-
+          Individual/business verification is described; acceptance of this project’s ordinary-person persona
+          is untested.
+      requirements:
+        email_verification:
+          value: required
+          evidence:
+            - setup
+        identity_verification:
+          value: required
+          evidence:
+            - setup
+      human_steps:
+        - step: Verify email and submit individual or business details
+          stage: activation
+          evidence:
+            - setup
+      notes: Live permissions, market coverage and pricing must be checked using a real eligible account.

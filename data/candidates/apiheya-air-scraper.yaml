@@ -1,0 +1,51 @@
+id: apiheya-air-scraper
+name: apiheya Air Scraper
+category: travel
+homepage: https://rapidapi.com/apiheya/api/sky-scrapper/pricing
+summary: >-
+  An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner
+  API.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    endpoint:
+      url: >-
+        https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e
+      checked_on: '2026-09-07'
+      kind: publisher_listing
+    pricing:
+      url: https://rapidapi.com/apiheya/api/sky-scrapper/pricing
+      checked_on: '2026-09-07'
+      kind: publisher_listing
+  routes:
+    - id: rapidapi-product
+      interface: api
+      maintainer: official
+      entry_url: >-
+        https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e
+      evidence:
+        - endpoint
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - endpoint
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - pricing
+      costs:
+        - kind: free_allowance
+          amount: 20
+          unit: requests
+          per: month
+          scope: Listed Basic plan; card requirements and included flight endpoints unverified.
+          evidence:
+            - pricing
+      notes: >-
+        Publisher is apiheya; RapidAPI is the marketplace. Upstream identity is not established by a product
+        slug.

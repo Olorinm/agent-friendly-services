@@ -66,3 +66,65 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+# Flight-route research; source claims only, not a task verification.
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    flights:
+      url: https://serpapi.com/google-flights-api
+      checked_on: '2026-09-07'
+      kind: official_docs
+    signup:
+      url: https://serpapi.com/users/sign_up
+      checked_on: '2026-09-07'
+      kind: official_site
+    pricing:
+      url: https://serpapi.com/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+    mcp:
+      url: https://github.com/serpapi/serpapi-mcp
+      checked_on: '2026-09-07'
+      kind: official_repo
+  routes:
+    - id: google-flights-api
+      interface: api
+      maintainer: official
+      entry_url: https://serpapi.com/google-flights-api
+      evidence:
+        - flights
+      upstream: google-flights
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - flights
+      auth:
+        value: api_key
+        evidence:
+          - flights
+      availability:
+        value: self_serve
+        evidence:
+          - signup
+      costs:
+        - kind: free_allowance
+          amount: 250
+          unit: searches
+          per: month
+          scope: Platform search allowance; flight-endpoint entitlement and shared usage untested.
+          evidence:
+            - pricing
+      notes: A third-party Google Flights data service. Not a Google-operated API.
+    - id: official-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://github.com/serpapi/serpapi-mcp
+      evidence:
+        - mcp
+      notes: >-
+        Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route
+        results.

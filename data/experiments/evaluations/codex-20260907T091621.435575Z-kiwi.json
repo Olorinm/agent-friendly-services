@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T091621.435575Z-kiwi",
+  "service_id": "kiwi",
+  "route_id": "search-mcp",
+  "entry_url": "https://mcp.kiwi.com",
+  "task": {
+    "description": "找到9月25日米兰飞往荷兰的机票",
+    "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+    "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+    "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+    "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+    "id": "flights-search-001",
+    "version": "v1",
+    "sha256": "ab11d65b9c290491d37f443c7e077c1c6ac4dd0102b8e16cb6e47b016b401a61",
+    "file": "data/experiments/tasks/travel-flights.md"
+  },
+  "prompt_sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "df13723f3910eb545fe8a9535e82e5d36d42b67ca4e3c65cb4b3e130ba3caad7"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T09:16:21.457471+00:00",
+  "ended_at": "2026-09-07T09:16:22.457859+00:00",
+  "elapsed_seconds": 1.0,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live"
+  },
+  "status": "invalid_run",
+  "reason": "本轮唯一一次启动在 Codex CLI 初始化阶段退出：stderr.log 报 failed to initialize in-process app-server client: Operation not permitted (os error 1)，同时有 PATH aliases 权限警告。run.json 记录 exit_code=1、elapsed_seconds=1.0、timed_out=false；events.jsonl 为空，无 thread.started、turn.completed、answer.md 或服务请求/响应，临时工作目录为空。执行环境阻碍导致无法评估 Kiwi search-mcp，不能作为服务失败或搜索成功。错误具体涉及的受限资源尚未定位；遵守只运行一次要求，未重试、未修改工具或任务。Agent token/费用及服务费用缺少当次用量或账单证据，均记未知。 2026-09-07费用口径修订：本字段统计本次调用服务的新增实付。本轮在初始化阶段退出，没有调用服务或付款，因此服务新增实付由未知修正为0；原始复核说明保留。",
+  "usage": null,
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing/reviewing Codex Agent in the current repository task; independent of the attempted measured session",
+    "reviewed_at": "2026-09-07T09:17:35.924010+00:00",
+    "checks": [
+      {
+        "criterion": "复用冻结的 flights-search-001 v1，指定 Kiwi search-mcp；固定 gpt-6-astra、xhigh、600 秒并独立启动一次",
+        "passed": true,
+        "evidence": "run.json 的 task、entry_url、model、reasoning_effort、seconds_limit、command 与 prompt.txt 一致；prompt SHA256 已复核。启动命令使用空临时目录、--ephemeral、--ignore-user-config、--ignore-rules，关闭项目指令/技能/插件/记忆注入。未传入研究、旧结果或调用脚本。记录的 harness 为 codex-cli 0.153.4；实际起止为 2026-09-07T09:16:21.457471+00:00 至 2026-09-07T09:16:22.457859+00:00（UTC）；对应 Asia/Shanghai 17:16:21.457471 至 17:16:22.457859。业务出发日期仍为 2026-09-25。启动失败，未产生被测会话事件。"
+      },
+      {
+        "criterion": "至少一个方案满足 MXP/LIN/BGY 出发、荷兰抵达、2026-09-25 当地出发日期、1 名成人、单程经济舱",
+        "passed": false,
+        "evidence": "answer.md 不存在，events.jsonl 为 0 字节，运行目录无 workspace/evidence，原临时工作目录为空；未取得可供核对的方案及旅客参数。此处 false 表示完成条件未获证实，原因是执行环境失败。"
+      },
+      {
+        "criterion": "提供各航段机场、航班号、当地起降日期时间、搜索报价、币种与查询来源，且与指定服务的真实请求/响应一致",
+        "passed": false,
+        "evidence": "未产生最终答复或服务请求/响应，无法核对关键信息；stderr.log 表明 CLI 在初始化 app-server 客户端时退出。未借用历史结果补齐答案。"
+      },
+      {
+        "criterion": "预算内完成任务；执行环境故障单列为无效运行",
+        "passed": false,
+        "evidence": "run.json 记录实际运行 1.0 秒、退出码 1、非超时；stderr.log 的 Operation not permitted 属于本机 Codex 初始化错误，不是 Kiwi 返回的错误。无 turn.completed/usage，不能把脚本返回或未知用量当作成功/零用量。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/stderr.log",
+      "sha256": "2d8b902fb51c4fb0108c58a40b037f3ed52641f00cdae67901d7cbda9b4b8473",
+      "note": "CLI 初始化失败的原始标准错误；含 PATH aliases 权限警告及 app-server 客户端 Operation not permitted，无凭据。"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/events.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "note": "原始事件流为 0 字节；本轮未记录会话启动、工具调用或用量事件。"
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T091621.435575Z-kiwi/prompt.txt",
+      "sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+      "note": "本轮冻结的基础找票题、公开入口、预算与统一资源限制；无旧结果、研究资料或服务调用脚本。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T091621.435575Z-kiwi",
+    "run_sha256": "ba0048a3ad4a313c60ef299167f66373eefdd2624de8d0479548a601d8c395a4",
+    "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "answer_sha256": null,
+    "review_sha256": "fa65d54e4c9fd8b2b8f5e5082a966e67ceca1c371c07f413cbcb06c086b65022"
+  }
+}

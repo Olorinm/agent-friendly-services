@@ -1,0 +1,22 @@
+id: ctrip-flights
+name: 携程机票合作
+category: travel
+homepage: https://pages.ctrip.com/public/dlhz.htm
+summary: 携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    cooperation:
+      url: https://pages.ctrip.com/public/dlhz.htm
+      checked_on: '2026-09-07'
+      kind: official_site
+    developer:
+      url: https://developer.ctrip.com/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes: []
+  notes:
+    - 仅发现合作入口，未把开发者主页登记成已知可调用 API。公开资料不足不等于没有 API。

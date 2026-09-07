@@ -1,6 +1,7 @@
 {
   "name": "agent-friendly-services",
   "version": "0.1.0",
+  "packageManager": "npm@10.9.8",
   "description": "Evidence-backed, machine-readable index of agent-friendly service providers, with an MCP server.",
   "private": true,
   "type": "module",
@@ -10,11 +11,12 @@
     "url": "https://github.com/Olorinm/agent-friendly-services.git"
   },
   "scripts": {
-    "validate": "tsx scripts/validate.ts",
+    "validate": "node --import tsx scripts/validate.ts",
     "probe": "tsx scripts/probe.ts",
-    "generate": "tsx scripts/generate.ts",
-    "test": "npm run validate",
-    "agent-verify": "tsx scripts/agent-verify.ts"
+    "generate": "node --import tsx scripts/generate.ts",
+    "test": "node --import tsx scripts/validate.ts && node --import tsx --test tests/*.test.ts",
+    "agent-verify": "tsx scripts/agent-verify.ts",
+    "research:init": "node --import tsx scripts/research-init.ts"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",

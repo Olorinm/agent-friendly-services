@@ -1,0 +1,22 @@
+# Copy with: npm run research:init -- travel/hotels
+# This is a blank research brief, not evidence that research has been performed.
+version: 1
+classification: category/subcategory
+title: 待填写研究主题
+purpose: 尽可能全面地理解用户需求，持续寻找最真实、最高频的场景，并理解其背景与约束。
+audience: 普通个人；具体使用背景、地区及其他边界待研究，不预设公司或行业资质。
+scope:
+  include: []
+  exclude: []
+sources: {}
+search_log: []
+needs: []
+# Begin with real scenario requests, then name their reusable business actions.
+# Each scenario may link capability_ids to capability_candidates below.
+# Try simpler tasks first; the number and order can change with the evidence.
+scenarios: []
+capability_candidates: []
+gaps:
+  - 明确研究边界，并检索公开的原始用户需求。
+  - 补充不同用户背景、不同目标和相互冲突的偏好。
+  - 记录来源偏差、未覆盖部分和不能确定的结论。

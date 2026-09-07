@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
+import { searchServices } from './catalog.mjs';
 
 const DATA_URL =
   process.env.AFS_DATA_URL ??
@@ -23,11 +24,15 @@ const LOCAL_DATA = path.resolve(
   'providers.json'
 );
 const CACHE_TTL_MS = 15 * 60 * 1000;
+const CATALOG_URL = process.env.AFS_CATALOG_URL ??
+  'https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/catalog.json';
+const LOCAL_CATALOG = path.join(path.dirname(LOCAL_DATA), 'catalog.json');
 
 let cache = null;
 let cachedAt = 0;
 
 async function loadData() {
+  if (process.env.AFS_DATA_DIR) return JSON.parse(fs.readFileSync(path.join(process.env.AFS_DATA_DIR, 'providers.json'), 'utf8'));
   if (cache && Date.now() - cachedAt < CACHE_TTL_MS) return cache;
   try {
     const res = await fetch(DATA_URL, {
@@ -45,6 +50,30 @@ async function loadData() {
       return cache;
     }
     if (cache) return cache; // stale beats nothing
+    throw err;
+  }
+}
+
+let catalogCache = null;
+let catalogCachedAt = 0;
+async function loadCatalog() {
+  if (process.env.AFS_DATA_DIR) return JSON.parse(fs.readFileSync(path.join(process.env.AFS_DATA_DIR, 'catalog.json'), 'utf8'));
+  if (catalogCache && Date.now() - catalogCachedAt < CACHE_TTL_MS) return catalogCache;
+  try {
+    const res = await fetch(CATALOG_URL, { signal: AbortSignal.timeout(10_000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status} from ${CATALOG_URL}`);
+    const data = await res.json();
+    if (data.schema_version !== 1 || !Array.isArray(data.services)) throw new Error('Unsupported discovery catalog format');
+    catalogCache = data;
+    catalogCachedAt = Date.now();
+    return data;
+  } catch (err) {
+    if (fs.existsSync(LOCAL_CATALOG)) {
+      catalogCache = JSON.parse(fs.readFileSync(LOCAL_CATALOG, 'utf8'));
+      catalogCachedAt = Date.now();
+      return catalogCache;
+    }
+    if (catalogCache) return catalogCache;
     throw err;
   }
 }
@@ -94,6 +123,40 @@ function json(value) {
 }
 
 const server = new McpServer({ name: 'agent-friendly-services', version: '0.1.0' });
+
+server.registerTool('search_services', {
+  title: 'Discover services and access routes',
+  description: 'Search candidates and access routes, including gated/unknown access. Documented access fields are public-source claims. Separately reviewed task_runs give outcomes, Agent token usage, service costs and configuration for the matching route only; invalid_run is not a service failure. Interface, capability and personal-access filters must match the SAME route. Missing service costs mean unknown; Agent usage is not converted to money. Use get_service for full review and evidence.',
+  inputSchema: {
+    query: z.string().optional(),
+    category: z.string().optional().describe('Top-level category, e.g. travel.'),
+    subcategory: z.string().optional().describe('Full category/subcategory path, e.g. travel/flights.'),
+    interface: z.enum(['api', 'sdk', 'cli', 'mcp', 'web', 'mobile']).optional(),
+    capability: z.string().optional().describe('Documented outcome, e.g. flights.search; not a measured pass.'),
+    personal_access: z.enum(['documented', 'restricted', 'unknown']).optional(),
+  },
+}, async (filters) => {
+  const data = await loadCatalog();
+  const validCategories = data.categories.map(c => c.id);
+  const validSubcategories = data.categories.flatMap(c => (c.subcategories ?? []).map(s => `${c.id}/${s.id}`));
+  const validCapabilities = [...new Set(data.categories.flatMap(c => (c.subcategories ?? []).flatMap(s => s.capabilities.map(x => x.id))))];
+  if (filters.category && !validCategories.includes(filters.category)) return json({ error: 'Unknown category', valid_categories: validCategories });
+  if (filters.subcategory && !validSubcategories.includes(filters.subcategory)) return json({ error: 'Unknown subcategory', valid_subcategories: validSubcategories });
+  if (filters.capability && !validCapabilities.includes(filters.capability)) return json({ error: 'Unknown capability', valid_capabilities: validCapabilities });
+  const services = searchServices(data, filters);
+  return json({ generated_at: data.generated_at, evidence_notice: data.description, count: services.length, services });
+});
+
+server.registerTool('get_service', {
+  title: 'Get service discovery record',
+  description: 'Get identity, documented routes, source evidence, eligibility, human steps and published cost units, plus separately reviewed task_runs with frozen task, harness/model/effort, date, actual token usage, service costs, outcome and evidence. A run does not certify other tasks or routes. Agent usage is tokens only; unknown service costs remain unknown. invalid_run is an execution environment failure, not a service verdict.',
+  inputSchema: { id: z.string() },
+}, async ({ id }) => {
+  const data = await loadCatalog();
+  const service = data.services.find(s => s.id === id.toLowerCase().trim());
+  return service ? json({ generated_at: data.generated_at, evidence_notice: data.description, persona: data.persona, service })
+    : json({ error: `No service with id "${id}". Use search_services to discover ids.` });
+});
 
 server.registerTool(
   'search_providers',

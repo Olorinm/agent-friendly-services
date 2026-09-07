@@ -1,0 +1,18 @@
+id: qunar-flights
+name: 去哪儿机票合作
+category: travel
+homepage: https://www.qunar.com/site/zh/Cooperate_4.shtml
+summary: 去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    contact:
+      url: https://www.qunar.com/site/zh/Cooperate_4.shtml
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes: []
+  notes:
+    - 商务联系入口不证明禁止个人；酒店供应商 API 不作为机票搜索证据，routes 暂为空。

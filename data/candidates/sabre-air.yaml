@@ -1,0 +1,49 @@
+id: sabre-air
+name: Sabre Air APIs
+category: travel
+homepage: https://developer.sabre.com/
+summary: Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    workflow:
+      url: https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md
+      checked_on: '2026-09-07'
+      kind: official_repo
+    home:
+      url: https://developer.sabre.com/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: air-workflow-api
+      interface: api
+      maintainer: official
+      entry_url: https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md
+      evidence:
+        - workflow
+      availability:
+        value: application
+        evidence:
+          - workflow
+      auth:
+        value: platform_credentials
+        evidence:
+          - workflow
+      human_steps:
+        - step: Contact sales to obtain EPR, IPCC and password
+          stage: credentials
+          evidence:
+            - workflow
+      notes: This older workflow is evidence for its own credential path only.
+    - id: agentic-mcp-lead
+      interface: mcp
+      maintainer: official
+      entry_url: https://developer.sabre.com/
+      evidence:
+        - home
+      notes: >-
+        Current developer homepage advertises Agentic API/MCP. Exact product, tools and onboarding need
+        research; do not copy legacy workflow gates onto it.

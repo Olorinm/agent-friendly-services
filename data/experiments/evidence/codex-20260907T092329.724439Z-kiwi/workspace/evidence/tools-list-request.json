@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-09-07T09:24:24.847249+00:00",
+  "method": "POST",
+  "url": "https://mcp.kiwi.com",
+  "body": {
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list",
+    "params": {}
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/schema/research.schema.json",
+  "title": "User needs and scenario discovery, v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "classification", "title", "purpose", "audience", "scope", "sources", "search_log", "needs", "scenarios", "capability_candidates", "gaps"],
+  "properties": {
+    "version": { "const": 1 },
+    "classification": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$" },
+    "title": { "$ref": "#/definitions/text" },
+    "purpose": { "$ref": "#/definitions/text" },
+    "audience": { "$ref": "#/definitions/text" },
+    "scope": {
+      "type": "object", "additionalProperties": false, "required": ["include", "exclude"],
+      "properties": { "include": { "$ref": "#/definitions/texts" }, "exclude": { "$ref": "#/definitions/texts" } }
+    },
+    "sources": { "type": "object", "propertyNames": { "$ref": "#/definitions/id" }, "additionalProperties": { "$ref": "#/definitions/source" } },
+    "search_log": { "type": "array", "items": { "$ref": "#/definitions/search" } },
+    "needs": { "type": "array", "items": { "$ref": "#/definitions/need" } },
+    "scenarios": { "type": "array", "items": { "$ref": "#/definitions/scenario" } },
+    "capability_candidates": { "type": "array", "items": { "$ref": "#/definitions/capability" } },
+    "gaps": { "$ref": "#/definitions/texts" }
+  },
+  "definitions": {
+    "text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "texts": { "type": "array", "items": { "$ref": "#/definitions/text" }, "uniqueItems": true },
+    "refs": { "type": "array", "items": { "$ref": "#/definitions/id" }, "uniqueItems": true },
+    "needRefs": { "allOf": [{ "$ref": "#/definitions/refs" }], "minItems": 1, "type": "array" },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["url", "kind", "checked_on", "origin_group", "summary"],
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "kind": { "enum": ["public_user_report", "documented_workflow", "provider_docs", "industry_standard", "survey_report"] },
+        "title": { "$ref": "#/definitions/text" },
+        "published_on": { "$ref": "#/definitions/date" },
+        "language": { "$ref": "#/definitions/text" },
+        "locator": { "$ref": "#/definitions/text" },
+        "access": { "enum": ["page_text", "indexed_text"] },
+        "checked_on": { "$ref": "#/definitions/date" },
+        "origin_group": { "$ref": "#/definitions/id" },
+        "summary": { "$ref": "#/definitions/text" },
+        "limitations": { "$ref": "#/definitions/text" }
+      }
+    },
+    "search": {
+      "type": "object", "additionalProperties": false,
+      "required": ["searched_on", "query", "channel", "source_ids", "notes"],
+      "properties": {
+        "searched_on": { "$ref": "#/definitions/date" },
+        "query": { "$ref": "#/definitions/text" },
+        "channel": { "enum": ["web", "repository", "documentation"] },
+        "source_ids": { "$ref": "#/definitions/refs" },
+        "notes": { "$ref": "#/definitions/text" }
+      }
+    },
+    "need": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "actor", "trigger", "outcome", "constraints", "basis", "evidence", "reasoning"],
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "actor": { "$ref": "#/definitions/text" },
+        "trigger": { "$ref": "#/definitions/text" },
+        "outcome": { "$ref": "#/definitions/text" },
+        "constraints": { "$ref": "#/definitions/texts" },
+        "basis": { "enum": ["reported", "inferred", "hypothesis"] },
+        "evidence": { "$ref": "#/definitions/refs" },
+        "reasoning": { "$ref": "#/definitions/text" },
+        "conflicts_with": { "$ref": "#/definitions/refs" },
+        "open_questions": { "$ref": "#/definitions/texts" }
+      }
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "need_ids", "request", "assumptions", "status", "reason", "testability"],
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "title": { "$ref": "#/definitions/text" },
+        "need_ids": { "$ref": "#/definitions/needRefs" },
+        "request": { "$ref": "#/definitions/text" },
+        "capability_ids": { "$ref": "#/definitions/refs" },
+        "assumptions": { "$ref": "#/definitions/texts" },
+        "variants": { "$ref": "#/definitions/texts" },
+        "status": { "enum": ["candidate", "retained", "deferred"] },
+        "reason": { "$ref": "#/definitions/text" },
+        "testability": { "enum": ["unknown", "feasible", "blocked"] },
+        "testability_notes": { "$ref": "#/definitions/text" }
+      },
+      "allOf": [{ "if": { "properties": { "testability": { "const": "blocked" } } }, "then": { "required": ["testability_notes"] } }]
+    },
+    "capability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "outcome", "need_ids", "evidence", "reasoning"],
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "outcome": { "$ref": "#/definitions/text" },
+        "need_ids": { "$ref": "#/definitions/needRefs" },
+        "evidence": { "$ref": "#/definitions/refs" },
+        "reasoning": { "$ref": "#/definitions/text" },
+        "catalog_id": { "type": "string", "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$" }
+      }
+    }
+  }
+}

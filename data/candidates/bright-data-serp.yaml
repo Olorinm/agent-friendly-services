@@ -1,0 +1,55 @@
+id: bright-data-serp
+name: Bright Data SERP API
+category: travel
+homepage: https://brightdata.com/
+summary: >-
+  SERP API with a documented Google Flights request; structured fare extraction and onboarding need
+  verification.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    flights:
+      url: https://docs.brightdata.com/api-reference/serp/google-flights/currency
+      checked_on: '2026-09-07'
+      kind: official_docs
+    billing:
+      url: https://docs.brightdata.com/general/account/billing-and-pricing/payment-verification
+      checked_on: '2026-09-07'
+      kind: official_docs
+    quickstart:
+      url: https://docs.brightdata.com/cn/scraping-automation/serp-api/quickstart
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: google-flights-serp
+      interface: api
+      maintainer: official
+      entry_url: https://docs.brightdata.com/api-reference/serp/google-flights/currency
+      evidence:
+        - flights
+      upstream: google-flights
+      auth:
+        value: api_key
+        evidence:
+          - quickstart
+      requirements:
+        payment_method:
+          value: unknown
+          evidence:
+            - billing
+            - quickstart
+          notes: >-
+            Current account policy permits personal-email SERP trial credits; Chinese quickstart still
+            requires payment setup.
+      capabilities:
+        flights.search:
+          value: unknown
+          evidence:
+            - flights
+          notes: >-
+            Published example returns HTML in its body; complete structured flight results are not yet
+            established.
+      notes: Requires a SERP zone. Do not apply other Bright Data products’ payment requirements to this route.

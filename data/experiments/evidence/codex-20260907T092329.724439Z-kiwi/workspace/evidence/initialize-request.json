@@ -1,0 +1,18 @@
+{
+  "timestamp_utc": "2026-09-07T09:24:22.508802+00:00",
+  "method": "POST",
+  "url": "https://mcp.kiwi.com",
+  "body": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {
+      "protocolVersion": "2024-11-05",
+      "capabilities": {},
+      "clientInfo": {
+        "name": "flight-evidence-client",
+        "version": "1.0"
+      }
+    }
+  }
+}

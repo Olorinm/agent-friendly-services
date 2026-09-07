@@ -55,6 +55,9 @@ if (layer !== 'real' && (args.milestone || ladder)) throw new Error('Milestones 
 // candidate is exactly what decides its promotion (docs/candidate-pool.md).
 const provider = [...loadProviders(), ...loadCandidates()].map((p) => p.data).find((p) => p.id === id);
 if (!provider) throw new Error(`Unknown provider id: ${id} (looked in data/providers/ and data/candidates/)`);
+if (!provider.entrypoints.docs) {
+  throw new Error('Discovery-only candidate: this legacy runner needs a reviewed test entrypoint. Select a catalog route, task and provisioning first; see docs/catalog-standard.zh-CN.md. No test was started.');
+}
 
 const CRED_DIR = process.env.AFS_CRED_DIR ?? path.join(os.homedir(), '.afs/credentials');
 const cred = (ext: string) => path.join(CRED_DIR, `${id}.${ext}`);

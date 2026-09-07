@@ -1,0 +1,48 @@
+id: scrapingdog-flights
+name: Scrapingdog Google Flights API
+category: travel
+homepage: https://www.scrapingdog.com/
+summary: Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    flights:
+      url: https://www.scrapingdog.com/documentation/google-flights-api/
+      checked_on: '2026-09-07'
+      kind: official_docs
+    setup:
+      url: https://www.scrapingdog.com/documentation/
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: flights-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.scrapingdog.com/documentation/google-flights-api/
+      evidence:
+        - flights
+      upstream: google-flights
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - flights
+      availability:
+        value: self_serve
+        evidence:
+          - setup
+      auth:
+        value: api_key
+        evidence:
+          - setup
+      costs:
+        - kind: usage
+          amount: 5
+          unit: credits
+          per: flight request
+          scope: Do not equate platform free credits to the same number of flight searches.
+          evidence:
+            - flights

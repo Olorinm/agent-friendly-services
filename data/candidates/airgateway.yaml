@@ -1,0 +1,54 @@
+id: airgateway
+name: AirGateway Platform API
+category: travel
+homepage: https://airgateway.com/
+summary: Air distribution API with sandbox keys, production certification and an agency application.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    api:
+      url: https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api
+      checked_on: '2026-09-07'
+      kind: official_docs
+    agencies:
+      url: https://airgateway.com/agencies/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: agency-api
+      interface: api
+      maintainer: official
+      entry_url: https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api
+      evidence:
+        - api
+      availability:
+        value: application
+        evidence:
+          - agencies
+      auth:
+        value: api_key
+        evidence:
+          - api
+      personal_access:
+        value: restricted
+        evidence:
+          - agencies
+        notes: The discovered agency route requires a company and IATA number.
+      requirements:
+        company:
+          value: required
+          evidence:
+            - agencies
+        industry_license:
+          value: required
+          evidence:
+            - agencies
+        approval:
+          value: required
+          evidence:
+            - api
+          notes: Production certification follows sandbox setup.
+      notes: This does not prove the absence of other individual-facing AirGateway products.

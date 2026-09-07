@@ -1,0 +1,91 @@
+id: letsfg
+name: LetsFG Personal Flight Search
+category: travel
+homepage: https://letsfg.co/
+summary: Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    current:
+      url: https://letsfg.co/for-agents
+      checked_on: '2026-09-07'
+      kind: official_docs
+    repo:
+      url: https://github.com/letsfg/letsfg
+      checked_on: '2026-09-07'
+      kind: official_repo
+      notes: >-
+        README still described the retired Stripe flow when reviewed; current site says it retired on
+        2026-09-02.
+  routes:
+    - id: personal-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://letsfg.co/for-agents
+      evidence:
+        - current
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - current
+      personal_access:
+        value: documented
+        evidence:
+          - current
+      auth:
+        value: oauth
+        evidence:
+          - current
+      requirements:
+        payment_method:
+          value: required
+          evidence:
+            - current
+      human_steps:
+        - step: Complete browser consent and connect a payment method
+          stage: activation
+          evidence:
+            - current
+          notes: >-
+            Zero-amount setup still authorizes a payment relationship; no consent or payment was performed in
+            this research.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          per: search
+          scope: >-
+            Personal flight-search claim only; excludes booking, payment authorization and the separate
+            Developer API.
+          evidence:
+            - current
+          currency: USD
+    - id: personal-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://github.com/letsfg/letsfg
+      evidence:
+        - repo
+        - current
+      notes: >-
+        Official repository advertises this interface (Python/JS for SDK). Installation version, current auth
+        compatibility and route-specific gates remain unverified due to documentation drift.
+    - id: personal-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://github.com/letsfg/letsfg
+      evidence:
+        - repo
+        - current
+      notes: >-
+        Official repository advertises this interface (Python/JS for SDK). Installation version, current auth
+        compatibility and route-specific gates remain unverified due to documentation drift.
+  notes:
+    - >-
+      Documentation conflict: current site describes zero-amount Revolut/card setup; repository README
+      described Stripe and older token lifetimes. Recheck current auth discovery before any onboarding.
+      Developer API is a separate paid offering.

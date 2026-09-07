@@ -1,0 +1,49 @@
+id: flights-fixed-itinerary-v1
+version: 1
+category: travel
+classification: travel/flights
+mode: exploratory_smoke
+research:
+  file: data/research/travel/flights.yaml
+  scenario_id: fixed-itinerary
+scenario: >-
+  2026年9月25日，两位成人从北京首都或大兴机场前往烟台。
+  请找经济舱直飞，08:00（含）到12:00（不含）起飞、当天14:00前抵达的航班，
+  列出航班号、机场、起降时间和两人的人民币搜索总报价。
+  不满足条件的方案不要作为推荐；没有结果或不能确认的条件请明确说明。
+inputs:
+  departure_date: '2026-09-25'
+  origin_airports: [PEK, PKX]
+  destination_airport: YNT
+  adults: 2
+  children: 0
+  infants: 0
+  cabin: economy
+  max_stops: 0
+  departure_local: {from: '08:00', until: '12:00'}
+  arrival_local_before: '14:00'
+  timezone: Asia/Shanghai
+  currency: CNY
+  preferred_point_of_sale: CN
+  baggage: no_additional_requirement
+selection_reason: 首轮固定行程场景；具体未来日期、成人身份、机场及时段由试跑设计补充，并非原帖原始参数。
+verification:
+  - 独立读取保存的原始响应，逐条检查日期、机场、人数、经济舱、直飞、起降时段与币种。
+  - 两人搜索总报价必须有返回字段或请求上下文支持，不用单人价格乘二。
+  - 对找到的匹配行程再次查询，核对航班与当前报价；变化如实保留，不要求动态票价恒定。
+  - 接口空结果只证明本次未返回报价，不能证明市场没有航班；未经外部核验不认定为正确的无结果。
+  - 仅凭结构符合或重复返回不能证明票价可支付；购买、库存及跨来源准确性未验证时单独标明。
+comparison:
+  - 同一任务输入、同一机器；相近时间查询，记录实际时间差及每条路径的条件偏差。
+  - 不支持指定销售市场时记未确认，语言和币种不替代销售市场，不做跨市场价格排名。
+  - 本次由当前会话探索并制作调用脚本，非独立新会话测评；不据此比较模型能力或接入速度。
+  - MCP、网页试用与需密钥API分别记入口，试用成功不自动证明另一入口成功。
+budget:
+  new_service_spend: 0
+  paid_model_invocations: 0
+  max_search_calls_per_service: 6
+  per_call_timeout_seconds: 60
+  agent_cost: unmeasured_current_codex_session
+allowed_actions: [read_documentation, connect_public_mcp, search_public_fares, use_public_playground]
+excluded_actions: [create_booking, pay, add_payment_method, start_subscription]
+cleanup: 无订单或付费资源；结果保存在gitignored实验目录，复用脚本留在scripts。

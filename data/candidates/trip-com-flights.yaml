@@ -1,0 +1,28 @@
+id: trip-com-flights
+name: Trip.com Flight Distribution
+category: travel
+homepage: >-
+  https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html
+summary: Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    supplier:
+      url: >-
+        https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: supplier-fare-maintenance
+      interface: api
+      maintainer: official
+      entry_url: >-
+        https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html
+      evidence:
+        - supplier
+      notes: >-
+        Supplier fare and rule maintenance with existing distribution permissions/support. Not evidence of
+        consumer itinerary search; no flights.search capability is assigned.

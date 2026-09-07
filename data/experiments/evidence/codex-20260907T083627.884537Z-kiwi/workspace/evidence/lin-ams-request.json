@@ -1,0 +1,29 @@
+{
+  "method": "POST",
+  "url": "https://mcp.kiwi.com",
+  "headers": {
+    "Accept": "application/json, text/event-stream",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "jsonrpc": "2.0",
+    "id": "lin-ams",
+    "method": "tools/call",
+    "params": {
+      "name": "search-flight",
+      "arguments": {
+        "flyFrom": "LIN",
+        "flyTo": "AMS",
+        "departureDate": "25/09/2026",
+        "departureDateFlexDays": 0,
+        "adults": 1,
+        "children": 0,
+        "infants": 0,
+        "cabinClass": "M",
+        "currency": "EUR",
+        "sort": "price"
+      }
+    }
+  },
+  "queried_at_utc": "2026-09-07T08:37:28.812908+00:00"
+}

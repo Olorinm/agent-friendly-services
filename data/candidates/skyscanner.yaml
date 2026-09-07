@@ -1,0 +1,61 @@
+id: skyscanner
+name: Skyscanner Travel APIs
+category: travel
+homepage: https://www.skyscanner.net/
+summary: Partner flight APIs and an official MCP, with independently documented business-access paths.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    api:
+      url: https://developers.skyscanner.net/docs/getting-started/authentication
+      checked_on: '2026-09-07'
+      kind: official_docs
+    mcp:
+      url: https://developers.skyscanner.net/docs/mcp-server
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: partner-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.skyscanner.net/docs/getting-started/authentication
+      evidence:
+        - api
+      availability:
+        value: application
+        evidence:
+          - api
+      auth:
+        value: api_key
+        evidence:
+          - api
+      requirements:
+        approval:
+          value: required
+          evidence:
+            - api
+      notes: Partnership review; personal-use acceptance, fees and waiting time are unknown.
+    - id: partner-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://developers.skyscanner.net/docs/mcp-server
+      evidence:
+        - mcp
+      availability:
+        value: application
+        evidence:
+          - mcp
+      requirements:
+        approval:
+          value: required
+          evidence:
+            - mcp
+      human_steps:
+        - step: Contact account manager or partnership team
+          stage: activation
+          evidence:
+            - mcp
+      notes: Case-by-case access; an official MCP does not establish personal self-service access.

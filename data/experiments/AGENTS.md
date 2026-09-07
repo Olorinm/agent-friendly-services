@@ -1,0 +1,62 @@
+# 执行、验收与结果回填
+
+目的：把候选表和任务表变成可核对的实际结果，让用户知道哪个入口能完成任务、需要多少开销。复用已有候选和任务；只有资料不足或需求变化时才继续研究，不重复制造中间报告。
+
+准备/验收Agent可以读仓库。被测Agent必须是独立新会话，只获得冻结的题目、指定入口和统一资源，不能收到研究材料、历史答案、提前写好的服务适配代码或本文件。
+
+## 从已有分类接手
+
+1. 读根目录理念、对应候选与任务表。选定服务ID、入口ID、任务ID与版本。新需求按`tasks/AGENTS.md`出题；确定完成条件后再运行。任务日期过期时先更新题目与版本，不让执行Agent自行改变题目。
+2. `npm run validate`、`npm run generate`检查数据并更新目录。入口来自`generated/catalog.json`，任务来自Markdown任务表。按同一批次固定harness、模型、思考等级、预算、工具和凭据条件；不同设置的结果分别记录。
+3. 启动独立执行。例如以下是运行命令，不是提供给被测Agent的解法：
+
+   ```sh
+   python3 scripts/codex-service-trial.py kiwi --route search-mcp \
+     --task-file data/experiments/tasks/travel-flights.md --task flights-search-001 \
+     --model gpt-6-astra --reasoning-effort xhigh --seconds 600
+   ```
+
+   服务与任务参数可以换成表里的其他记录；`--prepare-only`只生成并保存prompt和配置。脚本沿用本机Codex登录，要求全局AGENTS为空，关闭被测会话的项目指令/技能/插件/记忆注入。当前提供终端与联网检索、不提供服务凭据；需要注册、验证码、付费或人工凭据就记录阻碍。它是同机新目录隔离，非虚拟机；环境不满足时修复环境或记为运行阻碍，不将其归因于服务。
+
+   **在Codex内编排时，启动脚本应通过宿主机终端或获准提升权限的shell执行。** macOS沙箱里嵌套启动Codex可能在初始化app-server前报`Operation not permitted`；这是启动环境问题。已有启动授权时，为这一条启动命令申请`require_escalated`即可，被测Codex仍保留脚本设置的`workspace-write`沙箱，不改为全盘访问。未获授权则记录阻碍，不绕过审批。环境无效的尝试保留记录，修复后用全新会话重跑，不计作供应商失败。
+4. 等进程结束，保留它输出的结果目录。外部Agent读`run.json`中的冻结任务、`answer.md`、`events.jsonl`和`workspace/evidence/`。核对调用确实来自指定服务、请求参数与任务一致、答案由真实响应支持；不要执行或采信被测Agent写的校验器来替代复核。
+5. 在结果目录内、`workspace/`之外写`assessment.json`。按原先完成标准逐项核对，完整填好以下字段（示意中的空值必须据证据填写，不是默认判定）：
+
+   ```json
+   {
+     "status": null,
+     "reason": "",
+     "reviewer": "external preparing Agent / session identifier if available",
+     "checks": [
+       {"criterion": "任务的某条完成条件", "passed": false, "evidence": "请求/响应/答案的具体位置及核对结果"}
+     ],
+     "evidence": [
+       {"path": "workspace/evidence/实际文件名", "note": "此文件支持什么判断"}
+     ],
+     "service_cost_usd": null,
+     "human_interventions": null
+   }
+   ```
+
+   `status`为`completed`、`not_completed`或`invalid_run`。成功必须满足全部完成条件；缺凭据、无结果、任务超时等写清原因。环境故障用`invalid_run`。遇到无法证实的答案，不猜为成功。选取足够核对结论的请求、真实响应、答案或失败证据；先确认脱敏，原始完整日志保留本地。对动态查询核对当次证据，不固定未来价格答案。
+
+   `service_cost_usd`记录本次调用服务新增的实付，不含机票等业务商品价格。能够确认未使用付费账户/凭据且未付款，或服务根本未被调用时，新增实付记0；存在付费调用但无法确认金额时填null，不能仅因为脚本没报费用就填0。`human_interventions`来自当次观察，不知道填null。Agent侧只记录输入、其中缓存输入与输出token，不计算或填写Agent货币费用。token、耗时和配置由下一步直接从真实运行记录读取，复核者不重算或估填；保留模型与harness等配置用于解释用量差异。
+6. 回填结果并更新展示：
+
+   ```sh
+   python3 scripts/record-trial.py <结果目录> --review <结果目录>/assessment.json
+   npm run validate
+   npm run generate
+   ```
+
+   检查`generated/evaluations.md`出现新行、`generated/catalog.json`的对应服务/入口出现该次`task_runs`，其他入口不继承成功。MCP的`search_services`和`get_service`从同一目录读取这些结果；本机检查时设置`AFS_DATA_DIR`指向当前`generated/`。
+
+## 留下什么
+
+- 候选表、任务表、[结果表](../../generated/evaluations.md)是主交付。`data/experiments/evaluations/`保存精简结果源，`evidence/`保留选取的证据；原始`results/`日志仍gitignored。
+- 记录harness版本、模型、思考等级、实际起止时间/时区、任务版本与hash、接入条件和验收依据。历史观察保留；新运行追加，修订旧结论要解释原因，不静默覆盖。
+- 公开副本不保留本机用户名、目录路径或Codex会话ID。记录工具替换已知路径和会话标识，原始文件仍留在本地；发生脱敏时同时保留原文件hash与公开副本hash，并说明原因。Agent仍需检查密钥、Cookie、私人消息等内容，不能把自动替换当作完整隐私审查。
+- 录入工作区与公开发布是不同操作。当前流程不自动提交/推送，不联系服务商；外部发布沿用维护者的授权范围。
+- 脚本负责重复动作，Agent负责研究与证据判断。格式可以调整，限制来自真实任务与公平性要求；调整工具后做相应验证。
+
+旧的`npm run agent-verify`、`published/`及milestone文档属于历史Claude实验链路，不用于本次流程。

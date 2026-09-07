@@ -1,0 +1,59 @@
+id: flightapi-io
+name: FlightAPI.io Flight Price API
+category: travel
+homepage: https://www.flightapi.io/
+summary: Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    setup:
+      url: https://www.flightapi.io/documentation/getting-started/
+      checked_on: '2026-09-07'
+      kind: official_docs
+    docs:
+      url: https://www.flightapi.io/documentation/
+      checked_on: '2026-09-07'
+      kind: official_docs
+    home:
+      url: https://www.flightapi.io/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: price-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.flightapi.io/documentation/
+      evidence:
+        - docs
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      auth:
+        value: api_key
+        evidence:
+          - setup
+      availability:
+        value: self_serve
+        evidence:
+          - home
+      costs:
+        - kind: usage
+          amount: 2
+          unit: credits
+          per: request
+          scope: One-way or round-trip flight-price query.
+          evidence:
+            - setup
+        - kind: usage
+          amount: 5
+          unit: credits
+          per: request
+          scope: Multi-city flight-price query.
+          evidence:
+            - setup
+      notes: Trial quota units, card requirements and new-account endpoint access still need verification.

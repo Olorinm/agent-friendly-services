@@ -1,0 +1,2 @@
+# Retain this reviewed failure evidence; raw runtime logs remain in results/.
+!stderr.log

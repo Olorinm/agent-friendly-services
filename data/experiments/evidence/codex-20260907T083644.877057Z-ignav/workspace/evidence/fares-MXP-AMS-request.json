@@ -1,0 +1,21 @@
+{
+  "method": "POST",
+  "url": "https://ignav.com/api/playground/fares/one-way",
+  "parameters": {
+    "origin": "MXP",
+    "destination": "AMS",
+    "departure_date": "2026-09-25",
+    "adults": 1,
+    "children": 0,
+    "infants_in_seat": 0,
+    "infants_on_lap": 0,
+    "cabin_class": "economy",
+    "allow_self_transfer": true,
+    "market": "NL"
+  },
+  "requested_at_utc": "2026-09-07T08:38:32.467229+00:00",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "authentication_note": "Anonymous Playground session held only in memory; authentication headers omitted."
+}

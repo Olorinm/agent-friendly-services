@@ -1,0 +1,96 @@
+id: aviasales
+name: Aviasales via Travelpayouts
+category: travel
+homepage: https://www.aviasales.com/
+summary: Travelpayouts-distributed live flight search and a separately accessible historical price-data API.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    search:
+      url: >-
+        https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API
+      checked_on: '2026-09-07'
+      kind: official_docs
+    token:
+      url: >-
+        https://support.travelpayouts.com/hc/en-us/articles/203956083-Requirements-for-Aviasales-data-API-access
+      checked_on: '2026-09-07'
+      kind: official_docs
+    data:
+      url: https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: live-search-api
+      interface: api
+      maintainer: official
+      entry_url: >-
+        https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API
+      evidence:
+        - search
+      availability:
+        value: application
+        evidence:
+          - search
+      personal_access:
+        value: restricted
+        evidence:
+          - search
+        notes: The ordinary-person persona has no project with 50,000+ confirmed monthly active users.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - search
+        approval:
+          value: required
+          evidence:
+            - search
+        traffic:
+          value: required
+          evidence:
+            - search
+          notes: 50,000+ confirmed monthly active users.
+      data_kind:
+        value: live
+        evidence:
+          - search
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - search
+    - id: cached-data-api
+      interface: api
+      maintainer: official
+      entry_url: https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API
+      evidence:
+        - data
+      availability:
+        value: self_serve
+        evidence:
+          - token
+      auth:
+        value: api_key
+        evidence:
+          - token
+      data_kind:
+        value: cached
+        evidence:
+          - data
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - token
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - data
+      notes: >-
+        Historical user-search cache for price trends and inspiration. Each method has its own time window; no
+        fresh search is triggered.

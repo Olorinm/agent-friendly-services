@@ -1,0 +1,47 @@
+id: travelport-tripservices
+name: Travelport TripServices
+category: travel
+homepage: https://developer.travelport.com/
+summary: Travel distribution API requiring trial requests and provider-provisioned production credentials.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    setup:
+      url: https://developer.travelport.com/docs/getting-started
+      checked_on: '2026-09-07'
+      kind: official_docs
+    auth:
+      url: https://developer.travelport.com/docs/getting-started/authentication
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: tripservices-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.travelport.com/docs/getting-started
+      evidence:
+        - setup
+      availability:
+        value: application
+        evidence:
+          - setup
+      auth:
+        value: platform_credentials
+        evidence:
+          - auth
+      requirements:
+        approval:
+          value: required
+          evidence:
+            - setup
+      human_steps:
+        - step: Request trial access; contact sales for customer onboarding
+          stage: activation
+          evidence:
+            - setup
+      notes: >-
+        Production/pre-production credentials and PCC/point-of-sale context are provisioned. Personal access
+        and trial data realism remain unknown.

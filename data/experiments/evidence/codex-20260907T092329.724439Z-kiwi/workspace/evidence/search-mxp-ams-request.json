@@ -1,0 +1,25 @@
+{
+  "timestamp_utc": "2026-09-07T09:25:07.651602+00:00",
+  "method": "POST",
+  "url": "https://mcp.kiwi.com",
+  "body": {
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+      "name": "search-flight",
+      "arguments": {
+        "flyFrom": "MXP",
+        "flyTo": "AMS",
+        "departureDate": "25/09/2026",
+        "departureDateFlexDays": 0,
+        "adults": 1,
+        "children": 0,
+        "infants": 0,
+        "cabinClass": "M",
+        "currency": "EUR",
+        "sort": "price"
+      }
+    }
+  }
+}

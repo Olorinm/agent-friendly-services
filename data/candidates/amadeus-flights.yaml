@@ -1,0 +1,48 @@
+id: amadeus-flights
+name: Amadeus Flight APIs
+category: travel
+homepage: https://developers.amadeus.com/
+summary: >-
+  Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be
+  re-established.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    notice:
+      url: https://developers.amadeus.com/blog/comparing-open-source-flight-data-sources
+      checked_on: '2026-09-07'
+      kind: official_announcement
+      notes: >-
+        Official notice was visible in search-indexed text. Direct open redirected to the portal and returned
+        no extractable body; no old keys were tested.
+    portal:
+      url: https://developers.amadeus.com/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: former-self-service
+      interface: api
+      maintainer: official
+      entry_url: https://developers.amadeus.com/blog/comparing-open-source-flight-data-sources
+      evidence:
+        - notice
+      availability:
+        value: retired
+        evidence:
+          - notice
+        notes: >-
+          Official indexed notice says Self-Service was decommissioned July 17; current portal is Enterprise.
+          Recheck the notice before onboarding.
+      notes: Retain this historical access path. Stale tutorials do not establish current self-service signup.
+    - id: enterprise-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.amadeus.com/
+      evidence:
+        - portal
+      notes: >-
+        Current portal lead; personal eligibility, application requirements, costs and current flight
+        endpoints remain unknown.

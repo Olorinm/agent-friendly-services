@@ -1,5 +1,6 @@
 node_modules/
 *.log
+!data/experiments/evidence/**/*.log
 
 # agent-verification run results: local until the publication protocol is settled
 data/experiments/results/

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "classification": "travel/flights",
+  "title": "Synthetic flight research fixture",
+  "purpose": "Test provenance and evolving research independently of live findings.",
+  "audience": "普通个人旅行者；不假设具有公司、旅行社资质、商家店铺、用户流量或供应商合同。",
+  "scope": {
+    "include": [
+      "机票选择、比较和继续购买的需求，以及选择过程中的疑虑和失败。",
+      "不同旅客、行程确定程度、预算与便利性偏好；存在冲突的需求分别保留。"
+    ],
+    "exclude": [
+      "酒店作为相邻子类另行研究，跨机票和酒店的关联需求先记录在缺口中。"
+    ]
+  },
+  "sources": {
+    "kiwi-mcp-docs": {
+      "url": "https://www.kiwi.com/en/pages/mcp/",
+      "kind": "provider_docs",
+      "checked_on": "2026-09-07",
+      "origin_group": "kiwi-mcp-guide",
+      "summary": "官方 MCP 说明涉及单程、往返、日期弹性、旅客与舱等搜索，并提供预订链接。",
+      "limitations": "沿用机票服务候选调查的一手文档来源；它说明产品能力，不能证明某种用户需求的实际频率。"
+    }
+  },
+  "search_log": [],
+  "needs": [
+    {
+      "id": "choose-fixed-trip",
+      "actor": "已确定出行地点和日期的个人",
+      "trigger": "准备购买机票，希望减少查找和比较的时间。",
+      "outcome": "获得符合行程的可购买方案，比较总价并决定选择哪一班。",
+      "constraints": [
+        "日期、出发地、目的地、旅客人数和舱等。"
+      ],
+      "basis": "hypothesis",
+      "evidence": [],
+      "reasoning": "来自项目讨论中的说明性例子，尚未采集到支持它的公开用户原始诉求。",
+      "open_questions": [
+        "用户实际如何权衡总价、飞行时间、机场和购买渠道？"
+      ]
+    },
+    {
+      "id": "compare-family-total",
+      "actor": "为同行家人一起选择机票的个人",
+      "trigger": "多名旅客的行李和行程要求不同，展示的最低价可能不足以做决定。",
+      "outcome": "比较满足同行人数和行李等条件的总费用与行程。",
+      "constraints": [
+        "成人与儿童人数、年龄、行李、往返日期和转机偏好。"
+      ],
+      "basis": "hypothesis",
+      "evidence": [],
+      "reasoning": "来自项目讨论的家庭往返例子；具体约束与优先级需要公开需求资料支持。",
+      "open_questions": [
+        "行李、座位相邻、儿童出行等约束中，哪些被真实用户反复提及？"
+      ]
+    },
+    {
+      "id": "explore-flexible-trip",
+      "actor": "日期或机场选择尚有弹性的个人",
+      "trigger": "为控制预算，愿意调整出发日、出发机场或到达地点。",
+      "outcome": "了解不同选择的价格和时间代价，选出可接受的行程。",
+      "constraints": [
+        "可接受的日期范围、机场范围、转机次数和自转机条件。"
+      ],
+      "basis": "hypothesis",
+      "evidence": [],
+      "reasoning": "来自项目讨论中的中国赴美例子；尚未确认这类需求的真实约束组合和代表性。",
+      "open_questions": [
+        "用户接受的灵活程度是什么，哪些组合只是我们构造的？"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "fixed-itinerary",
+      "title": "确定行程下比较机票",
+      "need_ids": [
+        "choose-fixed-trip"
+      ],
+      "request": "我已经确定出发地、目的地和日期，帮我比较合适的机票，说明总价和重要差异，并告诉我如何继续购买。",
+      "assumptions": [
+        "当前是研究场景草案；尚未选定实际日期、机场、旅客与价格比较口径。"
+      ],
+      "variants": [
+        "单程与往返",
+        "国内与国际",
+        "价格优先与时间优先"
+      ],
+      "status": "candidate",
+      "reason": "保留讨论中的起始想法，等待公开用户资料验证或修正。",
+      "testability": "unknown"
+    },
+    {
+      "id": "family-constraints",
+      "title": "同行家庭的总费用与约束",
+      "need_ids": [
+        "compare-family-total"
+      ],
+      "request": "我和家人一起往返出行，帮我们比较满足旅客和行李条件的方案，算清全部人的费用，并说明转机情况。",
+      "assumptions": [
+        "人数、年龄、行李与直飞要求是待研究的变量，不预先视作所有家庭的固定要求。"
+      ],
+      "status": "candidate",
+      "reason": "需要查明真实的家庭出行诉求，不能只凭参数更多就称为代表性场景。",
+      "testability": "unknown"
+    },
+    {
+      "id": "flexible-itinerary",
+      "title": "在日期和机场之间寻找可接受方案",
+      "need_ids": [
+        "explore-flexible-trip"
+      ],
+      "request": "我的出发日期和机场可以调整，帮我看看有哪些便宜又能接受的选择，并解释每种选择需要付出的时间代价。",
+      "assumptions": [
+        "日期与机场的可调整范围来自具体需求，后续测试时再冻结输入。"
+      ],
+      "status": "candidate",
+      "reason": "已有服务文档中的弹性搜索不能替代真实需求证据；继续搜集原始诉求。",
+      "testability": "unknown"
+    }
+  ],
+  "capability_candidates": [
+    {
+      "id": "search-offers",
+      "outcome": "按行程条件获取机票方案及报价。",
+      "need_ids": [
+        "choose-fixed-trip",
+        "compare-family-total",
+        "explore-flexible-trip"
+      ],
+      "evidence": [
+        "kiwi-mcp-docs"
+      ],
+      "reasoning": "文档能支持业务动作定义；需求关联目前仍是假设，不用于声明场景已得到验证。",
+      "catalog_id": "flights.search"
+    },
+    {
+      "id": "purchase-handoff",
+      "outcome": "提供选中方案的继续购买入口。",
+      "need_ids": [
+        "choose-fixed-trip"
+      ],
+      "evidence": [
+        "kiwi-mcp-docs"
+      ],
+      "reasoning": "购买入口与出票是不同结果；是否属于每类用户的必要交付尚待研究。",
+      "catalog_id": "flights.booking-link"
+    }
+  ],
+  "gaps": [
+    "尚未采集公开用户原始诉求，reported 需求数为 0；三个场景不能视为最终任务集。",
+    "既有候选调查没有完整的逐查询执行日志；不补造历史搜索词，后续实际搜索再填写 search_log。",
+    "补查不同地区、语言、预算、出行目的与同行组合，记录来源渠道自身的偏差。",
+    "查找价格变动、无可用方案、购票失败、监控降价、改签退款等需求；当前覆盖范围不足以排除它们。",
+    "保留最低价与便利性、确定行程与开放探索等不同偏好，避免合并成一个“典型用户”。",
+    "原子能力仅为候选映射；行李和总价可能是输出要求，排序比较可能由 Agent 完成，需从需求进一步归纳。",
+    "测试准备、授权与执行预算留待需求研究后的测试设计；无法立即测试不会删除相关需求。"
+  ]
+}

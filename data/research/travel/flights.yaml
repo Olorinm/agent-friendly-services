@@ -1,0 +1,958 @@
+# First public-source research round, not a benchmark or market-frequency estimate.
+version: 1
+classification: travel/flights
+title: 机票用户需求与场景研究（首轮公开资料）
+purpose: 理解普通个人使用机票相关服务的真实情境、期望结果、约束与分歧；持续寻找常见需求的证据，不把公开帖子数量当作市场频率。
+audience: 普通个人旅行者；不假设具有公司、旅行社资质、商家店铺、用户流量或供应商合同。
+scope:
+  include:
+    - 购票前的目的地探索、选票、价格比较、购买衔接，以及购票后的变更和异常处理。
+    - 不同旅客、同行关系、预算与便利性偏好；包括暂时无法直接由现有机票API满足的需求。
+  exclude:
+    - 不在本轮调查中判断供应商优劣、运行机票服务、核实现行签证/票规或处理真实订单。
+    - 酒店及其他相邻服务单独研究；与机票交叉的目标保留在缺口，不宣称已覆盖完整旅程。
+sources:
+  kiwi-mcp-docs:
+    url: https://www.kiwi.com/en/pages/mcp/
+    kind: provider_docs
+    checked_on: '2026-09-07'
+    origin_group: kiwi-mcp-guide
+    summary: 官方 MCP 说明涉及单程、往返、日期弹性、旅客与舱等搜索，并提供预订链接。
+    limitations: 沿用机票服务候选调查的一手文档来源；它说明产品能力，不能证明某种用户需求的实际频率。
+  v2-fixed-price:
+    url: https://v2ex.com/t/1047113
+    kind: public_user_report
+    title: 固定假期航班的选择、等价与购买经历
+    published_on: '2024-06-05'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖“一、购买需求分析”及“三、实践过程”，包括后段分开购票失败
+    origin_group: v2-fixed-price
+    summary: 作者为端午北京到烟台购买两张直飞票；过早起飞和较晚到达均不理想。比较优惠后的付款总价，寻找历史价格和余票信息，持续观察票价；最终分开下单时第二张已售罄，转而调整航班。
+    limitations: 个人复盘，未核验票据；价格规律、舱位政策和售罄原因均是作者的理解，不作为当前行业事实。一个帖子涉及多个需求，不能重复算成多位用户。
+  v2-international-bags:
+    url: https://v2ex.com/t/921145
+    kind: public_user_report
+    title: 从深圳或香港出发、携带较多行李的国际机票选择
+    published_on: '2023-03-04'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: v2-international-bags
+    summary: 作者准备从深圳或香港飞欧洲，要带较多行李，面对不同航班的价格与额度差异，询问国内外购票渠道和优惠。
+    limitations: 原帖没有给出最终城市、日期或精确行李重量；不能把评论里的渠道推荐、里程交易或经验价当成需求事实。
+  tse-bag-total:
+    url: >-
+      https://travel.stackexchange.com/questions/9921/are-there-any-flight-price-search-engines-with-baggage-allowance-included
+    kind: public_user_report
+    title: 希望把所需行李费用算进机票比较
+    published_on: '2012-10-01'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-bag-total
+    summary: 提问者买了表面较便宜的票，付款后才发现另一航司包含更多行李；希望输入自己的行李需求后直接比较总费用，减少逐航司手算。
+    limitations: 较早的历史需求；不说明现在的搜索引擎仍有相同缺陷。该页收录合并讨论和产品方答复，本轮仅编码原提问，其他 URL 版本不重复计数。
+  tse-allin-flex:
+    url: https://travel.stackexchange.com/questions/182569/flight-search-by-total-cost-including-auxiliary-fees
+    kind: public_user_report
+    title: 同时比较弹性日期、行李和相邻座位费用
+    published_on: '2023-07-25'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-allin-flex
+    summary: 提问者寻找柏林到波士顿往返，两人各一件托运行李、不需头顶行李，并希望坐在一起；去返日期各可浮动三天，希望按含这些条件的总价比较。
+    limitations: 用户对费用涨幅和网站缺陷的描述未经本项目重测。虽然关联较早相似问题，作者给出了自己的具体行程；来源组按这次原始提问记录，不把被引用帖子再计入。
+  reddit-family-price:
+    url: https://www.reddit.com/r/TravelHacks/comments/1pwz8bd/flight_price_transparency/
+    kind: public_user_report
+    title: 一家四口赴欧时希望提前知道座位等费用
+    published_on: '2025-12-27'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文、EDIT、EDIT 2及作者解释；不编码机器人回复
+    origin_group: reddit-family-price
+    summary: 作者为一家四口赴欧比价，直到填写旅客信息才看清选座费用。原先认为费用强制收取，后编辑纠正为可跳过；仍愿意为与女儿坐在一起付费，并希望搜索时就能估计真实花费。
+    limitations: 必须连同作者两次编辑阅读；该帖不能证明航司强制加收选座费或违法收费。日期来自检索返回的原帖时间；正文及编辑已打开核对。
+  tse-child-adult:
+    url: >-
+      https://travel.stackexchange.com/questions/94078/do-gate-agents-really-seat-young-children-away-from-their-parents-in-united-basi
+    kind: public_user_report
+    title: 儿童至少与一位家长同行就座的票价选择
+    published_on: '2017-05-28'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原提问及作者 Update
+    origin_group: tse-child-adult
+    summary: 两位家长带七岁女儿出行，作者接受夫妻分开坐，但要求孩子与一位家长一起；更新中说明为自己和女儿购买较贵票，为丈夫购买较便宜票。
+    limitations: 这是2017年的个人选择，不沿用原帖所引的旧航司政策；实际相邻就座保证还需另外核实，不能照搬作者对换座的期待。
+  tse-family-seven:
+    url: >-
+      https://travel.stackexchange.com/questions/132292/how-to-seat-family-of-seven-together-on-long-haul-flight
+    kind: public_user_report
+    title: 七人同行希望相近就座但无力承担额外选座费
+    published_on: '2019-02-16'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-family-seven
+    summary: 七人同行已订洛杉矶到奥克兰航班，尚未分配座位；作者希望一家人至少坐得近一些，但难以承担额外约五百美元选座费，询问一起值机能否解决。
+    limitations: 支持预算与同行就座之间的冲突，不把七人全部相邻设为所有家庭的硬性要求；历史票价与规则不沿用。
+  tse-flex-airports:
+    url: >-
+      https://travel.stackexchange.com/questions/174551/finding-a-flight-with-flexible-date-and-flexible-airports
+    kind: public_user_report
+    title: 同时开放往返日期和多个机场的搜索
+    published_on: '2022-06-27'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原提问及作者 foobar 关于不能直接在线购买的评论
+    origin_group: tse-flex-airports
+    summary: 作者希望同一次往返搜索能同时接受多个出发/到达机场和灵活日期；追问中指出查到方案后仍有如何购买的问题。
+    limitations: 没有具体机场、日期或预算；不能据此虚构偏好组合。答案锚点 URL 打开失败，已通过问题主页读取。
+  tse-weekend-anywhere:
+    url: https://travel.stackexchange.com/questions/42721/searching-for-flights-to-anywhere-in-narrow-time-frame
+    kind: public_user_report
+    title: 目的地不限但要适合下班后的周末旅行
+    published_on: '2015-01-30'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-weekend-anywhere
+    summary: 作者从布鲁塞尔出发，喜欢周末旅行，目的地可以不同；希望周五下班后走、周日或周一上班前回，不愿逐个目的地重复设置时段过滤。
+    limitations: 历史个案；不限目的地不等于不限时段，也不能推断不限签证或预算。作者可接受早周一返回，不替所有用户作此假设。
+  tse-multicity:
+    url: >-
+      https://travel.stackexchange.com/questions/108093/how-to-search-for-a-multi-destination-flight-when-flexible-on-dates
+    kind: public_user_report
+    title: 赴日途中增加北京停留并比较多城市日期
+    published_on: '2018-01-10'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-multicity
+    summary: 作者计划从日内瓦赴日本，想途经北京停留游览后再去东京并返回；多城市搜索必须逐次指定三段日期，难以找到合适组合。
+    limitations: 原帖引用的过境政策仅属当时背景，不作为现行签证依据；多城市停留与普通短转机是不同目标。
+  tse-no-selftransfer:
+    url: >-
+      https://travel.stackexchange.com/questions/191493/flight-search-engine-that-can-show-the-cheapest-flight-excluding-self-transfer-a/191495
+    kind: public_user_report
+    title: 希望低价结果同时满足行李、时长和联程条件
+    published_on: '2024-09-26'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-no-selftransfer
+    summary: 作者不满意最低价结果包含自转机、第三方拼接或超长行程；以斯德哥尔摩到迪拜、十月底日期范围、总时长低于二十小时及客舱和托运行李各一件说明需求。
+    limitations: 作者后续评论对多航司与分开出票的关系存在疑问；只采纳其条件和识别困难，不认定多航司必然是自转机。链接含答案 ID，但编码原提问及提问者澄清。
+  tse-transit-visa:
+    url: >-
+      https://travel.stackexchange.com/questions/183766/indian-passport-holder-with-a-self-transfer-in-abu-dhabi
+    kind: public_user_report
+    title: 已订自转机行程后不确定证件要求
+    published_on: '2023-09-26'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-transit-visa
+    summary: 印度护照持有人已订巴库到比什凯克往返，经阿布扎比自转机，去程停留一小时二十分、返程六小时三十分，询问是否需要签证。
+    limitations: 仅证明用户需要结合证件与转机方式判断可行性；本项目没有核实现行签证要求，也没有认定该连接可赶上。
+  qyer-transfer-security:
+    url: https://ask.qyer.com/question/4253406.html
+    kind: public_user_report
+    title: 途经吉隆坡时不清楚转机流程
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: qyer-transfer-security
+    summary: 提问者的路线为巴厘岛经吉隆坡到上海浦东，询问中转是否还需安检。
+    limitations: 页面未显示可靠的提问日期；可见回复集中在2019-07-04，不将回复日期冒充发帖日期。回答相互矛盾，且原帖未给出机场航站楼、出票方式和行李条件。只采用原始问题。
+  reddit-ota-tradeoff:
+    url: https://www.reddit.com/r/Flights/comments/1mr4x7l/are_ota_worth_it_sometimes/
+    kind: public_user_report
+    title: 明显价差下是否值得选择 OTA
+    published_on: '2025-08-15'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 主帖；Ynoxz、phantom784、Single_Editor_2339 的个人经历/偏好回复
+    origin_group: reddit-ota-tradeoff
+    summary: 作者赴墨西哥的去程已向航司购买，返程看到 OTA 明显更便宜，想判断直飞是否可降低担心的风险。回复者同时表达简单旅行愿用 OTA、带家人偏好直购，以及航司网站支付失败后改用 OTA 的经历。
+    limitations: 主帖和回复属于同一讨论组，不是多份独立样本；价差和服务遭遇未核验。排除 AutoModerator 的自动警告，不以其反复出现证明需求频率。日期由页面关联的当日归档及检索时间信息识别。
+  tse-unbookable-price:
+    url: https://travel.stackexchange.com/questions/148416/book-with-a-travel-agent-option-on-google-flights
+    kind: public_user_report
+    title: 搜索给出价格却找不到可购买渠道
+    published_on: '2019-10-14'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-unbookable-price
+    summary: 提问者多次看到 Google Flights 显示可向代理购买的价格，尝试多个网站仍找不到对应票，想知道该报价是否可信以及从哪里购买。
+    limitations: 无法断定当时是缓存、渠道覆盖还是其他原因。没有订单、实际报价响应或付款证据，不据此评价某家服务当前可靠性。
+  v2-ticketing-delay:
+    url: https://www.v2ex.com/t/281472
+    kind: public_user_report
+    title: 预订后无法获知确定出票时间
+    published_on: '2016-05-26'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: indexed_text
+    locator: 检索索引中的原帖短正文
+    origin_group: v2-ticketing-delay
+    summary: 作者提前预订赴美机票，客服无法保证出票时间，甚至说可能到出发当天，作者为这种不确定性求助。
+    limitations: 检索结果展示了原帖标题、日期和完整短正文；打开 www 及不带 www 的页面均失败，本轮仅有索引正文，后续需复查原页。不能据此确认订单是否真实、最终是否出票或平台当前表现。
+  v2-family-refund:
+    url: https://www.v2ex.com/t/1044166
+    kind: public_user_report
+    title: 家庭行程取消后对退款损失和处理途径求助
+    published_on: '2024-05-27'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: v2-family-refund
+    summary: 作者购买两位成人和一位儿童的往返票，次日因计划变化取消，发现去返程退票收费不同，希望理解损失并寻找处理办法。
+    limitations: 收费比例是作者报告，未经核验；作者关于航司无损失的推断及评论的法律/票规解释不能当作事实。
+  v2-cancel-resume:
+    url: https://v2ex.com/t/1057821
+    kind: public_user_report
+    title: 收到取消通知后另购机票，却发现原航班恢复
+    published_on: '2024-07-16'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖对2024-07-15经历的说明；附言仅用于了解后续
+    origin_group: v2-cancel-resume
+    summary: 作者称收到取消通知后另买同日机票，申请退原票时发现原航班恢复并涉及手续费；希望解决重复购票带来的损失。
+    limitations: 单方投诉，不裁定责任、赔偿或通知是否有效。支持需要及时一致的状态及后续处理，不证明某家平台必然发生该问题。
+  tse-senior-assistance:
+    url: >-
+      https://travel.stackexchange.com/questions/193909/do-special-assistants-wait-at-the-gate-with-senior-passengers-im-worried-my-78
+    kind: public_user_report
+    title: 为独自跨国出行的母亲确认转机协助范围
+    published_on: '2025-03-24'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-senior-assistance
+    summary: 作者的年长母亲将独自从美国赴西班牙，需要轮椅且听力不便；作者担心候机时无人陪同、错过衔接航班，询问协助人员是否会一直等候。
+    limitations: 只保留理解服务边界所需的限制，不复制健康细节；是否能预订持续陪同服务及费用需要另查现行服务资料。
+  tse-airport-assistance:
+    url: >-
+      https://travel.stackexchange.com/questions/3354/what-options-are-there-for-disabled-assistance-at-heathrow-airport-or-which
+    kind: public_user_report
+    title: 选机场时考虑父母能否得到行动协助
+    published_on: '2011-11-08'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-airport-assistance
+    summary: 作者想安排父母赴瑞典，担心伦敦机场内步行距离过长，希望知道能否安排协助，愿意付费，也接受其他伦敦机场。
+    limitations: 历史需求，具体协助可用性未复核；机场距离、付费意愿和服务覆盖可能影响航班选择，不把轮椅输送等同于全程看护。
+  v2-fake-notice:
+    url: https://www.v2ex.com/t/1119316
+    kind: public_user_report
+    title: 收到知道行程信息的虚假改签来电
+    published_on: '2025-03-18'
+    language: zh-CN
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 主帖及 drafter 关于主动核实航班的个人经历
+    origin_group: v2-fake-notice
+    summary: 作者收到能说出身份和大部分行程信息的来电，对方声称取消航班并要求付款应用信息；作者表达对信息来源的担忧。回复中有人描述另向航司核实通知。
+    limitations: 不认定任何机构为泄漏源；用户表达的是遭遇和担忧，把独立核验通知设计为 Agent 任务是研究者的推导。
+  tse-timezone:
+    url: >-
+      https://travel.stackexchange.com/questions/102386/does-the-flight-time-when-booking-a-holiday-online-show-the-time-you-arrive-in-t
+    kind: public_user_report
+    title: 不确定票面到达时间属于哪个时区
+    published_on: '2017-09-19'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 原帖正文
+    origin_group: tse-timezone
+    summary: 作者准备跨国旅行，不确定网页显示的抵达法国时间是否为目的地当地时间，希望在后续欧美行程中正确理解时间。
+    limitations: 支持解释时间含义的需求；如何按现行航班数据换算时区应在测试设计时另行确定。
+  iata-gps-2025:
+    url: https://www.iata.org/en/pressroom/2025-releases/2025-11-05-02/
+    kind: survey_report
+    title: IATA 2025 旅客调查公开摘要
+    published_on: '2025-11-05'
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: Mobile-Reliance Rising、Regional Trends、About the GPS
+    origin_group: iata-gps-2025
+    summary: IATA称调查收到逾一万份、来自二百多个国家的回复；公开摘要称54%希望直接与航司交易，并描述不同地区在便利性、渠道与人工服务上的偏好差异。
+    limitations: 行业协会发布的总体调查摘要，完整报告未读取；无法从公开摘要核对本项目每个场景的提问口径、基数、权重及占比。54%是该调查所述偏好，不是任务发生频率，也不能直接外推为中国个人或 Agent 用户比例。
+  iata-gps-method:
+    url: https://www.iata.org/en/publications/manuals/global-passenger-survey/
+    kind: survey_report
+    title: IATA 调查范围与方法的公开说明
+    language: en
+    checked_on: '2026-09-07'
+    access: page_text
+    locator: 2025 GPS 概览、方法说明及报告范围
+    origin_group: iata-gps-2025
+    summary: 公开页面称2025 GPS基于逾一万份、二百个国家的回复，与 IPSOS 合作，样本按地区客运流量组织；完整分析作为报告另行提供。
+    limitations: 这些方法说明是发布方自述，本轮没有原始样本、问卷、响应率或权重；与公开摘要属于同一调查，不能算两份独立实证。页面无明确发布日期。
+search_log:
+  - searched_on: '2026-09-07'
+    query: >-
+      site.travel.stackexchange.com flights cheapest flexible dates destination baggage separate tickets
+      family
+    channel: web
+    source_ids:
+      - tse-multicity
+      - v2-international-bags
+      - reddit-ota-tradeoff
+    notes: >-
+      首轮宽检索；site 运算符误写成 site.，实际作为普通关键词搜索，未当作限定站点抽样。 三个查询合并返回，source_ids 标记共同结果池，不声称每条来源都由该单独查询命中；不计
+      SEO、营销和非原始汇总。
+  - searched_on: '2026-09-07'
+    query: site.reddit.com/r/Flights choosing flight layover cheaper bags OTA family
+    channel: web
+    source_ids:
+      - tse-multicity
+      - v2-international-bags
+      - reddit-ota-tradeoff
+    notes: >-
+      首轮宽检索；site 运算符误写成 site.，结果混合论坛、SEO 和产品文章，后续只取可读原帖。 三个查询合并返回，source_ids 标记共同结果池，不声称每条来源都由该单独查询命中；不计
+      SEO、营销和非原始汇总。
+  - searched_on: '2026-09-07'
+    query: site.v2ex.com 机票 转机 行李 便宜
+    channel: web
+    source_ids:
+      - tse-multicity
+      - v2-international-bags
+      - reddit-ota-tradeoff
+    notes: >-
+      首轮宽检索；site 运算符误写成 site.。命中中文用户的出发机场、行李、渠道组合需求。 三个查询合并返回，source_ids 标记共同结果池，不声称每条来源都由该单独查询命中；不计
+      SEO、营销和非原始汇总。
+  - searched_on: '2026-09-07'
+    query: site:v2ex.com/t/ 机票 便宜 提前 降价
+    channel: web
+    source_ids:
+      - tse-flex-airports
+      - tse-weekend-anywhere
+      - reddit-ota-tradeoff
+    notes: 第二轮：购票决策、费用与开放探索；保留公开原始问题，排除产品营销答案。 四个查询合并返回，source_ids 标记共同结果池，不按查询重复计算来源。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ flight search baggage fees family children seats
+    channel: web
+    source_ids:
+      - tse-flex-airports
+      - tse-weekend-anywhere
+      - reddit-ota-tradeoff
+    notes: 第二轮：购票决策、费用与开放探索；保留公开原始问题，排除产品营销答案。 四个查询合并返回，source_ids 标记共同结果池，不按查询重复计算来源。
+  - searched_on: '2026-09-07'
+    query: site:reddit.com/r/Flights "cheaper" "direct" "OTA"
+    channel: web
+    source_ids:
+      - tse-flex-airports
+      - tse-weekend-anywhere
+      - reddit-ota-tradeoff
+    notes: 第二轮：购票决策、费用与开放探索；保留公开原始问题，排除产品营销答案。 四个查询合并返回，source_ids 标记共同结果池，不按查询重复计算来源。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ flights flexible dates anywhere budget
+    channel: web
+    source_ids:
+      - tse-flex-airports
+      - tse-weekend-anywhere
+      - reddit-ota-tradeoff
+    notes: 第二轮：购票决策、费用与开放探索；保留公开原始问题，排除产品营销答案。 四个查询合并返回，source_ids 标记共同结果池，不按查询重复计算来源。
+  - searched_on: '2026-09-07'
+    query: site:v2ex.com/t/ 机票 提前 降价
+    channel: web
+    source_ids:
+      - v2-fixed-price
+      - v2-international-bags
+      - v2-family-refund
+      - v2-ticketing-delay
+    notes: 定向补充买票时机、含行李总价和家庭座位需求；每个查询单独搜索。 帖子有作者自制产品推广和一般推荐，本轮未纳入推广帖；出票延迟原页打开失败，仅以索引正文收录并标注。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ "baggage" "compare" "price"
+    channel: web
+    source_ids: []
+    notes: 定向补充买票时机、含行李总价和家庭座位需求；每个查询单独搜索。 返回材料本轮未独立编码；含行李需求以后续较准确查询及原页阅读收录，不能将此空 source_ids 理解为没有结果。
+  - searched_on: '2026-09-07'
+    query: site:reddit.com/r/Flights "children" "seats" "booking"
+    channel: web
+    source_ids: []
+    notes: 定向补充买票时机、含行李总价和家庭座位需求；每个查询单独搜索。 未从返回内容建立可独立编码的新条目；家庭证据转向 Stack Exchange 的具体原帖，并用后续较新的 Reddit 原帖补充。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ "baggage" "search engine"
+    channel: web
+    source_ids:
+      - tse-bag-total
+      - tse-no-selftransfer
+    notes: 补查含行李比价、亲子相邻座位、非自愿变更，并寻找有样本说明的总体调查作为频率线索。 同主题合并帖105132和主帖9921未重复计数；191493首次手写完整标题URL失败，改用检索返回的原URL读取。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ "children" "seats" "pay"
+    channel: web
+    source_ids:
+      - tse-child-adult
+      - tse-family-seven
+    notes: 补查含行李比价、亲子相邻座位、非自愿变更，并寻找有样本说明的总体调查作为频率线索。 排除火车座位结果；同一提问的答案锚点不重复纳入。
+  - searched_on: '2026-09-07'
+    query: site:v2ex.com/t/ 航班 取消 改签
+    channel: web
+    source_ids:
+      - v2-fake-notice
+      - v2-cancel-resume
+    notes: 补查含行李比价、亲子相邻座位、非自愿变更，并寻找有样本说明的总体调查作为频率线索。 排除高铁讨论；1057821重复主机名只计一组；未把投诉里的责任归因当事实。
+  - searched_on: '2026-09-07'
+    query: IATA 2025 global passenger survey airline selection price direct flights booking
+    channel: web
+    source_ids:
+      - iata-gps-2025
+      - iata-gps-method
+    notes: 补查含行李比价、亲子相邻座位、非自愿变更，并寻找有样本说明的总体调查作为频率线索。 阅读官方公开摘要与方法页面；未购买完整报告，也未得到本项目场景的发生频率。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ transit self transfer Indian passport visa
+    channel: web
+    source_ids:
+      - tse-transit-visa
+    notes: 补查证件和特殊协助、其他中文渠道、搜索到结账的价格失配；只纳入读到原始诉求的条目。 本轮选取原问中的证件/自转机疑问，不采用回答中的现行政策结论。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ elderly parents wheelchair connecting flight
+    channel: web
+    source_ids:
+      - tse-senior-assistance
+      - tse-airport-assistance
+    notes: 补查证件和特殊协助、其他中文渠道、搜索到结账的价格失配；只纳入读到原始诉求的条目。 新旧原帖用于确认协助边界需求；家属视角偏差留在研究缺口。
+  - searched_on: '2026-09-07'
+    query: site:zhihu.com 机票 带孩子 直飞 转机
+    channel: web
+    source_ids: []
+    notes: 补查证件和特殊协助、其他中文渠道、搜索到结账的价格失配；只纳入读到原始诉求的条目。 命中航司与留学机构推广、翻译后的行业人士答案；未取得足够可读且上下文完整的原始亲子需求，因此本轮未纳入，不据此否定中文需求。
+  - searched_on: '2026-09-07'
+    query: site:reddit.com/r/Flights "2025" "price" "checkout"
+    channel: web
+    source_ids:
+      - reddit-family-price
+    notes: 补查证件和特殊协助、其他中文渠道、搜索到结账的价格失配；只纳入读到原始诉求的条目。 搜索实际返回 TravelHacks 与其他航空子版，未严格限于 r/Flights；家庭帖的收费误解已在作者编辑中纠正。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ "price" "not available" "Google Flights"
+    channel: web
+    source_ids:
+      - tse-unbookable-price
+      - tse-allin-flex
+    notes: 补查报价无法购买、中文旅行社区和有到达期限的出行目标，避免只围绕低价搜索采样。 182569带noredirect参数的URL读取失败，改用问题主页成功；没有把“无报价”答案推断写成服务事实。
+  - searched_on: '2026-09-07'
+    query: site:ask.qyer.com 机票 退票 转机
+    channel: web
+    source_ids:
+      - qyer-transfer-security
+    notes: 补查报价无法购买、中文旅行社区和有到达期限的出行目标，避免只围绕低价搜索采样。 排除含可疑客服电话的伪客服营销帖433223及无法清楚确认原始归属的投诉汇编；仅采集4253406原问，不采用矛盾回复。
+  - searched_on: '2026-09-07'
+    query: site:travel.stackexchange.com/questions/ flight arrive wedding time booking
+    channel: web
+    source_ids:
+      - tse-timezone
+    notes: 补查报价无法购买、中文旅行社区和有到达期限的出行目标，避免只围绕低价搜索采样。 命中时区理解和酒店日期问题，未获得足够直接的婚礼到达期限需求。机酒跨类问题先列为缺口。
+needs:
+  - id: choose-fixed-trip
+    actor: 地点和出行日已确定的个人
+    trigger: 需要在可接受的起降时段内选票，避免为了便宜牺牲安排。
+    outcome: 比较满足日期和时段的可购买方案，理解当地起降日期、时间与价差。
+    constraints:
+      - 出发地、目的地、具体日期和当地时段。
+      - 同行人数；转机和总时长偏好需由用户给出。
+    basis: reported
+    evidence:
+      - v2-fixed-price
+      - tse-timezone
+    reasoning: 原有讨论假设得到固定假期出行和时区疑问的原帖支持；便宜与合适时段之间的权衡确实出现过。不会把北京—烟台或某个时段设为所有任务默认值。
+    open_questions:
+      - 补查赶会议、婚礼和紧急出行等有到达期限的需求；本轮相关查询未获得足够直接材料。
+  - id: compare-family-total
+    actor: 替家庭或多人同行购票的人
+    trigger: 低票价可能不满足孩子与家长同坐或多人靠近的需要，选座成本较晚才清楚。
+    outcome: 得到符合具体同行关系、预算和座位要求的全部旅客费用及可安排程度。
+    constraints:
+      - 人数、儿童年龄、至少哪些人必须同坐。
+      - 需要确认是否为保证、付费选择还是等待分配，不能混称已安排。
+      - 行李需求逐人给定；不默认每个家庭都需要相同件数。
+    basis: reported
+    evidence:
+      - reddit-family-price
+      - tse-child-adult
+      - tse-family-seven
+    reasoning: 保留原ID，修正此前只强调人数与行李的假设：座位关系和付费意愿是直接出现的关键问题；行李总价由另一需求交叉组合，不能声称每个家庭原帖都要求行李。
+    open_questions:
+      - 婴儿占座、婴儿车、未成年人单独出行尚未充分覆盖。
+      - 愿意支付多少与只需一位家长陪坐，应保留不同选择。
+  - id: explore-flexible-trip
+    actor: 目的地或区域有方向，但机场和日期有弹性的个人
+    trigger: 逐个尝试往返日期和机场费时，某些条件不能同时生效。
+    outcome: 在允许的日期与机场组合中找到可接受的行程，并比较时间、总费用和购买途径。
+    constraints:
+      - 分别给出去程与回程的日期窗口、候选机场和停留限制。
+      - 行李、座位等必要项目仍应参与比较。
+    basis: reported
+    evidence:
+      - tse-flex-airports
+      - tse-allin-flex
+      - v2-international-bags
+    reasoning: 原有弹性搜索假设得到支持；把已有目的地方向下的日期/机场探索保留在此，与目的地完全开放及多城市停留分开。
+    open_questions:
+      - 机场接驳成本是否要计入总预算，需补查直接需求并在测试前明确。
+  - id: compare-total-cost
+    actor: 需要携带行李或使用付费附加项目的旅客
+    trigger: 搜索最低价无法直接反映个人所需的完整费用，付款后才发现选错。
+    outcome: 按相同旅客需求比较含税费及所需附加项目的总价，并列出未知费用。
+    constraints:
+      - 随身/托运行李的件数、重量与分配。
+      - 按用户选择计入座位等项目；区分必收费用、用户需要的可选项目、无关加购。
+    basis: reported
+    evidence:
+      - tse-bag-total
+      - tse-allin-flex
+      - reddit-family-price
+      - v2-international-bags
+      - v2-fixed-price
+    reasoning: 多条原帖跨语言和年份表达总价困难；这是样本内复现，不是用户占比。作者将可选费误认成必收的编辑也被保留，避免把理解困难归因为已证实的强制收费。
+  - id: explore-open-destination
+    actor: 想利用周末出游、尚未选定目的地的个人
+    trigger: 愿意依据机票价格选地方，但工作时间限制了可出发和返回时段。
+    outcome: 在可用时间内比较目的地，找到值得去且能够按时回来的选择。
+    constraints:
+      - 出发机场或范围，周五下班后的出发窗口。
+      - 周日或周一的返回上限，不能只约束日期而忽略小时。
+    basis: reported
+    evidence:
+      - tse-weekend-anywhere
+    reasoning: 单个完整原帖足以支持存在这一需求；样本不支持断言其高频，也不将任意目的地解释为对证件条件无限制。
+    open_questions:
+      - 目的地偏好、证件和总旅行预算需继续收集。
+  - id: plan-multicity
+    actor: 想在一次出行中游览多个城市的个人
+    trigger: 普通往返搜索能找到价格，但增加中途停留后必须反复手动试日期。
+    outcome: 比较满足城市顺序和停留目的的整段方案与总费用。
+    constraints:
+      - 城市顺序、每段日期窗口和停留时长。
+      - 明确中途游览与短时换机的区别，允许比较不同出票结构但披露差别。
+    basis: reported
+    evidence:
+      - tse-multicity
+    reasoning: 多城市是独立的行程目标；不能把用户希望多留几天错误优化成最短转机。
+    open_questions:
+      - 城市顺序是否可变、开口程、不同出发地多人会合尚待补证据。
+  - id: check-connection
+    actor: 考虑或已经购买中转航班的个人
+    trigger: 无法判断便宜组合属于何种衔接、是否需过境手续或重新处理行李。
+    outcome: 明确衔接方式、待办手续和未知条件，判断方案是否适合自己的证件和时间限制。
+    constraints:
+      - 出票/联程结构、机场航站楼、转机时长、行李处理。
+      - 国籍与现有证件、是否需要入境及手续；按任务日期另查权威资料。
+      - 用户可明确拒绝自转机或超长行程；不能默认所有人拒绝。
+    basis: reported
+    evidence:
+      - tse-no-selftransfer
+      - tse-transit-visa
+      - qyer-transfer-security
+    reasoning: 原帖分别直接表达过滤需求、证件疑问与流程疑问；归为同一个衔接判断需求，但不把多航司误判为分开出票，不照抄相互矛盾的论坛答案。
+    open_questions:
+      - 是否能提供可靠的衔接可行性证据、延误风险和失败后的处理范围，仍需后续业务调查。
+  - id: choose-booking-channel
+    actor: 在航司直购与第三方渠道间作选择的个人
+    trigger: 相同或类似行程价格不同，担心售后，也可能遇到航司网站支付障碍。
+    outcome: 比较可用渠道的实际价格、支付可用性和后续处理路径，按本人的偏好决定。
+    constraints:
+      - 可接受渠道、支付方式与优惠资格。
+      - 价差、简单直飞与复杂行程、家庭出行对服务确定性的不同要求。
+    basis: reported
+    evidence:
+      - reddit-ota-tradeoff
+      - v2-international-bags
+      - v2-fixed-price
+      - iata-gps-2025
+    reasoning: 用户原帖与同帖不同回复支持相反偏好，调查提供方向性补充；不以社区机器人偏见认定 OTA 普遍不值得用，也不把调查的直购偏好当市场任务频率。
+    open_questions:
+      - 支付失败只来自同一讨论的一位回复者，需补不同国家与支付方式材料。
+  - id: confirm-purchasable
+    actor: 找到报价准备买票、或已经提交预订的个人
+    trigger: 低价缺少能继续购买的入口，或预订后无法确认何时出票。
+    outcome: 知道选中方案能从哪里买、当前费用是否成立，以及已预订的订单到底处于什么状态。
+    constraints:
+      - 价格核验时间、同一行程与所需项目、实际渠道。
+      - 搜索结果、继续购买链接、订单提交、出票确认分别表述。
+    basis: reported
+    evidence:
+      - tse-unbookable-price
+      - tse-flex-airports
+      - v2-ticketing-delay
+      - v2-fixed-price
+    reasoning: 原用户分别要求可购买性和出票确定性；合为购买衔接需求，保留不同起始状态的场景变体。出票延迟条目本轮仅有索引正文，是较弱证据，不能用于供应商结论。
+    open_questions:
+      - 现场核价成功也不等于出票成功；后续测试必须确定结束在哪个状态。
+  - id: watch-price
+    actor: 出行已知但尚未决定何时付款的个人
+    trigger: 票价会变化，既想等低价，又怕卖完；历史信息和连续查看费时。
+    outcome: 获得观察期间的价格变化与可购买性信息，帮助决定何时出手。
+    constraints:
+      - 具体航班/路线、日期、价格目标和观察截止时间。
+      - 是否已买票、退旧买新的费用和同时买到全部人数的风险。
+    basis: reported
+    evidence:
+      - v2-fixed-price
+    reasoning: 原帖直接支持购票时机和连续观察需求；阈值提醒是我们提出的实现方向，不声称原帖要求了特定提醒频率，也不承诺预测未来最低价。
+    open_questions:
+      - 应继续查主动提醒、提醒噪声和价格历史的原始诉求；当前主要证据来自一位成本敏感用户。
+  - id: change-or-refund
+    actor: 购票后计划发生变化的个人或家庭
+    trigger: 希望取消或调整行程，但不同票段的损失与处理方式不清楚。
+    outcome: 按当前订单弄清可选操作、退款或补差成本和下一步处理路径。
+    constraints:
+      - 订单、乘客、票规、已使用航段、提出变更的时间。
+      - 保留仅了解费用与执行退改两个不同授权边界。
+    basis: reported
+    evidence:
+      - v2-family-refund
+      - v2-fixed-price
+    reasoning: 家庭临时取消与购票复盘支持理解退改成本的需求；需要执行的具体动作来自任务另行约定，不能根据原帖主张裁定退款权利。
+  - id: recover-disruption
+    actor: 收到航班变更通知或行程受影响的旅客
+    trigger: 担心出行中断，匆忙另购可能与原订单状态冲突并产生额外费用。
+    outcome: 了解当前有效状态，找到继续出行或结束订单的选项及处理顺序。
+    constraints:
+      - 通知与最新航班/订单状态的时间。
+      - 已有票与替代方案、已发生支付、出行期限。
+    basis: reported
+    evidence:
+      - v2-cancel-resume
+      - reddit-ota-tradeoff
+    reasoning: 取消后恢复的投诉支持状态一致性和补救需求；退款等待来自另一讨论回复。主动预警及自动重订是下游设计，不能当作已经验证的用户要求或服务能力。
+    open_questions:
+      - 延误导致误机、重大中断中的改路、与酒店衔接尚缺直接原始材料。
+  - id: arrange-assistance
+    actor: 替独自出行且需要协助的家人安排旅程的人
+    trigger: 仅知道航班价格，无法确认机场及转机途中有人提供需要的帮助。
+    outcome: 在选机场和行程时确认协助范围、预约路径、费用及尚需人工确认的部分。
+    constraints:
+      - 旅客行动/沟通方面的实际需要，只收集任务必要信息。
+      - 接送到登机口、登机帮助、候机持续陪同是不同服务。
+    basis: reported
+    evidence:
+      - tse-senior-assistance
+      - tse-airport-assistance
+    reasoning: 两条原帖体现机场选择和协助边界会改变行程可行性；是否由机票服务直接完成尚未确定，但不能因当前候选是搜索API就排除该需求。
+    open_questions:
+      - 补查无障碍旅客自己的直接表达，避免全部通过家属视角理解。
+  - id: verify-notice
+    actor: 收到声称航班取消或可退款消息的个人
+    trigger: 消息掌握行程信息仍可能不可信，用户担心身份和旅行信息的使用。
+    outcome: 通过可核验的航班/订单和联系入口检查消息内容，辨别需要进一步确认的行动。
+    constraints:
+      - 消息时间、原订单、可独立核验的来源。
+      - 不根据单方叙述认定泄漏方或转发消息中的操作指引。
+    basis: inferred
+    evidence:
+      - v2-fake-notice
+      - v2-cancel-resume
+    reasoning: 原始表达支持信息可信性困扰，回复中有人主动核验；把它单列成可重复的 Agent 核验任务是研究者推导，因此标为 inferred。
+    open_questions:
+      - 补查用户是否会主动委托核验，以及需要怎样的结果才能作决定。
+scenarios:
+  - id: fixed-itinerary
+    title: 固定行程下按时段与价格选票
+    need_ids:
+      - choose-fixed-trip
+    capability_ids: [search-offers]
+    request: 假期我要从北京去烟台，两人同行，出发日已定，想坐早上的直飞；太早起床和太晚到达都不合适。帮我找出符合这些条件的航班，列出两人当前的搜索报价和起降时间。
+    assumptions:
+      - 根据 v2-fixed-price 改写，不是原话；真实测试日期和最早/最晚时刻需另行给定。
+      - 原帖两人分开下单导致部分买到，后续需设计全部人数同时报价的检查，不能用单人最低价乘二。
+      - 首轮先取真实购票过程中的选票部分，结束于符合条件的搜索结果；搜索报价的适用范围和时间需明确。
+    status: retained
+    reason: 首轮先检查能否按日期、时段和人数找到航班；原帖支持这些约束，适合作为基础场景。
+    testability: feasible
+    testability_notes: >-
+      2026-09-07已按data/experiments/tasks/travel-flights.yaml做本地探索试跑：Kiwi免凭据MCP返回符合固定行程条件的两人CNY搜索报价，并重复查询及离线核对。
+      这只支持基础搜索场景可试，不代表支付总价、市场完整性或正式可比测评已通过；销售市场未确认，完整结果见docs/flights.zh-CN.md。
+    variants:
+      - 国内固定日期；国际跨时区变体由 tse-timezone 支持，但不假装来自同一原帖
+      - 保留原先的完整购买版本：核验付款总价并提供购买入口；需增加 quote-selected-offer 和 purchase-handoff，亦见 channel-and-purchase。
+  - id: flexible-itinerary
+    title: 在日期与机场范围内比较完整费用
+    need_ids:
+      - explore-flexible-trip
+      - compare-total-cost
+    capability_ids: [search-offers, read-baggage-options, quote-selected-offer]
+    request: 我要从深圳或香港去欧洲，带较多行李，日期也可以在给定范围里调整。帮我比较满足行李要求的路线、总费用和用时，说明哪些条件尚不能确认。
+    assumptions:
+      - 由 v2-international-bags 与 tse-flex-airports 合成；同一用户同时提出日期弹性并非已观察事实。
+      - 欧洲的具体目的地、日期窗口、往返形式、行李件重和机场接驳是否计价在测试前冻结。
+    status: retained
+    reason: 在基础选票之上增加日期与机场组合、行李费用比较；以真实需求约束扩展任务，跨帖合成已明确标注。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+    variants:
+      - 单一机场、去返各浮动三天、两人托运行李与同坐费用：tse-allin-flex，适合作为少合成的变体
+  - id: family-constraints
+    title: 按家庭的座位关系比较总费用
+    need_ids:
+      - compare-family-total
+      - compare-total-cost
+      - confirm-purchasable
+    capability_ids: [search-offers, read-seat-options, quote-selected-offer, purchase-handoff]
+    request: 我们一家四口去欧洲，希望孩子旁边有家人。帮我比较合适的航班，把达到座位要求需要的总费用算清楚，区分能提前确定的安排与只能到值机时再看的安排，并给出所选方案的购买入口。
+    assumptions:
+      - 改写自 reddit-family-price；出发机场、日期、孩子年龄、需要哪些人相邻应明确输入。
+      - 原帖已纠正选座并非强制收费，不能把所有座位费自动计为必收；行李只有用户指定时才加入。
+      - 购买入口是结合 confirm-purchasable 需求补充的交付；同一家庭原帖没有直接提出这个要求。额外指定行李时再加入 read-baggage-options。
+    status: retained
+    reason: 在选票与费用比较之外，进一步检查座位关系、安排确定性及购买衔接；原帖中的不同付费意愿分别保留。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+    variants:
+      - 接受夫妻分坐、孩子与一位家长同坐：tse-child-adult
+      - 多人希望坐得近但预算不足：tse-family-seven
+  - id: open-weekend
+    title: 目的地不限的周末出游
+    need_ids:
+      - explore-open-destination
+      - choose-fixed-trip
+    request: 我从布鲁塞尔出发，周五下班后才能走，周一上班前要回来，去哪里可以再选。帮我找便宜且时间合适的目的地和往返方案，别推荐周五白天起飞的低价票。
+    assumptions:
+      - 改写自 tse-weekend-anywhere；测试时明确日期、下班/上班时刻、机场接驳缓冲和证件条件。
+      - 公开问题只支持这个周末探索目标；预算、是否愿意周一早班抵达需单独给定。
+    status: retained
+    reason: 目的地开放与日期开放有不同的验收条件，单独保留。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: multi-city-stopover
+    title: 有游览停留目的的多城市行程
+    need_ids:
+      - plan-multicity
+      - check-connection
+    request: 我从日内瓦去日本，想先在北京停留游览，再去东京，最后回日内瓦。帮我在给定日期范围内比较整个行程的方案和总价，不要把北京停留压缩成普通短转机。
+    assumptions:
+      - 改写自 tse-multicity；停留天数与测试日期待定。
+      - 现行证件要求另外查证，原帖的2018年政策不得复用。
+    status: retained
+    reason: 多段搜索服务于中途游览目标；具体能否统一出票及成本仍待测试。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: connection-check
+    title: 确认中转组合是否适合本人
+    need_ids:
+      - check-connection
+    request: 我正在考虑这组经阿布扎比自转机的往返航班，持印度护照。帮我弄清需要哪些手续、时间安排是否存在未解决的问题、需要谁进一步确认，再决定要不要选。
+    assumptions:
+      - 由 tse-transit-visa 的购票后问题前移为购票前判断，是研究者改写；也保留已购票版本。
+      - 必须提供航段、日期、证件和行李资料；不能只用国籍或间隔小时数作结论。
+    status: retained
+    reason: 原帖支持证件与转机方式的困惑；场景应容许有依据地报告无法确认。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+    variants:
+      - 已订票后核对手续：tse-transit-visa
+      - 直接排除自转机、长时程并按行李条件选票：tse-no-selftransfer
+      - 核对转机流程：qyer-transfer-security
+  - id: channel-and-purchase
+    title: 选定航班后的渠道与购买衔接
+    need_ids:
+      - choose-booking-channel
+      - confirm-purchasable
+    request: 我已经找到返程直飞航班，OTA 的报价比航司直购便宜不少。帮我核对是不是同一方案、总价和购买条件，比较后续服务的处理路径，并找出我能继续购买的入口。
+    assumptions:
+      - 改写自 reddit-ota-tradeoff；具体报价、币种、人数、支付方式和优惠资格需固定。
+      - 价格复核、跳转、提交订单、出票是不同终点；本轮没有替用户确定或执行付款。
+    status: retained
+    reason: 渠道选择要保留价差与便利性的不同偏好，不能预设直购或 OTA 获胜。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+    variants:
+      - 有搜索报价但找不到卖方：tse-unbookable-price
+      - 已经预订但尚不知何时出票：v2-ticketing-delay，仅索引证据、待原页复查
+  - id: buy-or-watch
+    title: 已定出行的观察票价与买票决策
+    need_ids:
+      - watch-price
+      - choose-fixed-trip
+    request: 我已选定假期出行日期和可接受时段，想买两张票，现在价格偏高。帮我整理能查到的价格变化和当前可购买情况，说明继续等与现在买各有哪些已知条件和未知风险。
+    assumptions:
+      - 从 v2-fixed-price 的实际观察行为改写；阈值提醒、通知方式和观察间隔属于待定设计。
+      - 不能把短期实测最低价叫未来最低价；如果测试预测，需另有预测评估方法。
+    status: retained
+    reason: 保留购买时机这一跨时间目标，无法在一次调用中完成也不删除。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: change-and-refund
+    title: 计划变化后比较退改选择
+    need_ids:
+      - change-or-refund
+    request: 我为两位成人和一位儿童买了往返票，现在计划变了。帮我按这份订单解释每段能退或能改什么、可能损失多少、要找哪个渠道处理。
+    assumptions:
+      - 改写自 v2-family-refund；退款权利与费用以实际订单和当前适用规则为准。
+      - 读规则和提供方案与执行退改分开设任务；本轮没有收集真实个人订单或提交退改。
+    status: retained
+    reason: 售后需求不能从单纯搜索测试的范围反推为不重要。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: disruption-recovery
+    title: 航班状态变化后安排下一步
+    need_ids:
+      - recover-disruption
+      - change-or-refund
+    request: 我收到航班取消通知，准备另买机票。帮我先核对原航班和订单的最新状态，再列出继续出行或退款的选择，说明会不会留下重复订单或额外费用。
+    assumptions:
+      - 从 v2-cancel-resume 的事后损失前移为事前处理，是合成任务。
+      - 通知、状态变更和读取时间需要可重放证据；仅有航班状态接口不等于能改原订单。
+    status: retained
+    reason: 取消又恢复的例子说明状态一致性会改变操作顺序；保持原订单与新选择的联系。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: assisted-travel
+    title: 把所需协助纳入机场和航班选择
+    need_ids:
+      - arrange-assistance
+      - check-connection
+    request: 我想安排需要行动协助的母亲独自跨国出行。帮我比较能安排适当协助的行程，说明转机和候机期间谁能帮她、服务到哪一步、怎样预约以及哪里还需要人工确认。
+    assumptions:
+      - 合成自 tse-senior-assistance 和 tse-airport-assistance；具体健康资料不进入公开任务，使用满足评估所需的最小合成限制。
+      - 轮椅接送、持续陪同与登机协助分别验收；不能把有机场服务说明当成预约成功。
+    status: retained
+    reason: 服务边界影响能否完成旅程，保留在机票相关需求内；可能涉及相邻服务。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+  - id: authentic-notice
+    title: 核验声称取消航班的消息
+    need_ids:
+      - verify-notice
+    request: 我收到一条能说出我的行程、声称航班取消并要求操作付款应用的消息。帮我从原订单或可信入口核对航班情况，指出哪些信息还不能确认。
+    assumptions:
+      - 从 v2-fake-notice 的担忧与回复中的核验行为推导；未找到直接委托 Agent 核验的原始提问。
+      - 测试使用合成消息，是否属于机票服务单项还是跨服务任务需进一步讨论。
+    status: candidate
+    reason: 保留为候选，待补查用户委托意愿和服务边界。
+    testability: unknown
+    testability_notes: 本轮只研究需求；尚未冻结测试输入、资源、验收与实际入口，也未运行服务测试。
+capability_candidates:
+  - id: search-offers
+    outcome: 按行程条件获取机票方案及报价。
+    need_ids:
+      - choose-fixed-trip
+      - compare-family-total
+      - explore-flexible-trip
+      - explore-open-destination
+      - plan-multicity
+    evidence:
+      - kiwi-mcp-docs
+      - tse-flex-airports
+      - tse-multicity
+    reasoning: 文档支持搜索这个业务动作，用户来源说明为何需要；不同入口能否覆盖全部约束仍未知。
+    catalog_id: flights.search
+  - id: purchase-handoff
+    outcome: 提供选中方案可继续购买的入口和关联条件。
+    need_ids:
+      - confirm-purchasable
+      - choose-booking-channel
+    evidence:
+      - kiwi-mcp-docs
+      - tse-unbookable-price
+    reasoning: 购买链接与出票不同；链接有效性和报价延续需测试，不由文档推定。
+    catalog_id: flights.booking-link
+  - id: quote-selected-offer
+    outcome: 核验选中行程及已选项目的当前可售性与总费用。
+    need_ids:
+      - compare-total-cost
+      - compare-family-total
+      - confirm-purchasable
+    evidence:
+      - tse-allin-flex
+      - reddit-family-price
+      - v2-fixed-price
+    reasoning: 行李和座位选项的获取已另列为基础动作；本动作检查选定组合的报价是否仍成立。保留既有ID便于追溯；具体实现待技术资料校准，暂不直接映射为 flights.reprice。
+  - id: read-baggage-options
+    outcome: 获取指定旅客和报价的行李额度、可加购项目及费用。
+    need_ids: [compare-total-cost, compare-family-total, explore-flexible-trip]
+    evidence: [tse-bag-total, tse-allin-flex, v2-international-bags]
+    reasoning: 从含行李总价需求拆出的基础动作；需核对费用适用的旅客和航段。服务可在搜索结果中直接返回这些信息，未要求独立API。
+  - id: read-seat-options
+    outcome: 获取指定报价的座位选项、费用与安排条件。
+    need_ids: [compare-family-total, compare-total-cost]
+    evidence: [reddit-family-price, tse-child-adult, tse-family-seven]
+    reasoning: 从真实同坐需求拆出的基础动作；输出需区分可选择、已保证和仍待确认，以支持Agent判断座位关系。读取选项与实际完成选座分别处理。
+  - id: observe-offers
+    outcome: 记录指定行程在一段时间内的报价与可售性变化。
+    need_ids:
+      - watch-price
+    evidence:
+      - v2-fixed-price
+    reasoning: 可由重复搜索加记录实现，也可能由服务推送；这是候选业务结果，不预设每家必须有专门监控API。
+  - id: read-trip-state
+    outcome: 读取航班、预订与出票状态及更新时间，说明不同状态的关联。
+    need_ids:
+      - confirm-purchasable
+      - recover-disruption
+      - verify-notice
+    evidence:
+      - v2-ticketing-delay
+      - v2-cancel-resume
+      - v2-fake-notice
+    reasoning: 需求侧候选；航班状态和私人订单权限可能不同，后续应按可独立验证的动作细分。
+  - id: quote-change-options
+    outcome: 针对具体订单获取退改条件、可选方案、费用和处理入口。
+    need_ids:
+      - change-or-refund
+      - recover-disruption
+    evidence:
+      - v2-family-refund
+      - v2-cancel-resume
+    reasoning: 先归纳理解选择的业务结果；执行改签、退款和争议处理不自动包含其中，需独立任务及授权。
+  - id: check-itinerary-requirements
+    outcome: 获取适用于指定旅客和行程的衔接、行李及证件要求。
+    need_ids:
+      - check-connection
+      - plan-multicity
+    evidence:
+      - tse-transit-visa
+      - qyer-transfer-security
+      - tse-no-selftransfer
+    reasoning: 需求侧候选，需权威业务资料校准；给结论、提供规则和完成手续是不同交付，不沿用论坛政策答案。
+  - id: find-assistance
+    outcome: 查明行程相关协助服务的范围、预约条件和联系入口。
+    need_ids:
+      - arrange-assistance
+    evidence:
+      - tse-senior-assistance
+      - tse-airport-assistance
+    reasoning: 需求侧候选；找到服务说明不等于预约成功，不预先要求所有机票API承担线下协助。
+gaps:
+  - 这是2026-09-07进行的目的性、迭代式公开资料采样：21条实际查询，22个用户原帖组（其中1个仅索引正文），另有1项调查的2个页面和沿用的1份产品文档。不是随机样本，未达到或声称主题饱和。
+  - >-
+    用户材料来自 Travel Stack
+    Exchange、V2EX、Reddit、穷游问答；中文和英文，偏可被搜索引擎检索的提问者、技术社区与困难案例。成功且无困扰的购买、普通低频旅客可能被低估，登录社区未充分覆盖。
+  - >-
+    旧帖证明当时出现过需求，不证明当前仍有同样产品缺陷；有明确发帖日期的材料从2011年至2025年，仍缺2026年的新增原始诉求及稳定复查机制。checked_on只表示本轮阅读日期，不是产品测试日期或页面最新版本保证。
+  - >-
+    13项 reported 指需求有直接表达支持，1项 inferred 是研究者推导；12个场景均为研究者改写/合成。11项 retained 表示本轮保留，1项 candidate
+    待补查；研究结束时全部测试可行性未知。随后仅fixed-itinerary完成本地探索试跑并更新为feasible，其余场景仍待验证；研究场景保留不等于任务通过。
+  - IATA总体偏好调查不能推出我们的任务频率。样本内复现、市场发生频率、未满足程度、失败后损失应分别讨论；本轮没有足够证据给场景排市场高频榜或设覆盖率权重。
+  - 后续优先补：普通顺利购买、时间优先与紧急出行、国内外不同市场、支付/出票失败、婴儿/未成年人、无障碍旅客本人、多人异地会合、里程与现金、商务舱/舒适度、航班延误后的实际改路。
+  - 机场接驳、机酒预算、到达日与酒店日期、租车、保险、宠物及环保偏好等相邻或未覆盖需求不可据本轮资料直接排除。知识缺口与供应商能力缺口分开记录。
+  - v2-ticketing-delay只能从检索索引读到原帖短正文，后续需原页复查或新增一手材料；r/Flights机器人警告、合并问答、同帖回复与镜像不增加独立用户样本数。未核验论坛身份或所有潜在转载关系。
+  - 能力候选有些尚包含多个动作，需要技术资料校准并根据实际测试继续拆分；输出字段、用户约束、Agent推理和服务动作不机械一一对应。仅search-offers和purchase-handoff沿用已有词典映射。
+  - 下一步测试设计先说明用户、输入、结束状态、验收证据与比较口径，再查各服务入口和个人接入准备；不同入口不必重复算成独立服务，未接入不等于任务失败。研究范围不能为了第一轮能跑而缩成已支持功能。

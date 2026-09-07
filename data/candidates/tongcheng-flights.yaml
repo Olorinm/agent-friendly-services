@@ -1,0 +1,22 @@
+id: tongcheng-flights
+name: 同程机票合作
+category: travel
+homepage: https://www.ly.com/public/about17u/contactus
+summary: 同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    contact:
+      url: https://www.ly.com/public/about17u/contactus
+      checked_on: '2026-09-07'
+      kind: official_site
+    platform:
+      url: https://flights.ly.com/open/home
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes: []
+  notes:
+    - 开放平台页面动态内容无法提取；这不是停服或没有 API 的证据，routes 暂为空。

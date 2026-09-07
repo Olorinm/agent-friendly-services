@@ -1,0 +1,64 @@
+id: kiwi
+name: Kiwi.com
+category: travel
+homepage: https://www.kiwi.com/
+summary: Flight search through a publicized MCP path and the separately gated Tequila partnership API.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    mcp:
+      url: https://www.kiwi.com/en/pages/mcp/
+      checked_on: '2026-09-07'
+      kind: official_docs
+    tequila:
+      url: >-
+        https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/
+      checked_on: '2026-09-07'
+      kind: official_announcement
+  routes:
+    - id: search-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.kiwi.com
+      evidence:
+        - mcp
+      docs: https://www.kiwi.com/en/pages/mcp/
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - mcp
+        flights.booking-link:
+          value: documented
+          evidence:
+            - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+        notes: The published setup provides only a server URL. Connection experiments are recorded separately; later purchase gates are not established by these docs.
+      auth:
+        value: unknown
+        notes: No key is listed in the setup. This catalog field reflects public documentation; observed authentication behavior belongs to the separate experiment record.
+    - id: tequila-api
+      interface: api
+      maintainer: official
+      entry_url: >-
+        https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/
+      evidence:
+        - tequila
+      availability:
+        value: invite_only
+        evidence:
+          - tequila
+      requirements:
+        invitation:
+          value: required
+          evidence:
+            - tequila
+      notes: >-
+        Keep invitation-only Tequila separate from the search MCP. Current endpoints and task coverage need
+        further research.

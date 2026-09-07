@@ -4,7 +4,7 @@
   "title": "Agent-Friendly Services provider",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name", "category", "homepage", "summary", "submitted_by", "entrypoints", "checks"],
+  "required": ["id", "name", "category", "homepage", "summary", "submitted_by"],
   "properties": {
     "id": {
       "type": "string",
@@ -31,7 +31,6 @@
     "entrypoints": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["docs"],
       "properties": {
         "docs": { "$ref": "#/definitions/httpsUrl" },
         "api_reference": { "$ref": "#/definitions/httpsUrl" },
@@ -75,6 +74,7 @@
         "automation_permitted": { "$ref": "#/definitions/check" }
       }
     },
+    "catalog": { "$ref": "catalog.schema.json" },
     "notes": { "type": "array", "items": { "type": "string" } }
   },
   "definitions": {

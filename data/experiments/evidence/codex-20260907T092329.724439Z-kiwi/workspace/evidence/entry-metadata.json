@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://mcp.kiwi.com",
+    "parameters": {}
+  },
+  "safe_response_headers": [
+    "HTTP/1.1 200 Connection established",
+    "HTTP/2 406 ",
+    "content-type: application/json"
+  ]
+}

@@ -1,0 +1,131 @@
+id: ignav
+name: Ignav Flights
+category: travel
+homepage: https://ignav.com/
+summary: Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    playground:
+      url: https://ignav.com/playground
+      checked_on: '2026-09-07'
+      kind: official_site
+    signup:
+      url: https://ignav.com/signup
+      checked_on: '2026-09-07'
+      kind: official_site
+    pricing:
+      url: https://ignav.com/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+    api:
+      url: https://ignav.com/docs
+      checked_on: '2026-09-07'
+      kind: official_docs
+    mcp:
+      url: https://ignav.com/docs/mcp
+      checked_on: '2026-09-07'
+      kind: official_docs
+    scope:
+      url: https://ignav.com/docs/amadeus-self-service-shutdown
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: public-playground
+      interface: web
+      maintainer: official
+      entry_url: https://ignav.com/playground
+      docs: https://ignav.com/docs
+      evidence: [playground, api]
+      availability:
+        value: self_serve
+        evidence: [playground, api]
+      auth:
+        value: none
+        evidence: [api]
+        notes: Docs advertise a no-signup playground. This is the guest website workflow, not customer API or MCP credentials.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence: [playground, api]
+      notes: Public trial UI; limits and selectable markets may differ from the customer API. Experimental observations remain separate from catalog claims.
+    - id: flights-api
+      interface: api
+      maintainer: official
+      entry_url: https://ignav.com/docs
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - signup
+      personal_access:
+        value: unknown
+        evidence:
+          - signup
+        notes: Email signup without payment details is documented; this alone does not establish all later eligibility conditions.
+      auth:
+        value: api_key
+        evidence:
+          - api
+      requirements:
+        email_verification:
+          value: required
+          evidence:
+            - signup
+        payment_method:
+          value: not_required
+          evidence:
+            - signup
+      human_steps:
+        - step: Verify signup email
+          stage: signup
+          evidence:
+            - signup
+      costs:
+        - kind: free_allowance
+          amount: 1000
+          unit: requests
+          per: one_time
+          scope: One-time account allowance, not monthly.
+          evidence:
+            - pricing
+        - kind: usage
+          amount: 2
+          unit: money
+          per: 1000 successful requests
+          scope: Successful HTTP 200 responses; search and booking-link retrieval are separate calls.
+          evidence:
+            - pricing
+          currency: USD
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - api
+        flights.booking-link:
+          value: documented
+          evidence:
+            - api
+        flights.ticketing:
+          value: unsupported
+          evidence:
+            - scope
+          notes: The API does not issue tickets.
+    - id: official-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://ignav.com/docs/mcp
+      evidence:
+        - mcp
+      via: flights-api
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+      notes: >-
+        Uses Ignav credentials. The API route records published account pricing; MCP tool billing and coverage
+        need confirmation.

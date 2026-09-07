@@ -1,0 +1,53 @@
+id: lufthansa-partner
+name: Lufthansa Partner Fare API
+category: travel
+homepage: https://developer.lufthansa.com/page
+summary: Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    notice:
+      url: https://developer.lufthansa.com/page
+      checked_on: '2026-09-07'
+      kind: official_announcement
+    directory:
+      url: https://developer.lufthansa.com/docs
+      checked_on: '2026-09-07'
+      kind: official_docs
+    offers:
+      url: https://developer.lufthansa.com/docs/read/api_partner/offers
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: open-api-registration
+      interface: api
+      maintainer: official
+      entry_url: https://developer.lufthansa.com/page
+      evidence: [notice]
+      availability:
+        value: paused
+        evidence: [notice]
+        notes: The notice pauses new Open API registrations, not every existing partner integration.
+      notes: Public schedule and status APIs are not evidence of consumer fare-search capability.
+    - id: partner-offers-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.lufthansa.com/docs/read/api_partner/offers
+      evidence:
+        - offers
+      availability:
+        value: unknown
+        evidence:
+          - notice
+        notes: Open API registration is on hold; whether a separate Partner application remains possible is unknown.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - offers
+      notes: >-
+        Public schedule/status APIs do not establish fare-search access. A readable registration form does not
+        override the pause notice.

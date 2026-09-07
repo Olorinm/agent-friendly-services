@@ -1,84 +1,54 @@
 # The candidate pool
 
-New services do not enter the index directly. They enter `data/candidates/` —
-the **candidate pool** — and are promoted only after an agent actually runs
-against them. Claims are tested, not argued: maintainers never have to judge
-whether a submission is "notable enough" or "too promotional", and vendors
-never have to lobby. The measurement decides.
+`data/candidates/` records services relevant to a user task, including unknown
+access paths, business-only products, invitation requirements, paused
+applications and retired routes. Ordinary individuals need to know about
+these barriers; self-serve access is not an inclusion requirement.
 
-## Entering the pool (mechanical bar, no editorial judgment)
+The [catalog standard](./catalog-standard.zh-CN.md) defines the discovery
+format. Identity, a category/subcategory and a dated first-party source are
+enough to start. Documentation, credentials and answered legacy checks are
+not required. `routes: []` means no route has been established, not that no API
+exists. Existing legacy candidates remain compatible.
 
-A candidate PR is merged when all of these hold:
+## Publication
 
-1. The YAML follows the exact same schema and rules as `data/providers/`
-   (`npm run validate` passes — candidates are validated too).
-2. The service is real and reachable: `homepage` and `entrypoints` answer
-   (`npm run probe -- --only=<id>`).
-3. [Inclusion rules](./methodology.md#inclusion-rules) are met — note that a
-   self-serve **agent-native pay-per-call scheme (e.g. x402) counts as an
-   access path**; an account system is not mandatory.
-4. `submitted_by` is honest (`vendor` if you work on the service).
-5. One provider per PR.
+- `generated/candidates.json` retains the compact legacy candidate list.
+- `generated/catalog.json` includes discovery records from both pools, with
+  labeled public-source claims, per-source dates and route boundaries.
+- `generated/catalog.md` provides a readable route comparison.
+- MCP `search_services` / `get_service` expose discovery records. Legacy
+  `search_providers` / `get_provider` do not inherit these new route claims.
 
-Maintainers still reject fraud, malware, and impersonation. That is the only
-human judgment at the door.
+An entry in `data/providers/` can gain new, untested routes. Keep one identity
+file and never copy its old verification badges onto those routes. Existing
+M1 runs and task experiments remain available through the old views; they are
+not yet linked to catalog route IDs.
 
-## What being a candidate means
+## Verification and promotion
 
-- Listed in the README **Candidate pool** table: identity, entrypoint file,
-  M1 status. Nothing else.
-- The claims inside the candidate's YAML are **not rendered** anywhere and the
-  entry is **not** in `generated/providers.json` (agents consuming the dataset
-  never ingest unverified claims). Candidates live in
-  [`generated/candidates.json`](../generated/candidates.json), clearly labeled.
-- Candidate URLs are probed weekly like everyone else's.
+The existing legacy-index promotion gate remains: evidence review and a
+majority pass across at least three published M1 first-call repetitions under
+the [verification method](./agent-verification.md) and
+[publication protocol](./publication-protocol.md). Moving an entry into that
+index also requires its legacy documentation entrypoint and reviewed checks.
+Discovery-only records cannot be promoted by simply moving the file.
 
-## Promotion into the index
+M1 establishes request-shape evidence, not successful onboarding or task
+completion. Do not describe an entry as task-tested because it passed M1.
+Future results must identify the concrete route, task, environment,
+permissions, dates, costs, human intervention and independent verification.
+There is no automatic promotion or overall score in the discovery catalog.
 
-Both gates, in any order:
+## Maintenance
 
-1. **M1 first-call run passes** — majority of ≥3 published dry-fire reps on the
-   standard environment: an agent, starting from the docs entry point with no
-   credentials, constructs the provider's canonical first API call and proves
-   the request shape is right (documented auth-error with a fake credential;
-   for credential-less/x402 APIs, the documented response of a harmless read).
-   Method: [agent-verification.md](./agent-verification.md); what may be
-   published and how: [publication-protocol.md](./publication-protocol.md).
-2. **Evidence review** — a maintainer or contributor verifies every
-   `supported`/`partial` claim against its evidence URL under the normal
-   [evidence rules](./contributing.md#evidence-rules) and the decision rubrics
-   in `data/fields.yaml`.
+Keep failed, restricted and retired routes with sources and dates. Never infer
+service death from failed web probes: authentication, bot protection, dynamic
+pages and protocol endpoints can prevent ordinary HTTP reads. Archive a whole
+product only when reliable evidence establishes it has ended; one retired
+route need not invalidate its other routes.
 
-Promotion is then a `git mv data/candidates/<id>.yaml data/providers/<id>.yaml`
-— the file itself does not change, and history preserves who submitted what.
-
-## Failing M1
-
-A failed M1 is published like any other run (transcript included) and shown in
-the candidate row. It is data, not punishment: the candidate stays in the pool,
-and anyone — including the vendor — can fix the docs or the service and open an
-issue to request a rerun. Reruns follow the
-[dispute rules](./publication-protocol.md).
-
-## Account-less services (x402, fully public APIs)
-
-Explicitly in scope — they are the most agent-native access model there is.
-But map the checks honestly: account-shaped checks (`self_serve_signup`,
-`api_key_self_serve`, `oauth_support`, `scoped_tokens`, `token_revocation`)
-are `not_applicable` **with a note** for a service that has no accounts or
-keys. Marking them `supported` because "no key is even needed" is inflation
-and will be corrected in review.
-
-## Demotion
-
-An index entry can be moved back to the pool by PR when its service dies
-(homepage/docs broken across two consecutive weekly probes) or when a disputed
-run fails its rerun. `archived: true` remains the right call for services that
-are gone for good.
-
-## Grandfathering
-
-The 76 entries indexed before the pool existed (2026-07-15) were
-evidence-reviewed at inclusion time. They get M1 runs through the same sweep
-as candidates, published the same way — the index converges on "everything
-measured" from both directions.
+Use precise product names and stable IDs. SDKs/CLIs/MCP wrappers are routes;
+independently operated hosted products can have their own identities. Official
+means official to the listed product, not necessarily to its upstream data
+source. Vendors must disclose `submitted_by: vendor`.

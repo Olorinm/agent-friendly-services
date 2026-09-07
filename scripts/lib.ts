@@ -30,6 +30,40 @@ export interface Provider {
   entrypoints: Record<string, string | string[]>;
   checks: Record<string, Check>;
   notes?: string[];
+  catalog?: Catalog;
+}
+
+/** All catalog facts are source claims. They never imply a successful task run. */
+export interface Fact {
+  value: string;
+  evidence?: string[];
+  notes?: string;
+}
+export interface AccessRoute {
+  id: string;
+  interface: 'api' | 'sdk' | 'cli' | 'mcp' | 'web' | 'mobile';
+  maintainer: 'official' | 'third_party' | 'unknown';
+  entry_url: string;
+  docs?: string;
+  evidence: string[];
+  upstream?: string;
+  via?: string;
+  notes?: string;
+  availability?: Fact;
+  personal_access?: Fact;
+  auth?: Fact;
+  data_kind?: Fact;
+  capabilities?: Record<string, Fact>;
+  requirements?: Record<string, Fact>;
+  human_steps?: { step: string; stage: string; evidence: string[]; notes?: string }[];
+  costs?: { kind: string; amount: number; unit: string; currency?: string; per: string; scope: string; evidence: string[] }[];
+}
+export interface Catalog {
+  version: 1;
+  classifications: string[];
+  sources: Record<string, { url: string; checked_on: string; kind: string; notes?: string }>;
+  routes: AccessRoute[];
+  notes?: string[];
 }
 
 export interface FieldDef {
@@ -47,6 +81,7 @@ export interface Category {
   id: string;
   name: string;
   description: string;
+  subcategories?: { id: string; name: string; description: string; capabilities: { id: string; description: string }[] }[];
 }
 
 export function loadYamlFile<T = unknown>(file: string): T {
@@ -84,11 +119,16 @@ export interface LoadedProvider {
 function loadDir(dir: string): LoadedProvider[] {
   return yamlFiles(dir).map((file) => {
     const raw = fs.readFileSync(file, 'utf8');
+    const parsed = yamlLoad(raw) as Provider;
     return {
       file,
       relFile: path.relative(ROOT, file),
       raw,
-      data: yamlLoad(raw) as Provider,
+      data: parsed && typeof parsed === 'object'
+        ? { ...parsed,
+          entrypoints: parsed.entrypoints === undefined ? {} : parsed.entrypoints,
+          checks: parsed.checks === undefined ? {} : parsed.checks,
+        } : parsed,
     };
   });
 }
@@ -97,9 +137,7 @@ export function loadProviders(): LoadedProvider[] {
   return loadDir(PROVIDERS_DIR);
 }
 
-/** Candidate-pool entries (data/candidates/): same schema as providers, but
- *  unverified — nobody has reviewed the evidence and no agent run has passed.
- *  See docs/candidate-pool.md for entry/promotion rules. */
+/** Candidate identity and source claims; directory membership is not a test result. */
 export function loadCandidates(): LoadedProvider[] {
   return loadDir(CANDIDATES_DIR);
 }
@@ -115,6 +153,14 @@ export function providerUrls(p: Provider): { url: string; source: string }[] {
     if (check?.evidence) urls.push({ url: check.evidence, source: `checks.${key}.evidence` });
   }
   if (p.homepage) urls.push({ url: p.homepage, source: 'homepage' });
+  for (const [id, source] of Object.entries(p.catalog?.sources ?? {})) {
+    urls.push({ url: source.url, source: `catalog.sources.${id}.url` });
+  }
+  for (const route of p.catalog?.routes ?? []) {
+    // entry_url can be a protocol endpoint: an HTTP probe is not a functional test.
+    urls.push({ url: route.entry_url, source: `catalog.routes.${route.id}.entry_url` });
+    if (route.docs) urls.push({ url: route.docs, source: `catalog.routes.${route.id}.docs` });
+  }
   return urls;
 }
 

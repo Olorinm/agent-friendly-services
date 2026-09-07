@@ -3,6 +3,13 @@
 Every fact in this directory is a small, self-contained contribution. Pick your
 size:
 
+Keep durable findings, their supporting evidence and reusable tools in the
+repository. Update existing source records; discussion drafts and duplicate
+process reports do not need separate committed documents. Generated views
+come from those records. See [AGENTS.md](../AGENTS.md) for the project principles.
+
+For the current task-evaluation workflow, follow [execution and review instructions](../data/experiments/AGENTS.md): reuse the candidate and task tables, launch a fresh measured Agent, independently review the evidence, record the outcome, and regenerate the [results table](../generated/evaluations.md) and catalog. The `agent-verify` command below is a separate legacy experiment runner.
+
 | Effort | Contribution | How |
 | --- | --- | --- |
 | 2 min | Report a broken or wrong link | [Issue form](../../issues/new/choose) |
@@ -15,27 +22,59 @@ Every open `unknown` is a ready-made first contribution: see each provider's
 **"Unknown (help wanted)"** line in [`generated/providers.md`](../generated/providers.md),
 or `derived.unknown_checks` in `generated/providers.json`.
 
-## Add a provider
+## Research user needs
 
-New providers land in `data/candidates/` — the [candidate pool](./candidate-pool.md).
-Entry is mechanical (schema + live URLs); promotion into the index happens after
-a passing M1 agent run plus an evidence review. Claims are tested, not argued.
+Use `data/research/<category>/<subcategory>.yaml`, extending an existing record
+or creating an empty one with `npm run research:init -- <category/subcategory>`.
+The [flight findings](./flights.zh-CN.md) show the current pilot.
 
-1. Check the [inclusion rules](./methodology.md#inclusion-rules): hosted
-   service + API surface + self-serve access path (account system, or
-   agent-native pay-per-call like x402); product-precision naming.
-2. Copy the closest existing file in `data/providers/` **into
-   `data/candidates/<id>.yaml`**; the filename is the id.
-3. Fill what you can verify; omit or mark `unknown` what you can't. A narrow,
-   solid entry beats a complete-looking guessed one.
-4. `npm run validate` (schema + rules, readable errors) and
-   `npm run probe -- --only=<id>` (checks your URLs answer).
-5. Open a PR. One provider per PR.
+1. Research real goals and constraints through public original discussions,
+   actual workflows and relevant surveys. Use provider docs to understand
+   capabilities; they do not establish user demand. Seek different users,
+   preferences and failure cases; document coverage gaps.
+2. Keep source URLs, reading dates, faithful summaries and limitations beside
+   the findings. Distinguish user reports, analyst inferences and hypotheses.
+   Note partial/indexed access and author corrections; group reposts and
+   survey derivatives without counting them as independent evidence. Public
+   sample counts do not establish market frequency.
+3. Derive scenarios from those needs, recording sources and added assumptions.
+   Start testing with a few real tasks, identify their required capabilities,
+   and increase constraints or completion depth as useful. Explain selection
+   and what each task adds. Untested or difficult needs remain in the record.
+4. Use `npm run validate` and `npm run generate` to check references and update
+   views. Research diagnostics are advisory and do not verify source meaning.
+   Formats, templates and tools can evolve; search logs are optional supporting
+   material, not a required standalone deliverable.
 
-Minimum bar: `id`, `name`, `category`, `homepage`, `summary`, `submitted_by`,
-`entrypoints.docs`, and at least 4 answered checks with evidence.
+Research scenarios are not executable tests. A runnable task adds concrete
+inputs, environment, budget, ending conditions and independent verification,
+and links back to the research scenario. Publish measured outcomes with their
+conditions and evidence; keep setup effort, service costs, Agent token usage and
+human involvement visible. Never fill an unmeasured cost with zero.
+
+## Add a candidate
+
+1. Follow the [catalog standard](./catalog-standard.zh-CN.md). Search both data
+   pools for an existing identity; use precise product names and stable IDs.
+2. Add a file in `data/candidates/` with identity, classification and dated
+   first-party sources. Routes, API docs, credentials and legacy checks can be
+   unknown. Restricted and paused services are useful records too.
+3. Keep per-route capabilities, eligibility, human steps and cost units separate.
+   Every known fact references a source; missing facts mean unknown, never zero.
+4. Run `npm run validate` and `npm test`. Preview with `AFS_OUTPUT_DIR` to avoid
+   changes to generated files. Optional link probes are not functional tests.
+5. Keep routine contributions focused on one product. Schema migrations may
+   need representative records to demonstrate the model.
+
+Legacy-format records remain compatible. The [candidate pool](./candidate-pool.md)
+explains the distinction between directory membership and task verification.
 
 ## Evidence rules
+
+The rules below describe legacy checks. Catalog sources can also be official
+registration/pricing pages or publisher listings, explicitly labeled as public
+claims. They never establish measured task performance.
+
 
 - Priority: official docs > API reference > official repo > changelog >
   official blog > trusted community source (last resort, checks only).

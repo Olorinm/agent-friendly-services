@@ -1,8 +1,168 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-07-15T07:44:24.612Z",
-  "count": 2,
+  "generated_at": "2026-09-07T11:07:30.205Z",
+  "count": 27,
   "candidates": [
+    {
+      "id": "airgateway",
+      "name": "AirGateway Platform API",
+      "category": "travel",
+      "homepage": "https://airgateway.com/",
+      "summary": "Air distribution API with sandbox keys, production certification and an agency application.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "amadeus-flights",
+      "name": "Amadeus Flight APIs",
+      "category": "travel",
+      "homepage": "https://developers.amadeus.com/",
+      "summary": "Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be re-established.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "apiheya-air-scraper",
+      "name": "apiheya Air Scraper",
+      "category": "travel",
+      "homepage": "https://rapidapi.com/apiheya/api/sky-scrapper/pricing",
+      "summary": "An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner API.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "aviasales",
+      "name": "Aviasales via Travelpayouts",
+      "category": "travel",
+      "homepage": "https://www.aviasales.com/",
+      "summary": "Travelpayouts-distributed live flight search and a separately accessible historical price-data API.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "bright-data-serp",
+      "name": "Bright Data SERP API",
+      "category": "travel",
+      "homepage": "https://brightdata.com/",
+      "summary": "SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "ctrip-flights",
+      "name": "携程机票合作",
+      "category": "travel",
+      "homepage": "https://pages.ctrip.com/public/dlhz.htm",
+      "summary": "携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "duffel-flights",
+      "name": "Duffel Flights API",
+      "category": "travel",
+      "homepage": "https://duffel.com/",
+      "summary": "Flight API whose self-serve test environment must be distinguished from live account activation.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "expedia-xap-flights",
+      "name": "Expedia XAP Flight Listings",
+      "category": "travel",
+      "homepage": "https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started",
+      "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "fliggy-domestic-flights",
+      "name": "飞猪国内机票开放平台",
+      "category": "travel",
+      "homepage": "https://open.alitrip.com/businessDetail.htm?tagId=85",
+      "summary": "面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "flight-mcp",
+      "name": "Flight MCP",
+      "category": "travel",
+      "homepage": "https://flight-mcp.com/",
+      "summary": "Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "flightapi-io",
+      "name": "FlightAPI.io Flight Price API",
+      "category": "travel",
+      "homepage": "https://www.flightapi.io/",
+      "summary": "Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "ignav",
+      "name": "Ignav Flights",
+      "category": "travel",
+      "homepage": "https://ignav.com/",
+      "summary": "Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "kayak-affiliate",
+      "name": "KAYAK Affiliate API",
+      "category": "travel",
+      "homepage": "https://affiliates.kayak.com/",
+      "summary": "Affiliate flight APIs with a business application and an optional requested sandbox.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "kiwi",
+      "name": "Kiwi.com",
+      "category": "travel",
+      "homepage": "https://www.kiwi.com/",
+      "summary": "Flight search through a publicized MCP path and the separately gated Tequila partnership API.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "letsfg",
+      "name": "LetsFG Personal Flight Search",
+      "category": "travel",
+      "homepage": "https://letsfg.co/",
+      "summary": "Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "lufthansa-partner",
+      "name": "Lufthansa Partner Fare API",
+      "category": "travel",
+      "homepage": "https://developer.lufthansa.com/page",
+      "summary": "Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
     {
       "id": "paas-build",
       "name": "paas.build",
@@ -24,6 +184,96 @@
         "date": "2026-07-15",
         "transcript": "2026-07-15-dry-fire-rep3.md"
       }
+    },
+    {
+      "id": "qunar-flights",
+      "name": "去哪儿机票合作",
+      "category": "travel",
+      "homepage": "https://www.qunar.com/site/zh/Cooperate_4.shtml",
+      "summary": "去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "sabre-air",
+      "name": "Sabre Air APIs",
+      "category": "travel",
+      "homepage": "https://developer.sabre.com/",
+      "summary": "Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "scrapingdog-flights",
+      "name": "Scrapingdog Google Flights API",
+      "category": "travel",
+      "homepage": "https://www.scrapingdog.com/",
+      "summary": "Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "searchapi",
+      "name": "SearchApi Google Flights",
+      "category": "travel",
+      "homepage": "https://www.searchapi.io/",
+      "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "skootle-google-flights",
+      "name": "Skootle Google Flights Scraper",
+      "category": "travel",
+      "homepage": "https://apify.com/skootle/google-flights-scraper",
+      "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "skyscanner",
+      "name": "Skyscanner Travel APIs",
+      "category": "travel",
+      "homepage": "https://www.skyscanner.net/",
+      "summary": "Partner flight APIs and an official MCP, with independently documented business-access paths.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "tongcheng-flights",
+      "name": "同程机票合作",
+      "category": "travel",
+      "homepage": "https://www.ly.com/public/about17u/contactus",
+      "summary": "同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "travelport-tripservices",
+      "name": "Travelport TripServices",
+      "category": "travel",
+      "homepage": "https://developer.travelport.com/",
+      "summary": "Travel distribution API requiring trial requests and provider-provisioned production credentials.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "trip-com-flights",
+      "name": "Trip.com Flight Distribution",
+      "category": "travel",
+      "homepage": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+      "summary": "Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
     },
     {
       "id": "xquik",

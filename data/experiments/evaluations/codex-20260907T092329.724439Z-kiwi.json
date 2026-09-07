@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T092329.724439Z-kiwi",
+  "service_id": "kiwi",
+  "route_id": "search-mcp",
+  "entry_url": "https://mcp.kiwi.com",
+  "task": {
+    "description": "找到9月25日米兰飞往荷兰的机票",
+    "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+    "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+    "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+    "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+    "id": "flights-search-001",
+    "version": "v1",
+    "sha256": "ab11d65b9c290491d37f443c7e077c1c6ac4dd0102b8e16cb6e47b016b401a61",
+    "file": "data/experiments/tasks/travel-flights.md"
+  },
+  "prompt_sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "3882d648e35afddf82400d171e650ee7edff8dc900254abd4d95924ea67e7fa5"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T09:23:29.733240+00:00",
+  "ended_at": "2026-09-07T09:27:01.957027+00:00",
+  "elapsed_seconds": 212.222,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live"
+  },
+  "status": "completed",
+  "reason": "独立核对当次请求、完整服务SSE响应和最终答案，3个方案均满足 flights-search-001 v1：BGY→EIN FR3460 62 EUR、LIN→AMS U25405 68 EUR、MXP→AMS U23851 75 EUR，均为2026-09-25出发、1名成人单程经济舱。单次运行212.222秒内完成，执行中人工介入0。初次GET 406后MCP POST成功，无未解决执行阻碍；仅证明本次基础搜索完成，Agent与服务逐次实付费用未报告，保留未知。 2026-09-07费用口径修订：本字段统计本次调用服务的新增实付。实际使用无账户、无凭据的公开入口，且没有付款，因此将原先因缺账单填写的未知修正为0；原始复核说明保留，不涉及机票报价。",
+  "usage": {
+    "input_tokens": 204087,
+    "cached_input_tokens": 163968,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5464,
+    "reasoning_output_tokens": 1056
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "External preparing Codex Agent for the user-requested single Kiwi trial; separate from measured thread [CODEX_SESSION]; reviewer session identifier unavailable.",
+    "reviewed_at": "2026-09-07T09:30:33.986667+00:00",
+    "checks": [
+      {
+        "criterion": "至少一个方案满足原题出发日期及路线范围",
+        "passed": true,
+        "evidence": "三组 search-*-request.json 均 departureDate=25/09/2026、departureDateFlexDays=0；各原始 search-*-response.txt 的 result.structuredContent.itineraries[0] 分别为 BGY→EIN、LIN→AMS、MXP→AMS，departureTime 均为 2026-09-25；segments[0].toCountry=Netherlands。三项均满足原题，允许中转而这三项为直飞。"
+      },
+      {
+        "criterion": "1名成人、单程、经济舱有请求与响应支持",
+        "passed": true,
+        "evidence": "三组请求 adults=1、children=0、infants=0、cabinClass=M 且未提供 returnDate；tools-list-response.txt 中 search-flight 明确 M=economy、省略 returnDate 为单程；三组响应 passengers 回显 1/0/0，所选 itinerary.inbound=null，outbound 与 segments[0].cabinClass 均为 Economy。"
+      },
+      {
+        "criterion": "最终答案包含各航段机场、航班号和当地起降日期时间，且与真实响应相符",
+        "passed": true,
+        "evidence": "独立解析三份原始 SSE 并核对 answer.md：itineraries[0].outbound.segments[0] 分别为 BGY→EIN FR3460 2026-09-25 06:40–08:20、LIN→AMS U25405 06:55–08:50、MXP→AMS U23851 06:10–08:05；每项仅一个航段。tools-list-response.txt 的 search-flight 描述明确 departureTime/arrivalTime 为当地 ISO 时间；各段机场名称、航司及航班号也与答案一致。"
+      },
+      {
+        "criterion": "搜索报价、币种和查询来源有真实服务响应支持",
+        "passed": true,
+        "evidence": "三组原始响应的 result.structuredContent.currency=EUR；itineraries[0].price/priceFormatted 分别为 62/62 EUR、68/68 EUR、75/75 EUR，bookingUrl 分别为 https://kiwi.com/u/gvdxmc、https://kiwi.com/u/dr8nqj、https://kiwi.com/u/p8kc4w，均与 answer.md 一致。请求和实际调用代码均指向 https://mcp.kiwi.com 的 search-flight，未推算报价或核验最低价/支付。"
+      },
+      {
+        "criterion": "独立复核实际调用证据，不能仅采信被测Agent自报或自写验收",
+        "passed": true,
+        "evidence": "外部准备Agent审阅 events.jsonl 的 item_6、item_8、item_9 及本轮生成的 kiwi_probe.py/search_flights.py，并独立解析原始 SSE；三组 result.content 中 JSON 与 structuredContent 相等。三份完整响应的前16000字符与 item_9 原始 stdout 逐字符一致；初始化和工具发现响应与 item_6 stdout 在仅统一换行后完整相等。查询 metadata 均 HTTP 200、response_redacted=false。保留完整响应及 execution-excerpts.json；未运行或采信被测 Agent 的 verify_results.py / selected-options.json。"
+      },
+      {
+        "criterion": "单次独立会话使用固定配置并在600秒预算内完成",
+        "passed": true,
+        "evidence": "run.json 和 prompt.txt 冻结 flights-search-001 v1、search-mcp、gpt-6-astra、xhigh、600秒；新临时目录、--ephemeral、--ignore-user-config、--ignore-rules、project_doc_max_bytes=0 等隔离配置已检查，原题及启动脚本未改。events.jsonl 只有一个 thread.started 和一个 turn.completed；exit_code=0、timed_out=false、耗时212.222秒。仅同机新目录隔离，非全新虚拟机；本次只启动一次被测任务。"
+      },
+      {
+        "criterion": "保留可复核证据，记录实际时间、开销与介入",
+        "passed": true,
+        "evidence": "运行起止 2026-09-07T09:23:29.733240+00:00 至 09:27:01.957027+00:00（UTC），对应 Asia/Shanghai 17:23:29.733240–17:27:01.957027；业务出发日期独立为 2026-09-25。输入204087、缓存输入163968、输出5464、其中推理输出1056来自 turn.completed.usage，与 run.json 一致。没有向执行会话追加消息，人工介入0。全程只观察到公开搜索/文档请求，无注册、订单或付款；未报告逐次服务账单，service_cost_usd=null，Agent逐次实付费用同样未知。初次GET 406为已解决的协议探测问题，后续POST 200；没有未解决的执行阻碍。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/run.json",
+      "sha256": "831e844ba51f3a0b10a2533cb1596eef4ad64837e323b02065902db77f2639ad",
+      "note": "Frozen task, exact harness/model/effort, UTC runtime timestamps, budget, isolation and measured usage.",
+      "source_sha256": "b4c6b191e0ea4858d79ea676ab3351ce3540d7ba4f41989f15189066d636226c",
+      "redactions": [
+        "local paths or Codex session identifiers"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/prompt.txt",
+      "sha256": "4c50c2931140bd9d04748d8db3e2e7acd850923399c0220ec372e02296cbfc39",
+      "note": "Exact prompt supplied to the one fresh measured session; contains no old result or prewritten calling code."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/answer.md",
+      "sha256": "a44eab97389a7364bd8c667c75c5e7c14d844e3a92c534be00132e905e729e02",
+      "note": "Measured final answer; local paths redacted in the public copy, original preserved locally.",
+      "source_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
+      "redactions": [
+        "local paths or Codex session identifiers"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/execution-excerpts.json",
+      "sha256": "c856b6e0202b4b7baef710f9f32bf3022a0dc86e71a5a3920eced8951a8b7d3f",
+      "note": "Original initialization/search execution events and usage event, selected by the external reviewer; complete logs stay local.",
+      "source_sha256": "2f3d4066b8baf54a9aa7a306f91da94bd5a0cac3776ac89d7e4ca4ba3494cf6d",
+      "redactions": [
+        "local paths or Codex session identifiers"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/kiwi_probe.py",
+      "sha256": "22bf6f226a60a9add227494113e4164c800dba0d9e5de2b7ba1c4e7d30d9aef1",
+      "note": "HTTP client written by the measured Agent during this run; saves service response bytes with credential redaction only."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search_flights.py",
+      "sha256": "b9a2837e9b381f203aa1cea300b7108b496671c2e79ef9a31f9aa5b89006c807",
+      "note": "Flight queries written by the measured Agent during this run; explicit date, passengers, economy and one-way parameters."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/entry-metadata.json",
+      "sha256": "c1417b4139b8b7f315e25fd3c3309f83ebd67b2e8c156eb9aef1580603c7aa04",
+      "note": "Initial GET request and HTTP 406 response status; later POST calls succeed."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/entry-response.txt",
+      "sha256": "2e36ef7d09d4bfe46439dcb0a8ec535f6a882656f2f63aae3c9c348f9b0fbaca",
+      "note": "Initial GET requires Accept: text/event-stream; a resolved protocol discovery step."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/initialize-request.json",
+      "sha256": "1d92eda91c0bbe7ca65ff6033aa5e0ba1302b7513167d7b704c3c647ccd2b2a3",
+      "note": "MCP initialization request to the designated URL."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/initialize-response.txt",
+      "sha256": "acbabb742a15f6dc5e5ebcbf7659fc0a94b36583f05b2147cf1fc88b1af83c32",
+      "note": "Kiwi server identity kiwicom-flight-search 1.28.1."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/tools-list-request.json",
+      "sha256": "6ab26a8d08c93377557d9316b881a2bdc66c15c1611ef827b2310fe8c868559f",
+      "note": "Tool discovery request to the designated URL."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/tools-list-response.txt",
+      "sha256": "f2d1cdf0d30a4a75947e43586db0aa5d2819afa110bc51a72eebe4f5fcde8453",
+      "note": "Actual service tool description: M=economy, omitted returnDate=one-way, timestamps are airport local times."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-request.json",
+      "sha256": "0bc7ba182917df5960e59c7382473329682e8e9ddd7b6d35c39f10257ce54efa",
+      "note": "Actual POST URL and exact search parameters."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-response.txt",
+      "sha256": "9ab3133e94bb8e555992b853eec5744332552b11a576f9ec4b06a4e15d8f7a16",
+      "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-bgy-ein-metadata.json",
+      "sha256": "d7ceddd4a445322c96ce36af3b032765b39704e84062ea60316061915acf63d2",
+      "note": "HTTP 200, UTC response time and response_redacted=false."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-request.json",
+      "sha256": "536f6d4ad145aa08dd70b9a4351281b887cb37e94a1d82a537aff478470c924c",
+      "note": "Actual POST URL and exact search parameters."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-response.txt",
+      "sha256": "831ac6f92afacca6a9a6fdcbc460b783f5def624d29b3c23608b2072ed66fb18",
+      "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-lin-ams-metadata.json",
+      "sha256": "e191e29703099a66df57a4f3a4c1a978233844dbda22ba91a24f5e21ed2ec181",
+      "note": "HTTP 200, UTC response time and response_redacted=false."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-request.json",
+      "sha256": "51e60e93550939f257d263ca1fb31abf9a440722dd0473cbbe3be2be8fe907c9",
+      "note": "Actual POST URL and exact search parameters."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-response.txt",
+      "sha256": "dde5a46bd326b6d3dcf2f892ce6dba8dafc24cd693cd83210b59fd00e083afe7",
+      "note": "Complete service SSE body; externally reviewed itinerary at result.structuredContent.itineraries[0], with matching text content."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T092329.724439Z-kiwi/workspace/evidence/search-mxp-ams-metadata.json",
+      "sha256": "b210adbcb78157f21b4024d4e867b80dd2075885670b484065777d8571e51baa",
+      "note": "HTTP 200, UTC response time and response_redacted=false."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T092329.724439Z-kiwi",
+    "run_sha256": "b4c6b191e0ea4858d79ea676ab3351ce3540d7ba4f41989f15189066d636226c",
+    "events_sha256": "4b70c33ea667a92248ca6b72569a39c8cc7d757ed1679731af74febcfd26b241",
+    "answer_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
+    "review_sha256": "dba51a04a317efb59bf950d63ce65b453b538dda09e8d36480c0c57cc41940e4",
+    "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

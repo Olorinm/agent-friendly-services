@@ -1,0 +1,44 @@
+id: expedia-xap-flights
+name: Expedia XAP Flight Listings
+category: travel
+homepage: https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started
+summary: Travel Redirect/XAP flight listings product whose new API applications are currently paused.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    setup:
+      url: https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started
+      checked_on: '2026-09-07'
+      kind: official_docs
+    flights:
+      url: https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: flight-listings-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings
+      evidence:
+        - flights
+      availability:
+        value: paused
+        evidence:
+          - setup
+      personal_access:
+        value: restricted
+        evidence:
+          - setup
+        notes: New API applications are paused for this product; not a claim about all Expedia services.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - flights
+        flights.booking-link:
+          value: documented
+          evidence:
+            - flights

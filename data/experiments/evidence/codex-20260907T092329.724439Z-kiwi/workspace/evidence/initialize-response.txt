@@ -1,0 +1,3 @@
+event: message
+data: {"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","capabilities":{"experimental":{},"prompts":{"listChanged":false},"resources":{"subscribe":false,"listChanged":false},"tools":{"listChanged":false}},"serverInfo":{"name":"kiwicom-flight-search","version":"1.28.1"},"instructions":"Flight search for Kiwi.com. Use search-flight to find one-way and return flights between two locations for given dates and passengers. Use feedback-to-devs only to forward feedback, bug reports, or feature requests about the search-flight tool itself to the developers — not for Claude/app behaviour, or other MCP servers."}}
+

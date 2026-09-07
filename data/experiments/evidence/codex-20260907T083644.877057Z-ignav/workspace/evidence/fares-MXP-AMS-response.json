@@ -1,0 +1,538 @@
+{
+  "origin": "MXP",
+  "destination": "AMS",
+  "departure_date": "2026-09-25",
+  "itineraries": [
+    {
+      "price": {
+        "amount": 58.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "easyJet",
+        "duration_minutes": 115,
+        "segments": [
+          {
+            "marketing_carrier_code": "U2",
+            "flight_number": "3851",
+            "operating_carrier_name": "easyJet",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T06:10:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T04:10:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T08:05:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T06:05:00Z",
+            "duration_minutes": 115,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "3528f532dbbb0000002d6ebb49931cf9",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 64.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "easyJet",
+        "duration_minutes": 115,
+        "segments": [
+          {
+            "marketing_carrier_code": "U2",
+            "flight_number": "3859",
+            "operating_carrier_name": "easyJet",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T17:50:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T15:50:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T19:45:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T17:45:00Z",
+            "duration_minutes": 115,
+            "aircraft": "Airbus A321"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "b1561b43c3f800000082c9cec4811fa6",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 70.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "easyJet",
+        "duration_minutes": 120,
+        "segments": [
+          {
+            "marketing_carrier_code": "U2",
+            "flight_number": "7814",
+            "operating_carrier_name": "easyJet",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T09:40:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T07:40:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T11:40:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T09:40:00Z",
+            "duration_minutes": 120,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "30be71ae16530000004b4f39ab603c93",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 111.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Vueling",
+        "duration_minutes": 435,
+        "segments": [
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "6343",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T13:25:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T11:25:00Z",
+            "arrival_airport": "BCN",
+            "arrival_time_local": "2026-09-25T15:10:00",
+            "arrival_timezone": "Europe/Madrid",
+            "arrival_time_utc": "2026-09-25T13:10:00Z",
+            "duration_minutes": 105,
+            "aircraft": "Airbus A320"
+          },
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "8304",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "BCN",
+            "departure_time_local": "2026-09-25T18:10:00",
+            "departure_timezone": "Europe/Madrid",
+            "departure_time_utc": "2026-09-25T16:10:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T20:40:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T18:40:00Z",
+            "duration_minutes": 150,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "bags": {
+        "checked": 2
+      },
+      "requires_self_transfer": false,
+      "ignav_id": "889118a9594e000000a1e887085a88f7",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 114.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Air Serbia",
+        "duration_minutes": 735,
+        "segments": [
+          {
+            "marketing_carrier_code": "JU",
+            "flight_number": "419",
+            "operating_carrier_name": "Air Serbia",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T20:55:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T18:55:00Z",
+            "arrival_airport": "BEG",
+            "arrival_time_local": "2026-09-25T22:40:00",
+            "arrival_timezone": "Europe/Belgrade",
+            "arrival_time_utc": "2026-09-25T20:40:00Z",
+            "duration_minutes": 105,
+            "aircraft": "Embraer 190"
+          },
+          {
+            "marketing_carrier_code": "JU",
+            "flight_number": "260",
+            "operating_carrier_name": "Air Serbia",
+            "departure_airport": "BEG",
+            "departure_time_local": "2026-09-26T06:35:00",
+            "departure_timezone": "Europe/Belgrade",
+            "departure_time_utc": "2026-09-26T04:35:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-26T09:10:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-26T07:10:00Z",
+            "duration_minutes": 155,
+            "aircraft": "Airbus A220-300 Passenger"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "8a2c794be8740000005953f5d70f4bd9",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 117.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Vueling",
+        "duration_minutes": 325,
+        "segments": [
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "6341",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T12:25:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T10:25:00Z",
+            "arrival_airport": "BCN",
+            "arrival_time_local": "2026-09-25T14:10:00",
+            "arrival_timezone": "Europe/Madrid",
+            "arrival_time_utc": "2026-09-25T12:10:00Z",
+            "duration_minutes": 105,
+            "aircraft": "Airbus A321"
+          },
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "8306",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "BCN",
+            "departure_time_local": "2026-09-25T15:20:00",
+            "departure_timezone": "Europe/Madrid",
+            "departure_time_utc": "2026-09-25T13:20:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T17:50:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T15:50:00Z",
+            "duration_minutes": 150,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "bags": {
+        "checked": 2
+      },
+      "requires_self_transfer": false,
+      "ignav_id": "0d8b181be2330000000413e4fda8842e",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 122.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Scandinavian Airlines",
+        "duration_minutes": 330,
+        "segments": [
+          {
+            "marketing_carrier_code": "SK",
+            "flight_number": "1686",
+            "operating_carrier_name": "Scandinavian Airlines",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T11:25:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T09:25:00Z",
+            "arrival_airport": "CPH",
+            "arrival_time_local": "2026-09-25T13:30:00",
+            "arrival_timezone": "Europe/Copenhagen",
+            "arrival_time_utc": "2026-09-25T11:30:00Z",
+            "duration_minutes": 125,
+            "aircraft": "Airbus A320neo"
+          },
+          {
+            "marketing_carrier_code": "SK",
+            "flight_number": "1549",
+            "operating_carrier_name": "Scandinavian Airlines",
+            "departure_airport": "CPH",
+            "departure_time_local": "2026-09-25T15:25:00",
+            "departure_timezone": "Europe/Copenhagen",
+            "departure_time_utc": "2026-09-25T13:25:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T16:55:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T14:55:00Z",
+            "duration_minutes": 90,
+            "aircraft": "Airbus A319"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "65efb8a4df88000000b03fe85de9efa4",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 129.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Vueling",
+        "duration_minutes": 325,
+        "segments": [
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "6343",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T13:25:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T11:25:00Z",
+            "arrival_airport": "BCN",
+            "arrival_time_local": "2026-09-25T15:10:00",
+            "arrival_timezone": "Europe/Madrid",
+            "arrival_time_utc": "2026-09-25T13:10:00Z",
+            "duration_minutes": 105,
+            "aircraft": "Airbus A320"
+          },
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "8317",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "BCN",
+            "departure_time_local": "2026-09-25T16:20:00",
+            "departure_timezone": "Europe/Madrid",
+            "departure_time_utc": "2026-09-25T14:20:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T18:50:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T16:50:00Z",
+            "duration_minutes": 150,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "bags": {
+        "checked": 2
+      },
+      "requires_self_transfer": false,
+      "ignav_id": "7fec29669743000000cf32d40f6c77d1",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 132.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Vueling",
+        "duration_minutes": 340,
+        "segments": [
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "6331",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T09:55:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T07:55:00Z",
+            "arrival_airport": "BCN",
+            "arrival_time_local": "2026-09-25T11:40:00",
+            "arrival_timezone": "Europe/Madrid",
+            "arrival_time_utc": "2026-09-25T09:40:00Z",
+            "duration_minutes": 105,
+            "aircraft": "Airbus A320"
+          },
+          {
+            "marketing_carrier_code": "VY",
+            "flight_number": "8302",
+            "operating_carrier_name": "Vueling",
+            "departure_airport": "BCN",
+            "departure_time_local": "2026-09-25T13:05:00",
+            "departure_timezone": "Europe/Madrid",
+            "departure_time_utc": "2026-09-25T11:05:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T15:35:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T13:35:00Z",
+            "duration_minutes": 150,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "bags": {
+        "checked": 2
+      },
+      "requires_self_transfer": false,
+      "ignav_id": "ccd95334737500000056601bcf6b8812",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 226.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "SWISS",
+        "duration_minutes": 260,
+        "segments": [
+          {
+            "marketing_carrier_code": "LX",
+            "flight_number": "1629",
+            "operating_carrier_name": "SWISS",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T14:55:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T12:55:00Z",
+            "arrival_airport": "ZRH",
+            "arrival_time_local": "2026-09-25T15:50:00",
+            "arrival_timezone": "Europe/Zurich",
+            "arrival_time_utc": "2026-09-25T13:50:00Z",
+            "duration_minutes": 55,
+            "aircraft": "Embraer 190"
+          },
+          {
+            "marketing_carrier_code": "LX",
+            "flight_number": "734",
+            "operating_carrier_name": "SWISS",
+            "departure_airport": "ZRH",
+            "departure_time_local": "2026-09-25T17:35:00",
+            "departure_timezone": "Europe/Zurich",
+            "departure_time_utc": "2026-09-25T15:35:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T19:15:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T17:15:00Z",
+            "duration_minutes": 100,
+            "aircraft": "Airbus A220-300 Passenger"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "e73ccb3237fd00000046d58b5e75d415",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 434.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "SWISS",
+        "duration_minutes": 210,
+        "segments": [
+          {
+            "marketing_carrier_code": "LX",
+            "flight_number": "1613",
+            "operating_carrier_name": "SWISS",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T10:40:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T08:40:00Z",
+            "arrival_airport": "ZRH",
+            "arrival_time_local": "2026-09-25T11:40:00",
+            "arrival_timezone": "Europe/Zurich",
+            "arrival_time_utc": "2026-09-25T09:40:00Z",
+            "duration_minutes": 60,
+            "aircraft": "Airbus A220-300 Passenger"
+          },
+          {
+            "marketing_carrier_code": "LX",
+            "flight_number": "728",
+            "operating_carrier_name": "SWISS",
+            "departure_airport": "ZRH",
+            "departure_time_local": "2026-09-25T12:30:00",
+            "departure_timezone": "Europe/Zurich",
+            "departure_time_utc": "2026-09-25T10:30:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T14:10:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T12:10:00Z",
+            "duration_minutes": 100,
+            "aircraft": "Airbus A220-300 Passenger"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "5f7ec3c84c5600000023a22cd6d863ff",
+      "playground_ignav_id": "[REDACTED]"
+    },
+    {
+      "price": {
+        "amount": 520.0,
+        "currency": "EUR",
+        "status": "verified"
+      },
+      "outbound": {
+        "carrier": "Air France",
+        "duration_minutes": 235,
+        "segments": [
+          {
+            "marketing_carrier_code": "AF",
+            "flight_number": "1831",
+            "operating_carrier_name": "Air France",
+            "departure_airport": "MXP",
+            "departure_time_local": "2026-09-25T09:15:00",
+            "departure_timezone": "Europe/Rome",
+            "departure_time_utc": "2026-09-25T07:15:00Z",
+            "arrival_airport": "CDG",
+            "arrival_time_local": "2026-09-25T10:50:00",
+            "arrival_timezone": "Europe/Paris",
+            "arrival_time_utc": "2026-09-25T08:50:00Z",
+            "duration_minutes": 95,
+            "aircraft": "Airbus A220-300 Passenger"
+          },
+          {
+            "marketing_carrier_code": "AF",
+            "flight_number": "1640",
+            "operating_carrier_name": "Air France",
+            "departure_airport": "CDG",
+            "departure_time_local": "2026-09-25T11:45:00",
+            "departure_timezone": "Europe/Paris",
+            "departure_time_utc": "2026-09-25T09:45:00Z",
+            "arrival_airport": "AMS",
+            "arrival_time_local": "2026-09-25T13:10:00",
+            "arrival_timezone": "Europe/Amsterdam",
+            "arrival_time_utc": "2026-09-25T11:10:00Z",
+            "duration_minutes": 85,
+            "aircraft": "Airbus A320"
+          }
+        ]
+      },
+      "cabin_class": "economy",
+      "requires_self_transfer": false,
+      "ignav_id": "5451878d77ab000000c5713ac107412d",
+      "playground_ignav_id": "[REDACTED]"
+    }
+  ]
+}

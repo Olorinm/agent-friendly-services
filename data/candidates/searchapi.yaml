@@ -1,0 +1,71 @@
+id: searchapi
+name: SearchApi Google Flights
+category: travel
+homepage: https://www.searchapi.io/
+summary: Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    flights:
+      url: https://www.searchapi.io/docs/google-flights-api
+      checked_on: '2026-09-07'
+      kind: official_docs
+    trial:
+      url: https://www.searchapi.io/google-flights-api
+      checked_on: '2026-09-07'
+      kind: official_site
+    mcp:
+      url: https://www.searchapi.io/integrations/mcp
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: google-flights-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.searchapi.io/docs/google-flights-api
+      evidence:
+        - flights
+      upstream: google-flights
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - flights
+      auth:
+        value: api_key
+        evidence:
+          - flights
+      availability:
+        value: self_serve
+        evidence:
+          - trial
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - trial
+          notes: Trial page explicitly says no credit card.
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: requests
+          per: trial
+          scope: Product-page trial; whether shared across engines requires account verification.
+          evidence:
+            - trial
+    - id: hosted-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://www.searchapi.io/mcp
+      evidence:
+        - mcp
+      docs: https://www.searchapi.io/integrations/mcp
+      notes: Supports browser OAuth or a separate MCP token. Which tools expose the flight task remains untested.
+      human_steps:
+        - step: Authorize in browser when choosing OAuth
+          stage: credentials
+          evidence:
+            - mcp

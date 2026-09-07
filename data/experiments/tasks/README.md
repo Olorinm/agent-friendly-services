@@ -1,5 +1,15 @@
 # Real-task definitions — milestone ladders
 
+For the current workflow use [task design](./AGENTS.md), [execution and review](../AGENTS.md), and the [flight task table](./travel-flights.md). The milestone format below is retained for historical experiments; it is not a prerequisite for new tasks.
+
+These are legacy executable task definitions. New user-needs research lives in
+`data/research/<category>/<subcategory>.yaml` under
+the [research guidance](../../../docs/contributing.md#research-user-needs).
+Research scenarios are not runnable tests. Future task design must cite its
+research file, Git revision and scenario IDs, then define inputs, resources and
+independent verification separately. A need remains valid even when testing is
+currently blocked.
+
 One file per category, holding that category's **milestone ladder**. Milestones
 pin the real-task scenarios so runs are comparable within a category and the
 verdict never depends on the agent's mid-run judgment about what "the task"

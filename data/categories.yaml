@@ -1,6 +1,6 @@
-# Canonical category list. One primary category per provider; use tags for
-# cross-cutting attributes. Keep this list small — propose additions in an issue
-# before using a new id.
+# Canonical category list. category remains the primary category for legacy
+# consumers. catalog.classifications may contain multiple category/subcategory
+# paths. Capability ids describe outcomes, not API methods or interface types.
 
 categories:
   - id: ai-models
@@ -50,3 +50,24 @@ categories:
   - id: commerce-marketing
     name: Commerce / Marketing
     description: CMS, e-commerce, CRM, marketing platforms.
+
+  - id: travel
+    name: Travel
+    description: Services for planning and purchasing travel as an individual.
+    subcategories:
+      - id: flights
+        name: Flights
+        description: Flight offers, fare comparison, purchase links and ticketing.
+        capabilities:
+          - id: flights.search
+            description: Search itineraries and fares matching travel constraints.
+          - id: flights.reprice
+            description: Recheck a selected offer's current price and availability.
+          - id: flights.booking-link
+            description: Return a link for purchasing a selected offer.
+          - id: flights.ticketing
+            description: Issue a ticket, beyond search or a purchase link.
+      - id: hotels
+        name: Hotels
+        description: Hotel availability, room offers and reservations; tasks not defined yet.
+        capabilities: []

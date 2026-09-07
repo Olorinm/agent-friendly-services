@@ -1,0 +1,56 @@
+id: kayak-affiliate
+name: KAYAK Affiliate API
+category: travel
+homepage: https://affiliates.kayak.com/
+summary: Affiliate flight APIs with a business application and an optional requested sandbox.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    apply:
+      url: https://affiliates.kayak.com/
+      checked_on: '2026-09-07'
+      kind: official_site
+    docs:
+      url: https://developers.kayak.com/
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: affiliate-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.kayak.com/
+      evidence:
+        - docs
+      availability:
+        value: application
+        evidence:
+          - apply
+      requirements:
+        company:
+          value: required
+          evidence:
+            - apply
+        website:
+          value: required
+          evidence:
+            - apply
+        approval:
+          value: required
+          evidence:
+            - apply
+      personal_access:
+        value: unknown
+        notes: Form requests company, business email and website; acceptance of an individual is not established.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - docs
+      human_steps:
+        - step: Submit business application for review
+          stage: activation
+          evidence:
+            - apply

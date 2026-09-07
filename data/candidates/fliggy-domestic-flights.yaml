@@ -1,0 +1,45 @@
+id: fliggy-domestic-flights
+name: 飞猪国内机票开放平台
+category: travel
+homepage: https://open.alitrip.com/businessDetail.htm?tagId=85
+summary: 面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    eligibility:
+      url: https://open.alitrip.com/businessDetail.htm?tagId=85
+      checked_on: '2026-09-07'
+      kind: official_docs
+    merchant:
+      url: https://open.alitrip.com/docs/doc.htm?articleId=121782&docType=1&treeId=111
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: merchant-api
+      interface: api
+      maintainer: official
+      entry_url: https://open.alitrip.com/businessDetail.htm?tagId=85
+      evidence:
+        - eligibility
+      personal_access:
+        value: restricted
+        evidence:
+          - eligibility
+        notes: 已找到的路径要求企业与机票代理商资质，不符合普通个人画像。
+      requirements:
+        company:
+          value: required
+          evidence:
+            - eligibility
+        store:
+          value: required
+          evidence:
+            - eligibility
+        industry_license:
+          value: required
+          evidence:
+            - eligibility
+      notes: 商家店铺须绑定支付宝并使用聚石塔；不能将政策和订单接口记成消费者搜索能力。其他个人入口未知。

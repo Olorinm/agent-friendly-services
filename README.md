@@ -4,11 +4,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into 76 popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](./generated/agent-runs.md)**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-823_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-847_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -287,12 +287,37 @@ Other MCP clients: command `npx`, args `["-y", "github:Olorinm/agent-friendly-se
 
 ## Candidate pool
 
-Submitted, **not yet verified** — listed for transparency only ([how the pool works](./docs/candidate-pool.md)). An entry is promoted into the index above once an agent passes the M1 first-call run against it and its evidence survives review; until then its claims live only in its YAML file.
+Collected services include tested, untested and gated entries ([pool rules](./docs/candidate-pool.md)). Browse the [route catalog](./generated/catalog.md) or use MCP `search_services` / `get_service` for access, personal eligibility and costs. Task observations apply only to their recorded route, task and configuration; invalid runs are environment failures. Public-source claims and legacy M1 checks are separate. A dash means no record of that test type.
 
-| Candidate | Category | Submitted by | M1 first-call | Claims |
-| --- | --- | --- | --- | --- |
-| [paas.build](https://paas.build) | Payments / Billing | vendor | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
-| [Xquik](https://xquik.com) | Web Search / Data | vendor | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
+| Candidate | Category | Submitted by | Task observations | Legacy M1 first-call | Claims |
+| --- | --- | --- | --- | --- | --- |
+| [AirGateway Platform API](https://airgateway.com/) | Travel | community | — | — | [yaml](./data/candidates/airgateway.yaml) |
+| [Amadeus Flight APIs](https://developers.amadeus.com/) | Travel | community | — | — | [yaml](./data/candidates/amadeus-flights.yaml) |
+| [apiheya Air Scraper](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) | Travel | community | — | — | [yaml](./data/candidates/apiheya-air-scraper.yaml) |
+| [Aviasales via Travelpayouts](https://www.aviasales.com/) | Travel | community | — | — | [yaml](./data/candidates/aviasales.yaml) |
+| [Bright Data SERP API](https://brightdata.com/) | Travel | community | — | — | [yaml](./data/candidates/bright-data-serp.yaml) |
+| [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) | Travel | community | — | — | [yaml](./data/candidates/ctrip-flights.yaml) |
+| [Duffel Flights API](https://duffel.com/) | Travel | community | — | — | [yaml](./data/candidates/duffel-flights.yaml) |
+| [Expedia XAP Flight Listings](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) | Travel | community | — | — | [yaml](./data/candidates/expedia-xap-flights.yaml) |
+| [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) | Travel | community | — | — | [yaml](./data/candidates/fliggy-domestic-flights.yaml) |
+| [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
+| [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
+| [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
+| [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
+| [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |
+| [LetsFG Personal Flight Search](https://letsfg.co/) | Travel | community | — | — | [yaml](./data/candidates/letsfg.yaml) |
+| [Lufthansa Partner Fare API](https://developer.lufthansa.com/page) | Travel | community | — | — | [yaml](./data/candidates/lufthansa-partner.yaml) |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | — | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
+| [去哪儿机票合作](https://www.qunar.com/site/zh/Cooperate_4.shtml) | Travel | community | — | — | [yaml](./data/candidates/qunar-flights.yaml) |
+| [Sabre Air APIs](https://developer.sabre.com/) | Travel | community | — | — | [yaml](./data/candidates/sabre-air.yaml) |
+| [Scrapingdog Google Flights API](https://www.scrapingdog.com/) | Travel | community | — | — | [yaml](./data/candidates/scrapingdog-flights.yaml) |
+| [SearchApi Google Flights](https://www.searchapi.io/) | Travel | community | — | — | [yaml](./data/candidates/searchapi.yaml) |
+| [Skootle Google Flights Scraper](https://apify.com/skootle/google-flights-scraper) | Travel | community | — | — | [yaml](./data/candidates/skootle-google-flights.yaml) |
+| [Skyscanner Travel APIs](https://www.skyscanner.net/) | Travel | community | — | — | [yaml](./data/candidates/skyscanner.yaml) |
+| [同程机票合作](https://www.ly.com/public/about17u/contactus) | Travel | community | — | — | [yaml](./data/candidates/tongcheng-flights.yaml) |
+| [Travelport TripServices](https://developer.travelport.com/) | Travel | community | — | — | [yaml](./data/candidates/travelport-tripservices.yaml) |
+| [Trip.com Flight Distribution](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | Travel | community | — | — | [yaml](./data/candidates/trip-com-flights.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | — | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
 
 ## Contributing
 

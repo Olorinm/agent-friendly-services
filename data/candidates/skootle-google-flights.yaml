@@ -1,0 +1,40 @@
+id: skootle-google-flights
+name: Skootle Google Flights Scraper
+category: travel
+homepage: https://apify.com/skootle/google-flights-scraper
+summary: A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    listing:
+      url: https://apify.com/skootle/google-flights-scraper
+      checked_on: '2026-09-07'
+      kind: publisher_listing
+  routes:
+    - id: apify-actor-api
+      interface: api
+      maintainer: official
+      entry_url: https://apify.com/skootle/google-flights-scraper
+      evidence:
+        - listing
+      upstream: google-flights
+      capabilities:
+        flights.search:
+          value: documented
+          evidence:
+            - listing
+      auth:
+        value: platform_credentials
+        evidence:
+          - listing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - listing
+      notes: >-
+        Publisher is Skootle; Apify is the host. Not operated by Google or Apify. Record-based fees, actor
+        version and actual trial eligibility need verification.

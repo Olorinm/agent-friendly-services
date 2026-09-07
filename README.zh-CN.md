@@ -4,11 +4,11 @@
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 76 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](./generated/agent-runs.md)**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 76 个服务的旧索引，[既有实验](./generated/agent-runs.md)单独展示。
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-823_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-847_ok%2C_0_broken-10b981)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
@@ -289,12 +289,37 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 候选池
 
-已提交、**尚未验证** —— 仅为透明而列出（[候选池规则](./docs/candidate-pool.md)）。条目要晋升进上方正式索引，必须先通过 M1 首次调用实测、且证据经得起复核；在此之前，其声明只存在于它自己的 YAML 文件里。
+已收录的服务包括已测、未测、有门槛和暂未找到接口的选择（[候选池规则](./docs/candidate-pool.md)）。[接入目录](./generated/catalog.md)和 MCP `search_services` / `get_service` 可查入口、个人准入与费用。任务实测仅说明对应入口、任务和配置的观察，环境无效不算服务失败。[收录标准](./docs/catalog-standard.zh-CN.md)区分公开资料和实测；旧M1首次请求单独展示，“—”表示没有该类测试记录。
 
-| 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
-| --- | --- | --- | --- | --- |
-| [paas.build](https://paas.build) | Payments / Billing | vendor | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
-| [Xquik](https://xquik.com) | Web Search / Data | vendor | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
+| 候选 | 类别 | 提交方 | 任务实测 | 历史M1首次调用 | 声明 |
+| --- | --- | --- | --- | --- | --- |
+| [AirGateway Platform API](https://airgateway.com/) | Travel | community | — | — | [yaml](./data/candidates/airgateway.yaml) |
+| [Amadeus Flight APIs](https://developers.amadeus.com/) | Travel | community | — | — | [yaml](./data/candidates/amadeus-flights.yaml) |
+| [apiheya Air Scraper](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) | Travel | community | — | — | [yaml](./data/candidates/apiheya-air-scraper.yaml) |
+| [Aviasales via Travelpayouts](https://www.aviasales.com/) | Travel | community | — | — | [yaml](./data/candidates/aviasales.yaml) |
+| [Bright Data SERP API](https://brightdata.com/) | Travel | community | — | — | [yaml](./data/candidates/bright-data-serp.yaml) |
+| [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) | Travel | community | — | — | [yaml](./data/candidates/ctrip-flights.yaml) |
+| [Duffel Flights API](https://duffel.com/) | Travel | community | — | — | [yaml](./data/candidates/duffel-flights.yaml) |
+| [Expedia XAP Flight Listings](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) | Travel | community | — | — | [yaml](./data/candidates/expedia-xap-flights.yaml) |
+| [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) | Travel | community | — | — | [yaml](./data/candidates/fliggy-domestic-flights.yaml) |
+| [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
+| [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
+| [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
+| [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
+| [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |
+| [LetsFG Personal Flight Search](https://letsfg.co/) | Travel | community | — | — | [yaml](./data/candidates/letsfg.yaml) |
+| [Lufthansa Partner Fare API](https://developer.lufthansa.com/page) | Travel | community | — | — | [yaml](./data/candidates/lufthansa-partner.yaml) |
+| [paas.build](https://paas.build) | Payments / Billing | vendor | — | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
+| [去哪儿机票合作](https://www.qunar.com/site/zh/Cooperate_4.shtml) | Travel | community | — | — | [yaml](./data/candidates/qunar-flights.yaml) |
+| [Sabre Air APIs](https://developer.sabre.com/) | Travel | community | — | — | [yaml](./data/candidates/sabre-air.yaml) |
+| [Scrapingdog Google Flights API](https://www.scrapingdog.com/) | Travel | community | — | — | [yaml](./data/candidates/scrapingdog-flights.yaml) |
+| [SearchApi Google Flights](https://www.searchapi.io/) | Travel | community | — | — | [yaml](./data/candidates/searchapi.yaml) |
+| [Skootle Google Flights Scraper](https://apify.com/skootle/google-flights-scraper) | Travel | community | — | — | [yaml](./data/candidates/skootle-google-flights.yaml) |
+| [Skyscanner Travel APIs](https://www.skyscanner.net/) | Travel | community | — | — | [yaml](./data/candidates/skyscanner.yaml) |
+| [同程机票合作](https://www.ly.com/public/about17u/contactus) | Travel | community | — | — | [yaml](./data/candidates/tongcheng-flights.yaml) |
+| [Travelport TripServices](https://developer.travelport.com/) | Travel | community | — | — | [yaml](./data/candidates/travelport-tripservices.yaml) |
+| [Trip.com Flight Distribution](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | Travel | community | — | — | [yaml](./data/candidates/trip-com-flights.yaml) |
+| [Xquik](https://xquik.com) | Web Search / Data | vendor | — | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
 
 ## 参与贡献
 

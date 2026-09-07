@@ -5,7 +5,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as yaml from 'js-yaml';
-import { ROOT, GENERATED_DIR, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
+import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
+import { catalogService } from './catalog.ts';
+import { generateResearch } from './research.ts';
+import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
+
+// Isolated preview/CI generation, without changing checked-in build outputs.
+const OUTPUT_ROOT = process.env.AFS_OUTPUT_DIR ? path.resolve(process.env.AFS_OUTPUT_DIR) : ROOT;
+const GENERATED_DIR = path.join(OUTPUT_ROOT, 'generated');
 
 const STALE_DAYS = 180;
 const REPO = 'Olorinm/agent-friendly-services';
@@ -21,6 +28,15 @@ const providers = loadProviders()
 const candidates = loadCandidates()
   .map((p) => p.data)
   .sort((a, b) => a.id.localeCompare(b.id));
+
+generateResearch(OUTPUT_ROOT, categories);
+
+const evaluations = loadEvaluations();
+for (const result of evaluations) {
+  const errors = evaluationErrors(result, [...providers, ...candidates]);
+  if (errors.length) throw new Error(`${result.run_id}: ${errors.join('; ')}`);
+}
+generateEvaluations(evaluations, OUTPUT_ROOT);
 
 // ---------------------------------------------------------------------------
 // Agent runs (published subset of experiment results; docs/agent-verification.md)
@@ -209,8 +225,8 @@ const jsonOut = {
   },
   categories,
   fields,
-  providers: providers.map((p) => ({
-    ...p,
+  providers: providers.map(({ catalog, ...p }) => ({
+    ...p, // New route claims are published separately, without legacy verification badges.
     derived: {
       badges: badges(p).filter((b) => b !== 'Stale'),
       stale: isStale(p),
@@ -242,6 +258,51 @@ const candidatesOut = {
   })),
 };
 fs.writeFileSync(path.join(GENERATED_DIR, 'candidates.json'), JSON.stringify(candidatesOut, null, 2) + '\n');
+
+// Searchable discovery catalog across both pools. Membership in the legacy
+// provider index never promotes a newly documented route to a tested result.
+const services = [
+  ...providers.map(p => catalogService(p, 'provider', evaluations)),
+  ...candidates.map(p => catalogService(p, 'candidate', evaluations)),
+].sort((a, b) => a.id.localeCompare(b.id));
+const catalogOut = {
+  schema_version: 1,
+  generated_at: new Date().toISOString(),
+  description: 'Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.',
+  persona: 'Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.',
+  categories,
+  services,
+};
+fs.writeFileSync(path.join(GENERATED_DIR, 'catalog.json'), JSON.stringify(catalogOut, null, 2) + '\n');
+const cell = (v: string) => v.replaceAll('|', '\\|').replaceAll('\n', ' ');
+const catalogRows = services.filter(s => s.catalog).flatMap(s => {
+  const c = s.catalog!;
+  const identity = `[${cell(s.name)}](../data/${s.record_pool === 'provider' ? 'providers' : 'candidates'}/${s.id}.yaml)`;
+  if (!c.routes.length) return [`| ${identity} | ${c.classifications.join(', ')} | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |`];
+  return c.routes.map(r => {
+    const requirements = Object.entries(r.requirements ?? {}).filter(([, v]) => v.value === 'required').map(([k]) => k);
+    const detail = [
+      requirements.length ? `Requires: ${requirements.join(', ')}` : 'Requirements incomplete',
+      ...(r.costs ?? []).map(x => `${x.amount} ${x.currency ?? x.unit} / ${x.per} (${x.kind}; ${x.scope})`),
+      ...(r.human_steps ?? []).map(x => `Human: ${x.step}`),
+      r.notes ?? '',
+    ].filter(Boolean).join('; ');
+    const observed = s.task_runs.filter(run => run.route_id === r.id).map(run =>
+      `[${cell(run.task.id)}: ${run.status} (${run.started_at.slice(0, 10)})](../data/experiments/evaluations/${run.run_id}.json)`).join('; ') || 'not recorded';
+    return `| ${identity} | ${c.classifications.join(', ')} | [${r.id} (${r.interface})](${r.entry_url}) | ${r.data_kind?.value ?? 'unknown'} | ${r.availability?.value ?? 'unknown'} | ${r.personal_access?.value ?? 'unknown'} | ${cell(detail)} | ${observed} |`;
+  });
+});
+fs.writeFileSync(path.join(GENERATED_DIR, 'catalog.md'), `<!-- GENERATED FILE — do not edit. -->
+# Service discovery catalog
+
+Access, requirements and published costs below are **public-source claims**. Source URLs and per-fact dates are in each linked YAML and [catalog.json](./catalog.json). Separately reviewed task observations appear in the last column and the [results table](./evaluations.md); they do not certify other routes or tasks. Missing routes/fields mean unknown. See the [collection standard](../docs/catalog-standard.zh-CN.md).
+
+Each row is an access route, not an independent data supplier. Services without an established route remain discoverable. No cost/quality ranking is implied.
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+${catalogRows.join('\n')}
+`);
 
 // ---------------------------------------------------------------------------
 // generated/matrix.csv
@@ -492,24 +553,27 @@ ${list.map((p) => awesomeEntry(p, labels)).join('\n')}`;
     .join('\n\n');
 }
 
-// Candidate-pool section: identity + M1 verdict only. Vendor claims stay in
-// the candidate's YAML until promotion — rendering them here would make them
-// look endorsed.
+// Keep task observations separate from legacy M1 first-call checks.
 function candidateRow(p: Provider): string {
   const m1 = m1Status(p.id);
   const m1Cell = m1
     ? `[${m1.verdict === 'pass' ? '✓ pass' : '✗ fail'} (${m1.passes}/${m1.reps}) · ${m1.date}](./data/experiments/published/${p.id}/${m1.transcript})`
-    : 'pending';
-  return `| [${p.name}](${p.homepage}) | ${catName(p.category)} | ${p.submitted_by} | ${m1Cell} | [yaml](./data/candidates/${p.id}.yaml) |`;
+    : '—';
+  const runs = evaluations.filter(r => r.service_id === p.id);
+  const observations = ['completed', 'not_completed', 'invalid_run']
+    .map(status => ({ status, count: runs.filter(r => r.status === status).length }))
+    .filter(r => r.count > 0).map(r => `${r.count} ${r.status}`).join(' · ');
+  const taskCell = runs.length ? `[${observations}](./generated/evaluations.md)` : '—';
+  return `| [${p.name}](${p.homepage}) | ${catName(p.category)} | ${p.submitted_by} | ${taskCell} | ${m1Cell} | [yaml](./data/candidates/${p.id}.yaml) |`;
 }
 
 const candidatePoolEn = candidates.length
   ? `## Candidate pool
 
-Submitted, **not yet verified** — listed for transparency only ([how the pool works](./docs/candidate-pool.md)). An entry is promoted into the index above once an agent passes the M1 first-call run against it and its evidence survives review; until then its claims live only in its YAML file.
+Collected services include tested, untested and gated entries ([pool rules](./docs/candidate-pool.md)). Browse the [route catalog](./generated/catalog.md) or use MCP \`search_services\` / \`get_service\` for access, personal eligibility and costs. Task observations apply only to their recorded route, task and configuration; invalid runs are environment failures. Public-source claims and legacy M1 checks are separate. A dash means no record of that test type.
 
-| Candidate | Category | Submitted by | M1 first-call | Claims |
-| --- | --- | --- | --- | --- |
+| Candidate | Category | Submitted by | Task observations | Legacy M1 first-call | Claims |
+| --- | --- | --- | --- | --- | --- |
 ${candidates.map(candidateRow).join('\n')}
 
 `
@@ -518,10 +582,10 @@ ${candidates.map(candidateRow).join('\n')}
 const candidatePoolZh = candidates.length
   ? `## 候选池
 
-已提交、**尚未验证** —— 仅为透明而列出（[候选池规则](./docs/candidate-pool.md)）。条目要晋升进上方正式索引，必须先通过 M1 首次调用实测、且证据经得起复核；在此之前，其声明只存在于它自己的 YAML 文件里。
+已收录的服务包括已测、未测、有门槛和暂未找到接口的选择（[候选池规则](./docs/candidate-pool.md)）。[接入目录](./generated/catalog.md)和 MCP \`search_services\` / \`get_service\` 可查入口、个人准入与费用。任务实测仅说明对应入口、任务和配置的观察，环境无效不算服务失败。[收录标准](./docs/catalog-standard.zh-CN.md)区分公开资料和实测；旧M1首次请求单独展示，“—”表示没有该类测试记录。
 
-| 候选 | 类别 | 提交方 | M1 首次调用 | 声明 |
-| --- | --- | --- | --- | --- |
+| 候选 | 类别 | 提交方 | 任务实测 | 历史M1首次调用 | 声明 |
+| --- | --- | --- | --- | --- | --- |
 ${candidates.map(candidateRow).join('\n')}
 
 `
@@ -533,7 +597,7 @@ const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. S
 
 English | [简体中文](./README.zh-CN.md)
 
-Where AI agents plug into ${providers.length} popular services: docs, APIs, official MCP servers, llms.txt, CLIs. Every link machine-probed weekly; every capability fact backed by official evidence and a date ([methodology](./docs/methodology.md)) — plus **[measured agent runs](${AGENT_RUNS})**: real agents completing real tasks against the live service, independently verified, transcripts included. 🏆 marks the best measured result in a category — held until someone measures better.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains ${providers.length} services, with [historical experiments](${AGENT_RUNS}) kept separately.
 
 ${badgeParts.join('\n')}
 
@@ -587,7 +651,7 @@ npm run validate, and open a small PR.
 Code: [MIT](./LICENSE) · Data (\`data/\`, \`generated/\`): [CC BY 4.0](./LICENSE-DATA)
 `;
 
-fs.writeFileSync(path.join(ROOT, 'README.md'), readme);
+fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.md'), readme);
 
 const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate\`。数据源：data/ -->
 
@@ -595,7 +659,7 @@ const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate
 
 [English](./README.md) | 简体中文
 
-AI 智能体接入 ${providers.length} 个主流服务的入口索引：文档、API、官方 MCP 服务器、llms.txt、CLI。所有链接每周机器探测；每条能力事实都附官方证据链接和验证日期（[方法论](./docs/methodology.md)）—— 还有 **[实测运行数据](${AGENT_RUNS})**：真实 agent 在真实服务上完成真实任务，结果独立校验、transcript 全文公开。🏆 标记类别内实测最优 —— 谁测得更好归谁。
+从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 ${providers.length} 个服务的旧索引，[既有实验](${AGENT_RUNS})单独展示。
 
 ${badgeParts.join('\n')}
 
@@ -651,7 +715,7 @@ npm run validate, and open a small PR.
 代码：[MIT](./LICENSE) · 数据（\`data/\`、\`generated/\`）：[CC BY 4.0](./LICENSE-DATA)
 `;
 
-fs.writeFileSync(path.join(ROOT, 'README.zh-CN.md'), readmeZh);
+fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.zh-CN.md'), readmeZh);
 
-console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/candidates.json, generated/matrix.csv, generated/agent-runs.md`);
+console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/candidates.json, generated/catalog.json, generated/catalog.md, generated/evaluations.json, generated/evaluations.md, generated/research.json, generated/research.md, generated/matrix.csv, generated/agent-runs.md`);
 console.log(`  ${providers.length} providers · ${candidates.length} candidates · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);

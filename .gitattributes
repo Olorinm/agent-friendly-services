@@ -1,0 +1,2 @@
+# Keep reviewed response bytes intact; SSE uses CRLF and a final blank line.
+data/experiments/evidence/** -text whitespace=cr-at-eol,-blank-at-eof

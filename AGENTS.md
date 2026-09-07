@@ -1,47 +1,70 @@
-# AGENTS.md
+# 项目核心理念
 
-This repository is a machine-readable directory of agent-friendly services.
-You (an agent) can contribute to it end-to-end. This file tells you how.
+这个项目帮助普通个人找到能让 Agent 完成任务的服务，并逐步用真实结果回答：哪个服务更可靠、更省事、更有性价比。
 
-## Source of truth
+旅行是探索这套机制的第一个样本。我们希望形成能适用于更多分类、持续修正和维护的方法，而不是把旅行的具体做法固定成所有分类的模板。
 
-- Provider data: `data/providers/*.yaml` — one file per provider (verified index)
-- Candidate pool: `data/candidates/*.yaml` — same schema, unverified; new providers start here (`docs/candidate-pool.md`)
-- Field definitions: `data/fields.yaml` — what every entrypoint and check means
-- Categories: `data/categories.yaml`
-- `README.md` and `generated/` are **build outputs. Never edit them.** CI regenerates them on main.
+## 每一步为什么存在
 
-## Add a provider (goes to the candidate pool)
+项目按三步推进，服务于同一个目标：帮用户发现高性价比的服务。
 
-1. Copy an existing file in `data/providers/` into `data/candidates/<id>.yaml`. Use a lowercase id equal to the filename (`modal.yaml` → `id: modal`). Promotion out of the pool happens later, after a passing M1 agent run + evidence review — not in your PR.
-2. Check inclusion rules first: hosted service + API surface + self-serve access path (an account system, or agent-native pay-per-call like x402). Libraries and frameworks don't qualify. Name the product precisely (`Docker Hub`, not `Docker`). Account-less services: mark account-shaped checks (signup, api keys, oauth, scoped tokens, revocation) `not_applicable` with a note — never `supported`.
-3. Fill `entrypoints` with public, login-free official URLs. **Omit what you cannot find** — a missing entrypoint means "no known URL", and that is fine.
-4. Fill the checks you can verify. Status enum: `supported | partial | unsupported | unknown | not_applicable`.
-5. Every `supported`/`partial` needs an official evidence URL and a `verified` date. `partial` and `not_applicable` also need `notes`.
-6. Dates are quoted strings: `verified: "2026-07-07"`. Update only the checks you actually verified.
-7. Run `npm run validate`. Fix what it reports — the messages tell you how.
-8. Optionally run `npm run probe -- --only=<id>` to confirm your URLs answer.
+| 步骤 | Agent做什么 | 要留下的结果 |
+| --- | --- | --- |
+| 发现服务 | 按大类/子类广泛查找，遵守收录约束 | 候选表：服务商、入口、个人接入条件和来源 |
+| 确定任务 | 调研真实需求，参考成熟benchmark的任务设计 | 任务表：任务、预计输入、预计输出、完成与未完成标准 |
+| 执行测评 | 从任务表生成prompt，在干净服务器的新环境、新会话中运行 | 结果表：服务×任务、是否完成、输入/缓存/输出token、服务费用、耗时、人工介入 |
 
-## Update a provider
+准备测评的Agent与被测Agent分开。研究过程可以自由展开，不要求把中间步骤都变成文档；重点是填好候选表、任务表和结果表。
 
-1. Change only the fields you re-verified; update only their `verified` dates.
-2. Leave everything you did not check untouched.
+被测Agent只获得任务prompt、指定服务入口和本轮统一规定的工具/凭据/资源。不能继承本次讨论、研究档案、其他服务的结果、参考答案或为它提前写好的调用脚本，也不加载本仓库的工作指令。固定Agent、模型与预算；需要查文档、安装或编写调用代码，由它在该次运行内完成并计入开销。研究用的AGENTS.md约束准备工作，不能被自动塞进被测会话。
 
-## Resolve an `unknown` (the easiest contribution)
+完成由事先写好的验收标准判断。Agent消耗只记录实际输入、其中缓存输入与输出token，不计算或填写Agent货币费用；服务商的调用费用单独记录。用量和服务费用缺失就记未知，缓存输入不重复相加。首先测能否完成基础用户任务，再增加场景深度；“找机票”不自动增加最便宜、购买、付款核验或复杂家庭限制。调用成功本身不是任务完成，环境故障也不能算服务失败。
 
-1. Pick any check marked `unknown` (each provider's "Unknown (help wanted)" line in [`generated/providers.md`](./generated/providers.md) lists them; machine-readable in `generated/providers.json` under `derived.unknown_checks`).
-2. **Start with the provider's `llms.txt` if it has one**: fetch it and grep for the check's keywords (`idempot`, `revoke`, `scope`, `sandbox`, `preview`, `usage`, `billing`, `deprecat`, `oauth`). It indexes the canonical docs pages far more reliably than guessing URLs — and sometimes contains facts itself (agent-access policies, hosted MCP endpoints).
-3. Otherwise find official evidence (docs > API reference > official repo > changelog > official blog).
-4. Prefer documentation pages over console/dashboard URLs as evidence — docs are probeable and quotable; login pages aren't. If the page redirects, record the post-redirect canonical URL.
-5. For `unsupported` (absence claims), quote the decisive sentence in `notes` — absence needs stronger backing than presence.
-6. Set the status, add `evidence` and `verified`, run `npm run validate`, open a PR.
-7. If you find no reliable evidence, leave it `unknown`. Do not guess.
+每次测评随结果记录harness及版本、模型标识、思考等级、实际测试起止时间与时区，便于解释差异和后续复跑。测试日期与任务中的业务日期（如航班出发日）分别记录；缺失信息不事后猜填。
 
-## Hard rules
+### 第一步：尽可能全面地发现可用服务
 
-- Do not invent URLs or evidence. `unknown` is a valid, welcome answer.
-- Never write bare `yes`/`no` anywhere — YAML 1.1 parsers read them as booleans.
-- Evidence must be official sources; marketing pages don't count for checks.
-- If you work for the provider, set `submitted_by: vendor`.
-- Do not edit `README.md` or `generated/` — CI will reject the PR.
-- One provider per PR. Do not change `data/fields.yaml` or `schema/` in the same PR as provider data.
+理解市场上有哪些选择、各自能提供什么、通过什么入口使用、个人会遇到哪些门槛。不要只收录熟悉、知名或容易接入的服务；未知、受限或暂时不可用的路径也能帮助用户做判断，应该如实记录。
+
+### 第二步：找到用户最真实、最高频的需求与场景
+
+尽可能理解用户什么时候需要这类服务、希望达成什么结果，以及真实的约束、偏好和困难。以用户需求为出发点，持续寻找证据，逐步判断哪些场景更普遍、更值得优先覆盖。
+
+原子能力、场景分类、采样方法和测试设计都服务于这个目的。不能让现有厂商的接口清单、已有服务范围或测试的便利程度替用户决定需求。少见但真实的需求仍然有记录价值。
+
+以真实场景任务组织测评，再拆出完成任务所需的基础能力，按真实约束和完成深度由浅入深地推进。能力用于复用和定位问题，按需单独验证；场景和能力的数量、划分与顺序随证据及试跑结果调整。
+
+### 后续：用公平的实际结果帮助用户选择
+
+从需求设计任务，记录适用环境和前提，再验证服务能否完成任务。把结果质量、服务费用、Agent 开销、接入成本、等待和人工介入纳入评价。范围不足时明确说明，不把局部成功推广成普遍结论。
+
+## 贯穿整个项目的判断原则
+
+- 客观中立，保留事实来源，区分用户表达、资料推断、我们的假设和实际测试结果。缺少证据时诚实保留未知，不编造完整性。
+- 高频需求是研究目标；公开资料中的出现次数不直接等于市场频率。持续补充不同来源和人群，说明当前证据支持到什么程度。
+- 保留不同甚至冲突的需求，不为了得到整齐的分类或简单的分数而抹掉差异。
+- 项目会动态变化。新的需求、服务和验证结果应当能够修正已有分类、结论和工作方式，重要变化保留理由与历史。
+- 在试点中区分领域事实与通用经验：领域事实留在对应研究中，具有复用价值的经验反馈到项目方法。
+
+## 格式、脚本和工具的地位
+
+数据格式、目录、字段、状态、schema 和操作流程都是当前工作方案，可以由 Agent 结合任务讨论、修改和迭代。它们不是项目目标，也不应成为探索边界。
+
+脚本用于减少重复劳动、发现不一致、方便整理和展示。工具报错时，应判断是数据有问题还是工具需要适应新的工作；不能仅因为不符合旧格式就删除有价值的服务或需求。必要时可以连同资料一起调整格式、脚本和文档，不必为了维持旧约定扭曲研究。
+
+优先复用已有资料与工具；生成视图通常从源资料更新。具体做法以能否帮助理解用户、保持证据清楚和方便后续维护来判断，不机械遵守固定数量、固定步骤或固定提交范围。
+
+仓库长期保留可维护的结果、必要证据和可复用的工具。讨论草稿、重复报告和逐步操作记录不必另写成文档提交；影响结论的来源、日期、关键判断和限制随对应结果保留。同一事实尽量只维护一份源资料，展示由工具生成，阶段摘要只说明结论与下一步。
+
+## 当前工作资料
+
+以下是方便接手的入口，具体组织方式可以继续演进：
+
+- [机票阶段结果](docs/flights.zh-CN.md)：当前已知结论与下一步。
+- [服务发现指令](data/candidates/AGENTS.md)：填写[候选表](generated/catalog.md)，源资料在 `data/candidates/` 和 `data/providers/`。
+- [任务设计指令](data/experiments/tasks/AGENTS.md)：填写[机票任务表](data/experiments/tasks/travel-flights.md)，需求来源可复用 `data/research/`。
+- [执行与验收指令](data/experiments/AGENTS.md)：从候选和任务启动独立测评、复核证据，填写[结果表](generated/evaluations.md)并关联回服务目录。
+- [维护说明](docs/contributing.md)：现有工具和字段参考，随实际需要调整。
+- [既有实验](docs/agent-verification.md)：历史测试方法、任务和证据；不代表所有新场景的固定方案。
+
+接手时先理解这些目标及已有讨论，再判断本次工作怎样推进它们。用户明确给出的方向和修正优先于当前文档中的操作约定。

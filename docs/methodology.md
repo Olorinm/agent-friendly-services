@@ -2,20 +2,28 @@
 
 ## What this is
 
-A directory of **service entry points for AI agents**, with a small set of
-evidence-backed capability facts. The core question it answers: *an agent needs
-to use service X — where does it start, how does it authenticate, what is
-machine-readable, and how fresh is that information?*
+A service discovery, verification and evaluation project for AI agents. The
+user question is: which service can complete this task, and at what cost,
+setup effort and human involvement?
 
-It is deliberately **not** a certification body, a score, or a ranking.
+Service discovery, [user-needs research](./contributing.md#research-user-needs),
+test design and execution build on one another. The [flight findings](./flights.zh-CN.md)
+show the current pilot. Research records preserve public user
+reports, analyst inferences and hypotheses separately; test feasibility must
+not determine which real needs are worth recording.
+
+The [catalog standard](./catalog-standard.zh-CN.md) covers candidate discovery
+and documented routes. The legacy index and its experiments remain available.
+Public-source claims, request-shape checks, onboarding and real task results
+are distinct evidence levels. There is no overall quality score or certification.
 
 ## Principles
 
-1. **URL = fact.** Most "does X exist?" questions are answered by the link
-   itself. The link is simultaneously the data, the evidence, and the thing a
-   script can probe weekly.
-2. **Facts, not scores.** No tiers, no weights, no editorial judgment. Badges
-   shown in the README map 1:1 to fields — nothing is composed or ranked.
+1. **URL = an entrypoint or source.** Most "does X exist?" questions are answered by the link
+   itself. A link can be probed weekly, but does not establish eligibility or task success.
+2. **Facts before scores.** The discovery catalog has no ranking. Existing
+   experiment summaries are limited to their published task and aggregation
+   definitions; they do not establish a general best service.
 3. **Evidence or `unknown`.** Every `supported`/`partial` check carries an
    official evidence URL and a verification date. When evidence can't be found,
    the honest answer is `unknown` — never a guess.
@@ -27,12 +35,13 @@ It is deliberately **not** a certification body, a score, or a ranking.
    is older than 180 days.
 6. **Machines first.** Everything a script can verify is verified by a script
    (`probe` for URLs; the official MCP registry as an authority for MCP
-   servers). Humans spend their time only on the 12 behavioral checks.
+   servers). Source interpretation, onboarding and independent task verification require separate evidence.
 
 ## Field semantics
 
-Canonical definitions live in [`data/fields.yaml`](../data/fields.yaml) —
-that file, not this document, is the source of truth.
+Legacy check definitions live in [`data/fields.yaml`](../data/fields.yaml).
+New discovery fields live in [`schema/catalog.schema.json`](../schema/catalog.schema.json)
+and the [catalog standard](./catalog-standard.zh-CN.md).
 
 Check status enum:
 
@@ -55,10 +64,10 @@ documented limitation. "I couldn't find it" is `unknown`, not `unsupported`.
 
 ## Inclusion rules
 
-1. Hosted service with an API surface and a self-serve access path — an
-   account system, or an agent-native pay-per-call scheme (e.g. x402) for
-   account-less services. Libraries, frameworks, and self-hosted-only software
-   don't qualify.
+1. Task-relevant service products, including unknown, gated, paused and retired
+   access routes. Accounts, public APIs and self-serve eligibility are not
+   required for candidate discovery. Standalone libraries/frameworks are not
+   service providers; their integrations can be recorded as routes.
 2. Entries are named at product precision: `Docker Hub`, not `Docker`.
 3. Multi-product giants (AWS, GCP, Azure) need a `scope` field declaring which
    surface the entry covers — honest "all partial" rows carry no information.
@@ -84,10 +93,11 @@ documented limitation. "I couldn't find it" is `unknown`, not `unsupported`.
 
 ## Governance
 
-- Vendors may submit or update their own entries with `submitted_by: vendor`;
-  evidence must be documentation, not marketing pages.
-- Disputes: open an issue with official evidence. Facts change when evidence
-  changes; experience reports don't move statuses.
+- Vendors may submit with `submitted_by: vendor`. Legacy checks need technical
+  documentation; discovery also accepts labeled official sites and publisher
+  listings as source claims, never as measured quality.
+- Disputes: open an issue with official evidence. Documented facts change with sources. Reproducible experience reports belong
+  in onboarding/task records and do not silently overwrite documentation claims.
 - Referencing this directory ("listed with an Official MCP badge") is fine, but
   data updates whenever evidence changes — nothing here is a certification.
 

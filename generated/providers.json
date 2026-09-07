@@ -12,10 +12,10 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-07-15T07:44:24.601Z",
+  "generated_at": "2026-09-07T11:07:30.198Z",
   "counts": {
     "providers": 76,
-    "categories": 12,
+    "categories": 13,
     "entrypoint_urls": 716,
     "checks_answered": 427
   },
@@ -79,6 +79,42 @@
       "id": "commerce-marketing",
       "name": "Commerce / Marketing",
       "description": "CMS, e-commerce, CRM, marketing platforms."
+    },
+    {
+      "id": "travel",
+      "name": "Travel",
+      "description": "Services for planning and purchasing travel as an individual.",
+      "subcategories": [
+        {
+          "id": "flights",
+          "name": "Flights",
+          "description": "Flight offers, fare comparison, purchase links and ticketing.",
+          "capabilities": [
+            {
+              "id": "flights.search",
+              "description": "Search itineraries and fares matching travel constraints."
+            },
+            {
+              "id": "flights.reprice",
+              "description": "Recheck a selected offer's current price and availability."
+            },
+            {
+              "id": "flights.booking-link",
+              "description": "Return a link for purchasing a selected offer."
+            },
+            {
+              "id": "flights.ticketing",
+              "description": "Issue a ticket, beyond search or a purchase link."
+            }
+          ]
+        },
+        {
+          "id": "hotels",
+          "name": "Hotels",
+          "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
+          "capabilities": []
+        }
+      ]
     }
   ],
   "fields": {
