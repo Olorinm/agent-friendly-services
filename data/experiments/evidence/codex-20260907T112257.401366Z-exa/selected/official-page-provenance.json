@@ -1,0 +1,102 @@
+[
+  {
+    "request": {
+      "started_at_utc": "2026-09-07T11:26:31.621268+00:00",
+      "method": "GET",
+      "url": "https://docs.python.org/zh-cn/3.13/whatsnew/3.13.html",
+      "headers": {
+        "User-Agent": "Python313-evidence-check/1.0"
+      },
+      "body": null,
+      "authentication": "none; no cookies or credentials sent"
+    },
+    "response_meta": {
+      "started_at_utc": "2026-09-07T11:26:31.621268+00:00",
+      "finished_at_utc": "2026-09-07T11:26:33.152993+00:00",
+      "status": 200,
+      "requested_url": "https://docs.python.org/zh-cn/3.13/whatsnew/3.13.html",
+      "final_url": "https://docs.python.org/zh-cn/3.13/whatsnew/3.13.html",
+      "headers_allowlisted": {
+        "Content-Length": "489375",
+        "server": "nginx",
+        "content-type": "text/html",
+        "last-modified": "Sun, 06 Sep 2026 12:30:53 GMT",
+        "etag": "\"6a9d5cfd-7779f\"",
+        "Date": "Mon, 07 Sep 2026 11:26:32 GMT"
+      },
+      "bytes": 489375,
+      "sha256": "de8a5436b8eb0faad26b794afe14cc93a6bb0cb77304a5aac11f6f7c6f127b57"
+    },
+    "raw_page_sha256": "de8a5436b8eb0faad26b794afe14cc93a6bb0cb77304a5aac11f6f7c6f127b57",
+    "reviewed_sections": [
+      "free-threaded-cpython"
+    ]
+  },
+  {
+    "request": {
+      "started_at_utc": "2026-09-07T11:26:31.633387+00:00",
+      "method": "GET",
+      "url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-python.html",
+      "headers": {
+        "User-Agent": "Python313-evidence-check/1.0"
+      },
+      "body": null,
+      "authentication": "none; no cookies or credentials sent"
+    },
+    "response_meta": {
+      "started_at_utc": "2026-09-07T11:26:31.633387+00:00",
+      "finished_at_utc": "2026-09-07T11:26:32.629665+00:00",
+      "status": 200,
+      "requested_url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-python.html",
+      "final_url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-python.html",
+      "headers_allowlisted": {
+        "Content-Length": "28804",
+        "server": "nginx",
+        "content-type": "text/html",
+        "last-modified": "Sun, 06 Sep 2026 12:30:54 GMT",
+        "etag": "\"6a9d5cfe-7084\"",
+        "Date": "Mon, 07 Sep 2026 11:26:32 GMT"
+      },
+      "bytes": 28804,
+      "sha256": "a6af1857315ee732cc929ac6fb467832b4d0d43959b95f99035de0eac1ff34be"
+    },
+    "raw_page_sha256": "a6af1857315ee732cc929ac6fb467832b4d0d43959b95f99035de0eac1ff34be",
+    "reviewed_sections": [
+      "installation",
+      "the-global-interpreter-lock-in-free-threaded-python"
+    ]
+  },
+  {
+    "request": {
+      "started_at_utc": "2026-09-07T11:27:30.804733+00:00",
+      "method": "GET",
+      "url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-extensions.html",
+      "headers": {
+        "User-Agent": "Python313-evidence-check/1.0"
+      },
+      "body": null,
+      "authentication": "none; no cookies or credentials sent"
+    },
+    "response_meta": {
+      "started_at_utc": "2026-09-07T11:27:30.804733+00:00",
+      "finished_at_utc": "2026-09-07T11:27:32.141120+00:00",
+      "status": 200,
+      "requested_url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-extensions.html",
+      "final_url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-extensions.html",
+      "headers_allowlisted": {
+        "Content-Length": "47146",
+        "server": "nginx",
+        "content-type": "text/html",
+        "last-modified": "Sun, 06 Sep 2026 12:30:54 GMT",
+        "etag": "\"6a9d5cfe-b82a\"",
+        "Date": "Mon, 07 Sep 2026 11:27:31 GMT"
+      },
+      "bytes": 47146,
+      "sha256": "6b45b541ea6e94cf9240b24b69fa31a9c0909fdd028009e9b79f235481fcac67"
+    },
+    "raw_page_sha256": "6b45b541ea6e94cf9240b24b69fa31a9c0909fdd028009e9b79f235481fcac67",
+    "reviewed_sections": [
+      "limited-c-api-and-stable-abi"
+    ]
+  }
+]

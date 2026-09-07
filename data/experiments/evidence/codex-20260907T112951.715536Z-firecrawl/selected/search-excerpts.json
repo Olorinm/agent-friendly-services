@@ -1,0 +1,88 @@
+[
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.firecrawl.dev/v2/search",
+      "parameters": {
+        "query": "site:docs.python.org/3.13 free threading GIL extensions",
+        "limit": 6
+      },
+      "headers": {
+        "User-Agent": "Python-Upgrade-Research/1.0",
+        "Content-Type": "application/json"
+      },
+      "requested_at_utc": "2026-09-07T11:30:59.915308+00:00",
+      "authentication": "none; no cookies or authorization headers sent"
+    },
+    "access": {
+      "requested_at_utc": "2026-09-07T11:30:59.915308+00:00",
+      "received_at_utc": "2026-09-07T11:31:02.112144+00:00",
+      "status": 200,
+      "final_url": "https://api.firecrawl.dev/v2/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:31:02 GMT",
+      "response_file": "02-firecrawl-search-response.json",
+      "byte_count": 1893,
+      "sha256": "890f09ed9e50d36e7bc0ddb0fa0bf1e7da4b90a671c24108520340c9938d0604"
+    },
+    "raw_response_sha256": "890f09ed9e50d36e7bc0ddb0fa0bf1e7da4b90a671c24108520340c9938d0604",
+    "success": true,
+    "selection_note": "Only URL/title and relevant official links within returned descriptions retained; full original response remains private. Links within snippets are distinguished from ranked result URLs.",
+    "results": [
+      {
+        "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+        "title": "Python experimental support for free threading — Python 3.13.15 ...",
+        "official_links_in_description": [
+          "https://docs.python.org/3.13/using/cmdline.html#envvar-PYTHON_GIL"
+        ]
+      },
+      {
+        "url": "https://docs.python.org/3.13/c-api/init.html",
+        "title": "Initialization, Finalization, and Threads — Python 3.13.15 documentation",
+        "official_links_in_description": []
+      }
+    ]
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.firecrawl.dev/v2/search",
+      "parameters": {
+        "query": "site:docs.python.org/3.13 free threading extensions experimental disable-gil",
+        "limit": 6
+      },
+      "headers": {
+        "User-Agent": "Python-Upgrade-Research/1.0",
+        "Content-Type": "application/json"
+      },
+      "requested_at_utc": "2026-09-07T11:31:22.500484+00:00",
+      "authentication": "none; no cookies or authorization headers sent"
+    },
+    "access": {
+      "requested_at_utc": "2026-09-07T11:31:22.500484+00:00",
+      "received_at_utc": "2026-09-07T11:31:24.050594+00:00",
+      "status": 200,
+      "final_url": "https://api.firecrawl.dev/v2/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:31:24 GMT",
+      "response_file": "04-firecrawl-search-response.json",
+      "byte_count": 2977,
+      "sha256": "d7082ff0d6c0a9628666ecaa00bebfd5d323d9efe210794435f30b775a4e8e8e"
+    },
+    "raw_response_sha256": "d7082ff0d6c0a9628666ecaa00bebfd5d323d9efe210794435f30b775a4e8e8e",
+    "success": true,
+    "selection_note": "Only URL/title and relevant official links within returned descriptions retained; full original response remains private. Links within snippets are distinguished from ranked result URLs.",
+    "results": [
+      {
+        "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+        "title": "Python experimental support for free threading — Python 3.13.15 ...",
+        "official_links_in_description": [
+          "https://docs.python.org/3.13/howto/free-threading-extensions.html#freethreading-extensions-howto",
+          "https://docs.python.org/3.13/using/cmdline.html#envvar-PYTHON_GIL",
+          "https://docs.python.org/3.13/using/cmdline.html#cmdoption-X",
+          "https://docs.python.org/3.13/howto/free-threading-extensions.html"
+        ]
+      }
+    ]
+  }
+]

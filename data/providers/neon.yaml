@@ -82,3 +82,32 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed for automated/agent account usage.
+
+catalog:
+  version: 1
+  classifications: [databases/hosted-relational]
+  sources:
+    launchpad:
+      url: https://neon.new/
+      checked_on: '2026-09-07'
+      kind: official_site
+    launchpad-guide:
+      url: https://neon.com/blog/neon-launchpad
+      checked_on: '2026-09-07'
+      kind: official_announcement
+  routes:
+    - id: ephemeral-api
+      interface: api
+      maintainer: official
+      entry_url: https://neon.new/
+      evidence: [launchpad, launchpad-guide]
+      availability:
+        value: unknown
+        evidence: [launchpad]
+        notes: Page still advertises provisioning but now says neon.new is being sunset in favor of Claimable Neon; actual availability must be tested.
+      personal_access: {value: documented, evidence: [launchpad]}
+      auth: {value: none, evidence: [launchpad]}
+      capabilities:
+        database.provision: {value: documented, evidence: [launchpad]}
+        database.persist: {value: documented, evidence: [launchpad-guide]}
+      notes: No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials.

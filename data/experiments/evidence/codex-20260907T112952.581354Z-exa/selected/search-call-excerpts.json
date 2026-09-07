@@ -1,0 +1,442 @@
+[
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 free threading experimental optional --disable-gil PYTHON_GIL C extensions compatibility",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:31:07.132358+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:31:07.132358+00:00",
+      "finished_at_utc": "2026-09-07T11:31:09.835863+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:31:09 GMT",
+      "bytes": 1349,
+      "body_file": "search-01.response.json",
+      "sha256": "b657604b546da93abcf975750597a1d250ae7c5b23dfcd2ec181373491211333"
+    },
+    "raw_response_sha256": "b657604b546da93abcf975750597a1d250ae7c5b23dfcd2ec181373491211333",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3/howto/free-threading-extensions.html",
+      "https://docs.python.org/3/howto/free-threading-python.html",
+      "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "https://docs.python.org/3/using/cmdline.html",
+      "https://docs.python.org/3/whatsnew/3.13.html",
+      "https://docs.python.org/3/using/configure.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "site:docs.python.org/3.13/howto/free-threading-extensions.html C API Extension Support Free Threading limited API stable ABI",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:31:28.755404+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:31:28.755404+00:00",
+      "finished_at_utc": "2026-09-07T11:31:31.758575+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:31:31 GMT",
+      "bytes": 1302,
+      "body_file": "search-02.response.json",
+      "sha256": "9d4fe8fe246849cf1badcb3de8f52cac6c8a7a1b4bdbab5eb378def315e83886"
+    },
+    "raw_response_sha256": "9d4fe8fe246849cf1badcb3de8f52cac6c8a7a1b4bdbab5eb378def315e83886",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3/howto/free-threading-extensions.html",
+      "https://docs.python.org/3/c-api/stable.html",
+      "https://docs.python.org/3/howto/free-threading-python.html",
+      "https://docs.python.org/3/c-api/index.html",
+      "https://docs.python.org/3/extending/extending.html",
+      "https://docs.python.org/3.11/c-api/stable.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 C API Extension Support for Free Threading Py_mod_gil Py_GIL_DISABLED stable ABI",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org/3.13"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:31:52.103732+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:31:52.103732+00:00",
+      "finished_at_utc": "2026-09-07T11:31:53.585518+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:31:53 GMT",
+      "bytes": 1016,
+      "body_file": "search-03.response.json",
+      "sha256": "657f1536272686f8b72687fdc5980e6cf4b8c8366de6f6e0cd3e0299072f72fc"
+    },
+    "raw_response_sha256": "657f1536272686f8b72687fdc5980e6cf4b8c8366de6f6e0cd3e0299072f72fc",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "https://docs.python.org/3.13/c-api/init.html",
+      "https://docs.python.org/3.13/py-modindex.html",
+      "https://docs.python.org/3.13/archives/",
+      "https://docs.python.org/3.13/genindex.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "https://docs.python.org/3.13/howto/free-threading-extensions.html",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org/3.13"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:32:26.768608+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:32:26.768608+00:00",
+      "finished_at_utc": "2026-09-07T11:32:28.503676+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:32:28 GMT",
+      "bytes": 1017,
+      "body_file": "search-04.response.json",
+      "sha256": "ef5ac35067cf88c51bd35f4ee80bb5524b8ae931eb199e841b77b1e5525c4444"
+    },
+    "raw_response_sha256": "ef5ac35067cf88c51bd35f4ee80bb5524b8ae931eb199e841b77b1e5525c4444",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "https://docs.python.org/3.13/c-api/init.html",
+      "https://docs.python.org/3.13/archives/",
+      "https://docs.python.org/3.13/py-modindex.html",
+      "https://docs.python.org/3.13/genindex.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 experimental free threading installation C API extension support",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org/3.13"
+        ],
+        "numResults": 6,
+        "contents": {
+          "text": true,
+          "extras": {
+            "links": 30
+          }
+        }
+      },
+      "requested_at_utc": "2026-09-07T11:33:15.515198+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:33:15.515198+00:00",
+      "finished_at_utc": "2026-09-07T11:33:17.432113+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:33:17 GMT",
+      "bytes": 44839,
+      "body_file": "search-05.response.json",
+      "sha256": "654b0f64cf84f971e6d8fb752158516721773e4570cedd37429a65cd82be07bb"
+    },
+    "raw_response_sha256": "654b0f64cf84f971e6d8fb752158516721773e4570cedd37429a65cd82be07bb",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "https://docs.python.org/3.13/py-modindex.html",
+      "https://docs.python.org/3.13/genindex.html",
+      "https://docs.python.org/3.13/archives/"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 experimental free threading C API extension support",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org/3.13/howto"
+        ],
+        "numResults": 3,
+        "contents": {
+          "text": true,
+          "extras": {
+            "links": 30
+          },
+          "subpages": 1,
+          "subpageTarget": "free-threading-extensions.html"
+        }
+      },
+      "requested_at_utc": "2026-09-07T11:34:04.660934+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:34:04.660934+00:00",
+      "finished_at_utc": "2026-09-07T11:34:06.437928+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:34:06 GMT",
+      "bytes": 7807,
+      "body_file": "search-06.response.json",
+      "sha256": "e4a238c0bc09b70daf798fc3ea6a26a3533dde8eefd5c089752bcb380e2c87d0"
+    },
+    "raw_response_sha256": "e4a238c0bc09b70daf798fc3ea6a26a3533dde8eefd5c089752bcb380e2c87d0",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3.13/howto/free-threading-python.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 对自由线程的 C API 扩展支持 受限 C API 稳定 ABI",
+        "type": "fast",
+        "includeDomains": [
+          "docs.python.org/zh-cn/3.13"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:34:52.061894+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:34:52.061894+00:00",
+      "finished_at_utc": "2026-09-07T11:34:53.196391+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:34:53 GMT",
+      "bytes": 1167,
+      "body_file": "search-07.response.json",
+      "sha256": "5e55ddc8a5b579502a19a3174dbf2c897f99122f933b819bc0671c1f150a191b"
+    },
+    "raw_response_sha256": "5e55ddc8a5b579502a19a3174dbf2c897f99122f933b819bc0671c1f150a191b",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/zh-cn/3.13/c-api/typeobj.html",
+      "https://docs.python.org/zh-cn/3.13/py-modindex.html",
+      "https://docs.python.org/zh-cn/3.13/genindex.html",
+      "https://docs.python.org/zh-cn/3.13/genindex-C.html",
+      "https://docs.python.org/zh-cn/3.13/genindex-all.html",
+      "https://docs.python.org/zh-cn/3.13/genindex-I.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Find Python 3.13 official C API Extension Support for Free Threading documentation: Building Extensions for the Free-Threaded Build; Limited C API and Stable ABI. Target https://docs.python.org/3.13/howto/free-threading-extensions.html",
+        "type": "deep",
+        "includeDomains": [
+          "docs.python.org/3.13"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:35:38.951574+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:35:38.951574+00:00",
+      "finished_at_utc": "2026-09-07T11:35:46.519311+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:35:46 GMT",
+      "bytes": 696,
+      "body_file": "search-08.response.json",
+      "sha256": "ae83b337a7ff6c0770122bdf1affec4bf81f1f1dec4987230e5cbfab6afa0ea5"
+    },
+    "raw_response_sha256": "ae83b337a7ff6c0770122bdf1affec4bf81f1f1dec4987230e5cbfab6afa0ea5",
+    "response_costDollars": {
+      "total": 0.012
+    },
+    "result_urls": [
+      "https://docs.python.org/3.13/genindex.html",
+      "https://docs.python.org/3.13/py-modindex.html",
+      "https://docs.python.org/3.13/archives/"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "\"Python 3.13\" \"free-threading-extensions\" \"Limited C API\"",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org"
+        ],
+        "excludeDomains": [
+          "docs.python.org/3/",
+          "docs.python.org/3.14/",
+          "docs.python.org/3.15/"
+        ],
+        "numResults": 10
+      },
+      "requested_at_utc": "2026-09-07T11:36:39.046307+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:36:39.046307+00:00",
+      "finished_at_utc": "2026-09-07T11:36:42.601336+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:36:42 GMT",
+      "bytes": 2043,
+      "body_file": "search-09.response.json",
+      "sha256": "484747b3233e54466052ac271e53e8886ecf2927d98273947fda909683af9dc3"
+    },
+    "raw_response_sha256": "484747b3233e54466052ac271e53e8886ecf2927d98273947fda909683af9dc3",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/3.11/c-api/stable.html",
+      "https://docs.python.org/3.11/c-api/init.html",
+      "https://docs.python.org/3.10/c-api/init.html",
+      "https://docs.python.org/3.10/c-api/stable.html",
+      "https://docs.python.org/3.3/faq/library.html",
+      "https://docs.python.org/3.11/howto/isolating-extensions.html",
+      "https://docs.python.org/3.11/extending/extending.html",
+      "https://docs.python.org/release/3.10.13/c-api/stable.html",
+      "https://docs.python.org/release/3.9.13/c-api/stable.html",
+      "https://docs.python.org/3.13/py-modindex.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  },
+  {
+    "request": {
+      "method": "POST",
+      "url": "https://api.exa.ai/search",
+      "parameters": {
+        "query": "Python 3.13 C API Extension Support for Free Threading フリースレッド Limited C API Stable ABI",
+        "type": "auto",
+        "includeDomains": [
+          "docs.python.org/ja/3.13",
+          "docs.python.org/ko/3.13",
+          "docs.python.org/zh-tw/3.13"
+        ],
+        "numResults": 6
+      },
+      "requested_at_utc": "2026-09-07T11:38:04.572003+00:00"
+    },
+    "response_metadata": {
+      "requested_at_utc": "2026-09-07T11:38:04.572003+00:00",
+      "finished_at_utc": "2026-09-07T11:38:06.511587+00:00",
+      "status": 200,
+      "requested_url": "https://api.exa.ai/search",
+      "final_url": "https://api.exa.ai/search",
+      "content_type": "application/json; charset=utf-8",
+      "server_date": "Mon, 07 Sep 2026 11:38:06 GMT",
+      "bytes": 1182,
+      "body_file": "search-10.response.json",
+      "sha256": "8c8fe1bb34a55970ef7e4c4ad5c55b30c1c111b0f1ff53aed54af061a6fca301"
+    },
+    "raw_response_sha256": "8c8fe1bb34a55970ef7e4c4ad5c55b30c1c111b0f1ff53aed54af061a6fca301",
+    "response_costDollars": {
+      "total": 0.007,
+      "search": {
+        "neural": 0.007
+      }
+    },
+    "result_urls": [
+      "https://docs.python.org/ko/3.13/library/_thread.html",
+      "https://docs.python.org/ja/3.13/py-modindex.html",
+      "https://docs.python.org/ko/3.13/py-modindex.html",
+      "https://docs.python.org/zh-tw/3.13/py-modindex.html",
+      "https://docs.python.org/ja/3.13/genindex-C.html",
+      "https://docs.python.org/ja/3.13/genindex.html"
+    ],
+    "selection_note": "Only result URLs and provider cost fields retained; full original response stays private."
+  }
+]

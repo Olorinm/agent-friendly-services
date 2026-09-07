@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T112951.715536Z-firecrawl",
+  "service_id": "firecrawl",
+  "route_id": "public-search-api",
+  "entry_url": "https://docs.firecrawl.dev/features/search",
+  "task": {
+    "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+    "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+    "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+    "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+    "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+    "id": "web-search-001",
+    "version": "v1",
+    "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+    "file": "data/experiments/tasks/web-search.md"
+  },
+  "prompt_sha256": "6f6e15c0555b0c9dd1041194f18227641469973991cf72a44ee3b134e659a2ab",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T11:29:51.792723+00:00",
+  "ended_at": "2026-09-07T11:35:54.779927+00:00",
+  "elapsed_seconds": 362.944,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "No service account or resource prepared before the measured session."
+  },
+  "status": "completed",
+  "reason": "Anonymous Firecrawl search and direct reads of returned official sources support all three answers. Two cited pages were discovered through links inside result descriptions, not separate ranked hits; this satisfies frozen v1 response-URL criterion. No account or payment; a single-run token difference does not establish overall provider superiority.",
+  "usage": {
+    "input_tokens": 338090,
+    "cached_input_tokens": 295552,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8728,
+    "reasoning_output_tokens": 1975
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-07T11:38:56.701781+00:00",
+    "checks": [
+      {
+        "criterion": "指定服务真实搜索并返回至少两个引用官方页面 URL",
+        "passed": true,
+        "evidence": "POST api.firecrawl.dev/v2/search without auth; guide is a ranked result. The extension guide and cmdline URL occur inside description links in actual response 04 (cmdline also in 02). v1 requires URLs present in real response, not necessarily separate ranked hits."
+      },
+      {
+        "criterion": "默认状态与启用方法正确且有官方原文",
+        "passed": true,
+        "evidence": "Fetched 3.13 free-threading guide states experimental build, optional installers and --disable-gil. cmdline restricts -X gil=0 to free-threaded builds. Answer matches."
+      },
+      {
+        "criterion": "C 扩展限制及运行时影响准确",
+        "passed": true,
+        "evidence": "Fetched 3.13 extension guide: separate wheels, no Limited C API/Stable ABI, thread-safety work; main guide warns unsupported extensions can re-enable GIL."
+      },
+      {
+        "criterion": "时间、响应、来源与中文答案可复核",
+        "passed": true,
+        "evidence": "Raw API JSON, request/access timestamps and fetched versioned pages reviewed locally. Public excerpts separate ranked URLs from in-description links and retain original response/page hashes."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/selected/search-excerpts.json",
+      "sha256": "1a6312775792fdeb95a855f490e6d39234d8f45cd0bdf62e6b065ff2a396b681",
+      "note": "Response URL/title fields and in-description links; exact raw hashes."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/selected/source-provenance.json",
+      "sha256": "084bbd25abf8bdda2abe32c2e96d9ec09ff1cc55f807b5a7c1b903daf3945a9d",
+      "note": "Official source fetch metadata and raw page hashes."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/answer.md",
+      "sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
+      "note": "Final answer independently checked against official source content."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T112951.715536Z-firecrawl",
+    "run_sha256": "ec3d39be8f6246ba5ba93a4b2f051e7bffffa19cc92ffea232d4cdc83b915ecc",
+    "events_sha256": "7f3e6db989299723c340ee48f5bc6e286dd265090c18c0f93ac7ba7337985698",
+    "answer_sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
+    "review_sha256": "2932989fe9d98da3ddf5891de99cb191af6cb0c5bb63224036c52c1a830462d9"
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T113506.422646Z-turso",
+  "service_id": "turso",
+  "route_id": "platform-api",
+  "entry_url": "https://docs.turso.tech/api-reference/introduction",
+  "task": {
+    "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+    "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+    "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+    "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+    "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+    "id": "database-todos-001",
+    "version": "v1",
+    "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+    "file": "data/experiments/tasks/databases.md"
+  },
+  "prompt_sha256": "312d7420298d95d1e9c0f187114ba64129ff6f313030f95a90dd47d315164ea0",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T11:35:06.452325+00:00",
+  "ended_at": "2026-09-07T11:42:44.234732+00:00",
+  "elapsed_seconds": 457.78,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "provided: TURSO_API_TOKEN, TURSO_ORGANIZATION",
+    "web_search": "live",
+    "preparation_note": "Outer Agent registered a new dedicated Free organization using Google sign-in, selected a username and created an organization API token; no card/payment, no existing database. Signup and token creation outside measured time/tokens. Executor receives only this organization and token, and must provision its own test database."
+  },
+  "status": "completed",
+  "reason": "Independent writer/reader processes and outer reviewer remote re-read confirm persisted todos. Dedicated free organization and API token were prepared before timing; database/group and SQL tokens were created during execution. No payment; overages remain off. Free archival and token expiry limit long-term use.",
+  "usage": {
+    "input_tokens": 755366,
+    "cached_input_tokens": 687616,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12234,
+    "reasoning_output_tokens": 2598
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-07T11:45:18.725259+00:00",
+    "checks": [
+      {
+        "criterion": "创建独立免费远程数据库",
+        "passed": true,
+        "evidence": "Initial groups empty; new database returned. starter plan price 0 and overages=false before/after; only organization/token preprovided."
+      },
+      {
+        "criterion": "新增与更新真实完成",
+        "passed": true,
+        "evidence": "09-write SQL/response: INSERT 3 rows, UPDATE id=2 affected 1, COMMIT successful on remote HTTPS."
+      },
+      {
+        "criterion": "独立进程重新连接",
+        "passed": true,
+        "evidence": "Writer 45788 exit=0 and absent before reader 45799 spawned; new TLS connection and read-only token; sequence matches execution log."
+      },
+      {
+        "criterion": "数据、未完成项与总数正确",
+        "passed": true,
+        "evidence": "10-read raw rows match expected; only id=1 unfinished, total/completed=3/2. Outer reviewer-query.json separately reads correct rows from remote service after execution."
+      },
+      {
+        "criterion": "限制与凭据隔离",
+        "passed": true,
+        "evidence": "Final answer reports free inactive archival after 10 days and 1-day SQL token expiry. Selected evidence omits authentication and redacts known account/resource identities."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/01-subscription.response.json",
+      "sha256": "20dc9c6203aee7046fc968bda1fc400d5f54a6bbfca1fc4ddcd2f0f450ccd834",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/02-plans.response.json",
+      "sha256": "6b705b2f2b53508b912b8aa8c619cbab2908290c45a5f77fe2b3a11e0a9d21d4",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/04-groups.response.json",
+      "sha256": "47aec4b16657492be8ea01cac39a2b54a0485f848fdc1bae4e70dd6bad83abd8",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/06-create-database.request.json",
+      "sha256": "32cf2496c5f39b73ddad189956b1056bfb8c347e6f3ee49b5c762acd292db21c",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+      "source_sha256": "d45bed2746319b592e1814792951b5bc1f11b24237176a1d563d2f8be92cdaa4",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/06-create-database.response.json",
+      "sha256": "d7ed1e08bcaa3aa8cb52ee112117c4f03064b024bcf5bc952b980883c2f63c25",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+      "source_sha256": "bb6a389c38fdda71f9bc66da029cd500b4923f0c7290642b32e95bdb445c4ad0",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.request.json",
+      "sha256": "24b09bec8bbaa32ea9bdd47c4289fc3acd869fa69f2682ed66244e58c0797612",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+      "source_sha256": "3bfeb936caf88bcda0edde484aac69f6d6db3a7f37c09a473a06cb6d82ff8d34",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.response.json",
+      "sha256": "bcd1aed8b8516e80938495f25c224dc6069af712bb8937f74c4bea7204b845fe",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.http.json",
+      "sha256": "96358352b635227f179a4eb6bca24c5ee66aed46b6f775d5149d3ffe50075431",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.request.json",
+      "sha256": "9fc20a50018fe387227a6d9a5806632d8cdb06023529ee360d93e20f9ed9ee17",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+      "source_sha256": "0e19480b3ad2b1910397bd4580395f9e80aecdd4cd4f449bd546260712d51e22",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.response.json",
+      "sha256": "a9096b81708bd38f7318331d54cd7e7c85291a3692223e99bc5ea1e58dd6dc4f",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.http.json",
+      "sha256": "ffc13063daee6b050a8b8d3f4602cf5a3122444cdc9bfeb191e2b4920cf441de",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/process-separation.json",
+      "sha256": "de6b785d53bed0d03c3eca7833efe88ba7fdab7ae2121bcba57ea6be85cdb5e4",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+      "source_sha256": "7aa8b261c7a6946caf638f706c319b0c058ce416c4098dbf1db7f769e3703fe7",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/08-read-token.expiry.json",
+      "sha256": "8815f7eea3e95976e07fd50618b300b8bf268a26d1eb9bd84fe73d18a6c34e58",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/12-subscription-after.response.json",
+      "sha256": "20dc9c6203aee7046fc968bda1fc400d5f54a6bbfca1fc4ddcd2f0f450ccd834",
+      "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/reviewer-query.json",
+      "sha256": "db95fb1a7b5644e0a245320b2cd79888d1fc92be2fad84a86d3f725b87274556",
+      "note": "Outer reviewer independent read, outside measured time/tokens.",
+      "source_sha256": "c082cc85aef6ecc9510ad2b52b0479672f75dee309bc72feb1cde0ba68936ada",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/answer.md",
+      "sha256": "52e839d62242cca15420b3a5b24ab4f18052e29d24a24847f38aa1484e266474",
+      "note": "Final deliverable reviewed against actual responses.",
+      "source_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T113506.422646Z-turso",
+    "run_sha256": "cba4d32c7ff7eb6ee60a95986db6ef58dbf385a0320c67862a7855246d50cc13",
+    "events_sha256": "4fb21cbc9f3d2aa631f7c96a0b8610a9e658c6d210f574bc54ce91f6c69c904f",
+    "answer_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
+    "review_sha256": "3859e981a89be94663a0fb927f8a16901c8ffe66ef1288d9e2677e9105fbe1a7",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

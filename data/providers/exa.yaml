@@ -73,3 +73,103 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed.
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-search
+  sources:
+    mcp:
+      url: https://exa.ai/docs/reference/exa-mcp
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://exa.ai/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+    docs:
+      url: https://exa.ai/docs/reference/search
+      checked_on: '2026-09-07'
+      kind: official_docs
+  routes:
+    - id: public-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.exa.ai/mcp
+      docs: https://exa.ai/docs/reference/exa-mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: none
+        evidence:
+          - mcp
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - mcp
+        web.fetch:
+          value: documented
+          evidence:
+            - mcp
+      notes: >-
+        Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires
+        authentication and separate usage charges; it is excluded from this pilot. API signup credits are not
+        a quota guarantee for anonymous MCP.
+    - id: search-api
+      interface: api
+      maintainer: official
+      entry_url: https://exa.ai/docs/reference/search
+      evidence:
+        - docs
+        - pricing
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed
+        for part of initial credits. No payment method required. Anonymous MCP quota is separate.
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
+      costs:
+        - kind: free_allowance
+          amount: 20
+          unit: money
+          per: one_time
+          scope: Published signup credits; some may require onboarding. Actual account award should be checked.
+          evidence:
+            - pricing
+          currency: USD
+        - kind: free_allowance
+          amount: 10
+          unit: money
+          per: month
+          scope: Free account monthly allowance, not anonymous MCP quota.
+          evidence:
+            - pricing
+          currency: USD

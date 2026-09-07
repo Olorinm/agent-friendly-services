@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T112952.581354Z-exa",
+  "service_id": "exa",
+  "route_id": "search-api",
+  "entry_url": "https://exa.ai/docs/reference/search",
+  "task": {
+    "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+    "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+    "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+    "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+    "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+    "id": "web-search-001",
+    "version": "v1",
+    "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+    "file": "data/experiments/tasks/web-search.md"
+  },
+  "prompt_sha256": "984b922aea1f6400645fbb378300f8cf9cbb7fe87a845d51a8b303c4b387f06f",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T11:29:52.610600+00:00",
+  "ended_at": "2026-09-07T11:39:54.672273+00:00",
+  "elapsed_seconds": 602.017,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "provided: EXA_API_KEY",
+    "web_search": "live",
+    "preparation_note": "Free account prepared by the outer Agent using browser Google sign-in and onboarding; no card or payment. Signup work is outside measured session tokens/time; only EXA_API_KEY provided, no adapter or research context."
+  },
+  "status": "not_completed",
+  "reason": "The authenticated Exa API returned real search results, but the executor spent its 10-search allowance on source discovery/evidence work and reached the 600-second wall-clock limit without a final answer. This is a task-budget failure, not API unavailability. CLI emitted no turn.completed usage event before interruption: tokens remain unknown, not zero. Free account was prepared outside measured time; no payment.",
+  "usage": null,
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-07T11:42:01.687813+00:00",
+    "checks": [
+      {
+        "criterion": "指定服务接入与真实搜索",
+        "passed": true,
+        "evidence": "10 recorded requests to api.exa.ai/search returned HTTP 200. Selected excerpts retain parameters, exact result URLs, provider cost fields and original response hashes."
+      },
+      {
+        "criterion": "预算内交付完整中文答案与可核对依据",
+        "passed": false,
+        "evidence": "run.json timed_out=true, exit_code=1, elapsed_seconds=602.017 (includes shutdown); no answer.md and no turn.completed event. Partial notes do not satisfy the final deliverable."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T112952.581354Z-exa/run.json",
+      "sha256": "26126f9f5ca9f6273b998038238bd75641316177c9450da06f2e2dab03b8d1d1",
+      "note": "Frozen task/configuration and observed timeout/unknown usage; all private host paths and session identifiers redacted.",
+      "source_sha256": "8d587ea778cba59c2e9b292b2189bc38250f5d9f376be5c2aa3e2b8f9f3a0b08",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112952.581354Z-exa/selected/search-call-excerpts.json",
+      "sha256": "53727b21639e0cc5aa052976c6bda400fb2e336b6d2e714239db0b7db0846562",
+      "note": "All ten actual API requests, selected response URLs and costDollars. API denomination is free-credit usage, not new cash payment."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T112952.581354Z-exa",
+    "run_sha256": "8d587ea778cba59c2e9b292b2189bc38250f5d9f376be5c2aa3e2b8f9f3a0b08",
+    "events_sha256": "0ffc6fecafa6f0a28e3e36e82f8b7bb33302ddd2f201938fec3a1ca349b80bd2",
+    "answer_sha256": null,
+    "review_sha256": "7a6e621847cee0bb030ad3acbf9d38631c2ddf5bfd0e014d7064f44d80922458",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

@@ -3,6 +3,676 @@
   "evaluations": [
     {
       "schema_version": 1,
+      "run_id": "codex-20260907T113506.422646Z-turso",
+      "service_id": "turso",
+      "route_id": "platform-api",
+      "entry_url": "https://docs.turso.tech/api-reference/introduction",
+      "task": {
+        "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+        "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+        "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+        "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+        "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+        "id": "database-todos-001",
+        "version": "v1",
+        "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+        "file": "data/experiments/tasks/databases.md"
+      },
+      "prompt_sha256": "312d7420298d95d1e9c0f187114ba64129ff6f313030f95a90dd47d315164ea0",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-07T11:35:06.452325+00:00",
+      "ended_at": "2026-09-07T11:42:44.234732+00:00",
+      "elapsed_seconds": 457.78,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "provided: TURSO_API_TOKEN, TURSO_ORGANIZATION",
+        "web_search": "live",
+        "preparation_note": "Outer Agent registered a new dedicated Free organization using Google sign-in, selected a username and created an organization API token; no card/payment, no existing database. Signup and token creation outside measured time/tokens. Executor receives only this organization and token, and must provision its own test database."
+      },
+      "status": "completed",
+      "reason": "Independent writer/reader processes and outer reviewer remote re-read confirm persisted todos. Dedicated free organization and API token were prepared before timing; database/group and SQL tokens were created during execution. No payment; overages remain off. Free archival and token expiry limit long-term use.",
+      "usage": {
+        "input_tokens": 755366,
+        "cached_input_tokens": 687616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12234,
+        "reasoning_output_tokens": 2598
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-07T11:45:18.725259+00:00",
+        "checks": [
+          {
+            "criterion": "创建独立免费远程数据库",
+            "passed": true,
+            "evidence": "Initial groups empty; new database returned. starter plan price 0 and overages=false before/after; only organization/token preprovided."
+          },
+          {
+            "criterion": "新增与更新真实完成",
+            "passed": true,
+            "evidence": "09-write SQL/response: INSERT 3 rows, UPDATE id=2 affected 1, COMMIT successful on remote HTTPS."
+          },
+          {
+            "criterion": "独立进程重新连接",
+            "passed": true,
+            "evidence": "Writer 45788 exit=0 and absent before reader 45799 spawned; new TLS connection and read-only token; sequence matches execution log."
+          },
+          {
+            "criterion": "数据、未完成项与总数正确",
+            "passed": true,
+            "evidence": "10-read raw rows match expected; only id=1 unfinished, total/completed=3/2. Outer reviewer-query.json separately reads correct rows from remote service after execution."
+          },
+          {
+            "criterion": "限制与凭据隔离",
+            "passed": true,
+            "evidence": "Final answer reports free inactive archival after 10 days and 1-day SQL token expiry. Selected evidence omits authentication and redacts known account/resource identities."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/01-subscription.response.json",
+          "sha256": "20dc9c6203aee7046fc968bda1fc400d5f54a6bbfca1fc4ddcd2f0f450ccd834",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/02-plans.response.json",
+          "sha256": "6b705b2f2b53508b912b8aa8c619cbab2908290c45a5f77fe2b3a11e0a9d21d4",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/04-groups.response.json",
+          "sha256": "47aec4b16657492be8ea01cac39a2b54a0485f848fdc1bae4e70dd6bad83abd8",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/06-create-database.request.json",
+          "sha256": "32cf2496c5f39b73ddad189956b1056bfb8c347e6f3ee49b5c762acd292db21c",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+          "source_sha256": "d45bed2746319b592e1814792951b5bc1f11b24237176a1d563d2f8be92cdaa4",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/06-create-database.response.json",
+          "sha256": "d7ed1e08bcaa3aa8cb52ee112117c4f03064b024bcf5bc952b980883c2f63c25",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+          "source_sha256": "bb6a389c38fdda71f9bc66da029cd500b4923f0c7290642b32e95bdb445c4ad0",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.request.json",
+          "sha256": "24b09bec8bbaa32ea9bdd47c4289fc3acd869fa69f2682ed66244e58c0797612",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+          "source_sha256": "3bfeb936caf88bcda0edde484aac69f6d6db3a7f37c09a473a06cb6d82ff8d34",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.response.json",
+          "sha256": "bcd1aed8b8516e80938495f25c224dc6069af712bb8937f74c4bea7204b845fe",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/09-write.http.json",
+          "sha256": "96358352b635227f179a4eb6bca24c5ee66aed46b6f775d5149d3ffe50075431",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.request.json",
+          "sha256": "9fc20a50018fe387227a6d9a5806632d8cdb06023529ee360d93e20f9ed9ee17",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+          "source_sha256": "0e19480b3ad2b1910397bd4580395f9e80aecdd4cd4f449bd546260712d51e22",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.response.json",
+          "sha256": "a9096b81708bd38f7318331d54cd7e7c85291a3692223e99bc5ea1e58dd6dc4f",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/10-read-new-process.http.json",
+          "sha256": "ffc13063daee6b050a8b8d3f4602cf5a3122444cdc9bfeb191e2b4920cf441de",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/process-separation.json",
+          "sha256": "de6b785d53bed0d03c3eca7833efe88ba7fdab7ae2121bcba57ea6be85cdb5e4",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
+          "source_sha256": "7aa8b261c7a6946caf638f706c319b0c058ce416c4098dbf1db7f769e3703fe7",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/08-read-token.expiry.json",
+          "sha256": "8815f7eea3e95976e07fd50618b300b8bf268a26d1eb9bd84fe73d18a6c34e58",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/12-subscription-after.response.json",
+          "sha256": "20dc9c6203aee7046fc968bda1fc400d5f54a6bbfca1fc4ddcd2f0f450ccd834",
+          "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/reviewer-query.json",
+          "sha256": "db95fb1a7b5644e0a245320b2cd79888d1fc92be2fad84a86d3f725b87274556",
+          "note": "Outer reviewer independent read, outside measured time/tokens.",
+          "source_sha256": "c082cc85aef6ecc9510ad2b52b0479672f75dee309bc72feb1cde0ba68936ada",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/answer.md",
+          "sha256": "52e839d62242cca15420b3a5b24ab4f18052e29d24a24847f38aa1484e266474",
+          "note": "Final deliverable reviewed against actual responses.",
+          "source_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260907T113506.422646Z-turso",
+        "run_sha256": "cba4d32c7ff7eb6ee60a95986db6ef58dbf385a0320c67862a7855246d50cc13",
+        "events_sha256": "4fb21cbc9f3d2aa631f7c96a0b8610a9e658c6d210f574bc54ce91f6c69c904f",
+        "answer_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
+        "review_sha256": "3859e981a89be94663a0fb927f8a16901c8ffe66ef1288d9e2677e9105fbe1a7",
+        "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "codex-20260907T112952.581354Z-exa",
+      "service_id": "exa",
+      "route_id": "search-api",
+      "entry_url": "https://exa.ai/docs/reference/search",
+      "task": {
+        "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+        "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+        "id": "web-search-001",
+        "version": "v1",
+        "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+        "file": "data/experiments/tasks/web-search.md"
+      },
+      "prompt_sha256": "984b922aea1f6400645fbb378300f8cf9cbb7fe87a845d51a8b303c4b387f06f",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-07T11:29:52.610600+00:00",
+      "ended_at": "2026-09-07T11:39:54.672273+00:00",
+      "elapsed_seconds": 602.017,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "provided: EXA_API_KEY",
+        "web_search": "live",
+        "preparation_note": "Free account prepared by the outer Agent using browser Google sign-in and onboarding; no card or payment. Signup work is outside measured session tokens/time; only EXA_API_KEY provided, no adapter or research context."
+      },
+      "status": "not_completed",
+      "reason": "The authenticated Exa API returned real search results, but the executor spent its 10-search allowance on source discovery/evidence work and reached the 600-second wall-clock limit without a final answer. This is a task-budget failure, not API unavailability. CLI emitted no turn.completed usage event before interruption: tokens remain unknown, not zero. Free account was prepared outside measured time; no payment.",
+      "usage": null,
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-07T11:42:01.687813+00:00",
+        "checks": [
+          {
+            "criterion": "指定服务接入与真实搜索",
+            "passed": true,
+            "evidence": "10 recorded requests to api.exa.ai/search returned HTTP 200. Selected excerpts retain parameters, exact result URLs, provider cost fields and original response hashes."
+          },
+          {
+            "criterion": "预算内交付完整中文答案与可核对依据",
+            "passed": false,
+            "evidence": "run.json timed_out=true, exit_code=1, elapsed_seconds=602.017 (includes shutdown); no answer.md and no turn.completed event. Partial notes do not satisfy the final deliverable."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260907T112952.581354Z-exa/run.json",
+          "sha256": "26126f9f5ca9f6273b998038238bd75641316177c9450da06f2e2dab03b8d1d1",
+          "note": "Frozen task/configuration and observed timeout/unknown usage; all private host paths and session identifiers redacted.",
+          "source_sha256": "8d587ea778cba59c2e9b292b2189bc38250f5d9f376be5c2aa3e2b8f9f3a0b08",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112952.581354Z-exa/selected/search-call-excerpts.json",
+          "sha256": "53727b21639e0cc5aa052976c6bda400fb2e336b6d2e714239db0b7db0846562",
+          "note": "All ten actual API requests, selected response URLs and costDollars. API denomination is free-credit usage, not new cash payment."
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260907T112952.581354Z-exa",
+        "run_sha256": "8d587ea778cba59c2e9b292b2189bc38250f5d9f376be5c2aa3e2b8f9f3a0b08",
+        "events_sha256": "0ffc6fecafa6f0a28e3e36e82f8b7bb33302ddd2f201938fec3a1ca349b80bd2",
+        "answer_sha256": null,
+        "review_sha256": "7a6e621847cee0bb030ad3acbf9d38631c2ddf5bfd0e014d7064f44d80922458",
+        "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "codex-20260907T112951.715536Z-firecrawl",
+      "service_id": "firecrawl",
+      "route_id": "public-search-api",
+      "entry_url": "https://docs.firecrawl.dev/features/search",
+      "task": {
+        "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+        "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+        "id": "web-search-001",
+        "version": "v1",
+        "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+        "file": "data/experiments/tasks/web-search.md"
+      },
+      "prompt_sha256": "6f6e15c0555b0c9dd1041194f18227641469973991cf72a44ee3b134e659a2ab",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "675a3536a6e231e74c6b4a94e824b4055e698be3172a55ad398570676fd8e67a"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-07T11:29:51.792723+00:00",
+      "ended_at": "2026-09-07T11:35:54.779927+00:00",
+      "elapsed_seconds": 362.944,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "none",
+        "web_search": "live",
+        "preparation_note": "No service account or resource prepared before the measured session."
+      },
+      "status": "completed",
+      "reason": "Anonymous Firecrawl search and direct reads of returned official sources support all three answers. Two cited pages were discovered through links inside result descriptions, not separate ranked hits; this satisfies frozen v1 response-URL criterion. No account or payment; a single-run token difference does not establish overall provider superiority.",
+      "usage": {
+        "input_tokens": 338090,
+        "cached_input_tokens": 295552,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 8728,
+        "reasoning_output_tokens": 1975
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-07T11:38:56.701781+00:00",
+        "checks": [
+          {
+            "criterion": "指定服务真实搜索并返回至少两个引用官方页面 URL",
+            "passed": true,
+            "evidence": "POST api.firecrawl.dev/v2/search without auth; guide is a ranked result. The extension guide and cmdline URL occur inside description links in actual response 04 (cmdline also in 02). v1 requires URLs present in real response, not necessarily separate ranked hits."
+          },
+          {
+            "criterion": "默认状态与启用方法正确且有官方原文",
+            "passed": true,
+            "evidence": "Fetched 3.13 free-threading guide states experimental build, optional installers and --disable-gil. cmdline restricts -X gil=0 to free-threaded builds. Answer matches."
+          },
+          {
+            "criterion": "C 扩展限制及运行时影响准确",
+            "passed": true,
+            "evidence": "Fetched 3.13 extension guide: separate wheels, no Limited C API/Stable ABI, thread-safety work; main guide warns unsupported extensions can re-enable GIL."
+          },
+          {
+            "criterion": "时间、响应、来源与中文答案可复核",
+            "passed": true,
+            "evidence": "Raw API JSON, request/access timestamps and fetched versioned pages reviewed locally. Public excerpts separate ranked URLs from in-description links and retain original response/page hashes."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/selected/search-excerpts.json",
+          "sha256": "1a6312775792fdeb95a855f490e6d39234d8f45cd0bdf62e6b065ff2a396b681",
+          "note": "Response URL/title fields and in-description links; exact raw hashes."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/selected/source-provenance.json",
+          "sha256": "084bbd25abf8bdda2abe32c2e96d9ec09ff1cc55f807b5a7c1b903daf3945a9d",
+          "note": "Official source fetch metadata and raw page hashes."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112951.715536Z-firecrawl/answer.md",
+          "sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
+          "note": "Final answer independently checked against official source content."
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260907T112951.715536Z-firecrawl",
+        "run_sha256": "ec3d39be8f6246ba5ba93a4b2f051e7bffffa19cc92ffea232d4cdc83b915ecc",
+        "events_sha256": "7f3e6db989299723c340ee48f5bc6e286dd265090c18c0f93ac7ba7337985698",
+        "answer_sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
+        "review_sha256": "2932989fe9d98da3ddf5891de99cb191af6cb0c5bb63224036c52c1a830462d9"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "codex-20260907T112258.549053Z-neon",
+      "service_id": "neon",
+      "route_id": "ephemeral-api",
+      "entry_url": "https://neon.new/",
+      "task": {
+        "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+        "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+        "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+        "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+        "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+        "id": "database-todos-001",
+        "version": "v1",
+        "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+        "file": "data/experiments/tasks/databases.md"
+      },
+      "prompt_sha256": "cecbd7e0c57d60edbf8a0e9c68ac9bc5fa46d6203131cd0b4f0d42abeb022776",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "5656266fce1230f78dab7be2e73e14d60d5b100bfe61ee155d61ddcedeb456be"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-07T11:22:58.558715+00:00",
+      "ended_at": "2026-09-07T11:30:34.899948+00:00",
+      "elapsed_seconds": 456.342,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "none",
+        "web_search": "live",
+        "preparation_note": "No service credentials provided."
+      },
+      "status": "completed",
+      "reason": "Independent remote re-read confirms the three synthetic todos and update; separate writer/reader processes and count response satisfy v1. No signup or payment; ephemeral database expires 2026-09-10T11:23:56.173Z. This establishes short-term persistence only.",
+      "usage": {
+        "input_tokens": 452623,
+        "cached_input_tokens": 402560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 12790,
+        "reasoning_output_tokens": 3571
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-07T11:33:33.355538+00:00",
+        "checks": [
+          {
+            "criterion": "指定服务创建独立远程数据库",
+            "passed": true,
+            "evidence": "02-create-database.json: POST neon.new/api/v1/database HTTP 200, UNCLAIMED; expires_at 2026-09-10T11:23:56.173Z."
+          },
+          {
+            "criterion": "新增三项并只更新 id=2",
+            "passed": true,
+            "evidence": "10-write-request.json and raw response: INSERT 3 original rows, UPDATE id=2 -> true, rowCount=1."
+          },
+          {
+            "criterion": "写进程退出后新进程读取",
+            "passed": true,
+            "evidence": "12-process-separation.json: writer 28718 exit=0 before reader 28719; matching SQL requests and independent TLS response records. Backend pool PID may be reused; client processes are separate."
+          },
+          {
+            "criterion": "标题、全部行、未完成项与汇总正确",
+            "passed": true,
+            "evidence": "11-read-response-body.json returns expected rows; unfinished only 1; total/completed=3/2. Outer reviewer-query.json independently confirms hosted rows after the run."
+          },
+          {
+            "criterion": "凭据不进入交付并说明到期",
+            "passed": true,
+            "evidence": "Selected requests omit authentication. Creation response replaces connection/claim credentials; answer states 72 hours and expiry."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/02-create-database.json",
+          "sha256": "0094a9f20e13904afc7ade9c38a6746ce3bdcd3ba27224598605c8b5ae973700",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+          "source_sha256": "b019c76191efd87429ed86a90def443179b63c65f3dec279d8cb1ee3c9a21575",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-request.json",
+          "sha256": "110b60c438aabb2970c97384f7357e2e4ee0e7ba66095fdf00ba0d1f538a2d91",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+          "source_sha256": "12a28b24e14b0d8044ffbdf8b77dbb30bdea5c615576bfbe28e73fd909963003",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-response-body.json",
+          "sha256": "79fc3ce8bf433dd8f4f8024fc0e4f9b6b5db09d760636b110325818df52d57d8",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-response.json",
+          "sha256": "858f4c3bdf0ab96a6f80a601254e313917094d4e0af3fda25b08a00bac0897de",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-request.json",
+          "sha256": "17152d34660d1f0eb802781aaa8eec7c93e26eaa62be7b7a48ef1c0509d045bc",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+          "source_sha256": "4995e3256e0c01a52e13587402aaf7635c706db2e487076069310b02b361bf75",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-response-body.json",
+          "sha256": "17b110cf52dbb692c7fd12c9930c00116eb94499386ff2c27de5e2c373105784",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-response.json",
+          "sha256": "f760df6a0a1d063fb00aa69da99ba25d7696b556140ae5066e603c1cae92b60b",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/12-process-separation.json",
+          "sha256": "5aea4f625b5c3b9a29a2284b3e8aab36ecbe4143f4165109f75e1f6631a86ada",
+          "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+          "source_sha256": "76def5e58ca3269ddf80661d9731dc401e10789e2be83c5188e88b7e9655c0fb",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/reviewer-query.json",
+          "sha256": "e66f2285ce347299c826e1f5f7df22b11a61e430b776255c2b56e6be29c82cf6",
+          "note": "Independent reviewer read, outside measured execution."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/answer.md",
+          "sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
+          "note": "Executor final answer, reviewed against service responses."
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260907T112258.549053Z-neon",
+        "run_sha256": "87bcc549894dbf8c14ea1f2461e2fa645eb1bbbedb7b9b09c056d83083bb13e7",
+        "events_sha256": "ce7cfc6bce251cc8b77934c6466f2b652d1070472c84e9e2acde128681763e64",
+        "answer_sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
+        "review_sha256": "714ba5268b35536b6fca4b3d1baaff2650f151fc70b456aa544e9e7d2e401c27",
+        "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "codex-20260907T112257.401366Z-exa",
+      "service_id": "exa",
+      "route_id": "public-mcp",
+      "entry_url": "https://mcp.exa.ai/mcp",
+      "task": {
+        "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+        "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+        "id": "web-search-001",
+        "version": "v1",
+        "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+        "file": "data/experiments/tasks/web-search.md"
+      },
+      "prompt_sha256": "f2cc5ba6121153cc483545d7af2a7f9cfb0ac188c4abd9e53ba163bc24696f01",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "5656266fce1230f78dab7be2e73e14d60d5b100bfe61ee155d61ddcedeb456be"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-07T11:22:57.413717+00:00",
+      "ended_at": "2026-09-07T11:31:39.882879+00:00",
+      "elapsed_seconds": 522.486,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "none",
+        "web_search": "live",
+        "preparation_note": "No service credentials provided."
+      },
+      "status": "completed",
+      "reason": "Three versioned Python 3.13 official pages occur in actual Exa MCP search responses and support all requested points. Anonymous entry succeeded without signup/payment; high usage reflects this single agent’s searches and evidence processing, not a general service ranking.",
+      "usage": {
+        "input_tokens": 917915,
+        "cached_input_tokens": 847104,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 13629,
+        "reasoning_output_tokens": 3131
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-07T11:36:00.214196+00:00",
+        "checks": [
+          {
+            "criterion": "使用指定搜索服务发现至少两个不同官方来源",
+            "passed": true,
+            "evidence": "Selected excerpts from actual Exa MCP responses 12 and 15 contain three versioned zh-cn/3.13 official URLs; initial tool/list and all search requests use mcp.exa.ai. Built-in web search used only for Exa setup docs."
+          },
+          {
+            "criterion": "默认状态与启用方法有版本对应的官方依据",
+            "passed": true,
+            "evidence": "Fetched 3.13 whatsnew free-threaded-cpython and howto installation sections state experimental, separate optional binary, source --disable-gil. Answer matches."
+          },
+          {
+            "criterion": "C 扩展兼容性解释正确",
+            "passed": true,
+            "evidence": "Fetched 3.13 extension/howto sections support separate wheels, no Limited C API/Stable ABI, thread-safety adaptation, and possible GIL re-enabling. Answer does not claim forcing GIL off ensures safety."
+          },
+          {
+            "criterion": "结果、来源内容与访问时间可核对",
+            "passed": true,
+            "evidence": "Raw source pages and timestamps reviewed locally. Public excerpts retain exact URLs/titles and raw-response hashes; official-page-provenance records accessed URLs, times and sections. Full private copies are not published."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/selected/search-response-excerpts.json",
+          "sha256": "78b376a426d643f9ac9b4bbaa470956e07988e8a9d64d196cb6881cd86a2dbcb",
+          "note": "Selected exact URL/title fields from actual responses; raw hashes retained."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/selected/official-page-provenance.json",
+          "sha256": "aa2e22faf885f5add355e2724fcc89a26dda2d725066016f60d9a3f09753baf0",
+          "note": "Source access metadata and sections independently reviewed; full website copies remain local."
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/answer.md",
+          "sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
+          "note": "Answer independently compared to official Python 3.13 content."
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260907T112257.401366Z-exa",
+        "run_sha256": "ece4aa4431bdb3a1ae255cc0b7c148ecd8ada65fbd237aaf4f477f7042f7ab32",
+        "events_sha256": "c937b4db065aab02ef523b8b6e6a63f9e24545c0071517e71f220627f1298850",
+        "answer_sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
+        "review_sha256": "a04ec40289da4fa3f588a957fea943e294b4c57312c71a1310965f324ac72ca4"
+      }
+    },
+    {
+      "schema_version": 1,
       "run_id": "codex-20260907T092329.724439Z-kiwi",
       "service_id": "kiwi",
       "route_id": "search-mcp",

@@ -597,7 +597,7 @@ const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. S
 
 English | [简体中文](./README.zh-CN.md)
 
-Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains ${providers.length} services, with [historical experiments](${AGENT_RUNS}) kept separately.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md) and [databases](./data/experiments/tasks/databases.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains ${providers.length} services, with [historical experiments](${AGENT_RUNS}) kept separately.
 
 ${badgeParts.join('\n')}
 
@@ -659,7 +659,7 @@ const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate
 
 [English](./README.md) | 简体中文
 
-从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 ${providers.length} 个服务的旧索引，[既有实验](${AGENT_RUNS})单独展示。
+从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)，任务表已覆盖[机票](./data/experiments/tasks/travel-flights.md)、[网页搜索](./data/experiments/tasks/web-search.md)和[数据库](./data/experiments/tasks/databases.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 ${providers.length} 个服务的旧索引，[既有实验](${AGENT_RUNS})单独展示。
 
 ${badgeParts.join('\n')}
 

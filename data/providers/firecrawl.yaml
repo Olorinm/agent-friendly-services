@@ -70,3 +70,89 @@ checks:
   automation_permitted:
     status: unknown
     notes: The product exists for automation, but ToS/robots handling not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-search
+  sources:
+    docs:
+      url: https://docs.firecrawl.dev/features/search
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://www.firecrawl.dev/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: public-search-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.firecrawl.dev/features/search
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - docs
+        web.fetch:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account
+        free credits cannot be assumed for this route.
+    - id: account-search-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.firecrawl.dev/features/search
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - docs
+        web.fetch:
+          value: documented
+          evidence:
+            - docs
+      notes: 'Search: 2 credits per 10 results; extra scraping can consume credits.'
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
+      costs:
+        - kind: free_allowance
+          amount: 1000
+          unit: credits
+          per: month
+          scope: Account Free plan; separate from anonymous access.
+          evidence:
+            - pricing

@@ -4,3 +4,6 @@ node_modules/
 
 # agent-verification run results: local until the publication protocol is settled
 data/experiments/results/
+
+# Python test/runner bytecode is local build output.
+__pycache__/

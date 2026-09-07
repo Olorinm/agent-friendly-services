@@ -1,0 +1,60 @@
+{
+  "method": "POST",
+  "url": "https://[SERVICE_SECRET]/v2/pipeline",
+  "query_parameters": {},
+  "body": {
+    "requests": [
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "BEGIN IMMEDIATE",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "CREATE TABLE todos (id INTEGER PRIMARY KEY, title TEXT NOT NULL, done INTEGER NOT NULL CHECK (done IN (0, 1)))",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "INSERT INTO todos (id, title, done) VALUES (1, 'Buy milk', 0), (2, 'Read book', 0), (3, 'Walk dog', 1)",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "SELECT id, title, done FROM todos ORDER BY id",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "UPDATE todos SET done = 1 WHERE id = 2",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "COMMIT",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "close"
+      }
+    ]
+  },
+  "pid": 45788,
+  "ppid": 45787,
+  "started_at_utc": "2026-09-07T11:39:22.625114+00:00",
+  "authentication": "omitted",
+  "new_https_connection": true,
+  "tls_verification": true
+}

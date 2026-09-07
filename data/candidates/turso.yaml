@@ -1,0 +1,94 @@
+id: turso
+name: Turso
+category: databases
+homepage: https://turso.tech/
+summary: >-
+  Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10
+  million writes/month. Signup/login required; local engine alone does not
+  satisfy remote storage.
+submitted_by: community
+
+catalog:
+  version: 1
+  classifications:
+    - databases/hosted-relational
+  sources:
+    docs:
+      url: https://docs.turso.tech/cli/introduction
+      checked_on: '2026-09-07'
+      kind: official_docs
+    api:
+      url: https://docs.turso.tech/api-reference/introduction
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://turso.tech/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: cloud-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://docs.turso.tech/cli/introduction
+      evidence:
+        - docs
+        - pricing
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: platform_credentials
+        evidence:
+          - docs
+      capabilities:
+        database.provision:
+          value: documented
+          evidence:
+            - docs
+        database.persist:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month.
+        Signup/login required; local engine alone does not satisfy remote storage.
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
+      costs:
+        - kind: free_allowance
+          amount: 5
+          unit: GB
+          per: account
+          scope: Free cloud storage; account quota also limits reads, writes and number of databases.
+          evidence:
+            - pricing
+    - id: platform-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.turso.tech/api-reference/introduction
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      auth:
+        value: api_key
+        evidence:
+          - api
+      capabilities:
+        database.provision:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        Management API; SQL connectivity uses separate database credentials created during execution.
+        Provision only within a dedicated free test organization; no precreated database.

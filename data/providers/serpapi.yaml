@@ -72,6 +72,7 @@ catalog:
   version: 1
   classifications:
     - travel/flights
+    - web-search-data/web-search
   sources:
     flights:
       url: https://serpapi.com/google-flights-api
@@ -89,6 +90,10 @@ catalog:
       url: https://github.com/serpapi/serpapi-mcp
       checked_on: '2026-09-07'
       kind: official_repo
+    web-docs:
+      url: https://serpapi.com/search-api
+      checked_on: '2026-09-07'
+      kind: official_docs
   routes:
     - id: google-flights-api
       interface: api
@@ -128,3 +133,25 @@ catalog:
       notes: >-
         Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route
         results.
+    - id: web-search-api
+      interface: api
+      maintainer: official
+      entry_url: https://serpapi.com/search-api
+      evidence:
+        - web-docs
+      availability:
+        value: self_serve
+        evidence:
+          - web-docs
+      personal_access:
+        value: unknown
+      auth:
+        value: api_key
+        evidence:
+          - web-docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - web-docs
+      notes: Separate from Google Flights API. Existing flight evaluations do not establish web search performance.

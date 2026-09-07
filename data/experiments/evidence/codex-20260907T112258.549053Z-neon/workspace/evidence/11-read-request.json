@@ -1,0 +1,40 @@
+{
+  "method": "POST",
+  "url": "https://api.c-4.us-east-2.aws.neon.tech/sql",
+  "headers": {
+    "Content-Type": "application/json",
+    "Neon-Raw-Text-Output": "true",
+    "Neon-Array-Mode": "true",
+    "Neon-Batch-Isolation-Level": "Serializable",
+    "Neon-Batch-Read-Only": "true",
+    "Connection": "close"
+  },
+  "body": {
+    "queries": [
+      {
+        "query": "SELECT id,title,done FROM public.todos ORDER BY id",
+        "params": []
+      },
+      {
+        "query": "SELECT id,title,done FROM public.todos WHERE done=false ORDER BY id",
+        "params": []
+      },
+      {
+        "query": "SELECT count(*)::integer AS total, count(*) FILTER (WHERE done)::integer AS completed FROM public.todos",
+        "params": []
+      },
+      {
+        "query": "SELECT current_database() AS database_name, pg_backend_pid() AS backend_pid, inet_server_addr()::text AS server_address, inet_server_port() AS server_port, current_setting('server_version') AS server_version, clock_timestamp()::text AS server_time, current_setting('transaction_read_only') AS transaction_read_only",
+        "params": []
+      }
+    ]
+  },
+  "target": {
+    "database_host": "[SERVICE_SECRET]",
+    "database": "neondb",
+    "neon_project_id": "[SERVICE_SECRET]"
+  },
+  "authentication_note": "Authentication is supplied from the private file in memory and omitted entirely from evidence.",
+  "client_pid": 28719,
+  "started_at": "2026-09-07T11:26:29.726498+00:00"
+}

@@ -1,0 +1,56 @@
+id: serper
+name: Serper
+category: web-search-data
+homepage: https://serper.dev/
+summary: >-
+  Google results API with signup trial queries; actual account flow and
+  authentication remain untested.
+submitted_by: community
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-search
+  sources:
+    docs:
+      url: https://serper.dev/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: search-api
+      interface: api
+      maintainer: official
+      entry_url: https://serper.dev/
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: unknown
+        evidence:
+          - docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - docs
+      notes: Google results API with signup trial queries; actual account flow and authentication remain untested.
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+      costs:
+        - kind: free_allowance
+          amount: 2500
+          unit: queries
+          per: one_time
+          scope: Advertised initial free queries, no monthly renewal claimed.
+          evidence:
+            - docs

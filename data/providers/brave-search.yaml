@@ -70,3 +70,45 @@ checks:
 
 notes:
   - Detailed API docs live inside the dashboard domain but are publicly readable without login (verified at review time).
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-search
+  sources:
+    docs:
+      url: https://brave.com/search/api/
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: search-api
+      interface: api
+      maintainer: official
+      entry_url: https://brave.com/search/api/
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Free-plan card verification is required. No card supplied in this pilot; onboarding restriction does
+        not establish poor search quality.
+      requirements:
+        payment_method:
+          value: required
+          evidence:
+            - docs

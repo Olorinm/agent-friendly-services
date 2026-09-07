@@ -1,0 +1,55 @@
+id: aiven
+name: Aiven
+category: databases
+homepage: https://aiven.io/
+summary: >-
+  Managed databases including free hosted PostgreSQL. Account signup and
+  provisioning remain untested; free lifecycle limits need checking before
+  production use.
+submitted_by: community
+
+catalog:
+  version: 1
+  classifications:
+    - databases/hosted-relational
+  sources:
+    docs:
+      url: https://aiven.io/docs/tools/cli
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://aiven.io/free-postgresql-database
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: postgres-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://aiven.io/docs/tools/cli
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: platform_credentials
+        evidence:
+          - docs
+      capabilities:
+        database.provision:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested;
+        free lifecycle limits need checking before production use.
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing

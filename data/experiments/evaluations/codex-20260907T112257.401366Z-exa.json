@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T112257.401366Z-exa",
+  "service_id": "exa",
+  "route_id": "public-mcp",
+  "entry_url": "https://mcp.exa.ai/mcp",
+  "task": {
+    "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+    "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+    "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+    "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+    "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+    "id": "web-search-001",
+    "version": "v1",
+    "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+    "file": "data/experiments/tasks/web-search.md"
+  },
+  "prompt_sha256": "f2cc5ba6121153cc483545d7af2a7f9cfb0ac188c4abd9e53ba163bc24696f01",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "5656266fce1230f78dab7be2e73e14d60d5b100bfe61ee155d61ddcedeb456be"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T11:22:57.413717+00:00",
+  "ended_at": "2026-09-07T11:31:39.882879+00:00",
+  "elapsed_seconds": 522.486,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "No service credentials provided."
+  },
+  "status": "completed",
+  "reason": "Three versioned Python 3.13 official pages occur in actual Exa MCP search responses and support all requested points. Anonymous entry succeeded without signup/payment; high usage reflects this single agent’s searches and evidence processing, not a general service ranking.",
+  "usage": {
+    "input_tokens": 917915,
+    "cached_input_tokens": 847104,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 13629,
+    "reasoning_output_tokens": 3131
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-07T11:36:00.214196+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定搜索服务发现至少两个不同官方来源",
+        "passed": true,
+        "evidence": "Selected excerpts from actual Exa MCP responses 12 and 15 contain three versioned zh-cn/3.13 official URLs; initial tool/list and all search requests use mcp.exa.ai. Built-in web search used only for Exa setup docs."
+      },
+      {
+        "criterion": "默认状态与启用方法有版本对应的官方依据",
+        "passed": true,
+        "evidence": "Fetched 3.13 whatsnew free-threaded-cpython and howto installation sections state experimental, separate optional binary, source --disable-gil. Answer matches."
+      },
+      {
+        "criterion": "C 扩展兼容性解释正确",
+        "passed": true,
+        "evidence": "Fetched 3.13 extension/howto sections support separate wheels, no Limited C API/Stable ABI, thread-safety adaptation, and possible GIL re-enabling. Answer does not claim forcing GIL off ensures safety."
+      },
+      {
+        "criterion": "结果、来源内容与访问时间可核对",
+        "passed": true,
+        "evidence": "Raw source pages and timestamps reviewed locally. Public excerpts retain exact URLs/titles and raw-response hashes; official-page-provenance records accessed URLs, times and sections. Full private copies are not published."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/selected/search-response-excerpts.json",
+      "sha256": "78b376a426d643f9ac9b4bbaa470956e07988e8a9d64d196cb6881cd86a2dbcb",
+      "note": "Selected exact URL/title fields from actual responses; raw hashes retained."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/selected/official-page-provenance.json",
+      "sha256": "aa2e22faf885f5add355e2724fcc89a26dda2d725066016f60d9a3f09753baf0",
+      "note": "Source access metadata and sections independently reviewed; full website copies remain local."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112257.401366Z-exa/answer.md",
+      "sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
+      "note": "Answer independently compared to official Python 3.13 content."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T112257.401366Z-exa",
+    "run_sha256": "ece4aa4431bdb3a1ae255cc0b7c148ecd8ada65fbd237aaf4f477f7042f7ab32",
+    "events_sha256": "c937b4db065aab02ef523b8b6e6a63f9e24545c0071517e71f220627f1298850",
+    "answer_sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
+    "review_sha256": "a04ec40289da4fa3f588a957fea943e294b4c57312c71a1310965f324ac72ca4"
+  }
+}

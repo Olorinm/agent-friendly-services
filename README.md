@@ -4,7 +4,7 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md) and [databases](./data/experiments/tasks/databases.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
@@ -292,6 +292,7 @@ Collected services include tested, untested and gated entries ([pool rules](./do
 | Candidate | Category | Submitted by | Task observations | Legacy M1 first-call | Claims |
 | --- | --- | --- | --- | --- | --- |
 | [AirGateway Platform API](https://airgateway.com/) | Travel | community | — | — | [yaml](./data/candidates/airgateway.yaml) |
+| [Aiven](https://aiven.io/) | Databases | community | — | — | [yaml](./data/candidates/aiven.yaml) |
 | [Amadeus Flight APIs](https://developers.amadeus.com/) | Travel | community | — | — | [yaml](./data/candidates/amadeus-flights.yaml) |
 | [apiheya Air Scraper](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) | Travel | community | — | — | [yaml](./data/candidates/apiheya-air-scraper.yaml) |
 | [Aviasales via Travelpayouts](https://www.aviasales.com/) | Travel | community | — | — | [yaml](./data/candidates/aviasales.yaml) |
@@ -308,15 +309,18 @@ Collected services include tested, untested and gated entries ([pool rules](./do
 | [LetsFG Personal Flight Search](https://letsfg.co/) | Travel | community | — | — | [yaml](./data/candidates/letsfg.yaml) |
 | [Lufthansa Partner Fare API](https://developer.lufthansa.com/page) | Travel | community | — | — | [yaml](./data/candidates/lufthansa-partner.yaml) |
 | [paas.build](https://paas.build) | Payments / Billing | vendor | — | [✓ pass (2/3) · 2026-07-15](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/paas-build.yaml) |
+| [PlanetScale](https://planetscale.com/) | Databases | community | — | — | [yaml](./data/candidates/planetscale.yaml) |
 | [去哪儿机票合作](https://www.qunar.com/site/zh/Cooperate_4.shtml) | Travel | community | — | — | [yaml](./data/candidates/qunar-flights.yaml) |
 | [Sabre Air APIs](https://developer.sabre.com/) | Travel | community | — | — | [yaml](./data/candidates/sabre-air.yaml) |
 | [Scrapingdog Google Flights API](https://www.scrapingdog.com/) | Travel | community | — | — | [yaml](./data/candidates/scrapingdog-flights.yaml) |
 | [SearchApi Google Flights](https://www.searchapi.io/) | Travel | community | — | — | [yaml](./data/candidates/searchapi.yaml) |
+| [Serper](https://serper.dev/) | Web Search / Data | community | — | — | [yaml](./data/candidates/serper.yaml) |
 | [Skootle Google Flights Scraper](https://apify.com/skootle/google-flights-scraper) | Travel | community | — | — | [yaml](./data/candidates/skootle-google-flights.yaml) |
 | [Skyscanner Travel APIs](https://www.skyscanner.net/) | Travel | community | — | — | [yaml](./data/candidates/skyscanner.yaml) |
 | [同程机票合作](https://www.ly.com/public/about17u/contactus) | Travel | community | — | — | [yaml](./data/candidates/tongcheng-flights.yaml) |
 | [Travelport TripServices](https://developer.travelport.com/) | Travel | community | — | — | [yaml](./data/candidates/travelport-tripservices.yaml) |
 | [Trip.com Flight Distribution](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | Travel | community | — | — | [yaml](./data/candidates/trip-com-flights.yaml) |
+| [Turso](https://turso.tech/) | Databases | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/turso.yaml) |
 | [Xquik](https://xquik.com) | Web Search / Data | vendor | — | [✓ pass (3/3) · 2026-07-15](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | [yaml](./data/candidates/xquik.yaml) |
 
 ## Contributing

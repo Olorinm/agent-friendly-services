@@ -1,0 +1,53 @@
+[
+  {
+    "observed_at_utc": "2026-09-07T11:39:22.585169+00:00",
+    "supervisor_pid": 45787,
+    "event": "spawn",
+    "role": "writer",
+    "child_pid": 45788,
+    "argv": [
+      "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "[WORKSPACE]/scripts/write_todos.py"
+    ]
+  },
+  {
+    "observed_at_utc": "2026-09-07T11:39:24.410754+00:00",
+    "supervisor_pid": 45787,
+    "event": "wait_returned",
+    "role": "writer",
+    "child_pid": 45788,
+    "returncode": 0
+  },
+  {
+    "observed_at_utc": "2026-09-07T11:39:24.411154+00:00",
+    "supervisor_pid": 45787,
+    "event": "writer_absent_before_reader_spawn",
+    "writer_pid": 45788,
+    "observed_os_error": "ESRCH / ProcessLookupError"
+  },
+  {
+    "observed_at_utc": "2026-09-07T11:39:24.412828+00:00",
+    "supervisor_pid": 45787,
+    "event": "spawn",
+    "role": "reader",
+    "child_pid": 45799,
+    "argv": [
+      "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "[WORKSPACE]/scripts/read_todos.py"
+    ]
+  },
+  {
+    "observed_at_utc": "2026-09-07T11:39:26.818428+00:00",
+    "supervisor_pid": 45787,
+    "event": "wait_returned",
+    "role": "reader",
+    "child_pid": 45799,
+    "returncode": 0
+  },
+  {
+    "observed_at_utc": "2026-09-07T11:39:26.818635+00:00",
+    "supervisor_pid": 45787,
+    "event": "verification_complete",
+    "success": true
+  }
+]

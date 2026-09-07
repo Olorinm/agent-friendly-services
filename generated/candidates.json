@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-07T11:07:30.205Z",
-  "count": 27,
+  "generated_at": "2026-09-07T11:45:19.199Z",
+  "count": 31,
   "candidates": [
     {
       "id": "airgateway",
@@ -9,6 +9,16 @@
       "category": "travel",
       "homepage": "https://airgateway.com/",
       "summary": "Air distribution API with sandbox keys, production certification and an agency application.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "aiven",
+      "name": "Aiven",
+      "category": "databases",
+      "homepage": "https://aiven.io/",
+      "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
       "submitted_by": "community",
       "entrypoints": {},
       "m1": null
@@ -186,6 +196,16 @@
       }
     },
     {
+      "id": "planetscale",
+      "name": "PlanetScale",
+      "category": "databases",
+      "homepage": "https://planetscale.com/",
+      "summary": "PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
       "id": "qunar-flights",
       "name": "去哪儿机票合作",
       "category": "travel",
@@ -221,6 +241,16 @@
       "category": "travel",
       "homepage": "https://www.searchapi.io/",
       "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "serper",
+      "name": "Serper",
+      "category": "web-search-data",
+      "homepage": "https://serper.dev/",
+      "summary": "Google results API with signup trial queries; actual account flow and authentication remain untested.",
       "submitted_by": "community",
       "entrypoints": {},
       "m1": null
@@ -271,6 +301,16 @@
       "category": "travel",
       "homepage": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
       "summary": "Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "turso",
+      "name": "Turso",
+      "category": "databases",
+      "homepage": "https://turso.tech/",
+      "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
       "submitted_by": "community",
       "entrypoints": {},
       "m1": null

@@ -131,6 +131,27 @@ class Trials(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'passing checks'):
             recorder.record(self.run, self.review)
 
+    def test_private_credentials_and_published_redaction(self):
+        credential = self.root / 'credential.json'
+        credential.write_text(json.dumps({'EXA_API_KEY': 'test-secret-123456'}))
+        credential.chmod(0o644)
+        with self.assertRaisesRegex(ValueError, 'private'):
+            runner.load_credentials(credential)
+        credential.chmod(0o600)
+        self.assertEqual(runner.load_credentials(credential)['EXA_API_KEY'], 'test-secret-123456')
+        (self.run / 'private-secrets.json').write_text(json.dumps(['test-secret-123456']))
+        (self.workspace / 'response.json').write_text('{"url":"https://example.com/?key=test-secret-123456","rows":[1]}')
+        self.meta['service_credentials'] = 'provided: EXA_API_KEY'
+        self.meta['preparation_note'] = 'Free signup outside measured run'
+        self.save()
+        result = json.loads(recorder.record(self.run, self.review).read_text())
+        published = (self.root / result['evidence'][0]['path']).read_text()
+        self.assertNotIn('test-secret-123456', published)
+        self.assertIn('[SERVICE_SECRET]', published)
+        self.assertEqual(result['environment']['service_credentials'], 'provided: EXA_API_KEY')
+        self.assertIn('outside', result['environment']['preparation_note'])
+        self.assertIn('test-secret-123456', (self.workspace / 'response.json').read_text())
+
     def test_route_relabel_and_evidence_escape_rejected(self):
         self.save()
         with self.assertRaisesRegex(ValueError, 'relabel'):

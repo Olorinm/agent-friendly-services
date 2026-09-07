@@ -1,0 +1,39 @@
+{
+  "method": "POST",
+  "url": "https://[SERVICE_SECRET]/v2/pipeline",
+  "query_parameters": {},
+  "body": {
+    "requests": [
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "SELECT id, title, done FROM todos ORDER BY id",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "SELECT id, title, done FROM todos WHERE done = 0 ORDER BY id",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "SELECT COUNT(*) AS total, SUM(done) AS completed FROM todos",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "close"
+      }
+    ]
+  },
+  "pid": 45799,
+  "ppid": 45787,
+  "started_at_utc": "2026-09-07T11:39:24.445244+00:00",
+  "authentication": "omitted",
+  "new_https_connection": true,
+  "tls_verification": true
+}

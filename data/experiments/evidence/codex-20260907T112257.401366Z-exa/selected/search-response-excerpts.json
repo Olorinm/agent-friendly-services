@@ -1,0 +1,104 @@
+[
+  {
+    "request": {
+      "started_at_utc": "2026-09-07T11:26:04.390599+00:00",
+      "method": "POST",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "User-Agent": "Python313-evidence-check/1.0",
+        "Content-Type": "application/json",
+        "Accept": "application/json, text/event-stream"
+      },
+      "body": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "site:docs.python.org/zh-cn/3.13 自由线程 默认 扩展",
+            "numResults": 8
+          }
+        }
+      },
+      "authentication": "none; no cookies or credentials sent"
+    },
+    "response_meta": {
+      "started_at_utc": "2026-09-07T11:26:04.390599+00:00",
+      "finished_at_utc": "2026-09-07T11:26:06.114996+00:00",
+      "status": 200,
+      "requested_url": "https://mcp.exa.ai/mcp",
+      "final_url": "https://mcp.exa.ai/mcp",
+      "headers_allowlisted": {
+        "Date": "Mon, 07 Sep 2026 11:26:06 GMT",
+        "Content-Type": "text/event-stream",
+        "Server": "cloudflare"
+      },
+      "bytes": 9694,
+      "sha256": "35ea4e4ed7761eafe74dba5a3a02a58d3b07ccdddccd1a1a13bda638f19d5be3"
+    },
+    "response_sha256": "35ea4e4ed7761eafe74dba5a3a02a58d3b07ccdddccd1a1a13bda638f19d5be3",
+    "selection_note": "Only matching result titles and URLs retained from the real MCP response. Full response remains private; this is an excerpt, not a replacement raw response.",
+    "selected_results": [
+      {
+        "title": "Python 对自由线程的实验性支持— Python 3.13.15 文档",
+        "url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-python.html"
+      },
+      {
+        "title": "Python 3.13 有什么新变化— Python 3.13.15 文档",
+        "url": "https://docs.python.org/zh-cn/3.13/whatsnew/3.13.html"
+      }
+    ]
+  },
+  {
+    "request": {
+      "started_at_utc": "2026-09-07T11:26:31.621001+00:00",
+      "method": "POST",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {
+        "User-Agent": "Python313-evidence-check/1.0",
+        "Content-Type": "application/json",
+        "Accept": "application/json, text/event-stream"
+      },
+      "body": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "web_search_exa",
+          "arguments": {
+            "query": "site:docs.python.org/zh-cn/3.13 自由线程的 C API 扩展支持 受限 稳定 ABI",
+            "numResults": 6
+          }
+        }
+      },
+      "authentication": "none; no cookies or credentials sent"
+    },
+    "response_meta": {
+      "started_at_utc": "2026-09-07T11:26:31.621001+00:00",
+      "finished_at_utc": "2026-09-07T11:26:33.716645+00:00",
+      "status": 200,
+      "requested_url": "https://mcp.exa.ai/mcp",
+      "final_url": "https://mcp.exa.ai/mcp",
+      "headers_allowlisted": {
+        "Date": "Mon, 07 Sep 2026 11:26:33 GMT",
+        "Content-Type": "text/event-stream",
+        "Server": "cloudflare"
+      },
+      "bytes": 18095,
+      "sha256": "093398b05011d1d196262a68c57476fd8065126e22c8d70ea4f54ff35d788047"
+    },
+    "response_sha256": "093398b05011d1d196262a68c57476fd8065126e22c8d70ea4f54ff35d788047",
+    "selection_note": "Only matching result titles and URLs retained from the real MCP response. Full response remains private; this is an excerpt, not a replacement raw response.",
+    "selected_results": [
+      {
+        "title": "自由线程的C API 扩展支持— Python 3.13.15 文档",
+        "url": "https://docs.python.org/zh-cn/3.13/howto/free-threading-extensions.html"
+      },
+      {
+        "title": "Python 3.13 有什么新变化— Python 3.13.15 文档",
+        "url": "https://docs.python.org/zh-cn/3.13/whatsnew/3.13.html"
+      }
+    ]
+  }
+]

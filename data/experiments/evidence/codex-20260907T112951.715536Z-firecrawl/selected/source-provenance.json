@@ -1,0 +1,74 @@
+[
+  {
+    "request": {
+      "method": "GET",
+      "url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "parameters": {},
+      "headers": {
+        "User-Agent": "Python-Upgrade-Research/1.0"
+      },
+      "requested_at_utc": "2026-09-07T11:31:22.500734+00:00",
+      "authentication": "none; no cookies or authorization headers sent"
+    },
+    "access": {
+      "requested_at_utc": "2026-09-07T11:31:22.500734+00:00",
+      "received_at_utc": "2026-09-07T11:31:23.466641+00:00",
+      "status": 200,
+      "final_url": "https://docs.python.org/3.13/howto/free-threading-python.html",
+      "content_type": "text/html",
+      "server_date": "Mon, 07 Sep 2026 11:31:23 GMT",
+      "response_file": "03-python-free-threading-response.html",
+      "byte_count": 27934,
+      "sha256": "a342d9c5f5927e57bcd52fe9cfcbeed0eed79ce57eea9000f9f46ee4f024cf56"
+    },
+    "raw_page_sha256": "a342d9c5f5927e57bcd52fe9cfcbeed0eed79ce57eea9000f9f46ee4f024cf56"
+  },
+  {
+    "request": {
+      "method": "GET",
+      "url": "https://docs.python.org/3.13/howto/free-threading-extensions.html",
+      "parameters": {},
+      "headers": {
+        "User-Agent": "Python-Upgrade-Research/1.0"
+      },
+      "requested_at_utc": "2026-09-07T11:32:05.132408+00:00",
+      "authentication": "none; no cookies or authorization headers sent"
+    },
+    "access": {
+      "requested_at_utc": "2026-09-07T11:32:05.132408+00:00",
+      "received_at_utc": "2026-09-07T11:32:06.108331+00:00",
+      "status": 200,
+      "final_url": "https://docs.python.org/3.13/howto/free-threading-extensions.html",
+      "content_type": "text/html",
+      "server_date": "Mon, 07 Sep 2026 11:32:05 GMT",
+      "response_file": "07-python-extensions-response.html",
+      "byte_count": 45912,
+      "sha256": "ea91124aa5eb8e3edcded791a51bee7e80b9292d7e5cc31b499320a85d1bf06e"
+    },
+    "raw_page_sha256": "ea91124aa5eb8e3edcded791a51bee7e80b9292d7e5cc31b499320a85d1bf06e"
+  },
+  {
+    "request": {
+      "method": "GET",
+      "url": "https://docs.python.org/3.13/using/cmdline.html",
+      "parameters": {},
+      "headers": {
+        "User-Agent": "Python-Upgrade-Research/1.0"
+      },
+      "requested_at_utc": "2026-09-07T11:32:05.135805+00:00",
+      "authentication": "none; no cookies or authorization headers sent"
+    },
+    "access": {
+      "requested_at_utc": "2026-09-07T11:32:05.135805+00:00",
+      "received_at_utc": "2026-09-07T11:32:06.353278+00:00",
+      "status": 200,
+      "final_url": "https://docs.python.org/3.13/using/cmdline.html",
+      "content_type": "text/html",
+      "server_date": "Mon, 07 Sep 2026 11:32:05 GMT",
+      "response_file": "08-python-cmdline-response.html",
+      "byte_count": 147851,
+      "sha256": "245c261aa57abe13be816253be0d40972111b7e9d0fa5941f6dd79b673f9e031"
+    },
+    "raw_page_sha256": "245c261aa57abe13be816253be0d40972111b7e9d0fa5941f6dd79b673f9e031"
+  }
+]

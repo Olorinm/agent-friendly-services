@@ -1,0 +1,64 @@
+{
+  "status": 200,
+  "reason": "OK",
+  "headers": {
+    "content-type": "application/json",
+    "neon-request-id": "38cbac06-a5e8-4f4a-8215-325b4fe0f4e4",
+    "content-length": "2035",
+    "date": "Mon, 07 Sep 2026 11:26:29 GMT"
+  },
+  "received_at": "2026-09-07T11:26:29.492766+00:00",
+  "body_file": "10-write-response-body.json",
+  "body_sha256": "79fc3ce8bf433dd8f4f8024fc0e4f9b6b5db09d760636b110325818df52d57d8",
+  "body_bytes": 2035,
+  "body_is_unmodified": true,
+  "transport": {
+    "connected_at": "2026-09-07T11:26:28.917876+00:00",
+    "remote_peer": [
+      "16.59.10.57",
+      443
+    ],
+    "local_socket": [
+      "192.168.2.78",
+      50626
+    ],
+    "tls_version": "TLSv1.3",
+    "cipher": [
+      "TLS_AES_256_GCM_SHA384",
+      "TLSv1.3",
+      256
+    ],
+    "certificate_sha256": "bf47f23402de732b120dbb2c26d7c2d8ee884f83cecf68709e10f61b27b4021b",
+    "certificate_subject": [
+      [
+        [
+          "commonName",
+          "*.c-4.us-east-2.aws.neon.tech"
+        ]
+      ]
+    ],
+    "certificate_issuer": [
+      [
+        [
+          "countryName",
+          "US"
+        ]
+      ],
+      [
+        [
+          "organizationName",
+          "Let's Encrypt"
+        ]
+      ],
+      [
+        [
+          "commonName",
+          "YR1"
+        ]
+      ]
+    ],
+    "certificate_not_after": "Dec  4 18:41:16 2026 GMT",
+    "certificate_hostname_verified": true,
+    "sni_hostname": "api.c-4.us-east-2.aws.neon.tech"
+  }
+}

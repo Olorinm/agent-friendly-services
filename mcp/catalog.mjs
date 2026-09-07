@@ -30,6 +30,7 @@ export function searchServices(data, filters) {
         harness: run.harness, model: run.model, reasoning_effort: run.reasoning_effort,
         started_at: run.started_at, ended_at: run.ended_at,
         usage: run.usage, elapsed_seconds: run.elapsed_seconds,
+        environment: run.environment, budget_seconds: run.budget_seconds,
         service_cost_usd: run.service_cost_usd,
         human_interventions: run.human_interventions,
         record: `data/experiments/evaluations/${run.run_id}.json`,

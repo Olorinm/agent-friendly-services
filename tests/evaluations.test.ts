@@ -60,3 +60,20 @@ test('public evaluation records and selected evidence omit local paths and Codex
     }
   }
 });
+
+
+test('MCP observations preserve setup conditions and budgets across categories', () => {
+  const records = loadEvaluations();
+  const providers = [...loadProviders(), ...loadCandidates()].map(p => p.data);
+  const data = { services: providers.map(p => catalogService(p, 'provider', records)) };
+  for (const service of searchServices(data, {})) {
+    for (const route of service.routes) {
+      for (const observation of route.task_runs) {
+        const original = records.find(r => r.run_id === observation.run_id)!;
+        assert.equal(original.route_id, route.id);
+        assert.deepEqual(observation.environment, original.environment);
+        assert.equal(observation.budget_seconds, original.budget_seconds);
+      }
+    }
+  }
+});

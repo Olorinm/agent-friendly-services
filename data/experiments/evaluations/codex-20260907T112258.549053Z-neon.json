@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260907T112258.549053Z-neon",
+  "service_id": "neon",
+  "route_id": "ephemeral-api",
+  "entry_url": "https://neon.new/",
+  "task": {
+    "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+    "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+    "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+    "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+    "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+    "id": "database-todos-001",
+    "version": "v1",
+    "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+    "file": "data/experiments/tasks/databases.md"
+  },
+  "prompt_sha256": "cecbd7e0c57d60edbf8a0e9c68ac9bc5fa46d6203131cd0b4f0d42abeb022776",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "5656266fce1230f78dab7be2e73e14d60d5b100bfe61ee155d61ddcedeb456be"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-07T11:22:58.558715+00:00",
+  "ended_at": "2026-09-07T11:30:34.899948+00:00",
+  "elapsed_seconds": 456.342,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "No service credentials provided."
+  },
+  "status": "completed",
+  "reason": "Independent remote re-read confirms the three synthetic todos and update; separate writer/reader processes and count response satisfy v1. No signup or payment; ephemeral database expires 2026-09-10T11:23:56.173Z. This establishes short-term persistence only.",
+  "usage": {
+    "input_tokens": 452623,
+    "cached_input_tokens": 402560,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12790,
+    "reasoning_output_tokens": 3571
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-07T11:33:33.355538+00:00",
+    "checks": [
+      {
+        "criterion": "指定服务创建独立远程数据库",
+        "passed": true,
+        "evidence": "02-create-database.json: POST neon.new/api/v1/database HTTP 200, UNCLAIMED; expires_at 2026-09-10T11:23:56.173Z."
+      },
+      {
+        "criterion": "新增三项并只更新 id=2",
+        "passed": true,
+        "evidence": "10-write-request.json and raw response: INSERT 3 original rows, UPDATE id=2 -> true, rowCount=1."
+      },
+      {
+        "criterion": "写进程退出后新进程读取",
+        "passed": true,
+        "evidence": "12-process-separation.json: writer 28718 exit=0 before reader 28719; matching SQL requests and independent TLS response records. Backend pool PID may be reused; client processes are separate."
+      },
+      {
+        "criterion": "标题、全部行、未完成项与汇总正确",
+        "passed": true,
+        "evidence": "11-read-response-body.json returns expected rows; unfinished only 1; total/completed=3/2. Outer reviewer-query.json independently confirms hosted rows after the run."
+      },
+      {
+        "criterion": "凭据不进入交付并说明到期",
+        "passed": true,
+        "evidence": "Selected requests omit authentication. Creation response replaces connection/claim credentials; answer states 72 hours and expiry."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/02-create-database.json",
+      "sha256": "0094a9f20e13904afc7ade9c38a6746ce3bdcd3ba27224598605c8b5ae973700",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+      "source_sha256": "b019c76191efd87429ed86a90def443179b63c65f3dec279d8cb1ee3c9a21575",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-request.json",
+      "sha256": "110b60c438aabb2970c97384f7357e2e4ee0e7ba66095fdf00ba0d1f538a2d91",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+      "source_sha256": "12a28b24e14b0d8044ffbdf8b77dbb30bdea5c615576bfbe28e73fd909963003",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-response-body.json",
+      "sha256": "79fc3ce8bf433dd8f4f8024fc0e4f9b6b5db09d760636b110325818df52d57d8",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/10-write-response.json",
+      "sha256": "858f4c3bdf0ab96a6f80a601254e313917094d4e0af3fda25b08a00bac0897de",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-request.json",
+      "sha256": "17152d34660d1f0eb802781aaa8eec7c93e26eaa62be7b7a48ef1c0509d045bc",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+      "source_sha256": "4995e3256e0c01a52e13587402aaf7635c706db2e487076069310b02b361bf75",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-response-body.json",
+      "sha256": "17b110cf52dbb692c7fd12c9930c00116eb94499386ff2c27de5e2c373105784",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/11-read-response.json",
+      "sha256": "f760df6a0a1d063fb00aa69da99ba25d7696b556140ae5066e603c1cae92b60b",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/workspace/evidence/12-process-separation.json",
+      "sha256": "5aea4f625b5c3b9a29a2284b3e8aab36ecbe4143f4165109f75e1f6631a86ada",
+      "note": "Observed provisioning, SQL or process evidence; secrets removed.",
+      "source_sha256": "76def5e58ca3269ddf80661d9731dc401e10789e2be83c5188e88b7e9655c0fb",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/reviewer-query.json",
+      "sha256": "e66f2285ce347299c826e1f5f7df22b11a61e430b776255c2b56e6be29c82cf6",
+      "note": "Independent reviewer read, outside measured execution."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260907T112258.549053Z-neon/answer.md",
+      "sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
+      "note": "Executor final answer, reviewed against service responses."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260907T112258.549053Z-neon",
+    "run_sha256": "87bcc549894dbf8c14ea1f2461e2fa645eb1bbbedb7b9b09c056d83083bb13e7",
+    "events_sha256": "ce7cfc6bce251cc8b77934c6466f2b652d1070472c84e9e2acde128681763e64",
+    "answer_sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
+    "review_sha256": "714ba5268b35536b6fca4b3d1baaff2650f151fc70b456aa544e9e7d2e401c27",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

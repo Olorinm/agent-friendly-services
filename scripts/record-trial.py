@@ -25,7 +25,7 @@ def number_or_unknown(value):
     return value is None or (type(value) in (int, float) and 0 <= value < float('inf'))
 
 
-def public_copy(raw, meta, run_dir, reviewer=''):
+def public_copy(raw, meta, run_dir, reviewer='', secrets=()):
     """Redact local paths/session identifiers without changing local originals."""
     replacements = {
         str(ROOT): '[REPO]', str(Path.home()): '[HOME]',
@@ -36,6 +36,7 @@ def public_copy(raw, meta, run_dir, reviewer=''):
     sessions = re.findall(r'\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b', reviewer, re.I)
     sessions += [meta[k] for k in ('thread_id', 'session_id') if isinstance(meta.get(k), str)]
     replacements.update({value: '[CODEX_SESSION]' for value in sessions if value})
+    replacements.update({value: '[SERVICE_SECRET]' for value in secrets if value})
     for value, replacement in sorted(replacements.items(), key=lambda item: -len(item[0])):
         # Evidence can embed paths in JSON strings or Markdown URL targets.
         for variant in (value, json.dumps(value, ensure_ascii=True)[1:-1],
@@ -49,6 +50,10 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
     if not run_dir.is_relative_to((ROOT / 'data/experiments/results').resolve()):
         raise ValueError('Run must be under data/experiments/results/')
     meta = json.loads((run_dir / 'run.json').read_text())
+    secret_file = run_dir / 'private-secrets.json'
+    secrets = json.loads(secret_file.read_text()) if secret_file.exists() else []
+    if not isinstance(secrets, list) or any(not isinstance(v, str) or not v for v in secrets):
+        raise ValueError('Private secrets must be a list of nonempty strings')
     for workspace in [run_dir / 'workspace', Path(meta['workspace'])]:
         if review_path.is_relative_to(workspace.resolve()):
             raise ValueError('Review must be written outside the measured Agent workspace')
@@ -113,18 +118,20 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         source = (run_dir / item['path']).resolve()
         if not source.is_relative_to(run_dir) or not source.is_file():
             raise ValueError('Evidence path must be a file inside the run directory')
+        if source == secret_file.resolve():
+            raise ValueError('Do not select the private secret store as evidence')
         raw = source.read_bytes()
-        if re.search(rb'eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+', raw):
+        public = public_copy(raw, meta, run_dir, review['reviewer'], secrets)
+        if re.search(rb'eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+', public):
             raise ValueError('Evidence contains a JWT-like value; review/redact before recording')
         # The reviewer checks content/credentials; strip host identifiers here too.
-        public = public_copy(raw, meta, run_dir, review['reviewer'])
         relative = source.relative_to(run_dir)
         dest = evidence_dir / relative
         info = {'path': str(dest.relative_to(ROOT)), 'sha256': hashlib.sha256(public).hexdigest(),
                 'note': item.get('note', '')}
         if public != raw:
             info.update(source_sha256=sha(source),
-                        redactions=['local paths or Codex session identifiers'])
+                        redactions=['local paths, Codex session identifiers or explicitly supplied service secrets'])
         files.append((public, dest, info))
     harness = meta.get('harness') or {'name': 'Codex CLI', 'version': meta['cli_version'],
                                     'mode': 'exec --json', 'launcher': 'scripts/codex-service-trial.py'}
@@ -135,7 +142,8 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         'started_at': meta['started_at'], 'ended_at': meta['ended_at'],
         'elapsed_seconds': meta['elapsed_seconds'], 'budget_seconds': meta['seconds_limit'],
         'environment': {'host': meta.get('host'), 'isolation': meta['isolation'],
-                        'service_credentials': 'none', 'web_search': 'live'},
+                        'service_credentials': meta.get('service_credentials', 'none'), 'web_search': 'live',
+                        'preparation_note': meta.get('preparation_note', 'No service credentials provided.')},
         'status': status, 'reason': review['reason'], 'usage': meta.get('usage'),
         'service_cost_usd': review['service_cost_usd'], 'human_interventions': review['human_interventions'],
         'review': {'method': 'external_agent', 'reviewer': review['reviewer'],
@@ -146,11 +154,11 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                        'answer_sha256': sha(run_dir / 'answer.md'), 'review_sha256': sha(review_path)},
     }
     serialized = json.dumps(result, ensure_ascii=False, indent=2).encode()
-    sanitized = public_copy(serialized, meta, run_dir, review['reviewer'])
+    sanitized = public_copy(serialized, meta, run_dir, review['reviewer'], secrets)
     result = json.loads(sanitized)
     if sanitized != serialized or any('redactions' in info for _, _, info in files):
         result['provenance']['privacy_note'] = (
-            'Public copies redact local paths and Codex session identifiers. '
+            'Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. '
             'Evidence sha256 hashes the public copy; source_sha256 and provenance hashes '
             'refer to unchanged local originals. Task results and usage are unchanged.')
     for public, dest, _ in files:

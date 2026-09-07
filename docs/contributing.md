@@ -24,8 +24,9 @@ or `derived.unknown_checks` in `generated/providers.json`.
 
 ## Research user needs
 
-Use `data/research/<category>/<subcategory>.yaml`, extending an existing record
-or creating an empty one with `npm run research:init -- <category/subcategory>`.
+Keep essential sources, task adaptations and coverage limits beside the task table.
+For larger research rounds, optionally use `data/research/<category>/<subcategory>.yaml`,
+extending a record or creating one with `npm run research:init -- <category/subcategory>`.
 The [flight findings](./flights.zh-CN.md) show the current pilot.
 
 1. Research real goals and constraints through public original discussions,
@@ -48,7 +49,7 @@ The [flight findings](./flights.zh-CN.md) show the current pilot.
 
 Research scenarios are not executable tests. A runnable task adds concrete
 inputs, environment, budget, ending conditions and independent verification,
-and links back to the research scenario. Publish measured outcomes with their
+and retains the source of the user need (inline or in a research scenario). Publish measured outcomes with their
 conditions and evidence; keep setup effort, service costs, Agent token usage and
 human involvement visible. Never fill an unmeasured cost with zero.
 

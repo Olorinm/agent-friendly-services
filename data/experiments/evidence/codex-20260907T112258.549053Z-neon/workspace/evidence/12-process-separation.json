@@ -1,0 +1,61 @@
+{
+  "orchestrator_pid": 28717,
+  "events": [
+    {
+      "event": "orchestrator_started",
+      "at": "2026-09-07T11:26:27.669119+00:00"
+    },
+    {
+      "event": "writer_spawned",
+      "at": "2026-09-07T11:26:27.684479+00:00",
+      "pid": 28718,
+      "command": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-B",
+        "[WORKSPACE]/db_worker.py",
+        "write"
+      ]
+    },
+    {
+      "event": "writer_wait_completed",
+      "at": "2026-09-07T11:26:29.544344+00:00",
+      "pid": 28718,
+      "returncode": 0,
+      "stdout": "{\"mode\": \"write\", \"pid\": 28718, \"verified\": true}\n",
+      "stderr": ""
+    },
+    {
+      "event": "writer_exit_checked",
+      "at": "2026-09-07T11:26:29.545308+00:00",
+      "pid": 28718,
+      "process_absent": true
+    },
+    {
+      "event": "reader_spawned_after_writer_exit",
+      "at": "2026-09-07T11:26:29.551134+00:00",
+      "pid": 28719,
+      "command": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "-B",
+        "[WORKSPACE]/db_worker.py",
+        "read",
+        "28718"
+      ]
+    },
+    {
+      "event": "reader_wait_completed",
+      "at": "2026-09-07T11:26:30.842333+00:00",
+      "pid": 28719,
+      "returncode": 0,
+      "stdout": "{\"mode\": \"read\", \"pid\": 28719, \"verified\": true}\n",
+      "stderr": ""
+    },
+    {
+      "event": "verification_completed",
+      "at": "2026-09-07T11:26:30.851698+00:00",
+      "separate_processes": true,
+      "writer_pid": 28718,
+      "reader_pid": 28719
+    }
+  ]
+}

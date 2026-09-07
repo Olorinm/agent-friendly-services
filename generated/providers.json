@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-09-07T11:07:30.198Z",
+  "generated_at": "2026-09-07T11:45:19.197Z",
   "counts": {
     "providers": 76,
     "categories": 13,
@@ -48,12 +48,50 @@
     {
       "id": "databases",
       "name": "Databases",
-      "description": "Databases, vector stores, data platforms."
+      "description": "Databases, vector stores, data platforms.",
+      "subcategories": [
+        {
+          "id": "hosted-relational",
+          "name": "Hosted Relational Databases",
+          "description": "Remote SQL storage for personal applications, including temporary development databases.",
+          "capabilities": [
+            {
+              "id": "database.provision",
+              "description": "Create an isolated hosted database."
+            },
+            {
+              "id": "database.persist",
+              "description": "Write, update and read data across fresh connections."
+            },
+            {
+              "id": "database.restore",
+              "description": "Export data and restore it into a separate database or namespace."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "web-search-data",
       "name": "Web Search / Data",
-      "description": "Search APIs, crawling and scraping, data providers."
+      "description": "Search APIs, crawling and scraping, data providers.",
+      "subcategories": [
+        {
+          "id": "web-search",
+          "name": "Web Search",
+          "description": "Discover web sources and retrieve evidence for user questions.",
+          "capabilities": [
+            {
+              "id": "web.search",
+              "description": "Return relevant web sources for a question."
+            },
+            {
+              "id": "web.fetch",
+              "description": "Retrieve source content supporting an answer."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "payments-billing",

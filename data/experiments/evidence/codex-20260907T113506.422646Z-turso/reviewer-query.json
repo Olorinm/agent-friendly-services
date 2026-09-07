@@ -1,0 +1,105 @@
+{
+  "note": "Outer reviewer independently read after measured execution; excluded from executor time/tokens.",
+  "at": "2026-09-07T11:44:01.110963+00:00",
+  "method": "POST",
+  "url": "https://[SERVICE_SECRET]/v2/pipeline",
+  "body": {
+    "requests": [
+      {
+        "type": "execute",
+        "stmt": {
+          "sql": "SELECT id,title,done FROM todos ORDER BY id",
+          "want_rows": true
+        }
+      },
+      {
+        "type": "close"
+      }
+    ]
+  },
+  "status": 200,
+  "response": {
+    "baton": null,
+    "base_url": null,
+    "results": [
+      {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "id",
+                "decltype": "INTEGER"
+              },
+              {
+                "name": "title",
+                "decltype": "TEXT"
+              },
+              {
+                "name": "done",
+                "decltype": "INTEGER"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "text",
+                  "value": "Buy milk"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "2"
+                },
+                {
+                  "type": "text",
+                  "value": "Read book"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "3"
+                },
+                {
+                  "type": "text",
+                  "value": "Walk dog"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                }
+              ]
+            ],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 3,
+            "rows_written": 0,
+            "query_duration_ms": 114.562
+          }
+        }
+      },
+      {
+        "type": "ok",
+        "response": {
+          "type": "close"
+        }
+      }
+    ]
+  }
+}

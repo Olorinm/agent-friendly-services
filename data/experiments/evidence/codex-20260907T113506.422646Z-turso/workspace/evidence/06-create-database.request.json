@@ -1,0 +1,16 @@
+{
+  "method": "POST",
+  "url": "https://api.turso.tech/v1/organizations/[SERVICE_SECRET]/databases",
+  "query_parameters": {},
+  "body": {
+    "name": "[SERVICE_SECRET]",
+    "group": "todo-verification",
+    "size_limit": "1mb"
+  },
+  "pid": 45706,
+  "ppid": 42070,
+  "started_at_utc": "2026-09-07T11:39:14.165822+00:00",
+  "authentication": "omitted",
+  "new_https_connection": true,
+  "tls_verification": true
+}

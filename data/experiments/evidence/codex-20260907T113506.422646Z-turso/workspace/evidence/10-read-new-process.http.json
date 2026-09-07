@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "content-length": "1438",
+    "date": "Mon, 07 Sep 2026 11:39:26 GMT"
+  },
+  "finished_at_utc": "2026-09-07T11:39:26.808692+00:00",
+  "pid": 45799,
+  "peer_ip": "100.25.145.202",
+  "peer_port": 443,
+  "tls_version": "TLSv1.2",
+  "certificate_sha256": "daf3ef974af881d0bb1ba00398d9b029953a92d0afe558231b1d5858e3bea571",
+  "response_body_saved_verbatim": true,
+  "response_sha256": "a9096b81708bd38f7318331d54cd7e7c85291a3692223e99bc5ea1e58dd6dc4f",
+  "redaction": null
+}

@@ -1,0 +1,59 @@
+{
+  "note": "Independent outer Agent read after measured run; excluded from executor usage and elapsed time.",
+  "at": "2026-09-07T11:33:33.234956+00:00",
+  "method": "POST",
+  "url": "https://api.c-4.us-east-2.aws.neon.tech/sql",
+  "sql": "SELECT id,title,done FROM public.todos ORDER BY id",
+  "status": 200,
+  "response": {
+    "fields": [
+      {
+        "name": "id",
+        "dataTypeID": 23,
+        "tableID": 16512,
+        "columnID": 1,
+        "dataTypeSize": 4,
+        "dataTypeModifier": -1,
+        "format": "text"
+      },
+      {
+        "name": "title",
+        "dataTypeID": 25,
+        "tableID": 16512,
+        "columnID": 2,
+        "dataTypeSize": -1,
+        "dataTypeModifier": -1,
+        "format": "text"
+      },
+      {
+        "name": "done",
+        "dataTypeID": 16,
+        "tableID": 16512,
+        "columnID": 3,
+        "dataTypeSize": 1,
+        "dataTypeModifier": -1,
+        "format": "text"
+      }
+    ],
+    "rows": [
+      [
+        "1",
+        "Buy milk",
+        "f"
+      ],
+      [
+        "2",
+        "Read book",
+        "t"
+      ],
+      [
+        "3",
+        "Walk dog",
+        "t"
+      ]
+    ],
+    "command": "SELECT",
+    "rowCount": 3,
+    "rowAsArray": true
+  }
+}

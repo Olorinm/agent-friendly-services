@@ -83,3 +83,53 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed for automated/agent account usage.
+
+catalog:
+  version: 1
+  classifications:
+    - databases/hosted-relational
+  sources:
+    docs:
+      url: https://supabase.com/docs/guides/api
+      checked_on: '2026-09-07'
+      kind: official_docs
+    pricing:
+      url: https://supabase.com/pricing
+      checked_on: '2026-09-07'
+      kind: official_site
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://supabase.com/docs/guides/api
+      evidence:
+        - docs
+        - pricing
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      capabilities:
+        database.persist:
+          value: documented
+          evidence:
+            - docs
+      notes: >-
+        Existing project required; Free plan: two active projects, 500 MB database per project; pauses after
+        one week inactivity. Management provisioning is separate from the data REST API.
+      costs:
+        - kind: free_allowance
+          amount: 500
+          unit: MB
+          per: project
+          scope: Free plan database size; up to two active projects, pauses after one inactive week.
+          evidence:
+            - pricing
