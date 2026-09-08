@@ -1,7 +1,9 @@
 import test from 'node:test';
+import fs from 'node:fs';
+import { ROOT } from '../scripts/lib.ts';
 import assert from 'node:assert/strict';
 import { estimateModelCost, type PriceSnapshot } from '../scripts/model-costs.ts';
-import { buildBoards, summarize } from '../scripts/leaderboard.ts';
+import { buildBoards, summarize, renderBoardRows, renderBoardDetails } from '../scripts/leaderboard.ts';
 import type { Evaluation } from '../scripts/evaluations.ts';
 
 const prices = (extra = {}): PriceSnapshot => ({ source: 'https://example.com/prices', revision: 'test', fetched_at: '2026-09-08', sha256: 'test',
@@ -96,4 +98,36 @@ test('per-request billing applies context tiers to each call, with final totals 
   const partial = measured([a, b]);
   partial.request_usage!.status = 'incomplete';
   assert.equal(estimateModelCost(partial, table).amount_usd, null);
+});
+
+
+test('one display can contain separate comparison groups without combining their scores', () => {
+  const a = run({ service_id: 'a', status: 'not_completed' });
+  const b = run({ service_id: 'b', budget_seconds: 300 });
+  const boards = buildBoards([a, b]);
+  const original = JSON.stringify(boards);
+  const names = new Map([['a', 'Alpha'], ['b', 'Beta']]);
+  const rows = renderBoardRows(boards, names);
+  assert.equal(rows.split('\n').length, 2);
+  assert.match(rows, /Alpha.*0%/);
+  assert.match(rows, /Beta.*100%/);
+  assert(rows.indexOf('Alpha') < rows.indexOf('Beta')); // Alphabetical, not a cross-condition ranking.
+  assert(!rows.includes('Tasks') && !rows.includes('<details>'));
+  assert(!renderBoardDetails(boards, names, true).includes('<details>'));
+  assert.equal(JSON.stringify(boards), original);
+});
+
+
+test('both homepages show one flights table with measured and untested services, and one disclosure', () => {
+  for (const file of ['README.md', 'README.zh-CN.md']) {
+    const page = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
+    const anchors = [...page.matchAll(/<a id="([^"]+)"/g)].map(m => m[1]);
+    assert.equal(new Set(anchors).size, anchors.length);
+    const section = page.split('<a id="services-travel-flights"></a>')[1].split('\n## ')[0];
+    const visible = section.replace(/<details>[\s\S]*?<\/details>/g, '');
+    assert.equal((visible.match(/\| --- \|/g) ?? []).length, 1);
+    assert.equal((section.match(/<details>/g) ?? []).length, 1);
+    for (const service of ['Kiwi.com', 'Ignav Flights', 'SerpApi', 'Amadeus']) assert(visible.includes(service));
+    assert(!visible.includes('flights-search-001'));
+  }
 });

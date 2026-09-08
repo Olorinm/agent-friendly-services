@@ -9,7 +9,7 @@ import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates, daysSi
 import { catalogService } from './catalog.ts';
 import { generateResearch } from './research.ts';
 import { loadPrices, estimateModelCost } from './model-costs.ts';
-import { buildBoards, renderBoards, boardHeader } from './leaderboard.ts';
+import { buildBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
 import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
 
 // Isolated preview/CI generation, without changing checked-in build outputs.
@@ -514,16 +514,16 @@ const directoryRows = (zh: boolean) => [...new Set(services.flatMap(s => s.catal
   return `| ${label} | [${count}](./generated/catalog.md#${anchor}) | ${task ? `[${zh ? '任务' : 'Tasks'}](./${task.relative})` : '—'} | ${runs.length ? `[${runs.length}](./generated/evaluations.md#${anchor})` : '—'} | ${task?.serviceNames || '—'} |`;
 }).join('\n');
 
-// Expand every collected service once under its primary category; source records remain shared.
+// Show services in their recorded categories; cross-category services share one source record.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
-const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id));
+const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))));
 const boards = buildBoards(evaluations);
 function serviceList(zh: boolean): string {
   const navigation = listedCategories.map(c => `[${c.name}](#services-${c.id})`).join(' · ');
   const sections = listedCategories.map(c => {
     const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
-    const measured = new Set(categoryBoards.flatMap(b => b.rows.map(r => r.service_id)));
-    const rows = listedServices.filter(p => p.category === c.id).map(p => {
+
+    const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
       const routes = p.catalog?.routes ?? [];
       const links: [string, string][] = routes.length
         ? routes.map(r => [routes.filter(other => other.interface === r.interface).length > 1
@@ -551,13 +551,38 @@ function serviceList(zh: boolean): string {
       const source = providers.some(provider => provider.id === p.id)
         ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
       const summary = cell(p.summary.replace(/\s+/g, ' ').trim());
-      return { id: p.id, detail: `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`,
+      return { id: p.id, classification: p.catalog?.classifications.find(id => id.startsWith(`${c.id}/`)), detail: `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`,
         unmeasured: `| [${cell(p.name)}](${source}) | ${runs.length ? `[${zh ? '其他领域实测' : 'Other task results'}](./generated/evaluations.md)` : status} | — | — | — |` };
     });
     const header = zh ? '| 服务 | 用途 | 接入方式 | 实测状态 |' : '| Service | Purpose | Access | Task results |';
-    const pending = rows.filter(r => !measured.has(r.id));
     const names = new Map(listedServices.map(p => [p.id, p.name]));
-    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${renderBoards(categoryBoards, names, zh)}${categoryBoards.length && pending.length ? `\n\n**${zh ? '其他候选' : 'Other candidates'}**\n\n` : ''}${pending.length ? `${boardHeader(zh)}\n${pending.map(r => r.unmeasured).join('\n')}` : ''}\n\n<details>\n<summary>${zh ? '服务用途与接入方式' : 'Service descriptions and access routes'}</summary>\n\n${header}\n| --- | --- | --- | --- |\n${rows.map(r => r.detail).join('\n')}\n\n</details>`;
+    const subcategories = (c.subcategories ?? []).filter(sub =>
+      rows.some(r => r.classification === `${c.id}/${sub.id}`)
+      || categoryBoards.some(b => taskPages.find(t => t.relative === b.task_file)?.ids === `${c.id}/${sub.id}`));
+    const groups = subcategories.map(sub => {
+      const id = `${c.id}/${sub.id}`;
+      const task = taskPages.find(t => t.ids === id);
+      return { id, name: zh ? (task?.classification.split(' / ').at(-1) ?? sub.name) : sub.name,
+        rows: rows.filter(r => r.classification === id),
+        boards: categoryBoards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids === id) };
+    });
+    const remaining = rows.filter(r => !groups.some(g => g.rows.includes(r)));
+    if (remaining.length || !groups.length) groups.push({ id: `${c.id}/other`, name: zh ? '其他服务' : 'Other services', rows: remaining,
+      boards: categoryBoards.filter(b => !groups.some(g => g.boards.includes(b))) });
+    const content = groups.map(group => {
+      const measured = new Set(group.boards.flatMap(b => b.rows.map(r => r.service_id)));
+      const pending = group.rows.filter(r => !measured.has(r.id));
+      const measuredRows = renderBoardRows(group.boards, names);
+      const table = `${boardHeader(zh)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`;
+      const note = group.boards.length > 1 ? (zh
+        ? '现有试跑的任务或条件尚未统一，暂不排名。'
+        : 'Existing trials use different or incompletely recorded conditions; these results are not ranked.') : '';
+      const details = [renderBoardDetails(group.boards, names, zh),
+        `${header}\n| --- | --- | --- | --- |\n${group.rows.map(r => r.detail).join('\n')}`].filter(Boolean).join('\n\n');
+      const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
+      return `${heading}${table}${note ? `\n\n${note}` : ''}\n\n<details>\n<summary>${zh ? '任务、配置、样本与接入方式' : 'Tasks, configuration, samples and access'}</summary>\n\n${details}\n\n</details>`;
+    }).join('\n\n');
+    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${content}`;
   });
   return `${navigation}\n\n${sections.join('\n\n')}`;
 }
@@ -602,7 +627,7 @@ curl -s ${RAW_JSON}
 
 ## All services (${listedServices.length})
 
-Usage and costs are per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for setup and history.
+Usage and costs are means per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for setup and history.
 
 ${serviceList(false)}
 

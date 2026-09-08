@@ -76,7 +76,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Z.ai (GLM)](./generated/providers.md#zai) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -119,7 +119,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Zapier](./generated/providers.md#zapier) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -143,7 +143,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Steel](./generated/providers.md#steel) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -166,7 +166,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Postman](./generated/providers.md#postman) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -191,7 +191,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Vercel](./generated/providers.md#vercel) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -206,72 +206,77 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 <a id="services-databases"></a>
 
-### Databases (12)
+### Databases (13)
 
-**database-todos-001 v1**
+<a id="services-databases-hosted-relational"></a>
+
+#### 托管关系型数据库
 
 | 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
 | --- | ---: | ---: | ---: | ---: |
-| [Turso / platform-api](./generated/evaluations.md#comparison-1420586eae17) | 100% | 767.6k | — | $0 |
+| [Neon](./generated/evaluations.md#comparison-fdecec09a4b6) | 100% | 465.4k | — | $0 |
+| [Turso](./generated/evaluations.md#comparison-1420586eae17) | 100% | 767.6k | — | $0 |
+| [Aiven](./data/candidates/aiven.yaml) | 待实测 | — | — | — |
+| [Cloudflare](./generated/providers.md#cloudflare) | 待实测 | — | — | — |
+| [PlanetScale](./data/candidates/planetscale.yaml) | 待实测 | — | — | — |
+| [Supabase](./generated/providers.md#supabase) | 待实测 | — | — | — |
+
+现有试跑的任务或条件尚未统一，暂不排名。
 
 <details>
-<summary>任务、配置与样本</summary>
+<summary>任务、配置、样本与接入方式</summary>
+
+**[database-todos-001 v1](./generated/evaluations.md#comparison-1420586eae17)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 预供凭据
 
 - 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
 
-- Turso: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json)
+- Turso / platform-api: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json)
 
-</details>
-
-**database-todos-001 v1**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Neon / ephemeral-api](./generated/evaluations.md#comparison-fdecec09a4b6) | 100% | 465.4k | — | $0 |
-
-<details>
-<summary>任务、配置与样本</summary>
+**[database-todos-001 v1](./generated/evaluations.md#comparison-fdecec09a4b6)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 
 - 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
 
-- Neon: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json)
-
-</details>
-
-**其他候选**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Aiven](./data/candidates/aiven.yaml) | 待实测 | — | — | — |
-| [Chroma](./generated/providers.md#chroma) | 待实测 | — | — | — |
-| [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | 待实测 | — | — | — |
-| [Pinecone](./generated/providers.md#pinecone) | 待实测 | — | — | — |
-| [PlanetScale](./data/candidates/planetscale.yaml) | 待实测 | — | — | — |
-| [Qdrant](./generated/providers.md#qdrant) | 待实测 | — | — | — |
-| [Redis (Redis Cloud)](./generated/providers.md#redis) | 待实测 | — | — | — |
-| [Supabase](./generated/providers.md#supabase) | 待实测 | — | — | — |
-| [Upstash](./generated/providers.md#upstash) | 待实测 | — | — | — |
-| [Weaviate](./generated/providers.md#weaviate) | 待实测 | — | — | — |
-
-<details>
-<summary>服务用途与接入方式</summary>
+- Neon / ephemeral-api: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json)
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
 | [Aiven](https://aiven.io/) · [资料](./data/candidates/aiven.yaml) | Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. | [CLI](https://aiven.io/docs/tools/cli) | 待实测 |
-| [Chroma](https://www.trychroma.com) · [资料](./generated/providers.md#chroma) | Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt. | [Docs](https://docs.trychroma.com)<br>[API](https://docs.trychroma.com/docs/overview/introduction)<br>[MCP](https://github.com/chroma-core/chroma-mcp)<br>[CLI](https://docs.trychroma.com/docs/cli/install) | 待实测 |
-| [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database) · [资料](./generated/providers.md#mongodb-atlas) | Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server. | [Docs](https://www.mongodb.com/docs/atlas/)<br>[API](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/)<br>[MCP](https://github.com/mongodb-js/mongodb-mcp-server)<br>[CLI](https://www.mongodb.com/docs/atlas/cli/) | 待实测 |
+| [Cloudflare](https://www.cloudflare.com) · [资料](./generated/providers.md#cloudflare) | Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers. | [CLI](https://developers.cloudflare.com/d1/get-started/) | 待实测 |
 | [Neon](https://neon.com) · [资料](./generated/providers.md#neon) | Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs. | [API](https://neon.new/) | [1 完成](./generated/evaluations.md) |
-| [Pinecone](https://www.pinecone.io) · [资料](./generated/providers.md#pinecone) | Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. | [Docs](https://docs.pinecone.io)<br>[API](https://docs.pinecone.io/reference/api/introduction)<br>[MCP](https://docs.pinecone.io/guides/operations/mcp-server)<br>[CLI](https://github.com/pinecone-io/cli) | 待实测 |
 | [PlanetScale](https://planetscale.com/) · [资料](./data/candidates/planetscale.yaml) | PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task. | [CLI](https://planetscale.com/docs/cli) | 待实测 |
-| [Qdrant](https://qdrant.tech) · [资料](./generated/providers.md#qdrant) | Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. | [Docs](https://qdrant.tech/documentation)<br>[API](https://api.qdrant.tech)<br>[MCP](https://github.com/qdrant/mcp-server-qdrant) | 待实测 |
-| [Redis (Redis Cloud)](https://redis.io) · [资料](./generated/providers.md#redis) | In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt. | [Docs](https://redis.io/docs/latest)<br>[API](https://redis.io/docs/latest/operate/rc/api/)<br>[MCP](https://github.com/redis/mcp-redis)<br>[CLI](https://redis.io/docs/latest/develop/tools/cli/) | 待实测 |
 | [Supabase](https://supabase.com) · [资料](./generated/providers.md#supabase) | Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs. | [API](https://supabase.com/docs/guides/api) | 待实测 |
 | [Turso](https://turso.tech/) · [资料](./data/candidates/turso.yaml) | Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. | [CLI](https://docs.turso.tech/cli/introduction)<br>[API](https://docs.turso.tech/api-reference/introduction) | [1 完成](./generated/evaluations.md) |
+
+</details>
+
+<a id="services-databases-other"></a>
+
+#### 其他服务
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Chroma](./generated/providers.md#chroma) | 待实测 | — | — | — |
+| [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | 待实测 | — | — | — |
+| [Pinecone](./generated/providers.md#pinecone) | 待实测 | — | — | — |
+| [Qdrant](./generated/providers.md#qdrant) | 待实测 | — | — | — |
+| [Redis (Redis Cloud)](./generated/providers.md#redis) | 待实测 | — | — | — |
+| [Upstash](./generated/providers.md#upstash) | 待实测 | — | — | — |
+| [Weaviate](./generated/providers.md#weaviate) | 待实测 | — | — | — |
+
+<details>
+<summary>任务、配置、样本与接入方式</summary>
+
+| 服务 | 用途 | 接入方式 | 实测状态 |
+| --- | --- | --- | --- |
+| [Chroma](https://www.trychroma.com) · [资料](./generated/providers.md#chroma) | Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt. | [Docs](https://docs.trychroma.com)<br>[API](https://docs.trychroma.com/docs/overview/introduction)<br>[MCP](https://github.com/chroma-core/chroma-mcp)<br>[CLI](https://docs.trychroma.com/docs/cli/install) | 待实测 |
+| [MongoDB Atlas](https://www.mongodb.com/products/platform/atlas-database) · [资料](./generated/providers.md#mongodb-atlas) | Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server. | [Docs](https://www.mongodb.com/docs/atlas/)<br>[API](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/)<br>[MCP](https://github.com/mongodb-js/mongodb-mcp-server)<br>[CLI](https://www.mongodb.com/docs/atlas/cli/) | 待实测 |
+| [Pinecone](https://www.pinecone.io) · [资料](./generated/providers.md#pinecone) | Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys. | [Docs](https://docs.pinecone.io)<br>[API](https://docs.pinecone.io/reference/api/introduction)<br>[MCP](https://docs.pinecone.io/guides/operations/mcp-server)<br>[CLI](https://github.com/pinecone-io/cli) | 待实测 |
+| [Qdrant](https://qdrant.tech) · [资料](./generated/providers.md#qdrant) | Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier. | [Docs](https://qdrant.tech/documentation)<br>[API](https://api.qdrant.tech)<br>[MCP](https://github.com/qdrant/mcp-server-qdrant) | 待实测 |
+| [Redis (Redis Cloud)](https://redis.io) · [资料](./generated/providers.md#redis) | In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt. | [Docs](https://redis.io/docs/latest)<br>[API](https://redis.io/docs/latest/operate/rc/api/)<br>[MCP](https://github.com/redis/mcp-redis)<br>[CLI](https://redis.io/docs/latest/develop/tools/cli/) | 待实测 |
 | [Upstash](https://upstash.com) · [资料](./generated/providers.md#upstash) | Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. | [Docs](https://upstash.com/docs)<br>[API](https://upstash.com/docs/devops/developer-api/introduction)<br>[MCP](https://github.com/upstash/mcp-server)<br>[CLI](https://github.com/upstash/cli) | 待实测 |
 | [Weaviate](https://weaviate.io) · [资料](./generated/providers.md#weaviate) | Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. | [Docs](https://docs.weaviate.io)<br>[API](https://docs.weaviate.io/weaviate/api/rest)<br>[MCP](https://github.com/weaviate/mcp-server-weaviate)<br>[CLI](https://github.com/weaviate/weaviate-cli) | 待实测 |
 
@@ -281,84 +286,79 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 
 ### Web Search / Data (10)
 
-**web-search-001 v1**
+<a id="services-web-search-data-web-search"></a>
+
+#### 网页搜索
 
 | 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
 | --- | ---: | ---: | ---: | ---: |
+| [Exa / public-mcp](./generated/evaluations.md#comparison-87ab787b88b3) | 100% | 931.5k | — | $0 |
 | [Exa / search-api](./generated/evaluations.md#comparison-9dbe771526ac) | 0% | — | — | $0 |
+| [Firecrawl](./generated/evaluations.md#comparison-b5f21fc39ab4) | 100% | 346.8k | — | $0 |
+| [Brave Search API](./generated/providers.md#brave-search) | 待实测 | — | — | — |
+| [SerpApi](./generated/providers.md#serpapi) | 待实测 | — | — | — |
+| [Serper](./data/candidates/serper.yaml) | 待实测 | — | — | — |
+| [Tavily](./generated/providers.md#tavily) | 待实测 | — | — | — |
+
+现有试跑的任务或条件尚未统一，暂不排名。
 
 <details>
-<summary>任务、配置与样本</summary>
+<summary>任务、配置、样本与接入方式</summary>
+
+**[web-search-001 v1](./generated/evaluations.md#comparison-9dbe771526ac)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 预供凭据
 
 - 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
 
-- Exa: 完成 / 失败 / 环境无效 = 0 / 1 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json)
+- Exa / search-api: 完成 / 失败 / 环境无效 = 0 / 1 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json)
 
-</details>
-
-**web-search-001 v1**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Firecrawl / public-search-api](./generated/evaluations.md#comparison-b5f21fc39ab4) | 100% | 346.8k | — | $0 |
-
-<details>
-<summary>任务、配置与样本</summary>
+**[web-search-001 v1](./generated/evaluations.md#comparison-b5f21fc39ab4)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 
 - 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
 
-- Firecrawl: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json)
+- Firecrawl / public-search-api: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json)
 
-</details>
-
-**web-search-001 v1**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Exa / public-mcp](./generated/evaluations.md#comparison-87ab787b88b3) | 100% | 931.5k | — | $0 |
-
-<details>
-<summary>任务、配置与样本</summary>
+**[web-search-001 v1](./generated/evaluations.md#comparison-87ab787b88b3)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 
 - 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
 
-- Exa: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json)
+- Exa / public-mcp: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json)
+
+| 服务 | 用途 | 接入方式 | 实测状态 |
+| --- | --- | --- | --- |
+| [Brave Search API](https://brave.com/search/api/) · [资料](./generated/providers.md#brave-search) | Independent web search index with a developer API, self-serve registration, and a free plan. | [API](https://brave.com/search/api/) | 待实测 |
+| [Exa](https://exa.ai) · [资料](./generated/providers.md#exa) | Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server. | [MCP](https://mcp.exa.ai/mcp)<br>[API](https://exa.ai/docs/reference/search) | [1 完成 / 1 未完成](./generated/evaluations.md) |
+| [Firecrawl](https://www.firecrawl.dev) · [资料](./generated/providers.md#firecrawl) | Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server. | [API: account-search-api](https://docs.firecrawl.dev/features/search) | [1 完成](./generated/evaluations.md) |
+| [SerpApi](https://serpapi.com) · [资料](./generated/providers.md#serpapi) | Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. | [API: google-flights-api](https://serpapi.com/google-flights-api)<br>[MCP](https://github.com/serpapi/serpapi-mcp)<br>[API: web-search-api](https://serpapi.com/search-api) | 待实测 |
+| [Serper](https://serper.dev/) · [资料](./data/candidates/serper.yaml) | Google results API with signup trial queries; actual account flow and authentication remain untested. | [API](https://serper.dev/) | 待实测 |
+| [Tavily](https://www.tavily.com) · [资料](./generated/providers.md#tavily) | Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. | [API](https://docs.tavily.com/documentation/quickstart) | 待实测 |
 
 </details>
 
-**其他候选**
+<a id="services-web-search-data-other"></a>
+
+#### 其他服务
 
 | 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
 | --- | ---: | ---: | ---: | ---: |
 | [Apify](./generated/providers.md#apify) | 待实测 | — | — | — |
-| [Brave Search API](./generated/providers.md#brave-search) | 待实测 | — | — | — |
 | [Jina AI](./generated/providers.md#jina) | 待实测 | — | — | — |
 | [Perplexity API](./generated/providers.md#perplexity) | 待实测 | — | — | — |
-| [SerpApi](./generated/providers.md#serpapi) | 待实测 | — | — | — |
-| [Serper](./data/candidates/serper.yaml) | 待实测 | — | — | — |
-| [Tavily](./generated/providers.md#tavily) | 待实测 | — | — | — |
 | [Xquik](./data/candidates/xquik.yaml) | [历史首次调用检查](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
 | [Apify](https://apify.com) · [资料](./generated/providers.md#apify) | Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server. | [Docs](https://docs.apify.com)<br>[API](https://docs.apify.com/api/v2)<br>[MCP](https://docs.apify.com/platform/integrations/mcp)<br>[CLI](https://docs.apify.com/cli) | 待实测 |
-| [Brave Search API](https://brave.com/search/api/) · [资料](./generated/providers.md#brave-search) | Independent web search index with a developer API, self-serve registration, and a free plan. | [API](https://brave.com/search/api/) | 待实测 |
-| [Exa](https://exa.ai) · [资料](./generated/providers.md#exa) | Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server. | [MCP](https://mcp.exa.ai/mcp)<br>[API](https://exa.ai/docs/reference/search) | [1 完成 / 1 未完成](./generated/evaluations.md) |
-| [Firecrawl](https://www.firecrawl.dev) · [资料](./generated/providers.md#firecrawl) | Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server. | [API: account-search-api](https://docs.firecrawl.dev/features/search) | [1 完成](./generated/evaluations.md) |
 | [Jina AI](https://jina.ai) · [资料](./generated/providers.md#jina) | Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path. | [API](https://docs.jina.ai)<br>[MCP](https://github.com/jina-ai/MCP) | 待实测 |
 | [Perplexity API](https://www.perplexity.ai) · [资料](./generated/providers.md#perplexity) | Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers. | [Docs](https://docs.perplexity.ai)<br>[MCP](https://github.com/ppl-ai/modelcontextprotocol) | 待实测 |
-| [SerpApi](https://serpapi.com) · [资料](./generated/providers.md#serpapi) | Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. | [API: google-flights-api](https://serpapi.com/google-flights-api)<br>[MCP](https://github.com/serpapi/serpapi-mcp)<br>[API: web-search-api](https://serpapi.com/search-api) | 待实测 |
-| [Serper](https://serper.dev/) · [资料](./data/candidates/serper.yaml) | Google results API with signup trial queries; actual account flow and authentication remain untested. | [API](https://serper.dev/) | 待实测 |
-| [Tavily](https://www.tavily.com) · [资料](./generated/providers.md#tavily) | Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. | [API](https://docs.tavily.com/documentation/quickstart) | 待实测 |
 | [Xquik](https://xquik.com) · [资料](./data/candidates/xquik.yaml) | Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1. | [Docs](https://docs.xquik.com)<br>[API](https://docs.xquik.com/api-reference/overview)<br>[MCP](https://docs.xquik.com/mcp/overview) | [历史首次调用检查](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) |
 
 </details>
@@ -375,7 +375,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 | [Stripe](./generated/providers.md#stripe) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -400,7 +400,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 | [Twilio](./generated/providers.md#twilio) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -415,53 +415,64 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 
 <a id="services-productivity-storage"></a>
 
-### Productivity / Storage (9)
+### Productivity / Storage (10)
 
-**collaborative-tables-001 v2**
+<a id="services-productivity-storage-collaborative-tables"></a>
+
+#### 在线任务表
 
 | 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
 | --- | ---: | ---: | ---: | ---: |
-| [Grist / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 540.8k | — | $0 |
-| [Notion / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 215.5k | $0.75 | $0 |
+| [Grist](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 540.8k | — | $0 |
+| [Notion](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 215.5k | $0.75 | $0 |
+| [Airtable](./generated/providers.md#airtable) | 待实测 | — | — | — |
+| [Baserow Cloud](./data/candidates/baserow.yaml) | 待实测 | — | — | — |
+| [Coda / Superhuman Docs](./data/candidates/coda.yaml) | 待实测 | — | — | — |
+| [Google Sheets](./data/candidates/google-sheets.yaml) | 待实测 | — | — | — |
+| [Lark](./generated/providers.md#lark) | 待实测 | — | — | — |
+| [飞书 Feishu](./data/candidates/feishu.yaml) | 待实测 | — | — | — |
 
 <details>
-<summary>任务、配置与样本</summary>
+<summary>任务、配置、样本与接入方式</summary>
+
+**[collaborative-tables-001 v2](./generated/evaluations.md#comparison-6203194a76cd)**
 
 gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · 预供凭据
 
 - 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。
 
-- Grist: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json)
-- Notion: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json)
-
-</details>
-
-**其他候选**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Airtable](./generated/providers.md#airtable) | 待实测 | — | — | — |
-| [Baserow Cloud](./data/candidates/baserow.yaml) | 待实测 | — | — | — |
-| [Coda / Superhuman Docs](./data/candidates/coda.yaml) | 待实测 | — | — | — |
-| [Dropbox](./generated/providers.md#dropbox) | 待实测 | — | — | — |
-| [Google Sheets](./data/candidates/google-sheets.yaml) | 待实测 | — | — | — |
-| [Linear](./generated/providers.md#linear) | 待实测 | — | — | — |
-| [飞书 Feishu](./data/candidates/feishu.yaml) | 待实测 | — | — | — |
-
-<details>
-<summary>服务用途与接入方式</summary>
+- Grist / rest-api: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json)
+- Notion / rest-api: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json)
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
 | [Airtable](https://www.airtable.com) · [资料](./generated/providers.md#airtable) | Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits. | [API](https://airtable.com/developers/web/api/introduction) | 待实测 |
 | [Baserow Cloud](https://baserow.io/) · [资料](./data/candidates/baserow.yaml) | Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential. | [API](https://baserow.io/docs/apis/rest-api)<br>[MCP](https://baserow.io/user-docs/mcp-server) | 待实测 |
 | [Coda / Superhuman Docs](https://coda.io/) · [资料](./data/candidates/coda.yaml) | Docs and tables with a free REST API; current API page is branded Superhuman Docs. | [API](https://coda.io/developers/apis/v1)<br>[MCP](https://coda.io/apis/mcp) | 待实测 |
-| [Dropbox](https://www.dropbox.com) · [资料](./generated/providers.md#dropbox) | File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks. | [Docs](https://www.dropbox.com/developers/documentation)<br>[API](https://www.dropbox.com/developers/documentation/http/documentation)<br>[CLI](https://github.com/dropbox/dbxcli) | 待实测 |
 | [Google Sheets](https://workspace.google.com/products/sheets/) · [资料](./data/candidates/google-sheets.yaml) | Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites. | [API](https://developers.google.com/workspace/sheets/api/guides/concepts) | 待实测 |
 | [Grist](https://www.getgrist.com/) · [资料](./data/candidates/grist.yaml) | Hosted relational spreadsheets with a free personal site, REST API and official MCP. | [API](https://support.getgrist.com/api/)<br>[MCP](https://docs.getgrist.com/api/mcp)<br>[SDK: python-sdk](https://pypi.org/project/grist-api/)<br>[SDK: javascript-sdk](https://www.npmjs.com/package/grist-api) | [2 完成](./generated/evaluations.md) |
-| [Linear](https://linear.app) · [资料](./generated/providers.md#linear) | Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks. | [Docs](https://linear.app/developers)<br>[MCP](https://linear.app/docs/mcp) | 待实测 |
+| [Lark](https://www.larksuite.com) · [资料](./generated/providers.md#lark) | Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server. | [API](https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create)<br>[CLI](https://github.com/larksuite/cli)<br>[MCP](https://github.com/larksuite/lark-openapi-mcp) | 待实测 |
 | [Notion](https://www.notion.com) · [资料](./generated/providers.md#notion) | Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server. | [API](https://developers.notion.com/reference/intro)<br>[SDK](https://github.com/makenotion/notion-sdk-js)<br>[CLI](https://developers.notion.com/cli/get-started/overview)<br>[MCP](https://mcp.notion.com/mcp) | [2 完成](./generated/evaluations.md) |
 | [飞书 Feishu](https://www.feishu.cn/) · [资料](./data/candidates/feishu.yaml) | China-region Feishu workspace and Base APIs; separate account/tenant from international Lark. | [API](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create)<br>[CLI](https://github.com/larksuite/cli)<br>[MCP](https://github.com/larksuite/lark-openapi-mcp) | 待实测 |
+
+</details>
+
+<a id="services-productivity-storage-other"></a>
+
+#### 其他服务
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Dropbox](./generated/providers.md#dropbox) | 待实测 | — | — | — |
+| [Linear](./generated/providers.md#linear) | 待实测 | — | — | — |
+
+<details>
+<summary>任务、配置、样本与接入方式</summary>
+
+| 服务 | 用途 | 接入方式 | 实测状态 |
+| --- | --- | --- | --- |
+| [Dropbox](https://www.dropbox.com) · [资料](./generated/providers.md#dropbox) | File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks. | [Docs](https://www.dropbox.com/developers/documentation)<br>[API](https://www.dropbox.com/developers/documentation/http/documentation)<br>[CLI](https://github.com/dropbox/dbxcli) | 待实测 |
+| [Linear](https://linear.app) · [资料](./generated/providers.md#linear) | Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks. | [Docs](https://linear.app/developers)<br>[MCP](https://linear.app/docs/mcp) | 待实测 |
 
 </details>
 
@@ -476,7 +487,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · 预供凭据
 | [Sentry](./generated/providers.md#sentry) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -495,7 +506,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · 预供凭据
 | [Shopify](./generated/providers.md#shopify) | 待实测 | — | — | — |
 
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -505,46 +516,16 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · 预供凭据
 
 <a id="services-travel"></a>
 
-### Travel (25)
+### Travel (26)
 
-**flights-search-001 v1**
+<a id="services-travel-flights"></a>
 
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
-| [Kiwi.com / search-mcp](./generated/evaluations.md#comparison-c77feef961a0) | 100% | 209.6k | $0.84 | $0 |
-
-<details>
-<summary>任务、配置与样本</summary>
-
-gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
-
-- 找到9月25日米兰飞往荷兰的机票
-
-- Kiwi.com: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json)
-
-</details>
-
-**flights-search-001 v1**
+#### 航空机票
 
 | 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
 | --- | ---: | ---: | ---: | ---: |
-| [Ignav Flights / public-playground](./generated/evaluations.md#comparison-45effe165cf4) | 100% | 212.9k | $0.93 | $0 |
-
-<details>
-<summary>任务、配置与样本</summary>
-
-gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
-
-- 找到9月25日米兰飞往荷兰的机票
-
-- Ignav Flights: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json)
-
-</details>
-
-**其他候选**
-
-| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
-| --- | ---: | ---: | ---: | ---: |
+| [Ignav Flights](./generated/evaluations.md#comparison-45effe165cf4) | 100% | 212.9k | $0.93 | $0 |
+| [Kiwi.com](./generated/evaluations.md#comparison-c77feef961a0) | 100% | 209.6k | $0.84 | $0 |
 | [AirGateway Platform API](./data/candidates/airgateway.yaml) | 待实测 | — | — | — |
 | [Amadeus Flight APIs](./data/candidates/amadeus-flights.yaml) | 待实测 | — | — | — |
 | [apiheya Air Scraper](./data/candidates/apiheya-air-scraper.yaml) | 待实测 | — | — | — |
@@ -560,6 +541,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 | [Sabre Air APIs](./data/candidates/sabre-air.yaml) | 待实测 | — | — | — |
 | [Scrapingdog Google Flights API](./data/candidates/scrapingdog-flights.yaml) | 待实测 | — | — | — |
 | [SearchApi Google Flights](./data/candidates/searchapi.yaml) | 待实测 | — | — | — |
+| [SerpApi](./generated/providers.md#serpapi) | 待实测 | — | — | — |
 | [Skootle Google Flights Scraper](./data/candidates/skootle-google-flights.yaml) | 待实测 | — | — | — |
 | [Skyscanner Travel APIs](./data/candidates/skyscanner.yaml) | 待实测 | — | — | — |
 | [Travelport TripServices](./data/candidates/travelport-tripservices.yaml) | 待实测 | — | — | — |
@@ -569,8 +551,26 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 | [携程机票合作](./data/candidates/ctrip-flights.yaml) | 待实测 | — | — | — |
 | [飞猪国内机票开放平台](./data/candidates/fliggy-domestic-flights.yaml) | 待实测 | — | — | — |
 
+现有试跑的任务或条件尚未统一，暂不排名。
+
 <details>
-<summary>服务用途与接入方式</summary>
+<summary>任务、配置、样本与接入方式</summary>
+
+**[flights-search-001 v1](./generated/evaluations.md#comparison-c77feef961a0)**
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Kiwi.com / search-mcp: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json)
+
+**[flights-search-001 v1](./generated/evaluations.md#comparison-45effe165cf4)**
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Ignav Flights / public-playground: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json)
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -591,6 +591,7 @@ gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
 | [Sabre Air APIs](https://developer.sabre.com/) · [资料](./data/candidates/sabre-air.yaml) | Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead. | [API](https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md)<br>[MCP](https://developer.sabre.com/) | 待实测 |
 | [Scrapingdog Google Flights API](https://www.scrapingdog.com/) · [资料](./data/candidates/scrapingdog-flights.yaml) | Google Flights extraction endpoint charged in platform credits rather than one credit per flight search. | [API](https://www.scrapingdog.com/documentation/google-flights-api/) | 待实测 |
 | [SearchApi Google Flights](https://www.searchapi.io/) · [资料](./data/candidates/searchapi.yaml) | Google Flights extraction API and a hosted MCP integration supporting token or browser authorization. | [API](https://www.searchapi.io/docs/google-flights-api)<br>[MCP](https://www.searchapi.io/mcp) | 待实测 |
+| [SerpApi](https://serpapi.com) · [资料](./generated/providers.md#serpapi) | Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota. | [API: google-flights-api](https://serpapi.com/google-flights-api)<br>[MCP](https://github.com/serpapi/serpapi-mcp)<br>[API: web-search-api](https://serpapi.com/search-api) | 待实测 |
 | [Skootle Google Flights Scraper](https://apify.com/skootle/google-flights-scraper) · [资料](./data/candidates/skootle-google-flights.yaml) | A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records. | [API](https://apify.com/skootle/google-flights-scraper) | 待实测 |
 | [Skyscanner Travel APIs](https://www.skyscanner.net/) · [资料](./data/candidates/skyscanner.yaml) | Partner flight APIs and an official MCP, with independently documented business-access paths. | [API](https://developers.skyscanner.net/docs/getting-started/authentication)<br>[MCP](https://developers.skyscanner.net/docs/mcp-server) | 待实测 |
 | [Travelport TripServices](https://developer.travelport.com/) · [资料](./data/candidates/travelport-tripservices.yaml) | Travel distribution API requiring trial requests and provider-provisioned production credentials. | [API](https://developer.travelport.com/docs/getting-started) | 待实测 |

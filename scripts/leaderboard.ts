@@ -66,19 +66,27 @@ export const moneyLabel = (n: number | null) => n === null ? '—' : n === 0 ? '
 export const boardHeader = (zh: boolean) => zh
   ? '| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |\n| --- | ---: | ---: | ---: | ---: |'
   : '| Service | Resolution rate | Tokens | Model cost | Service cost |\n| --- | ---: | ---: | ---: | ---: |';
-export function renderBoards(boards: Board[], names: Map<string, string>, zh: boolean, prefix = './') {
+/** Display rows together without pooling measurements from different comparison groups. */
+export function renderBoardRows(boards: Board[], names: Map<string, string>, prefix = './') {
+  const entries = boards.flatMap(board => board.rows.map(row => ({ board, row })));
+  return entries.sort((a, b) => (names.get(a.row.service_id) ?? a.row.service_id).localeCompare(names.get(b.row.service_id) ?? b.row.service_id)
+    || a.row.route_id.localeCompare(b.row.route_id) || a.board.id.localeCompare(b.board.id)).map(({ board, row }) => {
+    const m = row.metrics;
+    const repeated = entries.filter(e => e.row.service_id === row.service_id).length > 1;
+    const name = cell(names.get(row.service_id) ?? row.service_id) + (repeated ? ` / ${cell(row.route_id)}` : '');
+    return `| [${name}](${prefix}generated/evaluations.md#${board.id}) | ${m.resolution_rate === null ? '—' : `${Number((100 * m.resolution_rate).toFixed(1))}%`} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |`;
+  }).join('\n');
+}
+
+export function renderBoardDetails(boards: Board[], names: Map<string, string>, zh: boolean, prefix = './') {
   return boards.map(board => {
     const first = board.rows[0].runs[0];
     const title = board.tasks.map(t => `${t.id} ${t.version ?? t.sha256.slice(0, 8)}`).join(', ');
-    const lines = board.rows.map(row => {
-      const m = row.metrics;
-      return `| [${cell(names.get(row.service_id) ?? row.service_id)} / ${cell(row.route_id)}](${prefix}generated/evaluations.md#${board.id}) | ${m.resolution_rate === null ? '—' : `${Number((100 * m.resolution_rate).toFixed(1))}%`} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |`;
-    });
     const details = board.rows.map(row => {
       const m = row.metrics;
-      return `- ${cell(names.get(row.service_id) ?? row.service_id)}: ${zh ? '完成 / 失败 / 环境无效' : 'passed / failed / invalid'} = ${m.passed} / ${m.failed} / ${m.invalid}; ` +
+      return `- ${cell(names.get(row.service_id) ?? row.service_id)} / ${cell(row.route_id)}: ${zh ? '完成 / 失败 / 环境无效' : 'passed / failed / invalid'} = ${m.passed} / ${m.failed} / ${m.invalid}; ` +
         row.runs.map(r => `[${r.started_at.slice(0, 10)}](${prefix}data/experiments/evaluations/${r.run_id}.json)`).join(', ');
     }).join('\n');
-    return `**${cell(title)}**\n\n${boardHeader(zh)}\n${lines.join('\n')}\n\n<details>\n<summary>${zh ? '任务、配置与样本' : 'Tasks, configuration and samples'}</summary>\n\n${cell(first.model)} / ${cell(first.reasoning_effort)} · ${cell(first.harness.version)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${String(first.environment.service_credentials ?? 'none').startsWith('provided:') ? (zh ? '预供凭据' : 'credentials provided') : (zh ? '未供凭据' : 'no credentials')}\n\n${board.tasks.map(t => `- ${cell(t.description)}`).join('\n')}\n\n${details}\n\n</details>`;
+    return `**[${cell(title)}](${prefix}generated/evaluations.md#${board.id})**\n\n${cell(first.model)} / ${cell(first.reasoning_effort)} · ${cell(first.harness.version)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${String(first.environment.service_credentials ?? 'none').startsWith('provided:') ? (zh ? '预供凭据' : 'credentials provided') : (zh ? '未供凭据' : 'no credentials')}\n\n${board.tasks.map(t => `- ${cell(t.description)}`).join('\n')}\n\n${details}`;
   }).join('\n\n');
 }
