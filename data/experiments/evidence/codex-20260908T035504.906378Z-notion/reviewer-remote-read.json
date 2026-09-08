@@ -1,0 +1,501 @@
+{
+  "reviewer": "external preparing Agent",
+  "after_executor_exit": true,
+  "receipts": [
+    {
+      "at": "2026-09-08T04:01:53.336894+00:00",
+      "method": "GET",
+      "url": "https://api.notion.com/v1/blocks/[SERVICE_SECRET]/children",
+      "body": null,
+      "status": 200,
+      "response": {
+        "object": "list",
+        "results": [
+          {
+            "object": "block",
+            "id": "[SERVICE_SECRET]",
+            "parent": {
+              "type": "page_id",
+              "page_id": "[SERVICE_SECRET]"
+            },
+            "created_time": "2026-09-08T03:57:00.000Z",
+            "last_edited_time": "2026-09-08T03:57:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "has_children": false,
+            "in_trash": false,
+            "type": "child_database",
+            "child_database": {
+              "title": "读书会筹备任务表｜2026-09-08"
+            }
+          }
+        ],
+        "next_cursor": null,
+        "has_more": false,
+        "type": "block",
+        "block": {},
+        "request_id": "[SERVICE_SECRET]"
+      }
+    },
+    {
+      "at": "2026-09-08T04:01:56.569373+00:00",
+      "method": "GET",
+      "url": "https://api.notion.com/v1/databases/[SERVICE_SECRET]",
+      "body": null,
+      "status": 200,
+      "response": {
+        "object": "database",
+        "id": "[SERVICE_SECRET]",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "读书会筹备任务表｜2026-09-08",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "读书会筹备任务表｜2026-09-08",
+            "href": null
+          }
+        ],
+        "description": [
+          {
+            "type": "text",
+            "text": {
+              "content": "根据2026年9月8日读书会筹备会记录及会后补充整理。已采用最新状态和截止日期；负责人以姓名记录。",
+              "link": null
+            },
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "strikethrough": false,
+              "underline": false,
+              "code": false,
+              "color": "default"
+            },
+            "plain_text": "根据2026年9月8日读书会筹备会记录及会后补充整理。已采用最新状态和截止日期；负责人以姓名记录。",
+            "href": null
+          }
+        ],
+        "parent": {
+          "type": "page_id",
+          "page_id": "[SERVICE_SECRET]"
+        },
+        "is_inline": false,
+        "database_type": null,
+        "in_trash": false,
+        "is_locked": false,
+        "created_time": "2026-09-08T03:57:48.309+00:00",
+        "last_edited_time": "2026-09-08T03:57:48.309+00:00",
+        "data_sources": [
+          {
+            "id": "[SERVICE_SECRET]",
+            "name": "读书会筹备任务表｜2026-09-08"
+          }
+        ],
+        "icon": null,
+        "cover": null,
+        "url": "[SERVICE_SECRET]",
+        "public_url": null,
+        "request_id": "[SERVICE_SECRET]"
+      }
+    },
+    {
+      "at": "2026-09-08T04:02:02.221951+00:00",
+      "method": "POST",
+      "url": "https://api.notion.com/v1/data_sources/[SERVICE_SECRET]/query",
+      "body": {
+        "page_size": 100
+      },
+      "status": 200,
+      "response": {
+        "object": "list",
+        "results": [
+          {
+            "object": "page",
+            "id": "[SERVICE_SECRET]",
+            "created_time": "2026-09-08T03:57:00.000Z",
+            "last_edited_time": "2026-09-08T03:57:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "cover": null,
+            "icon": null,
+            "parent": {
+              "type": "data_source_id",
+              "data_source_id": "[SERVICE_SECRET]",
+              "database_id": "[SERVICE_SECRET]"
+            },
+            "in_trash": false,
+            "is_archived": false,
+            "is_locked": false,
+            "properties": {
+              "状态": {
+                "id": "%3E%3AEy",
+                "type": "select",
+                "select": {
+                  "id": "[SERVICE_SECRET]",
+                  "name": "未完成",
+                  "color": "yellow"
+                }
+              },
+              "截止日期": {
+                "id": "%40Ghh",
+                "type": "date",
+                "date": {
+                  "start": "2026-09-20",
+                  "end": null,
+                  "time_zone": null
+                }
+              },
+              "备注": {
+                "id": "%5CY%7Bb",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "原定2026-09-18完成；会后补充改为2026-09-20，其他安排不变。",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "原定2026-09-18完成；会后补充改为2026-09-20，其他安排不变。",
+                    "href": null
+                  }
+                ]
+              },
+              "负责人": {
+                "id": "_oI%3A",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "陈禾",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "陈禾",
+                    "href": null
+                  }
+                ]
+              },
+              "任务": {
+                "id": "title",
+                "type": "title",
+                "title": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "制作海报",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "制作海报",
+                    "href": null
+                  }
+                ]
+              }
+            },
+            "url": "https://app.notion.com/p/[SERVICE_SECRET]",
+            "public_url": null
+          },
+          {
+            "object": "page",
+            "id": "[SERVICE_SECRET]",
+            "created_time": "2026-09-08T03:57:00.000Z",
+            "last_edited_time": "2026-09-08T03:57:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "cover": null,
+            "icon": null,
+            "parent": {
+              "type": "data_source_id",
+              "data_source_id": "[SERVICE_SECRET]",
+              "database_id": "[SERVICE_SECRET]"
+            },
+            "in_trash": false,
+            "is_archived": false,
+            "is_locked": false,
+            "properties": {
+              "状态": {
+                "id": "%3E%3AEy",
+                "type": "select",
+                "select": {
+                  "id": "[SERVICE_SECRET]",
+                  "name": "已完成",
+                  "color": "green"
+                }
+              },
+              "截止日期": {
+                "id": "%40Ghh",
+                "type": "date",
+                "date": {
+                  "start": "2026-09-16",
+                  "end": null,
+                  "time_zone": null
+                }
+              },
+              "备注": {
+                "id": "%5CY%7Bb",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "会后补充：周舟确认书单已整理完成；原截止日期保留。",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "会后补充：周舟确认书单已整理完成；原截止日期保留。",
+                    "href": null
+                  }
+                ]
+              },
+              "负责人": {
+                "id": "_oI%3A",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "周舟",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "周舟",
+                    "href": null
+                  }
+                ]
+              },
+              "任务": {
+                "id": "title",
+                "type": "title",
+                "title": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "整理书单",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "整理书单",
+                    "href": null
+                  }
+                ]
+              }
+            },
+            "url": "https://app.notion.com/p/[SERVICE_SECRET]",
+            "public_url": null
+          },
+          {
+            "object": "page",
+            "id": "[SERVICE_SECRET]",
+            "created_time": "2026-09-08T03:57:00.000Z",
+            "last_edited_time": "2026-09-08T03:57:00.000Z",
+            "created_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "last_edited_by": {
+              "object": "user",
+              "id": "[SERVICE_SECRET]"
+            },
+            "cover": null,
+            "icon": null,
+            "parent": {
+              "type": "data_source_id",
+              "data_source_id": "[SERVICE_SECRET]",
+              "database_id": "[SERVICE_SECRET]"
+            },
+            "in_trash": false,
+            "is_archived": false,
+            "is_locked": false,
+            "properties": {
+              "状态": {
+                "id": "%3E%3AEy",
+                "type": "select",
+                "select": {
+                  "id": "[SERVICE_SECRET]",
+                  "name": "未完成",
+                  "color": "yellow"
+                }
+              },
+              "截止日期": {
+                "id": "%40Ghh",
+                "type": "date",
+                "date": {
+                  "start": "2026-09-15",
+                  "end": null,
+                  "time_zone": null
+                }
+              },
+              "备注": {
+                "id": "%5CY%7Bb",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "9月8日筹备会时未完成；会后安排不变。",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "9月8日筹备会时未完成；会后安排不变。",
+                    "href": null
+                  }
+                ]
+              },
+              "负责人": {
+                "id": "_oI%3A",
+                "type": "rich_text",
+                "rich_text": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "林青",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "林青",
+                    "href": null
+                  }
+                ]
+              },
+              "任务": {
+                "id": "title",
+                "type": "title",
+                "title": [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "确认场地",
+                      "link": null
+                    },
+                    "annotations": {
+                      "bold": false,
+                      "italic": false,
+                      "strikethrough": false,
+                      "underline": false,
+                      "code": false,
+                      "color": "default"
+                    },
+                    "plain_text": "确认场地",
+                    "href": null
+                  }
+                ]
+              }
+            },
+            "url": "https://app.notion.com/p/[SERVICE_SECRET]",
+            "public_url": null
+          }
+        ],
+        "next_cursor": null,
+        "has_more": false,
+        "type": "page_or_data_source",
+        "page_or_data_source": {},
+        "request_id": "[SERVICE_SECRET]"
+      }
+    }
+  ],
+  "normalized_rows": [
+    {
+      "task": "制作海报",
+      "owner": "陈禾",
+      "due": "2026-09-20",
+      "done": false
+    },
+    {
+      "task": "整理书单",
+      "owner": "周舟",
+      "due": "2026-09-16",
+      "done": true
+    },
+    {
+      "task": "确认场地",
+      "owner": "林青",
+      "due": "2026-09-15",
+      "done": false
+    }
+  ]
+}

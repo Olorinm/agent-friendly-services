@@ -4,7 +4,7 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md) [databases](./data/experiments/tasks/databases.md) and [collaborative tables](./data/experiments/tasks/collaborative-tables.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md), [databases](./data/experiments/tasks/databases.md) and [collaborative tables](./data/experiments/tasks/collaborative-tables.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
@@ -307,7 +307,7 @@ Collected services include tested, untested and gated entries ([pool rules](./do
 | [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
 | [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
 | [Google Sheets](https://workspace.google.com/products/sheets/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/google-sheets.yaml) |
-| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
+| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [2 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
 | [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
 | [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
 | [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |

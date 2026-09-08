@@ -1,0 +1,59 @@
+{
+  "source": "CLI item.completed events; excludes documentation fetch output",
+  "commands": [
+    {
+      "event_line_sha256": "1b04c032f106f59a9f1e5b340bacb787035ce1a800cb3cc3a553f24e6e932d04",
+      "id": "item_6",
+      "type": "command_execution",
+      "command": "/bin/zsh -c \"cat > grist_tasks.py <<'PY'\nimport json\nimport re\nimport sys\nimport urllib.request\nimport urllib.error\nfrom pathlib import Path\n\nROOT = Path.cwd()\nSTATE = ROOT / 'grist_task_state.json'\ncredentials = json.loads((ROOT / '.private/credentials.json').read_text())\n_api_key = credentials['GRIST_API_KEY']\nworkspace_id = str(credentials['GRIST_WORKSPACE_ID'])\nassert re.fullmatch(r'\\\\d+', workspace_id), 'Invalid workspace ID'\nstate = json.loads(STATE.read_text()) if STATE.exists() else {'requests': 0, 'base': 'https://docs.getgrist.com'}\n\ndef save():\n    STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2))\n\nclass NoRedirect(urllib.request.HTTPRedirectHandler):\n    def redirect_request(self, req, fp, code, msg, headers, newurl):\n        return None\n\nopener = urllib.request.build_opener(NoRedirect())\n\ndef api(method, path, data=None):\n    assert path == '/workspaces/' + workspace_id or path == '/workspaces/' + workspace_id + '/docs' or (state.get('doc_id') and path.startswith('/docs/' + state['doc_id'])), 'Outside authorized scope'\n    assert state['requests'] < 40, 'Request budget exhausted'\n    state['requests'] += 1\n    save()\n    raw = None if data is None else json.dumps(data, ensure_ascii=False).encode('utf-8')\n    req = urllib.request.Request(state['base'] + '/api' + path, data=raw, method=method, headers={'Authorization': 'Bearer ' + _api_key, 'Content-Type': 'application/json', 'Accept': 'application/json'})\n    try:\n        with opener.open(req, timeout=35) as resp:\n            body = resp.read().decode('utf-8')\n            result = json.loads(body) if body else None\n            print(json.dumps({'request': state['requests'], 'method': method, 'path': path, 'status': resp.status}, ensure_ascii=False), flush=True)\n            return result\n    except urllib.error.HTTPError as e:\n        body = e.read().decode('utf-8', errors='replace').replace(_api_key, '[REDACTED]')\n        print(json.dumps({'request': state['requests'], 'status': e.code, 'error': body[:1500], 'redirect': e.headers.get('Location')}, ensure_ascii=False), flush=True)\n        sys.exit(1)\n    except Exception as e:\n        print(type(e).__name__ + ': ' + str(e).replace(_api_key, '[REDACTED]'))\n        sys.exit(1)\n\nif __name__ == '__main__':\n    ws = api('GET', '/workspaces/' + workspace_id)\n    assert str(ws['id']) == workspace_id\n    state['workspace_empty'] = len(ws.get('docs', [])) == 0\n    state['org_domain'] = ws.get('org', {}).get('domain')\n    save()\n    print(json.dumps({'workspace_empty': state['workspace_empty'], 'access': ws.get('access'), 'org_domain': state['org_domain']}, ensure_ascii=False))\nPY\npython3 grist_tasks.py\"",
+      "aggregated_output": "{\"request\": 1, \"method\": \"GET\", \"path\": \"/workspaces/[SERVICE_SECRET]\", \"status\": 200}\n{\"workspace_empty\": true, \"access\": \"owners\", \"org_domain\": \"[SERVICE_SECRET]\"}\n",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "event_line_sha256": "8747452b8cef11f6355175b5d29868ed454c3299d77d259095c16db331b6d6fd",
+      "id": "item_8",
+      "type": "command_execution",
+      "command": "/bin/zsh -c \"python3 - <<'PY'\nfrom grist_tasks import api, state, save, workspace_id\nassert state['workspace_empty']\nassert not state.get('doc_id'), 'Document already created'\ndoc = api('POST', '/workspaces/' + workspace_id + '/docs', {'name': '读书会筹备待办｜2026-09-08'})\nassert isinstance(doc, str)\nstate['doc_id'] = doc\nsave()\ntables = api('GET', '/docs/' + doc + '/tables')\nstate['initial_tables'] = tables\nsave()\nprint(tables)\nPY\"",
+      "aggregated_output": "{\"request\": 2, \"method\": \"POST\", \"path\": \"/workspaces/[SERVICE_SECRET]/docs\", \"status\": 200}\n{\"request\": 3, \"method\": \"GET\", \"path\": \"/docs/[SERVICE_SECRET]/tables\", \"status\": 200}\n{'tables': [{'id': 'Table1', 'fields': {'tableRef': 1, 'primaryViewId': 1, 'summarySourceTable': 0, 'onDemand': False, 'rawViewSectionRef': 2, 'recordCardViewSectionRef': 3}}]}\n",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "event_line_sha256": "3ea907da1c1b75874387d9765f92a1275ee297543d1d7a1983eadfd63530412d",
+      "id": "item_9",
+      "type": "command_execution",
+      "command": "/bin/zsh -c \"cat > populate_tasks.py <<'PY'\nimport json\nfrom datetime import datetime, timezone\nfrom grist_tasks import api, state, save\n\ndef day(value):\n    return int(datetime.fromisoformat(value).replace(tzinfo=timezone.utc).timestamp())\n\ntasks = [\n    {'Task': '确认场地', 'Owner': '林青', 'Due': day('2026-09-15'), 'Status': '未完成', 'Notes': '会议时未完成；其他安排不变。'},\n    {'Task': '整理书单', 'Owner': '周舟', 'Due': day('2026-09-16'), 'Status': '已完成', 'Notes': '会后周舟确认书单已整理好。'},\n    {'Task': '制作海报', 'Owner': '陈禾', 'Due': day('2026-09-20'), 'Status': '未完成', 'Notes': '原截止日为2026-09-18；会后改为2026-09-20。'},\n]\ncolumns = [\n    {'id': 'Task', 'fields': {'label': '任务', 'type': 'Text', 'isFormula': False}},\n    {'id': 'Owner', 'fields': {'label': '负责人', 'type': 'Text', 'isFormula': False}},\n    {'id': 'Due', 'fields': {'label': '截止日期', 'type': 'Date', 'isFormula': False, 'widgetOptions': json.dumps({'dateFormat': 'YYYY-MM-DD'})}},\n    {'id': 'Status', 'fields': {'label': '状态', 'type': 'Choice', 'isFormula': False, 'widgetOptions': json.dumps({'choices': ['未完成', '已完成']}, ensure_ascii=False)}},\n    {'id': 'Notes', 'fields': {'label': '备注', 'type': 'Text', 'isFormula': False, 'widgetOptions': json.dumps({'wrap': True})}},\n]\nassert not state.get('table_id'), 'Table already created'\ndoc = state['doc_id']\nresult = api('POST', '/docs/' + doc + '/tables', {'tables': [{'id': 'Tasks', 'columns': columns}]})\nstate['table_id'] = result['tables'][0]['id']\nsave()\nresult = api('POST', '/docs/' + doc + '/tables/' + state['table_id'] + '/records', {'records': [{'fields': fields} for fields in tasks]})\nstate['inserted_record_ids'] = [r['id'] for r in result['records']]\nstate['expected_tasks'] = tasks\nsave()\nprint(json.dumps({'table_id': state['table_id'], 'inserted_rows': len(result['records'])}, ensure_ascii=False))\nPY\"",
+      "aggregated_output": "",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "event_line_sha256": "d6feafaa1b8408ffa55e01f66e7750b9a2296512272e6cb8e1f7d0507bea8abb",
+      "id": "item_10",
+      "type": "command_execution",
+      "command": "/bin/zsh -c 'python3 populate_tasks.py'",
+      "aggregated_output": "{\"request\": 4, \"method\": \"POST\", \"path\": \"/docs/[SERVICE_SECRET]/tables\", \"status\": 200}\n{\"request\": 5, \"method\": \"POST\", \"path\": \"/docs/[SERVICE_SECRET]/tables/Tasks/records\", \"status\": 200}\n{\"table_id\": \"Tasks\", \"inserted_rows\": 3}\n",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "event_line_sha256": "f1d25e747a02f499610b3b61d7e7b86b779b80d45471e595a22cbdd0eb727c83",
+      "id": "item_11",
+      "type": "command_execution",
+      "command": "/bin/zsh -c \"cat > verify_tasks.py <<'PY'\nimport json\nfrom datetime import datetime, timezone\nfrom grist_tasks import api, state, save\n\ndoc = state['doc_id']\ntable = state['table_id']\nrows = api('GET', '/docs/' + doc + '/tables/' + table + '/records')['records']\nactual = [{k: row['fields'][k] for k in ('Task', 'Owner', 'Due', 'Status', 'Notes')} for row in rows]\nassert actual == state['expected_tasks'], 'Readback did not match meeting updates'\nstate['verified_rows'] = actual\nsave()\nfor t in state['initial_tables']['tables']:\n    initial_id = t['id']\n    old_rows = api('GET', '/docs/' + doc + '/tables/' + initial_id + '/records')['records']\n    assert not old_rows, 'Default table unexpectedly contains data'\n    api('POST', '/docs/' + doc + '/apply', [['RemoveTable', initial_id]])\ntables = api('GET', '/docs/' + doc + '/tables')['tables']\nassert len(tables) == 1 and tables[0]['id'] == table\nview = tables[0]['fields']['primaryViewId']\napi('POST', '/docs/' + doc + '/apply', [['UpdateRecord', '_grist_Views', view, {'name': '筹备待办'}]])\nmeta = api('GET', '/docs/' + doc)\nassert str(meta['workspace']['id']) == str(__import__('grist_tasks').workspace_id)\nstate['url'] = state['base'] + '/' + (meta.get('urlId') or doc) + '/p/' + str(view)\nstate['verified'] = True\nsave()\nsummary = [{**r, 'Due': datetime.fromtimestamp(r['Due'], timezone.utc).date().isoformat()} for r in actual]\nprint(json.dumps({'url': state['url'], 'document_name': meta['name'], 'tasks': summary, 'business_api_requests': state['requests'], 'verified': True}, ensure_ascii=False, indent=2))\nPY\"",
+      "aggregated_output": "",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "event_line_sha256": "aa3b207a563796f3bd3a31926e74b7186dc9f721a77ed0cdef73dad14f8754a7",
+      "id": "item_13",
+      "type": "command_execution",
+      "command": "/bin/zsh -c 'python3 verify_tasks.py'",
+      "aggregated_output": "{\"request\": 6, \"method\": \"GET\", \"path\": \"/docs/[SERVICE_SECRET]/tables/Tasks/records\", \"status\": 200}\n{\"request\": 7, \"method\": \"GET\", \"path\": \"/docs/[SERVICE_SECRET]/tables/Table1/records\", \"status\": 200}\n{\"request\": 8, \"method\": \"POST\", \"path\": \"/docs/[SERVICE_SECRET]/apply\", \"status\": 200}\n{\"request\": 9, \"method\": \"GET\", \"path\": \"/docs/[SERVICE_SECRET]/tables\", \"status\": 200}\n{\"request\": 10, \"method\": \"POST\", \"path\": \"/docs/[SERVICE_SECRET]/apply\", \"status\": 200}\n{\"request\": 11, \"method\": \"GET\", \"path\": \"/docs/[SERVICE_SECRET]\", \"status\": 200}\n{\n  \"url\": \"[SERVICE_SECRET]\",\n  \"document_name\": \"读书会筹备待办｜2026-09-08\",\n  \"tasks\": [\n    {\n      \"Task\": \"确认场地\",\n      \"Owner\": \"林青\",\n      \"Due\": \"2026-09-15\",\n      \"Status\": \"未完成\",\n      \"Notes\": \"会议时未完成；其他安排不变。\"\n    },\n    {\n      \"Task\": \"整理书单\",\n      \"Owner\": \"周舟\",\n      \"Due\": \"2026-09-16\",\n      \"Status\": \"已完成\",\n      \"Notes\": \"会后周舟确认书单已整理好。\"\n    },\n    {\n      \"Task\": \"制作海报\",\n      \"Owner\": \"陈禾\",\n      \"Due\": \"2026-09-20\",\n      \"Status\": \"未完成\",\n      \"Notes\": \"原截止日为2026-09-18；会后改为2026-09-20。\"\n    }\n  ],\n  \"business_api_requests\": 11,\n  \"verified\": true\n}\n",
+      "exit_code": 0,
+      "status": "completed"
+    }
+  ]
+}

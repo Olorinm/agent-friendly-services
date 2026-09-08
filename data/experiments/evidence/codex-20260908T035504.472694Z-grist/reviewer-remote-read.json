@@ -1,0 +1,254 @@
+{
+  "reviewer": "external preparing Agent",
+  "after_executor_exit": true,
+  "receipts": [
+    {
+      "at": "2026-09-08T04:01:40.782028+00:00",
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/workspaces/[SERVICE_SECRET]",
+      "body": null,
+      "status": 200,
+      "response": {
+        "name": "AFS natural v2 20260908",
+        "createdAt": "2026-09-08T03:54:26.409Z",
+        "updatedAt": "2026-09-08T03:54:26.417Z",
+        "id": "[SERVICE_SECRET]",
+        "isSupportWorkspace": false,
+        "docs": [
+          {
+            "name": "读书会筹备待办｜2026-09-08",
+            "createdAt": "2026-09-08T03:57:04.362Z",
+            "updatedAt": "2026-09-08T03:58:23.002Z",
+            "id": "[SERVICE_SECRET]",
+            "isPinned": false,
+            "urlId": "[SERVICE_SECRET]",
+            "trunkId": null,
+            "type": null,
+            "access": "owners"
+          }
+        ],
+        "org": {
+          "name": "Personal",
+          "createdAt": "2026-09-08T03:13:39.985Z",
+          "updatedAt": "2026-09-08T03:13:39.995Z",
+          "id": "[SERVICE_SECRET]",
+          "domain": "[SERVICE_SECRET]",
+          "host": null,
+          "owner": {
+            "id": "[SERVICE_SECRET]",
+            "name": "[SERVICE_SECRET]",
+            "picture": "https://lh3.googleusercontent.com/a/ACg8ocJ50bpV77y2grFY4vHvxfi_iz8ZDc7HV5uNoOyFKvWhC0R05Q=s96-c",
+            "ref": "3tkFFqEu27yMc4aCc1AJYi",
+            "createdAt": "2026-09-08T03:13:39.985Z",
+            "type": "login"
+          }
+        },
+        "access": "owners"
+      }
+    },
+    {
+      "at": "2026-09-08T04:01:42.255059+00:00",
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables",
+      "body": null,
+      "status": 200,
+      "response": {
+        "tables": [
+          {
+            "id": "Tasks",
+            "fields": {
+              "tableRef": 2,
+              "primaryViewId": 2,
+              "summarySourceTable": 0,
+              "onDemand": false,
+              "rawViewSectionRef": 5,
+              "recordCardViewSectionRef": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-09-08T04:01:43.704163+00:00",
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/columns",
+      "body": null,
+      "status": 200,
+      "response": {
+        "columns": [
+          {
+            "id": "Task",
+            "fields": {
+              "colRef": 6,
+              "label": "任务",
+              "isFormula": false,
+              "type": "Text",
+              "parentId": 2,
+              "parentPos": 6,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "Owner",
+            "fields": {
+              "colRef": 7,
+              "label": "负责人",
+              "isFormula": false,
+              "type": "Text",
+              "parentId": 2,
+              "parentPos": 7,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "Due",
+            "fields": {
+              "colRef": 8,
+              "label": "截止日期",
+              "isFormula": false,
+              "type": "Date",
+              "parentId": 2,
+              "parentPos": 8,
+              "widgetOptions": "{\"dateFormat\": \"YYYY-MM-DD\"}",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "Status",
+            "fields": {
+              "colRef": 9,
+              "label": "状态",
+              "isFormula": false,
+              "type": "Choice",
+              "parentId": 2,
+              "parentPos": 9,
+              "widgetOptions": "{\"choices\": [\"未完成\", \"已完成\"]}",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "Notes",
+            "fields": {
+              "colRef": 10,
+              "label": "备注",
+              "isFormula": false,
+              "type": "Text",
+              "parentId": 2,
+              "parentPos": 10,
+              "widgetOptions": "{\"wrap\": true}",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-09-08T04:01:47.338778+00:00",
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records",
+      "body": null,
+      "status": 200,
+      "response": {
+        "records": [
+          {
+            "id": 1,
+            "fields": {
+              "Task": "确认场地",
+              "Owner": "林青",
+              "Due": 1789430400,
+              "Status": "未完成",
+              "Notes": "会议时未完成；其他安排不变。"
+            }
+          },
+          {
+            "id": 2,
+            "fields": {
+              "Task": "整理书单",
+              "Owner": "周舟",
+              "Due": 1789516800,
+              "Status": "已完成",
+              "Notes": "会后周舟确认书单已整理好。"
+            }
+          },
+          {
+            "id": 3,
+            "fields": {
+              "Task": "制作海报",
+              "Owner": "陈禾",
+              "Due": 1789862400,
+              "Status": "未完成",
+              "Notes": "原截止日为2026-09-18；会后改为2026-09-20。"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "normalized_rows": [
+    {
+      "task": "确认场地",
+      "owner": "林青",
+      "due": "2026-09-15",
+      "done": false
+    },
+    {
+      "task": "整理书单",
+      "owner": "周舟",
+      "due": "2026-09-16",
+      "done": true
+    },
+    {
+      "task": "制作海报",
+      "owner": "陈禾",
+      "due": "2026-09-20",
+      "done": false
+    }
+  ]
+}

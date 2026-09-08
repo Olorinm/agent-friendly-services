@@ -309,7 +309,7 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
 | [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
 | [Google Sheets](https://workspace.google.com/products/sheets/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/google-sheets.yaml) |
-| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
+| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [2 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
 | [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
 | [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
 | [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |

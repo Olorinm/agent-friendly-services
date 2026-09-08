@@ -92,17 +92,40 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   fs.mkdirSync(dir, { recursive: true });
   const sorted = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at) || a.run_id.localeCompare(b.run_id));
   fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1, evaluations: sorted }, null, 2) + '\n');
-  const rows = sorted.map(r => {
+  const row = (r: Evaluation) => {
     const link = `../data/experiments/evaluations/${r.run_id}.json`;
-    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds}s | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
-  });
+    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds}s | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
+  };
+  // Classify the task, not the provider: one provider may serve several domains.
+  // This is a current display label, not a rewrite of frozen historical evidence.
+  const groups = new Map<string, Map<string, Evaluation[]>>();
+  for (const r of sorted) {
+    const file = path.resolve(ROOT, r.task.file);
+    const taskText = file.startsWith(ROOT + path.sep) && fs.existsSync(file)
+      ? fs.readFileSync(file, 'utf8') : '';
+    const classification = taskText.match(/^分类：(.+)$/m)?.[1].trim() ?? '未标明分类';
+    if (!groups.has(classification)) groups.set(classification, new Map());
+    const tasks = groups.get(classification)!;
+    const key = `${r.task.file}:${r.task.id}:${r.task.version ?? r.task.sha256}:${r.task.sha256}`;
+    if (!tasks.has(key)) tasks.set(key, []);
+    tasks.get(key)!.push(r);
+  }
+  const header = `| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |`;
+  const sections = [...groups].map(([classification, tasks]) => `## ${cell(classification)}\n\n` +
+    [...tasks.values()].map(runs => {
+      const task = runs[0].task;
+      return `### ${cell(task.id)} / ${cell(task.version ?? task.sha256.slice(0, 8))}\n\n${cell(task.description)}\n\n${header}\n${runs.map(row).join('\n')}`;
+    }).join('\n\n')).join('\n\n');
   fs.writeFileSync(path.join(dir, 'evaluations.md'), `<!-- GENERATED — npm run generate; source: data/experiments/evaluations/ -->
 # 任务实测结果
 
 每行只说明该服务入口在该任务和运行配置下的观察。Agent消耗只记录token，不换算货币；缓存输入已含在输入总数中。服务调用费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-${rows.join('\n')}
+按任务所属大类 / 子类分组，再展示同一任务版本和冻结内容的运行。分类标题来自当前任务表，仅用于导航；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
+
+输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
+
+${sections}
 `);
 }

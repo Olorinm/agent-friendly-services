@@ -68,6 +68,42 @@ class Trials(unittest.TestCase):
         self.task.write_text(self.task.read_text().replace('rows match', 'rows and types match'))
         self.assertNotEqual(task['sha256'], runner.select_task(self.task, 'rows-1')[0]['sha256'])
 
+    def test_natural_inputs_separate_request_material_environment_and_grader(self):
+        task, _ = runner.select_task(self.task, 'rows-1')
+        task.update(success='SECRET_GRADER_CANARY', failure='FAILURE_CANARY',
+                    expected_output='GRADER_OUTPUT_CANARY', resources='Only update the supplied existing table.')
+        prompt = runner.natural_prompt(task, 'https://example.com/api', ['API_KEY'], 600)
+        context = runner.natural_context(task, 'https://example.com/api', ['API_KEY'], 600)
+        manifest = runner.write_context_files(context, self.workspace, self.run)
+        self.assertIn('Read rows', prompt)
+        self.assertIn('input.md', prompt)
+        self.assertNotIn('table A', prompt)
+        self.assertNotIn('API_KEY', prompt)
+        self.assertEqual(context['input.md'].strip(), 'table A')
+        self.assertIn('API_KEY', context['ENVIRONMENT.md'])
+        self.assertIn('Only update the supplied existing table.', context['ENVIRONMENT.md'])
+        self.assertNotIn('空容器', context['ENVIRONMENT.md'])
+        supplied = prompt + ''.join(context.values())
+        for hidden in ['SECRET_GRADER_CANARY', 'FAILURE_CANARY', 'GRADER_OUTPUT_CANARY', 'evidence/']:
+            self.assertNotIn(hidden, supplied)
+        for item in manifest:
+            frozen = self.run / 'context-files' / item['path']
+            self.assertEqual(frozen.read_bytes(), (self.workspace / item['path']).read_bytes())
+            self.assertEqual(item['sha256'], hashlib.sha256(frozen.read_bytes()).hexdigest())
+        (self.workspace / 'input.md').write_text('executor modified input')
+        self.assertEqual((self.run / 'context-files/input.md').read_text().strip(), 'table A')
+
+    def test_optional_resource_scope_is_frozen_and_not_assumed_for_other_tasks(self):
+        old, _ = runner.select_task(self.task, 'rows-1')
+        self.assertNotIn('resources', old)
+        context = runner.natural_context(old, 'https://example.com/api', [], 600)
+        self.assertNotIn('任务表', context['ENVIRONMENT.md'])
+        self.task.write_text(self.task.read_text().replace('| 版本 |', '| 版本 | 运行资源 |')
+                             .replace('| v2 |', '| v3 | Only the existing table |'))
+        current, _ = runner.select_task(self.task, 'rows-1')
+        self.assertEqual(current['resources'], 'Only the existing table')
+        self.assertNotEqual(old['sha256'], current['sha256'])
+
     def test_duplicate_task_is_not_silently_selected(self):
         self.task.write_text(self.task.read_text() + self.task.read_text().splitlines()[-1] + '\n')
         with self.assertRaisesRegex(ValueError, 'exactly one'):
@@ -75,10 +111,16 @@ class Trials(unittest.TestCase):
 
     def test_metrics_come_from_run_unknown_cost_stays_unknown(self):
         self.assessment.update(usage={'input_tokens': 1}, model='invented', elapsed_seconds=0)
+        self.meta.update(prompt_style='natural', evidence_collection='CLI events and external remote read', prompt_characters=123)
+        self.meta.update(input_delivery='workspace attachments', context_files=[{'path': 'input.md', 'sha256': 'b' * 64, 'characters': 7}])
         self.save()
         output = recorder.record(self.run, self.review)
         actual = json.loads(output.read_text())
         self.assertEqual(actual['usage']['input_tokens'], 17)
+        self.assertEqual(actual['environment']['prompt_style'], 'natural')
+        self.assertEqual(actual['environment']['prompt_characters'], 123)
+        self.assertEqual(actual['environment']['input_delivery'], 'workspace attachments')
+        self.assertEqual(actual['environment']['context_files'], self.meta['context_files'])
         self.assertEqual(actual['model'], 'fixture-model')
         self.assertEqual(actual['elapsed_seconds'], 2)
         self.assertNotIn('agent_cost_usd', actual)
@@ -87,6 +129,15 @@ class Trials(unittest.TestCase):
         self.assertTrue((self.root / actual['evidence'][0]['path']).is_file())
         with self.assertRaisesRegex(ValueError, 'already recorded'):
             recorder.record(self.run, self.review)
+
+    def test_numeric_private_ids_remain_valid_json_without_rewriting_usage(self):
+        raw = b'{"id": 241383, "workspaceId": 241383, "input_tokens": 241383, "url": "https://example.com/241383"}'
+        public = recorder.public_copy(raw, self.meta, self.run, secrets=['241383'])
+        value = json.loads(public)
+        self.assertEqual(value['id'], '[SERVICE_SECRET]')
+        self.assertEqual(value['workspaceId'], '[SERVICE_SECRET]')
+        self.assertEqual(value['input_tokens'], 241383)
+        self.assertNotIn('241383', value['url'])
 
     def test_executor_cannot_supply_its_own_review(self):
         self.save()

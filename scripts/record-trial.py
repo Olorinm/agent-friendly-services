@@ -37,12 +37,38 @@ def public_copy(raw, meta, run_dir, reviewer='', secrets=()):
     sessions += [meta[k] for k in ('thread_id', 'session_id') if isinstance(meta.get(k), str)]
     replacements.update({value: '[CODEX_SESSION]' for value in sessions if value})
     replacements.update({value: '[SERVICE_SECRET]' for value in secrets if value})
-    for value, replacement in sorted(replacements.items(), key=lambda item: -len(item[0])):
-        # Evidence can embed paths in JSON strings or Markdown URL targets.
-        for variant in (value, json.dumps(value, ensure_ascii=True)[1:-1],
-                        quote(value, safe='/'), quote(value, safe='')):
-            raw = raw.replace(variant.encode(), replacement.encode())
-    return raw
+    def redact_text(value):
+        for secret, replacement in sorted(replacements.items(), key=lambda item: -len(item[0])):
+            for variant in (secret, json.dumps(secret, ensure_ascii=True)[1:-1],
+                            quote(secret, safe='/'), quote(secret, safe='')):
+                value = value.replace(variant, replacement)
+        return value
+
+    # Preserve JSON syntax and measured numeric fields. Account/resource IDs can
+    # be JSON numbers; replacing raw bytes would leave an unquoted placeholder.
+    try:
+        original = json.loads(raw)
+    except UnicodeDecodeError:
+        for secret, replacement in sorted(replacements.items(), key=lambda item: -len(item[0])):
+            raw = raw.replace(secret.encode(), replacement.encode())
+        return raw
+    except ValueError:
+        return redact_text(raw.decode()).encode()
+
+    def redact_json(value, key=''):
+        if isinstance(value, dict):
+            return {redact_text(k): redact_json(v, k) for k, v in value.items()}
+        if isinstance(value, list):
+            return [redact_json(v, key) for v in value]
+        if isinstance(value, str):
+            return redact_text(value)
+        if type(value) is int and key.lower().endswith('id') and str(value) in secrets:
+            return '[SERVICE_SECRET]'
+        return value
+
+    sanitized = redact_json(original)
+    return raw if sanitized == original else (json.dumps(sanitized, ensure_ascii=False, indent=2) + '\n').encode()
+
 
 
 def record(run_dir, review_path, route_id=None, task_file=None, task_version=None):
@@ -143,7 +169,12 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         'elapsed_seconds': meta['elapsed_seconds'], 'budget_seconds': meta['seconds_limit'],
         'environment': {'host': meta.get('host'), 'isolation': meta['isolation'],
                         'service_credentials': meta.get('service_credentials', 'none'), 'web_search': 'live',
-                        'preparation_note': meta.get('preparation_note', 'No service credentials provided.')},
+                        'preparation_note': meta.get('preparation_note', 'No service credentials provided.'),
+                        'prompt_style': meta.get('prompt_style', 'legacy'),
+                        'evidence_collection': meta.get('evidence_collection', 'executor receipts and external review'),
+                        'prompt_characters': meta.get('prompt_characters'),
+                        'input_delivery': meta.get('input_delivery', 'inline'),
+                        'context_files': meta.get('context_files', [])},
         'status': status, 'reason': review['reason'], 'usage': meta.get('usage'),
         'service_cost_usd': review['service_cost_usd'], 'human_interventions': review['human_interventions'],
         'review': {'method': 'external_agent', 'reviewer': review['reviewer'],

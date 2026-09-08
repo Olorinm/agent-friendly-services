@@ -3,6 +3,258 @@
   "evaluations": [
     {
       "schema_version": 1,
+      "run_id": "codex-20260908T035504.906378Z-notion",
+      "service_id": "notion",
+      "route_id": "rest-api",
+      "entry_url": "https://developers.notion.com/reference/intro",
+      "task": {
+        "description": "帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "可访问的私有在线任务表链接；未完成事项及负责人、截止日期",
+        "success": "远端表中恰好包含三项行动、负责人和最终截止日期正确、书单已完成且另两项未完成；答复给出该表链接并正确列出两项未完成事项及日期；准备者通过服务API独立读取确认。允许自由选择字段与操作顺序，不要求先写入旧状态或输出证据文件",
+        "failure": "只给本地文件或Markdown、无真实远端表、漏项或重复、最终内容或未完成清单错误、预算内未完成。违反免费资源/测试容器/不通知约束也不通过；凭据或环境故障单列",
+        "id": "collaborative-tables-001",
+        "version": "v2",
+        "sha256": "e14854af8ccddcff3dd7d812b91dd624366ce42ef6df924d74bf910356e9e2f7",
+        "file": "data/experiments/tasks/collaborative-tables.md"
+      },
+      "prompt_sha256": "7f266108a29a7dd0db5033280ac9541acfc8fc543a6f23c60d626a744aabbfd3",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "d36ed361ac2a7359c8db0fd5d297e6dda9df9e99de765d6632bf42472466dcc4"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-08T03:55:05.045850+00:00",
+      "ended_at": "2026-09-08T03:58:08.429951+00:00",
+      "elapsed_seconds": 183.384,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "provided: NOTION_API_TOKEN, NOTION_PARENT_PAGE_ID",
+        "web_search": "live",
+        "preparation_note": "Existing dedicated free test account; API credential and a newly created empty private parent page prepared before timing. No business schema, records or adapter supplied. Setup and external verification excluded from measured tokens/time. No payment enabled.",
+        "prompt_style": "natural",
+        "evidence_collection": "CLI events and external remote read",
+        "prompt_characters": 536
+      },
+      "status": "completed",
+      "reason": "Natural v2 created a real online table with three correct final actions and returned the matching link and two outstanding tasks. Independent remote read after executor exit matched all user facts. 7 business API requests observed in executed code and CLI outputs, within 40. Setup and external review excluded; one observation, not a typical-cost estimate or service ranking.",
+      "usage": {
+        "input_tokens": 211718,
+        "cached_input_tokens": 173440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3779,
+        "reasoning_output_tokens": 448
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-08T04:03:29.550344+00:00",
+        "checks": [
+          {
+            "criterion": "Create a real table in the supplied empty test container with exactly three correct final actions",
+            "passed": true,
+            "evidence": "prepared-empty-container.json shows empty baseline; reviewer-remote-read.json independently retrieves the created table, three rows, correct owners/dates and only the book list completed."
+          },
+          {
+            "criterion": "Return the actual online table link and correct outstanding tasks with owners and due dates",
+            "passed": true,
+            "evidence": "answer.md resource link matches independently retrieved resource identity; 场地 / 林青 / September 15 and 海报 / 陈禾 / September 20 match remote rows. Book list is completed."
+          },
+          {
+            "criterion": "Stay within free-resource, container, row, request and time limits without notifying anyone",
+            "passed": true,
+            "evidence": "selected-execution.json contains the executed business scripts and actual CLI outputs: 7 requests confined to the new synthetic container, one final task table and three rows, no invitations or paid operations. CLI exited 0 within 600 seconds. Existing dedicated free account; no payment or execution intervention."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.906378Z-notion/answer.md",
+          "sha256": "25c9f56935007f003c640a2b17b5919aae26f676c2d5e63d51872820df719f5c",
+          "note": "User-facing result; private resource links redacted.",
+          "source_sha256": "1e579e837fb3d6b5fb1c40d677c9596f10a64fe5da27feaa6dd5a9c7f8b56106",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.906378Z-notion/selected-execution.json",
+          "sha256": "c185635e55d71c8e4d7190dc3bf22c5a4b4079bef51a05bb6247d266974cb944",
+          "note": "Selected real CLI commands/outputs and executor-authored code; public documentation output excluded.",
+          "source_sha256": "99289de85ddcd77b79c4a8705b1080254df90db4851de9a0d33d78cc11c5d733",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.906378Z-notion/reviewer-remote-read.json",
+          "sha256": "fd550d081849a58723ff1de31a7bf8fc88cb5a8531a37c1d57d5aa877a19d642",
+          "note": "External authenticated service read after measured execution; raw service responses plus normalized rows; not counted in executor usage.",
+          "source_sha256": "a4826495175768e691bd03b9fbc802442ca28fac22796319935159d414f07613",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.906378Z-notion/prepared-empty-container.json",
+          "sha256": "4f2e3dda6e5adb6d408a63b2624515c0d5fe6a0bb5135b20227c1e83824bd8b0",
+          "note": "Preparation-stage empty container snapshot, outside measured execution.",
+          "source_sha256": "5dc1afec1f29c079ec30209148b28f8791b9511b1f4375a0a6d44bb7f31ff3e4",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260908T035504.906378Z-notion",
+        "run_sha256": "293299c58e9a321ec698fd642048b03f48f97fd5b5f730197e77152c3121636a",
+        "events_sha256": "17684fd98e0ddb0ebee4c5fdad854c642a0570bc13b89814f96160f564ab0e18",
+        "answer_sha256": "1e579e837fb3d6b5fb1c40d677c9596f10a64fe5da27feaa6dd5a9c7f8b56106",
+        "review_sha256": "0f634381c8b1656327d1943ea868733bbc0a01dbb043049b06afb2c09d96e1aa",
+        "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "codex-20260908T035504.472694Z-grist",
+      "service_id": "grist",
+      "route_id": "rest-api",
+      "entry_url": "https://support.getgrist.com/api/",
+      "task": {
+        "description": "帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "可访问的私有在线任务表链接；未完成事项及负责人、截止日期",
+        "success": "远端表中恰好包含三项行动、负责人和最终截止日期正确、书单已完成且另两项未完成；答复给出该表链接并正确列出两项未完成事项及日期；准备者通过服务API独立读取确认。允许自由选择字段与操作顺序，不要求先写入旧状态或输出证据文件",
+        "failure": "只给本地文件或Markdown、无真实远端表、漏项或重复、最终内容或未完成清单错误、预算内未完成。违反免费资源/测试容器/不通知约束也不通过；凭据或环境故障单列",
+        "id": "collaborative-tables-001",
+        "version": "v2",
+        "sha256": "e14854af8ccddcff3dd7d812b91dd624366ce42ef6df924d74bf910356e9e2f7",
+        "file": "data/experiments/tasks/collaborative-tables.md"
+      },
+      "prompt_sha256": "152051d410f014e8515d40509f8a94d03924cac8574c25d5c7ecf2117e4d826a",
+      "harness": {
+        "name": "Codex CLI",
+        "version": "codex-cli 0.153.4",
+        "mode": "exec --json",
+        "launcher": "scripts/codex-service-trial.py",
+        "launcher_sha256": "d36ed361ac2a7359c8db0fd5d297e6dda9df9e99de765d6632bf42472466dcc4"
+      },
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "started_at": "2026-09-08T03:55:04.657181+00:00",
+      "ended_at": "2026-09-08T03:58:44.280554+00:00",
+      "elapsed_seconds": 219.634,
+      "budget_seconds": 600,
+      "environment": {
+        "host": {
+          "system": "Darwin",
+          "release": "25.6.0",
+          "architecture": "arm64",
+          "python": "3.13.0"
+        },
+        "isolation": "fresh conversation/directory; same host, not VM isolation",
+        "service_credentials": "provided: GRIST_API_KEY, GRIST_WORKSPACE_ID",
+        "web_search": "live",
+        "preparation_note": "Existing dedicated free test account; API credential and a newly created empty workspace prepared before timing. No business schema, records or adapter supplied. Setup and external verification excluded from measured tokens/time. No payment enabled.",
+        "prompt_style": "natural",
+        "evidence_collection": "CLI events and external remote read",
+        "prompt_characters": 518
+      },
+      "status": "completed",
+      "reason": "Natural v2 created a real online table with three correct final actions and returned the matching link and two outstanding tasks. Independent remote read after executor exit matched all user facts. 11 business API requests observed in executed code and CLI outputs, within 40. Setup and external review excluded; one observation, not a typical-cost estimate or service ranking.",
+      "usage": {
+        "input_tokens": 536770,
+        "cached_input_tokens": 489088,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3983,
+        "reasoning_output_tokens": 902
+      },
+      "service_cost_usd": 0,
+      "human_interventions": 0,
+      "review": {
+        "method": "external_agent",
+        "reviewer": "external preparing Agent",
+        "reviewed_at": "2026-09-08T04:03:29.127453+00:00",
+        "checks": [
+          {
+            "criterion": "Create a real table in the supplied empty test container with exactly three correct final actions",
+            "passed": true,
+            "evidence": "prepared-empty-container.json shows empty baseline; reviewer-remote-read.json independently retrieves the created table, three rows, correct owners/dates and only the book list completed."
+          },
+          {
+            "criterion": "Return the actual online table link and correct outstanding tasks with owners and due dates",
+            "passed": true,
+            "evidence": "answer.md resource link matches independently retrieved resource identity; 场地 / 林青 / September 15 and 海报 / 陈禾 / September 20 match remote rows. Book list is completed."
+          },
+          {
+            "criterion": "Stay within free-resource, container, row, request and time limits without notifying anyone",
+            "passed": true,
+            "evidence": "selected-execution.json contains the executed business scripts and actual CLI outputs: 11 requests confined to the new synthetic container, one final task table and three rows, no invitations or paid operations. CLI exited 0 within 600 seconds. Existing dedicated free account; no payment or execution intervention."
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/answer.md",
+          "sha256": "b2c034613cfe86e91fb028f1498afb4417b017d25e5c0dada5e071d81c8e597e",
+          "note": "User-facing result; private resource links redacted.",
+          "source_sha256": "cc1a42c7f321d334ffc75b087af34c837e3ba95519b2c3a03f60ffe8fcde1a36",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/selected-execution.json",
+          "sha256": "109ffb88d6418b21fdc2fffd1fa52e22dd3a80be490630978eb34d4c2cbc70fe",
+          "note": "Selected real CLI commands/outputs and executor-authored code; public documentation output excluded.",
+          "source_sha256": "692c967bd2334a8786265d2e1c2d3084a3224461761c18a6926bdc53e68ff3d2",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/reviewer-remote-read.json",
+          "sha256": "69c72febb712ce8218cae62ccb556482d7bd383b021ac6a155630b7068eb871d",
+          "note": "External authenticated service read after measured execution; raw service responses plus normalized rows; not counted in executor usage.",
+          "source_sha256": "8556ac9720defa3078c285fd9160c3cc2c42df3032967bef39278770d6072e70",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        },
+        {
+          "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/prepared-empty-container.json",
+          "sha256": "aecb31582f609297bd423a52afaf1b5edc25a41487af8037632a36d77aeeafad",
+          "note": "Preparation-stage empty container snapshot, outside measured execution.",
+          "source_sha256": "258e3eaaef915e66327d4375c922a0b852b0bc76f81715579f2978624c1bf7a4",
+          "redactions": [
+            "local paths, Codex session identifiers or explicitly supplied service secrets"
+          ]
+        }
+      ],
+      "provenance": {
+        "local_run_dir": "data/experiments/results/trials/codex-20260908T035504.472694Z-grist",
+        "run_sha256": "d50829aa5dea38e2d9e65be9bd2e2ccb45da619f0c391bf344672c5b9a6830ba",
+        "events_sha256": "d8fcbe1b1fb1a7e97e3df30a4f6fa091e6b7d85cfa092cca72a3e1293840b12a",
+        "answer_sha256": "cc1a42c7f321d334ffc75b087af34c837e3ba95519b2c3a03f60ffe8fcde1a36",
+        "review_sha256": "c08b07a90cd1cc214503a40288eb575bd47803d63493176a43564299b689361a",
+        "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      }
+    },
+    {
+      "schema_version": 1,
       "run_id": "codex-20260908T032850.330773Z-notion",
       "service_id": "notion",
       "route_id": "rest-api",
