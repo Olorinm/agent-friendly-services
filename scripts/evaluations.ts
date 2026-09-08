@@ -112,7 +112,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   }
   const header = `| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |`;
-  const sections = [...groups].map(([classification, tasks]) => `## ${cell(classification)}\n\n` +
+  const sections = [...groups].map(([classification, tasks]) => `${classification.match(/（([a-z0-9/-]+)）/) ? `<a id="${classification.match(/（([a-z0-9/-]+)）/)![1].replaceAll('/', '-')}"></a>\n\n` : ''}## ${cell(classification)}\n\n` +
     [...tasks.values()].map(runs => {
       const task = runs[0].task;
       return `### ${cell(task.id)} / ${cell(task.version ?? task.sha256.slice(0, 8))}\n\n${cell(task.description)}\n\n${header}\n${runs.map(row).join('\n')}`;

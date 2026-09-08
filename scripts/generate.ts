@@ -16,7 +16,7 @@ const GENERATED_DIR = path.join(OUTPUT_ROOT, 'generated');
 
 const STALE_DAYS = 180;
 const REPO = 'Olorinm/agent-friendly-services';
-const RAW_JSON = `https://raw.githubusercontent.com/${REPO}/main/generated/providers.json`;
+const RAW_JSON = `https://raw.githubusercontent.com/${REPO}/main/generated/catalog.json`;
 
 const fields = loadFields();
 const categories = loadCategories();
@@ -275,7 +275,7 @@ const catalogOut = {
 };
 fs.writeFileSync(path.join(GENERATED_DIR, 'catalog.json'), JSON.stringify(catalogOut, null, 2) + '\n');
 const cell = (v: string) => v.replaceAll('|', '\\|').replaceAll('\n', ' ');
-const catalogRows = services.filter(s => s.catalog).flatMap(s => {
+const catalogRows = (items: typeof services) => items.filter(s => s.catalog).flatMap(s => {
   const c = s.catalog!;
   const identity = `[${cell(s.name)}](../data/${s.record_pool === 'provider' ? 'providers' : 'candidates'}/${s.id}.yaml)`;
   if (!c.routes.length) return [`| ${identity} | ${c.classifications.join(', ')} | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |`];
@@ -299,9 +299,7 @@ Access, requirements and published costs below are **public-source claims**. Sou
 
 Each row is an access route, not an independent data supplier. Services without an established route remain discoverable. No cost/quality ranking is implied.
 
-| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-${catalogRows.join('\n')}
+${[...new Set(services.flatMap(s => s.catalog?.classifications ?? []))].sort().map(classification => `\n<a id="${classification.replaceAll('/', '-')}"></a>\n\n## ${classification}\n\n| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n${catalogRows(services.filter(s => s.catalog?.classifications.includes(classification))).join('\n')}`).join('\n')}
 `);
 
 // ---------------------------------------------------------------------------
@@ -328,30 +326,6 @@ fs.writeFileSync(path.join(GENERATED_DIR, 'matrix.csv'), [csvCols.join(','), ...
 // README.md
 // ---------------------------------------------------------------------------
 const catName = (id: string) => categories.find((c) => c.id === id)?.name ?? id;
-
-// Link health (written by `npm run probe`); tolerate absence.
-let linkHealth: { checked_at: string; ok: number; inconclusive: number; broken: number } | null = null;
-try {
-  linkHealth = JSON.parse(fs.readFileSync(path.join(GENERATED_DIR, 'link-health.json'), 'utf8'));
-} catch {
-  /* no probe results yet */
-}
-
-function shieldText(s: string): string {
-  return encodeURIComponent(s.replace(/-/g, '--').replace(/_/g, '__')).replace(/%20/g, '_');
-}
-
-const verifiedCount = providers.filter((p) => isAgentVerified(p.id)).length;
-
-const badgeParts = [
-  `![Providers](https://img.shields.io/badge/providers-${providers.length}-2563eb)`,
-  verifiedCount ? `[![Agent-verified](https://img.shields.io/badge/agent--verified-${verifiedCount}-10b981)](${AGENT_RUNS})` : null,
-  linkHealth
-    ? `[![Link health](https://img.shields.io/badge/link_health-${shieldText(`${linkHealth.ok} ok, ${linkHealth.broken} broken`)}-${linkHealth.broken > 0 ? 'e11d48' : '10b981'})](./generated/link-health.json)`
-    : null,
-  `[![Last update](https://img.shields.io/github/last-commit/${REPO}?label=last%20update&color=8b5cf6)](https://github.com/${REPO}/commits/main)`,
-  `[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)`,
-].filter(Boolean);
 
 const activeCategories = categories.filter((c) => providers.some((p) => p.category === c.id));
 
@@ -511,210 +485,122 @@ ${notes.length ? `\n**Run notes** (agent-reported, verbatim):\n\n${notes.join('\
 `;
 fs.writeFileSync(path.join(GENERATED_DIR, 'agent-runs.md'), agentRunsMd);
 
-// README.md / README.zh-CN.md — awesome-style: one bullet per provider, details linked.
-// Provider names, summaries and category headings stay English in both languages
-// (single-source data, stable anchors); only the surrounding prose is translated.
-const DETAILS = './generated/providers.md';
+// README is the entry point; detailed catalogs and historical experiments have their own pages.
+// Derive coverage from task files and recorded runs so new domains appear on generation.
+const taskDir = 'data/experiments/tasks';
+const taskPages = fs.readdirSync(path.join(ROOT, taskDir)).filter(f => f.endsWith('.md') && f !== 'AGENTS.md')
+  .sort().map(file => {
+    const relative = `${taskDir}/${file}`;
+    const source = fs.readFileSync(path.join(ROOT, relative), 'utf8');
+    const classification = source.match(/^分类：(.+)$/m)?.[1].trim();
+    if (!classification) return null;
+    const ids = classification.match(/（([^）]+)）/)?.[1] ?? classification;
+    const runs = evaluations.filter(r => r.task.file === relative);
+    const serviceNames = [...new Set(runs.map(r => r.service_id))].sort()
+      .map(id => [...providers, ...candidates].find(p => p.id === id)?.name ?? id).join(', ');
+    return { relative, classification: classification.replace(/（[^）]+）/, '').trim(), ids, runs, serviceNames };
+  }).filter(p => p !== null);
+const directoryRows = (zh: boolean) => [...new Set(services.flatMap(s => s.catalog?.classifications ?? []))].sort().map(id => {
+  const task = taskPages.find(p => p.ids === id);
+  const count = services.filter(s => s.catalog?.classifications.includes(id)).length;
+  const runs = task?.runs ?? [];
+  const anchor = id.replaceAll('/', '-');
+  const category = categories.find(c => c.id === id.split('/')[0]);
+  const subcategory = category?.subcategories?.find(c => c.id === id.split('/')[1]);
+  const label = zh ? (task?.classification ?? id) : `${category?.name ?? id.split('/')[0]} / ${subcategory?.name ?? id.split('/')[1]}`;
+  return `| ${label} | [${count}](./generated/catalog.md#${anchor}) | ${task ? `[${zh ? '任务' : 'Tasks'}](./${task.relative})` : '—'} | ${runs.length ? `[${runs.length}](./generated/evaluations.md#${anchor})` : '—'} | ${task?.serviceNames || '—'} |`;
+}).join('\n');
 
-function awesomeLinks(p: Provider, allFactsLabel: string): string {
-  const e = p.entrypoints;
-  const parts: string[] = [];
-  if (e.api_reference) parts.push(`[API](${e.api_reference})`);
-  if (e.graphql && !e.api_reference) parts.push(`[GraphQL](${e.graphql})`);
-  if (e.mcp_official) parts.push(`[MCP](${e.mcp_official})`);
-  if (e.llms_txt) parts.push(`[llms.txt](${e.llms_txt})`);
-  if (e.openapi) parts.push(`[OpenAPI](${e.openapi})`);
-  if (e.cli) parts.push(`[CLI](${e.cli})`);
-  parts.push(`[${allFactsLabel}](${DETAILS}#${p.id})`);
-  return parts.join(' · ');
-}
-
-function awesomeEntry(p: Provider, labels: { allFacts: string; verified: string; vendor: string }): string {
-  const summary = p.summary.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
-  const crown = topMeasured.get(p.category) === p.id ? ' 🏆' : '';
-  const badge = isAgentVerified(p.id) ? ` · **[🤖✓ ${labels.verified}](${AGENT_RUNS}#${p.id})**` : '';
-  const vendor = p.submitted_by === 'vendor' ? ` · *${labels.vendor}*` : '';
-  return `- **[${p.name}](${p.entrypoints.docs})**${crown} — ${summary}. ${awesomeLinks(p, labels.allFacts)}${badge}${vendor}`;
-}
-
-// GitHub heading slugs: lowercase, strip punctuation, each space becomes one hyphen.
-const toc = activeCategories
-  .map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s/g, '-')})`)
-  .join(' · ');
-
-function categorySections(labels: { allFacts: string; verified: string; vendor: string }): string {
-  return activeCategories
-    .map((cat) => {
-      const list = providers.filter((p) => p.category === cat.id);
-      return `## ${cat.name}
-
-${list.map((p) => awesomeEntry(p, labels)).join('\n')}`;
-    })
-    .join('\n\n');
-}
-
-// Keep task observations separate from legacy M1 first-call checks.
-function candidateRow(p: Provider): string {
-  const m1 = m1Status(p.id);
-  const m1Cell = m1
-    ? `[${m1.verdict === 'pass' ? '✓ pass' : '✗ fail'} (${m1.passes}/${m1.reps}) · ${m1.date}](./data/experiments/published/${p.id}/${m1.transcript})`
-    : '—';
-  const runs = evaluations.filter(r => r.service_id === p.id);
-  const observations = ['completed', 'not_completed', 'invalid_run']
-    .map(status => ({ status, count: runs.filter(r => r.status === status).length }))
-    .filter(r => r.count > 0).map(r => `${r.count} ${r.status}`).join(' · ');
-  const taskCell = runs.length ? `[${observations}](./generated/evaluations.md)` : '—';
-  return `| [${p.name}](${p.homepage}) | ${catName(p.category)} | ${p.submitted_by} | ${taskCell} | ${m1Cell} | [yaml](./data/candidates/${p.id}.yaml) |`;
-}
-
-const candidatePoolEn = candidates.length
-  ? `## Candidate pool
-
-Collected services include tested, untested and gated entries ([pool rules](./docs/candidate-pool.md)). Browse the [route catalog](./generated/catalog.md) or use MCP \`search_services\` / \`get_service\` for access, personal eligibility and costs. Task observations apply only to their recorded route, task and configuration; invalid runs are environment failures. Public-source claims and legacy M1 checks are separate. A dash means no record of that test type.
-
-| Candidate | Category | Submitted by | Task observations | Legacy M1 first-call | Claims |
-| --- | --- | --- | --- | --- | --- |
-${candidates.map(candidateRow).join('\n')}
-
-`
-  : '';
-
-const candidatePoolZh = candidates.length
-  ? `## 候选池
-
-已收录的服务包括已测、未测、有门槛和暂未找到接口的选择（[候选池规则](./docs/candidate-pool.md)）。[接入目录](./generated/catalog.md)和 MCP \`search_services\` / \`get_service\` 可查入口、个人准入与费用。任务实测仅说明对应入口、任务和配置的观察，环境无效不算服务失败。[收录标准](./docs/catalog-standard.zh-CN.md)区分公开资料和实测；旧M1首次请求单独展示，“—”表示没有该类测试记录。
-
-| 候选 | 类别 | 提交方 | 任务实测 | 历史M1首次调用 | 声明 |
-| --- | --- | --- | --- | --- | --- |
-${candidates.map(candidateRow).join('\n')}
-
-`
-  : '';
-
-const readme = `<!-- GENERATED FILE — do not edit. Run \`npm run generate\`. Source of truth: data/ -->
+const readme = `<!-- GENERATED — edit scripts/generate.ts; run npm run generate. -->
 
 # Agent-Friendly Services
 
 English | [简体中文](./README.zh-CN.md)
 
-Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md), [databases](./data/experiments/tasks/databases.md) and [collaborative tables](./data/experiments/tasks/collaborative-tables.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains ${providers.length} services, with [historical experiments](${AGENT_RUNS}) kept separately.
+**Find services that let your Agent complete tasks, and use real tests to compare reliability, setup effort and cost.**
 
-${badgeParts.join('\n')}
+Finding a service is only the start. Before your Agent can use it, you may need to read the docs, create an account and work out whether the available API actually does what you need. We collect the options and test them on real tasks, so you and your Agent have less of that work to repeat. We focus on what an ordinary personal user can access, including the hurdles along the way.
 
-**🤖 Agents** — add the MCP server, or fetch the whole dataset as one JSON file:
+## Browse the services
 
-\`\`\`bash
-# MCP server — tools: search_providers, get_provider, list_categories, get_stats
-claude mcp add agent-friendly-services -- npx -y github:${REPO}
+Pick a category below to see its candidates, the tasks we designed and the results we recorded.
 
-# Or skip the server: the same data as one JSON file
+| Category / subcategory | Candidates | Task definitions | Recorded runs | Services with runs |
+| --- | ---: | --- | ---: | --- |
+${directoryRows(false)}
+
+[All candidates and access routes](./generated/catalog.md) · [All task results and evidence](./generated/evaluations.md) · [Legacy provider index (${providers.length})](./generated/providers.md)
+
+Open a result to see what the Agent accomplished, what it needed, and the tokens, time and service charges involved. Each run includes its task, model, date and supporting evidence so you can judge how closely it matches your situation.
+
+This is a growing collection. Untested services and access restrictions stay visible, and run counts include earlier task versions and unsuccessful attempts. A successful run is useful evidence; it takes more comparable runs to recommend a service with confidence.
+
+## Let your Agent use the directory
+
+You can give your Agent the query guide below and ask it to find options for your task, check the access requirements and explain its choice using the available evidence.
+
+[Query guide](./llms.txt) · [Catalog JSON](./generated/catalog.json) · [Results JSON](./generated/evaluations.json) · [MCP setup](./mcp/README.md)
+
+Use \`search_services\` to filter by category/subcategory and access route, then \`get_service\` to inspect eligibility, costs and task evidence. Without MCP:
+
+\`\`\`sh
 curl -s ${RAW_JSON}
 \`\`\`
 
-Other MCP clients: command \`npx\`, args \`["-y", "github:${REPO}"]\` ([details](./mcp/)). Repo map: [\`llms.txt\`](./llms.txt) · contribution manual: [\`AGENTS.md\`](./AGENTS.md).
+## Help us fill the gaps
 
-**🧑‍💻 Humans** — browse below: each name links to the docs, the trailing links are what officially exists (a missing link means "no known URL", not "confirmed absent"). Full fact sheets with evidence and dates: [provider details](${DETAILS}#providers) · measured runs & route comparison: [agent runs](${AGENT_RUNS}) · spreadsheet: [\`matrix.csv\`](./generated/matrix.csv).
+Know a service we missed, have a task you would like tested, or found something that has changed? Issues and PRs are welcome. A useful lead or a correction is a contribution too.
 
-**🏢 Vendors** — fix your own entry in one PR with documentation (not marketing) as evidence. New services enter the [candidate pool](./docs/candidate-pool.md) and are promoted only after a measured agent run — claims are tested, not argued ([rules](./docs/contributing.md)).
+[Principles](./AGENTS.md) · [Inclusion standards](./docs/catalog-standard.zh-CN.md) · [Task design](./data/experiments/tasks/AGENTS.md) · [Execution and review](./data/experiments/AGENTS.md) · [Contributing](./docs/contributing.md) · [Flight findings](./docs/flights.zh-CN.md)
 
-<details open>
-<summary><b>Capability matrix</b> — all ${providers.length} providers at a glance (✓ supported · ◐ partial · ✗ unsupported · — unknown · Agent: verified routes, h=http c=cli m=mcp)</summary>
-
-${matrixTables(DETAILS, (name) => `**${name}**`)}
-
-</details>
-
----
-
-${toc}
-
-${categorySections({ allFacts: 'all facts →', verified: 'agent-verified', vendor: 'vendor-submitted' })}
-
-${candidatePoolEn}## Contributing
-
-One fact = one contribution: report a broken link (2 min, [issue form](../../issues/new/choose)) · resolve one of the **${totalUnknown} open \`unknown\`s** (15 min) · add a provider (1–2 h, [inclusion rules](./docs/methodology.md#inclusion-rules)). CI validates everything mechanical; humans only review evidence quality. Full guide: [\`docs/contributing.md\`](./docs/contributing.md).
-
-Have a coding agent? Point it at a checkout and paste:
-
-\`\`\`text
-Read AGENTS.md, then resolve one "unknown" check: find official evidence, update
-the provider YAML (or leave it unknown if evidence is genuinely missing), run
-npm run validate, and open a small PR.
-\`\`\`
-
-## Related
-
-[Fern Agent Score](https://buildwithfern.com/agent-score) (docs-site readiness scoring — we deliberately don't duplicate it) · [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/) · [official MCP Registry](https://registry.modelcontextprotocol.io/) · [llms.txt hub](https://llmstxthub.com/)
-
-## License
-
-Code: [MIT](./LICENSE) · Data (\`data/\`, \`generated/\`): [CC BY 4.0](./LICENSE-DATA)
+Code: [MIT](./LICENSE) · Data: [CC BY 4.0](./LICENSE-DATA).
 `;
-
 fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.md'), readme);
 
-const readmeZh = `<!-- 生成文件 — 请勿手改。运行 \`npm run generate\`。数据源：data/ -->
+const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 npm run generate。 -->
 
-# Agent-Friendly Services（智能体友好服务索引）
+# Agent-Friendly Services
 
 [English](./README.md) | 简体中文
 
-从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)，任务表已覆盖[机票](./data/experiments/tasks/travel-flights.md)、[网页搜索](./data/experiments/tasks/web-search.md)、[数据库](./data/experiments/tasks/databases.md)和[协作任务表](./data/experiments/tasks/collaborative-tables.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 ${providers.length} 个服务的旧索引，[既有实验](${AGENT_RUNS})单独展示。
+**帮你找到能让 Agent 完成任务的服务，并用实测比较哪个更可靠、更省事、更有性价比。**
 
-${badgeParts.join('\n')}
+让 Agent 帮忙找机票、准备数据库或整理会议待办，往往还得先选服务、读文档、申请账号，再试试到底能不能用。我们把这些选择收集起来，用真实任务逐步验证，让你和你的 Agent 少走一些重复的弯路。我们关注普通个人能用上的服务，注册、权限和付费门槛也会一并记录。
 
-**🤖 智能体** —— 添加 MCP 服务器，或直接把完整数据集当一个 JSON 文件拉取：
+## 看看有哪些服务
 
-\`\`\`bash
-# MCP 服务器 —— 工具：search_providers、get_provider、list_categories、get_stats
-claude mcp add agent-friendly-services -- npx -y github:${REPO}
+按下面的分类，可以找到候选服务、我们设计的任务，以及已经留下的实测结果。
 
-# 不装服务器也行：同一份数据就是一个 JSON 文件
+| 大类 / 子类 | 候选服务 | 任务定义 | 实测记录 | 有运行记录的服务 |
+| --- | ---: | --- | ---: | --- |
+${directoryRows(true)}
+
+[全部候选与接入方式](./generated/catalog.md) · [全部实测与证据](./generated/evaluations.md) · [旧版服务索引（${providers.length}）](./generated/providers.md)
+
+点开实测记录，可以看到 Agent 实际做成了什么、需要哪些准备，以及用了多少 token、时间和服务费用。每次运行也保留任务、模型、日期与证据，方便你判断结果是否适用于自己的情况。
+
+资料还在持续积累。未测的服务、遇到的接入门槛都会保留，运行次数也包含历史版本和未成功的尝试。一次成功能提供参考；要推荐谁更值得用，还需要更多可比的结果。
+
+## 也可以交给你的 Agent 来查
+
+把下面的查询指引交给你的 Agent，让它结合你的任务寻找候选、核对接入条件，再根据已有证据说明推荐理由。
+
+[查询指引](./llms.txt) · [服务 JSON](./generated/catalog.json) · [实测 JSON](./generated/evaluations.json) · [MCP 配置](./mcp/README.md)
+
+通过 \`search_services\` 按分类和接入方式检索，再用 \`get_service\` 查看个人准入条件、费用与实测依据。不安装 MCP 也可直接读取：
+
+\`\`\`sh
 curl -s ${RAW_JSON}
 \`\`\`
 
-其他 MCP 客户端：command \`npx\`，args \`["-y", "github:${REPO}"]\`（[详情](./mcp/)）。仓库地图：[\`llms.txt\`](./llms.txt) · 智能体贡献手册：[\`AGENTS.md\`](./AGENTS.md)。
+## 一起补全这份资料
 
-**🧑‍💻 人类** —— 直接往下浏览：服务名链到官方文档，后面跟着的是官方确认存在的入口（没有链接表示"暂无已知 URL"，不代表"确认不存在"）。带证据和日期的完整事实表：[提供商详情](${DETAILS}#providers) · 实测运行与路线对比：[agent runs](${AGENT_RUNS}) · 表格版：[\`matrix.csv\`](./generated/matrix.csv)。
+如果你知道我们漏掉的服务、有想测的真实任务，或发现资料已经过时，欢迎提 Issue 或 PR。提供一条线索、纠正一个事实，都能帮上忙。
 
-**🏢 服务商** —— 欢迎自己维护自己的条目：一个 PR、以文档（而非营销页）为证据。新服务先进入[候选池](./docs/candidate-pool.md)，通过 agent 实测后才晋升 —— 声明靠实测说话（[规则](./docs/contributing.md)）。
+[核心理念](./AGENTS.md) · [收录标准](./docs/catalog-standard.zh-CN.md) · [任务设计](./data/experiments/tasks/AGENTS.md) · [执行与验收](./data/experiments/AGENTS.md) · [参与贡献](./docs/contributing.md) · [机票阶段结论](./docs/flights.zh-CN.md)
 
-> 提供商简介与详情页保持英文原文（数据单一来源，避免翻译漂移）；本页仅翻译框架文字。
-
-<details open>
-<summary><b>能力矩阵表</b> —— ${providers.length} 家提供商一览（✓ 支持 · ◐ 部分 · ✗ 不支持 · — 未知 · Agent 列：已验证路线，h=http c=cli m=mcp）</summary>
-
-${matrixTables(DETAILS, (name) => `**${name}**`)}
-
-</details>
-
----
-
-${toc}
-
-${categorySections({ allFacts: '全部事实 →', verified: '实测验证', vendor: '厂商提交' })}
-
-${candidatePoolZh}## 参与贡献
-
-一条事实 = 一次贡献：报告失效链接（2 分钟，[issue 表单](../../issues/new/choose)） · 解决 **${totalUnknown} 个待查 \`unknown\`** 中的一个（15 分钟） · 新增一个提供商（1–2 小时，[收录规则](./docs/methodology.md#inclusion-rules)）。机械性检查全部由 CI 完成，人工只审证据质量。完整指南：[\`docs/contributing.md\`](./docs/contributing.md)。
-
-有编程智能体？让它打开本仓库的检出目录，然后粘贴：
-
-\`\`\`text
-Read AGENTS.md, then resolve one "unknown" check: find official evidence, update
-the provider YAML (or leave it unknown if evidence is genuinely missing), run
-npm run validate, and open a small PR.
-\`\`\`
-
-## 相关项目
-
-[Fern Agent Score](https://buildwithfern.com/agent-score)（文档站就绪度打分 —— 我们刻意不重复它的工作） · [Cloudflare Agent Readiness](https://blog.cloudflare.com/agent-readiness/) · [官方 MCP Registry](https://registry.modelcontextprotocol.io/) · [llms.txt hub](https://llmstxthub.com/)
-
-## 许可证
-
-代码：[MIT](./LICENSE) · 数据（\`data/\`、\`generated/\`）：[CC BY 4.0](./LICENSE-DATA)
+代码：[MIT](./LICENSE) · 数据：[CC BY 4.0](./LICENSE-DATA)。
 `;
-
 fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.zh-CN.md'), readmeZh);
 
 console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/candidates.json, generated/catalog.json, generated/catalog.md, generated/evaluations.json, generated/evaluations.md, generated/research.json, generated/research.md, generated/matrix.csv, generated/agent-runs.md`);

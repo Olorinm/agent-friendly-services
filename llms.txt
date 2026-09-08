@@ -1,34 +1,28 @@
-# Agent-Friendly Services Index
+# Agent-Friendly Services
 
-> A community-maintained, evidence-backed directory of service entry points for
-> AI agents: where the docs are, how to authenticate, what is machine-readable,
-> and how fresh that information is.
+> Find services for user tasks and compare access requirements, reviewed outcomes and costs.
 
-## Core Files
+## Query
 
-- [Flight findings](./docs/flights.zh-CN.md): Discovery, tasks and independently reviewed local Codex trials; limited samples do not establish a general ranking.
-- [Task results](./generated/evaluations.json): Reviewed outcomes, harness/model/effort, timestamps, Agent token usage, service costs and selected evidence.
-- [Execution instructions](./data/experiments/AGENTS.md): Start a fresh measured session from a task, independently review evidence and record results.
-- [Research JSON](./generated/research.json): Cross-category demand research, not a benchmark or usage-frequency estimate.
-- [Research briefs](./data/research/): One source file per category/subcategory, validated by schema/research.schema.json.
-- [Service discovery](./generated/catalog.json): Candidates and documented access routes, with separately identified task observations for each tested route.
-- [Providers JSON](./generated/providers.json): Full machine-readable dataset with derived badges and freshness. Start here.
-- Canonical raw URL for external agents: https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/providers.json
-- [MCP server](./mcp/README.md): `npx -y github:Olorinm/agent-friendly-services` — search_services / get_service expose discovery and task observations; search_providers / get_provider / list_categories / get_stats retain the legacy index.
-- [Provider details](./generated/providers.md): Human-readable fact sheets — all entry points, checks, evidence, dates, and open unknowns per provider.
-- [Provider sources](./data/providers/): One YAML per provider (source of truth).
-- [Field definitions](./data/fields.yaml): What every entrypoint and check means, and how each is verified.
-- [Categories](./data/categories.yaml): Canonical category list.
-- [Schema](./schema/provider.schema.json): Provider file schema.
-- [Link health](./generated/link-health.json): Weekly probe results for every URL in the dataset.
-- [Methodology](./docs/methodology.md): Scope, principles, and how verification works.
-- [Contributing](./docs/contributing.md): How to maintain providers and user-needs research. Initialize a brief with `npm run research:init -- <category/subcategory>`.
-- [Agent instructions](./AGENTS.md): Core goals and evidence principles; retain durable findings without duplicate process reports.
+- [Catalog JSON](https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/catalog.json): categories, subcategories, services, access routes, personal eligibility, published costs and route-specific task observations.
+- [Results JSON](https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/evaluations.json): frozen tasks, outcomes, run conditions, tokens, service charges and evidence paths.
+- [MCP setup and parameters](./mcp/README.md): `search_services` filters candidates; `get_service` returns full service details.
+- Example: `search_services({"subcategory":"travel/flights"})`, then `get_service({"id":"kiwi"})`.
 
-## Rules For Agents
+Start with the user's domain and constraints. Inspect candidate routes and relevant task records before recommending a service. Report why it fits, access requirements, observed results, costs, evidence dates and unresolved gaps. Official entry URLs are in the catalog.
 
-- `data/providers/*.yaml` is the source of truth; `generated/providers.json` is its faithful export.
-- A missing entrypoint means "no known URL", not "confirmed absent".
-- Check statuses: supported | partial | unsupported | unknown | not_applicable.
-- Every supported/partial check has an official evidence URL and a per-check `verified` date.
-- URL liveness is machine-checked weekly; human-verified facts carry their own dates. Trust accordingly.
+A documented route is not a task pass. Results apply only to the recorded route, task/version and setup; unknown costs are not zero. Cached input tokens are included in input totals. Setup outside the measured run is disclosed separately. Do not infer a general ranking from isolated trials or contact/register with a provider merely to query this directory.
+
+## Browse
+
+- [Service catalog](./generated/catalog.md)
+- [Task definitions](./data/experiments/tasks/)
+- [Task results](./generated/evaluations.md)
+- [Legacy provider facts](./generated/providers.md)
+
+## Maintain this repository
+
+- [Core principles](./AGENTS.md)
+- [Discovery](./data/candidates/AGENTS.md)
+- [Task design](./data/experiments/tasks/AGENTS.md)
+- [Execution and external review](./data/experiments/AGENTS.md)
