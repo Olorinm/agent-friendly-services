@@ -118,3 +118,16 @@ are labeled `vendor-submitted` wherever they render.
 Schema compliance (CI does this), evidence reliability, over-optimistic
 statuses, category and naming rules, duplicates. **Not** reviewed: fame,
 "worthiness", subjective quality — the directory records facts only.
+
+### Link-health maintenance
+
+`npm run probe -- --only=kiwi,hugging-face` writes a targeted report to the ignored
+`data/experiments/results/selected-link-health.json`; it does not replace the full
+weekly report. Use `--output=path` to choose another destination.
+
+Known MCP entry points are probed with `Accept: application/json, text/event-stream`.
+A 406 or 405 is inconclusive, not a dead link. Protocol discovery can establish that
+an MCP server answers, but does not prove a user task succeeds. Full reports retain
+`checked_at` for the full sweep; a selectively refreshed entry has its own
+`checked_at`, with `last_partial_check_at` on the report. Unchecked entries keep their
+original dates.

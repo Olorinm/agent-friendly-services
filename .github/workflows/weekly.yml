@@ -51,7 +51,7 @@ jobs:
             const broken = health.results.filter(r => r.class === 'broken');
             if (broken.length === 0) return;
             const body = [
-              'The weekly probe found broken links. Inconclusive results (403/429, WAF blocks) are excluded — only real 404/410/5xx/network failures are listed.',
+              'The weekly probe found broken links. Authentication, protocol negotiation and other inconclusive responses are excluded. Only 404/410/5xx or repeated network failures are listed; these observations do not establish permanent failure.',
               '',
               ...broken.map(r => `- [ ] \`${r.status ?? r.detail}\` ${r.url}\n  - used by: ${r.sources.join(', ')}`),
               '',

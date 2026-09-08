@@ -2,8 +2,8 @@
   "checked_at": "2026-09-07T11:45:06.100Z",
   "total": 930,
   "ok": 914,
-  "inconclusive": 15,
-  "broken": 1,
+  "inconclusive": 16,
+  "broken": 0,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -4311,9 +4311,12 @@
       "url": "https://huggingface.co/docs/hub/rate-limits",
       "class": "ok",
       "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
       "sources": [
         "hugging-face:entrypoints.rate_limits"
-      ]
+      ],
+      "checked_at": "2026-09-08T10:59:29.221Z"
     },
     {
       "url": "https://huggingface.co/docs/hub/security-tokens",
@@ -4700,11 +4703,26 @@
     },
     {
       "url": "https://mcp.kiwi.com",
-      "class": "broken",
-      "status": 406,
+      "class": "inconclusive",
+      "status": 405,
+      "method": "HEAD",
+      "accept": "application/json, text/event-stream",
       "sources": [
         "kiwi:catalog.routes.search-mcp.entry_url"
-      ]
+      ],
+      "checked_at": "2026-09-08T10:59:29.221Z",
+      "detail": "HTTP reachability is inconclusive (GET not supported); independent MCP initialize and tools/list succeeded. No flight-search tool was called.",
+      "mcp_discovery": {
+        "checked_at": "2026-09-08T10:59:53.880Z",
+        "server": {
+          "name": "kiwicom-flight-search",
+          "version": "1.28.1"
+        },
+        "tools": [
+          "search-flight",
+          "feedback-to-devs"
+        ]
+      }
     },
     {
       "url": "https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/",
@@ -7883,5 +7901,6 @@
         "zapier:checks.self_serve_signup.evidence"
       ]
     }
-  ]
+  ],
+  "last_partial_check_at": "2026-09-08T10:59:29.221Z"
 }

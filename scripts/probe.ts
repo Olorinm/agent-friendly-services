@@ -4,81 +4,23 @@
  *
  * Classification:
  *   ok           2xx/3xx — the page answers
- *   inconclusive 401/403/405/429 or a bot challenge — a human should re-check;
+ *   inconclusive client/auth/protocol errors (including 406) — re-check the request;
  *                NEVER treated as broken (WAFs routinely block CI runners)
  *   broken       404/410/5xx or repeated network failure
  *
- * Usage: npm run probe [-- --only=stripe,github]
+ * Usage: npm run probe [-- --only=stripe,github] [--output=path]
+ * Targeted checks default to ignored local output, preserving the full weekly report.
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { GENERATED_DIR, loadProviders, loadCandidates, providerUrls } from './lib.ts';
+import { ROOT, GENERATED_DIR, loadProviders, loadCandidates, providerUrls } from './lib.ts';
 
-const UA = 'agent-friendly-services-probe/0.1 (link health check; non-commercial index)';
-const TIMEOUT_MS = 15_000;
+import { probeUrl } from './link-probe.ts';
+
 const CONCURRENCY = 8;
-
-type Cls = 'ok' | 'inconclusive' | 'broken';
-
-interface Result {
-  url: string;
-  class: Cls;
-  status: number | null;
-  detail?: string;
-  sources: string[];
-}
-
-const only = process.argv
-  .find((a) => a.startsWith('--only='))
-  ?.slice('--only='.length)
-  .split(',');
-
-async function fetchStatus(url: string, method: 'HEAD' | 'GET'): Promise<{ status: number } | { error: string }> {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
-  try {
-    const res = await fetch(url, {
-      method,
-      redirect: 'follow',
-      signal: ctrl.signal,
-      headers: { 'user-agent': UA, accept: '*/*' },
-    });
-    // Drain tiny bit / cancel body so sockets free up.
-    try {
-      await res.body?.cancel();
-    } catch {
-      /* ignore */
-    }
-    return { status: res.status };
-  } catch (e) {
-    return { error: e instanceof Error ? (e.cause as Error | undefined)?.message ?? e.message : String(e) };
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-function classify(status: number): Cls {
-  if (status >= 200 && status < 400) return 'ok';
-  if ([401, 403, 405, 407, 429].includes(status)) return 'inconclusive';
-  return 'broken';
-}
-
-async function probe(url: string): Promise<Omit<Result, 'sources' | 'url'>> {
-  let r = await fetchStatus(url, 'HEAD');
-  // Many servers reject HEAD (405) or treat it oddly — retry with GET on any non-2xx.
-  if ('error' in r || r.status >= 300) {
-    const g = await fetchStatus(url, 'GET');
-    if (!('error' in g)) r = g;
-    else if ('error' in r) {
-      // two network failures in a row
-      const retry = await fetchStatus(url, 'GET');
-      if ('error' in retry) return { class: 'broken', status: null, detail: retry.error };
-      r = retry;
-    }
-  }
-  if ('error' in r) return { class: 'broken', status: null, detail: r.error };
-  return { class: classify(r.status), status: r.status };
-}
+const only = process.argv.find(a => a.startsWith('--only='))?.slice('--only='.length).split(',');
+const output = process.argv.find(a => a.startsWith('--output='))?.slice('--output='.length)
+  ?? path.join(only ? path.join(ROOT, 'data/experiments/results') : GENERATED_DIR, only ? 'selected-link-health.json' : 'link-health.json');
 
 async function main() {
   // Candidate-pool URLs are probed too — a dead link in a candidate is a fact
@@ -92,15 +34,19 @@ async function main() {
     }
   }
 
+  const mcpUrls = new Set(providers.flatMap(p => [
+    ...[p.data.entrypoints.mcp_official ?? []].flat(),
+    ...(p.data.catalog?.routes ?? []).filter(r => r.interface === 'mcp').map(r => r.entry_url),
+  ]));
   const urls = [...byUrl.keys()];
   console.log(`Probing ${urls.length} unique URLs from ${providers.length} providers...`);
 
-  const results: Result[] = [];
+  const results: (Awaited<ReturnType<typeof probeUrl>> & { url: string; sources: string[] })[] = [];
   let cursor = 0;
   async function worker() {
     while (cursor < urls.length) {
       const url = urls[cursor++];
-      const r = await probe(url);
+      const r = await probeUrl(url, { mcp: mcpUrls.has(url) });
       results.push({ url, ...r, sources: byUrl.get(url)! });
       const mark = r.class === 'ok' ? '·' : r.class === 'inconclusive' ? '?' : '✗';
       process.stdout.write(mark);
@@ -116,9 +62,9 @@ async function main() {
     broken: results.filter((r) => r.class === 'broken').length,
   };
 
-  fs.mkdirSync(GENERATED_DIR, { recursive: true });
+  fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(
-    path.join(GENERATED_DIR, 'link-health.json'),
+    output,
     JSON.stringify({ checked_at: new Date().toISOString(), total: results.length, ...summary, results }, null, 2) + '\n',
   );
 
