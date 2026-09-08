@@ -544,10 +544,11 @@ function serviceList(zh: boolean): string {
       }
       const source = providers.some(provider => provider.id === p.id)
         ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
-      const summary = p.summary.replace(/\s+/g, ' ').trim();
-      return `- **[${p.name}](${p.homepage})** — ${summary} ${entryLinks.join(' · ')} · [${zh ? '资料' : 'Details'}](${source}) · ${status}`;
+      const summary = cell(p.summary.replace(/\s+/g, ' ').trim());
+      return `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`;
     });
-    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${rows.join('\n')}`;
+    const header = zh ? '| 服务 | 用途 | 接入方式 | 实测状态 |' : '| Service | Purpose | Access | Task results |';
+    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${header}\n| --- | --- | --- | --- |\n${rows.join('\n')}`;
   });
   return `${navigation}\n\n${sections.join('\n\n')}`;
 }
