@@ -511,6 +511,47 @@ const directoryRows = (zh: boolean) => [...new Set(services.flatMap(s => s.catal
   return `| ${label} | [${count}](./generated/catalog.md#${anchor}) | ${task ? `[${zh ? '任务' : 'Tasks'}](./${task.relative})` : '—'} | ${runs.length ? `[${runs.length}](./generated/evaluations.md#${anchor})` : '—'} | ${task?.serviceNames || '—'} |`;
 }).join('\n');
 
+// Expand every collected service once under its primary category; source records remain shared.
+const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
+const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id));
+function serviceList(zh: boolean): string {
+  const navigation = listedCategories.map(c => `[${c.name}](#services-${c.id})`).join(' · ');
+  const sections = listedCategories.map(c => {
+    const rows = listedServices.filter(p => p.category === c.id).map(p => {
+      const routes = p.catalog?.routes ?? [];
+      const links: [string, string][] = routes.length
+        ? routes.map(r => [routes.filter(other => other.interface === r.interface).length > 1
+            ? `${r.interface.toUpperCase()}: ${r.id}` : r.interface.toUpperCase(), r.entry_url])
+        : Object.entries({ Docs: p.entrypoints.docs, API: p.entrypoints.api_reference,
+            MCP: p.entrypoints.mcp_official, CLI: p.entrypoints.cli })
+            .filter((pair): pair is [string, string] => Boolean(pair[1]));
+      const entryLinks = [...new Map(links.map(([label, url]) => [url, `[${label}](${url})`])).values()];
+      const runs = evaluations.filter(r => r.service_id === p.id);
+      let status = zh ? '待实测' : 'Not yet task-tested';
+      if (runs.length) {
+        const counts = [
+          ['completed', zh ? '完成' : 'completed'],
+          ['not_completed', zh ? '未完成' : 'not completed'],
+          ['invalid_run', zh ? '环境无效' : 'invalid environment'],
+        ].map(([key, label]) => ({ count: runs.filter(r => r.status === key).length, label }))
+          .filter(x => x.count).map(x => `${x.count} ${x.label}`).join(' / ');
+        status = `[${counts}](./generated/evaluations.md)`;
+      } else if (agentRunsByProvider.has(p.id)) {
+        status = `[${zh ? '历史实测' : 'Legacy trials'}](./generated/agent-runs.md#${p.id})`;
+      } else if (m1Status(p.id)) {
+        const m1 = m1Status(p.id)!;
+        status = `[${zh ? '历史首次调用检查' : 'Legacy first-call check'}](./data/experiments/published/${p.id}/${m1.transcript})`;
+      }
+      const source = providers.some(provider => provider.id === p.id)
+        ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
+      const summary = p.summary.replace(/\s+/g, ' ').trim();
+      return `- **[${p.name}](${p.homepage})** — ${summary} ${entryLinks.join(' · ')} · [${zh ? '资料' : 'Details'}](${source}) · ${status}`;
+    });
+    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${rows.join('\n')}`;
+  });
+  return `${navigation}\n\n${sections.join('\n\n')}`;
+}
+
 const readme = `<!-- GENERATED — edit scripts/generate.ts; run npm run generate. -->
 
 # Agent-Friendly Services
@@ -529,7 +570,7 @@ Pick a category below to see its candidates, the tasks we designed and the resul
 | --- | ---: | --- | ---: | --- |
 ${directoryRows(false)}
 
-[All candidates and access routes](./generated/catalog.md) · [All task results and evidence](./generated/evaluations.md) · [Legacy provider index (${providers.length})](./generated/providers.md)
+[Full service list](#all-services) · [All candidates and access routes](./generated/catalog.md) · [All task results and evidence](./generated/evaluations.md) · [Legacy provider index (${providers.length})](./generated/providers.md)
 
 Open a result to see what the Agent accomplished, what it needed, and the tokens, time and service charges involved. Each run includes its task, model, date and supporting evidence so you can judge how closely it matches your situation.
 
@@ -546,6 +587,14 @@ Use \`search_services\` to filter by category/subcategory and access route, then
 \`\`\`sh
 curl -s ${RAW_JSON}
 \`\`\`
+
+<a id="all-services"></a>
+
+## All services (${listedServices.length})
+
+Browse the full collection below, grouped by primary category. Links show recorded access routes; task counts apply only to their recorded tasks and conditions. Legacy checks are labeled separately.
+
+${serviceList(false)}
 
 ## Help us fill the gaps
 
@@ -575,7 +624,7 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 | --- | ---: | --- | ---: | --- |
 ${directoryRows(true)}
 
-[全部候选与接入方式](./generated/catalog.md) · [全部实测与证据](./generated/evaluations.md) · [旧版服务索引（${providers.length}）](./generated/providers.md)
+[浏览大名单](#all-services) · [全部候选与接入方式](./generated/catalog.md) · [全部实测与证据](./generated/evaluations.md) · [旧版服务索引（${providers.length}）](./generated/providers.md)
 
 点开实测记录，可以看到 Agent 实际做成了什么、需要哪些准备，以及用了多少 token、时间和服务费用。每次运行也保留任务、模型、日期与证据，方便你判断结果是否适用于自己的情况。
 
@@ -592,6 +641,14 @@ ${directoryRows(true)}
 \`\`\`sh
 curl -s ${RAW_JSON}
 \`\`\`
+
+<a id="all-services"></a>
+
+## 服务大名单（${listedServices.length}）
+
+下面按主分类列出全部已收录服务，可以直接浏览用途和接入链接。实测次数只对应记录中的任务与条件，历史检查单独标明；服务简介沿用来源资料的英文描述。
+
+${serviceList(true)}
 
 ## 一起补全这份资料
 
