@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260908T032850.330773Z-notion",
+  "service_id": "notion",
+  "route_id": "rest-api",
+  "entry_url": "https://developers.notion.com/reference/intro",
+  "task": {
+    "description": "把一次读书会筹备会的行动项整理成在线任务表，更新进展，然后告诉我还剩什么没完成",
+    "inputs": "合成会议 M01：行动 A01，林青负责确认场地，截止 2026-09-15；行动 A02，周舟负责整理书单，截止 2026-09-16；行动 A03，陈禾负责制作海报，截止 2026-09-18。三项初始均为待办。后续更新：A02 已完成；A03 的截止日期改为 2026-09-20，负责人和其他字段不变。提供仅用于测试的免费账户凭据和空容器，其 ID 在凭据文件中；不预建业务表或字段。通过指定入口创建在线表格，字段至少包含行动编号、会议编号、内容、负责人、截止日期和状态。所有人名仅为文本，不邀请或通知真实账户。限新建一份任务表及必要父文档、最多 10 行、40 次业务 API 请求；读取公开文档不计业务请求",
+    "expected_output": "在线任务表的私有链接及资源标识；最终三条完整记录；按截止日期排序的未完成清单及数量；初始写入、更新和重新读取的真实请求/响应与时间。写入程序结束后须在一个新进程中读取远端服务，不以本地文件或内存代替",
+    "success": "服务端初始保存三项待办；后续正确更新 A02 状态及 A03 日期；新进程真实读回恰好三项、无重复或遗漏，其余字段不变；未完成清单内容、排序和数量与远端记录一致；在线表格可由准备者独立打开或通过远端 API 复核",
+    "failure": "没有实际在线表格、仅输出 Markdown/本地文件、缺少初始或最终证据、内容/更新错误、通知真实用户、突破资源上限或预算内未完成。凭据或环境问题单列原因，不将未执行当作服务功能不支持",
+    "id": "collaborative-tables-001",
+    "version": "v1",
+    "sha256": "55f76c043eedf525b20f6f494560c980dc9e73a54556be499f186e90868da5a0",
+    "file": "data/experiments/tasks/collaborative-tables.md"
+  },
+  "prompt_sha256": "cf19dc52f1b1940649070012ee364aee5fe4acdd9672b297b6b56d0b316d10b4",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "b440d8120b5b41f1541418a6c7a5ba908714cf0e27844bd3750c89071815223f"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-08T03:28:50.359616+00:00",
+  "ended_at": "2026-09-08T03:36:34.038160+00:00",
+  "elapsed_seconds": 463.678,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "provided: NOTION_API_TOKEN, NOTION_PARENT_PAGE_ID",
+    "web_search": "live",
+    "preparation_note": "Preparation completed on 2026-09-08: created a fresh free personal workspace using Google basic-identity signup; generated a 7-day PAT with Notion API capability only (Workers disabled); created and verified an empty private parent page. No business table/schema/rows or adapter code prepared. No payment method or purchase. Signup, token creation and empty-container preparation are outside measured execution time/tokens. PAT has owner access only within this new test workspace, unlike a page-scoped internal connection."
+  },
+  "status": "completed",
+  "reason": "Created one private online task table under an empty parent page; saved three pending actions, applied both updates and read correct final rows in a new process. External reviewer independently queried the remote data source and confirmed all six fields. 12 business requests within 40; 463.678 seconds within 600. One prepared-account REST trial; other routes are untested.",
+  "usage": {
+    "input_tokens": 471247,
+    "cached_input_tokens": 425344,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12291,
+    "reasoning_output_tokens": 2837
+  },
+  "service_cost_usd": 0,
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "external preparing Agent",
+    "reviewed_at": "2026-09-08T03:39:43.522761+00:00",
+    "checks": [
+      {
+        "criterion": "Create online table with six required fields and three initial pending actions",
+        "passed": true,
+        "evidence": "Database creation, three inserts and initial remote query returned 200. Actual initial response matches all supplied fields."
+      },
+      {
+        "criterion": "Update only A02 status and A03 deadline",
+        "passed": true,
+        "evidence": "Both PATCH responses returned 200; final and independent reads preserve every other business field."
+      },
+      {
+        "criterion": "Fresh-process remote read after writer exits",
+        "passed": true,
+        "evidence": "Writer PID 80215 exited at 03:33:36 UTC; reader PID 80280 queried at 03:33:46 UTC. Separate write/read commands checked in events. External reviewer queried again after executor exit."
+      },
+      {
+        "criterion": "Correct sorted outstanding list, count and private resource reference",
+        "passed": true,
+        "evidence": "Server filtered/sorted query and answer contain A01 then A03, count 2. Online reference independently works; private identifiers redacted in public copies."
+      },
+      {
+        "criterion": "Respect resource/time budget and no real-user notifications",
+        "passed": true,
+        "evidence": "12 actual business requests, one new database/three rows. Owner fields are text; no invitation/sharing mutations. CLI exited 0 within 600 seconds."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/answer.md",
+      "sha256": "0b2ce210088ef6acb4d42b579a7cdb4422244541418637755332f52e78e3b700",
+      "note": "Executor answer; private resources and local paths redacted.",
+      "source_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/selected-receipts.json",
+      "sha256": "34fa088243f6088d9d8423483ae0204a33d889110098c1715d27529373c96fab",
+      "note": "Actual request/response and process-exit evidence, with original hashes.",
+      "source_sha256": "adc5e4ee5fde1c05dbf4a5f9c7a3b3ef299ba176c984a339b1b1069739c4f0fa",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/reviewer-remote-read.json",
+      "sha256": "0563980c757d972c90f3abbcd798d31936dab56802c07f5682e514f931f50f89",
+      "note": "Independent remote query after executor exit, excluded from measured execution usage/time.",
+      "source_sha256": "a131dedb1cf18e468a895b3b74cdafc38df683f035ed9a6edaa0dcd14cdf7b1b",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260908T032850.330773Z-notion",
+    "run_sha256": "af0d163b3b45c764d52d65bd4a88a94675a047d2f18964e2a44317aa280a8565",
+    "events_sha256": "bd250134ef8986049d83336a5b23509551b267d5fd3e082fb50608b5467ef2d1",
+    "answer_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
+    "review_sha256": "e7061ba88f1535f61ae4365a18c067139442a67a4a2f43db02bd5eebc80dac9e",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  }
+}

@@ -78,3 +78,77 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api
+      checked_on: '2026-09-08'
+      kind: official_docs
+    auth:
+      url: https://airtable.com/developers/web/guides/personal-access-tokens
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pricing:
+      url: https://support.airtable.com/articles/2277136852-airtable-plans-overview
+      checked_on: '2026-09-08'
+      kind: official_docs
+    limits:
+      url: https://support.airtable.com/articles/7735693959-managing-api-call-limits-in-airtable
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: web-api
+      interface: api
+      maintainer: official
+      entry_url: https://airtable.com/developers/web/api/introduction
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - api
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - api
+        records.track:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        PAT scopes plus selected workspace/base access required. Base creation is documented on all
+        plans; do not infer paid-only access from outdated posts.
+      human_steps:
+        - stage: credentials
+          step: Create a personal access token with required scopes and selected test resources.
+          evidence:
+            - auth
+      costs:
+        - kind: free_allowance
+          amount: 1000
+          unit: API calls
+          per: workspace/month
+          scope: Free plan; includes metadata/schema calls, 5 requests/second/base.
+          evidence:
+            - limits
+        - kind: free_allowance
+          amount: 1000
+          unit: records
+          per: base
+          scope: Free plan storage limit across all tables in a base.
+          evidence:
+            - pricing
+  notes: []

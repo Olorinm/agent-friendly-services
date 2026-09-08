@@ -1,0 +1,79 @@
+id: coda
+name: Coda / Superhuman Docs
+category: productivity-storage
+homepage: https://coda.io/
+summary: Docs and tables with a free REST API; current API page is branded Superhuman Docs.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://coda.io/developers/apis/v1
+      checked_on: '2026-09-08'
+      kind: official_docs
+    mcp:
+      url: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://coda.io/developers/apis/v1
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: unknown
+        evidence:
+          - api
+      auth:
+        value: api_key
+        evidence:
+          - api
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - api
+        records.track:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        API available in free and paid workspaces. Creating docs requires a Doc Maker role; row
+        writes may be asynchronous. Table/schema creation support must be verified for the task.
+    - id: hosted-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://coda.io/apis/mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: unknown
+        evidence:
+          - mcp
+      auth:
+        value: oauth
+        evidence:
+          - mcp
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - mcp
+        records.track:
+          value: documented
+          evidence:
+            - mcp
+      notes: Official hosted MCP; connector setup needs authorization.
+  notes: []

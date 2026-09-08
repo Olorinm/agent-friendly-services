@@ -1,0 +1,516 @@
+{
+  "note": "Selected actual executor receipts repackaged by external reviewer; unselected raw logs remain local. The failed batch update is retained.",
+  "receipts": [
+    {
+      "source": "workspace/evidence/02_create_document.json",
+      "source_sha256": "077fa2bfc12d12a3aeeb5d059544cc411aff578e539385e56c529f652342d07f",
+      "data": {
+        "sequence": 2,
+        "phase": "provision",
+        "pid": 78086,
+        "started_at_utc": "2026-09-08T03:23:42.697+00:00",
+        "request": {
+          "method": "POST",
+          "url": "https://docs.getgrist.com/api/workspaces/[SERVICE_SECRET]/docs",
+          "parameters": {},
+          "body": {
+            "name": "M01 读书会筹备行动项"
+          },
+          "body_utf8": "{\"name\":\"M01 读书会筹备行动项\"}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:23:43.690+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:23:43 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "24",
+            "ETag": "W/\"18-ZTKVDRRjyyUdxxdd27Ft21HC08s\""
+          },
+          "body": "[SERVICE_SECRET]",
+          "body_file": "02_create_document.response.txt",
+          "body_sha256": "bc75432b8d0f1b1e8e9a1d32792d7b7d5e5c5f3679fccd84bd3f659d5c350aba",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/07_define_six_columns.json",
+      "source_sha256": "729afac1b5206757da63ffcfe8fb10935f201247ca47e4100b08ef99522e4a89",
+      "data": {
+        "sequence": 7,
+        "phase": "write",
+        "pid": 78374,
+        "started_at_utc": "2026-09-08T03:25:37.961+00:00",
+        "request": {
+          "method": "PUT",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/columns?replaceall=true",
+          "parameters": {
+            "replaceall": "true"
+          },
+          "body": {
+            "columns": [
+              {
+                "id": "ActionID",
+                "fields": {
+                  "label": "行动编号",
+                  "type": "Text",
+                  "isFormula": false,
+                  "formula": ""
+                }
+              },
+              {
+                "id": "MeetingID",
+                "fields": {
+                  "label": "会议编号",
+                  "type": "Text",
+                  "isFormula": false,
+                  "formula": ""
+                }
+              },
+              {
+                "id": "Content",
+                "fields": {
+                  "label": "内容",
+                  "type": "Text",
+                  "isFormula": false,
+                  "formula": ""
+                }
+              },
+              {
+                "id": "Owner",
+                "fields": {
+                  "label": "负责人",
+                  "type": "Text",
+                  "isFormula": false,
+                  "formula": ""
+                }
+              },
+              {
+                "id": "DueDate",
+                "fields": {
+                  "label": "截止日期",
+                  "type": "Date",
+                  "isFormula": false,
+                  "formula": "",
+                  "widgetOptions": "{\"dateFormat\": \"YYYY-MM-DD\", \"isCustomDateFormat\": true}"
+                }
+              },
+              {
+                "id": "Status",
+                "fields": {
+                  "label": "状态",
+                  "type": "Choice",
+                  "isFormula": false,
+                  "formula": "",
+                  "widgetOptions": "{\"choices\": [\"待办\", \"已完成\"]}"
+                }
+              }
+            ]
+          },
+          "body_utf8": "{\"columns\":[{\"id\":\"ActionID\",\"fields\":{\"label\":\"行动编号\",\"type\":\"Text\",\"isFormula\":false,\"formula\":\"\"}},{\"id\":\"MeetingID\",\"fields\":{\"label\":\"会议编号\",\"type\":\"Text\",\"isFormula\":false,\"formula\":\"\"}},{\"id\":\"Content\",\"fields\":{\"label\":\"内容\",\"type\":\"Text\",\"isFormula\":false,\"formula\":\"\"}},{\"id\":\"Owner\",\"fields\":{\"label\":\"负责人\",\"type\":\"Text\",\"isFormula\":false,\"formula\":\"\"}},{\"id\":\"DueDate\",\"fields\":{\"label\":\"截止日期\",\"type\":\"Date\",\"isFormula\":false,\"formula\":\"\",\"widgetOptions\":\"{\\\"dateFormat\\\": \\\"YYYY-MM-DD\\\", \\\"isCustomDateFormat\\\": true}\"}},{\"id\":\"Status\",\"fields\":{\"label\":\"状态\",\"type\":\"Choice\",\"isFormula\":false,\"formula\":\"\",\"widgetOptions\":\"{\\\"choices\\\": [\\\"待办\\\", \\\"已完成\\\"]}\"}}]}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:25:39.107+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:25:39 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "4",
+            "etag": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+          },
+          "body": null,
+          "body_file": "07_define_six_columns.response.txt",
+          "body_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/08_initial_insert.json",
+      "source_sha256": "277ff9e28b953e412afafe07763c3fd3fbc5c72ec02b7e46690b9cb93a194038",
+      "data": {
+        "sequence": 8,
+        "phase": "write",
+        "pid": 78374,
+        "started_at_utc": "2026-09-08T03:25:39.108+00:00",
+        "request": {
+          "method": "POST",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?noparse=true",
+          "parameters": {
+            "noparse": "true"
+          },
+          "body": {
+            "records": [
+              {
+                "fields": {
+                  "ActionID": "A01",
+                  "MeetingID": "M01",
+                  "Content": "确认场地",
+                  "Owner": "林青",
+                  "DueDate": 1789430400,
+                  "Status": "待办"
+                }
+              },
+              {
+                "fields": {
+                  "ActionID": "A02",
+                  "MeetingID": "M01",
+                  "Content": "整理书单",
+                  "Owner": "周舟",
+                  "DueDate": 1789516800,
+                  "Status": "待办"
+                }
+              },
+              {
+                "fields": {
+                  "ActionID": "A03",
+                  "MeetingID": "M01",
+                  "Content": "制作海报",
+                  "Owner": "陈禾",
+                  "DueDate": 1789689600,
+                  "Status": "待办"
+                }
+              }
+            ]
+          },
+          "body_utf8": "{\"records\":[{\"fields\":{\"ActionID\":\"A01\",\"MeetingID\":\"M01\",\"Content\":\"确认场地\",\"Owner\":\"林青\",\"DueDate\":1789430400,\"Status\":\"待办\"}},{\"fields\":{\"ActionID\":\"A02\",\"MeetingID\":\"M01\",\"Content\":\"整理书单\",\"Owner\":\"周舟\",\"DueDate\":1789516800,\"Status\":\"待办\"}},{\"fields\":{\"ActionID\":\"A03\",\"MeetingID\":\"M01\",\"Content\":\"制作海报\",\"Owner\":\"陈禾\",\"DueDate\":1789689600,\"Status\":\"待办\"}}]}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:25:40.190+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:25:40 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "40",
+            "etag": "W/\"28-Lp+ljabJCxrSek8raDVMW3bW09k\""
+          },
+          "body": {
+            "records": [
+              {
+                "id": 1
+              },
+              {
+                "id": 2
+              },
+              {
+                "id": 3
+              }
+            ]
+          },
+          "body_file": "08_initial_insert.response.txt",
+          "body_sha256": "da337d95e7ca81ec5f5eaecd42e3d2ba3530a91f9c30a10f45c54222da915b02",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/09_initial_remote_read.json",
+      "source_sha256": "780a12e55315f23ab30adf9063a1068c58dd4869c0be734b8ae6019d02999713",
+      "data": {
+        "sequence": 9,
+        "phase": "write",
+        "pid": 78374,
+        "started_at_utc": "2026-09-08T03:25:40.190+00:00",
+        "request": {
+          "method": "GET",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?sort=ActionID",
+          "parameters": {
+            "sort": "ActionID"
+          },
+          "body": null,
+          "body_utf8": null,
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:25:41.405+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:25:41 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "421",
+            "etag": "W/\"1a5-ZUP5Vm8PyInXuuffqFWSpBUrYp4\""
+          },
+          "body": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "ActionID": "A01",
+                  "MeetingID": "M01",
+                  "Content": "确认场地",
+                  "Owner": "林青",
+                  "DueDate": 1789430400,
+                  "Status": "待办"
+                }
+              },
+              {
+                "id": 2,
+                "fields": {
+                  "ActionID": "A02",
+                  "MeetingID": "M01",
+                  "Content": "整理书单",
+                  "Owner": "周舟",
+                  "DueDate": 1789516800,
+                  "Status": "待办"
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "ActionID": "A03",
+                  "MeetingID": "M01",
+                  "Content": "制作海报",
+                  "Owner": "陈禾",
+                  "DueDate": 1789689600,
+                  "Status": "待办"
+                }
+              }
+            ]
+          },
+          "body_file": "09_initial_remote_read.response.txt",
+          "body_sha256": "2fa1147b39102ac5695054aebb1d8977bee02a989d42e85d1978bd6aaace0168",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/10_apply_requested_updates.json",
+      "source_sha256": "a72a525c9e955889de70d4efac35f601db63ecadead8269814ad01c61027f7b1",
+      "data": {
+        "sequence": 10,
+        "phase": "write",
+        "pid": 78374,
+        "started_at_utc": "2026-09-08T03:25:41.662+00:00",
+        "request": {
+          "method": "PATCH",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?noparse=true",
+          "parameters": {
+            "noparse": "true"
+          },
+          "body": {
+            "records": [
+              {
+                "id": 2,
+                "fields": {
+                  "Status": "已完成"
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "DueDate": 1789862400
+                }
+              }
+            ]
+          },
+          "body_utf8": "{\"records\":[{\"id\":2,\"fields\":{\"Status\":\"已完成\"}},{\"id\":3,\"fields\":{\"DueDate\":1789862400}}]}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:25:42.757+00:00",
+        "response": {
+          "status": 400,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:25:42 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "58",
+            "etag": "W/\"3a-7+H9gVlByNE4id6x3Ip5waNloko\""
+          },
+          "body": {
+            "error": "PATCH requires all records to have same fields"
+          },
+          "body_file": "10_apply_requested_updates.response.txt",
+          "body_sha256": "decffa6a8e7d121096e6521670558f1fc8e945edd221be2756bce15ebe93ea28",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/12_update_A02_status.json",
+      "source_sha256": "60699d4ac89db73834039e1d9b34d307a48dbd0aac7f6aa0cff8fc235bb5eea7",
+      "data": {
+        "sequence": 12,
+        "phase": "corrected_update",
+        "pid": 78630,
+        "started_at_utc": "2026-09-08T03:26:46.395+00:00",
+        "request": {
+          "method": "PATCH",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?noparse=true",
+          "parameters": {
+            "noparse": "true"
+          },
+          "body": {
+            "records": [
+              {
+                "id": 2,
+                "fields": {
+                  "Status": "已完成"
+                }
+              }
+            ]
+          },
+          "body_utf8": "{\"records\":[{\"id\":2,\"fields\":{\"Status\":\"已完成\"}}]}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:26:51.197+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:26:50 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "4",
+            "etag": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+          },
+          "body": null,
+          "body_file": "12_update_A02_status.response.txt",
+          "body_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/13_update_A03_date.json",
+      "source_sha256": "56cffd0a28f098160c6f5cd823d136257e235150107ccd118f4f545ceae7ad9c",
+      "data": {
+        "sequence": 13,
+        "phase": "corrected_update",
+        "pid": 78630,
+        "started_at_utc": "2026-09-08T03:26:51.197+00:00",
+        "request": {
+          "method": "PATCH",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?noparse=true",
+          "parameters": {
+            "noparse": "true"
+          },
+          "body": {
+            "records": [
+              {
+                "id": 3,
+                "fields": {
+                  "DueDate": 1789862400
+                }
+              }
+            ]
+          },
+          "body_utf8": "{\"records\":[{\"id\":3,\"fields\":{\"DueDate\":1789862400}}]}",
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:26:56.152+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:26:56 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "4",
+            "etag": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+          },
+          "body": null,
+          "body_file": "13_update_A03_date.response.txt",
+          "body_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/14_final_new_process_read.json",
+      "source_sha256": "10357fa8abacd797cf95d4910ba38d3c34011e51a74133e6609b7e6f3bbe7d32",
+      "data": {
+        "sequence": 14,
+        "phase": "independent_verify",
+        "pid": 78714,
+        "started_at_utc": "2026-09-08T03:27:07.554+00:00",
+        "request": {
+          "method": "GET",
+          "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records?sort=DueDate%2CActionID",
+          "parameters": {
+            "sort": "DueDate,ActionID"
+          },
+          "body": null,
+          "body_utf8": null,
+          "authentication_used": true
+        },
+        "ended_at_utc": "2026-09-08T03:27:08.534+00:00",
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Tue, 08 Sep 2026 03:27:08 GMT",
+            "Content-Type": "application/json; charset=utf-8",
+            "Content-Length": "424",
+            "etag": "W/\"1a8-7N1ukSmD1ZKROV85nwdwoMMnzZk\""
+          },
+          "body": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "ActionID": "A01",
+                  "MeetingID": "M01",
+                  "Content": "确认场地",
+                  "Owner": "林青",
+                  "DueDate": 1789430400,
+                  "Status": "待办"
+                }
+              },
+              {
+                "id": 2,
+                "fields": {
+                  "ActionID": "A02",
+                  "MeetingID": "M01",
+                  "Content": "整理书单",
+                  "Owner": "周舟",
+                  "DueDate": 1789516800,
+                  "Status": "已完成"
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "ActionID": "A03",
+                  "MeetingID": "M01",
+                  "Content": "制作海报",
+                  "Owner": "陈禾",
+                  "DueDate": 1789862400,
+                  "Status": "待办"
+                }
+              }
+            ]
+          },
+          "body_file": "14_final_new_process_read.response.txt",
+          "body_sha256": "b8378112e47c6e7ffcf733e516d745bff8748c1c6a3dc0489784149d7d79762f",
+          "redacted": false
+        }
+      }
+    },
+    {
+      "source": "workspace/evidence/writer-exit.json",
+      "source_sha256": "d82f023fa869a3584824c74eeb8e67ea1f5655bfd6a71d3a22579cf13568c9f0",
+      "data": {
+        "supervisor_pid": 78364,
+        "writer_pid": 78374,
+        "started_at_utc": "2026-09-08T03:25:32.759+00:00",
+        "observed_exit_at_utc": "2026-09-08T03:25:42.828+00:00",
+        "exit_code": 1
+      }
+    },
+    {
+      "source": "workspace/evidence/update-writer-exit.json",
+      "source_sha256": "0c6a20b08c53d89bf345dce57b285ae35df3b73334d76cabcccea77a9f9deb2f",
+      "data": {
+        "supervisor_pid": 78625,
+        "writer_pid": 78630,
+        "started_at_utc": "2026-09-08T03:26:37.652+00:00",
+        "observed_exit_at_utc": "2026-09-08T03:26:56.176+00:00",
+        "exit_code": 0
+      }
+    }
+  ],
+  "business_requests_observed": 18,
+  "execution_commands_verified_in_events": [
+    "python3 run_updates.py",
+    "python3 verify_remote.py"
+  ],
+  "all_write_targets": "Only the newly created document/table; no invitations or notifications."
+}

@@ -4,7 +4,7 @@
 
 [English](./README.md) | 简体中文
 
-从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)，任务表已覆盖[机票](./data/experiments/tasks/travel-flights.md)、[网页搜索](./data/experiments/tasks/web-search.md)和[数据库](./data/experiments/tasks/databases.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 76 个服务的旧索引，[既有实验](./generated/agent-runs.md)单独展示。
+从用户真实需求出发寻找服务，再通过任务比较结果、接入成本与人工介入。直接查[服务候选](./generated/catalog.md)、[任务实测结果](./generated/evaluations.md)和[机票阶段结果](./docs/flights.zh-CN.md)，任务表已覆盖[机票](./data/experiments/tasks/travel-flights.md)、[网页搜索](./data/experiments/tasks/web-search.md)、[数据库](./data/experiments/tasks/databases.md)和[协作任务表](./data/experiments/tasks/collaborative-tables.md)。Agent按[执行与验收指令](./data/experiments/AGENTS.md)接手；每条结果保留任务、harness/模型/思考等级、日期、用量与证据，单次试跑不代表普遍排名。下方保留 76 个服务的旧索引，[既有实验](./generated/agent-runs.md)单独展示。
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
@@ -298,13 +298,18 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Amadeus Flight APIs](https://developers.amadeus.com/) | Travel | community | — | — | [yaml](./data/candidates/amadeus-flights.yaml) |
 | [apiheya Air Scraper](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) | Travel | community | — | — | [yaml](./data/candidates/apiheya-air-scraper.yaml) |
 | [Aviasales via Travelpayouts](https://www.aviasales.com/) | Travel | community | — | — | [yaml](./data/candidates/aviasales.yaml) |
+| [Baserow Cloud](https://baserow.io/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/baserow.yaml) |
 | [Bright Data SERP API](https://brightdata.com/) | Travel | community | — | — | [yaml](./data/candidates/bright-data-serp.yaml) |
+| [Coda / Superhuman Docs](https://coda.io/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/coda.yaml) |
 | [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) | Travel | community | — | — | [yaml](./data/candidates/ctrip-flights.yaml) |
 | [Duffel Flights API](https://duffel.com/) | Travel | community | — | — | [yaml](./data/candidates/duffel-flights.yaml) |
 | [Expedia XAP Flight Listings](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) | Travel | community | — | — | [yaml](./data/candidates/expedia-xap-flights.yaml) |
+| [飞书 Feishu](https://www.feishu.cn/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/feishu.yaml) |
 | [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) | Travel | community | — | — | [yaml](./data/candidates/fliggy-domestic-flights.yaml) |
 | [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
 | [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
+| [Google Sheets](https://workspace.google.com/products/sheets/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/google-sheets.yaml) |
+| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
 | [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
 | [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
 | [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |

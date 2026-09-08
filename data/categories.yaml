@@ -62,6 +62,17 @@ categories:
   - id: productivity-storage
     name: Productivity / Storage
     description: Project management, documents, file storage.
+    subcategories:
+      - id: collaborative-tables
+        name: Collaborative Tables
+        description: User-facing online tables for organizing and following up shared work.
+        capabilities:
+          - id: records.organize
+            description: Turn supplied notes into a structured online action list.
+          - id: records.track
+            description: Update progress and retrieve outstanding actions.
+          - id: records.reconcile
+            description: Merge follow-up notes without duplicating existing actions.
 
   - id: observability-security
     name: Observability / Security

@@ -1,0 +1,78 @@
+{
+  "reviewer": "external preparing Agent",
+  "not_part_of_measured_execution": true,
+  "started_at": "2026-09-08T03:30:19.347644+00:00",
+  "finished_at": "2026-09-08T03:30:22.119997+00:00",
+  "request": {
+    "method": "GET",
+    "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "records": [
+        {
+          "id": 1,
+          "fields": {
+            "ActionID": "A01",
+            "MeetingID": "M01",
+            "Content": "确认场地",
+            "Owner": "林青",
+            "DueDate": 1789430400,
+            "Status": "待办"
+          }
+        },
+        {
+          "id": 2,
+          "fields": {
+            "ActionID": "A02",
+            "MeetingID": "M01",
+            "Content": "整理书单",
+            "Owner": "周舟",
+            "DueDate": 1789516800,
+            "Status": "已完成"
+          }
+        },
+        {
+          "id": 3,
+          "fields": {
+            "ActionID": "A03",
+            "MeetingID": "M01",
+            "Content": "制作海报",
+            "Owner": "陈禾",
+            "DueDate": 1789862400,
+            "Status": "待办"
+          }
+        }
+      ]
+    },
+    "body_sha256": "b8378112e47c6e7ffcf733e516d745bff8748c1c6a3dc0489784149d7d79762f"
+  },
+  "normalized_rows": [
+    {
+      "ActionID": "A01",
+      "MeetingID": "M01",
+      "Content": "确认场地",
+      "Owner": "林青",
+      "DueDate": "2026-09-15",
+      "Status": "待办"
+    },
+    {
+      "ActionID": "A02",
+      "MeetingID": "M01",
+      "Content": "整理书单",
+      "Owner": "周舟",
+      "DueDate": "2026-09-16",
+      "Status": "已完成"
+    },
+    {
+      "ActionID": "A03",
+      "MeetingID": "M01",
+      "Content": "制作海报",
+      "Owner": "陈禾",
+      "DueDate": "2026-09-20",
+      "Status": "待办"
+    }
+  ],
+  "matches_frozen_task": true
+}

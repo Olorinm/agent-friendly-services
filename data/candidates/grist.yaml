@@ -1,0 +1,128 @@
+id: grist
+name: Grist
+category: productivity-storage
+homepage: https://www.getgrist.com/
+summary: Hosted relational spreadsheets with a free personal site, REST API and official MCP.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://support.getgrist.com/api/
+      checked_on: '2026-09-08'
+      kind: official_docs
+    auth:
+      url: https://support.getgrist.com/rest-api/
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pricing:
+      url: https://www.getgrist.com/pricing/
+      checked_on: '2026-09-08'
+      kind: official_site
+    mcp:
+      url: https://support.getgrist.com/mcp/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://support.getgrist.com/api/
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - api
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - api
+        records.track:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        Account API key grants the user’s existing access. Use a separate free test account;
+        personal site is freely available.
+      human_steps:
+        - stage: credentials
+          step: Sign in and generate an API key in account settings.
+          evidence:
+            - auth
+      costs:
+        - kind: free_allowance
+          amount: 5000
+          unit: records
+          per: document
+          scope: Hosted Free plan; API quota must also be checked for the selected site.
+          evidence:
+            - pricing
+    - id: hosted-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://docs.getgrist.com/api/mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - mcp
+        records.track:
+          value: documented
+          evidence:
+            - mcp
+      notes: >-
+        Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the
+        API pool.
+    - id: python-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://pypi.org/project/grist-api/
+      evidence:
+        - auth
+      auth:
+        value: api_key
+        evidence:
+          - auth
+      notes: >-
+        Official Python client linked by Grist REST API guide; SDK installation does not remove
+        account permission requirements.
+    - id: javascript-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://www.npmjs.com/package/grist-api
+      evidence:
+        - auth
+      auth:
+        value: api_key
+        evidence:
+          - auth
+      notes: >-
+        Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch
+        returned 403 during public research, not a service failure.
+  notes: []

@@ -1,0 +1,69 @@
+id: google-sheets
+name: Google Sheets
+category: productivity-storage
+homepage: https://workspace.google.com/products/sheets/
+summary: >-
+  Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still
+  prerequisites.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://developers.google.com/workspace/sheets/api/quickstart/python
+      checked_on: '2026-09-08'
+      kind: official_docs
+    limits:
+      url: https://developers.google.com/workspace/sheets/api/limits
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sheets-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.google.com/workspace/sheets/api/guides/concepts
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: unknown
+        evidence:
+          - api
+      auth:
+        value: oauth
+        evidence:
+          - api
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - api
+        records.track:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        Quickstart requires a Google account, Cloud project, enabled Sheets API and OAuth
+        client/consent setup. Service accounts are another route, not assumed preconfigured.
+      human_steps:
+        - stage: credentials
+          step: >-
+            Configure a Cloud project and OAuth consent/client, then authorize selected account
+            access.
+          evidence:
+            - api
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: standard API usage
+          scope: Sheets API standard use has no additional cost; per-minute quotas apply.
+          evidence:
+            - limits
+  notes: []

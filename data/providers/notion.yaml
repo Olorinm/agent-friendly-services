@@ -80,3 +80,173 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://developers.notion.com/reference/intro
+      checked_on: '2026-09-08'
+      kind: official_docs
+    auth:
+      url: https://developers.notion.com/guides/get-started/authorization
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pat:
+      url: https://developers.notion.com/guides/get-started/personal-access-tokens
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pricing:
+      url: https://www.notion.com/pricing
+      checked_on: '2026-09-08'
+      kind: official_site
+    sdk:
+      url: https://github.com/makenotion/notion-sdk-js
+      checked_on: '2026-09-08'
+      kind: official_repo
+    cli:
+      url: https://developers.notion.com/cli/get-started/overview
+      checked_on: '2026-09-08'
+      kind: official_docs
+    mcp:
+      url: https://developers.notion.com/guides/mcp/get-started-with-mcp
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://developers.notion.com/reference/intro
+      evidence:
+        - api
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: documented
+        evidence:
+          - pat
+      auth:
+        value: api_key
+        evidence:
+          - api
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - api
+        records.track:
+          value: documented
+          evidence:
+            - api
+      notes: >-
+        Internal connection requires workspace owner creation and explicit page sharing; PAT acts
+        with creator permissions in the selected workspace. Free-plan PAT creation is restricted to
+        workspace owners; being a free member alone is insufficient.
+      human_steps:
+        - stage: credentials
+          step: >-
+            Create internal connection and grant only the test page, or create a PAT in a dedicated
+            test workspace.
+          evidence:
+            - auth
+            - pat
+      costs:
+        - kind: free_allowance
+          amount: 0
+          unit: money
+          currency: USD
+          per: month
+          scope: Free workspace subscription; API limits and resource permissions still apply.
+          evidence:
+            - pricing
+    - id: javascript-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://github.com/makenotion/notion-sdk-js
+      evidence:
+        - sdk
+      availability:
+        value: self_serve
+        evidence:
+          - sdk
+      personal_access:
+        value: unknown
+        evidence:
+          - sdk
+      auth:
+        value: api_key
+        evidence:
+          - sdk
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - sdk
+        records.track:
+          value: documented
+          evidence:
+            - sdk
+      notes: Official client library over the REST API; credentials and resource grants remain necessary.
+    - id: official-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://developers.notion.com/cli/get-started/overview
+      evidence:
+        - cli
+      availability:
+        value: self_serve
+        evidence:
+          - cli
+      personal_access:
+        value: unknown
+        evidence:
+          - cli
+      auth:
+        value: api_key
+        evidence:
+          - cli
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - cli
+        records.track:
+          value: documented
+          evidence:
+            - cli
+      notes: Official CLI discovered in current docs; measure separately from raw REST.
+    - id: hosted-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.notion.com/mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: unknown
+        evidence:
+          - mcp
+      auth:
+        value: oauth
+        evidence:
+          - mcp
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - mcp
+        records.track:
+          value: documented
+          evidence:
+            - mcp
+      notes: >-
+        Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer
+        actively maintained.
+  notes: []

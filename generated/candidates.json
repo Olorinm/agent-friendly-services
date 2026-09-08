@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-07T11:45:19.199Z",
-  "count": 31,
+  "generated_at": "2026-09-08T03:40:18.204Z",
+  "count": 36,
   "candidates": [
     {
       "id": "airgateway",
@@ -54,11 +54,31 @@
       "m1": null
     },
     {
+      "id": "baserow",
+      "name": "Baserow Cloud",
+      "category": "productivity-storage",
+      "homepage": "https://baserow.io/",
+      "summary": "Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
       "id": "bright-data-serp",
       "name": "Bright Data SERP API",
       "category": "travel",
       "homepage": "https://brightdata.com/",
       "summary": "SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "coda",
+      "name": "Coda / Superhuman Docs",
+      "category": "productivity-storage",
+      "homepage": "https://coda.io/",
+      "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
       "submitted_by": "community",
       "entrypoints": {},
       "m1": null
@@ -94,6 +114,16 @@
       "m1": null
     },
     {
+      "id": "feishu",
+      "name": "飞书 Feishu",
+      "category": "productivity-storage",
+      "homepage": "https://www.feishu.cn/",
+      "summary": "China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
       "id": "fliggy-domestic-flights",
       "name": "飞猪国内机票开放平台",
       "category": "travel",
@@ -119,6 +149,26 @@
       "category": "travel",
       "homepage": "https://www.flightapi.io/",
       "summary": "Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "google-sheets",
+      "name": "Google Sheets",
+      "category": "productivity-storage",
+      "homepage": "https://workspace.google.com/products/sheets/",
+      "summary": "Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "m1": null
+    },
+    {
+      "id": "grist",
+      "name": "Grist",
+      "category": "productivity-storage",
+      "homepage": "https://www.getgrist.com/",
+      "summary": "Hosted relational spreadsheets with a free personal site, REST API and official MCP.",
       "submitted_by": "community",
       "entrypoints": {},
       "m1": null

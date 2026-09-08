@@ -1,0 +1,124 @@
+id: feishu
+name: 飞书 Feishu
+category: productivity-storage
+homepage: https://www.feishu.cn/
+summary: China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/collaborative-tables
+  sources:
+    api:
+      url: https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md
+      checked_on: '2026-09-08'
+      kind: official_docs
+      notes: >-
+        Fetched official Markdown successfully: creates a Base with tenant/user token and
+        base:app:create or bitable:app permission.
+    cli:
+      url: https://github.com/larksuite/cli
+      checked_on: '2026-09-08'
+      kind: official_repo
+    mcp:
+      url: https://github.com/larksuite/lark-openapi-mcp
+      checked_on: '2026-09-08'
+      kind: official_repo
+    pricing:
+      url: https://www.feishu.cn/service?tab=free
+      checked_on: '2026-09-08'
+      kind: official_site
+  routes:
+    - id: base-api
+      interface: api
+      maintainer: official
+      entry_url: https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create
+      evidence:
+        - api
+        - cli
+      availability:
+        value: self_serve
+        evidence:
+          - cli
+      personal_access:
+        value: unknown
+        evidence:
+          - cli
+      auth:
+        value: platform_credentials
+        evidence:
+          - cli
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - cli
+        records.track:
+          value: documented
+          evidence:
+            - cli
+      notes: >-
+        Requires a platform app, authorized identity and Base scopes/resource permissions.
+        Ordinary-person onboarding from a fresh account is not tested.
+    - id: official-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://github.com/larksuite/cli
+      evidence:
+        - cli
+      availability:
+        value: self_serve
+        evidence:
+          - cli
+      personal_access:
+        value: unknown
+        evidence:
+          - cli
+      auth:
+        value: platform_credentials
+        evidence:
+          - cli
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - cli
+        records.track:
+          value: documented
+          evidence:
+            - cli
+      notes: >-
+        Official CLI covers Base and supports individuals. Account signup, app creation and
+        permission setup still need separate verification.
+    - id: official-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://github.com/larksuite/lark-openapi-mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: unknown
+        evidence:
+          - mcp
+      auth:
+        value: platform_credentials
+        evidence:
+          - mcp
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - mcp
+        records.track:
+          value: documented
+          evidence:
+            - mcp
+      notes: >-
+        Local official MCP package uses platform app credentials; identity and tenant domains must
+        match.
+  notes:
+    - China Feishu service. Do not reuse international Lark onboarding or test results.

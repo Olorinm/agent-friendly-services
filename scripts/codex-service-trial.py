@@ -130,7 +130,7 @@ def main():
         raise SystemExit("Set an explicit model in your Codex config before comparing runs.")
     access = (f"提供本服务免费账户凭据，位于 .private/credentials.json，字段为 {', '.join(sorted(credentials))}。"
               "只可由程序读取用于认证，不能打印该文件或把密钥写入代码、命令参数、日志、evidence或答案。"
-              "使用已提供的免费额度，最多10次搜索请求或一个免费测试数据库；额度不足即停止，不开启付费。"
+              "使用已提供的免费额度，最多10次搜索请求、一个免费测试数据库或一份合成资料文档/表格，具体资源上限见任务输入；额度不足即停止，不开启付费。"
               if credentials else "没有预先配置的服务账号或密钥。")
     prompt = f"""任务：{task['description']}
 输入：{task['inputs']}

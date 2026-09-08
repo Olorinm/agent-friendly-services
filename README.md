@@ -4,7 +4,7 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md) and [databases](./data/experiments/tasks/databases.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
+Find services for real user needs, then evaluate task results, setup effort, cost and human involvement. Browse [service candidates](./generated/catalog.md), [task results](./generated/evaluations.md) and [flight findings](./docs/flights.zh-CN.md), plus task tables for [flights](./data/experiments/tasks/travel-flights.md), [web search](./data/experiments/tasks/web-search.md) [databases](./data/experiments/tasks/databases.md) and [collaborative tables](./data/experiments/tasks/collaborative-tables.md). Follow the [execution and review instructions](./data/experiments/AGENTS.md) to contribute a fresh run. Each result records its task, harness/model/effort, date, usage and evidence; individual trials do not establish a general ranking. The legacy index below contains 76 services, with [historical experiments](./generated/agent-runs.md) kept separately.
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
@@ -296,13 +296,18 @@ Collected services include tested, untested and gated entries ([pool rules](./do
 | [Amadeus Flight APIs](https://developers.amadeus.com/) | Travel | community | — | — | [yaml](./data/candidates/amadeus-flights.yaml) |
 | [apiheya Air Scraper](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) | Travel | community | — | — | [yaml](./data/candidates/apiheya-air-scraper.yaml) |
 | [Aviasales via Travelpayouts](https://www.aviasales.com/) | Travel | community | — | — | [yaml](./data/candidates/aviasales.yaml) |
+| [Baserow Cloud](https://baserow.io/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/baserow.yaml) |
 | [Bright Data SERP API](https://brightdata.com/) | Travel | community | — | — | [yaml](./data/candidates/bright-data-serp.yaml) |
+| [Coda / Superhuman Docs](https://coda.io/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/coda.yaml) |
 | [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) | Travel | community | — | — | [yaml](./data/candidates/ctrip-flights.yaml) |
 | [Duffel Flights API](https://duffel.com/) | Travel | community | — | — | [yaml](./data/candidates/duffel-flights.yaml) |
 | [Expedia XAP Flight Listings](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) | Travel | community | — | — | [yaml](./data/candidates/expedia-xap-flights.yaml) |
+| [飞书 Feishu](https://www.feishu.cn/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/feishu.yaml) |
 | [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) | Travel | community | — | — | [yaml](./data/candidates/fliggy-domestic-flights.yaml) |
 | [Flight MCP](https://flight-mcp.com/) | Travel | community | — | — | [yaml](./data/candidates/flight-mcp.yaml) |
 | [FlightAPI.io Flight Price API](https://www.flightapi.io/) | Travel | community | — | — | [yaml](./data/candidates/flightapi-io.yaml) |
+| [Google Sheets](https://workspace.google.com/products/sheets/) | Productivity / Storage | community | — | — | [yaml](./data/candidates/google-sheets.yaml) |
+| [Grist](https://www.getgrist.com/) | Productivity / Storage | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/grist.yaml) |
 | [Ignav Flights](https://ignav.com/) | Travel | community | [1 completed](./generated/evaluations.md) | — | [yaml](./data/candidates/ignav.yaml) |
 | [KAYAK Affiliate API](https://affiliates.kayak.com/) | Travel | community | — | — | [yaml](./data/candidates/kayak-affiliate.yaml) |
 | [Kiwi.com](https://www.kiwi.com/) | Travel | community | [2 completed · 1 invalid_run](./generated/evaluations.md) | — | [yaml](./data/candidates/kiwi.yaml) |

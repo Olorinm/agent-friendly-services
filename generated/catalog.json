@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-07T11:45:19.200Z",
+  "generated_at": "2026-09-08T03:40:18.206Z",
   "description": "Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
@@ -90,7 +90,28 @@
     {
       "id": "productivity-storage",
       "name": "Productivity / Storage",
-      "description": "Project management, documents, file storage."
+      "description": "Project management, documents, file storage.",
+      "subcategories": [
+        {
+          "id": "collaborative-tables",
+          "name": "Collaborative Tables",
+          "description": "User-facing online tables for organizing and following up shared work.",
+          "capabilities": [
+            {
+              "id": "records.organize",
+              "description": "Turn supplied notes into a structured online action list."
+            },
+            {
+              "id": "records.track",
+              "description": "Update progress and retrieve outstanding actions."
+            },
+            {
+              "id": "records.reconcile",
+              "description": "Merge follow-up notes without duplicating existing actions."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "observability-security",
@@ -237,10 +258,114 @@
         "spreadsheets"
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "auth": {
+            "url": "https://airtable.com/developers/web/guides/personal-access-tokens",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "pricing": {
+            "url": "https://support.airtable.com/articles/2277136852-airtable-plans-overview",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "limits": {
+            "url": "https://support.airtable.com/articles/7735693959-managing-api-call-limits-in-airtable",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "web-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://airtable.com/developers/web/api/introduction",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "pricing"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "PAT scopes plus selected workspace/base access required. Base creation is documented on all plans; do not infer paid-only access from outdated posts.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Create a personal access token with required scopes and selected test resources.",
+                "evidence": [
+                  "auth"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 1000,
+                "unit": "API calls",
+                "per": "workspace/month",
+                "scope": "Free plan; includes metadata/schema calls, 5 requests/second/base.",
+                "evidence": [
+                  "limits"
+                ]
+              },
+              {
+                "kind": "free_allowance",
+                "amount": 1000,
+                "unit": "records",
+                "per": "base",
+                "scope": "Free plan storage limit across all tables in a base.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
+      }
     },
     {
       "id": "aiven",
@@ -651,6 +776,166 @@
       }
     },
     {
+      "id": "baserow",
+      "name": "Baserow Cloud",
+      "category": "productivity-storage",
+      "homepage": "https://baserow.io/",
+      "summary": "Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://baserow.io/docs/apis/rest-api",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "auth": {
+            "url": "https://baserow.io/user-docs/personal-api-tokens",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "pricing": {
+            "url": "https://baserow.io/pricing",
+            "checked_on": "2026-09-08",
+            "kind": "official_site"
+          },
+          "mcp": {
+            "url": "https://baserow.io/user-docs/mcp-server",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "database-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://baserow.io/docs/apis/rest-api",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "pricing"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "Database token can read/create/update/delete rows in permitted tables; creating the table/schema requires a short-lived JWT. A precreated table changes the test setup.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Generate a database token and select permitted tables and operations.",
+                "evidence": [
+                  "auth"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 3000,
+                "unit": "rows",
+                "per": "workspace",
+                "scope": "Cloud Free plan. 2 GB storage. JWT/schema access and database row tokens are distinct.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          },
+          {
+            "id": "native-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://baserow.io/user-docs/mcp-server",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "unknown",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Workspace admin creates a unique secret-bearing endpoint URL; the URL is itself a credential and must not be published. Documented tools read schema/list tables and create/update/delete rows, but do not list table creation. Cloud plan availability is not yet verified; do not assume this route can provision task 001 from an empty container.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Create a workspace MCP endpoint in account settings and securely store its private URL.",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
+      }
+    },
+    {
       "id": "brave-search",
       "name": "Brave Search API",
       "category": "web-search-data",
@@ -964,6 +1249,126 @@
             "task_run_ids": []
           }
         ]
+      }
+    },
+    {
+      "id": "coda",
+      "name": "Coda / Superhuman Docs",
+      "category": "productivity-storage",
+      "homepage": "https://coda.io/",
+      "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://coda.io/developers/apis/v1",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "mcp": {
+            "url": "https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "rest-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://coda.io/developers/apis/v1",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "api"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be asynchronous. Table/schema creation support must be verified for the task.",
+            "task_run_ids": []
+          },
+          {
+            "id": "hosted-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://coda.io/apis/mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "oauth",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Official hosted MCP; connector setup needs authorization.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
       }
     },
     {
@@ -1717,6 +2122,183 @@
       "catalog": null
     },
     {
+      "id": "feishu",
+      "name": "飞书 Feishu",
+      "category": "productivity-storage",
+      "homepage": "https://www.feishu.cn/",
+      "summary": "China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs",
+            "notes": "Fetched official Markdown successfully: creates a Base with tenant/user token and base:app:create or bitable:app permission."
+          },
+          "cli": {
+            "url": "https://github.com/larksuite/cli",
+            "checked_on": "2026-09-08",
+            "kind": "official_repo"
+          },
+          "mcp": {
+            "url": "https://github.com/larksuite/lark-openapi-mcp",
+            "checked_on": "2026-09-08",
+            "kind": "official_repo"
+          },
+          "pricing": {
+            "url": "https://www.feishu.cn/service?tab=free",
+            "checked_on": "2026-09-08",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "base-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create",
+            "evidence": [
+              "api",
+              "cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              }
+            },
+            "notes": "Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested.",
+            "task_run_ids": []
+          },
+          {
+            "id": "official-cli",
+            "interface": "cli",
+            "maintainer": "official",
+            "entry_url": "https://github.com/larksuite/cli",
+            "evidence": [
+              "cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              }
+            },
+            "notes": "Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification.",
+            "task_run_ids": []
+          },
+          {
+            "id": "official-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://github.com/larksuite/lark-openapi-mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Local official MCP package uses platform app credentials; identity and tenant domains must match.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": [
+          "China Feishu service. Do not reuse international Lark onboarding or test results."
+        ]
+      }
+    },
+    {
       "id": "firecrawl",
       "name": "Firecrawl",
       "category": "web-search-data",
@@ -2426,6 +3008,105 @@
       "catalog": null
     },
     {
+      "id": "google-sheets",
+      "name": "Google Sheets",
+      "category": "productivity-storage",
+      "homepage": "https://workspace.google.com/products/sheets/",
+      "summary": "Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_only",
+      "route_tests": "not_recorded",
+      "task_runs": [],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://developers.google.com/workspace/sheets/api/quickstart/python",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "limits": {
+            "url": "https://developers.google.com/workspace/sheets/api/limits",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "sheets-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.google.com/workspace/sheets/api/guides/concepts",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "api"
+              ]
+            },
+            "auth": {
+              "value": "oauth",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "Quickstart requires a Google account, Cloud project, enabled Sheets API and OAuth client/consent setup. Service accounts are another route, not assumed preconfigured.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Configure a Cloud project and OAuth consent/client, then authorize selected account access.",
+                "evidence": [
+                  "api"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "usage",
+                "amount": 0,
+                "unit": "money",
+                "currency": "USD",
+                "per": "standard API usage",
+                "scope": "Sheets API standard use has no additional cost; per-minute quotas apply.",
+                "evidence": [
+                  "limits"
+                ]
+              }
+            ],
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
+      }
+    },
+    {
       "id": "grafana",
       "name": "Grafana (Grafana Cloud)",
       "category": "observability-security",
@@ -2442,6 +3123,318 @@
       "route_tests": "not_recorded",
       "task_runs": [],
       "catalog": null
+    },
+    {
+      "id": "grist",
+      "name": "Grist",
+      "category": "productivity-storage",
+      "homepage": "https://www.getgrist.com/",
+      "summary": "Hosted relational spreadsheets with a free personal site, REST API and official MCP.",
+      "submitted_by": "community",
+      "tags": [],
+      "record_pool": "candidate",
+      "evidence_level": "public_sources_and_task_runs",
+      "route_tests": "recorded",
+      "task_runs": [
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260908T032113.556233Z-grist",
+          "service_id": "grist",
+          "route_id": "rest-api",
+          "entry_url": "https://support.getgrist.com/api/",
+          "task": {
+            "description": "把一次读书会筹备会的行动项整理成在线任务表，更新进展，然后告诉我还剩什么没完成",
+            "inputs": "合成会议 M01：行动 A01，林青负责确认场地，截止 2026-09-15；行动 A02，周舟负责整理书单，截止 2026-09-16；行动 A03，陈禾负责制作海报，截止 2026-09-18。三项初始均为待办。后续更新：A02 已完成；A03 的截止日期改为 2026-09-20，负责人和其他字段不变。提供仅用于测试的免费账户凭据和空容器，其 ID 在凭据文件中；不预建业务表或字段。通过指定入口创建在线表格，字段至少包含行动编号、会议编号、内容、负责人、截止日期和状态。所有人名仅为文本，不邀请或通知真实账户。限新建一份任务表及必要父文档、最多 10 行、40 次业务 API 请求；读取公开文档不计业务请求",
+            "expected_output": "在线任务表的私有链接及资源标识；最终三条完整记录；按截止日期排序的未完成清单及数量；初始写入、更新和重新读取的真实请求/响应与时间。写入程序结束后须在一个新进程中读取远端服务，不以本地文件或内存代替",
+            "success": "服务端初始保存三项待办；后续正确更新 A02 状态及 A03 日期；新进程真实读回恰好三项、无重复或遗漏，其余字段不变；未完成清单内容、排序和数量与远端记录一致；在线表格可由准备者独立打开或通过远端 API 复核",
+            "failure": "没有实际在线表格、仅输出 Markdown/本地文件、缺少初始或最终证据、内容/更新错误、通知真实用户、突破资源上限或预算内未完成。凭据或环境问题单列原因，不将未执行当作服务功能不支持",
+            "id": "collaborative-tables-001",
+            "version": "v1",
+            "sha256": "55f76c043eedf525b20f6f494560c980dc9e73a54556be499f186e90868da5a0",
+            "file": "data/experiments/tasks/collaborative-tables.md"
+          },
+          "prompt_sha256": "39688b68c975edd6aad59d01d0c20b178ff16bec2bd6a91fee75a8393934ae4b",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py",
+            "launcher_sha256": "b440d8120b5b41f1541418a6c7a5ba908714cf0e27844bd3750c89071815223f"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-08T03:21:13.580494+00:00",
+          "ended_at": "2026-09-08T03:29:12.056313+00:00",
+          "elapsed_seconds": 478.476,
+          "budget_seconds": 600,
+          "environment": {
+            "host": {
+              "system": "Darwin",
+              "release": "25.6.0",
+              "architecture": "arm64",
+              "python": "3.13.0"
+            },
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "provided: GRIST_API_KEY, GRIST_WORKSPACE_ID",
+            "web_search": "live",
+            "preparation_note": "Preparation completed on 2026-09-08: created a fresh hosted free personal account using Google basic-identity signup, skipped optional organization questions, generated an account API key and checked that the supplied workspace was empty. No business table/schema/rows or adapter code prepared. No payment method or purchase. Signup, credential generation and empty-container verification are outside measured execution time/tokens; account-wide key belongs only to the new test account."
+          },
+          "status": "completed",
+          "reason": "Created one private hosted task table from an empty workspace, saved three initial actions, corrected a rejected mixed-field batch PATCH using separate updates, and read correct final rows in a new process. External reviewer independently retrieved all three final rows. 18 business requests within 40; 478.476 seconds within 600. This is one prepared-account REST trial, not a general ranking.",
+          "usage": {
+            "input_tokens": 769817,
+            "cached_input_tokens": 708608,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 11455,
+            "reasoning_output_tokens": 2294
+          },
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "external preparing Agent",
+            "reviewed_at": "2026-09-08T03:31:24.581087+00:00",
+            "checks": [
+              {
+                "criterion": "Create a real online task table with six required fields and three initial pending actions",
+                "passed": true,
+                "evidence": "selected-receipts.json: document creation, schema write, initial insert and initial remote read all returned 200."
+              },
+              {
+                "criterion": "Update only A02 status and A03 due date",
+                "passed": true,
+                "evidence": "Initial PATCH returned 400; subsequent separate PATCH responses were 200. Initial/final receipts and independent remote read show only requested changes."
+              },
+              {
+                "criterion": "Read exactly three correct remote records from a fresh process after writer exit",
+                "passed": true,
+                "evidence": "Update writer exited at 03:26:56 UTC; final GET occurred in another PID at 03:27:07 UTC. events.jsonl contains separate run_updates.py and verify_remote.py commands. reviewer-remote-read.json independently matches all fields."
+              },
+              {
+                "criterion": "Return correctly sorted outstanding list, count and online resource reference",
+                "passed": true,
+                "evidence": "answer.md gives A01 then A03, count 2; remote rows match. Private document URL/id are redacted in public copies."
+              },
+              {
+                "criterion": "Respect resource budget, time budget and no real-user notifications",
+                "passed": true,
+                "evidence": "18 numbered actual business request receipts, one document/one table/three rows; all mutations target new synthetic resources. CLI exited 0 without timeout; no intervention or real payment."
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260908T032113.556233Z-grist/answer.md",
+              "sha256": "5d1b94dde949edd3ce5d3fd21eef0e42ef9e82e3aaea75f01a6d7798d7ce3e97",
+              "note": "Executor result; private resource references and local paths redacted.",
+              "source_sha256": "e669df7bab957bd13d50b8317e8cd9bab61133d10d505512739c1054bc0cd5ec",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260908T032113.556233Z-grist/selected-receipts.json",
+              "sha256": "ac723950469bfa58974bc4bab68389e05ae5c0bf30840d873c885f737eaed832",
+              "note": "Selected original request/response receipts, including failed attempt and separate-process timing, with source hashes.",
+              "source_sha256": "5a4ced9db1bb9f03ec7316a80e4f19bc74af6fd6bb0213497e10239b88be470a",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260908T032113.556233Z-grist/reviewer-remote-read.json",
+              "sha256": "eb2560be8faba1514eac95af5a58d53af6731a97cac0d56b5e200df1b40f35e1",
+              "note": "External reviewer independently fetched final remote rows after executor finished; excluded from executor usage/time.",
+              "source_sha256": "765a991973a0dd3c6708085966b4b3f8fd16fa3430e272898e5de69f6e0800c2",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/trials/codex-20260908T032113.556233Z-grist",
+            "run_sha256": "9fc5533d1c516305976aa4e7e3c0894018bbe563024e629355024b620f79a048",
+            "events_sha256": "e0628212541645b843bcae1912635eb319fd3f420e266a0c6cd17dc98d1c10ce",
+            "answer_sha256": "e669df7bab957bd13d50b8317e8cd9bab61133d10d505512739c1054bc0cd5ec",
+            "review_sha256": "d478508efce3f2e518964e0da5641598c83a2b1dfde9141c30170c2e1486b736",
+            "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          }
+        }
+      ],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://support.getgrist.com/api/",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "auth": {
+            "url": "https://support.getgrist.com/rest-api/",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "pricing": {
+            "url": "https://www.getgrist.com/pricing/",
+            "checked_on": "2026-09-08",
+            "kind": "official_site"
+          },
+          "mcp": {
+            "url": "https://support.getgrist.com/mcp/",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "rest-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://support.getgrist.com/api/",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "pricing"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "Account API key grants the user’s existing access. Use a separate free test account; personal site is freely available.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Sign in and generate an API key in account settings.",
+                "evidence": [
+                  "auth"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 5000,
+                "unit": "records",
+                "per": "document",
+                "scope": "Hosted Free plan; API quota must also be checked for the selected site.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": [
+              "codex-20260908T032113.556233Z-grist"
+            ]
+          },
+          {
+            "id": "hosted-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://docs.getgrist.com/api/mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the API pool.",
+            "task_run_ids": []
+          },
+          {
+            "id": "python-sdk",
+            "interface": "sdk",
+            "maintainer": "official",
+            "entry_url": "https://pypi.org/project/grist-api/",
+            "evidence": [
+              "auth"
+            ],
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "auth"
+              ]
+            },
+            "notes": "Official Python client linked by Grist REST API guide; SDK installation does not remove account permission requirements.",
+            "task_run_ids": []
+          },
+          {
+            "id": "javascript-sdk",
+            "interface": "sdk",
+            "maintainer": "official",
+            "entry_url": "https://www.npmjs.com/package/grist-api",
+            "evidence": [
+              "auth"
+            ],
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "auth"
+              ]
+            },
+            "notes": "Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch returned 403 during public research, not a service failure.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
+      }
     },
     {
       "id": "groq",
@@ -3455,10 +4448,193 @@
         "bots"
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs",
+            "notes": "Fetched official Markdown successfully: creates a Base with tenant/user token and base:app:create or bitable:app permission."
+          },
+          "cli": {
+            "url": "https://github.com/larksuite/cli",
+            "checked_on": "2026-09-08",
+            "kind": "official_repo"
+          },
+          "mcp": {
+            "url": "https://github.com/larksuite/lark-openapi-mcp",
+            "checked_on": "2026-09-08",
+            "kind": "official_repo"
+          },
+          "pricing": {
+            "url": "https://www.larksuite.com/en_us/plans",
+            "checked_on": "2026-09-08",
+            "kind": "official_site"
+          }
+        },
+        "routes": [
+          {
+            "id": "base-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create",
+            "evidence": [
+              "api",
+              "cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              }
+            },
+            "notes": "Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested.",
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 2000,
+                "unit": "rows",
+                "per": "table",
+                "scope": "Starter Base table limit; access still depends on tenant/app scopes.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "requirements": {
+              "payment_method": {
+                "value": "not_required",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            },
+            "task_run_ids": []
+          },
+          {
+            "id": "official-cli",
+            "interface": "cli",
+            "maintainer": "official",
+            "entry_url": "https://github.com/larksuite/cli",
+            "evidence": [
+              "cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              }
+            },
+            "notes": "Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification.",
+            "task_run_ids": []
+          },
+          {
+            "id": "official-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://github.com/larksuite/lark-openapi-mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Local official MCP package uses platform app credentials; identity and tenant domains must match.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": [
+          "International larksuite.com service. Do not transfer Feishu China results to this identity."
+        ]
+      }
     },
     {
       "id": "lemonsqueezy",
@@ -4121,10 +5297,377 @@
         "knowledge-base"
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
-      "route_tests": "not_recorded",
-      "task_runs": [],
-      "catalog": null
+      "evidence_level": "public_sources_and_task_runs",
+      "route_tests": "recorded",
+      "task_runs": [
+        {
+          "schema_version": 1,
+          "run_id": "codex-20260908T032850.330773Z-notion",
+          "service_id": "notion",
+          "route_id": "rest-api",
+          "entry_url": "https://developers.notion.com/reference/intro",
+          "task": {
+            "description": "把一次读书会筹备会的行动项整理成在线任务表，更新进展，然后告诉我还剩什么没完成",
+            "inputs": "合成会议 M01：行动 A01，林青负责确认场地，截止 2026-09-15；行动 A02，周舟负责整理书单，截止 2026-09-16；行动 A03，陈禾负责制作海报，截止 2026-09-18。三项初始均为待办。后续更新：A02 已完成；A03 的截止日期改为 2026-09-20，负责人和其他字段不变。提供仅用于测试的免费账户凭据和空容器，其 ID 在凭据文件中；不预建业务表或字段。通过指定入口创建在线表格，字段至少包含行动编号、会议编号、内容、负责人、截止日期和状态。所有人名仅为文本，不邀请或通知真实账户。限新建一份任务表及必要父文档、最多 10 行、40 次业务 API 请求；读取公开文档不计业务请求",
+            "expected_output": "在线任务表的私有链接及资源标识；最终三条完整记录；按截止日期排序的未完成清单及数量；初始写入、更新和重新读取的真实请求/响应与时间。写入程序结束后须在一个新进程中读取远端服务，不以本地文件或内存代替",
+            "success": "服务端初始保存三项待办；后续正确更新 A02 状态及 A03 日期；新进程真实读回恰好三项、无重复或遗漏，其余字段不变；未完成清单内容、排序和数量与远端记录一致；在线表格可由准备者独立打开或通过远端 API 复核",
+            "failure": "没有实际在线表格、仅输出 Markdown/本地文件、缺少初始或最终证据、内容/更新错误、通知真实用户、突破资源上限或预算内未完成。凭据或环境问题单列原因，不将未执行当作服务功能不支持",
+            "id": "collaborative-tables-001",
+            "version": "v1",
+            "sha256": "55f76c043eedf525b20f6f494560c980dc9e73a54556be499f186e90868da5a0",
+            "file": "data/experiments/tasks/collaborative-tables.md"
+          },
+          "prompt_sha256": "cf19dc52f1b1940649070012ee364aee5fe4acdd9672b297b6b56d0b316d10b4",
+          "harness": {
+            "name": "Codex CLI",
+            "version": "codex-cli 0.153.4",
+            "mode": "exec --json",
+            "launcher": "scripts/codex-service-trial.py",
+            "launcher_sha256": "b440d8120b5b41f1541418a6c7a5ba908714cf0e27844bd3750c89071815223f"
+          },
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "started_at": "2026-09-08T03:28:50.359616+00:00",
+          "ended_at": "2026-09-08T03:36:34.038160+00:00",
+          "elapsed_seconds": 463.678,
+          "budget_seconds": 600,
+          "environment": {
+            "host": {
+              "system": "Darwin",
+              "release": "25.6.0",
+              "architecture": "arm64",
+              "python": "3.13.0"
+            },
+            "isolation": "fresh conversation/directory; same host, not VM isolation",
+            "service_credentials": "provided: NOTION_API_TOKEN, NOTION_PARENT_PAGE_ID",
+            "web_search": "live",
+            "preparation_note": "Preparation completed on 2026-09-08: created a fresh free personal workspace using Google basic-identity signup; generated a 7-day PAT with Notion API capability only (Workers disabled); created and verified an empty private parent page. No business table/schema/rows or adapter code prepared. No payment method or purchase. Signup, token creation and empty-container preparation are outside measured execution time/tokens. PAT has owner access only within this new test workspace, unlike a page-scoped internal connection."
+          },
+          "status": "completed",
+          "reason": "Created one private online task table under an empty parent page; saved three pending actions, applied both updates and read correct final rows in a new process. External reviewer independently queried the remote data source and confirmed all six fields. 12 business requests within 40; 463.678 seconds within 600. One prepared-account REST trial; other routes are untested.",
+          "usage": {
+            "input_tokens": 471247,
+            "cached_input_tokens": 425344,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 12291,
+            "reasoning_output_tokens": 2837
+          },
+          "service_cost_usd": 0,
+          "human_interventions": 0,
+          "review": {
+            "method": "external_agent",
+            "reviewer": "external preparing Agent",
+            "reviewed_at": "2026-09-08T03:39:43.522761+00:00",
+            "checks": [
+              {
+                "criterion": "Create online table with six required fields and three initial pending actions",
+                "passed": true,
+                "evidence": "Database creation, three inserts and initial remote query returned 200. Actual initial response matches all supplied fields."
+              },
+              {
+                "criterion": "Update only A02 status and A03 deadline",
+                "passed": true,
+                "evidence": "Both PATCH responses returned 200; final and independent reads preserve every other business field."
+              },
+              {
+                "criterion": "Fresh-process remote read after writer exits",
+                "passed": true,
+                "evidence": "Writer PID 80215 exited at 03:33:36 UTC; reader PID 80280 queried at 03:33:46 UTC. Separate write/read commands checked in events. External reviewer queried again after executor exit."
+              },
+              {
+                "criterion": "Correct sorted outstanding list, count and private resource reference",
+                "passed": true,
+                "evidence": "Server filtered/sorted query and answer contain A01 then A03, count 2. Online reference independently works; private identifiers redacted in public copies."
+              },
+              {
+                "criterion": "Respect resource/time budget and no real-user notifications",
+                "passed": true,
+                "evidence": "12 actual business requests, one new database/three rows. Owner fields are text; no invitation/sharing mutations. CLI exited 0 within 600 seconds."
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/answer.md",
+              "sha256": "0b2ce210088ef6acb4d42b579a7cdb4422244541418637755332f52e78e3b700",
+              "note": "Executor answer; private resources and local paths redacted.",
+              "source_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/selected-receipts.json",
+              "sha256": "34fa088243f6088d9d8423483ae0204a33d889110098c1715d27529373c96fab",
+              "note": "Actual request/response and process-exit evidence, with original hashes.",
+              "source_sha256": "adc5e4ee5fde1c05dbf4a5f9c7a3b3ef299ba176c984a339b1b1069739c4f0fa",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            },
+            {
+              "path": "data/experiments/evidence/codex-20260908T032850.330773Z-notion/reviewer-remote-read.json",
+              "sha256": "0563980c757d972c90f3abbcd798d31936dab56802c07f5682e514f931f50f89",
+              "note": "Independent remote query after executor exit, excluded from measured execution usage/time.",
+              "source_sha256": "a131dedb1cf18e468a895b3b74cdafc38df683f035ed9a6edaa0dcd14cdf7b1b",
+              "redactions": [
+                "local paths, Codex session identifiers or explicitly supplied service secrets"
+              ]
+            }
+          ],
+          "provenance": {
+            "local_run_dir": "data/experiments/results/trials/codex-20260908T032850.330773Z-notion",
+            "run_sha256": "af0d163b3b45c764d52d65bd4a88a94675a047d2f18964e2a44317aa280a8565",
+            "events_sha256": "bd250134ef8986049d83336a5b23509551b267d5fd3e082fb50608b5467ef2d1",
+            "answer_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
+            "review_sha256": "e7061ba88f1535f61ae4365a18c067139442a67a4a2f43db02bd5eebc80dac9e",
+            "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          }
+        }
+      ],
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "productivity-storage/collaborative-tables"
+        ],
+        "sources": {
+          "api": {
+            "url": "https://developers.notion.com/reference/intro",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "auth": {
+            "url": "https://developers.notion.com/guides/get-started/authorization",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "pat": {
+            "url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "pricing": {
+            "url": "https://www.notion.com/pricing",
+            "checked_on": "2026-09-08",
+            "kind": "official_site"
+          },
+          "sdk": {
+            "url": "https://github.com/makenotion/notion-sdk-js",
+            "checked_on": "2026-09-08",
+            "kind": "official_repo"
+          },
+          "cli": {
+            "url": "https://developers.notion.com/cli/get-started/overview",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          },
+          "mcp": {
+            "url": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+            "checked_on": "2026-09-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "rest-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://developers.notion.com/reference/intro",
+            "evidence": [
+              "api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "pat"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "api"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "api"
+                ]
+              }
+            },
+            "notes": "Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being a free member alone is insufficient.",
+            "human_steps": [
+              {
+                "stage": "credentials",
+                "step": "Create internal connection and grant only the test page, or create a PAT in a dedicated test workspace.",
+                "evidence": [
+                  "auth",
+                  "pat"
+                ]
+              }
+            ],
+            "costs": [
+              {
+                "kind": "free_allowance",
+                "amount": 0,
+                "unit": "money",
+                "currency": "USD",
+                "per": "month",
+                "scope": "Free workspace subscription; API limits and resource permissions still apply.",
+                "evidence": [
+                  "pricing"
+                ]
+              }
+            ],
+            "task_run_ids": [
+              "codex-20260908T032850.330773Z-notion"
+            ]
+          },
+          {
+            "id": "javascript-sdk",
+            "interface": "sdk",
+            "maintainer": "official",
+            "entry_url": "https://github.com/makenotion/notion-sdk-js",
+            "evidence": [
+              "sdk"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "sdk"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "sdk"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "sdk"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "sdk"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "sdk"
+                ]
+              }
+            },
+            "notes": "Official client library over the REST API; credentials and resource grants remain necessary.",
+            "task_run_ids": []
+          },
+          {
+            "id": "official-cli",
+            "interface": "cli",
+            "maintainer": "official",
+            "entry_url": "https://developers.notion.com/cli/get-started/overview",
+            "evidence": [
+              "cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "cli"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "cli"
+                ]
+              }
+            },
+            "notes": "Official CLI discovered in current docs; measure separately from raw REST.",
+            "task_run_ids": []
+          },
+          {
+            "id": "hosted-mcp",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://mcp.notion.com/mcp",
+            "evidence": [
+              "mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "auth": {
+              "value": "oauth",
+              "evidence": [
+                "mcp"
+              ]
+            },
+            "capabilities": {
+              "records.organize": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              },
+              "records.track": {
+                "value": "documented",
+                "evidence": [
+                  "mcp"
+                ]
+              }
+            },
+            "notes": "Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer actively maintained.",
+            "task_run_ids": []
+          }
+        ],
+        "notes": []
+      }
     },
     {
       "id": "openai",
