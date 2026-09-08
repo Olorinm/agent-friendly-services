@@ -123,16 +123,18 @@ test('both homepages show one flights table with measured and untested services,
     const page = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
     const anchors = [...page.matchAll(/<a id="([^"]+)"/g)].map(m => m[1]);
     assert.equal(new Set(anchors).size, anchors.length);
-    const section = page.split('<a id="services-travel-flights"></a>')[1].split('\n## ')[0];
+    const section = page.split('<a id="services-travel-flights"></a>')[1].split('<a id="services-databases"></a>')[0];
     const visible = section.replace(/<details>[\s\S]*?<\/details>/g, '');
-    assert.equal((visible.match(/\| --- \|/g) ?? []).length, 1);
+    assert.equal((visible.match(/<table /g) ?? []).length, 1);
     assert.equal((section.match(/<details>/g) ?? []).length, 1);
     for (const service of ['Kiwi.com', 'Ignav Flights', 'SerpApi', 'Amadeus']) assert(visible.includes(service));
     assert(!visible.includes('flights-search-001'));
     const detail = section.split('<details>')[1];
     assert.equal(detail.split('gpt-6-astra / xhigh').length - 1, 1);
-    assert.equal(detail.split('找到9月25日米兰飞往荷兰的机票').length - 1, 1);
-    assert(!detail.includes('flights-search-001') && !detail.includes('legacy'));
+    assert.equal(detail.split(file.includes('zh-CN') ? '找到9月25日米兰飞往荷兰的机票' : 'Find flights from Milan to the Netherlands on September 25').length - 1, 1);
+    const readableDetail = detail.replace(/\]\([^)]+\)/g, ']');
+    assert(!readableDetail.includes('flights-search-001') && !readableDetail.includes('legacy'));
+    if (!file.includes('zh-CN')) assert(!/\p{Script=Han}/u.test(readableDetail));
     assert(!detail.includes('Amadeus') && !detail.includes('AirGateway'));
     assert(detail.includes(file.includes('zh-CN') ? '测了什么，怎么测的' : 'What we tested and how'));
   }

@@ -9,6 +9,9 @@ import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates, daysSi
 import { catalogService } from './catalog.ts';
 import { generateResearch } from './research.ts';
 import { loadPrices, estimateModelCost } from './model-costs.ts';
+import { readmeTable } from './readme-table.ts';
+import { taskDisplay } from './task-display.ts';
+import { serviceAccess } from './service-access.ts';
 import { buildBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
 import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
 
@@ -503,57 +506,59 @@ const taskPages = fs.readdirSync(path.join(ROOT, taskDir)).filter(f => f.endsWit
       .map(id => [...providers, ...candidates].find(p => p.id === id)?.name ?? id).join(', ');
     return { relative, classification: classification.replace(/（[^）]+）/, '').trim(), ids, runs, serviceNames };
   }).filter(p => p !== null);
-const directoryRows = (zh: boolean) => [...new Set(services.flatMap(s => s.catalog?.classifications ?? []))].sort().map(id => {
-  const task = taskPages.find(p => p.ids === id);
-  const count = services.filter(s => s.catalog?.classifications.includes(id)).length;
-  const runs = task?.runs ?? [];
-  const anchor = id.replaceAll('/', '-');
-  const category = categories.find(c => c.id === id.split('/')[0]);
-  const subcategory = category?.subcategories?.find(c => c.id === id.split('/')[1]);
-  const label = zh ? (task?.classification ?? id) : `${category?.name ?? id.split('/')[0]} / ${subcategory?.name ?? id.split('/')[1]}`;
-  return `| ${label} | [${count}](./generated/catalog.md#${anchor}) | ${task ? `[${zh ? '任务' : 'Tasks'}](./${task.relative})` : '—'} | ${runs.length ? `[${runs.length}](./generated/evaluations.md#${anchor})` : '—'} | ${task?.serviceNames || '—'} |`;
-}).join('\n');
-
 // Show services in their recorded categories; cross-category services share one source record.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
-const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))));
+const categoryZh: Record<string, string> = { travel: '旅行', databases: '数据库', 'web-search-data': '网页搜索与数据', 'productivity-storage': '协作办公与存储', 'ai-models': 'AI 模型', 'agent-tooling': 'Agent 工具', 'code-execution': '代码执行', 'developer-tools': '开发工具', 'cloud-hosting': '云服务与部署', 'payments-billing': '支付与账单', communication: '通信', 'observability-security': '监控与安全', 'commerce-marketing': '电商与营销' };
+const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
+const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))))
+  .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
+const accessLinks = (p: Provider, zh: boolean) => serviceAccess(p, zh).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
+const profileUrl = (id: string) => `./generated/services.md#${id}`;
+
+// One readable profile per service, generated from the same records as the tables.
+const taskTranslations = [...new Map(evaluations.map(r => [`${r.task.id}/${r.task.version}`, r.task])).values()].map(task => {
+  const t = taskDisplay(task, false);
+  return `<a id="${t.id}-${t.version}"></a>\n\n## ${t.description}\n\n${t.id} ${t.version} · [Original task definition](../${t.file})\n\n**Inputs:** ${t.inputs}\n\n**Expected output:** ${t.expected_output}\n\n**Completion criteria:** ${t.success}\n\n**Failure criteria:** ${t.failure}`;
+});
+fs.writeFileSync(path.join(GENERATED_DIR, 'tasks.en.md'), `<!-- GENERATED — display translations, not execution prompts. -->\n# Evaluated tasks\n\nEnglish translations of the recorded task versions. Original prompts and evidence remain unchanged; language requirements below describe the actual tests.\n\n${taskTranslations.join('\n\n')}\n`);
+const profiles = listedServices.map(p => {
+  const pool = providers.some(x => x.id === p.id) ? 'providers' : 'candidates';
+  const source = `../data/${pool}/${p.id}.yaml`;
+  const routes = p.catalog?.routes ?? [];
+  const access = routes.length ? `| Route | Personal access | Requirements and human steps |\n| --- | --- | --- |\n` + routes.map(r => {
+    const requirements = Object.entries(r.requirements ?? {}).filter(([, v]) => v.value === 'required').map(([k]) => k);
+    const preparation = [requirements.length ? `Requires: ${requirements.join(', ')}` : 'Requirements not fully recorded', ...(r.human_steps ?? []).map(x => x.step), r.notes ?? ''].filter(Boolean).join('; ');
+    return `| [${cell(r.id)} (${r.interface})](${r.entry_url}) | ${cell(r.availability?.value ?? 'unknown')} / ${cell(r.personal_access?.value ?? 'unknown')} | ${cell(preparation)} |`;
+  }).join('\n') : `Personal access requirements are not fully recorded. See the [source record](${source}).`;
+  const costClaims = routes.flatMap(r => (r.costs ?? []).map(c => `- ${cell(r.id)}: ${c.amount} ${c.currency ?? c.unit} / ${cell(c.per)} (${cell(c.kind)}; ${cell(c.scope)})`));
+  const pricing = [p.entrypoints.pricing ? `[Official pricing](${[p.entrypoints.pricing].flat()[0]})` : '', ...costClaims].filter(Boolean).join('\n\n') || 'Full pricing and free allowances have not been verified. A free test does not establish long-term pricing.';
+  const recorded = evaluations.filter(r => r.service_id === p.id);
+  const results = recorded.length ? `| Task | Tested route | Result | Date |\n| --- | --- | --- | --- |\n` + recorded.map(r => `| ${cell(taskDisplay(r.task, false).description ?? r.task.id)} | ${cell(r.route_id)} | [${r.status}](../data/experiments/evaluations/${r.run_id}.json) | ${r.started_at.slice(0, 10)} |`).join('\n') : 'Not yet task-tested.';
+  const sources = Object.values(p.catalog?.sources ?? {}).map(x => `- [${cell(x.kind)}](${x.url}) — checked ${x.checked_on}`).join('\n');
+  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access\n\n${accessLinks(p, false)}\n\n### Personal access and preparation\n\n${access}\n\n### Service pricing\n\n${pricing}\n\n### Task results\n\n${results}\n\n### Sources\n\n${sources || `See the dated checks and evidence in the [source record](${source}).`}`;
+});
+fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nAccess and pricing are source claims; task results apply only to the recorded conditions.\n\n${profiles.join('\n\n')}\n`);
 const boards = buildBoards(evaluations);
 function serviceList(zh: boolean): string {
-  const navigation = listedCategories.map(c => `[${c.name}](#services-${c.id})`).join(' · ');
+  const navigation = listedCategories.map(c => `[${zh ? categoryZh[c.id] ?? c.name : c.name}](#services-${c.id})`).join(' · ');
   const sections = listedCategories.map(c => {
     const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
 
     const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
-      const runs = evaluations.filter(r => r.service_id === p.id);
-      let status = zh ? '待实测' : 'Not yet task-tested';
-      if (runs.length) {
-        const counts = [
-          ['completed', zh ? '完成' : 'completed'],
-          ['not_completed', zh ? '未完成' : 'not completed'],
-          ['invalid_run', zh ? '环境无效' : 'invalid environment'],
-        ].map(([key, label]) => ({ count: runs.filter(r => r.status === key).length, label }))
-          .filter(x => x.count).map(x => `${x.count} ${x.label}`).join(' / ');
-        status = `[${counts}](./generated/evaluations.md)`;
-      } else if (agentRunsByProvider.has(p.id)) {
-        status = `[${zh ? '历史实测' : 'Legacy trials'}](./generated/agent-runs.md#${p.id})`;
-      } else if (m1Status(p.id)) {
-        const m1 = m1Status(p.id)!;
-        status = `[${zh ? '历史首次调用检查' : 'Legacy first-call check'}](./data/experiments/published/${p.id}/${m1.transcript})`;
-      }
-      const source = providers.some(provider => provider.id === p.id)
-        ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
-      return { id: p.id, classification: p.catalog?.classifications.find(id => id.startsWith(`${c.id}/`)),
-        unmeasured: `| [${cell(p.name)}](${source}) | ${runs.length ? `[${zh ? '其他领域实测' : 'Other task results'}](./generated/evaluations.md)` : status} | — | — | — |` };
+      const identity = `[${cell(p.name)}](${profileUrl(p.id)})`;
+      return { id: p.id, classifications: p.catalog?.classifications ?? [],
+        unmeasured: `| ${identity} | ${zh ? '待实测' : 'Not yet task-tested'} | — | — | — | ${accessLinks(p, zh)} |`,
+        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh)} |` };
     });
     const names = new Map(listedServices.map(p => [p.id, p.name]));
     const subcategories = (c.subcategories ?? []).filter(sub =>
-      rows.some(r => r.classification === `${c.id}/${sub.id}`)
+      rows.some(r => r.classifications.includes(`${c.id}/${sub.id}`))
       || categoryBoards.some(b => taskPages.find(t => t.relative === b.task_file)?.ids === `${c.id}/${sub.id}`));
     const groups = subcategories.map(sub => {
       const id = `${c.id}/${sub.id}`;
       const task = taskPages.find(t => t.ids === id);
       return { id, name: zh ? (task?.classification.split(' / ').at(-1) ?? sub.name) : sub.name,
-        rows: rows.filter(r => r.classification === id),
+        rows: rows.filter(r => r.classifications.includes(id)),
         boards: categoryBoards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids === id) };
     });
     const remaining = rows.filter(r => !groups.some(g => g.rows.includes(r)));
@@ -562,8 +567,10 @@ function serviceList(zh: boolean): string {
     const content = groups.map(group => {
       const measured = new Set(group.boards.flatMap(b => b.rows.map(r => r.service_id)));
       const pending = group.rows.filter(r => !measured.has(r.id));
-      const measuredRows = renderBoardRows(group.boards, names);
-      const table = `${boardHeader(zh)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`;
+      const measuredRows = renderBoardRows(group.boards, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }])));
+      const table = group.boards.length
+        ? readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`, true)
+        : `${zh ? '尚未实测' : 'Not yet task-tested'}\n\n${readmeTable(`${zh ? '| 服务 | 用途 | 接入方式 |' : '| Service | Purpose | Access |'}\n| --- | --- | --- |\n${group.rows.map(r => r.directory).join('\n')}`, false)}`;
       const note = group.boards.length > 1 ? (zh
         ? '现有试跑的任务或条件尚未统一，暂不排名。'
         : 'Existing trials use different or incompletely recorded conditions; these results are not ranked.') : '';
@@ -572,7 +579,7 @@ function serviceList(zh: boolean): string {
       const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
       return `${heading}${table}${note ? `\n\n${note}` : ''}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
     }).join('\n\n');
-    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${content}`;
+    return `<a id="services-${c.id}"></a>\n\n### ${zh ? categoryZh[c.id] ?? c.name : c.name} (${rows.length})\n\n${content}`;
   });
   return `${navigation}\n\n${sections.join('\n\n')}`;
 }
@@ -585,47 +592,27 @@ English | [简体中文](./README.zh-CN.md)
 
 **Find services that let your Agent complete tasks, and use real tests to compare reliability, setup effort and cost.**
 
-Finding a service is only the start. Before your Agent can use it, you may need to read the docs, create an account and work out whether the available API actually does what you need. We collect the options and test them on real tasks, so you and your Agent have less of that work to repeat. We focus on what an ordinary personal user can access, including the hurdles along the way.
-
-## Browse the services
-
-Pick a category below to see its candidates, the tasks we designed and the results we recorded.
-
-| Category / subcategory | Candidates | Task definitions | Recorded runs | Services with runs |
-| --- | ---: | --- | ---: | --- |
-${directoryRows(false)}
-
-[Full service list](#all-services) · [All candidates and access routes](./generated/catalog.md) · [All task results and evidence](./generated/evaluations.md) · [Legacy provider index (${providers.length})](./generated/providers.md)
-
-Open a result to see what the Agent accomplished, what it needed, and the tokens, time and service charges involved. Each run includes its task, model, date and supporting evidence so you can judge how closely it matches your situation.
-
-This is a growing collection. Untested services and access restrictions stay visible, and run counts include earlier task versions and unsuccessful attempts. A successful run is useful evidence; it takes more comparable runs to recommend a service with confidence.
-
-## Let your Agent use the directory
-
-You can give your Agent the query guide below and ask it to find options for your task, check the access requirements and explain its choice using the available evidence.
-
-[Query guide](./llms.txt) · [Catalog JSON](./generated/catalog.json) · [Results JSON](./generated/evaluations.json) · [MCP setup](./mcp/README.md)
-
-Use \`search_services\` to filter by category/subcategory and access route, then \`get_service\` to inspect eligibility, costs and task evidence. Without MCP:
-
-\`\`\`sh
-curl -s ${RAW_JSON}
-\`\`\`
+We collect options for ordinary personal users and test them on real tasks. Browse the services below, open a name for its access requirements and sources, or follow a documentation link to get started.
 
 <a id="all-services"></a>
 
-## All services (${listedServices.length})
+## Services (${listedServices.length})
 
-Usage and costs are means per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for setup and history.
+Usage and costs are means per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for tasks, preparation and samples.
 
 ${serviceList(false)}
 
-## Help us fill the gaps
+## For your Agent
 
-Know a service we missed, have a task you would like tested, or found something that has changed? Issues and PRs are welcome. A useful lead or a correction is a contribution too.
+[Query guide](./llms.txt) · [Catalog JSON](./generated/catalog.json) · [Results JSON](./generated/evaluations.json) · [MCP setup](./mcp/README.md)
 
-[Principles](./AGENTS.md) · [Inclusion standards](./docs/catalog-standard.zh-CN.md) · [Task design](./data/experiments/tasks/AGENTS.md) · [Execution and review](./data/experiments/AGENTS.md) · [Contributing](./docs/contributing.md) · [Flight findings](./docs/flights.zh-CN.md)
+Use \`search_services\` to find candidates, then \`get_service\` to check access requirements and test evidence. The same data is available directly as JSON.
+
+## Methods and contributions
+
+Know a service we missed, have a task you would like tested, or found something that has changed? A lead or correction is welcome.
+
+[Principles](./AGENTS.md) · [Inclusion standards](./docs/catalog-standard.zh-CN.md) · [Flight findings](./docs/flights.zh-CN.md) · [Task design](./data/experiments/tasks/AGENTS.md) · [Execution and review](./data/experiments/AGENTS.md) · [All results and evidence](./generated/evaluations.md) · [Contributing](./docs/contributing.md) · [Issues](https://github.com/${REPO}/issues)
 
 Code: [MIT](./LICENSE) · Data: [CC BY 4.0](./LICENSE-DATA).
 `;
@@ -639,51 +626,30 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 
 **帮你找到能让 Agent 完成任务的服务，并用实测比较哪个更可靠、更省事、更有性价比。**
 
-让 Agent 帮忙找机票、准备数据库或整理会议待办，往往还得先选服务、读文档、申请账号，再试试到底能不能用。我们把这些选择收集起来，用真实任务逐步验证，让你和你的 Agent 少走一些重复的弯路。我们关注普通个人能用上的服务，注册、权限和付费门槛也会一并记录。
-
-## 看看有哪些服务
-
-按下面的分类，可以找到候选服务、我们设计的任务，以及已经留下的实测结果。
-
-| 大类 / 子类 | 候选服务 | 任务定义 | 实测记录 | 有运行记录的服务 |
-| --- | ---: | --- | ---: | --- |
-${directoryRows(true)}
-
-[浏览大名单](#all-services) · [全部候选与接入方式](./generated/catalog.md) · [全部实测与证据](./generated/evaluations.md) · [旧版服务索引（${providers.length}）](./generated/providers.md)
-
-点开实测记录，可以看到 Agent 实际做成了什么、需要哪些准备，以及用了多少 token、时间和服务费用。每次运行也保留任务、模型、日期与证据，方便你判断结果是否适用于自己的情况。
-
-资料还在持续积累。未测的服务、遇到的接入门槛都会保留，运行次数也包含历史版本和未成功的尝试。一次成功能提供参考；要推荐谁更值得用，还需要更多可比的结果。
-
-## 也可以交给你的 Agent 来查
-
-把下面的查询指引交给你的 Agent，让它结合你的任务寻找候选、核对接入条件，再根据已有证据说明推荐理由。
-
-[查询指引](./llms.txt) · [服务 JSON](./generated/catalog.json) · [实测 JSON](./generated/evaluations.json) · [MCP 配置](./mcp/README.md)
-
-通过 \`search_services\` 按分类和接入方式检索，再用 \`get_service\` 查看个人准入条件、费用与实测依据。不安装 MCP 也可直接读取：
-
-\`\`\`sh
-curl -s ${RAW_JSON}
-\`\`\`
+我们关注普通个人能用上的服务，收集候选，再用真实任务逐步验证。你可以按分类浏览，点服务名查看接入条件和资料，也可以直接打开文档开始使用。
 
 <a id="all-services"></a>
 
-## 服务大名单（${listedServices.length}）
+## 服务目录（${listedServices.length}）
 
-用量和费用均为每次有效试跑的平均值，包含成功与失败；模型费用按保存的 LiteLLM 价表估算，服务费用按记录来源核验（估算额标 ~）。— 表示未知或未测。仅在相同任务版本、重复次数与配置内比较；历史记录和接入细节可展开查看。
+用量和费用均为每次有效试跑的平均值，包含成功与失败；模型费用按保存的 LiteLLM 价表估算，服务费用按记录来源核验（估算额标 ~）。— 表示未知或未测。仅在相同任务版本、重复次数与配置内比较；任务、提前准备和样本可展开查看。
 
 ${serviceList(true)}
 
-## 一起补全这份资料
+## 给 Agent 的入口
 
-如果你知道我们漏掉的服务、有想测的真实任务，或发现资料已经过时，欢迎提 Issue 或 PR。提供一条线索、纠正一个事实，都能帮上忙。
+[查询指引](./llms.txt) · [服务 JSON](./generated/catalog.json) · [实测 JSON](./generated/evaluations.json) · [MCP 配置](./mcp/README.md)
 
-[核心理念](./AGENTS.md) · [收录标准](./docs/catalog-standard.zh-CN.md) · [任务设计](./data/experiments/tasks/AGENTS.md) · [执行与验收](./data/experiments/AGENTS.md) · [参与贡献](./docs/contributing.md) · [机票阶段结论](./docs/flights.zh-CN.md)
+通过 \`search_services\` 查找候选，再用 \`get_service\` 查看接入条件和实测依据。同一份数据也可以直接读取 JSON。
+
+## 方法与贡献
+
+如果你知道我们漏掉的服务、有想测的真实任务，或发现资料已经过时，欢迎提供线索或纠错。
+
+[核心理念](./AGENTS.md) · [收录标准](./docs/catalog-standard.zh-CN.md) · [机票阶段结论](./docs/flights.zh-CN.md) · [任务设计](./data/experiments/tasks/AGENTS.md) · [执行与验收](./data/experiments/AGENTS.md) · [全部实测与证据](./generated/evaluations.md) · [参与贡献](./docs/contributing.md) · [提出问题](https://github.com/${REPO}/issues)
 
 代码：[MIT](./LICENSE) · 数据：[CC BY 4.0](./LICENSE-DATA)。
 `;
 fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.zh-CN.md'), readmeZh);
 
-console.log(`✓ README.md, README.zh-CN.md, generated/providers.json, generated/candidates.json, generated/catalog.json, generated/catalog.md, generated/evaluations.json, generated/evaluations.md, generated/research.json, generated/research.md, generated/matrix.csv, generated/agent-runs.md`);
-console.log(`  ${providers.length} providers · ${candidates.length} candidates · ${jsonOut.counts.entrypoint_urls} entry links · ${totalUnknown} unknowns open`);
+console.log(`✓ Generated homepages, service profiles, catalogs and evaluations (${listedServices.length} services).`);

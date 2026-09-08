@@ -1,0 +1,82 @@
+{
+  "flights-search-001/v1": {
+    "description": "Find flights from Milan to the Netherlands on September 25",
+    "inputs": "September 25, 2026; depart from MXP, LIN or BGY and arrive at any passenger airport in the Netherlands; one adult, one-way, economy; connections allowed; use the service entry point specified for this trial.",
+    "expected_output": "At least one matching itinerary with airports, flight numbers, local departure and arrival dates and times for each leg, a quoted price and currency, and the search source.",
+    "success": "At least one itinerary matches the date, route and passenger requirements. Key details agree with the real service response obtained by the runner. Only search results are assessed, not the lowest price across all sites or successful payment.",
+    "failure": "No matching itinerary, missing key information, unverifiable evidence, or failure to finish within the budget. Record causes such as no results, missing credentials, human assistance or timeout separately; execution environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "找到9月25日米兰飞往荷兰的机票",
+        "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+        "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+        "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+        "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行"
+      }
+    ]
+  },
+  "database-todos-001/v1": {
+    "description": "Prepare a separate remote database for my personal todo app and verify adding, updating and reading todos after reconnecting",
+    "inputs": "Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2. A temporary database requiring no payment may be created; existing projects must not be modified.",
+    "expected_output": "After saving the data, end the writing process and connect to the same remote database from a fresh process. Return all todos sorted by id, the incomplete items, and the total/completed counts. Explain resource expiry or free-tier limits, and provide verifiable non-sensitive requests, SQL, real responses and evidence of the separate processes.",
+    "success": "Data is actually saved and updated in the specified service's remote database. A fresh process reads back all three items with unchanged titles; only id=1 is incomplete, with three total and two completed. Evidence establishes an independent connection and remote execution. Credentials stay in private workspace files and must not appear in evidence or the final answer. Temporary resources are acceptable if their expiry is disclosed.",
+    "failure": "Local-only or simulated data, no real remote response, inability to reconnect and verify, incorrect data, missing evidence or failure to finish within the budget. Required signup or credentials not supplied for this trial are access barriers; environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+        "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+        "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+        "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+        "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效"
+      }
+    ]
+  },
+  "web-search-001/v1": {
+    "description": "I am upgrading a Python app to 3.13. Find out whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions, with official sources",
+    "inputs": "Target Python 3.13; official sources under python.org. Discover sources through the search service assigned to this trial; directly reading the pages it returns is allowed. Do not answer from model memory or another search engine.",
+    "expected_output": "A short answer in Chinese covering the default setting, how to enable free threading and C-extension compatibility. Include at least two distinct official page URLs and link each conclusion to source content. Save the assigned service's search requests and real responses, the page content used, and access times.",
+    "success": "All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.",
+    "failure": "The specified search service was not called, cited sources do not appear in its response, evidence is missing for any question, versions are confused, output is unverifiable or the budget is exceeded. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+        "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效"
+      }
+    ]
+  },
+  "collaborative-tables-001/v2": {
+    "description": "Turn the action items in these book-club meeting notes into an online task table, give me its link, and tell me what is still unfinished and when each item is due",
+    "inputs": "Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue by September 15; Zhou Zhou will prepare the reading list by September 16; Chen He will make the poster, originally due September 18. All three were unfinished during the meeting. Follow-up: Zhou Zhou has finished the reading list, and the poster deadline has moved to September 20. Everything else stays the same.",
+    "expected_output": "An accessible private link to the online task table, plus the unfinished items with owners and due dates.",
+    "success": "The remote table contains exactly three actions with correct owners and final deadlines. The reading list is complete and the other two are incomplete. The answer links to the table and correctly lists the two unfinished items and their dates. The evaluator independently verifies the data through the service API. Fields and operation order are unrestricted; inserting the old state first or producing evidence files is not required.",
+    "failure": "Only a local file or Markdown is produced, no real remote table exists, items are missing or duplicated, final data or the unfinished list is wrong, or the task is unfinished within the budget. Violating the free-resource, test-container or no-notification constraints also fails. Credential and environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "可访问的私有在线任务表链接；未完成事项及负责人、截止日期",
+        "success": "远端表中恰好包含三项行动、负责人和最终截止日期正确、书单已完成且另两项未完成；答复给出该表链接并正确列出两项未完成事项及日期；准备者通过服务API独立读取确认。允许自由选择字段与操作顺序，不要求先写入旧状态或输出证据文件",
+        "failure": "只给本地文件或Markdown、无真实远端表、漏项或重复、最终内容或未完成清单错误、预算内未完成。违反免费资源/测试容器/不通知约束也不通过；凭据或环境故障单列"
+      }
+    ]
+  },
+  "collaborative-tables-001/v1": {
+    "description": "Turn a book-club planning meeting's action items into an online task table, update their progress, and tell me what remains unfinished",
+    "inputs": "Synthetic meeting M01: A01, Lin Qing confirms the venue, due 2026-09-15; A02, Zhou Zhou prepares the reading list, due 2026-09-16; A03, Chen He makes the poster, due 2026-09-18. All initially incomplete. Update A02 to complete and move A03's deadline to 2026-09-20 without changing other fields. Free test-account credentials and an empty container are supplied; its ID is in the credential file. No business table or fields are prepared. Create an online table through the specified entry point with action ID, meeting ID, content, owner, due date and status. Names are text only: do not invite or notify real accounts. Create at most one task table and required parent document, with at most 10 rows and 40 business API requests. Reading public documentation does not count toward that request limit.",
+    "expected_output": "A private online-table link and resource identifiers; all three final records; incomplete items sorted by due date and their count; real requests, responses and timestamps for the initial insert, updates and fresh read. After the writing program ends, a new process must read the remote service; local files or memory cannot substitute for it.",
+    "success": "The server initially stores three incomplete actions. A02's status and A03's date are updated correctly. A fresh process reads back exactly three items without duplicates or omissions, with all other fields unchanged. The incomplete list, order and count match the remote records. The evaluator can independently open the online table or verify it through the remote API.",
+    "failure": "No real online table, Markdown/local-file-only output, missing initial or final evidence, incorrect content or updates, notifications sent to real users, exceeded resource limits or failure to finish within the budget. Credential or environment problems are recorded separately; failure to execute is not proof that the service lacks a capability.",
+    "source_variants": [
+      {
+        "description": "把一次读书会筹备会的行动项整理成在线任务表，更新进展，然后告诉我还剩什么没完成",
+        "inputs": "合成会议 M01：行动 A01，林青负责确认场地，截止 2026-09-15；行动 A02，周舟负责整理书单，截止 2026-09-16；行动 A03，陈禾负责制作海报，截止 2026-09-18。三项初始均为待办。后续更新：A02 已完成；A03 的截止日期改为 2026-09-20，负责人和其他字段不变。提供仅用于测试的免费账户凭据和空容器，其 ID 在凭据文件中；不预建业务表或字段。通过指定入口创建在线表格，字段至少包含行动编号、会议编号、内容、负责人、截止日期和状态。所有人名仅为文本，不邀请或通知真实账户。限新建一份任务表及必要父文档、最多 10 行、40 次业务 API 请求；读取公开文档不计业务请求",
+        "expected_output": "在线任务表的私有链接及资源标识；最终三条完整记录；按截止日期排序的未完成清单及数量；初始写入、更新和重新读取的真实请求/响应与时间。写入程序结束后须在一个新进程中读取远端服务，不以本地文件或内存代替",
+        "success": "服务端初始保存三项待办；后续正确更新 A02 状态及 A03 日期；新进程真实读回恰好三项、无重复或遗漏，其余字段不变；未完成清单内容、排序和数量与远端记录一致；在线表格可由准备者独立打开或通过远端 API 复核",
+        "failure": "没有实际在线表格、仅输出 Markdown/本地文件、缺少初始或最终证据、内容/更新错误、通知真实用户、突破资源上限或预算内未完成。凭据或环境问题单列原因，不将未执行当作服务功能不支持"
+      }
+    ]
+  }
+}
