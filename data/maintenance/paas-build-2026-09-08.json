@@ -1,0 +1,168 @@
+{
+  "kind": "maintainer_regression_review",
+  "service_id": "paas-build",
+  "issue": "https://github.com/Olorinm/agent-friendly-services/issues/5",
+  "checked_on": "2026-09-08",
+  "counts_as_task_evaluation": false,
+  "verdict": "partially_fixed",
+  "scope": "Direct maintainer checks of the reported fixes. No independent benchmark-agent run, signup, real credentials, merchant account creation or payment. These checks do not establish successful onboarding, checkout creation or payment processing.",
+  "findings": [
+    {
+      "claim": "Auth failures return HTTP 401 instead of being wrapped in 502.",
+      "result": "Confirmed for the invalid-vendor sandbox checkout request tested.",
+      "checks": [
+        "checkout-invalid-vendor"
+      ]
+    },
+    {
+      "claim": "GET /api/whoami is available as a read-only credential check.",
+      "result": "Endpoint and rejection paths confirmed: missing and malformed tokens return 401 with a structured error. Valid-token success and implementation side-effect guarantees were not tested.",
+      "checks": [
+        "whoami-no-token",
+        "whoami-invalid-token"
+      ]
+    },
+    {
+      "claim": "All /api/* errors use {ok:false,error:{code,message}}.",
+      "result": "Not fully fixed: missing vendorId at /api/checkout returns HTTP 400 with {error:\"vendorId and amount required\"}.",
+      "checks": [
+        "checkout-missing-vendor"
+      ]
+    },
+    {
+      "claim": "The new errors are documented in SKILL.md, llms.txt and OpenAPI.",
+      "result": "Current SKILL.md and llms.txt contain no whoami/error-schema section. OpenAPI documents whoami and its 401 shape, but checkout only lists a 200 response."
+    },
+    {
+      "observation": "Current remote tools/list exposes add_payments, identify_business, go_live and create_checkout, without whoami. The REST read-only endpoint is not automatically available as an MCP tool."
+    }
+  ],
+  "checks": [
+    {
+      "name": "whoami-no-token",
+      "method": "GET",
+      "endpoint": "/api/whoami",
+      "started_at": "2026-09-08T11:00:00.223Z",
+      "finished_at": "2026-09-08T11:00:01.076Z",
+      "synthetic_credentials_only": true,
+      "request": null,
+      "status": 401,
+      "content_type": "application/json",
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "missing_token",
+          "message": "Authorization: Bearer <paas.build access token> required"
+        }
+      }
+    },
+    {
+      "name": "whoami-invalid-token",
+      "method": "GET",
+      "endpoint": "/api/whoami",
+      "started_at": "2026-09-08T11:00:01.077Z",
+      "finished_at": "2026-09-08T11:00:01.266Z",
+      "synthetic_credentials_only": true,
+      "request": null,
+      "status": 401,
+      "content_type": "application/json",
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_token",
+          "message": "not a JWT"
+        }
+      }
+    },
+    {
+      "name": "checkout-invalid-vendor",
+      "method": "POST",
+      "endpoint": "/api/checkout",
+      "started_at": "2026-09-08T11:00:01.266Z",
+      "finished_at": "2026-09-08T11:00:02.251Z",
+      "synthetic_credentials_only": true,
+      "request": {
+        "vendorId": "afs-maintenance-invalid-vendor",
+        "amount": 1,
+        "currency": "GBP",
+        "description": "Invalid-credential regression check",
+        "env": "sandbox"
+      },
+      "status": 401,
+      "content_type": "application/json",
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_credentials",
+          "message": "checkout failed",
+          "upstream_status": 401
+        }
+      }
+    },
+    {
+      "name": "checkout-missing-vendor",
+      "method": "POST",
+      "endpoint": "/api/checkout",
+      "started_at": "2026-09-08T11:00:02.251Z",
+      "finished_at": "2026-09-08T11:00:02.438Z",
+      "synthetic_credentials_only": true,
+      "request": {
+        "amount": 1,
+        "currency": "GBP",
+        "env": "sandbox"
+      },
+      "status": 400,
+      "content_type": "application/json",
+      "response": {
+        "error": "vendorId and amount required"
+      }
+    }
+  ],
+  "mcp_discovery": {
+    "started_at": "2026-09-08T10:59:53.888Z",
+    "finished_at": "2026-09-08T10:59:55.936Z",
+    "url": "https://paas.build/mcp",
+    "server": {
+      "name": "paas.build",
+      "title": "paas.build \u2014 payments for AI builders",
+      "version": "0.2.0"
+    },
+    "tools": [
+      "add_payments",
+      "identify_business",
+      "go_live",
+      "create_checkout"
+    ],
+    "business_tools_called": false
+  },
+  "source_checks": [
+    {
+      "url": "https://paas.build/SKILL.md",
+      "sha256": "a8e5422c4cb6295a2eb991f0f7e852001aa96da79ba1da4a2ed3b0cea643fc72",
+      "has_whoami": false,
+      "has_error_section": false
+    },
+    {
+      "url": "https://paas.build/llms.txt",
+      "sha256": "1e8f3d73ba868c4c04a025f1df8ea2c171da99fc9c31d96478fd4d80203fd274",
+      "has_whoami": false
+    },
+    {
+      "url": "https://paas.build/openapi.json",
+      "sha256": "6f04fee86da58a1f63cdc8a6bf88b6e273da4fcac38d54c2d5c7478085ac07c3",
+      "whoami_responses": [
+        "200",
+        "401"
+      ],
+      "checkout_responses": [
+        "200"
+      ]
+    },
+    {
+      "url": "https://github.com/UNIPaaS/paas-build-mcp/blob/main/paas-build-mcp.mjs",
+      "sha256": "66a07ece782fb14b92b8430a872d3ded419689a2a92c954fb122f192ae8c3e2d",
+      "observation": "add_payments defaults env to both and sets notify=true; go_live defaults notifications on. This source was inspected, not executed."
+    }
+  ],
+  "next_task": "After preparing an eligible sandbox-only account, ask a fresh agent to create a sandbox payment link for a specified amount and currency; independently verify the resulting checkout. Record merchant setup, email/identity requirements and fees separately. Do not count invalid-credential checks as completion of that task."
+}

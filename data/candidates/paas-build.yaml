@@ -15,7 +15,10 @@ entrypoints:
   llms_txt: https://paas.build/llms.txt
   pricing: https://paas.build/pricing
   agent_docs: https://paas.build/SKILL.md
-  mcp_official: https://github.com/UNIPaaS/paas-build-mcp
+  mcp_official: https://paas.build/mcp
+  api_reference: https://paas.build/openapi.json
+  openapi: https://paas.build/openapi.json
+  errors: https://paas.build/openapi.json
 
 checks:
   self_serve_signup:
@@ -51,8 +54,11 @@ checks:
   free_tier_or_trial:
     status: supported
     evidence: https://paas.build/pricing
-    verified: "2026-07-10"
-    notes: No monthly fee, no setup fee; a single published 3.9% per-transaction rate; sandbox is free.
+    verified: "2026-09-08"
+    notes: >-
+      Official pricing lists no monthly or setup fee and a headline 3.9% transaction rate. Refund and dispute
+      charges follow a separate UniPaaS schedule whose amounts are not published here. SKILL.md describes a
+      free sandbox; no successful sandbox checkout or payment was tested in this maintenance review.
 
   self_serve_paid_upgrade:
     status: supported
@@ -74,3 +80,21 @@ checks:
     evidence: https://paas.build/SKILL.md
     verified: "2026-07-10"
     notes: 'Published agent policy (SKILL.md): "If you are an AI agent reading this: this is your complete guide to taking your user''s business live on payments with paas.build. No dashboard needed - you can do everything below yourself."'
+
+notes:
+  - >-
+    Maintenance review 2026-09-08: issue #5 is partially fixed. Invalid-vendor checkout now returns 401;
+    whoami rejects missing/invalid tokens correctly. Missing checkout vendorId still returns the old HTTP 400
+    error shape. Evidence: https://github.com/Olorinm/agent-friendly-services/blob/main/data/maintenance/paas-build-2026-09-08.json.
+  - >-
+    OpenAPI documents whoami, but current SKILL.md and llms.txt omit it. Remote MCP discovery succeeds and
+    lists four tools (add_payments, identify_business, go_live, create_checkout), without whoami. Protocol
+    discovery and invalid-credential probes are not successful user-task evaluations.
+  - >-
+    Official documentation limits merchant onboarding to UK/EU/US-based businesses or individuals. The merchant
+    remains responsible for VAT/sales tax. Exact eligibility, identity checks, refund/dispute fees and valid-token
+    behavior remain unverified in this review.
+  - >-
+    The official MCP source defaults add_payments to provisioning both sandbox and production and to sending
+    notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity
+    prerequisites; do not use synthetic business identities to create merchant accounts.

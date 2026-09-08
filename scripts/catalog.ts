@@ -83,7 +83,7 @@ export function catalogService(p: Provider, pool: 'provider' | 'candidate', eval
   const runs = evaluations.filter(r => r.service_id === p.id);
   return {
     id: p.id, name: p.name, category: p.category, homepage: p.homepage,
-    summary: p.summary, submitted_by: p.submitted_by, tags: p.tags ?? [],
+    summary: p.summary, submitted_by: p.submitted_by, tags: p.tags ?? [], notes: p.notes ?? [],
     record_pool: pool,
     evidence_level: runs.length ? 'public_sources_and_task_runs' : p.catalog ? 'public_sources_only' : 'legacy_record',
     // Records apply only to their exact route/task; do not promote source claims.

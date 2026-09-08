@@ -1,6 +1,6 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-08T08:14:51.478Z",
+  "generated_at": "2026-09-08T11:03:37.612Z",
   "count": 36,
   "candidates": [
     {
@@ -11,6 +11,7 @@
       "summary": "Air distribution API with sandbox keys, production certification and an agency application.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -21,6 +22,7 @@
       "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -31,6 +33,7 @@
       "summary": "Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be re-established.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -41,6 +44,7 @@
       "summary": "An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner API.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -51,6 +55,7 @@
       "summary": "Travelpayouts-distributed live flight search and a separately accessible historical price-data API.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -61,6 +66,7 @@
       "summary": "Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -71,6 +77,7 @@
       "summary": "SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -81,6 +88,7 @@
       "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -91,6 +99,7 @@
       "summary": "携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -101,6 +110,7 @@
       "summary": "Flight API whose self-serve test environment must be distinguished from live account activation.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -111,6 +121,7 @@
       "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -121,6 +132,7 @@
       "summary": "China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -131,6 +143,7 @@
       "summary": "面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -141,6 +154,7 @@
       "summary": "Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -151,6 +165,7 @@
       "summary": "Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -161,6 +176,7 @@
       "summary": "Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -171,6 +187,7 @@
       "summary": "Hosted relational spreadsheets with a free personal site, REST API and official MCP.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -181,6 +198,7 @@
       "summary": "Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -191,6 +209,7 @@
       "summary": "Affiliate flight APIs with a business application and an optional requested sandbox.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -201,6 +220,7 @@
       "summary": "Flight search through a publicized MCP path and the separately gated Tequila partnership API.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -211,6 +231,7 @@
       "summary": "Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -221,6 +242,7 @@
       "summary": "Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -235,8 +257,17 @@
         "llms_txt": "https://paas.build/llms.txt",
         "pricing": "https://paas.build/pricing",
         "agent_docs": "https://paas.build/SKILL.md",
-        "mcp_official": "https://github.com/UNIPaaS/paas-build-mcp"
+        "mcp_official": "https://paas.build/mcp",
+        "api_reference": "https://paas.build/openapi.json",
+        "openapi": "https://paas.build/openapi.json",
+        "errors": "https://paas.build/openapi.json"
       },
+      "notes": [
+        "Maintenance review 2026-09-08: issue #5 is partially fixed. Invalid-vendor checkout now returns 401; whoami rejects missing/invalid tokens correctly. Missing checkout vendorId still returns the old HTTP 400 error shape. Evidence: https://github.com/Olorinm/agent-friendly-services/blob/main/data/maintenance/paas-build-2026-09-08.json.",
+        "OpenAPI documents whoami, but current SKILL.md and llms.txt omit it. Remote MCP discovery succeeds and lists four tools (add_payments, identify_business, go_live, create_checkout), without whoami. Protocol discovery and invalid-credential probes are not successful user-task evaluations.",
+        "Official documentation limits merchant onboarding to UK/EU/US-based businesses or individuals. The merchant remains responsible for VAT/sales tax. Exact eligibility, identity checks, refund/dispute fees and valid-token behavior remain unverified in this review.",
+        "The official MCP source defaults add_payments to provisioning both sandbox and production and to sending notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity prerequisites; do not use synthetic business identities to create merchant accounts."
+      ],
       "m1": {
         "verdict": "pass",
         "passes": 2,
@@ -253,6 +284,7 @@
       "summary": "PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -263,6 +295,7 @@
       "summary": "去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -273,6 +306,7 @@
       "summary": "Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -283,6 +317,7 @@
       "summary": "Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -293,6 +328,7 @@
       "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -303,6 +339,7 @@
       "summary": "Google results API with signup trial queries; actual account flow and authentication remain untested.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -313,6 +350,7 @@
       "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -323,6 +361,7 @@
       "summary": "Partner flight APIs and an official MCP, with independently documented business-access paths.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -333,6 +372,7 @@
       "summary": "同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -343,6 +383,7 @@
       "summary": "Travel distribution API requiring trial requests and provider-provisioned production credentials.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -353,6 +394,7 @@
       "summary": "Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -363,6 +405,7 @@
       "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -388,6 +431,9 @@
         "rate_limits": "https://docs.xquik.com/guides/rate-limits",
         "errors": "https://docs.xquik.com/guides/error-handling"
       },
+      "notes": [
+        "The official Streamable HTTP MCP endpoint is https://xquik.com/mcp and supports API key or OAuth authentication."
+      ],
       "m1": {
         "verdict": "pass",
         "passes": 3,

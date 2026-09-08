@@ -186,6 +186,11 @@ Personal access requirements are not fully recorded. See the [source record](../
 
 Not yet task-tested.
 
+### Notes
+
+- Anthropic authored the MCP standard; no first-party MCP server exposing the Anthropic API was found at review time (mcp_official intentionally absent).
+- Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI.
+
 ### Sources
 
 See the dated checks and evidence in the [source record](../data/providers/anthropic.yaml).
@@ -213,6 +218,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.
 
 ### Sources
 
@@ -370,6 +379,10 @@ Independent web search index with a developer API, self-serve registration, and 
 
 Not yet task-tested.
 
+### Notes
+
+- Detailed API docs live inside the dashboard domain but are publicly readable without login (verified at review time).
+
 ### Sources
 
 - [official_site](https://brave.com/search/api/) — checked 2026-09-07
@@ -429,6 +442,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- Stagehand (the company's agent framework) is a separate open-source project and not assessed here.
 
 ### Sources
 
@@ -746,6 +763,10 @@ Full pricing and free allowances have not been verified. A free test does not es
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- The official OpenAPI spec is published by Discord but marked public preview / subject to change.
 
 ### Sources
 
@@ -1124,6 +1145,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 
 Not yet task-tested.
 
+### Notes
+
+- fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication).
+
 ### Sources
 
 See the dated checks and evidence in the [source record](../data/providers/fly-io.yaml).
@@ -1179,6 +1204,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- Multi-product platform; this entry covers the core developer platform only (see scope).
 
 ### Sources
 
@@ -2056,7 +2085,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 ### Documentation and access
 
-[Docs](https://paas.build/agents) · [MCP](https://github.com/UNIPaaS/paas-build-mcp)
+[Docs](https://paas.build/agents) · [API](https://paas.build/openapi.json) · [MCP](https://paas.build/mcp)
 
 ### Personal access and preparation
 
@@ -2069,6 +2098,13 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- Maintenance review 2026-09-08: issue #5 is partially fixed. Invalid-vendor checkout now returns 401; whoami rejects missing/invalid tokens correctly. Missing checkout vendorId still returns the old HTTP 400 error shape. Evidence: https://github.com/Olorinm/agent-friendly-services/blob/main/data/maintenance/paas-build-2026-09-08.json.
+- OpenAPI documents whoami, but current SKILL.md and llms.txt omit it. Remote MCP discovery succeeds and lists four tools (add_payments, identify_business, go_live, create_checkout), without whoami. Protocol discovery and invalid-credential probes are not successful user-task evaluations.
+- Official documentation limits merchant onboarding to UK/EU/US-based businesses or individuals. The merchant remains responsible for VAT/sales tax. Exact eligibility, identity checks, refund/dispute fees and valid-token behavior remain unverified in this review.
+- The official MCP source defaults add_payments to provisioning both sandbox and production and to sending notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity prerequisites; do not use synthetic business identities to create merchant accounts.
 
 ### Sources
 
@@ -2324,6 +2360,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions).
 
 ### Sources
 
@@ -2747,6 +2787,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 
 Not yet task-tested.
 
+### Notes
+
+- Agent tooling (MCP, agent toolkit) evolves quickly; re-check quarterly.
+
 ### Sources
 
 See the dated checks and evidence in the [source record](../data/providers/stripe.yaml).
@@ -3160,6 +3204,10 @@ Personal access requirements are not fully recorded. See the [source record](../
 ### Task results
 
 Not yet task-tested.
+
+### Notes
+
+- The official Streamable HTTP MCP endpoint is https://xquik.com/mcp and supports API key or OAuth authentication.
 
 ### Sources
 

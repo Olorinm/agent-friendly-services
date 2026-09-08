@@ -260,6 +260,7 @@ const candidatesOut = {
     summary: p.summary,
     submitted_by: p.submitted_by,
     entrypoints: p.entrypoints,
+    notes: p.notes ?? [],
     m1: m1Status(p.id),
   })),
 };
@@ -535,7 +536,7 @@ const profiles = listedServices.map(p => {
   const recorded = evaluations.filter(r => r.service_id === p.id);
   const results = recorded.length ? `| Task | Tested route | Result | Date |\n| --- | --- | --- | --- |\n` + recorded.map(r => `| ${cell(taskDisplay(r.task, false).description ?? r.task.id)} | ${cell(r.route_id)} | [${r.status}](../data/experiments/evaluations/${r.run_id}.json) | ${r.started_at.slice(0, 10)} |`).join('\n') : 'Not yet task-tested.';
   const sources = Object.values(p.catalog?.sources ?? {}).map(x => `- [${cell(x.kind)}](${x.url}) — checked ${x.checked_on}`).join('\n');
-  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access\n\n${accessLinks(p, false)}\n\n### Personal access and preparation\n\n${access}\n\n### Service pricing\n\n${pricing}\n\n### Task results\n\n${results}\n\n### Sources\n\n${sources || `See the dated checks and evidence in the [source record](${source}).`}`;
+  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access\n\n${accessLinks(p, false)}\n\n### Personal access and preparation\n\n${access}\n\n### Service pricing\n\n${pricing}\n\n### Task results\n\n${results}\n\n${p.notes?.length ? `### Notes\n\n${p.notes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || `See the dated checks and evidence in the [source record](${source}).`}`;
 });
 fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nAccess and pricing are source claims; task results apply only to the recorded conditions.\n\n${profiles.join('\n\n')}\n`);
 const boards = buildBoards(evaluations);
