@@ -1,0 +1,90 @@
+id: bargo-congress
+name: Bargo Congress Trades API
+category: web-search-data
+homepage: https://www.bargo.ai/free-apis/congress
+summary: Hosted read-only REST and MCP API for normalized U.S. House and Senate STOCK Act trade disclosures, with ticker, member, filing, value-range, and price-performance data.
+submitted_by: vendor
+
+tags:
+  - finance
+  - congress
+  - stock-act
+  - market-data
+
+entrypoints:
+  docs: https://www.bargo.ai/free-apis/congress
+  api_reference: https://www.bargo.ai/free-apis/congress
+  openapi: https://www.bargo.ai/free-apis/congress/openapi.json
+  llms_txt: https://www.bargo.ai/llms.txt
+  pricing: https://www.bargo.ai/free-apis/congress
+  signup: https://www.bargo.ai/free-apis/dash
+  api_keys: https://www.bargo.ai/free-apis/dash
+  mcp_official: https://www.bargo.ai/free-apis/congress
+  agent_docs: https://www.bargo.ai/free-apis/congress
+  rate_limits: https://www.bargo.ai/free-apis/congress
+  errors: https://www.bargo.ai/free-apis/congress/openapi.json
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://www.bargo.ai/free-apis/dash
+    verified: "2026-07-16"
+    notes: The key dashboard provides self-serve Google sign-in without a sales process.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://www.bargo.ai/free-apis/dash
+    verified: "2026-07-16"
+    notes: Signed-in users can generate and regenerate a free API key from the dashboard.
+
+  oauth_support:
+    status: unknown
+    notes: Google sign-in protects the key dashboard, but public documentation does not describe OAuth for API clients.
+
+  scoped_tokens:
+    status: unknown
+    notes: Public documentation does not describe permission scopes for API keys.
+
+  token_revocation:
+    status: supported
+    evidence: https://www.bargo.ai/free-apis/dash
+    verified: "2026-07-16"
+    notes: Regenerating a key immediately invalidates the previous key.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: The API has keyless and free-key access, but no separate sandbox or test mode is documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://www.bargo.ai/free-apis/congress
+    verified: "2026-07-16"
+    notes: Read endpoints have a keyless quota, and a free key raises the documented request and row limits without requiring a card.
+
+  self_serve_paid_upgrade:
+    status: unknown
+    notes: A self-serve paid upgrade path is not documented on the Congress API page.
+
+  usage_dashboard:
+    status: supported
+    evidence: https://www.bargo.ai/free-apis/dash
+    verified: "2026-07-16"
+    notes: The dashboard reports the current day's request count, daily limit, total requests, and key creation date.
+
+  idempotency:
+    status: unknown
+    notes: The Congress API is read-only, and no idempotency-key contract is documented.
+
+  versioning_policy:
+    status: unknown
+    notes: The REST base path is versioned, but no breaking-change or deprecation policy is documented.
+
+  automation_permitted:
+    status: partial
+    evidence: https://www.bargo.ai/free-apis/terms
+    verified: "2026-07-16"
+    notes: 'The terms grant a "license to access the API and use the Data within your own applications, websites, agents, research and analyses"; raw-data redistribution, rate-limit evasion, and competing data products are restricted.'
+
+notes:
+  - REST read endpoints work without a key at a lower quota; the focused Congress MCP server requires a free Bargo API key.
+  - Displayed data requires visible Bargo attribution, and the terms restrict redistribution of the underlying raw records.
