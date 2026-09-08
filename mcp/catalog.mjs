@@ -32,6 +32,7 @@ export function searchServices(data, filters) {
         usage: run.usage, elapsed_seconds: run.elapsed_seconds,
         environment: run.environment, budget_seconds: run.budget_seconds,
         service_cost_usd: run.service_cost_usd,
+        model_cost: run.model_cost ?? null, service_cost: run.service_cost ?? null,
         human_interventions: run.human_interventions,
         record: `data/experiments/evaluations/${run.run_id}.json`,
       })),

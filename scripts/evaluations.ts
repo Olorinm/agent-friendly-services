@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, type Provider } from './lib.ts';
+import type { ModelCost } from './model-costs.ts';
+import { buildBoards, moneyLabel } from './leaderboard.ts';
 
 export interface Evaluation {
   schema_version: 1;
@@ -15,6 +17,11 @@ export interface Evaluation {
   status: 'completed' | 'not_completed' | 'invalid_run'; reason: string;
   usage: null | { input_tokens: number; cached_input_tokens: number; output_tokens: number;
     reasoning_output_tokens?: number; cache_write_input_tokens?: number };
+  request_usage?: { status: 'complete' | 'incomplete'; method: string; reason: string; source_sha256: string | null;
+    requests: NonNullable<Evaluation['usage']>[]; totals?: NonNullable<Evaluation['usage']> };
+  model_cost?: ModelCost;
+  service_cost?: { kind: 'reported' | 'estimated' | 'confirmed_free' | 'unknown'; amount_usd: number | null;
+    sources: string[]; note: string; items?: { quantity: number; unit: string; usd_per_unit: number }[] };
   service_cost_usd: number | null; human_interventions: number | null;
   review: { method: string; reviewer: string; reviewed_at: string;
     checks: { criterion: string; passed: boolean; evidence: string }[] };
@@ -65,6 +72,32 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
     }
     if (v?.usage?.cached_input_tokens > v?.usage?.input_tokens) errors.push('cached input is a subset of input tokens');
   }
+  if (v.request_usage) {
+    const detail = v.request_usage;
+    if (!['complete', 'incomplete'].includes(detail.status) || !text(detail.method) || !text(detail.reason)
+        || !Array.isArray(detail.requests) || (detail.source_sha256 !== null && !hash(detail.source_sha256))) errors.push('invalid request_usage');
+    if (detail.status === 'complete') {
+      if (!hash(detail.source_sha256) || !detail.requests?.length || !v.usage) errors.push('complete request_usage needs source hash, requests and final totals');
+      for (const key of ['input_tokens', 'cached_input_tokens', 'cache_write_input_tokens', 'output_tokens', 'reasoning_output_tokens']) {
+        if (!Array.isArray(detail.requests) || detail.requests.some((r: any) => !Number.isInteger(r[key] ?? 0) || (r[key] ?? 0) < 0)
+            || detail.requests.reduce((sum: number, r: any) => sum + (r[key] ?? 0), 0) !== (v.usage?.[key] ?? 0)) errors.push(`request_usage mismatch: ${key}`);
+      }
+    }
+  }
+  if (v.service_cost) {
+    const fee = v.service_cost;
+    if (!['reported', 'estimated', 'confirmed_free', 'unknown'].includes(fee.kind)
+        || !text(fee.note) || !Array.isArray(fee.sources) || fee.sources.some((x: unknown) => !text(x))
+        || (fee.kind !== 'unknown' && (!fee.sources.length || !nonnegative(fee.amount_usd))) || fee.amount_usd !== v.service_cost_usd
+        || (fee.kind === 'unknown' && fee.amount_usd !== null)
+        || (fee.kind === 'confirmed_free' && fee.amount_usd !== 0)) errors.push('invalid service_cost basis');
+    if (fee.kind === 'estimated') {
+      if (!Array.isArray(fee.items) || !fee.items.length || fee.items.some((x: any) =>
+        !nonnegative(x.quantity) || !nonnegative(x.usd_per_unit) || !text(x.unit))
+        || Math.abs(fee.items.reduce((sum: number, x: any) => sum + x.quantity * x.usd_per_unit, 0) - fee.amount_usd) > 1e-9)
+        errors.push('service_cost estimate does not match usage × price');
+    }
+  }
   const checks = v?.review?.checks;
   if (v?.review?.method !== 'external_agent' || !text(v?.review?.reviewer) || !timestamp(v?.review?.reviewed_at)
       || !Array.isArray(checks) || checks.some((c: any) => !text(c?.criterion) || typeof c?.passed !== 'boolean' || !text(c?.evidence))) {
@@ -91,7 +124,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   const dir = path.join(outputRoot, 'generated');
   fs.mkdirSync(dir, { recursive: true });
   const sorted = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at) || a.run_id.localeCompare(b.run_id));
-  fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1, evaluations: sorted }, null, 2) + '\n');
+  fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1, evaluations: sorted, comparisons: buildBoards(records).map(b => ({ ...b, rows: b.rows.map(row => ({ service_id: row.service_id, route_id: row.route_id, metrics: row.metrics, run_ids: row.runs.map(r => r.run_id) })) })) }, null, 2) + '\n');
   const row = (r: Evaluation) => {
     const link = `../data/experiments/evaluations/${r.run_id}.json`;
     return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds}s | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
@@ -120,12 +153,22 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   fs.writeFileSync(path.join(dir, 'evaluations.md'), `<!-- GENERATED — npm run generate; source: data/experiments/evaluations/ -->
 # 任务实测结果
 
-每行只说明该服务入口在该任务和运行配置下的观察。Agent消耗只记录token，不换算货币；缓存输入已含在输入总数中。服务调用费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
+每行只说明该服务入口在该任务和运行配置下的观察。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
 按任务所属大类 / 子类分组，再展示同一任务版本和冻结内容的运行。分类标题来自当前任务表，仅用于导航；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
 
 ${sections}
+
+## 汇总条件与费用依据
+
+${buildBoards(records).map(board => `<a id="${board.id}"></a>\n\n### ${board.tasks.map(t => `${cell(t.id)} ${cell(t.version)}`).join(', ')}\n\n` + board.rows.map(row => {
+  const first = row.runs[0];
+  return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
+    const price = r.model_cost;
+    return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${moneyLabel(price?.amount_usd ?? null)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? `${r.service_cost.kind}: ${r.service_cost.note}; ${r.service_cost.sources.join('; ')}` : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}`;
+  }).join('\n');
+}).join('\n\n')).join('\n\n')}
 `);
 }

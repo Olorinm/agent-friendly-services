@@ -125,6 +125,24 @@
         "answer_sha256": "1e579e837fb3d6b5fb1c40d677c9596f10a64fe5da27feaa6dd5a9c7f8b56106",
         "review_sha256": "0f634381c8b1656327d1943ea868733bbc0a01dbb043049b06afb2c09d96e1aa",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": 0.74517,
+        "kind": "estimated",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        },
+        "rates": {
+          "input": 0.00001,
+          "cache_read": 0.000001,
+          "output": 0.00005
+        },
+        "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
       }
     },
     {
@@ -251,6 +269,19 @@
         "answer_sha256": "cc1a42c7f321d334ffc75b087af34c837e3ba95519b2c3a03f60ffe8fcde1a36",
         "review_sha256": "c08b07a90cd1cc214503a40288eb575bd47803d63493176a43564299b689361a",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -375,6 +406,19 @@
         "answer_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
         "review_sha256": "e7061ba88f1535f61ae4365a18c067139442a67a4a2f43db02bd5eebc80dac9e",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -499,6 +543,19 @@
         "answer_sha256": "e669df7bab957bd13d50b8317e8cd9bab61133d10d505512739c1054bc0cd5ec",
         "review_sha256": "d478508efce3f2e518964e0da5641598c83a2b1dfde9141c30170c2e1486b736",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -704,6 +761,19 @@
         "answer_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
         "review_sha256": "3859e981a89be94663a0fb927f8a16901c8ffe66ef1288d9e2677e9105fbe1a7",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -794,6 +864,19 @@
         "answer_sha256": null,
         "review_sha256": "7a6e621847cee0bb030ad3acbf9d38631c2ddf5bfd0e014d7064f44d80922458",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Token usage was not reported.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -900,6 +983,19 @@
         "events_sha256": "7f3e6db989299723c340ee48f5bc6e286dd265090c18c0f93ac7ba7337985698",
         "answer_sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
         "review_sha256": "2932989fe9d98da3ddf5891de99cb191af6cb0c5bb63224036c52c1a830462d9"
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -1063,6 +1159,19 @@
         "answer_sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
         "review_sha256": "714ba5268b35536b6fca4b3d1baaff2650f151fc70b456aa544e9e7d2e401c27",
         "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -1169,6 +1278,19 @@
         "events_sha256": "c937b4db065aab02ef523b8b6e6a63f9e24545c0071517e71f220627f1298850",
         "answer_sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
         "review_sha256": "a04ec40289da4fa3f588a957fea943e294b4c57312c71a1310965f324ac72ca4"
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -1392,6 +1514,24 @@
         "answer_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
         "review_sha256": "dba51a04a317efb59bf950d63ce65b453b538dda09e8d36480c0c57cc41940e4",
         "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": 0.838358,
+        "kind": "estimated",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        },
+        "rates": {
+          "input": 0.00001,
+          "cache_read": 0.000001,
+          "output": 0.00005
+        },
+        "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
       }
     },
     {
@@ -1491,6 +1631,19 @@
         "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "answer_sha256": null,
         "review_sha256": "fa65d54e4c9fd8b2b8f5e5082a966e67ceca1c371c07f413cbcb06c086b65022"
+      },
+      "model_cost": {
+        "amount_usd": null,
+        "kind": "unknown",
+        "reason": "Token usage was not reported.",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        }
       }
     },
     {
@@ -1595,6 +1748,24 @@
         "answer_sha256": "f43f36121f642753cdb538c8549f722430b03154c473d23f079095b0d3718b49",
         "review_sha256": "802c65908e9c7f126a99e02797afca14bc690f373993803d1aea62e0f453bc50",
         "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": 0.930856,
+        "kind": "estimated",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        },
+        "rates": {
+          "input": 0.00001,
+          "cache_read": 0.000001,
+          "output": 0.00005
+        },
+        "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
       }
     },
     {
@@ -1719,7 +1890,340 @@
         "answer_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
         "review_sha256": "1e667f6f09f155cedb06b71f18bc1d9bd1a4faa13aaf52e43da81f69c3b2b63d",
         "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+      },
+      "model_cost": {
+        "amount_usd": 0.864548,
+        "kind": "estimated",
+        "pricing": {
+          "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+          "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+          "fetched_at": "2026-09-08T08:50:04.463Z",
+          "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+          "model": "gpt-6-astra",
+          "tier": "standard"
+        },
+        "rates": {
+          "input": 0.00001,
+          "cache_read": 0.000001,
+          "output": 0.00005
+        },
+        "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
       }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "comparison-6203194a76cd",
+      "task_file": "data/experiments/tasks/collaborative-tables.md",
+      "tasks": [
+        {
+          "description": "帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。",
+          "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+          "expected_output": "可访问的私有在线任务表链接；未完成事项及负责人、截止日期",
+          "success": "远端表中恰好包含三项行动、负责人和最终截止日期正确、书单已完成且另两项未完成；答复给出该表链接并正确列出两项未完成事项及日期；准备者通过服务API独立读取确认。允许自由选择字段与操作顺序，不要求先写入旧状态或输出证据文件",
+          "failure": "只给本地文件或Markdown、无真实远端表、漏项或重复、最终内容或未完成清单错误、预算内未完成。违反免费资源/测试容器/不通知约束也不通过；凭据或环境故障单列",
+          "id": "collaborative-tables-001",
+          "version": "v2",
+          "sha256": "e14854af8ccddcff3dd7d812b91dd624366ce42ef6df924d74bf910356e9e2f7",
+          "file": "data/experiments/tasks/collaborative-tables.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "grist",
+          "route_id": "rest-api",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 540753,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260908T035504.472694Z-grist"
+          ]
+        },
+        {
+          "service_id": "notion",
+          "route_id": "rest-api",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 215497,
+            "model_cost_usd": 0.74517,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260908T035504.906378Z-notion"
+          ]
+        }
+      ],
+      "latest": "2026-09-08T03:55:05.045850+00:00"
+    },
+    {
+      "id": "comparison-1420586eae17",
+      "task_file": "data/experiments/tasks/databases.md",
+      "tasks": [
+        {
+          "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+          "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+          "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+          "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+          "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+          "id": "database-todos-001",
+          "version": "v1",
+          "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+          "file": "data/experiments/tasks/databases.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "turso",
+          "route_id": "platform-api",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 767600,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T113506.422646Z-turso"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T11:35:06.452325+00:00"
+    },
+    {
+      "id": "comparison-9dbe771526ac",
+      "task_file": "data/experiments/tasks/web-search.md",
+      "tasks": [
+        {
+          "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+          "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+          "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+          "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+          "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+          "id": "web-search-001",
+          "version": "v1",
+          "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+          "file": "data/experiments/tasks/web-search.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "exa",
+          "route_id": "search-api",
+          "metrics": {
+            "passed": 0,
+            "failed": 1,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 0,
+            "tokens": null,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T112952.581354Z-exa"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T11:29:52.610600+00:00"
+    },
+    {
+      "id": "comparison-b5f21fc39ab4",
+      "task_file": "data/experiments/tasks/web-search.md",
+      "tasks": [
+        {
+          "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+          "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+          "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+          "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+          "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+          "id": "web-search-001",
+          "version": "v1",
+          "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+          "file": "data/experiments/tasks/web-search.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "firecrawl",
+          "route_id": "public-search-api",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 346818,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T112951.715536Z-firecrawl"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T11:29:51.792723+00:00"
+    },
+    {
+      "id": "comparison-fdecec09a4b6",
+      "task_file": "data/experiments/tasks/databases.md",
+      "tasks": [
+        {
+          "description": "为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项",
+          "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true。允许创建无需付费的临时数据库；不能动已有项目",
+          "expected_output": "保存数据后结束写入进程，用另一个全新进程连接同一远程数据库，返回按 id 排序的全部待办、未完成项及总数/完成数；说明资源到期或免费限制；提供可核对的非敏感请求、SQL、真实响应、分开进程执行的证据",
+          "success": "实际在指定服务的远程数据库中保存和更新；新进程读回三项且只有 id=1 未完成，总数3、完成数2，标题未变；证据证明独立连接和远程执行。凭据只保存在工作目录私有文件，不得进入 evidence 或最终答案。限时资源可完成此题，但必须明确到期限制",
+          "failure": "只在本地或模拟数据、无真实远程响应、写后无法重连核对、数据不符、证据缺失或预算内未完成；需注册或凭据而本轮未提供则记接入阻碍；环境故障单列无效",
+          "id": "database-todos-001",
+          "version": "v1",
+          "sha256": "0af70e96220847be16b3d52d033d8f262b593dbf233a98be9e29b76410b6f732",
+          "file": "data/experiments/tasks/databases.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "neon",
+          "route_id": "ephemeral-api",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 465413,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T112258.549053Z-neon"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T11:22:58.558715+00:00"
+    },
+    {
+      "id": "comparison-87ab787b88b3",
+      "task_file": "data/experiments/tasks/web-search.md",
+      "tasks": [
+        {
+          "description": "我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据",
+          "inputs": "目标版本 Python 3.13；官方来源范围 python.org；使用本轮指定搜索服务发现来源，可直接读取它返回的来源页面；不依赖模型记忆或其他搜索引擎提供答案",
+          "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；至少两个不同的官方页面 URL；每个结论对应来源内容；保存指定服务的搜索请求与真实响应、所用网页内容和访问时间",
+          "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；至少两个不同官方 URL 出现在指定服务的真实搜索响应中；证据可核对。直接抓取搜索返回页面允许，但内置联网检索只可用于服务接入文档，不能替代被测搜索",
+          "failure": "未调用指定搜索服务、引用来源未在响应中出现、缺少任何一个问题的依据、版本混淆、输出不可核对或预算内未完成；运行环境故障单列无效",
+          "id": "web-search-001",
+          "version": "v1",
+          "sha256": "8393456f14d1ec23aa9fdae73a619897e53c67fbc8259c7d7251f4cc2660782a",
+          "file": "data/experiments/tasks/web-search.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "exa",
+          "route_id": "public-mcp",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 931544,
+            "model_cost_usd": null,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T112257.401366Z-exa"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T11:22:57.413717+00:00"
+    },
+    {
+      "id": "comparison-c77feef961a0",
+      "task_file": "data/experiments/tasks/travel-flights.md",
+      "tasks": [
+        {
+          "description": "找到9月25日米兰飞往荷兰的机票",
+          "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+          "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+          "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+          "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+          "id": "flights-search-001",
+          "version": "v1",
+          "sha256": "ab11d65b9c290491d37f443c7e077c1c6ac4dd0102b8e16cb6e47b016b401a61",
+          "file": "data/experiments/tasks/travel-flights.md"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "kiwi",
+          "route_id": "search-mcp",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 209551,
+            "model_cost_usd": 0.838358,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T092329.724439Z-kiwi"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T09:23:29.733240+00:00"
+    },
+    {
+      "id": "comparison-45effe165cf4",
+      "task_file": "data/experiments/tasks/travel-flights.md",
+      "tasks": [
+        {
+          "id": "flights-search-001",
+          "description": "找到9月25日米兰飞往荷兰的机票",
+          "inputs": "2026-09-25；本题出发范围约定为MXP/LIN/BGY，抵达荷兰任一客运机场；1名成人、单程、经济舱，允许中转；本轮指定的服务入口",
+          "expected_output": "至少一个符合条件的航班方案，包含各航段机场、航班号、当地起降日期时间、搜索报价与币种，以及查询来源",
+          "success": "至少一个方案满足日期、路线和旅客条件；关键信息与执行器取得的真实服务响应相符。仅验搜索结果，不验全网最低价或支付成功",
+          "failure": "未提供符合条件的方案、关键信息缺失、证据无法核对，或运行在预算内未完成。另记原因，如无返回、缺凭据、需人工或超时；执行环境故障单列为无效运行",
+          "file": "data/experiments/tasks/travel-flights.md",
+          "version": "v1",
+          "sha256": "d08dd9e778a6d35c3c8f33de4047431874264a4f797a4dab22bb0b86915a707c"
+        }
+      ],
+      "rows": [
+        {
+          "service_id": "ignav",
+          "route_id": "public-playground",
+          "metrics": {
+            "passed": 1,
+            "failed": 0,
+            "invalid": 0,
+            "trials": 1,
+            "resolution_rate": 1,
+            "tokens": 212944,
+            "model_cost_usd": 0.930856,
+            "service_cost_usd": 0
+          },
+          "run_ids": [
+            "codex-20260907T083644.877057Z-ignav"
+          ]
+        }
+      ],
+      "latest": "2026-09-07T08:36:44.885519+00:00"
     }
   ]
 }

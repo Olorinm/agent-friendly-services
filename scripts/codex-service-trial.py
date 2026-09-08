@@ -22,6 +22,7 @@ import tempfile
 import time
 import tomllib
 from datetime import datetime, timezone
+from session_usage import collect_session_usage
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -220,7 +221,7 @@ def main():
         "allow_login_shell": False,
         "web_search": "live",
     }
-    command = [codex, "exec", "--ignore-user-config", "--ignore-rules", "--ephemeral",
+    command = [codex, "exec", "--ignore-user-config", "--ignore-rules",
                "--skip-git-repo-check", "--strict-config", "--sandbox", "workspace-write",
                "--model", model, "--cd", str(workspace), "--color", "never", "--json",
                "--output-last-message", str(records / "answer.md")]
@@ -308,8 +309,14 @@ def main():
                                       "status": item.get("status")}), flush=True)
         selector.close()
         meta["exit_code"] = proc.wait()
+        proc.stdout.close()
     meta.update(ended_at=now(), elapsed_seconds=round(time.monotonic() - started, 3),
                 timed_out=timed_out, usage=usage)
+    meta["request_usage"] = collect_session_usage(auth_root, meta.get("thread_id"), records, usage)
+    dump(records / "request-usage.json", meta["request_usage"])
+    print(json.dumps({"usage_capture": meta["request_usage"]["status"],
+                      "request_count": len(meta["request_usage"]["requests"]),
+                      "reason": meta["request_usage"]["reason"]}), flush=True)
     # No usage event means unknown, never zero. Completion is judged separately.
     dump(records / "run.json", meta)
     # Keep evidence beside the events even if the OS later clears /tmp. Avoid

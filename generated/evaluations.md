@@ -1,7 +1,7 @@
 <!-- GENERATED — npm run generate; source: data/experiments/evaluations/ -->
 # 任务实测结果
 
-每行只说明该服务入口在该任务和运行配置下的观察。Agent消耗只记录token，不换算货币；缓存输入已含在输入总数中。服务调用费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
+每行只说明该服务入口在该任务和运行配置下的观察。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
 按任务所属大类 / 子类分组，再展示同一任务版本和冻结内容的运行。分类标题来自当前任务表，仅用于导航；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
 
@@ -77,3 +77,109 @@
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
 | ignav / public-playground | flights-search-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json) | 2026-09-07T08:36:44.885519+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 207427 / 157696 / 5517 | 204.375s | 0 | 0 |
 | kiwi / search-mcp | flights-search-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T083627.884537Z-kiwi.json) | 2026-09-07T08:36:27.894085+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 184152 / 129408 / 3754 | 156.912s | 0 | 0 |
+
+## 汇总条件与费用依据
+
+<a id="comparison-6203194a76cd"></a>
+
+### collaborative-tables-001 v2
+
+**grist / rest-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · natural · provided: GRIST_API_KEY, GRIST_WORKSPACE_ID
+
+准备：Existing dedicated free test account; API credential and a newly created empty workspace prepared before timing. No business schema, records or adapter supplied. Setup and external verification excluded from measured tokens/time. No payment enabled.
+
+- [codex-20260908T035504.472694Z-grist](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json)：模型费用 —；Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+**notion / rest-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · natural · provided: NOTION_API_TOKEN, NOTION_PARENT_PAGE_ID
+
+准备：Existing dedicated free test account; API credential and a newly created empty private parent page prepared before timing. No business schema, records or adapter supplied. Setup and external verification excluded from measured tokens/time. No payment enabled.
+
+- [codex-20260908T035504.906378Z-notion](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json)：模型费用 $0.75；Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-1420586eae17"></a>
+
+### database-todos-001 v1
+
+**turso / platform-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · provided: TURSO_API_TOKEN, TURSO_ORGANIZATION
+
+准备：Outer Agent registered a new dedicated Free organization using Google sign-in, selected a username and created an organization API token; no card/payment, no existing database. Signup and token creation outside measured time/tokens. Executor receives only this organization and token, and must provision its own test database.
+
+- [codex-20260907T113506.422646Z-turso](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json)：模型费用 —；Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-9dbe771526ac"></a>
+
+### web-search-001 v1
+
+**exa / search-api** — 0 完成 / 1 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · provided: EXA_API_KEY
+
+准备：Free account prepared by the outer Agent using browser Google sign-in and onboarding; no card or payment. Signup work is outside measured session tokens/time; only EXA_API_KEY provided, no adapter or research context.
+
+- [codex-20260907T112952.581354Z-exa](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json)：模型费用 —；Token usage was not reported. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-b5f21fc39ab4"></a>
+
+### web-search-001 v1
+
+**firecrawl / public-search-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · none
+
+准备：No service account or resource prepared before the measured session.
+
+- [codex-20260907T112951.715536Z-firecrawl](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json)：模型费用 —；Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-fdecec09a4b6"></a>
+
+### database-todos-001 v1
+
+**neon / ephemeral-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · none
+
+准备：No service credentials provided.
+
+- [codex-20260907T112258.549053Z-neon](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json)：模型费用 —；Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-87ab787b88b3"></a>
+
+### web-search-001 v1
+
+**exa / public-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · none
+
+准备：No service credentials provided.
+
+- [codex-20260907T112257.401366Z-exa](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json)：模型费用 —；Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-c77feef961a0"></a>
+
+### flights-search-001 v1
+
+**kiwi / search-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · none
+
+准备：unknown
+
+- [codex-20260907T092329.724439Z-kiwi](../data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json)：模型费用 $0.84；Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。
+
+<a id="comparison-45effe165cf4"></a>
+
+### flights-search-001 v1
+
+**ignav / public-playground** — 1 完成 / 0 未完成 / 0 环境无效。
+
+codex-cli 0.153.4 / gpt-6-astra / xhigh · 600s · legacy · none
+
+准备：unknown
+
+- [codex-20260907T083644.877057Z-ignav](../data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json)：模型费用 $0.93；Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json)（2026-09-08T08:50:04.463Z，standard）。服务费用 $0；旧记录新增实付金额；沿用原复核，不补造回执或估算依据。

@@ -5,9 +5,12 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.dont_write_bytecode = True
 REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / 'scripts'))
+from session_usage import extract_usage, collect_session_usage
 
 
 def load(name, file):
@@ -57,6 +60,95 @@ class Trials(unittest.TestCase):
     def save(self):
         (self.run / 'run.json').write_text(json.dumps(self.meta))
         self.review.write_text(json.dumps(self.assessment))
+
+
+    def session_fixture(self, exact=True):
+        a = {'input_tokens': 10, 'cached_input_tokens': 4, 'output_tokens': 2}
+        b = {'input_tokens': 7, 'cached_input_tokens': 4, 'output_tokens': 1}
+        events = [{'type': 'session_meta', 'payload': {'private_content': 'PRIVATE_CANARY'}}]
+        for i, (usage, total) in enumerate([(a, a), (b, self.meta['usage'])]):
+            event = ({'type': 'token_usage_record', 'payload': {'response_id': str(i), 'usage': usage}}
+                     if exact else {'type': 'event_msg', 'payload': {'type': 'token_count',
+                         'info': {'last_token_usage': usage, 'total_token_usage': total}}})
+            events.extend([event, event])
+        raw = self.run / 'session.raw.jsonl'
+        raw.write_text('\n'.join(json.dumps(e) for e in events)+'\n')
+        return raw
+
+    def test_session_usage_deduplicates_and_exports_only_numeric_counters(self):
+        for exact in [True, False]:
+            detail = extract_usage(self.session_fixture(exact), self.meta['usage'])
+            self.assertEqual(detail['status'], 'complete')
+            self.assertEqual(len(detail['requests']), 2)
+            self.assertNotIn('PRIVATE_CANARY', json.dumps(detail))
+            self.assertNotIn('response_id', json.dumps(detail))
+
+    def test_partial_mismatched_and_truncated_sessions_stay_incomplete(self):
+        raw = self.session_fixture()
+        self.assertEqual(extract_usage(raw, None)['status'], 'incomplete')
+        self.assertEqual(extract_usage(raw, dict(self.meta['usage'], input_tokens=18))['status'], 'incomplete')
+        raw.write_text(raw.read_text()+'{"private":"SECRET')
+        detail = extract_usage(raw, self.meta['usage'])
+        self.assertEqual(detail['status'], 'incomplete')
+        self.assertNotIn('SECRET', json.dumps(detail))
+
+    def test_counter_gaps_do_not_become_request_usage(self):
+        raw = self.session_fixture(False)
+        raw.write_text(raw.read_text().replace('"input_tokens": 17', '"input_tokens": 18'))
+        self.assertEqual(extract_usage(raw, self.meta['usage'])['status'], 'incomplete')
+
+    def test_recorder_reextracts_usage_and_rejects_raw_session_publication(self):
+        self.session_fixture()
+        self.meta['request_usage'] = {'requests': [{'input_tokens': 99999}]}
+        self.save()
+        result_path = recorder.record(self.run, self.review)
+        detail = json.loads(result_path.read_text())['request_usage']
+        self.assertEqual(detail['status'], 'complete')
+        self.assertEqual(len(detail['requests']), 2)
+        self.assertNotIn('PRIVATE_CANARY', result_path.read_text())
+
+    def test_raw_session_cannot_be_selected_as_evidence(self):
+        self.session_fixture()
+        self.assessment['evidence'] = [{'path': 'session.raw.jsonl'}]
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'raw session'):
+            recorder.record(self.run, self.review)
+
+    def test_runner_persists_and_collects_session_after_process_exit(self):
+        # A fake CLI exercises the actual launcher/subprocess/collector without API calls.
+        auth = self.root / 'codex-home'
+        auth.mkdir()
+        cli = self.root / 'codex'
+        cli.write_text('#!' + sys.executable + '\n' + r"""
+import json,os,sys
+from pathlib import Path
+if '--version' in sys.argv:
+    print('codex-cli fixture');sys.exit(0)
+assert '--ephemeral' not in sys.argv
+sys.stdin.read()
+sid = '11111111-2222-3333-4444-555555555555'
+usage = {'input_tokens':17,'cached_input_tokens':8,'output_tokens':3}
+p = Path(os.environ['CODEX_HOME'])/'sessions'/'2026'/'09'/'08'/('rollout-'+sid+'.jsonl')
+p.parent.mkdir(parents=True)
+p.write_text(json.dumps({'type':'token_usage_record','payload':{'response_id':'one','usage':usage}})+'\n')
+print(json.dumps({'type':'thread.started','thread_id':sid}))
+print(json.dumps({'type':'turn.completed','usage':usage}))
+""")
+        cli.chmod(0o700)
+        workspace = self.root / 'new-workspace'
+        workspace.mkdir()
+        with patch.dict('os.environ', {'CODEX_HOME': str(auth)}), patch.object(sys, 'argv',
+                ['runner', 'database-example', '--route', 'http', '--task-file', 'tasks.md',
+                 '--task', 'rows-1', '--model', 'fixture', '--seconds', '10']), \
+                patch.object(runner.shutil, 'which', return_value=str(cli)), \
+                patch.object(runner.tempfile, 'mkdtemp', return_value=str(workspace)):
+            self.assertEqual(runner.main(), 0)
+        recorded = list((self.root/'data/experiments/results/trials').glob('codex-*/run.json'))
+        self.assertEqual(len(recorded), 1)
+        meta = json.loads(recorded[0].read_text())
+        self.assertEqual(meta['request_usage']['status'], 'complete')
+        self.assertEqual(len(meta['request_usage']['requests']), 1)
+        self.assertEqual((recorded[0].parent/'session.raw.jsonl').stat().st_mode & 0o777, 0o600)
 
     def test_arbitrary_task_and_route_and_ambiguity(self):
         task, _ = runner.select_task(self.task, 'rows-1')
@@ -138,6 +230,25 @@ class Trials(unittest.TestCase):
         self.assertEqual(value['workspaceId'], '[SERVICE_SECRET]')
         self.assertEqual(value['input_tokens'], 241383)
         self.assertNotIn('241383', value['url'])
+
+    def test_service_charge_requires_evidence_and_estimates_from_usage(self):
+        with self.assertRaisesRegex(ValueError, 'sources'):
+            recorder.service_charge({'service_cost_usd': 0})
+        detail = {'kind': 'estimated', 'sources': ['https://example.com/prices', 'receipt.json'],
+                  'note': 'Ten billed requests at the documented rate',
+                  'items': [{'quantity': 10, 'unit': 'request', 'usd_per_unit': 0.002}]}
+        amount, basis = recorder.service_charge({'service_cost_usd': None, 'service_cost': detail})
+        self.assertEqual(amount, 0.02)
+        self.assertEqual(basis['amount_usd'], 0.02)
+        with self.assertRaisesRegex(ValueError, 'does not match'):
+            recorder.service_charge({'service_cost_usd': 0.01, 'service_cost': detail})
+        detail.update(kind='confirmed_free', note='Verified free allowance for this run')
+        self.assertEqual(recorder.service_charge({'service_cost_usd': None, 'service_cost': detail})[0], 0)
+        self.assessment.update(service_cost_usd=None, service_cost=detail)
+        self.save()
+        output = json.loads(recorder.record(self.run, self.review).read_text())
+        self.assertEqual(output['service_cost_usd'], 0)
+        self.assertEqual(output['service_cost']['sources'], detail['sources'])
 
     def test_executor_cannot_supply_its_own_review(self):
         self.save()

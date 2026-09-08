@@ -41,13 +41,42 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## All services (112)
 
-Browse the full collection below, grouped by primary category. Links show recorded access routes; task counts apply only to their recorded tasks and conditions. Legacy checks are labeled separately.
+Usage and costs are per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for setup and history.
 
 [AI Models](#services-ai-models) · [Agent Tooling](#services-agent-tooling) · [Code Execution](#services-code-execution) · [Developer Tools](#services-developer-tools) · [Cloud / Hosting](#services-cloud-hosting) · [Databases](#services-databases) · [Web Search / Data](#services-web-search-data) · [Payments / Billing](#services-payments-billing) · [Communication](#services-communication) · [Productivity / Storage](#services-productivity-storage) · [Observability / Security](#services-observability-security) · [Commerce / Marketing](#services-commerce-marketing) · [Travel](#services-travel)
 
 <a id="services-ai-models"></a>
 
 ### AI Models (23)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Alibaba Qwen (Model Studio)](./generated/providers.md#qwen) | Not yet task-tested | — | — | — |
+| [Anthropic](./generated/providers.md#anthropic) | Not yet task-tested | — | — | — |
+| [Cartesia](./generated/providers.md#cartesia) | Not yet task-tested | — | — | — |
+| [Cerebras Inference](./generated/providers.md#cerebras) | Not yet task-tested | — | — | — |
+| [Cohere](./generated/providers.md#cohere) | Not yet task-tested | — | — | — |
+| [Deepgram](./generated/providers.md#deepgram) | Not yet task-tested | — | — | — |
+| [DeepSeek](./generated/providers.md#deepseek) | Not yet task-tested | — | — | — |
+| [ElevenLabs](./generated/providers.md#elevenlabs) | Not yet task-tested | — | — | — |
+| [fal.ai](./generated/providers.md#fal) | Not yet task-tested | — | — | — |
+| [Fireworks AI](./generated/providers.md#fireworks) | Not yet task-tested | — | — | — |
+| [Gemini API](./generated/providers.md#gemini-api) | Not yet task-tested | — | — | — |
+| [Groq](./generated/providers.md#groq) | Not yet task-tested | — | — | — |
+| [Hugging Face](./generated/providers.md#hugging-face) | Not yet task-tested | — | — | — |
+| [Luma AI (Dream Machine)](./generated/providers.md#luma) | Not yet task-tested | — | — | — |
+| [MiniMax](./generated/providers.md#minimax) | Not yet task-tested | — | — | — |
+| [Mistral AI](./generated/providers.md#mistral) | Not yet task-tested | — | — | — |
+| [Moonshot AI (Kimi)](./generated/providers.md#moonshot) | Not yet task-tested | — | — | — |
+| [OpenAI](./generated/providers.md#openai) | Not yet task-tested | — | — | — |
+| [OpenRouter](./generated/providers.md#openrouter) | Not yet task-tested | — | — | — |
+| [Replicate](./generated/providers.md#replicate) | Not yet task-tested | — | — | — |
+| [Together AI](./generated/providers.md#together-ai) | Not yet task-tested | — | — | — |
+| [xAI (Grok API)](./generated/providers.md#xai) | Not yet task-tested | — | — | — |
+| [Z.ai (GLM)](./generated/providers.md#zai) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -75,9 +104,22 @@ Browse the full collection below, grouped by primary category. Links show record
 | [xAI (Grok API)](https://x.ai) · [Details](./generated/providers.md#xai) | xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. | [Docs](https://docs.x.ai)<br>[API](https://docs.x.ai/developers/rest-api-reference/inference) | Not yet task-tested |
 | [Z.ai (GLM)](https://z.ai) · [Details](./generated/providers.md#zai) | GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys. | [Docs](https://docs.z.ai)<br>[API](https://docs.z.ai/api-reference) | Not yet task-tested |
 
+</details>
+
 <a id="services-agent-tooling"></a>
 
 ### Agent Tooling (5)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Composio](./generated/providers.md#composio) | Not yet task-tested | — | — | — |
+| [Mem0](./generated/providers.md#mem0) | Not yet task-tested | — | — | — |
+| [n8n](./generated/providers.md#n8n) | Not yet task-tested | — | — | — |
+| [Vapi](./generated/providers.md#vapi) | Not yet task-tested | — | — | — |
+| [Zapier](./generated/providers.md#zapier) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -87,9 +129,21 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Vapi](https://vapi.ai) · [Details](./generated/providers.md#vapi) | Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents. | [Docs](https://docs.vapi.ai)<br>[API](https://docs.vapi.ai/api-reference)<br>[MCP](https://github.com/VapiAI/mcp-server) | Not yet task-tested |
 | [Zapier](https://zapier.com) · [Details](./generated/providers.md#zapier) | Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. | [Docs](https://docs.zapier.com)<br>[MCP](https://zapier.com/mcp)<br>[CLI](https://github.com/zapier/zapier-platform) | Not yet task-tested |
 
+</details>
+
 <a id="services-code-execution"></a>
 
 ### Code Execution (4)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Browserbase](./generated/providers.md#browserbase) | Not yet task-tested | — | — | — |
+| [E2B](./generated/providers.md#e2b) | Not yet task-tested | — | — | — |
+| [Modal](./generated/providers.md#modal) | Not yet task-tested | — | — | — |
+| [Steel](./generated/providers.md#steel) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -98,9 +152,21 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Modal](https://modal.com) · [Details](./generated/providers.md#modal) | Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI. | [Docs](https://modal.com/docs)<br>[API](https://modal.com/docs/reference)<br>[CLI](https://modal.com/docs/reference/cli) | Not yet task-tested |
 | [Steel](https://steel.dev) · [Details](./generated/providers.md#steel) | Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier. | [Docs](https://docs.steel.dev)<br>[API](https://docs.steel.dev/api-reference) | Not yet task-tested |
 
+</details>
+
 <a id="services-developer-tools"></a>
 
 ### Developer Tools (4)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Atlassian (Jira & Confluence)](./generated/providers.md#atlassian) | Not yet task-tested | — | — | — |
+| [GitHub](./generated/providers.md#github) | [Legacy trials](./generated/agent-runs.md#github) | — | — | — |
+| [GitLab](./generated/providers.md#gitlab) | Not yet task-tested | — | — | — |
+| [Postman](./generated/providers.md#postman) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -109,9 +175,23 @@ Browse the full collection below, grouped by primary category. Links show record
 | [GitLab](https://gitlab.com) · [Details](./generated/providers.md#gitlab) | DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI. | [Docs](https://docs.gitlab.com)<br>[API](https://docs.gitlab.com/api/rest/)<br>[MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server)<br>[CLI](https://gitlab.com/gitlab-org/cli) | Not yet task-tested |
 | [Postman](https://www.postman.com) · [Details](./generated/providers.md#postman) | API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys. | [Docs](https://learning.postman.com)<br>[API](https://learning.postman.com/docs/developer/postman-api/intro-api/)<br>[MCP](https://github.com/postmanlabs/postman-mcp-server)<br>[CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) | Not yet task-tested |
 
+</details>
+
 <a id="services-cloud-hosting"></a>
 
 ### Cloud / Hosting (6)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Cloudflare](./generated/providers.md#cloudflare) | Not yet task-tested | — | — | — |
+| [Fly.io](./generated/providers.md#fly-io) | Not yet task-tested | — | — | — |
+| [Netlify](./generated/providers.md#netlify) | Not yet task-tested | — | — | — |
+| [Railway](./generated/providers.md#railway) | Not yet task-tested | — | — | — |
+| [Render](./generated/providers.md#render) | Not yet task-tested | — | — | — |
+| [Vercel](./generated/providers.md#vercel) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -122,9 +202,63 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Render](https://render.com) · [Details](./generated/providers.md#render) | Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt. | [Docs](https://render.com/docs)<br>[API](https://api-docs.render.com/reference/introduction)<br>[MCP](https://github.com/render-oss/render-mcp-server)<br>[CLI](https://github.com/render-oss/cli) | Not yet task-tested |
 | [Vercel](https://vercel.com) · [Details](./generated/providers.md#vercel) | Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem. | [Docs](https://vercel.com/docs)<br>[API](https://vercel.com/docs/rest-api)<br>[MCP](https://vercel.com/docs/mcp/vercel-mcp)<br>[CLI](https://vercel.com/docs/cli) | Not yet task-tested |
 
+</details>
+
 <a id="services-databases"></a>
 
 ### Databases (12)
+
+**database-todos-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Turso / platform-api](./generated/evaluations.md#comparison-1420586eae17) | 100% | 767.6k | — | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · credentials provided
+
+- 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
+
+- Turso: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json)
+
+</details>
+
+**database-todos-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Neon / ephemeral-api](./generated/evaluations.md#comparison-fdecec09a4b6) | 100% | 465.4k | — | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · no credentials
+
+- 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
+
+- Neon: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json)
+
+</details>
+
+**Other candidates**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Aiven](./data/candidates/aiven.yaml) | Not yet task-tested | — | — | — |
+| [Chroma](./generated/providers.md#chroma) | Not yet task-tested | — | — | — |
+| [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | Not yet task-tested | — | — | — |
+| [Pinecone](./generated/providers.md#pinecone) | Not yet task-tested | — | — | — |
+| [PlanetScale](./data/candidates/planetscale.yaml) | Not yet task-tested | — | — | — |
+| [Qdrant](./generated/providers.md#qdrant) | Not yet task-tested | — | — | — |
+| [Redis (Redis Cloud)](./generated/providers.md#redis) | Not yet task-tested | — | — | — |
+| [Supabase](./generated/providers.md#supabase) | Not yet task-tested | — | — | — |
+| [Upstash](./generated/providers.md#upstash) | Not yet task-tested | — | — | — |
+| [Weaviate](./generated/providers.md#weaviate) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -141,9 +275,78 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Upstash](https://upstash.com) · [Details](./generated/providers.md#upstash) | Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. | [Docs](https://upstash.com/docs)<br>[API](https://upstash.com/docs/devops/developer-api/introduction)<br>[MCP](https://github.com/upstash/mcp-server)<br>[CLI](https://github.com/upstash/cli) | Not yet task-tested |
 | [Weaviate](https://weaviate.io) · [Details](./generated/providers.md#weaviate) | Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. | [Docs](https://docs.weaviate.io)<br>[API](https://docs.weaviate.io/weaviate/api/rest)<br>[MCP](https://github.com/weaviate/mcp-server-weaviate)<br>[CLI](https://github.com/weaviate/weaviate-cli) | Not yet task-tested |
 
+</details>
+
 <a id="services-web-search-data"></a>
 
 ### Web Search / Data (10)
+
+**web-search-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Exa / search-api](./generated/evaluations.md#comparison-9dbe771526ac) | 0% | — | — | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · credentials provided
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Exa: passed / failed / invalid = 0 / 1 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json)
+
+</details>
+
+**web-search-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Firecrawl / public-search-api](./generated/evaluations.md#comparison-b5f21fc39ab4) | 100% | 346.8k | — | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · no credentials
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Firecrawl: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json)
+
+</details>
+
+**web-search-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Exa / public-mcp](./generated/evaluations.md#comparison-87ab787b88b3) | 100% | 931.5k | — | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · no credentials
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Exa: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json)
+
+</details>
+
+**Other candidates**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Apify](./generated/providers.md#apify) | Not yet task-tested | — | — | — |
+| [Brave Search API](./generated/providers.md#brave-search) | Not yet task-tested | — | — | — |
+| [Jina AI](./generated/providers.md#jina) | Not yet task-tested | — | — | — |
+| [Perplexity API](./generated/providers.md#perplexity) | Not yet task-tested | — | — | — |
+| [SerpApi](./generated/providers.md#serpapi) | Not yet task-tested | — | — | — |
+| [Serper](./data/candidates/serper.yaml) | Not yet task-tested | — | — | — |
+| [Tavily](./generated/providers.md#tavily) | Not yet task-tested | — | — | — |
+| [Xquik](./data/candidates/xquik.yaml) | [Legacy first-call check](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -158,9 +361,21 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Tavily](https://www.tavily.com) · [Details](./generated/providers.md#tavily) | Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. | [API](https://docs.tavily.com/documentation/quickstart) | Not yet task-tested |
 | [Xquik](https://xquik.com) · [Details](./data/candidates/xquik.yaml) | Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1. | [Docs](https://docs.xquik.com)<br>[API](https://docs.xquik.com/api-reference/overview)<br>[MCP](https://docs.xquik.com/mcp/overview) | [Legacy first-call check](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) |
 
+</details>
+
 <a id="services-payments-billing"></a>
 
 ### Payments / Billing (4)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Lemon Squeezy](./generated/providers.md#lemonsqueezy) | Not yet task-tested | — | — | — |
+| [paas.build](./data/candidates/paas-build.yaml) | [Legacy first-call check](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | — | — | — |
+| [Paddle](./generated/providers.md#paddle) | Not yet task-tested | — | — | — |
+| [Stripe](./generated/providers.md#stripe) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -169,9 +384,23 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Paddle](https://www.paddle.com) · [Details](./generated/providers.md#paddle) | Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks. | [Docs](https://developer.paddle.com)<br>[API](https://developer.paddle.com/api-reference/overview)<br>[MCP](https://github.com/PaddleHQ/paddle-mcp-server) | Not yet task-tested |
 | [Stripe](https://stripe.com) · [Details](./generated/providers.md#stripe) | Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface. | [Docs](https://docs.stripe.com)<br>[API](https://docs.stripe.com/api)<br>[MCP](https://docs.stripe.com/mcp)<br>[CLI](https://docs.stripe.com/stripe-cli) | Not yet task-tested |
 
+</details>
+
 <a id="services-communication"></a>
 
 ### Communication (6)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Discord](./generated/providers.md#discord) | Not yet task-tested | — | — | — |
+| [Lark](./generated/providers.md#lark) | Not yet task-tested | — | — | — |
+| [Resend](./generated/providers.md#resend) | Not yet task-tested | — | — | — |
+| [Slack](./generated/providers.md#slack) | Not yet task-tested | — | — | — |
+| [Telegram Bot API](./generated/providers.md#telegram) | Not yet task-tested | — | — | — |
+| [Twilio](./generated/providers.md#twilio) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -182,9 +411,45 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Telegram Bot API](https://telegram.org) · [Details](./generated/providers.md#telegram) | Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog. | [Docs](https://core.telegram.org/bots)<br>[API](https://core.telegram.org/bots/api) | Not yet task-tested |
 | [Twilio](https://www.twilio.com) · [Details](./generated/providers.md#twilio) | Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI. | [Docs](https://www.twilio.com/docs)<br>[API](https://www.twilio.com/docs/usage/api)<br>[MCP](https://github.com/twilio-labs/mcp)<br>[CLI](https://www.twilio.com/docs/twilio-cli) | Not yet task-tested |
 
+</details>
+
 <a id="services-productivity-storage"></a>
 
 ### Productivity / Storage (9)
+
+**collaborative-tables-001 v2**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Grist / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 540.8k | — | $0 |
+| [Notion / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 215.5k | $0.75 | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · credentials provided
+
+- 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。
+
+- Grist: passed / failed / invalid = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json)
+- Notion: passed / failed / invalid = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json)
+
+</details>
+
+**Other candidates**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Airtable](./generated/providers.md#airtable) | Not yet task-tested | — | — | — |
+| [Baserow Cloud](./data/candidates/baserow.yaml) | Not yet task-tested | — | — | — |
+| [Coda / Superhuman Docs](./data/candidates/coda.yaml) | Not yet task-tested | — | — | — |
+| [Dropbox](./generated/providers.md#dropbox) | Not yet task-tested | — | — | — |
+| [Google Sheets](./data/candidates/google-sheets.yaml) | Not yet task-tested | — | — | — |
+| [Linear](./generated/providers.md#linear) | Not yet task-tested | — | — | — |
+| [飞书 Feishu](./data/candidates/feishu.yaml) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -198,9 +463,20 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Notion](https://www.notion.com) · [Details](./generated/providers.md#notion) | Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server. | [API](https://developers.notion.com/reference/intro)<br>[SDK](https://github.com/makenotion/notion-sdk-js)<br>[CLI](https://developers.notion.com/cli/get-started/overview)<br>[MCP](https://mcp.notion.com/mcp) | [2 completed](./generated/evaluations.md) |
 | [飞书 Feishu](https://www.feishu.cn/) · [Details](./data/candidates/feishu.yaml) | China-region Feishu workspace and Base APIs; separate account/tenant from international Lark. | [API](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create)<br>[CLI](https://github.com/larksuite/cli)<br>[MCP](https://github.com/larksuite/lark-openapi-mcp) | Not yet task-tested |
 
+</details>
+
 <a id="services-observability-security"></a>
 
 ### Observability / Security (3)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Datadog](./generated/providers.md#datadog) | Not yet task-tested | — | — | — |
+| [Grafana (Grafana Cloud)](./generated/providers.md#grafana) | Not yet task-tested | — | — | — |
+| [Sentry](./generated/providers.md#sentry) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -208,17 +484,93 @@ Browse the full collection below, grouped by primary category. Links show record
 | [Grafana (Grafana Cloud)](https://grafana.com) · [Details](./generated/providers.md#grafana) | Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier. | [Docs](https://grafana.com/docs)<br>[API](https://grafana.com/docs/grafana/latest/developers/http_api/)<br>[MCP](https://github.com/grafana/mcp-grafana) | Not yet task-tested |
 | [Sentry](https://sentry.io) · [Details](./generated/providers.md#sentry) | Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API. | [Docs](https://docs.sentry.io)<br>[API](https://docs.sentry.io/api/)<br>[MCP](https://docs.sentry.io/product/sentry-mcp/)<br>[CLI](https://docs.sentry.io/cli/) | Not yet task-tested |
 
+</details>
+
 <a id="services-commerce-marketing"></a>
 
 ### Commerce / Marketing (1)
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Shopify](./generated/providers.md#shopify) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
 | [Shopify](https://www.shopify.com) · [Details](./generated/providers.md#shopify) | Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. | [Docs](https://shopify.dev/docs)<br>[API](https://shopify.dev/docs/api)<br>[MCP](https://shopify.dev/docs/apps/build/storefront-mcp)<br>[CLI](https://shopify.dev/docs/api/shopify-cli) | Not yet task-tested |
 
+</details>
+
 <a id="services-travel"></a>
 
 ### Travel (25)
+
+**flights-search-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Kiwi.com / search-mcp](./generated/evaluations.md#comparison-c77feef961a0) | 100% | 209.6k | $0.84 | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · no credentials
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Kiwi.com: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json)
+
+</details>
+
+**flights-search-001 v1**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [Ignav Flights / public-playground](./generated/evaluations.md#comparison-45effe165cf4) | 100% | 212.9k | $0.93 | $0 |
+
+<details>
+<summary>Tasks, configuration and samples</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · no credentials
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Ignav Flights: passed / failed / invalid = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json)
+
+</details>
+
+**Other candidates**
+
+| Service | Resolution rate | Tokens | Model cost | Service cost |
+| --- | ---: | ---: | ---: | ---: |
+| [AirGateway Platform API](./data/candidates/airgateway.yaml) | Not yet task-tested | — | — | — |
+| [Amadeus Flight APIs](./data/candidates/amadeus-flights.yaml) | Not yet task-tested | — | — | — |
+| [apiheya Air Scraper](./data/candidates/apiheya-air-scraper.yaml) | Not yet task-tested | — | — | — |
+| [Aviasales via Travelpayouts](./data/candidates/aviasales.yaml) | Not yet task-tested | — | — | — |
+| [Bright Data SERP API](./data/candidates/bright-data-serp.yaml) | Not yet task-tested | — | — | — |
+| [Duffel Flights API](./data/candidates/duffel-flights.yaml) | Not yet task-tested | — | — | — |
+| [Expedia XAP Flight Listings](./data/candidates/expedia-xap-flights.yaml) | Not yet task-tested | — | — | — |
+| [Flight MCP](./data/candidates/flight-mcp.yaml) | Not yet task-tested | — | — | — |
+| [FlightAPI.io Flight Price API](./data/candidates/flightapi-io.yaml) | Not yet task-tested | — | — | — |
+| [KAYAK Affiliate API](./data/candidates/kayak-affiliate.yaml) | Not yet task-tested | — | — | — |
+| [LetsFG Personal Flight Search](./data/candidates/letsfg.yaml) | Not yet task-tested | — | — | — |
+| [Lufthansa Partner Fare API](./data/candidates/lufthansa-partner.yaml) | Not yet task-tested | — | — | — |
+| [Sabre Air APIs](./data/candidates/sabre-air.yaml) | Not yet task-tested | — | — | — |
+| [Scrapingdog Google Flights API](./data/candidates/scrapingdog-flights.yaml) | Not yet task-tested | — | — | — |
+| [SearchApi Google Flights](./data/candidates/searchapi.yaml) | Not yet task-tested | — | — | — |
+| [Skootle Google Flights Scraper](./data/candidates/skootle-google-flights.yaml) | Not yet task-tested | — | — | — |
+| [Skyscanner Travel APIs](./data/candidates/skyscanner.yaml) | Not yet task-tested | — | — | — |
+| [Travelport TripServices](./data/candidates/travelport-tripservices.yaml) | Not yet task-tested | — | — | — |
+| [Trip.com Flight Distribution](./data/candidates/trip-com-flights.yaml) | Not yet task-tested | — | — | — |
+| [去哪儿机票合作](./data/candidates/qunar-flights.yaml) | Not yet task-tested | — | — | — |
+| [同程机票合作](./data/candidates/tongcheng-flights.yaml) | Not yet task-tested | — | — | — |
+| [携程机票合作](./data/candidates/ctrip-flights.yaml) | Not yet task-tested | — | — | — |
+| [飞猪国内机票开放平台](./data/candidates/fliggy-domestic-flights.yaml) | Not yet task-tested | — | — | — |
+
+<details>
+<summary>Service descriptions and access routes</summary>
 
 | Service | Purpose | Access | Task results |
 | --- | --- | --- | --- |
@@ -247,6 +599,8 @@ Browse the full collection below, grouped by primary category. Links show record
 | [同程机票合作](https://www.ly.com/public/about17u/contactus) · [Details](./data/candidates/tongcheng-flights.yaml) | 同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。 | — | Not yet task-tested |
 | [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) · [Details](./data/candidates/ctrip-flights.yaml) | 携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。 | — | Not yet task-tested |
 | [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) · [Details](./data/candidates/fliggy-domestic-flights.yaml) | 面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。 | [API](https://open.alitrip.com/businessDetail.htm?tagId=85) | Not yet task-tested |
+
+</details>
 
 ## Help us fill the gaps
 

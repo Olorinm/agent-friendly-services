@@ -166,12 +166,15 @@ test('generated data and the real MCP protocol preserve legacy behavior and expo
     for (const run of kiwi.task_runs) {
       assert(!('agent_cost_usd' in run) && !('agent_cost_note' in run));
       assert('service_cost_usd' in run);
+      assert(['estimated', 'unknown'].includes(run.model_cost.kind));
+      assert(run.model_cost.pricing.sha256);
     }
     const searchedRuns = flights.services.find((s: any) => s.id === 'kiwi').routes.flatMap((r: any) => r.task_runs);
     assert(searchedRuns.length > 0);
     for (const run of searchedRuns) {
       assert(!('agent_cost_usd' in run));
       assert.deepEqual(run.usage, kiwi.task_runs.find((r: any) => r.run_id === run.run_id).usage);
+      assert.deepEqual(run.model_cost, kiwi.task_runs.find((r: any) => r.run_id === run.run_id).model_cost);
     }
     assert.equal(kiwi.catalog.routes.find((r: any) => r.id === 'tequila-api').task_run_ids.length, 0);
     assert(kiwi.catalog.routes.find((r: any) => r.id === 'search-mcp').task_run_ids.length > 0);

@@ -16,7 +16,8 @@
     "generate": "node --import tsx scripts/generate.ts",
     "test": "node --import tsx scripts/validate.ts && node --import tsx --test tests/*.test.ts",
     "agent-verify": "tsx scripts/agent-verify.ts",
-    "research:init": "node --import tsx scripts/research-init.ts"
+    "research:init": "node --import tsx scripts/research-init.ts",
+    "pricing:update": "node --import tsx scripts/update-model-prices.ts"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",

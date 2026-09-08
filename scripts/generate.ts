@@ -8,6 +8,8 @@ import * as yaml from 'js-yaml';
 import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
 import { catalogService } from './catalog.ts';
 import { generateResearch } from './research.ts';
+import { loadPrices, estimateModelCost } from './model-costs.ts';
+import { buildBoards, renderBoards, boardHeader } from './leaderboard.ts';
 import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
 
 // Isolated preview/CI generation, without changing checked-in build outputs.
@@ -31,7 +33,8 @@ const candidates = loadCandidates()
 
 generateResearch(OUTPUT_ROOT, categories);
 
-const evaluations = loadEvaluations();
+const prices = loadPrices();
+const evaluations = loadEvaluations().map(run => ({ ...run, model_cost: estimateModelCost(run, prices) }));
 for (const result of evaluations) {
   const errors = evaluationErrors(result, [...providers, ...candidates]);
   if (errors.length) throw new Error(`${result.run_id}: ${errors.join('; ')}`);
@@ -514,9 +517,12 @@ const directoryRows = (zh: boolean) => [...new Set(services.flatMap(s => s.catal
 // Expand every collected service once under its primary category; source records remain shared.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
 const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id));
+const boards = buildBoards(evaluations);
 function serviceList(zh: boolean): string {
   const navigation = listedCategories.map(c => `[${c.name}](#services-${c.id})`).join(' · ');
   const sections = listedCategories.map(c => {
+    const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
+    const measured = new Set(categoryBoards.flatMap(b => b.rows.map(r => r.service_id)));
     const rows = listedServices.filter(p => p.category === c.id).map(p => {
       const routes = p.catalog?.routes ?? [];
       const links: [string, string][] = routes.length
@@ -545,10 +551,13 @@ function serviceList(zh: boolean): string {
       const source = providers.some(provider => provider.id === p.id)
         ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
       const summary = cell(p.summary.replace(/\s+/g, ' ').trim());
-      return `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`;
+      return { id: p.id, detail: `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`,
+        unmeasured: `| [${cell(p.name)}](${source}) | ${runs.length ? `[${zh ? '其他领域实测' : 'Other task results'}](./generated/evaluations.md)` : status} | — | — | — |` };
     });
     const header = zh ? '| 服务 | 用途 | 接入方式 | 实测状态 |' : '| Service | Purpose | Access | Task results |';
-    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${header}\n| --- | --- | --- | --- |\n${rows.join('\n')}`;
+    const pending = rows.filter(r => !measured.has(r.id));
+    const names = new Map(listedServices.map(p => [p.id, p.name]));
+    return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${renderBoards(categoryBoards, names, zh)}${categoryBoards.length && pending.length ? `\n\n**${zh ? '其他候选' : 'Other candidates'}**\n\n` : ''}${pending.length ? `${boardHeader(zh)}\n${pending.map(r => r.unmeasured).join('\n')}` : ''}\n\n<details>\n<summary>${zh ? '服务用途与接入方式' : 'Service descriptions and access routes'}</summary>\n\n${header}\n| --- | --- | --- | --- |\n${rows.map(r => r.detail).join('\n')}\n\n</details>`;
   });
   return `${navigation}\n\n${sections.join('\n\n')}`;
 }
@@ -593,7 +602,7 @@ curl -s ${RAW_JSON}
 
 ## All services (${listedServices.length})
 
-Browse the full collection below, grouped by primary category. Links show recorded access routes; task counts apply only to their recorded tasks and conditions. Legacy checks are labeled separately.
+Usage and costs are per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for setup and history.
 
 ${serviceList(false)}
 
@@ -647,7 +656,7 @@ curl -s ${RAW_JSON}
 
 ## 服务大名单（${listedServices.length}）
 
-下面按主分类列出全部已收录服务，可以直接浏览用途和接入链接。实测次数只对应记录中的任务与条件，历史检查单独标明；服务简介沿用来源资料的英文描述。
+用量和费用均为每次有效试跑的平均值，包含成功与失败；模型费用按保存的 LiteLLM 价表估算，服务费用按记录来源核验（估算额标 ~）。— 表示未知或未测。仅在相同任务版本、重复次数与配置内比较；历史记录和接入细节可展开查看。
 
 ${serviceList(true)}
 

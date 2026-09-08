@@ -25,6 +25,55 @@ def number_or_unknown(value):
     return value is None or (type(value) in (int, float) and 0 <= value < float('inf'))
 
 
+def service_charge(review):
+    """Normalize documented service charges; calculate usage-based estimates."""
+    detail = review.get('service_cost')
+    amount = review.get('service_cost_usd')
+    if detail is None:
+        if amount is not None:
+            raise ValueError('service_cost sources and basis are required for a known service charge')
+        return None, {'kind': 'unknown', 'amount_usd': None, 'sources': [],
+                      'note': 'No service billing evidence supplied.'}
+    if not isinstance(detail, dict) or detail.get('kind') not in ('reported', 'estimated', 'confirmed_free', 'unknown'):
+        raise ValueError('Invalid service_cost kind')
+    kind = detail['kind']
+    sources = detail.get('sources', [])
+    if not isinstance(sources, list) or any(not isinstance(x, str) or not x.strip() for x in sources):
+        raise ValueError('service_cost sources must be nonempty source references')
+    if not isinstance(detail.get('note'), str) or not detail['note'].strip():
+        raise ValueError('service_cost needs a note explaining the billing basis')
+    if kind != 'unknown' and not sources:
+        raise ValueError('service_cost sources are required')
+    if kind == 'estimated':
+        items = detail.get('items')
+        if not isinstance(items, list) or not items:
+            raise ValueError('Estimated service_cost needs usage and unit-price items')
+        total = 0
+        for item in items:
+            if not isinstance(item, dict) or not item.get('unit'):
+                raise ValueError('Each service_cost item needs a unit')
+            for key in ('quantity', 'usd_per_unit'):
+                if item.get(key) is None or not number_or_unknown(item.get(key)):
+                    raise ValueError('Service usage and unit prices must be nonnegative numbers')
+            total += item['quantity'] * item['usd_per_unit']
+        total = round(total, 10)
+        if not number_or_unknown(total):
+            raise ValueError('Service charge overflow')
+        if amount is not None and abs(amount - total) > 1e-9:
+            raise ValueError('Service charge does not match usage times price')
+        amount = total
+    elif kind == 'confirmed_free':
+        if amount not in (None, 0):
+            raise ValueError('Confirmed free service charge must be zero')
+        amount = 0
+    elif kind == 'unknown':
+        if amount is not None:
+            raise ValueError('Unknown service charge cannot contain a known amount')
+    elif amount is None:
+        raise ValueError('Reported service charge needs an amount')
+    return amount, {**detail, 'amount_usd': amount, 'sources': sources}
+
+
 def public_copy(raw, meta, run_dir, reviewer='', secrets=()):
     """Redact local paths/session identifiers without changing local originals."""
     replacements = {
@@ -129,6 +178,7 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
     if not (ROOT / task['file']).resolve().is_relative_to(ROOT) or not (ROOT / task['file']).is_file():
         raise ValueError('Task file must exist in the repository')
 
+    service_amount, service_detail = service_charge(review)
     evidence = review.get('evidence', [])
     if not isinstance(evidence, list) or not evidence:
         raise ValueError('Select evidence files, including evidence of any failure/blocker')
@@ -144,6 +194,8 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         source = (run_dir / item['path']).resolve()
         if not source.is_relative_to(run_dir) or not source.is_file():
             raise ValueError('Evidence path must be a file inside the run directory')
+        if source == (run_dir / 'session.raw.jsonl').resolve():
+            raise ValueError('Do not publish the raw session as evidence')
         if source == secret_file.resolve():
             raise ValueError('Do not select the private secret store as evidence')
         raw = source.read_bytes()
@@ -176,7 +228,8 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                         'input_delivery': meta.get('input_delivery', 'inline'),
                         'context_files': meta.get('context_files', [])},
         'status': status, 'reason': review['reason'], 'usage': meta.get('usage'),
-        'service_cost_usd': review['service_cost_usd'], 'human_interventions': review['human_interventions'],
+        'service_cost_usd': service_amount, 'service_cost': service_detail,
+        'human_interventions': review['human_interventions'],
         'review': {'method': 'external_agent', 'reviewer': review['reviewer'],
                    'reviewed_at': datetime.now(timezone.utc).isoformat(), 'checks': checks},
         'evidence': [f[2] for f in files],
@@ -184,6 +237,13 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                        'run_sha256': sha(run_dir / 'run.json'), 'events_sha256': sha(run_dir / 'events.jsonl'),
                        'answer_sha256': sha(run_dir / 'answer.md'), 'review_sha256': sha(review_path)},
     }
+    if "request_usage" in meta:
+        # Re-extract from the private raw session; do not trust review-supplied usage.
+        from session_usage import extract_usage
+        raw_session = run_dir / "session.raw.jsonl"
+        result["request_usage"] = extract_usage(raw_session, meta.get("usage")) if raw_session.is_file() else {
+            "status": "incomplete", "method": "session", "requests": [],
+            "source_sha256": None, "reason": "Session file not found"}
     serialized = json.dumps(result, ensure_ascii=False, indent=2).encode()
     sanitized = public_copy(serialized, meta, run_dir, review['reviewer'], secrets)
     result = json.loads(sanitized)

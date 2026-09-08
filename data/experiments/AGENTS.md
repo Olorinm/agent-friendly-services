@@ -18,7 +18,7 @@
 ## 从已有分类接手
 
 1. 读根目录理念、对应候选与任务表。选定服务ID、入口ID、任务ID与版本。新需求按`tasks/AGENTS.md`出题；确定完成条件后再运行。任务日期过期时先更新题目与版本，不让执行Agent自行改变题目。
-2. `npm run validate`、`npm run generate`检查数据并更新目录。入口来自`generated/catalog.json`，任务来自Markdown任务表。按同一批次固定harness、模型、思考等级、预算、工具和凭据条件；不同设置的结果分别记录。
+2. `npm run pricing:update`获取本轮模型的LiteLLM价表快照（新增模型可在命令后加`-- 模型名`）；`npm run validate`、`npm run generate`检查数据并自动估算模型费用、更新目录。生成本身不联网，使用`data/pricing/litellm.json`中冻结的价格；主动刷新价格会更新展示中的估算，快照日期不等于历史运行日期。入口来自`generated/catalog.json`，任务来自Markdown任务表。按同一批次固定harness、模型、思考等级、预算、工具和凭据条件；不同设置的结果分别记录。
 3. 启动独立执行。例如以下是运行命令，不是提供给被测Agent的解法：
 
    ```sh
@@ -34,7 +34,7 @@
 
    新自然输入可先用 `--prepare-only` 查看。原始附件在运行前备份到结果目录的 `context-files/`，文件 hash 随 run.json 保存；不能仅按 prompt 字符数比较信息量，Agent 阅读附件也会消耗 token。旧任务表可能仍含测试要求，逐题整理并升级版本后再选择 natural；legacy 保留用于旧方式。
 
-4. 等进程结束，保留它输出的结果目录。外部Agent读`run.json`中的冻结任务、`answer.md`、`events.jsonl`和`workspace/evidence/`。核对调用确实来自指定服务、请求参数与任务一致、答案由真实响应支持；不要执行或采信被测Agent写的校验器来替代复核。
+4. 等进程结束，保留它输出的结果目录。运行器保留本地 Codex session（不使用 `--ephemeral`），退出后按本次 thread ID 找到原始文件，复制为仅本机可读的 `session.raw.jsonl`；该文件与其他原始日志均留在 gitignored 结果目录，禁止作为公开证据。自动提取 `request-usage.json`，只保留逐次 token 计数、采集状态和源文件 hash，不保留会话内容、路径或请求/会话 ID。优先使用 `token_usage_record`，兼容 `token_count`；去重后必须与 CLI 最终用量一致才标记 `complete`。超时缺少最终汇总、明细缺失、截断或计数不一致均标记 `incomplete`，保留观察值但不当作完整费用。录入器从原始 session 重新提取，不接受评测者手填请求用量。外部Agent读`run.json`中的冻结任务、`answer.md`、`events.jsonl`和`workspace/evidence/`。核对调用确实来自指定服务、请求参数与任务一致、答案由真实响应支持；不要执行或采信被测Agent写的校验器来替代复核。
 5. 在结果目录内、`workspace/`之外写`assessment.json`。按原先完成标准逐项核对，完整填好以下字段（示意中的空值必须据证据填写，不是默认判定）：
 
    ```json
@@ -49,13 +49,23 @@
        {"path": "workspace/evidence/实际文件名", "note": "此文件支持什么判断"}
      ],
      "service_cost_usd": null,
+     "service_cost": {
+       "kind": "unknown",
+       "sources": [],
+       "note": "写明费用依据或未知原因"
+     },
      "human_interventions": null
    }
    ```
 
    `status`为`completed`、`not_completed`或`invalid_run`。成功必须满足全部完成条件；缺凭据、无结果、任务超时等写清原因。环境故障用`invalid_run`。遇到无法证实的答案，不猜为成功。选取足够核对结论的请求、真实响应、答案或失败证据；先确认脱敏，原始完整日志保留本地。对动态查询核对当次证据，不固定未来价格答案。
 
-   `service_cost_usd`记录本次调用服务新增的实付，不含机票等业务商品价格。能够确认未使用付费账户/凭据且未付款，或服务根本未被调用时，新增实付记0；存在付费调用但无法确认金额时填null，不能仅因为脚本没报费用就填0。`human_interventions`来自当次观察，不知道填null。Agent侧只记录输入、其中缓存输入与输出token，不计算或填写Agent货币费用。token、耗时和配置由下一步直接从真实运行记录读取，复核者不重算或估填；保留模型与harness等配置用于解释用量差异。
+   `service_cost_usd`记录本次被测服务调用费用，不含机票等业务商品价格。`service_cost.kind`为`reported`（回执/账单金额）、`confirmed_free`（确认免费）、`estimated`（用量×单价）或`unknown`；已知金额须在`sources`提供脱敏证据路径或公开计费来源，并在`note`写明依据。记录器不自动抓取各家账单，外部评测 Agent 负责采集与核验；回执没写费用不代表免费。旧记录的新增实付金额原样保留，不补造新来源。
+
+   估算服务费用时提供`items`，例如`[{"quantity": 10, "unit": "request", "usd_per_unit": 0.002}]`，顶层金额可为null，由记录器计算为0.02；若填写了金额，必须与计算结果一致。复杂套餐、阶梯或最低消费需先据真实账单/规则确定本次适用的计费项，不能只按一次请求的标价猜算。信用额度不是实付金额，只有确认本次落在免费范围才标`confirmed_free`。
+
+   模型费用不由评测 Agent 手填：`npm run generate`从真实`usage`和LiteLLM快照自动得到`model_cost`，公开在生成的结果JSON与目录。新运行优先对每次请求按其输入长度选择LiteLLM价格档位，再逐次相加；完整明细须与整轮用量核对一致。按标准API价格估算普通输入、缓存读取/写入和输出，推理token若已含在输出中不重复加。缺价格、缺用量或无法判断上下文计价档位时记未知；不能用累计会话输入冒充单次请求上下文。服务费用估算单独标明。`human_interventions`来自实际观察，不知道填null；模型、用量、耗时和配置只来自运行器记录。
+
 6. 回填结果并更新展示：
 
    ```sh
@@ -69,6 +79,7 @@
 ## 留下什么
 
 - 候选表、任务表、[结果表](../../generated/evaluations.md)是主交付。`data/experiments/evaluations/`保存精简结果源，`evidence/`保留选取的证据；原始`results/`日志仍gitignored。
+- 首页显示完成率、Token用量、模型费用、服务费用；后面三项取有效试跑均值（成功与失败都包含），未知值不按0填，也不跳过未知样本制造偏低均值。当前汇总按服务/入口最新已测协议取样，任务冻结内容、重复次数及配置一致才合表；旧记录仍可查。
 - 记录harness版本、模型、思考等级、实际起止时间/时区、任务版本与hash、接入条件和验收依据。历史观察保留；新运行追加，修订旧结论要解释原因，不静默覆盖。
 - 公开副本不保留本机用户名、目录路径或Codex会话ID。记录工具替换已知路径和会话标识，原始文件仍留在本地；发生脱敏时同时保留原文件hash与公开副本hash，并说明原因。Agent仍需检查密钥、Cookie、私人消息等内容，不能把自动替换当作完整隐私审查。
 - 录入工作区与公开发布是不同操作。当前流程不自动提交/推送，不联系服务商；外部发布沿用维护者的授权范围。

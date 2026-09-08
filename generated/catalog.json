@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T08:14:51.478Z",
+  "generated_at": "2026-09-08T09:14:30.052Z",
   "description": "Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
@@ -1796,6 +1796,19 @@
             "events_sha256": "c937b4db065aab02ef523b8b6e6a63f9e24545c0071517e71f220627f1298850",
             "answer_sha256": "c20ef903ed8fda7d4f3d16c447082f2c578bc5e6be08f48784fe8bba2a651464",
             "review_sha256": "a04ec40289da4fa3f588a957fea943e294b4c57312c71a1310965f324ac72ca4"
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         },
         {
@@ -1886,6 +1899,19 @@
             "answer_sha256": null,
             "review_sha256": "7a6e621847cee0bb030ad3acbf9d38631c2ddf5bfd0e014d7064f44d80922458",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Token usage was not reported.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         }
       ],
@@ -2418,6 +2444,19 @@
             "events_sha256": "7f3e6db989299723c340ee48f5bc6e286dd265090c18c0f93ac7ba7337985698",
             "answer_sha256": "00f4412ead75c72769cf051bd2e2ed9716d017803c6bb1d7414e6d41a377c5fd",
             "review_sha256": "2932989fe9d98da3ddf5891de99cb191af6cb0c5bb63224036c52c1a830462d9"
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         }
       ],
@@ -3258,6 +3297,19 @@
             "answer_sha256": "e669df7bab957bd13d50b8317e8cd9bab61133d10d505512739c1054bc0cd5ec",
             "review_sha256": "d478508efce3f2e518964e0da5641598c83a2b1dfde9141c30170c2e1486b736",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         },
         {
@@ -3384,6 +3436,19 @@
             "answer_sha256": "cc1a42c7f321d334ffc75b087af34c837e3ba95519b2c3a03f60ffe8fcde1a36",
             "review_sha256": "c08b07a90cd1cc214503a40288eb575bd47803d63493176a43564299b689361a",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         }
       ],
@@ -3713,6 +3778,24 @@
             "answer_sha256": "f43f36121f642753cdb538c8549f722430b03154c473d23f079095b0d3718b49",
             "review_sha256": "802c65908e9c7f126a99e02797afca14bc690f373993803d1aea62e0f453bc50",
             "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": 0.930856,
+            "kind": "estimated",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            },
+            "rates": {
+              "input": 0.00001,
+              "cache_read": 0.000001,
+              "output": 0.00005
+            },
+            "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
           }
         }
       ],
@@ -4151,6 +4234,24 @@
             "answer_sha256": "f0a94ffe9b92b22a9063f98cc680682b5e434174af89efdcd09ccaab13419e60",
             "review_sha256": "1e667f6f09f155cedb06b71f18bc1d9bd1a4faa13aaf52e43da81f69c3b2b63d",
             "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": 0.864548,
+            "kind": "estimated",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            },
+            "rates": {
+              "input": 0.00001,
+              "cache_read": 0.000001,
+              "output": 0.00005
+            },
+            "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
           }
         },
         {
@@ -4250,6 +4351,19 @@
             "events_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
             "answer_sha256": null,
             "review_sha256": "fa65d54e4c9fd8b2b8f5e5082a966e67ceca1c371c07f413cbcb06c086b65022"
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Token usage was not reported.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         },
         {
@@ -4473,6 +4587,24 @@
             "answer_sha256": "cd5208488ae8419c33534221764c064e8968237b79ee4dad97345c8fee1948da",
             "review_sha256": "dba51a04a317efb59bf950d63ce65b453b538dda09e8d36480c0c57cc41940e4",
             "privacy_note": "Public copies redact local paths and Codex session identifiers. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": 0.838358,
+            "kind": "estimated",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            },
+            "rates": {
+              "input": 0.00001,
+              "cache_read": 0.000001,
+              "output": 0.00005
+            },
+            "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
           }
         }
       ],
@@ -5322,6 +5454,19 @@
             "answer_sha256": "327f301e9bffbc7728bd27ef675f09e6cfbb465c1c92fc3ecbaf0f87c0155116",
             "review_sha256": "714ba5268b35536b6fca4b3d1baaff2650f151fc70b456aa544e9e7d2e401c27",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         }
       ],
@@ -5549,6 +5694,19 @@
             "answer_sha256": "65d655989d17bdf9180e0936e385d62f63a7d65a79b5194f1600996f3deacc4d",
             "review_sha256": "e7061ba88f1535f61ae4365a18c067139442a67a4a2f43db02bd5eebc80dac9e",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         },
         {
@@ -5675,6 +5833,24 @@
             "answer_sha256": "1e579e837fb3d6b5fb1c40d677c9596f10a64fe5da27feaa6dd5a9c7f8b56106",
             "review_sha256": "0f634381c8b1656327d1943ea868733bbc0a01dbb043049b06afb2c09d96e1aa",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": 0.74517,
+            "kind": "estimated",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            },
+            "rates": {
+              "input": 0.00001,
+              "cache_read": 0.000001,
+              "output": 0.00005
+            },
+            "reason": "Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees."
           }
         }
       ],
@@ -7604,6 +7780,19 @@
             "answer_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
             "review_sha256": "3859e981a89be94663a0fb927f8a16901c8ffe66ef1288d9e2677e9105fbe1a7",
             "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+          },
+          "model_cost": {
+            "amount_usd": null,
+            "kind": "unknown",
+            "reason": "Context-dependent pricing requires per-request usage; session totals cannot establish the applicable tier.",
+            "pricing": {
+              "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
+              "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
+              "fetched_at": "2026-09-08T08:50:04.463Z",
+              "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+              "model": "gpt-6-astra",
+              "tier": "standard"
+            }
           }
         }
       ],

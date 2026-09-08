@@ -41,13 +41,42 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 
 ## 服务大名单（112）
 
-下面按主分类列出全部已收录服务，可以直接浏览用途和接入链接。实测次数只对应记录中的任务与条件，历史检查单独标明；服务简介沿用来源资料的英文描述。
+用量和费用均为每次有效试跑的平均值，包含成功与失败；模型费用按保存的 LiteLLM 价表估算，服务费用按记录来源核验（估算额标 ~）。— 表示未知或未测。仅在相同任务版本、重复次数与配置内比较；历史记录和接入细节可展开查看。
 
 [AI Models](#services-ai-models) · [Agent Tooling](#services-agent-tooling) · [Code Execution](#services-code-execution) · [Developer Tools](#services-developer-tools) · [Cloud / Hosting](#services-cloud-hosting) · [Databases](#services-databases) · [Web Search / Data](#services-web-search-data) · [Payments / Billing](#services-payments-billing) · [Communication](#services-communication) · [Productivity / Storage](#services-productivity-storage) · [Observability / Security](#services-observability-security) · [Commerce / Marketing](#services-commerce-marketing) · [Travel](#services-travel)
 
 <a id="services-ai-models"></a>
 
 ### AI Models (23)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Alibaba Qwen (Model Studio)](./generated/providers.md#qwen) | 待实测 | — | — | — |
+| [Anthropic](./generated/providers.md#anthropic) | 待实测 | — | — | — |
+| [Cartesia](./generated/providers.md#cartesia) | 待实测 | — | — | — |
+| [Cerebras Inference](./generated/providers.md#cerebras) | 待实测 | — | — | — |
+| [Cohere](./generated/providers.md#cohere) | 待实测 | — | — | — |
+| [Deepgram](./generated/providers.md#deepgram) | 待实测 | — | — | — |
+| [DeepSeek](./generated/providers.md#deepseek) | 待实测 | — | — | — |
+| [ElevenLabs](./generated/providers.md#elevenlabs) | 待实测 | — | — | — |
+| [fal.ai](./generated/providers.md#fal) | 待实测 | — | — | — |
+| [Fireworks AI](./generated/providers.md#fireworks) | 待实测 | — | — | — |
+| [Gemini API](./generated/providers.md#gemini-api) | 待实测 | — | — | — |
+| [Groq](./generated/providers.md#groq) | 待实测 | — | — | — |
+| [Hugging Face](./generated/providers.md#hugging-face) | 待实测 | — | — | — |
+| [Luma AI (Dream Machine)](./generated/providers.md#luma) | 待实测 | — | — | — |
+| [MiniMax](./generated/providers.md#minimax) | 待实测 | — | — | — |
+| [Mistral AI](./generated/providers.md#mistral) | 待实测 | — | — | — |
+| [Moonshot AI (Kimi)](./generated/providers.md#moonshot) | 待实测 | — | — | — |
+| [OpenAI](./generated/providers.md#openai) | 待实测 | — | — | — |
+| [OpenRouter](./generated/providers.md#openrouter) | 待实测 | — | — | — |
+| [Replicate](./generated/providers.md#replicate) | 待实测 | — | — | — |
+| [Together AI](./generated/providers.md#together-ai) | 待实测 | — | — | — |
+| [xAI (Grok API)](./generated/providers.md#xai) | 待实测 | — | — | — |
+| [Z.ai (GLM)](./generated/providers.md#zai) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -75,9 +104,22 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [xAI (Grok API)](https://x.ai) · [资料](./generated/providers.md#xai) | xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys. | [Docs](https://docs.x.ai)<br>[API](https://docs.x.ai/developers/rest-api-reference/inference) | 待实测 |
 | [Z.ai (GLM)](https://z.ai) · [资料](./generated/providers.md#zai) | GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys. | [Docs](https://docs.z.ai)<br>[API](https://docs.z.ai/api-reference) | 待实测 |
 
+</details>
+
 <a id="services-agent-tooling"></a>
 
 ### Agent Tooling (5)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Composio](./generated/providers.md#composio) | 待实测 | — | — | — |
+| [Mem0](./generated/providers.md#mem0) | 待实测 | — | — | — |
+| [n8n](./generated/providers.md#n8n) | 待实测 | — | — | — |
+| [Vapi](./generated/providers.md#vapi) | 待实测 | — | — | — |
+| [Zapier](./generated/providers.md#zapier) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -87,9 +129,21 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Vapi](https://vapi.ai) · [资料](./generated/providers.md#vapi) | Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents. | [Docs](https://docs.vapi.ai)<br>[API](https://docs.vapi.ai/api-reference)<br>[MCP](https://github.com/VapiAI/mcp-server) | 待实测 |
 | [Zapier](https://zapier.com) · [资料](./generated/providers.md#zapier) | Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations. | [Docs](https://docs.zapier.com)<br>[MCP](https://zapier.com/mcp)<br>[CLI](https://github.com/zapier/zapier-platform) | 待实测 |
 
+</details>
+
 <a id="services-code-execution"></a>
 
 ### Code Execution (4)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Browserbase](./generated/providers.md#browserbase) | 待实测 | — | — | — |
+| [E2B](./generated/providers.md#e2b) | 待实测 | — | — | — |
+| [Modal](./generated/providers.md#modal) | 待实测 | — | — | — |
+| [Steel](./generated/providers.md#steel) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -98,9 +152,21 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Modal](https://modal.com) · [资料](./generated/providers.md#modal) | Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI. | [Docs](https://modal.com/docs)<br>[API](https://modal.com/docs/reference)<br>[CLI](https://modal.com/docs/reference/cli) | 待实测 |
 | [Steel](https://steel.dev) · [资料](./generated/providers.md#steel) | Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier. | [Docs](https://docs.steel.dev)<br>[API](https://docs.steel.dev/api-reference) | 待实测 |
 
+</details>
+
 <a id="services-developer-tools"></a>
 
 ### Developer Tools (4)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Atlassian (Jira & Confluence)](./generated/providers.md#atlassian) | 待实测 | — | — | — |
+| [GitHub](./generated/providers.md#github) | [历史实测](./generated/agent-runs.md#github) | — | — | — |
+| [GitLab](./generated/providers.md#gitlab) | 待实测 | — | — | — |
+| [Postman](./generated/providers.md#postman) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -109,9 +175,23 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [GitLab](https://gitlab.com) · [资料](./generated/providers.md#gitlab) | DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI. | [Docs](https://docs.gitlab.com)<br>[API](https://docs.gitlab.com/api/rest/)<br>[MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server)<br>[CLI](https://gitlab.com/gitlab-org/cli) | 待实测 |
 | [Postman](https://www.postman.com) · [资料](./generated/providers.md#postman) | API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys. | [Docs](https://learning.postman.com)<br>[API](https://learning.postman.com/docs/developer/postman-api/intro-api/)<br>[MCP](https://github.com/postmanlabs/postman-mcp-server)<br>[CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) | 待实测 |
 
+</details>
+
 <a id="services-cloud-hosting"></a>
 
 ### Cloud / Hosting (6)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Cloudflare](./generated/providers.md#cloudflare) | 待实测 | — | — | — |
+| [Fly.io](./generated/providers.md#fly-io) | 待实测 | — | — | — |
+| [Netlify](./generated/providers.md#netlify) | 待实测 | — | — | — |
+| [Railway](./generated/providers.md#railway) | 待实测 | — | — | — |
+| [Render](./generated/providers.md#render) | 待实测 | — | — | — |
+| [Vercel](./generated/providers.md#vercel) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -122,9 +202,63 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Render](https://render.com) · [资料](./generated/providers.md#render) | Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt. | [Docs](https://render.com/docs)<br>[API](https://api-docs.render.com/reference/introduction)<br>[MCP](https://github.com/render-oss/render-mcp-server)<br>[CLI](https://github.com/render-oss/cli) | 待实测 |
 | [Vercel](https://vercel.com) · [资料](./generated/providers.md#vercel) | Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem. | [Docs](https://vercel.com/docs)<br>[API](https://vercel.com/docs/rest-api)<br>[MCP](https://vercel.com/docs/mcp/vercel-mcp)<br>[CLI](https://vercel.com/docs/cli) | 待实测 |
 
+</details>
+
 <a id="services-databases"></a>
 
 ### Databases (12)
+
+**database-todos-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Turso / platform-api](./generated/evaluations.md#comparison-1420586eae17) | 100% | 767.6k | — | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 预供凭据
+
+- 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
+
+- Turso: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json)
+
+</details>
+
+**database-todos-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Neon / ephemeral-api](./generated/evaluations.md#comparison-fdecec09a4b6) | 100% | 465.4k | — | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项
+
+- Neon: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json)
+
+</details>
+
+**其他候选**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Aiven](./data/candidates/aiven.yaml) | 待实测 | — | — | — |
+| [Chroma](./generated/providers.md#chroma) | 待实测 | — | — | — |
+| [MongoDB Atlas](./generated/providers.md#mongodb-atlas) | 待实测 | — | — | — |
+| [Pinecone](./generated/providers.md#pinecone) | 待实测 | — | — | — |
+| [PlanetScale](./data/candidates/planetscale.yaml) | 待实测 | — | — | — |
+| [Qdrant](./generated/providers.md#qdrant) | 待实测 | — | — | — |
+| [Redis (Redis Cloud)](./generated/providers.md#redis) | 待实测 | — | — | — |
+| [Supabase](./generated/providers.md#supabase) | 待实测 | — | — | — |
+| [Upstash](./generated/providers.md#upstash) | 待实测 | — | — | — |
+| [Weaviate](./generated/providers.md#weaviate) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -141,9 +275,78 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Upstash](https://upstash.com) · [资料](./generated/providers.md#upstash) | Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier. | [Docs](https://upstash.com/docs)<br>[API](https://upstash.com/docs/devops/developer-api/introduction)<br>[MCP](https://github.com/upstash/mcp-server)<br>[CLI](https://github.com/upstash/cli) | 待实测 |
 | [Weaviate](https://weaviate.io) · [资料](./generated/providers.md#weaviate) | Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt. | [Docs](https://docs.weaviate.io)<br>[API](https://docs.weaviate.io/weaviate/api/rest)<br>[MCP](https://github.com/weaviate/mcp-server-weaviate)<br>[CLI](https://github.com/weaviate/weaviate-cli) | 待实测 |
 
+</details>
+
 <a id="services-web-search-data"></a>
 
 ### Web Search / Data (10)
+
+**web-search-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Exa / search-api](./generated/evaluations.md#comparison-9dbe771526ac) | 0% | — | — | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 预供凭据
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Exa: 完成 / 失败 / 环境无效 = 0 / 1 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json)
+
+</details>
+
+**web-search-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Firecrawl / public-search-api](./generated/evaluations.md#comparison-b5f21fc39ab4) | 100% | 346.8k | — | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Firecrawl: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json)
+
+</details>
+
+**web-search-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Exa / public-mcp](./generated/evaluations.md#comparison-87ab787b88b3) | 100% | 931.5k | — | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 我准备把 Python 应用升级到 3.13，查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并给出官方依据
+
+- Exa: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json)
+
+</details>
+
+**其他候选**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Apify](./generated/providers.md#apify) | 待实测 | — | — | — |
+| [Brave Search API](./generated/providers.md#brave-search) | 待实测 | — | — | — |
+| [Jina AI](./generated/providers.md#jina) | 待实测 | — | — | — |
+| [Perplexity API](./generated/providers.md#perplexity) | 待实测 | — | — | — |
+| [SerpApi](./generated/providers.md#serpapi) | 待实测 | — | — | — |
+| [Serper](./data/candidates/serper.yaml) | 待实测 | — | — | — |
+| [Tavily](./generated/providers.md#tavily) | 待实测 | — | — | — |
+| [Xquik](./data/candidates/xquik.yaml) | [历史首次调用检查](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -158,9 +361,21 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Tavily](https://www.tavily.com) · [资料](./generated/providers.md#tavily) | Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier. | [API](https://docs.tavily.com/documentation/quickstart) | 待实测 |
 | [Xquik](https://xquik.com) · [资料](./data/candidates/xquik.yaml) | Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1. | [Docs](https://docs.xquik.com)<br>[API](https://docs.xquik.com/api-reference/overview)<br>[MCP](https://docs.xquik.com/mcp/overview) | [历史首次调用检查](./data/experiments/published/xquik/2026-07-15-dry-fire-rep3.md) |
 
+</details>
+
 <a id="services-payments-billing"></a>
 
 ### Payments / Billing (4)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Lemon Squeezy](./generated/providers.md#lemonsqueezy) | 待实测 | — | — | — |
+| [paas.build](./data/candidates/paas-build.yaml) | [历史首次调用检查](./data/experiments/published/paas-build/2026-07-15-dry-fire-rep3.md) | — | — | — |
+| [Paddle](./generated/providers.md#paddle) | 待实测 | — | — | — |
+| [Stripe](./generated/providers.md#stripe) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -169,9 +384,23 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Paddle](https://www.paddle.com) · [资料](./generated/providers.md#paddle) | Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks. | [Docs](https://developer.paddle.com)<br>[API](https://developer.paddle.com/api-reference/overview)<br>[MCP](https://github.com/PaddleHQ/paddle-mcp-server) | 待实测 |
 | [Stripe](https://stripe.com) · [资料](./generated/providers.md#stripe) | Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface. | [Docs](https://docs.stripe.com)<br>[API](https://docs.stripe.com/api)<br>[MCP](https://docs.stripe.com/mcp)<br>[CLI](https://docs.stripe.com/stripe-cli) | 待实测 |
 
+</details>
+
 <a id="services-communication"></a>
 
 ### Communication (6)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Discord](./generated/providers.md#discord) | 待实测 | — | — | — |
+| [Lark](./generated/providers.md#lark) | 待实测 | — | — | — |
+| [Resend](./generated/providers.md#resend) | 待实测 | — | — | — |
+| [Slack](./generated/providers.md#slack) | 待实测 | — | — | — |
+| [Telegram Bot API](./generated/providers.md#telegram) | 待实测 | — | — | — |
+| [Twilio](./generated/providers.md#twilio) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -182,9 +411,45 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Telegram Bot API](https://telegram.org) · [资料](./generated/providers.md#telegram) | Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog. | [Docs](https://core.telegram.org/bots)<br>[API](https://core.telegram.org/bots/api) | 待实测 |
 | [Twilio](https://www.twilio.com) · [资料](./generated/providers.md#twilio) | Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI. | [Docs](https://www.twilio.com/docs)<br>[API](https://www.twilio.com/docs/usage/api)<br>[MCP](https://github.com/twilio-labs/mcp)<br>[CLI](https://www.twilio.com/docs/twilio-cli) | 待实测 |
 
+</details>
+
 <a id="services-productivity-storage"></a>
 
 ### Productivity / Storage (9)
+
+**collaborative-tables-001 v2**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Grist / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 540.8k | — | $0 |
+| [Notion / rest-api](./generated/evaluations.md#comparison-6203194a76cd) | 100% | 215.5k | $0.75 | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · natural · 预供凭据
+
+- 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。
+
+- Grist: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json)
+- Notion: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-08](./data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json)
+
+</details>
+
+**其他候选**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Airtable](./generated/providers.md#airtable) | 待实测 | — | — | — |
+| [Baserow Cloud](./data/candidates/baserow.yaml) | 待实测 | — | — | — |
+| [Coda / Superhuman Docs](./data/candidates/coda.yaml) | 待实测 | — | — | — |
+| [Dropbox](./generated/providers.md#dropbox) | 待实测 | — | — | — |
+| [Google Sheets](./data/candidates/google-sheets.yaml) | 待实测 | — | — | — |
+| [Linear](./generated/providers.md#linear) | 待实测 | — | — | — |
+| [飞书 Feishu](./data/candidates/feishu.yaml) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -198,9 +463,20 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Notion](https://www.notion.com) · [资料](./generated/providers.md#notion) | Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server. | [API](https://developers.notion.com/reference/intro)<br>[SDK](https://github.com/makenotion/notion-sdk-js)<br>[CLI](https://developers.notion.com/cli/get-started/overview)<br>[MCP](https://mcp.notion.com/mcp) | [2 完成](./generated/evaluations.md) |
 | [飞书 Feishu](https://www.feishu.cn/) · [资料](./data/candidates/feishu.yaml) | China-region Feishu workspace and Base APIs; separate account/tenant from international Lark. | [API](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create)<br>[CLI](https://github.com/larksuite/cli)<br>[MCP](https://github.com/larksuite/lark-openapi-mcp) | 待实测 |
 
+</details>
+
 <a id="services-observability-security"></a>
 
 ### Observability / Security (3)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Datadog](./generated/providers.md#datadog) | 待实测 | — | — | — |
+| [Grafana (Grafana Cloud)](./generated/providers.md#grafana) | 待实测 | — | — | — |
+| [Sentry](./generated/providers.md#sentry) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -208,17 +484,93 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [Grafana (Grafana Cloud)](https://grafana.com) · [资料](./generated/providers.md#grafana) | Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier. | [Docs](https://grafana.com/docs)<br>[API](https://grafana.com/docs/grafana/latest/developers/http_api/)<br>[MCP](https://github.com/grafana/mcp-grafana) | 待实测 |
 | [Sentry](https://sentry.io) · [资料](./generated/providers.md#sentry) | Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API. | [Docs](https://docs.sentry.io)<br>[API](https://docs.sentry.io/api/)<br>[MCP](https://docs.sentry.io/product/sentry-mcp/)<br>[CLI](https://docs.sentry.io/cli/) | 待实测 |
 
+</details>
+
 <a id="services-commerce-marketing"></a>
 
 ### Commerce / Marketing (1)
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Shopify](./generated/providers.md#shopify) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
 | [Shopify](https://www.shopify.com) · [资料](./generated/providers.md#shopify) | Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI. | [Docs](https://shopify.dev/docs)<br>[API](https://shopify.dev/docs/api)<br>[MCP](https://shopify.dev/docs/apps/build/storefront-mcp)<br>[CLI](https://shopify.dev/docs/api/shopify-cli) | 待实测 |
 
+</details>
+
 <a id="services-travel"></a>
 
 ### Travel (25)
+
+**flights-search-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Kiwi.com / search-mcp](./generated/evaluations.md#comparison-c77feef961a0) | 100% | 209.6k | $0.84 | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Kiwi.com: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json)
+
+</details>
+
+**flights-search-001 v1**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [Ignav Flights / public-playground](./generated/evaluations.md#comparison-45effe165cf4) | 100% | 212.9k | $0.93 | $0 |
+
+<details>
+<summary>任务、配置与样本</summary>
+
+gpt-6-astra / xhigh · codex-cli 0.153.4 · 600s · legacy · 未供凭据
+
+- 找到9月25日米兰飞往荷兰的机票
+
+- Ignav Flights: 完成 / 失败 / 环境无效 = 1 / 0 / 0; [2026-09-07](./data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json)
+
+</details>
+
+**其他候选**
+
+| 服务 | 完成率 | Token 用量 | 模型费用 | 服务费用 |
+| --- | ---: | ---: | ---: | ---: |
+| [AirGateway Platform API](./data/candidates/airgateway.yaml) | 待实测 | — | — | — |
+| [Amadeus Flight APIs](./data/candidates/amadeus-flights.yaml) | 待实测 | — | — | — |
+| [apiheya Air Scraper](./data/candidates/apiheya-air-scraper.yaml) | 待实测 | — | — | — |
+| [Aviasales via Travelpayouts](./data/candidates/aviasales.yaml) | 待实测 | — | — | — |
+| [Bright Data SERP API](./data/candidates/bright-data-serp.yaml) | 待实测 | — | — | — |
+| [Duffel Flights API](./data/candidates/duffel-flights.yaml) | 待实测 | — | — | — |
+| [Expedia XAP Flight Listings](./data/candidates/expedia-xap-flights.yaml) | 待实测 | — | — | — |
+| [Flight MCP](./data/candidates/flight-mcp.yaml) | 待实测 | — | — | — |
+| [FlightAPI.io Flight Price API](./data/candidates/flightapi-io.yaml) | 待实测 | — | — | — |
+| [KAYAK Affiliate API](./data/candidates/kayak-affiliate.yaml) | 待实测 | — | — | — |
+| [LetsFG Personal Flight Search](./data/candidates/letsfg.yaml) | 待实测 | — | — | — |
+| [Lufthansa Partner Fare API](./data/candidates/lufthansa-partner.yaml) | 待实测 | — | — | — |
+| [Sabre Air APIs](./data/candidates/sabre-air.yaml) | 待实测 | — | — | — |
+| [Scrapingdog Google Flights API](./data/candidates/scrapingdog-flights.yaml) | 待实测 | — | — | — |
+| [SearchApi Google Flights](./data/candidates/searchapi.yaml) | 待实测 | — | — | — |
+| [Skootle Google Flights Scraper](./data/candidates/skootle-google-flights.yaml) | 待实测 | — | — | — |
+| [Skyscanner Travel APIs](./data/candidates/skyscanner.yaml) | 待实测 | — | — | — |
+| [Travelport TripServices](./data/candidates/travelport-tripservices.yaml) | 待实测 | — | — | — |
+| [Trip.com Flight Distribution](./data/candidates/trip-com-flights.yaml) | 待实测 | — | — | — |
+| [去哪儿机票合作](./data/candidates/qunar-flights.yaml) | 待实测 | — | — | — |
+| [同程机票合作](./data/candidates/tongcheng-flights.yaml) | 待实测 | — | — | — |
+| [携程机票合作](./data/candidates/ctrip-flights.yaml) | 待实测 | — | — | — |
+| [飞猪国内机票开放平台](./data/candidates/fliggy-domestic-flights.yaml) | 待实测 | — | — | — |
+
+<details>
+<summary>服务用途与接入方式</summary>
 
 | 服务 | 用途 | 接入方式 | 实测状态 |
 | --- | --- | --- | --- |
@@ -247,6 +599,8 @@ curl -s https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/g
 | [同程机票合作](https://www.ly.com/public/about17u/contactus) · [资料](./data/candidates/tongcheng-flights.yaml) | 同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。 | — | 待实测 |
 | [携程机票合作](https://pages.ctrip.com/public/dlhz.htm) · [资料](./data/candidates/ctrip-flights.yaml) | 携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。 | — | 待实测 |
 | [飞猪国内机票开放平台](https://open.alitrip.com/businessDetail.htm?tagId=85) · [资料](./data/candidates/fliggy-domestic-flights.yaml) | 面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。 | [API](https://open.alitrip.com/businessDetail.htm?tagId=85) | 待实测 |
+
+</details>
 
 ## 一起补全这份资料
 
