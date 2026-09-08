@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T07:50:07.138Z",
+  "generated_at": "2026-09-08T07:54:18.432Z",
   "description": "Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [

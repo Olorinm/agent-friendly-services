@@ -8,7 +8,7 @@ Find services for real user needs, then evaluate task results, setup effort, cos
 
 ![Providers](https://img.shields.io/badge/providers-76-2563eb)
 [![Agent-verified](https://img.shields.io/badge/agent--verified-1-10b981)](./generated/agent-runs.md)
-[![Link health](https://img.shields.io/badge/link_health-847_ok%2C_0_broken-10b981)](./generated/link-health.json)
+[![Link health](https://img.shields.io/badge/link_health-914_ok%2C_1_broken-e11d48)](./generated/link-health.json)
 [![Last update](https://img.shields.io/github/last-commit/Olorinm/agent-friendly-services?label=last%20update&color=8b5cf6)](https://github.com/Olorinm/agent-friendly-services/commits/main)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC_BY_4.0-64748b)](./LICENSE-DATA)
 
