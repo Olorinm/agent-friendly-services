@@ -524,14 +524,6 @@ function serviceList(zh: boolean): string {
     const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
 
     const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
-      const routes = p.catalog?.routes ?? [];
-      const links: [string, string][] = routes.length
-        ? routes.map(r => [routes.filter(other => other.interface === r.interface).length > 1
-            ? `${r.interface.toUpperCase()}: ${r.id}` : r.interface.toUpperCase(), r.entry_url])
-        : Object.entries({ Docs: p.entrypoints.docs, API: p.entrypoints.api_reference,
-            MCP: p.entrypoints.mcp_official, CLI: p.entrypoints.cli })
-            .filter((pair): pair is [string, string] => Boolean(pair[1]));
-      const entryLinks = [...new Map(links.map(([label, url]) => [url, `[${label}](${url})`])).values()];
       const runs = evaluations.filter(r => r.service_id === p.id);
       let status = zh ? '待实测' : 'Not yet task-tested';
       if (runs.length) {
@@ -550,11 +542,9 @@ function serviceList(zh: boolean): string {
       }
       const source = providers.some(provider => provider.id === p.id)
         ? `./generated/providers.md#${p.id}` : `./data/candidates/${p.id}.yaml`;
-      const summary = cell(p.summary.replace(/\s+/g, ' ').trim());
-      return { id: p.id, classification: p.catalog?.classifications.find(id => id.startsWith(`${c.id}/`)), detail: `| [${cell(p.name)}](${p.homepage}) · [${zh ? '资料' : 'Details'}](${source}) | ${summary} | ${entryLinks.map(cell).join('<br>') || '—'} | ${status} |`,
+      return { id: p.id, classification: p.catalog?.classifications.find(id => id.startsWith(`${c.id}/`)),
         unmeasured: `| [${cell(p.name)}](${source}) | ${runs.length ? `[${zh ? '其他领域实测' : 'Other task results'}](./generated/evaluations.md)` : status} | — | — | — |` };
     });
-    const header = zh ? '| 服务 | 用途 | 接入方式 | 实测状态 |' : '| Service | Purpose | Access | Task results |';
     const names = new Map(listedServices.map(p => [p.id, p.name]));
     const subcategories = (c.subcategories ?? []).filter(sub =>
       rows.some(r => r.classification === `${c.id}/${sub.id}`)
@@ -577,10 +567,10 @@ function serviceList(zh: boolean): string {
       const note = group.boards.length > 1 ? (zh
         ? '现有试跑的任务或条件尚未统一，暂不排名。'
         : 'Existing trials use different or incompletely recorded conditions; these results are not ranked.') : '';
-      const details = [renderBoardDetails(group.boards, names, zh),
-        `${header}\n| --- | --- | --- | --- |\n${group.rows.map(r => r.detail).join('\n')}`].filter(Boolean).join('\n\n');
+      const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
+      const details = renderBoardDetails(group.boards, names, zh, './', interfaces);
       const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
-      return `${heading}${table}${note ? `\n\n${note}` : ''}\n\n<details>\n<summary>${zh ? '任务、配置、样本与接入方式' : 'Tasks, configuration, samples and access'}</summary>\n\n${details}\n\n</details>`;
+      return `${heading}${table}${note ? `\n\n${note}` : ''}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
     }).join('\n\n');
     return `<a id="services-${c.id}"></a>\n\n### ${c.name} (${rows.length})\n\n${content}`;
   });

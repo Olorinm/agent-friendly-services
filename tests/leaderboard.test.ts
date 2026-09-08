@@ -129,5 +129,35 @@ test('both homepages show one flights table with measured and untested services,
     assert.equal((section.match(/<details>/g) ?? []).length, 1);
     for (const service of ['Kiwi.com', 'Ignav Flights', 'SerpApi', 'Amadeus']) assert(visible.includes(service));
     assert(!visible.includes('flights-search-001'));
+    const detail = section.split('<details>')[1];
+    assert.equal(detail.split('gpt-6-astra / xhigh').length - 1, 1);
+    assert.equal(detail.split('找到9月25日米兰飞往荷兰的机票').length - 1, 1);
+    assert(!detail.includes('flights-search-001') && !detail.includes('legacy'));
+    assert(!detail.includes('Amadeus') && !detail.includes('AirGateway'));
+    assert(detail.includes(file.includes('zh-CN') ? '测了什么，怎么测的' : 'What we tested and how'));
   }
+});
+
+
+test('details explain shared tasks and configuration once, retaining access differences', () => {
+  const task = { ...run().task, description: 'Find a flight', inputs: 'One adult', expected_output: 'Flight and price', success: 'Matches the live response', failure: 'No matching flight' };
+  const a = run({ task, service_id: 'a', entry_url: 'https://example.com/mcp' });
+  const b = run({ service_id: 'b', route_id: 'public-playground', task: { ...task, sha256: 'historical-other-hash' }, entry_url: 'https://example.com/playground' });
+  const names = new Map([['a', 'Alpha'], ['b', 'Beta']]);
+  const interfaces = new Map([['a/api', 'mcp'], ['b/public-playground', 'web']]);
+  const text = renderBoardDetails(buildBoards([a, b]), names, true, './', interfaces);
+  assert.equal(text.split('Find a flight').length - 1, 1);
+  assert.equal(text.split('example / high').length - 1, 1);
+  assert.match(text, /Flight and price/);
+  assert.match(text, /MCP/);
+  assert.match(text, /网页 Playground/);
+  assert.match(text, /Beta 的网页试跑成绩不代表/);
+  assert(!text.includes('historical-other-hash'));
+  const changed = { ...b, budget_seconds: 300, task: { ...task, inputs: 'Two adults', sha256: 'changed' } };
+  const varying = renderBoardDetails(buildBoards([a, changed]), names, true, './', interfaces);
+  assert.match(varying, /One adult/);
+  assert.match(varying, /Two adults/);
+  assert.match(varying, /本次任务/);
+  assert.match(varying, /5 分钟/);
+  assert.match(varying, /10 分钟/);
 });

@@ -78,15 +78,51 @@ export function renderBoardRows(boards: Board[], names: Map<string, string>, pre
   }).join('\n');
 }
 
-export function renderBoardDetails(boards: Board[], names: Map<string, string>, zh: boolean, prefix = './') {
-  return boards.map(board => {
-    const first = board.rows[0].runs[0];
-    const title = board.tasks.map(t => `${t.id} ${t.version ?? t.sha256.slice(0, 8)}`).join(', ');
-    const details = board.rows.map(row => {
-      const m = row.metrics;
-      return `- ${cell(names.get(row.service_id) ?? row.service_id)} / ${cell(row.route_id)}: ${zh ? '完成 / 失败 / 环境无效' : 'passed / failed / invalid'} = ${m.passed} / ${m.failed} / ${m.invalid}; ` +
-        row.runs.map(r => `[${r.started_at.slice(0, 10)}](${prefix}data/experiments/evaluations/${r.run_id}.json)`).join(', ');
-    }).join('\n');
-    return `**[${cell(title)}](${prefix}generated/evaluations.md#${board.id})**\n\n${cell(first.model)} / ${cell(first.reasoning_effort)} · ${cell(first.harness.version)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${String(first.environment.service_credentials ?? 'none').startsWith('provided:') ? (zh ? '预供凭据' : 'credentials provided') : (zh ? '未供凭据' : 'no credentials')}\n\n${board.tasks.map(t => `- ${cell(t.description)}`).join('\n')}\n\n${details}`;
-  }).join('\n\n');
+export function renderBoardDetails(boards: Board[], names: Map<string, string>, zh: boolean, prefix = './', interfaces = new Map<string, string>()) {
+  if (!boards.length) return '';
+  const entries = boards.flatMap(board => board.rows.map(row => ({ board, row })));
+  const runs = entries.flatMap(e => e.row.runs);
+  // Deduplicate readable task content, not historical hashes or display titles alone.
+  // This changes prose only; the comparison groups and their measurements stay frozen.
+  const taskKey = (t: Evaluation['task']) => stable([t.description, t.inputs, t.expected_output, t.success, t.failure]);
+  const tasks = [...new Map(boards.flatMap(b => b.tasks).map(t => [taskKey(t), t])).values()];
+  const label = (cn: string, en: string) => zh ? cn : en;
+  const completion = (t: Evaluation['task']) => [t.expected_output, t.success].filter(Boolean).join('；');
+  const taskText = tasks.length === 1
+    ? `**${label('任务', 'Task')}：${cell(tasks[0].description)}**\n\n${cell(tasks[0].inputs)}\n\n${label('完成标准', 'Completion criteria')}：${cell(completion(tasks[0]))}`
+    : `| ${label('任务及条件', 'Task and conditions')} | ${label('完成标准', 'Completion criteria')} |\n| --- | --- |\n` + tasks.map(t => `| ${cell(t.description)}<br>${cell(t.inputs)} | ${cell(completion(t))} |`).join('\n');
+  const config = (r: Evaluation) => `${r.harness.version} · ${r.model} / ${r.reasoning_effort} · ${r.budget_seconds % 60 === 0 ? `${r.budget_seconds / 60} ${label('分钟', 'min')}` : `${r.budget_seconds}s`}`;
+  const configs = [...new Set(runs.map(config))];
+  const dates = [...new Set(runs.map(r => new Date(r.started_at).toISOString().slice(0, 10)))].sort();
+  const date = dates.length === 1 ? dates[0] : `${dates[0]} – ${dates.at(-1)}`;
+  const varyingTasks = new Set(entries.map(({ board }) => stable(board.tasks.map(taskKey).sort()))).size > 1;
+  const headers = [label('服务', 'Service'), label('本次使用的入口', 'Tested access'), label('提前准备', 'Preparation'), label('样本', 'Trials'),
+    ...(varyingTasks ? [label('本次任务', 'Tasks covered')] : []), ...(configs.length > 1 ? [label('测试配置', 'Configuration')] : [])];
+  const rows = entries.sort((a, b) => (names.get(a.row.service_id) ?? a.row.service_id).localeCompare(names.get(b.row.service_id) ?? b.row.service_id)
+    || a.row.route_id.localeCompare(b.row.route_id)).map(({ board, row }) => {
+    const run = row.runs[0];
+    const type = interfaces.get(`${row.service_id}/${row.route_id}`);
+    const access = type === 'web' ? label('网页', 'Web') + (row.route_id.includes('playground') ? ' Playground' : '') : type?.toUpperCase() ?? row.route_id;
+    const provided = String(run.environment.service_credentials ?? 'none').startsWith('provided:');
+    const preparation = provided ? label('已提供本服务凭据', 'Service credentials provided') : label('未提供账号或密钥', 'No account or key supplied');
+    const sample = `${row.metrics.trials}${label(' 次', '')}` + (row.metrics.invalid ? ` (${row.metrics.invalid} ${label('次环境无效，未计入', 'invalid attempts excluded')})` : '');
+    const values = [cell(names.get(row.service_id) ?? row.service_id), `[${cell(access)}](${run.entry_url})`,
+      provided ? `[${preparation}](${prefix}generated/evaluations.md#${board.id})` : preparation,
+      `[${sample}](${prefix}generated/evaluations.md#${board.id})`,
+      ...(varyingTasks ? [board.tasks.map(t => cell(t.description)).join('<br>')] : []), ...(configs.length > 1 ? [cell(config(run))] : [])];
+    return `| ${values.join(' | ')} |`;
+  });
+  const table = `| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.join('\n')}`;
+  const setup = `**${label('测试配置', 'Test configuration')}：** ${configs.length === 1 ? `${cell(configs[0])} · ` : ''}${date}${label('（UTC）', ' (UTC)')}。`;
+  const notes: string[] = [];
+  if (runs.some(r => !r.environment.host || !r.harness.launcher_sha256)) notes.push(label(
+    '部分早期记录缺少环境信息，尚待统一复跑。', 'Some early records lack environment details and await a controlled rerun.'));
+  const webServices = [...new Set(entries.filter(e => interfaces.get(`${e.row.service_id}/${e.row.route_id}`) === 'web').map(e => names.get(e.row.service_id) ?? e.row.service_id))];
+  if (webServices.length) notes.push(label(`${webServices.join('、')} 的网页试跑成绩不代表其 API 或 MCP 的表现。`, `The web results for ${webServices.join(', ')} do not establish API or MCP performance.`));
+  if (runs.some(r => String(r.environment.service_credentials ?? 'none').startsWith('provided:'))) notes.push(label(
+    '提前准备不计入上表的 Token 用量和耗时，具体步骤见准备详情。', 'Preparation is outside the measured tokens and time; follow the preparation links for the steps.'));
+  const files = [...new Set(tasks.map(t => t.file))];
+  const links = files.map((file, i) => `[${label('任务定义', 'Task definitions')}${files.length > 1 ? ` ${i + 1}` : ''}](${prefix}${file})`).join(' · ')
+    + ` · [${label('完整运行记录与证据', 'Full runs and evidence')}](${prefix}generated/evaluations.md)`;
+  return [taskText, table, setup, notes.join(' '), links].filter(Boolean).join('\n\n');
 }
