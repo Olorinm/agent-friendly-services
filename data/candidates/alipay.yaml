@@ -1,0 +1,48 @@
+id: alipay
+name: Alipay
+homepage: https://open.alipay.com/
+summary: Online merchant payment integrations for websites and apps through Alipay APIs and SDKs.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://open.alipay.com/module/webApp
+      checked_on: '2026-09-08'
+      kind: official_site
+    platform:
+      url: https://open.alipay.com/
+      checked_on: '2026-09-08'
+      kind: official_site
+  routes:
+    - id: web-app-api
+      interface: api
+      maintainer: official
+      entry_url: https://open.alipay.com/module/webApp
+      evidence:
+        - checkout
+      availability:
+        value: application
+        evidence:
+          - checkout
+      personal_access:
+        value: unknown
+      notes: >-
+        Application setup, signing keys and review are documented for launch. Merchant qualification,
+        supported currencies and a task-compatible sandbox still need verification. Web/app integration is not
+        proof of a standalone shareable checkout link.
+      requirements:
+        approval:
+          value: required
+          evidence:
+            - checkout
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://open.alipay.com/module/webApp

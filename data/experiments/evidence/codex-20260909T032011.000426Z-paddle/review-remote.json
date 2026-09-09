@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-09-09T03:24:33.236722+00:00",
+  "method": "Independent authenticated reads after execution, cross-checked with selected actual API error output.",
+  "observations": [
+    {
+      "url": "https://sandbox-api.paddle.com/products?per_page=1",
+      "http_status": 200,
+      "data": [],
+      "has_more": false,
+      "raw_response_sha256": "41670af6cfbdd979a494ed5c3536beee02033963aea48d97d4e90e433fd9005f"
+    },
+    {
+      "url": "https://sandbox-api.paddle.com/transactions?per_page=1",
+      "http_status": 200,
+      "data": [],
+      "has_more": false,
+      "raw_response_sha256": "5bc0fde69a09b1db1b2631b012a5e3905dfc43643f2925defa2d42d032b61793"
+    }
+  ],
+  "executor_error": [
+    {
+      "source": "executor command output",
+      "excerpt": "RuntimeError: POST /products: HTTP 400: {\"error\": {\"type\": \"request_error\", \"code\": \"product_tax_category_not_approved\", \"detail\": \"tax category not approved\", \"documentation_url\": \"https://developer.paddle.com/v1/errors/products/product_tax_category_not_approved\"}, \"meta\": {\"request_id\": \"[REDACTED]\"}}"
+    }
+  ]
+}

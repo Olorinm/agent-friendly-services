@@ -32,6 +32,23 @@ export function summarize(runs: Evaluation[]) {
 export interface BoardRow { service_id: string; route_id: string; runs: Evaluation[]; metrics: ReturnType<typeof summarize> }
 export interface Board { id: string; task_file: string; tasks: Evaluation['task'][]; rows: BoardRow[]; latest: string }
 
+/** Homepage selection is chronological, never a claim of the cheapest or best route.
+ * Keep a whole recorded protocol; do not select a different route for each task. */
+export function selectServiceBoards(boards: Board[]): Board[] {
+  const entries = boards.flatMap(board => board.rows.map(row => ({ board, row })));
+  const chosen = new Map<string, typeof entries[number]>();
+  const latest = (row: BoardRow) => row.runs.filter(r => r.status !== 'invalid_run')
+    .map(r => r.started_at).sort().at(-1) ?? '';
+  entries.sort((a, b) => latest(b.row).localeCompare(latest(a.row))
+    || b.board.latest.localeCompare(a.board.latest) || a.row.route_id.localeCompare(b.row.route_id));
+  for (const entry of entries) if (!chosen.has(entry.row.service_id)) chosen.set(entry.row.service_id, entry);
+  return boards.map(board => ({ ...board, rows: board.rows.filter(row => chosen.get(row.service_id)?.row === row) }))
+    .filter(board => board.rows.length);
+}
+
+export const interfaceLabel = (type: string | undefined, zh = false) => type === 'web' ? (zh ? '网页' : 'Web')
+  : type === 'mobile' ? (zh ? '移动应用' : 'Mobile') : type?.toUpperCase() ?? '—';
+
 /** Latest recorded protocol per service/route; compare only identical frozen task sets and settings. */
 export function buildBoards(records: Evaluation[]): Board[] {
   const byRoute = new Map<string, Evaluation[]>();
@@ -65,12 +82,12 @@ const cell = (value: unknown) => String(value ?? 'unknown').replaceAll('|', '\\|
 export const tokenLabel = (n: number | null) => n === null ? '—' : n >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(Math.round(n));
 export const moneyLabel = (n: number | null) => n === null ? '—' : n === 0 ? '$0' : n < .01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`;
 export const boardHeader = (zh: boolean, withAccess = false) => {
-  const headings = zh ? ['服务', '完成率', 'Token 用量', '模型费用', '服务费用'] : ['Service', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost'];
-  if (withAccess) headings.push(zh ? '接入方式' : 'Access');
-  return `| ${headings.join(' | ')} |\n| --- | ---: | ---: | ---: | ---: |${withAccess ? ' --- |' : ''}`;
+  const headings = zh ? ['服务', '试跑次数', '完成率', 'Token', '模型费用', '服务费用'] : ['Service', 'Trials', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost'];
+  if (withAccess) headings.push(...(zh ? ['测试方式', '接入资料'] : ['Tested via', 'Access links']));
+  return `| ${headings.join(' | ')} |\n| --- | ---: | ---: | ---: | ---: | ---: |${withAccess ? ' --- | --- |' : ''}`;
 };
 /** Display rows together without pooling measurements from different comparison groups. */
-export function renderBoardRows(boards: Board[], names: Map<string, string>, prefix = './', serviceLinks?: Map<string, { profile: string; access: string }>) {
+export function renderBoardRows(boards: Board[], names: Map<string, string>, prefix = './', serviceLinks?: Map<string, { profile: string; access: string }>, interfaces = new Map<string, string>(), zh = false) {
   const entries = boards.flatMap(board => board.rows.map(row => ({ board, row })));
   return entries.sort((a, b) => (names.get(a.row.service_id) ?? a.row.service_id).localeCompare(names.get(b.row.service_id) ?? b.row.service_id)
     || a.row.route_id.localeCompare(b.row.route_id) || a.board.id.localeCompare(b.board.id)).map(({ board, row }) => {
@@ -80,7 +97,7 @@ export function renderBoardRows(boards: Board[], names: Map<string, string>, pre
     const evidence = `${prefix}generated/evaluations.md#${board.id}`;
     const links = serviceLinks?.get(row.service_id);
     const rate = m.resolution_rate === null ? '—' : `${Number((100 * m.resolution_rate).toFixed(1))}%`;
-    return `| [${name}](${links?.profile ?? evidence}) | ${links && rate !== '—' ? `[${rate}](${evidence})` : rate} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |${serviceLinks ? ` ${links?.access ?? '—'} |` : ''}`;
+    return `| [${name}](${links?.profile ?? evidence}) | ${m.trials} | ${links && rate !== '—' ? `[${rate}](${evidence})` : rate} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |${serviceLinks ? ` [${interfaceLabel(interfaces.get(`${row.service_id}/${row.route_id}`), zh)}](${row.runs[0].entry_url}) | ${links?.access ?? '—'} |` : ''}`;
   }).join('\n');
 }
 
@@ -94,7 +111,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const tasks = [...new Map(boards.flatMap(b => b.tasks).map(t => [taskKey(t), t])).values()];
   const label = (cn: string, en: string) => zh ? cn : en;
   const displayTasks = tasks.map(t => taskDisplay(t, zh));
-  const completion = (t: Evaluation['task']) => [t.expected_output, t.success].filter(Boolean).join(zh ? '；' : ' ');
+  const completion = (t: Evaluation['task']) => t.success || t.expected_output || '—';
   const taskText = tasks.length === 1
     ? `**${label('任务：', 'Task: ')}${cell(displayTasks[0].description)}**\n\n${cell(displayTasks[0].inputs)}\n\n${label('完成标准：', 'Completion criteria: ')}${cell(completion(displayTasks[0]))}`
     : `| ${label('任务及条件', 'Task and conditions')} | ${label('完成标准', 'Completion criteria')} |\n| --- | --- |\n` + displayTasks.map(t => `| ${cell(t.description)}<br>${cell(t.inputs)} | ${cell(completion(t))} |`).join('\n');
@@ -103,31 +120,27 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const dates = [...new Set(runs.map(r => new Date(r.started_at).toISOString().slice(0, 10)))].sort();
   const date = dates.length === 1 ? dates[0] : `${dates[0]} – ${dates.at(-1)}`;
   const varyingTasks = new Set(entries.map(({ board }) => stable(board.tasks.map(taskKey).sort()))).size > 1;
-  const headers = [label('服务', 'Service'), label('本次使用的入口', 'Tested access'), label('提前准备', 'Preparation'), label('样本', 'Trials'),
-    ...(varyingTasks ? [label('本次任务', 'Tasks covered')] : []), ...(configs.length > 1 ? [label('测试配置', 'Configuration')] : [])];
-  const rows = entries.sort((a, b) => (names.get(a.row.service_id) ?? a.row.service_id).localeCompare(names.get(b.row.service_id) ?? b.row.service_id)
-    || a.row.route_id.localeCompare(b.row.route_id)).map(({ board, row }) => {
-    const run = row.runs[0];
-    const type = interfaces.get(`${row.service_id}/${row.route_id}`);
-    const access = type === 'web' ? label('网页', 'Web') + (row.route_id.includes('playground') ? ' Playground' : '') : type?.toUpperCase() ?? row.route_id;
-    const provided = String(run.environment.service_credentials ?? 'none').startsWith('provided:');
-    const preparation = provided ? label('已提供本服务凭据', 'Service credentials provided') : label('未提供账号或密钥', 'No account or key supplied');
-    const sample = `${row.metrics.trials}${label(' 次', '')}` + (row.metrics.invalid ? ` (${row.metrics.invalid} ${label('次环境无效，未计入', 'invalid attempts excluded')})` : '');
-    const values = [cell(names.get(row.service_id) ?? row.service_id), `[${cell(access)}](${run.entry_url})`,
-      provided ? `[${preparation}](${prefix}generated/evaluations.md#${board.id})` : preparation,
-      `[${sample}](${prefix}generated/evaluations.md#${board.id})`,
-      ...(varyingTasks ? [board.tasks.map(t => cell(taskDisplay(t, zh).description)).join('<br>')] : []), ...(configs.length > 1 ? [cell(config(run))] : [])];
+  const preparation = (r: Evaluation) => String(r.environment.service_credentials ?? 'none').startsWith('provided:')
+    ? label('已预供服务凭据', 'Service credentials supplied') : label('未预供账号或密钥', 'No account or key supplied');
+  const preparations = [...new Set(runs.map(preparation))];
+  const varying = varyingTasks || configs.length > 1 || preparations.length > 1;
+  const headers = [label('服务', 'Service'),
+    ...(varyingTasks ? [label('本次任务', 'Tasks covered')] : []),
+    ...(configs.length > 1 ? [label('测试配置', 'Configuration')] : []),
+    ...(preparations.length > 1 ? [label('起点', 'Starting resources')] : [])];
+  const rows = entries.map(({ board, row }) => {
+    const repeated = entries.filter(e => e.row.service_id === row.service_id).length > 1;
+    const values = [`[${cell(names.get(row.service_id) ?? row.service_id)}${repeated ? ` / ${interfaceLabel(interfaces.get(`${row.service_id}/${row.route_id}`), zh)}` : ''}](${prefix}generated/evaluations.md#${board.id})`,
+      ...(varyingTasks ? [board.tasks.map(t => cell(taskDisplay(t, zh).description)).join('<br>')] : []),
+      ...(configs.length > 1 ? [cell(config(row.runs[0]))] : []),
+      ...(preparations.length > 1 ? [preparation(row.runs[0])] : [])];
     return `| ${values.join(' | ')} |`;
   });
-  const table = `| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.join('\n')}`;
-  const setup = `**${label('测试配置：', 'Test configuration:')}** ${configs.length === 1 ? `${cell(configs[0])} · ` : ''}${date}${label('（UTC）。', ' (UTC).')}`;
+  const table = varying ? `| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.join('\n')}` : '';
+  const setup = `**${label('测试配置：', 'Test configuration:')}** ${configs.length === 1 ? `${cell(configs[0])} · ` : ''}${date}${label('（UTC）', ' (UTC)')}${preparations.length === 1 ? ` · ${preparations[0]}` : ''}`;
   const notes: string[] = [];
   if (runs.some(r => !r.environment.host || !r.harness.launcher_sha256)) notes.push(label(
     '部分早期记录缺少环境信息，尚待统一复跑。', 'Some early records lack environment details and await a controlled rerun.'));
-  const webServices = [...new Set(entries.filter(e => interfaces.get(`${e.row.service_id}/${e.row.route_id}`) === 'web').map(e => names.get(e.row.service_id) ?? e.row.service_id))];
-  if (webServices.length) notes.push(label(`${webServices.join('、')} 的网页试跑成绩不代表其 API 或 MCP 的表现。`, `The web results for ${webServices.join(', ')} do not establish API or MCP performance.`));
-  if (runs.some(r => String(r.environment.service_credentials ?? 'none').startsWith('provided:'))) notes.push(label(
-    '提前准备不计入上表的 Token 用量和耗时，具体步骤见准备详情。', 'Preparation is outside the measured tokens and time; follow the preparation links for the steps.'));
   const files = [...new Set(tasks.map(t => t.file))];
   const links = files.map((file, i) => `[${label('任务定义', 'Task definitions')}${files.length > 1 ? ` ${i + 1}` : ''}](${prefix}${zh ? file : 'generated/tasks.en.md#' + boards.find(b => b.task_file === file)!.tasks[0].id + '-' + boards.find(b => b.task_file === file)!.tasks[0].version})`).join(' · ')
     + ` · [${label('完整运行记录与证据', 'Full runs and evidence')}](${prefix}generated/evaluations.md)`;

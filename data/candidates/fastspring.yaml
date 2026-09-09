@@ -1,0 +1,32 @@
+id: fastspring
+name: FastSpring
+homepage: https://fastspring.com/
+summary: Checkout and subscription platform with API, JavaScript checkout libraries and order webhooks.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    docs:
+      url: https://developer.fastspring.com/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: official-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.fastspring.com/
+      evidence:
+        - docs
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Official docs establish API, checkout and subscription integration options. Individual admission,
+        store activation, sandbox prerequisites and applicable fees have not been checked in this discovery
+        pass.
+entrypoints:
+  docs: https://developer.fastspring.com/

@@ -78,5 +78,21 @@
         "failure": "没有实际在线表格、仅输出 Markdown/本地文件、缺少初始或最终证据、内容/更新错误、通知真实用户、突破资源上限或预算内未完成。凭据或环境问题单列原因，不将未执行当作服务功能不支持"
       }
     ]
+  },
+  "payment-acceptance-001/v1": {
+    "description": "I want to sell an ebook titled “城市散步指南” for a one-time price of 12 USD. Set up its checkout page in the test environment and give me a link customers can open.",
+    "inputs": "Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Delivering the ebook file is not required.",
+    "expected_output": "A test checkout-page link for this product.",
+    "success": "The evaluator independently reads the remote product, order or checkout resource and opens the returned link. The name, 12 USD base price, quantity 1 and one-time charge must match, and the page must allow proceeding to simulated payment. Any dynamic taxes are shown separately; successful payment is not required.",
+    "failure": "Fake links, debug-only pages that cannot proceed to simulated payment, wrong amount, product, currency or billing interval, no remote resource, timeout or use of production. Environment and credential failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "我要卖一份电子书《城市散步指南》，标价12美元，一次性付款。先在测试环境做好收款页面，把顾客能打开的链接给我。",
+        "inputs": "商品为电子书《城市散步指南》，标价12 USD，一次性收费，数量1；不需要交付电子书文件",
+        "expected_output": "对应商品的测试收款页面链接",
+        "success": "评测 Agent 独立读取远端商品/订单/结账资源，并打开返回链接；确认名称、标价12 USD、数量1和一次性收费一致，页面可继续进入测试付款流程。动态税费如存在单独显示；不要求支付成功",
+        "failure": "假链接、只能查看开发调试信息而不能进入测试付款、金额/商品/币种/计费周期错误、无远端资源、超时或越过测试环境；环境或凭据故障单列"
+      }
+    ]
   }
 }

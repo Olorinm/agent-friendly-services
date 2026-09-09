@@ -1,0 +1,43 @@
+id: razorpay
+name: Razorpay
+homepage: https://razorpay.com/
+summary: >-
+  Payment Links API for collecting specified amounts through hosted checkout, including a documented test
+  mode.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://razorpay.com/docs/api/payments/payment-links/create-standard/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: payment-links-api
+      interface: api
+      maintainer: official
+      entry_url: https://razorpay.com/docs/api/payments/payment-links/create-standard/
+      evidence:
+        - checkout
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Documentation limits test-mode creation to 30 payment links per business before contacting support.
+        API-key access, merchant geography, KYC and production eligibility need preparation checks; a
+        documented test endpoint does not establish individual admission.
+      data_kind:
+        value: mixed
+        evidence:
+          - checkout
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://razorpay.com/docs/api/payments/payment-links/create-standard/

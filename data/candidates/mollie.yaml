@@ -1,0 +1,58 @@
+id: mollie
+name: Mollie
+homepage: https://www.mollie.com/
+summary: Payment links and payment APIs with isolated test mode and a simulated checkout screen.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://docs.mollie.com/reference/create-payment-link
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://docs.mollie.com/reference/testing
+      checked_on: '2026-09-08'
+      kind: official_docs
+    auth:
+      url: https://docs.mollie.com/reference/authentication
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.mollie.com/reference/create-payment-link
+      evidence:
+        - testing
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Uses a Test API key (or testmode with supported tokens). Test checkout is a simulator, not the live
+        payment page. Account admission and live payment-method activation remain prerequisites to check
+        separately.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://docs.mollie.com/reference/create-payment-link

@@ -10,9 +10,11 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 <a id="all-services"></a>
 
-## Services (112)
+## Services (127)
 
-Usage and costs are means per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for tasks, preparation and samples.
+Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
+
+Each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions.
 
 [Travel](#services-travel) · [Databases](#services-databases) · [Web Search / Data](#services-web-search-data) · [Productivity / Storage](#services-productivity-storage) · [AI Models](#services-ai-models) · [Agent Tooling](#services-agent-tooling) · [Code Execution](#services-code-execution) · [Developer Tools](#services-developer-tools) · [Cloud / Hosting](#services-cloud-hosting) · [Payments / Billing](#services-payments-billing) · [Communication](#services-communication) · [Observability / Security](#services-observability-security) · [Commerce / Marketing](#services-commerce-marketing)
 
@@ -25,38 +27,36 @@ Usage and costs are means per valid trial, including successes and failures. Mod
 #### Flights
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="12%" align="right">Tokens</th><th width="12%" align="right">Model cost</th><th width="12%" align="right">Service cost</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="7%" align="right">Trials</th><th width="9%" align="right">Resolution rate</th><th width="10%" align="right">Tokens</th><th width="10%" align="right">Model cost</th><th width="10%" align="right">Service cost</th><th width="8%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#ignav">Ignav Flights</a></td><td align="right"><a href="./generated/evaluations.md#comparison-45effe165cf4">100%</a></td><td align="right">212.9k</td><td align="right">$0.93</td><td align="right">$0</td><td align="left"><a href="https://ignav.com/docs">Docs</a> · <a href="https://ignav.com/playground">Web</a> · <a href="https://ignav.com/docs">API</a> · <a href="https://ignav.com/docs/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#kiwi">Kiwi.com</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c77feef961a0">100%</a></td><td align="right">209.6k</td><td align="right">$0.84</td><td align="right">$0</td><td align="left"><a href="https://www.kiwi.com/en/pages/mcp/">Docs</a> · <a href="https://mcp.kiwi.com">MCP</a> · <a href="https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#airgateway">AirGateway Platform API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#amadeus-flights">Amadeus Flight APIs</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.amadeus.com/blog/comparing-open-source-flight-data-sources">API</a> · <a href="https://developers.amadeus.com/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#apiheya-air-scraper">apiheya Air Scraper</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#aviasales">Aviasales via Travelpayouts</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API">API</a> · <a href="https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#bright-data-serp">Bright Data SERP API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://docs.brightdata.com/api-reference/serp/google-flights/currency">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#duffel-flights">Duffel Flights API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://duffel.com/docs/api/overview/test-mode">API</a> · <a href="https://duffel.com/guides/getting-started">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#expedia-xap-flights">Expedia XAP Flight Listings</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#flight-mcp">Flight MCP</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://flight-mcp.com/docs">API</a> · <a href="https://flight-mcp.com/docs">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#flightapi-io">FlightAPI.io Flight Price API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://www.flightapi.io/documentation/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#kayak-affiliate">KAYAK Affiliate API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.kayak.com/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#letsfg">LetsFG Personal Flight Search</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://letsfg.co/for-agents">MCP</a> · <a href="https://github.com/letsfg/letsfg">CLI</a> · <a href="https://github.com/letsfg/letsfg">SDK</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#lufthansa-partner">Lufthansa Partner Fare API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developer.lufthansa.com/page">API</a> · <a href="https://developer.lufthansa.com/docs/read/api_partner/offers">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#sabre-air">Sabre Air APIs</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md">API</a> · <a href="https://developer.sabre.com/">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#scrapingdog-flights">Scrapingdog Google Flights API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://www.scrapingdog.com/documentation/google-flights-api/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#searchapi">SearchApi Google Flights</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://www.searchapi.io/docs/google-flights-api">API</a> · <a href="https://www.searchapi.io/integrations/mcp">Docs</a> · <a href="https://www.searchapi.io/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://serpapi.com/search-api">Docs</a> · <a href="https://serpapi.com/google-flights-api">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a> · <a href="https://serpapi.com/search-api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#skootle-google-flights">Skootle Google Flights Scraper</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://apify.com/skootle/google-flights-scraper">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#skyscanner">Skyscanner Travel APIs</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.skyscanner.net/docs/getting-started/authentication">API</a> · <a href="https://developers.skyscanner.net/docs/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#travelport-tripservices">Travelport TripServices</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developer.travelport.com/docs/getting-started">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#trip-com-flights">Trip.com Flight Distribution</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#qunar-flights">去哪儿机票合作</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#tongcheng-flights">同程机票合作</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#ctrip-flights">携程机票合作</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#fliggy-domestic-flights">飞猪国内机票开放平台</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://open.alitrip.com/businessDetail.htm?tagId=85">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ignav">Ignav Flights</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-45effe165cf4">100%</a></td><td align="right">212.9k</td><td align="right">$0.93</td><td align="right">$0</td><td align="left"><a href="https://ignav.com/playground">Web</a></td><td align="left"><a href="https://ignav.com/docs">Docs</a> · <a href="https://ignav.com/playground">Web</a> · <a href="https://ignav.com/docs">API</a> · <a href="https://ignav.com/docs/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#kiwi">Kiwi.com</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-c77feef961a0">100%</a></td><td align="right">209.6k</td><td align="right">$0.84</td><td align="right">$0</td><td align="left"><a href="https://mcp.kiwi.com">MCP</a></td><td align="left"><a href="https://www.kiwi.com/en/pages/mcp/">Docs</a> · <a href="https://mcp.kiwi.com">MCP</a> · <a href="https://media.kiwi.com/articles-and-interviews/better-for-business-kiwi-com-takes-a-new-approach-to-partnerships/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#airgateway">AirGateway Platform API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#amadeus-flights">Amadeus Flight APIs</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="./generated/services.md#amadeus-flights-access">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#apiheya-air-scraper">apiheya Air Scraper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://rapidapi.com/apiheya/api/sky-scrapper/playground/apiendpoint_6856e0a6-2804-43cd-9cc0-bb377022981e">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#aviasales">Aviasales via Travelpayouts</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="./generated/services.md#aviasales-access">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bright-data-serp">Bright Data SERP API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.brightdata.com/api-reference/serp/google-flights/currency">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#duffel-flights">Duffel Flights API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="./generated/services.md#duffel-flights-access">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#expedia-xap-flights">Expedia XAP Flight Listings</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#flight-mcp">Flight MCP</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://flight-mcp.com/docs">API</a> · <a href="https://flight-mcp.com/docs">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#flightapi-io">FlightAPI.io Flight Price API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.flightapi.io/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#kayak-affiliate">KAYAK Affiliate API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.kayak.com/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#letsfg">LetsFG Personal Flight Search</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://letsfg.co/for-agents">MCP</a> · <a href="https://github.com/letsfg/letsfg">CLI</a> · <a href="https://github.com/letsfg/letsfg">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#lufthansa-partner">Lufthansa Partner Fare API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="./generated/services.md#lufthansa-partner-access">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sabre-air">Sabre Air APIs</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md">API</a> · <a href="https://developer.sabre.com/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#scrapingdog-flights">Scrapingdog Google Flights API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.scrapingdog.com/documentation/google-flights-api/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#searchapi">SearchApi Google Flights</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.searchapi.io/docs/google-flights-api">API</a> · <a href="https://www.searchapi.io/integrations/mcp">Docs</a> · <a href="https://www.searchapi.io/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serpapi.com/search-api">Docs</a> · <a href="./generated/services.md#serpapi-access">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#skootle-google-flights">Skootle Google Flights Scraper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://apify.com/skootle/google-flights-scraper">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#skyscanner">Skyscanner Travel APIs</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.skyscanner.net/docs/getting-started/authentication">API</a> · <a href="https://developers.skyscanner.net/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#travelport-tripservices">Travelport TripServices</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developer.travelport.com/docs/getting-started">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#trip-com-flights">Trip.com Flight Distribution</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#qunar-flights">去哪儿机票合作</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#tongcheng-flights">同程机票合作</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#ctrip-flights">携程机票合作</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#fliggy-domestic-flights">飞猪国内机票开放平台</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://open.alitrip.com/businessDetail.htm?tagId=85">API</a></td></tr>
 </tbody>
 </table>
-
-Existing trials use different or incompletely recorded conditions; these results are not ranked.
 
 <details>
 <summary>What we tested and how</summary>
@@ -65,16 +65,11 @@ Existing trials use different or incompletely recorded conditions; these results
 
 September 25, 2026; depart from MXP, LIN or BGY and arrive at any passenger airport in the Netherlands; one adult, one-way, economy; connections allowed; use the service entry point specified for this trial.
 
-Completion criteria: At least one matching itinerary with airports, flight numbers, local departure and arrival dates and times for each leg, a quoted price and currency, and the search source. At least one itinerary matches the date, route and passenger requirements. Key details agree with the real service response obtained by the runner. Only search results are assessed, not the lowest price across all sites or successful payment.
+Completion criteria: At least one itinerary matches the date, route and passenger requirements. Key details agree with the real service response obtained by the runner. Only search results are assessed, not the lowest price across all sites or successful payment.
 
-| Service | Tested access | Preparation | Trials |
-| --- | --- | --- | --- |
-| Ignav Flights | [Web Playground](https://ignav.com/playground) | No account or key supplied | [1](./generated/evaluations.md#comparison-45effe165cf4) |
-| Kiwi.com | [MCP](https://mcp.kiwi.com) | No account or key supplied | [1](./generated/evaluations.md#comparison-c77feef961a0) |
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC) · No account or key supplied
 
-**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC).
-
-Some early records lack environment details and await a controlled rerun. The web results for Ignav Flights do not establish API or MCP performance.
+Some early records lack environment details and await a controlled rerun.
 
 [Task definitions](./generated/tasks.en.md#flights-search-001-v1) · [Full runs and evidence](./generated/evaluations.md)
 
@@ -89,18 +84,16 @@ Some early records lack environment details and await a controlled rerun. The we
 #### Hosted Relational Databases
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="12%" align="right">Tokens</th><th width="12%" align="right">Model cost</th><th width="12%" align="right">Service cost</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="7%" align="right">Trials</th><th width="9%" align="right">Resolution rate</th><th width="10%" align="right">Tokens</th><th width="10%" align="right">Model cost</th><th width="10%" align="right">Service cost</th><th width="8%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#neon">Neon</a></td><td align="right"><a href="./generated/evaluations.md#comparison-fdecec09a4b6">100%</a></td><td align="right">465.4k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://neon.com/docs">Docs</a> · <a href="https://neon.new/">API</a> · <a href="https://api-docs.neon.tech">API</a> · <a href="https://neon.com/docs/reference/neon-cli">CLI</a> · <a href="https://github.com/neondatabase/mcp-server-neon">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right"><a href="./generated/evaluations.md#comparison-1420586eae17">100%</a></td><td align="right">767.6k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.turso.tech/cli/introduction">CLI</a> · <a href="https://docs.turso.tech/api-reference/introduction">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#aiven">Aiven</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://aiven.io/docs/tools/cli">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.cloudflare.com">Docs</a> · <a href="https://developers.cloudflare.com/d1/get-started/">CLI</a> · <a href="https://developers.cloudflare.com/api/">API</a> · <a href="https://developers.cloudflare.com/workers/wrangler/">CLI</a> · <a href="https://developers.cloudflare.com/fundamentals/api/reference/sdks/">SDK</a> · <a href="https://github.com/cloudflare/mcp-server-cloudflare">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#planetscale">PlanetScale</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://planetscale.com/docs/cli">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#supabase">Supabase</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://supabase.com/docs">Docs</a> · <a href="https://supabase.com/docs/guides/api">API</a> · <a href="https://supabase.com/docs/reference/api/introduction">API</a> · <a href="https://supabase.com/docs/guides/cli">CLI</a> · <a href="https://supabase.com/docs/reference">SDK</a> · <a href="https://supabase.com/docs/guides/getting-started/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#neon">Neon</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-fdecec09a4b6">100%</a></td><td align="right">465.4k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://neon.new/">API</a></td><td align="left"><a href="https://neon.com/docs">Docs</a> · <a href="./generated/services.md#neon-access">API</a> · <a href="https://neon.com/docs/reference/neon-cli">CLI</a> · <a href="https://github.com/neondatabase/mcp-server-neon">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-1420586eae17">100%</a></td><td align="right">767.6k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.turso.tech/api-reference/introduction">API</a></td><td align="left"><a href="https://docs.turso.tech/cli/introduction">CLI</a> · <a href="https://docs.turso.tech/api-reference/introduction">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#aiven">Aiven</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://aiven.io/docs/tools/cli">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.cloudflare.com">Docs</a> · <a href="./generated/services.md#cloudflare-access">CLI</a> · <a href="https://developers.cloudflare.com/api/">API</a> · <a href="https://developers.cloudflare.com/fundamentals/api/reference/sdks/">SDK</a> · <a href="https://github.com/cloudflare/mcp-server-cloudflare">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#planetscale">PlanetScale</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://planetscale.com/docs/cli">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#supabase">Supabase</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://supabase.com/docs">Docs</a> · <a href="./generated/services.md#supabase-access">API</a> · <a href="https://supabase.com/docs/guides/cli">CLI</a> · <a href="https://supabase.com/docs/reference">SDK</a> · <a href="https://supabase.com/docs/guides/getting-started/mcp">MCP</a></td></tr>
 </tbody>
 </table>
-
-Existing trials use different or incompletely recorded conditions; these results are not ranked.
 
 <details>
 <summary>What we tested and how</summary>
@@ -109,16 +102,14 @@ Existing trials use different or incompletely recorded conditions; these results
 
 Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2. A temporary database requiring no payment may be created; existing projects must not be modified.
 
-Completion criteria: After saving the data, end the writing process and connect to the same remote database from a fresh process. Return all todos sorted by id, the incomplete items, and the total/completed counts. Explain resource expiry or free-tier limits, and provide verifiable non-sensitive requests, SQL, real responses and evidence of the separate processes. Data is actually saved and updated in the specified service's remote database. A fresh process reads back all three items with unchanged titles; only id=1 is incomplete, with three total and two completed. Evidence establishes an independent connection and remote execution. Credentials stay in private workspace files and must not appear in evidence or the final answer. Temporary resources are acceptable if their expiry is disclosed.
+Completion criteria: Data is actually saved and updated in the specified service's remote database. A fresh process reads back all three items with unchanged titles; only id=1 is incomplete, with three total and two completed. Evidence establishes an independent connection and remote execution. Credentials stay in private workspace files and must not appear in evidence or the final answer. Temporary resources are acceptable if their expiry is disclosed.
 
-| Service | Tested access | Preparation | Trials |
-| --- | --- | --- | --- |
-| Neon | [API](https://neon.new/) | No account or key supplied | [1](./generated/evaluations.md#comparison-fdecec09a4b6) |
-| Turso | [API](https://docs.turso.tech/api-reference/introduction) | [Service credentials provided](./generated/evaluations.md#comparison-1420586eae17) | [1](./generated/evaluations.md#comparison-1420586eae17) |
+| Service | Starting resources |
+| --- | --- |
+| [Turso](./generated/evaluations.md#comparison-1420586eae17) | Service credentials supplied |
+| [Neon](./generated/evaluations.md#comparison-fdecec09a4b6) | No account or key supplied |
 
-**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC).
-
-Preparation is outside the measured tokens and time; follow the preparation links for the steps.
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC)
 
 [Task definitions](./generated/tasks.en.md#database-todos-001-v1) · [Full runs and evidence](./generated/evaluations.md)
 
@@ -128,10 +119,8 @@ Preparation is outside the measured tokens and time; follow the preparation link
 
 #### Other services
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#chroma">Chroma</a></td><td align="left">Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.</td><td align="left"><a href="https://docs.trychroma.com">Docs</a> · <a href="https://docs.trychroma.com/docs/overview/introduction">API</a> · <a href="https://docs.trychroma.com/docs/cli/install">CLI</a> · <a href="https://github.com/chroma-core/chroma-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#mongodb-atlas">MongoDB Atlas</a></td><td align="left">Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.</td><td align="left"><a href="https://www.mongodb.com/docs/atlas/">Docs</a> · <a href="https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/">API</a> · <a href="https://www.mongodb.com/docs/atlas/cli/">CLI</a> · <a href="https://www.mongodb.com/docs/drivers/">SDK</a> · <a href="https://github.com/mongodb-js/mongodb-mcp-server">MCP</a></td></tr>
@@ -152,19 +141,16 @@ Not yet task-tested
 #### Web Search
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="12%" align="right">Tokens</th><th width="12%" align="right">Model cost</th><th width="12%" align="right">Service cost</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="7%" align="right">Trials</th><th width="9%" align="right">Resolution rate</th><th width="10%" align="right">Tokens</th><th width="10%" align="right">Model cost</th><th width="10%" align="right">Service cost</th><th width="8%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#exa">Exa / public-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-87ab787b88b3">100%</a></td><td align="right">931.5k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.exa.ai">Docs</a> · <a href="https://exa.ai/docs/reference/exa-mcp">Docs</a> · <a href="https://mcp.exa.ai/mcp">MCP</a> · <a href="https://exa.ai/docs/reference/search">API</a> · <a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://github.com/exa-labs/exa-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#exa">Exa / search-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-9dbe771526ac">0%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.exa.ai">Docs</a> · <a href="https://exa.ai/docs/reference/exa-mcp">Docs</a> · <a href="https://mcp.exa.ai/mcp">MCP</a> · <a href="https://exa.ai/docs/reference/search">API</a> · <a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://github.com/exa-labs/exa-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b5f21fc39ab4">100%</a></td><td align="right">346.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.firecrawl.dev">Docs</a> · <a href="https://docs.firecrawl.dev/features/search">API</a> · <a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#brave-search">Brave Search API</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://api-dashboard.search.brave.com/app/documentation">Docs</a> · <a href="https://brave.com/search/api/">API</a> · <a href="https://github.com/brave/brave-search-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://serpapi.com/search-api">Docs</a> · <a href="https://serpapi.com/google-flights-api">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a> · <a href="https://serpapi.com/search-api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#serper">Serper</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://serper.dev/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://docs.tavily.com">Docs</a> · <a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/documentation/api-reference/introduction">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-9dbe771526ac">0%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://exa.ai/docs/reference/search">API</a></td><td align="left"><a href="./generated/services.md#exa-access">Docs</a> · <a href="./generated/services.md#exa-access">MCP</a> · <a href="./generated/services.md#exa-access">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-b5f21fc39ab4">100%</a></td><td align="right">346.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.firecrawl.dev/features/search">API</a></td><td align="left"><a href="https://docs.firecrawl.dev">Docs</a> · <a href="./generated/services.md#firecrawl-access">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#brave-search">Brave Search API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://api-dashboard.search.brave.com/app/documentation">Docs</a> · <a href="https://brave.com/search/api/">API</a> · <a href="https://github.com/brave/brave-search-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serpapi.com/search-api">Docs</a> · <a href="./generated/services.md#serpapi-access">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#serper">Serper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serper.dev/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.tavily.com">Docs</a> · <a href="./generated/services.md#tavily-access">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
 </tbody>
 </table>
-
-Existing trials use different or incompletely recorded conditions; these results are not ranked.
 
 <details>
 <summary>What we tested and how</summary>
@@ -173,17 +159,14 @@ Existing trials use different or incompletely recorded conditions; these results
 
 Target Python 3.13; official sources under python.org. Discover sources through the search service assigned to this trial; directly reading the pages it returns is allowed. Do not answer from model memory or another search engine.
 
-Completion criteria: A short answer in Chinese covering the default setting, how to enable free threading and C-extension compatibility. Include at least two distinct official page URLs and link each conclusion to source content. Save the assigned service's search requests and real responses, the page content used, and access times. All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
+Completion criteria: All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
 
-| Service | Tested access | Preparation | Trials |
-| --- | --- | --- | --- |
-| Exa | [MCP](https://mcp.exa.ai/mcp) | No account or key supplied | [1](./generated/evaluations.md#comparison-87ab787b88b3) |
-| Exa | [API](https://exa.ai/docs/reference/search) | [Service credentials provided](./generated/evaluations.md#comparison-9dbe771526ac) | [1](./generated/evaluations.md#comparison-9dbe771526ac) |
-| Firecrawl | [API](https://docs.firecrawl.dev/features/search) | No account or key supplied | [1](./generated/evaluations.md#comparison-b5f21fc39ab4) |
+| Service | Starting resources |
+| --- | --- |
+| [Exa](./generated/evaluations.md#comparison-9dbe771526ac) | Service credentials supplied |
+| [Firecrawl](./generated/evaluations.md#comparison-b5f21fc39ab4) | No account or key supplied |
 
-**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC).
-
-Preparation is outside the measured tokens and time; follow the preparation links for the steps.
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC)
 
 [Task definitions](./generated/tasks.en.md#web-search-001-v1) · [Full runs and evidence](./generated/evaluations.md)
 
@@ -193,10 +176,8 @@ Preparation is outside the measured tokens and time; follow the preparation link
 
 #### Other services
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="left">Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.</td><td align="left"><a href="https://docs.apify.com">Docs</a> · <a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://docs.jina.ai">Docs</a> · <a href="https://docs.jina.ai">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
@@ -214,16 +195,16 @@ Not yet task-tested
 #### Collaborative Tables
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="12%" align="right">Tokens</th><th width="12%" align="right">Model cost</th><th width="12%" align="right">Service cost</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="7%" align="right">Trials</th><th width="9%" align="right">Resolution rate</th><th width="10%" align="right">Tokens</th><th width="10%" align="right">Model cost</th><th width="10%" align="right">Service cost</th><th width="8%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#grist">Grist</a></td><td align="right"><a href="./generated/evaluations.md#comparison-6203194a76cd">100%</a></td><td align="right">540.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://docs.getgrist.com/api/mcp">MCP</a> · <a href="https://pypi.org/project/grist-api/">SDK</a> · <a href="https://www.npmjs.com/package/grist-api">SDK</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#notion">Notion</a></td><td align="right"><a href="./generated/evaluations.md#comparison-6203194a76cd">100%</a></td><td align="right">215.5k</td><td align="right">$0.75</td><td align="right">$0</td><td align="left"><a href="https://developers.notion.com">Docs</a> · <a href="https://developers.notion.com/reference/intro">API</a> · <a href="https://github.com/makenotion/notion-sdk-js">SDK</a> · <a href="https://developers.notion.com/cli/get-started/overview">CLI</a> · <a href="https://mcp.notion.com/mcp">MCP</a> · <a href="https://developers.notion.com/docs/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#airtable">Airtable</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://airtable.com/developers">Docs</a> · <a href="https://airtable.com/developers/web/api/introduction">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#baserow">Baserow Cloud</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://baserow.io/docs/apis/rest-api">API</a> · <a href="https://baserow.io/user-docs/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#coda">Coda / Superhuman Docs</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://coda.io/developers/apis/v1">API</a> · <a href="https://coda.io/apis/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#google-sheets">Google Sheets</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://developers.google.com/workspace/sheets/api/guides/concepts">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://open.larksuite.com/document/home/index">Docs</a> · <a href="https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a> · <a href="https://open.larksuite.com/document/server-docs/getting-started/server-api-list">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#feishu">飞书 Feishu</a></td><td align="right">Not yet task-tested</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#grist">Grist</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-6203194a76cd">100%</a></td><td align="right">540.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://support.getgrist.com/api/">API</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://docs.getgrist.com/api/mcp">MCP</a> · <a href="./generated/services.md#grist-access">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#notion">Notion</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-6203194a76cd">100%</a></td><td align="right">215.5k</td><td align="right">$0.75</td><td align="right">$0</td><td align="left"><a href="https://developers.notion.com/reference/intro">API</a></td><td align="left"><a href="https://developers.notion.com">Docs</a> · <a href="https://developers.notion.com/reference/intro">API</a> · <a href="https://github.com/makenotion/notion-sdk-js">SDK</a> · <a href="https://developers.notion.com/cli/get-started/overview">CLI</a> · <a href="./generated/services.md#notion-access">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#airtable">Airtable</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://airtable.com/developers">Docs</a> · <a href="https://airtable.com/developers/web/api/introduction">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#baserow">Baserow Cloud</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://baserow.io/docs/apis/rest-api">API</a> · <a href="https://baserow.io/user-docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#coda">Coda / Superhuman Docs</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://coda.io/developers/apis/v1">API</a> · <a href="https://coda.io/apis/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#google-sheets">Google Sheets</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.google.com/workspace/sheets/api/guides/concepts">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://open.larksuite.com/document/home/index">Docs</a> · <a href="./generated/services.md#lark-access">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#feishu">飞书 Feishu</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -234,16 +215,9 @@ Not yet task-tested
 
 Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue by September 15; Zhou Zhou will prepare the reading list by September 16; Chen He will make the poster, originally due September 18. All three were unfinished during the meeting. Follow-up: Zhou Zhou has finished the reading list, and the poster deadline has moved to September 20. Everything else stays the same.
 
-Completion criteria: An accessible private link to the online task table, plus the unfinished items with owners and due dates. The remote table contains exactly three actions with correct owners and final deadlines. The reading list is complete and the other two are incomplete. The answer links to the table and correctly lists the two unfinished items and their dates. The evaluator independently verifies the data through the service API. Fields and operation order are unrestricted; inserting the old state first or producing evidence files is not required.
+Completion criteria: The remote table contains exactly three actions with correct owners and final deadlines. The reading list is complete and the other two are incomplete. The answer links to the table and correctly lists the two unfinished items and their dates. The evaluator independently verifies the data through the service API. Fields and operation order are unrestricted; inserting the old state first or producing evidence files is not required.
 
-| Service | Tested access | Preparation | Trials |
-| --- | --- | --- | --- |
-| Grist | [API](https://support.getgrist.com/api/) | [Service credentials provided](./generated/evaluations.md#comparison-6203194a76cd) | [1](./generated/evaluations.md#comparison-6203194a76cd) |
-| Notion | [API](https://developers.notion.com/reference/intro) | [Service credentials provided](./generated/evaluations.md#comparison-6203194a76cd) | [1](./generated/evaluations.md#comparison-6203194a76cd) |
-
-**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-08 (UTC).
-
-Preparation is outside the measured tokens and time; follow the preparation links for the steps.
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-08 (UTC) · Service credentials supplied
 
 [Task definitions](./generated/tasks.en.md#collaborative-tables-001-v2) · [Full runs and evidence](./generated/evaluations.md)
 
@@ -253,10 +227,8 @@ Preparation is outside the measured tokens and time; follow the preparation link
 
 #### Other services
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#dropbox">Dropbox</a></td><td align="left">File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.</td><td align="left"><a href="https://www.dropbox.com/developers/documentation">Docs</a> · <a href="https://www.dropbox.com/developers/documentation/http/documentation">API</a> · <a href="https://github.com/dropbox/dbxcli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#linear">Linear</a></td><td align="left">Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.</td><td align="left"><a href="https://linear.app/developers">Docs</a> · <a href="https://linear.app/docs/mcp">MCP</a></td></tr>
@@ -267,10 +239,8 @@ Not yet task-tested
 
 ### AI Models (23)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#qwen">Alibaba Qwen (Model Studio)</a></td><td align="left">Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).</td><td align="left"><a href="https://www.alibabacloud.com/help/en/model-studio/">Docs</a> · <a href="https://www.alibabacloud.com/help/en/model-studio/models">API</a> · <a href="https://github.com/QwenLM/qwen-code">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#anthropic">Anthropic</a></td><td align="left">Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.</td><td align="left"><a href="https://docs.anthropic.com">Docs</a> · <a href="https://docs.anthropic.com/en/api">API</a> · <a href="https://docs.anthropic.com/en/docs/claude-code">CLI</a> · <a href="https://docs.anthropic.com/en/api/client-sdks">SDK</a></td></tr>
@@ -302,10 +272,8 @@ Not yet task-tested
 
 ### Agent Tooling (5)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#composio">Composio</a></td><td align="left">Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.</td><td align="left"><a href="https://docs.composio.dev">Docs</a> · <a href="https://mcp.composio.dev">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#mem0">Mem0</a></td><td align="left">Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.</td><td align="left"><a href="https://docs.mem0.ai">Docs</a> · <a href="https://docs.mem0.ai/api-reference">API</a> · <a href="https://docs.mem0.ai/openmemory/overview">MCP</a></td></tr>
@@ -319,10 +287,8 @@ Not yet task-tested
 
 ### Code Execution (4)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#browserbase">Browserbase</a></td><td align="left">Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.</td><td align="left"><a href="https://docs.browserbase.com">Docs</a> · <a href="https://docs.browserbase.com/reference">API</a> · <a href="https://docs.browserbase.com/reference">SDK</a> · <a href="https://github.com/browserbase/mcp-server-browserbase">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#e2b">E2B</a></td><td align="left">Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.</td><td align="left"><a href="https://e2b.dev/docs">Docs</a> · <a href="https://e2b.dev/docs/cli">CLI</a> · <a href="https://e2b.dev/docs/sdk-reference">SDK</a> · <a href="https://github.com/e2b-dev/mcp-server">MCP</a></td></tr>
@@ -335,10 +301,8 @@ Not yet task-tested
 
 ### Developer Tools (4)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#atlassian">Atlassian (Jira &amp; Confluence)</a></td><td align="left">Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.</td><td align="left"><a href="https://developer.atlassian.com">Docs</a> · <a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/">API</a> · <a href="https://developer.atlassian.com/cloud/acli/">CLI</a> · <a href="https://github.com/atlassian/atlassian-mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="left">Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.</td><td align="left"><a href="https://docs.github.com">Docs</a> · <a href="https://docs.github.com/rest">API</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
@@ -351,12 +315,10 @@ Not yet task-tested
 
 ### Cloud / Hosting (6)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="left">Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.</td><td align="left"><a href="https://developers.cloudflare.com">Docs</a> · <a href="https://developers.cloudflare.com/d1/get-started/">CLI</a> · <a href="https://developers.cloudflare.com/api/">API</a> · <a href="https://developers.cloudflare.com/workers/wrangler/">CLI</a> · <a href="https://developers.cloudflare.com/fundamentals/api/reference/sdks/">SDK</a> · <a href="https://github.com/cloudflare/mcp-server-cloudflare">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="left">Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.</td><td align="left"><a href="https://developers.cloudflare.com">Docs</a> · <a href="./generated/services.md#cloudflare-access">CLI</a> · <a href="https://developers.cloudflare.com/api/">API</a> · <a href="https://developers.cloudflare.com/fundamentals/api/reference/sdks/">SDK</a> · <a href="https://github.com/cloudflare/mcp-server-cloudflare">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fly-io">Fly.io</a></td><td align="left">Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.</td><td align="left"><a href="https://fly.io/docs">Docs</a> · <a href="https://fly.io/docs/machines/api/">API</a> · <a href="https://fly.io/docs/flyctl/">CLI</a> · <a href="https://fly.io/docs/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#netlify">Netlify</a></td><td align="left">Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.</td><td align="left"><a href="https://docs.netlify.com">Docs</a> · <a href="https://open-api.netlify.com">API</a> · <a href="https://docs.netlify.com/cli/get-started/">CLI</a> · <a href="https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#railway">Railway</a></td><td align="left">App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.</td><td align="left"><a href="https://docs.railway.com">Docs</a> · <a href="https://docs.railway.com/reference/public-api">API</a> · <a href="https://github.com/railwayapp/cli">CLI</a></td></tr>
@@ -367,31 +329,61 @@ Not yet task-tested
 
 <a id="services-payments-billing"></a>
 
-### Payments / Billing (4)
+### Payments / Billing (19)
 
-Not yet task-tested
+<a id="services-payments-billing-accept-payments"></a>
+
+#### Payment Acceptance
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="7%" align="right">Trials</th><th width="9%" align="right">Resolution rate</th><th width="10%" align="right">Tokens</th><th width="10%" align="right">Model cost</th><th width="10%" align="right">Service cost</th><th width="8%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#lemonsqueezy">Lemon Squeezy</a></td><td align="left">Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.</td><td align="left"><a href="https://docs.lemonsqueezy.com">Docs</a> · <a href="https://docs.lemonsqueezy.com/api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#paas-build">paas.build</a></td><td align="left">Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.</td><td align="left"><a href="https://paas.build/agents">Docs</a> · <a href="https://paas.build/openapi.json">API</a> · <a href="https://paas.build/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#paddle">Paddle</a></td><td align="left">Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.</td><td align="left"><a href="https://developer.paddle.com">Docs</a> · <a href="https://developer.paddle.com/api-reference/overview">API</a> · <a href="https://github.com/PaddleHQ/paddle-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#stripe">Stripe</a></td><td align="left">Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.</td><td align="left"><a href="https://docs.stripe.com">Docs</a> · <a href="https://docs.stripe.com/api">API</a> · <a href="https://docs.stripe.com/stripe-cli">CLI</a> · <a href="https://docs.stripe.com/sdks">SDK</a> · <a href="https://docs.stripe.com/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#paas-build">paas.build</a></td><td align="right">0</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://paas.build/openapi.json">API</a></td><td align="left"><a href="https://paas.build/agents">Docs</a> · <a href="https://paas.build/openapi.json">API</a> · <a href="https://paas.build/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#paddle">Paddle</a></td><td align="right">1</td><td align="right"><a href="./generated/evaluations.md#comparison-1149cab0b0f0">0%</a></td><td align="right">455.2k</td><td align="right">$1.20</td><td align="right">$0</td><td align="left"><a href="https://developer.paddle.com/sdks/sandbox/">API</a></td><td align="left"><a href="https://developer.paddle.com">Docs</a> · <a href="./generated/services.md#paddle-access">API</a> · <a href="https://github.com/PaddleHQ/paddle-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#adyen">Adyen</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks">Docs</a> · <a href="https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#airwallex">Airwallex</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.airwallex.com/docs/payments/payment-links/payment-links-via-api">Docs</a> · <a href="https://www.airwallex.com/docs/api/payments/payment_links/api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alipay">Alipay</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://open.alipay.com/module/webApp">Docs</a> · <a href="https://open.alipay.com/module/webApp">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#checkout-com">Checkout.com</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://api-reference.checkout.com/tag/Payment-Links/">Docs</a> · <a href="https://api-reference.checkout.com/tag/Payment-Links/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#creem">Creem</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.creem.io/getting-started/test-mode">Docs</a> · <a href="https://docs.creem.io/getting-started/test-mode">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#dodo-payments">Dodo Payments</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="./generated/services.md#dodo-payments-access">Docs</a> · <a href="https://docs.dodopayments.com/introduction">API</a> · <a href="https://github.com/dodopayments/dodopayments-cli">CLI</a> · <a href="https://mcp.dodopayments.com/sse">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fastspring">FastSpring</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developer.fastspring.com/">Docs</a> · <a href="https://developer.fastspring.com/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#lemonsqueezy">Lemon Squeezy</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.lemonsqueezy.com">Docs</a> · <a href="./generated/services.md#lemonsqueezy-access">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mollie">Mollie</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.mollie.com/reference/create-payment-link">Docs</a> · <a href="https://docs.mollie.com/reference/create-payment-link">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#paypal">PayPal</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developer.paypal.com/api/rest/postman/">Docs</a> · <a href="https://developer.paypal.com/api/rest">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#pingxx">Ping++</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.pingxx.com/docs/client/web.html">Docs</a> · <a href="https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html">API</a> · <a href="https://www.pingxx.com/docs/client/web.html">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#polar">Polar</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://polar.sh/docs/integrate/sandbox">Docs</a> · <a href="https://polar.sh/docs/integrate/sandbox">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#razorpay">Razorpay</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://razorpay.com/docs/api/payments/payment-links/create-standard/">Docs</a> · <a href="https://razorpay.com/docs/api/payments/payment-links/create-standard/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#square">Square</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink">Docs</a> · <a href="https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#stripe">Stripe</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.stripe.com">Docs</a> · <a href="./generated/services.md#stripe-access">API</a> · <a href="https://docs.stripe.com/stripe-cli">CLI</a> · <a href="https://docs.stripe.com/sdks">SDK</a> · <a href="https://docs.stripe.com/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#wechat-pay">WeChat Pay</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://pay.wechatpay.cn/doc/v3/merchant/4012791877">Docs</a> · <a href="https://pay.wechatpay.cn/doc/v3/merchant/4012791877">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#whop">Whop</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.whop.com/">Docs</a> · <a href="https://docs.whop.com/">API</a></td></tr>
 </tbody>
 </table>
+
+<details>
+<summary>What we tested and how</summary>
+
+**Task: I want to sell an ebook titled “城市散步指南” for a one-time price of 12 USD. Set up its checkout page in the test environment and give me a link customers can open.**
+
+Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Delivering the ebook file is not required.
+
+Completion criteria: The evaluator independently reads the remote product, order or checkout resource and opens the returned link. The name, 12 USD base price, quantity 1 and one-time charge must match, and the page must allow proceeding to simulated payment. Any dynamic taxes are shown separately; successful payment is not required.
+
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-08 – 2026-09-09 (UTC) · Service credentials supplied
+
+[Task definitions](./generated/tasks.en.md#payment-acceptance-001-v1) · [Full runs and evidence](./generated/evaluations.md)
+
+</details>
 
 <a id="services-communication"></a>
 
 ### Communication (6)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#discord">Discord</a></td><td align="left">Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.</td><td align="left"><a href="https://discord.com/developers/docs/intro">Docs</a> · <a href="https://discord.com/developers/docs/reference">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="left">Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.</td><td align="left"><a href="https://open.larksuite.com/document/home/index">Docs</a> · <a href="https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a> · <a href="https://open.larksuite.com/document/server-docs/getting-started/server-api-list">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="left">Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.</td><td align="left"><a href="https://open.larksuite.com/document/home/index">Docs</a> · <a href="./generated/services.md#lark-access">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#resend">Resend</a></td><td align="left">Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.</td><td align="left"><a href="https://resend.com/docs">Docs</a> · <a href="https://resend.com/docs/api-reference/introduction">API</a> · <a href="https://resend.com/docs/sdks">SDK</a> · <a href="https://github.com/resend/mcp-send-email">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#slack">Slack</a></td><td align="left">Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.</td><td align="left"><a href="https://api.slack.com">Docs</a> · <a href="https://api.slack.com/methods">API</a> · <a href="https://docs.slack.dev/tools/slack-cli">CLI</a> · <a href="https://tools.slack.dev">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#telegram">Telegram Bot API</a></td><td align="left">Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.</td><td align="left"><a href="https://core.telegram.org/bots">Docs</a> · <a href="https://core.telegram.org/bots/api">API</a></td></tr>
@@ -403,10 +395,8 @@ Not yet task-tested
 
 ### Observability / Security (3)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#datadog">Datadog</a></td><td align="left">Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.</td><td align="left"><a href="https://docs.datadoghq.com">Docs</a> · <a href="https://docs.datadoghq.com/api/latest/">API</a> · <a href="https://github.com/DataDog/datadog-ci">CLI</a> · <a href="https://docs.datadoghq.com/bits_ai/mcp_server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#grafana">Grafana (Grafana Cloud)</a></td><td align="left">Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.</td><td align="left"><a href="https://grafana.com/docs">Docs</a> · <a href="https://grafana.com/docs/grafana/latest/developers/http_api/">API</a> · <a href="https://github.com/grafana/mcp-grafana">MCP</a></td></tr>
@@ -418,10 +408,8 @@ Not yet task-tested
 
 ### Commerce / Marketing (1)
 
-Not yet task-tested
-
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="48%" align="left">Purpose</th><th width="26%" align="left">Access</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#shopify">Shopify</a></td><td align="left">Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.</td><td align="left"><a href="https://shopify.dev/docs">Docs</a> · <a href="https://shopify.dev/docs/api">API</a> · <a href="https://shopify.dev/docs/api/shopify-cli">CLI</a> · <a href="https://shopify.dev/docs/apps/build/storefront-mcp">MCP</a></td></tr>
 </tbody>

@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260908T113239.160717Z-paas-build",
+  "service_id": "paas-build",
+  "route_id": "rest-api",
+  "entry_url": "https://paas.build/openapi.json",
+  "task": {
+    "description": "我要卖一份电子书《城市散步指南》，标价12美元，一次性付款。先在测试环境做好收款页面，把顾客能打开的链接给我。",
+    "inputs": "商品为电子书《城市散步指南》，标价12 USD，一次性收费，数量1；不需要交付电子书文件",
+    "expected_output": "对应商品的测试收款页面链接",
+    "success": "评测 Agent 独立读取远端商品/订单/结账资源，并打开返回链接；确认名称、标价12 USD、数量1和一次性收费一致，页面可继续进入测试付款流程。动态税费如存在单独显示；不要求支付成功",
+    "failure": "假链接、只能查看开发调试信息而不能进入测试付款、金额/商品/币种/计费周期错误、无远端资源、超时或越过测试环境；环境或凭据故障单列",
+    "resources": "提供服务的空测试商店/账户及最小必要测试凭据，无商品、价格、订单或调用脚本；仅创建本题所需测试资源，不实付、不启用生产收款、不通知第三方",
+    "id": "payment-acceptance-001",
+    "version": "v1",
+    "sha256": "b908db88aced8cb8b3c77adee6d37a20c307418d7cb32c4f9833ea64a47016d2",
+    "file": "data/experiments/tasks/payment-acceptance.md"
+  },
+  "prompt_sha256": "e94e5b0f64de65dc048cd6222e627c3167bd059065ed291718a5af0b1adaa01f",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "7d3a59a5fd9eaa56ae843215be756c30744362b18eed44bb74a4a0159bfa41e3"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-08T11:32:39.178384+00:00",
+  "ended_at": "2026-09-08T11:39:27.272770+00:00",
+  "elapsed_seconds": 408.184,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "provided: PAAS_SANDBOX_ACCESS_TOKEN, PAAS_SANDBOX_VENDOR_ID",
+    "web_search": "live",
+    "preparation_note": "A new sandbox-only merchant was provisioned by the evaluator through the official API with notifications disabled. Sandbox token identity was checked before execution. No product, price, checkout, production merchant or solution code was prepared. Signup identity stays private; preparation time and evaluator tokens are outside execution metrics.",
+    "prompt_style": "natural",
+    "evidence_collection": "CLI events and external remote read",
+    "prompt_characters": 104,
+    "input_delivery": "workspace attachments",
+    "context_files": [
+      {
+        "path": "input.md",
+        "sha256": "52889f1f6bc1e2debcd99236efcecaa422e86c6a672e13d6efcbe00c6b35f839",
+        "characters": 45
+      },
+      {
+        "path": "ENVIRONMENT.md",
+        "sha256": "36c593bf519e3c68a7039581103bb14b9bd3c1fc5f5c4ff1039388a10ae67af6",
+        "characters": 363
+      }
+    ]
+  },
+  "status": "invalid_run",
+  "reason": "The executor created a real sandbox checkout, but macOS sandbox permissions prevented Chromium from launching. Exclude this trial from service completion-rate comparisons. Independent post-run browser inspection also showed only the checkout shell, without the product, amount or payment form; this is a separate observed usability issue requiring a fresh run after environment repair.",
+  "usage": {
+    "input_tokens": 790729,
+    "cached_input_tokens": 699520,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7753,
+    "reasoning_output_tokens": 2209
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://paas.build/SKILL.md"
+    ],
+    "note": "Official instructions state that the sandbox is free to play with. Only sandbox checkout creation and reads occurred; no payment was submitted. The $12 product price is not a service charge.",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "External preparing Agent; separate from the executing Codex CLI session",
+    "reviewed_at": "2026-09-08T11:44:06.796494+00:00",
+    "checks": [
+      {
+        "criterion": "A real remote sandbox checkout exists with the requested amount, currency and product reference.",
+        "passed": true,
+        "evidence": "review-remote.json: independent HTTP 200 read, amount and totalAmount 12, currency USD, product reference includes the title and quantity 1, no recurring plans."
+      },
+      {
+        "criterion": "The returned customer page displays the product and amount and can proceed to simulated payment.",
+        "passed": false,
+        "evidence": "review-remote.json and review-page.png: independent browser displayed only the checkout shell and footer. No visible product, amount or payment controls."
+      },
+      {
+        "criterion": "The executor environment supports the browser operation it attempted.",
+        "passed": false,
+        "evidence": "environment-error.txt: Chromium MachPortRendezvousServer bootstrap check failed with Permission denied (1100)."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260908T113239.160717Z-paas-build/review-remote.json",
+      "sha256": "90d3e4aa3e13e82d31f73d49a9adc5c52a73ab963ac0e2a04a4eaec7e1ce3c41",
+      "note": "Independent remote data and post-run browser observation; does not convert the invalid execution into a scored vendor failure."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260908T113239.160717Z-paas-build/review-page.png",
+      "sha256": "f0003b799ff882e77fc12339be051845695c9cbd9141e3175c7f51641073f41b",
+      "note": "Independent browser screenshot of the returned checkout after loading; no account identity or checkout URL in the image."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260908T113239.160717Z-paas-build/environment-error.txt",
+      "sha256": "d3ad6f462d2204bc536765cefd3b0baf4dfdc8533f3898a709c15048d4bbf7e9",
+      "note": "Selected actual executor browser launch failure."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260908T113239.160717Z-paas-build/service-cost-source.json",
+      "sha256": "d2978d16a0bd07de6f17ebdc0d926efb45830d048c0c0750e05a2dcd79114907",
+      "note": "Official sandbox-free statement supporting a $0 service charge for this sandbox-only attempt."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260908T113239.160717Z-paas-build",
+    "run_sha256": "9b26f38d93481dae9751226339c777c871a967301a34021bb3d23e76c6ad4ebe",
+    "events_sha256": "c59586d5a8cc824b0f8b4cbb3fdc5a9844ad3946941d0f0965f8a70bad3b1bf7",
+    "answer_sha256": "ba3cc430416cce5f1f6b1b2a4dd9df315fc10fea3d66ceb62eac51600ba2fc84",
+    "review_sha256": "58702566e6b95461cf9ef57f622b38a927afe6de359d31d7b3bfd862c51c4076"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "session token_usage_record",
+    "requests": [
+      {
+        "input_tokens": 11193,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 114,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11413,
+        "cached_input_tokens": 11008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11907,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 240,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 16421,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 401,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 18816,
+        "cached_input_tokens": 16256,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 624,
+        "reasoning_output_tokens": 121
+      },
+      {
+        "input_tokens": 19496,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19650,
+        "cached_input_tokens": 19328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 228,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19936,
+        "cached_input_tokens": 19456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 20486,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 304,
+        "reasoning_output_tokens": 27
+      },
+      {
+        "input_tokens": 20968,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 40,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 21725,
+        "cached_input_tokens": 20736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 299,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 22150,
+        "cached_input_tokens": 21504,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 229,
+        "reasoning_output_tokens": 75
+      },
+      {
+        "input_tokens": 22769,
+        "cached_input_tokens": 22016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 191,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26438,
+        "cached_input_tokens": 22528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 325,
+        "reasoning_output_tokens": 31
+      },
+      {
+        "input_tokens": 26821,
+        "cached_input_tokens": 26240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 89,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28320,
+        "cached_input_tokens": 19712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28510,
+        "cached_input_tokens": 28160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 371,
+        "reasoning_output_tokens": 88
+      },
+      {
+        "input_tokens": 29125,
+        "cached_input_tokens": 28288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 584,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 29769,
+        "cached_input_tokens": 28928,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 113,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 29957,
+        "cached_input_tokens": 26624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 364,
+        "reasoning_output_tokens": 209
+      },
+      {
+        "input_tokens": 30462,
+        "cached_input_tokens": 29824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 247,
+        "reasoning_output_tokens": 111
+      },
+      {
+        "input_tokens": 31922,
+        "cached_input_tokens": 29568,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 446,
+        "reasoning_output_tokens": 272
+      },
+      {
+        "input_tokens": 36559,
+        "cached_input_tokens": 31744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 466,
+        "reasoning_output_tokens": 274
+      },
+      {
+        "input_tokens": 40407,
+        "cached_input_tokens": 36352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 472,
+        "reasoning_output_tokens": 224
+      },
+      {
+        "input_tokens": 41250,
+        "cached_input_tokens": 40192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 202,
+        "reasoning_output_tokens": 23
+      },
+      {
+        "input_tokens": 42274,
+        "cached_input_tokens": 30336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 202,
+        "reasoning_output_tokens": 88
+      },
+      {
+        "input_tokens": 42533,
+        "cached_input_tokens": 42112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 44285,
+        "cached_input_tokens": 42368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 812,
+        "reasoning_output_tokens": 462
+      },
+      {
+        "input_tokens": 45167,
+        "cached_input_tokens": 44160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 88,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "2c8bb0964cbf8f1e8728e77dc119b256c12bb8b0ef2214631f72e27d07ee45b6",
+    "reason": "Per-request counters reconcile with CLI final usage",
+    "totals": {
+      "input_tokens": 790729,
+      "cached_input_tokens": 699520,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7753,
+      "reasoning_output_tokens": 2209
+    }
+  }
+}

@@ -1,0 +1,66 @@
+id: paypal
+name: PayPal
+homepage: https://www.paypal.com/
+summary: >-
+  Online payment acceptance through Orders API and buyer approval checkout; separate sandbox buyer and
+  business seller accounts.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    api:
+      url: https://developer.paypal.com/api/rest
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://developer.paypal.com/sandbox-testing/overview/
+      checked_on: '2026-09-08'
+      kind: official_docs
+    checkout:
+      url: https://developer.paypal.com/api/rest/postman/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.paypal.com/api/rest
+      evidence:
+        - testing
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: unknown
+      notes: >-
+        Developer dashboard supplies sandbox buyer and seller accounts and app credentials. Going live
+        requires a Business account; merchant country and personal eligibility need separate checks.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: oauth
+        evidence:
+          - api
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+      human_steps:
+        - step: Create a developer account and obtain sandbox app client credentials.
+          stage: credentials
+          evidence:
+            - api
+entrypoints:
+  docs: https://developer.paypal.com/api/rest/postman/

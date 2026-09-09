@@ -3,7 +3,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, type Provider } from './lib.ts';
 import type { ModelCost } from './model-costs.ts';
-import { buildBoards, moneyLabel } from './leaderboard.ts';
+import { buildBoards, selectServiceBoards, moneyLabel } from './leaderboard.ts';
 
 export interface Evaluation {
   schema_version: 1;
@@ -124,7 +124,18 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   const dir = path.join(outputRoot, 'generated');
   fs.mkdirSync(dir, { recursive: true });
   const sorted = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at) || a.run_id.localeCompare(b.run_id));
-  fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1, evaluations: sorted, comparisons: buildBoards(records).map(b => ({ ...b, rows: b.rows.map(row => ({ service_id: row.service_id, route_id: row.route_id, metrics: row.metrics, run_ids: row.runs.map(r => r.run_id) })) })) }, null, 2) + '\n');
+  const boards = buildBoards(records);
+  const summaryRow = (row: typeof boards[number]['rows'][number]) => ({ service_id: row.service_id,
+    route_id: row.route_id, metrics: row.metrics, run_ids: row.runs.map(r => r.run_id) });
+  const serviceSummaries = [...new Set(records.map(r => r.task.file))].flatMap(file =>
+    selectServiceBoards(boards.filter(b => b.task_file === file)).flatMap(b => b.rows.map(row => ({
+      task_file: file, ...summaryRow(row), comparison_id: b.id,
+      selection: row.metrics.trials ? 'most_recent_valid_route_protocol' : 'no_valid_trials',
+    }))));
+  fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1,
+    evaluations: sorted, service_summaries: serviceSummaries,
+    comparisons: boards.map(b => ({ ...b, rows: b.rows.map(summaryRow) })),
+  }, null, 2) + '\n');
   const row = (r: Evaluation) => {
     const link = `../data/experiments/evaluations/${r.run_id}.json`;
     return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds}s | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;

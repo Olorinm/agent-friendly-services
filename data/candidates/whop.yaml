@@ -1,0 +1,32 @@
+id: whop
+name: Whop
+homepage: https://whop.com/
+summary: Payment APIs and checkout integration for existing apps, with TypeScript, Python and Ruby SDKs.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    docs:
+      url: https://docs.whop.com/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: official-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.whop.com/
+      evidence:
+        - docs
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Docs describe dashboard API keys and checkout integration. Merchant eligibility, sandbox coverage,
+        service responsibilities and full fees still need verification; buyer availability does not establish
+        seller eligibility.
+entrypoints:
+  docs: https://docs.whop.com/

@@ -160,6 +160,23 @@ print(json.dumps({'type':'turn.completed','usage':usage}))
         self.task.write_text(self.task.read_text().replace('rows match', 'rows and types match'))
         self.assertNotEqual(task['sha256'], runner.select_task(self.task, 'rows-1')[0]['sha256'])
 
+    def test_browser_connection_stays_private_and_rejects_remote_hosts(self):
+        connection = self.root / 'browser.json'
+        connection.write_text(json.dumps({'cdp_url': 'ws://127.0.0.1:4567/devtools/browser/private-id'}))
+        connection.chmod(0o600)
+        browser = runner.load_browser(connection)
+        task, _ = runner.select_task(self.task, 'rows-1')
+        context = runner.natural_context(task, 'https://example.com', [], 600, browser)
+        self.assertIn('.private/browser.json', context['ENVIRONMENT.md'])
+        self.assertNotIn('private-id', ''.join(context.values()))
+        for url in ['ws://example.com:4567/devtools/browser/id', 'file:///tmp/browser', 'http://127.0.0.1']:
+            connection.write_text(json.dumps({'cdp_url': url}))
+            with self.assertRaises(ValueError):
+                runner.load_browser(connection)
+        connection.chmod(0o644)
+        with self.assertRaisesRegex(ValueError, 'private'):
+            runner.load_browser(connection)
+
     def test_natural_inputs_separate_request_material_environment_and_grader(self):
         task, _ = runner.select_task(self.task, 'rows-1')
         task.update(success='SECRET_GRADER_CANARY', failure='FAILURE_CANARY',

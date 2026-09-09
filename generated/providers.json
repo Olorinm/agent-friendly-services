@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-09-08T08:14:51.475Z",
+  "generated_at": "2026-09-09T04:03:25.712Z",
   "counts": {
     "providers": 76,
     "categories": 13,
@@ -96,7 +96,28 @@
     {
       "id": "payments-billing",
       "name": "Payments / Billing",
-      "description": "Payments, billing, subscription infrastructure."
+      "description": "Payments, billing, subscription infrastructure.",
+      "subcategories": [
+        {
+          "id": "accept-payments",
+          "name": "Payment Acceptance",
+          "description": "Accept customer payments for products or services; alternatives depend on merchant eligibility, geography and the task.",
+          "capabilities": [
+            {
+              "id": "payments.checkout",
+              "description": "Prepare a customer checkout for a specified product and price."
+            },
+            {
+              "id": "payments.status",
+              "description": "Determine whether an order has actually been paid."
+            },
+            {
+              "id": "payments.subscription",
+              "description": "Prepare recurring collection for a subscription offering."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "communication",

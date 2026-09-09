@@ -1,0 +1,12 @@
+Independent authenticated dashboard read, 2026-09-09
+Source: https://sandbox-vendors.paddle.com/taxable-categories
+								54 文本 Test mode
+										71 文本 Please note that taxable categories must be applied for and approved in your live account.
+												85 文本 Standard Digital Goods
+													92 文本 Default
+												95 文本 eBook
+													102 文本 Not Requested
+												105 文本 SaaS
+													112 文本 Approved
+													122 文本 Not Requested
+													132 文本 Not Requested

@@ -1,0 +1,49 @@
+id: airwallex
+name: Airwallex
+homepage: https://www.airwallex.com/
+summary: Hosted payment links with fixed or customer-selected amounts and payment status webhooks.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://www.airwallex.com/docs/payments/payment-links/payment-links-via-api
+      checked_on: '2026-09-08'
+      kind: official_docs
+    api:
+      url: https://www.airwallex.com/docs/api/payments/payment_links/api
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: payment-links-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.airwallex.com/docs/api/payments/payment_links/api
+      evidence:
+        - api
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        API requires an access token and merchant configuration. Sandbox examples are documented, but
+        individual account eligibility, activation and full fees are not established here. Payment success is
+        reported separately from link creation.
+      data_kind:
+        value: mixed
+        evidence:
+          - api
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+        payments.status:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://www.airwallex.com/docs/payments/payment-links/payment-links-via-api

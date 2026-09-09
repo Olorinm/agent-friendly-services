@@ -1,0 +1,39 @@
+id: wechat-pay
+name: WeChat Pay
+homepage: https://pay.weixin.qq.com/
+summary: >-
+  Merchant payment APIs including Native QR checkout; merchant credentials and channel-specific setup are
+  required.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://pay.wechatpay.cn/doc/v3/merchant/4012791877
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: native-api
+      interface: api
+      maintainer: official
+      entry_url: https://pay.wechatpay.cn/doc/v3/merchant/4012791877
+      evidence:
+        - checkout
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Native checkout is a QR payment flow, not a browser-hosted card checkout. Merchant admission,
+        individual eligibility and an applicable free sandbox remain unknown in this discovery pass; do not
+        simulate success by using a live small-value payment.
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://pay.wechatpay.cn/doc/v3/merchant/4012791877

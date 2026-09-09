@@ -1,0 +1,10 @@
+[
+  {
+    "status": "completed",
+    "output": "Contexts: 1\nPages: [{'url': 'chrome://new-tab-page/'}, {'url': 'about:blank'}]\n"
+  },
+  {
+    "status": "completed",
+    "output": "HTTP 200 URL https://sandbox-login.paddle.com/login?s=Monolith&subject_type=user\nWelcome back to Paddle!\nDon't have an account?Sign up\nLogin\nRemember me\nLogin\nForgot your password?\n"
+  }
+]

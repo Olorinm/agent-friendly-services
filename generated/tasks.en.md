@@ -72,3 +72,17 @@ collaborative-tables-001 v2 · [Original task definition](../data/experiments/ta
 **Completion criteria:** The remote table contains exactly three actions with correct owners and final deadlines. The reading list is complete and the other two are incomplete. The answer links to the table and correctly lists the two unfinished items and their dates. The evaluator independently verifies the data through the service API. Fields and operation order are unrestricted; inserting the old state first or producing evidence files is not required.
 
 **Failure criteria:** Only a local file or Markdown is produced, no real remote table exists, items are missing or duplicated, final data or the unfinished list is wrong, or the task is unfinished within the budget. Violating the free-resource, test-container or no-notification constraints also fails. Credential and environment failures are recorded separately.
+
+<a id="payment-acceptance-001-v1"></a>
+
+## I want to sell an ebook titled “城市散步指南” for a one-time price of 12 USD. Set up its checkout page in the test environment and give me a link customers can open.
+
+payment-acceptance-001 v1 · [Original task definition](../data/experiments/tasks/payment-acceptance.md)
+
+**Inputs:** Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Delivering the ebook file is not required.
+
+**Expected output:** A test checkout-page link for this product.
+
+**Completion criteria:** The evaluator independently reads the remote product, order or checkout resource and opens the returned link. The name, 12 USD base price, quantity 1 and one-time charge must match, and the page must allow proceeding to simulated payment. Any dynamic taxes are shown separately; successful payment is not required.
+
+**Failure criteria:** Fake links, debug-only pages that cannot proceed to simulated payment, wrong amount, product, currency or billing interval, no remote resource, timeout or use of production. Environment and credential failures are recorded separately.

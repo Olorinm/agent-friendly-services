@@ -76,3 +76,59 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    testing:
+      url: https://developer.paddle.com/sdks/sandbox/
+      checked_on: '2026-09-08'
+      kind: official_docs
+    checkout:
+      url: https://developer.paddle.com/get-started/quickstart/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.paddle.com/sdks/sandbox/
+      evidence:
+        - testing
+      availability:
+        value: self_serve
+        evidence:
+          - testing
+      personal_access:
+        value: unknown
+      notes: >-
+        Create a separate sandbox account with sandbox credentials. Sandbox does not require the domain and
+        checkout approvals needed for live sales. Merchant-of-record responsibilities and live account review
+        differ from payment processing alone. On 2026-09-09, sandbox email verification completed and a
+        seven-day API key was created with scoped permissions. An authenticated sandbox products read returned
+        HTTP 200 with an empty catalog. No KYC, production activation or payment was performed. Account setup
+        alone is not a completed checkout task. The first ebook checkout task was not completed: POST /products
+        rejected ebooks with product_tax_category_not_approved. The authenticated sandbox dashboard showed
+        eBook Not Requested and SaaS Approved, with a notice that category approval must be requested in a live
+        account. No live application was made. This result concerns the default account and ebook scenario,
+        not approved categories or all Paddle checkouts.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      human_steps:
+        - step: Register the separate sandbox account and obtain its API key.
+          stage: credentials
+          evidence:
+            - testing

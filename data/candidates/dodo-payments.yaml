@@ -1,0 +1,143 @@
+id: dodo-payments
+name: Dodo Payments
+homepage: https://dodopayments.com/
+summary: >-
+  Merchant-of-record checkout for one-time and subscription sales, with test mode, APIs, CLI and MCP
+  documentation.
+category: payments-billing
+submitted_by: community
+notes:
+  - >-
+    Official introduction links both knowledge MCP (documentation retrieval) and payments MCP. They are
+    different capabilities; only the transactional server should be considered for payment execution.
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://docs.dodopayments.com/introduction
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://docs.dodopayments.com/miscellaneous/testing-process
+      checked_on: '2026-09-08'
+      kind: official_docs
+    eligibility:
+      url: https://docs.dodopayments.com/miscellaneous/verification-process
+      checked_on: '2026-09-08'
+      kind: official_docs
+    cli:
+      url: https://github.com/dodopayments/dodopayments-cli
+      checked_on: '2026-09-08'
+      kind: official_repo
+    mcp:
+      url: https://docs.dodopayments.com/developer-resources/mcp-server
+      checked_on: '2026-09-08'
+      kind: official_docs
+    merchant-countries:
+      url: https://docs.dodopayments.com/miscellaneous/accepted-countries-and-territories
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.dodopayments.com/introduction
+      evidence:
+        - testing
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Use test API keys and simulated payments. Individual accounts are documented, but live payments and
+        payouts require product review, identity verification and bank verification. Accepted ID countries
+        apply; sandbox access does not certify live eligibility.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+        payments.subscription:
+          value: documented
+          evidence:
+            - checkout
+    - id: official-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://github.com/dodopayments/dodopayments-cli
+      evidence:
+        - cli
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Official CLI for payments and billing resources. Authentication and environment must be prepared; this
+        route has not been task-tested.
+    - id: live-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.dodopayments.com/introduction
+      evidence:
+        - checkout
+      availability:
+        value: application
+        evidence:
+          - eligibility
+      personal_access:
+        value: documented
+        evidence:
+          - eligibility
+      data_kind:
+        value: live
+        evidence:
+          - eligibility
+      requirements:
+        approval:
+          value: required
+          evidence:
+            - eligibility
+        identity_verification:
+          value: required
+          evidence:
+            - eligibility
+      notes: >-
+        Individual account type is documented, subject to product, identity and bank review plus
+        accepted-country restrictions. Live payments and payouts require approval. No live account was created
+        or approved in this research.
+    - id: payments-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.dodopayments.com/sse
+      docs: https://docs.dodopayments.com/developer-resources/mcp-server
+      evidence:
+        - mcp
+      auth:
+        value: oauth
+        evidence:
+          - mcp
+      data_kind:
+        value: mixed
+        evidence:
+          - mcp
+      notes: >-
+        Transactional MCP. Initial OAuth setup asks for the merchant API key and test/live environment;
+        explicitly select test. This is separate from the documentation-only Knowledge MCP and has not been
+        task-tested.
+entrypoints:
+  docs: https://docs.dodopayments.com/introduction

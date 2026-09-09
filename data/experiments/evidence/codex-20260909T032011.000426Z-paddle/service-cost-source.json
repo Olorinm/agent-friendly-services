@@ -1,0 +1,14 @@
+{
+  "checked_on": "2026-09-09",
+  "sources": [
+    {
+      "url": "https://developer.paddle.com/sdks/sandbox/",
+      "finding": "Sandbox is separate from live; test cards only and no real money."
+    },
+    {
+      "url": "https://www.paddle.com/pricing",
+      "finding": "Pay-as-you-go checkout transaction pricing with no monthly fees."
+    }
+  ],
+  "scope": "Only sandbox setup and resource creation/reads; no production account or real payment. Final task-specific observation is recorded in the assessment."
+}

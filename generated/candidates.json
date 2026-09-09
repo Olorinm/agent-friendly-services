@@ -1,8 +1,21 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-08T11:03:37.612Z",
-  "count": 36,
+  "generated_at": "2026-09-09T04:03:25.714Z",
+  "count": 51,
   "candidates": [
+    {
+      "id": "adyen",
+      "name": "Adyen",
+      "category": "payments-billing",
+      "homepage": "https://www.adyen.com/",
+      "summary": "Payment processing with hosted Pay by Link checkout; test merchant accounts and live onboarding have separate requirements.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks"
+      },
+      "notes": [],
+      "m1": null
+    },
     {
       "id": "airgateway",
       "name": "AirGateway Platform API",
@@ -15,6 +28,19 @@
       "m1": null
     },
     {
+      "id": "airwallex",
+      "name": "Airwallex",
+      "category": "payments-billing",
+      "homepage": "https://www.airwallex.com/",
+      "summary": "Hosted payment links with fixed or customer-selected amounts and payment status webhooks.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://www.airwallex.com/docs/payments/payment-links/payment-links-via-api"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "aiven",
       "name": "Aiven",
       "category": "databases",
@@ -22,6 +48,19 @@
       "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "alipay",
+      "name": "Alipay",
+      "category": "payments-billing",
+      "homepage": "https://open.alipay.com/",
+      "summary": "Online merchant payment integrations for websites and apps through Alipay APIs and SDKs.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://open.alipay.com/module/webApp"
+      },
       "notes": [],
       "m1": null
     },
@@ -81,6 +120,19 @@
       "m1": null
     },
     {
+      "id": "checkout-com",
+      "name": "Checkout.com",
+      "category": "payments-billing",
+      "homepage": "https://www.checkout.com/",
+      "summary": "Payment Links API for hosted checkout, with separate sandbox and production API hosts.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://api-reference.checkout.com/tag/Payment-Links/"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "coda",
       "name": "Coda / Superhuman Docs",
       "category": "productivity-storage",
@@ -92,6 +144,22 @@
       "m1": null
     },
     {
+      "id": "creem",
+      "name": "Creem",
+      "category": "payments-billing",
+      "homepage": "https://www.creem.io/",
+      "summary": "Digital-product checkout and billing APIs with separate test mode and reviewed merchant accounts.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "pricing": "https://docs.creem.io/getting-started/introduction",
+        "docs": "https://docs.creem.io/getting-started/test-mode"
+      },
+      "notes": [
+        "Official introduction checked 2026-09-08 quotes a headline 3.9% + USD 0.40 transaction rate. The full applicable fee schedule and payouts have not been verified; this is not a measured sandbox charge."
+      ],
+      "m1": null
+    },
+    {
       "id": "ctrip-flights",
       "name": "携程机票合作",
       "category": "travel",
@@ -100,6 +168,21 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
+      "m1": null
+    },
+    {
+      "id": "dodo-payments",
+      "name": "Dodo Payments",
+      "category": "payments-billing",
+      "homepage": "https://dodopayments.com/",
+      "summary": "Merchant-of-record checkout for one-time and subscription sales, with test mode, APIs, CLI and MCP documentation.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://docs.dodopayments.com/introduction"
+      },
+      "notes": [
+        "Official introduction links both knowledge MCP (documentation retrieval) and payments MCP. They are different capabilities; only the transactional server should be considered for payment execution."
+      ],
       "m1": null
     },
     {
@@ -121,6 +204,19 @@
       "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "fastspring",
+      "name": "FastSpring",
+      "category": "payments-billing",
+      "homepage": "https://fastspring.com/",
+      "summary": "Checkout and subscription platform with API, JavaScript checkout libraries and order webhooks.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://developer.fastspring.com/"
+      },
       "notes": [],
       "m1": null
     },
@@ -246,6 +342,19 @@
       "m1": null
     },
     {
+      "id": "mollie",
+      "name": "Mollie",
+      "category": "payments-billing",
+      "homepage": "https://www.mollie.com/",
+      "summary": "Payment links and payment APIs with isolated test mode and a simulated checkout screen.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://docs.mollie.com/reference/create-payment-link"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "paas-build",
       "name": "paas.build",
       "category": "payments-billing",
@@ -263,10 +372,11 @@
         "errors": "https://paas.build/openapi.json"
       },
       "notes": [
+        "Sandbox preparation on 2026-09-08 used env=sandbox and notify=false. The API returned a sandbox vendor token with acceptPayments=true and no production account; whoami returned HTTP 200 with env=sandbox. No identity verification, address or real payment was needed for this sandbox setup. This does not establish production eligibility. The first task trial is an invalid run because the executor could not launch Chromium.",
         "Maintenance review 2026-09-08: issue #5 is partially fixed. Invalid-vendor checkout now returns 401; whoami rejects missing/invalid tokens correctly. Missing checkout vendorId still returns the old HTTP 400 error shape. Evidence: https://github.com/Olorinm/agent-friendly-services/blob/main/data/maintenance/paas-build-2026-09-08.json.",
         "OpenAPI documents whoami, but current SKILL.md and llms.txt omit it. Remote MCP discovery succeeds and lists four tools (add_payments, identify_business, go_live, create_checkout), without whoami. Protocol discovery and invalid-credential probes are not successful user-task evaluations.",
         "Official documentation limits merchant onboarding to UK/EU/US-based businesses or individuals. The merchant remains responsible for VAT/sales tax. Exact eligibility, identity checks, refund/dispute fees and valid-token behavior remain unverified in this review.",
-        "The official MCP source defaults add_payments to provisioning both sandbox and production and to sending notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity prerequisites; do not use synthetic business identities to create merchant accounts."
+        "The official MCP source defaults add_payments to provisioning both sandbox and production and to sending notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity prerequisites; synthetic test details are restricted to sandbox resources and must not be used to activate production merchants."
       ],
       "m1": {
         "verdict": "pass",
@@ -275,6 +385,32 @@
         "date": "2026-07-15",
         "transcript": "2026-07-15-dry-fire-rep3.md"
       }
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "category": "payments-billing",
+      "homepage": "https://www.paypal.com/",
+      "summary": "Online payment acceptance through Orders API and buyer approval checkout; separate sandbox buyer and business seller accounts.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://developer.paypal.com/api/rest/postman/"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "pingxx",
+      "name": "Ping++",
+      "category": "payments-billing",
+      "homepage": "https://www.pingxx.com/",
+      "summary": "Unified payment integration across payment channels, with API keys, a web SDK and simulated test transactions.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://www.pingxx.com/docs/client/web.html"
+      },
+      "notes": [],
+      "m1": null
     },
     {
       "id": "planetscale",
@@ -288,6 +424,22 @@
       "m1": null
     },
     {
+      "id": "polar",
+      "name": "Polar",
+      "category": "payments-billing",
+      "homepage": "https://polar.sh/",
+      "summary": "Merchant-of-record service for digital products, with checkout APIs and a separate developer sandbox.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "pricing": "https://polar.sh/",
+        "docs": "https://polar.sh/docs/integrate/sandbox"
+      },
+      "notes": [
+        "Pricing checked 2026-09-08: new organizations on Starter pay a published 5% + USD 0.50 per transaction. Older Early Member pricing and paid plans differ; international-card, payout and dispute fees may apply. This is a published pricing claim, not a measured sandbox charge."
+      ],
+      "m1": null
+    },
+    {
       "id": "qunar-flights",
       "name": "去哪儿机票合作",
       "category": "travel",
@@ -295,6 +447,19 @@
       "summary": "去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "razorpay",
+      "name": "Razorpay",
+      "category": "payments-billing",
+      "homepage": "https://razorpay.com/",
+      "summary": "Payment Links API for collecting specified amounts through hosted checkout, including a documented test mode.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://razorpay.com/docs/api/payments/payment-links/create-standard/"
+      },
       "notes": [],
       "m1": null
     },
@@ -365,6 +530,19 @@
       "m1": null
     },
     {
+      "id": "square",
+      "name": "Square",
+      "category": "payments-billing",
+      "homepage": "https://squareup.com/",
+      "summary": "Hosted payment links and payment APIs with a free developer sandbox; merchant availability depends on country.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "tongcheng-flights",
       "name": "同程机票合作",
       "category": "travel",
@@ -405,6 +583,32 @@
       "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
       "submitted_by": "community",
       "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "wechat-pay",
+      "name": "WeChat Pay",
+      "category": "payments-billing",
+      "homepage": "https://pay.weixin.qq.com/",
+      "summary": "Merchant payment APIs including Native QR checkout; merchant credentials and channel-specific setup are required.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://pay.wechatpay.cn/doc/v3/merchant/4012791877"
+      },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "whop",
+      "name": "Whop",
+      "category": "payments-billing",
+      "homepage": "https://whop.com/",
+      "summary": "Payment APIs and checkout integration for existing apps, with TypeScript, Python and Ruby SDKs.",
+      "submitted_by": "community",
+      "entrypoints": {
+        "docs": "https://docs.whop.com/"
+      },
       "notes": [],
       "m1": null
     },

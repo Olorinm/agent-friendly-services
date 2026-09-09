@@ -1,7 +1,7 @@
 {
-  "source": "https://raw.githubusercontent.com/BerriAI/litellm/eeb7732fc11fd47762ca84cc3fb7cc74235d7097/model_prices_and_context_window.json",
-  "revision": "eeb7732fc11fd47762ca84cc3fb7cc74235d7097",
-  "fetched_at": "2026-09-08T08:50:04.463Z",
+  "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+  "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+  "fetched_at": "2026-09-09T03:22:13.676Z",
   "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
   "models": {
     "gpt-6-astra": {

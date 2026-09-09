@@ -1,0 +1,22 @@
+{
+  "http_status": 200,
+  "product_count_in_page": 0,
+  "has_more": false,
+  "checked_on": "2026-09-09",
+  "sandbox_email_verified": true,
+  "kyc_performed": false,
+  "production_activated": false,
+  "api_key_expiry": "2026-09-16",
+  "permissions": [
+    "product.read",
+    "product.write",
+    "price.read",
+    "price.write",
+    "transaction.read",
+    "transaction.write",
+    "checkout_domain.read",
+    "checkout_domain.write",
+    "client_token.read",
+    "client_token.write"
+  ]
+}

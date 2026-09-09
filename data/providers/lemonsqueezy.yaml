@@ -65,3 +65,50 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    testing:
+      url: https://docs.lemonsqueezy.com/help/getting-started/test-mode
+      checked_on: '2026-09-08'
+      kind: official_docs
+    checkout:
+      url: https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments
+      evidence:
+        - testing
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Use test-mode products and API keys; test resources do not automatically become live products. Store
+        activation and live merchant eligibility must be checked separately. Merchant-of-record checkout
+        applies to digital products/SaaS.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout

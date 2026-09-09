@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260909T032011.000426Z-paddle",
+  "service_id": "paddle",
+  "route_id": "sandbox-api",
+  "entry_url": "https://developer.paddle.com/sdks/sandbox/",
+  "task": {
+    "description": "我要卖一份电子书《城市散步指南》，标价12美元，一次性付款。先在测试环境做好收款页面，把顾客能打开的链接给我。",
+    "inputs": "商品为电子书《城市散步指南》，标价12 USD，一次性收费，数量1；不需要交付电子书文件",
+    "expected_output": "对应商品的测试收款页面链接",
+    "success": "评测 Agent 独立读取远端商品/订单/结账资源，并打开返回链接；确认名称、标价12 USD、数量1和一次性收费一致，页面可继续进入测试付款流程。动态税费如存在单独显示；不要求支付成功",
+    "failure": "假链接、只能查看开发调试信息而不能进入测试付款、金额/商品/币种/计费周期错误、无远端资源、超时或越过测试环境；环境或凭据故障单列",
+    "resources": "提供服务的空测试商店/账户及最小必要测试凭据，无商品、价格、订单或调用脚本；仅创建本题所需测试资源，不实付、不启用生产收款、不通知第三方",
+    "id": "payment-acceptance-001",
+    "version": "v1",
+    "sha256": "b908db88aced8cb8b3c77adee6d37a20c307418d7cb32c4f9833ea64a47016d2",
+    "file": "data/experiments/tasks/payment-acceptance.md"
+  },
+  "prompt_sha256": "e94e5b0f64de65dc048cd6222e627c3167bd059065ed291718a5af0b1adaa01f",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "1689c8c57298862c3785d2d2f8179e486754b3282a8a07b5c7c0e7ae3a443959"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "started_at": "2026-09-09T03:20:11.012572+00:00",
+  "ended_at": "2026-09-09T03:23:09.015241+00:00",
+  "elapsed_seconds": 178.002,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "provided: PADDLE_SANDBOX_API_KEY",
+    "web_search": "live",
+    "preparation_note": "A separate sandbox account was registered and email-verified by the evaluator using synthetic test business/address details. No KYC or production activation occurred. A sandbox API key expires after seven days and grants read/write access only to products, prices, transactions, checkout domains and client-side tokens. A preflight API read confirmed an empty product catalog. No product, price, transaction, checkout page or solution code was prepared. A dedicated empty local Chromium browser is supplied over CDP to avoid macOS sandbox browser-launch failures; the executing Codex still uses workspace-write sandboxing. Registration, browser startup and evaluator work are outside measured execution metrics. This configuration differs from earlier browser-less trials.",
+    "prompt_style": "natural",
+    "evidence_collection": "CLI events and external remote read",
+    "prompt_characters": 104,
+    "input_delivery": "workspace attachments",
+    "context_files": [
+      {
+        "path": "input.md",
+        "sha256": "52889f1f6bc1e2debcd99236efcecaa422e86c6a672e13d6efcbe00c6b35f839",
+        "characters": 45
+      },
+      {
+        "path": "ENVIRONMENT.md",
+        "sha256": "293b2f69e6e85b5441c83d474a61723d90f18ae244f1464b29eb788cfb2089f8",
+        "characters": 518
+      }
+    ]
+  },
+  "status": "not_completed",
+  "reason": "The default newly registered Paddle sandbox account rejected creation of the ebook product with product_tax_category_not_approved for ebooks. No product, transaction or customer checkout link was created. This is an account/category access barrier for this scenario, not evidence that Paddle cannot serve any product or approved account. The dedicated browser connected successfully but had no dashboard login, as disclosed. Independent authenticated dashboard inspection shows eBook Not Requested, SaaS Approved, and a notice that category approval must be requested in the live account; no live application was made.",
+  "usage": {
+    "input_tokens": 450919,
+    "cached_input_tokens": 391040,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4297,
+    "reasoning_output_tokens": 1329
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://developer.paddle.com/sdks/sandbox/",
+      "https://www.paddle.com/pricing"
+    ],
+    "note": "Sandbox-only API requests, with no completed payment, no paid subscription or live account activation. Official docs specify no real money in sandbox and pricing has no monthly fees. The $12 product price is not a service cost.",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "External preparing Agent, separate from executor session",
+    "reviewed_at": "2026-09-09T03:26:34.567453+00:00",
+    "checks": [
+      {
+        "criterion": "A remote ebook product and checkout with the requested one-time 12 USD price exist.",
+        "passed": false,
+        "evidence": "review-remote.json: executor POST /products returned HTTP 400 product_tax_category_not_approved; independent products and transactions reads returned empty arrays."
+      },
+      {
+        "criterion": "The answer supplies a customer-accessible sandbox checkout page.",
+        "passed": false,
+        "evidence": "answer.md explicitly reports no checkout link; no transaction exists in the independent read."
+      },
+      {
+        "criterion": "Execution used valid sandbox credentials and the provided browser without a browser-launch environment failure.",
+        "passed": true,
+        "evidence": "preparation.json and review-remote.json show authenticated HTTP 200 reads; selected browser connection output confirms a successful CDP operation."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/review-remote.json",
+      "sha256": "a88581a3c5982cabb9785ced1851f359a5a194c313c74825dbd7916d59b41479",
+      "note": "Independent post-run reads and selected actual API rejection."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/answer.md",
+      "sha256": "6af7a9c6df96dabe882d387fc7e8ae4e2609f389d26b88893f2be04153c23ffb",
+      "note": "Executor honestly reports no checkout link and the category approval barrier."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/preparation.json",
+      "sha256": "eb5bcabaa93b1365ad6047d9c6304fe08c890a2f06a38c0682b021f891af9008",
+      "note": "Account setup and empty-catalog preflight; no personal identity or key."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/service-cost-source.json",
+      "sha256": "3ac713a976bea39c9508a355a1786a08f650307bdbfaeac337ebd4c7b1883493",
+      "note": "Sandbox and pay-as-you-go pricing basis."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/browser-connection.json",
+      "sha256": "5246466da047d06b0423d4e04242943888a28d24072ef88674ec1879843dd5ad",
+      "note": "Actual executor CDP connection output; blank browser had no merchant dashboard session."
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T032011.000426Z-paddle/dashboard-categories.txt",
+      "sha256": "84077143f697bb742dffc386b27a0d3a5ca6e55d56e60ba5ed85df57043fec99",
+      "note": "Independent logged-in sandbox dashboard: ebook category not requested; SaaS approved; notice requires live-account category approval."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260909T032011.000426Z-paddle",
+    "run_sha256": "31ac03da092a8097db4c3dbb0c5e05bafa1875066ab0c9efdd7d1793b4abcbd7",
+    "events_sha256": "c599fbd0540ac3a56ceb9f1d043bc095f4a96d22f9916722a827a1267c033ff0",
+    "answer_sha256": "6af7a9c6df96dabe882d387fc7e8ae4e2609f389d26b88893f2be04153c23ffb",
+    "review_sha256": "da2afd2e0c011e1040c7629c5f0cb7dbdf98767a7382744bb9a12c5d80f215fe"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "session token_usage_record",
+    "requests": [
+      {
+        "input_tokens": 11186,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 121,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11919,
+        "cached_input_tokens": 11008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 77,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12584,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 303,
+        "reasoning_output_tokens": 54
+      },
+      {
+        "input_tokens": 15765,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 163,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 25202,
+        "cached_input_tokens": 15616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 234,
+        "reasoning_output_tokens": 32
+      },
+      {
+        "input_tokens": 33930,
+        "cached_input_tokens": 24960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 218,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 40956,
+        "cached_input_tokens": 33792,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 214,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 43675,
+        "cached_input_tokens": 40832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 204,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 46493,
+        "cached_input_tokens": 43520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 344,
+        "reasoning_output_tokens": 67
+      },
+      {
+        "input_tokens": 46973,
+        "cached_input_tokens": 46336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 520,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 47840,
+        "cached_input_tokens": 46848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 348,
+        "reasoning_output_tokens": 209
+      },
+      {
+        "input_tokens": 56449,
+        "cached_input_tokens": 47616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1424,
+        "reasoning_output_tokens": 953
+      },
+      {
+        "input_tokens": 57947,
+        "cached_input_tokens": 56320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 127,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "05bd37aeb653174b363d9ef30082d74ad4bf7fef6f2a72762214d93b1312d017",
+    "reason": "Per-request counters reconcile with CLI final usage",
+    "totals": {
+      "input_tokens": 450919,
+      "cached_input_tokens": 391040,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4297,
+      "reasoning_output_tokens": 1329
+    }
+  }
+}

@@ -1,0 +1,65 @@
+id: creem
+name: Creem
+homepage: https://www.creem.io/
+summary: Digital-product checkout and billing APIs with separate test mode and reviewed merchant accounts.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    testing:
+      url: https://docs.creem.io/getting-started/test-mode
+      checked_on: '2026-09-08'
+      kind: official_docs
+    eligibility:
+      url: https://docs.creem.io/merchant-of-record/account-reviews/account-reviews
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pricing:
+      url: https://docs.creem.io/getting-started/introduction
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.creem.io/getting-started/test-mode
+      evidence:
+        - testing
+      availability:
+        value: self_serve
+        evidence:
+          - testing
+      personal_access:
+        value: unknown
+      notes: >-
+        Test mode has separate API keys, products and test-api.creem.io. Production account review includes
+        the product website and individual or business identity; do not infer automatic approval from sandbox
+        access.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      human_steps:
+        - step: Use dashboard Test Mode and obtain a test API key.
+          stage: credentials
+          evidence:
+            - testing
+entrypoints:
+  pricing: https://docs.creem.io/getting-started/introduction
+  docs: https://docs.creem.io/getting-started/test-mode
+notes:
+  - >-
+    Official introduction checked 2026-09-08 quotes a headline 3.9% + USD 0.40 transaction rate. The full
+    applicable fee schedule and payouts have not been verified; this is not a measured sandbox charge.

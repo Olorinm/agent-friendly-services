@@ -1,0 +1,78 @@
+id: pingxx
+name: Ping++
+homepage: https://www.pingxx.com/
+summary: >-
+  Unified payment integration across payment channels, with API keys, a web SDK and simulated test
+  transactions.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    testing:
+      url: https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html
+      checked_on: '2026-09-08'
+      kind: official_docs
+    checkout:
+      url: https://www.pingxx.com/docs/client/web.html
+      checked_on: '2026-09-08'
+      kind: official_docs
+    channels:
+      url: https://www.pingxx.com/wiki/alipayapps
+      checked_on: '2026-09-08'
+      kind: official_site
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html
+      evidence:
+        - testing
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Dashboard provides separate test/live API keys; test transactions are documented as simulated and
+        without actual transaction fees. Channel-specific merchant permissions may still be needed for live
+        use. Current individual admission and channel fees need verification.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+    - id: web-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://www.pingxx.com/docs/client/web.html
+      evidence:
+        - checkout
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Web SDK consumes server-created Charge credentials and invokes the selected payment channel. This is
+        not a separate merchant account or a waiver of channel admission.
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://www.pingxx.com/docs/client/web.html

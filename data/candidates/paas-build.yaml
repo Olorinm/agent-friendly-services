@@ -58,7 +58,7 @@ checks:
     notes: >-
       Official pricing lists no monthly or setup fee and a headline 3.9% transaction rate. Refund and dispute
       charges follow a separate UniPaaS schedule whose amounts are not published here. SKILL.md describes a
-      free sandbox; no successful sandbox checkout or payment was tested in this maintenance review.
+      free sandbox; sandbox-only account provisioning and checkout resource creation were observed later on the same day. The customer page was not verified usable; no payment was submitted.
 
   self_serve_paid_upgrade:
     status: supported
@@ -83,6 +83,11 @@ checks:
 
 notes:
   - >-
+    Sandbox preparation on 2026-09-08 used env=sandbox and notify=false. The API returned a sandbox vendor
+    token with acceptPayments=true and no production account; whoami returned HTTP 200 with env=sandbox.
+    No identity verification, address or real payment was needed for this sandbox setup. This does not establish
+    production eligibility. The first task trial is an invalid run because the executor could not launch Chromium.
+  - >-
     Maintenance review 2026-09-08: issue #5 is partially fixed. Invalid-vendor checkout now returns 401;
     whoami rejects missing/invalid tokens correctly. Missing checkout vendorId still returns the old HTTP 400
     error shape. Evidence: https://github.com/Olorinm/agent-friendly-services/blob/main/data/maintenance/paas-build-2026-09-08.json.
@@ -97,4 +102,74 @@ notes:
   - >-
     The official MCP source defaults add_payments to provisioning both sandbox and production and to sending
     notifications. A sandbox benchmark must explicitly constrain the environment and record real account/identity
-    prerequisites; do not use synthetic business identities to create merchant accounts.
+    prerequisites; synthetic test details are restricted to sandbox resources and must not be used to activate production merchants.
+
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    docs:
+      url: https://paas.build/SKILL.md
+      checked_on: '2026-09-08'
+      kind: official_docs
+    api:
+      url: https://paas.build/openapi.json
+      checked_on: '2026-09-08'
+      kind: official_docs
+    eligibility:
+      url: https://paas.build/accept-payments-without-a-company
+      checked_on: '2026-09-08'
+      kind: official_site
+    pricing:
+      url: https://paas.build/pricing
+      checked_on: '2026-09-08'
+      kind: official_site
+    mcp:
+      url: https://paas.build/mcp
+      checked_on: '2026-09-08'
+      kind: official_site
+  routes:
+    - id: rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://paas.build/openapi.json
+      evidence:
+        - api
+      availability:
+        value: unknown
+      personal_access:
+        value: restricted
+        evidence:
+          - eligibility
+        notes: Individual/sole-trader onboarding is documented subject to supported geography and verification.
+      notes: >-
+        PayFac powered by UniPaaS; merchant retains tax responsibilities. Official materials limit onboarding
+        to UK/EU/US merchants. Sandbox and production tokens differ. A 2026-09-08 sandbox-only account and token were prepared successfully. A fresh Codex trial created a
+        remote checkout but hit a browser launch permission failure, so it is invalid for completion-rate
+        comparison. Independent browser review showed only the checkout shell; customer usability remains unverified.
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      data_kind:
+        value: mixed
+        evidence:
+          - docs
+    - id: official-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://paas.build/mcp
+      evidence:
+        - mcp
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Discovery verified four tools on 2026-09-08. Default onboarding can provision both environments and
+        send notifications; explicitly prepare sandbox-only access. Protocol discovery is not task completion.
+      data_kind:
+        value: mixed
+        evidence:
+          - docs

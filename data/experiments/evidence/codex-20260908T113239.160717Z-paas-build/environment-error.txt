@@ -1,0 +1,1 @@
+[pid=69960][err] [0908/193841.532877:FATAL:base/apple/mach_port_rendezvous_mac.cc:159] Check failed: kr == KERN_SUCCESS. bootstrap_check_in org.chromium.Chromium.MachPortRendezvousServer.69960: Permission denied (1100)

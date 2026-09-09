@@ -1,0 +1,51 @@
+id: adyen
+name: Adyen
+homepage: https://www.adyen.com/
+summary: >-
+  Payment processing with hosted Pay by Link checkout; test merchant accounts and live onboarding have
+  separate requirements.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://docs.adyen.com/unified-commerce/pay-by-link/create-payment-links/customer-area
+      checked_on: '2026-09-08'
+      kind: official_docs
+    scope:
+      url: https://docs.adyen.com/unified-commerce/pay-by-link?locale=en-us
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: payment-links-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks
+      evidence:
+        - checkout
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Requires merchantAccount and API credentials. Test cards and test accounts are documented; test
+        account admission and individual eligibility have not been verified. Live setup needs approval and
+        merchant terms. Pay by Link is described as supplementary to an online store checkout.
+      data_kind:
+        value: mixed
+        evidence:
+          - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks

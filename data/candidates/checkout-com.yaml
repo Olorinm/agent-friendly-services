@@ -1,0 +1,44 @@
+id: checkout-com
+name: Checkout.com
+homepage: https://www.checkout.com/
+summary: Payment Links API for hosted checkout, with separate sandbox and production API hosts.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://api-reference.checkout.com/tag/Payment-Links/
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: payment-links-api
+      interface: api
+      maintainer: official
+      entry_url: https://api-reference.checkout.com/tag/Payment-Links/
+      evidence:
+        - checkout
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        API secret key and account-specific host required. Sandbox endpoints are documented; obtaining an
+        account, individual merchant admission and negotiated fees remain unverified.
+      auth:
+        value: api_key
+        evidence:
+          - checkout
+      data_kind:
+        value: mixed
+        evidence:
+          - checkout
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+entrypoints:
+  docs: https://api-reference.checkout.com/tag/Payment-Links/

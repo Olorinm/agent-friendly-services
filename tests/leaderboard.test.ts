@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { ROOT } from '../scripts/lib.ts';
 import assert from 'node:assert/strict';
 import { estimateModelCost, type PriceSnapshot } from '../scripts/model-costs.ts';
-import { buildBoards, summarize, renderBoardRows, renderBoardDetails } from '../scripts/leaderboard.ts';
+import { buildBoards, selectServiceBoards, summarize, renderBoardRows, renderBoardDetails } from '../scripts/leaderboard.ts';
 import type { Evaluation } from '../scripts/evaluations.ts';
 
 const prices = (extra = {}): PriceSnapshot => ({ source: 'https://example.com/prices', revision: 'test', fetched_at: '2026-09-08', sha256: 'test',
@@ -150,10 +150,10 @@ test('details explain shared tasks and configuration once, retaining access diff
   const text = renderBoardDetails(buildBoards([a, b]), names, true, './', interfaces);
   assert.equal(text.split('Find a flight').length - 1, 1);
   assert.equal(text.split('example / high').length - 1, 1);
-  assert.match(text, /Flight and price/);
-  assert.match(text, /MCP/);
-  assert.match(text, /网页 Playground/);
-  assert.match(text, /Beta 的网页试跑成绩不代表/);
+  assert.match(text, /Matches the live response/);
+  assert.equal(text.split('未预供账号或密钥').length - 1, 1);
+  assert(!text.includes('| 服务 |')); // no repeated route table when shared conditions suffice
+  assert(!text.includes('的网页试跑成绩不代表'));
   assert(!text.includes('historical-other-hash'));
   const changed = { ...b, budget_seconds: 300, task: { ...task, inputs: 'Two adults', sha256: 'changed' } };
   const varying = renderBoardDetails(buildBoards([a, changed]), names, true, './', interfaces);
@@ -162,4 +162,32 @@ test('details explain shared tasks and configuration once, retaining access diff
   assert.match(varying, /本次任务/);
   assert.match(varying, /5 分钟/);
   assert.match(varying, /10 分钟/);
+});
+
+
+test('homepage chooses one complete route protocol without cherry-picking tasks or promoting invalid attempts', () => {
+  const a = run({ route_id: 'mcp', started_at: '2026-09-01T00:00:00Z' });
+  const b = run({ run_id: 'b', route_id: 'api', status: 'not_completed' });
+  const bad = run({ run_id: 'bad', route_id: 'cli', status: 'invalid_run', started_at: '2026-09-09T00:00:00Z' });
+  const boards = buildBoards([a, b, bad]);
+  const selected = selectServiceBoards(boards).flatMap(b => b.rows);
+  assert.equal(selected.length, 1);
+  assert.equal(selected[0].route_id, 'api');
+  assert.equal(selected[0].metrics.resolution_rate, 0);
+  assert.equal(boards.flatMap(b => b.rows).length, 3);
+  assert.equal(selectServiceBoards(buildBoards([bad]))[0].rows[0].metrics.resolution_rate, null);
+});
+
+test('homepages use compact empty cells, aligned widths and separate tested routes from access links', () => {
+  for (const file of ['README.md', 'README.zh-CN.md']) {
+    const text = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
+    assert(!/Not yet task-tested|待实测|尚未实测|undefined%/.test(text));
+    const kiwi = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Kiwi.com</a>'))!;
+    assert(kiwi.includes('>MCP</a>'));
+    assert.equal((kiwi.match(/<td /g) ?? []).length, 8);
+    const header = text.match(/<thead><tr>(.*?)<\/tr><\/thead>/)![1];
+    assert.equal([...header.matchAll(/width="(\d+)%"/g)].reduce((sum, m) => sum + Number(m[1]), 0), 100);
+    const amadeus = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Amadeus Flight APIs</a>'))!;
+    assert.equal((amadeus.match(/>API<\/a>/g) ?? []).length, 1);
+  }
 });

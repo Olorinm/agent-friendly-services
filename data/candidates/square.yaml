@@ -1,0 +1,72 @@
+id: square
+name: Square
+homepage: https://squareup.com/
+summary: >-
+  Hosted payment links and payment APIs with a free developer sandbox; merchant availability depends on
+  country.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://developer.squareup.com/docs/devtools/sandbox/overview
+      checked_on: '2026-09-08'
+      kind: official_docs
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink
+      evidence:
+        - testing
+      availability:
+        value: self_serve
+        evidence:
+          - testing
+      personal_access:
+        value: unknown
+      notes: >-
+        Requires a Square account, application and sandbox seller location. Sandbox is free; live merchant
+        eligibility is separate. Hosted checkout behavior must be checked before treating a sandbox link as a
+        usable customer page.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+      human_steps:
+        - step: Create an application and select its sandbox seller account and access token.
+          stage: credentials
+          evidence:
+            - testing
+      costs:
+        - kind: usage
+          amount: 0
+          currency: USD
+          unit: money
+          per: sandbox API call
+          scope: Documented free sandbox API calls; not live processing or model usage.
+          evidence:
+            - testing
+entrypoints:
+  docs: https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink

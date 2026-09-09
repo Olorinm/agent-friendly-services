@@ -1,0 +1,8 @@
+{
+  "source": "https://paas.build/SKILL.md",
+  "checked_at": "2026-09-08T11:42:44.598607+00:00",
+  "excerpt": [
+    "- Keep production tokens in env vars. Sandbox is free to play with."
+  ],
+  "scope": "Sandbox-only checkout creation and read; no payment submitted."
+}

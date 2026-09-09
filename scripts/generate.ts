@@ -12,7 +12,8 @@ import { loadPrices, estimateModelCost } from './model-costs.ts';
 import { readmeTable } from './readme-table.ts';
 import { taskDisplay } from './task-display.ts';
 import { serviceAccess } from './service-access.ts';
-import { buildBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
+import { renderServiceResults, renderSetup } from './service-results.ts';
+import { buildBoards, selectServiceBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
 import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
 
 // Isolated preview/CI generation, without changing checked-in build outputs.
@@ -513,7 +514,14 @@ const categoryZh: Record<string, string> = { travel: '旅行', databases: '数�
 const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
 const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))))
   .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
-const accessLinks = (p: Provider, zh: boolean) => serviceAccess(p, zh).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
+const accessLinks = (p: Provider, zh: boolean, compact = false) => {
+  const links = serviceAccess(p, zh);
+  const names = [...new Set(links.map(([name]) => name))];
+  return (compact ? names.map(name => {
+    const matches = links.filter(([n]) => n === name);
+    return [name, matches.length === 1 ? matches[0][1] : `./generated/services.md#${p.id}-access`];
+  }) : links).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
+};
 const profileUrl = (id: string) => `./generated/services.md#${id}`;
 
 // One readable profile per service, generated from the same records as the tables.
@@ -522,24 +530,28 @@ const taskTranslations = [...new Map(evaluations.map(r => [`${r.task.id}/${r.tas
   return `<a id="${t.id}-${t.version}"></a>\n\n## ${t.description}\n\n${t.id} ${t.version} · [Original task definition](../${t.file})\n\n**Inputs:** ${t.inputs}\n\n**Expected output:** ${t.expected_output}\n\n**Completion criteria:** ${t.success}\n\n**Failure criteria:** ${t.failure}`;
 });
 fs.writeFileSync(path.join(GENERATED_DIR, 'tasks.en.md'), `<!-- GENERATED — display translations, not execution prompts. -->\n# Evaluated tasks\n\nEnglish translations of the recorded task versions. Original prompts and evidence remain unchanged; language requirements below describe the actual tests.\n\n${taskTranslations.join('\n\n')}\n`);
+const boards = buildBoards(evaluations);
 const profiles = listedServices.map(p => {
   const pool = providers.some(x => x.id === p.id) ? 'providers' : 'candidates';
   const source = `../data/${pool}/${p.id}.yaml`;
   const routes = p.catalog?.routes ?? [];
-  const access = routes.length ? `| Route | Personal access | Requirements and human steps |\n| --- | --- | --- |\n` + routes.map(r => {
+  const access = routes.length ? `| Route | Docs | Personal access | Requirements and human steps |\n| --- | --- | --- | --- |\n` + routes.map(r => {
     const requirements = Object.entries(r.requirements ?? {}).filter(([, v]) => v.value === 'required').map(([k]) => k);
-    const preparation = [requirements.length ? `Requires: ${requirements.join(', ')}` : 'Requirements not fully recorded', ...(r.human_steps ?? []).map(x => x.step), r.notes ?? ''].filter(Boolean).join('; ');
-    return `| [${cell(r.id)} (${r.interface})](${r.entry_url}) | ${cell(r.availability?.value ?? 'unknown')} / ${cell(r.personal_access?.value ?? 'unknown')} | ${cell(preparation)} |`;
-  }).join('\n') : `Personal access requirements are not fully recorded. See the [source record](${source}).`;
+    const preparation = [requirements.length ? `Requires: ${requirements.join(', ')}` : '', ...(r.human_steps ?? []).map(x => x.step), r.notes ?? ''].filter(Boolean).join('; ');
+    const admission = [r.availability?.value, r.personal_access?.value].filter(v => v && v !== 'unknown').map(v => v!.replaceAll('_', ' ')).join(' / ') || '—';
+    return `| [${cell(r.id)} (${r.interface.toUpperCase()})](${r.entry_url}) | ${r.docs ? `[Docs](${r.docs})` : '—'} | ${cell(admission)} | ${cell(preparation || '—')} |`;
+  }).join('\n') : '—';
+  const routeUrls = new Set(routes.flatMap(r => [r.entry_url, r.docs]));
+  const extraLinks = serviceAccess(p).filter(([, url]) => !routeUrls.has(url))
+    .map(([name, url]) => `[${name}](${url})`).join(' · ');
   const costClaims = routes.flatMap(r => (r.costs ?? []).map(c => `- ${cell(r.id)}: ${c.amount} ${c.currency ?? c.unit} / ${cell(c.per)} (${cell(c.kind)}; ${cell(c.scope)})`));
-  const pricing = [p.entrypoints.pricing ? `[Official pricing](${[p.entrypoints.pricing].flat()[0]})` : '', ...costClaims].filter(Boolean).join('\n\n') || 'Full pricing and free allowances have not been verified. A free test does not establish long-term pricing.';
+  const pricing = [p.entrypoints.pricing ? `[Official pricing](${[p.entrypoints.pricing].flat()[0]})` : '', ...costClaims].filter(Boolean).join('\n\n') || '—';
   const recorded = evaluations.filter(r => r.service_id === p.id);
-  const results = recorded.length ? `| Task | Tested route | Result | Date |\n| --- | --- | --- | --- |\n` + recorded.map(r => `| ${cell(taskDisplay(r.task, false).description ?? r.task.id)} | ${cell(r.route_id)} | [${r.status}](../data/experiments/evaluations/${r.run_id}.json) | ${r.started_at.slice(0, 10)} |`).join('\n') : 'Not yet task-tested.';
+  const results = renderServiceResults(p, boards, recorded);
   const sources = Object.values(p.catalog?.sources ?? {}).map(x => `- [${cell(x.kind)}](${x.url}) — checked ${x.checked_on}`).join('\n');
-  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access\n\n${accessLinks(p, false)}\n\n### Personal access and preparation\n\n${access}\n\n### Service pricing\n\n${pricing}\n\n### Task results\n\n${results}\n\n${p.notes?.length ? `### Notes\n\n${p.notes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || `See the dated checks and evidence in the [source record](${source}).`}`;
+  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access <a id="${p.id}-access"></a>\n\n${extraLinks ? `${extraLinks}\n\n` : ''}${access}\n\n### Service pricing\n\n${pricing}\n\n${recorded.length ? `### Setup observations\n\n${renderSetup(p, recorded)}\n\n` : ''}### Task results\n\n${results}\n\n${p.notes?.length ? `### Notes\n\n${p.notes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || '—'}`;
 });
-fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nAccess and pricing are source claims; task results apply only to the recorded conditions.\n\n${profiles.join('\n\n')}\n`);
-const boards = buildBoards(evaluations);
+fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nToken and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use saved LiteLLM prices; ~ marks estimated service charges. — means no data. Setup costs are separate from business task costs. Access and pricing are source claims; a listed route does not establish task support. Compare only matching tasks and conditions.\n\n${profiles.join('\n\n')}\n`);
 function serviceList(zh: boolean): string {
   const navigation = listedCategories.map(c => `[${zh ? categoryZh[c.id] ?? c.name : c.name}](#services-${c.id})`).join(' · ');
   const sections = listedCategories.map(c => {
@@ -548,8 +560,8 @@ function serviceList(zh: boolean): string {
     const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
       const identity = `[${cell(p.name)}](${profileUrl(p.id)})`;
       return { id: p.id, classifications: p.catalog?.classifications ?? [],
-        unmeasured: `| ${identity} | ${zh ? '待实测' : 'Not yet task-tested'} | — | — | — | ${accessLinks(p, zh)} |`,
-        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh)} |` };
+        unmeasured: `| ${identity} | — | — | — | — | — | — | ${accessLinks(p, zh, true)} |`,
+        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh, true)} |` };
     });
     const names = new Map(listedServices.map(p => [p.id, p.name]));
     const subcategories = (c.subcategories ?? []).filter(sub =>
@@ -568,17 +580,15 @@ function serviceList(zh: boolean): string {
     const content = groups.map(group => {
       const measured = new Set(group.boards.flatMap(b => b.rows.map(r => r.service_id)));
       const pending = group.rows.filter(r => !measured.has(r.id));
-      const measuredRows = renderBoardRows(group.boards, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }])));
+      const selected = selectServiceBoards(group.boards);
+      const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
+      const measuredRows = renderBoardRows(selected, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh, true) }])), interfaces, zh);
       const table = group.boards.length
         ? readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`, true)
-        : `${zh ? '尚未实测' : 'Not yet task-tested'}\n\n${readmeTable(`${zh ? '| 服务 | 用途 | 接入方式 |' : '| Service | Purpose | Access |'}\n| --- | --- | --- |\n${group.rows.map(r => r.directory).join('\n')}`, false)}`;
-      const note = group.boards.length > 1 ? (zh
-        ? '现有试跑的任务或条件尚未统一，暂不排名。'
-        : 'Existing trials use different or incompletely recorded conditions; these results are not ranked.') : '';
-      const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
-      const details = renderBoardDetails(group.boards, names, zh, './', interfaces);
+        : readmeTable(`${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${group.rows.map(r => r.directory).join('\n')}`, false);
+      const details = renderBoardDetails(selected, names, zh, './', interfaces);
       const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
-      return `${heading}${table}${note ? `\n\n${note}` : ''}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
+      return `${heading}${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
     }).join('\n\n');
     return `<a id="services-${c.id}"></a>\n\n### ${zh ? categoryZh[c.id] ?? c.name : c.name} (${rows.length})\n\n${content}`;
   });
@@ -599,7 +609,9 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 ## Services (${listedServices.length})
 
-Usage and costs are means per valid trial, including successes and failures. Model costs are estimates from saved LiteLLM prices; service charges retain their evidence basis (~ marks estimates). — means unknown or untested. Compare only identical task versions, repeat counts and settings; expand for tasks, preparation and samples.
+Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
+
+Each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions.
 
 ${serviceList(false)}
 
@@ -633,7 +645,9 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 
 ## 服务目录（${listedServices.length}）
 
-用量和费用均为每次有效试跑的平均值，包含成功与失败；模型费用按保存的 LiteLLM 价表估算，服务费用按记录来源核验（估算额标 ~）。— 表示未知或未测。仅在相同任务版本、重复次数与配置内比较；任务、提前准备和样本可展开查看。
+Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
+
+每个服务展示最近取得有效结果的测试方式，其他方式和接入准备见服务详情。当前不排名，仅在任务与条件一致时比较。
 
 ${serviceList(true)}
 

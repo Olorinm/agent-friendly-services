@@ -1,0 +1,70 @@
+id: polar
+name: Polar
+homepage: https://polar.sh/
+summary: Merchant-of-record service for digital products, with checkout APIs and a separate developer sandbox.
+category: payments-billing
+submitted_by: community
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    testing:
+      url: https://polar.sh/docs/integrate/sandbox
+      checked_on: '2026-09-08'
+      kind: official_docs
+    eligibility:
+      url: https://docs.polar.sh/documentation/polar-as-merchant-of-record/supported-countries
+      checked_on: '2026-09-08'
+      kind: official_docs
+    pricing:
+      url: https://polar.sh/
+      checked_on: '2026-09-08'
+      kind: official_site
+    pricing-change:
+      url: https://polar.sh/blog/introducing-polar-plans
+      checked_on: '2026-09-08'
+      kind: official_announcement
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://polar.sh/docs/integrate/sandbox
+      evidence:
+        - testing
+      availability:
+        value: self_serve
+        evidence:
+          - testing
+      personal_access:
+        value: unknown
+      notes: >-
+        Create a separate sandbox account and organization; production credentials cannot be reused. Sandbox
+        customer email delivery is restricted. Live payouts depend on Polar's supported seller countries and
+        Stripe Connect Express, not the Stripe Payments country list.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      human_steps:
+        - step: Create a sandbox account and organization, then issue sandbox credentials.
+          stage: credentials
+          evidence:
+            - testing
+entrypoints:
+  pricing: https://polar.sh/
+  docs: https://polar.sh/docs/integrate/sandbox
+notes:
+  - >-
+    Pricing checked 2026-09-08: new organizations on Starter pay a published 5% + USD 0.50 per transaction.
+    Older Early Member pricing and paid plans differ; international-card, payout and dispute fees may apply.
+    This is a published pricing claim, not a measured sandbox charge.

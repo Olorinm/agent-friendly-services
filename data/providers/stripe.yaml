@@ -93,3 +93,58 @@ checks:
 
 notes:
   - Agent tooling (MCP, agent toolkit) evolves quickly; re-check quarterly.
+
+catalog:
+  version: 1
+  classifications:
+    - payments-billing/accept-payments
+  sources:
+    checkout:
+      url: https://docs.stripe.com/payment-links/create
+      checked_on: '2026-09-08'
+      kind: official_docs
+    testing:
+      url: https://docs.stripe.com/testing?numbers-or-method-or-token=tokens
+      checked_on: '2026-09-08'
+      kind: official_docs
+    merchant-countries:
+      url: https://stripe.com/global
+      checked_on: '2026-09-08'
+      kind: official_site
+  routes:
+    - id: sandbox-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.stripe.com/payment-links/create
+      evidence:
+        - testing
+      availability:
+        value: unknown
+      personal_access:
+        value: unknown
+      notes: >-
+        Use isolated sandbox resources and test API keys. One-time and recurring product prices are
+        documented. Live account activation, merchant country eligibility and tax responsibilities require
+        separate checks.
+      data_kind:
+        value: sandbox
+        evidence:
+          - testing
+      auth:
+        value: api_key
+        evidence:
+          - testing
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - testing
+      capabilities:
+        payments.checkout:
+          value: documented
+          evidence:
+            - checkout
+        payments.subscription:
+          value: documented
+          evidence:
+            - checkout

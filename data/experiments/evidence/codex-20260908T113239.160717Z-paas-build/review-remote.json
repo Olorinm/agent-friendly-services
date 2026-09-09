@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-09-08T11:42:44.598607+00:00",
+  "method": "Independent HTTP read and independent browser session after executor exit; no payment submitted.",
+  "remote_endpoint_template": "https://sandbox.unipaas.com/platform/pay-ins/checkout/{private-link-id}/",
+  "http_status": 200,
+  "raw_response_sha256": "393e7024330ad129d6a609dde677d4087c8781f9f8dcb7092ee30f5b6b0575f0",
+  "payment_link": {
+    "amount": 12,
+    "totalAmount": 12,
+    "currency": "USD",
+    "reference": "电子书《城市散步指南》 × 1",
+    "status": "open",
+    "totalPaid": 0,
+    "plans": [],
+    "expiresAt": "2027-03-07T11:34:00.000Z"
+  },
+  "browser": {
+    "document_http_status": 404,
+    "visible_text": "Secure Checkout\n\nThis payment is processed by UNIPaaS Financial Services Limited, regulated by the Financial Conduct Authority (FCA) as an Authorised Payment Institution (No. 929994)",
+    "console_excerpts": [
+      "[error] Failed to extract partial payments allowed from session: {stack: \"InvalidCharacterError: Failed to execute 'atob' on…ipaas.com/checkout-embedded.sandbox.js:48:112005)\", code: 5, name: \"InvalidCharacterError\", message: \"Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.\"}",
+      "[error] Failed to extract partial payments allowed from session: {stack: \"InvalidCharacterError: Failed to execute 'atob' on…ipaas.com/checkout-embedded.sandbox.js:48:115539)\", code: 5, name: \"InvalidCharacterError\", message: \"Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded.\"}"
+    ],
+    "observation": "Only checkout shell and regulatory footer rendered; product, amount and payment controls did not appear."
+  },
+  "limitation": "Executor Chromium could not launch under its macOS sandbox. External observation does not repair that execution environment, and the trial is excluded from service completion-rate statistics."
+}
