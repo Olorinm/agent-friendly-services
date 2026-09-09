@@ -182,9 +182,10 @@ test('homepages use compact empty cells, aligned widths and separate tested rout
   for (const file of ['README.md', 'README.zh-CN.md']) {
     const text = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
     assert(!/Not yet task-tested|待实测|尚未实测|undefined%/.test(text));
+    assert(!/>Trials<|>试跑次数</.test(text));
     const kiwi = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Kiwi.com</a>'))!;
     assert(kiwi.includes('>MCP</a>'));
-    assert.equal((kiwi.match(/<td /g) ?? []).length, 8);
+    assert.equal((kiwi.match(/<td /g) ?? []).length, 7);
     const header = text.match(/<thead><tr>(.*?)<\/tr><\/thead>/)![1];
     assert.equal([...header.matchAll(/width="(\d+)%"/g)].reduce((sum, m) => sum + Number(m[1]), 0), 100);
     const amadeus = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Amadeus Flight APIs</a>'))!;

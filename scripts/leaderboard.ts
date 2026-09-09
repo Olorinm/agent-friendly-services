@@ -82,9 +82,9 @@ const cell = (value: unknown) => String(value ?? 'unknown').replaceAll('|', '\\|
 export const tokenLabel = (n: number | null) => n === null ? '—' : n >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(Math.round(n));
 export const moneyLabel = (n: number | null) => n === null ? '—' : n === 0 ? '$0' : n < .01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`;
 export const boardHeader = (zh: boolean, withAccess = false) => {
-  const headings = zh ? ['服务', '试跑次数', '完成率', 'Token', '模型费用', '服务费用'] : ['Service', 'Trials', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost'];
+  const headings = zh ? ['服务', '完成率', 'Token', '模型费用', '服务费用'] : ['Service', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost'];
   if (withAccess) headings.push(...(zh ? ['测试方式', '接入资料'] : ['Tested via', 'Access links']));
-  return `| ${headings.join(' | ')} |\n| --- | ---: | ---: | ---: | ---: | ---: |${withAccess ? ' --- | --- |' : ''}`;
+  return `| ${headings.join(' | ')} |\n| --- | ---: | ---: | ---: | ---: |${withAccess ? ' --- | --- |' : ''}`;
 };
 /** Display rows together without pooling measurements from different comparison groups. */
 export function renderBoardRows(boards: Board[], names: Map<string, string>, prefix = './', serviceLinks?: Map<string, { profile: string; access: string }>, interfaces = new Map<string, string>(), zh = false) {
@@ -97,7 +97,7 @@ export function renderBoardRows(boards: Board[], names: Map<string, string>, pre
     const evidence = `${prefix}generated/evaluations.md#${board.id}`;
     const links = serviceLinks?.get(row.service_id);
     const rate = m.resolution_rate === null ? '—' : `${Number((100 * m.resolution_rate).toFixed(1))}%`;
-    return `| [${name}](${links?.profile ?? evidence}) | ${m.trials} | ${links && rate !== '—' ? `[${rate}](${evidence})` : rate} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |${serviceLinks ? ` [${interfaceLabel(interfaces.get(`${row.service_id}/${row.route_id}`), zh)}](${row.runs[0].entry_url}) | ${links?.access ?? '—'} |` : ''}`;
+    return `| [${name}](${links?.profile ?? evidence}) | ${links && rate !== '—' ? `[${rate}](${evidence})` : rate} | ${tokenLabel(m.tokens)} | ${moneyLabel(m.model_cost_usd)} | ${m.service_cost_usd !== null && row.runs.some(r => r.status !== 'invalid_run' && r.service_cost?.kind === 'estimated') ? '~' : ''}${moneyLabel(m.service_cost_usd)} |${serviceLinks ? ` [${interfaceLabel(interfaces.get(`${row.service_id}/${row.route_id}`), zh)}](${row.runs[0].entry_url}) | ${links?.access ?? '—'} |` : ''}`;
   }).join('\n');
 }
 

@@ -560,7 +560,7 @@ function serviceList(zh: boolean): string {
     const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
       const identity = `[${cell(p.name)}](${profileUrl(p.id)})`;
       return { id: p.id, classifications: p.catalog?.classifications ?? [],
-        unmeasured: `| ${identity} | — | — | — | — | — | — | ${accessLinks(p, zh, true)} |`,
+        unmeasured: `| ${identity} | — | — | — | — | — | ${accessLinks(p, zh, true)} |`,
         directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh, true)} |` };
     });
     const names = new Map(listedServices.map(p => [p.id, p.name]));
