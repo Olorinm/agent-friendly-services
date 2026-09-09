@@ -1,0 +1,38 @@
+id: guerrilla-mail
+name: Guerrilla Mail
+category: communication
+homepage: https://www.guerrillamail.com/
+summary: Temporary email addresses and message retrieval through a public session-based API.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://www.guerrillamail.com/GuerrillaMailAPI.html
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://www.guerrillamail.com/GuerrillaMailAPI.html
+    docs: https://www.guerrillamail.com/GuerrillaMailAPI.html
+    evidence:
+    - docs
+    notes: Public API uses session cookies. Documentation is old and describes short message/session retention;
+      current HTTPS access and behavior require testing. Not a persistent private-account substitute. On 2026-09-09,
+      a fresh Codex session created a mailbox without upstream credentials; independent reuse of its saved
+      access state succeeded. This tests provisioning/listing only, not external delivery or long-term retention.
+      In a subsequent Gmail-delivered fixture test, all three synthetic message bodies arrived, but listing
+      and full-message APIs returned blank subjects. The Agent retrieved the correct latest login code and
+      timestamp, but the task requiring the original subject was not fully completed; this does not establish
+      that all emails lose subjects.
+    auth:
+      value: none
+      evidence:
+      - docs

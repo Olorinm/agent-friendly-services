@@ -1,0 +1,38 @@
+id: nasdaq-data-link
+name: Nasdaq Data Link
+category: web-search-data
+homepage: https://data.nasdaq.com/
+summary: Marketplace for financial and economic datasets with free and separately subscribed products.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+  - macro
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://docs.data.nasdaq.com/docs/getting-started
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.data.nasdaq.com/docs/getting-started
+      docs: https://docs.data.nasdaq.com/docs/getting-started
+      evidence:
+        - docs
+      availability:
+        value: unknown
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: unknown
+      notes: >-
+        Choose a specific dataset before comparison. Most datasets are premium. The legacy documentation
+        announces retirement on 2026-08-31; its replacement link was not readable in this research pass.

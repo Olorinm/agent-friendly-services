@@ -1,0 +1,32 @@
+id: gmail
+name: Gmail
+category: communication
+homepage: https://mail.google.com/
+summary: Persistent Google mailboxes accessible through the Gmail API after account and OAuth setup.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://developers.google.com/workspace/gmail/api/guides
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://developers.google.com/workspace/gmail/api/guides
+    docs: https://developers.google.com/workspace/gmail/api/guides
+    evidence:
+    - docs
+    notes: Existing mailbox, API project and scoped OAuth consent are separate preparation steps. Gmail API
+      access is not a public API for creating consumer Google accounts.
+    auth:
+      value: oauth
+      evidence:
+      - docs

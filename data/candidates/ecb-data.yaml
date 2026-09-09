@@ -1,0 +1,43 @@
+id: ecb-data
+name: ECB Data Portal API
+category: web-search-data
+homepage: https://data.ecb.europa.eu/
+summary: >-
+  European Central Bank statistical data, including historical reference exchange rates, through SDMX
+  REST.
+submitted_by: community
+tags:
+  - fx
+  - macro
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://data.ecb.europa.eu/help/api/data-examples
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://data.ecb.europa.eu/help/api/data-examples
+      docs: https://data.ecb.europa.eu/help/api/data-examples
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      notes: >-
+        Series dimensions, quote direction, observation frequency and date range must be selected
+        correctly. Reference rates are not executable conversion prices.

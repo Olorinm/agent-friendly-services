@@ -31,7 +31,7 @@ export function estimateModelCost(run: Pick<Evaluation, 'model' | 'usage' | 'req
   return calculate(run, prices);
 }
 function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, prices: PriceSnapshot | null, singleRequest = false): ModelCost {
-  const key = prices?.models[run.model] ? run.model : `openai/${run.model}`;
+  const key = prices?.models[run.model] ? run.model : run.model.startsWith("glm-") ? `zai/${run.model}` : `openai/${run.model}`;
   const entry = prices?.models[key];
   const pricing = prices && entry ? { source: prices.source, revision: prices.revision,
     fetched_at: prices.fetched_at, sha256: prices.sha256, model: key, tier: 'standard' } : null;

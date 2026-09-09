@@ -1,0 +1,32 @@
+id: mailsac
+name: Mailsac
+category: communication
+homepage: https://mailsac.com/
+summary: Email receiving and testing APIs with public and private mailbox options.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://docs.mailsac.com/en/latest/about/introduction.html
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://docs.mailsac.com/en/latest/about/introduction.html
+    docs: https://docs.mailsac.com/en/latest/about/introduction.html
+    evidence:
+    - docs
+    notes: API key required; public inboxes are publicly viewable. Private addresses and retention depend on
+      the plan; no real registration secrets should be placed in a public inbox.
+    auth:
+      value: api_key
+      evidence:
+      - docs

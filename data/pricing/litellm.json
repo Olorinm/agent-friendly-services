@@ -1,9 +1,25 @@
 {
   "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
   "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
-  "fetched_at": "2026-09-09T03:22:13.676Z",
-  "sha256": "4de23e259fff2fe66935f3675e78178e5efe914548163e8d5fa4305365f813e5",
+  "fetched_at": "2026-09-09T10:51:49.718Z",
+  "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
   "models": {
+    "zai/glm-5.3-flash": {
+      "cache_creation_input_token_cost": 0,
+      "cache_read_input_token_cost": 3e-8,
+      "input_cost_per_token": 1.5e-7,
+      "output_cost_per_token": 5e-7,
+      "litellm_provider": "zai",
+      "max_input_tokens": 1048576,
+      "max_output_tokens": 128000,
+      "mode": "chat",
+      "supports_function_calling": true,
+      "supports_prompt_caching": true,
+      "supports_reasoning": true,
+      "supports_tool_choice": true,
+      "source": "https://docs.z.ai/guides/overview/pricing",
+      "supports_vision": true
+    },
     "gpt-6-astra": {
       "cache_creation_input_token_cost": 0.0000125,
       "cache_creation_input_token_cost_above_272k_tokens": 0.000025,

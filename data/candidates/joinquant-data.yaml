@@ -1,0 +1,25 @@
+id: joinquant-data
+name: JoinQuant JQData
+category: web-search-data
+homepage: https://www.joinquant.com/
+summary: >-
+  Chinese-market data candidate. The official documentation returned a non-Mainland-China region
+  restriction during research.
+submitted_by: community
+tags:
+  - china-stocks
+  - financials
+notes:
+  - >-
+    The documentation access restriction was observed through the research browser, not a local API
+    trial. API availability, personal onboarding, transport and free trial remain unverified.
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://www.joinquant.com/help/api/help?name=JQData
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes: []

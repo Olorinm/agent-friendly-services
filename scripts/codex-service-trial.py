@@ -156,7 +156,7 @@ def main():
     parser.add_argument("--task-file", type=Path, required=True)
     parser.add_argument("--task", required=True, help="Task ID in the Markdown task table")
     parser.add_argument("--model", help="Explicit model; otherwise use the current user setting")
-    parser.add_argument("--reasoning-effort", help="Explicit effort; otherwise use the current user setting")
+    parser.add_argument("--reasoning-effort", default="medium", help="Reasoning effort for this batch (default: medium)")
     parser.add_argument("--seconds", type=int, default=600)
     parser.add_argument("--prepare-only", action="store_true")
     parser.add_argument("--prompt-style", choices=("legacy", "natural"), default="legacy")
@@ -193,7 +193,7 @@ def main():
     config_path = auth_root / "config.toml"
     config = tomllib.loads(config_path.read_text()) if config_path.exists() else {}
     model = args.model or config.get("model")
-    effort = args.reasoning_effort or config.get("model_reasoning_effort", "medium")
+    effort = args.reasoning_effort
     if not model:
         raise SystemExit("Set an explicit model in your Codex config before comparing runs.")
     access = (f"提供本服务免费账户凭据，位于 .private/credentials.json，字段为 {', '.join(sorted(credentials))}。"

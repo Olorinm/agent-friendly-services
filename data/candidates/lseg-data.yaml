@@ -1,0 +1,58 @@
+id: lseg-data
+name: LSEG Data Platform
+category: web-search-data
+homepage: https://www.lseg.com/en/data-analytics
+summary: Financial-data platform and Python library with licensed desktop and cloud access paths.
+submitted_by: community
+tags:
+  - institutional
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: >-
+        https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: sdk
+      maintainer: official
+      entry_url: >-
+        https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start
+      docs: >-
+        https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start
+      evidence:
+        - docs
+      availability:
+        value: application
+        evidence:
+          - docs
+      personal_access:
+        value: restricted
+        evidence:
+          - docs
+        notes: >-
+          Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon
+          login and App Key. Individual admission and trial approval are not established.
+      auth:
+        value: platform_credentials
+        evidence:
+          - docs
+      notes: >-
+        Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon login
+        and App Key. Individual admission and trial approval are not established.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - docs
+      human_steps:
+        - step: >-
+            Obtain licensed cloud credentials through an account manager, or provide an existing entitled
+            desktop login.
+          stage: activation
+          evidence:
+            - docs

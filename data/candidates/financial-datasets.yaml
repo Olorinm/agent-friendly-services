@@ -1,0 +1,55 @@
+id: financial-datasets
+name: Financial Datasets
+category: web-search-data
+homepage: https://financialdatasets.ai/
+summary: >-
+  US company financial statements, historical prices, filings and insider trades, with API and an
+  officially listed MCP integration.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://docs.financialdatasets.ai/quickstart
+      checked_on: '2026-09-09'
+      kind: official_docs
+    mcp-discovery:
+      url: https://docs.financialdatasets.ai/llms.txt
+      checked_on: '2026-09-09'
+      kind: official_docs
+      notes: >-
+        Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not
+        retrievable in this pass.
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.financialdatasets.ai/quickstart
+      docs: https://docs.financialdatasets.ai/quickstart
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      notes: >-
+        Create an account and key. A free execution allowance has not been established; do not start
+        metered requests without confirming available free credit.
+notes:
+  - >-
+    Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not
+    retrievable in this pass.

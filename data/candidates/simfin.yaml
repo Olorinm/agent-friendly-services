@@ -1,0 +1,23 @@
+id: simfin
+name: SimFin
+category: web-search-data
+homepage: https://www.simfin.com/
+summary: Company fundamentals and price data with API and CSV access advertised across free and paid plans.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+notes:
+  - >-
+    Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup
+    documentation and execution allowance still need verification.
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://www.simfin.com/en/prices/
+      checked_on: '2026-09-09'
+      kind: official_site
+  routes: []

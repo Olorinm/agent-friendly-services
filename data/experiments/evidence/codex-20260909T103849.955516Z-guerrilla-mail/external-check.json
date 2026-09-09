@@ -1,0 +1,11 @@
+{
+  "reviewed_at": "2026-09-09T10:41:08.971080+00:00",
+  "method": "Independent post-run HTTP read of the target test message using only the dedicated mailbox credentials.",
+  "service": "guerrilla-mail",
+  "http_status": 200,
+  "subject": "",
+  "timestamp": "1788949892",
+  "expected_code_present": true,
+  "subject_matches_sent_message": false,
+  "raw_response_sha256": "5fb3b2b4f83abba8384a0c6e81811f7a9bbcad6b90b8467f0d4868717af0da27"
+}

@@ -17,6 +17,7 @@ A documented route is not a task pass. Results apply only to the recorded route,
 
 - [Service catalog](./generated/catalog.md)
 - [Task definitions](./data/experiments/tasks/)
+- [Financial-data needs and draft tasks](./data/experiments/tasks/financial-data.md): source-backed demand, first task definitions and preparation gaps; no task runs yet.
 - [Task results](./generated/evaluations.md)
 - [Legacy provider facts](./generated/providers.md)
 
@@ -26,3 +27,5 @@ A documented route is not a task pass. Results apply only to the recorded route,
 - [Discovery](./data/candidates/AGENTS.md)
 - [Task design](./data/experiments/tasks/AGENTS.md)
 - [Execution and external review](./data/experiments/AGENTS.md)
+
+- [Mailbox tasks](./data/experiments/tasks/mailboxes.md): mailbox provisioning and verification-email retrieval; temporary and persistent access conditions are kept distinct.

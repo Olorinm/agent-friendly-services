@@ -1,0 +1,48 @@
+id: mailslurp
+name: MailSlurp
+category: communication
+homepage: https://www.mailslurp.com/
+summary: Programmable mailboxes for email automation and testing, including message waiting and agent integrations.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://www.mailslurp.com/guides/getting-started/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    pricing:
+      url: https://app.mailslurp.com/pricing/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    agents:
+      url: https://www.mailslurp.com/docs/agents/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://www.mailslurp.com/guides/getting-started/
+    docs: https://www.mailslurp.com/guides/getting-started/
+    evidence:
+    - docs
+    notes: A service account and API key are required. Free plan has caps and sandbox-only sending; receiving
+      real email and sending externally have different entitlements.
+    auth:
+      value: api_key
+      evidence:
+      - docs
+  - id: mail-mcp
+    interface: mcp
+    maintainer: official
+    entry_url: https://www.mailslurp.com/docs/agents/
+    docs: https://www.mailslurp.com/docs/agents/
+    evidence:
+    - agents
+    notes: Agent-scoped access requires account setup; task usage has not been measured.

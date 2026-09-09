@@ -31,6 +31,37 @@ Payment processing with hosted Pay by Link checkout; test merchant accounts and 
 - [official_docs](https://docs.adyen.com/unified-commerce/pay-by-link/create-payment-links/customer-area) — checked 2026-09-08
 - [official_docs](https://docs.adyen.com/unified-commerce/pay-by-link?locale=en-us) — checked 2026-09-08
 
+<a id="agentmail"></a>
+
+## AgentMail
+
+Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and MCP access.
+
+[Website](https://www.agentmail.to/) · [Source record](../data/candidates/agentmail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="agentmail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Agent signup accepts an owner email and sends an OTP. Verification unlocks full permissions; existing owner accounts cannot use first-time signup. Signup can rotate an existing unverified key, so inspect account state before retrying. Published Free plan: 3 inboxes and 3,000 emails/month, no card required; not observed account entitlement. |
+| [mail-sdk (SDK)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
+| [mail-cli (CLI)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
+| [mail-mcp (MCP)](https://mcp.agentmail.to/mcp) | [Docs](https://docs.agentmail.to/agent-onboarding) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.agentmail.to/quickstart) — checked 2026-09-09
+- [official_docs](https://www.agentmail.to/pricing) — checked 2026-09-09
+- [official_docs](https://docs.agentmail.to/agent-onboarding) — checked 2026-09-09
+
 <a id="airgateway"></a>
 
 ## AirGateway Platform API
@@ -201,6 +232,65 @@ Online merchant payment integrations for websites and apps through Alipay APIs a
 
 - [official_site](https://open.alipay.com/module/webApp) — checked 2026-09-08
 - [official_site](https://open.alipay.com/) — checked 2026-09-08
+
+<a id="alpaca-market-data"></a>
+
+## Alpaca Market Data
+
+Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.
+
+[Website](https://alpaca.markets/) · [Source record](../data/candidates/alpaca-market-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="alpaca-market-data-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://docs.alpaca.markets/us/docs/about-market-data-api) | [Docs](https://docs.alpaca.markets/us/docs/about-market-data-api) | self serve / documented | Basic is free with limited real-time feeds; historical coverage and latest-15-minute restrictions are separate. Use market-data endpoints only. Paper-account signup and identity requirements have not been measured. |
+| [crypto-api-keyless (API)](https://docs.alpaca.markets/us/docs/about-market-data-api) | [Docs](https://docs.alpaca.markets/us/docs/about-market-data-api) | self serve / documented | Official documentation exempts historical crypto endpoints from authentication. Does not imply equity-data access or trading permission. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.alpaca.markets/us/docs/about-market-data-api) — checked 2026-09-09
+
+<a id="alpha-vantage"></a>
+
+## Alpha Vantage
+
+Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.
+
+[Website](https://www.alphavantage.co/) · [Source record](../data/candidates/alpha-vantage.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="alpha-vantage-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://www.alphavantage.co/documentation/) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day. Real-time and delayed US quotes are premium; check each task endpoint before execution. |
+
+### Service pricing
+
+- data-api: 25 requests / day (free_allowance; Free API key allowance; excludes premium endpoints.)
+
+### Task results
+
+—
+
+### Notes
+
+- Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass.
+
+### Sources
+
+- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-09-09
+- [official_site](https://www.alphavantage.co/support/) — checked 2026-09-09
+- [official_docs](https://www.alphavantage.co/support/) — checked 2026-09-09
 
 <a id="amadeus-flights"></a>
 
@@ -373,6 +463,48 @@ Travelpayouts-distributed live flight search and a separately accessible histori
 - [official_docs](https://support.travelpayouts.com/hc/en-us/articles/203956083-Requirements-for-Aviasales-data-API-access) — checked 2026-09-07
 - [official_docs](https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API) — checked 2026-09-07
 
+<a id="bargo-congress"></a>
+
+## Bargo Congress Trades API
+
+Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.
+
+[Website](https://www.bargo.ai/free-apis/congress) · [Source record](../data/candidates/bargo-congress.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="bargo-congress-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [congress-api-keyless (API)](https://www.bargo.ai/free-apis/congress) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Keyless: 30 requests and 100 rows per IP/day; free key: 100 requests and 1,000 rows/day. Rolling three-month coverage; preserve transaction and disclosure dates. Attribution required; raw-data redistribution restricted. |
+| [congress-api-keyed (API)](https://www.bargo.ai/free-apis/congress/v1) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Free key raises the quota; signup and key acquisition have not been measured. |
+| [congress-mcp (MCP)](https://www.bargo.ai/free-apis/congress/mcp) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Uses the free Congress key. Same rolling data window; verify available tool coverage per task. |
+
+### Service pricing
+
+- congress-api-keyless: 30 requests / day (free_allowance; Keyless quota shared per IP.)
+
+- congress-api-keyless: 100 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
+
+- congress-api-keyed: 100 requests / day (free_allowance; Free-key quota shared by API and MCP.)
+
+- congress-api-keyed: 1000 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
+
+- congress-mcp: 100 requests / day (free_allowance; Free-key quota shared by API and MCP.)
+
+- congress-mcp: 1000 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
+
+### Task results
+
+—
+
+### Notes
+
+- Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; included in the broader financial-data discovery pass. PR remains open; no task result implied.
+
+### Sources
+
+- [official_docs](https://www.bargo.ai/free-apis/congress) — checked 2026-09-09
+
 <a id="baserow"></a>
 
 ## Baserow Cloud
@@ -402,6 +534,34 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 - [official_docs](https://baserow.io/user-docs/personal-api-tokens) — checked 2026-09-08
 - [official_site](https://baserow.io/pricing) — checked 2026-09-08
 - [official_docs](https://baserow.io/user-docs/mcp-server) — checked 2026-09-08
+
+<a id="bloomberg-data-license"></a>
+
+## Bloomberg Data License
+
+Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.
+
+[Website](https://professional.bloomberg.com/products/data/data-license/) · [Source record](../data/candidates/bloomberg-data-license.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="bloomberg-data-license-access"></a>
+
+—
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Existing-client data portal and demo request are documented. Personal self-service API signup and a free execution allowance have not been established.
+
+### Sources
+
+- [official_site](https://professional.bloomberg.com/products/data/data-license/) — checked 2026-09-09
 
 <a id="brave-search"></a>
 
@@ -681,6 +841,62 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 ### Sources
 
 - [official_docs](https://docs.cohere.com/docs/rate-limits) — checked 2026-07-07
+
+<a id="coingecko"></a>
+
+## CoinGecko
+
+Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.
+
+[Website](https://www.coingecko.com/) · [Source record](../data/candidates/coingecko.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="coingecko-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://docs.coingecko.com/docs/setting-up-your-api-key) | [Docs](https://docs.coingecko.com/docs/setting-up-your-api-key) | self serve / documented | Demo and paid API plans have different history and quotas. Keyless MCP has shared limits and a smaller tool set. Asset IDs and quote currency must match the task. |
+| [keyless-mcp (MCP)](https://mcp.api.coingecko.com/mcp) | [Docs](https://docs.coingecko.com/ai-integration/mcp-server) | self serve / documented | Free, shared rate limits, limited tool set; account and key not required. |
+| [keyed-mcp (MCP)](https://mcp.pro-api.coingecko.com/mcp) | [Docs](https://docs.coingecko.com/ai-integration/mcp-server) | self serve / documented | Account entitlement and tool set differ from keyless MCP; confirm free Demo compatibility before a paid-server call. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.coingecko.com/docs/setting-up-your-api-key) — checked 2026-09-09
+- [official_docs](https://docs.coingecko.com/) — checked 2026-09-09
+- [official_docs](https://docs.coingecko.com/ai-integration/mcp-server) — checked 2026-09-09
+
+<a id="coinmarketcap"></a>
+
+## CoinMarketCap
+
+Crypto market data with selected keyless endpoints and a free authenticated Basic plan.
+
+[Website](https://coinmarketcap.com/) · [Source record](../data/candidates/coinmarketcap.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="coinmarketcap-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://coinmarketcap.com/api/) | — | self serve / documented | Basic advertises 15,000 monthly call credits and 50 requests/minute. History depth and endpoint availability depend on plan; keyless access is limited to selected endpoints. |
+
+### Service pricing
+
+- data-api: 15000 credits / month (free_allowance; Authenticated Basic plan; selected endpoints and history only.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_site](https://coinmarketcap.com/api/) — checked 2026-09-09
 
 <a id="composio"></a>
 
@@ -970,6 +1186,32 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 - [official_docs](https://e2b.dev/docs/api-key) — checked 2026-07-07
 
+<a id="ecb-data"></a>
+
+## ECB Data Portal API
+
+European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.
+
+[Website](https://data.ecb.europa.eu/) · [Source record](../data/candidates/ecb-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="ecb-data-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://data.ecb.europa.eu/help/api/data-examples) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://data.ecb.europa.eu/help/api/data-examples) — checked 2026-09-09
+
 <a id="elevenlabs"></a>
 
 ## ElevenLabs
@@ -995,6 +1237,33 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 ### Sources
 
 —
+
+<a id="eodhd"></a>
+
+## EODHD
+
+Historical market prices, fundamentals and economic datasets, with free and separately paid packages.
+
+[Website](https://eodhd.com/) · [Source record](../data/candidates/eodhd.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="eodhd-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://eodhd.com/financial-apis/) | [Docs](https://eodhd.com/financial-apis/) | self serve / documented | Free registration advertises 20 API calls/day without a card; some data types are excluded. Check dataset and market coverage before choosing a trial. |
+
+### Service pricing
+
+- data-api: 20 requests / day (free_allowance; Free plan; some data types are excluded.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://eodhd.com/financial-apis/) — checked 2026-09-09
+- [official_site](https://eodhd.com/pricing) — checked 2026-09-09
 
 <a id="exa"></a>
 
@@ -1099,6 +1368,34 @@ Travel Redirect/XAP flight listings product whose new API applications are curre
 - [official_docs](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) — checked 2026-09-07
 - [official_docs](https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings) — checked 2026-09-07
 
+<a id="factset-data"></a>
+
+## FactSet Data APIs
+
+Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.
+
+[Website](https://www.factset.com/) · [Source record](../data/candidates/factset-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="factset-data-access"></a>
+
+—
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Developer portal is discoverable, but the exact dataset, individual eligibility, credentials and price remain unconfirmed. No claim of free self-service access.
+
+### Sources
+
+- [official_docs](https://developer.factset.com/) — checked 2026-09-09
+
 <a id="fal"></a>
 
 ## fal.ai
@@ -1125,6 +1422,32 @@ Generative media platform (image, video, audio models) with queue/streaming APIs
 
 —
 
+<a id="fastmail"></a>
+
+## Fastmail
+
+Persistent email with JMAP API tokens, OAuth and standard mail protocols.
+
+[Website](https://www.fastmail.com/) · [Source record](../data/candidates/fastmail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="fastmail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://www.fastmail.com/dev/) | [Docs](https://www.fastmail.com/dev/) | — | JMAP tokens can be generated for an existing account. Subscription/trial API eligibility is not yet verified; do not assume permanent free access. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.fastmail.com/dev/) — checked 2026-09-09
+
 <a id="fastspring"></a>
 
 ## FastSpring
@@ -1150,6 +1473,92 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 ### Sources
 
 - [official_docs](https://developer.fastspring.com/) — checked 2026-09-08
+
+<a id="financial-datasets"></a>
+
+## Financial Datasets
+
+US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.
+
+[Website](https://financialdatasets.ai/) · [Source record](../data/candidates/financial-datasets.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="financial-datasets-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://docs.financialdatasets.ai/quickstart) | [Docs](https://docs.financialdatasets.ai/quickstart) | self serve / documented | Create an account and key. A free execution allowance has not been established; do not start metered requests without confirming available free credit. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass.
+
+### Sources
+
+- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-09-09
+- [official_docs](https://docs.financialdatasets.ai/llms.txt) — checked 2026-09-09
+
+<a id="fmp"></a>
+
+## Financial Modeling Prep (FMP)
+
+Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.
+
+[Website](https://financialmodelingprep.com/) · [Source record](../data/candidates/fmp.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="fmp-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Account and API key required. Personal and commercial plans differ; endpoint access must be checked against the selected plan. |
+| [data-mcp (MCP)](https://financialmodelingprep.com/mcp) | [Docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) | self serve / documented | Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in public results. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://site.financialmodelingprep.com/developer/docs) — checked 2026-09-09
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-09
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) — checked 2026-09-09
+
+<a id="finnhub"></a>
+
+## Finnhub
+
+Stock quotes, historical candles and fundamentals; stock candles are documented as premium.
+
+[Website](https://finnhub.io/) · [Source record](../data/candidates/finnhub.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="finnhub-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://finnhub.io/docs/api/quote) | [Docs](https://finnhub.io/docs/api/quote) | self serve | Dashboard API key required. Stock candles require premium access; a working free quote endpoint would not establish free historical-data access. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://finnhub.io/docs/api/quote) — checked 2026-09-09
 
 <a id="firecrawl"></a>
 
@@ -1337,6 +1746,61 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 - [official_docs](https://fly.io/docs/security/tokens/) — checked 2026-07-07
 
+<a id="frankfurter"></a>
+
+## Frankfurter
+
+Public exchange-rate API and official MCP using central-bank reference data, with no API key.
+
+[Website](https://frankfurter.dev/) · [Source record](../data/candidates/frankfurter.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="frankfurter-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://frankfurter.dev/) | [Docs](https://frankfurter.dev/) | self serve / documented | Reference rates are not bank/card execution quotes. Specify the rate date and underlying source; v2 can combine central-bank sources. |
+| [rates-mcp (MCP)](https://frankfurter.dev/mcp/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading service. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://frankfurter.dev/) — checked 2026-09-09
+- [official_docs](https://frankfurter.dev/mcp/) — checked 2026-09-09
+
+<a id="fred"></a>
+
+## FRED / ALFRED
+
+Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.
+
+[Website](https://fred.stlouisfed.org/) · [Source record](../data/candidates/fred.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="fred-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://fred.stlouisfed.org/docs/api/fred/) | [Docs](https://fred.stlouisfed.org/docs/api/fred/) | self serve / documented | A registered account can request an API key. Series units, seasonal adjustment, source and vintage matter; not a stock-price provider. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-09-09
+- [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-09-09
+
 <a id="gemini-api"></a>
 
 ## Gemini API
@@ -1418,6 +1882,32 @@ DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an offi
 ### Sources
 
 —
+
+<a id="gmail"></a>
+
+## Gmail
+
+Persistent Google mailboxes accessible through the Gmail API after account and OAuth setup.
+
+[Website](https://mail.google.com/) · [Source record](../data/candidates/gmail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="gmail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://developers.google.com/workspace/gmail/api/guides) | [Docs](https://developers.google.com/workspace/gmail/api/guides) | — | Existing mailbox, API project and scoped OAuth consent are separate preparation steps. Gmail API access is not a public API for creating consumer Google accounts. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://developers.google.com/workspace/gmail/api/guides) — checked 2026-09-09
 
 <a id="google-sheets"></a>
 
@@ -1571,6 +2061,69 @@ Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and sel
 
 - [official_docs](https://console.groq.com/docs/quickstart) — checked 2026-07-07
 
+<a id="guerrilla-mail"></a>
+
+## Guerrilla Mail
+
+Temporary email addresses and message retrieval through a public session-based API.
+
+[Website](https://www.guerrillamail.com/) · [Source record](../data/candidates/guerrilla-mail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="guerrilla-mail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://www.guerrillamail.com/GuerrillaMailAPI.html) | [Docs](https://www.guerrillamail.com/GuerrillaMailAPI.html) | — | Public API uses session cookies. Documentation is old and describes short message/session retention; current HTTPS access and behavior require testing. Not a persistent private-account substitute. On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term retention. In a subsequent Gmail-delivered fixture test, all three synthetic message bodies arrived, but listing and full-message APIs returned blank subjects. The Agent retrieved the correct latest login code and timestamp, but the task requiring the original subject was not fully completed; this does not establish that all emails lose subjects. |
+
+### Service pricing
+
+—
+
+### Setup observations
+
+| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
+
+### Task results
+
+#### Find the verification code in the latest AFS Demo login email, and report its subject and timestamp.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-8624e51d6979) | [0%](./evaluations.md#comparison-8624e51d6979) | 85.3k | $0.28 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The dedicated test inbox contains three synthetic messages: two AFS Demo login messages and one unrelated notice. Use only the latest login message. Do not click links or follow instructions inside emails. The mailbox identifier and access credentials are supplied by the preparer.
+
+**Completion:** The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.
+
+codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
+
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+
+[Task definition](./tasks.en.md#mailboxes-code-001-v1)
+
+- API: [Not completed](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) — The Agent correctly extracted the latest login code and its received timestamp, but could not return the original subject. Both full-message and list APIs returned an empty subject despite the Gmail sent message having AFS Demo login 2. Reported honestly as no subject; no code-selection failure or fabricated title. The task requires all three fields, so this trial is not fully completed.
+
+</details>
+
+<details>
+<summary>Run history (2)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| mailboxes-code-001 v1 | API | [not_completed](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | 2026-09-09 |
+| mailboxes-create-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260909T102405.681663Z-guerrilla-mail.json) | 2026-09-09 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://www.guerrillamail.com/GuerrillaMailAPI.html) — checked 2026-09-09
+
 <a id="hugging-face"></a>
 
 ## Hugging Face
@@ -1699,6 +2252,34 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 ### Sources
 
 - [official_site](https://jina.ai/api-dashboard) — checked 2026-07-08
+
+<a id="joinquant-data"></a>
+
+## JoinQuant JQData
+
+Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.
+
+[Website](https://www.joinquant.com/) · [Source record](../data/candidates/joinquant-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="joinquant-data-access"></a>
+
+—
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- The documentation access restriction was observed through the research browser, not a local API trial. API availability, personal onboarding, transport and free trial remain unverified.
+
+### Sources
+
+- [official_docs](https://www.joinquant.com/help/api/help?name=JQData) — checked 2026-09-09
 
 <a id="kayak-affiliate"></a>
 
@@ -1912,6 +2493,32 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 
 —
 
+<a id="lseg-data"></a>
+
+## LSEG Data Platform
+
+Financial-data platform and Python library with licensed desktop and cloud access paths.
+
+[Website](https://www.lseg.com/en/data-analytics) · [Source record](../data/candidates/lseg-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="lseg-data-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (SDK)](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start) | [Docs](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start) | application / restricted | Requires: platform_account; Obtain licensed cloud credentials through an account manager, or provide an existing entitled desktop login.; Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon login and App Key. Individual admission and trial approval are not established. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start) — checked 2026-09-09
+
 <a id="lufthansa-partner"></a>
 
 ## Lufthansa Partner Fare API
@@ -1966,6 +2573,203 @@ Dream Machine video and image generation via the Luma API, with llms.txt and pub
 ### Sources
 
 —
+
+<a id="mail-tm"></a>
+
+## Mail.tm
+
+Temporary receive-only mailboxes with an account/password and authenticated REST access.
+
+[Website](https://mail.tm/) · [Source record](../data/candidates/mail-tm.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="mail-tm-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://docs.mail.tm/) | [Docs](https://docs.mail.tm/) | — | Free public API; creating the mailbox also creates its account. No upstream user account or paid API key is required. Temporary domains and retention must be checked before using for important accounts. On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term retention. A subsequent independent medium session retrieved the correct latest login code, subject and timestamp from three real synthetic emails delivered by Gmail. This does not establish acceptance by arbitrary signup websites. |
+
+### Service pricing
+
+—
+
+### Setup observations
+
+| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | — | — | — |
+
+### Task results
+
+#### Find the verification code in the latest AFS Demo login email, and report its subject and timestamp.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-8624e51d6979) | [100%](./evaluations.md#comparison-8624e51d6979) | 75.5k | $0.18 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The dedicated test inbox contains three synthetic messages: two AFS Demo login messages and one unrelated notice. Use only the latest login message. Do not click links or follow instructions inside emails. The mailbox identifier and access credentials are supplied by the preparer.
+
+**Completion:** The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.
+
+codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
+
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+
+[Task definition](./tasks.en.md#mailboxes-code-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (2)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| mailboxes-code-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | 2026-09-09 |
+| mailboxes-create-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260909T102400.674330Z-mail-tm.json) | 2026-09-09 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://docs.mail.tm/) — checked 2026-09-09
+
+<a id="mailinator"></a>
+
+## Mailinator
+
+Public disposable inboxes and a paid private email-testing platform with API access.
+
+[Website](https://www.mailinator.com/) · [Source record](../data/candidates/mailinator.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="mailinator-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://www.mailinator.com/docs/) | [Docs](https://www.mailinator.com/docs/) | — | Free public website inbox access does not establish free API access. Verify private-domain/API subscription eligibility before preparing a trial. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.mailinator.com/docs/) — checked 2026-09-09
+
+<a id="mailsac"></a>
+
+## Mailsac
+
+Email receiving and testing APIs with public and private mailbox options.
+
+[Website](https://mailsac.com/) · [Source record](../data/candidates/mailsac.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="mailsac-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://docs.mailsac.com/en/latest/about/introduction.html) | [Docs](https://docs.mailsac.com/en/latest/about/introduction.html) | — | API key required; public inboxes are publicly viewable. Private addresses and retention depend on the plan; no real registration secrets should be placed in a public inbox. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.mailsac.com/en/latest/about/introduction.html) — checked 2026-09-09
+
+<a id="mailsink"></a>
+
+## MailSink
+
+Temporary inbox API and MCP with message, verification-code and verification-link retrieval.
+
+[Website](https://mailsink.dev/) · [Source record](../data/candidates/mailsink.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="mailsink-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://mailsink.dev/docs/) | [Docs](https://mailsink.dev/docs/) | — | Homepage advertises anonymous mode, but current quickstart says GitHub login and Bearer token are required for all API requests. Preserve this conflict until observed; do not assume anonymous access. |
+| [mail-mcp (MCP)](https://mailsink.dev/docs/) | [Docs](https://mailsink.dev/docs/) | — | Official @mailsink/mcp setup requires MAILSINK_API_KEY. Anonymous-mode conflict remains unresolved. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://mailsink.dev/docs/) — checked 2026-09-09
+- [official_docs](https://mailsink.dev/) — checked 2026-09-09
+
+<a id="mailslurp"></a>
+
+## MailSlurp
+
+Programmable mailboxes for email automation and testing, including message waiting and agent integrations.
+
+[Website](https://www.mailslurp.com/) · [Source record](../data/candidates/mailslurp.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="mailslurp-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://www.mailslurp.com/guides/getting-started/) | [Docs](https://www.mailslurp.com/guides/getting-started/) | — | A service account and API key are required. Free plan has caps and sandbox-only sending; receiving real email and sending externally have different entitlements. |
+| [mail-mcp (MCP)](https://www.mailslurp.com/docs/agents/) | [Docs](https://www.mailslurp.com/docs/agents/) | — | Agent-scoped access requires account setup; task usage has not been measured. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.mailslurp.com/guides/getting-started/) — checked 2026-09-09
+- [official_docs](https://app.mailslurp.com/pricing/) — checked 2026-09-09
+- [official_docs](https://www.mailslurp.com/docs/agents/) — checked 2026-09-09
+
+<a id="massive"></a>
+
+## Massive (formerly Polygon.io)
+
+Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.
+
+[Website](https://massive.com/) · [Source record](../data/candidates/massive.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="massive-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://massive.com/docs/rest/quickstart) | [Docs](https://massive.com/docs/rest/quickstart) | self serve / documented | Select the exact data product and history entitlement. A free Stocks Basic account does not imply access to all datasets or real-time consolidated data. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://massive.com/docs/rest/quickstart) — checked 2026-09-09
+- [official_site](https://massive.com/pricing) — checked 2026-09-09
 
 <a id="mem0"></a>
 
@@ -2177,6 +2981,32 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 —
 
+<a id="nasdaq-data-link"></a>
+
+## Nasdaq Data Link
+
+Marketplace for financial and economic datasets with free and separately subscribed products.
+
+[Website](https://data.nasdaq.com/) · [Source record](../data/candidates/nasdaq-data-link.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="nasdaq-data-link-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://docs.data.nasdaq.com/docs/getting-started) | [Docs](https://docs.data.nasdaq.com/docs/getting-started) | documented | Choose a specific dataset before comparison. Most datasets are premium. The legacy documentation announces retirement on 2026-08-31; its replacement link was not readable in this research pass. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.data.nasdaq.com/docs/getting-started) — checked 2026-09-09
+
 <a id="neon"></a>
 
 ## Neon
@@ -2346,6 +3176,33 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 - [official_docs](https://developers.notion.com/cli/get-started/overview) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/guides/mcp/get-started-with-mcp) — checked 2026-09-08
 
+<a id="open-exchange-rates"></a>
+
+## Open Exchange Rates
+
+Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.
+
+[Website](https://openexchangerates.org/) · [Source record](../data/candidates/open-exchange-rates.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="open-exchange-rates-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://docs.openexchangerates.org/reference/api-introduction) | [Docs](https://docs.openexchangerates.org/reference/api-introduction) | self serve / documented | A free signup route is published. Confirm whether the chosen historical date and currency base are included; rates are indicative rather than executable bank/card quotes. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.openexchangerates.org/reference/api-introduction) — checked 2026-09-09
+- [official_site](https://openexchangerates.org/signup/free) — checked 2026-09-09
+
 <a id="openai"></a>
 
 ## OpenAI
@@ -2397,6 +3254,32 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 ### Sources
 
 - [official_docs](https://openrouter.ai/docs/quickstart) — checked 2026-07-08
+
+<a id="outlook-mail"></a>
+
+## Outlook Mail
+
+Persistent Microsoft mailboxes with mail retrieval and management through Microsoft Graph.
+
+[Website](https://outlook.live.com/) · [Source record](../data/candidates/outlook-mail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="outlook-mail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview) | [Docs](https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview) | — | Personal versus organizational accounts and delegated permissions differ. Requires mailbox ownership and app authorization; Graph mail access does not create consumer Microsoft accounts. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview) — checked 2026-09-09
 
 <a id="paas-build"></a>
 
@@ -2765,6 +3648,33 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 
 —
 
+<a id="quiver-quantitative"></a>
+
+## Quiver Quantitative
+
+Congressional and insider transactions, institutional activity and other alternative financial datasets.
+
+[Website](https://www.quiverquant.com/) · [Source record](../data/candidates/quiver-quantitative.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="quiver-quantitative-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://www.quiverquant.com/api-setup/) | [Docs](https://www.quiverquant.com/api-setup/) | self serve / documented | API access is advertised from USD 30/month. Free website signup does not establish free API access; no free execution allowance confirmed. |
+
+### Service pricing
+
+- data-api: 30 USD / month (minimum_spend; Advertised API starting price; exact dataset entitlement not established.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.quiverquant.com/api-setup/) — checked 2026-09-09
+- [official_site](https://api.quiverquant.com/) — checked 2026-09-09
+
 <a id="railway"></a>
 
 ## Railway
@@ -3009,6 +3919,32 @@ Google Flights extraction API and a hosted MCP integration supporting token or b
 - [official_site](https://www.searchapi.io/google-flights-api) — checked 2026-09-07
 - [official_docs](https://www.searchapi.io/integrations/mcp) — checked 2026-09-07
 
+<a id="sec-edgar"></a>
+
+## SEC EDGAR Data APIs
+
+Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.
+
+[Website](https://www.sec.gov/) · [Source record](../data/candidates/sec-edgar.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="sec-edgar-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | [Docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | self serve / documented | Reading APIs are separate from filer submission APIs. Automated-access policy applies. Facts need fiscal-period, unit and amendment interpretation; CORS is not supported. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-09-09
+
 <a id="sentry"></a>
 
 ## Sentry
@@ -3120,6 +4056,34 @@ Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, acce
 ### Sources
 
 —
+
+<a id="simfin"></a>
+
+## SimFin
+
+Company fundamentals and price data with API and CSV access advertised across free and paid plans.
+
+[Website](https://www.simfin.com/) · [Source record](../data/candidates/simfin.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="simfin-access"></a>
+
+—
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification.
+
+### Sources
+
+- [official_site](https://www.simfin.com/en/prices/) — checked 2026-09-09
 
 <a id="skootle-google-flights"></a>
 
@@ -3376,6 +4340,58 @@ Free bot platform with instant token issuance via BotFather, webhooks, a documen
 
 —
 
+<a id="temp-mail"></a>
+
+## Temp Mail
+
+Disposable email receiving service with a developer API for automated email workflows.
+
+[Website](https://temp-mail.org/) · [Source record](../data/candidates/temp-mail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="temp-mail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://temp-mail.org/en/api/) | [Docs](https://temp-mail.org/en/api/) | — | Free web inboxes do not establish free developer API access. API credentials, pricing and retention require preparation checks. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://temp-mail.org/en/api/) — checked 2026-09-09
+
+<a id="tiingo"></a>
+
+## Tiingo
+
+Market data covering end-of-day prices and other feeds, with an account-issued authentication token.
+
+[Website](https://www.tiingo.com/) · [Source record](../data/candidates/tiingo.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="tiingo-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://www.tiingo.com/documentation/general/overview) | [Docs](https://www.tiingo.com/documentation/general/overview) | self serve | Token is assigned after account creation. Request and bandwidth limits apply; current free allowance and target-feed entitlement are not yet established. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.tiingo.com/documentation/general/overview) — checked 2026-09-09
+
 <a id="together-ai"></a>
 
 ## Together AI
@@ -3519,6 +4535,70 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 - [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-09-07
 - [official_docs](https://docs.turso.tech/api-reference/introduction) — checked 2026-09-07
 - [official_site](https://turso.tech/pricing) — checked 2026-09-07
+
+<a id="tushare"></a>
+
+## Tushare Pro
+
+Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.
+
+[Website](https://tushare.pro/) · [Source record](../data/candidates/tushare.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="tushare-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://tushare.pro/document/1?doc_id=40) | [Docs](https://tushare.pro/document/1?doc_id=40) | self serve / documented | Daily unadjusted prices start at 120 points; financial statements start at 2,000. Points are an access threshold, not per-call spending. Some datasets need separate permissions. The HTTP example uses an unencrypted endpoint; verify a secure credential path before testing. |
+| [python-sdk (SDK)](https://tushare.pro/document/1?doc_id=40) | [Docs](https://tushare.pro/document/1?doc_id=40) | self serve / documented | Python SDK shares token and point thresholds with HTTP access; verify transport security before supplying credentials. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://tushare.pro/document/1?doc_id=40) — checked 2026-09-09
+- [official_docs](https://tushare.pro/document/1?doc_id=290) — checked 2026-09-09
+- [official_docs](https://tushare.pro/document/1?doc_id=108) — checked 2026-09-09
+
+<a id="twelve-data"></a>
+
+## Twelve Data
+
+Global stock, FX and crypto time series with API, Python SDK and CLI access.
+
+[Website](https://twelvedata.com/) · [Source record](../data/candidates/twelve-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="twelve-data-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://twelvedata.com/docs/introduction/quickstart) | [Docs](https://twelvedata.com/docs/introduction/quickstart) | self serve / documented | Basic advertises 800 API credits/day. Credits are not necessarily requests. Market coverage, fundamentals and display rights depend on plan. |
+| [python-sdk (SDK)](https://twelvedata.com/docs/introduction/quickstart) | [Docs](https://twelvedata.com/docs/introduction/quickstart) | self serve / documented | Official Python TDClient example; same account entitlement as REST. |
+| [data-cli (CLI)](https://github.com/twelvedata/twelvedata-cli) | [Docs](https://github.com/twelvedata/twelvedata-cli) | self serve / documented | Official CLI repository; installation and command coverage not yet tested. |
+
+### Service pricing
+
+- data-api: 800 credits / day (free_allowance; Basic plan; endpoint credit weights and market entitlements vary.)
+
+- python-sdk: 800 credits / day (free_allowance; Basic plan; endpoint credit weights and market entitlements vary.)
+
+- data-cli: 800 credits / day (free_allowance; Basic plan; endpoint credit weights and market entitlements vary.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
+- [official_site](https://twelvedata.com/pricing) — checked 2026-09-09
+- [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
+- [official_repo](https://github.com/twelvedata/twelvedata-cli) — checked 2026-09-09
 
 <a id="twilio"></a>
 
@@ -3702,6 +4782,32 @@ Payment APIs and checkout integration for existing apps, with TypeScript, Python
 
 - [official_docs](https://docs.whop.com/) — checked 2026-09-08
 
+<a id="world-bank-data"></a>
+
+## World Bank Indicators API
+
+Country-level economic and development indicators through the public Indicators API.
+
+[Website](https://data.worldbank.org/) · [Source record](../data/candidates/world-bank-data.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="world-bank-data-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | [Docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | self serve / documented | Annual country indicators have publication lags and revisions. Confirm each series and year; do not substitute annual GDP or inflation for monthly US indicators. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) — checked 2026-09-09
+
 <a id="xai"></a>
 
 ## xAI (Grok API)
@@ -3813,6 +4919,32 @@ Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpo
 ### Sources
 
 —
+
+<a id="zoho-mail"></a>
+
+## Zoho Mail
+
+Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
+
+[Website](https://www.zoho.com/mail/) · [Source record](../data/candidates/zoho-mail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="zoho-mail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-api (API)](https://www.zoho.com/mail/help/api/getting-started-with-api.html) | [Docs](https://www.zoho.com/mail/help/api/getting-started-with-api.html) | — | Account, OAuth client/scopes and data-center endpoint must be prepared. Free mailbox availability does not establish the API permissions required by a task. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.zoho.com/mail/help/api/getting-started-with-api.html) — checked 2026-09-09
 
 <a id="qunar-flights"></a>
 

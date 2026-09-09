@@ -1,0 +1,32 @@
+id: zoho-mail
+name: Zoho Mail
+category: communication
+homepage: https://www.zoho.com/mail/
+summary: Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://www.zoho.com/mail/help/api/getting-started-with-api.html
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://www.zoho.com/mail/help/api/getting-started-with-api.html
+    docs: https://www.zoho.com/mail/help/api/getting-started-with-api.html
+    evidence:
+    - docs
+    notes: Account, OAuth client/scopes and data-center endpoint must be prepared. Free mailbox availability
+      does not establish the API permissions required by a task.
+    auth:
+      value: oauth
+      evidence:
+      - docs

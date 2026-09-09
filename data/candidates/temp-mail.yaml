@@ -1,0 +1,28 @@
+id: temp-mail
+name: Temp Mail
+category: communication
+homepage: https://temp-mail.org/
+summary: Disposable email receiving service with a developer API for automated email workflows.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://temp-mail.org/en/api/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://temp-mail.org/en/api/
+    docs: https://temp-mail.org/en/api/
+    evidence:
+    - docs
+    notes: Free web inboxes do not establish free developer API access. API credentials, pricing and retention
+      require preparation checks.

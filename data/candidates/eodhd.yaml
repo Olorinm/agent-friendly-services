@@ -1,0 +1,65 @@
+id: eodhd
+name: EODHD
+category: web-search-data
+homepage: https://eodhd.com/
+summary: Historical market prices, fundamentals and economic datasets, with free and separately paid packages.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+  - fx
+  - crypto
+  - macro
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://eodhd.com/financial-apis/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    access:
+      url: https://eodhd.com/pricing
+      checked_on: '2026-09-09'
+      kind: official_site
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://eodhd.com/financial-apis/
+      docs: https://eodhd.com/financial-apis/
+      evidence:
+        - docs
+        - access
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+          - access
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+          - access
+      auth:
+        value: api_key
+        evidence:
+          - docs
+          - access
+      notes: >-
+        Free registration advertises 20 API calls/day without a card; some data types are excluded. Check
+        dataset and market coverage before choosing a trial.
+      costs:
+        - kind: free_allowance
+          amount: 20
+          unit: requests
+          per: day
+          scope: Free plan; some data types are excluded.
+          evidence:
+            - access
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - access

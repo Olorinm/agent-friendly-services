@@ -1,0 +1,74 @@
+id: alpha-vantage
+name: Alpha Vantage
+category: web-search-data
+homepage: https://www.alphavantage.co/
+summary: >-
+  Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota;
+  premium endpoints are separate.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+  - fx
+  - crypto
+  - macro
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://www.alphavantage.co/documentation/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    access:
+      url: https://www.alphavantage.co/support/
+      checked_on: '2026-09-09'
+      kind: official_site
+    mcp-discovery:
+      url: https://www.alphavantage.co/support/
+      checked_on: '2026-09-09'
+      kind: official_docs
+      notes: >-
+        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
+        could not be extracted in this pass.
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.alphavantage.co/documentation/
+      docs: https://www.alphavantage.co/documentation/
+      evidence:
+        - docs
+        - access
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+          - access
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+          - access
+      auth:
+        value: api_key
+        evidence:
+          - docs
+          - access
+      notes: >-
+        Free key: 25 requests/day. Real-time and delayed US quotes are premium; check each task endpoint
+        before execution.
+      costs:
+        - kind: free_allowance
+          amount: 25
+          unit: requests
+          per: day
+          scope: Free API key allowance; excludes premium endpoints.
+          evidence:
+            - access
+notes:
+  - >-
+    Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could
+    not be extracted in this pass.

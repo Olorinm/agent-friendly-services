@@ -1,0 +1,47 @@
+id: coinmarketcap
+name: CoinMarketCap
+category: web-search-data
+homepage: https://coinmarketcap.com/
+summary: Crypto market data with selected keyless endpoints and a free authenticated Basic plan.
+submitted_by: community
+tags:
+  - crypto
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://coinmarketcap.com/api/
+      checked_on: '2026-09-09'
+      kind: official_site
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://coinmarketcap.com/api/
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      notes: >-
+        Basic advertises 15,000 monthly call credits and 50 requests/minute. History depth and endpoint
+        availability depend on plan; keyless access is limited to selected endpoints.
+      costs:
+        - kind: free_allowance
+          amount: 15000
+          unit: credits
+          per: month
+          scope: Authenticated Basic plan; selected endpoints and history only.
+          evidence:
+            - docs

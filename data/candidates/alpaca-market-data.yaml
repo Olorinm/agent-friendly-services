@@ -1,0 +1,66 @@
+id: alpaca-market-data
+name: Alpaca Market Data
+category: web-search-data
+homepage: https://alpaca.markets/
+summary: >-
+  Read-only equities, options and crypto market data, separate from trading operations; Basic access is
+  included with paper accounts.
+submitted_by: community
+tags:
+  - stocks
+  - crypto
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://docs.alpaca.markets/us/docs/about-market-data-api
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.alpaca.markets/us/docs/about-market-data-api
+      docs: https://docs.alpaca.markets/us/docs/about-market-data-api
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      notes: >-
+        Basic is free with limited real-time feeds; historical coverage and latest-15-minute restrictions
+        are separate. Use market-data endpoints only. Paper-account signup and identity requirements have
+        not been measured.
+    - id: crypto-api-keyless
+      interface: api
+      maintainer: official
+      entry_url: https://docs.alpaca.markets/us/docs/about-market-data-api
+      docs: https://docs.alpaca.markets/us/docs/about-market-data-api
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      notes: >-
+        Official documentation exempts historical crypto endpoints from authentication. Does not imply
+        equity-data access or trading permission.

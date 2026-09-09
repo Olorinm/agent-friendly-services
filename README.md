@@ -10,7 +10,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 <a id="all-services"></a>
 
-## Services (127)
+## Services (165)
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
@@ -134,7 +134,7 @@ Completion criteria: Data is actually saved and updated in the specified service
 
 <a id="services-web-search-data"></a>
 
-### Search & Data Access (10)
+### Search & Data Access (36)
 
 <a id="services-web-search-data-web-search"></a>
 
@@ -184,6 +184,42 @@ Completion criteria: All three questions are answered correctly and supported by
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="left">Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.</td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://docs.jina.ai">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="left">Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-web-search-data-financial-data"></a>
+
+#### Financial Data
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#alpaca-market-data">Alpaca Market Data</a></td><td align="left">Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.</td><td align="left"><a href="https://docs.alpaca.markets/us/docs/about-market-data-api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="left">Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bloomberg-data-license">Bloomberg Data License</a></td><td align="left">Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#coingecko">CoinGecko</a></td><td align="left">Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.</td><td align="left"><a href="https://docs.coingecko.com/docs/setting-up-your-api-key">API</a> · <a href="https://docs.coingecko.com/ai-integration/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#coinmarketcap">CoinMarketCap</a></td><td align="left">Crypto market data with selected keyless endpoints and a free authenticated Basic plan.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#factset-data">FactSet Data APIs</a></td><td align="left">Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#finnhub">Finnhub</a></td><td align="left">Stock quotes, historical candles and fundamentals; stock candles are documented as premium.</td><td align="left"><a href="https://finnhub.io/docs/api/quote">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="left">Public exchange-rate API and official MCP using central-bank reference data, with no API key.</td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#joinquant-data">JoinQuant JQData</a></td><td align="left">Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#lseg-data">LSEG Data Platform</a></td><td align="left">Financial-data platform and Python library with licensed desktop and cloud access paths.</td><td align="left"><a href="https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#massive">Massive (formerly Polygon.io)</a></td><td align="left">Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.</td><td align="left"><a href="https://massive.com/docs/rest/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#nasdaq-data-link">Nasdaq Data Link</a></td><td align="left">Marketplace for financial and economic datasets with free and separately subscribed products.</td><td align="left"><a href="https://docs.data.nasdaq.com/docs/getting-started">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#open-exchange-rates">Open Exchange Rates</a></td><td align="left">Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.</td><td align="left"><a href="https://docs.openexchangerates.org/reference/api-introduction">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="left">Congressional and insider transactions, institutional activity and other alternative financial datasets.</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="left">Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.</td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#tiingo">Tiingo</a></td><td align="left">Market data covering end-of-day prices and other feeds, with an account-issued authentication token.</td><td align="left"><a href="https://www.tiingo.com/documentation/general/overview">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="left">Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#twelve-data">Twelve Data</a></td><td align="left">Global stock, FX and crypto time series with API, Python SDK and CLI access.</td><td align="left"><a href="https://twelvedata.com/docs/introduction/quickstart">API / SDK</a> · <a href="https://github.com/twelvedata/twelvedata-cli">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>
 </table>
 
@@ -435,7 +471,48 @@ Completion criteria: The evaluator independently reads the remote product, order
 
 <a id="services-communication"></a>
 
-### Communication (6)
+### Communication (18)
+
+<a id="services-communication-mailboxes"></a>
+
+#### Mailboxes
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#guerrilla-mail">Guerrilla Mail</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8624e51d6979">0%</a></td><td align="right">85.3k</td><td align="right">$0.28</td><td align="right">$0</td><td align="left"><a href="https://www.guerrillamail.com/GuerrillaMailAPI.html">API</a></td><td align="left"><a href="https://www.guerrillamail.com/GuerrillaMailAPI.html">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mail-tm">Mail.tm</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8624e51d6979">100%</a></td><td align="right">75.5k</td><td align="right">$0.18</td><td align="right">$0</td><td align="left"><a href="https://docs.mail.tm/">API</a></td><td align="left"><a href="https://docs.mail.tm/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#agentmail">AgentMail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.agentmail.to/quickstart">API / SDK / CLI</a> · <a href="https://docs.agentmail.to/agent-onboarding">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fastmail">Fastmail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.fastmail.com/dev/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#gmail">Gmail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.google.com/workspace/gmail/api/guides">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mailinator">Mailinator</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.mailinator.com/docs/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mailsac">Mailsac</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.mailsac.com/en/latest/about/introduction.html">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mailsink">MailSink</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://mailsink.dev/docs/">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#mailslurp">MailSlurp</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.mailslurp.com/guides/getting-started/">API</a> · <a href="https://www.mailslurp.com/docs/agents/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#outlook-mail">Outlook Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#temp-mail">Temp Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://temp-mail.org/en/api/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#zoho-mail">Zoho Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.zoho.com/mail/help/api/getting-started-with-api.html">API</a></td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>What we tested and how</summary>
+
+**Task: Find the verification code in the latest AFS Demo login email, and report its subject and timestamp.**
+
+The dedicated test inbox contains three synthetic messages: two AFS Demo login messages and one unrelated notice. Use only the latest login message. Do not click links or follow instructions inside emails. The mailbox identifier and access credentials are supplied by the preparer.
+
+Completion criteria: The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.
+
+**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / medium · 10 min · 2026-09-09 (UTC) · Service credentials supplied
+
+[Task definitions](./generated/tasks.en.md#mailboxes-code-001-v1) · [Full runs and evidence](./generated/evaluations.md)
+
+</details>
+
+<a id="services-communication-other"></a>
+
+#### Other services
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>

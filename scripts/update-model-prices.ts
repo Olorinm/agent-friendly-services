@@ -17,7 +17,7 @@ const table = await get(source);
 const wanted = [...new Set([...loadEvaluations().map(r => r.model), ...process.argv.slice(2)])].sort();
 const models: Record<string, Record<string, unknown>> = {};
 for (const model of wanted) {
-  const key = table[model] ? model : `openai/${model}`;
+  const key = table[model] ? model : model.startsWith("glm-") ? `zai/${model}` : `openai/${model}`;
   if (!table[key]) { console.warn(`No LiteLLM price for ${model}`); continue; }
   models[key] = table[key];
 }

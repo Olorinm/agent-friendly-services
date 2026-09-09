@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "run_id": "codex-20260909T102405.681663Z-guerrilla-mail",
+  "service_id": "guerrilla-mail",
+  "route_id": "mail-api",
+  "entry_url": "https://www.guerrillamail.com/GuerrillaMailAPI.html",
+  "task": {
+    "description": "为这次自动化测试准备一个临时收件邮箱，给我地址，并保存后续读取收件箱需要的访问信息。",
+    "inputs": "使用服务提供的域名；只需本次测试期间使用，不要求长期保留或自定义域名。确认能够读取收件箱列表，说明当前是否有邮件。将密码、令牌或会话信息保存在本地私有文件中，答复只给文件位置，不输出秘密。",
+    "expected_output": "一个真实邮箱地址、当前收件箱状态、私有访问信息文件和后续使用说明。",
+    "success": "指定服务返回实际邮箱地址；真实收件箱读取成功；已保存的访问状态可由评测者在独立请求中复用到同一邮箱；答复与实际状态相符，秘密不出现在答复中。",
+    "failure": "只生成地址字符串或给出教程；无法读取邮箱；未保存可复用访问状态；实际邮箱与答复不同；预算内未完成。平台或执行环境故障单列无效。",
+    "resources": "只使用指定服务的 API 及其官方文档，可创建一个本轮专用免费测试邮箱。邮箱资源创建属于此任务；如需上游服务账号、已有邮箱验证或付费则说明阻碍，不借用本机身份。不得发送邮件、注册其他服务或读取他人邮箱。",
+    "id": "mailboxes-create-001",
+    "version": "v1",
+    "sha256": "6fe50bc29a54aab38252367b7202eb075c1641923e11fc55895924fe7e31a1d6",
+    "file": "data/experiments/tasks/mailboxes.md"
+  },
+  "prompt_sha256": "27caaf3e8e917cdab4f5abeb7ba8eb54d012b458014cc1393b1de2b8b18ed4a8",
+  "harness": {
+    "name": "Codex CLI",
+    "version": "codex-cli 0.153.4",
+    "mode": "exec --json",
+    "launcher": "scripts/codex-service-trial.py",
+    "launcher_sha256": "9f5b1bef0d1192ec821438cdacd263b2429a6b1a3b2bd9cc1b26dbb9a7793fcf"
+  },
+  "model": "gpt-6-astra",
+  "reasoning_effort": "medium",
+  "started_at": "2026-09-09T10:24:05.693712+00:00",
+  "ended_at": "2026-09-09T10:25:01.094221+00:00",
+  "elapsed_seconds": 55.401,
+  "budget_seconds": 600,
+  "environment": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "architecture": "arm64",
+      "python": "3.13.0"
+    },
+    "isolation": "fresh conversation/directory; same host, not VM isolation",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "No service account or resource prepared before the measured session.",
+    "prompt_style": "natural",
+    "evidence_collection": "CLI events and external remote read",
+    "prompt_characters": 91,
+    "input_delivery": "workspace attachments",
+    "context_files": [
+      {
+        "path": "input.md",
+        "sha256": "696c6542b67a208781ed9938272c7246883912bfc1cccffaa40b8615e63d241e",
+        "characters": 95
+      },
+      {
+        "path": "ENVIRONMENT.md",
+        "sha256": "115ce4a54fd91c036b25814001c12c2d45ce6593dcb78c5dea5effffa2ca569e",
+        "characters": 320
+      }
+    ]
+  },
+  "status": "completed",
+  "reason": "Created a real temporary mailbox, read its inbox and saved private reusable access state. Independent HTTP requests recovered the same mailbox and matched the reported message count. External email delivery, verification-code retrieval and long-term retention were not tested.",
+  "usage": {
+    "input_tokens": 112605,
+    "cached_input_tokens": 91392,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1107,
+    "reasoning_output_tokens": 23
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.guerrillamail.com/GuerrillaMailAPI.html",
+      "external-check.json"
+    ],
+    "note": "Public default temporary-mailbox API, no upstream account, payment credential, subscription or custom domain supplied; no billable feature invoked. Only mailbox provisioning and listing were used.",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "Preparing/evaluating Agent; independent from the measured Codex session",
+    "reviewed_at": "2026-09-09T10:28:37.786308+00:00",
+    "checks": [
+      {
+        "criterion": "Real mailbox and successful inbox read through the specified service",
+        "passed": true,
+        "evidence": "external-check.json: both independent requests returned HTTP 200; same_mailbox=true."
+      },
+      {
+        "criterion": "Saved access state can be reused for the same mailbox",
+        "passed": true,
+        "evidence": "Evaluator directly read private access files and made new HTTP requests; no executor scripts were run."
+      },
+      {
+        "criterion": "Reported inbox state matches the observed result",
+        "passed": true,
+        "evidence": "external-check.json: observed and reported message counts match; answer.md reports the same mailbox (address redacted in public copy)."
+      },
+      {
+        "criterion": "Secret access values saved privately and excluded from answer",
+        "passed": true,
+        "evidence": "Private access JSON permissions 0600; answer_contains_secret=false. Private credentials and raw logs excluded from public evidence."
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/codex-20260909T102405.681663Z-guerrilla-mail/answer.md",
+      "sha256": "72de5c43c72dddb5bc09d0213edccba6530b23a1e593aa57b44daa755a006bf1",
+      "note": "Executor final deliverable, test address and local paths redacted.",
+      "source_sha256": "91c361fae92be865b95bf5bce264399aef40c6023a2b81cc67edf930b08b61e8",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/codex-20260909T102405.681663Z-guerrilla-mail/external-check.json",
+      "sha256": "d8370e521e2d38ac307f5c00116ade4e983fa0cf1565a1fe1d603c12388a7c6c",
+      "note": "Independent post-run HTTP checks and hash of local raw responses."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/trials/codex-20260909T102405.681663Z-guerrilla-mail",
+    "run_sha256": "dfc5eade36dd84275a19e42b85a2e624523885893b6b017376518aa450083169",
+    "events_sha256": "c0d1b3d99e13ed55935a96c92de53dc66fd83133ee3047240623a05c09a30717",
+    "answer_sha256": "91c361fae92be865b95bf5bce264399aef40c6023a2b81cc67edf930b08b61e8",
+    "review_sha256": "ea9f334ef83737b324b7031f1daaab011931804df486b797077b53bd71378fa4",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "session token_usage_record",
+    "requests": [
+      {
+        "input_tokens": 11200,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11412,
+        "cached_input_tokens": 11008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11759,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 47,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18894,
+        "cached_input_tokens": 11520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 610,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19561,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 39,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19768,
+        "cached_input_tokens": 19328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 150,
+        "reasoning_output_tokens": 23
+      },
+      {
+        "input_tokens": 20011,
+        "cached_input_tokens": 19584,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 128,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "0109b639aa7f8f3a138221a0f15e28712dbc9c67a96bbd40819e6012a842753a",
+    "reason": "Per-request counters reconcile with CLI final usage",
+    "totals": {
+      "input_tokens": 112605,
+      "cached_input_tokens": 91392,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1107,
+      "reasoning_output_tokens": 23
+    }
+  }
+}

@@ -1,0 +1,148 @@
+id: bargo-congress
+name: Bargo Congress Trades API
+category: web-search-data
+homepage: https://www.bargo.ai/free-apis/congress
+summary: >-
+  Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers
+  only the Congress product.
+submitted_by: vendor
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://www.bargo.ai/free-apis/congress
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: congress-api-keyless
+      interface: api
+      maintainer: official
+      entry_url: https://www.bargo.ai/free-apis/congress
+      docs: https://www.bargo.ai/free-apis/congress
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      notes: >-
+        Keyless: 30 requests and 100 rows per IP/day; free key: 100 requests and 1,000 rows/day. Rolling
+        three-month coverage; preserve transaction and disclosure dates. Attribution required; raw-data
+        redistribution restricted.
+      costs:
+        - kind: free_allowance
+          amount: 30
+          unit: requests
+          per: day
+          scope: Keyless quota shared per IP.
+          evidence:
+            - docs
+        - kind: free_allowance
+          amount: 100
+          unit: rows
+          per: day
+          scope: Rolling three-month Congress dataset; redistribution restrictions apply.
+          evidence:
+            - docs
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+    - id: congress-api-keyed
+      interface: api
+      maintainer: official
+      entry_url: https://www.bargo.ai/free-apis/congress/v1
+      docs: https://www.bargo.ai/free-apis/congress
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      notes: Free key raises the quota; signup and key acquisition have not been measured.
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: requests
+          per: day
+          scope: Free-key quota shared by API and MCP.
+          evidence:
+            - docs
+        - kind: free_allowance
+          amount: 1000
+          unit: rows
+          per: day
+          scope: Rolling three-month Congress dataset; redistribution restrictions apply.
+          evidence:
+            - docs
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+    - id: congress-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://www.bargo.ai/free-apis/congress/mcp
+      docs: https://www.bargo.ai/free-apis/congress
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      notes: Uses the free Congress key. Same rolling data window; verify available tool coverage per task.
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: requests
+          per: day
+          scope: Free-key quota shared by API and MCP.
+          evidence:
+            - docs
+        - kind: free_allowance
+          amount: 1000
+          unit: rows
+          per: day
+          scope: Rolling three-month Congress dataset; redistribution restrictions apply.
+          evidence:
+            - docs
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+notes:
+  - >-
+    Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6;
+    included in the broader financial-data discovery pass. PR remains open; no task result implied.

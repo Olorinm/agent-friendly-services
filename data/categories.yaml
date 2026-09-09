@@ -114,6 +114,16 @@ categories:
   - id: communication
     name: Communication
     description: Email, SMS, chat, notifications.
+    subcategories:
+      - id: mailboxes
+        name: Mailboxes
+        name_zh: 邮箱
+        description: Mailboxes for receiving and managing email; temporary and persistent accounts have different retention and access conditions.
+        capabilities:
+          - id: mailboxes.provision
+            description: Obtain a mailbox and retain access for subsequent use.
+          - id: mailboxes.read
+            description: Find and read the intended incoming email.
     name_zh: 通信
   - id: productivity-storage
     name: Workplace Collaboration

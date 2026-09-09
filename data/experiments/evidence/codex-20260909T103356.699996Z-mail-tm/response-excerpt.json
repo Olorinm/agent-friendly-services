@@ -1,0 +1,7 @@
+{
+  "source": "Selected fields from executor command response in events.jsonl",
+  "subject": "AFS Demo login 2",
+  "createdAt": "2026-09-09T10:31:11+00:00",
+  "text": "Synthetic email for an authorized mailbox test.\nAFS Demo login verification code: 702619.\nThis code is test data and cannot access any real account.",
+  "events_sha256": "1b356387b162c3f747c921fd3dcc18a3fc2fb8c0cc3b4cc8d17d79ad99d1efb0"
+}

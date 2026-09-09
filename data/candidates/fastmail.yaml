@@ -1,0 +1,32 @@
+id: fastmail
+name: Fastmail
+category: communication
+homepage: https://www.fastmail.com/
+summary: Persistent email with JMAP API tokens, OAuth and standard mail protocols.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://www.fastmail.com/dev/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://www.fastmail.com/dev/
+    docs: https://www.fastmail.com/dev/
+    evidence:
+    - docs
+    notes: JMAP tokens can be generated for an existing account. Subscription/trial API eligibility is not
+      yet verified; do not assume permanent free access.
+    auth:
+      value: api_key
+      evidence:
+      - docs

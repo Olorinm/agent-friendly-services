@@ -1,0 +1,26 @@
+id: bloomberg-data-license
+name: Bloomberg Data License
+category: web-search-data
+homepage: https://professional.bloomberg.com/products/data/data-license/
+summary: >-
+  Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP
+  or cloud.
+submitted_by: community
+tags:
+  - institutional
+  - stocks
+  - financials
+notes:
+  - >-
+    Existing-client data portal and demo request are documented. Personal self-service API signup and a
+    free execution allowance have not been established.
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://professional.bloomberg.com/products/data/data-license/
+      checked_on: '2026-09-09'
+      kind: official_site
+  routes: []

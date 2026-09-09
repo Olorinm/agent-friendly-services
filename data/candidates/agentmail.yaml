@@ -1,0 +1,69 @@
+id: agentmail
+name: AgentMail
+category: communication
+homepage: https://www.agentmail.to/
+summary: Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and MCP access.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://docs.agentmail.to/quickstart
+      checked_on: '2026-09-09'
+      kind: official_docs
+    pricing:
+      url: https://www.agentmail.to/pricing
+      checked_on: '2026-09-09'
+      kind: official_docs
+    onboarding:
+      url: https://docs.agentmail.to/agent-onboarding
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://docs.agentmail.to/quickstart
+    docs: https://docs.agentmail.to/quickstart
+    evidence:
+    - docs
+    notes: 'Agent signup accepts an owner email and sends an OTP. Verification unlocks full permissions; existing
+      owner accounts cannot use first-time signup. Signup can rotate an existing unverified key, so inspect
+      account state before retrying. Published Free plan: 3 inboxes and 3,000 emails/month, no card required;
+      not observed account entitlement.'
+    auth:
+      value: api_key
+      evidence:
+      - docs
+  - id: mail-sdk
+    interface: sdk
+    maintainer: official
+    entry_url: https://docs.agentmail.to/quickstart
+    docs: https://docs.agentmail.to/quickstart
+    evidence:
+    - docs
+    notes: Separate route; shares the service account and plan limits. No task result inherited from other
+      routes.
+  - id: mail-cli
+    interface: cli
+    maintainer: official
+    entry_url: https://docs.agentmail.to/quickstart
+    docs: https://docs.agentmail.to/quickstart
+    evidence:
+    - docs
+    notes: Separate route; shares the service account and plan limits. No task result inherited from other
+      routes.
+  - id: mail-mcp
+    interface: mcp
+    maintainer: official
+    entry_url: https://mcp.agentmail.to/mcp
+    docs: https://docs.agentmail.to/agent-onboarding
+    evidence:
+    - onboarding
+    notes: Separate route; shares the service account and plan limits. No task result inherited from other
+      routes.

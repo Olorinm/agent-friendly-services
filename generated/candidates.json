@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-09T09:56:03.240Z",
-  "count": 51,
+  "generated_at": "2026-09-09T11:12:29.597Z",
+  "count": 89,
   "candidates": [
     {
       "id": "adyen",
@@ -13,6 +13,17 @@
       "entrypoints": {
         "docs": "https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks"
       },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "agentmail",
+      "name": "AgentMail",
+      "category": "communication",
+      "homepage": "https://www.agentmail.to/",
+      "summary": "Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and MCP access.",
+      "submitted_by": "community",
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },
@@ -63,6 +74,30 @@
       "m1": null
     },
     {
+      "id": "alpaca-market-data",
+      "name": "Alpaca Market Data",
+      "category": "web-search-data",
+      "homepage": "https://alpaca.markets/",
+      "summary": "Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "alpha-vantage",
+      "name": "Alpha Vantage",
+      "category": "web-search-data",
+      "homepage": "https://www.alphavantage.co/",
+      "summary": "Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass."
+      ],
+      "m1": null
+    },
+    {
       "id": "amadeus-flights",
       "name": "Amadeus Flight APIs",
       "category": "travel",
@@ -96,6 +131,19 @@
       "m1": null
     },
     {
+      "id": "bargo-congress",
+      "name": "Bargo Congress Trades API",
+      "category": "web-search-data",
+      "homepage": "https://www.bargo.ai/free-apis/congress",
+      "summary": "Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.",
+      "submitted_by": "vendor",
+      "entrypoints": {},
+      "notes": [
+        "Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; included in the broader financial-data discovery pass. PR remains open; no task result implied."
+      ],
+      "m1": null
+    },
+    {
       "id": "baserow",
       "name": "Baserow Cloud",
       "category": "productivity-storage",
@@ -104,6 +152,19 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
+      "m1": null
+    },
+    {
+      "id": "bloomberg-data-license",
+      "name": "Bloomberg Data License",
+      "category": "web-search-data",
+      "homepage": "https://professional.bloomberg.com/products/data/data-license/",
+      "summary": "Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "Existing-client data portal and demo request are documented. Personal self-service API signup and a free execution allowance have not been established."
+      ],
       "m1": null
     },
     {
@@ -136,6 +197,28 @@
       "category": "productivity-storage",
       "homepage": "https://coda.io/",
       "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "coingecko",
+      "name": "CoinGecko",
+      "category": "web-search-data",
+      "homepage": "https://www.coingecko.com/",
+      "summary": "Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "coinmarketcap",
+      "name": "CoinMarketCap",
+      "category": "web-search-data",
+      "homepage": "https://coinmarketcap.com/",
+      "summary": "Crypto market data with selected keyless endpoints and a free authenticated Basic plan.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -195,11 +278,57 @@
       "m1": null
     },
     {
+      "id": "ecb-data",
+      "name": "ECB Data Portal API",
+      "category": "web-search-data",
+      "homepage": "https://data.ecb.europa.eu/",
+      "summary": "European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "eodhd",
+      "name": "EODHD",
+      "category": "web-search-data",
+      "homepage": "https://eodhd.com/",
+      "summary": "Historical market prices, fundamentals and economic datasets, with free and separately paid packages.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "expedia-xap-flights",
       "name": "Expedia XAP Flight Listings",
       "category": "travel",
       "homepage": "https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started",
       "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "factset-data",
+      "name": "FactSet Data APIs",
+      "category": "web-search-data",
+      "homepage": "https://www.factset.com/",
+      "summary": "Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "Developer portal is discoverable, but the exact dataset, individual eligibility, credentials and price remain unconfirmed. No claim of free self-service access."
+      ],
+      "m1": null
+    },
+    {
+      "id": "fastmail",
+      "name": "Fastmail",
+      "category": "communication",
+      "homepage": "https://www.fastmail.com/",
+      "summary": "Persistent email with JMAP API tokens, OAuth and standard mail protocols.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -224,6 +353,30 @@
       "category": "productivity-storage",
       "homepage": "https://www.feishu.cn/",
       "summary": "China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "financial-datasets",
+      "name": "Financial Datasets",
+      "category": "web-search-data",
+      "homepage": "https://financialdatasets.ai/",
+      "summary": "US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass."
+      ],
+      "m1": null
+    },
+    {
+      "id": "finnhub",
+      "name": "Finnhub",
+      "category": "web-search-data",
+      "homepage": "https://finnhub.io/",
+      "summary": "Stock quotes, historical candles and fundamentals; stock candles are documented as premium.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -263,6 +416,50 @@
       "m1": null
     },
     {
+      "id": "fmp",
+      "name": "Financial Modeling Prep (FMP)",
+      "category": "web-search-data",
+      "homepage": "https://financialmodelingprep.com/",
+      "summary": "Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "frankfurter",
+      "name": "Frankfurter",
+      "category": "web-search-data",
+      "homepage": "https://frankfurter.dev/",
+      "summary": "Public exchange-rate API and official MCP using central-bank reference data, with no API key.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "fred",
+      "name": "FRED / ALFRED",
+      "category": "web-search-data",
+      "homepage": "https://fred.stlouisfed.org/",
+      "summary": "Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "gmail",
+      "name": "Gmail",
+      "category": "communication",
+      "homepage": "https://mail.google.com/",
+      "summary": "Persistent Google mailboxes accessible through the Gmail API after account and OAuth setup.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "google-sheets",
       "name": "Google Sheets",
       "category": "productivity-storage",
@@ -285,6 +482,17 @@
       "m1": null
     },
     {
+      "id": "guerrilla-mail",
+      "name": "Guerrilla Mail",
+      "category": "communication",
+      "homepage": "https://www.guerrillamail.com/",
+      "summary": "Temporary email addresses and message retrieval through a public session-based API.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "ignav",
       "name": "Ignav Flights",
       "category": "travel",
@@ -293,6 +501,19 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
+      "m1": null
+    },
+    {
+      "id": "joinquant-data",
+      "name": "JoinQuant JQData",
+      "category": "web-search-data",
+      "homepage": "https://www.joinquant.com/",
+      "summary": "Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "The documentation access restriction was observed through the research browser, not a local API trial. API availability, personal onboarding, transport and free trial remain unverified."
+      ],
       "m1": null
     },
     {
@@ -329,11 +550,88 @@
       "m1": null
     },
     {
+      "id": "lseg-data",
+      "name": "LSEG Data Platform",
+      "category": "web-search-data",
+      "homepage": "https://www.lseg.com/en/data-analytics",
+      "summary": "Financial-data platform and Python library with licensed desktop and cloud access paths.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "lufthansa-partner",
       "name": "Lufthansa Partner Fare API",
       "category": "travel",
       "homepage": "https://developer.lufthansa.com/page",
       "summary": "Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "mail-tm",
+      "name": "Mail.tm",
+      "category": "communication",
+      "homepage": "https://mail.tm/",
+      "summary": "Temporary receive-only mailboxes with an account/password and authenticated REST access.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "mailinator",
+      "name": "Mailinator",
+      "category": "communication",
+      "homepage": "https://www.mailinator.com/",
+      "summary": "Public disposable inboxes and a paid private email-testing platform with API access.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "mailsac",
+      "name": "Mailsac",
+      "category": "communication",
+      "homepage": "https://mailsac.com/",
+      "summary": "Email receiving and testing APIs with public and private mailbox options.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "mailsink",
+      "name": "MailSink",
+      "category": "communication",
+      "homepage": "https://mailsink.dev/",
+      "summary": "Temporary inbox API and MCP with message, verification-code and verification-link retrieval.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "mailslurp",
+      "name": "MailSlurp",
+      "category": "communication",
+      "homepage": "https://www.mailslurp.com/",
+      "summary": "Programmable mailboxes for email automation and testing, including message waiting and agent integrations.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "massive",
+      "name": "Massive (formerly Polygon.io)",
+      "category": "web-search-data",
+      "homepage": "https://massive.com/",
+      "summary": "Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -349,6 +647,39 @@
       "entrypoints": {
         "docs": "https://docs.mollie.com/reference/create-payment-link"
       },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "nasdaq-data-link",
+      "name": "Nasdaq Data Link",
+      "category": "web-search-data",
+      "homepage": "https://data.nasdaq.com/",
+      "summary": "Marketplace for financial and economic datasets with free and separately subscribed products.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "open-exchange-rates",
+      "name": "Open Exchange Rates",
+      "category": "web-search-data",
+      "homepage": "https://openexchangerates.org/",
+      "summary": "Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "outlook-mail",
+      "name": "Outlook Mail",
+      "category": "communication",
+      "homepage": "https://outlook.live.com/",
+      "summary": "Persistent Microsoft mailboxes with mail retrieval and management through Microsoft Graph.",
+      "submitted_by": "community",
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },
@@ -438,6 +769,17 @@
       "m1": null
     },
     {
+      "id": "quiver-quantitative",
+      "name": "Quiver Quantitative",
+      "category": "web-search-data",
+      "homepage": "https://www.quiverquant.com/",
+      "summary": "Congressional and insider transactions, institutional activity and other alternative financial datasets.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "qunar-flights",
       "name": "去哪儿机票合作",
       "category": "travel",
@@ -495,6 +837,17 @@
       "m1": null
     },
     {
+      "id": "sec-edgar",
+      "name": "SEC EDGAR Data APIs",
+      "category": "web-search-data",
+      "homepage": "https://www.sec.gov/",
+      "summary": "Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "serper",
       "name": "Serper",
       "category": "web-search-data",
@@ -503,6 +856,19 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
+      "m1": null
+    },
+    {
+      "id": "simfin",
+      "name": "SimFin",
+      "category": "web-search-data",
+      "homepage": "https://www.simfin.com/",
+      "summary": "Company fundamentals and price data with API and CSV access advertised across free and paid plans.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [
+        "Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification."
+      ],
       "m1": null
     },
     {
@@ -537,6 +903,28 @@
       "entrypoints": {
         "docs": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink"
       },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "temp-mail",
+      "name": "Temp Mail",
+      "category": "communication",
+      "homepage": "https://temp-mail.org/",
+      "summary": "Disposable email receiving service with a developer API for automated email workflows.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "tiingo",
+      "name": "Tiingo",
+      "category": "web-search-data",
+      "homepage": "https://www.tiingo.com/",
+      "summary": "Market data covering end-of-day prices and other feeds, with an account-issued authentication token.",
+      "submitted_by": "community",
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },
@@ -585,6 +973,28 @@
       "m1": null
     },
     {
+      "id": "tushare",
+      "name": "Tushare Pro",
+      "category": "web-search-data",
+      "homepage": "https://tushare.pro/",
+      "summary": "Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "twelve-data",
+      "name": "Twelve Data",
+      "category": "web-search-data",
+      "homepage": "https://twelvedata.com/",
+      "summary": "Global stock, FX and crypto time series with API, Python SDK and CLI access.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "wechat-pay",
       "name": "WeChat Pay",
       "category": "payments-billing",
@@ -607,6 +1017,17 @@
       "entrypoints": {
         "docs": "https://docs.whop.com/"
       },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "world-bank-data",
+      "name": "World Bank Indicators API",
+      "category": "web-search-data",
+      "homepage": "https://data.worldbank.org/",
+      "summary": "Country-level economic and development indicators through the public Indicators API.",
+      "submitted_by": "community",
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },
@@ -643,6 +1064,17 @@
         "date": "2026-07-15",
         "transcript": "2026-07-15-dry-fire-rep3.md"
       }
+    },
+    {
+      "id": "zoho-mail",
+      "name": "Zoho Mail",
+      "category": "communication",
+      "homepage": "https://www.zoho.com/mail/",
+      "summary": "Persistent personal and organizational mailboxes with scoped OAuth mail APIs.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
     }
   ]
 }

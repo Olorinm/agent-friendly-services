@@ -1,0 +1,96 @@
+id: coingecko
+name: CoinGecko
+category: web-search-data
+homepage: https://www.coingecko.com/
+summary: >-
+  Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP
+  servers.
+submitted_by: community
+tags:
+  - crypto
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://docs.coingecko.com/docs/setting-up-your-api-key
+      checked_on: '2026-09-09'
+      kind: official_docs
+    access:
+      url: https://docs.coingecko.com/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    mcp:
+      url: https://docs.coingecko.com/ai-integration/mcp-server
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.coingecko.com/docs/setting-up-your-api-key
+      docs: https://docs.coingecko.com/docs/setting-up-your-api-key
+      evidence:
+        - docs
+        - access
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+          - access
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+          - access
+      auth:
+        value: api_key
+        evidence:
+          - docs
+          - access
+      notes: >-
+        Demo and paid API plans have different history and quotas. Keyless MCP has shared limits and a
+        smaller tool set. Asset IDs and quote currency must match the task.
+    - id: keyless-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.api.coingecko.com/mcp
+      docs: https://docs.coingecko.com/ai-integration/mcp-server
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: none
+        evidence:
+          - mcp
+      notes: Free, shared rate limits, limited tool set; account and key not required.
+    - id: keyed-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.pro-api.coingecko.com/mcp
+      docs: https://docs.coingecko.com/ai-integration/mcp-server
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+      notes: >-
+        Account entitlement and tool set differ from keyless MCP; confirm free Demo compatibility before
+        a paid-server call.

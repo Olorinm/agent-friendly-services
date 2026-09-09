@@ -1,0 +1,44 @@
+id: mailsink
+name: MailSink
+category: communication
+homepage: https://mailsink.dev/
+summary: Temporary inbox API and MCP with message, verification-code and verification-link retrieval.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://mailsink.dev/docs/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    homepage:
+      url: https://mailsink.dev/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://mailsink.dev/docs/
+    docs: https://mailsink.dev/docs/
+    evidence:
+    - docs
+    notes: Homepage advertises anonymous mode, but current quickstart says GitHub login and Bearer token are
+      required for all API requests. Preserve this conflict until observed; do not assume anonymous access.
+    auth:
+      value: api_key
+      evidence:
+      - docs
+  - id: mail-mcp
+    interface: mcp
+    maintainer: official
+    entry_url: https://mailsink.dev/docs/
+    docs: https://mailsink.dev/docs/
+    evidence:
+    - docs
+    notes: Official @mailsink/mcp setup requires MAILSINK_API_KEY. Anonymous-mode conflict remains unresolved.

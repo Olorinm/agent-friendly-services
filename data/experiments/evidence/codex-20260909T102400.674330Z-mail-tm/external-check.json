@@ -1,0 +1,19 @@
+{
+  "reviewed_at": "2026-09-09T10:27:32.157050+00:00",
+  "method": "Independent HTTP requests from the preparing/evaluating Agent; executor scripts were not run.",
+  "requests": [
+    "https://api.mail.tm/me",
+    "https://api.mail.tm/messages"
+  ],
+  "http_statuses": [
+    200,
+    200
+  ],
+  "same_mailbox": true,
+  "message_count": 0,
+  "executor_reported_message_count": 0,
+  "private_file_mode": "0o600",
+  "answer_contains_secret": false,
+  "raw_response_sha256": "fa91872e6e50749f2809a00d7375a2b08a126cf1098272e6031e7e31ac74951e",
+  "scope": "Provisioning and inbox listing only. No external test email was sent or delivery verified."
+}

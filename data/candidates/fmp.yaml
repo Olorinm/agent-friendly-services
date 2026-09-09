@@ -1,0 +1,80 @@
+id: fmp
+name: Financial Modeling Prep (FMP)
+category: web-search-data
+homepage: https://financialmodelingprep.com/
+summary: >-
+  Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and
+  official MCP.
+submitted_by: community
+tags:
+  - stocks
+  - financials
+  - fx
+  - crypto
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://site.financialmodelingprep.com/developer/docs
+      checked_on: '2026-09-09'
+      kind: official_docs
+    access:
+      url: https://site.financialmodelingprep.com/developer/docs/pricing
+      checked_on: '2026-09-09'
+      kind: official_docs
+    mcp:
+      url: https://site.financialmodelingprep.com/developer/docs/mcp-server
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://site.financialmodelingprep.com/developer/docs
+      docs: https://site.financialmodelingprep.com/developer/docs
+      evidence:
+        - docs
+        - access
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+          - access
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+          - access
+      auth:
+        value: api_key
+        evidence:
+          - docs
+          - access
+      notes: >-
+        Account and API key required. Personal and commercial plans differ; endpoint access must be
+        checked against the selected plan.
+    - id: data-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://financialmodelingprep.com/mcp
+      docs: https://site.financialmodelingprep.com/developer/docs/mcp-server
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+      notes: >-
+        Uses the existing API key and plan limits; key must be injected privately, never stored in the
+        URL in public results.

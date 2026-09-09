@@ -1,0 +1,32 @@
+id: outlook-mail
+name: Outlook Mail
+category: communication
+homepage: https://outlook.live.com/
+summary: Persistent Microsoft mailboxes with mail retrieval and management through Microsoft Graph.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview
+    docs: https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview
+    evidence:
+    - docs
+    notes: Personal versus organizational accounts and delegated permissions differ. Requires mailbox ownership
+      and app authorization; Graph mail access does not create consumer Microsoft accounts.
+    auth:
+      value: oauth
+      evidence:
+      - docs

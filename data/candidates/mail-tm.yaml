@@ -1,0 +1,37 @@
+id: mail-tm
+name: Mail.tm
+category: communication
+homepage: https://mail.tm/
+summary: Temporary receive-only mailboxes with an account/password and authenticated REST access.
+submitted_by: community
+tags:
+- email
+- mailbox
+catalog:
+  version: 1
+  classifications:
+  - communication/mailboxes
+  sources:
+    docs:
+      url: https://docs.mail.tm/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+  - id: mail-api
+    interface: api
+    maintainer: official
+    entry_url: https://docs.mail.tm/
+    docs: https://docs.mail.tm/
+    evidence:
+    - docs
+    notes: Free public API; creating the mailbox also creates its account. No upstream user account or paid
+      API key is required. Temporary domains and retention must be checked before using for important accounts.
+      On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse
+      of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term
+      retention. A subsequent independent medium session retrieved the correct latest login code, subject and
+      timestamp from three real synthetic emails delivered by Gmail. This does not establish acceptance by
+      arbitrary signup websites.
+    auth:
+      value: none
+      evidence:
+      - docs

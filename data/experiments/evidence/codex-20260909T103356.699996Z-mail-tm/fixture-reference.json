@@ -1,0 +1,25 @@
+{
+  "frozen_at": "2026-09-09T10:32:40.928474+00:00",
+  "service": "mail-tm",
+  "messages": [
+    {
+      "subject": "AFS Demo weekly notice",
+      "time": "2026-09-09T10:31:32+00:00",
+      "code_in_body": "987654"
+    },
+    {
+      "subject": "AFS Demo login 2",
+      "time": "2026-09-09T10:31:11+00:00",
+      "code_in_body": "702619"
+    },
+    {
+      "subject": "AFS Demo login 1",
+      "time": "2026-09-09T10:30:50+00:00",
+      "code_in_body": "183492"
+    }
+  ],
+  "expected_subject": "AFS Demo login 2",
+  "expected_code": "702619",
+  "raw_sha256": "c56223c7df079c94086a1e827db78cfd4c3dc9d378db0737f48036b20547e3be",
+  "source": "Three synthetic emails sent from user-authorized Gmail through browser UI; pre-run recipient API read confirms delivery."
+}

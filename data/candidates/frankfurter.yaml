@@ -1,0 +1,66 @@
+id: frankfurter
+name: Frankfurter
+category: web-search-data
+homepage: https://frankfurter.dev/
+summary: Public exchange-rate API and official MCP using central-bank reference data, with no API key.
+submitted_by: community
+tags:
+  - fx
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data
+  sources:
+    docs:
+      url: https://frankfurter.dev/
+      checked_on: '2026-09-09'
+      kind: official_docs
+    mcp:
+      url: https://frankfurter.dev/mcp/
+      checked_on: '2026-09-09'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://frankfurter.dev/
+      docs: https://frankfurter.dev/
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      notes: >-
+        Reference rates are not bank/card execution quotes. Specify the rate date and underlying source;
+        v2 can combine central-bank sources.
+    - id: rates-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://frankfurter.dev/mcp/
+      docs: https://frankfurter.dev/mcp/
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: none
+        evidence:
+          - mcp
+      notes: >-
+        Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading
+        service.

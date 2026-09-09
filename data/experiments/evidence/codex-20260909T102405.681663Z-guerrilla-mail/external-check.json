@@ -1,0 +1,19 @@
+{
+  "reviewed_at": "2026-09-09T10:27:34.176665+00:00",
+  "method": "Independent HTTP requests from the preparing/evaluating Agent; executor scripts were not run.",
+  "requests": [
+    "https://api.guerrillamail.com/ajax.php?f=get_email_address",
+    "https://api.guerrillamail.com/ajax.php?f=get_email_list&offset=0"
+  ],
+  "http_statuses": [
+    200,
+    200
+  ],
+  "same_mailbox": true,
+  "message_count": 1,
+  "executor_reported_message_count": 1,
+  "private_file_mode": "0o600",
+  "answer_contains_secret": false,
+  "raw_response_sha256": "9a5a76e14466478585d77c9ae3a21438717823fd4802c2f2f5ba5c449689ed87",
+  "scope": "Provisioning and inbox listing only. No external test email was sent or delivery verified."
+}

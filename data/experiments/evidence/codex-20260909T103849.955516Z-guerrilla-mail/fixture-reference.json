@@ -1,0 +1,25 @@
+{
+  "frozen_at": "2026-09-09T10:37:53.387511+00:00",
+  "service": "guerrilla-mail",
+  "messages": [
+    {
+      "subject": "",
+      "time": "1788949913",
+      "code_in_body": "987654"
+    },
+    {
+      "subject": "",
+      "time": "1788949892",
+      "code_in_body": "702619"
+    },
+    {
+      "subject": "",
+      "time": "1788949872",
+      "code_in_body": "183492"
+    }
+  ],
+  "expected_subject": "AFS Demo login 2",
+  "expected_code": "702619",
+  "raw_sha256": "4647be4d2540b2f1b94860cbc657815ada7971dd35c752eb9508613c7c8ae69a",
+  "source": "Gmail sent UI confirms exact recipients and subjects; independent recipient API read confirms all three synthetic bodies. Subject metadata in message listing is blank; inspect full messages rather than treating blank list subjects as failed delivery."
+}
