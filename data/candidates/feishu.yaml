@@ -30,6 +30,7 @@ catalog:
       kind: official_site
   routes:
     - id: base-api
+      docs: https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md
       interface: api
       maintainer: official
       entry_url: https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create
@@ -61,6 +62,7 @@ catalog:
         Requires a platform app, authorized identity and Base scopes/resource permissions.
         Ordinary-person onboarding from a fresh account is not tested.
     - id: official-cli
+      docs: https://github.com/larksuite/cli
       interface: cli
       maintainer: official
       entry_url: https://github.com/larksuite/cli
@@ -91,6 +93,7 @@ catalog:
         Official CLI covers Base and supports individuals. Account signup, app creation and
         permission setup still need separate verification.
     - id: official-mcp
+      docs: https://github.com/larksuite/lark-openapi-mcp
       interface: mcp
       maintainer: official
       entry_url: https://github.com/larksuite/lark-openapi-mcp

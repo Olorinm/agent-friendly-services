@@ -290,10 +290,12 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Category:** Agent Tooling · `Official MCP` `llms.txt`
 
-**Links:** [Documentation](https://docs.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [Pricing](https://composio.dev/pricing) · [Signup](https://app.composio.dev) · [Official MCP](https://mcp.composio.dev)
+**Links:** [Documentation](https://docs.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [Pricing](https://composio.dev/pricing) · [Signup](https://app.composio.dev) · [Official MCP](https://mcp.composio.dev) · [MCP Setup Documentation](https://docs.composio.dev/docs/composio-connect)
 
 - **Supported:** [Self-serve signup](https://app.composio.dev) · [Free tier / trial](https://composio.dev/pricing) · [Self-serve upgrade](https://composio.dev/pricing) · [Automation permitted](https://docs.composio.dev)
 - **Unknown (help wanted):** `api_key_self_serve`, `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+> MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official.
 
 ### Datadog <a id="datadog"></a>
 
@@ -509,10 +511,12 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Category:** AI Models · **Scope:** Hub + Hub API + Inference Providers; self-hosted libraries are not assessed. · `Official MCP` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://huggingface.co/docs) · [API Reference](https://huggingface.co/docs/hub/api) · [Status Page](https://status.huggingface.co) · [Pricing](https://huggingface.co/pricing) · [Signup](https://huggingface.co/join) · [API Keys](https://huggingface.co/docs/hub/security-tokens) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDKs](https://huggingface.co/docs/huggingface_hub) · [Official MCP](https://huggingface.co/mcp) · [Rate Limits](https://huggingface.co/docs/hub/rate-limits)
+**Links:** [Documentation](https://huggingface.co/docs) · [API Reference](https://huggingface.co/docs/hub/api) · [Status Page](https://status.huggingface.co) · [Pricing](https://huggingface.co/pricing) · [Signup](https://huggingface.co/join) · [API Keys](https://huggingface.co/docs/hub/security-tokens) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDKs](https://huggingface.co/docs/huggingface_hub) · [Official MCP](https://huggingface.co/mcp) · [MCP Setup Documentation](https://huggingface.co/docs/hub/agents-mcp) · [Rate Limits](https://huggingface.co/docs/hub/rate-limits)
 
 - **Supported:** [Self-serve signup](https://huggingface.co/join) · [Self-serve API keys](https://huggingface.co/docs/hub/security-tokens) · [OAuth](https://huggingface.co/docs/hub/oauth) · [Scoped tokens](https://huggingface.co/docs/hub/security-tokens) · [Token revocation](https://huggingface.co/docs/hub/security-tokens) · [Free tier / trial](https://huggingface.co/pricing) · [Self-serve upgrade](https://huggingface.co/pricing)
 - **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`, `automation_permitted`
+
+> MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official.
 
 ### Jina AI <a id="jina"></a>
 
@@ -1041,8 +1045,10 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Category:** Agent Tooling · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
-**Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [CLI](https://github.com/zapier/zapier-platform) · [Official MCP](https://zapier.com/mcp)
+**Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [CLI](https://github.com/zapier/zapier-platform) · [Official MCP](https://zapier.com/mcp) · [MCP Setup Documentation](https://docs.zapier.com/mcp/get-started/quickstart)
 
 - **Supported:** [Self-serve signup](https://zapier.com/sign-up) · [Self-serve API keys](https://zapier.com/mcp) · [Free tier / trial](https://zapier.com/pricing) · [Self-serve upgrade](https://zapier.com/pricing) · [Automation permitted](https://docs.zapier.com)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `versioning_policy`
+
+> MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official.
 

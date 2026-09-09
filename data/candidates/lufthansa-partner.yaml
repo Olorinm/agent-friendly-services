@@ -33,6 +33,7 @@ catalog:
         notes: The notice pauses new Open API registrations, not every existing partner integration.
       notes: Public schedule and status APIs are not evidence of consumer fare-search capability.
     - id: partner-offers-api
+      docs: https://developer.lufthansa.com/docs/read/api_partner/offers
       interface: api
       maintainer: official
       entry_url: https://developer.lufthansa.com/docs/read/api_partner/offers

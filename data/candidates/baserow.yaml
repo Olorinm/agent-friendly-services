@@ -29,6 +29,7 @@ catalog:
       kind: official_docs
   routes:
     - id: database-api
+      docs: https://baserow.io/docs/apis/rest-api
       interface: api
       maintainer: official
       entry_url: https://baserow.io/docs/apis/rest-api
@@ -72,6 +73,7 @@ catalog:
           evidence:
             - pricing
     - id: native-mcp
+      docs: https://baserow.io/user-docs/mcp-server
       interface: mcp
       maintainer: official
       entry_url: https://baserow.io/user-docs/mcp-server

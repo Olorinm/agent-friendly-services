@@ -53,6 +53,7 @@ catalog:
           evidence: [playground, api]
       notes: Public trial UI; limits and selectable markets may differ from the customer API. Experimental observations remain separate from catalog claims.
     - id: flights-api
+      docs: https://ignav.com/docs
       interface: api
       maintainer: official
       entry_url: https://ignav.com/docs
@@ -116,6 +117,7 @@ catalog:
             - scope
           notes: The API does not issue tickets.
     - id: official-mcp
+      docs: https://ignav.com/docs/mcp
       interface: mcp
       maintainer: official
       entry_url: https://ignav.com/docs/mcp

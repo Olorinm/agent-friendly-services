@@ -44,5 +44,3 @@ catalog:
           value: documented
           evidence:
             - checkout
-entrypoints:
-  docs: https://open.alipay.com/module/webApp

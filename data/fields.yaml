@@ -73,6 +73,11 @@ entrypoints:
     description: Official MCP server or officially supported MCP integration.
     verification: registry
 
+  mcp_docs:
+    name: MCP Setup Documentation
+    description: Official MCP connection, authentication and configuration instructions; distinct from the callable server URL.
+    verification: probe
+
   mcp_community:
     name: Community MCP
     description: Trusted community MCP servers (list). Informational only; never feeds a badge.

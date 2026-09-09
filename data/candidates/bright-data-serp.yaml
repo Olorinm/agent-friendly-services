@@ -25,6 +25,7 @@ catalog:
       kind: official_docs
   routes:
     - id: google-flights-serp
+      docs: https://docs.brightdata.com/api-reference/serp/google-flights/currency
       interface: api
       maintainer: official
       entry_url: https://docs.brightdata.com/api-reference/serp/google-flights/currency

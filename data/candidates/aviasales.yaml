@@ -25,6 +25,7 @@ catalog:
       kind: official_docs
   routes:
     - id: live-search-api
+      docs: https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API
       interface: api
       maintainer: official
       entry_url: >-
@@ -64,6 +65,7 @@ catalog:
           evidence:
             - search
     - id: cached-data-api
+      docs: https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API
       interface: api
       maintainer: official
       entry_url: https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API

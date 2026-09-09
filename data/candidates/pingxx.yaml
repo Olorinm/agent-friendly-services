@@ -25,6 +25,7 @@ catalog:
       kind: official_site
   routes:
     - id: sandbox-api
+      docs: https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html
       interface: api
       maintainer: official
       entry_url: https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html
@@ -57,6 +58,7 @@ catalog:
           evidence:
             - checkout
     - id: web-sdk
+      docs: https://www.pingxx.com/docs/client/web.html
       interface: sdk
       maintainer: official
       entry_url: https://www.pingxx.com/docs/client/web.html

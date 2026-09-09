@@ -18,6 +18,7 @@ entrypoints:
   signup: https://zapier.com/sign-up
   cli: https://github.com/zapier/zapier-platform
   mcp_official: https://zapier.com/mcp
+  mcp_docs: https://docs.zapier.com/mcp/get-started/quickstart
 
 checks:
   self_serve_signup:
@@ -70,3 +71,6 @@ checks:
     evidence: https://docs.zapier.com
     verified: "2026-07-07"
     notes: Automation is the product; the developer platform and MCP endpoint exist for programmatic use.
+
+notes:
+  - "MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official."

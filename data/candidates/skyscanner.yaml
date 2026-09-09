@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: partner-api
+      docs: https://developers.skyscanner.net/docs/getting-started/authentication
       interface: api
       maintainer: official
       entry_url: https://developers.skyscanner.net/docs/getting-started/authentication
@@ -39,6 +40,7 @@ catalog:
             - api
       notes: Partnership review; personal-use acceptance, fees and waiting time are unknown.
     - id: partner-mcp
+      docs: https://developers.skyscanner.net/docs/mcp-server
       interface: mcp
       maintainer: official
       entry_url: https://developers.skyscanner.net/docs/mcp-server

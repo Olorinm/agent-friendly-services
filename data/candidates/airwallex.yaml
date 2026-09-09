@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: payment-links-api
+      docs: https://www.airwallex.com/docs/api/payments/payment_links/api
       interface: api
       maintainer: official
       entry_url: https://www.airwallex.com/docs/api/payments/payment_links/api

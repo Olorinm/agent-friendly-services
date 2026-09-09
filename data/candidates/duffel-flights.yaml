@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: test-api
+      docs: https://duffel.com/docs/api/overview/test-mode
       interface: api
       maintainer: official
       entry_url: https://duffel.com/docs/api/overview/test-mode
@@ -45,6 +46,7 @@ catalog:
         Duffel Airways test prices and schedules are fictitious. Test-token success cannot establish live fare
         access.
     - id: live-api
+      docs: https://duffel.com/guides/getting-started
       interface: api
       maintainer: official
       entry_url: https://duffel.com/guides/getting-started

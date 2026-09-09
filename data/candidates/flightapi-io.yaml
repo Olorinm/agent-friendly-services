@@ -23,6 +23,7 @@ catalog:
       kind: official_site
   routes:
     - id: price-api
+      docs: https://www.flightapi.io/documentation/
       interface: api
       maintainer: official
       entry_url: https://www.flightapi.io/documentation/

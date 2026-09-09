@@ -41,6 +41,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://docs.dodopayments.com/introduction
       interface: api
       maintainer: official
       entry_url: https://docs.dodopayments.com/introduction
@@ -77,6 +78,7 @@ catalog:
           evidence:
             - checkout
     - id: official-cli
+      docs: https://github.com/dodopayments/dodopayments-cli
       interface: cli
       maintainer: official
       entry_url: https://github.com/dodopayments/dodopayments-cli
@@ -90,6 +92,7 @@ catalog:
         Official CLI for payments and billing resources. Authentication and environment must be prepared; this
         route has not been task-tested.
     - id: live-api
+      docs: https://docs.dodopayments.com/introduction
       interface: api
       maintainer: official
       entry_url: https://docs.dodopayments.com/introduction

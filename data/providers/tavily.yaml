@@ -88,6 +88,7 @@ catalog:
       kind: official_docs
   routes:
     - id: search-api
+      docs: https://docs.tavily.com/documentation/quickstart
       interface: api
       maintainer: official
       entry_url: https://docs.tavily.com/documentation/quickstart

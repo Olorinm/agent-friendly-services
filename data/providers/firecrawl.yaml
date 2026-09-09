@@ -86,6 +86,7 @@ catalog:
       kind: official_site
   routes:
     - id: public-search-api
+      docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
       entry_url: https://docs.firecrawl.dev/features/search
@@ -116,6 +117,7 @@ catalog:
         Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account
         free credits cannot be assumed for this route.
     - id: account-search-api
+      docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
       entry_url: https://docs.firecrawl.dev/features/search

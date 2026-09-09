@@ -99,6 +99,7 @@ catalog:
       kind: official_site
   routes:
     - id: data-api
+      docs: https://supabase.com/docs/guides/api
       interface: api
       maintainer: official
       entry_url: https://supabase.com/docs/guides/api

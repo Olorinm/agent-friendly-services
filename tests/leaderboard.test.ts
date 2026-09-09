@@ -189,6 +189,6 @@ test('homepages use compact empty cells, aligned widths and separate tested rout
     const header = text.match(/<thead><tr>(.*?)<\/tr><\/thead>/)![1];
     assert.equal([...header.matchAll(/width="(\d+)%"/g)].reduce((sum, m) => sum + Number(m[1]), 0), 100);
     const amadeus = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Amadeus Flight APIs</a>'))!;
-    assert.equal((amadeus.match(/>API<\/a>/g) ?? []).length, 1);
+    assert.equal((amadeus.match(/>API<\/a>/g) ?? []).length, 0); // partnership announcements are not API docs
   }
 });

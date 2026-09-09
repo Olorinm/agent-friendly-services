@@ -19,6 +19,7 @@ catalog:
       kind: official_site
   routes:
     - id: agency-api
+      docs: https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api
       interface: api
       maintainer: official
       entry_url: https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api

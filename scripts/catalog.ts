@@ -1,4 +1,5 @@
 import type { Category, Provider } from './lib.ts';
+import { serviceAccess } from './service-access.ts';
 import type { Evaluation } from './evaluations.ts';
 
 export function taxonomyErrors(categories: Category[]): string[] {
@@ -83,6 +84,7 @@ export function catalogService(p: Provider, pool: 'provider' | 'candidate', eval
   const runs = evaluations.filter(r => r.service_id === p.id);
   return {
     id: p.id, name: p.name, category: p.category, homepage: p.homepage,
+    access_links: serviceAccess(p).map(([label, url]) => ({ label, url, kind: 'documentation' })),
     summary: p.summary, submitted_by: p.submitted_by, tags: p.tags ?? [], notes: p.notes ?? [],
     record_pool: pool,
     evidence_level: runs.length ? 'public_sources_and_task_runs' : p.catalog ? 'public_sources_only' : 'legacy_record',

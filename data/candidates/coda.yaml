@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: rest-api
+      docs: https://coda.io/developers/apis/v1
       interface: api
       maintainer: official
       entry_url: https://coda.io/developers/apis/v1
@@ -49,6 +50,7 @@ catalog:
         API available in free and paid workspaces. Creating docs requires a Doc Maker role; row
         writes may be asynchronous. Table/schema creation support must be verified for the task.
     - id: hosted-mcp
+      docs: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
       interface: mcp
       maintainer: official
       entry_url: https://coda.io/apis/mcp

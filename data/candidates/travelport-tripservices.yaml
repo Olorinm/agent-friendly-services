@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: tripservices-api
+      docs: https://developer.travelport.com/docs/getting-started
       interface: api
       maintainer: official
       entry_url: https://developer.travelport.com/docs/getting-started

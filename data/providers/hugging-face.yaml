@@ -21,6 +21,7 @@ entrypoints:
   cli: https://huggingface.co/docs/huggingface_hub/guides/cli
   sdks: https://huggingface.co/docs/huggingface_hub
   mcp_official: https://huggingface.co/mcp
+  mcp_docs: https://huggingface.co/docs/hub/agents-mcp
   rate_limits: https://huggingface.co/docs/hub/rate-limits
 
 checks:
@@ -78,3 +79,6 @@ checks:
   automation_permitted:
     status: unknown
     notes: Hub ToS not yet reviewed for automated/agent usage; API automation is clearly normal practice.
+
+notes:
+  - "MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official."

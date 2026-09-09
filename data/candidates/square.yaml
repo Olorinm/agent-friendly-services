@@ -21,6 +21,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink
       interface: api
       maintainer: official
       entry_url: https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink

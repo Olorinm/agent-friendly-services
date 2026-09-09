@@ -102,6 +102,7 @@ catalog:
       kind: official_docs
   routes:
     - id: web-api
+      docs: https://airtable.com/developers/web/api/introduction
       interface: api
       maintainer: official
       entry_url: https://airtable.com/developers/web/api/introduction

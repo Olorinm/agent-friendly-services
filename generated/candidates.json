@@ -1,6 +1,6 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-09T04:03:25.714Z",
+  "generated_at": "2026-09-09T09:36:26.391Z",
   "count": 51,
   "candidates": [
     {
@@ -58,9 +58,7 @@
       "homepage": "https://open.alipay.com/",
       "summary": "Online merchant payment integrations for websites and apps through Alipay APIs and SDKs.",
       "submitted_by": "community",
-      "entrypoints": {
-        "docs": "https://open.alipay.com/module/webApp"
-      },
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },

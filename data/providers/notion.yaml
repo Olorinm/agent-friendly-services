@@ -116,6 +116,7 @@ catalog:
       kind: official_docs
   routes:
     - id: rest-api
+      docs: https://developers.notion.com/reference/intro
       interface: api
       maintainer: official
       entry_url: https://developers.notion.com/reference/intro
@@ -164,6 +165,7 @@ catalog:
           evidence:
             - pricing
     - id: javascript-sdk
+      docs: https://github.com/makenotion/notion-sdk-js
       interface: sdk
       maintainer: official
       entry_url: https://github.com/makenotion/notion-sdk-js
@@ -192,6 +194,7 @@ catalog:
             - sdk
       notes: Official client library over the REST API; credentials and resource grants remain necessary.
     - id: official-cli
+      docs: https://developers.notion.com/cli/get-started/overview
       interface: cli
       maintainer: official
       entry_url: https://developers.notion.com/cli/get-started/overview
@@ -220,6 +223,7 @@ catalog:
             - cli
       notes: Official CLI discovered in current docs; measure separately from raw REST.
     - id: hosted-mcp
+      docs: https://developers.notion.com/guides/mcp/get-started-with-mcp
       interface: mcp
       maintainer: official
       entry_url: https://mcp.notion.com/mcp

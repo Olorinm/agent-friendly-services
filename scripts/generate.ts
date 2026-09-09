@@ -276,7 +276,7 @@ const services = [
 const catalogOut = {
   schema_version: 1,
   generated_at: new Date().toISOString(),
-  description: 'Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.',
+  description: 'Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.',
   persona: 'Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.',
   categories,
   services,
@@ -514,14 +514,7 @@ const categoryZh: Record<string, string> = { travel: '旅行', databases: '数�
 const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
 const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))))
   .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
-const accessLinks = (p: Provider, zh: boolean, compact = false) => {
-  const links = serviceAccess(p, zh);
-  const names = [...new Set(links.map(([name]) => name))];
-  return (compact ? names.map(name => {
-    const matches = links.filter(([n]) => n === name);
-    return [name, matches.length === 1 ? matches[0][1] : `./generated/services.md#${p.id}-access`];
-  }) : links).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
-};
+const accessLinks = (p: Provider, zh: boolean) => serviceAccess(p, zh).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
 const profileUrl = (id: string) => `./generated/services.md#${id}`;
 
 // One readable profile per service, generated from the same records as the tables.
@@ -542,7 +535,9 @@ const profiles = listedServices.map(p => {
     return `| [${cell(r.id)} (${r.interface.toUpperCase()})](${r.entry_url}) | ${r.docs ? `[Docs](${r.docs})` : '—'} | ${cell(admission)} | ${cell(preparation || '—')} |`;
   }).join('\n') : '—';
   const routeUrls = new Set(routes.flatMap(r => [r.entry_url, r.docs]));
-  const extraLinks = serviceAccess(p).filter(([, url]) => !routeUrls.has(url))
+  const rawLinks: [string, string][] = Object.entries({ docs: 'Docs', api_reference: 'API reference', cli: 'CLI', sdks: 'SDK', mcp_official: 'MCP entry', mcp_docs: 'MCP setup' })
+    .flatMap(([field, label]) => [p.entrypoints[field] ?? []].flat().map(url => [label, url] as [string, string]));
+  const extraLinks = rawLinks.filter(([, url], i) => !routeUrls.has(url) && rawLinks.findIndex(([, other]) => other === url) === i)
     .map(([name, url]) => `[${name}](${url})`).join(' · ');
   const costClaims = routes.flatMap(r => (r.costs ?? []).map(c => `- ${cell(r.id)}: ${c.amount} ${c.currency ?? c.unit} / ${cell(c.per)} (${cell(c.kind)}; ${cell(c.scope)})`));
   const pricing = [p.entrypoints.pricing ? `[Official pricing](${[p.entrypoints.pricing].flat()[0]})` : '', ...costClaims].filter(Boolean).join('\n\n') || '—';
@@ -560,8 +555,8 @@ function serviceList(zh: boolean): string {
     const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
       const identity = `[${cell(p.name)}](${profileUrl(p.id)})`;
       return { id: p.id, classifications: p.catalog?.classifications ?? [],
-        unmeasured: `| ${identity} | — | — | — | — | — | ${accessLinks(p, zh, true)} |`,
-        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh, true)} |` };
+        unmeasured: `| ${identity} | — | — | — | — | — | ${accessLinks(p, zh)} |`,
+        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh)} |` };
     });
     const names = new Map(listedServices.map(p => [p.id, p.name]));
     const subcategories = (c.subcategories ?? []).filter(sub =>
@@ -582,7 +577,7 @@ function serviceList(zh: boolean): string {
       const pending = group.rows.filter(r => !measured.has(r.id));
       const selected = selectServiceBoards(group.boards);
       const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
-      const measuredRows = renderBoardRows(selected, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh, true) }])), interfaces, zh);
+      const measuredRows = renderBoardRows(selected, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }])), interfaces, zh);
       const table = group.boards.length
         ? readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`, true)
         : readmeTable(`${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${group.rows.map(r => r.directory).join('\n')}`, false);

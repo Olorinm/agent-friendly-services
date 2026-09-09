@@ -15,7 +15,7 @@ Payment processing with hosted Pay by Link checkout; test merchant accounts and 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [payment-links-api (API)](https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks) | — | — | Requires merchantAccount and API credentials. Test cards and test accounts are documented; test account admission and individual eligibility have not been verified. Live setup needs approval and merchant terms. Pay by Link is described as supplementary to an online store checkout. |
+| [payment-links-api (API)](https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks) | [Docs](https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks) | — | Requires merchantAccount and API credentials. Test cards and test accounts are documented; test account admission and individual eligibility have not been verified. Live setup needs approval and merchant terms. Pay by Link is described as supplementary to an online store checkout. |
 
 ### Service pricing
 
@@ -43,7 +43,7 @@ Air distribution API with sandbox keys, production certification and an agency a
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [agency-api (API)](https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api) | — | application / restricted | Requires: company, industry_license, approval; This does not prove the absence of other individual-facing AirGateway products. |
+| [agency-api (API)](https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api) | [Docs](https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api) | application / restricted | Requires: company, industry_license, approval; This does not prove the absence of other individual-facing AirGateway products. |
 
 ### Service pricing
 
@@ -72,7 +72,7 @@ Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAut
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [web-api (API)](https://airtable.com/developers/web/api/introduction) | — | self serve / documented | Create a personal access token with required scopes and selected test resources.; PAT scopes plus selected workspace/base access required. Base creation is documented on all plans; do not infer paid-only access from outdated posts. |
+| [web-api (API)](https://airtable.com/developers/web/api/introduction) | [Docs](https://airtable.com/developers/web/api/introduction) | self serve / documented | Create a personal access token with required scopes and selected test resources.; PAT scopes plus selected workspace/base access required. Base creation is documented on all plans; do not infer paid-only access from outdated posts. |
 
 ### Service pricing
 
@@ -107,7 +107,7 @@ Hosted payment links with fixed or customer-selected amounts and payment status 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [payment-links-api (API)](https://www.airwallex.com/docs/api/payments/payment_links/api) | — | — | API requires an access token and merchant configuration. Sandbox examples are documented, but individual account eligibility, activation and full fees are not established here. Payment success is reported separately from link creation. |
+| [payment-links-api (API)](https://www.airwallex.com/docs/api/payments/payment_links/api) | [Docs](https://www.airwallex.com/docs/api/payments/payment_links/api) | — | API requires an access token and merchant configuration. Sandbox examples are documented, but individual account eligibility, activation and full fees are not established here. Payment success is reported separately from link creation. |
 
 ### Service pricing
 
@@ -134,7 +134,7 @@ Managed databases including free hosted PostgreSQL. Account signup and provision
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | — | self serve / documented | Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. |
+| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | [Docs](https://aiven.io/docs/tools/cli) | self serve / documented | Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. |
 
 ### Service pricing
 
@@ -159,7 +159,7 @@ Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with a
 
 ### Documentation and access <a id="qwen-access"></a>
 
-[Docs](https://www.alibabacloud.com/help/en/model-studio/) · [API](https://www.alibabacloud.com/help/en/model-studio/models) · [CLI](https://github.com/QwenLM/qwen-code)
+[Docs](https://www.alibabacloud.com/help/en/model-studio/) · [API reference](https://www.alibabacloud.com/help/en/model-studio/models) · [CLI](https://github.com/QwenLM/qwen-code)
 
 —
 
@@ -240,7 +240,7 @@ Claude model APIs with agent-focused documentation, llms.txt, and the company be
 
 ### Documentation and access <a id="anthropic-access"></a>
 
-[Docs](https://docs.anthropic.com) · [API](https://docs.anthropic.com/en/api) · [CLI](https://docs.anthropic.com/en/docs/claude-code) · [SDK](https://docs.anthropic.com/en/api/client-sdks)
+[Docs](https://docs.anthropic.com) · [API reference](https://docs.anthropic.com/en/api) · [CLI](https://docs.anthropic.com/en/docs/claude-code) · [SDK](https://docs.anthropic.com/en/api/client-sdks)
 
 —
 
@@ -271,7 +271,7 @@ Web scraping and automation platform with thousands of ready-made actors, a vers
 
 ### Documentation and access <a id="apify-access"></a>
 
-[Docs](https://docs.apify.com) · [API](https://docs.apify.com/api/v2) · [CLI](https://docs.apify.com/cli) · [SDK](https://docs.apify.com/sdk) · [MCP](https://docs.apify.com/platform/integrations/mcp)
+[Docs](https://docs.apify.com) · [API reference](https://docs.apify.com/api/v2) · [CLI](https://docs.apify.com/cli) · [SDK](https://docs.apify.com/sdk) · [MCP entry](https://docs.apify.com/platform/integrations/mcp)
 
 —
 
@@ -328,7 +328,7 @@ Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official rem
 
 ### Documentation and access <a id="atlassian-access"></a>
 
-[Docs](https://developer.atlassian.com) · [API](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) · [CLI](https://developer.atlassian.com/cloud/acli/) · [MCP](https://github.com/atlassian/atlassian-mcp-server)
+[Docs](https://developer.atlassian.com) · [API reference](https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/) · [CLI](https://developer.atlassian.com/cloud/acli/) · [MCP entry](https://github.com/atlassian/atlassian-mcp-server)
 
 —
 
@@ -356,8 +356,8 @@ Travelpayouts-distributed live flight search and a separately accessible histori
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [live-search-api (API)](https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API) | — | application / restricted | Requires: platform_account, approval, traffic |
-| [cached-data-api (API)](https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API) | — | self serve | Requires: platform_account; Historical user-search cache for price trends and inspiration. Each method has its own time window; no fresh search is triggered. |
+| [live-search-api (API)](https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API) | [Docs](https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API) | application / restricted | Requires: platform_account, approval, traffic |
+| [cached-data-api (API)](https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API) | [Docs](https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API) | self serve | Requires: platform_account; Historical user-search cache for price trends and inspiration. Each method has its own time window; no fresh search is triggered. |
 
 ### Service pricing
 
@@ -385,8 +385,8 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [database-api (API)](https://baserow.io/docs/apis/rest-api) | — | self serve / documented | Generate a database token and select permitted tables and operations.; Database token can read/create/update/delete rows in permitted tables; creating the table/schema requires a short-lived JWT. A precreated table changes the test setup. |
-| [native-mcp (MCP)](https://baserow.io/user-docs/mcp-server) | — | — | Create a workspace MCP endpoint in account settings and securely store its private URL.; Workspace admin creates a unique secret-bearing endpoint URL; the URL is itself a credential and must not be published. Documented tools read schema/list tables and create/update/delete rows, but do not list table creation. Cloud plan availability is not yet verified; do not assume this route can provision task 001 from an empty container. |
+| [database-api (API)](https://baserow.io/docs/apis/rest-api) | [Docs](https://baserow.io/docs/apis/rest-api) | self serve / documented | Generate a database token and select permitted tables and operations.; Database token can read/create/update/delete rows in permitted tables; creating the table/schema requires a short-lived JWT. A precreated table changes the test setup. |
+| [native-mcp (MCP)](https://baserow.io/user-docs/mcp-server) | [Docs](https://baserow.io/user-docs/mcp-server) | — | Create a workspace MCP endpoint in account settings and securely store its private URL.; Workspace admin creates a unique secret-bearing endpoint URL; the URL is itself a credential and must not be published. Documented tools read schema/list tables and create/update/delete rows, but do not list table creation. Cloud plan availability is not yet verified; do not assume this route can provision task 001 from an empty container. |
 
 ### Service pricing
 
@@ -413,7 +413,7 @@ Independent web search index with a developer API, self-serve registration, and 
 
 ### Documentation and access <a id="brave-search-access"></a>
 
-[Docs](https://api-dashboard.search.brave.com/app/documentation) · [MCP](https://github.com/brave/brave-search-mcp-server)
+[Docs](https://api-dashboard.search.brave.com/app/documentation) · [MCP entry](https://github.com/brave/brave-search-mcp-server)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
@@ -447,7 +447,7 @@ SERP API with a documented Google Flights request; structured fare extraction an
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [google-flights-serp (API)](https://docs.brightdata.com/api-reference/serp/google-flights/currency) | — | — | Requires a SERP zone. Do not apply other Bright Data products’ payment requirements to this route. |
+| [google-flights-serp (API)](https://docs.brightdata.com/api-reference/serp/google-flights/currency) | [Docs](https://docs.brightdata.com/api-reference/serp/google-flights/currency) | — | Requires a SERP zone. Do not apply other Bright Data products’ payment requirements to this route. |
 
 ### Service pricing
 
@@ -473,7 +473,7 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 
 ### Documentation and access <a id="browserbase-access"></a>
 
-[Docs](https://docs.browserbase.com) · [API](https://docs.browserbase.com/reference) · [SDK](https://docs.browserbase.com/reference) · [MCP](https://github.com/browserbase/mcp-server-browserbase)
+[Docs](https://docs.browserbase.com) · [API reference](https://docs.browserbase.com/reference) · [MCP entry](https://github.com/browserbase/mcp-server-browserbase)
 
 —
 
@@ -503,7 +503,7 @@ Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MC
 
 ### Documentation and access <a id="cartesia-access"></a>
 
-[Docs](https://docs.cartesia.ai) · [API](https://docs.cartesia.ai/api-reference) · [MCP](https://github.com/cartesia-ai/cartesia-mcp)
+[Docs](https://docs.cartesia.ai) · [API reference](https://docs.cartesia.ai/api-reference) · [MCP entry](https://github.com/cartesia-ai/cartesia-mcp)
 
 —
 
@@ -529,7 +529,7 @@ Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible
 
 ### Documentation and access <a id="cerebras-access"></a>
 
-[Docs](https://inference-docs.cerebras.ai) · [API](https://inference-docs.cerebras.ai/api-reference/chat-completions)
+[Docs](https://inference-docs.cerebras.ai) · [API reference](https://inference-docs.cerebras.ai/api-reference/chat-completions)
 
 —
 
@@ -557,7 +557,7 @@ Payment Links API for hosted checkout, with separate sandbox and production API 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [payment-links-api (API)](https://api-reference.checkout.com/tag/Payment-Links/) | — | — | API secret key and account-specific host required. Sandbox endpoints are documented; obtaining an account, individual merchant admission and negotiated fees remain unverified. |
+| [payment-links-api (API)](https://api-reference.checkout.com/tag/Payment-Links/) | [Docs](https://api-reference.checkout.com/tag/Payment-Links/) | — | API secret key and account-specific host required. Sandbox endpoints are documented; obtaining an account, individual merchant admission and negotiated fees remain unverified. |
 
 ### Service pricing
 
@@ -581,7 +581,7 @@ Open-source embedding database with a hosted Chroma Cloud, official CLI, officia
 
 ### Documentation and access <a id="chroma-access"></a>
 
-[Docs](https://docs.trychroma.com) · [API](https://docs.trychroma.com/docs/overview/introduction) · [CLI](https://docs.trychroma.com/docs/cli/install) · [MCP](https://github.com/chroma-core/chroma-mcp)
+[Docs](https://docs.trychroma.com) · [API reference](https://docs.trychroma.com/docs/overview/introduction) · [CLI](https://docs.trychroma.com/docs/cli/install) · [MCP entry](https://github.com/chroma-core/chroma-mcp)
 
 —
 
@@ -607,11 +607,11 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 
 ### Documentation and access <a id="cloudflare-access"></a>
 
-[Docs](https://developers.cloudflare.com) · [API](https://developers.cloudflare.com/api/) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [SDK](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) · [MCP](https://github.com/cloudflare/mcp-server-cloudflare)
+[Docs](https://developers.cloudflare.com) · [API reference](https://developers.cloudflare.com/api/) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [SDK](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) · [MCP entry](https://github.com/cloudflare/mcp-server-cloudflare)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [d1-cli (CLI)](https://developers.cloudflare.com/d1/get-started/) | — | self serve / documented | D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. |
+| [d1-cli (CLI)](https://developers.cloudflare.com/d1/get-started/) | [Docs](https://developers.cloudflare.com/d1/get-started/) | self serve / documented | D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. |
 
 ### Service pricing
 
@@ -640,8 +640,8 @@ Docs and tables with a free REST API; current API page is branded Superhuman Doc
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://coda.io/developers/apis/v1) | — | self serve | API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be asynchronous. Table/schema creation support must be verified for the task. |
-| [hosted-mcp (MCP)](https://coda.io/apis/mcp) | — | self serve | Official hosted MCP; connector setup needs authorization. |
+| [rest-api (API)](https://coda.io/developers/apis/v1) | [Docs](https://coda.io/developers/apis/v1) | self serve | API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be asynchronous. Table/schema creation support must be verified for the task. |
+| [hosted-mcp (MCP)](https://coda.io/apis/mcp) | [Docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) | self serve | Official hosted MCP; connector setup needs authorization. |
 
 ### Service pricing
 
@@ -666,7 +666,7 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 
 ### Documentation and access <a id="cohere-access"></a>
 
-[Docs](https://docs.cohere.com) · [API](https://docs.cohere.com/reference/about)
+[Docs](https://docs.cohere.com) · [API reference](https://docs.cohere.com/reference/about)
 
 —
 
@@ -692,7 +692,7 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 
 ### Documentation and access <a id="composio-access"></a>
 
-[Docs](https://docs.composio.dev) · [MCP](https://mcp.composio.dev)
+[Docs](https://docs.composio.dev) · [MCP entry](https://mcp.composio.dev) · [MCP setup](https://docs.composio.dev/docs/composio-connect)
 
 —
 
@@ -703,6 +703,10 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 ### Task results
 
 —
+
+### Notes
+
+- MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official.
 
 ### Sources
 
@@ -720,7 +724,7 @@ Digital-product checkout and billing APIs with separate test mode and reviewed m
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://docs.creem.io/getting-started/test-mode) | — | self serve | Requires: platform_account; Use dashboard Test Mode and obtain a test API key.; Test mode has separate API keys, products and test-api.creem.io. Production account review includes the product website and individual or business identity; do not infer automatic approval from sandbox access. |
+| [sandbox-api (API)](https://docs.creem.io/getting-started/test-mode) | [Docs](https://docs.creem.io/getting-started/test-mode) | self serve | Requires: platform_account; Use dashboard Test Mode and obtain a test API key.; Test mode has separate API keys, products and test-api.creem.io. Production account review includes the product website and individual or business identity; do not infer automatic approval from sandbox access. |
 
 ### Service pricing
 
@@ -750,7 +754,7 @@ Observability platform with a full REST API, llms.txt, documented OAuth for inte
 
 ### Documentation and access <a id="datadog-access"></a>
 
-[Docs](https://docs.datadoghq.com) · [API](https://docs.datadoghq.com/api/latest/) · [CLI](https://github.com/DataDog/datadog-ci) · [MCP](https://docs.datadoghq.com/bits_ai/mcp_server)
+[Docs](https://docs.datadoghq.com) · [API reference](https://docs.datadoghq.com/api/latest/) · [CLI](https://github.com/DataDog/datadog-ci) · [MCP entry](https://docs.datadoghq.com/bits_ai/mcp_server)
 
 —
 
@@ -776,7 +780,7 @@ Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API
 
 ### Documentation and access <a id="deepgram-access"></a>
 
-[Docs](https://developers.deepgram.com/docs) · [API](https://developers.deepgram.com/reference) · [SDK](https://developers.deepgram.com/docs/deepgram-sdks)
+[Docs](https://developers.deepgram.com/docs) · [API reference](https://developers.deepgram.com/reference) · [SDK](https://developers.deepgram.com/docs/deepgram-sdks)
 
 —
 
@@ -828,7 +832,7 @@ Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), 
 
 ### Documentation and access <a id="discord-access"></a>
 
-[Docs](https://discord.com/developers/docs/intro) · [API](https://discord.com/developers/docs/reference)
+[Docs](https://discord.com/developers/docs/intro) · [API reference](https://discord.com/developers/docs/reference)
 
 —
 
@@ -860,9 +864,9 @@ Merchant-of-record checkout for one-time and subscription sales, with test mode,
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://docs.dodopayments.com/introduction) | — | — | Requires: platform_account; Use test API keys and simulated payments. Individual accounts are documented, but live payments and payouts require product review, identity verification and bank verification. Accepted ID countries apply; sandbox access does not certify live eligibility. |
-| [official-cli (CLI)](https://github.com/dodopayments/dodopayments-cli) | — | — | Official CLI for payments and billing resources. Authentication and environment must be prepared; this route has not been task-tested. |
-| [live-api (API)](https://docs.dodopayments.com/introduction) | — | application / documented | Requires: approval, identity_verification; Individual account type is documented, subject to product, identity and bank review plus accepted-country restrictions. Live payments and payouts require approval. No live account was created or approved in this research. |
+| [sandbox-api (API)](https://docs.dodopayments.com/introduction) | [Docs](https://docs.dodopayments.com/introduction) | — | Requires: platform_account; Use test API keys and simulated payments. Individual accounts are documented, but live payments and payouts require product review, identity verification and bank verification. Accepted ID countries apply; sandbox access does not certify live eligibility. |
+| [official-cli (CLI)](https://github.com/dodopayments/dodopayments-cli) | [Docs](https://github.com/dodopayments/dodopayments-cli) | — | Official CLI for payments and billing resources. Authentication and environment must be prepared; this route has not been task-tested. |
+| [live-api (API)](https://docs.dodopayments.com/introduction) | [Docs](https://docs.dodopayments.com/introduction) | application / documented | Requires: approval, identity_verification; Individual account type is documented, subject to product, identity and bank review plus accepted-country restrictions. Live payments and payouts require approval. No live account was created or approved in this research. |
 | [payments-mcp (MCP)](https://mcp.dodopayments.com/sse) | [Docs](https://docs.dodopayments.com/developer-resources/mcp-server) | — | Transactional MCP. Initial OAuth setup asks for the merchant API key and test/live environment; explicitly select test. This is separate from the documentation-only Knowledge MCP and has not been task-tested. |
 
 ### Service pricing
@@ -896,7 +900,7 @@ File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and
 
 ### Documentation and access <a id="dropbox-access"></a>
 
-[Docs](https://www.dropbox.com/developers/documentation) · [API](https://www.dropbox.com/developers/documentation/http/documentation) · [CLI](https://github.com/dropbox/dbxcli)
+[Docs](https://www.dropbox.com/developers/documentation) · [API reference](https://www.dropbox.com/developers/documentation/http/documentation) · [CLI](https://github.com/dropbox/dbxcli)
 
 —
 
@@ -924,8 +928,8 @@ Flight API whose self-serve test environment must be distinguished from live acc
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [test-api (API)](https://duffel.com/docs/api/overview/test-mode) | — | self serve | Duffel Airways test prices and schedules are fictitious. Test-token success cannot establish live fare access. |
-| [live-api (API)](https://duffel.com/guides/getting-started) | — | — | Requires: email_verification, identity_verification; Verify email and submit individual or business details; Live permissions, market coverage and pricing must be checked using a real eligible account. |
+| [test-api (API)](https://duffel.com/docs/api/overview/test-mode) | [Docs](https://duffel.com/docs/api/overview/test-mode) | self serve | Duffel Airways test prices and schedules are fictitious. Test-token success cannot establish live fare access. |
+| [live-api (API)](https://duffel.com/guides/getting-started) | [Docs](https://duffel.com/guides/getting-started) | — | Requires: email_verification, identity_verification; Verify email and submit individual or business details; Live permissions, market coverage and pricing must be checked using a real eligible account. |
 
 ### Service pricing
 
@@ -950,7 +954,7 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 ### Documentation and access <a id="e2b-access"></a>
 
-[Docs](https://e2b.dev/docs) · [CLI](https://e2b.dev/docs/cli) · [SDK](https://e2b.dev/docs/sdk-reference) · [MCP](https://github.com/e2b-dev/mcp-server)
+[Docs](https://e2b.dev/docs) · [CLI](https://e2b.dev/docs/cli) · [SDK](https://e2b.dev/docs/sdk-reference) · [MCP entry](https://github.com/e2b-dev/mcp-server)
 
 —
 
@@ -976,7 +980,7 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 
 ### Documentation and access <a id="elevenlabs-access"></a>
 
-[Docs](https://elevenlabs.io/docs) · [API](https://elevenlabs.io/docs/api-reference/introduction) · [MCP](https://github.com/elevenlabs/elevenlabs-mcp)
+[Docs](https://elevenlabs.io/docs) · [API reference](https://elevenlabs.io/docs/api-reference/introduction) · [MCP entry](https://github.com/elevenlabs/elevenlabs-mcp)
 
 —
 
@@ -1002,12 +1006,12 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 ### Documentation and access <a id="exa-access"></a>
 
-[Docs](https://docs.exa.ai) · [API](https://docs.exa.ai/reference/getting-started) · [SDK](https://docs.exa.ai/sdks/typescript-sdk-specification) · [MCP](https://github.com/exa-labs/exa-mcp-server)
+[Docs](https://docs.exa.ai) · [API reference](https://docs.exa.ai/reference/getting-started) · [SDK](https://docs.exa.ai/sdks/typescript-sdk-specification) · [MCP entry](https://github.com/exa-labs/exa-mcp-server)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [public-mcp (MCP)](https://mcp.exa.ai/mcp) | [Docs](https://exa.ai/docs/reference/exa-mcp) | self serve / documented | Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. |
-| [search-api (API)](https://exa.ai/docs/reference/search) | — | self serve / documented | Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. |
+| [search-api (API)](https://exa.ai/docs/reference/search) | [Docs](https://exa.ai/docs/reference/search) | self serve / documented | Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. |
 
 ### Service pricing
 
@@ -1080,7 +1084,7 @@ Travel Redirect/XAP flight listings product whose new API applications are curre
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [flight-listings-api (API)](https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings) | — | paused / restricted | — |
+| [flight-listings-api (API)](https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings) | [Docs](https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings) | paused / restricted | — |
 
 ### Service pricing
 
@@ -1105,7 +1109,7 @@ Generative media platform (image, video, audio models) with queue/streaming APIs
 
 ### Documentation and access <a id="fal-access"></a>
 
-[Docs](https://fal.ai/docs) · [API](https://fal.ai/docs/model-apis) · [CLI](https://github.com/fal-ai/fal)
+[Docs](https://fal.ai/docs) · [API reference](https://fal.ai/docs/model-apis) · [CLI](https://github.com/fal-ai/fal)
 
 —
 
@@ -1133,7 +1137,7 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [official-api (API)](https://developer.fastspring.com/) | — | — | Official docs establish API, checkout and subscription integration options. Individual admission, store activation, sandbox prerequisites and applicable fees have not been checked in this discovery pass. |
+| [official-api (API)](https://developer.fastspring.com/) | [Docs](https://developer.fastspring.com/) | — | Official docs establish API, checkout and subscription integration options. Individual admission, store activation, sandbox prerequisites and applicable fees have not been checked in this discovery pass. |
 
 ### Service pricing
 
@@ -1157,12 +1161,12 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 
 ### Documentation and access <a id="firecrawl-access"></a>
 
-[Docs](https://docs.firecrawl.dev) · [API](https://docs.firecrawl.dev/api-reference/introduction) · [SDK](https://docs.firecrawl.dev/sdks/overview) · [MCP](https://docs.firecrawl.dev/mcp-server)
+[Docs](https://docs.firecrawl.dev) · [API reference](https://docs.firecrawl.dev/api-reference/introduction) · [SDK](https://docs.firecrawl.dev/sdks/overview) · [MCP entry](https://docs.firecrawl.dev/mcp-server)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-search-api (API)](https://docs.firecrawl.dev/features/search) | — | self serve / documented | Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. |
-| [account-search-api (API)](https://docs.firecrawl.dev/features/search) | — | self serve / documented | Search: 2 credits per 10 results; extra scraping can consume credits. |
+| [public-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. |
+| [account-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Search: 2 credits per 10 results; extra scraping can consume credits. |
 
 ### Service pricing
 
@@ -1225,7 +1229,7 @@ Fast open-model inference and fine-tuning with an OpenAI-compatible API, officia
 
 ### Documentation and access <a id="fireworks-access"></a>
 
-[Docs](https://docs.fireworks.ai) · [API](https://docs.fireworks.ai/api-reference/introduction) · [CLI](https://docs.fireworks.ai/tools-sdks/firectl/firectl)
+[Docs](https://docs.fireworks.ai) · [API reference](https://docs.fireworks.ai/api-reference/introduction) · [CLI](https://docs.fireworks.ai/tools-sdks/firectl/firectl)
 
 —
 
@@ -1253,10 +1257,10 @@ Authenticated flight lookup and a separate, restricted public cache exposed thro
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [authenticated-api (API)](https://flight-mcp.com/docs) | — | self serve | — |
-| [authenticated-mcp (MCP)](https://flight-mcp.com/docs) | — | self serve | — |
-| [public-cache-api (API)](https://flight-mcp.com/docs) | — | self serve | Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes. |
-| [public-cache-mcp (MCP)](https://flight-mcp.com/docs) | — | self serve | Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes. |
+| [authenticated-api (API)](https://flight-mcp.com/docs) | [Docs](https://flight-mcp.com/docs) | self serve | — |
+| [authenticated-mcp (MCP)](https://flight-mcp.com/docs) | [Docs](https://flight-mcp.com/docs) | self serve | — |
+| [public-cache-api (API)](https://flight-mcp.com/docs) | [Docs](https://flight-mcp.com/docs) | self serve | Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes. |
+| [public-cache-mcp (MCP)](https://flight-mcp.com/docs) | [Docs](https://flight-mcp.com/docs) | self serve | Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes. |
 
 ### Service pricing
 
@@ -1285,7 +1289,7 @@ Flight-price search for one-way, round-trip and multi-city itineraries, with cre
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [price-api (API)](https://www.flightapi.io/documentation/) | — | self serve | Trial quota units, card requirements and new-account endpoint access still need verification. |
+| [price-api (API)](https://www.flightapi.io/documentation/) | [Docs](https://www.flightapi.io/documentation/) | self serve | Trial quota units, card requirements and new-account endpoint access still need verification. |
 
 ### Service pricing
 
@@ -1313,7 +1317,7 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 ### Documentation and access <a id="fly-io-access"></a>
 
-[Docs](https://fly.io/docs) · [API](https://fly.io/docs/machines/api/) · [CLI](https://fly.io/docs/flyctl/) · [MCP](https://fly.io/docs/mcp/)
+[Docs](https://fly.io/docs) · [API reference](https://fly.io/docs/machines/api/) · [CLI](https://fly.io/docs/flyctl/) · [MCP entry](https://fly.io/docs/mcp/)
 
 —
 
@@ -1343,7 +1347,7 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 ### Documentation and access <a id="gemini-api-access"></a>
 
-[Docs](https://ai.google.dev/gemini-api/docs) · [API](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [SDK](https://ai.google.dev/gemini-api/docs/libraries)
+[Docs](https://ai.google.dev/gemini-api/docs) · [API reference](https://ai.google.dev/api) · [CLI](https://github.com/google-gemini/gemini-cli) · [SDK](https://ai.google.dev/gemini-api/docs/libraries)
 
 —
 
@@ -1369,7 +1373,7 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 
 ### Documentation and access <a id="github-access"></a>
 
-[Docs](https://docs.github.com) · [API](https://docs.github.com/rest) · [CLI](https://cli.github.com) · [SDK](https://github.com/octokit) · [MCP](https://github.com/github/github-mcp-server)
+[Docs](https://docs.github.com) · [API reference](https://docs.github.com/rest) · [CLI](https://cli.github.com) · [SDK](https://github.com/octokit) · [MCP entry](https://github.com/github/github-mcp-server)
 
 —
 
@@ -1399,7 +1403,7 @@ DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an offi
 
 ### Documentation and access <a id="gitlab-access"></a>
 
-[Docs](https://docs.gitlab.com) · [API](https://docs.gitlab.com/api/rest/) · [CLI](https://gitlab.com/gitlab-org/cli) · [MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server)
+[Docs](https://docs.gitlab.com) · [API reference](https://docs.gitlab.com/api/rest/) · [CLI](https://gitlab.com/gitlab-org/cli) · [MCP entry](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server)
 
 —
 
@@ -1427,7 +1431,7 @@ Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sheets-api (API)](https://developers.google.com/workspace/sheets/api/guides/concepts) | — | self serve | Configure a Cloud project and OAuth consent/client, then authorize selected account access.; Quickstart requires a Google account, Cloud project, enabled Sheets API and OAuth client/consent setup. Service accounts are another route, not assumed preconfigured. |
+| [sheets-api (API)](https://developers.google.com/workspace/sheets/api/guides/concepts) | [Docs](https://developers.google.com/workspace/sheets/api/quickstart/python) | self serve | Configure a Cloud project and OAuth consent/client, then authorize selected account access.; Quickstart requires a Google account, Cloud project, enabled Sheets API and OAuth client/consent setup. Service accounts are another route, not assumed preconfigured. |
 
 ### Service pricing
 
@@ -1452,7 +1456,7 @@ Observability platform (dashboards, metrics, logs, traces) with a documented HTT
 
 ### Documentation and access <a id="grafana-access"></a>
 
-[Docs](https://grafana.com/docs) · [API](https://grafana.com/docs/grafana/latest/developers/http_api/) · [MCP](https://github.com/grafana/mcp-grafana)
+[Docs](https://grafana.com/docs) · [API reference](https://grafana.com/docs/grafana/latest/developers/http_api/) · [MCP entry](https://github.com/grafana/mcp-grafana)
 
 —
 
@@ -1480,10 +1484,10 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://support.getgrist.com/api/) | — | self serve / documented | Sign in and generate an API key in account settings.; Account API key grants the user’s existing access. Use a separate free test account; personal site is freely available. |
-| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | — | self serve / documented | Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the API pool. |
-| [python-sdk (SDK)](https://pypi.org/project/grist-api/) | — | — | Official Python client linked by Grist REST API guide; SDK installation does not remove account permission requirements. |
-| [javascript-sdk (SDK)](https://www.npmjs.com/package/grist-api) | — | — | Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch returned 403 during public research, not a service failure. |
+| [rest-api (API)](https://support.getgrist.com/api/) | [Docs](https://support.getgrist.com/api/) | self serve / documented | Sign in and generate an API key in account settings.; Account API key grants the user’s existing access. Use a separate free test account; personal site is freely available. |
+| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | [Docs](https://support.getgrist.com/mcp/) | self serve / documented | Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the API pool. |
+| [python-sdk (SDK)](https://pypi.org/project/grist-api/) | [Docs](https://support.getgrist.com/rest-api/) | — | Official Python client linked by Grist REST API guide; SDK installation does not remove account permission requirements. |
+| [javascript-sdk (SDK)](https://www.npmjs.com/package/grist-api) | [Docs](https://support.getgrist.com/rest-api/) | — | Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch returned 403 during public research, not a service failure. |
 
 ### Service pricing
 
@@ -1551,7 +1555,7 @@ Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and sel
 
 ### Documentation and access <a id="groq-access"></a>
 
-[Docs](https://console.groq.com/docs) · [API](https://console.groq.com/docs/api-reference) · [SDK](https://console.groq.com/docs/libraries)
+[Docs](https://console.groq.com/docs) · [API reference](https://console.groq.com/docs/api-reference) · [SDK](https://console.groq.com/docs/libraries)
 
 —
 
@@ -1577,7 +1581,7 @@ Model hub and inference platform with fine-grained tokens, OAuth, an official MC
 
 ### Documentation and access <a id="hugging-face-access"></a>
 
-[Docs](https://huggingface.co/docs) · [API](https://huggingface.co/docs/hub/api) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDK](https://huggingface.co/docs/huggingface_hub) · [MCP](https://huggingface.co/mcp)
+[Docs](https://huggingface.co/docs) · [API reference](https://huggingface.co/docs/hub/api) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDK](https://huggingface.co/docs/huggingface_hub) · [MCP entry](https://huggingface.co/mcp) · [MCP setup](https://huggingface.co/docs/hub/agents-mcp)
 
 —
 
@@ -1588,6 +1592,10 @@ Model hub and inference platform with fine-grained tokens, OAuth, an official MC
 ### Task results
 
 —
+
+### Notes
+
+- MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official.
 
 ### Sources
 
@@ -1606,8 +1614,8 @@ Flight search and purchase-link API with email signup and an official MCP; indiv
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [public-playground (WEB)](https://ignav.com/playground) | [Docs](https://ignav.com/docs) | self serve | Public trial UI; limits and selectable markets may differ from the customer API. Experimental observations remain separate from catalog claims. |
-| [flights-api (API)](https://ignav.com/docs) | — | self serve | Requires: email_verification; Verify signup email |
-| [official-mcp (MCP)](https://ignav.com/docs/mcp) | — | — | Uses Ignav credentials. The API route records published account pricing; MCP tool billing and coverage need confirmation. |
+| [flights-api (API)](https://ignav.com/docs) | [Docs](https://ignav.com/docs) | self serve | Requires: email_verification; Verify signup email |
+| [official-mcp (MCP)](https://ignav.com/docs/mcp) | [Docs](https://ignav.com/docs/mcp) | — | Uses Ignav credentials. The API route records published account pricing; MCP tool billing and coverage need confirmation. |
 
 ### Service pricing
 
@@ -1676,7 +1684,7 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 ### Documentation and access <a id="jina-access"></a>
 
-[Docs](https://docs.jina.ai) · [API](https://docs.jina.ai) · [MCP](https://github.com/jina-ai/MCP)
+[Docs](https://docs.jina.ai) · [MCP entry](https://github.com/jina-ai/MCP)
 
 —
 
@@ -1704,7 +1712,7 @@ Affiliate flight APIs with a business application and an optional requested sand
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [affiliate-api (API)](https://developers.kayak.com/) | — | application | Requires: company, website, approval; Submit business application for review |
+| [affiliate-api (API)](https://developers.kayak.com/) | [Docs](https://developers.kayak.com/) | application | Requires: company, website, approval; Submit business application for review |
 
 ### Service pricing
 
@@ -1795,13 +1803,13 @@ Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt,
 
 ### Documentation and access <a id="lark-access"></a>
 
-[Docs](https://open.larksuite.com/document/home/index) · [API](https://open.larksuite.com/document/server-docs/getting-started/server-api-list)
+[Docs](https://open.larksuite.com/document/home/index) · [API reference](https://open.larksuite.com/document/server-docs/getting-started/server-api-list)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [base-api (API)](https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create) | — | self serve | Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested. |
-| [official-cli (CLI)](https://github.com/larksuite/cli) | — | self serve | Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification. |
-| [official-mcp (MCP)](https://github.com/larksuite/lark-openapi-mcp) | — | self serve | Local official MCP package uses platform app credentials; identity and tenant domains must match. |
+| [base-api (API)](https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create) | [Docs](https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md) | self serve | Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested. |
+| [official-cli (CLI)](https://github.com/larksuite/cli) | [Docs](https://github.com/larksuite/cli) | self serve | Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification. |
+| [official-mcp (MCP)](https://github.com/larksuite/lark-openapi-mcp) | [Docs](https://github.com/larksuite/lark-openapi-mcp) | self serve | Local official MCP package uses platform app credentials; identity and tenant domains must match. |
 
 ### Service pricing
 
@@ -1830,11 +1838,11 @@ Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, 
 
 ### Documentation and access <a id="lemonsqueezy-access"></a>
 
-[Docs](https://docs.lemonsqueezy.com) · [API](https://docs.lemonsqueezy.com/api)
+[Docs](https://docs.lemonsqueezy.com) · [API reference](https://docs.lemonsqueezy.com/api)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments) | — | — | Requires: platform_account; Use test-mode products and API keys; test resources do not automatically become live products. Store activation and live merchant eligibility must be checked separately. Merchant-of-record checkout applies to digital products/SaaS. |
+| [sandbox-api (API)](https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments) | [Docs](https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments) | — | Requires: platform_account; Use test-mode products and API keys; test resources do not automatically become live products. Store activation and live merchant eligibility must be checked separately. Merchant-of-record checkout applies to digital products/SaaS. |
 
 ### Service pricing
 
@@ -1861,9 +1869,9 @@ Personal flight search through MCP, CLI and SDKs, with a human payment-method au
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [personal-mcp (MCP)](https://letsfg.co/for-agents) | — | documented | Requires: payment_method; Complete browser consent and connect a payment method |
-| [personal-cli (CLI)](https://github.com/letsfg/letsfg) | — | — | Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift. |
-| [personal-sdk (SDK)](https://github.com/letsfg/letsfg) | — | — | Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift. |
+| [personal-mcp (MCP)](https://letsfg.co/for-agents) | [Docs](https://letsfg.co/for-agents) | documented | Requires: payment_method; Complete browser consent and connect a payment method |
+| [personal-cli (CLI)](https://github.com/letsfg/letsfg) | [Docs](https://github.com/letsfg/letsfg) | — | Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift. |
+| [personal-sdk (SDK)](https://github.com/letsfg/letsfg) | [Docs](https://github.com/letsfg/letsfg) | — | Official repository advertises this interface (Python/JS for SDK). Installation version, current auth compatibility and route-specific gates remain unverified due to documentation drift. |
 
 ### Service pricing
 
@@ -1888,7 +1896,7 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 
 ### Documentation and access <a id="linear-access"></a>
 
-[Docs](https://linear.app/developers) · [MCP](https://linear.app/docs/mcp)
+[Docs](https://linear.app/developers) · [MCP entry](https://linear.app/docs/mcp)
 
 —
 
@@ -1917,7 +1925,7 @@ Lufthansa fare methods are partner-scoped; the developer portal currently pauses
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [open-api-registration (API)](https://developer.lufthansa.com/page) | — | paused | Public schedule and status APIs are not evidence of consumer fare-search capability. |
-| [partner-offers-api (API)](https://developer.lufthansa.com/docs/read/api_partner/offers) | — | — | Public schedule/status APIs do not establish fare-search access. A readable registration form does not override the pause notice. |
+| [partner-offers-api (API)](https://developer.lufthansa.com/docs/read/api_partner/offers) | [Docs](https://developer.lufthansa.com/docs/read/api_partner/offers) | — | Public schedule/status APIs do not establish fare-search access. A readable registration form does not override the pause notice. |
 
 ### Service pricing
 
@@ -1943,7 +1951,7 @@ Dream Machine video and image generation via the Luma API, with llms.txt and pub
 
 ### Documentation and access <a id="luma-access"></a>
 
-[Docs](https://docs.lumalabs.ai) · [API](https://docs.lumalabs.ai/reference)
+[Docs](https://docs.lumalabs.ai) · [API reference](https://docs.lumalabs.ai/reference)
 
 —
 
@@ -1969,7 +1977,7 @@ Memory layer for AI agents (hosted platform + open-source), with REST API, llms.
 
 ### Documentation and access <a id="mem0-access"></a>
 
-[Docs](https://docs.mem0.ai) · [API](https://docs.mem0.ai/api-reference) · [MCP](https://docs.mem0.ai/openmemory/overview)
+[Docs](https://docs.mem0.ai) · [API reference](https://docs.mem0.ai/api-reference) · [MCP entry](https://docs.mem0.ai/openmemory/overview)
 
 —
 
@@ -1995,7 +2003,7 @@ MiniMax text, speech, video and music models via the international platform API,
 
 ### Documentation and access <a id="minimax-access"></a>
 
-[Docs](https://platform.minimax.io/docs) · [API](https://platform.minimax.io/docs/api-reference) · [MCP](https://github.com/MiniMax-AI/MiniMax-MCP)
+[Docs](https://platform.minimax.io/docs) · [API reference](https://platform.minimax.io/docs/api-reference) · [MCP entry](https://github.com/MiniMax-AI/MiniMax-MCP)
 
 —
 
@@ -2021,7 +2029,7 @@ European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs 
 
 ### Documentation and access <a id="mistral-access"></a>
 
-[Docs](https://docs.mistral.ai) · [API](https://docs.mistral.ai/api) · [SDK](https://docs.mistral.ai/getting-started/clients)
+[Docs](https://docs.mistral.ai) · [API reference](https://docs.mistral.ai/api) · [SDK](https://docs.mistral.ai/getting-started/clients)
 
 —
 
@@ -2047,7 +2055,7 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 
 ### Documentation and access <a id="modal-access"></a>
 
-[Docs](https://modal.com/docs) · [API](https://modal.com/docs/reference) · [CLI](https://modal.com/docs/reference/cli)
+[Docs](https://modal.com/docs) · [API reference](https://modal.com/docs/reference) · [CLI](https://modal.com/docs/reference/cli)
 
 —
 
@@ -2075,7 +2083,7 @@ Payment links and payment APIs with isolated test mode and a simulated checkout 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://docs.mollie.com/reference/create-payment-link) | — | — | Requires: platform_account; Uses a Test API key (or testmode with supported tokens). Test checkout is a simulator, not the live payment page. Account admission and live payment-method activation remain prerequisites to check separately. |
+| [sandbox-api (API)](https://docs.mollie.com/reference/create-payment-link) | [Docs](https://docs.mollie.com/reference/create-payment-link) | — | Requires: platform_account; Uses a Test API key (or testmode with supported tokens). Test checkout is a simulator, not the live payment page. Account admission and live payment-method activation remain prerequisites to check separately. |
 
 ### Service pricing
 
@@ -2101,7 +2109,7 @@ Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, of
 
 ### Documentation and access <a id="mongodb-atlas-access"></a>
 
-[Docs](https://www.mongodb.com/docs/atlas/) · [API](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/) · [CLI](https://www.mongodb.com/docs/atlas/cli/) · [SDK](https://www.mongodb.com/docs/drivers/) · [MCP](https://github.com/mongodb-js/mongodb-mcp-server)
+[Docs](https://www.mongodb.com/docs/atlas/) · [API reference](https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/) · [CLI](https://www.mongodb.com/docs/atlas/cli/) · [SDK](https://www.mongodb.com/docs/drivers/) · [MCP entry](https://github.com/mongodb-js/mongodb-mcp-server)
 
 —
 
@@ -2127,7 +2135,7 @@ Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi pla
 
 ### Documentation and access <a id="moonshot-access"></a>
 
-[Docs](https://platform.kimi.ai/docs) · [API](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli)
+[Docs](https://platform.kimi.ai/docs) · [API reference](https://platform.kimi.ai/docs/api/chat) · [CLI](https://github.com/MoonshotAI/kimi-cli)
 
 —
 
@@ -2153,7 +2161,7 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 ### Documentation and access <a id="n8n-access"></a>
 
-[Docs](https://docs.n8n.io) · [API](https://docs.n8n.io/api/) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server)
+[Docs](https://docs.n8n.io) · [API reference](https://docs.n8n.io/api/) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [MCP entry](https://docs.n8n.io/connect/connect-to-n8n-mcp-server)
 
 —
 
@@ -2179,7 +2187,7 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 
 ### Documentation and access <a id="neon-access"></a>
 
-[Docs](https://neon.com/docs) · [API](https://api-docs.neon.tech) · [CLI](https://neon.com/docs/reference/neon-cli) · [MCP](https://github.com/neondatabase/mcp-server-neon)
+[Docs](https://neon.com/docs) · [API reference](https://api-docs.neon.tech) · [CLI](https://neon.com/docs/reference/neon-cli) · [MCP entry](https://github.com/neondatabase/mcp-server-neon)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
@@ -2242,7 +2250,7 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 ### Documentation and access <a id="netlify-access"></a>
 
-[Docs](https://docs.netlify.com) · [API](https://open-api.netlify.com) · [CLI](https://docs.netlify.com/cli/get-started/) · [MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/)
+[Docs](https://docs.netlify.com) · [API reference](https://open-api.netlify.com) · [CLI](https://docs.netlify.com/cli/get-started/) · [MCP entry](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/)
 
 —
 
@@ -2268,14 +2276,14 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 ### Documentation and access <a id="notion-access"></a>
 
-[Docs](https://developers.notion.com) · [MCP](https://developers.notion.com/docs/mcp)
+[Docs](https://developers.notion.com) · [MCP entry](https://developers.notion.com/docs/mcp)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://developers.notion.com/reference/intro) | — | self serve / documented | Create internal connection and grant only the test page, or create a PAT in a dedicated test workspace.; Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being a free member alone is insufficient. |
-| [javascript-sdk (SDK)](https://github.com/makenotion/notion-sdk-js) | — | self serve | Official client library over the REST API; credentials and resource grants remain necessary. |
-| [official-cli (CLI)](https://developers.notion.com/cli/get-started/overview) | — | self serve | Official CLI discovered in current docs; measure separately from raw REST. |
-| [hosted-mcp (MCP)](https://mcp.notion.com/mcp) | — | self serve | Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer actively maintained. |
+| [rest-api (API)](https://developers.notion.com/reference/intro) | [Docs](https://developers.notion.com/reference/intro) | self serve / documented | Create internal connection and grant only the test page, or create a PAT in a dedicated test workspace.; Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being a free member alone is insufficient. |
+| [javascript-sdk (SDK)](https://github.com/makenotion/notion-sdk-js) | [Docs](https://github.com/makenotion/notion-sdk-js) | self serve | Official client library over the REST API; credentials and resource grants remain necessary. |
+| [official-cli (CLI)](https://developers.notion.com/cli/get-started/overview) | [Docs](https://developers.notion.com/cli/get-started/overview) | self serve | Official CLI discovered in current docs; measure separately from raw REST. |
+| [hosted-mcp (MCP)](https://mcp.notion.com/mcp) | [Docs](https://developers.notion.com/guides/mcp/get-started-with-mcp) | self serve | Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer actively maintained. |
 
 ### Service pricing
 
@@ -2348,7 +2356,7 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 
 ### Documentation and access <a id="openai-access"></a>
 
-[Docs](https://developers.openai.com/api/docs) · [API](https://platform.openai.com/docs/api-reference) · [SDK](https://platform.openai.com/docs/libraries)
+[Docs](https://developers.openai.com/api/docs) · [API reference](https://platform.openai.com/docs/api-reference) · [SDK](https://platform.openai.com/docs/libraries)
 
 —
 
@@ -2374,7 +2382,7 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 
 ### Documentation and access <a id="openrouter-access"></a>
 
-[Docs](https://openrouter.ai/docs) · [API](https://openrouter.ai/docs/api-reference/overview)
+[Docs](https://openrouter.ai/docs) · [API reference](https://openrouter.ai/docs/api-reference/overview)
 
 —
 
@@ -2400,12 +2408,10 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 ### Documentation and access <a id="paas-build-access"></a>
 
-[Docs](https://paas.build/agents)
-
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://paas.build/openapi.json) | — | restricted | PayFac powered by UniPaaS; merchant retains tax responsibilities. Official materials limit onboarding to UK/EU/US merchants. Sandbox and production tokens differ. A 2026-09-08 sandbox-only account and token were prepared successfully. A fresh Codex trial created a remote checkout but hit a browser launch permission failure, so it is invalid for completion-rate comparison. Independent browser review showed only the checkout shell; customer usability remains unverified. |
-| [official-mcp (MCP)](https://paas.build/mcp) | — | — | Discovery verified four tools on 2026-09-08. Default onboarding can provision both environments and send notifications; explicitly prepare sandbox-only access. Protocol discovery is not task completion. |
+| [rest-api (API)](https://paas.build/openapi.json) | [Docs](https://paas.build/SKILL.md) | restricted | PayFac powered by UniPaaS; merchant retains tax responsibilities. Official materials limit onboarding to UK/EU/US merchants. Sandbox and production tokens differ. A 2026-09-08 sandbox-only account and token were prepared successfully. A fresh Codex trial created a remote checkout but hit a browser launch permission failure, so it is invalid for completion-rate comparison. Independent browser review showed only the checkout shell; customer usability remains unverified. |
+| [official-mcp (MCP)](https://paas.build/mcp) | [Docs](https://paas.build/agents) | — | Discovery verified four tools on 2026-09-08. Default onboarding can provision both environments and send notifications; explicitly prepare sandbox-only access. Protocol discovery is not task completion. |
 
 ### Service pricing
 
@@ -2481,11 +2487,11 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 ### Documentation and access <a id="paddle-access"></a>
 
-[Docs](https://developer.paddle.com) · [API](https://developer.paddle.com/api-reference/overview) · [MCP](https://github.com/PaddleHQ/paddle-mcp-server)
+[Docs](https://developer.paddle.com) · [API reference](https://developer.paddle.com/api-reference/overview) · [MCP entry](https://github.com/PaddleHQ/paddle-mcp-server)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://developer.paddle.com/sdks/sandbox/) | — | self serve | Requires: platform_account; Register the separate sandbox account and obtain its API key.; Create a separate sandbox account with sandbox credentials. Sandbox does not require the domain and checkout approvals needed for live sales. Merchant-of-record responsibilities and live account review differ from payment processing alone. On 2026-09-09, sandbox email verification completed and a seven-day API key was created with scoped permissions. An authenticated sandbox products read returned HTTP 200 with an empty catalog. No KYC, production activation or payment was performed. Account setup alone is not a completed checkout task. The first ebook checkout task was not completed: POST /products rejected ebooks with product_tax_category_not_approved. The authenticated sandbox dashboard showed eBook Not Requested and SaaS Approved, with a notice that category approval must be requested in a live account. No live application was made. This result concerns the default account and ebook scenario, not approved categories or all Paddle checkouts. |
+| [sandbox-api (API)](https://developer.paddle.com/sdks/sandbox/) | [Docs](https://developer.paddle.com/sdks/sandbox/) | self serve | Requires: platform_account; Register the separate sandbox account and obtain its API key.; Create a separate sandbox account with sandbox credentials. Sandbox does not require the domain and checkout approvals needed for live sales. Merchant-of-record responsibilities and live account review differ from payment processing alone. On 2026-09-09, sandbox email verification completed and a seven-day API key was created with scoped permissions. An authenticated sandbox products read returned HTTP 200 with an empty catalog. No KYC, production activation or payment was performed. Account setup alone is not a completed checkout task. The first ebook checkout task was not completed: POST /products rejected ebooks with product_tax_category_not_approved. The authenticated sandbox dashboard showed eBook Not Requested and SaaS Approved, with a notice that category approval must be requested in a live account. No live application was made. This result concerns the default account and ebook scenario, not approved categories or all Paddle checkouts. |
 
 ### Service pricing
 
@@ -2550,7 +2556,7 @@ Online payment acceptance through Orders API and buyer approval checkout; separa
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://developer.paypal.com/api/rest) | — | self serve | Requires: platform_account; Create a developer account and obtain sandbox app client credentials.; Developer dashboard supplies sandbox buyer and seller accounts and app credentials. Going live requires a Business account; merchant country and personal eligibility need separate checks. |
+| [sandbox-api (API)](https://developer.paypal.com/api/rest) | [Docs](https://developer.paypal.com/api/rest) | self serve | Requires: platform_account; Create a developer account and obtain sandbox app client credentials.; Developer dashboard supplies sandbox buyer and seller accounts and app credentials. Going live requires a Business account; merchant country and personal eligibility need separate checks. |
 
 ### Service pricing
 
@@ -2576,7 +2582,7 @@ Sonar API for web-grounded answers and search, with llms.txt, an official MCP se
 
 ### Documentation and access <a id="perplexity-access"></a>
 
-[Docs](https://docs.perplexity.ai) · [MCP](https://github.com/ppl-ai/modelcontextprotocol)
+[Docs](https://docs.perplexity.ai) · [MCP entry](https://github.com/ppl-ai/modelcontextprotocol)
 
 —
 
@@ -2602,7 +2608,7 @@ Managed vector database for search and RAG, with llms.txt, an official MCP serve
 
 ### Documentation and access <a id="pinecone-access"></a>
 
-[Docs](https://docs.pinecone.io) · [API](https://docs.pinecone.io/reference/api/introduction) · [CLI](https://github.com/pinecone-io/cli) · [MCP](https://docs.pinecone.io/guides/operations/mcp-server)
+[Docs](https://docs.pinecone.io) · [API reference](https://docs.pinecone.io/reference/api/introduction) · [CLI](https://github.com/pinecone-io/cli) · [MCP entry](https://docs.pinecone.io/guides/operations/mcp-server)
 
 —
 
@@ -2630,8 +2636,8 @@ Unified payment integration across payment channels, with API keys, a web SDK an
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html) | — | — | Requires: platform_account; Dashboard provides separate test/live API keys; test transactions are documented as simulated and without actual transaction fees. Channel-specific merchant permissions may still be needed for live use. Current individual admission and channel fees need verification. |
-| [web-sdk (SDK)](https://www.pingxx.com/docs/client/web.html) | — | — | Web SDK consumes server-created Charge credentials and invokes the selected payment channel. This is not a separate merchant account or a waiver of channel admission. |
+| [sandbox-api (API)](https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html) | [Docs](https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html) | — | Requires: platform_account; Dashboard provides separate test/live API keys; test transactions are documented as simulated and without actual transaction fees. Channel-specific merchant permissions may still be needed for live use. Current individual admission and channel fees need verification. |
+| [web-sdk (SDK)](https://www.pingxx.com/docs/client/web.html) | [Docs](https://www.pingxx.com/docs/client/web.html) | — | Web SDK consumes server-created Charge credentials and invokes the selected payment channel. This is not a separate merchant account or a waiver of channel admission. |
 
 ### Service pricing
 
@@ -2659,7 +2665,7 @@ PostgreSQL single-node plans start at USD 5/month. No free writable database all
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [database-cli (CLI)](https://planetscale.com/docs/cli) | — | self serve / documented | PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task. |
+| [database-cli (CLI)](https://planetscale.com/docs/cli) | [Docs](https://planetscale.com/docs/cli) | self serve / documented | PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task. |
 
 ### Service pricing
 
@@ -2686,7 +2692,7 @@ Merchant-of-record service for digital products, with checkout APIs and a separa
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://polar.sh/docs/integrate/sandbox) | — | self serve | Requires: platform_account; Create a sandbox account and organization, then issue sandbox credentials.; Create a separate sandbox account and organization; production credentials cannot be reused. Sandbox customer email delivery is restricted. Live payouts depend on Polar's supported seller countries and Stripe Connect Express, not the Stripe Payments country list. |
+| [sandbox-api (API)](https://polar.sh/docs/integrate/sandbox) | [Docs](https://polar.sh/docs/integrate/sandbox) | self serve | Requires: platform_account; Create a sandbox account and organization, then issue sandbox credentials.; Create a separate sandbox account and organization; production credentials cannot be reused. Sandbox customer email delivery is restricted. Live payouts depend on Polar's supported seller countries and Stripe Connect Express, not the Stripe Payments country list. |
 
 ### Service pricing
 
@@ -2717,7 +2723,7 @@ API development platform with a public Postman API, llms.txt, official CLI, and 
 
 ### Documentation and access <a id="postman-access"></a>
 
-[Docs](https://learning.postman.com) · [API](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) · [MCP](https://github.com/postmanlabs/postman-mcp-server)
+[Docs](https://learning.postman.com) · [API reference](https://learning.postman.com/docs/developer/postman-api/intro-api/) · [CLI](https://learning.postman.com/docs/postman-cli/postman-cli-overview/) · [MCP entry](https://github.com/postmanlabs/postman-mcp-server)
 
 —
 
@@ -2743,7 +2749,7 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 
 ### Documentation and access <a id="qdrant-access"></a>
 
-[Docs](https://qdrant.tech/documentation) · [API](https://api.qdrant.tech) · [SDK](https://qdrant.tech/documentation/interfaces) · [MCP](https://github.com/qdrant/mcp-server-qdrant)
+[Docs](https://qdrant.tech/documentation) · [API reference](https://api.qdrant.tech) · [SDK](https://qdrant.tech/documentation/interfaces) · [MCP entry](https://github.com/qdrant/mcp-server-qdrant)
 
 —
 
@@ -2769,7 +2775,7 @@ App/database hosting with a public GraphQL API, official CLI, llms.txt, and usag
 
 ### Documentation and access <a id="railway-access"></a>
 
-[Docs](https://docs.railway.com) · [API](https://docs.railway.com/reference/public-api) · [CLI](https://github.com/railwayapp/cli)
+[Docs](https://docs.railway.com) · [API reference](https://docs.railway.com/reference/public-api) · [CLI](https://github.com/railwayapp/cli)
 
 —
 
@@ -2797,7 +2803,7 @@ Payment Links API for collecting specified amounts through hosted checkout, incl
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [payment-links-api (API)](https://razorpay.com/docs/api/payments/payment-links/create-standard/) | — | — | Documentation limits test-mode creation to 30 payment links per business before contacting support. API-key access, merchant geography, KYC and production eligibility need preparation checks; a documented test endpoint does not establish individual admission. |
+| [payment-links-api (API)](https://razorpay.com/docs/api/payments/payment-links/create-standard/) | [Docs](https://razorpay.com/docs/api/payments/payment-links/create-standard/) | — | Documentation limits test-mode creation to 30 payment links per business before contacting support. API-key access, merchant geography, KYC and production eligibility need preparation checks; a documented test endpoint does not establish individual admission. |
 
 ### Service pricing
 
@@ -2821,7 +2827,7 @@ In-memory data platform for caching, vector search and real-time apps; Redis Clo
 
 ### Documentation and access <a id="redis-access"></a>
 
-[Docs](https://redis.io/docs/latest) · [API](https://redis.io/docs/latest/operate/rc/api/) · [CLI](https://redis.io/docs/latest/develop/tools/cli/) · [MCP](https://github.com/redis/mcp-redis)
+[Docs](https://redis.io/docs/latest) · [API reference](https://redis.io/docs/latest/operate/rc/api/) · [CLI](https://redis.io/docs/latest/develop/tools/cli/) · [MCP entry](https://github.com/redis/mcp-redis)
 
 —
 
@@ -2847,7 +2853,7 @@ Cloud hosting for web services, static sites and databases with a REST API, offi
 
 ### Documentation and access <a id="render-access"></a>
 
-[Docs](https://render.com/docs) · [API](https://api-docs.render.com/reference/introduction) · [CLI](https://github.com/render-oss/cli) · [MCP](https://github.com/render-oss/render-mcp-server)
+[Docs](https://render.com/docs) · [API reference](https://api-docs.render.com/reference/introduction) · [CLI](https://github.com/render-oss/cli) · [MCP entry](https://github.com/render-oss/render-mcp-server)
 
 —
 
@@ -2877,7 +2883,7 @@ Run and fine-tune open-source models via a simple predictions API, with llms.txt
 
 ### Documentation and access <a id="replicate-access"></a>
 
-[Docs](https://replicate.com/docs) · [API](https://replicate.com/docs/reference/http) · [CLI](https://github.com/replicate/cli) · [SDK](https://replicate.com/docs/reference/client-libraries)
+[Docs](https://replicate.com/docs) · [API reference](https://replicate.com/docs/reference/http) · [CLI](https://github.com/replicate/cli) · [SDK](https://replicate.com/docs/reference/client-libraries)
 
 —
 
@@ -2903,7 +2909,7 @@ Email API for developers with test mode, scoped API keys, idempotency support, a
 
 ### Documentation and access <a id="resend-access"></a>
 
-[Docs](https://resend.com/docs) · [API](https://resend.com/docs/api-reference/introduction) · [SDK](https://resend.com/docs/sdks) · [MCP](https://github.com/resend/mcp-send-email)
+[Docs](https://resend.com/docs) · [API reference](https://resend.com/docs/api-reference/introduction) · [SDK](https://resend.com/docs/sdks) · [MCP entry](https://github.com/resend/mcp-send-email)
 
 —
 
@@ -2931,7 +2937,7 @@ Air API workflows with assigned credentials, plus a separately researched Agenti
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [air-workflow-api (API)](https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md) | — | application | Contact sales to obtain EPR, IPCC and password; This older workflow is evidence for its own credential path only. |
+| [air-workflow-api (API)](https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md) | [Docs](https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md) | application | Contact sales to obtain EPR, IPCC and password; This older workflow is evidence for its own credential path only. |
 | [agentic-mcp-lead (MCP)](https://developer.sabre.com/) | — | — | Current developer homepage advertises Agentic API/MCP. Exact product, tools and onboarding need research; do not copy legacy workflow gates onto it. |
 
 ### Service pricing
@@ -2959,7 +2965,7 @@ Google Flights extraction endpoint charged in platform credits rather than one c
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [flights-api (API)](https://www.scrapingdog.com/documentation/google-flights-api/) | — | self serve | — |
+| [flights-api (API)](https://www.scrapingdog.com/documentation/google-flights-api/) | [Docs](https://www.scrapingdog.com/documentation/google-flights-api/) | self serve | — |
 
 ### Service pricing
 
@@ -2986,7 +2992,7 @@ Google Flights extraction API and a hosted MCP integration supporting token or b
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [google-flights-api (API)](https://www.searchapi.io/docs/google-flights-api) | — | self serve | — |
+| [google-flights-api (API)](https://www.searchapi.io/docs/google-flights-api) | [Docs](https://www.searchapi.io/docs/google-flights-api) | self serve | — |
 | [hosted-mcp (MCP)](https://www.searchapi.io/mcp) | [Docs](https://www.searchapi.io/integrations/mcp) | — | Authorize in browser when choosing OAuth; Supports browser OAuth or a separate MCP token. Which tools expose the flight task remains untested. |
 
 ### Service pricing
@@ -3013,7 +3019,7 @@ Error monitoring and performance tracing with llms.txt, an official MCP server, 
 
 ### Documentation and access <a id="sentry-access"></a>
 
-[Docs](https://docs.sentry.io) · [API](https://docs.sentry.io/api/) · [CLI](https://docs.sentry.io/cli/) · [SDK](https://docs.sentry.io/platforms/) · [MCP](https://docs.sentry.io/product/sentry-mcp/)
+[Docs](https://docs.sentry.io) · [API reference](https://docs.sentry.io/api/) · [CLI](https://docs.sentry.io/cli/) · [SDK](https://docs.sentry.io/platforms/) · [MCP entry](https://docs.sentry.io/product/sentry-mcp/)
 
 —
 
@@ -3041,9 +3047,9 @@ Real-time JSON API for Google and other search engines' results, with an officia
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [google-flights-api (API)](https://serpapi.com/google-flights-api) | — | self serve | A third-party Google Flights data service. Not a Google-operated API. |
-| [official-mcp (MCP)](https://github.com/serpapi/serpapi-mcp) | — | — | Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route results. |
-| [web-search-api (API)](https://serpapi.com/search-api) | — | self serve | Separate from Google Flights API. Existing flight evaluations do not establish web search performance. |
+| [google-flights-api (API)](https://serpapi.com/google-flights-api) | [Docs](https://serpapi.com/google-flights-api) | self serve | A third-party Google Flights data service. Not a Google-operated API. |
+| [official-mcp (MCP)](https://github.com/serpapi/serpapi-mcp) | [Docs](https://github.com/serpapi/serpapi-mcp) | — | Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route results. |
+| [web-search-api (API)](https://serpapi.com/search-api) | [Docs](https://serpapi.com/search-api) | self serve | Separate from Google Flights API. Existing flight evaluations do not establish web search performance. |
 
 ### Service pricing
 
@@ -3099,7 +3105,7 @@ Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, acce
 
 ### Documentation and access <a id="shopify-access"></a>
 
-[Docs](https://shopify.dev/docs) · [API](https://shopify.dev/docs/api) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [MCP](https://shopify.dev/docs/apps/build/storefront-mcp)
+[Docs](https://shopify.dev/docs) · [API reference](https://shopify.dev/docs/api) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [MCP entry](https://shopify.dev/docs/apps/build/storefront-mcp)
 
 —
 
@@ -3153,8 +3159,8 @@ Partner flight APIs and an official MCP, with independently documented business-
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [partner-api (API)](https://developers.skyscanner.net/docs/getting-started/authentication) | — | application | Requires: approval; Partnership review; personal-use acceptance, fees and waiting time are unknown. |
-| [partner-mcp (MCP)](https://developers.skyscanner.net/docs/mcp-server) | — | application | Requires: approval; Contact account manager or partnership team; Case-by-case access; an official MCP does not establish personal self-service access. |
+| [partner-api (API)](https://developers.skyscanner.net/docs/getting-started/authentication) | [Docs](https://developers.skyscanner.net/docs/getting-started/authentication) | application | Requires: approval; Partnership review; personal-use acceptance, fees and waiting time are unknown. |
+| [partner-mcp (MCP)](https://developers.skyscanner.net/docs/mcp-server) | [Docs](https://developers.skyscanner.net/docs/mcp-server) | application | Requires: approval; Contact account manager or partnership team; Case-by-case access; an official MCP does not establish personal self-service access. |
 
 ### Service pricing
 
@@ -3179,7 +3185,7 @@ Workspace messaging platform with a mature Web API, granular OAuth scopes, an Op
 
 ### Documentation and access <a id="slack-access"></a>
 
-[Docs](https://api.slack.com) · [API](https://api.slack.com/methods) · [CLI](https://docs.slack.dev/tools/slack-cli) · [SDK](https://tools.slack.dev)
+[Docs](https://api.slack.com) · [API reference](https://api.slack.com/methods) · [CLI](https://docs.slack.dev/tools/slack-cli) · [SDK](https://tools.slack.dev)
 
 —
 
@@ -3207,7 +3213,7 @@ Hosted payment links and payment APIs with a free developer sandbox; merchant av
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink) | — | self serve | Requires: platform_account; Create an application and select its sandbox seller account and access token.; Requires a Square account, application and sandbox seller location. Sandbox is free; live merchant eligibility is separate. Hosted checkout behavior must be checked before treating a sandbox link as a usable customer page. |
+| [sandbox-api (API)](https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink) | [Docs](https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink) | self serve | Requires: platform_account; Create an application and select its sandbox seller account and access token.; Requires a Square account, application and sandbox seller location. Sandbox is free; live merchant eligibility is separate. Hosted checkout behavior must be checked before treating a sandbox link as a usable customer page. |
 
 ### Service pricing
 
@@ -3232,7 +3238,7 @@ Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and se
 
 ### Documentation and access <a id="steel-access"></a>
 
-[Docs](https://docs.steel.dev) · [API](https://docs.steel.dev/api-reference)
+[Docs](https://docs.steel.dev) · [API reference](https://docs.steel.dev/api-reference)
 
 —
 
@@ -3258,11 +3264,11 @@ Payments, billing, subscriptions, and financial infrastructure with a famously c
 
 ### Documentation and access <a id="stripe-access"></a>
 
-[Docs](https://docs.stripe.com) · [API](https://docs.stripe.com/api) · [CLI](https://docs.stripe.com/stripe-cli) · [SDK](https://docs.stripe.com/sdks) · [MCP](https://docs.stripe.com/mcp)
+[Docs](https://docs.stripe.com) · [API reference](https://docs.stripe.com/api) · [CLI](https://docs.stripe.com/stripe-cli) · [SDK](https://docs.stripe.com/sdks) · [MCP entry](https://docs.stripe.com/mcp)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [sandbox-api (API)](https://docs.stripe.com/payment-links/create) | — | — | Requires: platform_account; Use isolated sandbox resources and test API keys. One-time and recurring product prices are documented. Live account activation, merchant country eligibility and tax responsibilities require separate checks. |
+| [sandbox-api (API)](https://docs.stripe.com/payment-links/create) | [Docs](https://docs.stripe.com/payment-links/create) | — | Requires: platform_account; Use isolated sandbox resources and test API keys. One-time and recurring product prices are documented. Live account activation, merchant country eligibility and tax responsibilities require separate checks. |
 
 ### Service pricing
 
@@ -3292,11 +3298,11 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 ### Documentation and access <a id="supabase-access"></a>
 
-[Docs](https://supabase.com/docs) · [API](https://supabase.com/docs/reference/api/introduction) · [CLI](https://supabase.com/docs/guides/cli) · [SDK](https://supabase.com/docs/reference) · [MCP](https://supabase.com/docs/guides/getting-started/mcp)
+[Docs](https://supabase.com/docs) · [API reference](https://supabase.com/docs/reference/api/introduction) · [CLI](https://supabase.com/docs/guides/cli) · [SDK](https://supabase.com/docs/reference) · [MCP entry](https://supabase.com/docs/guides/getting-started/mcp)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://supabase.com/docs/guides/api) | — | self serve / documented | Existing project required; Free plan: two active projects, 500 MB database per project; pauses after one week inactivity. Management provisioning is separate from the data REST API. |
+| [data-api (API)](https://supabase.com/docs/guides/api) | [Docs](https://supabase.com/docs/guides/api) | self serve / documented | Existing project required; Free plan: two active projects, 500 MB database per project; pauses after one week inactivity. Management provisioning is separate from the data REST API. |
 
 ### Service pricing
 
@@ -3323,11 +3329,11 @@ Search and extraction API built for AI agents, with llms.txt, an official MCP se
 
 ### Documentation and access <a id="tavily-access"></a>
 
-[Docs](https://docs.tavily.com) · [API](https://docs.tavily.com/documentation/api-reference/introduction) · [SDK](https://docs.tavily.com/sdk) · [MCP](https://docs.tavily.com/documentation/mcp)
+[Docs](https://docs.tavily.com) · [API reference](https://docs.tavily.com/documentation/api-reference/introduction) · [SDK](https://docs.tavily.com/sdk) · [MCP entry](https://docs.tavily.com/documentation/mcp)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [search-api (API)](https://docs.tavily.com/documentation/quickstart) | — | self serve / documented | Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. |
+| [search-api (API)](https://docs.tavily.com/documentation/quickstart) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. |
 
 ### Service pricing
 
@@ -3354,7 +3360,7 @@ Free bot platform with instant token issuance via BotFather, webhooks, a documen
 
 ### Documentation and access <a id="telegram-access"></a>
 
-[Docs](https://core.telegram.org/bots) · [API](https://core.telegram.org/bots/api)
+[Docs](https://core.telegram.org/bots) · [API reference](https://core.telegram.org/bots/api)
 
 —
 
@@ -3380,7 +3386,7 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 
 ### Documentation and access <a id="together-ai-access"></a>
 
-[Docs](https://docs.together.ai) · [API](https://docs.together.ai/reference/chat-completions)
+[Docs](https://docs.together.ai) · [API reference](https://docs.together.ai/reference/chat-completions)
 
 —
 
@@ -3408,7 +3414,7 @@ Travel distribution API requiring trial requests and provider-provisioned produc
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [tripservices-api (API)](https://developer.travelport.com/docs/getting-started) | — | application | Requires: approval; Request trial access; contact sales for customer onboarding; Production/pre-production credentials and PCC/point-of-sale context are provisioned. Personal access and trial data realism remain unknown. |
+| [tripservices-api (API)](https://developer.travelport.com/docs/getting-started) | [Docs](https://developer.travelport.com/docs/getting-started) | application | Requires: approval; Request trial access; contact sales for customer onboarding; Production/pre-production credentials and PCC/point-of-sale context are provisioned. Personal access and trial data realism remain unknown. |
 
 ### Service pricing
 
@@ -3435,7 +3441,7 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [supplier-fare-maintenance (API)](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | — | — | Supplier fare and rule maintenance with existing distribution permissions/support. Not evidence of consumer itinerary search; no flights.search capability is assigned. |
+| [supplier-fare-maintenance (API)](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | [Docs](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | — | Supplier fare and rule maintenance with existing distribution permissions/support. Not evidence of consumer itinerary search; no flights.search capability is assigned. |
 
 ### Service pricing
 
@@ -3461,8 +3467,8 @@ Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | — | self serve / documented | Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. |
-| [platform-api (API)](https://docs.turso.tech/api-reference/introduction) | — | self serve | Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. |
+| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/cli/introduction) | self serve / documented | Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. |
+| [platform-api (API)](https://docs.turso.tech/api-reference/introduction) | [Docs](https://docs.turso.tech/api-reference/introduction) | self serve | Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. |
 
 ### Service pricing
 
@@ -3524,7 +3530,7 @@ Programmable messaging and voice APIs with test credentials, an OpenAPI spec, ll
 
 ### Documentation and access <a id="twilio-access"></a>
 
-[Docs](https://www.twilio.com/docs) · [API](https://www.twilio.com/docs/usage/api) · [CLI](https://www.twilio.com/docs/twilio-cli) · [SDK](https://www.twilio.com/docs/libraries) · [MCP](https://github.com/twilio-labs/mcp)
+[Docs](https://www.twilio.com/docs) · [API reference](https://www.twilio.com/docs/usage/api) · [CLI](https://www.twilio.com/docs/twilio-cli) · [SDK](https://www.twilio.com/docs/libraries) · [MCP entry](https://github.com/twilio-labs/mcp)
 
 —
 
@@ -3550,7 +3556,7 @@ Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llm
 
 ### Documentation and access <a id="upstash-access"></a>
 
-[Docs](https://upstash.com/docs) · [API](https://upstash.com/docs/devops/developer-api/introduction) · [CLI](https://github.com/upstash/cli) · [MCP](https://github.com/upstash/mcp-server)
+[Docs](https://upstash.com/docs) · [API reference](https://upstash.com/docs/devops/developer-api/introduction) · [CLI](https://github.com/upstash/cli) · [MCP entry](https://github.com/upstash/mcp-server)
 
 —
 
@@ -3576,7 +3582,7 @@ Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with
 
 ### Documentation and access <a id="vapi-access"></a>
 
-[Docs](https://docs.vapi.ai) · [API](https://docs.vapi.ai/api-reference) · [MCP](https://github.com/VapiAI/mcp-server)
+[Docs](https://docs.vapi.ai) · [API reference](https://docs.vapi.ai/api-reference) · [MCP entry](https://github.com/VapiAI/mcp-server)
 
 —
 
@@ -3602,7 +3608,7 @@ Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server
 
 ### Documentation and access <a id="vercel-access"></a>
 
-[Docs](https://vercel.com/docs) · [API](https://vercel.com/docs/rest-api) · [CLI](https://vercel.com/docs/cli) · [SDK](https://vercel.com/docs/rest-api/sdk) · [MCP](https://vercel.com/docs/mcp/vercel-mcp)
+[Docs](https://vercel.com/docs) · [API reference](https://vercel.com/docs/rest-api) · [CLI](https://vercel.com/docs/cli) · [SDK](https://vercel.com/docs/rest-api/sdk) · [MCP entry](https://vercel.com/docs/mcp/vercel-mcp)
 
 —
 
@@ -3628,7 +3634,7 @@ Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free san
 
 ### Documentation and access <a id="weaviate-access"></a>
 
-[Docs](https://docs.weaviate.io) · [API](https://docs.weaviate.io/weaviate/api/rest) · [CLI](https://github.com/weaviate/weaviate-cli) · [MCP](https://github.com/weaviate/mcp-server-weaviate)
+[Docs](https://docs.weaviate.io) · [API reference](https://docs.weaviate.io/weaviate/api/rest) · [CLI](https://github.com/weaviate/weaviate-cli) · [MCP entry](https://github.com/weaviate/mcp-server-weaviate)
 
 —
 
@@ -3656,7 +3662,7 @@ Merchant payment APIs including Native QR checkout; merchant credentials and cha
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [native-api (API)](https://pay.wechatpay.cn/doc/v3/merchant/4012791877) | — | — | Native checkout is a QR payment flow, not a browser-hosted card checkout. Merchant admission, individual eligibility and an applicable free sandbox remain unknown in this discovery pass; do not simulate success by using a live small-value payment. |
+| [native-api (API)](https://pay.wechatpay.cn/doc/v3/merchant/4012791877) | [Docs](https://pay.wechatpay.cn/doc/v3/merchant/4012791877) | — | Native checkout is a QR payment flow, not a browser-hosted card checkout. Merchant admission, individual eligibility and an applicable free sandbox remain unknown in this discovery pass; do not simulate success by using a live small-value payment. |
 
 ### Service pricing
 
@@ -3682,7 +3688,7 @@ Payment APIs and checkout integration for existing apps, with TypeScript, Python
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [official-api (API)](https://docs.whop.com/) | — | — | Docs describe dashboard API keys and checkout integration. Merchant eligibility, sandbox coverage, service responsibilities and full fees still need verification; buyer availability does not establish seller eligibility. |
+| [official-api (API)](https://docs.whop.com/) | [Docs](https://docs.whop.com/) | — | Docs describe dashboard API keys and checkout integration. Merchant eligibility, sandbox coverage, service responsibilities and full fees still need verification; buyer availability does not establish seller eligibility. |
 
 ### Service pricing
 
@@ -3706,7 +3712,7 @@ xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-s
 
 ### Documentation and access <a id="xai-access"></a>
 
-[Docs](https://docs.x.ai) · [API](https://docs.x.ai/developers/rest-api-reference/inference)
+[Docs](https://docs.x.ai) · [API reference](https://docs.x.ai/developers/rest-api-reference/inference)
 
 —
 
@@ -3732,7 +3738,7 @@ Hosted X data and account automation service with a REST API, official MCP serve
 
 ### Documentation and access <a id="xquik-access"></a>
 
-[Docs](https://docs.xquik.com) · [API](https://docs.xquik.com/api-reference/overview) · [SDK](https://docs.xquik.com/sdks) · [MCP](https://docs.xquik.com/mcp/overview)
+[Docs](https://docs.xquik.com) · [API reference](https://docs.xquik.com/api-reference/overview) · [SDK](https://docs.xquik.com/sdks) · [MCP entry](https://docs.xquik.com/mcp/overview)
 
 —
 
@@ -3762,7 +3768,7 @@ GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, publis
 
 ### Documentation and access <a id="zai-access"></a>
 
-[Docs](https://docs.z.ai) · [API](https://docs.z.ai/api-reference)
+[Docs](https://docs.z.ai) · [API reference](https://docs.z.ai/api-reference)
 
 —
 
@@ -3788,7 +3794,7 @@ Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpo
 
 ### Documentation and access <a id="zapier-access"></a>
 
-[Docs](https://docs.zapier.com) · [CLI](https://github.com/zapier/zapier-platform) · [MCP](https://zapier.com/mcp)
+[Docs](https://docs.zapier.com) · [CLI](https://github.com/zapier/zapier-platform) · [MCP entry](https://zapier.com/mcp) · [MCP setup](https://docs.zapier.com/mcp/get-started/quickstart)
 
 —
 
@@ -3799,6 +3805,10 @@ Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpo
 ### Task results
 
 —
+
+### Notes
+
+- MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official.
 
 ### Sources
 
@@ -3890,9 +3900,9 @@ China-region Feishu workspace and Base APIs; separate account/tenant from intern
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [base-api (API)](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create) | — | self serve | Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested. |
-| [official-cli (CLI)](https://github.com/larksuite/cli) | — | self serve | Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification. |
-| [official-mcp (MCP)](https://github.com/larksuite/lark-openapi-mcp) | — | self serve | Local official MCP package uses platform app credentials; identity and tenant domains must match. |
+| [base-api (API)](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create) | [Docs](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md) | self serve | Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person onboarding from a fresh account is not tested. |
+| [official-cli (CLI)](https://github.com/larksuite/cli) | [Docs](https://github.com/larksuite/cli) | self serve | Official CLI covers Base and supports individuals. Account signup, app creation and permission setup still need separate verification. |
+| [official-mcp (MCP)](https://github.com/larksuite/lark-openapi-mcp) | [Docs](https://github.com/larksuite/lark-openapi-mcp) | self serve | Local official MCP package uses platform app credentials; identity and tenant domains must match. |
 
 ### Service pricing
 

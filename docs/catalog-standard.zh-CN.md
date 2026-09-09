@@ -44,7 +44,8 @@ catalog:
 | --- | --- |
 | `id` | 服务内稳定且唯一，例如 `search-mcp`、`tequila-api` |
 | `interface` | `api / sdk / cli / mcp / web / mobile`；只记录找到的入口，缺项为未知 |
-| `entry_url`、`docs` | Agent 从哪里开始：安装说明、产品 API 文档或协议地址。文档不是独立的接口类型 |
+| `entry_url` | 实际调用、操作入口或发现线索；历史记录可能是文档、注册页或合作公告，不自动当作接入说明 |
+| `docs` | 对应方式的官方接入说明：优先包含认证、安装/配置和最小调用示例的快速开始页。文档不是独立接口类型，缺少可靠说明时留空 |
 | `maintainer` | 相对于本条服务产品的维护方：`official / third_party / unknown`。Skootle 官方产品仍是 Google Flights 的第三方数据入口 |
 | `upstream` | 已确认的上游标识，例如 `google-flights`；不确定就省略。共享上游不能算成独立票源 |
 | `via` | 本服务内依赖的另一条入口编号；只表达依赖，不自动继承能力、权限、费用或实测结果 |

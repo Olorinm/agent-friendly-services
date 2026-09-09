@@ -102,6 +102,7 @@ catalog:
       kind: official_docs
   routes:
     - id: d1-cli
+      docs: https://developers.cloudflare.com/d1/get-started/
       interface: cli
       maintainer: official
       entry_url: https://developers.cloudflare.com/d1/get-started/

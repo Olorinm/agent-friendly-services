@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: affiliate-api
+      docs: https://developers.kayak.com/
       interface: api
       maintainer: official
       entry_url: https://developers.kayak.com/

@@ -15,6 +15,7 @@ catalog:
       kind: official_docs
   routes:
     - id: official-api
+      docs: https://docs.whop.com/
       interface: api
       maintainer: official
       entry_url: https://docs.whop.com/

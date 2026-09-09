@@ -17,6 +17,7 @@ catalog:
       kind: official_docs
   routes:
     - id: payment-links-api
+      docs: https://razorpay.com/docs/api/payments/payment-links/create-standard/
       interface: api
       maintainer: official
       entry_url: https://razorpay.com/docs/api/payments/payment-links/create-standard/

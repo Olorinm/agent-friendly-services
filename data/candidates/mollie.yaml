@@ -23,6 +23,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://docs.mollie.com/reference/create-payment-link
       interface: api
       maintainer: official
       entry_url: https://docs.mollie.com/reference/create-payment-link

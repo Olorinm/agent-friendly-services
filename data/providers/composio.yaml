@@ -16,6 +16,7 @@ entrypoints:
   pricing: https://composio.dev/pricing
   signup: https://app.composio.dev
   mcp_official: https://mcp.composio.dev
+  mcp_docs: https://docs.composio.dev/docs/composio-connect
 
 checks:
   self_serve_signup:
@@ -65,3 +66,6 @@ checks:
     evidence: https://docs.composio.dev
     verified: "2026-07-07"
     notes: The product exists to let agents act on integrated apps.
+
+notes:
+  - "MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official."

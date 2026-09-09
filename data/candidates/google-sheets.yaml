@@ -21,6 +21,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sheets-api
+      docs: https://developers.google.com/workspace/sheets/api/quickstart/python
       interface: api
       maintainer: official
       entry_url: https://developers.google.com/workspace/sheets/api/guides/concepts

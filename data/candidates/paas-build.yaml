@@ -131,6 +131,7 @@ catalog:
       kind: official_site
   routes:
     - id: rest-api
+      docs: https://paas.build/SKILL.md
       interface: api
       maintainer: official
       entry_url: https://paas.build/openapi.json
@@ -157,6 +158,7 @@ catalog:
         evidence:
           - docs
     - id: official-mcp
+      docs: https://paas.build/agents
       interface: mcp
       maintainer: official
       entry_url: https://paas.build/mcp

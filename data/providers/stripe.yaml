@@ -113,6 +113,7 @@ catalog:
       kind: official_site
   routes:
     - id: sandbox-api
+      docs: https://docs.stripe.com/payment-links/create
       interface: api
       maintainer: official
       entry_url: https://docs.stripe.com/payment-links/create

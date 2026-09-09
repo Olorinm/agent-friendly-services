@@ -27,6 +27,7 @@ catalog:
       kind: official_site
   routes:
     - id: cloud-cli
+      docs: https://docs.turso.tech/cli/introduction
       interface: cli
       maintainer: official
       entry_url: https://docs.turso.tech/cli/introduction
@@ -71,6 +72,7 @@ catalog:
           evidence:
             - pricing
     - id: platform-api
+      docs: https://docs.turso.tech/api-reference/introduction
       interface: api
       maintainer: official
       entry_url: https://docs.turso.tech/api-reference/introduction

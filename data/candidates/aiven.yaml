@@ -23,6 +23,7 @@ catalog:
       kind: official_site
   routes:
     - id: postgres-cli
+      docs: https://aiven.io/docs/tools/cli
       interface: cli
       maintainer: official
       entry_url: https://aiven.io/docs/tools/cli

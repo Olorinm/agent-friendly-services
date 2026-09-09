@@ -15,6 +15,7 @@ catalog:
       kind: official_docs
   routes:
     - id: official-api
+      docs: https://developer.fastspring.com/
       interface: api
       maintainer: official
       entry_url: https://developer.fastspring.com/

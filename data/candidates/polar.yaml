@@ -27,6 +27,7 @@ catalog:
       kind: official_announcement
   routes:
     - id: sandbox-api
+      docs: https://polar.sh/docs/integrate/sandbox
       interface: api
       maintainer: official
       entry_url: https://polar.sh/docs/integrate/sandbox

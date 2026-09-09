@@ -125,6 +125,7 @@ catalog:
         authentication and separate usage charges; it is excluded from this pilot. API signup credits are not
         a quota guarantee for anonymous MCP.
     - id: search-api
+      docs: https://exa.ai/docs/reference/search
       interface: api
       maintainer: official
       entry_url: https://exa.ai/docs/reference/search

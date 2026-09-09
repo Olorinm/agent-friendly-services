@@ -81,6 +81,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments
       interface: api
       maintainer: official
       entry_url: https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments

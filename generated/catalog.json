@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-09T04:03:25.714Z",
-  "description": "Service discovery, documented access routes and separately reviewed task_runs. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
+  "generated_at": "2026-09-09T09:36:26.392Z",
+  "description": "Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
     {
@@ -187,6 +187,13 @@
       "name": "Adyen",
       "category": "payments-billing",
       "homepage": "https://www.adyen.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payment processing with hosted Pay by Link checkout; test merchant accounts and live onboarding have separate requirements.",
       "submitted_by": "community",
       "tags": [],
@@ -220,6 +227,7 @@
         "routes": [
           {
             "id": "payment-links-api",
+            "docs": "https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks",
@@ -257,6 +265,13 @@
       "name": "AirGateway Platform API",
       "category": "travel",
       "homepage": "https://airgateway.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Air distribution API with sandbox keys, production certification and an agency application.",
       "submitted_by": "community",
       "tags": [],
@@ -285,6 +300,7 @@
         "routes": [
           {
             "id": "agency-api",
+            "docs": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
@@ -342,6 +358,13 @@
       "name": "Airtable",
       "category": "productivity-storage",
       "homepage": "https://www.airtable.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://airtable.com/developers/web/api/introduction",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.",
       "submitted_by": "community",
       "tags": [
@@ -384,6 +407,7 @@
         "routes": [
           {
             "id": "web-api",
+            "docs": "https://airtable.com/developers/web/api/introduction",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://airtable.com/developers/web/api/introduction",
@@ -465,6 +489,13 @@
       "name": "Airwallex",
       "category": "payments-billing",
       "homepage": "https://www.airwallex.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.airwallex.com/docs/api/payments/payment_links/api",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Hosted payment links with fixed or customer-selected amounts and payment status webhooks.",
       "submitted_by": "community",
       "tags": [],
@@ -493,6 +524,7 @@
         "routes": [
           {
             "id": "payment-links-api",
+            "docs": "https://www.airwallex.com/docs/api/payments/payment_links/api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://www.airwallex.com/docs/api/payments/payment_links/api",
@@ -536,6 +568,13 @@
       "name": "Aiven",
       "category": "databases",
       "homepage": "https://aiven.io/",
+      "access_links": [
+        {
+          "label": "CLI",
+          "url": "https://aiven.io/docs/tools/cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
       "submitted_by": "community",
       "tags": [],
@@ -564,6 +603,7 @@
         "routes": [
           {
             "id": "postgres-cli",
+            "docs": "https://aiven.io/docs/tools/cli",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://aiven.io/docs/tools/cli",
@@ -615,6 +655,7 @@
       "name": "Alipay",
       "category": "payments-billing",
       "homepage": "https://open.alipay.com/",
+      "access_links": [],
       "summary": "Online merchant payment integrations for websites and apps through Alipay APIs and SDKs.",
       "submitted_by": "community",
       "tags": [],
@@ -685,6 +726,7 @@
       "name": "Amadeus Flight APIs",
       "category": "travel",
       "homepage": "https://developers.amadeus.com/",
+      "access_links": [],
       "summary": "Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be re-established.",
       "submitted_by": "community",
       "tags": [],
@@ -749,6 +791,23 @@
       "name": "Anthropic",
       "category": "ai-models",
       "homepage": "https://www.anthropic.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.anthropic.com/en/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.anthropic.com/en/api/client-sdks",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.anthropic.com/en/docs/claude-code",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.",
       "submitted_by": "community",
       "tags": [
@@ -771,6 +830,28 @@
       "name": "Apify",
       "category": "web-search-data",
       "homepage": "https://apify.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.apify.com/api/v2",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.apify.com/sdk",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.apify.com/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.apify.com/platform/integrations/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -792,6 +873,7 @@
       "name": "apiheya Air Scraper",
       "category": "travel",
       "homepage": "https://rapidapi.com/apiheya/api/sky-scrapper/pricing",
+      "access_links": [],
       "summary": "An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner API.",
       "submitted_by": "community",
       "tags": [],
@@ -865,6 +947,23 @@
       "name": "Atlassian (Jira & Confluence)",
       "category": "developer-tools",
       "homepage": "https://www.atlassian.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://developer.atlassian.com/cloud/acli/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/atlassian/atlassian-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.",
       "submitted_by": "community",
       "tags": [
@@ -884,6 +983,13 @@
       "name": "Aviasales via Travelpayouts",
       "category": "travel",
       "homepage": "https://www.aviasales.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Travelpayouts-distributed live flight search and a separately accessible historical price-data API.",
       "submitted_by": "community",
       "tags": [],
@@ -917,6 +1023,7 @@
         "routes": [
           {
             "id": "live-search-api",
+            "docs": "https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://support.travelpayouts.com/hc/en-us/articles/210995808-How-to-get-access-to-the-Aviasales-Search-API",
@@ -975,6 +1082,7 @@
           },
           {
             "id": "cached-data-api",
+            "docs": "https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API",
@@ -1026,6 +1134,18 @@
       "name": "Baserow Cloud",
       "category": "productivity-storage",
       "homepage": "https://baserow.io/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://baserow.io/docs/apis/rest-api",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://baserow.io/user-docs/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.",
       "submitted_by": "community",
       "tags": [],
@@ -1064,6 +1184,7 @@
         "routes": [
           {
             "id": "database-api",
+            "docs": "https://baserow.io/docs/apis/rest-api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://baserow.io/docs/apis/rest-api",
@@ -1128,6 +1249,7 @@
           },
           {
             "id": "native-mcp",
+            "docs": "https://baserow.io/user-docs/mcp-server",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://baserow.io/user-docs/mcp-server",
@@ -1187,6 +1309,13 @@
       "name": "Brave Search API",
       "category": "web-search-data",
       "homepage": "https://brave.com/search/api/",
+      "access_links": [
+        {
+          "label": "MCP",
+          "url": "https://github.com/brave/brave-search-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Independent web search index with a developer API, self-serve registration, and a free plan.",
       "submitted_by": "community",
       "tags": [
@@ -1266,6 +1395,13 @@
       "name": "Bright Data SERP API",
       "category": "travel",
       "homepage": "https://brightdata.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.brightdata.com/api-reference/serp/google-flights/currency",
+          "kind": "documentation"
+        }
+      ],
       "summary": "SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.",
       "submitted_by": "community",
       "tags": [],
@@ -1299,6 +1435,7 @@
         "routes": [
           {
             "id": "google-flights-serp",
+            "docs": "https://docs.brightdata.com/api-reference/serp/google-flights/currency",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.brightdata.com/api-reference/serp/google-flights/currency",
@@ -1342,6 +1479,18 @@
       "name": "Browserbase",
       "category": "code-execution",
       "homepage": "https://www.browserbase.com",
+      "access_links": [
+        {
+          "label": "API / SDK",
+          "url": "https://docs.browserbase.com/reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/browserbase/mcp-server-browserbase",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -1363,6 +1512,18 @@
       "name": "Cartesia",
       "category": "ai-models",
       "homepage": "https://cartesia.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.cartesia.ai/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/cartesia-ai/cartesia-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -1382,6 +1543,13 @@
       "name": "Cerebras Inference",
       "category": "ai-models",
       "homepage": "https://cloud.cerebras.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://inference-docs.cerebras.ai/api-reference/chat-completions",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.",
       "submitted_by": "community",
       "tags": [
@@ -1401,6 +1569,13 @@
       "name": "Checkout.com",
       "category": "payments-billing",
       "homepage": "https://www.checkout.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://api-reference.checkout.com/tag/Payment-Links/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payment Links API for hosted checkout, with separate sandbox and production API hosts.",
       "submitted_by": "community",
       "tags": [],
@@ -1424,6 +1599,7 @@
         "routes": [
           {
             "id": "payment-links-api",
+            "docs": "https://api-reference.checkout.com/tag/Payment-Links/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://api-reference.checkout.com/tag/Payment-Links/",
@@ -1467,6 +1643,23 @@
       "name": "Chroma",
       "category": "databases",
       "homepage": "https://www.trychroma.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.trychroma.com/docs/overview/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.trychroma.com/docs/cli/install",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/chroma-core/chroma-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -1486,6 +1679,28 @@
       "name": "Cloudflare",
       "category": "cloud-hosting",
       "homepage": "https://www.cloudflare.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.cloudflare.com/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://developers.cloudflare.com/fundamentals/api/reference/sdks/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://developers.cloudflare.com/d1/get-started/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/cloudflare/mcp-server-cloudflare",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.",
       "submitted_by": "community",
       "tags": [
@@ -1518,6 +1733,7 @@
         "routes": [
           {
             "id": "d1-cli",
+            "docs": "https://developers.cloudflare.com/d1/get-started/",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://developers.cloudflare.com/d1/get-started/",
@@ -1580,6 +1796,18 @@
       "name": "Coda / Superhuman Docs",
       "category": "productivity-storage",
       "homepage": "https://coda.io/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://coda.io/developers/apis/v1",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
       "submitted_by": "community",
       "tags": [],
@@ -1608,6 +1836,7 @@
         "routes": [
           {
             "id": "rest-api",
+            "docs": "https://coda.io/developers/apis/v1",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://coda.io/developers/apis/v1",
@@ -1651,6 +1880,7 @@
           },
           {
             "id": "hosted-mcp",
+            "docs": "https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://coda.io/apis/mcp",
@@ -1701,6 +1931,13 @@
       "name": "Cohere",
       "category": "ai-models",
       "homepage": "https://cohere.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.cohere.com/reference/about",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.",
       "submitted_by": "community",
       "tags": [
@@ -1720,6 +1957,13 @@
       "name": "Composio",
       "category": "agent-tooling",
       "homepage": "https://composio.dev",
+      "access_links": [
+        {
+          "label": "MCP",
+          "url": "https://docs.composio.dev/docs/composio-connect",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.",
       "submitted_by": "community",
       "tags": [
@@ -1727,7 +1971,9 @@
         "integrations",
         "auth"
       ],
-      "notes": [],
+      "notes": [
+        "MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official."
+      ],
       "record_pool": "provider",
       "evidence_level": "legacy_record",
       "route_tests": "not_recorded",
@@ -1739,6 +1985,13 @@
       "name": "Creem",
       "category": "payments-billing",
       "homepage": "https://www.creem.io/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.creem.io/getting-started/test-mode",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Digital-product checkout and billing APIs with separate test mode and reviewed merchant accounts.",
       "submitted_by": "community",
       "tags": [],
@@ -1774,6 +2027,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://docs.creem.io/getting-started/test-mode",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.creem.io/getting-started/test-mode",
@@ -1829,6 +2083,7 @@
       "name": "携程机票合作",
       "category": "travel",
       "homepage": "https://pages.ctrip.com/public/dlhz.htm",
+      "access_links": [],
       "summary": "携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。",
       "submitted_by": "community",
       "tags": [],
@@ -1865,6 +2120,23 @@
       "name": "Datadog",
       "category": "observability-security",
       "homepage": "https://www.datadoghq.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.datadoghq.com/api/latest/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/DataDog/datadog-ci",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.datadoghq.com/bits_ai/mcp_server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.",
       "submitted_by": "community",
       "tags": [
@@ -1884,6 +2156,18 @@
       "name": "Deepgram",
       "category": "ai-models",
       "homepage": "https://deepgram.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.deepgram.com/reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://developers.deepgram.com/docs/deepgram-sdks",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.",
       "submitted_by": "community",
       "tags": [
@@ -1903,6 +2187,13 @@
       "name": "DeepSeek",
       "category": "ai-models",
       "homepage": "https://www.deepseek.com",
+      "access_links": [
+        {
+          "label": "Docs",
+          "url": "https://api-docs.deepseek.com",
+          "kind": "documentation"
+        }
+      ],
       "summary": "OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -1922,6 +2213,13 @@
       "name": "Discord",
       "category": "communication",
       "homepage": "https://discord.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://discord.com/developers/docs/reference",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.",
       "submitted_by": "community",
       "tags": [
@@ -1943,6 +2241,23 @@
       "name": "Dodo Payments",
       "category": "payments-billing",
       "homepage": "https://dodopayments.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.dodopayments.com/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/dodopayments/dodopayments-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.dodopayments.com/developer-resources/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Merchant-of-record checkout for one-time and subscription sales, with test mode, APIs, CLI and MCP documentation.",
       "submitted_by": "community",
       "tags": [],
@@ -1993,6 +2308,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://docs.dodopayments.com/introduction",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.dodopayments.com/introduction",
@@ -2044,6 +2360,7 @@
           },
           {
             "id": "official-cli",
+            "docs": "https://github.com/dodopayments/dodopayments-cli",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://github.com/dodopayments/dodopayments-cli",
@@ -2061,6 +2378,7 @@
           },
           {
             "id": "live-api",
+            "docs": "https://docs.dodopayments.com/introduction",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.dodopayments.com/introduction",
@@ -2134,6 +2452,18 @@
       "name": "Dropbox",
       "category": "productivity-storage",
       "homepage": "https://www.dropbox.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.dropbox.com/developers/documentation/http/documentation",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/dropbox/dbxcli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.",
       "submitted_by": "community",
       "tags": [
@@ -2153,6 +2483,13 @@
       "name": "Duffel Flights API",
       "category": "travel",
       "homepage": "https://duffel.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://duffel.com/guides/getting-started",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Flight API whose self-serve test environment must be distinguished from live account activation.",
       "submitted_by": "community",
       "tags": [],
@@ -2181,6 +2518,7 @@
         "routes": [
           {
             "id": "test-api",
+            "docs": "https://duffel.com/docs/api/overview/test-mode",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://duffel.com/docs/api/overview/test-mode",
@@ -2218,6 +2556,7 @@
           },
           {
             "id": "live-api",
+            "docs": "https://duffel.com/guides/getting-started",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://duffel.com/guides/getting-started",
@@ -2262,6 +2601,23 @@
       "name": "E2B",
       "category": "code-execution",
       "homepage": "https://e2b.dev",
+      "access_links": [
+        {
+          "label": "SDK",
+          "url": "https://e2b.dev/docs/sdk-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://e2b.dev/docs/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/e2b-dev/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -2281,6 +2637,18 @@
       "name": "ElevenLabs",
       "category": "ai-models",
       "homepage": "https://elevenlabs.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://elevenlabs.io/docs/api-reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/elevenlabs/elevenlabs-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -2300,6 +2668,23 @@
       "name": "Exa",
       "category": "web-search-data",
       "homepage": "https://exa.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.exa.ai/reference/getting-started",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.exa.ai/sdks/typescript-sdk-specification",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://exa.ai/docs/reference/exa-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -2606,6 +2991,7 @@
           },
           {
             "id": "search-api",
+            "docs": "https://exa.ai/docs/reference/search",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://exa.ai/docs/reference/search",
@@ -2684,6 +3070,13 @@
       "name": "Expedia XAP Flight Listings",
       "category": "travel",
       "homepage": "https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Travel Redirect/XAP flight listings product whose new API applications are currently paused.",
       "submitted_by": "community",
       "tags": [],
@@ -2712,6 +3105,7 @@
         "routes": [
           {
             "id": "flight-listings-api",
+            "docs": "https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings",
@@ -2755,6 +3149,18 @@
       "name": "fal.ai",
       "category": "ai-models",
       "homepage": "https://fal.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://fal.ai/docs/model-apis",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/fal-ai/fal",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -2774,6 +3180,13 @@
       "name": "FastSpring",
       "category": "payments-billing",
       "homepage": "https://fastspring.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.fastspring.com/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Checkout and subscription platform with API, JavaScript checkout libraries and order webhooks.",
       "submitted_by": "community",
       "tags": [],
@@ -2797,6 +3210,7 @@
         "routes": [
           {
             "id": "official-api",
+            "docs": "https://developer.fastspring.com/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.fastspring.com/",
@@ -2820,6 +3234,23 @@
       "name": "飞书 Feishu",
       "category": "productivity-storage",
       "homepage": "https://www.feishu.cn/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/larksuite/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/larksuite/lark-openapi-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.",
       "submitted_by": "community",
       "tags": [],
@@ -2859,6 +3290,7 @@
         "routes": [
           {
             "id": "base-api",
+            "docs": "https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create",
@@ -2903,6 +3335,7 @@
           },
           {
             "id": "official-cli",
+            "docs": "https://github.com/larksuite/cli",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://github.com/larksuite/cli",
@@ -2946,6 +3379,7 @@
           },
           {
             "id": "official-mcp",
+            "docs": "https://github.com/larksuite/lark-openapi-mcp",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://github.com/larksuite/lark-openapi-mcp",
@@ -2998,6 +3432,23 @@
       "name": "Firecrawl",
       "category": "web-search-data",
       "homepage": "https://www.firecrawl.dev",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.firecrawl.dev/api-reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.firecrawl.dev/sdks/overview",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.firecrawl.dev/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -3150,6 +3601,7 @@
         "routes": [
           {
             "id": "public-search-api",
+            "docs": "https://docs.firecrawl.dev/features/search",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.firecrawl.dev/features/search",
@@ -3195,6 +3647,7 @@
           },
           {
             "id": "account-search-api",
+            "docs": "https://docs.firecrawl.dev/features/search",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.firecrawl.dev/features/search",
@@ -3264,6 +3717,18 @@
       "name": "Fireworks AI",
       "category": "ai-models",
       "homepage": "https://fireworks.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.fireworks.ai/api-reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.fireworks.ai/tools-sdks/firectl/firectl",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.",
       "submitted_by": "community",
       "tags": [
@@ -3283,6 +3748,7 @@
       "name": "飞猪国内机票开放平台",
       "category": "travel",
       "homepage": "https://open.alitrip.com/businessDetail.htm?tagId=85",
+      "access_links": [],
       "summary": "面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。",
       "submitted_by": "community",
       "tags": [],
@@ -3355,6 +3821,13 @@
       "name": "Flight MCP",
       "category": "travel",
       "homepage": "https://flight-mcp.com/",
+      "access_links": [
+        {
+          "label": "API / MCP",
+          "url": "https://flight-mcp.com/docs",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.",
       "submitted_by": "community",
       "tags": [],
@@ -3383,6 +3856,7 @@
         "routes": [
           {
             "id": "authenticated-api",
+            "docs": "https://flight-mcp.com/docs",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://flight-mcp.com/docs",
@@ -3432,6 +3906,7 @@
           },
           {
             "id": "authenticated-mcp",
+            "docs": "https://flight-mcp.com/docs",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://flight-mcp.com/docs",
@@ -3481,6 +3956,7 @@
           },
           {
             "id": "public-cache-api",
+            "docs": "https://flight-mcp.com/docs",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://flight-mcp.com/docs",
@@ -3518,6 +3994,7 @@
           },
           {
             "id": "public-cache-mcp",
+            "docs": "https://flight-mcp.com/docs",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://flight-mcp.com/docs",
@@ -3561,6 +4038,13 @@
       "name": "FlightAPI.io Flight Price API",
       "category": "travel",
       "homepage": "https://www.flightapi.io/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.flightapi.io/documentation/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.",
       "submitted_by": "community",
       "tags": [],
@@ -3594,6 +4078,7 @@
         "routes": [
           {
             "id": "price-api",
+            "docs": "https://www.flightapi.io/documentation/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://www.flightapi.io/documentation/",
@@ -3653,6 +4138,23 @@
       "name": "Fly.io",
       "category": "cloud-hosting",
       "homepage": "https://fly.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://fly.io/docs/machines/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://fly.io/docs/flyctl/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://fly.io/docs/mcp/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.",
       "submitted_by": "community",
       "tags": [
@@ -3674,6 +4176,23 @@
       "name": "Gemini API",
       "category": "ai-models",
       "homepage": "https://ai.google.dev",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://ai.google.dev/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://ai.google.dev/gemini-api/docs/libraries",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/google-gemini/gemini-cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.",
       "submitted_by": "community",
       "tags": [
@@ -3693,6 +4212,28 @@
       "name": "GitHub",
       "category": "developer-tools",
       "homepage": "https://github.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.github.com/rest",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://github.com/octokit",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://cli.github.com",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/github/github-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -3714,6 +4255,23 @@
       "name": "GitLab",
       "category": "developer-tools",
       "homepage": "https://gitlab.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.gitlab.com/api/rest/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://gitlab.com/gitlab-org/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.",
       "submitted_by": "community",
       "tags": [
@@ -3733,6 +4291,13 @@
       "name": "Google Sheets",
       "category": "productivity-storage",
       "homepage": "https://workspace.google.com/products/sheets/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.google.com/workspace/sheets/api/quickstart/python",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.",
       "submitted_by": "community",
       "tags": [],
@@ -3761,6 +4326,7 @@
         "routes": [
           {
             "id": "sheets-api",
+            "docs": "https://developers.google.com/workspace/sheets/api/quickstart/python",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developers.google.com/workspace/sheets/api/guides/concepts",
@@ -3833,6 +4399,18 @@
       "name": "Grafana (Grafana Cloud)",
       "category": "observability-security",
       "homepage": "https://grafana.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://grafana.com/docs/grafana/latest/developers/http_api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/grafana/mcp-grafana",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.",
       "submitted_by": "community",
       "tags": [
@@ -3852,6 +4430,23 @@
       "name": "Grist",
       "category": "productivity-storage",
       "homepage": "https://www.getgrist.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://support.getgrist.com/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://support.getgrist.com/rest-api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://support.getgrist.com/mcp/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Hosted relational spreadsheets with a free personal site, REST API and official MCP.",
       "submitted_by": "community",
       "tags": [],
@@ -4167,6 +4762,7 @@
         "routes": [
           {
             "id": "rest-api",
+            "docs": "https://support.getgrist.com/api/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://support.getgrist.com/api/",
@@ -4234,6 +4830,7 @@
           },
           {
             "id": "hosted-mcp",
+            "docs": "https://support.getgrist.com/mcp/",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://docs.getgrist.com/api/mcp",
@@ -4277,6 +4874,7 @@
           },
           {
             "id": "python-sdk",
+            "docs": "https://support.getgrist.com/rest-api/",
             "interface": "sdk",
             "maintainer": "official",
             "entry_url": "https://pypi.org/project/grist-api/",
@@ -4294,6 +4892,7 @@
           },
           {
             "id": "javascript-sdk",
+            "docs": "https://support.getgrist.com/rest-api/",
             "interface": "sdk",
             "maintainer": "official",
             "entry_url": "https://www.npmjs.com/package/grist-api",
@@ -4318,6 +4917,18 @@
       "name": "Groq",
       "category": "ai-models",
       "homepage": "https://groq.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://console.groq.com/docs/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://console.groq.com/docs/libraries",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -4337,6 +4948,28 @@
       "name": "Hugging Face",
       "category": "ai-models",
       "homepage": "https://huggingface.co",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://huggingface.co/docs/hub/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://huggingface.co/docs/huggingface_hub",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://huggingface.co/docs/huggingface_hub/guides/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://huggingface.co/docs/hub/agents-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.",
       "submitted_by": "community",
       "tags": [
@@ -4344,7 +4977,9 @@
         "inference",
         "hub"
       ],
-      "notes": [],
+      "notes": [
+        "MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official."
+      ],
       "record_pool": "provider",
       "evidence_level": "legacy_record",
       "route_tests": "not_recorded",
@@ -4356,6 +4991,18 @@
       "name": "Ignav Flights",
       "category": "travel",
       "homepage": "https://ignav.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://ignav.com/docs",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://ignav.com/docs/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.",
       "submitted_by": "community",
       "tags": [],
@@ -4565,6 +5212,7 @@
           },
           {
             "id": "flights-api",
+            "docs": "https://ignav.com/docs",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://ignav.com/docs",
@@ -4661,6 +5309,7 @@
           },
           {
             "id": "official-mcp",
+            "docs": "https://ignav.com/docs/mcp",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://ignav.com/docs/mcp",
@@ -4685,6 +5334,18 @@
       "name": "Jina AI",
       "category": "web-search-data",
       "homepage": "https://jina.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.jina.ai",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/jina-ai/MCP",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.",
       "submitted_by": "community",
       "tags": [
@@ -4704,6 +5365,13 @@
       "name": "KAYAK Affiliate API",
       "category": "travel",
       "homepage": "https://affiliates.kayak.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.kayak.com/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Affiliate flight APIs with a business application and an optional requested sandbox.",
       "submitted_by": "community",
       "tags": [],
@@ -4732,6 +5400,7 @@
         "routes": [
           {
             "id": "affiliate-api",
+            "docs": "https://developers.kayak.com/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developers.kayak.com/",
@@ -4795,6 +5464,13 @@
       "name": "Kiwi.com",
       "category": "travel",
       "homepage": "https://www.kiwi.com/",
+      "access_links": [
+        {
+          "label": "MCP",
+          "url": "https://www.kiwi.com/en/pages/mcp/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Flight search through a publicized MCP path and the separately gated Tequila partnership API.",
       "submitted_by": "community",
       "tags": [],
@@ -5390,6 +6066,23 @@
       "name": "Lark",
       "category": "communication",
       "homepage": "https://www.larksuite.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://open.larksuite.com/document/server-docs/getting-started/server-api-list",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/larksuite/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/larksuite/lark-openapi-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -5433,6 +6126,7 @@
         "routes": [
           {
             "id": "base-api",
+            "docs": "https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create",
@@ -5497,6 +6191,7 @@
           },
           {
             "id": "official-cli",
+            "docs": "https://github.com/larksuite/cli",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://github.com/larksuite/cli",
@@ -5540,6 +6235,7 @@
           },
           {
             "id": "official-mcp",
+            "docs": "https://github.com/larksuite/lark-openapi-mcp",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://github.com/larksuite/lark-openapi-mcp",
@@ -5592,6 +6288,13 @@
       "name": "Lemon Squeezy",
       "category": "payments-billing",
       "homepage": "https://www.lemonsqueezy.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -5624,6 +6327,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.lemonsqueezy.com/guides/developer-guide/taking-payments",
@@ -5675,6 +6379,18 @@
       "name": "LetsFG Personal Flight Search",
       "category": "travel",
       "homepage": "https://letsfg.co/",
+      "access_links": [
+        {
+          "label": "SDK / CLI",
+          "url": "https://github.com/letsfg/letsfg",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://letsfg.co/for-agents",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.",
       "submitted_by": "community",
       "tags": [],
@@ -5704,6 +6420,7 @@
         "routes": [
           {
             "id": "personal-mcp",
+            "docs": "https://letsfg.co/for-agents",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://letsfg.co/for-agents",
@@ -5765,6 +6482,7 @@
           },
           {
             "id": "personal-cli",
+            "docs": "https://github.com/letsfg/letsfg",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://github.com/letsfg/letsfg",
@@ -5777,6 +6495,7 @@
           },
           {
             "id": "personal-sdk",
+            "docs": "https://github.com/letsfg/letsfg",
             "interface": "sdk",
             "maintainer": "official",
             "entry_url": "https://github.com/letsfg/letsfg",
@@ -5798,6 +6517,13 @@
       "name": "Linear",
       "category": "productivity-storage",
       "homepage": "https://linear.app",
+      "access_links": [
+        {
+          "label": "MCP",
+          "url": "https://linear.app/docs/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.",
       "submitted_by": "community",
       "tags": [
@@ -5817,6 +6543,13 @@
       "name": "Lufthansa Partner Fare API",
       "category": "travel",
       "homepage": "https://developer.lufthansa.com/page",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.lufthansa.com/docs/read/api_partner/offers",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.",
       "submitted_by": "community",
       "tags": [],
@@ -5868,6 +6601,7 @@
           },
           {
             "id": "partner-offers-api",
+            "docs": "https://developer.lufthansa.com/docs/read/api_partner/offers",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.lufthansa.com/docs/read/api_partner/offers",
@@ -5900,6 +6634,13 @@
       "name": "Luma AI (Dream Machine)",
       "category": "ai-models",
       "homepage": "https://lumalabs.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.lumalabs.ai/reference",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.",
       "submitted_by": "community",
       "tags": [
@@ -5918,6 +6659,18 @@
       "name": "Mem0",
       "category": "agent-tooling",
       "homepage": "https://mem0.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.mem0.ai/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.mem0.ai/openmemory/overview",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -5936,6 +6689,18 @@
       "name": "MiniMax",
       "category": "ai-models",
       "homepage": "https://platform.minimax.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://platform.minimax.io/docs/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/MiniMax-AI/MiniMax-MCP",
+          "kind": "documentation"
+        }
+      ],
       "summary": "MiniMax text, speech, video and music models via the international platform API, with an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -5955,6 +6720,18 @@
       "name": "Mistral AI",
       "category": "ai-models",
       "homepage": "https://mistral.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.mistral.ai/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.mistral.ai/getting-started/clients",
+          "kind": "documentation"
+        }
+      ],
       "summary": "European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -5974,6 +6751,18 @@
       "name": "Modal",
       "category": "code-execution",
       "homepage": "https://modal.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://modal.com/docs/reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://modal.com/docs/reference/cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.",
       "submitted_by": "community",
       "tags": [
@@ -5993,6 +6782,13 @@
       "name": "Mollie",
       "category": "payments-billing",
       "homepage": "https://www.mollie.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.mollie.com/reference/create-payment-link",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payment links and payment APIs with isolated test mode and a simulated checkout screen.",
       "submitted_by": "community",
       "tags": [],
@@ -6026,6 +6822,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://docs.mollie.com/reference/create-payment-link",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.mollie.com/reference/create-payment-link",
@@ -6077,6 +6874,28 @@
       "name": "MongoDB Atlas",
       "category": "databases",
       "homepage": "https://www.mongodb.com/products/platform/atlas-database",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://www.mongodb.com/docs/drivers/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://www.mongodb.com/docs/atlas/cli/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/mongodb-js/mongodb-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -6096,6 +6915,18 @@
       "name": "Moonshot AI (Kimi)",
       "category": "ai-models",
       "homepage": "https://platform.kimi.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://platform.kimi.ai/docs/api/chat",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/MoonshotAI/kimi-cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).",
       "submitted_by": "community",
       "tags": [
@@ -6115,6 +6946,23 @@
       "name": "n8n",
       "category": "agent-tooling",
       "homepage": "https://n8n.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.n8n.io/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.n8n.io/hosting/cli-commands/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.n8n.io/connect/connect-to-n8n-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.",
       "submitted_by": "community",
       "tags": [
@@ -6134,6 +6982,23 @@
       "name": "Neon",
       "category": "databases",
       "homepage": "https://neon.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://api-docs.neon.tech",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://neon.com/docs/reference/neon-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/neondatabase/mcp-server-neon",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.",
       "submitted_by": "community",
       "tags": [
@@ -6396,6 +7261,23 @@
       "name": "Netlify",
       "category": "cloud-hosting",
       "homepage": "https://www.netlify.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://open-api.netlify.com",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.netlify.com/cli/get-started/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -6415,6 +7297,28 @@
       "name": "Notion",
       "category": "productivity-storage",
       "homepage": "https://www.notion.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.notion.com/reference/intro",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://github.com/makenotion/notion-sdk-js",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://developers.notion.com/cli/get-started/overview",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -6754,6 +7658,7 @@
         "routes": [
           {
             "id": "rest-api",
+            "docs": "https://developers.notion.com/reference/intro",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developers.notion.com/reference/intro",
@@ -6823,6 +7728,7 @@
           },
           {
             "id": "javascript-sdk",
+            "docs": "https://github.com/makenotion/notion-sdk-js",
             "interface": "sdk",
             "maintainer": "official",
             "entry_url": "https://github.com/makenotion/notion-sdk-js",
@@ -6866,6 +7772,7 @@
           },
           {
             "id": "official-cli",
+            "docs": "https://developers.notion.com/cli/get-started/overview",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://developers.notion.com/cli/get-started/overview",
@@ -6909,6 +7816,7 @@
           },
           {
             "id": "hosted-mcp",
+            "docs": "https://developers.notion.com/guides/mcp/get-started-with-mcp",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://mcp.notion.com/mcp",
@@ -6959,6 +7867,18 @@
       "name": "OpenAI",
       "category": "ai-models",
       "homepage": "https://openai.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://platform.openai.com/docs/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://platform.openai.com/docs/libraries",
+          "kind": "documentation"
+        }
+      ],
       "summary": "GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.",
       "submitted_by": "community",
       "tags": [
@@ -6978,6 +7898,13 @@
       "name": "OpenRouter",
       "category": "ai-models",
       "homepage": "https://openrouter.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://openrouter.ai/docs/api-reference/overview",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -6997,6 +7924,18 @@
       "name": "paas.build",
       "category": "payments-billing",
       "homepage": "https://paas.build",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://paas.build/SKILL.md",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://paas.build/agents",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.",
       "submitted_by": "vendor",
       "tags": [
@@ -7414,6 +8353,7 @@
         "routes": [
           {
             "id": "rest-api",
+            "docs": "https://paas.build/SKILL.md",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://paas.build/openapi.json",
@@ -7449,6 +8389,7 @@
           },
           {
             "id": "official-mcp",
+            "docs": "https://paas.build/agents",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://paas.build/mcp",
@@ -7478,6 +8419,18 @@
       "name": "Paddle",
       "category": "payments-billing",
       "homepage": "https://www.paddle.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.paddle.com/api-reference/overview",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/PaddleHQ/paddle-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.",
       "submitted_by": "community",
       "tags": [
@@ -7773,6 +8726,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://developer.paddle.com/sdks/sandbox/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.paddle.com/sdks/sandbox/",
@@ -7830,6 +8784,13 @@
       "name": "PayPal",
       "category": "payments-billing",
       "homepage": "https://www.paypal.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.paypal.com/api/rest",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Online payment acceptance through Orders API and buyer approval checkout; separate sandbox buyer and business seller accounts.",
       "submitted_by": "community",
       "tags": [],
@@ -7863,6 +8824,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://developer.paypal.com/api/rest",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.paypal.com/api/rest",
@@ -7926,6 +8888,13 @@
       "name": "Perplexity API",
       "category": "web-search-data",
       "homepage": "https://www.perplexity.ai",
+      "access_links": [
+        {
+          "label": "MCP",
+          "url": "https://github.com/ppl-ai/modelcontextprotocol",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.",
       "submitted_by": "community",
       "tags": [
@@ -7945,6 +8914,23 @@
       "name": "Pinecone",
       "category": "databases",
       "homepage": "https://www.pinecone.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.pinecone.io/reference/api/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/pinecone-io/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.pinecone.io/guides/operations/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -7964,6 +8950,18 @@
       "name": "Ping++",
       "category": "payments-billing",
       "homepage": "https://www.pingxx.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://www.pingxx.com/docs/client/web.html",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Unified payment integration across payment channels, with API keys, a web SDK and simulated test transactions.",
       "submitted_by": "community",
       "tags": [],
@@ -7997,6 +8995,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://www.pingxx.com/api/%E8%AE%A4%E8%AF%81.html",
@@ -8042,6 +9041,7 @@
           },
           {
             "id": "web-sdk",
+            "docs": "https://www.pingxx.com/docs/client/web.html",
             "interface": "sdk",
             "maintainer": "official",
             "entry_url": "https://www.pingxx.com/docs/client/web.html",
@@ -8073,6 +9073,13 @@
       "name": "PlanetScale",
       "category": "databases",
       "homepage": "https://planetscale.com/",
+      "access_links": [
+        {
+          "label": "CLI",
+          "url": "https://planetscale.com/docs/cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task.",
       "submitted_by": "community",
       "tags": [],
@@ -8101,6 +9108,7 @@
         "routes": [
           {
             "id": "database-cli",
+            "docs": "https://planetscale.com/docs/cli",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://planetscale.com/docs/cli",
@@ -8158,6 +9166,13 @@
       "name": "Polar",
       "category": "payments-billing",
       "homepage": "https://polar.sh/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://polar.sh/docs/integrate/sandbox",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Merchant-of-record service for digital products, with checkout APIs and a separate developer sandbox.",
       "submitted_by": "community",
       "tags": [],
@@ -8198,6 +9213,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://polar.sh/docs/integrate/sandbox",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://polar.sh/docs/integrate/sandbox",
@@ -8253,6 +9269,23 @@
       "name": "Postman",
       "category": "developer-tools",
       "homepage": "https://www.postman.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://learning.postman.com/docs/developer/postman-api/intro-api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://learning.postman.com/docs/postman-cli/postman-cli-overview/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/postmanlabs/postman-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -8272,6 +9305,23 @@
       "name": "Qdrant",
       "category": "databases",
       "homepage": "https://qdrant.tech",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://api.qdrant.tech",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://qdrant.tech/documentation/interfaces",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/qdrant/mcp-server-qdrant",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.",
       "submitted_by": "community",
       "tags": [
@@ -8291,6 +9341,7 @@
       "name": "去哪儿机票合作",
       "category": "travel",
       "homepage": "https://www.qunar.com/site/zh/Cooperate_4.shtml",
+      "access_links": [],
       "summary": "去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。",
       "submitted_by": "community",
       "tags": [],
@@ -8322,6 +9373,18 @@
       "name": "Alibaba Qwen (Model Studio)",
       "category": "ai-models",
       "homepage": "https://www.alibabacloud.com/en/product/modelstudio",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.alibabacloud.com/help/en/model-studio/models",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/QwenLM/qwen-code",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).",
       "submitted_by": "community",
       "tags": [
@@ -8341,6 +9404,18 @@
       "name": "Railway",
       "category": "cloud-hosting",
       "homepage": "https://railway.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.railway.com/reference/public-api",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/railwayapp/cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.",
       "submitted_by": "community",
       "tags": [
@@ -8359,6 +9434,13 @@
       "name": "Razorpay",
       "category": "payments-billing",
       "homepage": "https://razorpay.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://razorpay.com/docs/api/payments/payment-links/create-standard/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payment Links API for collecting specified amounts through hosted checkout, including a documented test mode.",
       "submitted_by": "community",
       "tags": [],
@@ -8382,6 +9464,7 @@
         "routes": [
           {
             "id": "payment-links-api",
+            "docs": "https://razorpay.com/docs/api/payments/payment-links/create-standard/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://razorpay.com/docs/api/payments/payment-links/create-standard/",
@@ -8419,6 +9502,23 @@
       "name": "Redis (Redis Cloud)",
       "category": "databases",
       "homepage": "https://redis.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://redis.io/docs/latest/operate/rc/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://redis.io/docs/latest/develop/tools/cli/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/redis/mcp-redis",
+          "kind": "documentation"
+        }
+      ],
       "summary": "In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -8438,6 +9538,23 @@
       "name": "Render",
       "category": "cloud-hosting",
       "homepage": "https://render.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://api-docs.render.com/reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/render-oss/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/render-oss/render-mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -8458,6 +9575,23 @@
       "name": "Replicate",
       "category": "ai-models",
       "homepage": "https://replicate.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://replicate.com/docs/reference/http",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://replicate.com/docs/reference/client-libraries",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/replicate/cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.",
       "submitted_by": "community",
       "tags": [
@@ -8477,6 +9611,23 @@
       "name": "Resend",
       "category": "communication",
       "homepage": "https://resend.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://resend.com/docs/api-reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://resend.com/docs/sdks",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/resend/mcp-send-email",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.",
       "submitted_by": "community",
       "tags": [
@@ -8495,6 +9646,13 @@
       "name": "Sabre Air APIs",
       "category": "travel",
       "homepage": "https://developer.sabre.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.",
       "submitted_by": "community",
       "tags": [],
@@ -8523,6 +9681,7 @@
         "routes": [
           {
             "id": "air-workflow-api",
+            "docs": "https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md",
@@ -8572,6 +9731,13 @@
       "name": "Scrapingdog Google Flights API",
       "category": "travel",
       "homepage": "https://www.scrapingdog.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.scrapingdog.com/documentation/google-flights-api/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.",
       "submitted_by": "community",
       "tags": [],
@@ -8600,6 +9766,7 @@
         "routes": [
           {
             "id": "flights-api",
+            "docs": "https://www.scrapingdog.com/documentation/google-flights-api/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://www.scrapingdog.com/documentation/google-flights-api/",
@@ -8649,6 +9816,18 @@
       "name": "SearchApi Google Flights",
       "category": "travel",
       "homepage": "https://www.searchapi.io/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.searchapi.io/docs/google-flights-api",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://www.searchapi.io/integrations/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
       "submitted_by": "community",
       "tags": [],
@@ -8682,6 +9861,7 @@
         "routes": [
           {
             "id": "google-flights-api",
+            "docs": "https://www.searchapi.io/docs/google-flights-api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://www.searchapi.io/docs/google-flights-api",
@@ -8761,6 +9941,28 @@
       "name": "Sentry",
       "category": "observability-security",
       "homepage": "https://sentry.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.sentry.io/api/",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.sentry.io/platforms/",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.sentry.io/cli/",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.sentry.io/product/sentry-mcp/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.",
       "submitted_by": "community",
       "tags": [
@@ -8780,6 +9982,18 @@
       "name": "SerpApi",
       "category": "web-search-data",
       "homepage": "https://serpapi.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://serpapi.com/google-flights-api",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/serpapi/serpapi-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.",
       "submitted_by": "community",
       "tags": [
@@ -8827,6 +10041,7 @@
         "routes": [
           {
             "id": "google-flights-api",
+            "docs": "https://serpapi.com/google-flights-api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://serpapi.com/google-flights-api",
@@ -8871,6 +10086,7 @@
           },
           {
             "id": "official-mcp",
+            "docs": "https://github.com/serpapi/serpapi-mcp",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://github.com/serpapi/serpapi-mcp",
@@ -8882,6 +10098,7 @@
           },
           {
             "id": "web-search-api",
+            "docs": "https://serpapi.com/search-api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://serpapi.com/search-api",
@@ -8922,6 +10139,7 @@
       "name": "Serper",
       "category": "web-search-data",
       "homepage": "https://serper.dev/",
+      "access_links": [],
       "summary": "Google results API with signup trial queries; actual account flow and authentication remain untested.",
       "submitted_by": "community",
       "tags": [],
@@ -9008,6 +10226,23 @@
       "name": "Shopify",
       "category": "commerce-marketing",
       "homepage": "https://www.shopify.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://shopify.dev/docs/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://shopify.dev/docs/api/shopify-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://shopify.dev/docs/apps/build/storefront-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.",
       "submitted_by": "community",
       "tags": [
@@ -9027,6 +10262,7 @@
       "name": "Skootle Google Flights Scraper",
       "category": "travel",
       "homepage": "https://apify.com/skootle/google-flights-scraper",
+      "access_links": [],
       "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
       "submitted_by": "community",
       "tags": [],
@@ -9090,6 +10326,18 @@
       "name": "Skyscanner Travel APIs",
       "category": "travel",
       "homepage": "https://www.skyscanner.net/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developers.skyscanner.net/docs/getting-started/authentication",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://developers.skyscanner.net/docs/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Partner flight APIs and an official MCP, with independently documented business-access paths.",
       "submitted_by": "community",
       "tags": [],
@@ -9118,6 +10366,7 @@
         "routes": [
           {
             "id": "partner-api",
+            "docs": "https://developers.skyscanner.net/docs/getting-started/authentication",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developers.skyscanner.net/docs/getting-started/authentication",
@@ -9149,6 +10398,7 @@
           },
           {
             "id": "partner-mcp",
+            "docs": "https://developers.skyscanner.net/docs/mcp-server",
             "interface": "mcp",
             "maintainer": "official",
             "entry_url": "https://developers.skyscanner.net/docs/mcp-server",
@@ -9189,6 +10439,23 @@
       "name": "Slack",
       "category": "communication",
       "homepage": "https://slack.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://api.slack.com/methods",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://tools.slack.dev",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.slack.dev/tools/slack-cli",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -9208,6 +10475,13 @@
       "name": "Square",
       "category": "payments-billing",
       "homepage": "https://squareup.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Hosted payment links and payment APIs with a free developer sandbox; merchant availability depends on country.",
       "submitted_by": "community",
       "tags": [],
@@ -9236,6 +10510,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink",
@@ -9312,6 +10587,13 @@
       "name": "Steel",
       "category": "code-execution",
       "homepage": "https://steel.dev",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.steel.dev/api-reference",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -9331,6 +10613,28 @@
       "name": "Stripe",
       "category": "payments-billing",
       "homepage": "https://stripe.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.stripe.com/payment-links/create",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.stripe.com/sdks",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.stripe.com/stripe-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.stripe.com/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.",
       "submitted_by": "community",
       "tags": [
@@ -9370,6 +10674,7 @@
         "routes": [
           {
             "id": "sandbox-api",
+            "docs": "https://docs.stripe.com/payment-links/create",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.stripe.com/payment-links/create",
@@ -9427,6 +10732,28 @@
       "name": "Supabase",
       "category": "databases",
       "homepage": "https://supabase.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://supabase.com/docs/reference/api/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://supabase.com/docs/reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://supabase.com/docs/guides/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://supabase.com/docs/guides/getting-started/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.",
       "submitted_by": "community",
       "tags": [
@@ -9459,6 +10786,7 @@
         "routes": [
           {
             "id": "data-api",
+            "docs": "https://supabase.com/docs/guides/api",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://supabase.com/docs/guides/api",
@@ -9515,6 +10843,23 @@
       "name": "Tavily",
       "category": "web-search-data",
       "homepage": "https://www.tavily.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.tavily.com/documentation/quickstart",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.tavily.com/sdk",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.tavily.com/documentation/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -9547,6 +10892,7 @@
         "routes": [
           {
             "id": "search-api",
+            "docs": "https://docs.tavily.com/documentation/quickstart",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.tavily.com/documentation/quickstart",
@@ -9610,6 +10956,13 @@
       "name": "Telegram Bot API",
       "category": "communication",
       "homepage": "https://telegram.org",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://core.telegram.org/bots/api",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.",
       "submitted_by": "community",
       "tags": [
@@ -9629,6 +10982,13 @@
       "name": "Together AI",
       "category": "ai-models",
       "homepage": "https://www.together.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.together.ai/reference/chat-completions",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -9648,6 +11008,7 @@
       "name": "同程机票合作",
       "category": "travel",
       "homepage": "https://www.ly.com/public/about17u/contactus",
+      "access_links": [],
       "summary": "同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。",
       "submitted_by": "community",
       "tags": [],
@@ -9684,6 +11045,13 @@
       "name": "Travelport TripServices",
       "category": "travel",
       "homepage": "https://developer.travelport.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://developer.travelport.com/docs/getting-started",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Travel distribution API requiring trial requests and provider-provisioned production credentials.",
       "submitted_by": "community",
       "tags": [],
@@ -9712,6 +11080,7 @@
         "routes": [
           {
             "id": "tripservices-api",
+            "docs": "https://developer.travelport.com/docs/getting-started",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://developer.travelport.com/docs/getting-started",
@@ -9758,6 +11127,13 @@
       "name": "Trip.com Flight Distribution",
       "category": "travel",
       "homepage": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.",
       "submitted_by": "community",
       "tags": [],
@@ -9781,6 +11157,7 @@
         "routes": [
           {
             "id": "supplier-fare-maintenance",
+            "docs": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html",
@@ -9798,6 +11175,18 @@
       "name": "Turso",
       "category": "databases",
       "homepage": "https://turso.tech/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.turso.tech/api-reference/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://docs.turso.tech/cli/introduction",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
       "submitted_by": "community",
       "tags": [],
@@ -10050,6 +11439,7 @@
         "routes": [
           {
             "id": "cloud-cli",
+            "docs": "https://docs.turso.tech/cli/introduction",
             "interface": "cli",
             "maintainer": "official",
             "entry_url": "https://docs.turso.tech/cli/introduction",
@@ -10114,6 +11504,7 @@
           },
           {
             "id": "platform-api",
+            "docs": "https://docs.turso.tech/api-reference/introduction",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.turso.tech/api-reference/introduction",
@@ -10153,6 +11544,28 @@
       "name": "Twilio",
       "category": "communication",
       "homepage": "https://www.twilio.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://www.twilio.com/docs/usage/api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://www.twilio.com/docs/libraries",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://www.twilio.com/docs/twilio-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/twilio-labs/mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.",
       "submitted_by": "community",
       "tags": [
@@ -10172,6 +11585,23 @@
       "name": "Upstash",
       "category": "databases",
       "homepage": "https://upstash.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://upstash.com/docs/devops/developer-api/introduction",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/upstash/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/upstash/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.",
       "submitted_by": "community",
       "tags": [
@@ -10191,6 +11621,18 @@
       "name": "Vapi",
       "category": "agent-tooling",
       "homepage": "https://vapi.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.vapi.ai/api-reference",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/VapiAI/mcp-server",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.",
       "submitted_by": "community",
       "tags": [
@@ -10209,6 +11651,28 @@
       "name": "Vercel",
       "category": "cloud-hosting",
       "homepage": "https://vercel.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://vercel.com/docs/rest-api",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://vercel.com/docs/rest-api/sdk",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://vercel.com/docs/cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://vercel.com/docs/mcp/vercel-mcp",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.",
       "submitted_by": "community",
       "tags": [
@@ -10228,6 +11692,23 @@
       "name": "Weaviate",
       "category": "databases",
       "homepage": "https://weaviate.io",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.weaviate.io/weaviate/api/rest",
+          "kind": "documentation"
+        },
+        {
+          "label": "CLI",
+          "url": "https://github.com/weaviate/weaviate-cli",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://github.com/weaviate/mcp-server-weaviate",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.",
       "submitted_by": "community",
       "tags": [
@@ -10246,6 +11727,13 @@
       "name": "WeChat Pay",
       "category": "payments-billing",
       "homepage": "https://pay.weixin.qq.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://pay.wechatpay.cn/doc/v3/merchant/4012791877",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Merchant payment APIs including Native QR checkout; merchant credentials and channel-specific setup are required.",
       "submitted_by": "community",
       "tags": [],
@@ -10269,6 +11757,7 @@
         "routes": [
           {
             "id": "native-api",
+            "docs": "https://pay.wechatpay.cn/doc/v3/merchant/4012791877",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://pay.wechatpay.cn/doc/v3/merchant/4012791877",
@@ -10300,6 +11789,13 @@
       "name": "Whop",
       "category": "payments-billing",
       "homepage": "https://whop.com/",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.whop.com/",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Payment APIs and checkout integration for existing apps, with TypeScript, Python and Ruby SDKs.",
       "submitted_by": "community",
       "tags": [],
@@ -10323,6 +11819,7 @@
         "routes": [
           {
             "id": "official-api",
+            "docs": "https://docs.whop.com/",
             "interface": "api",
             "maintainer": "official",
             "entry_url": "https://docs.whop.com/",
@@ -10346,6 +11843,13 @@
       "name": "xAI (Grok API)",
       "category": "ai-models",
       "homepage": "https://x.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.x.ai/developers/rest-api-reference/inference",
+          "kind": "documentation"
+        }
+      ],
       "summary": "xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.",
       "submitted_by": "community",
       "tags": [
@@ -10364,6 +11868,23 @@
       "name": "Xquik",
       "category": "web-search-data",
       "homepage": "https://xquik.com",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.xquik.com/api-reference/overview",
+          "kind": "documentation"
+        },
+        {
+          "label": "SDK",
+          "url": "https://docs.xquik.com/sdks",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.xquik.com/mcp/overview",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.",
       "submitted_by": "vendor",
       "tags": [
@@ -10385,6 +11906,13 @@
       "name": "Z.ai (GLM)",
       "category": "ai-models",
       "homepage": "https://z.ai",
+      "access_links": [
+        {
+          "label": "API",
+          "url": "https://docs.z.ai/api-reference",
+          "kind": "documentation"
+        }
+      ],
       "summary": "GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.",
       "submitted_by": "community",
       "tags": [
@@ -10404,6 +11932,18 @@
       "name": "Zapier",
       "category": "agent-tooling",
       "homepage": "https://zapier.com",
+      "access_links": [
+        {
+          "label": "CLI",
+          "url": "https://github.com/zapier/zapier-platform",
+          "kind": "documentation"
+        },
+        {
+          "label": "MCP",
+          "url": "https://docs.zapier.com/mcp/get-started/quickstart",
+          "kind": "documentation"
+        }
+      ],
       "summary": "Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.",
       "submitted_by": "community",
       "tags": [
@@ -10411,7 +11951,9 @@
         "integrations",
         "workflows"
       ],
-      "notes": [],
+      "notes": [
+        "MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official."
+      ],
       "record_pool": "provider",
       "evidence_level": "legacy_record",
       "route_tests": "not_recorded",

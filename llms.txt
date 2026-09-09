@@ -9,7 +9,7 @@
 - [MCP setup and parameters](./mcp/README.md): `search_services` filters candidates; `get_service` returns full service details.
 - Example: `search_services({"subcategory":"travel/flights"})`, then `get_service({"id":"kiwi"})`.
 
-Start with the user's domain and constraints. Inspect candidate routes and relevant task records before recommending a service. Report why it fits, access requirements, observed results, costs, evidence dates and unresolved gaps. Official entry URLs are in the catalog.
+Start with the user's domain and constraints. Inspect candidate routes and relevant task records before recommending a service. Report why it fits, access requirements, observed results, costs, evidence dates and unresolved gaps. Read `access_links` for selected API/SDK/CLI/MCP setup documentation (the same links shown on the homepage). Concrete endpoints and other discovery URLs remain in `catalog.routes[].entry_url`; route-specific instructions are in `docs`. Missing documentation does not mean the route is unavailable.
 
 A documented route is not a task pass. Results apply only to the recorded route, task/version and setup; unknown costs are not zero. Cached input tokens are included in input totals. Model costs are automatically estimated using a dated LiteLLM pricing snapshot; service charges retain reported/free/estimated/unknown provenance. Summary usage and costs are means over valid trials, including failures; any missing value makes that mean unknown. Compare identical task sets, repetitions and configurations. Setup outside the measured run is disclosed separately. Do not infer a general ranking from isolated trials or contact/register with a provider merely to query this directory.
 

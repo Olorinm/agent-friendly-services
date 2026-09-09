@@ -19,6 +19,7 @@ catalog:
       kind: official_site
   routes:
     - id: air-workflow-api
+      docs: https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md
       interface: api
       maintainer: official
       entry_url: https://github.com/SabreDevStudio/SabreAPIsWorkflows/blob/master/SabreAPIsTestSuites/README.md

@@ -23,6 +23,7 @@ catalog:
       kind: official_docs
   routes:
     - id: google-flights-api
+      docs: https://www.searchapi.io/docs/google-flights-api
       interface: api
       maintainer: official
       entry_url: https://www.searchapi.io/docs/google-flights-api

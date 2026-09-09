@@ -23,6 +23,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://docs.creem.io/getting-started/test-mode
       interface: api
       maintainer: official
       entry_url: https://docs.creem.io/getting-started/test-mode

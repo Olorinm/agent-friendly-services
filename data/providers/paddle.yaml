@@ -92,6 +92,7 @@ catalog:
       kind: official_docs
   routes:
     - id: sandbox-api
+      docs: https://developer.paddle.com/sdks/sandbox/
       interface: api
       maintainer: official
       entry_url: https://developer.paddle.com/sdks/sandbox/

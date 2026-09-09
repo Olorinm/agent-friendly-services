@@ -23,6 +23,7 @@ catalog:
       kind: official_site
   routes:
     - id: database-cli
+      docs: https://planetscale.com/docs/cli
       interface: cli
       maintainer: official
       entry_url: https://planetscale.com/docs/cli

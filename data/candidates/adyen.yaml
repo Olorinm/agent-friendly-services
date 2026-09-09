@@ -25,6 +25,7 @@ catalog:
       kind: official_docs
   routes:
     - id: payment-links-api
+      docs: https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks
       interface: api
       maintainer: official
       entry_url: https://docs.adyen.com/api-explorer/Checkout/latest/post/paymentLinks

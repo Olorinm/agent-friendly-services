@@ -17,6 +17,7 @@ catalog:
       kind: official_docs
   routes:
     - id: supplier-fare-maintenance
+      docs: https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html
       interface: api
       maintainer: official
       entry_url: >-

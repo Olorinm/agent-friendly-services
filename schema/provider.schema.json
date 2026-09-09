@@ -45,6 +45,7 @@
         "cli": { "$ref": "#/definitions/httpsUrl" },
         "sdks": { "$ref": "#/definitions/httpsUrl" },
         "mcp_official": { "$ref": "#/definitions/httpsUrl" },
+        "mcp_docs": { "$ref": "#/definitions/httpsUrl" },
         "mcp_community": {
           "type": "array",
           "items": { "$ref": "#/definitions/httpsUrl" },

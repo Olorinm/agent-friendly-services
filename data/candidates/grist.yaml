@@ -27,6 +27,7 @@ catalog:
       kind: official_docs
   routes:
     - id: rest-api
+      docs: https://support.getgrist.com/api/
       interface: api
       maintainer: official
       entry_url: https://support.getgrist.com/api/
@@ -70,6 +71,7 @@ catalog:
           evidence:
             - pricing
     - id: hosted-mcp
+      docs: https://support.getgrist.com/mcp/
       interface: mcp
       maintainer: official
       entry_url: https://docs.getgrist.com/api/mcp
@@ -100,6 +102,7 @@ catalog:
         Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the
         API pool.
     - id: python-sdk
+      docs: https://support.getgrist.com/rest-api/
       interface: sdk
       maintainer: official
       entry_url: https://pypi.org/project/grist-api/
@@ -113,6 +116,7 @@ catalog:
         Official Python client linked by Grist REST API guide; SDK installation does not remove
         account permission requirements.
     - id: javascript-sdk
+      docs: https://support.getgrist.com/rest-api/
       interface: sdk
       maintainer: official
       entry_url: https://www.npmjs.com/package/grist-api

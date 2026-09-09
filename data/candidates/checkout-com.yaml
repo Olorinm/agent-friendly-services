@@ -15,6 +15,7 @@ catalog:
       kind: official_docs
   routes:
     - id: payment-links-api
+      docs: https://api-reference.checkout.com/tag/Payment-Links/
       interface: api
       maintainer: official
       entry_url: https://api-reference.checkout.com/tag/Payment-Links/

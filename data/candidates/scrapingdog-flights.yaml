@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: flights-api
+      docs: https://www.scrapingdog.com/documentation/google-flights-api/
       interface: api
       maintainer: official
       entry_url: https://www.scrapingdog.com/documentation/google-flights-api/

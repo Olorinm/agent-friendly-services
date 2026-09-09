@@ -96,6 +96,7 @@ catalog:
       kind: official_docs
   routes:
     - id: google-flights-api
+      docs: https://serpapi.com/google-flights-api
       interface: api
       maintainer: official
       entry_url: https://serpapi.com/google-flights-api
@@ -125,6 +126,7 @@ catalog:
             - pricing
       notes: A third-party Google Flights data service. Not a Google-operated API.
     - id: official-mcp
+      docs: https://github.com/serpapi/serpapi-mcp
       interface: mcp
       maintainer: official
       entry_url: https://github.com/serpapi/serpapi-mcp
@@ -134,6 +136,7 @@ catalog:
         Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route
         results.
     - id: web-search-api
+      docs: https://serpapi.com/search-api
       interface: api
       maintainer: official
       entry_url: https://serpapi.com/search-api

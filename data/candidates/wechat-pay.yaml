@@ -17,6 +17,7 @@ catalog:
       kind: official_docs
   routes:
     - id: native-api
+      docs: https://pay.wechatpay.cn/doc/v3/merchant/4012791877
       interface: api
       maintainer: official
       entry_url: https://pay.wechatpay.cn/doc/v3/merchant/4012791877

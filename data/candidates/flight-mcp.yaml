@@ -19,6 +19,7 @@ catalog:
       kind: official_site
   routes:
     - id: authenticated-api
+      docs: https://flight-mcp.com/docs
       interface: api
       maintainer: official
       entry_url: https://flight-mcp.com/docs
@@ -51,6 +52,7 @@ catalog:
           evidence:
             - pricing
     - id: authenticated-mcp
+      docs: https://flight-mcp.com/docs
       interface: mcp
       maintainer: official
       entry_url: https://flight-mcp.com/docs
@@ -83,6 +85,7 @@ catalog:
           evidence:
             - pricing
     - id: public-cache-api
+      docs: https://flight-mcp.com/docs
       interface: api
       maintainer: official
       entry_url: https://flight-mcp.com/docs
@@ -109,6 +112,7 @@ catalog:
         Only 10 specified directed routes, one adult, economy, USD, en-US and US point of sale; per-date
         weekly cache refresh over 180 days. Does not trigger fresh queries for arbitrary routes.
     - id: public-cache-mcp
+      docs: https://flight-mcp.com/docs
       interface: mcp
       maintainer: official
       entry_url: https://flight-mcp.com/docs

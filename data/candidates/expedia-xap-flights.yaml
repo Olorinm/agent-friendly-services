@@ -19,6 +19,7 @@ catalog:
       kind: official_docs
   routes:
     - id: flight-listings-api
+      docs: https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings
       interface: api
       maintainer: official
       entry_url: https://developers.expediagroup.com/xap-apis/api/shopping-apis/flight-listings
