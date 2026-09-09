@@ -1,6 +1,6 @@
 id: modal
 name: Modal
-category: code-execution
+category: cloud-hosting
 homepage: https://modal.com
 summary: Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
 submitted_by: community
@@ -77,3 +77,14 @@ checks:
     evidence: https://modal.com/docs/guide/sandbox
     verified: "2026-07-07"
     notes: Running agent/generated workloads is a documented, first-class use case.
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/code-sandboxes
+  sources:
+    existing-docs:
+      url: https://modal.com/docs/reference/cli
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

@@ -77,3 +77,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: Gemini API additional terms not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    existing-docs:
+      url: https://ai.google.dev/gemini-api/docs/api-key
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

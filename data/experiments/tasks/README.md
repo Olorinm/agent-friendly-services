@@ -10,7 +10,9 @@ research file, Git revision and scenario IDs, then define inputs, resources and
 independent verification separately. A need remains valid even when testing is
 currently blocked.
 
-One file per category, holding that category's **milestone ladder**. Milestones
+The historical `code-execution.yaml` and `observability-security.yaml` filenames remain stable after their services move into cloud hosting and developer tools. The legacy runner retains their original task selection; new comparisons use explicit task tables.
+
+One file per original category, holding that category's **milestone ladder**. Milestones
 pin the real-task scenarios so runs are comparable within a category and the
 verdict never depends on the agent's mid-run judgment about what "the task"
 means. See `docs/agent-verification.md` for the method.

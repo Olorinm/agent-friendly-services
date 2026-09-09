@@ -77,6 +77,7 @@ checks:
 catalog:
   version: 1
   classifications:
+    - web-search-data/web-extraction
     - web-search-data/web-search
   sources:
     mcp:

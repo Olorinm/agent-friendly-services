@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as yaml from 'js-yaml';
-import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
+import { ROOT, legacyTaskCategory, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
 import { catalogService } from './catalog.ts';
 import { generateResearch } from './research.ts';
 import { loadPrices, estimateModelCost } from './model-costs.ts';
@@ -442,7 +442,7 @@ ${providers
 **Links:** ${entrypointLinks(p)}
 
 ${checksBlock(p)}
-${agentRunsTable(p, '../') ? `\n**Agent runs** — a real agent climbed this category's [task ladder](../data/experiments/tasks/${p.category}.yaml), every result independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#${p.id})):\n\n${agentRunsTable(p, '../')}\n` : ''}${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
+${agentRunsTable(p, '../') ? `\n**Agent runs** — a real agent climbed this category's [task ladder](../data/experiments/tasks/${legacyTaskCategory(p)}.yaml), every result independently verified ([method](../docs/agent-verification.md) · [all runs](./agent-runs.md#${p.id})):\n\n${agentRunsTable(p, '../')}\n` : ''}${p.notes?.length ? `\n${p.notes.map((n) => `> ${n}`).join('\n')}\n` : ''}`;
   })
   .join('\n')}
 `;
@@ -484,7 +484,7 @@ ${measured
       a.runs.flatMap((r) => (r.agent_claims?.friction_notes ?? []).map((n) => `- *(${a.route} rep${r.rep})* ${n}`)));
     return `### ${p.name} <a id="${p.id}"></a>
 
-Task: \`${(agentRunsByProvider.get(p.id) ?? [])[0]?.task}\` ([definition](../data/experiments/tasks/${p.category}.yaml)) · [provider facts](./providers.md#${p.id})
+Task: \`${(agentRunsByProvider.get(p.id) ?? [])[0]?.task}\` ([definition](../data/experiments/tasks/${legacyTaskCategory(p)}.yaml)) · [provider facts](./providers.md#${p.id})
 
 ${agentRunsTable(p, '../')}
 ${notes.length ? `\n**Run notes** (agent-reported, verbatim):\n\n${notes.join('\n')}` : ''}`;
@@ -510,7 +510,6 @@ const taskPages = fs.readdirSync(path.join(ROOT, taskDir)).filter(f => f.endsWit
   }).filter(p => p !== null);
 // Show services in their recorded categories; cross-category services share one source record.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
-const categoryZh: Record<string, string> = { travel: '旅行', databases: '数据库', 'web-search-data': '网页搜索与数据', 'productivity-storage': '协作办公与存储', 'ai-models': 'AI 模型', 'agent-tooling': 'Agent 工具', 'code-execution': '代码执行', 'developer-tools': '开发工具', 'cloud-hosting': '云服务与部署', 'payments-billing': '支付与账单', communication: '通信', 'observability-security': '监控与安全', 'commerce-marketing': '电商与营销' };
 const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
 const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))))
   .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
@@ -548,7 +547,7 @@ const profiles = listedServices.map(p => {
 });
 fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nToken and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use saved LiteLLM prices; ~ marks estimated service charges. — means no data. Setup costs are separate from business task costs. Access and pricing are source claims; a listed route does not establish task support. Compare only matching tasks and conditions.\n\n${profiles.join('\n\n')}\n`);
 function serviceList(zh: boolean): string {
-  const navigation = listedCategories.map(c => `[${zh ? categoryZh[c.id] ?? c.name : c.name}](#services-${c.id})`).join(' · ');
+  const navigation = listedCategories.map(c => `[${zh ? c.name_zh ?? c.name : c.name}](#services-${c.id})`).join(' · ');
   const sections = listedCategories.map(c => {
     const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
 
@@ -565,7 +564,7 @@ function serviceList(zh: boolean): string {
     const groups = subcategories.map(sub => {
       const id = `${c.id}/${sub.id}`;
       const task = taskPages.find(t => t.ids === id);
-      return { id, name: zh ? (task?.classification.split(' / ').at(-1) ?? sub.name) : sub.name,
+      return { id, name: zh ? (sub.name_zh ?? task?.classification.split(' / ').at(-1) ?? sub.name) : sub.name,
         rows: rows.filter(r => r.classifications.includes(id)),
         boards: categoryBoards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids === id) };
     });
@@ -585,7 +584,7 @@ function serviceList(zh: boolean): string {
       const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
       return `${heading}${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
     }).join('\n\n');
-    return `<a id="services-${c.id}"></a>\n\n### ${zh ? categoryZh[c.id] ?? c.name : c.name} (${rows.length})\n\n${content}`;
+    return `<a id="services-${c.id}"></a>\n\n### ${zh ? c.name_zh ?? c.name : c.name} (${rows.length})\n\n${content}`;
   });
   return `${navigation}\n\n${sections.join('\n\n')}`;
 }

@@ -1,6 +1,6 @@
 id: e2b
 name: E2B
-category: code-execution
+category: cloud-hosting
 homepage: https://e2b.dev
 summary: Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.
 submitted_by: community
@@ -73,3 +73,14 @@ checks:
     evidence: https://e2b.dev/docs
     verified: "2026-07-07"
     notes: Running agent-generated code is the product's stated purpose.
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/code-sandboxes
+  sources:
+    existing-docs:
+      url: https://e2b.dev/docs/api-key
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

@@ -87,3 +87,14 @@ checks:
 notes:
   - Anthropic authored the MCP standard; no first-party MCP server exposing the Anthropic API was found at review time (mcp_official intentionally absent).
   - Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI.
+
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    existing-docs:
+      url: https://docs.anthropic.com/en/api/getting-started
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

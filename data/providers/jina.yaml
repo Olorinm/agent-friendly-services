@@ -70,3 +70,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-extraction
+  sources:
+    existing-docs:
+      url: https://jina.ai/api-dashboard
+      checked_on: '2026-07-08'
+      kind: official_site
+  routes: []

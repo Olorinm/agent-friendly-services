@@ -29,7 +29,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import * as yaml from 'js-yaml';
-import { ROOT, loadProviders, loadCandidates } from './lib.ts';
+import { ROOT, legacyTaskCategory, loadProviders, loadCandidates } from './lib.ts';
 
 const args = Object.fromEntries(
   process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => {
@@ -132,7 +132,7 @@ let taskDef: TaskDef | null = null;
 let provisionVars: Record<string, string> = {};
 let milestones: (Milestone | null)[] = [null]; // recon/dry-fire run once, without a milestone
 if (layer === 'real') {
-  const taskFile = path.join(ROOT, `data/experiments/tasks/${provider.category}.yaml`);
+  const taskFile = path.join(ROOT, `data/experiments/tasks/${legacyTaskCategory(provider)}.yaml`);
   taskDef = yaml.load(fs.readFileSync(requireFile(taskFile, 'no task definition for this category yet'), 'utf8')) as TaskDef;
   if (!taskDef.milestones?.length) throw new Error(`${taskFile} has no milestones — see data/experiments/tasks/README.md`);
   if (ladder) milestones = taskDef.milestones;

@@ -80,8 +80,9 @@ export interface Fields {
 export interface Category {
   id: string;
   name: string;
+  name_zh?: string;
   description: string;
-  subcategories?: { id: string; name: string; description: string; capabilities: { id: string; description: string }[] }[];
+  subcategories?: { id: string; name: string; name_zh?: string; description: string; capabilities: { id: string; description: string }[] }[];
 }
 
 export function loadYamlFile<T = unknown>(file: string): T {
@@ -167,4 +168,13 @@ export function providerUrls(p: Provider): { url: string; source: string }[] {
 export function daysSince(dateStr: string): number {
   const then = new Date(`${dateStr}T00:00:00Z`).getTime();
   return Math.floor((Date.now() - then) / 86_400_000);
+}
+
+/** Keep legacy experiment task selection stable when discovery categories change. */
+export function legacyTaskCategory(provider: Provider): string {
+  // These providers were evaluated/planned against the original task files.
+  // New multi-purpose services must select a task explicitly in the current workflow.
+  if (['e2b', 'modal', 'browserbase', 'steel'].includes(provider.id)) return 'code-execution';
+  if (['datadog', 'grafana', 'sentry'].includes(provider.id)) return 'observability-security';
+  return provider.category;
 }

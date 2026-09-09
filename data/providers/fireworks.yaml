@@ -66,3 +66,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    existing-docs:
+      url: https://docs.fireworks.ai/getting-started/introduction
+      checked_on: '2026-07-08'
+      kind: official_docs
+  routes: []

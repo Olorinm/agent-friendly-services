@@ -1,33 +1,73 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-09T09:36:26.392Z",
+  "generated_at": "2026-09-09T09:56:03.241Z",
   "description": "Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
     {
       "id": "ai-models",
-      "name": "AI Models",
-      "description": "Model and inference APIs (LLMs, embeddings, media generation)."
+      "name": "AI Services",
+      "description": "Services for accessing models and generating or processing content; compare access providers using a shared model or content services using a specific user task.",
+      "name_zh": "AI 服务",
+      "subcategories": [
+        {
+          "id": "model-access",
+          "name": "Model Access",
+          "name_zh": "模型接入",
+          "description": "Access a model through its provider or an inference/router service. Compare only a shared model version and matched request settings; this is not a model-quality leaderboard.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "agent-tooling",
       "name": "Agent Tooling",
-      "description": "Agent infrastructure, MCP tooling, orchestration services."
-    },
-    {
-      "id": "code-execution",
-      "name": "Code Execution",
-      "description": "Code sandboxes, ephemeral compute, browser automation."
+      "description": "Agent infrastructure, MCP tooling, orchestration services.",
+      "name_zh": "Agent 工具"
     },
     {
       "id": "developer-tools",
       "name": "Developer Tools",
-      "description": "Code hosting, CI, testing, API tooling, error tracking."
+      "description": "Code hosting, API development, testing, monitoring and troubleshooting.",
+      "name_zh": "开发工具",
+      "subcategories": [
+        {
+          "id": "monitoring",
+          "name": "Monitoring & Troubleshooting",
+          "name_zh": "监控与故障排查",
+          "description": "Collect and retrieve application errors, logs and performance evidence to diagnose problems.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "cloud-hosting",
-      "name": "Cloud / Hosting",
-      "description": "Clouds, deployment platforms, edge and serverless hosting."
+      "name": "Cloud Computing & Hosting",
+      "description": "Cloud runtime environments and hosting for code, browsers and applications.",
+      "name_zh": "云计算与托管",
+      "subcategories": [
+        {
+          "id": "code-sandboxes",
+          "name": "Code Sandboxes",
+          "name_zh": "代码沙箱",
+          "description": "Run code and process files in an isolated temporary environment.",
+          "capabilities": []
+        },
+        {
+          "id": "browser-environments",
+          "name": "Browser Environments",
+          "name_zh": "浏览器运行环境",
+          "description": "Create a remote browser session and execute browser operations.",
+          "capabilities": []
+        },
+        {
+          "id": "app-hosting",
+          "name": "Application Hosting",
+          "name_zh": "应用部署",
+          "description": "Deploy a website or application and keep it available at a public endpoint.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "databases",
@@ -51,13 +91,15 @@
               "id": "database.restore",
               "description": "Export data and restore it into a separate database or namespace."
             }
-          ]
+          ],
+          "name_zh": "托管关系型数据库"
         }
-      ]
+      ],
+      "name_zh": "数据库"
     },
     {
       "id": "web-search-data",
-      "name": "Web Search / Data",
+      "name": "Search & Data Access",
       "description": "Search APIs, crawling and scraping, data providers.",
       "subcategories": [
         {
@@ -73,9 +115,25 @@
               "id": "web.fetch",
               "description": "Retrieve source content supporting an answer."
             }
-          ]
+          ],
+          "name_zh": "网页搜索"
+        },
+        {
+          "id": "web-extraction",
+          "name": "Web Content Extraction",
+          "name_zh": "网页内容提取",
+          "description": "Retrieve specified web pages or sites as usable text or structured data.",
+          "capabilities": []
+        },
+        {
+          "id": "financial-data",
+          "name": "Financial Data",
+          "name_zh": "金融数据",
+          "description": "Retrieve market prices, company financials or financial disclosures. Select competing providers by the particular dataset and task.",
+          "capabilities": []
         }
-      ]
+      ],
+      "name_zh": "搜索与数据获取"
     },
     {
       "id": "payments-billing",
@@ -99,19 +157,22 @@
               "id": "payments.subscription",
               "description": "Prepare recurring collection for a subscription offering."
             }
-          ]
+          ],
+          "name_zh": "收款"
         }
-      ]
+      ],
+      "name_zh": "支付与计费"
     },
     {
       "id": "communication",
       "name": "Communication",
-      "description": "Email, SMS, chat, notifications."
+      "description": "Email, SMS, chat, notifications.",
+      "name_zh": "通信"
     },
     {
       "id": "productivity-storage",
-      "name": "Productivity / Storage",
-      "description": "Project management, documents, file storage.",
+      "name": "Workplace Collaboration",
+      "description": "Documents, collaborative tables, project management and file sharing; application object storage belongs under cloud services.",
       "subcategories": [
         {
           "id": "collaborative-tables",
@@ -130,19 +191,17 @@
               "id": "records.reconcile",
               "description": "Merge follow-up notes without duplicating existing actions."
             }
-          ]
+          ],
+          "name_zh": "协作表格"
         }
-      ]
-    },
-    {
-      "id": "observability-security",
-      "name": "Observability / Security",
-      "description": "Monitoring, logging, identity, security services."
+      ],
+      "name_zh": "办公协作"
     },
     {
       "id": "commerce-marketing",
-      "name": "Commerce / Marketing",
-      "description": "CMS, e-commerce, CRM, marketing platforms."
+      "name": "E-commerce",
+      "description": "Services for building and operating online stores.",
+      "name_zh": "电商"
     },
     {
       "id": "travel",
@@ -170,15 +229,18 @@
               "id": "flights.ticketing",
               "description": "Issue a ticket, beyond search or a purchase link."
             }
-          ]
+          ],
+          "name_zh": "机票"
         },
         {
           "id": "hotels",
           "name": "Hotels",
           "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
-          "capabilities": []
+          "capabilities": [],
+          "name_zh": "酒店"
         }
-      ]
+      ],
+      "name_zh": "旅行"
     }
   ],
   "services": [
@@ -820,10 +882,23 @@
         "Claude Code is listed as cli — it is an agent CLI rather than an API-management CLI."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.anthropic.com/en/api/getting-started",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "apify",
@@ -863,10 +938,23 @@
         "mcp.apify.com hosts the official remote MCP server; the docs page above explains setup."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "web-search-data/web-extraction"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.apify.com/platform/integrations/api",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "apiheya-air-scraper",
@@ -1477,7 +1565,7 @@
     {
       "id": "browserbase",
       "name": "Browserbase",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://www.browserbase.com",
       "access_links": [
         {
@@ -1502,10 +1590,23 @@
         "Stagehand (the company's agent framework) is a separate open-source project and not assessed here."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/browser-environments"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.browserbase.com/introduction",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "cartesia",
@@ -1559,10 +1660,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://inference-docs.cerebras.ai/introduction",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "checkout-com",
@@ -1716,6 +1830,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
+          "cloud-hosting/app-hosting",
           "databases/hosted-relational"
         ],
         "sources": {
@@ -1947,10 +2062,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.cohere.com/docs/rate-limits",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "composio",
@@ -2118,7 +2246,7 @@
     {
       "id": "datadog",
       "name": "Datadog",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://www.datadoghq.com",
       "access_links": [
         {
@@ -2146,10 +2274,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "developer-tools/monitoring"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.datadoghq.com/account_management/api-app-keys",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "deepgram",
@@ -2203,10 +2344,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://api-docs.deepseek.com/quick_start/pricing",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "discord",
@@ -2599,7 +2753,7 @@
     {
       "id": "e2b",
       "name": "E2B",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://e2b.dev",
       "access_links": [
         {
@@ -2627,10 +2781,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/code-sandboxes"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://e2b.dev/docs/api-key",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "elevenlabs",
@@ -2923,6 +3090,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
+          "web-search-data/web-extraction",
           "web-search-data/web-search"
         ],
         "sources": {
@@ -3584,6 +3752,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
+          "web-search-data/web-extraction",
           "web-search-data/web-search"
         ],
         "sources": {
@@ -3738,10 +3907,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.fireworks.ai/getting-started/introduction",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "fliggy-domestic-flights",
@@ -4166,10 +4348,23 @@
         "fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication)."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/app-hosting"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://fly.io/docs/security/tokens/",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "gemini-api",
@@ -4202,10 +4397,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://ai.google.dev/gemini-api/docs/api-key",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "github",
@@ -4397,7 +4605,7 @@
     {
       "id": "grafana",
       "name": "Grafana (Grafana Cloud)",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://grafana.com",
       "access_links": [
         {
@@ -4420,10 +4628,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "developer-tools/monitoring"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://grafana.com/docs/grafana/latest/administration/service-accounts/",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "grist",
@@ -4938,10 +5159,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://console.groq.com/docs/quickstart",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "hugging-face",
@@ -4981,10 +5215,23 @@
         "MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://huggingface.co/docs/hub/security-tokens",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "ignav",
@@ -5355,10 +5602,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "web-search-data/web-extraction"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://jina.ai/api-dashboard",
+            "checked_on": "2026-07-08",
+            "kind": "official_site"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "kayak-affiliate",
@@ -6710,10 +6970,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://platform.minimax.io/user-center/basic-information/interface-key",
+            "checked_on": "2026-07-08",
+            "kind": "official_site"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "mistral",
@@ -6741,15 +7014,28 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.mistral.ai/getting-started/quickstart",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "modal",
       "name": "Modal",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://modal.com",
       "access_links": [
         {
@@ -6772,10 +7058,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/code-sandboxes"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://modal.com/docs/reference/cli",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "mollie",
@@ -6936,10 +7235,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://platform.kimi.ai/console/api-keys",
+            "checked_on": "2026-07-08",
+            "kind": "official_site"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "n8n",
@@ -7287,10 +7599,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/app-hosting"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.netlify.com/api/get-started/",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "notion",
@@ -7888,10 +8213,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://platform.openai.com/docs/quickstart",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "openrouter",
@@ -7914,10 +8252,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://openrouter.ai/docs/quickstart",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "paas-build",
@@ -9394,10 +9745,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://www.alibabacloud.com/help/en/model-studio/get-api-key",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "railway",
@@ -9424,10 +9788,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/app-hosting"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.railway.com/reference/public-api",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "razorpay",
@@ -9565,10 +9942,23 @@
         "The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions)."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/app-hosting"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://render.com/docs/api",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "replicate",
@@ -9601,10 +9991,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://replicate.com/docs/reference/http",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "resend",
@@ -9939,7 +10342,7 @@
     {
       "id": "sentry",
       "name": "Sentry",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://sentry.io",
       "access_links": [
         {
@@ -9972,10 +10375,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "developer-tools/monitoring"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.sentry.io/api/auth/",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "serpapi",
@@ -10585,7 +11001,7 @@
     {
       "id": "steel",
       "name": "Steel",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://steel.dev",
       "access_links": [
         {
@@ -10603,10 +11019,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/browser-environments"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.steel.dev/overview/intro-to-steel",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "stripe",
@@ -10875,6 +11304,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
+          "web-search-data/web-extraction",
           "web-search-data/web-search"
         ],
         "sources": {
@@ -10998,10 +11428,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.together.ai/docs/quickstart",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "tongcheng-flights",
@@ -11682,10 +12125,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "cloud-hosting/app-hosting"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://vercel.com/docs/integrations",
+            "checked_on": "2026-07-07",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "weaviate",
@@ -11858,10 +12314,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.x.ai/overview",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "xquik",
@@ -11922,10 +12391,23 @@
       ],
       "notes": [],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "ai-models/model-access"
+        ],
+        "sources": {
+          "existing-docs": {
+            "url": "https://docs.z.ai/guides/overview/quick-start",
+            "checked_on": "2026-07-08",
+            "kind": "official_docs"
+          }
+        },
+        "routes": []
+      }
     },
     {
       "id": "zapier",

@@ -79,3 +79,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: Usage policies not yet reviewed for autonomous agent account usage.
+
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    existing-docs:
+      url: https://platform.openai.com/docs/quickstart
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

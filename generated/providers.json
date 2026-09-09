@@ -12,38 +12,78 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-09-09T09:36:26.389Z",
+  "generated_at": "2026-09-09T09:56:03.238Z",
   "counts": {
     "providers": 76,
-    "categories": 13,
+    "categories": 11,
     "entrypoint_urls": 719,
     "checks_answered": 427
   },
   "categories": [
     {
       "id": "ai-models",
-      "name": "AI Models",
-      "description": "Model and inference APIs (LLMs, embeddings, media generation)."
+      "name": "AI Services",
+      "description": "Services for accessing models and generating or processing content; compare access providers using a shared model or content services using a specific user task.",
+      "name_zh": "AI 服务",
+      "subcategories": [
+        {
+          "id": "model-access",
+          "name": "Model Access",
+          "name_zh": "模型接入",
+          "description": "Access a model through its provider or an inference/router service. Compare only a shared model version and matched request settings; this is not a model-quality leaderboard.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "agent-tooling",
       "name": "Agent Tooling",
-      "description": "Agent infrastructure, MCP tooling, orchestration services."
-    },
-    {
-      "id": "code-execution",
-      "name": "Code Execution",
-      "description": "Code sandboxes, ephemeral compute, browser automation."
+      "description": "Agent infrastructure, MCP tooling, orchestration services.",
+      "name_zh": "Agent 工具"
     },
     {
       "id": "developer-tools",
       "name": "Developer Tools",
-      "description": "Code hosting, CI, testing, API tooling, error tracking."
+      "description": "Code hosting, API development, testing, monitoring and troubleshooting.",
+      "name_zh": "开发工具",
+      "subcategories": [
+        {
+          "id": "monitoring",
+          "name": "Monitoring & Troubleshooting",
+          "name_zh": "监控与故障排查",
+          "description": "Collect and retrieve application errors, logs and performance evidence to diagnose problems.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "cloud-hosting",
-      "name": "Cloud / Hosting",
-      "description": "Clouds, deployment platforms, edge and serverless hosting."
+      "name": "Cloud Computing & Hosting",
+      "description": "Cloud runtime environments and hosting for code, browsers and applications.",
+      "name_zh": "云计算与托管",
+      "subcategories": [
+        {
+          "id": "code-sandboxes",
+          "name": "Code Sandboxes",
+          "name_zh": "代码沙箱",
+          "description": "Run code and process files in an isolated temporary environment.",
+          "capabilities": []
+        },
+        {
+          "id": "browser-environments",
+          "name": "Browser Environments",
+          "name_zh": "浏览器运行环境",
+          "description": "Create a remote browser session and execute browser operations.",
+          "capabilities": []
+        },
+        {
+          "id": "app-hosting",
+          "name": "Application Hosting",
+          "name_zh": "应用部署",
+          "description": "Deploy a website or application and keep it available at a public endpoint.",
+          "capabilities": []
+        }
+      ]
     },
     {
       "id": "databases",
@@ -67,13 +107,15 @@
               "id": "database.restore",
               "description": "Export data and restore it into a separate database or namespace."
             }
-          ]
+          ],
+          "name_zh": "托管关系型数据库"
         }
-      ]
+      ],
+      "name_zh": "数据库"
     },
     {
       "id": "web-search-data",
-      "name": "Web Search / Data",
+      "name": "Search & Data Access",
       "description": "Search APIs, crawling and scraping, data providers.",
       "subcategories": [
         {
@@ -89,9 +131,25 @@
               "id": "web.fetch",
               "description": "Retrieve source content supporting an answer."
             }
-          ]
+          ],
+          "name_zh": "网页搜索"
+        },
+        {
+          "id": "web-extraction",
+          "name": "Web Content Extraction",
+          "name_zh": "网页内容提取",
+          "description": "Retrieve specified web pages or sites as usable text or structured data.",
+          "capabilities": []
+        },
+        {
+          "id": "financial-data",
+          "name": "Financial Data",
+          "name_zh": "金融数据",
+          "description": "Retrieve market prices, company financials or financial disclosures. Select competing providers by the particular dataset and task.",
+          "capabilities": []
         }
-      ]
+      ],
+      "name_zh": "搜索与数据获取"
     },
     {
       "id": "payments-billing",
@@ -115,19 +173,22 @@
               "id": "payments.subscription",
               "description": "Prepare recurring collection for a subscription offering."
             }
-          ]
+          ],
+          "name_zh": "收款"
         }
-      ]
+      ],
+      "name_zh": "支付与计费"
     },
     {
       "id": "communication",
       "name": "Communication",
-      "description": "Email, SMS, chat, notifications."
+      "description": "Email, SMS, chat, notifications.",
+      "name_zh": "通信"
     },
     {
       "id": "productivity-storage",
-      "name": "Productivity / Storage",
-      "description": "Project management, documents, file storage.",
+      "name": "Workplace Collaboration",
+      "description": "Documents, collaborative tables, project management and file sharing; application object storage belongs under cloud services.",
       "subcategories": [
         {
           "id": "collaborative-tables",
@@ -146,19 +207,17 @@
               "id": "records.reconcile",
               "description": "Merge follow-up notes without duplicating existing actions."
             }
-          ]
+          ],
+          "name_zh": "协作表格"
         }
-      ]
-    },
-    {
-      "id": "observability-security",
-      "name": "Observability / Security",
-      "description": "Monitoring, logging, identity, security services."
+      ],
+      "name_zh": "办公协作"
     },
     {
       "id": "commerce-marketing",
-      "name": "Commerce / Marketing",
-      "description": "CMS, e-commerce, CRM, marketing platforms."
+      "name": "E-commerce",
+      "description": "Services for building and operating online stores.",
+      "name_zh": "电商"
     },
     {
       "id": "travel",
@@ -186,15 +245,18 @@
               "id": "flights.ticketing",
               "description": "Issue a ticket, beyond search or a purchase link."
             }
-          ]
+          ],
+          "name_zh": "机票"
         },
         {
           "id": "hotels",
           "name": "Hotels",
           "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
-          "capabilities": []
+          "capabilities": [],
+          "name_zh": "酒店"
         }
-      ]
+      ],
+      "name_zh": "旅行"
     }
   ],
   "fields": {
@@ -866,7 +928,7 @@
     {
       "id": "browserbase",
       "name": "Browserbase",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://www.browserbase.com",
       "summary": "Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.",
       "submitted_by": "community",
@@ -1533,7 +1595,7 @@
     {
       "id": "datadog",
       "name": "Datadog",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://www.datadoghq.com",
       "summary": "Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.",
       "submitted_by": "community",
@@ -2028,7 +2090,7 @@
     {
       "id": "e2b",
       "name": "E2B",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://e2b.dev",
       "summary": "Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.",
       "submitted_by": "community",
@@ -3013,7 +3075,7 @@
     {
       "id": "grafana",
       "name": "Grafana (Grafana Cloud)",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://grafana.com",
       "summary": "Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.",
       "submitted_by": "community",
@@ -4055,7 +4117,7 @@
     {
       "id": "modal",
       "name": "Modal",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://modal.com",
       "summary": "Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.",
       "submitted_by": "community",
@@ -6026,7 +6088,7 @@
     {
       "id": "sentry",
       "name": "Sentry",
-      "category": "observability-security",
+      "category": "developer-tools",
       "homepage": "https://sentry.io",
       "summary": "Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.",
       "submitted_by": "community",
@@ -6433,7 +6495,7 @@
     {
       "id": "steel",
       "name": "Steel",
-      "category": "code-execution",
+      "category": "cloud-hosting",
       "homepage": "https://steel.dev",
       "summary": "Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.",
       "submitted_by": "community",

@@ -81,3 +81,14 @@ checks:
 
 notes:
   - mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.
+
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-extraction
+  sources:
+    existing-docs:
+      url: https://docs.apify.com/platform/integrations/api
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

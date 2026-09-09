@@ -1,6 +1,6 @@
 id: browserbase
 name: Browserbase
-category: code-execution
+category: cloud-hosting
 homepage: https://www.browserbase.com
 summary: Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.
 submitted_by: community
@@ -75,3 +75,14 @@ checks:
 
 notes:
   - Stagehand (the company's agent framework) is a separate open-source project and not assessed here.
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/browser-environments
+  sources:
+    existing-docs:
+      url: https://docs.browserbase.com/introduction
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

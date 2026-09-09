@@ -81,3 +81,14 @@ checks:
 
 notes:
   - "fly.io/llms.txt publishes an explicit AI-agent access policy: automated LLM clients are asked to identify via an AI-Agent request header (telemetry only, not authentication)."
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/app-hosting
+  sources:
+    existing-docs:
+      url: https://fly.io/docs/security/tokens/
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

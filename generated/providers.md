@@ -10,7 +10,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 ## Matrix
 
-### AI Models
+### AI Services
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -48,33 +48,31 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Vapi](#vapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Zapier](#zapier) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 
-### Code Execution
-
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
-| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
-| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
-| [Steel](#steel) | — | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
-
 ### Developer Tools
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Atlassian (Jira & Confluence)](#atlassian) | ✓ | — | — | ✓ | ◐ | ✓ | — | 2026-07-08 |
+| [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | [✓ h·c·m](./agent-runs.md#github) | 2026-07-07 |
 | [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [Grafana (Grafana Cloud)](#grafana) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
+| [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 
-### Cloud / Hosting
+### Cloud Computing & Hosting
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-08 |
+| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
 | [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-08 |
+| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
 | [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Railway](#railway) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Render](#render) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
+| [Steel](#steel) | — | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Vercel](#vercel) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
 ### Databases
@@ -91,7 +89,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Weaviate](#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 
-### Web Search / Data
+### Search & Data Access
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -123,7 +121,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | — | 2026-07-07 |
 | [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
-### Productivity / Storage
+### Workplace Collaboration
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -132,15 +130,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 
-### Observability / Security
-
-| Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
-| [Grafana (Grafana Cloud)](#grafana) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
-| [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
-
-### Commerce / Marketing
+### E-commerce
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -152,7 +142,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
 
-**Category:** Productivity / Storage · `Self-serve`
+**Category:** Workplace Collaboration · `Self-serve`
 
 **Links:** [Documentation](https://airtable.com/developers) · [API Reference](https://airtable.com/developers/web/api/introduction) · [Changelog](https://airtable.com/developers/web/api/changelog) · [Status Page](https://status.airtable.com) · [Pricing](https://airtable.com/pricing) · [Signup](https://airtable.com/signup) · [API Keys](https://airtable.com/create/tokens) · [Webhooks](https://airtable.com/developers/web/api/webhooks-overview) · [Rate Limits](https://airtable.com/developers/web/api/rate-limits)
 
@@ -163,7 +153,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.
 
-**Category:** AI Models · `llms.txt` `CLI` `Agent Docs` `Self-serve`
+**Category:** AI Services · `llms.txt` `CLI` `Agent Docs` `Self-serve`
 
 **Links:** [Documentation](https://docs.anthropic.com) · [API Reference](https://docs.anthropic.com/en/api) · [llms.txt](https://docs.anthropic.com/llms.txt) · [Changelog](https://docs.anthropic.com/en/release-notes/api) · [Status Page](https://status.anthropic.com) · [Pricing](https://www.anthropic.com/pricing) · [Signup](https://console.anthropic.com) · [API Keys](https://docs.anthropic.com/en/api/getting-started) · [CLI](https://docs.anthropic.com/en/docs/claude-code) · [SDKs](https://docs.anthropic.com/en/api/client-sdks) · [Agent Docs](https://docs.anthropic.com/en/docs/agents-and-tools) · [Rate Limits](https://docs.anthropic.com/en/api/rate-limits) · [Errors](https://docs.anthropic.com/en/api/errors)
 
@@ -178,7 +168,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.apify.com) · [API Reference](https://docs.apify.com/api/v2) · [OpenAPI](https://docs.apify.com/api/openapi.json) · [llms.txt](https://docs.apify.com/llms.txt) · [Changelog](https://apify.com/change-log) · [Status Page](https://status.apify.com) · [Pricing](https://apify.com/pricing) · [Signup](https://console.apify.com/sign-up) · [API Keys](https://docs.apify.com/platform/integrations/api) · [CLI](https://docs.apify.com/cli) · [SDKs](https://docs.apify.com/sdk) · [Official MCP](https://docs.apify.com/platform/integrations/mcp) · [Webhooks](https://docs.apify.com/platform/integrations/webhooks)
 
@@ -203,7 +193,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Independent web search index with a developer API, self-serve registration, and a free plan.
 
-**Category:** Web Search / Data · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Official MCP` `Self-serve`
+**Category:** Search & Data Access · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Official MCP` `Self-serve`
 
 **Links:** [Documentation](https://api-dashboard.search.brave.com/app/documentation) · [Pricing](https://brave.com/search/api/) · [Signup](https://api-dashboard.search.brave.com/register) · [Official MCP](https://github.com/brave/brave-search-mcp-server)
 
@@ -217,7 +207,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.
 
-**Category:** Code Execution · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.browserbase.com) · [API Reference](https://docs.browserbase.com/reference) · [llms.txt](https://docs.browserbase.com/llms.txt) · [Status Page](https://status.browserbase.com) · [Pricing](https://www.browserbase.com/pricing) · [Signup](https://www.browserbase.com/sign-up) · [API Keys](https://docs.browserbase.com/introduction) · [SDKs](https://docs.browserbase.com/reference) · [Official MCP](https://github.com/browserbase/mcp-server-browserbase)
 
@@ -231,7 +221,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.
 
-**Category:** AI Models · `Official MCP` `llms.txt` `Self-serve`
+**Category:** AI Services · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.cartesia.ai) · [API Reference](https://docs.cartesia.ai/api-reference) · [llms.txt](https://docs.cartesia.ai/llms.txt) · [Status Page](https://status.cartesia.ai) · [Pricing](https://www.cartesia.ai/pricing) · [Signup](https://play.cartesia.ai) · [API Keys](https://play.cartesia.ai) · [Official MCP](https://github.com/cartesia-ai/cartesia-mcp)
 
@@ -242,7 +232,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://inference-docs.cerebras.ai) · [API Reference](https://inference-docs.cerebras.ai/api-reference/chat-completions) · [llms.txt](https://inference-docs.cerebras.ai/llms.txt) · [Status Page](https://status.cerebras.ai) · [Pricing](https://www.cerebras.ai/pricing) · [Signup](https://cloud.cerebras.ai) · [API Keys](https://cloud.cerebras.ai)
 
@@ -264,7 +254,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.
 
-**Category:** Cloud / Hosting · **Scope:** Developer platform (Workers, R2, D1, AI) and core API. Enterprise network products not assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Self-serve`
+**Category:** Cloud Computing & Hosting · **Scope:** Developer platform (Workers, R2, D1, AI) and core API. Enterprise network products not assessed. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Self-serve`
 
 **Links:** [Documentation](https://developers.cloudflare.com) · [API Reference](https://developers.cloudflare.com/api/) · [OpenAPI](https://github.com/cloudflare/api-schemas) · [llms.txt](https://developers.cloudflare.com/llms.txt) · [Changelog](https://developers.cloudflare.com/changelog/) · [Status Page](https://www.cloudflarestatus.com) · [Pricing](https://www.cloudflare.com/plans/) · [Signup](https://dash.cloudflare.com/sign-up) · [API Keys](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) · [CLI](https://developers.cloudflare.com/workers/wrangler/) · [SDKs](https://developers.cloudflare.com/fundamentals/api/reference/sdks/) · [Official MCP](https://github.com/cloudflare/mcp-server-cloudflare) · [Agent Docs](https://developers.cloudflare.com/agents/)
 
@@ -276,7 +266,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.cohere.com) · [API Reference](https://docs.cohere.com/reference/about) · [llms.txt](https://docs.cohere.com/llms.txt) · [Changelog](https://docs.cohere.com/changelog) · [Status Page](https://status.cohere.com) · [Pricing](https://cohere.com/pricing) · [Signup](https://dashboard.cohere.com/welcome/register) · [Rate Limits](https://docs.cohere.com/docs/rate-limits) · [Errors](https://docs.cohere.com/reference/errors)
 
@@ -301,7 +291,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
 
-**Category:** Observability / Security · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Developer Tools · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.datadoghq.com) · [API Reference](https://docs.datadoghq.com/api/latest/) · [llms.txt](https://docs.datadoghq.com/llms.txt) · [Status Page](https://status.datadoghq.com) · [Pricing](https://www.datadoghq.com/pricing) · [Signup](https://www.datadoghq.com/free-datadog-trial) · [API Keys](https://docs.datadoghq.com/account_management/api-app-keys) · [CLI](https://github.com/DataDog/datadog-ci) · [Official MCP](https://docs.datadoghq.com/bits_ai/mcp_server) · [Webhooks](https://docs.datadoghq.com/integrations/webhooks) · [Rate Limits](https://docs.datadoghq.com/api/latest/rate-limits)
 
@@ -313,7 +303,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.
 
-**Category:** AI Models · `llms.txt` `OpenAPI` `Self-serve`
+**Category:** AI Services · `llms.txt` `OpenAPI` `Self-serve`
 
 **Links:** [Documentation](https://developers.deepgram.com/docs) · [API Reference](https://developers.deepgram.com/reference) · [OpenAPI](https://github.com/deepgram/deepgram-api-specs) · [llms.txt](https://developers.deepgram.com/llms.txt) · [Changelog](https://deepgram.com/changelog) · [Status Page](https://status.deepgram.com) · [Pricing](https://deepgram.com/pricing) · [Signup](https://console.deepgram.com/signup) · [API Keys](https://developers.deepgram.com/docs/create-additional-api-keys) · [SDKs](https://developers.deepgram.com/docs/deepgram-sdks) · [Rate Limits](https://developers.deepgram.com/reference/api-rate-limits)
 
@@ -324,7 +314,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.
 
-**Category:** AI Models · `Self-serve`
+**Category:** AI Services · `Self-serve`
 
 **Links:** [Documentation](https://api-docs.deepseek.com) · [Changelog](https://api-docs.deepseek.com/updates) · [Pricing](https://api-docs.deepseek.com/quick_start/pricing) · [Signup](https://platform.deepseek.com) · [API Keys](https://platform.deepseek.com/api_keys)
 
@@ -350,7 +340,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
-**Category:** Productivity / Storage · `llms.txt` `CLI` `Self-serve`
+**Category:** Workplace Collaboration · `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [llms.txt](https://www.dropbox.com/llms.txt) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [CLI](https://github.com/dropbox/dbxcli) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
 
@@ -361,7 +351,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.
 
-**Category:** Code Execution · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://e2b.dev/docs) · [llms.txt](https://e2b.dev/llms.txt) · [Status Page](https://status.e2b.dev) · [Pricing](https://e2b.dev/pricing) · [Signup](https://e2b.dev) · [API Keys](https://e2b.dev/docs/api-key) · [CLI](https://e2b.dev/docs/cli) · [SDKs](https://e2b.dev/docs/sdk-reference) · [Official MCP](https://github.com/e2b-dev/mcp-server)
 
@@ -373,7 +363,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.
 
-**Category:** AI Models · `Official MCP` `llms.txt` `OpenAPI` `Self-serve`
+**Category:** AI Services · `Official MCP` `llms.txt` `OpenAPI` `Self-serve`
 
 **Links:** [Documentation](https://elevenlabs.io/docs) · [API Reference](https://elevenlabs.io/docs/api-reference/introduction) · [OpenAPI](https://api.elevenlabs.io/openapi.json) · [llms.txt](https://elevenlabs.io/docs/llms.txt) · [Changelog](https://elevenlabs.io/docs/changelog) · [Status Page](https://status.elevenlabs.io) · [Pricing](https://elevenlabs.io/pricing) · [Signup](https://elevenlabs.io/app/sign-up) · [API Keys](https://elevenlabs.io/app/settings/api-keys) · [Official MCP](https://github.com/elevenlabs/elevenlabs-mcp)
 
@@ -384,7 +374,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.exa.ai) · [API Reference](https://docs.exa.ai/reference/getting-started) · [llms.txt](https://docs.exa.ai/llms.txt) · [Changelog](https://docs.exa.ai/changelog) · [Pricing](https://exa.ai/pricing) · [Signup](https://dashboard.exa.ai) · [API Keys](https://docs.exa.ai/reference/getting-started) · [SDKs](https://docs.exa.ai/sdks/typescript-sdk-specification) · [Official MCP](https://github.com/exa-labs/exa-mcp-server) · [Rate Limits](https://docs.exa.ai/reference/rate-limits)
 
@@ -396,7 +386,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.
 
-**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+**Category:** AI Services · `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://fal.ai/docs) · [API Reference](https://fal.ai/docs/model-apis) · [llms.txt](https://fal.ai/llms.txt) · [Status Page](https://status.fal.ai) · [Pricing](https://fal.ai/pricing) · [Signup](https://fal.ai) · [API Keys](https://fal.ai/dashboard/keys) · [CLI](https://github.com/fal-ai/fal)
 
@@ -407,7 +397,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.firecrawl.dev) · [API Reference](https://docs.firecrawl.dev/api-reference/introduction) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [Pricing](https://www.firecrawl.dev/pricing) · [Signup](https://www.firecrawl.dev/signin/signup) · [API Keys](https://docs.firecrawl.dev/introduction) · [SDKs](https://docs.firecrawl.dev/sdks/overview) · [Official MCP](https://docs.firecrawl.dev/mcp-server) · [Rate Limits](https://docs.firecrawl.dev/rate-limits)
 
@@ -419,7 +409,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.
 
-**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+**Category:** AI Services · `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.fireworks.ai) · [API Reference](https://docs.fireworks.ai/api-reference/introduction) · [llms.txt](https://docs.fireworks.ai/llms.txt) · [Status Page](https://status.fireworks.ai) · [Pricing](https://fireworks.ai/pricing) · [Signup](https://app.fireworks.ai) · [API Keys](https://app.fireworks.ai) · [CLI](https://docs.fireworks.ai/tools-sdks/firectl/firectl)
 
@@ -430,7 +420,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://fly.io/docs) · [API Reference](https://fly.io/docs/machines/api/) · [OpenAPI](https://docs.machines.dev) · [llms.txt](https://fly.io/llms.txt) · [Status Page](https://status.flyio.net) · [Pricing](https://fly.io/docs/about/pricing/) · [Signup](https://fly.io/app/sign-up) · [API Keys](https://fly.io/docs/security/tokens/) · [CLI](https://fly.io/docs/flyctl/) · [Official MCP](https://fly.io/docs/mcp/)
 
@@ -444,7 +434,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
 
-**Category:** AI Models · **Scope:** Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed. · `CLI` `Agent Docs` `Self-serve`
+**Category:** AI Services · **Scope:** Gemini API via Google AI Studio (ai.google.dev); Vertex AI is not assessed. · `CLI` `Agent Docs` `Self-serve`
 
 **Links:** [Documentation](https://ai.google.dev/gemini-api/docs) · [API Reference](https://ai.google.dev/api) · [Changelog](https://ai.google.dev/gemini-api/docs/changelog) · [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Signup](https://aistudio.google.com) · [API Keys](https://ai.google.dev/gemini-api/docs/api-key) · [CLI](https://github.com/google-gemini/gemini-cli) · [SDKs](https://ai.google.dev/gemini-api/docs/libraries) · [Agent Docs](https://ai.google.dev/gemini-api/docs/function-calling) · [Rate Limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Errors](https://ai.google.dev/gemini-api/docs/troubleshooting)
 
@@ -487,7 +477,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.
 
-**Category:** Observability / Security · **Scope:** Grafana Cloud + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
+**Category:** Developer Tools · **Scope:** Grafana Cloud + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://grafana.com/docs) · [API Reference](https://grafana.com/docs/grafana/latest/developers/http_api/) · [llms.txt](https://grafana.com/llms.txt) · [Status Page](https://status.grafana.com) · [Pricing](https://grafana.com/pricing) · [Signup](https://grafana.com/auth/sign-up/create-user) · [API Keys](https://grafana.com/docs/grafana/latest/administration/service-accounts/) · [Official MCP](https://github.com/grafana/mcp-grafana)
 
@@ -498,7 +488,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://console.groq.com/docs) · [API Reference](https://console.groq.com/docs/api-reference) · [llms.txt](https://console.groq.com/llms.txt) · [Changelog](https://console.groq.com/docs/changelog) · [Status Page](https://groqstatus.com) · [Pricing](https://groq.com/pricing) · [Signup](https://console.groq.com) · [API Keys](https://console.groq.com/docs/quickstart) · [SDKs](https://console.groq.com/docs/libraries) · [Rate Limits](https://console.groq.com/docs/rate-limits) · [Errors](https://console.groq.com/docs/errors)
 
@@ -509,7 +499,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.
 
-**Category:** AI Models · **Scope:** Hub + Hub API + Inference Providers; self-hosted libraries are not assessed. · `Official MCP` `CLI` `Self-serve`
+**Category:** AI Services · **Scope:** Hub + Hub API + Inference Providers; self-hosted libraries are not assessed. · `Official MCP` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://huggingface.co/docs) · [API Reference](https://huggingface.co/docs/hub/api) · [Status Page](https://status.huggingface.co) · [Pricing](https://huggingface.co/pricing) · [Signup](https://huggingface.co/join) · [API Keys](https://huggingface.co/docs/hub/security-tokens) · [CLI](https://huggingface.co/docs/huggingface_hub/guides/cli) · [SDKs](https://huggingface.co/docs/huggingface_hub) · [Official MCP](https://huggingface.co/mcp) · [MCP Setup Documentation](https://huggingface.co/docs/hub/agents-mcp) · [Rate Limits](https://huggingface.co/docs/hub/rate-limits)
 
@@ -522,7 +512,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.jina.ai) · [API Reference](https://docs.jina.ai) · [llms.txt](https://docs.jina.ai/llms.txt) · [Status Page](https://status.jina.ai) · [Signup](https://jina.ai/api-dashboard) · [API Keys](https://jina.ai/api-dashboard) · [Official MCP](https://github.com/jina-ai/MCP)
 
@@ -557,7 +547,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.
 
-**Category:** Productivity / Storage · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Workplace Collaboration · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://linear.app/developers) · [GraphQL](https://linear.app/developers/graphql) · [llms.txt](https://linear.app/llms.txt) · [Changelog](https://linear.app/changelog) · [Status Page](https://linearstatus.com) · [Pricing](https://linear.app/pricing) · [Signup](https://linear.app/signup) · [API Keys](https://linear.app/developers/graphql) · [Official MCP](https://linear.app/docs/mcp) · [Webhooks](https://linear.app/developers/webhooks) · [Rate Limits](https://linear.app/developers/rate-limiting)
 
@@ -568,7 +558,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.lumalabs.ai) · [API Reference](https://docs.lumalabs.ai/reference) · [llms.txt](https://docs.lumalabs.ai/llms.txt) · [Pricing](https://lumalabs.ai/api/pricing) · [Signup](https://lumalabs.ai/api) · [API Keys](https://lumalabs.ai/api)
 
@@ -590,7 +580,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > MiniMax text, speech, video and music models via the international platform API, with an official MCP server.
 
-**Category:** AI Models · **Scope:** International platform (platform.minimax.io) · `Official MCP` `Self-serve`
+**Category:** AI Services · **Scope:** International platform (platform.minimax.io) · `Official MCP` `Self-serve`
 
 **Links:** [Documentation](https://platform.minimax.io/docs) · [API Reference](https://platform.minimax.io/docs/api-reference) · [Signup](https://platform.minimax.io) · [API Keys](https://platform.minimax.io/user-center/basic-information/interface-key) · [Official MCP](https://github.com/MiniMax-AI/MiniMax-MCP)
 
@@ -601,7 +591,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.
 
-**Category:** AI Models · `llms.txt` `OpenAPI` `Self-serve`
+**Category:** AI Services · `llms.txt` `OpenAPI` `Self-serve`
 
 **Links:** [Documentation](https://docs.mistral.ai) · [API Reference](https://docs.mistral.ai/api) · [OpenAPI](https://github.com/mistralai/platform-docs-public) · [llms.txt](https://docs.mistral.ai/llms.txt) · [Changelog](https://docs.mistral.ai/getting-started/changelog) · [Status Page](https://status.mistral.ai) · [Pricing](https://mistral.ai/pricing) · [Signup](https://mistral.ai) · [API Keys](https://docs.mistral.ai/getting-started/quickstart) · [SDKs](https://docs.mistral.ai/getting-started/clients)
 
@@ -612,7 +602,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
 
-**Category:** Code Execution · `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · `llms.txt` `CLI` `Agent Docs` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://modal.com/docs) · [API Reference](https://modal.com/docs/reference) · [llms.txt](https://modal.com/llms.txt) · [Changelog](https://modal.com/docs/reference/changelog) · [Status Page](https://status.modal.com) · [Pricing](https://modal.com/pricing) · [Signup](https://modal.com/signup) · [API Keys](https://modal.com/docs/reference/cli) · [CLI](https://modal.com/docs/reference/cli) · [Agent Docs](https://modal.com/docs/guide/sandbox)
 
@@ -634,7 +624,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).
 
-**Category:** AI Models · **Scope:** International platform (platform.kimi.ai) · `CLI` `Self-serve`
+**Category:** AI Services · **Scope:** International platform (platform.kimi.ai) · `CLI` `Self-serve`
 
 **Links:** [Documentation](https://platform.kimi.ai/docs) · [API Reference](https://platform.kimi.ai/docs/api/chat) · [Signup](https://platform.kimi.ai) · [API Keys](https://platform.kimi.ai/console/api-keys) · [CLI](https://github.com/MoonshotAI/kimi-cli)
 
@@ -669,7 +659,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.netlify.com) · [API Reference](https://open-api.netlify.com) · [OpenAPI](https://github.com/netlify/open-api) · [llms.txt](https://docs.netlify.com/llms.txt) · [Changelog](https://www.netlify.com/changelog/) · [Status Page](https://www.netlifystatus.com) · [Pricing](https://www.netlify.com/pricing/) · [Signup](https://app.netlify.com/signup) · [API Keys](https://docs.netlify.com/api/get-started/) · [CLI](https://docs.netlify.com/cli/get-started/) · [Official MCP](https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/)
 
@@ -681,7 +671,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.
 
-**Category:** Productivity / Storage · **Scope:** Notion API integrations; the editor product itself is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Workplace Collaboration · **Scope:** Notion API integrations; the editor product itself is not assessed. · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://developers.notion.com) · [API Reference](https://developers.notion.com/reference/intro) · [llms.txt](https://developers.notion.com/llms.txt) · [Status Page](https://status.notion.so) · [Pricing](https://www.notion.com/pricing) · [Signup](https://www.notion.com/signup) · [API Keys](https://developers.notion.com/docs/authorization) · [Official MCP](https://developers.notion.com/docs/mcp) · [Rate Limits](https://developers.notion.com/reference/request-limits) · [Errors](https://developers.notion.com/reference/status-codes)
 
@@ -693,7 +683,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
 
-**Category:** AI Models · `OpenAPI` `Agent Docs` `Self-serve`
+**Category:** AI Services · `OpenAPI` `Agent Docs` `Self-serve`
 
 **Links:** [Documentation](https://developers.openai.com/api/docs) · [API Reference](https://platform.openai.com/docs/api-reference) · [OpenAPI](https://github.com/openai/openai-openapi) · [Changelog](https://platform.openai.com/docs/changelog) · [Status Page](https://status.openai.com) · [Pricing](https://platform.openai.com/docs/pricing) · [Signup](https://platform.openai.com/signup) · [API Keys](https://platform.openai.com/docs/quickstart) · [SDKs](https://platform.openai.com/docs/libraries) · [Agent Docs](https://platform.openai.com/docs/guides/agents) · [Rate Limits](https://platform.openai.com/docs/guides/rate-limits) · [Errors](https://platform.openai.com/docs/guides/error-codes)
 
@@ -705,7 +695,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://openrouter.ai/docs) · [API Reference](https://openrouter.ai/docs/api-reference/overview) · [llms.txt](https://openrouter.ai/docs/llms.txt) · [Status Page](https://status.openrouter.ai) · [Pricing](https://openrouter.ai/models) · [Signup](https://openrouter.ai) · [API Keys](https://openrouter.ai/settings/keys)
 
@@ -730,7 +720,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
 
-**Category:** Web Search / Data · **Scope:** Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · **Scope:** Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed. · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.perplexity.ai) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [Changelog](https://docs.perplexity.ai/changelog) · [Status Page](https://status.perplexity.com) · [Pricing](https://docs.perplexity.ai/getting-started/pricing) · [API Keys](https://docs.perplexity.ai/getting-started/quickstart) · [Official MCP](https://github.com/ppl-ai/modelcontextprotocol) · [Rate Limits](https://docs.perplexity.ai/guides/rate-limits)
 
@@ -775,7 +765,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).
 
-**Category:** AI Models · **Scope:** International (Alibaba Cloud Model Studio / DashScope Intl) · `CLI` `Self-serve`
+**Category:** AI Services · **Scope:** International (Alibaba Cloud Model Studio / DashScope Intl) · `CLI` `Self-serve`
 
 **Links:** [Documentation](https://www.alibabacloud.com/help/en/model-studio/) · [API Reference](https://www.alibabacloud.com/help/en/model-studio/models) · [Signup](https://modelstudio.console.alibabacloud.com) · [API Keys](https://www.alibabacloud.com/help/en/model-studio/get-api-key) · [CLI](https://github.com/QwenLM/qwen-code)
 
@@ -786,7 +776,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.
 
-**Category:** Cloud / Hosting · `llms.txt` `CLI` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.railway.com) · [API Reference](https://docs.railway.com/reference/public-api) · [GraphQL](https://docs.railway.com/reference/public-api) · [llms.txt](https://docs.railway.com/llms.txt) · [Status Page](https://status.railway.com) · [Pricing](https://railway.com/pricing) · [Signup](https://railway.com/new) · [API Keys](https://docs.railway.com/reference/public-api) · [CLI](https://github.com/railwayapp/cli)
 
@@ -809,7 +799,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://render.com/docs) · [API Reference](https://api-docs.render.com/reference/introduction) · [llms.txt](https://render.com/docs/llms.txt) · [Status Page](https://status.render.com) · [Pricing](https://render.com/pricing) · [Signup](https://dashboard.render.com/register) · [API Keys](https://render.com/docs/api) · [CLI](https://github.com/render-oss/cli) · [Official MCP](https://github.com/render-oss/render-mcp-server)
 
@@ -822,7 +812,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
 
-**Category:** AI Models · `llms.txt` `CLI` `Self-serve`
+**Category:** AI Services · `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://replicate.com/docs) · [API Reference](https://replicate.com/docs/reference/http) · [llms.txt](https://replicate.com/llms.txt) · [Changelog](https://replicate.com/changelog) · [Status Page](https://replicatestatus.com) · [Pricing](https://replicate.com/pricing) · [Signup](https://replicate.com/signin) · [API Keys](https://replicate.com/docs/reference/http) · [CLI](https://github.com/replicate/cli) · [SDKs](https://replicate.com/docs/reference/client-libraries) · [Webhooks](https://replicate.com/docs/topics/webhooks)
 
@@ -844,7 +834,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
 
-**Category:** Observability / Security · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Developer Tools · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.sentry.io) · [API Reference](https://docs.sentry.io/api/) · [OpenAPI](https://github.com/getsentry/sentry-api-schema) · [llms.txt](https://docs.sentry.io/llms.txt) · [Changelog](https://sentry.io/changelog/) · [Status Page](https://status.sentry.io) · [Pricing](https://sentry.io/pricing/) · [Signup](https://sentry.io/signup/) · [API Keys](https://docs.sentry.io/api/auth/) · [CLI](https://docs.sentry.io/cli/) · [SDKs](https://docs.sentry.io/platforms/) · [Official MCP](https://docs.sentry.io/product/sentry-mcp/) · [Rate Limits](https://docs.sentry.io/api/ratelimits/)
 
@@ -855,7 +845,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://serpapi.com/search-api) · [API Reference](https://serpapi.com/search-api) · [llms.txt](https://serpapi.com/llms.txt) · [Status Page](https://serpapi.com/status) · [Pricing](https://serpapi.com/pricing) · [Signup](https://serpapi.com/users/sign_up) · [API Keys](https://serpapi.com/manage-api-key) · [Official MCP](https://github.com/serpapi/serpapi-mcp)
 
@@ -866,7 +856,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.
 
-**Category:** Commerce / Marketing · **Scope:** The Shopify developer platform (Admin/Storefront APIs, apps); the merchant product itself is not assessed. · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+**Category:** E-commerce · **Scope:** The Shopify developer platform (Admin/Storefront APIs, apps); the merchant product itself is not assessed. · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://shopify.dev/docs) · [API Reference](https://shopify.dev/docs/api) · [GraphQL](https://shopify.dev/docs/api/admin-graphql) · [llms.txt](https://www.shopify.com/llms.txt) · [Changelog](https://shopify.dev/changelog) · [Status Page](https://www.shopifystatus.com) · [Pricing](https://www.shopify.com/pricing) · [Signup](https://www.shopify.com/free-trial) · [API Keys](https://shopify.dev/docs/apps/build/authentication-authorization) · [CLI](https://shopify.dev/docs/api/shopify-cli) · [Official MCP](https://shopify.dev/docs/apps/build/storefront-mcp) · [Webhooks](https://shopify.dev/docs/apps/build/webhooks) · [Rate Limits](https://shopify.dev/docs/api/usage/rate-limits)
 
@@ -888,7 +878,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.
 
-**Category:** Code Execution · **Scope:** Steel Cloud + open-source · `llms.txt` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · **Scope:** Steel Cloud + open-source · `llms.txt` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.steel.dev) · [API Reference](https://docs.steel.dev/api-reference) · [llms.txt](https://docs.steel.dev/llms.txt) · [Pricing](https://steel.dev/pricing) · [Signup](https://app.steel.dev) · [API Keys](https://app.steel.dev)
 
@@ -925,7 +915,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
 
-**Category:** Web Search / Data · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.tavily.com) · [API Reference](https://docs.tavily.com/documentation/api-reference/introduction) · [llms.txt](https://docs.tavily.com/llms.txt) · [Status Page](https://status.tavily.com) · [Pricing](https://www.tavily.com/pricing) · [Signup](https://app.tavily.com) · [API Keys](https://docs.tavily.com/documentation/quickstart) · [SDKs](https://docs.tavily.com/sdk) · [Official MCP](https://docs.tavily.com/documentation/mcp) · [Rate Limits](https://docs.tavily.com/documentation/rate-limits)
 
@@ -952,7 +942,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.
 
-**Category:** AI Models · `llms.txt` `Self-serve`
+**Category:** AI Services · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.together.ai) · [API Reference](https://docs.together.ai/reference/chat-completions) · [llms.txt](https://docs.together.ai/llms.txt) · [Status Page](https://status.together.ai) · [Pricing](https://www.together.ai/pricing) · [Signup](https://api.together.ai) · [API Keys](https://docs.together.ai/docs/quickstart) · [Rate Limits](https://docs.together.ai/docs/rate-limits) · [Errors](https://docs.together.ai/docs/error-codes)
 
@@ -997,7 +987,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
 
-**Category:** Cloud / Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Sandbox` `Self-serve`
+**Category:** Cloud Computing & Hosting · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Agent Docs` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://vercel.com/docs) · [API Reference](https://vercel.com/docs/rest-api) · [OpenAPI](https://openapi.vercel.sh) · [llms.txt](https://vercel.com/llms.txt) · [Changelog](https://vercel.com/changelog) · [Status Page](https://www.vercel-status.com) · [Pricing](https://vercel.com/pricing) · [Signup](https://vercel.com/signup) · [API Keys](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token) · [CLI](https://vercel.com/docs/cli) · [SDKs](https://vercel.com/docs/rest-api/sdk) · [Official MCP](https://vercel.com/docs/mcp/vercel-mcp) · [Agent Docs](https://vercel.com/docs/agents) · [Webhooks](https://vercel.com/docs/webhooks) · [Rate Limits](https://vercel.com/docs/limits) · [Errors](https://vercel.com/docs/errors)
 
@@ -1021,7 +1011,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.
 
-**Category:** AI Models · `llms.txt`
+**Category:** AI Services · `llms.txt`
 
 **Links:** [Documentation](https://docs.x.ai) · [API Reference](https://docs.x.ai/developers/rest-api-reference/inference) · [llms.txt](https://docs.x.ai/llms.txt) · [Signup](https://console.x.ai) · [API Keys](https://console.x.ai)
 
@@ -1032,7 +1022,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.
 
-**Category:** AI Models · **Scope:** International platform (z.ai); the China platform is open.bigmodel.cn · `llms.txt` `Self-serve`
+**Category:** AI Services · **Scope:** International platform (z.ai); the China platform is open.bigmodel.cn · `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.z.ai) · [API Reference](https://docs.z.ai/api-reference) · [llms.txt](https://docs.z.ai/llms.txt) · [Pricing](https://docs.z.ai/guides/overview/pricing) · [Signup](https://z.ai) · [API Keys](https://z.ai/manage-apikey/apikey-list)
 

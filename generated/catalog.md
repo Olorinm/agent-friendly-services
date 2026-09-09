@@ -6,6 +6,62 @@ Access, requirements and published costs below are **public-source claims**. Sou
 Each row is an access route, not an independent data supplier. Services without an established route remain discoverable. No cost/quality ranking is implied.
 
 
+<a id="ai-models-model-access"></a>
+
+## ai-models/model-access
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Anthropic](../data/providers/anthropic.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Cerebras Inference](../data/providers/cerebras.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Cohere](../data/providers/cohere.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [DeepSeek](../data/providers/deepseek.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Fireworks AI](../data/providers/fireworks.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Gemini API](../data/providers/gemini-api.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Groq](../data/providers/groq.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Hugging Face](../data/providers/hugging-face.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [MiniMax](../data/providers/minimax.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Mistral AI](../data/providers/mistral.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Moonshot AI (Kimi)](../data/providers/moonshot.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [OpenAI](../data/providers/openai.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [OpenRouter](../data/providers/openrouter.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Alibaba Qwen (Model Studio)](../data/providers/qwen.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Replicate](../data/providers/replicate.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Together AI](../data/providers/together-ai.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [xAI (Grok API)](../data/providers/xai.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Z.ai (GLM)](../data/providers/zai.yaml) | ai-models/model-access | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+
+<a id="cloud-hosting-app-hosting"></a>
+
+## cloud-hosting/app-hosting
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Cloudflare](../data/providers/cloudflare.yaml) | cloud-hosting/app-hosting, databases/hosted-relational | [d1-cli (cli)](https://developers.cloudflare.com/d1/get-started/) | unknown | self_serve | documented | Requirements incomplete; 5 GB / account (free_allowance; D1 total storage on Workers Free; separate daily row quotas.); D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. | not recorded |
+| [Fly.io](../data/providers/fly-io.yaml) | cloud-hosting/app-hosting | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Netlify](../data/providers/netlify.yaml) | cloud-hosting/app-hosting | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Railway](../data/providers/railway.yaml) | cloud-hosting/app-hosting | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Render](../data/providers/render.yaml) | cloud-hosting/app-hosting | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Vercel](../data/providers/vercel.yaml) | cloud-hosting/app-hosting | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+
+<a id="cloud-hosting-browser-environments"></a>
+
+## cloud-hosting/browser-environments
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Browserbase](../data/providers/browserbase.yaml) | cloud-hosting/browser-environments | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Steel](../data/providers/steel.yaml) | cloud-hosting/browser-environments | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+
+<a id="cloud-hosting-code-sandboxes"></a>
+
+## cloud-hosting/code-sandboxes
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [E2B](../data/providers/e2b.yaml) | cloud-hosting/code-sandboxes | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Modal](../data/providers/modal.yaml) | cloud-hosting/code-sandboxes | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+
 <a id="databases-hosted-relational"></a>
 
 ## databases/hosted-relational
@@ -13,12 +69,22 @@ Each row is an access route, not an independent data supplier. Services without 
 | Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Aiven](../data/candidates/aiven.yaml) | databases/hosted-relational | [postgres-cli (cli)](https://aiven.io/docs/tools/cli) | unknown | self_serve | documented | Requirements incomplete; Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. | not recorded |
-| [Cloudflare](../data/providers/cloudflare.yaml) | databases/hosted-relational | [d1-cli (cli)](https://developers.cloudflare.com/d1/get-started/) | unknown | self_serve | documented | Requirements incomplete; 5 GB / account (free_allowance; D1 total storage on Workers Free; separate daily row quotas.); D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. | not recorded |
+| [Cloudflare](../data/providers/cloudflare.yaml) | cloud-hosting/app-hosting, databases/hosted-relational | [d1-cli (cli)](https://developers.cloudflare.com/d1/get-started/) | unknown | self_serve | documented | Requirements incomplete; 5 GB / account (free_allowance; D1 total storage on Workers Free; separate daily row quotas.); D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. | not recorded |
 | [Neon](../data/providers/neon.yaml) | databases/hosted-relational | [ephemeral-api (api)](https://neon.new/) | unknown | unknown | documented | Requirements incomplete; No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials. | [database-todos-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) |
 | [PlanetScale](../data/candidates/planetscale.yaml) | databases/hosted-relational | [database-cli (cli)](https://planetscale.com/docs/cli) | unknown | self_serve | documented | Requirements incomplete; 5 USD / month (minimum_spend; Postgres single-node starting plan; configuration, region and other resources may cost more.); PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task. | not recorded |
 | [Supabase](../data/providers/supabase.yaml) | databases/hosted-relational | [data-api (api)](https://supabase.com/docs/guides/api) | unknown | self_serve | documented | Requirements incomplete; 500 MB / project (free_allowance; Free plan database size; up to two active projects, pauses after one inactive week.); Existing project required; Free plan: two active projects, 500 MB database per project; pauses after one week inactivity. Management provisioning is separate from the data REST API. | not recorded |
 | [Turso](../data/candidates/turso.yaml) | databases/hosted-relational | [cloud-cli (cli)](https://docs.turso.tech/cli/introduction) | unknown | self_serve | documented | Requirements incomplete; 5 GB / account (free_allowance; Free cloud storage; account quota also limits reads, writes and number of databases.); Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. | not recorded |
 | [Turso](../data/candidates/turso.yaml) | databases/hosted-relational | [platform-api (api)](https://docs.turso.tech/api-reference/introduction) | unknown | self_serve | unknown | Requirements incomplete; Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. | [database-todos-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) |
+
+<a id="developer-tools-monitoring"></a>
+
+## developer-tools/monitoring
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Datadog](../data/providers/datadog.yaml) | developer-tools/monitoring | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Grafana (Grafana Cloud)](../data/providers/grafana.yaml) | developer-tools/monitoring | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Sentry](../data/providers/sentry.yaml) | developer-tools/monitoring | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
 
 <a id="payments-billing-accept-payments"></a>
 
@@ -128,6 +194,20 @@ Each row is an access route, not an independent data supplier. Services without 
 | [Travelport TripServices](../data/candidates/travelport-tripservices.yaml) | travel/flights | [tripservices-api (api)](https://developer.travelport.com/docs/getting-started) | unknown | application | unknown | Requires: approval; Human: Request trial access; contact sales for customer onboarding; Production/pre-production credentials and PCC/point-of-sale context are provisioned. Personal access and trial data realism remain unknown. | not recorded |
 | [Trip.com Flight Distribution](../data/candidates/trip-com-flights.yaml) | travel/flights | [supplier-fare-maintenance (api)](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) | unknown | unknown | unknown | Requirements incomplete; Supplier fare and rule maintenance with existing distribution permissions/support. Not evidence of consumer itinerary search; no flights.search capability is assigned. | not recorded |
 
+<a id="web-search-data-web-extraction"></a>
+
+## web-search-data/web-extraction
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [Apify](../data/providers/apify.yaml) | web-search-data/web-extraction | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Exa](../data/providers/exa.yaml) | web-search-data/web-extraction, web-search-data/web-search | [public-mcp (mcp)](https://mcp.exa.ai/mcp) | unknown | self_serve | documented | Requirements incomplete; Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) |
+| [Exa](../data/providers/exa.yaml) | web-search-data/web-extraction, web-search-data/web-search | [search-api (api)](https://exa.ai/docs/reference/search) | unknown | self_serve | documented | Requirements incomplete; 20 USD / one_time (free_allowance; Published signup credits; some may require onboarding. Actual account award should be checked.); 10 USD / month (free_allowance; Free account monthly allowance, not anonymous MCP quota.); Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. | [web-search-001: not_completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) |
+| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-extraction, web-search-data/web-search | [public-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) |
+| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-extraction, web-search-data/web-search | [account-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Account Free plan; separate from anonymous access.); Search: 2 credits per 10 results; extra scraping can consume credits. | not recorded |
+| [Jina AI](../data/providers/jina.yaml) | web-search-data/web-extraction | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |
+| [Tavily](../data/providers/tavily.yaml) | web-search-data/web-extraction, web-search-data/web-search | [search-api (api)](https://docs.tavily.com/documentation/quickstart) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Free account allowance, not requests.); Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. | not recorded |
+
 <a id="web-search-data-web-search"></a>
 
 ## web-search-data/web-search
@@ -135,12 +215,12 @@ Each row is an access route, not an independent data supplier. Services without 
 | Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Brave Search API](../data/providers/brave-search.yaml) | web-search-data/web-search | [search-api (api)](https://brave.com/search/api/) | unknown | self_serve | documented | Requires: payment_method; Free-plan card verification is required. No card supplied in this pilot; onboarding restriction does not establish poor search quality. | not recorded |
-| [Exa](../data/providers/exa.yaml) | web-search-data/web-search | [public-mcp (mcp)](https://mcp.exa.ai/mcp) | unknown | self_serve | documented | Requirements incomplete; Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) |
-| [Exa](../data/providers/exa.yaml) | web-search-data/web-search | [search-api (api)](https://exa.ai/docs/reference/search) | unknown | self_serve | documented | Requirements incomplete; 20 USD / one_time (free_allowance; Published signup credits; some may require onboarding. Actual account award should be checked.); 10 USD / month (free_allowance; Free account monthly allowance, not anonymous MCP quota.); Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. | [web-search-001: not_completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) |
-| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-search | [public-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) |
-| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-search | [account-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Account Free plan; separate from anonymous access.); Search: 2 credits per 10 results; extra scraping can consume credits. | not recorded |
+| [Exa](../data/providers/exa.yaml) | web-search-data/web-extraction, web-search-data/web-search | [public-mcp (mcp)](https://mcp.exa.ai/mcp) | unknown | self_serve | documented | Requirements incomplete; Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) |
+| [Exa](../data/providers/exa.yaml) | web-search-data/web-extraction, web-search-data/web-search | [search-api (api)](https://exa.ai/docs/reference/search) | unknown | self_serve | documented | Requirements incomplete; 20 USD / one_time (free_allowance; Published signup credits; some may require onboarding. Actual account award should be checked.); 10 USD / month (free_allowance; Free account monthly allowance, not anonymous MCP quota.); Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. | [web-search-001: not_completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) |
+| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-extraction, web-search-data/web-search | [public-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. | [web-search-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) |
+| [Firecrawl](../data/providers/firecrawl.yaml) | web-search-data/web-extraction, web-search-data/web-search | [account-search-api (api)](https://docs.firecrawl.dev/features/search) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Account Free plan; separate from anonymous access.); Search: 2 credits per 10 results; extra scraping can consume credits. | not recorded |
 | [SerpApi](../data/providers/serpapi.yaml) | travel/flights, web-search-data/web-search | [google-flights-api (api)](https://serpapi.com/google-flights-api) | unknown | self_serve | unknown | Requirements incomplete; 250 searches / month (free_allowance; Platform search allowance; flight-endpoint entitlement and shared usage untested.); A third-party Google Flights data service. Not a Google-operated API. | not recorded |
 | [SerpApi](../data/providers/serpapi.yaml) | travel/flights, web-search-data/web-search | [official-mcp (mcp)](https://github.com/serpapi/serpapi-mcp) | unknown | unknown | unknown | Requirements incomplete; Official to SerpApi. Flight tool coverage and access gates are unconfirmed; do not inherit API-route results. | not recorded |
 | [SerpApi](../data/providers/serpapi.yaml) | travel/flights, web-search-data/web-search | [web-search-api (api)](https://serpapi.com/search-api) | unknown | self_serve | unknown | Requirements incomplete; Separate from Google Flights API. Existing flight evaluations do not establish web search performance. | not recorded |
 | [Serper](../data/candidates/serper.yaml) | web-search-data/web-search | [search-api (api)](https://serper.dev/) | unknown | self_serve | documented | Requirements incomplete; 2500 queries / one_time (free_allowance; Advertised initial free queries, no monthly renewal claimed.); Google results API with signup trial queries; actual account flow and authentication remain untested. | not recorded |
-| [Tavily](../data/providers/tavily.yaml) | web-search-data/web-search | [search-api (api)](https://docs.tavily.com/documentation/quickstart) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Free account allowance, not requests.); Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. | not recorded |
+| [Tavily](../data/providers/tavily.yaml) | web-search-data/web-extraction, web-search-data/web-search | [search-api (api)](https://docs.tavily.com/documentation/quickstart) | unknown | self_serve | documented | Requirements incomplete; 1000 credits / month (free_allowance; Free account allowance, not requests.); Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. | not recorded |

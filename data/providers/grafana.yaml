@@ -1,6 +1,6 @@
 id: grafana
 name: Grafana (Grafana Cloud)
-category: observability-security
+category: developer-tools
 homepage: https://grafana.com
 summary: Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.
 submitted_by: community
@@ -77,3 +77,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/monitoring
+  sources:
+    existing-docs:
+      url: https://grafana.com/docs/grafana/latest/administration/service-accounts/
+      checked_on: '2026-07-08'
+      kind: official_docs
+  routes: []

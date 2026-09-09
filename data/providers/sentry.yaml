@@ -1,6 +1,6 @@
 id: sentry
 name: Sentry
-category: observability-security
+category: developer-tools
 homepage: https://sentry.io
 summary: Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
 submitted_by: community
@@ -79,3 +79,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/monitoring
+  sources:
+    existing-docs:
+      url: https://docs.sentry.io/api/auth/
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

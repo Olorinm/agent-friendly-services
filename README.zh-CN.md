@@ -16,7 +16,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 每个服务展示最近取得有效结果的测试方式，其他方式和接入准备见服务详情。当前不排名，仅在任务与条件一致时比较。
 
-[旅行](#services-travel) · [数据库](#services-databases) · [网页搜索与数据](#services-web-search-data) · [协作办公与存储](#services-productivity-storage) · [AI 模型](#services-ai-models) · [Agent 工具](#services-agent-tooling) · [代码执行](#services-code-execution) · [开发工具](#services-developer-tools) · [云服务与部署](#services-cloud-hosting) · [支付与账单](#services-payments-billing) · [通信](#services-communication) · [监控与安全](#services-observability-security) · [电商与营销](#services-commerce-marketing)
+[旅行](#services-travel) · [数据库](#services-databases) · [搜索与数据获取](#services-web-search-data) · [办公协作](#services-productivity-storage) · [AI 服务](#services-ai-models) · [Agent 工具](#services-agent-tooling) · [开发工具](#services-developer-tools) · [云计算与托管](#services-cloud-hosting) · [支付与计费](#services-payments-billing) · [通信](#services-communication) · [电商](#services-commerce-marketing)
 
 <a id="services-travel"></a>
 
@@ -24,7 +24,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-travel-flights"></a>
 
-#### 航空机票
+#### 机票
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -134,7 +134,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-web-search-data"></a>
 
-### 网页搜索与数据 (10)
+### 搜索与数据获取 (10)
 
 <a id="services-web-search-data-web-search"></a>
 
@@ -172,6 +172,21 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 </details>
 
+<a id="services-web-search-data-web-extraction"></a>
+
+#### 网页内容提取
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="left">Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.</td><td align="left"><a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="left">Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.</td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/reference/exa-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="left">Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.</td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://docs.jina.ai">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="left">Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
 <a id="services-web-search-data-other"></a>
 
 #### 其他服务
@@ -179,8 +194,6 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="left">Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.</td><td align="left"><a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://docs.jina.ai">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#perplexity">Perplexity API</a></td><td align="left">Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.</td><td align="left"><a href="https://github.com/ppl-ai/modelcontextprotocol">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#xquik">Xquik</a></td><td align="left">Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.</td><td align="left"><a href="https://docs.xquik.com/api-reference/overview">API</a> · <a href="https://docs.xquik.com/sdks">SDK</a> · <a href="https://docs.xquik.com/mcp/overview">MCP</a></td></tr>
 </tbody>
@@ -188,11 +201,11 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-productivity-storage"></a>
 
-### 协作办公与存储 (10)
+### 办公协作 (10)
 
 <a id="services-productivity-storage-collaborative-tables"></a>
 
-#### 在线任务表
+#### 协作表格
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -237,25 +250,24 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-ai-models"></a>
 
-### AI 模型 (23)
+### AI 服务 (23)
+
+<a id="services-ai-models-model-access"></a>
+
+#### 模型接入
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#qwen">Alibaba Qwen (Model Studio)</a></td><td align="left">Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).</td><td align="left"><a href="https://www.alibabacloud.com/help/en/model-studio/models">API</a> · <a href="https://github.com/QwenLM/qwen-code">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#anthropic">Anthropic</a></td><td align="left">Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.</td><td align="left"><a href="https://docs.anthropic.com/en/api">API</a> · <a href="https://docs.anthropic.com/en/api/client-sdks">SDK</a> · <a href="https://docs.anthropic.com/en/docs/claude-code">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#cartesia">Cartesia</a></td><td align="left">Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.</td><td align="left"><a href="https://docs.cartesia.ai/api-reference">API</a> · <a href="https://github.com/cartesia-ai/cartesia-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cerebras">Cerebras Inference</a></td><td align="left">Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.</td><td align="left"><a href="https://inference-docs.cerebras.ai/api-reference/chat-completions">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cohere">Cohere</a></td><td align="left">Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.</td><td align="left"><a href="https://docs.cohere.com/reference/about">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#deepgram">Deepgram</a></td><td align="left">Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.</td><td align="left"><a href="https://developers.deepgram.com/reference">API</a> · <a href="https://developers.deepgram.com/docs/deepgram-sdks">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#deepseek">DeepSeek</a></td><td align="left">OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.</td><td align="left"><a href="https://api-docs.deepseek.com">文档</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#elevenlabs">ElevenLabs</a></td><td align="left">Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://elevenlabs.io/docs/api-reference/introduction">API</a> · <a href="https://github.com/elevenlabs/elevenlabs-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fal">fal.ai</a></td><td align="left">Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.</td><td align="left"><a href="https://fal.ai/docs/model-apis">API</a> · <a href="https://github.com/fal-ai/fal">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fireworks">Fireworks AI</a></td><td align="left">Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.</td><td align="left"><a href="https://docs.fireworks.ai/api-reference/introduction">API</a> · <a href="https://docs.fireworks.ai/tools-sdks/firectl/firectl">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#gemini-api">Gemini API</a></td><td align="left">Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.</td><td align="left"><a href="https://ai.google.dev/api">API</a> · <a href="https://ai.google.dev/gemini-api/docs/libraries">SDK</a> · <a href="https://github.com/google-gemini/gemini-cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#groq">Groq</a></td><td align="left">Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.</td><td align="left"><a href="https://console.groq.com/docs/api-reference">API</a> · <a href="https://console.groq.com/docs/libraries">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#hugging-face">Hugging Face</a></td><td align="left">Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.</td><td align="left"><a href="https://huggingface.co/docs/hub/api">API</a> · <a href="https://huggingface.co/docs/huggingface_hub">SDK</a> · <a href="https://huggingface.co/docs/huggingface_hub/guides/cli">CLI</a> · <a href="https://huggingface.co/docs/hub/agents-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#luma">Luma AI (Dream Machine)</a></td><td align="left">Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.</td><td align="left"><a href="https://docs.lumalabs.ai/reference">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#minimax">MiniMax</a></td><td align="left">MiniMax text, speech, video and music models via the international platform API, with an official MCP server.</td><td align="left"><a href="https://platform.minimax.io/docs/api-reference">API</a> · <a href="https://github.com/MiniMax-AI/MiniMax-MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#mistral">Mistral AI</a></td><td align="left">European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.</td><td align="left"><a href="https://docs.mistral.ai/api">API</a> · <a href="https://docs.mistral.ai/getting-started/clients">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#moonshot">Moonshot AI (Kimi)</a></td><td align="left">Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).</td><td align="left"><a href="https://platform.kimi.ai/docs/api/chat">API</a> · <a href="https://github.com/MoonshotAI/kimi-cli">CLI</a></td></tr>
@@ -265,6 +277,21 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#together-ai">Together AI</a></td><td align="left">Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.</td><td align="left"><a href="https://docs.together.ai/reference/chat-completions">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#xai">xAI (Grok API)</a></td><td align="left">xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.</td><td align="left"><a href="https://docs.x.ai/developers/rest-api-reference/inference">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#zai">Z.ai (GLM)</a></td><td align="left">GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.</td><td align="left"><a href="https://docs.z.ai/api-reference">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-ai-models-other"></a>
+
+#### 其他服务
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#cartesia">Cartesia</a></td><td align="left">Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.</td><td align="left"><a href="https://docs.cartesia.ai/api-reference">API</a> · <a href="https://github.com/cartesia-ai/cartesia-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#deepgram">Deepgram</a></td><td align="left">Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.</td><td align="left"><a href="https://developers.deepgram.com/reference">API</a> · <a href="https://developers.deepgram.com/docs/deepgram-sdks">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#elevenlabs">ElevenLabs</a></td><td align="left">Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://elevenlabs.io/docs/api-reference/introduction">API</a> · <a href="https://github.com/elevenlabs/elevenlabs-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fal">fal.ai</a></td><td align="left">Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.</td><td align="left"><a href="https://fal.ai/docs/model-apis">API</a> · <a href="https://github.com/fal-ai/fal">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#luma">Luma AI (Dream Machine)</a></td><td align="left">Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.</td><td align="left"><a href="https://docs.lumalabs.ai/reference">API</a></td></tr>
 </tbody>
 </table>
 
@@ -283,23 +310,26 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 </tbody>
 </table>
 
-<a id="services-code-execution"></a>
+<a id="services-developer-tools"></a>
 
-### 代码执行 (4)
+### 开发工具 (7)
+
+<a id="services-developer-tools-monitoring"></a>
+
+#### 监控与故障排查
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#browserbase">Browserbase</a></td><td align="left">Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.</td><td align="left"><a href="https://docs.browserbase.com/reference">API / SDK</a> · <a href="https://github.com/browserbase/mcp-server-browserbase">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#e2b">E2B</a></td><td align="left">Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.</td><td align="left"><a href="https://e2b.dev/docs/sdk-reference">SDK</a> · <a href="https://e2b.dev/docs/cli">CLI</a> · <a href="https://github.com/e2b-dev/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#modal">Modal</a></td><td align="left">Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.</td><td align="left"><a href="https://modal.com/docs/reference">API</a> · <a href="https://modal.com/docs/reference/cli">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#steel">Steel</a></td><td align="left">Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.</td><td align="left"><a href="https://docs.steel.dev/api-reference">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#datadog">Datadog</a></td><td align="left">Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.</td><td align="left"><a href="https://docs.datadoghq.com/api/latest/">API</a> · <a href="https://github.com/DataDog/datadog-ci">CLI</a> · <a href="https://docs.datadoghq.com/bits_ai/mcp_server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#grafana">Grafana (Grafana Cloud)</a></td><td align="left">Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.</td><td align="left"><a href="https://grafana.com/docs/grafana/latest/developers/http_api/">API</a> · <a href="https://github.com/grafana/mcp-grafana">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sentry">Sentry</a></td><td align="left">Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.</td><td align="left"><a href="https://docs.sentry.io/api/">API</a> · <a href="https://docs.sentry.io/platforms/">SDK</a> · <a href="https://docs.sentry.io/cli/">CLI</a> · <a href="https://docs.sentry.io/product/sentry-mcp/">MCP</a></td></tr>
 </tbody>
 </table>
 
-<a id="services-developer-tools"></a>
+<a id="services-developer-tools-other"></a>
 
-### 开发工具 (4)
+#### 其他服务
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -313,7 +343,35 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-cloud-hosting"></a>
 
-### 云服务与部署 (6)
+### 云计算与托管 (10)
+
+<a id="services-cloud-hosting-code-sandboxes"></a>
+
+#### 代码沙箱
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#e2b">E2B</a></td><td align="left">Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.</td><td align="left"><a href="https://e2b.dev/docs/sdk-reference">SDK</a> · <a href="https://e2b.dev/docs/cli">CLI</a> · <a href="https://github.com/e2b-dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#modal">Modal</a></td><td align="left">Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.</td><td align="left"><a href="https://modal.com/docs/reference">API</a> · <a href="https://modal.com/docs/reference/cli">CLI</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-cloud-hosting-browser-environments"></a>
+
+#### 浏览器运行环境
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#browserbase">Browserbase</a></td><td align="left">Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.</td><td align="left"><a href="https://docs.browserbase.com/reference">API / SDK</a> · <a href="https://github.com/browserbase/mcp-server-browserbase">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#steel">Steel</a></td><td align="left">Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.</td><td align="left"><a href="https://docs.steel.dev/api-reference">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-cloud-hosting-app-hosting"></a>
+
+#### 应用部署
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -329,7 +387,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-payments-billing"></a>
 
-### 支付与账单 (19)
+### 支付与计费 (19)
 
 <a id="services-payments-billing-accept-payments"></a>
 
@@ -391,22 +449,9 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 </tbody>
 </table>
 
-<a id="services-observability-security"></a>
-
-### 监控与安全 (3)
-
-<table width="100%">
-<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
-<tbody>
-<tr><td align="left"><a href="./generated/services.md#datadog">Datadog</a></td><td align="left">Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.</td><td align="left"><a href="https://docs.datadoghq.com/api/latest/">API</a> · <a href="https://github.com/DataDog/datadog-ci">CLI</a> · <a href="https://docs.datadoghq.com/bits_ai/mcp_server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#grafana">Grafana (Grafana Cloud)</a></td><td align="left">Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.</td><td align="left"><a href="https://grafana.com/docs/grafana/latest/developers/http_api/">API</a> · <a href="https://github.com/grafana/mcp-grafana">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#sentry">Sentry</a></td><td align="left">Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.</td><td align="left"><a href="https://docs.sentry.io/api/">API</a> · <a href="https://docs.sentry.io/platforms/">SDK</a> · <a href="https://docs.sentry.io/cli/">CLI</a> · <a href="https://docs.sentry.io/product/sentry-mcp/">MCP</a></td></tr>
-</tbody>
-</table>
-
 <a id="services-commerce-marketing"></a>
 
-### 电商与营销 (1)
+### 电商 (1)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>

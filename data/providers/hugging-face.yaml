@@ -82,3 +82,14 @@ checks:
 
 notes:
   - "MCP setup documentation checked on 2026-09-09: https://huggingface.co/docs/hub/agents-mcp. The server or product entry remains separately recorded in mcp_official."
+
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    existing-docs:
+      url: https://huggingface.co/docs/hub/security-tokens
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

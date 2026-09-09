@@ -173,7 +173,7 @@ Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with a
 
 ### Sources
 
-—
+- [official_docs](https://www.alibabacloud.com/help/en/model-studio/get-api-key) — checked 2026-07-08
 
 <a id="alipay"></a>
 
@@ -259,7 +259,7 @@ Claude model APIs with agent-focused documentation, llms.txt, and the company be
 
 ### Sources
 
-—
+- [official_docs](https://docs.anthropic.com/en/api/getting-started) — checked 2026-07-07
 
 <a id="apify"></a>
 
@@ -289,7 +289,7 @@ Web scraping and automation platform with thousands of ready-made actors, a vers
 
 ### Sources
 
-—
+- [official_docs](https://docs.apify.com/platform/integrations/api) — checked 2026-07-07
 
 <a id="apiheya-air-scraper"></a>
 
@@ -491,7 +491,7 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 
 ### Sources
 
-—
+- [official_docs](https://docs.browserbase.com/introduction) — checked 2026-07-07
 
 <a id="cartesia"></a>
 
@@ -543,7 +543,7 @@ Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible
 
 ### Sources
 
-—
+- [official_docs](https://inference-docs.cerebras.ai/introduction) — checked 2026-07-08
 
 <a id="checkout-com"></a>
 
@@ -680,7 +680,7 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 
 ### Sources
 
-—
+- [official_docs](https://docs.cohere.com/docs/rate-limits) — checked 2026-07-07
 
 <a id="composio"></a>
 
@@ -768,7 +768,7 @@ Observability platform with a full REST API, llms.txt, documented OAuth for inte
 
 ### Sources
 
-—
+- [official_docs](https://docs.datadoghq.com/account_management/api-app-keys) — checked 2026-07-07
 
 <a id="deepgram"></a>
 
@@ -820,7 +820,7 @@ OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a
 
 ### Sources
 
-—
+- [official_docs](https://api-docs.deepseek.com/quick_start/pricing) — checked 2026-07-07
 
 <a id="discord"></a>
 
@@ -968,7 +968,7 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 ### Sources
 
-—
+- [official_docs](https://e2b.dev/docs/api-key) — checked 2026-07-07
 
 <a id="elevenlabs"></a>
 
@@ -1243,7 +1243,7 @@ Fast open-model inference and fine-tuning with an OpenAI-compatible API, officia
 
 ### Sources
 
-—
+- [official_docs](https://docs.fireworks.ai/getting-started/introduction) — checked 2026-07-08
 
 <a id="flight-mcp"></a>
 
@@ -1335,7 +1335,7 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 ### Sources
 
-—
+- [official_docs](https://fly.io/docs/security/tokens/) — checked 2026-07-07
 
 <a id="gemini-api"></a>
 
@@ -1361,7 +1361,7 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 ### Sources
 
-—
+- [official_docs](https://ai.google.dev/gemini-api/docs/api-key) — checked 2026-07-07
 
 <a id="github"></a>
 
@@ -1470,7 +1470,7 @@ Observability platform (dashboards, metrics, logs, traces) with a documented HTT
 
 ### Sources
 
-—
+- [official_docs](https://grafana.com/docs/grafana/latest/administration/service-accounts/) — checked 2026-07-08
 
 <a id="grist"></a>
 
@@ -1569,7 +1569,7 @@ Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and sel
 
 ### Sources
 
-—
+- [official_docs](https://console.groq.com/docs/quickstart) — checked 2026-07-07
 
 <a id="hugging-face"></a>
 
@@ -1599,7 +1599,7 @@ Model hub and inference platform with fine-grained tokens, OAuth, an official MC
 
 ### Sources
 
-—
+- [official_docs](https://huggingface.co/docs/hub/security-tokens) — checked 2026-07-07
 
 <a id="ignav"></a>
 
@@ -1698,7 +1698,7 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 ### Sources
 
-—
+- [official_site](https://jina.ai/api-dashboard) — checked 2026-07-08
 
 <a id="kayak-affiliate"></a>
 
@@ -2017,7 +2017,7 @@ MiniMax text, speech, video and music models via the international platform API,
 
 ### Sources
 
-—
+- [official_site](https://platform.minimax.io/user-center/basic-information/interface-key) — checked 2026-07-08
 
 <a id="mistral"></a>
 
@@ -2043,7 +2043,7 @@ European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs 
 
 ### Sources
 
-—
+- [official_docs](https://docs.mistral.ai/getting-started/quickstart) — checked 2026-07-07
 
 <a id="modal"></a>
 
@@ -2069,7 +2069,7 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 
 ### Sources
 
-—
+- [official_docs](https://modal.com/docs/reference/cli) — checked 2026-07-07
 
 <a id="mollie"></a>
 
@@ -2149,7 +2149,7 @@ Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi pla
 
 ### Sources
 
-—
+- [official_site](https://platform.kimi.ai/console/api-keys) — checked 2026-07-08
 
 <a id="n8n"></a>
 
@@ -2264,7 +2264,7 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 ### Sources
 
-—
+- [official_docs](https://docs.netlify.com/api/get-started/) — checked 2026-07-07
 
 <a id="notion"></a>
 
@@ -2370,7 +2370,7 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 
 ### Sources
 
-—
+- [official_docs](https://platform.openai.com/docs/quickstart) — checked 2026-07-07
 
 <a id="openrouter"></a>
 
@@ -2396,7 +2396,7 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 
 ### Sources
 
-—
+- [official_docs](https://openrouter.ai/docs/quickstart) — checked 2026-07-08
 
 <a id="paas-build"></a>
 
@@ -2789,7 +2789,7 @@ App/database hosting with a public GraphQL API, official CLI, llms.txt, and usag
 
 ### Sources
 
-—
+- [official_docs](https://docs.railway.com/reference/public-api) — checked 2026-07-08
 
 <a id="razorpay"></a>
 
@@ -2871,7 +2871,7 @@ Cloud hosting for web services, static sites and databases with a REST API, offi
 
 ### Sources
 
-—
+- [official_docs](https://render.com/docs/api) — checked 2026-07-08
 
 <a id="replicate"></a>
 
@@ -2897,7 +2897,7 @@ Run and fine-tune open-source models via a simple predictions API, with llms.txt
 
 ### Sources
 
-—
+- [official_docs](https://replicate.com/docs/reference/http) — checked 2026-07-07
 
 <a id="resend"></a>
 
@@ -3033,7 +3033,7 @@ Error monitoring and performance tracing with llms.txt, an official MCP server, 
 
 ### Sources
 
-—
+- [official_docs](https://docs.sentry.io/api/auth/) — checked 2026-07-07
 
 <a id="serpapi"></a>
 
@@ -3252,7 +3252,7 @@ Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and se
 
 ### Sources
 
-—
+- [official_docs](https://docs.steel.dev/overview/intro-to-steel) — checked 2026-07-08
 
 <a id="stripe"></a>
 
@@ -3400,7 +3400,7 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 
 ### Sources
 
-—
+- [official_docs](https://docs.together.ai/docs/quickstart) — checked 2026-07-07
 
 <a id="travelport-tripservices"></a>
 
@@ -3622,7 +3622,7 @@ Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server
 
 ### Sources
 
-—
+- [official_docs](https://vercel.com/docs/integrations) — checked 2026-07-07
 
 <a id="weaviate"></a>
 
@@ -3726,7 +3726,7 @@ xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-s
 
 ### Sources
 
-—
+- [official_docs](https://docs.x.ai/overview) — checked 2026-07-08
 
 <a id="xquik"></a>
 
@@ -3782,7 +3782,7 @@ GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, publis
 
 ### Sources
 
-—
+- [official_docs](https://docs.z.ai/guides/overview/quick-start) — checked 2026-07-08
 
 <a id="zapier"></a>
 

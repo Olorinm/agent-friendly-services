@@ -90,6 +90,7 @@ checks:
 catalog:
   version: 1
   classifications:
+    - cloud-hosting/app-hosting
     - databases/hosted-relational
   sources:
     docs:

@@ -79,3 +79,14 @@ checks:
 
 notes:
   - "The docs llms.txt directs agents to an official hosted MCP endpoint: https://mcp.render.com/mcp (authenticated account-scoped actions)."
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/app-hosting
+  sources:
+    existing-docs:
+      url: https://render.com/docs/api
+      checked_on: '2026-07-08'
+      kind: official_docs
+  routes: []

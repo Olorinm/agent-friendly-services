@@ -78,3 +78,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/app-hosting
+  sources:
+    existing-docs:
+      url: https://docs.railway.com/reference/public-api
+      checked_on: '2026-07-08'
+      kind: official_docs
+  routes: []

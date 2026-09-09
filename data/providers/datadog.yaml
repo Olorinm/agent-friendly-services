@@ -1,6 +1,6 @@
 id: datadog
 name: Datadog
-category: observability-security
+category: developer-tools
 homepage: https://www.datadoghq.com
 summary: Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
 submitted_by: community
@@ -80,3 +80,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/monitoring
+  sources:
+    existing-docs:
+      url: https://docs.datadoghq.com/account_management/api-app-keys
+      checked_on: '2026-07-07'
+      kind: official_docs
+  routes: []

@@ -1,6 +1,6 @@
 id: steel
 name: Steel
-category: code-execution
+category: cloud-hosting
 homepage: https://steel.dev
 summary: Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.
 submitted_by: community
@@ -67,3 +67,14 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/browser-environments
+  sources:
+    existing-docs:
+      url: https://docs.steel.dev/overview/intro-to-steel
+      checked_on: '2026-07-08'
+      kind: official_docs
+  routes: []

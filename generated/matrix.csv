@@ -4,19 +4,19 @@ anthropic,Anthropic,ai-models,false,true,false,true,unknown,true,2026-07-07
 apify,Apify,web-search-data,true,true,true,true,unknown,true,2026-07-07
 atlassian,Atlassian (Jira & Confluence),developer-tools,true,false,false,true,partial,true,2026-07-08
 brave-search,Brave Search API,web-search-data,true,false,false,false,unknown,true,2026-07-07
-browserbase,Browserbase,code-execution,true,true,false,false,not_applicable,true,2026-07-07
+browserbase,Browserbase,cloud-hosting,true,true,false,false,not_applicable,true,2026-07-07
 cartesia,Cartesia,ai-models,true,true,false,false,unknown,true,2026-07-08
 cerebras,Cerebras Inference,ai-models,false,true,false,false,unknown,true,2026-07-08
 chroma,Chroma,databases,true,true,false,true,supported,true,2026-07-08
 cloudflare,Cloudflare,cloud-hosting,true,true,true,true,partial,true,2026-07-08
 cohere,Cohere,ai-models,false,true,false,false,partial,true,2026-07-07
 composio,Composio,agent-tooling,true,true,false,false,unknown,false,2026-07-07
-datadog,Datadog,observability-security,true,true,false,true,unknown,true,2026-07-07
+datadog,Datadog,developer-tools,true,true,false,true,unknown,true,2026-07-07
 deepgram,Deepgram,ai-models,false,true,true,false,unknown,true,2026-07-07
 deepseek,DeepSeek,ai-models,false,false,false,false,unknown,true,2026-07-07
 discord,Discord,communication,false,false,true,false,unknown,true,2026-07-07
 dropbox,Dropbox,productivity-storage,false,true,false,true,unknown,true,2026-07-07
-e2b,E2B,code-execution,true,true,false,true,not_applicable,true,2026-07-07
+e2b,E2B,cloud-hosting,true,true,false,true,not_applicable,true,2026-07-07
 elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-07-07
 fal,fal.ai,ai-models,false,true,false,true,unknown,true,2026-07-08
@@ -26,7 +26,7 @@ fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-08
 gemini-api,Gemini API,ai-models,false,false,false,true,unknown,true,2026-07-07
 github,GitHub,developer-tools,true,true,true,true,unknown,true,2026-07-07
 gitlab,GitLab,developer-tools,true,true,true,true,unknown,true,2026-07-07
-grafana,Grafana (Grafana Cloud),observability-security,true,true,false,false,supported,true,2026-07-08
+grafana,Grafana (Grafana Cloud),developer-tools,true,true,false,false,supported,true,2026-07-08
 groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
 hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
 jina,Jina AI,web-search-data,true,true,false,false,unknown,true,2026-07-08
@@ -37,7 +37,7 @@ luma,Luma AI (Dream Machine),ai-models,false,true,false,false,unknown,true,2026-
 mem0,Mem0,agent-tooling,true,true,false,false,supported,true,2026-07-08
 minimax,MiniMax,ai-models,true,false,false,false,unknown,true,2026-07-08
 mistral,Mistral AI,ai-models,false,true,true,false,unknown,true,2026-07-07
-modal,Modal,code-execution,false,true,false,true,supported,true,2026-07-07
+modal,Modal,cloud-hosting,false,true,false,true,supported,true,2026-07-07
 mongodb-atlas,MongoDB Atlas,databases,true,true,true,true,unknown,true,2026-07-07
 moonshot,Moonshot AI (Kimi),ai-models,false,false,false,true,unknown,true,2026-07-08
 n8n,n8n,agent-tooling,true,true,false,true,supported,true,2026-07-08
@@ -57,11 +57,11 @@ redis,Redis (Redis Cloud),databases,true,true,false,true,supported,true,2026-07-
 render,Render,cloud-hosting,true,true,false,true,supported,true,2026-07-08
 replicate,Replicate,ai-models,false,true,false,true,unknown,true,2026-07-07
 resend,Resend,communication,true,true,false,false,supported,true,2026-07-07
-sentry,Sentry,observability-security,true,true,true,true,unknown,true,2026-07-07
+sentry,Sentry,developer-tools,true,true,true,true,unknown,true,2026-07-07
 serpapi,SerpApi,web-search-data,true,true,false,false,unknown,true,2026-07-08
 shopify,Shopify,commerce-marketing,true,true,false,true,supported,true,2026-07-07
 slack,Slack,communication,false,true,true,true,unknown,true,2026-07-07
-steel,Steel,code-execution,false,true,false,false,supported,true,2026-07-08
+steel,Steel,cloud-hosting,false,true,false,false,supported,true,2026-07-08
 stripe,Stripe,payments-billing,true,true,true,true,supported,true,2026-07-07
 supabase,Supabase,databases,true,true,true,true,partial,true,2026-07-07
 tavily,Tavily,web-search-data,true,true,false,false,unknown,true,2026-07-07
