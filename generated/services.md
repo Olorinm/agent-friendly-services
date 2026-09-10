@@ -772,6 +772,10 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [d1-cli (CLI)](https://developers.cloudflare.com/d1/get-started/) | [Docs](https://developers.cloudflare.com/d1/get-started/) | self serve / documented | D1 Workers Free: 5 million reads/day, 100,000 writes/day, 5 GB total storage. Account authorization required; Wrangler local mode is not a remote database test. Existing paid projects are excluded. |
+| [kv-api (API)](https://api.cloudflare.com/client/v4/) | [Docs](https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/) | self serve | Documented remote Workers KV key-value read API. Requires account and namespace identifiers and credentials with permission for the requested operation. No task success is claimed. |
+| [kv-sdk (SDK)](https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/) | [Docs](https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/) | self serve | Official cloudflare TypeScript client exposes remote KV namespace and value methods. Local package installation is distinct from obtaining credentials and remote resource access. |
+| [kv-cli (CLI)](https://developers.cloudflare.com/kv/reference/kv-commands/) | [Docs](https://developers.cloudflare.com/kv/reference/kv-commands/) | self serve | Wrangler provides native KV namespace, key-list and key-read commands. Remote storage must be selected for comparison with cloud API/SDK/MCP; local simulation is not equivalent. |
+| [api-mcp (MCP)](https://mcp.cloudflare.com/mcp) | [Docs](https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/) | self serve | Official remote API MCP exposes search and execute tools for Cloudflare API operations, including KV. Record the actual exposed tools and native MCP calls separately from raw HTTP. An existing Wrangler OAuth login is not assumed to authorize this endpoint. |
 
 ### Service pricing
 
@@ -787,6 +791,10 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 
 - [official_docs](https://developers.cloudflare.com/d1/get-started/) — checked 2026-09-07
 - [official_docs](https://developers.cloudflare.com/d1/platform/pricing/) — checked 2026-09-07
+- [official_docs](https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/) — checked 2026-09-10
+- [official_docs](https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/) — checked 2026-09-10
+- [official_docs](https://developers.cloudflare.com/kv/reference/kv-commands/) — checked 2026-09-10
+- [official_docs](https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/) — checked 2026-09-10
 
 <a id="coda"></a>
 

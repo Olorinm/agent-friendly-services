@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { ROOT } from '../scripts/lib.ts';
 import assert from 'node:assert/strict';
 import { estimateModelCost, type PriceSnapshot } from '../scripts/model-costs.ts';
-import { buildBoards, selectServiceBoards, summarize, renderBoardRows, renderBoardDetails } from '../scripts/leaderboard.ts';
+import { buildBoards, selectServiceBoards, summarize, renderBoardRows, renderBoardDetails, moneyLabel } from '../scripts/leaderboard.ts';
 import type { Evaluation } from '../scripts/evaluations.ts';
 
 const prices = (extra = {}): PriceSnapshot => ({ source: 'https://example.com/prices', revision: 'test', fetched_at: '2026-09-08', sha256: 'test',
@@ -191,4 +191,14 @@ test('homepages use compact empty cells, aligned widths and separate tested rout
     const amadeus = text.split('\n').find(l => l.startsWith('<tr>') && l.includes('>Amadeus Flight APIs</a>'))!;
     assert.equal((amadeus.match(/>API<\/a>/g) ?? []).length, 0); // partnership announcements are not API docs
   }
+});
+
+
+test('small positive costs are preserved, and never displayed as free', () => {
+  const value = estimateModelCost(run({ usage: { input_tokens: 1, cached_input_tokens: 0, output_tokens: 0 } }),
+    prices({ input_cost_per_token: 1e-12 }));
+  assert.equal(value.amount_usd, 1e-12);
+  assert.equal(moneyLabel(value.amount_usd), '<$0.0001');
+  assert.equal(moneyLabel(0), '$0');
+  assert.equal(moneyLabel(null), '—');
 });

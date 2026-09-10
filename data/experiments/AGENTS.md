@@ -1,110 +1,152 @@
 # 执行、验收与结果回填
 
-目的：把候选表和任务表变成可核对的实际结果，让用户知道哪个入口能完成任务、需要多少开销。复用已有候选和任务；只有资料不足或需求变化时才继续研究，不重复制造中间报告。
+目的：把有来源的候选和真实用户任务变成可核对的结果，比较服务的可用性、接入门槛和开销。Pipeline 使用统一任务与结果，不绑定领域、服务、模型或执行器；具体运行环境负责启动会话和采集真实记录。
 
-编排、发现、任务设计和验收可以读仓库，四个角色入口见根目录索引。被测Agent必须是独立新会话，只获得冻结的题目、指定入口、统一资源和专用执行角色指令，不能收到研究材料、历史答案、提前写好的服务适配代码或本文件。
+## 角色与边界
 
-## 执行阶段的会话边界
+总控协调[发现服务](../candidates/AGENTS.md)、[任务设计](tasks/AGENTS.md)、[执行](../../scripts/roles/execution/AGENTS.md)和[独立验收](../../scripts/roles/grading/AGENTS.md)。角色的具体原则各维护一份。总控负责交接、资源授权、异常判断、复核与结果录入，各角色不负责启动自己。
 
-| 角色 | 会话与职责 | 能看到的内容 |
-| --- | --- | --- |
-| 评测 Agent | 主持会话准备；后续由独立新会话验收，独立读服务状态并写 assessment.json | 仓库原则、任务表、验收规则、真实结果和本地日志 |
-| 被测 Agent | 每个服务/任务启动独立 ZCode CLI 新会话（历史 Codex 记录保留），实际调用服务和交付用户结果 | 专用执行角色 AGENTS.md、简短委托、原始材料、服务入口及本轮工具/凭据/资源范围 |
+一次执行对应一个独立验收会话。执行者只获得该次任务、材料、环境和执行角色指令；验收者只获得该次冻结要求、必要参考、执行记录及交付物，不混用其他运行的答案。历史记录保留实际验收方式，不改称独立盲评。
 
-历史 `codex-service-trial.py` 只启动被测 Agent 和采集日志；`record-trial.py` 只录入外部评测 Agent 写好的结论，不是第三个 Agent，也不自动启动盲评会话。历史评测 Agent 已参与准备，不能声称它不知任务设计或历史结果；后续独立验收会话仅接收冻结任务、必要参考与本次证据。两者会话/工作目录分开，当前仍同机运行，不是 VM 或完整文件读取隔离。
+## 第一个任务：接入服务
 
-验收在被测会话结束后进行，独立读取真实远端结果，不采信被测 Agent 的自评脚本。记录器拒收被测工作目录内的 assessment 文件，但这只是录入检查，不能替代对评测者身份和证据的实际核对。评测规则、参考答案不随任务交给被测会话。
+每个服务先测试“接入服务”：按需注册、验证、授权、获取凭据或安装配置，通过指定 API、CLI、SDK 或 MCP 完成一次基础调用，确认可以开始使用。业务要求和授权资源在执行前明确；具体操作由执行 Agent 查官方资料决定，不提供预写服务调用代码。账号注册成功不等于接入完成。
 
-## 接入阶段与不同测试方式
+- 无需注册时直接调用，并记录无需账号。已有账号时说明由谁、何时提供，不能声称本轮完成了自助注册。
+- 接入结果与接入门槛分别记录。结果说明完成或受阻；门槛说明 Agent 自助、实际人工介入、特殊申请或资质要求及具体原因。这些条件可以同时存在，例如需人工提交企业申请。
+- Token、费用、耗时与人工步骤由这项任务单独留底，不藏在业务测试前。未测量的历史准备保持未知，不补填零。
+- 需要人工身份核验或特殊申请时保留实际进度与阻碍。后续依赖该账号的任务尚未执行，不能批量记为业务能力失败。
+- 安装 MCP 后若执行器必须重启或换会话才能加载工具，由总控在同一容器内完成；仍属于同一次接入任务，关联全部会话并累计用量、耗时与人工步骤。配置文件写成不等于接入成功，必须有指定方式的实际调用证据。
+- 同一账号可在授权范围内供后续任务使用；更换接入方式时仍需验证该方式的安装、认证和实际调用。已完成的注册不重复计费，也不冒充再次注册。
 
-先分别考察“注册账号”和“接通服务”，再运行用户的业务任务。接通可以是获取 Key、OAuth 授权、安装并登录 CLI 或连接 MCP；不要求所有服务都用 Key。不适用的步骤记不适用，未量测的历史准备记未知，不能记失败或补填零。
+## 环境生命周期
 
-接入阶段记录是否 Agent 自助完成、需要何种人工介入、无法继续的门槛，以及实际 Token、费用与耗时。评测 Agent 提供原始材料和授权资源；业务所需的查文档、安装依赖、写代码、创建产品或数据库等由执行 Agent 完成。必要的账号状态可供后续使用，解题过程和脚本不能传给新的业务会话。
+一批测试按服务 × 调用方式创建容器，接入任务完成安装、认证和基础调用，后续业务任务在原容器中运行，不逐题重建或重复复制依赖。每次运行使用独立题目目录和全新会话，安装与认证保留，接入开销不重复计入每道业务题。
 
-同一业务任务按“服务 × 测试方式 × 任务”分别运行。固定任务、模型、预算和等价资源，核心调用须经过指定 API、CLI 或 MCP；CLI/MCP 自身调用 HTTP 属正常实现，绕过指定入口直接调用不能算该入口完成。每个方式独立留底，首页选择整套已测方式，详情比较各方式，不拼接最佳单项成绩。
+总控按顺序停止执行、归档产物与该会话日志、清理上题目录及其他临时解题文件，再启动下一题。执行器适配须处理自身历史会话留存，避免下一题读到旧答案；验收在另一个环境中进行。同一容器不并发执行多题，写入型任务的远端数据按冻结要求单独恢复。无法确认清理或环境损坏时暂停该路线，重建必须记录原因，不能把新环境冒充复用。具体环境操作见 [容器工具](../../scripts/sandbox/README.md)。
 
-## 从已有分类接手
+## 材料与资源交接
 
-1. 读根目录理念、对应候选与任务表。选定服务ID、入口ID、任务ID与版本。新需求按`tasks/AGENTS.md`出题；确定完成条件后再运行。任务日期过期时先更新题目与版本，不让执行Agent自行改变题目。
-2. `npm run pricing:update`获取本轮模型的LiteLLM价表快照（新增模型可在命令后加`-- 模型名`）；`npm run validate`、`npm run generate`检查数据并自动估算模型费用、更新目录。生成本身不联网，使用`data/pricing/litellm.json`中冻结的价格；主动刷新价格会更新展示中的估算，快照日期不等于历史运行日期。入口来自`generated/catalog.json`，任务来自Markdown任务表。后续测试默认使用 `glm-5.3-flash / high`、ZCode CLI，运行器不继承个人配置中的思考等级；历史结果保持原值。按同一批次固定harness、模型、思考等级、预算、工具和凭据条件；不同设置的结果分别记录。
-3. 启动独立执行。例如以下是运行命令，不是提供给被测Agent的解法：
+任务生成器从候选和任务表生成简短 prompt、`input.md`、`ENVIRONMENT.md` 和独立验收材料。脚本负责生成合成数据、工作目录和必要文件；真实账号、Key、授权或远端资源通过实际操作取得，不能以生成了文件代替已取得资源。
 
-   ```sh
-   python3 scripts/codex-service-trial.py kiwi --route search-mcp \
-     --task-file data/experiments/tasks/travel-flights.md --task flights-search-001 \
-     --model gpt-6-astra --reasoning-effort medium --seconds 600
-   ```
+接入任务产出的凭据只交给明确依赖它的任务，以本地私有文件或运行环境支持的安全方式传递。后续会话可获得必要的账号、资源标识与登录配置，不继承上轮对话、解题脚本或评分内容。身份资料、验证邮箱等外部输入必须来自本轮授权，不能搜索本机其他账号；合成测试内容不能冒充真实身份或资质。
 
-   服务与任务参数可以换成表里的其他记录；`--prepare-only`只生成并保存prompt和配置。脚本沿用本机Codex登录，要求全局AGENTS为空，关闭被测会话的项目指令/技能/插件/记忆注入。默认提供终端与联网检索、不提供服务凭据；也支持准备者在已授权范围内先注册免费账号，再用 `--credentials-file` 传入仅属于指定服务的私有 JSON 凭据，必须用 `--preparation-note` 公开说明准备步骤及其未计入执行 token/耗时。两种前提分别记录；不能让执行 Agent 搜索本机既有凭据。需要本轮未提供的账号、验证码、凭据或付款就记录阻碍。它是同机新目录隔离，非虚拟机；环境不满足时修复环境或记为运行阻碍，不将其归因于服务。
+需要远端测试材料时，生成之后还要投递或创建并确认就绪。例如验证码题的三封合成邮件必须实际送达本轮邮箱，不能只在本地写出三段文本。准备未就绪属于材料或环境问题，不算被测服务业务任务失败。
 
-   **在Codex内编排时，启动脚本应通过宿主机终端或获准提升权限的shell执行。** macOS沙箱里嵌套启动Codex可能在初始化app-server前报`Operation not permitted`；这是启动环境问题。在允许权限提升的环境且已有启动授权时，可以只对该启动命令申请宿主执行；当前环境禁止权限参数时不要传入该参数。被测Codex仍保留脚本设置的`workspace-write`沙箱，不改为全盘访问。未获授权则记录阻碍，不绕过审批。环境无效的尝试保留记录，修复后用全新会话重跑，不计作供应商失败。
-   若终端沙箱不能启动浏览器，可由准备者启动本轮专用、无既有登录和页面的空白 Chromium，再以 `--browser-file` 传入仓库外 `0600` 的 JSON（`cdp_url` 为仅监听 127.0.0.1 的 CDP 地址）。执行会话仍保留 `workspace-write` 沙箱；连接资料只进入 `.private/browser.json`，通用连接说明进入环境附件，不提供服务解法。先验证浏览器能连接；在 `--preparation-note` 记录工具、版本、准备开销及变化。提供浏览器和未提供浏览器的运行不能直接合并排名。结束后关闭本轮专用浏览器，不能连接或关闭用户已有浏览器。
+## 从任务到结果
 
-   自然任务用 `--prompt-style natural`：prompt 只含简短委托及附件位置，原始材料写入 `input.md`，环境与授权范围写入 `ENVIRONMENT.md`。预计输出不重复拼接，完成/失败标准留给外部复核；必要交付要求须已在委托或材料中写清。自动保存的 CLI 日志和独立远端读取承担留证，不让执行者额外整理测试报告。修改任务要求时升级版本，不能将自然任务结果与历史强指导任务混为同一题。
+1. **确定批次。** 选择服务、入口、任务 ID 与版本、重复次数、执行器、模型、思考等级、工具、预算和并发条件。服务、任务和次数均来自批次输入，不写死在调度代码。只对条件一致的记录合并统计。
+2. **冻结输入。** 为每次运行保存原始委托、附件、执行角色指令、授权资源、预算及哈希；评分要求与参考答案另存。材料变更升级版本，不能在执行中修改题目来适应某个服务。
+3. **启动与留底。** 运行器以独立新会话执行该次委托，返回可查询的运行标识，采集实际状态、起止时间、配置、工具过程、答案、逐请求用量与整轮汇总。确认日志保留能力并持续归档模型实际输入；不能仅凭复制了 AGENTS.md 就宣称它实际生效。同机新目录不等于 OS 文件系统隔离。
+4. **逐次验收。** 执行结束后生成该次验收任务。独立 Agent 核对冻结要求和真实服务证据，需要时自行构造授权范围内的核验请求；不能运行执行者的自评脚本代替验证，也不补做业务任务。输出 `assessment.json`，正常流程直接交脚本校验、录入，不固定再加一层 Agent 验收。发现异常时退回补充依据或记录未知；修正保留原始结论。
+5. **录入与生成。** 运行记录和验收结论合成统一结果源，校验后生成结果表、目录、服务详情和机器入口。数值由记录计算，Agent 不手填 Token、模型费用或另写一份榜单。原始记录留本地，仅发布最少的脱敏证据。
 
-   新自然输入可先用 `--prepare-only` 查看。原始附件在运行前备份到结果目录的 `context-files/`，文件 hash 随 run.json 保存；不能仅按 prompt 字符数比较信息量，Agent 阅读附件也会消耗 token。旧任务表可能仍含测试要求，逐题整理并升级版本后再选择 natural；legacy 保留用于旧方式。
+总控应核对执行会话的实际工具列表，能禁用委派工具时禁用，不能只靠角色文本假设执行者不会调用子 Agent；出现越界调用时保留记录并交独立验收，不能直接纳入合格样本。
 
-4. 等进程结束，保留它输出的结果目录。运行器保留本地 Codex session（不使用 `--ephemeral`），退出后按本次 thread ID 找到原始文件，复制为仅本机可读的 `session.raw.jsonl`；该文件与其他原始日志均留在 gitignored 结果目录，禁止作为公开证据。自动提取 `request-usage.json`，只保留逐次 token 计数、采集状态和源文件 hash，不保留会话内容、路径或请求/会话 ID。优先使用 `token_usage_record`，兼容 `token_count`；去重后必须与 CLI 最终用量一致才标记 `complete`。超时缺少最终汇总、明细缺失、截断或计数不一致均标记 `incomplete`，保留观察值但不当作完整费用。录入器从原始 session 重新提取，不接受评测者手填请求用量。外部Agent读`run.json`中的冻结任务、`answer.md`、`events.jsonl`和`workspace/evidence/`。核对调用确实来自指定服务、请求参数与任务一致、答案由真实响应支持；不要执行或采信被测Agent写的校验器来替代复核。
-5. 在结果目录内、`workspace/`之外写`assessment.json`。按原先完成标准逐项核对，完整填好以下字段（示意中的空值必须据证据填写，不是默认判定）：
+运行器应提供启动、状态查询、结果采集和停止能力；状态不明时先查实际会话，不能盲目重发。预算是可核对的执行限制，不能只在 prompt 写一个数字便视为已实现超时控制。不同任务可并发，但共享机器、网络和服务限流条件必须记录。
 
-   ```json
-   {
-     "status": null,
-     "reason": "",
-     "reviewer": "external preparing Agent / session identifier if available",
-     "checks": [
-       {"criterion": "任务的某条完成条件", "passed": false, "evidence": "请求/响应/答案的具体位置及核对结果"}
-     ],
-     "evidence": [
-       {"path": "workspace/evidence/实际文件名", "note": "此文件支持什么判断"}
-     ],
-     "service_cost_usd": null,
-     "service_cost": {
-       "kind": "unknown",
-       "sources": [],
-       "note": "写明费用依据或未知原因"
-     },
-     "human_interventions": null
-   }
-   ```
+通用调度由 `scripts/pipeline.py` 实现；其命令适配协议已通过本地固定样本验证，实际执行器的远端隔离、完整日志、停止能力还须分别接入验证。不能把固定样本通过说成真实服务测评通过。
 
-   `status`为`completed`、`not_completed`或`invalid_run`。成功必须满足全部完成条件；缺凭据、无结果、任务超时等写清原因。环境故障用`invalid_run`。遇到无法证实的答案，不猜为成功。选取足够核对结论的请求、真实响应、答案或失败证据；先确认脱敏，原始完整日志保留本地。对动态查询核对当次证据，不固定未来价格答案。
+## 验收与费用
 
-   `service_cost_usd`记录本次被测服务调用费用，不含机票等业务商品价格。`service_cost.kind`为`reported`（回执/账单金额）、`confirmed_free`（确认免费）、`estimated`（用量×单价）或`unknown`；已知金额须在`sources`提供脱敏证据路径或公开计费来源，并在`note`写明依据。记录器不自动抓取各家账单，外部评测 Agent 负责采集与核验；回执没写费用不代表免费。旧记录的新增实付金额原样保留，不补造新来源。
+`assessment.json` 沿用现有结果录入字段：`status`、`reason`、`reviewer`、`checks`、`evidence`、`service_cost_usd`、`service_cost`、`human_interventions`。字段可以随需求迭代，判定必须能追溯到冻结任务和证据。
 
-   估算服务费用时提供`items`，例如`[{"quantity": 10, "unit": "request", "usd_per_unit": 0.002}]`，顶层金额可为null，由记录器计算为0.02；若填写了金额，必须与计算结果一致。复杂套餐、阶梯或最低消费需先据真实账单/规则确定本次适用的计费项，不能只按一次请求的标价猜算。信用额度不是实付金额，只有确认本次落在免费范围才标`confirmed_free`。
+- `completed`：全部用户要求有证据满足；`not_completed`：实际执行未完成；`invalid_run`：运行环境或测试材料失效。说明原因来自服务、接入门槛、执行行为、材料还是环境，证据不足不能猜成功。
+- 服务费用优先依据回执、账单和真实用量；确认免费标 `confirmed_free`，按用量和单价估算标 `estimated`，实际报告金额标 `reported`，缺依据标 `unknown`。来源与说明随结果保留，返回成功不能证明免费。
+- 模型费用按冻结 LiteLLM 价表从逐请求输入、缓存读取/写入和输出计算，并与整轮用量核对。按单次请求的输入长度判断计价档位，不能拿累计输入代替。缓存输入若已包含在输入总数中不重复加；推理 Token 若已含在输出中不重复加。
+- 用量不完整、计数不一致、缺价格或计价条件不明时保留未知及原因，不填零。标准 API 价估算不是订阅套餐的实际扣费。
+- 接入任务、业务执行、独立验收的用量分别记录。每次有效试跑均值包含成功和失败，排除环境无效；缺项不能跳过后制造完整的低均值。
 
-   模型费用不由评测 Agent 手填：`npm run generate`从真实`usage`和LiteLLM快照自动得到`model_cost`，公开在生成的结果JSON与目录。新运行优先对每次请求按其输入长度选择LiteLLM价格档位，再逐次相加；完整明细须与整轮用量核对一致。按标准API价格估算普通输入、缓存读取/写入和输出，推理token若已含在输出中不重复加。缺价格、缺用量或无法判断上下文计价档位时记未知；不能用累计会话输入冒充单次请求上下文。服务费用估算单独标明。`human_interventions`来自实际观察，不知道填null；模型、用量、耗时和配置只来自运行器记录。
+## 现有结果入口
 
-6. 回填结果并更新展示：
+`data/experiments/evaluations/` 保存结果源，`data/experiments/evidence/` 保存必要证据；`data/experiments/results/` 保存本地原始运行记录。执行器输出先转换为统一记录，再交给现有录入与生成工具；不能把某个执行器专有的日志格式直接冒充兼容。
 
-   ```sh
-   python3 scripts/record-trial.py <结果目录> --review <结果目录>/assessment.json
-   npm run validate
-   npm run generate
-   ```
+```sh
+python3 scripts/record-trial.py <结果目录> --review <结果目录>/assessment.json
+npm run validate
+npm run generate
+```
 
-   检查`generated/evaluations.md`出现新行、`generated/catalog.json`的对应服务/入口出现该次`task_runs`，其他入口不继承成功。MCP的`search_services`和`get_service`从同一目录读取这些结果；本机检查时设置`AFS_DATA_DIR`指向当前`generated/`。
+`record-trial.py` 是统一录入入口：读取 `run.json` 与独立 `assessment.json`，所有服务费用经过 `service_cost.py`。历史 Codex 日志沿用原始提取；新执行器通过 `adapter-v1` 数值记录核对逐请求用量、总量与原始来源哈希。该核对不能代替对具体执行器转换代码的验证。新 pipeline 冻结价格表，页面按该次快照重算模型费；历史无快照记录保留原有计价行为。生成器从同一份结果源更新 `generated/evaluations.md`、目录、服务详情和 MCP 数据。价格快照通过 `npm run pricing:update` 更新；更新快照会影响费用估算，快照日期不冒充测试日期。
 
-## 留下什么
+发布前检查私人信息、密钥、Cookie、用户目录和会话标识。凭据仅存私有位置，完整原始会话不进入公开证据；自动脱敏不能代替对公开副本的检查。历史观察保留，新运行追加；角色说明、脚本和输出格式服务于可核对的结论，不追求文档数量。
 
-- 候选表、任务表、[结果表](../../generated/evaluations.md)是主交付。`data/experiments/evaluations/`保存精简结果源，`evidence/`保留选取的证据；原始`results/`日志仍gitignored。
-- 首页每个服务一行，显示完成率、Token、模型费用、服务费用和实际测试方式，接入资料另列，试跑次数放在服务详情；后面三项取有效试跑均值（成功与失败都包含），未知值不按0填，也不跳过未知样本制造偏低均值。当前汇总按服务/入口最新已测协议取样，任务冻结内容、重复次数及配置一致才合表；旧记录仍可查。
-- 记录harness版本、模型、思考等级、实际起止时间/时区、任务版本与hash、接入条件和验收依据。历史观察保留；新运行追加，修订旧结论要解释原因，不静默覆盖。
-- 公开副本不保留本机用户名、目录路径或Codex会话ID。记录工具替换已知路径和会话标识，原始文件仍留在本地；发生脱敏时同时保留原文件hash与公开副本hash，并说明原因。Agent仍需检查密钥、Cookie、私人消息等内容，不能把自动替换当作完整隐私审查。
-- 录入工作区与公开发布是不同操作。当前流程不自动提交/推送，不联系服务商；外部发布沿用维护者的授权范围。
-- 脚本负责重复动作，Agent负责研究与证据判断。格式可以调整，限制来自真实任务与公平性要求；调整工具后做相应验证。
+## 通用 pipeline 的使用
 
-旧的`npm run agent-verify`、`published/`及milestone文档属于历史Claude实验链路，不用于本次流程。
+各角色可以在不同机器工作，通过文件交接。候选与任务仍由对应 Agent 调研生成；pipeline 从已确定的候选、任务表开始，不用脚本替代需求研究。`prepare` 复用现有任务生成函数，分别冻结执行、验收材料和价表；`run` 自动推进执行、采集和独立验收；`record` 通过同一个校验入口录入、生成页面。
 
-## 免费账户测试的私有输入
+```sh
+python3 scripts/pipeline.py prepare data/experiments/results/<run-id> --config <private-config.json>
+python3 scripts/pipeline.py run data/experiments/results/<run-id>
+python3 scripts/pipeline.py status data/experiments/results/<run-id>
+python3 scripts/pipeline.py stop data/experiments/results/<run-id>
+python3 scripts/pipeline.py record data/experiments/results/<run-id> --generate
+```
 
-凭据文件格式为 `{ "SERVICE_API_KEY": "实际值" }`，置于仓库外并设为 `0600`。脚本只把明确传入的字段复制到新目录的 `.private/credentials.json`；不继承本机其他服务登录，不把密钥放入 prompt、命令参数或公开元数据。指定 Key 对应免费账户/额度，由准备者先核对，不启用付费超额。准备注册不等于执行期间的人类介入；两部分分开描述。
+`advance` 只推进一步，供外部调度器调用；`run` 循环推进到验收完成、停止或异常。状态和原始记录私有保存，发布前检查所选证据。不推送 Git，也不把测试夹具写入真实榜单。启动响应丢失时保留 `*_starting`，先按运行 ID 核对实际会话，不能重新发题；错误与超时不冒充完成。当前不会自动修复不确定状态或安排第二个验收者。
 
-本地结果目录的 `private-secrets.json` 是脱敏用字符串数组，也可由复核者补入本次生成的数据库密码、连接 URL、claim URL 或账号标识。此文件不能作为公开证据。记录器将这些确切值及编码形式从公开副本中替换，仍须人工审查未列出的敏感项。源文件 hash 和脱敏副本 hash 同时保留。只选最少的请求/响应证据，不公开完整网页、邮箱、控制台或原始会话。
+配置为 JSON，包含以下字段：
 
-## ZCode 运行准备
+| 字段 | 内容 |
+| --- | --- |
+| `service`、`route` | 现有目录中的服务和接入路径 ID |
+| `task_file`、`task` | 仓库任务表路径及任务 ID |
+| `phase` | `access` 或 `business` |
+| `environment_id` | 本批次服务 × 方式的持久容器标识 |
+| `environment` | 明确的可用工具、指定方式、授权、凭据位置、预算及资源边界；直接生成 ENVIRONMENT.md |
+| `depends_on` | 业务任务依赖的上一运行绝对目录；必须已验收通过，服务、方式和环境标识一致 |
+| `attachments`、`reference` | 可选：原始附件目录、私有验收参考 JSON 文件的绝对路径；分开传递 |
+| `preparation_note` | 已提供账号等准备条件，不能冒充 Agent 注册成果 |
+| `execution`、`grading` | 各自的模型、思考等级、执行器版本、运行环境、预算和适配命令 |
 
-默认模型 `glm-5.3-flash`、思考等级 `high`，最大并发 10；先以两个服务核对登录、隔离、任务执行与用量采集，再扩充并发。每个执行和验收会话分目录，禁止复用被测历史。任务仍通过现有 `select_task`、`natural_prompt`、`natural_context` 从任务表生成，不另写一套题。
+每个角色的配置形如：
 
-编排目录的 AGENTS.md 解释流程，不能复制到被测目录。被测目录允许放专用[执行角色 AGENTS.md](../../scripts/roles/execution/AGENTS.md)，另提供简短任务附件、环境授权与隔离配置；不能继承仓库整体指令，所有实际加载的指令都需冻结并记录。执行角色要求先读本次 `input.md` 和 `ENVIRONMENT.md`，不含研究路径或隐藏评分内容。[验收角色](../../scripts/roles/grading/AGENTS.md)在另一新会话读取冻结要求和本次证据。新 harness 结果不与 Codex 历史结果混算。ZCode 桌面 OAuth 登录与 CLI 模型配置不是同一步；必须先确认 CLI 配置和实际模型/思考等级，失败属于运行环境问题。
+```json
+{
+  "model": "实际模型 ID",
+  "reasoning_effort": "high",
+  "harness": {"name": "实际执行器", "version": "固定版本", "mode": "noninteractive"},
+  "runtime": "该角色的运行环境标识",
+  "seconds": 600,
+  "commands": {
+    "start": ["/absolute/path/adapter", "start", "{request}"],
+    "status": ["/absolute/path/adapter", "status", "{request}"],
+    "collect": ["/absolute/path/adapter", "collect", "{request}"],
+    "stop": ["/absolute/path/adapter", "stop", "{request}"]
+  }
+}
+```
+
+命令是 argv 数组，不经 shell 拼接。执行和验收使用不同 runtime，实际回执必须对应不同会话和工作目录。`runtime` 相同只能说明声明一致，实际容器复用、历史清理与远端数据恢复必须由适配器落实并留证。新题目目录不能访问其他题答案；不能把整个 pipeline 记录目录开放给执行者。
+
+### 执行器适配协议
+
+每个命令读取 `{request}` 指向的 JSON，stdout 返回一个 JSON 对象，诊断写 stderr。请求包含 `run_id`、`role`、`model`、`reasoning_effort`、`harness`、`seconds`、`runtime`、`input`、`output`、`fresh_session: true`；启动后增加 `handle`。路径属于总控机器，远端适配器负责传送到实际环境、执行及取回。
+
+- `start`：新建会话并返回 `{"handle":"可查询运行标识"}`；适配器用 run_id + role 保证不重复启动。
+- `status`：返回 `{"status":"running"}`、`completed` 或 `failed`，必须查询真实运行状态。
+- `stop`：终止对应会话及遗留进程；远端场景不能只结束本地 SSH。没有 handle 的不确定启动也要能按 run_id 核对并停止。
+- `collect`：将该次记录导出到 output，返回 `{"collected":true}`，必须可重复采集；不运行题目、不自评。
+
+执行 output 包含 `answer.md`（失败可缺）、`events.jsonl`、原始用量来源、`usage.json`、必要业务证据和 `receipt.json`；验收 output 包含 `assessment.json`、原始来源、`usage.json`、`receipt.json`。验收能读取本次执行材料，但不可补做业务。公开证据路径相对运行根目录，例如 `execution/evidence/response.json`。
+
+`receipt.json` 记录实际 `session_id`、`workspace`、`model`、`reasoning_effort`、`harness`、`runtime`、`started_at`、`ended_at`、`exit_code`、`timed_out`、`isolation`、`input_verified`。`input_verified` 必须基于实际模型输入或执行器明确加载记录，不能因为文件存在就填 true。需要重载 MCP 的接入任务由适配器关联所有相关会话、累计用量并保持完整证据，不漏掉初始化阶段。
+
+`usage.json` 使用下列结构。计数来自执行器原始记录，`totals` 是独立读取的运行总量，不能用逐请求求和伪造一次核对。输入包含缓存部分，输出包含推理部分：
+
+```json
+{
+  "schema_version": 1,
+  "complete": true,
+  "model": "与实际回执相同的模型 ID",
+  "sources": [{"path": "runtime.raw.jsonl", "sha256": "原始文件的 SHA256"}],
+  "requests": [{"id": "运行内唯一请求标识", "usage": {
+    "input_tokens": 100, "cached_input_tokens": 60,
+    "cache_write_input_tokens": 0, "output_tokens": 20, "reasoning_output_tokens": 10
+  }}],
+  "totals": {"input_tokens": 100, "cached_input_tokens": 60,
+    "cache_write_input_tokens": 0, "output_tokens": 20, "reasoning_output_tokens": 10}
+}
+```
+
+来源路径相对 output。缓存写入数必须显式提供，不能把缺失当零。缺字段、来源不符或计数不一致时，模型费用保持未知；不能采信 Agent 答复中的 Token 或金额。多模型请求不能合并成一个模型计价，适配器须单独分账，当前单模型入口不支持时明确标记用量不完整。价表由 pipeline 事前冻结，执行与验收分别计价。小于展示精度的正金额显示 `<$0.0001`，底层保留数值。

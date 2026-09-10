@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, type Provider } from './lib.ts';
-import type { ModelCost } from './model-costs.ts';
+import type { ModelCost, PriceSnapshot } from './model-costs.ts';
 import { buildBoards, selectServiceBoards, moneyLabel } from './leaderboard.ts';
 
 export interface Evaluation {
@@ -20,6 +20,7 @@ export interface Evaluation {
   request_usage?: { status: 'complete' | 'incomplete'; method: string; reason: string; source_sha256: string | null;
     requests: NonNullable<Evaluation['usage']>[]; totals?: NonNullable<Evaluation['usage']> };
   model_cost?: ModelCost;
+  pricing_snapshot?: PriceSnapshot;
   service_cost?: { kind: 'reported' | 'estimated' | 'confirmed_free' | 'unknown'; amount_usd: number | null;
     sources: string[]; note: string; items?: { quantity: number; unit: string; usd_per_unit: number }[] };
   service_cost_usd: number | null; human_interventions: number | null;

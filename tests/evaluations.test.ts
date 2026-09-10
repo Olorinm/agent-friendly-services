@@ -10,7 +10,7 @@ import { catalogService } from '../scripts/catalog.ts';
 import { searchServices } from '../mcp/catalog.mjs';
 
 test('task selection and reviewed-result recorder reject contaminated or mislabeled input', () => {
-  execFileSync('python3', ['tests/trials_test.py'], { cwd: ROOT, stdio: 'pipe' });
+  execFileSync('python3', ['-B', '-m', 'unittest', 'discover', '-s', 'tests', '-p', '*_test.py'], { cwd: ROOT, stdio: 'pipe' });
 });
 
 test('evaluation evidence tampering and cached-token double counting are detected', () => {

@@ -27,8 +27,11 @@ export function loadPrices(root = ROOT): PriceSnapshot | null {
 const rate = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0;
 
 /** Use the stored LiteLLM standard-tier prices; never substitute a different model. */
-export function estimateModelCost(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, prices: PriceSnapshot | null): ModelCost {
-  return calculate(run, prices);
+export function estimateModelCost(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage' | 'pricing_snapshot'>, prices: PriceSnapshot | null): ModelCost {
+  const snapshot = run.pricing_snapshot ?? prices;
+  if (run.pricing_snapshot && createHash('sha256').update(JSON.stringify(snapshot!.models)).digest('hex') !== snapshot!.sha256)
+    return { amount_usd: null, kind: 'unknown', reason: 'Frozen price snapshot hash mismatch.', pricing: null };
+  return calculate(run, snapshot);
 }
 function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, prices: PriceSnapshot | null, singleRequest = false): ModelCost {
   const key = prices?.models[run.model] ? run.model : run.model.startsWith("glm-") ? `zai/${run.model}` : `openai/${run.model}`;
@@ -48,7 +51,7 @@ function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, p
     const costs = detail.requests.map(usage => calculate({ model: run.model, usage }, prices, true));
     const missing = costs.find(c => c.amount_usd === null);
     if (missing) return missing;
-    return { amount_usd: Number(costs.reduce((n, c) => n + c.amount_usd!, 0).toFixed(10)), kind: 'estimated',
+    return { amount_usd: Number(costs.reduce((n, c) => n + c.amount_usd!, 0).toPrecision(15)), kind: 'estimated',
       pricing: pricing ? { ...pricing, tier: 'standard; context tier selected per request' } : null,
       request_count: costs.length, reason: 'Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees.' };
   }
@@ -91,6 +94,6 @@ function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, p
     rates[name] = price;
     amount += count * price;
   }
-  return { amount_usd: Number(amount.toFixed(10)), kind: 'estimated', pricing, rates,
+  return { amount_usd: Number(amount.toPrecision(15)), kind: 'estimated', pricing, rates,
     reason: 'Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees.' };
 }

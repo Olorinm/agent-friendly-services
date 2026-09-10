@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-09T11:12:29.599Z",
+  "generated_at": "2026-09-10T10:39:32.164Z",
   "description": "Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
@@ -2379,12 +2379,12 @@
       "access_links": [
         {
           "label": "API",
-          "url": "https://developers.cloudflare.com/api/",
+          "url": "https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/",
           "kind": "documentation"
         },
         {
           "label": "SDK",
-          "url": "https://developers.cloudflare.com/fundamentals/api/reference/sdks/",
+          "url": "https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/",
           "kind": "documentation"
         },
         {
@@ -2394,7 +2394,7 @@
         },
         {
           "label": "MCP",
-          "url": "https://github.com/cloudflare/mcp-server-cloudflare",
+          "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
           "kind": "documentation"
         }
       ],
@@ -2425,6 +2425,26 @@
           "pricing": {
             "url": "https://developers.cloudflare.com/d1/platform/pricing/",
             "checked_on": "2026-09-07",
+            "kind": "official_docs"
+          },
+          "kv-api": {
+            "url": "https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/",
+            "checked_on": "2026-09-10",
+            "kind": "official_docs"
+          },
+          "kv-sdk": {
+            "url": "https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/",
+            "checked_on": "2026-09-10",
+            "kind": "official_docs"
+          },
+          "kv-cli": {
+            "url": "https://developers.cloudflare.com/kv/reference/kv-commands/",
+            "checked_on": "2026-09-10",
+            "kind": "official_docs"
+          },
+          "api-mcp": {
+            "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+            "checked_on": "2026-09-10",
             "kind": "official_docs"
           }
         },
@@ -2484,6 +2504,115 @@
                 ]
               }
             ],
+            "task_run_ids": []
+          },
+          {
+            "id": "kv-api",
+            "docs": "https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://api.cloudflare.com/client/v4/",
+            "evidence": [
+              "kv-api"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "kv-api"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown"
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "kv-api"
+              ]
+            },
+            "notes": "Documented remote Workers KV key-value read API. Requires account and namespace identifiers and credentials with permission for the requested operation. No task success is claimed.",
+            "task_run_ids": []
+          },
+          {
+            "id": "kv-sdk",
+            "docs": "https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/",
+            "interface": "sdk",
+            "maintainer": "official",
+            "entry_url": "https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/",
+            "evidence": [
+              "kv-sdk"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "kv-sdk"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown"
+            },
+            "auth": {
+              "value": "api_key",
+              "evidence": [
+                "kv-sdk"
+              ]
+            },
+            "notes": "Official cloudflare TypeScript client exposes remote KV namespace and value methods. Local package installation is distinct from obtaining credentials and remote resource access.",
+            "task_run_ids": []
+          },
+          {
+            "id": "kv-cli",
+            "docs": "https://developers.cloudflare.com/kv/reference/kv-commands/",
+            "interface": "cli",
+            "maintainer": "official",
+            "entry_url": "https://developers.cloudflare.com/kv/reference/kv-commands/",
+            "evidence": [
+              "kv-cli"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "kv-cli"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown"
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "kv-cli"
+              ]
+            },
+            "notes": "Wrangler provides native KV namespace, key-list and key-read commands. Remote storage must be selected for comparison with cloud API/SDK/MCP; local simulation is not equivalent.",
+            "task_run_ids": []
+          },
+          {
+            "id": "api-mcp",
+            "docs": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+            "interface": "mcp",
+            "maintainer": "official",
+            "entry_url": "https://mcp.cloudflare.com/mcp",
+            "evidence": [
+              "api-mcp"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "api-mcp"
+              ]
+            },
+            "personal_access": {
+              "value": "unknown"
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "api-mcp"
+              ],
+              "notes": "Official remote server documents OAuth and API-token bearer authentication; granted permissions still apply."
+            },
+            "notes": "Official remote API MCP exposes search and execute tools for Cloudflare API operations, including KV. Record the actual exposed tools and native MCP calls separately from raw HTTP. An existing Wrangler OAuth login is not assumed to authorize this endpoint.",
             "task_run_ids": []
           }
         ]

@@ -259,7 +259,8 @@ print(json.dumps({'type':'turn.completed','usage':usage}))
         self.assertEqual(basis['amount_usd'], 0.02)
         with self.assertRaisesRegex(ValueError, 'does not match'):
             recorder.service_charge({'service_cost_usd': 0.01, 'service_cost': detail})
-        detail.update(kind='confirmed_free', note='Verified free allowance for this run')
+        detail.update(kind='confirmed_free', note='Verified free allowance for this run',
+                      applicability={'rule': 'Free tier allowance', 'observed': 'Account has remaining quota', 'evidence': 'usage.json'})
         self.assertEqual(recorder.service_charge({'service_cost_usd': None, 'service_cost': detail})[0], 0)
         self.assessment.update(service_cost_usd=None, service_cost=detail)
         self.save()

@@ -80,7 +80,7 @@ export function buildBoards(records: Evaluation[]): Board[] {
 }
 const cell = (value: unknown) => String(value ?? 'unknown').replaceAll('|', '\\|').replaceAll('\n', ' ');
 export const tokenLabel = (n: number | null) => n === null ? '—' : n >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(Math.round(n));
-export const moneyLabel = (n: number | null) => n === null ? '—' : n === 0 ? '$0' : n < .01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`;
+export const moneyLabel = (n: number | null) => n === null ? '—' : n === 0 ? '$0' : n < .0001 ? '<$0.0001' : n < .01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`;
 export const boardHeader = (zh: boolean, withAccess = false) => {
   const headings = zh ? ['服务', '完成率', 'Token', '模型费用', '服务费用'] : ['Service', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost'];
   if (withAccess) headings.push(...(zh ? ['测试方式', '接入资料'] : ['Tested via', 'Access links']));
