@@ -95,6 +95,7 @@ Pipeline 不绑定具体模型或执行器。每批显式确定并记录执行�
 - [服务发现指令](data/candidates/AGENTS.md)：填写[候选表](generated/catalog.md)，源资料在 `data/candidates/` 和 `data/providers/`。
 - [任务设计指令](data/experiments/tasks/AGENTS.md)：填写对应任务表：[机票](data/experiments/tasks/travel-flights.md)、[网页搜索](data/experiments/tasks/web-search.md)、[数据库](data/experiments/tasks/databases.md)、[协作任务表](data/experiments/tasks/collaborative-tables.md)、[收款](data/experiments/tasks/payment-acceptance.md)、[金融数据](data/experiments/tasks/financial-data.md)、[邮箱](data/experiments/tasks/mailboxes.md)。必要的需求来源与限制可以直接随任务保留，也可复用 `data/research/`，不强制另建中间档案。
 - [执行与验收指令](data/experiments/AGENTS.md)：从候选和任务启动独立测评、复核证据，填写[结果表](generated/evaluations.md)并关联回服务目录。
+- [服务器运行器](scripts/runners/opencode/README.md)：后续执行与验收优先通过服务器 OpenCode CLI 调度；服务器和凭据由外部私有配置提供，复用通用 pipeline。
 - [维护说明](docs/contributing.md)：现有工具和字段参考，随实际需要调整。
 - [既有实验](docs/agent-verification.md)：历史测试方法、任务和证据；不代表所有新场景的固定方案。
 

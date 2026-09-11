@@ -332,6 +332,17 @@ print(json.dumps({'type':'turn.completed','usage':usage}))
         self.assertIn('outside', result['environment']['preparation_note'])
         self.assertIn('test-secret-123456', (self.workspace / 'response.json').read_text())
 
+    def test_copied_raw_adapter_log_cannot_be_published_as_evidence(self):
+        self.meta['usage_format'] = 'adapter-v1'
+        raw = self.run / 'raw-events.jsonl'
+        raw.write_text('PRIVATE MODEL INPUT')
+        (self.run / 'copy.md').write_bytes(raw.read_bytes())
+        (self.run / 'usage.json').write_text(json.dumps({'sources': [{'path': raw.name}]}))
+        self.assessment['evidence'] = [{'path': 'copy.md'}]
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'private adapter'):
+            recorder.record(self.run, self.review, dry_run=True)
+
     def test_route_relabel_and_evidence_escape_rejected(self):
         self.save()
         with self.assertRaisesRegex(ValueError, 'relabel'):

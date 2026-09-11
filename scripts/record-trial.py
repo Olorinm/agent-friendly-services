@@ -134,6 +134,7 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         private_usage_files.add((run_dir / 'usage.json').resolve())
         for source in json.loads((run_dir / 'usage.json').read_text()).get('sources', []):
             private_usage_files.add((run_dir / source['path']).resolve())
+    private_usage_hashes = {sha(path) for path in private_usage_files if path.is_file()}
     evidence = review.get('evidence', [])
     if not isinstance(evidence, list) or not evidence:
         raise ValueError('Select evidence files, including evidence of any failure/blocker')
@@ -151,8 +152,8 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
             raise ValueError('Evidence path must be a file inside the run directory')
         if source == (run_dir / 'session.raw.jsonl').resolve():
             raise ValueError('Do not publish the raw session as evidence')
-        if source in private_usage_files:
-            raise ValueError('Do not publish private adapter usage sources as evidence')
+        if source in private_usage_files or sha(source) in private_usage_hashes or source.name in ('events.jsonl', 'session.json'):
+            raise ValueError('Do not publish private adapter logs/usage sources or copies as evidence')
         if source == secret_file.resolve():
             raise ValueError('Do not select the private secret store as evidence')
         raw = source.read_bytes()

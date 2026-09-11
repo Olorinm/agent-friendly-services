@@ -55,6 +55,18 @@ elif op=='collect':
 
 
 class PipelineTests(unittest.TestCase):
+    def test_rejected_grader_attempts_are_included_in_cost(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name, amount in [('grading-attempt1', 0.02), ('grading', 0.01)]:
+                (root/name).mkdir()
+                pipeline.write(root/name/'model-cost.json', {'amount_usd': amount, 'kind': 'estimated'})
+            cost, attempts = pipeline.grading_costs(root)
+            self.assertAlmostEqual(cost['amount_usd'], 0.03)
+            self.assertEqual(len(attempts), 2)
+            (root/'grading-attempt1'/'model-cost.json').unlink()
+            self.assertIsNone(pipeline.grading_costs(root)[0]['amount_usd'])
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory(prefix='afs-pipeline-test-')
         self.addCleanup(self.tmp.cleanup)

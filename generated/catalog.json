@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T10:39:32.164Z",
+  "generated_at": "2026-09-10T11:09:04.892Z",
   "description": "Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
@@ -6066,7 +6066,7 @@
       "access_links": [
         {
           "label": "API",
-          "url": "https://docs.github.com/rest",
+          "url": "https://docs.github.com/en/rest/quickstart",
           "kind": "documentation"
         },
         {
@@ -6096,10 +6096,55 @@
         "Multi-product platform; this entry covers the core developer platform only (see scope)."
       ],
       "record_pool": "provider",
-      "evidence_level": "legacy_record",
+      "evidence_level": "public_sources_only",
       "route_tests": "not_recorded",
       "task_runs": [],
-      "catalog": null
+      "catalog": {
+        "version": 1,
+        "classifications": [
+          "developer-tools"
+        ],
+        "sources": {
+          "quickstart": {
+            "url": "https://docs.github.com/en/rest/quickstart",
+            "checked_on": "2026-09-10",
+            "kind": "official_docs"
+          }
+        },
+        "routes": [
+          {
+            "id": "rest-api",
+            "interface": "api",
+            "maintainer": "official",
+            "entry_url": "https://api.github.com/",
+            "docs": "https://docs.github.com/en/rest/quickstart",
+            "evidence": [
+              "quickstart"
+            ],
+            "availability": {
+              "value": "self_serve",
+              "evidence": [
+                "quickstart"
+              ]
+            },
+            "personal_access": {
+              "value": "documented",
+              "evidence": [
+                "quickstart"
+              ]
+            },
+            "auth": {
+              "value": "platform_credentials",
+              "evidence": [
+                "quickstart"
+              ]
+            },
+            "capabilities": {},
+            "notes": "Authenticated REST access; existing account setup and token permissions must be recorded separately from the task.",
+            "task_run_ids": []
+          }
+        ]
+      }
     },
     {
       "id": "gitlab",

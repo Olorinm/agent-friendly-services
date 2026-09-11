@@ -1847,7 +1847,9 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 
 [Docs](https://docs.github.com) · [API reference](https://docs.github.com/rest) · [CLI](https://cli.github.com) · [SDK](https://github.com/octokit) · [MCP entry](https://github.com/github/github-mcp-server)
 
-—
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [rest-api (API)](https://api.github.com/) | [Docs](https://docs.github.com/en/rest/quickstart) | self serve / documented | Authenticated REST access; existing account setup and token permissions must be recorded separately from the task. |
 
 ### Service pricing
 
@@ -1863,7 +1865,7 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 
 ### Sources
 
-—
+- [official_docs](https://docs.github.com/en/rest/quickstart) — checked 2026-09-10
 
 <a id="gitlab"></a>
 

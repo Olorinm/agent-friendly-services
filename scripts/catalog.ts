@@ -38,6 +38,7 @@ export function catalogErrors(p: Provider, categories: Category[], today: string
   );
   const allowedCaps = new Set<string>();
   for (const id of catalog.classifications) {
+    if (categories.some(c => c.id === id)) continue; // A route does not require inventing a subcategory.
     const sub = taxonomy.get(id);
     if (!sub) errors.push(`Unknown classification: ${id}; add it to data/categories.yaml first.`);
     else sub.capabilities.forEach(c => allowedCaps.add(c.id));

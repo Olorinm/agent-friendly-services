@@ -93,3 +93,31 @@ checks:
 
 notes:
   - Multi-product platform; this entry covers the core developer platform only (see scope).
+
+# Existing developer-tools scope; access routes do not require a new subcategory.
+catalog:
+  version: 1
+  classifications: [developer-tools]
+  sources:
+    quickstart:
+      url: https://docs.github.com/en/rest/quickstart
+      checked_on: '2026-09-10'
+      kind: official_docs
+  routes:
+    - id: rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.github.com/
+      docs: https://docs.github.com/en/rest/quickstart
+      evidence: [quickstart]
+      availability:
+        value: self_serve
+        evidence: [quickstart]
+      personal_access:
+        value: documented
+        evidence: [quickstart]
+      auth:
+        value: platform_credentials
+        evidence: [quickstart]
+      capabilities: {}
+      notes: Authenticated REST access; existing account setup and token permissions must be recorded separately from the task.

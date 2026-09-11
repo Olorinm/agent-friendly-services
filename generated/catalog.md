@@ -108,6 +108,14 @@ Each row is an access route, not an independent data supplier. Services without 
 | [Turso](../data/candidates/turso.yaml) | databases/hosted-relational | [cloud-cli (cli)](https://docs.turso.tech/cli/introduction) | unknown | self_serve | documented | Requirements incomplete; 5 GB / account (free_allowance; Free cloud storage; account quota also limits reads, writes and number of databases.); Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. | not recorded |
 | [Turso](../data/candidates/turso.yaml) | databases/hosted-relational | [platform-api (api)](https://docs.turso.tech/api-reference/introduction) | unknown | self_serve | unknown | Requirements incomplete; Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. | [database-todos-001: completed (2026-09-07)](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) |
 
+<a id="developer-tools"></a>
+
+## developer-tools
+
+| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [GitHub](../data/providers/github.yaml) | developer-tools | [rest-api (api)](https://api.github.com/) | unknown | self_serve | documented | Requirements incomplete; Authenticated REST access; existing account setup and token permissions must be recorded separately from the task. | not recorded |
+
 <a id="developer-tools-monitoring"></a>
 
 ## developer-tools/monitoring

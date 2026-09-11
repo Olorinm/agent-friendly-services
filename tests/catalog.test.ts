@@ -194,3 +194,13 @@ test('generated data and the real MCP protocol preserve legacy behavior and expo
     fs.rmSync(output, { recursive: true, force: true });
   }
 });
+
+test('existing categories can hold routes without an invented subcategory', () => {
+  const p = withRoute();
+  p.category = 'developer-tools';
+  p.catalog!.classifications = ['developer-tools'];
+  assert.equal(valid(p), true, JSON.stringify(valid.errors));
+  assert.deepEqual(catalogErrors(p, categories, today), []);
+  p.catalog!.classifications = ['unknown-category'];
+  assert.ok(catalogErrors(p, categories, today).some(e => e.startsWith('Unknown classification:')));
+});

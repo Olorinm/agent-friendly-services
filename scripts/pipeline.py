@@ -236,7 +236,26 @@ def finish_execution(directory, config, receipt, elapsed):
     shutil.copytree(directory / 'frozen/execution', grade / 'frozen-execution')
     shutil.copytree(output, grade / 'execution')
     (grade / 'prompt.txt').write_text('按 AGENTS.md 验收 task.json 的这一次执行。frozen-execution 是冻结输入，execution 是实际记录。'
-                                    '不补做用户任务。在输出目录写 assessment.json，采用项目约定字段和费用依据。\n')
+                                    '不补做用户任务。在当前工作目录写 assessment.json，采用项目约定字段和费用依据。\n'
+                                    'evidence.path 相对整次运行目录：执行者最终答复是 execution/answer.md；工作文件是 execution/artifacts/文件名（仅在实际存在时引用）；'
+                                    '你新建的简短脱敏证据请放当前目录 evidence/，条目路径使用 grading/artifacts/evidence/文件名。\n'
+                                    '禁止将 events.jsonl、session.json、wire/ 或任何原始会话与模型用量源文件选为公开证据。'
+                                    '引用最少业务结果即可；如使用日志，摘录必要业务字段到简短证据文件，删除账号、资源标识和密钥。\n'
+                                    'confirmed_free 必须给出真实免费规则来源与本次适用证据；执行者自称没有付款不证明免费。无法确认则 unknown。\n')
+
+
+def grading_costs(directory):
+    """Include rejected grader attempts; retry overhead is not free."""
+    outputs = sorted(p for p in directory.glob('grading-attempt*') if p.is_dir()) + [directory / 'grading']
+    attempts = [{'directory': p.name, 'model_cost': read(p / 'model-cost.json')
+                 if (p / 'model-cost.json').exists() else {'amount_usd': None, 'kind': 'unknown'}} for p in outputs]
+    if len(attempts) == 1:
+        return attempts[0]['model_cost'], attempts
+    amounts = [row['model_cost'].get('amount_usd') for row in attempts]
+    known = all(isinstance(n, (int, float)) and not isinstance(n, bool) for n in amounts)
+    return {'amount_usd': sum(amounts) if known else None,
+            'kind': 'estimated' if known else 'unknown',
+            'reason': 'All grader attempts, including rejected outputs; per-attempt saved price calculations retained.'}, attempts
 
 
 def advance(directory):
@@ -290,9 +309,10 @@ def advance(directory):
         recorder = module('recorder', 'record-trial.py')
         recorder.record(directory, directory / 'grading/assessment.json', dry_run=True)
         amount, detail = service_charge(assessment)
+        grading_total, grading_attempts = grading_costs(directory)
         write(directory / 'charges.json', {'model_cost': read(directory / 'execution/model-cost.json'),
                                           'service_cost_usd': amount, 'service_cost': detail,
-                                          'grading_model_cost': read(directory / 'grading/model-cost.json')})
+                                          'grading_model_cost': grading_total, 'grading_attempts': grading_attempts})
         state.update(phase='reviewed', record_hashes={name: digest(directory / name) for name in
                      ('run.json', 'charges.json', 'grading/assessment.json', 'pricing.json')})
     write(directory / 'state.json', state)
