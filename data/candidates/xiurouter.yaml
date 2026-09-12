@@ -12,12 +12,12 @@ tags:
   - usage-tracking
 
 entrypoints:
-  docs: https://docs.xiu.ai/router/
-  api_reference: https://docs.xiu.ai/router/api-compatibility/
+  docs: https://docs.xiu.ai/en/router/
+  api_reference: https://docs.xiu.ai/en/router/api-compatibility/
   llms_txt: https://docs.xiu.ai/llms.txt
   pricing: https://router.xiu.ai/en/pricing
   status_page: https://router-api.xiu.ai/api/status
-  api_keys: https://docs.xiu.ai/router/quickstart/
+  api_keys: https://docs.xiu.ai/en/router/quickstart/
   agent_docs: https://docs.xiu.ai/router/integrations/
   errors: https://docs.xiu.ai/router/errors-and-production/
 
@@ -59,9 +59,9 @@ checks:
 
   usage_dashboard:
     status: supported
-    evidence: https://docs.xiu.ai/router/models-pricing-usage/
-    verified: "2026-09-02"
-    notes: The official documentation directs users to usage records to verify model, service group, tokens, cost, status, and result for a request.
+    evidence: https://docs.xiu.ai/en/router/models-pricing-usage/
+    verified: "2026-09-12"
+    notes: The official documentation describes request statistics for model, final service group, tokens, cost, status, and result. It does not provide conversation content. A single available service tier is shown directly; the simpler display does not change existing key permissions or groups.
 
   idempotency:
     status: unknown
@@ -74,6 +74,8 @@ checks:
     notes: The public documentation describes API and agent integrations, but the provider terms were not used to infer a general automation policy.
 
 notes:
-  - "Vendor submission based only on official XiuRouter and XiuAI documentation checked on 2026-09-02."
+  - "Vendor submission based on official documentation. English entrypoints, usage guidance, and the data policy were rechecked on 2026-09-12 UTC; other check dates retain their original scope."
+  - "The published data policy states that XiuRouter does not store model conversation content or use it for training. Usage statistics and model performance data are retained long term; model providers apply their own service data policies. Source: https://router.xiu.ai/en/data-privacy (2026-09-12 UTC). This is the provider's documented policy, not an independent audit."
+  - "Pricing depends on the model, context band, processing mode, and input/output/cache usage. Provider-reference prices are comparison values; the recorded service-group charge determines the actual bill. Source: https://docs.xiu.ai/en/router/models-pricing-usage/ (2026-09-12 UTC)."
   - "This entry belongs in the candidate pool until a passing M1 agent run and evidence review promote it to the verified index."
   - "No new model request was made for this contribution because the official quickstart states that model requests incur usage-based charges."
