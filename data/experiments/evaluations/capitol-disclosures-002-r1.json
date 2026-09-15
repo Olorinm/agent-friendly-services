@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "run_id": "capitol-disclosures-002-r1",
+  "service_id": "capitol-exposed",
+  "route_id": "data-api-keyless",
+  "entry_url": "https://www.capitolexposed.com/api/v1",
+  "task": {
+    "description": "我的关注名单里有 Richard W. Allen、Donald Sternoff Beyer Jr、Rob Bresnahan 和 Ed Case。查一下他们 2026 年 8 月提交的披露中有哪些苹果股票买卖，列出明细；没有匹配记录的人也请说明，并附原始申报出处。",
+    "inputs": "按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 关注名单：Allen（GA12）、Beyer（VA08）、Bresnahan（PA08）、Case（HI01）；股票为 Apple Inc.（AAPL）。不能把服务未收录或查不到直接等同于没有交易，也不能从披露推断当前持仓。",
+    "expected_output": "按关注名单给出匹配或无匹配的结论；有记录时列出股票、买卖方向、交易日、官方提交日、美元金额区间；标明数据服务及具体原始申报。",
+    "success": "四位身份与期间正确，全部匹配明细与冻结官方索引及 PTR 一致；无匹配结论同时有指定服务查询和官方范围核对依据，不能由报错或空响应单独推出。金额保留区间，来源定位到具体申报。",
+    "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 漏掉名单成员、把债券当股票、把无匹配说成没有持仓，或未解释查询覆盖缺口均不通过。",
+    "resources": "指定服务的免费只读 API 与官方文档；可核对众议院原始申报，不能用其他聚合服务补齐。结果仅供私有阅读，不导出或发布原始数据；遵守署名与额度，不注册、不付费、不交易。",
+    "id": "financial-disclosures-002",
+    "version": "v1",
+    "sha256": "0b18c996df5fed3135950facfac55298b15f1befc57dc8e8bd246f2845079dc6",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "a8a9b2ae9657611648bbec940c61d83856771b03cea49f0e57a67e77f92415d9",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T12:09:04.533341+00:00",
+  "ended_at": "2026-09-15T12:17:41.273569+00:00",
+  "elapsed_seconds": 516.740228,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Continues the independently passed 2026-09-15 keyless access setup in the same service/route container. Reuses service configuration and installed dependencies only; new workspace/session per task. Controller prepared tasks and official references. Cloud execution and grading GLM-5.3-Flash/high, 600 seconds each; at most two active sessions across batch. Round 1 of this four-task comparison; no fresh signup claimed.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "独立验收确认：四人查询结果与冻结的官方索引和原始 PTR 相符；匹配明细正确，无匹配结论同时有指定服务全量查询和官方原件核对依据，附具体出处及署名，金额保留区间且未推断持仓。执行者披露了未枚举官方全量索引的限制；验收者用事前冻结索引确认当前样本的原件覆盖，未补写执行答案。",
+  "usage": {
+    "input_tokens": 1103414,
+    "cached_input_tokens": 1052672,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 13130,
+    "reasoning_output_tokens": 6407
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.capitolexposed.com/api-docs",
+      "grading/artifacts/evidence/verification.md"
+    ],
+    "applicability": {
+      "rule": "CapitolExposed API 官方文档载明：免费层请求免 Key、按 IP 限速（成员/交易列表端点 60 请求/分钟/IP），免费只读、要求署名；付费项仅为其 AI 产品与批量导出功能。",
+      "observed": "本次业务数据全部来自免 Key GET 请求（/api/v1/search、/members/{slug}/trades），2026-09-15 实调均返回 HTTP 200；未注册账号、未携带 X-API-Key、未使用付费导出或 AI 功能。",
+      "evidence": "grading/artifacts/evidence/verification.md"
+    },
+    "note": "无服务方收费回执；依据文档化免费规则与本次免 Key 调用观察判定本次服务费用为 0。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-acceptance-agent (opencode, 2026-09-15)",
+    "reviewed_at": "2026-09-15T12:26:48.953153+00:00",
+    "checks": [
+      {
+        "criterion": "业务数据来自指定服务 capitol-exposed REST API 的真实调用，未用其他聚合服务或模型记忆替代",
+        "passed": true,
+        "evidence": "指定服务真实请求及分页回执支持四人的业务数据查询；接口股票过滤未生效时，执行者取全量后在本地过滤。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "四位身份与筛选期间正确（Allen GA12、Beyer VA08、Bresnahan PA08、Case HI01；官方提交 2026-08-01 至 08-31）",
+        "passed": true,
+        "evidence": "名单身份、众议院范围和官方提交月份与冻结参考一致。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "全部匹配明细与冻结官方索引及 PTR 一致（股票、方向、交易日、提交日、金额区间、出处）",
+        "passed": true,
+        "evidence": "匹配字段与官方原件逐项一致，采集 PDF 哈希与冻结参考相同。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "无匹配结论同时有指定服务查询与官方范围核对依据，非由报错或空响应单独推出",
+        "passed": true,
+        "evidence": "执行者对指定服务全量结果及原始文件做了核对；验收者再以事前冻结索引确认本样本的原件覆盖。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "金额保留区间、来源定位到具体申报，且未把无匹配说成无持仓",
+        "passed": true,
+        "evidence": "交付金额保留区间，给出具体原始出处，注明当前持仓不能由披露推定，并披露自身索引检索限制。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "授权与接入合规：仅用确认免费的免 Key 公开入口，不注册、不付费；官方文件仅用于核对",
+        "passed": true,
+        "evidence": "当次请求和官方免费规则支持免 Key 免费只读使用，原始政府文件仅用于核对。 原始交易行与完整核对记录私有保留。"
+      },
+      {
+        "criterion": "运行配置与测评相符且预算内完成（模型/harness/600 秒上限）",
+        "passed": true,
+        "evidence": "实际模型、执行器及预算符合冻结配置；本次执行约 517 秒，无超时。 原始交易行与完整核对记录私有保留。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "disclosures-002-r1",
+      "round": 1,
+      "snapshot_sha256": "7b3e5e6096c1a969400a74d13d18c73ac554a57152567316f7e6702ee65638ec",
+      "run_ids": [
+        "bargo-disclosures-002-r1",
+        "capitol-disclosures-002-r1"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/capitol-disclosures-002-r1/grading/artifacts/evidence/verification.md",
+      "sha256": "c269ea818c3e3768c989cd1adb661f39943bd81ba7da14e3b4365e9695caef83",
+      "note": "非重建性核验摘要，保留执行者覆盖限制、独立参考核对与费用依据",
+      "source_sha256": "e58d12a82e3605d1934c9c0c1179fd860556203d192a5dd04b0197de824139c2",
+      "redactions": [
+        "Controller abstract omits transaction rows and original PDFs; unchanged originals retained privately."
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/disclosures-suite-20260915/capitol-disclosures-002-r1",
+    "run_sha256": "c4df17f742f4d0cd9088e01e0391b02b2ff2875719bc7616056cb6094f5b23bc",
+    "events_sha256": "365b77b0e87badb4d0bf9fbda55828fb1bed7280e94dffbae7771be2af318473",
+    "answer_sha256": "a823b4511d22b0793d94471d0ee6f9788a27865e14fe74ba0b01f78b9b0c9bd9",
+    "review_sha256": "df07ed76e76224f3fd0a01cfe023e3cab6e46972972dc825ca01245c91a3d210",
+    "privacy_note": " Public reason, check evidence and selected evidence are non-reconstructive controller abstracts; the original independent review and selected PDF sources remain private under recorded hashes. Status, check booleans, measured usage and fees are unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6933,
+        "cached_input_tokens": 5952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 66,
+        "reasoning_output_tokens": 18
+      },
+      {
+        "input_tokens": 7469,
+        "cached_input_tokens": 6912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 515,
+        "reasoning_output_tokens": 302
+      },
+      {
+        "input_tokens": 8202,
+        "cached_input_tokens": 7424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 69,
+        "reasoning_output_tokens": 25
+      },
+      {
+        "input_tokens": 16202,
+        "cached_input_tokens": 8192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 688,
+        "reasoning_output_tokens": 415
+      },
+      {
+        "input_tokens": 16976,
+        "cached_input_tokens": 16192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 311,
+        "reasoning_output_tokens": 152
+      },
+      {
+        "input_tokens": 17395,
+        "cached_input_tokens": 16960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1176,
+        "reasoning_output_tokens": 476
+      },
+      {
+        "input_tokens": 18585,
+        "cached_input_tokens": 17344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 41,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18761,
+        "cached_input_tokens": 18560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 345,
+        "reasoning_output_tokens": 155
+      },
+      {
+        "input_tokens": 20008,
+        "cached_input_tokens": 18752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1188,
+        "reasoning_output_tokens": 897
+      },
+      {
+        "input_tokens": 21657,
+        "cached_input_tokens": 19968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1088,
+        "reasoning_output_tokens": 813
+      },
+      {
+        "input_tokens": 23721,
+        "cached_input_tokens": 21632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 553,
+        "reasoning_output_tokens": 347
+      },
+      {
+        "input_tokens": 24328,
+        "cached_input_tokens": 23680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 143,
+        "reasoning_output_tokens": 55
+      },
+      {
+        "input_tokens": 24522,
+        "cached_input_tokens": 24320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 36,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 24589,
+        "cached_input_tokens": 24512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 89,
+        "reasoning_output_tokens": 72
+      },
+      {
+        "input_tokens": 24695,
+        "cached_input_tokens": 24576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 79,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 24788,
+        "cached_input_tokens": 24640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 215,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 25022,
+        "cached_input_tokens": 24768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 238,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 25498,
+        "cached_input_tokens": 24960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 383,
+        "reasoning_output_tokens": 171
+      },
+      {
+        "input_tokens": 25890,
+        "cached_input_tokens": 25472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26250,
+        "cached_input_tokens": 25856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 115,
+        "reasoning_output_tokens": 50
+      },
+      {
+        "input_tokens": 26385,
+        "cached_input_tokens": 5888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 79,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26609,
+        "cached_input_tokens": 26368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 239,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26989,
+        "cached_input_tokens": 26560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 87,
+        "reasoning_output_tokens": 26
+      },
+      {
+        "input_tokens": 27455,
+        "cached_input_tokens": 26944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 42,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 27504,
+        "cached_input_tokens": 27392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 27569,
+        "cached_input_tokens": 27456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 98,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 27730,
+        "cached_input_tokens": 27520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 112,
+        "reasoning_output_tokens": 38
+      },
+      {
+        "input_tokens": 28031,
+        "cached_input_tokens": 27712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 246,
+        "reasoning_output_tokens": 67
+      },
+      {
+        "input_tokens": 28476,
+        "cached_input_tokens": 27968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 24,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28552,
+        "cached_input_tokens": 28416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 257,
+        "reasoning_output_tokens": 106
+      },
+      {
+        "input_tokens": 28865,
+        "cached_input_tokens": 28544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 212,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 29395,
+        "cached_input_tokens": 28864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 298,
+        "reasoning_output_tokens": 219
+      },
+      {
+        "input_tokens": 31022,
+        "cached_input_tokens": 29376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 999,
+        "reasoning_output_tokens": 814
+      },
+      {
+        "input_tokens": 32093,
+        "cached_input_tokens": 30976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 32413,
+        "cached_input_tokens": 32064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 394,
+        "reasoning_output_tokens": 282
+      },
+      {
+        "input_tokens": 32891,
+        "cached_input_tokens": 32384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 68,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 32992,
+        "cached_input_tokens": 32832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 853,
+        "reasoning_output_tokens": 797
+      },
+      {
+        "input_tokens": 33973,
+        "cached_input_tokens": 32960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 215,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 34196,
+        "cached_input_tokens": 33920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 105,
+        "reasoning_output_tokens": 57
+      },
+      {
+        "input_tokens": 34388,
+        "cached_input_tokens": 34176,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 256,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 34652,
+        "cached_input_tokens": 34368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 32,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 34692,
+        "cached_input_tokens": 34624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 166,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 35051,
+        "cached_input_tokens": 34688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 831,
+        "reasoning_output_tokens": 20
+      }
+    ],
+    "source_sha256": "851b4b706d80ac21076cd8c410fa6c89d98e126c0a0742715d230989dfcbd073",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 1103414,
+      "cached_input_tokens": 1052672,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 13130,
+      "reasoning_output_tokens": 6407
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

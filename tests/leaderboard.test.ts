@@ -79,6 +79,31 @@ test('historical task versions are retained in records but not pooled into curre
   assert.equal(records.length, 2);
 });
 
+test('peer review separates earlier solo trials and different cohorts, while pooling matching rounds', () => {
+  const reviewed = (id: string, service: string, ids: string[], group: string) => run({
+    run_id: id, service_id: service,
+    review: { method: 'external_agent', reviewer: 'grader', reviewed_at: '2026-09-08T00:10:00Z', checks: [],
+      peer_context: { group_id: group, round: group === 'round-1' ? 1 : 2,
+        snapshot_sha256: group.padEnd(64, '0'), run_ids: ids } },
+  });
+  const old = run({ run_id: 'old', started_at: '2026-09-01T00:00:00Z' });
+  const a = reviewed('a1', 'a', ['a1', 'b1'], 'round-1');
+  const b = reviewed('b1', 'b', ['a1', 'b1'], 'round-1');
+  const a2 = reviewed('a2', 'a', ['b2', 'a2'], 'round-2');
+  const b2 = reviewed('b2', 'b', ['a2', 'b2'], 'round-2');
+  const records = [old, a, b, a2, b2];
+  const boards = buildBoards(records);
+  assert.equal(boards.length, 1);
+  assert.deepEqual(boards[0].rows.map(r => r.metrics.trials), [2, 2]);
+  assert(!boards[0].rows.flatMap(r => r.runs).some(r => r.run_id === 'old'));
+  assert.equal(records.length, 5);
+  assert.equal(buildBoards([a, run({ run_id: 'b1', service_id: 'b' })]).length, 2);
+  const c = reviewed('c1', 'c', ['a1', 'c1'], 'round-1');
+  assert.equal(buildBoards([a, b, c]).length, 2);
+  assert.match(renderBoardDetails(boards, new Map(), true), /同期 2 家服务/);
+  assert.match(renderBoardDetails(boards, new Map(), false), /same-task answers from 2 services/);
+});
+
 test('per-request billing applies context tiers to each call, with final totals reconciled', () => {
   const table = prices({ input_cost_per_token_above_1000_tokens: .000004,
     cache_read_input_token_cost_above_1000_tokens: .0000004, output_cost_per_token_above_1000_tokens: .00002 });

@@ -32,15 +32,25 @@ def collect_artifacts(workspace,private,out):
     with archive.open('wb') as stream:
         subprocess.run(['tar','-cf','-','-C',str(workspace),'.'],stdout=stream,preexec_fn=identity,check=True)
     target=out/'artifacts';target.mkdir()
+    omitted=[]
     with tarfile.open(archive) as stream:
         for member in stream:
             dest=(target/member.name).resolve()
-            if not dest.is_relative_to(target) or not (member.isdir() or member.isfile()):
+            if not dest.is_relative_to(target):
                 raise ValueError('Unsafe artifact path or link')
+            if member.issym() or member.islnk():
+                # Never follow executor links, even when they look internal.
+                # Preserve the omission so graders can distinguish it from a
+                # missing deliverable without losing unrelated regular files.
+                omitted.append({'path':member.name,'reason':'Link omitted; target not read'})
+                continue
+            if not (member.isdir() or member.isfile()):
+                raise ValueError('Unsafe artifact type')
             if member.isdir():dest.mkdir(parents=True,exist_ok=True)
             else:
                 dest.parent.mkdir(parents=True,exist_ok=True)
                 dest.write_bytes(stream.extractfile(member).read())
+    dump(out/'artifact-omissions.json',omitted)
 
 
 def main():
@@ -97,12 +107,6 @@ def main():
     if session:
         with (out/'session.json').open('wb') as f:
             subprocess.run(['opencode','export',session],cwd=workspace,env=env,stdout=f,stderr=(out/'export.stderr').open('wb'),preexec_fn=identity,timeout=20)
-    collect_artifacts(workspace,private,out)
-    # Preserve state for inspection without exposing it to the next task or copying service keys to grading.
-    dump(out/'retained-files.json',[str(p.relative_to('/home/node/service-tools')) for p in Path('/home/node/service-tools').rglob('*') if p.is_file()])
-    if (out/'artifacts/assessment.json').is_file():
-        if (out/'artifacts/assessment.json').is_symlink():raise ValueError('Assessment must not be a symlink')
-        shutil.copyfile(out/'artifacts/assessment.json',out/'assessment.json')
     requests=[json.loads(p.read_text()) for p in (out/'wire').glob('*/request.json')]
     def strings(value):
         if isinstance(value,str):return [value]
@@ -115,6 +119,13 @@ def main():
     verified=bool(requests) and role in payload and all(line in payload for line in prompt.decode().splitlines() if line.strip()) and all(r.get('model')==request['model'] and r.get('reasoning_effort')==request['reasoning_effort'] for r in requests)
     dump(out/'receipt.json',dict(session_id=session,workspace=str(workspace),model=request['model'],reasoning_effort=request['reasoning_effort'],harness=request['harness'],runtime=request['runtime'],started_at=started,ended_at=ended,exit_code=process.returncode,timed_out=timed_out,isolation='Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools',input_verified=verified))
     normalize(out,request['model'])
+    # Persist actual process status and usage before collecting untrusted files.
+    # Collection errors must not erase the already observed runtime receipt.
+    collect_artifacts(workspace,private,out)
+    # Preserve state for inspection without exposing it to the next task or copying service keys to grading.
+    dump(out/'retained-files.json',[str(p.relative_to('/home/node/service-tools')) for p in Path('/home/node/service-tools').rglob('*') if p.is_file()])
+    if (out/'artifacts/assessment.json').is_file():
+        shutil.copyfile(out/'artifacts/assessment.json',out/'assessment.json')
     dump(private/'done.json',{'status':'completed' if process.returncode==0 else 'failed'})
 
 if __name__=='__main__':main()

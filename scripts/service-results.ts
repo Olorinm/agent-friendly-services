@@ -1,6 +1,6 @@
 import type { Provider } from './lib.ts';
 import type { Evaluation } from './evaluations.ts';
-import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel } from './leaderboard.ts';
+import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel, peerReviewLabel } from './leaderboard.ts';
 import { taskDisplay } from './task-display.ts';
 import { taskClassification } from './task-classifications.ts';
 
@@ -25,7 +25,7 @@ export function renderSetup(p: Provider, records: Evaluation[]) {
     const setup = latest.find(r => r.route_id === route.id && taskClassification(r.task).phase === 'setup' && r.status !== 'invalid_run');
     const measured = setup ? `[${tokenLabel(setup.usage ? setup.usage.input_tokens + setup.usage.output_tokens : null)}](${recordLink(setup)})` : '—';
     return [routeName(p, route.id), r ? `[${state}](${recordLink(r)})` : state, measured,
-      setup ? `${setup.elapsed_seconds}s` : '—', setup ? cell(setup.human_interventions) : '—'];
+      setup?.elapsed_seconds != null ? `${setup.elapsed_seconds}s` : '—', setup ? cell(setup.human_interventions) : '—'];
   });
   return table(['Route', 'Starting resources', 'Latest setup tokens', 'Latest setup time', 'Latest setup human involvement'], rows);
 }
@@ -57,7 +57,7 @@ export function renderServiceResults(p: Provider, boards: Board[], records: Eval
     for (const route of p.catalog?.routes ?? []) if (!matching.some(e => e.row.route_id === route.id)) {
       rows.push([routeName(p, route.id), '—', '—', '—', '—', '—', ...(conditions.length > 1 ? ['—'] : [])]);
     }
-    const config = (r: Evaluation) => `${cell(r.harness.version)} · ${cell(r.model)} / ${cell(r.reasoning_effort)} · ${r.budget_seconds}s`;
+    const config = (r: Evaluation) => `${cell(r.harness.version)} · ${cell(r.model)} / ${cell(r.reasoning_effort)} · ${r.budget_seconds}s${peerReviewLabel(r) ? ` · ${peerReviewLabel(r)}` : ''}`;
     const commonConfigs = [...new Set(matching.map(e => config(e.runs[0])))];
     const dates = [...new Set(matching.flatMap(e => e.runs).map(r => r.started_at.slice(0, 10)))].sort().join(', ');
     const shared = `${commonConfigs.length === 1 ? commonConfigs[0] + ' · ' : ''}${dates} (UTC)`;

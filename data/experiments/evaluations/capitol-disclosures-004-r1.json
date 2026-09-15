@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "run_id": "capitol-disclosures-004-r1",
+  "service_id": "capitol-exposed",
+  "route_id": "data-api-keyless",
+  "entry_url": "https://www.capitolexposed.com/api/v1",
+  "task": {
+    "description": "帮我核对这条待查说法：“Ed Case 本人在 2026 年 8 月 18 日主动买入了恰好 8,000 美元的苹果股票。”请逐项判断交易归属、日期、金额和交易性质，写出有依据的更正，并附原始申报出处。",
+    "inputs": "按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 Ed Case（HI01），Apple Inc.（AAPL）。引号内是研究者编写的合成待查说法，不是真实新闻引文；仅核对该月提交的相关披露。区分本人、配偶或共同持有，交易日和提交日，以及金额区间和精确金额；交易性质以原始说明为准，无依据就说无法确认。",
+    "expected_output": "四项主张分别判断并给出理由、可核对的更正和来源；标明指定数据服务，不扩展成动机或投资建议。",
+    "success": "真实指定服务记录与具体官方申报共同支持核对；归属、日期、金额、交易性质均与冻结参考相符；不能把区间中点当精确成交额、申报人当交易所有人，或遗漏影响说法真假的原始备注。",
+    "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 任一主张误判、遗漏、更正无据或把合成说法当真实报道均不通过。",
+    "resources": "指定服务的免费只读 API 与官方文档；可核对众议院原始申报，不能用其他聚合服务补齐。结果仅供私有阅读，不导出或发布原始数据；遵守署名与额度，不注册、不付费、不交易。",
+    "id": "financial-disclosures-004",
+    "version": "v1",
+    "sha256": "32fc4ebba182f5c93b982e3fcd56544757c8f162941c7486408189632d8bfe62",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "b010006b4f6273884756782078d0bcabda73cec4fba3e2654757726b88d24c6c",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T12:38:23.929828+00:00",
+  "ended_at": "2026-09-15T12:40:35.943227+00:00",
+  "elapsed_seconds": null,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Continues the independently passed 2026-09-15 keyless access setup in the same service/route container. Reuses service configuration and installed dependencies only; new workspace/session per task. Controller prepared tasks and official references. Cloud execution and grading GLM-5.3-Flash/high, 600 seconds each; at most two active sessions across batch. Round 1 of this four-task comparison; no fresh signup claimed. Infrastructure collection failure: process exit/timeout/end duration unavailable. ended_at is controller stop confirmation; elapsed_seconds is unknown. Partial capture recovered without rerunning; see receipt recovery and original worker failure.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "invalid_run",
+  "reason": "运行器采集软链接时退出，原始进程回执与精确时长缺失。独立验收的原始业务结论为 completed；总控保留该结论并另作环境无效裁决，排除出完成率，不作为服务失败。最终答案另有原始所有者代码抄写错误，原验收未指出，已在质量说明中保留。",
+  "usage": {
+    "input_tokens": 250971,
+    "cached_input_tokens": 232064,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5116,
+    "reasoning_output_tokens": 1989
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.capitolexposed.com/api-docs",
+      "grading/artifacts/evidence/verification-summary.md"
+    ],
+    "note": "指定服务本次仅使用免 Key 只读公开端点，官方文档载明免费层级无需认证、按 IP 限速并要求署名；未调用付费 AI 或导出功能，无注册或付款发生。",
+    "applicability": {
+      "rule": "CapitolExposed 官方 API 文档：Free-tier requests require no authentication and are rate-limited by IP address；免费只读访问，附署名要求（keyless 约 60 req/min/IP）。",
+      "observed": "本次执行仅发起两笔无 X-API-Key 的 GET（/api/v1/members/ed-case、/api/v1/members/ed-case/trades?per_page=100），均 HTTP 200；未注册、未绑定支付、未启用付费超额。",
+      "evidence": "grading/artifacts/evidence/verification-summary.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-acceptance-agent; controller runtime validity decision (original business verdict preserved)",
+    "reviewed_at": "2026-09-15T12:54:19.325867+00:00",
+    "checks": [
+      {
+        "criterion": "指定服务真实调用",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "交易归属判断",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "交易日与提交日区分",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "金额区间与精确值区分",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "交易性质依据",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "更正及出处",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "原始文件与冻结参考核对",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "提交月份范围",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      },
+      {
+        "criterion": "合成输入及授权范围",
+        "passed": true,
+        "evidence": "原独立验收判为满足；具体原始材料私有保留。总控的运行有效性裁决及代码抄写问题另见公开摘要，不以此项通过代替整体质量结论。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "disclosures-004-r1",
+      "round": 1,
+      "snapshot_sha256": "3834e399de0c953a26d79f5a2689404d089720fd336769c61401a0c8dce1b15a",
+      "run_ids": [
+        "bargo-disclosures-004-r1",
+        "capitol-disclosures-004-r1"
+      ]
+    },
+    "original_status": "completed",
+    "validity_override": {
+      "decided_by": "controller",
+      "status": "invalid_run",
+      "reason": "Process receipt lost during artifact collection; successful execution cannot be established. Original independent business verdict and check booleans retained.",
+      "original_review_sha256": "150f5a1bd811141b57aec916e6b36504bd2103a611444334f5333b25abd08819"
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/capitol-disclosures-004-r1/grading/artifacts/evidence/verification-summary.md",
+      "sha256": "511d6313a400d8fb7831a5990f7d5cef9941d9009beb56da2d7719e5f054ff93",
+      "source_sha256": "1f3770a74410d70c1e57d9088475f762b04294f85131ecb1fea56d63a64dbf9e",
+      "note": "总控运行有效性裁决、原独立结论及质量说明；不含交易原始行",
+      "redactions": [
+        "Non-reconstructive controller abstract; unchanged original grade retained privately."
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/disclosures-suite-20260915/capitol-disclosures-004-r1",
+    "run_sha256": "f48ab0a7b9b99d86c04710d69879eb224add09ed17883c1650dca4097cbf814a",
+    "events_sha256": "55d37f31b8681f64f1928244b265049b8522373737bc260b654daa89095b4ecb",
+    "answer_sha256": "fa78e011698fd08c7b7cc969ce58d3263f0a20850815412094df86f745c6afc4",
+    "review_sha256": "01b793d81ef43023cd10bf2f40f83001f4c53f903e50664ca662ec795ed4ebdf",
+    "independent_review_sha256": "150f5a1bd811141b57aec916e6b36504bd2103a611444334f5333b25abd08819",
+    "validity_decision_sha256": "84271e6a2bbc3bc0692c68111e9cae5fe08391d52dc6d1d0102523621c02ff21",
+    "privacy_note": "Public reason/check text/evidence are controller abstracts. Original independent status completed and all check booleans are preserved under review; public invalid_run is a separately identified controller runtime-validity decision. review_sha256 refers to the derived recording assessment; independent_review_sha256 identifies the unchanged original. Usage and price calculations are unchanged; unknown runtime duration stays null."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6937,
+        "cached_input_tokens": 5952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 66,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 7491,
+        "cached_input_tokens": 6912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 503,
+        "reasoning_output_tokens": 310
+      },
+      {
+        "input_tokens": 8393,
+        "cached_input_tokens": 7488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 87,
+        "reasoning_output_tokens": 43
+      },
+      {
+        "input_tokens": 16495,
+        "cached_input_tokens": 8384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 280,
+        "reasoning_output_tokens": 121
+      },
+      {
+        "input_tokens": 16787,
+        "cached_input_tokens": 16448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 154,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19494,
+        "cached_input_tokens": 16768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 621,
+        "reasoning_output_tokens": 457
+      },
+      {
+        "input_tokens": 20157,
+        "cached_input_tokens": 19456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 20445,
+        "cached_input_tokens": 20096,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 80,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 20716,
+        "cached_input_tokens": 20416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 149,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 21060,
+        "cached_input_tokens": 20672,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 171,
+        "reasoning_output_tokens": 47
+      },
+      {
+        "input_tokens": 21535,
+        "cached_input_tokens": 21056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 966,
+        "reasoning_output_tokens": 758
+      },
+      {
+        "input_tokens": 22813,
+        "cached_input_tokens": 21504,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1345,
+        "reasoning_output_tokens": 179
+      },
+      {
+        "input_tokens": 24173,
+        "cached_input_tokens": 22784,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 141,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 24475,
+        "cached_input_tokens": 24128,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 490,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "48b3d6437aba7fe932f5aa31c0fffcdd76a1d3069660b9a2d52111fedea81e60",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 250971,
+      "cached_input_tokens": 232064,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5116,
+      "reasoning_output_tokens": 1989
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

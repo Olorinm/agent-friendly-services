@@ -31,6 +31,48 @@ financial-disclosures-001 v1 · [Original task definition](../data/experiments/t
 
 **Failure criteria:** Missing or added records; wrong month, dates, direction or amount interpretation; substituting insider filings, demo data, another aggregator or model memory; using only the original PDF without retrieving business data from the specified service; untraceable provenance; or failure within budget. Explaining a service limitation is not business-task completion. Execution-environment faults are recorded as invalid.
 
+<a id="financial-disclosures-002-v1"></a>
+
+## My watchlist includes Richard W. Allen, Donald Sternoff Beyer Jr, Rob Bresnahan and Ed Case. Find their Apple stock purchases and sales disclosed in August 2026, list the details, identify members with no matching records, and link the original filings.
+
+financial-disclosures-002 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Watchlist: Allen (GA12), Beyer (VA08), Bresnahan (PA08), Case (HI01). Stock: Apple Inc. (AAPL). Missing service coverage or failed retrieval is not evidence of no transactions. Do not infer current holdings from disclosures.
+
+**Expected output:** A matching or no-match conclusion for each watchlist member. For matches include stock, direction, transaction date, official filing date and USD amount range. Identify the data service and specific original filings.
+
+**Completion criteria:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
+
+**Failure criteria:** Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. Omitting watchlist members, treating bonds as stocks, equating no match with no holdings or failing to explain coverage gaps does not pass.
+
+<a id="financial-disclosures-003-v1"></a>
+
+## Compare Richard W. Allen and Ed Case in the stock disclosures they filed in August 2026: how many days elapsed between each transaction and official filing? List the dates and elapsed days, summarize count and minimum/maximum lag per filer, and link the original filings.
+
+financial-disclosures-003 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Allen (GA12) and Case (HI01). Calculate calendar days as official filing date minus transaction date, with same-day filing equal to zero. Do not use notification or platform publication dates. Do not assess legality or whether to copy the trades.
+
+**Expected output:** For each stock transaction, report filer, stock, transaction date, filing date and elapsed days. For each filer report count and minimum/maximum lag. Attribute the service and identify original documents.
+
+**Completion criteria:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
+
+**Failure criteria:** Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. Mixing date types, omitting trades, treating a filing as one transaction or incorrect calculations does not pass.
+
+<a id="financial-disclosures-004-v1"></a>
+
+## Check this claim: “Ed Case personally and actively purchased exactly USD 8,000 of Apple stock on August 18, 2026.” Assess ownership, date, amount and transaction nature separately, provide supported corrections, and link the original filing.
+
+financial-disclosures-004 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Ed Case (HI01), Apple Inc. (AAPL). The quoted claim is a researcher-written synthetic statement, not an actual news quotation. Check only the relevant disclosures filed that month. Distinguish member, spouse and joint ownership; transaction and filing dates; amount ranges and exact values. Use original remarks to determine transaction nature, and state uncertainty when unsupported.
+
+**Expected output:** A judgment and explanation for each of four assertions, supported corrections and sources. Attribute the specified service without extending to motives or investment advice.
+
+**Completion criteria:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
+
+**Failure criteria:** Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. An incorrect or omitted assertion, unsupported correction or treating the synthetic statement as real reporting does not pass.
+
 <a id="flights-search-001-v1"></a>
 
 ## Find flights from Milan to the Netherlands on September 25

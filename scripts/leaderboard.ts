@@ -9,12 +9,20 @@ const stable = (value: unknown): string => {
     Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, JSON.parse(stable(v))])));
   return JSON.stringify(value ?? null);
 };
-const configKey = (r: Evaluation) => stable({ model: r.model, effort: r.reasoning_effort,
+const configKey = (r: Evaluation, services: Map<string, string>) => stable({ model: r.model, effort: r.reasoning_effort,
   harness: r.harness, budget: r.budget_seconds, host: r.environment.host,
   isolation: r.environment.isolation, prompt_style: r.environment.prompt_style ?? 'legacy',
   input_delivery: r.environment.input_delivery ?? 'inline',
   credentials: String(r.environment.service_credentials ?? 'none').startsWith('provided:') ? 'provided' : 'none',
-  web_search: r.environment.web_search });
+  web_search: r.environment.web_search,
+  // Compare the available peer services, not per-task group IDs or round IDs.
+  // An unrecorded member stays distinct until its service identity is available.
+  ...(r.review?.peer_context ? { peer_review: r.review.peer_context.run_ids
+    .map(id => services.get(id) ?? `unrecorded:${id}`).sort() } : {}) });
+export const peerReviewLabel = (r: Evaluation, zh = false) => r.review?.peer_context
+  ? (zh ? `独立验收可参考同期 ${r.review.peer_context.run_ids.length} 家服务的答案`
+    : `Independent review with same-task answers from ${r.review.peer_context.run_ids.length} services`)
+  : '';
 const mean = (values: (number | null)[]) => values.length && values.every(v => v !== null && Number.isFinite(v))
   ? values.reduce<number>((sum, v) => sum + v!, 0) / values.length : null;
 export function summarize(runs: Evaluation[]) {
@@ -53,6 +61,7 @@ export const interfaceLabel = (type: string | undefined, zh = false) => type ===
 
 /** Latest recorded protocol per service/route; compare only identical frozen task sets and settings. */
 export function buildBoards(records: Evaluation[]): Board[] {
+  const services = new Map(records.map(r => [r.run_id, r.service_id]));
   const byRoute = new Map<string, Evaluation[]>();
   for (const run of records) {
     const { classification, phase } = taskClassification(run.task);
@@ -63,8 +72,8 @@ export function buildBoards(records: Evaluation[]): Board[] {
   for (const runs of byRoute.values()) {
     runs.sort((a, b) => b.started_at.localeCompare(a.started_at) || b.run_id.localeCompare(a.run_id));
     const reference = runs.find(r => r.status !== 'invalid_run') ?? runs[0];
-    const config = configKey(reference);
-    const matching = runs.filter(r => configKey(r) === config);
+    const config = configKey(reference, services);
+    const matching = runs.filter(r => configKey(r, services) === config);
     const latestTask = new Map<string, string>();
     for (const run of matching) if (!latestTask.has(run.task.id)) latestTask.set(run.task.id, run.task.sha256);
     const selected = matching.filter(r => r.task.sha256 === latestTask.get(r.task.id));
@@ -118,7 +127,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const taskText = tasks.length === 1
     ? `**${label('任务：', 'Task: ')}${cell(displayTasks[0].description)}**\n\n${cell(displayTasks[0].inputs)}\n\n${label('完成标准：', 'Completion criteria: ')}${cell(completion(displayTasks[0]))}`
     : `| ${label('任务及条件', 'Task and conditions')} | ${label('完成标准', 'Completion criteria')} |\n| --- | --- |\n` + displayTasks.map(t => `| ${cell(t.description)}<br>${cell(t.inputs)} | ${cell(completion(t))} |`).join('\n');
-  const config = (r: Evaluation) => `${r.harness.version} · ${r.model} / ${r.reasoning_effort} · ${r.budget_seconds % 60 === 0 ? `${r.budget_seconds / 60} ${label('分钟', 'min')}` : `${r.budget_seconds}s`}`;
+  const config = (r: Evaluation) => `${r.harness.version} · ${r.model} / ${r.reasoning_effort} · ${r.budget_seconds % 60 === 0 ? `${r.budget_seconds / 60} ${label('分钟', 'min')}` : `${r.budget_seconds}s`}${peerReviewLabel(r, zh) ? ` · ${peerReviewLabel(r, zh)}` : ''}`;
   const configs = [...new Set(runs.map(config))];
   const dates = [...new Set(runs.map(r => new Date(r.started_at).toISOString().slice(0, 10)))].sort();
   const date = dates.length === 1 ? dates[0] : `${dates[0]} – ${dates.at(-1)}`;

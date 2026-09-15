@@ -142,3 +142,16 @@ the documented final-answer alias to the actual captured answer. These operation
 are logged in `adapter-normalizations.json`; they never add a billing fact, change
 a judgment, or guess an amount. Missing evidence is still rejected by the shared
 validator. Rejected grading attempts remain part of the recorded grading overhead.
+
+For a free-cost result with a plain-text `applicability`, the collector can move
+that existing observation into `applicability.observed` when the original rule
+and evidence are also present and there is no competing `observed` field. If
+this layout repair lacks a `note`, it copies the existing rule text into it.
+Conflicting or incomplete facts remain rejected; this is not another grading pass.
+
+Artifact collection never follows symbolic or hard links. It copies regular files
+and lists omitted links in private `artifact-omissions.json`; other unsafe archive
+entries still fail collection. The worker persists its observed process receipt
+and usage before artifact collection, so a collection error does not erase them.
+Historical captures that lack the process receipt must retain unknown status or
+timing fields; a final model message alone does not establish a successful exit.

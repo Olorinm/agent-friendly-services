@@ -36,7 +36,29 @@ class AssessmentTests(unittest.TestCase):
         self.assertEqual(normalized['service_cost']['applicability'],{k:original['service_cost'][k] for k in ['rule','observed','evidence']})
         self.assertEqual(normalized['service_cost_usd'],original['service_cost_usd'])
         self.assertNotIn('applicability',original['service_cost'])
-        self.assertEqual(len(changes),1)
+        self.assertEqual(normalized['service_cost']['note'],original['service_cost']['rule'])
+        self.assertEqual(len(changes),2)
+        del original['service_cost']['evidence']
+        self.assertEqual(assessment.normalize(original),(original,[]))
+
+    def test_string_applicability_preserves_facts_and_does_not_resolve_conflicts(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        original={'status':'not_completed','service_cost_usd':None,'service_cost':{
+            'kind':'confirmed_free','sources':['https://example.com/pricing'],
+            'rule':'keyless reads are free','applicability':'actual keyless GET', 'evidence':'captured response'}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['status'],original['status'])
+        self.assertIsNone(normalized['service_cost_usd'])
+        self.assertEqual(normalized['service_cost']['applicability'],{
+            'rule':'keyless reads are free','observed':'actual keyless GET','evidence':'captured response'})
+        self.assertEqual(normalized['service_cost']['note'],'keyless reads are free')
+        self.assertEqual(original['service_cost']['applicability'],'actual keyless GET')
+        self.assertEqual(len(changes),3)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+        original['service_cost']['observed']='conflicting observation'
+        self.assertEqual(assessment.normalize(original),(original,[]))
+        del original['service_cost']['observed']
         del original['service_cost']['evidence']
         self.assertEqual(assessment.normalize(original),(original,[]))
 
@@ -66,11 +88,17 @@ class ArtifactTests(unittest.TestCase):
             root=Path(d).resolve();workspace=root/'task';workspace.mkdir();private=root/'private';private.mkdir();out=private/'output';out.mkdir()
             (root/'canary').write_text('controller-only secret')
             (workspace/'leak').symlink_to(root/'canary')
+            (workspace/'answer.md').write_text('real deliverable')
+            (workspace/'alias.md').symlink_to('answer.md')
             # Exercise the archive parser independently of Linux root/uid setup.
             with patch.object(worker,'Path',side_effect=lambda p: workspace.parent if p=='/workspace' else Path(p)), patch.object(worker,'identity',lambda: None):
-                with self.assertRaisesRegex(ValueError,'Unsafe artifact'):
-                    worker.collect_artifacts(workspace,private,out)
+                worker.collect_artifacts(workspace,private,out)
             self.assertFalse((out/'artifacts/leak').exists())
+            self.assertFalse((out/'artifacts/alias.md').exists())
+            self.assertEqual((out/'artifacts/answer.md').read_text(),'real deliverable')
+            omitted=json.loads((out/'artifact-omissions.json').read_text())
+            self.assertEqual({r['path'].removeprefix('./') for r in omitted},{'leak','alias.md'})
+            self.assertNotIn('controller-only secret',json.dumps(omitted))
 
 class ProvisionTests(unittest.TestCase):
     @classmethod

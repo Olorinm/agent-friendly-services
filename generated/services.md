@@ -579,7 +579,7 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-business.json) | [95.8k](../data/experiments/evaluations/bargo-access.json) | 157.266045s | 0 |
+| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | [95.8k](../data/experiments/evaluations/bargo-access.json) | 157.266045s | 0 |
 | API (congress-api-keyed) | — | — | — | — |
 | MCP | — | — | — | — |
 
@@ -621,7 +621,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-ee257df56f0f) | [100%](./evaluations.md#comparison-ee257df56f0f) | 751.7k | $0.03 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -632,19 +632,98 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 **Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-ee257df56f0f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
+
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-001-r1.json) — 独立验收判定未完成：已通过指定 Bargo API 取得业务数据并核对原始文件，但执行超时前仅留下过程旁白，没有交付要求的表格、原始出处和服务署名。该次失败发生在执行交付环节，不证明服务缺少目标数据；原始交易行私有保留。
+
+</details>
+
+#### My watchlist includes Richard W. Allen, Donald Sternoff Beyer Jr, Rob Bresnahan and Ed Case. Find their Apple stock purchases and sales disclosed in August 2026, list the details, identify members with no matching records, and link the original filings.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
+| API (congress-api-keyed) | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Watchlist: Allen (GA12), Beyer (VA08), Bresnahan (PA08), Case (HI01). Stock: Apple Inc. (AAPL). Missing service coverage or failed retrieval is not evidence of no transactions. Do not infer current holdings from disclosures.
+
+**Completion:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+
+[Task definition](./tasks.en.md#financial-disclosures-002-v1)
+
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) — 独立验收判定未完成：指定服务已返回股票查询结果，但官方申报批量解析未完成，执行超时前只有过程叙述，没有交付四人最终结论、完整明细及原始出处。属于本次执行未完成，不是服务不可用；中间空结果不足以支持无匹配结论。
+
+</details>
+
+#### Compare Richard W. Allen and Ed Case in the stock disclosures they filed in August 2026: how many days elapsed between each transaction and official filing? List the dates and elapsed days, summarize count and minimum/maximum lag per filer, and link the original filings.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [100%](./evaluations.md#comparison-864872ad88ab) | 578.4k | $0.03 | $0 |
+| API (congress-api-keyed) | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Allen (GA12) and Case (HI01). Calculate calendar days as official filing date minus transaction date, with same-day filing equal to zero. Do not use notification or platform publication dates. Do not assess legality or whether to copy the trades.
+
+**Completion:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+
+[Task definition](./tasks.en.md#financial-disclosures-003-v1)
+
+</details>
+
+#### Check this claim: “Ed Case personally and actively purchased exactly USD 8,000 of Apple stock on August 18, 2026.” Assess ownership, date, amount and transaction nature separately, provide supported corrections, and link the original filing.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
+| API (congress-api-keyed) | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Ed Case (HI01), Apple Inc. (AAPL). The quoted claim is a researcher-written synthetic statement, not an actual news quotation. Check only the relevant disclosures filed that month. Distinguish member, spouse and joint ownership; transaction and filing dates; amount ranges and exact values. Use original remarks to determine transaction nature, and state uncertainty when unsupported.
+
+**Completion:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+
+[Task definition](./tasks.en.md#financial-disclosures-004-v1)
+
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) — 独立验收判定未完成：指定服务和官方资料已取得，过程叙述有部分正确判断，但未交付交易性质判断及完整更正与出处；执行约 590 秒后超时终止。这是执行行为造成的未交付，不证明服务没有数据。
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-disclosures-004 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | 2026-09-15 |
+| financial-disclosures-003 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-003-r1.json) | 2026-09-15 |
+| financial-disclosures-002 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) | 2026-09-15 |
+| financial-disclosures-001 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-001-r1.json) | 2026-09-15 |
 | financial-disclosures-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-business.json) | 2026-09-15 |
 
 </details>
@@ -874,7 +953,7 @@ Congressional disclosures and related public records, with a keyless read API an
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/capitol-business.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/capitol-disclosures-004-r1.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
@@ -912,7 +991,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-ee257df56f0f) | [100%](./evaluations.md#comparison-ee257df56f0f) | 321.9k | $0.02 | $0 |
+| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 291.0k | $0.02 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -921,19 +1000,90 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 **Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-ee257df56f0f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
 
 </details>
 
+#### My watchlist includes Richard W. Allen, Donald Sternoff Beyer Jr, Rob Bresnahan and Ed Case. Find their Apple stock purchases and sales disclosed in August 2026, list the details, identify members with no matching records, and link the original filings.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 1.12M | $0.05 | $0 |
+
 <details>
-<summary>Run history (1)</summary>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Watchlist: Allen (GA12), Beyer (VA08), Bresnahan (PA08), Case (HI01). Stock: Apple Inc. (AAPL). Missing service coverage or failed retrieval is not evidence of no transactions. Do not infer current holdings from disclosures.
+
+**Completion:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+
+[Task definition](./tasks.en.md#financial-disclosures-002-v1)
+
+</details>
+
+#### Compare Richard W. Allen and Ed Case in the stock disclosures they filed in August 2026: how many days elapsed between each transaction and official filing? List the dates and elapsed days, summarize count and minimum/maximum lag per filer, and link the original filings.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 266.1k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Allen (GA12) and Case (HI01). Calculate calendar days as official filing date minus transaction date, with same-day filing equal to zero. Do not use notification or platform publication dates. Do not assess legality or whether to copy the trades.
+
+**Completion:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+
+[Task definition](./tasks.en.md#financial-disclosures-003-v1)
+
+</details>
+
+#### Check this claim: “Ed Case personally and actively purchased exactly USD 8,000 of Apple stock on August 18, 2026.” Assess ownership, date, amount and transaction nature separately, provide supported corrections, and link the original filing.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [0](./evaluations.md#comparison-eff87a506310) | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Ed Case (HI01), Apple Inc. (AAPL). The quoted claim is a researcher-written synthetic statement, not an actual news quotation. Check only the relevant disclosures filed that month. Distinguish member, spouse and joint ownership; transaction and filing dates; amount ranges and exact values. Use original remarks to determine transaction nature, and state uncertainty when unsupported.
+
+**Completion:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
+
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+
+[Task definition](./tasks.en.md#financial-disclosures-004-v1)
+
+Invalid runs: 1
+
+- API: [Invalid run](../data/experiments/evaluations/capitol-disclosures-004-r1.json) — 运行器采集软链接时退出，原始进程回执与精确时长缺失。独立验收的原始业务结论为 completed；总控保留该结论并另作环境无效裁决，排除出完成率，不作为服务失败。最终答案另有原始所有者代码抄写错误，原验收未指出，已在质量说明中保留。
+
+</details>
+
+<details>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-disclosures-004 v1 | API | [invalid_run](../data/experiments/evaluations/capitol-disclosures-004-r1.json) | 2026-09-15 |
+| financial-disclosures-003 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-003-r1.json) | 2026-09-15 |
+| financial-disclosures-002 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-002-r1.json) | 2026-09-15 |
+| financial-disclosures-001 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-001-r1.json) | 2026-09-15 |
 | financial-disclosures-001 v1 | API | [completed](../data/experiments/evaluations/capitol-business.json) | 2026-09-15 |
 
 </details>

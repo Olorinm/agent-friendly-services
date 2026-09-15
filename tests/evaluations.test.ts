@@ -43,6 +43,19 @@ test('peer-assisted review records a distinct group round and immutable snapshot
   assert(evaluationErrors(value, providers).some(s => s.includes('peer_context')));
 });
 
+test('lost runtime duration remains unknown only for an invalid run', () => {
+  const providers = [...loadProviders(), ...loadCandidates()].map(p => p.data);
+  const value = structuredClone(loadEvaluations()[0]);
+  value.status = 'invalid_run';
+  value.reason = 'Artifact collection failed before the runtime receipt was saved; duration is unavailable.';
+  value.elapsed_seconds = null;
+  assert.deepEqual(evaluationErrors(value, providers), []);
+  for (const status of ['completed', 'not_completed'] as const) {
+    value.status = status;
+    assert(evaluationErrors(value, providers).some(s => s.includes('elapsed time')));
+  }
+});
+
 test('a public-playground pass never becomes a customer API or MCP pass', () => {
   const ignav = loadCandidates().find(p => p.data.id === 'ignav')!.data;
   const data = { services: [catalogService(ignav, 'candidate', loadEvaluations())] };

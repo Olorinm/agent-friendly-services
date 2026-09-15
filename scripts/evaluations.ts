@@ -3,7 +3,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, loadCategories, type Provider } from './lib.ts';
 import type { ModelCost, PriceSnapshot } from './model-costs.ts';
-import { buildBoards, selectServiceBoards, moneyLabel } from './leaderboard.ts';
+import { buildBoards, selectServiceBoards, moneyLabel, peerReviewLabel } from './leaderboard.ts';
 import { taskClassification } from './task-classifications.ts';
 import { classificationLabel } from './taxonomy.mjs';
 
@@ -15,7 +15,7 @@ export interface Evaluation {
   prompt_sha256: string;
   harness: { name: string; version: string; mode: string; launcher?: string; launcher_sha256?: string };
   model: string; reasoning_effort: string; started_at: string; ended_at: string;
-  elapsed_seconds: number; budget_seconds: number; environment: Record<string, unknown>;
+  elapsed_seconds: number | null; budget_seconds: number; environment: Record<string, unknown>;
   status: 'completed' | 'not_completed' | 'invalid_run'; reason: string;
   usage: null | { input_tokens: number; cached_input_tokens: number; output_tokens: number;
     reasoning_output_tokens?: number; cache_write_input_tokens?: number };
@@ -64,7 +64,8 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
   for (const field of ['name', 'version', 'mode']) if (!text(v?.harness?.[field])) errors.push(`harness.${field} is required`);
   if (!text(v?.model) || !text(v?.reasoning_effort)) errors.push('model and reasoning_effort are required');
   if (!timestamp(v?.started_at) || !timestamp(v?.ended_at) || Date.parse(v.ended_at) < Date.parse(v.started_at)) errors.push('valid ordered timestamps with timezone are required');
-  if (!nonnegative(v?.elapsed_seconds) || !nonnegative(v?.budget_seconds) || v.budget_seconds === 0) errors.push('invalid elapsed time or budget');
+  const unknownInvalidDuration = v?.status === 'invalid_run' && v?.elapsed_seconds === null;
+  if ((!unknownInvalidDuration && !nonnegative(v?.elapsed_seconds)) || !nonnegative(v?.budget_seconds) || v.budget_seconds === 0) errors.push('invalid elapsed time or budget');
   if (!['completed', 'not_completed', 'invalid_run'].includes(v?.status) || !text(v?.reason)) errors.push('status and reason are required');
   for (const key of ['service_cost_usd', 'human_interventions']) {
     if (v?.[key] !== null && !nonnegative(v?.[key])) errors.push(`${key}: use a nonnegative measurement or null, not an inferred zero`);
@@ -150,7 +151,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   }, null, 2) + '\n');
   const row = (r: Evaluation) => {
     const link = `../data/experiments/evaluations/${r.run_id}.json`;
-    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds}s | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
+    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds === null ? '—' : `${r.elapsed_seconds}s`} | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
   };
   // Classify the task, not the provider: one provider may serve several domains.
   // This is a current display label, not a rewrite of frozen historical evidence.
@@ -187,7 +188,7 @@ ${sections}
 
 ${buildBoards(records).map(board => `<a id="${board.id}"></a>\n\n### ${board.tasks.map(t => `${cell(t.id)} ${cell(t.version)}`).join(', ')}\n\n` + board.rows.map(row => {
   const first = row.runs[0];
-  return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
+  return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}${peerReviewLabel(first, true) ? ` · ${peerReviewLabel(first, true)}` : ''}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
     const price = r.model_cost;
     return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${moneyLabel(price?.amount_usd ?? null)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? `${r.service_cost.kind}: ${r.service_cost.note}; ${r.service_cost.sources.join('; ')}` : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}`;
   }).join('\n');
