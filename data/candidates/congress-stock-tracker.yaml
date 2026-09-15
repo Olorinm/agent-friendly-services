@@ -1,0 +1,53 @@
+id: congress-stock-tracker
+name: Congress Stock Tracker
+category: web-search-data
+homepage: https://www.congressstock.com/
+summary: >-
+  Licensed congressional transaction datasets with source links and amendment history; pricing is
+  negotiated.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    docs:
+      url: https://www.congressstock.com/congress-trading-api
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes:
+    - id: licensed-api
+      interface: api
+      maintainer: official
+      entry_url: https://www.congressstock.com/congress-trading-api
+      docs: https://www.congressstock.com/congress-trading-api
+      evidence:
+        - docs
+      availability:
+        value: application
+        evidence:
+          - docs
+      personal_access:
+        value: unknown
+        notes: Licensing is negotiated; self-serve personal API eligibility is not established.
+      auth:
+        value: unknown
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            House and Senate transactions with filing/transaction dates, ownership, amount ranges,
+            original filing URLs and amendment history.
+      notes: >-
+        Contact-based pricing; no self-serve free tier. An evaluation extract or discounted
+        academic/non-commercial access requires a request and is not an issued API entitlement.
+      human_steps:
+        - step: Request a dataset licence and access terms.
+          stage: activation
+          evidence:
+            - docs

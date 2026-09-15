@@ -1,0 +1,57 @@
+id: us-house-disclosures
+name: U.S. House Financial Disclosures
+category: web-search-data
+homepage: https://disclosures-clerk.house.gov/FinancialDisclosure
+summary: Original House financial disclosure filings and searchable annual indexes, published by the Clerk.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    overview:
+      url: https://disclosures-clerk.house.gov/FinancialDisclosure/ViewReport
+      checked_on: '2026-09-15'
+      kind: official_site
+    search:
+      url: https://disclosures-clerk.house.gov/FinancialDisclosure/ViewSearch
+      checked_on: '2026-09-15'
+      kind: official_site
+  routes:
+    - id: filing-website
+      interface: web
+      maintainer: official
+      entry_url: https://disclosures-clerk.house.gov/FinancialDisclosure
+      evidence:
+        - overview
+        - search
+      availability:
+        value: self_serve
+        evidence:
+          - overview
+          - search
+      personal_access:
+        value: documented
+        evidence:
+          - overview
+      auth:
+        value: none
+        evidence:
+          - overview
+          - search
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - overview
+            - search
+          notes: >-
+            Original House financial disclosure reports and PTR PDFs; yearly filing indexes and
+            search by filer. Does not cover Senate filings.
+      notes: >-
+        Website/file access, not a documented public financial-data API. Annual ZIP contains filing
+        indexes; transaction rows require the linked PDFs. Source used for independent references;
+        not yet measured as a service.

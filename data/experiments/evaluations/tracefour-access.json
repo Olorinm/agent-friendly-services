@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "run_id": "tracefour-access",
+  "service_id": "tracefour",
+  "route_id": "data-api-keyless",
+  "entry_url": "https://tracefour.com/v1",
+  "task": {
+    "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+    "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+    "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+    "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。",
+    "resources": "本轮指定入口与授权资料；仅已确认免费的资源，不付费，不进行交易或资金操作。需要人工或额外身份资料时说明阻碍。安装和配置在本轮持久目录内，不能读取其他任务和账号。",
+    "id": "financial-access-001",
+    "version": "v1",
+    "sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T09:07:26.569219+00:00",
+  "ended_at": "2026-09-15T09:09:59.984439+00:00",
+  "elapsed_seconds": 153.41522,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "not_completed",
+  "reason": "本轮通过指定 REST 方式接入 Tracefour 未完成：文档页和实际尝试的 URL 从本轮云端环境返回 Cloudflare 403 challenge，没有取得真实金融数据；已保存含阻碍说明的配置，无人工介入。独立验收复现了 /v1 和 /api-docs 的 403。执行者未成功读取文档，也未调用后来研究确认的 /v1/congress 等数据路由，因此这些观察不能证明全部数据端点、MCP 或其他网络环境都不可用；本轮没有执行交易披露业务题。",
+  "usage": {
+    "input_tokens": 103555,
+    "cached_input_tokens": 86272,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3755,
+    "reasoning_output_tokens": 1747
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "reference.json（本题冻结参考 free_rule：Keyless reads 60 requests/hour/IP; compilation CC BY 4.0 with attribution）",
+      "execution/artifacts/probe-results.txt",
+      "grading/artifacts/evidence/independent-verification.md"
+    ],
+    "note": "规则：指定入口为免 Key 免费读取，限 60 次/小时/IP。本次适用性：全程仅约 9 次免 Key 只读 GET，远低于限额；所有请求在 Cloudflare 边缘即被 403 质询拒绝，服务未实际处理任何请求；未提供也未创建任何账户、Key 或支付方式，无付款回执。故本次服务侧费用为 0。模型 token 与模型费用由运行器统一核算，不在此列。",
+    "applicability": {
+      "rule": "规则：指定入口为免 Key 免费读取，限 60 次/小时/IP。",
+      "observed": "本次适用性：全程仅约 9 次免 Key 只读 GET，远低于限额；所有请求在 Cloudflare 边缘即被 403 质询拒绝，服务未实际处理任何请求；未提供也未创建任何账户、Key 或支付方式，无付款回执。故本次服务侧费用为 0。模型 token 与模型费用由运行器统一核算，不在此列。",
+      "evidence": "reference.json（本题冻结参考 free_rule：Keyless reads 60 requests/hour/IP; compilation CC BY 4.0 with attribution）；execution/artifacts/probe-results.txt；grading/artifacts/evidence/independent-verification.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-acceptance-agent-2026-09-15",
+    "reviewed_at": "2026-09-15T09:17:12.379932+00:00",
+    "checks": [
+      {
+        "criterion": "仅使用指定服务与调用方式（tracefour，REST 直连 HTTP，https://tracefour.com/v1）",
+        "passed": true,
+        "evidence": "review-packet/tools/0006-0013 记录全部 HTTP 尝试均指向 tracefour.com 域；无任何替代数据源或模型记忆替代；api 子域经 DNS 验证不存在（tools/0008）。"
+      },
+      {
+        "criterion": "在授权范围内操作：仅免 Key 免费公开入口，不注册、不付款、不写远端、不绕过人机验证",
+        "passed": true,
+        "evidence": "ENVIRONMENT.md 未提供账户/Key；tools/0001-0015 仅含只读 GET 与本地写文件，无注册、支付或绕过质询行为；answer.md 明确说明未绕过。"
+      },
+      {
+        "criterion": "成功查询至少一项真实金融数据（指定服务 API 返回）",
+        "passed": false,
+        "evidence": "tools/0007、0010、0013 与 execution/artifacts/probe-results.txt：/v1、/v1/quotes、/v1/health 全部 HTTP 403、cf-mitigated: challenge，响应体为 'Just a moment...' 质询页；无任何成功响应或业务数据。验收者独立重放亦复现 403 质询（grading/artifacts/evidence/independent-verification.md）。"
+      },
+      {
+        "criterion": "后续调用所需连接配置已保存到持久目录（/home/node/service-tools/service-config.json）",
+        "passed": true,
+        "evidence": "tools/0015 写入 service-config.json（入口、access_mode、status=blocked、blocker 详情与恢复条件）；execution/retained-files.json 列明该文件已保留；installed-tools 目录已建（tools/0014）。"
+      },
+      {
+        "criterion": "如接不通，给出具体阻碍与恢复条件",
+        "passed": true,
+        "evidence": "execution/answer.md：说明全站 Cloudflare managed challenge、无 api 子域、容器无浏览器、不在授权范围绕过，并给出恢复条件（服务方放行免质询域名/令牌或可用出口）；探测脚本 probe-tracefour.sh 与结果 probe-results.txt 已留档。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/tracefour-access/execution/answer.md",
+      "sha256": "21d8d4a4081433eecf2d88b9a32230ef143bc08fd0561fd2a2e5cb5cfa76ba0f",
+      "note": "执行者最终答复：接入被 Cloudflare managed challenge 阻断，未取得业务数据，已保存含阻塞详情的连接配置与恢复条件。"
+    },
+    {
+      "path": "data/experiments/evidence/tracefour-access/execution/artifacts/probe-results.txt",
+      "sha256": "bb0761ec528bd357a53b88836aad2430bae3bbcd6485bf96af8f510ba846576b",
+      "note": "执行者探测留档：/v1、/v1/quotes、/v1/health、/api-docs、/robots.txt 全部 403 且 cf-mitigated: challenge、server: cloudflare。",
+      "source_sha256": "b85e826487de324dac8820383753d005a69fde050ff902649a7d4648d4956073",
+      "redactions": [
+        "Normalized line endings and trailing whitespace in the public HTTP receipt; response status and header values unchanged."
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/tracefour-access/grading/artifacts/evidence/independent-verification.md",
+      "sha256": "69db2bb269f0e3600129ec3d3512d3783fd7b625de31c6499a1d6ed5cc12a668",
+      "note": "验收者独立重放（脱敏摘要）：2026-09-15 对 /v1 与 /api-docs 只读 GET 复现 403 质询，api 子域无 DNS 记录；含关键文件 sha256。",
+      "source_sha256": "60e48c9a38fbc02c2779d2ef3428e8cfa3ba5fe807974387447f5f2a402d2930",
+      "redactions": [
+        "Controller narrowed domain-wide wording to the URLs actually observed; independent not_completed verdict unchanged."
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/disclosures-pilot-20260915/tracefour-access",
+    "run_sha256": "fbefe18d51f2a627e69d549f4b304278e565beb18867b4e8e3292c88e4ae3139",
+    "events_sha256": "20cfb75721074e3ed9b5c7e577909a434e365393c922e2cfd8405046a4d363ff",
+    "answer_sha256": "21d8d4a4081433eecf2d88b9a32230ef143bc08fd0561fd2a2e5cb5cfa76ba0f",
+    "review_sha256": "72b7b8a9484badc185f06abf95ddb30310f00bf67429306100cc17775a684bee",
+    "privacy_note": " Public-release review adds required attribution and bounds conclusions to observed requests. Private original answers and independent assessments are retained; status, check booleans, usage and fee amounts are unchanged. Public HTTP receipt line endings and trailing whitespace were normalized; private original remains unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6893,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 22
+      },
+      {
+        "input_tokens": 7326,
+        "cached_input_tokens": 2880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 255,
+        "reasoning_output_tokens": 184
+      },
+      {
+        "input_tokens": 7787,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 267,
+        "reasoning_output_tokens": 42
+      },
+      {
+        "input_tokens": 9498,
+        "cached_input_tokens": 7744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 718,
+        "reasoning_output_tokens": 480
+      },
+      {
+        "input_tokens": 10455,
+        "cached_input_tokens": 9472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1034,
+        "reasoning_output_tokens": 789
+      },
+      {
+        "input_tokens": 11562,
+        "cached_input_tokens": 10432,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 475,
+        "reasoning_output_tokens": 118
+      },
+      {
+        "input_tokens": 12046,
+        "cached_input_tokens": 11520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 34,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12443,
+        "cached_input_tokens": 12032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_output_tokens": 70
+      },
+      {
+        "input_tokens": 12541,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 454,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 13004,
+        "cached_input_tokens": 12480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 367,
+        "reasoning_output_tokens": 42
+      }
+    ],
+    "source_sha256": "b4924141f7a5efde4bf08d87a76a5930d6211e0a07bbd01ee6f797f42ce98c65",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 103555,
+      "cached_input_tokens": 86272,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3755,
+      "reasoning_output_tokens": 1747
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

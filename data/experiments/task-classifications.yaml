@@ -44,6 +44,10 @@ tasks:
     id: financial-fx-001
     classification: web-search-data/financial-data/fx
     phase: business
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-disclosures-001
+    classification: web-search-data/financial-data/disclosures
+    phase: business
   - file: data/experiments/tasks/mailboxes.md
     id: mailboxes-create-001
     classification: communication/mailboxes

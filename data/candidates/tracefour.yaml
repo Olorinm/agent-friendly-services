@@ -1,0 +1,96 @@
+id: tracefour
+name: Tracefour
+category: web-search-data
+homepage: https://tracefour.com/
+summary: >-
+  Public trading disclosures through keyless REST and MCP, with attribution and original-filing
+  links.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    docs:
+      url: https://tracefour.com/api-docs
+      checked_on: '2026-09-15'
+      kind: official_docs
+    congress:
+      url: https://tracefour.com/api-docs/congress-trading-api
+      checked_on: '2026-09-15'
+      kind: official_docs
+    mcp:
+      url: https://tracefour.com/api-docs/mcp
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes:
+    - id: data-api-keyless
+      interface: api
+      maintainer: official
+      entry_url: https://tracefour.com/v1
+      docs: https://tracefour.com/api-docs
+      evidence:
+        - docs
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+            - congress
+          notes: >-
+            Congress member transactions, SEC Form 4 and European PDMR disclosures. Congress member
+            results are capped at 500 trades; sourceLink and amount brackets are documented.
+      costs:
+        - kind: free_allowance
+          amount: 60
+          unit: requests
+          per: hour
+          scope: Anonymous read allowance per IP.
+          evidence:
+            - docs
+      notes: >-
+        CC BY 4.0 compilation; link to the attribution page supplied with each response. Congress
+        coverage is not established as complete for both chambers.
+    - id: data-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://tracefour.com/v1/mcp
+      docs: https://tracefour.com/api-docs/mcp
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - mcp
+          notes: Keyless get_congress_member and separate insider tools. Same underlying records as REST.
+      notes: >-
+        Streamable HTTP; anonymous calls share the documented per-IP allowance. Optional free key
+        increases the allowance to 600/hour; key acquisition not tested.

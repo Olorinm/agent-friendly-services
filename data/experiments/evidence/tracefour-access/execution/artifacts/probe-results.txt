@@ -1,0 +1,35 @@
+=== GET https://tracefour.com/v1 ===
+HTTP/2 403
+cf-mitigated: challenge
+server: cloudflare
+server-timing: chlray;desc="a3b67de7c9186421"
+cf-ray: a3b67de7c9186421-LHR
+
+=== GET https://tracefour.com/v1/quotes ===
+HTTP/2 403
+cf-mitigated: challenge
+server: cloudflare
+server-timing: chlray;desc="a3b67debc9d7f5f2"
+cf-ray: a3b67debc9d7f5f2-AMS
+
+=== GET https://tracefour.com/v1/health ===
+HTTP/2 403
+cf-mitigated: challenge
+server: cloudflare
+server-timing: chlray;desc="a3b67defeb40e568"
+cf-ray: a3b67defeb40e568-AMS
+
+=== GET https://tracefour.com/api-docs ===
+HTTP/2 403
+cf-mitigated: challenge
+server: cloudflare
+server-timing: chlray;desc="a3b67df3ca2e9f7c"
+cf-ray: a3b67df3ca2e9f7c-AMS
+
+=== GET https://tracefour.com/robots.txt ===
+HTTP/2 403
+cf-mitigated: challenge
+server: cloudflare
+server-timing: chlray;desc="a3b67df74e4fcd14"
+cf-ray: a3b67df74e4fcd14-LHR
+

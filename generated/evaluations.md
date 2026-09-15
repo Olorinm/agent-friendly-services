@@ -7,6 +7,35 @@
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
 
+<a id="web-search-data-financial-data-disclosures"></a>
+
+## 搜索与数据获取 / 金融数据 / 交易披露（web-search-data/financial-data/disclosures）
+
+### financial-disclosures-001 / v1
+
+帮我整理 Richard W. Allen 在 2026 年 8 月向美国众议院提交的股票买卖披露，列出股票、买卖方向、交易日期、提交日期和金额区间，并附原始申报出处。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-disclosures-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-business.json) | 2026-09-15T09:20:49.994872+00:00 | 1.18.29 / glm-5.3-flash / high | 316639 / 248576 / 5213 | 220.999401s | 0 | unknown |
+| bargo-congress / congress-api-keyless | financial-disclosures-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-business.json) | 2026-09-15T09:15:16.890334+00:00 | 1.18.29 / glm-5.3-flash / high | 738160 / 702208 / 13547 | 525.761527s | 0 | 0 |
+
+<a id="web-search-data-financial-data"></a>
+
+## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
+
+### financial-access-001 / v1
+
+帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15T09:14:32.838922+00:00 | 1.18.29 / glm-5.3-flash / high | 189737 / 172864 / 2746 | 138.671707s | 0 | 0 |
+| bargo-congress / congress-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15T09:07:26.717325+00:00 | 1.18.29 / glm-5.3-flash / high | 92193 / 73920 / 3609 | 157.266045s | 0 | 0 |
+| tracefour / data-api-keyless | financial-access-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/tracefour-access.json) | 2026-09-15T09:07:26.569219+00:00 | 1.18.29 / glm-5.3-flash / high | 103555 / 86272 / 3755 | 153.41522s | 0 | 0 |
+| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15T07:06:04.074344+00:00 | 1.18.29 / glm-5.3-flash / high | 84240 / 72512 / 2596 | 115.282949s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15T07:06:04.069023+00:00 | 1.18.29 / glm-5.3-flash / high | 216483 / 199488 / 5383 | 216.897575s | 0 | 0 |
+
 <a id="web-search-data-financial-data-fx"></a>
 
 ## 搜索与数据获取 / 金融数据 / 汇率数据（web-search-data/financial-data/fx）
@@ -19,19 +48,6 @@
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
 | ecb-data / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15T07:15:18.031345+00:00 | 1.18.29 / glm-5.3-flash / high | 60837 / 56064 / 1994 | 81.215126s | 0 | 0 |
 | frankfurter / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15T07:11:48.392690+00:00 | 1.18.29 / glm-5.3-flash / high | 51862 / 42880 / 2384 | 88.202808s | 0 | 0 |
-
-<a id="web-search-data-financial-data"></a>
-
-## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
-
-### financial-access-001 / v1
-
-帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15T07:06:04.074344+00:00 | 1.18.29 / glm-5.3-flash / high | 84240 / 72512 / 2596 | 115.282949s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15T07:06:04.069023+00:00 | 1.18.29 / glm-5.3-flash / high | 216483 / 199488 / 5383 | 216.897575s | 0 | 0 |
 
 <a id="communication-mailboxes"></a>
 
@@ -141,6 +157,70 @@
 
 ## 汇总条件与费用依据
 
+<a id="comparison-ee257df56f0f"></a>
+
+### financial-disclosures-001 v1
+
+**bargo-congress / congress-api-keyless** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [bargo-business](../data/experiments/evaluations/bargo-business.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: bargo-congress 官方文档明示读端点免 Key、免费（FREE · NO CARD）、按 IP 限速；本次为免 Key 只读调用 1 次 3 行，限额回执头显示在 30 请求/100 行每日额度内，未注册、未创建 Key、未付款。众议院书记官页面为公开政府资源，pdf-parse 为 MIT 开源依赖，均无费用。; https://www.bargo.ai/free-apis/congress; https://www.bargo.ai/free-apis/terms; reference.json free_rule / free_access_sources
+
+**capitol-exposed / data-api-keyless** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [capitol-business](../data/experiments/evaluations/capitol-business.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 免 Key 免费档完成全部业务查询，无付费环节。; https://www.capitolexposed.com/api-docs; reference.json#free_rule; review-packet/tools/0005.json; review-packet/tools/0008.json; review-packet/tools/0013.json
+
+<a id="comparison-bd611da6270b"></a>
+
+### financial-access-001 v1
+
+**bargo-congress / congress-api-keyless** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [bargo-access](../data/experiments/evaluations/bargo-access.json)：模型费用 $0.0068；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 免费规则：官方文档明示读端点免 Key、FREE · NO CARD，keyless 30 请求/100 行每天/IP。本次适用观察：执行全部 9 次业务请求及验收复测均使用 keyless 读端点并返回 200，响应头 X-RateLimit-Limit=30、X-RateLimit-Rows-Limit=100 与该规则一致，未注册账号、未提供或绑定任何支付方式，无付费回执。依据：工具记录 0005（官方页）与 0009/0010/0014（响应头），验收复测见 evidence/live-verification.md。; https://www.bargo.ai/free-apis/congress; https://www.bargo.ai/free-apis/terms; reference.json free_rule: Keyless 30 requests and 100 rows/day/IP
+
+**capitol-exposed / data-api-keyless** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [capitol-access](../data/experiments/evaluations/capitol-access.json)：模型费用 $0.0091；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮仅使用免 Key GET 读取端点（/stats、/members、/search、/members/{slug}/trades），未用 API Key、未触发付费 AI 或批量导出产品，适用文档化免费层，服务费用为 0。; https://www.capitolexposed.com/api-docs（执行中抓取：Free-tier requests require no authentication, rate-limited by IP）; reference.json free_rule：免 Key member/trade 列表端点 60 次/分/IP，免费读取并要求署名
+
+**ecb-data / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [ecb-access](../data/experiments/evaluations/ecb-access.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 免费结论依据 ECB 官方免费使用规则与本次实际无凭据只读请求，而非执行者自述或仅因成功响应；未发生任何服务端计费。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; execution/artifacts/ENVIRONMENT.md; grading/artifacts/evidence/ecb-independent-check.md
+
+**frankfurter / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [frankfurter-access](../data/experiments/evaluations/frankfurter-access.json)：模型费用 $0.0052；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务端无计费回执；本次调用确认免费，无实付金额，故金额字段保留 null。模型费用由运行器与统一计价脚本处理，不在此填写。; https://frankfurter.dev/; grading/artifacts/evidence/independent-check.md
+
+**tracefour / data-api-keyless** — 0 完成 / 1 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [tracefour-access](../data/experiments/evaluations/tracefour-access.json)：模型费用 $0.0071；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 规则：指定入口为免 Key 免费读取，限 60 次/小时/IP。本次适用性：全程仅约 9 次免 Key 只读 GET，远低于限额；所有请求在 Cloudflare 边缘即被 403 质询拒绝，服务未实际处理任何请求；未提供也未创建任何账户、Key 或支付方式，无付款回执。故本次服务侧费用为 0。模型 token 与模型费用由运行器统一核算，不在此列。; reference.json（本题冻结参考 free_rule：Keyless reads 60 requests/hour/IP; compilation CC BY 4.0 with attribution）; execution/artifacts/probe-results.txt; grading/artifacts/evidence/independent-verification.md
+
 <a id="comparison-d86a11990066"></a>
 
 ### financial-fx-001 v1
@@ -160,26 +240,6 @@
 准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
 
 - [frankfurter-business](../data/experiments/evaluations/frankfurter-business.json)：模型费用 $0.0038；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务本身免费：官方声明无 Key、无配额，本次仅匿名 GET 读取，无任何付费路径; https://frankfurter.dev/ （官方文档："Free, open-source exchange rates API ... No API key required"；FAQ：commercial use free、no quotas，仅防滥用限流）
-
-<a id="comparison-bd611da6270b"></a>
-
-### financial-access-001 v1
-
-**ecb-data / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.29 / glm-5.3-flash / high · 600s · natural · none
-
-准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
-
-- [ecb-access](../data/experiments/evaluations/ecb-access.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 免费结论依据 ECB 官方免费使用规则与本次实际无凭据只读请求，而非执行者自述或仅因成功响应；未发生任何服务端计费。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; execution/artifacts/ENVIRONMENT.md; grading/artifacts/evidence/ecb-independent-check.md
-
-**frankfurter / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.29 / glm-5.3-flash / high · 600s · natural · none
-
-准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
-
-- [frankfurter-access](../data/experiments/evaluations/frankfurter-access.json)：模型费用 $0.0052；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务端无计费回执；本次调用确认免费，无实付金额，故金额字段保留 null。模型费用由运行器与统一计价脚本处理，不在此填写。; https://frankfurter.dev/; grading/artifacts/evidence/independent-check.md
 
 <a id="comparison-8624e51d6979"></a>
 

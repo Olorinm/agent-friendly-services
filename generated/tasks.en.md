@@ -3,6 +3,34 @@
 
 English translations of the recorded task versions. Original prompts and evidence remain unchanged; language requirements below describe the actual tests.
 
+<a id="financial-access-001-v1"></a>
+
+## Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+financial-access-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Expected output:** One genuine financial-data query result from the specified service, reusable configuration where needed, and the actual setup steps or specific blockers.
+
+**Completion criteria:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+**Failure criteria:** No genuine data query, substitution of another service, signup or installation only, required credentials or human steps unfinished, or failure within the budget. Environment failures are invalid runs.
+
+<a id="financial-disclosures-001-v1"></a>
+
+## Summarize the stock purchases and sales Richard W. Allen filed with the U.S. House in August 2026. Include the stock, direction, transaction date, filing date, amount range and original filing source.
+
+financial-disclosures-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction Reports by official filing date from 2026-08-01 through 2026-08-31, publicly available as of 2026-09-15. Include reported family-member transactions and retain USD amount ranges. Common stock only, excluding options, funds, bonds and other assets. Filing in August does not mean trading in August. This is for private reading; no data export is needed.
+
+**Expected output:** A readable table of all matching stock purchases and sales, with stock name or ticker, direction, transaction date, official filing date, USD amount range, and a traceable original filing URL or document ID. Identify the data service.
+
+**Completion criteria:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
+
+**Failure criteria:** Missing or added records; wrong month, dates, direction or amount interpretation; substituting insider filings, demo data, another aggregator or model memory; using only the original PDF without retrieving business data from the specified service; untraceable provenance; or failure within budget. Explaining a service limitation is not business-task completion. Execution-environment faults are recorded as invalid.
+
 <a id="flights-search-001-v1"></a>
 
 ## Find flights from Milan to the Netherlands on September 25
@@ -114,20 +142,6 @@ mailboxes-code-001 v1 · [Original task definition](../data/experiments/tasks/ma
 **Completion criteria:** The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.
 
 **Failure criteria:** Wrong code or email; documentation examples substituted for real messages; fabricated delivery state; or failure within the budget. A failure to deliver fixtures is not attributed to the measured Agent.
-
-<a id="financial-access-001-v1"></a>
-
-## Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
-
-financial-access-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
-
-**Inputs:** The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
-
-**Expected output:** One genuine financial-data query result from the specified service, reusable configuration where needed, and the actual setup steps or specific blockers.
-
-**Completion criteria:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
-
-**Failure criteria:** No genuine data query, substitution of another service, signup or installation only, required credentials or human steps unfinished, or failure within the budget. Environment failures are invalid runs.
 
 <a id="financial-fx-001-v1"></a>
 

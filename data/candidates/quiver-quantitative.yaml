@@ -22,6 +22,10 @@ catalog:
       url: https://api.quiverquant.com/
       checked_on: '2026-09-15'
       kind: official_site
+    mcp:
+      url: https://api.quiverquant.com/mcp-server/
+      checked_on: '2026-09-15'
+      kind: official_docs
   routes:
     - id: data-api
       interface: api
@@ -52,11 +56,11 @@ catalog:
           evidence:
             - docs
           notes: >-
-            Congressional and insider transaction datasets; exact fields, filing provenance and plan access
-            need task-specific confirmation.
+            Congressional and insider transaction datasets; exact fields, filing provenance and plan
+            access need task-specific confirmation.
       notes: >-
-        API access is advertised from USD 30/month. Free website signup does not establish free API access; no
-        free execution allowance confirmed.
+        API access is advertised from USD 30/month. Free website signup does not establish free API
+        access; no free execution allowance confirmed.
       costs:
         - kind: minimum_spend
           amount: 30
@@ -66,3 +70,31 @@ catalog:
           scope: Advertised API starting price; exact dataset entitlement not established.
           evidence:
             - access
+    - id: data-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.quiverquant.com/
+      docs: https://api.quiverquant.com/mcp-server/
+      evidence:
+        - mcp
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - mcp
+          notes: get_congress_trades and get_congress_politician are separate from SEC insider tools.
+      notes: >-
+        Uses a Quiver API key and plan entitlement; MCP is not an additional free allowance.
+        Required dataset tier must be checked.

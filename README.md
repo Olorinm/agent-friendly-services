@@ -10,7 +10,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 <a id="all-services"></a>
 
-## Services (168)
+## Services (174)
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
@@ -158,7 +158,7 @@ Completion criteria: Data is actually saved and updated in the specified service
 
 <a id="services-web-search-data"></a>
 
-### Search & Data Access (37)
+### Search & Data Access (43)
 
 These services remain at this scope; see their profiles for unresolved classification details.
 
@@ -225,7 +225,7 @@ Completion criteria: All three questions are answered correctly and supported by
 
 <a id="services-web-search-data-financial-data"></a>
 
-#### Financial Data (27)
+#### Financial Data (33)
 
 <details>
 <summary>Setup tests (recorded separately)</summary>
@@ -233,8 +233,11 @@ Completion criteria: All three questions are answered correctly and supported by
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">95.8k</td><td align="right">$0.0068</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">192.5k</td><td align="right">$0.0091</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">221.9k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">86.8k</td><td align="right">$0.0052</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tracefour">Tracefour</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">0%</a></td><td align="right">107.3k</td><td align="right">$0.0071</td><td align="right">$0</td><td align="left"><a href="https://tracefour.com/v1">API</a></td><td align="left"><a href="https://tracefour.com/api-docs">API</a> · <a href="https://tracefour.com/api-docs/mcp">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -316,7 +319,7 @@ Some early records lack environment details and await a controlled rerun.
 <tr><td align="left"><a href="./generated/services.md#bloomberg-data-license">Bloomberg Data License</a></td><td align="left">Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#coingecko">CoinGecko</a></td><td align="left">Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.</td><td align="left"><a href="https://docs.coingecko.com/docs/setting-up-your-api-key">API</a> · <a href="https://docs.coingecko.com/ai-integration/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#coinmarketcap">CoinMarketCap</a></td><td align="left">Crypto market data with selected keyless endpoints and a free authenticated Basic plan.</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#finnhub">Finnhub</a></td><td align="left">Stock quotes, historical candles and fundamentals; stock candles are documented as premium.</td><td align="left"><a href="https://finnhub.io/docs/api/quote">API</a></td></tr>
@@ -336,7 +339,7 @@ Some early records lack environment details and await a controlled rerun.
 <thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="left">Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.</td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
@@ -347,18 +350,42 @@ Some early records lack environment details and await a controlled rerun.
 
 <a id="services-web-search-data-financial-data-disclosures"></a>
 
-##### Transaction Disclosures (5)
+##### Transaction Disclosures (12)
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="left">Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="left">Congressional and insider transactions, institutional activity and other alternative financial datasets.</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ee257df56f0f">100%</a></td><td align="right">751.7k</td><td align="right">$0.03</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ee257df56f0f">100%</a></td><td align="right">321.9k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#capitol-trades">Capitol Trades</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#congress-stock-tracker">Congress Stock Tracker</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.congressstock.com/congress-trading-api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#insynet">Insynet</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://insynet.se/developers">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a> · <a href="https://api.quiverquant.com/mcp-server/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tracefour">Tracefour</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://tracefour.com/api-docs">API</a> · <a href="https://tracefour.com/api-docs/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#us-house-disclosures">U.S. House Financial Disclosures</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
 </tbody>
 </table>
+
+<details>
+<summary>What we tested and how</summary>
+
+**Task: Summarize the stock purchases and sales Richard W. Allen filed with the U.S. House in August 2026. Include the stock, direction, transaction date, filing date, amount range and original filing source.**
+
+Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction Reports by official filing date from 2026-08-01 through 2026-08-31, publicly available as of 2026-09-15. Include reported family-member transactions and retain USD amount ranges. Common stock only, excluding options, funds, bonds and other assets. Filing in August does not mean trading in August. This is for private reading; no data export is needed.
+
+Completion criteria: Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
+
+**Test configuration:** 1.18.29 · glm-5.3-flash / high · 10 min · 2026-09-15 (UTC) · No account or key supplied
+
+Some early records lack environment details and await a controlled rerun.
+
+[Task definitions](./generated/tasks.en.md#financial-disclosures-001-v1) · [Full runs and evidence](./generated/evaluations.md)
+
+</details>
 
 <a id="services-web-search-data-financial-data-macro"></a>
 
@@ -369,7 +396,7 @@ Some early records lack environment details and await a controlled rerun.
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>

@@ -575,9 +575,79 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 - congress-mcp: 1000 rows / day (free_allowance; Same free-key allowance; Congress data is limited to a rolling three-month window.)
 
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-business.json) | [95.8k](../data/experiments/evaluations/bargo-access.json) | 157.266045s | 0 |
+| API (congress-api-keyed) | — | — | — | — |
+| MCP | — | — | — | — |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 95.8k | $0.0068 | $0 |
+| API (congress-api-keyed) | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15 |
+
+</details>
+
 ### Task results
 
-—
+#### Summarize the stock purchases and sales Richard W. Allen filed with the U.S. House in August 2026. Include the stock, direction, transaction date, filing date, amount range and original filing source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-ee257df56f0f) | [100%](./evaluations.md#comparison-ee257df56f0f) | 751.7k | $0.03 | $0 |
+| API (congress-api-keyed) | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction Reports by official filing date from 2026-08-01 through 2026-08-31, publicly available as of 2026-09-15. Include reported family-member transactions and retain USD amount ranges. Common stock only, excluding options, funds, bonds and other assets. Filing in August does not mean trading in August. This is for private reading; no data export is needed.
+
+**Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-ee257df56f0f)
+
+[Task definition](./tasks.en.md#financial-disclosures-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-disclosures-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-business.json) | 2026-09-15 |
+
+</details>
 
 ### Notes
 
@@ -750,6 +820,128 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 ### Sources
 
 - [official_docs](https://docs.browserbase.com/introduction) — checked 2026-07-07
+
+<a id="capitol-trades"></a>
+
+## Capitol Trades
+
+Public congressional trading website by 2iQ; no self-serve API is established in this record.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://www.capitoltrades.com/) · [Source record](../data/candidates/capitol-trades.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="capitol-trades-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [trades-website (WEB)](https://www.capitoltrades.com/trades) | — | self serve / documented | Official indexed pages describe free public access. Direct page fetch returned 403 during this review; browser usability, automation terms and any personal API access remain unverified. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_site](https://www.capitoltrades.com/about-us) — checked 2026-09-15
+- [official_site](https://www.capitoltrades.com/index) — checked 2026-09-15
+
+<a id="capitol-exposed"></a>
+
+## CapitolExposed
+
+Congressional disclosures and related public records, with a keyless read API and separate paid features.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://www.capitolexposed.com/) · [Source record](../data/candidates/capitol-exposed.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="capitol-exposed-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api-keyless (API)](https://www.capitolexposed.com/api/v1) | [Docs](https://www.capitolexposed.com/api-docs) | self serve / documented | Keyless requests are limited by IP. Terms require attribution; raw-data resale and competing services have additional restrictions. Use the records API, not its separately metered AI research product. |
+
+### Service pricing
+
+- data-api-keyless: 60 requests / minute (free_allowance; Free member/trade list endpoints; separate limits apply to search, exports and AI tools.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [No account or key supplied](../data/experiments/evaluations/capitol-business.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 192.5k | $0.0091 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15 |
+
+</details>
+
+### Task results
+
+#### Summarize the stock purchases and sales Richard W. Allen filed with the U.S. House in August 2026. Include the stock, direction, transaction date, filing date, amount range and original filing source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-ee257df56f0f) | [100%](./evaluations.md#comparison-ee257df56f0f) | 321.9k | $0.02 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction Reports by official filing date from 2026-08-01 through 2026-08-31, publicly available as of 2026-09-15. Include reported family-member transactions and retain USD amount ranges. Common stock only, excluding options, funds, bonds and other assets. Filing in August does not mean trading in August. This is for private reading; no data export is needed.
+
+**Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-ee257df56f0f)
+
+[Task definition](./tasks.en.md#financial-disclosures-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-disclosures-001 v1 | API | [completed](../data/experiments/evaluations/capitol-business.json) | 2026-09-15 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://www.capitolexposed.com/api-docs) — checked 2026-09-15
+- [official_site](https://www.capitolexposed.com/terms) — checked 2026-09-15
 
 <a id="cartesia"></a>
 
@@ -1120,6 +1312,34 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 ### Sources
 
 - [official_docs](https://docs.composio.dev/docs) — checked 2026-09-15
+
+<a id="congress-stock-tracker"></a>
+
+## Congress Stock Tracker
+
+Licensed congressional transaction datasets with source links and amendment history; pricing is negotiated.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://www.congressstock.com/) · [Source record](../data/candidates/congress-stock-tracker.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="congress-stock-tracker-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [licensed-api (API)](https://www.congressstock.com/congress-trading-api) | [Docs](https://www.congressstock.com/congress-trading-api) | application | Request a dataset licence and access terms.; Contact-based pricing; no self-serve free tier. An evaluation extract or discounted academic/non-commercial access requires a request and is not an issued API entitlement. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://www.congressstock.com/congress-trading-api) — checked 2026-09-15
 
 <a id="creem"></a>
 
@@ -1538,9 +1758,9 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 
 ## EODHD
 
-Historical market prices, fundamentals and economic datasets, with free and separately paid packages.
+Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Economic Indicators; Search & Data Access / Financial Data / Transaction Disclosures
 
 [Website](https://eodhd.com/) · [Source record](../data/candidates/eodhd.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1548,7 +1768,7 @@ Historical market prices, fundamentals and economic datasets, with free and sepa
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://eodhd.com/financial-apis/) | [Docs](https://eodhd.com/financial-apis/) | self serve / documented | Free registration advertises 20 API calls/day without a card; some data types are excluded. Check dataset and market coverage before choosing a trial. |
+| [data-api (API)](https://eodhd.com/financial-apis/) | [Docs](https://eodhd.com/financial-apis/) | self serve / documented | Free registration advertises 20 API calls/day without a card; some data types are excluded. Check dataset and market coverage before choosing a trial. Congressional Trades is documented for the All-in-one plan; the generic 20-call free allowance does not establish access to this dataset. |
 
 ### Service pricing
 
@@ -1562,6 +1782,8 @@ Historical market prices, fundamentals and economic datasets, with free and sepa
 
 - [official_docs](https://eodhd.com/financial-apis/) — checked 2026-09-09
 - [official_site](https://eodhd.com/pricing) — checked 2026-09-15
+- [official_docs](https://eodhd.com/financial-apis/congressional-trades-api) — checked 2026-09-15
+- [official_announcement](https://eodhd.com/financial-apis-blog/introducing-the-congressional-trades-api) — checked 2026-09-15
 
 <a id="exa"></a>
 
@@ -1837,7 +2059,7 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. |
+| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. The House Trades endpoint is documented, but Congress-specific free-plan entitlement is not confirmed. |
 | [data-mcp (MCP)](https://financialmodelingprep.com/mcp) | [Docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) | self serve / documented | Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in public results. |
 
 ### Service pricing
@@ -1853,6 +2075,7 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 - [official_docs](https://site.financialmodelingprep.com/developer/docs) — checked 2026-09-09
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-15
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) — checked 2026-09-09
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/house-trading) — checked 2026-09-15
 
 <a id="finnhub"></a>
 
@@ -2666,6 +2889,34 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 - [official_docs](https://ignav.com/docs) — checked 2026-09-07
 - [official_docs](https://ignav.com/docs/mcp) — checked 2026-09-07
 - [official_docs](https://ignav.com/docs/amadeus-self-service-shutdown) — checked 2026-09-07
+
+<a id="insynet"></a>
+
+## Insynet
+
+Congress purchase disclosures and insider filings through an API; free keys require an email request.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://insynet.se/) · [Source record](../data/candidates/insynet.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="insynet-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api (API)](https://tlyddvcmpcbhotxhbiao.supabase.co/functions/v1/api-v1) | [Docs](https://insynet.se/developers) | application / documented | Request a free API key by email.; Ticker, since and limit filters; limit is at most 100. Full historical pagination and complete transaction-level ownership are not established. |
+
+### Service pricing
+
+- data-api: 100 requests / day (free_allowance; Free-key tier covers all five endpoints with data delayed at least 24 hours after ingestion.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://insynet.se/developers) — checked 2026-09-15
 
 <a id="jina"></a>
 
@@ -4252,6 +4503,7 @@ Congressional and insider transactions, institutional activity and other alterna
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [data-api (API)](https://www.quiverquant.com/api-setup/) | [Docs](https://www.quiverquant.com/api-setup/) | self serve / documented | API access is advertised from USD 30/month. Free website signup does not establish free API access; no free execution allowance confirmed. |
+| [data-mcp (MCP)](https://mcp.quiverquant.com/) | [Docs](https://api.quiverquant.com/mcp-server/) | self serve / documented | Uses a Quiver API key and plan entitlement; MCP is not an additional free allowance. Required dataset tier must be checked. |
 
 ### Service pricing
 
@@ -4265,6 +4517,7 @@ Congressional and insider transactions, institutional activity and other alterna
 
 - [official_docs](https://www.quiverquant.com/api-setup/) — checked 2026-09-15
 - [official_site](https://api.quiverquant.com/) — checked 2026-09-15
+- [official_docs](https://api.quiverquant.com/mcp-server/) — checked 2026-09-15
 
 <a id="railway"></a>
 
@@ -5086,6 +5339,77 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 
 - [official_docs](https://docs.together.ai/docs/quickstart) — checked 2026-07-07
 
+<a id="tracefour"></a>
+
+## Tracefour
+
+Public trading disclosures through keyless REST and MCP, with attribution and original-filing links.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://tracefour.com/) · [Source record](../data/candidates/tracefour.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="tracefour-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-api-keyless (API)](https://tracefour.com/v1) | [Docs](https://tracefour.com/api-docs) | self serve / documented | CC BY 4.0 compilation; link to the attribution page supplied with each response. Congress coverage is not established as complete for both chambers. |
+| [data-mcp (MCP)](https://tracefour.com/v1/mcp) | [Docs](https://tracefour.com/api-docs/mcp) | self serve / documented | Streamable HTTP; anonymous calls share the documented per-IP allowance. Optional free key increases the allowance to 600/hour; key acquisition not tested. |
+
+### Service pricing
+
+- data-api-keyless: 60 requests / hour (free_allowance; Anonymous read allowance per IP.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [No account or key supplied](../data/experiments/evaluations/tracefour-access.json) | [107.3k](../data/experiments/evaluations/tracefour-access.json) | 153.41522s | 0 |
+| MCP | — | — | — | — |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [0%](./evaluations.md#comparison-bd611da6270b) | 107.3k | $0.0071 | $0 |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+- API: [Not completed](../data/experiments/evaluations/tracefour-access.json) — 本轮通过指定 REST 方式接入 Tracefour 未完成：文档页和实际尝试的 URL 从本轮云端环境返回 Cloudflare 403 challenge，没有取得真实金融数据；已保存含阻碍说明的配置，无人工介入。独立验收复现了 /v1 和 /api-docs 的 403。执行者未成功读取文档，也未调用后来研究确认的 /v1/congress 等数据路由，因此这些观察不能证明全部数据端点、MCP 或其他网络环境都不可用；本轮没有执行交易披露业务题。
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [not_completed](../data/experiments/evaluations/tracefour-access.json) | 2026-09-15 |
+
+</details>
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://tracefour.com/api-docs) — checked 2026-09-15
+- [official_docs](https://tracefour.com/api-docs/congress-trading-api) — checked 2026-09-15
+- [official_docs](https://tracefour.com/api-docs/mcp) — checked 2026-09-15
+
 <a id="travelport-tripservices"></a>
 
 ## Travelport TripServices
@@ -5309,6 +5633,35 @@ Programmable messaging and voice APIs with test credentials, an OpenAPI spec, ll
 ### Sources
 
 - [official_docs](https://www.twilio.com/docs) — checked 2026-09-15
+
+<a id="us-house-disclosures"></a>
+
+## U.S. House Financial Disclosures
+
+Original House financial disclosure filings and searchable annual indexes, published by the Clerk.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
+[Website](https://disclosures-clerk.house.gov/FinancialDisclosure) · [Source record](../data/candidates/us-house-disclosures.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="us-house-disclosures-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [filing-website (WEB)](https://disclosures-clerk.house.gov/FinancialDisclosure) | — | self serve / documented | Website/file access, not a documented public financial-data API. Annual ZIP contains filing indexes; transaction rows require the linked PDFs. Source used for independent references; not yet measured as a service. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Sources
+
+- [official_site](https://disclosures-clerk.house.gov/FinancialDisclosure/ViewReport) — checked 2026-09-15
+- [official_site](https://disclosures-clerk.house.gov/FinancialDisclosure/ViewSearch) — checked 2026-09-15
 
 <a id="upstash"></a>
 

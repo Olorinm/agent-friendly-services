@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "run_id": "bargo-access",
+  "service_id": "bargo-congress",
+  "route_id": "congress-api-keyless",
+  "entry_url": "https://www.bargo.ai/free-apis/congress/v1",
+  "task": {
+    "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+    "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+    "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+    "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。",
+    "resources": "本轮指定入口与授权资料；仅已确认免费的资源，不付费，不进行交易或资金操作。需要人工或额外身份资料时说明阻碍。安装和配置在本轮持久目录内，不能读取其他任务和账号。",
+    "id": "financial-access-001",
+    "version": "v1",
+    "sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T09:07:26.717325+00:00",
+  "ended_at": "2026-09-15T09:10:03.983370+00:00",
+  "elapsed_seconds": 157.266045,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者以指定方式（REST 直接 HTTP）调用指定服务 bargo-congress，实际查询到真实业务数据（/stats、/trades、/trades/NVDA、/members 均 200 且返回真实披露行），并把可复用配置写入持久目录 /home/node/service-tools/service-config.json（写入回执与 retained-files.json 证实）。验收环境同日独立复测 keyless 端点成功，且配额计数（21/88）恰为执行者记录终态（22/89）再消耗 1 请求/1 行，逐项吻合，证实记录对应真实在线服务。免 Key 入口无需注册，无人工介入，未付款。",
+  "usage": {
+    "input_tokens": 92193,
+    "cached_input_tokens": 73920,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3609,
+    "reasoning_output_tokens": 1277
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.bargo.ai/free-apis/congress",
+      "https://www.bargo.ai/free-apis/terms",
+      "reference.json free_rule: Keyless 30 requests and 100 rows/day/IP"
+    ],
+    "note": "免费规则：官方文档明示读端点免 Key、FREE · NO CARD，keyless 30 请求/100 行每天/IP。本次适用观察：执行全部 9 次业务请求及验收复测均使用 keyless 读端点并返回 200，响应头 X-RateLimit-Limit=30、X-RateLimit-Rows-Limit=100 与该规则一致，未注册账号、未提供或绑定任何支付方式，无付费回执。依据：工具记录 0005（官方页）与 0009/0010/0014（响应头），验收复测见 evidence/live-verification.md。",
+    "applicability": {
+      "rule": "读端点免 Key 即免费，限额 30 请求/100 行每天/IP；免费 Key 仅用于提升限额与解锁 MCP，本轮未使用。",
+      "observed": "本轮所有调用为 keyless GET，返回 200 且限额头显示处于 keyless 30/100 档；用量最高剩余 21 请求/88 行，未超限，未发生任何付费动作。",
+      "evidence": "官方文档页（工具 0005）与各请求的 X-RateLimit 响应头（工具 0009/0010/0014）；独立复测记录 grading/artifacts/evidence/live-verification.md。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader/financial-access-001",
+    "reviewed_at": "2026-09-15T09:17:11.417562+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定服务与指定调用方式（bargo-congress REST API 直接 HTTP，入口 https://www.bargo.ai/free-apis/congress/v1），不用替代服务或模型记忆",
+        "passed": true,
+        "evidence": "工具记录 0009/0010/0014 显示所有业务请求均指向指定 base_url 的 REST 端点（Python urllib 直连）；工具 0005 抓取的官方文档与指定入口一致；未发现调用其他数据服务。"
+      },
+      {
+        "criterion": "完成至少一次真实业务数据查询（仅文档、健康检查或配置文件不足）",
+        "passed": true,
+        "evidence": "工具 0010：/trades?limit=3、/trades/NVDA、/members 均 HTTP 200 并返回真实披露行（议员、ticker、交易/披露日期、金额区间）；工具 0009：/stats 200 含全库统计与 90 天热门 ticker；验收环境同日独立复测 /trades?limit=1 返回 200 与真实数据行，配额计数与执行者终态连续吻合（22/89→21/88），见 evidence/live-verification.md。"
+      },
+      {
+        "criterion": "必要连接配置保存到指定持久位置，可供后续会话复用",
+        "passed": true,
+        "evidence": "工具 0012 成功写入 /home/node/service-tools/service-config.json，内容含 base_url、auth（免 Key 说明）、端点清单、响应字段、keyless 限额与 X-RateLimit 头说明、curl 段错误需改用 Python/Node 的注意事项；execution/retained-files.json 列明 service-config.json 已随持久目录保留。"
+      },
+      {
+        "criterion": "接入门槛如实完成：无需账号的入口直接使用，不强行注册；注册/授权/人工步骤如实记录",
+        "passed": true,
+        "evidence": "官方文档（工具 0005）确认读端点免 Key、免费限流可用；本轮未提供账号/Key，执行者未注册、未付款，配置与答复中如实注明未注册及免费 Key 的可选性；全程无人工介入或特殊申请。"
+      },
+      {
+        "criterion": "在确认免费的授权范围内操作（不付款、不写远端、遵守限额）",
+        "passed": true,
+        "evidence": "所有调用为 keyless GET 读端点，响应头显示 X-RateLimit-Limit 30 / Rows-Limit 100（与独立参考免费规则一致），用量在限内；无注册、无支付、无远端写操作。"
+      },
+      {
+        "criterion": "最终答复与实际执行一致，如实报告结果与阻碍",
+        "passed": true,
+        "evidence": "execution/answer.md 所述 5 端点 200、配置路径、免 Key 限额、剩余配额 22/89 与工具记录 0014 一致；如实报告容器 curl 段错误（工具 0007/0008）并改用 Python 完成，未夸大或编造。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/bargo-access/execution/answer.md",
+      "sha256": "1768f0cb8183c4bfcbf0c61fc8997c3afe075270dd5784ef187bd4a7502b530c",
+      "note": "执行者最终答复：接入结果、5 端点实测 200、配置位置、curl 环境问题与剩余配额。",
+      "source_sha256": "aa3f020639c9f2c1794b7866357628ecf1c012a6102ae967c9c4d3960857fe26",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Public copy adds visible linked Bargo attribution; private original unchanged."
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/bargo-access/execution/retained-files.json",
+      "sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "持久目录留存清单，列明 service-config.json 已保留。"
+    },
+    {
+      "path": "data/experiments/evidence/bargo-access/grading/artifacts/evidence/live-verification.md",
+      "sha256": "7a7681b09eeabb63100f2a1e29287b96e987c893c63179b78248e732adae2e68",
+      "note": "验收环境同日独立复测摘要：keyless /health 与 /trades 调用成功，配额计数与执行记录终态连续吻合；含来源链接、哈希与数据署名，不含原始数据行。",
+      "source_sha256": "0917a67d2e179011c06754dbdef86e61edcecb09521cc1120593d92fe7f1a2f2",
+      "redactions": [
+        "Public copy adds visible linked Bargo attribution; private original unchanged."
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/disclosures-pilot-20260915/bargo-access",
+    "run_sha256": "1a15c242bf9d4fb8ab87ce95911a00635eaf579bfeaee4b40df95e231d7098e6",
+    "events_sha256": "b110b12bd2a5be5d44e2f1452152a9eaccc53bba226b85e48fd32cfee506c7d2",
+    "answer_sha256": "aa3f020639c9f2c1794b7866357628ecf1c012a6102ae967c9c4d3960857fe26",
+    "review_sha256": "ed9e114f033a497763e04f882626f712a411e3eb897951127fe574f6d768a2cf",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged. Public-release review adds required attribution and bounds conclusions to observed requests. Private original answers and independent assessments are retained; status, check booleans, usage and fee amounts are unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6891,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 65,
+        "reasoning_output_tokens": 29
+      },
+      {
+        "input_tokens": 7338,
+        "cached_input_tokens": 2880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 183,
+        "reasoning_output_tokens": 135
+      },
+      {
+        "input_tokens": 7617,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 44
+      },
+      {
+        "input_tokens": 9329,
+        "cached_input_tokens": 7616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 574,
+        "reasoning_output_tokens": 420
+      },
+      {
+        "input_tokens": 10014,
+        "cached_input_tokens": 9280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 217,
+        "reasoning_output_tokens": 24
+      },
+      {
+        "input_tokens": 10775,
+        "cached_input_tokens": 9984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 461,
+        "reasoning_output_tokens": 243
+      },
+      {
+        "input_tokens": 12273,
+        "cached_input_tokens": 10752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1623,
+        "reasoning_output_tokens": 370
+      },
+      {
+        "input_tokens": 13917,
+        "cached_input_tokens": 12224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 27,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 14039,
+        "cached_input_tokens": 13888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 326,
+        "reasoning_output_tokens": 12
+      }
+    ],
+    "source_sha256": "ff8a59025df1b10cb9c274e58e052801f35b0daa667eec0a9cd8e6d637c8934a",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 92193,
+      "cached_input_tokens": 73920,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3609,
+      "reasoning_output_tokens": 1277
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

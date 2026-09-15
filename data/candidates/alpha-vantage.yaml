@@ -35,8 +35,8 @@ catalog:
       checked_on: '2026-09-09'
       kind: official_docs
       notes: >-
-        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not
-        be extracted in this pass.
+        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
+        could not be extracted in this pass.
   routes:
     - id: data-api
       interface: api
@@ -77,15 +77,15 @@ catalog:
           evidence:
             - docs
           notes: >-
-            Asset quotes and time series; supported assets, price adjustment and history depend on endpoint
-            and entitlement.
+            Asset quotes and time series; supported assets, price adjustment and history depend on
+            endpoint and entitlement.
         prices.history:
           value: documented
           evidence:
             - docs
           notes: >-
-            Asset quotes and time series; supported assets, price adjustment and history depend on endpoint
-            and entitlement.
+            Asset quotes and time series; supported assets, price adjustment and history depend on
+            endpoint and entitlement.
         statements.read:
           value: documented
           evidence:
@@ -96,20 +96,21 @@ catalog:
           evidence:
             - docs
           notes: >-
-            Separate Congress Trades and Insider Transactions datasets; population, fields and access must
-            match the task.
+            CONGRESS_TRADES accepts a stock symbol, politician bioguide_id, or both. It is separate
+            from INSIDER_TRANSACTIONS. The docs point to free-key signup, but actual Congress
+            entitlement, coverage and date fields need access verification.
         macro.series:
           value: documented
           evidence:
             - docs
           notes: >-
-            Named economic series including GDP, CPI and unemployment; frequency and revision treatment
-            require task-specific checks.
+            Named economic series including GDP, CPI and unemployment; frequency and revision
+            treatment require task-specific checks.
       notes: >-
-        Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100
-        observations) is available to free keys; full history and intraday are premium. This may cover the
-        current short historical task, subject to access and source precision. Real-time quotes and adjusted
-        data require separate entitlement checks.
+        Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output
+        (latest 100 observations) is available to free keys; full history and intraday are premium.
+        This may cover the current short historical task, subject to access and source precision.
+        Real-time quotes and adjusted data require separate entitlement checks.
       costs:
         - kind: free_allowance
           amount: 25

@@ -1,0 +1,65 @@
+id: capitol-exposed
+name: CapitolExposed
+category: web-search-data
+homepage: https://www.capitolexposed.com/
+summary: >-
+  Congressional disclosures and related public records, with a keyless read API and separate paid
+  features.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    docs:
+      url: https://www.capitolexposed.com/api-docs
+      checked_on: '2026-09-15'
+      kind: official_docs
+    terms:
+      url: https://www.capitolexposed.com/terms
+      checked_on: '2026-09-15'
+      kind: official_site
+  routes:
+    - id: data-api-keyless
+      interface: api
+      maintainer: official
+      entry_url: https://www.capitolexposed.com/api/v1
+      docs: https://www.capitolexposed.com/api-docs
+      evidence:
+        - docs
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: none
+        evidence:
+          - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Congress trade lists and per-member trades; filters, pagination and citation metadata.
+            Current completeness needs an actual task.
+      costs:
+        - kind: free_allowance
+          amount: 60
+          unit: requests
+          per: minute
+          scope: Free member/trade list endpoints; separate limits apply to search, exports and AI tools.
+          evidence:
+            - docs
+      notes: >-
+        Keyless requests are limited by IP. Terms require attribution; raw-data resale and competing
+        services have additional restrictions. Use the records API, not its separately metered AI
+        research product.

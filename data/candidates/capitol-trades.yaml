@@ -1,0 +1,53 @@
+id: capitol-trades
+name: Capitol Trades
+category: web-search-data
+homepage: https://www.capitoltrades.com/
+summary: Public congressional trading website by 2iQ; no self-serve API is established in this record.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    about:
+      url: https://www.capitoltrades.com/about-us
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: Official search-index text inspected; direct fetch returned 403.
+    site:
+      url: https://www.capitoltrades.com/index
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: Official indexed page states the website has three years of history.
+  routes:
+    - id: trades-website
+      interface: web
+      maintainer: official
+      entry_url: https://www.capitoltrades.com/trades
+      evidence:
+        - about
+        - site
+      availability:
+        value: self_serve
+        evidence:
+          - about
+      personal_access:
+        value: documented
+        evidence:
+          - about
+      auth:
+        value: unknown
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - about
+            - site
+          notes: Searchable US congressional trades; website history is limited to three years.
+      notes: >-
+        Official indexed pages describe free public access. Direct page fetch returned 403 during
+        this review; browser usability, automation terms and any personal API access remain
+        unverified.

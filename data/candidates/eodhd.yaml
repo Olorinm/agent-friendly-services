@@ -3,8 +3,8 @@ name: EODHD
 category: web-search-data
 homepage: https://eodhd.com/
 summary: >-
-  Historical market prices, fundamentals and economic datasets, with free and separately paid
-  packages.
+  Historical market prices, fundamentals, economic datasets and congressional trades, with
+  dataset-specific plan entitlements.
 submitted_by: community
 tags:
   - stocks
@@ -12,12 +12,14 @@ tags:
   - fx
   - crypto
   - macro
+  - disclosures
 catalog:
   version: 1
   classifications:
     - web-search-data/financial-data/prices
     - web-search-data/financial-data/statements
     - web-search-data/financial-data/macro
+    - web-search-data/financial-data/disclosures
   sources:
     docs:
       url: https://eodhd.com/financial-apis/
@@ -27,6 +29,14 @@ catalog:
       url: https://eodhd.com/pricing
       checked_on: '2026-09-15'
       kind: official_site
+    congress:
+      url: https://eodhd.com/financial-apis/congressional-trades-api
+      checked_on: '2026-09-15'
+      kind: official_docs
+    congress-plan:
+      url: https://eodhd.com/financial-apis-blog/introducing-the-congressional-trades-api
+      checked_on: '2026-09-15'
+      kind: official_announcement
   routes:
     - id: data-api
       interface: api
@@ -52,8 +62,10 @@ catalog:
           - docs
           - access
       notes: >-
-        Free registration advertises 20 API calls/day without a card; some data types are excluded. Check
-        dataset and market coverage before choosing a trial.
+        Free registration advertises 20 API calls/day without a card; some data types are excluded.
+        Check dataset and market coverage before choosing a trial. Congressional Trades is
+        documented for the All-in-one plan; the generic 20-call free allowance does not establish
+        access to this dataset.
       costs:
         - kind: free_allowance
           amount: 20
@@ -67,3 +79,11 @@ catalog:
           value: not_required
           evidence:
             - access
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - congress
+          notes: >-
+            House and Senate trades with separate transaction/disclosure date filters, amount
+            ranges, filing URLs and pagination. Beta dataset.

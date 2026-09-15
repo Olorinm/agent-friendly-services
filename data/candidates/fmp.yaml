@@ -32,6 +32,10 @@ catalog:
       url: https://site.financialmodelingprep.com/developer/docs/mcp-server
       checked_on: '2026-09-09'
       kind: official_docs
+    house-trades:
+      url: https://site.financialmodelingprep.com/developer/docs/stable/house-trading
+      checked_on: '2026-09-15'
+      kind: official_docs
   routes:
     - id: data-api
       interface: api
@@ -57,10 +61,19 @@ catalog:
           - docs
           - access
       notes: >-
-        Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are
-        listed under paid Starter; a free key does not establish access to the fiscal-year comparison task.
-        Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing
-        page.
+        Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual
+        fundamentals are listed under paid Starter; a free key does not establish access to the
+        fiscal-year comparison task. Displaying or redistributing FMP data requires a separate
+        licensing agreement according to its pricing page. The House Trades endpoint is documented,
+        but Congress-specific free-plan entitlement is not confirmed.
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - house-trades
+          notes: >-
+            House stock trades by symbol, including member/family activity. This endpoint does not
+            by itself establish Senate or MCP coverage.
     - id: data-mcp
       interface: mcp
       maintainer: official
@@ -81,5 +94,5 @@ catalog:
         evidence:
           - mcp
       notes: >-
-        Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in
-        public results.
+        Uses the existing API key and plan limits; key must be injected privately, never stored in
+        the URL in public results.

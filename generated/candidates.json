@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-15T08:49:00.725Z",
-  "count": 92,
+  "generated_at": "2026-09-15T09:35:33.214Z",
+  "count": 98,
   "candidates": [
     {
       "id": "adyen",
@@ -192,6 +192,28 @@
       "m1": null
     },
     {
+      "id": "capitol-exposed",
+      "name": "CapitolExposed",
+      "category": "web-search-data",
+      "homepage": "https://www.capitolexposed.com/",
+      "summary": "Congressional disclosures and related public records, with a keyless read API and separate paid features.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "capitol-trades",
+      "name": "Capitol Trades",
+      "category": "web-search-data",
+      "homepage": "https://www.capitoltrades.com/",
+      "summary": "Public congressional trading website by 2iQ; no self-serve API is established in this record.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "checkout-com",
       "name": "Checkout.com",
       "category": "payments-billing",
@@ -243,6 +265,17 @@
       "category": "web-search-data",
       "homepage": "https://coinmarketcap.com/",
       "summary": "Crypto market data with selected keyless endpoints and a free authenticated Basic plan.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "congress-stock-tracker",
+      "name": "Congress Stock Tracker",
+      "category": "web-search-data",
+      "homepage": "https://www.congressstock.com/",
+      "summary": "Licensed congressional transaction datasets with source links and amendment history; pricing is negotiated.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -317,7 +350,7 @@
       "name": "EODHD",
       "category": "web-search-data",
       "homepage": "https://eodhd.com/",
-      "summary": "Historical market prices, fundamentals and economic datasets, with free and separately paid packages.",
+      "summary": "Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -522,6 +555,17 @@
       "category": "travel",
       "homepage": "https://ignav.com/",
       "summary": "Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "insynet",
+      "name": "Insynet",
+      "category": "web-search-data",
+      "homepage": "https://insynet.se/",
+      "summary": "Congress purchase disclosures and insider filings through an API; free keys require an email request.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -964,6 +1008,17 @@
       "m1": null
     },
     {
+      "id": "tracefour",
+      "name": "Tracefour",
+      "category": "web-search-data",
+      "homepage": "https://tracefour.com/",
+      "summary": "Public trading disclosures through keyless REST and MCP, with attribution and original-filing links.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "travelport-tripservices",
       "name": "Travelport TripServices",
       "category": "travel",
@@ -1013,6 +1068,17 @@
       "category": "web-search-data",
       "homepage": "https://twelvedata.com/",
       "summary": "Global stock, FX and crypto time series with API, Python SDK and CLI access.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "us-house-disclosures",
+      "name": "U.S. House Financial Disclosures",
+      "category": "web-search-data",
+      "homepage": "https://disclosures-clerk.house.gov/FinancialDisclosure",
+      "summary": "Original House financial disclosure filings and searchable annual indexes, published by the Clerk.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],

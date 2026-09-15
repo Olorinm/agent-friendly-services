@@ -1,0 +1,69 @@
+id: insynet
+name: Insynet
+category: web-search-data
+homepage: https://insynet.se/
+summary: >-
+  Congress purchase disclosures and insider filings through an API; free keys require an email
+  request.
+submitted_by: community
+tags:
+  - congress
+  - disclosures
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/disclosures
+  sources:
+    docs:
+      url: https://insynet.se/developers
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes:
+    - id: data-api
+      interface: api
+      maintainer: official
+      entry_url: https://tlyddvcmpcbhotxhbiao.supabase.co/functions/v1/api-v1
+      docs: https://insynet.se/developers
+      evidence:
+        - docs
+      availability:
+        value: application
+        evidence:
+          - docs
+        notes: Free keys are requested by email; paid Hobby/Pro keys are issued after checkout.
+      personal_access:
+        value: documented
+        evidence:
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Congress v1 covers House purchases only, with some same-day members folded into
+            politicians[]. Separate US/Swedish insider endpoints. Not a complete House/Senate
+            buy-and-sell feed.
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: requests
+          per: day
+          scope: >-
+            Free-key tier covers all five endpoints with data delayed at least 24 hours after
+            ingestion.
+          evidence:
+            - docs
+      human_steps:
+        - step: Request a free API key by email.
+          stage: credentials
+          evidence:
+            - docs
+          notes: Issuance requires provider response; no request sent in this review.
+      notes: >-
+        Ticker, since and limit filters; limit is at most 100. Full historical pagination and
+        complete transaction-level ownership are not established.
