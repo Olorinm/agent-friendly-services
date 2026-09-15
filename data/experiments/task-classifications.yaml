@@ -76,3 +76,18 @@ tasks:
     id: web-search-001
     classification: web-search-data/web-search
     phase: business
+
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-disclosures-002
+    classification: web-search-data/financial-data/disclosures
+    phase: business
+
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-disclosures-003
+    classification: web-search-data/financial-data/disclosures
+    phase: business
+
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-disclosures-004
+    classification: web-search-data/financial-data/disclosures
+    phase: business

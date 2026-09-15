@@ -174,5 +174,53 @@
         "failure": "遗漏或增加记录，混用月份/日期、买卖方向或金额口径；用公司内部人交易、演示数据、其他聚合服务或模型记忆代替指定服务；只解析原始文件而未从指定服务取得业务数据；出处不可定位；预算内未完成。仅说明服务受限不等于业务完成，执行环境故障单列无效。"
       }
     ]
+  },
+  "financial-disclosures-002/v1": {
+    "description": "My watchlist includes Richard W. Allen, Donald Sternoff Beyer Jr, Rob Bresnahan and Ed Case. Find their Apple stock purchases and sales disclosed in August 2026, list the details, identify members with no matching records, and link the original filings.",
+    "inputs": "Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Watchlist: Allen (GA12), Beyer (VA08), Bresnahan (PA08), Case (HI01). Stock: Apple Inc. (AAPL). Missing service coverage or failed retrieval is not evidence of no transactions. Do not infer current holdings from disclosures.",
+    "expected_output": "A matching or no-match conclusion for each watchlist member. For matches include stock, direction, transaction date, official filing date and USD amount range. Identify the data service and specific original filings.",
+    "success": "Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.",
+    "failure": "Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. Omitting watchlist members, treating bonds as stocks, equating no match with no holdings or failing to explain coverage gaps does not pass.",
+    "source_variants": [
+      {
+        "description": "我的关注名单里有 Richard W. Allen、Donald Sternoff Beyer Jr、Rob Bresnahan 和 Ed Case。查一下他们 2026 年 8 月提交的披露中有哪些苹果股票买卖，列出明细；没有匹配记录的人也请说明，并附原始申报出处。",
+        "inputs": "按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 关注名单：Allen（GA12）、Beyer（VA08）、Bresnahan（PA08）、Case（HI01）；股票为 Apple Inc.（AAPL）。不能把服务未收录或查不到直接等同于没有交易，也不能从披露推断当前持仓。",
+        "expected_output": "按关注名单给出匹配或无匹配的结论；有记录时列出股票、买卖方向、交易日、官方提交日、美元金额区间；标明数据服务及具体原始申报。",
+        "success": "四位身份与期间正确，全部匹配明细与冻结官方索引及 PTR 一致；无匹配结论同时有指定服务查询和官方范围核对依据，不能由报错或空响应单独推出。金额保留区间，来源定位到具体申报。",
+        "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 漏掉名单成员、把债券当股票、把无匹配说成没有持仓，或未解释查询覆盖缺口均不通过。"
+      }
+    ]
+  },
+  "financial-disclosures-003/v1": {
+    "description": "Compare Richard W. Allen and Ed Case in the stock disclosures they filed in August 2026: how many days elapsed between each transaction and official filing? List the dates and elapsed days, summarize count and minimum/maximum lag per filer, and link the original filings.",
+    "inputs": "Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Allen (GA12) and Case (HI01). Calculate calendar days as official filing date minus transaction date, with same-day filing equal to zero. Do not use notification or platform publication dates. Do not assess legality or whether to copy the trades.",
+    "expected_output": "For each stock transaction, report filer, stock, transaction date, filing date and elapsed days. For each filer report count and minimum/maximum lag. Attribute the service and identify original documents.",
+    "success": "All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.",
+    "failure": "Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. Mixing date types, omitting trades, treating a filing as one transaction or incorrect calculations does not pass.",
+    "source_variants": [
+      {
+        "description": "比较 Richard W. Allen 和 Ed Case 在 2026 年 8 月提交的股票披露：从交易发生到正式提交分别隔了多久？列出每笔的日期和天数，再按申报人汇总笔数、最短和最长间隔，并附原始申报出处。",
+        "inputs": "按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 Allen（GA12）、Case（HI01）。间隔按官方提交日减交易日的自然日计算，同日记 0；不使用通知日或平台上架日，不判断是否违法或是否值得跟投。",
+        "expected_output": "每笔股票买卖的申报人、股票、交易日、提交日及间隔天数；两人的笔数和最短/最长间隔；数据服务署名及原始文件依据。",
+        "success": "两位全部匹配交易及日期与独立冻结参考一致；逐笔自然日差、笔数、最短和最长值均正确；无记录时不编造统计；核心记录来自指定服务，官方索引或 PTR 可用于日期核对。",
+        "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 混用日期、漏计交易、把一次申报当一笔交易或计算错误均不通过。"
+      }
+    ]
+  },
+  "financial-disclosures-004/v1": {
+    "description": "Check this claim: “Ed Case personally and actively purchased exactly USD 8,000 of Apple stock on August 18, 2026.” Assess ownership, date, amount and transaction nature separately, provide supported corrections, and link the original filing.",
+    "inputs": "Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-31, public as of 2026-09-15. Include family transactions in common stock purchases and sales; exclude options, funds and bonds. For private reading, with no data export. Ed Case (HI01), Apple Inc. (AAPL). The quoted claim is a researcher-written synthetic statement, not an actual news quotation. Check only the relevant disclosures filed that month. Distinguish member, spouse and joint ownership; transaction and filing dates; amount ranges and exact values. Use original remarks to determine transaction nature, and state uncertainty when unsupported.",
+    "expected_output": "A judgment and explanation for each of four assertions, supported corrections and sources. Attribute the specified service without extending to motives or investment advice.",
+    "success": "Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.",
+    "failure": "Failure to retrieve business data from the specified service; substitution with another aggregator or model memory; missing or incorrect results, unsupported sources, merely reporting a service restriction, or failure within budget. Environment or material faults are invalid runs. An incorrect or omitted assertion, unsupported correction or treating the synthetic statement as real reporting does not pass.",
+    "source_variants": [
+      {
+        "description": "帮我核对这条待查说法：“Ed Case 本人在 2026 年 8 月 18 日主动买入了恰好 8,000 美元的苹果股票。”请逐项判断交易归属、日期、金额和交易性质，写出有依据的更正，并附原始申报出处。",
+        "inputs": "按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 Ed Case（HI01），Apple Inc.（AAPL）。引号内是研究者编写的合成待查说法，不是真实新闻引文；仅核对该月提交的相关披露。区分本人、配偶或共同持有，交易日和提交日，以及金额区间和精确金额；交易性质以原始说明为准，无依据就说无法确认。",
+        "expected_output": "四项主张分别判断并给出理由、可核对的更正和来源；标明指定数据服务，不扩展成动机或投资建议。",
+        "success": "真实指定服务记录与具体官方申报共同支持核对；归属、日期、金额、交易性质均与冻结参考相符；不能把区间中点当精确成交额、申报人当交易所有人，或遗漏影响说法真假的原始备注。",
+        "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 任一主张误判、遗漏、更正无据或把合成说法当真实报道均不通过。"
+      }
+    ]
   }
 }
