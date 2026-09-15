@@ -16,16 +16,29 @@ catalog:
   sources:
     docs:
       url: https://www.bargo.ai/free-apis/congress
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
+    openapi:
+      url: https://www.bargo.ai/free-apis/congress/openapi.json
+      checked_on: '2026-09-15'
+      kind: official_docs
+    key-dashboard:
+      url: https://www.bargo.ai/free-apis/dash
+      checked_on: '2026-09-15'
+      kind: official_site
+    free-api-terms:
+      url: https://www.bargo.ai/free-apis/terms
+      checked_on: '2026-09-15'
+      kind: official_site
   routes:
     - id: congress-api-keyless
       interface: api
       maintainer: official
-      entry_url: https://www.bargo.ai/free-apis/congress
+      entry_url: https://www.bargo.ai/free-apis/congress/v1
       docs: https://www.bargo.ai/free-apis/congress
       evidence:
         - docs
+        - openapi
       availability:
         value: self_serve
         evidence:
@@ -33,15 +46,14 @@ catalog:
       personal_access:
         value: documented
         evidence:
-          - docs
+          - free-api-terms
       auth:
         value: none
         evidence:
           - docs
       notes: >-
-        Keyless: 30 requests and 100 rows per IP/day; free key: 100 requests and 1,000 rows/day. Rolling
-        three-month coverage; preserve transaction and disclosure dates. Attribution required; raw-data
-        redistribution restricted.
+        Rolling three-month coverage. Preserve transaction and disclosure dates; the Free API Terms
+        require attribution and restrict raw-data redistribution.
       costs:
         - kind: free_allowance
           amount: 30
@@ -76,28 +88,37 @@ catalog:
       personal_access:
         value: documented
         evidence:
-          - docs
+          - free-api-terms
       auth:
         value: api_key
         evidence:
           - docs
-      notes: Free key raises the quota; signup and key acquisition have not been measured.
+      notes: >-
+        Free keys are issued through Google sign-in. REST accepts Bearer or X-Api-Key authentication;
+        regenerating a key invalidates the old one. Signup and key acquisition have not been measured.
+        The published quota covers the same key across Bargo Free APIs, not a separate allowance per route.
       costs:
         - kind: free_allowance
           amount: 100
           unit: requests
           per: day
-          scope: Free-key quota shared by API and MCP.
+          scope: Free-key allowance across Bargo Free APIs, including REST and MCP.
           evidence:
-            - docs
+            - key-dashboard
         - kind: free_allowance
           amount: 1000
           unit: rows
           per: day
-          scope: Rolling three-month Congress dataset; redistribution restrictions apply.
+          scope: Same free-key allowance; Congress data is limited to a rolling three-month window.
           evidence:
             - docs
+            - key-dashboard
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - key-dashboard
+          notes: A Google account is required to issue and manage the free key.
         payment_method:
           value: not_required
           evidence:
@@ -116,28 +137,36 @@ catalog:
       personal_access:
         value: documented
         evidence:
-          - docs
+          - free-api-terms
       auth:
         value: api_key
         evidence:
           - docs
-      notes: Uses the free Congress key. Same rolling data window; verify available tool coverage per task.
+      notes: >-
+        Uses the free key obtained through Google sign-in. Bearer authentication is documented;
+        no separate MCP data or quota allowance is claimed. Verify tool coverage per task.
       costs:
         - kind: free_allowance
           amount: 100
           unit: requests
           per: day
-          scope: Free-key quota shared by API and MCP.
+          scope: Free-key allowance across Bargo Free APIs, including REST and MCP.
           evidence:
-            - docs
+            - key-dashboard
         - kind: free_allowance
           amount: 1000
           unit: rows
           per: day
-          scope: Rolling three-month Congress dataset; redistribution restrictions apply.
+          scope: Same free-key allowance; Congress data is limited to a rolling three-month window.
           evidence:
             - docs
+            - key-dashboard
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - key-dashboard
+          notes: A Google account is required to issue and manage the free key.
         payment_method:
           value: not_required
           evidence:
@@ -145,4 +174,13 @@ catalog:
 notes:
   - >-
     Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6;
-    included in the broader financial-data discovery pass. PR remains open; no task result implied.
+    incorporated during the broader financial-data discovery pass. This record covers the Congress
+    product, not Bargo's separate market-intelligence platform; no task result is implied.
+  - >-
+    The OpenAPI date filters select transaction dates, not disclosure dates; filing_portal points to
+    the source filing portal and does not establish a direct link to each original filing. Preserve
+    these distinctions when selecting a task or checking provenance.
+  - >-
+    Free API Terms allow personal applications, agents and analysis with visible Bargo attribution.
+    Raw records may not be redistributed, including partial exports; derivative work must not expose
+    or reconstruct them. Evidence publication must respect this restriction.

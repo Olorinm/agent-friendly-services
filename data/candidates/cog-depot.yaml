@@ -1,0 +1,166 @@
+id: cog-depot
+name: Cog Depot
+category: agent-tooling
+homepage: https://cogdepot.com/
+summary: Hosted marketplace for agents to discover counterparties, negotiate capability exchanges and obtain direct contact details after paying platform fees.
+submitted_by: vendor
+tags:
+  - marketplace
+  - a2a
+  - agent-commerce
+catalog:
+  version: 1
+  classifications:
+    - agent-tooling
+  sources:
+    api-docs:
+      url: https://cogdepot.com/docs
+      checked_on: '2026-09-15'
+      kind: official_docs
+    discovery:
+      url: https://cogdepot.com/docs/machine-discovery
+      checked_on: '2026-09-15'
+      kind: official_docs
+    mcp-repo:
+      url: https://github.com/cogdepot/mcp-server
+      checked_on: '2026-09-15'
+      kind: official_repo
+    onboarding:
+      url: https://cogdepot.com/docs/full-flow
+      checked_on: '2026-09-15'
+      kind: official_docs
+    signup:
+      url: https://cogdepot.com/auth/signup
+      checked_on: '2026-09-15'
+      kind: official_site
+    pricing:
+      url: https://cogdepot.com/pricing
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: The detailed fee table meters only listing creation, feed reads and individual listing reads; introductory prose still says every API call. These are published prices, not observed charges.
+    terms:
+      url: https://cogdepot.com/terms
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: Terms dated August 18, 2026 describe B2B use, location/nationality/residency exclusions and escrow limited to platform fees.
+  routes:
+    - id: marketplace-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.cogdepot.com
+      docs: https://cogdepot.com/docs
+      evidence: [api-docs, onboarding]
+      availability:
+        value: self_serve
+        evidence: [onboarding, signup]
+      personal_access:
+        value: unknown
+        evidence: [terms, signup]
+        notes: Public signup exists, but it does not establish eligibility for an ordinary individual; see the service-wide terms note.
+      auth:
+        value: api_key
+        evidence: [api-docs]
+        notes: x-api-key for account operations; public discovery needs no key. Paid x402 onboarding is a separate documented option, not a free unauthenticated task route.
+      requirements:
+        company:
+          value: unknown
+          evidence: [terms]
+        website:
+          value: unknown
+          evidence: [onboarding]
+          notes: Domain control is required for the API-signup free credit grant, not stated as a requirement for web signup or paid funding.
+        payment_method:
+          value: unknown
+          evidence: [signup, onboarding]
+          notes: Web signup advertises no card for its welcome grant; paid funding and grants have different prerequisites.
+      human_steps:
+        - step: Complete email, Google or GitHub web signup and transfer the issued key to the agent.
+          stage: signup
+          evidence: [signup, onboarding]
+          notes: Applies to the operator-led path. API registration can return a key without this web step, initially with zero credits.
+      costs:
+        - kind: free_allowance
+          amount: 20000
+          unit: credits
+          per: eligible account
+          scope: Web signup receives the grant immediately; API signup starts at zero and must verify domain control, once per domain and account. Granted credits are not cash or measured savings.
+          evidence: [signup, onboarding]
+        - kind: usage
+          amount: 1
+          unit: credits
+          per: billable listing request
+          scope: Published metering for posting a listing, a feed page or an individual listing read; pricing explicitly values one credit at USD 0.0005.
+          evidence: [pricing]
+        - kind: usage
+          amount: 200
+          unit: credits
+          per: posted listing
+          scope: Posting fee in addition to the metered request. Unfunded accounts have a lifetime limit of three listings regardless of granted balance.
+          evidence: [pricing]
+        - kind: usage
+          amount: 2000
+          unit: credits
+          per: party per sealed deal
+          scope: The opener reserves this platform fee when a thread opens; capture occurs at seal, when the poster also pays. The underlying service purchase is separate.
+          evidence: [pricing, terms]
+        - kind: minimum_spend
+          amount: 0.5
+          unit: money
+          currency: USD
+          per: smallest listed x402 credit pack
+          scope: Published equivalent for 1000 credits paid in USDC on Base; insufficient by itself for the 2000-credit deal fee. Not a required signup payment or observed expenditure.
+          evidence: [pricing]
+      notes: Registration alone does not establish readiness to trade. Negotiation needs enough credits for its fee hold; x402-funded accounts receive no welcome grant merely for paying.
+    - id: marketplace-a2a
+      interface: api
+      maintainer: official
+      entry_url: https://api.cogdepot.com/a2a
+      docs: https://cogdepot.com/docs/machine-discovery
+      evidence: [discovery]
+      personal_access:
+        value: unknown
+      auth:
+        value: unknown
+      notes: Official docs describe A2A v1.0 over JSON-RPC and the Agent Card at /.well-known/agent-card.json. Authentication details and protocol conformance were not independently verified; no task result is implied.
+    - id: marketplace-mcp-local
+      interface: mcp
+      maintainer: official
+      entry_url: https://github.com/cogdepot/mcp-server
+      docs: https://github.com/cogdepot/mcp-server#install
+      evidence: [mcp-repo]
+      via: marketplace-api
+      availability:
+        value: self_serve
+        evidence: [mcp-repo]
+      personal_access:
+        value: unknown
+      auth:
+        value: api_key
+        evidence: [mcp-repo]
+        notes: COGDEPOT_API_KEY enables account tools; keyless discovery and limited listing previews are available without it.
+      notes: Local stdio wrapper published as @cogdepot/mcp-server, started with npx. A preview has no search or pagination; the full feed is charged. Uses the same service credits; no local installation or task was tested.
+    - id: marketplace-mcp-remote
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.cogdepot.com
+      docs: https://github.com/cogdepot/mcp-server#remote-hosted-oauth
+      evidence: [mcp-repo, discovery]
+      via: marketplace-api
+      availability:
+        value: self_serve
+        evidence: [mcp-repo]
+      personal_access:
+        value: unknown
+      auth:
+        value: oauth
+        evidence: [mcp-repo, discovery]
+      human_steps:
+        - step: Sign in and authorize the hosted MCP connector.
+          stage: credentials
+          evidence: [mcp-repo]
+          notes: Choose the client's always-required authentication mode for account tools; an unauthenticated connection exposes only keyless tools.
+      notes: Hosted OAuth documents action-scoped access, unlike the original PR's account-key-only description. This does not establish scopes for static API keys or imply tested authorization behavior.
+  notes:
+    - Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/7; reviewed on 2026-09-15 at head f97e8ef286f3feeba7e83ef086fbd5b354213cb2. The July submission's absent-MCP claim is superseded by current official documentation.
+    - The terms exclude users located in, or nationals/residents of, Cuba, Iran, North Korea, Syria and Russia and named restricted parties. Their B2B description does not establish a company-registration requirement or ordinary-person eligibility; those remain unknown.
+    - Escrow covers platform fees only. Counterparties exchange work and payment directly after introduction; Cog Depot does not hold the purchase price or guarantee delivery. Crypto funding of platform credits must not be described as settlement of the underlying deal.

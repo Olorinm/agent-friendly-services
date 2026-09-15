@@ -1,0 +1,126 @@
+id: xiurouter
+name: XiuRouter
+category: ai-models
+homepage: https://router.xiu.ai/
+summary: Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols, scoped keys and request-level usage records.
+submitted_by: vendor
+tags:
+  - llm-api
+  - model-routing
+  - protocol-compatibility
+  - usage-tracking
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+  sources:
+    quickstart:
+      url: https://docs.xiu.ai/en/router/quickstart/index.md
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: Documents account credit, console key creation and billable text requests. The publisher's own request checks are not this directory's test results.
+    compatibility:
+      url: https://docs.xiu.ai/en/router/api-compatibility/index.md
+      checked_on: '2026-09-15'
+      kind: official_docs
+    usage:
+      url: https://docs.xiu.ai/en/router/models-pricing-usage/index.md
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: The current Markdown source includes the benefit-group retirement notice and the distinction between displayed prices and account permissions.
+    pricing:
+      url: https://router.xiu.ai/en/pricing
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: USD billing; token rates are per million input, output, cache-read or cache-write tokens, with per-request models labeled separately. CNY values are estimates.
+    privacy:
+      url: https://router.xiu.ai/en/data-privacy
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: Supplier policy last updated September 12, 2026; applies to the XiuRouter API and Playground. This is not an independent privacy audit.
+    vercel-ai-sdk:
+      url: https://docs.xiu.ai/router/integrations/vercel-ai-sdk/
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: XiuRouter's configuration guide for a third-party SDK; the guide does not claim a measured integration run.
+    opencode:
+      url: https://docs.xiu.ai/router/integrations/opencode/
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: XiuRouter's configuration guide for the third-party OpenCode client; the guide explicitly states no billable OpenCode task was run in that review.
+  routes:
+    - id: model-api
+      interface: api
+      maintainer: official
+      entry_url: https://router-api.xiu.ai
+      docs: https://docs.xiu.ai/en/router/quickstart/
+      evidence: [quickstart, compatibility]
+      availability:
+        value: unknown
+        evidence: [quickstart]
+        notes: Existing account holders are instructed to create their own keys; eligibility and the full new-account activation flow were not established.
+      personal_access:
+        value: unknown
+        evidence: [quickstart]
+        notes: Sign-in and key documentation alone do not establish ordinary-person eligibility in a specified region.
+      auth:
+        value: api_key
+        evidence: [compatibility]
+        notes: Bearer authentication for OpenAI protocols; Messages and Gemini also have protocol-specific API-key headers.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [quickstart]
+        company:
+          value: unknown
+        identity_verification:
+          value: unknown
+        payment_method:
+          value: unknown
+        prepayment:
+          value: unknown
+          evidence: [quickstart]
+          notes: Available account credit is required, but minimum funding, promotional credit and payment eligibility were not established.
+      notes: >-
+        Documents Chat Completions, Responses, Messages and Gemini GenerateContent. The exact model,
+        account group and protocol must match; ordinary text support does not establish tool compatibility.
+        Responses storage, previous_response_id and background mode are outside the documented scope;
+        Gemini Interactions, Files and fine-tuning are also excluded. Keys can restrict models, quota,
+        expiration and IP access. No signup, authentication or model request was performed for this review.
+    - id: vercel-ai-sdk
+      interface: sdk
+      maintainer: third_party
+      entry_url: https://docs.xiu.ai/router/integrations/vercel-ai-sdk/
+      docs: https://docs.xiu.ai/router/integrations/vercel-ai-sdk/
+      evidence: [vercel-ai-sdk]
+      via: model-api
+      auth:
+        value: api_key
+        evidence: [vercel-ai-sdk]
+      personal_access:
+        value: unknown
+      notes: >-
+        The supplier guide installs ai and @ai-sdk/openai-compatible and configures a server-side
+        client for the Chat Completions API. This is a third-party client path, not a XiuRouter-owned
+        SDK or an independent service. Text, streaming and tool behavior remain untested.
+  notes:
+    - >-
+      Vendor contribution by XiuAI / XiuLab Inc., reviewed from PR #10 at head
+      d7395f6decec10bfbdb1cdf8cac453dc2a88da7c:
+      https://github.com/Olorinm/agent-friendly-services/pull/10 (checked September 15, 2026).
+      This record contains public-source claims only; it does not establish successful access or task completion.
+    - >-
+      Usage and pricing sources describe variable charges by model, group, context length, processing mode,
+      token/cache usage and hosted tools. A reference discount is not a guaranteed saving or an actual charge.
+      Free allowance, sandbox availability and minimum spend remain unknown; no zero-cost claim is made.
+    - >-
+      The current usage documentation says the benefit group is closed to new selection and will cease
+      after September 30, 2026. Existing keys require migration to another available group; a public model
+      listing does not grant account access. This notice concerns one group, not retirement of XiuRouter.
+    - >-
+      The privacy source says conversation content is not stored or used for training by XiuRouter, while
+      usage and performance records are retained long term. Model developers apply their own retention
+      and training policies; this statement does not establish end-to-end zero retention.
+    - >-
+      The OpenCode integration guide documents using XiuRouter as a Chat Completions model provider;
+      that client configuration has not been tested here.
