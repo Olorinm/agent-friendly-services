@@ -33,6 +33,16 @@ test('evaluation evidence tampering and cached-token double counting are detecte
   assert(evaluationErrors(modified, providers).some(s => s.includes('passing checks')));
 });
 
+test('peer-assisted review records a distinct group round and immutable snapshot', () => {
+  const providers = [...loadProviders(), ...loadCandidates()].map(p => p.data);
+  const value = structuredClone(loadEvaluations()[0]);
+  value.review.peer_context = { group_id: 'same-task-round-1', round: 1,
+    snapshot_sha256: 'a'.repeat(64), run_ids: [value.run_id, 'another-service-run'] };
+  assert.deepEqual(evaluationErrors(value, providers), []);
+  value.review.peer_context.run_ids = ['another-service-run', 'another-service-run'];
+  assert(evaluationErrors(value, providers).some(s => s.includes('peer_context')));
+});
+
 test('a public-playground pass never becomes a customer API or MCP pass', () => {
   const ignav = loadCandidates().find(p => p.data.id === 'ignav')!.data;
   const data = { services: [catalogService(ignav, 'candidate', loadEvaluations())] };

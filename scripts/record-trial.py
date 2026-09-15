@@ -140,6 +140,8 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
     private_packet_files = [run_dir / 'execution/tool-records.json']
     private_packet_files += list((run_dir / 'grading-input/review-packet').rglob('*.json'))
     private_usage_hashes.update(sha(path) for path in private_packet_files if path.is_file())
+    peer_dir = run_dir / 'grading-input/peer-results'
+    private_peer_hashes = {sha(path) for path in peer_dir.rglob('*') if path.is_file()}
     evidence = review.get('evidence', [])
     if not isinstance(evidence, list) or not evidence:
         raise ValueError('Select evidence files, including evidence of any failure/blocker')
@@ -159,6 +161,13 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
             raise ValueError('Do not publish the raw session as evidence')
         if source in private_usage_files or sha(source) in private_usage_hashes or source.name in ('events.jsonl', 'session.json'):
             raise ValueError('Do not publish private adapter logs/usage sources or copies as evidence')
+        if sha(source) in private_peer_hashes:
+            # The target may independently produce the same answer as a peer.
+            # Only its original captured execution file is eligible for publication.
+            original = (run_dir / 'grading-input' / source.relative_to(run_dir))
+            if (not source.is_relative_to(run_dir / 'execution') or not original.is_file()
+                    or sha(original) != sha(source)):
+                raise ValueError('Do not publish private peer results or copies as evidence')
         if source == secret_file.resolve():
             raise ValueError('Do not select the private secret store as evidence')
         raw = source.read_bytes()
@@ -200,6 +209,9 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                        'run_sha256': sha(run_dir / 'run.json'), 'events_sha256': sha(run_dir / 'events.jsonl'),
                        'answer_sha256': sha(run_dir / 'answer.md'), 'review_sha256': sha(review_path)},
     }
+    peer_context = run_dir / 'peer-context.json'
+    if peer_context.exists():
+        result['review']['peer_context'] = json.loads(peer_context.read_text())
     if meta.get('usage_format') == 'adapter-v1':
         from adapter_usage import read_usage
         result['usage'], result['request_usage'] = read_usage(run_dir, meta['model'])

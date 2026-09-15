@@ -102,7 +102,10 @@ python3 scripts/pipeline.py record data/experiments/results/<run-id> --generate
 python3 scripts/runners/opencode/provision.py --config /private/adapter.json stop
 ```
 
-For an active task use `pipeline.py stop` first. A runtime lock rejects overlapping
+For an active task use `pipeline.py stop` first; grouped runs use `pipeline.py
+stop-group`. The adapter confirms that the model process group, capture proxy,
+and worker have exited before returning `stopped: true`. A missing process
+receipt or an unconfirmed stop requires reconciliation. A runtime lock rejects overlapping
 workers within one container. Parallel tasks need separate service/route
 containers and separate grader runtimes; the controller schedules their budgets
 and the host's available capacity. Model request capture stays enabled throughout.

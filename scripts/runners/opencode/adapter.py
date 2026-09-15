@@ -83,6 +83,10 @@ elif a.operation=='collect':
     print(json.dumps({'collected':True}))
 else:
     # Stop only this worker's recorded process group. Container service state persists.
-    script="import json,os,signal; p=json.load(open(%r)); os.killpg(p['pid'],signal.SIGTERM)" % ('/run/afs/'+run+'/process.json')
-    exec_root('python3','-c',script,check=False)
-    print(json.dumps({'stopped':True}))
+    script=Path(__file__).with_name('runtime_stop.py').read_text()
+    pattern='^python3 /run/afs/worker.py '+re.escape('/run/afs/'+run+'.request.json')+'$'
+    result=exec_root('python3','-c',script,'/run/afs/'+run,pattern,check=False)
+    if result.returncode:
+        print(json.dumps({'stopped':False,'reason':'Stop verification failed; inspect owned runtime'}))
+    else:
+        print(json.dumps(json.loads(result.stdout)))

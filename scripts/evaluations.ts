@@ -27,6 +27,7 @@ export interface Evaluation {
     sources: string[]; note: string; items?: { quantity: number; unit: string; usd_per_unit: number }[] };
   service_cost_usd: number | null; human_interventions: number | null;
   review: { method: string; reviewer: string; reviewed_at: string;
+    peer_context?: { group_id: string; round: number; snapshot_sha256: string; run_ids: string[] };
     checks: { criterion: string; passed: boolean; evidence: string }[] };
   evidence: { path: string; sha256: string; note: string; source_sha256?: string; redactions?: string[] }[];
   provenance: { local_run_dir: string; run_sha256: string; events_sha256: string | null;
@@ -107,6 +108,14 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
     errors.push('an external review with evidence-backed checks is required');
   }
   if (v?.status === 'completed' && (!Array.isArray(checks) || !checks.length || checks.some((c: any) => c.passed !== true) || !hash(v?.provenance?.answer_sha256))) errors.push('completed requires passing checks and final-answer provenance');
+  const peers = v?.review?.peer_context;
+  if (peers !== undefined && (typeof peers?.group_id !== 'string' || !/^[a-zA-Z0-9._-]+$/.test(peers.group_id)
+      || !Number.isInteger(peers?.round) || peers.round < 1 || !hash(peers?.snapshot_sha256)
+      || !Array.isArray(peers?.run_ids) || peers.run_ids.length < 2
+      || peers.run_ids.some((id: any) => typeof id !== 'string' || !/^[a-zA-Z0-9._-]+$/.test(id))
+      || new Set(peers.run_ids).size !== peers.run_ids.length || !peers.run_ids.includes(v.run_id))) {
+    errors.push('peer_context requires a frozen group, round, snapshot hash and distinct run IDs including this run');
+  }
   for (const key of ['run_sha256', 'review_sha256']) if (!hash(v?.provenance?.[key])) errors.push(`provenance.${key} is required`);
   const evidence = v?.evidence;
   if (!Array.isArray(evidence) || !evidence.length) errors.push('selected evidence is required');
