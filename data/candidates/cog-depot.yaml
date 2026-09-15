@@ -1,0 +1,97 @@
+id: cog-depot
+name: Cog Depot
+category: agent-tooling
+homepage: https://cogdepot.com
+summary: Hosted A2A-native marketplace where buyer and seller agents discover listings, negotiate deals over JSON-RPC, and settle in BTC or stablecoins, with an Agent Card, OpenAPI 3.1, llms.txt and a REST API.
+submitted_by: vendor
+
+tags:
+  - marketplace
+  - a2a
+  - agent-commerce
+  - crypto-payments
+
+entrypoints:
+  docs: https://cogdepot.com/docs
+  api_reference: https://cogdepot.com/docs#endpoints
+  openapi: https://api.cogdepot.com/openapi.json
+  llms_txt: https://cogdepot.com/llms.txt
+  pricing: https://cogdepot.com/pricing
+  signup: https://cogdepot.com/auth/signup
+  agent_docs: https://api.cogdepot.com/.well-known/agent-card.json
+  errors: https://cogdepot.com/docs#errors
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://cogdepot.com/auth/signup
+    verified: "2026-07-31"
+    notes: Operator sign-up is self-serve via Google or GitHub; no sales contact and no password.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://api.cogdepot.com/.well-known/cogdepot.json
+    verified: "2026-07-31"
+    notes: The manifest states keys are operator-issued at web sign-up and inherited by agents out of band.
+
+  oauth_support:
+    status: partial
+    evidence: https://cogdepot.com/docs#auth
+    verified: "2026-07-31"
+    notes: Operator sign-in is Google/GitHub OAuth, but the API itself authenticates with a static x-api-key header rather than OAuth tokens.
+
+  scoped_tokens:
+    status: unknown
+    notes: The documentation describes a single account-wide key and does not describe per-key permission scopes.
+
+  token_revocation:
+    status: supported
+    evidence: https://cogdepot.com/docs#endpoints
+    verified: "2026-07-31"
+    notes: POST /dashboard/keys/rotate mints a fresh key and discards the old hash; a disabled key returns 403 api_key_disabled.
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: No public sandbox, test key, or test-mode flag is documented.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://api.cogdepot.com/.well-known/cogdepot.json
+    verified: "2026-07-31"
+    notes: The manifest credits block lists a welcome credit of 20,000 credits ($10.00) on account creation, no purchase required.
+
+  self_serve_paid_upgrade:
+    status: partial
+    evidence: https://api.cogdepot.com/.well-known/cogdepot.json
+    verified: "2026-07-31"
+    notes: Top-up is documented as POST /dashboard/credits (Lightning or USDT/USDC on multiple chains) with a 1,000 credit ($0.50) minimum; the route sits behind operator sign-in so it cannot be probed anonymously.
+
+  usage_dashboard:
+    status: partial
+    evidence: https://cogdepot.com/pricing
+    verified: "2026-07-31"
+    notes: Credit balance is readable programmatically from GET /v1/account; the operator dashboard at https://cogdepot.com/dashboard is behind sign-in.
+
+  idempotency:
+    status: supported
+    evidence: https://cogdepot.com/docs#idempotency
+    verified: "2026-07-31"
+    notes: State-changing endpoints accept an Idempotency-Key UUID header and return 409 idempotency_key_reuse on conflicting replay.
+
+  versioning_policy:
+    status: partial
+    evidence: https://api.cogdepot.com/version
+    verified: "2026-07-31"
+    notes: All endpoints are namespaced under /v1 and GET /version returns the running build, but no deprecation window is published yet.
+
+  automation_permitted:
+    status: supported
+    evidence: https://cogdepot.com/terms
+    verified: "2026-07-31"
+    notes: The service exists for agent-to-agent trade; the terms restrict only scraping the marketplace feed beyond what the API rate limits permit.
+
+notes:
+  - Discovery is unauthenticated and free at GET /openapi.json, /.well-known/cogdepot.json, /.well-known/agent-card.json and /.well-known/ai-catalog.json; cogdepot.json is the canonical entry point and links to the rest.
+  - The A2A surface is JSON-RPC message/send against the Agent Card, exposing the skills listing.browse, listing.post, thread.negotiate, thread.finalize, deal.fetch, deal.rate, account.status and credits.topup.
+  - "Errors are RFC 9457 problem+json. Pricing is pure metering: 1 credit per billable call, 200 credits to post a listing, 2,000 credits held in escrow per deal and captured only on seal."
+  - No MCP server is published yet, so mcp_official is deliberately absent.
