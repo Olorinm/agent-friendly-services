@@ -19,6 +19,9 @@ def load(path):
     containers = config['containers']
     if not containers or len(set(containers.values())) != len(containers):
         raise ValueError('Each runtime must have a separate container')
+    children = config.get('retained_children', {})
+    if not isinstance(children, dict) or set(children) - set(containers):
+        raise ValueError('retained_children must name configured runtimes')
     for runtime, container in containers.items():
         if any(not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', x) for x in (runtime, container)):
             raise ValueError('Invalid runtime or container name')
@@ -28,6 +31,15 @@ def load(path):
             for x in retained
         ):
             raise ValueError('retained_paths must list top-level entries per runtime')
+        nested = children.get(runtime, {})
+        if not isinstance(nested, dict) or set(nested) - set(retained):
+            raise ValueError('retained_children must name retained top-level directories')
+        for names in nested.values():
+            if not isinstance(names, list) or any(
+                not isinstance(x, str) or x in ('.', '..') or not re.fullmatch(r'[A-Za-z0-9_.-]+', x)
+                for x in names
+            ):
+                raise ValueError('retained_children must list direct child names')
     return config
 
 

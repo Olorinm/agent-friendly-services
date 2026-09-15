@@ -178,7 +178,9 @@ def attach(directory, group_directory):
     if runs.frozen_files(dest) != hashes:
         raise ValueError('Grader peer snapshot differs from frozen group snapshot')
     context = {'group_id': manifest['group_id'], 'round': manifest['round'],
-               'snapshot_sha256': state['snapshot_sha256'], 'run_ids': [m['run_id'] for m in manifest['members']]}
+               'snapshot_sha256': state['snapshot_sha256'], 'run_ids': [m['run_id'] for m in manifest['members']],
+               'available_run_ids': [m['run_id'] for m in runs.read(dest / 'index.json')['members']
+                                     if any(f['path'] == m['run_id'] + '/answer.md' for f in m['files'])]}
     runs.write(directory / 'peer-context.json', context)
     index_path = directory / 'grading-input/review-packet/index.json'
     index = runs.read(index_path)
@@ -206,7 +208,9 @@ def stop_member(path):
         runs.write(path / 'state.json', {**runs.read(path / 'state.json'), 'stop_confirmed': True})
 
 
-def advance(directory):
+def advance(directory, *, busy_runtimes=(), max_active=None):
+    if max_active is not None and (type(max_active) is not int or max_active < 0):
+        raise ValueError('Available group capacity must be a nonnegative integer')
     directory = Path(directory).resolve()
     manifest, state = load(directory)
     if state['phase'] in ('reviewed', 'needs_attention', 'stopped'):
@@ -216,7 +220,8 @@ def advance(directory):
     errors = state['errors']
     role = 'execution' if state['phase'] == 'executing' else 'grading'
     ready = 'prepared' if role == 'execution' else 'execution_collected'
-    # Poll existing sessions before starting more; the two stages never overlap.
+    # Poll existing sessions before starting more; stages within this group never overlap.
+    capacity = manifest['max_concurrency'] if max_active is None else min(manifest['max_concurrency'], max_active)
     members = sorted(manifest['members'], key=lambda m: not active(runs.read(Path(m['directory']) / 'state.json')))
     for member in members:
         path, run_id = Path(member['directory']), member['run_id']
@@ -224,8 +229,10 @@ def advance(directory):
         if run_id in errors or current['phase'] not in (ready, role + '_running', role + '_collecting', role + '_starting'):
             continue
         running = sum(active(runs.read(Path(m['directory']) / 'state.json')) for m in members)
-        if current['phase'] == ready and running >= manifest['max_concurrency']:
-            continue
+        if current['phase'] == ready:
+            runtime = runs.read(path / 'config.json')[role]['runtime']
+            if running >= capacity or runtime in busy_runtimes:
+                continue
         try:
             runs.advance(path, group_directory=directory)
         except Exception as exc:

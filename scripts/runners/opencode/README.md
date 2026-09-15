@@ -45,6 +45,11 @@ Create a private adapter configuration outside Git (for example under the ignore
   "retained_paths": {
     "execution-runtime": ["credentials.json", "installed-tools"],
     "grading-runtime": []
+  },
+  "retained_children": {
+    "execution-runtime": {
+      "installed-tools": ["package.json", "package-lock.json", "node_modules"]
+    }
   }
 }
 ```
@@ -71,7 +76,14 @@ under `/home/node/service-tools` and authorize their exact scope in the pipeline
 configuration. `retained_paths` lists top-level entries to preserve for subsequent
 tasks: credentials/configuration and installed service dependencies, not previous
 answers or generated task scripts. Other state is archived to `/run/afs/archive`.
-Each task starts with a fresh home, session and workspace. An installation batch
+For a retained dependency directory, optional `retained_children` lists its direct
+children to keep. This archives task downloads written beside dependencies before
+the next session. A named parent must be a real directory, never a symlink.
+Review retained helper scripts and configuration for task-specific contents when
+reusing an older container; a filename policy does not inspect file contents.
+Each task starts with a fresh home, session and workspace. The worker
+also archives previous `/tmp` and `/var/tmp` contents between sessions; task
+downloads must not survive through a shared temporary directory. An installation batch
 continues in the same service container. Stop containers after the batch; keeping
 the image avoids reinstalling OpenCode next time.
 
@@ -109,6 +121,26 @@ receipt or an unconfirmed stop requires reconciliation. A runtime lock rejects o
 workers within one container. Parallel tasks need separate service/route
 containers and separate grader runtimes; the controller schedules their budgets
 and the host's available capacity. Model request capture stays enabled throughout.
+
+For multiple prepared comparison groups, run a single batch controller:
+
+```sh
+python3 scripts/comparison_batch.py --max-concurrency 10 /private/group-1 /private/group-2
+```
+
+The ceiling covers execution and grading sessions across these groups. The
+controller also excludes occupied runtimes, so successive tasks can overlap
+execution and grading without sharing a container concurrently. Each group still
+seals its same-task answer snapshot before grading. Actual concurrency is bounded
+by the available distinct runtimes; raising the ceiling does not create containers.
+The controller holds all group/member locks and refuses further dispatch after an
+unconfirmed runtime stop. Run the whole batch together, rather than independently
+starting controllers that reuse its runtimes.
+
+Peer metadata distinguishes declared members (`run_ids`) from members with an
+answer in the frozen snapshot (`available_run_ids`). A member deferred before
+dispatch contributes no answer or business failure. If only one service ran, the
+public review label states that no other service answer was available.
 
 `collect` retains raw CLI events, session export, actual outgoing model
 messages/tools, streaming responses, artifacts and a runtime receipt. The wire
@@ -148,6 +180,8 @@ that existing observation into `applicability.observed` when the original rule
 and evidence are also present and there is no competing `observed` field. If
 this layout repair lacks a `note`, it copies the existing rule text into it.
 Conflicting or incomplete facts remain rejected; this is not another grading pass.
+An existing nonempty list of evidence references may be joined with newlines for
+the scalar `applicability.evidence` field, retaining every reference and its order.
 
 Artifact collection never follows symbolic or hard links. It copies regular files
 and lists omitted links in private `artifact-omissions.json`; other unsafe archive

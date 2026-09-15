@@ -28,6 +28,21 @@ class UsageTests(unittest.TestCase):
 
 
 class AssessmentTests(unittest.TestCase):
+    def test_billing_evidence_list_is_joined_without_adding_facts(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        original={'status':'completed','service_cost_usd':0,'service_cost':{'kind':'confirmed_free','note':'existing basis',
+            'applicability':{'rule':'free reads','observed':'keyless GET','evidence':['first source','second source']}}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['service_cost']['applicability']['evidence'],'first source\nsecond source')
+        self.assertEqual(original['service_cost']['applicability']['evidence'],['first source','second source'])
+        self.assertEqual(normalized['status'],original['status']);self.assertEqual(normalized['service_cost_usd'],0)
+        self.assertEqual(len(changes),1)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+        for invalid in ([],[''],['source',None],{'source':'somewhere'}):
+            original['service_cost']['applicability']['evidence']=invalid
+            self.assertEqual(assessment.normalize(original),(original,[]))
+
     def test_rearranges_existing_billing_facts_without_inference(self):
         spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
         assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
@@ -77,6 +92,49 @@ class RuntimeStatusTests(unittest.TestCase):
             status.query(lambda: missing, lambda: missing)
 
 class ArtifactTests(unittest.TestCase):
+    def test_fresh_session_archives_shared_temporary_files_without_following_links(self):
+        import sys
+        directory=Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        sys.path.insert(0,str(directory))
+        spec=importlib.util.spec_from_file_location('opencode_worker',directory/'worker.py')
+        worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker)
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);parents=[root/p for p in ('workspace','home/node','tmp','var/tmp')]
+            for parent in parents:
+                parent.mkdir(parents=True);(parent/'old-answer').write_text('prior task')
+            service_tools=parents[1]/'service-tools';service_tools.mkdir()
+            (parents[0]/'service-tools').write_text('not the persistent directory')
+            secret=root/'secret';secret.write_text('outside')
+            (parents[2]/'alias').symlink_to(secret)
+            worker.archive_session_artifacts(parents,root/'archive',service_tools)
+            self.assertTrue(service_tools.is_dir())
+            self.assertEqual(list(parents[1].iterdir()),[service_tools])
+            self.assertTrue(all(not list(p.iterdir()) for p in (parents[0],parents[2],parents[3])))
+            self.assertEqual(secret.read_text(),'outside')
+            self.assertEqual(len(list((root/'archive').rglob('old-answer-*'))),4)
+
+    def test_nested_retention_archives_task_material_and_rejects_parent_alias(self):
+        import sys
+        directory=Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        sys.path.insert(0,str(directory))
+        spec=importlib.util.spec_from_file_location('opencode_worker',directory/'worker.py')
+        worker=importlib.util.module_from_spec(spec);spec.loader.exec_module(worker)
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);tools=root/'tools';installed=tools/'installed';installed.mkdir(parents=True)
+            (installed/'node_modules').mkdir();(installed/'extract.mjs').write_text('generic parser')
+            (installed/'prior.pdf').write_text('prior task');(tools/'answer.md').write_text('prior answer')
+            (installed/'alias').symlink_to(root/'outside')
+            policy={'installed':['node_modules','extract.mjs']}
+            worker.archive_service_artifacts(tools,root/'archive',['installed'],policy)
+            self.assertEqual({p.name for p in installed.iterdir()},{'node_modules','extract.mjs'})
+            self.assertEqual((root/'archive/installed/prior.pdf').read_text(),'prior task')
+            self.assertTrue((root/'archive/installed/alias').is_symlink())
+            self.assertEqual((root/'archive/answer.md').read_text(),'prior answer')
+            installed.rename(root/'outside');installed.symlink_to(root/'outside')
+            with self.assertRaisesRegex(ValueError,'real directory'):
+                worker.archive_service_artifacts(tools,root/'archive2',['installed'],policy)
+            self.assertFalse((root/'archive2').exists())
+
     def test_does_not_follow_executor_symlinks(self):
         import sys
         from unittest.mock import patch
@@ -120,7 +178,10 @@ class ProvisionTests(unittest.TestCase):
             config = Path(d)/'config.json'
             for field, value in [('host', '-oProxyCommand=bad'), ('remote_root', '/srv/../'),
                                  ('containers', {'execution': 'shared', 'grading': 'shared'}),
-                                 ('retained_paths', {'execution': ['..'], 'grading': []})]:
+                                 ('retained_paths', {'execution': ['..'], 'grading': []}),
+                                 ('retained_children', {'unknown': {}}),
+                                 ('retained_children', {'execution': {'unknown': []}}),
+                                 ('retained_children', {'execution': {'credentials.json': ['..']}})]:
                 settings = self.settings(); settings[field] = value
                 config.write_text(json.dumps(settings))
                 with self.assertRaises(ValueError):

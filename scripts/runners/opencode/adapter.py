@@ -36,6 +36,7 @@ def put(directory):
 
 if a.operation=='start':
     r['retained_paths']=c['retained_paths'][r['runtime']]
+    r['retained_children']=c.get('retained_children',{}).get(r['runtime'],{})
     if not isinstance(r['retained_paths'],list):raise ValueError('Specify retained_paths for each runtime')
     if r['retained_paths'] is not None and any(not re.fullmatch(r'[A-Za-z0-9._-]+',name) for name in r['retained_paths']):raise ValueError('Retention entries must be top-level names')
     # Exclusive remote directory protects uncertain dispatches from duplicate starts.

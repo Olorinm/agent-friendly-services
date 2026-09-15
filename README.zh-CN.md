@@ -356,7 +356,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-864872ad88ab">25%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-eff87a506310">100%</a></td><td align="right">557.9k</td><td align="right">$0.03</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-cbad562eed82">100%</a></td><td align="right">227.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#capitol-trades">Capitol Trades</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#congress-stock-tracker">Congress Stock Tracker</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.congressstock.com/congress-trading-api">API</a></td></tr>
@@ -380,7 +380,12 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 | 比较 Richard W. Allen 和 Ed Case 在 2026 年 8 月提交的股票披露：从交易发生到正式提交分别隔了多久？列出每笔的日期和天数，再按申报人汇总笔数、最短和最长间隔，并附原始申报出处。<br>按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 Allen（GA12）、Case（HI01）。间隔按官方提交日减交易日的自然日计算，同日记 0；不使用通知日或平台上架日，不判断是否违法或是否值得跟投。 | 两位全部匹配交易及日期与独立冻结参考一致；逐笔自然日差、笔数、最短和最长值均正确；无记录时不编造统计；核心记录来自指定服务，官方索引或 PTR 可用于日期核对。 |
 | 帮我核对这条待查说法：“Ed Case 本人在 2026 年 8 月 18 日主动买入了恰好 8,000 美元的苹果股票。”请逐项判断交易归属、日期、金额和交易性质，写出有依据的更正，并附原始申报出处。<br>按官方提交日期筛选 2026-08-01 至 2026-08-31、截至 2026-09-15 已公开的美国众议院 PTR；包括家庭成员，普通股买卖，不含期权、基金、债券。结果供本人阅读，不需导出文件。 Ed Case（HI01），Apple Inc.（AAPL）。引号内是研究者编写的合成待查说法，不是真实新闻引文；仅核对该月提交的相关披露。区分本人、配偶或共同持有，交易日和提交日，以及金额区间和精确金额；交易性质以原始说明为准，无依据就说无法确认。 | 真实指定服务记录与具体官方申报共同支持核对；归属、日期、金额、交易性质均与冻结参考相符；不能把区间中点当精确成交额、申报人当交易所有人，或遗漏影响说法真假的原始备注。 |
 
-**测试配置：** 1.18.29 · glm-5.3-flash / high · 10 分钟 · 独立验收可参考同期 2 家服务的答案 · 2026-09-15（UTC） · 未预供账号或密钥
+| 服务 | 测试配置 |
+| --- | --- |
+| [CapitolExposed](./generated/evaluations.md#comparison-cbad562eed82) | 1.18.29 · glm-5.3-flash / high · 15 分钟 · 独立验收（本轮无其他服务答案可参考） |
+| [Bargo Congress Trades API](./generated/evaluations.md#comparison-864872ad88ab) | 1.18.29 · glm-5.3-flash / high · 10 分钟 · 独立验收可参考同期 2 家服务的答案 |
+
+**测试配置：** 2026-09-15（UTC） · 未预供账号或密钥
 
 部分早期记录缺少环境信息，尚待统一复跑。
 

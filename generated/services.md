@@ -953,7 +953,7 @@ Congressional disclosures and related public records, with a keyless read API an
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/capitol-disclosures-004-r1.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
@@ -991,7 +991,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 291.0k | $0.02 | $0 |
+| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 163.1k | $0.0100 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1000,9 +1000,9 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 **Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
 
@@ -1012,7 +1012,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 1.12M | $0.05 | $0 |
+| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 309.7k | $0.02 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1021,9 +1021,9 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
 
 [Task definition](./tasks.en.md#financial-disclosures-002-v1)
 
@@ -1033,7 +1033,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-eff87a506310) | [100%](./evaluations.md#comparison-eff87a506310) | 266.1k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 206.5k | $0.01 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1042,9 +1042,9 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
 
 [Task definition](./tasks.en.md#financial-disclosures-003-v1)
 
@@ -1054,7 +1054,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [0](./evaluations.md#comparison-eff87a506310) | — | — | — | — |
+| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 230.9k | $0.01 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1063,23 +1063,23 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-eff87a506310)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
 
 [Task definition](./tasks.en.md#financial-disclosures-004-v1)
-
-Invalid runs: 1
-
-- API: [Invalid run](../data/experiments/evaluations/capitol-disclosures-004-r1.json) — 运行器采集软链接时退出，原始进程回执与精确时长缺失。独立验收的原始业务结论为 completed；总控保留该结论并另作环境无效裁决，排除出完成率，不作为服务失败。最终答案另有原始所有者代码抄写错误，原验收未指出，已在质量说明中保留。
 
 </details>
 
 <details>
-<summary>Run history (5)</summary>
+<summary>Run history (9)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-disclosures-004 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json) | 2026-09-15 |
+| financial-disclosures-003 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-003-900s-c10-r1.json) | 2026-09-15 |
+| financial-disclosures-002 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-002-900s-c10-r1.json) | 2026-09-15 |
+| financial-disclosures-001 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-001-900s-c10-r1.json) | 2026-09-15 |
 | financial-disclosures-004 v1 | API | [invalid_run](../data/experiments/evaluations/capitol-disclosures-004-r1.json) | 2026-09-15 |
 | financial-disclosures-003 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-003-r1.json) | 2026-09-15 |
 | financial-disclosures-002 v1 | API | [completed](../data/experiments/evaluations/capitol-disclosures-002-r1.json) | 2026-09-15 |

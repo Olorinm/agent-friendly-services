@@ -104,6 +104,21 @@ test('peer review separates earlier solo trials and different cohorts, while poo
   assert.match(renderBoardDetails(boards, new Map(), false), /same-task answers from 2 services/);
 });
 
+test('deferred peers neither split a task suite nor count as available answers', () => {
+  const records = [1, 2, 3, 4].map(n => run({
+    run_id: `a${n}`, task: { ...run().task, id: `task-${n}` },
+    review: { method: 'external_agent', reviewer: 'grader', reviewed_at: '2026-09-08T00:10:00Z', checks: [],
+      peer_context: { group_id: `group-${n}`, round: 1, snapshot_sha256: 'a'.repeat(64),
+        run_ids: [`a${n}`, `deferred-${n}`], available_run_ids: [`a${n}`] } },
+  }));
+  const boards = buildBoards(records);
+  assert.equal(boards.length, 1);
+  assert.equal(boards[0].tasks.length, 4);
+  assert.equal(boards[0].rows[0].metrics.trials, 4);
+  assert.match(renderBoardDetails(boards, new Map(), true), /本轮无其他服务答案可参考/);
+  assert.doesNotMatch(renderBoardDetails(boards, new Map(), true), /同期 2 家服务/);
+});
+
 test('per-request billing applies context tiers to each call, with final totals reconciled', () => {
   const table = prices({ input_cost_per_token_above_1000_tokens: .000004,
     cache_read_input_token_cost_above_1000_tokens: .0000004, output_cost_per_token_above_1000_tokens: .00002 });

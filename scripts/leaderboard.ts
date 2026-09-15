@@ -17,12 +17,16 @@ const configKey = (r: Evaluation, services: Map<string, string>) => stable({ mod
   web_search: r.environment.web_search,
   // Compare the available peer services, not per-task group IDs or round IDs.
   // An unrecorded member stays distinct until its service identity is available.
-  ...(r.review?.peer_context ? { peer_review: r.review.peer_context.run_ids
-    .map(id => services.get(id) ?? `unrecorded:${id}`).sort() } : {}) });
-export const peerReviewLabel = (r: Evaluation, zh = false) => r.review?.peer_context
-  ? (zh ? `独立验收可参考同期 ${r.review.peer_context.run_ids.length} 家服务的答案`
-    : `Independent review with same-task answers from ${r.review.peer_context.run_ids.length} services`)
-  : '';
+  ...(r.review?.peer_context ? { peer_review: peerAnswers(r).some(id => id !== r.run_id)
+    ? peerAnswers(r).map(id => services.get(id) ?? `unrecorded:${id}`).sort() : [] } : {}) });
+const peerAnswers = (r: Evaluation) => r.review?.peer_context?.available_run_ids ?? r.review?.peer_context?.run_ids ?? [];
+export const peerReviewLabel = (r: Evaluation, zh = false) => {
+  if (!r.review?.peer_context) return '';
+  if (!peerAnswers(r).some(id => id !== r.run_id)) return zh
+    ? '独立验收（本轮无其他服务答案可参考）' : 'Independent review; no other service answer available this round';
+  return zh ? `独立验收可参考同期 ${peerAnswers(r).length} 家服务的答案`
+    : `Independent review with same-task answers from ${peerAnswers(r).length} services`;
+};
 const mean = (values: (number | null)[]) => values.length && values.every(v => v !== null && Number.isFinite(v))
   ? values.reduce<number>((sum, v) => sum + v!, 0) / values.length : null;
 export function summarize(runs: Evaluation[]) {

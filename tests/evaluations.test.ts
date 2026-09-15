@@ -41,6 +41,11 @@ test('peer-assisted review records a distinct group round and immutable snapshot
   assert.deepEqual(evaluationErrors(value, providers), []);
   value.review.peer_context.run_ids = ['another-service-run', 'another-service-run'];
   assert(evaluationErrors(value, providers).some(s => s.includes('peer_context')));
+  value.review.peer_context.run_ids = [value.run_id, 'another-service-run'];
+  value.review.peer_context.available_run_ids = [value.run_id];
+  assert.deepEqual(evaluationErrors(value, providers), []);
+  value.review.peer_context.available_run_ids = ['not-in-group'];
+  assert(evaluationErrors(value, providers).some(s => s.includes('available_run_ids')));
 });
 
 test('lost runtime duration remains unknown only for an invalid run', () => {

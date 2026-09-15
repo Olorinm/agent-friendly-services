@@ -23,6 +23,31 @@ def dump(p,x): p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
 def now(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
 def identity(): os.setgroups([]);os.setgid(1000);os.setuid(1000)
 
+def archive_session_artifacts(parents, archive_root, service_tools):
+    for parent in parents:
+        for old in parent.iterdir():
+            if old==service_tools:continue
+            archive=archive_root/str(parent).lstrip('/');archive.mkdir(parents=True,exist_ok=True)
+            shutil.move(str(old),str(archive/(old.name+'-'+str(time.time_ns()))))
+
+def archive_service_artifacts(tools, archive, retained, children):
+    if tools.is_symlink() or not tools.is_dir():
+        raise ValueError('Service tools must be a real directory')
+    # Validate before moving anything. Never traverse a model-created alias.
+    for name in children:
+        parent=tools/name
+        if parent.is_symlink() or (parent.exists() and not parent.is_dir()):
+            raise ValueError('Retained child policy requires a real directory')
+    archive.mkdir(parents=True,exist_ok=False)
+    for old in tools.iterdir():
+        if old.name not in retained:
+            shutil.move(str(old),str(archive/old.name))
+        elif old.name in children:
+            for child in old.iterdir():
+                if child.name not in children[old.name]:
+                    target=archive/old.name;target.mkdir(exist_ok=True)
+                    shutil.move(str(child),str(target/child.name))
+
 def collect_artifacts(workspace,private,out):
     if workspace.is_symlink() or workspace.resolve().parent != Path('/workspace'):
         raise ValueError('Workspace moved outside its authorized root')
@@ -65,16 +90,12 @@ def main():
     workspace=Path('/workspace')/run;home=Path('/home/node')/run
     # Previous task artifacts are archived to controller-only storage. Only
     # service-tools persists as executor-readable state between batch tasks.
-    for parent in (Path('/workspace'),Path('/home/node')):
-        for old in parent.iterdir():
-            if old.name=='service-tools':continue
-            archive=ROOT/'archive'/parent.name;archive.mkdir(parents=True,exist_ok=True)
-            shutil.move(str(old),str(archive/(old.name+'-'+str(time.time_ns()))))
+    archive_session_artifacts((Path('/workspace'),Path('/home/node'),Path('/tmp'),Path('/var/tmp')),
+                              ROOT/'archive',Path('/home/node/service-tools'))
     retained=request.get('retained_paths')
     if retained is not None:
-        archive=ROOT/'archive'/'service-tools'/run;archive.mkdir(parents=True,exist_ok=True)
-        for old in Path('/home/node/service-tools').iterdir():
-            if old.name not in retained:shutil.move(str(old),str(archive/old.name))
+        archive_service_artifacts(Path('/home/node/service-tools'),
+            ROOT/'archive'/'service-tools'/run,retained,request.get('retained_children',{}))
     shutil.copytree(ROOT/'inputs'/run,workspace);home.mkdir()
     cfg={'$schema':'https://opencode.ai/config.json','model':'zhipuai-coding-plan/'+request['model'],'small_model':'zhipuai-coding-plan/'+request['model'],
          'share':'disabled','autoupdate':False,'agent':{'title':{'disable':True},'summary':{'disable':True}},

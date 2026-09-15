@@ -17,6 +17,7 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-disclosures-004 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json) | 2026-09-15T13:30:44.951470+00:00 | 1.18.29 / glm-5.3-flash / high | 225048 / 204800 / 5872 | 193.388154s | 0 | unknown |
 | capitol-exposed / data-api-keyless | financial-disclosures-004 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/capitol-disclosures-004-r1.json) | 2026-09-15T12:38:23.929828+00:00 | 1.18.29 / glm-5.3-flash / high | 250971 / 232064 / 5116 | — | 0 | 0 |
 | bargo-congress / congress-api-keyless | financial-disclosures-004 (v1) | none | natural | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | 2026-09-15T12:38:21.712373+00:00 | 1.18.29 / glm-5.3-flash / high | unknown | 590.066135s | 0 | unknown |
 
@@ -26,6 +27,7 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-disclosures-003 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-003-900s-c10-r1.json) | 2026-09-15T13:28:27.702197+00:00 | 1.18.29 / glm-5.3-flash / high | 202230 / 185088 / 4276 | 128.978342s | 0 | 0 |
 | capitol-exposed / data-api-keyless | financial-disclosures-003 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-003-r1.json) | 2026-09-15T12:26:19.469293+00:00 | 1.18.29 / glm-5.3-flash / high | 260342 / 242048 / 5776 | 207.284676s | 0 | 0 |
 | bargo-congress / congress-api-keyless | financial-disclosures-003 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-disclosures-003-r1.json) | 2026-09-15T12:26:17.426614+00:00 | 1.18.29 / glm-5.3-flash / high | 564454 / 530304 / 13956 | 400.656225s | 0 | 0 |
 
@@ -35,6 +37,7 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-disclosures-002 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-002-900s-c10-r1.json) | 2026-09-15T13:21:48.603813+00:00 | 1.18.29 / glm-5.3-flash / high | 302171 / 273152 / 7480 | 393.147793s | 0 | 0 |
 | capitol-exposed / data-api-keyless | financial-disclosures-002 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-002-r1.json) | 2026-09-15T12:09:04.533341+00:00 | 1.18.29 / glm-5.3-flash / high | 1103414 / 1052672 / 13130 | 516.740228s | 0 | 0 |
 | bargo-congress / congress-api-keyless | financial-disclosures-002 (v1) | none | natural | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) | 2026-09-15T12:09:02.396160+00:00 | 1.18.29 / glm-5.3-flash / high | unknown | 590.067368s | 0 | 0 |
 
@@ -44,6 +47,7 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| capitol-exposed / data-api-keyless | financial-disclosures-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-001-900s-c10-r1.json) | 2026-09-15T13:17:49.887185+00:00 | 1.18.29 / glm-5.3-flash / high | 158452 / 134272 / 4661 | 233.011992s | 0 | 0 |
 | capitol-exposed / data-api-keyless | financial-disclosures-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-disclosures-001-r1.json) | 2026-09-15T11:52:43.643345+00:00 | 1.18.29 / glm-5.3-flash / high | 284404 / 216384 / 6563 | 262.354235s | 0 | 0 |
 | bargo-congress / congress-api-keyless | financial-disclosures-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/bargo-disclosures-001-r1.json) | 2026-09-15T11:52:41.065341+00:00 | 1.18.29 / glm-5.3-flash / high | unknown | 590.067227s | 0 | 0 |
 | capitol-exposed / data-api-keyless | financial-disclosures-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-business.json) | 2026-09-15T09:20:49.994872+00:00 | 1.18.29 / glm-5.3-flash / high | 316639 / 248576 / 5213 | 220.999401s | 0 | unknown |
@@ -186,6 +190,21 @@
 
 ## 汇总条件与费用依据
 
+<a id="comparison-cbad562eed82"></a>
+
+### financial-disclosures-001 v1, financial-disclosures-002 v1, financial-disclosures-003 v1, financial-disclosures-004 v1
+
+**capitol-exposed / data-api-keyless** — 4 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 900s · natural · none · 独立验收（本轮无其他服务答案可参考）
+
+准备：15-minute budget comparison following the 600-second round. Same task v1, model GLM-5.3-Flash/high, role instructions, service/route, references and price snapshot; execution and grading each 900 seconds, batch ceiling ten concurrent model sessions, with one active session per existing runtime (four available runtimes). Reuses the independently passed access setup and generic installed dependencies in the same containers with fresh task workspaces/sessions; no fresh signup. Collector fix preserves receipts before artifact collection and omits links without following them. Prior 600-second records remain separate. Shared-IP service quotas are checked before dispatch. Dispatch amendment: user deferred Bargo before execution because its daily quota was exhausted. Only CapitolExposed execution/grading ran (two runtimes, actual peak two); no other service answer was available. Controller archived prior task files before reuse; shared temporary-directory cleanup was added before execution 003 and grading 002.
+
+- [capitol-disclosures-004-900s-c10-r1](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方免费规则及当次免 Key 只读请求支持服务费用为零；模型费用另行估算。; https://www.capitolexposed.com/api-docs
+- [capitol-disclosures-003-900s-c10-r1](../data/experiments/evaluations/capitol-disclosures-003-900s-c10-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方免费规则及当次免 Key 只读请求支持服务费用为零；模型费用另行估算。; https://www.capitolexposed.com/api-docs
+- [capitol-disclosures-002-900s-c10-r1](../data/experiments/evaluations/capitol-disclosures-002-900s-c10-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方免费规则及当次免 Key 只读请求支持服务费用为零；模型费用另行估算。; https://www.capitolexposed.com/api-docs
+- [capitol-disclosures-001-900s-c10-r1](../data/experiments/evaluations/capitol-disclosures-001-900s-c10-r1.json)：模型费用 $0.0100；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方免费规则及当次免 Key 只读请求支持服务费用为零；模型费用另行估算。; https://www.capitolexposed.com/api-docs
+
 <a id="comparison-864872ad88ab"></a>
 
 ### financial-disclosures-001 v1, financial-disclosures-002 v1, financial-disclosures-003 v1, financial-disclosures-004 v1
@@ -200,21 +219,6 @@
 - [bargo-disclosures-003-r1](../data/experiments/evaluations/bargo-disclosures-003-r1.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方文档明示读端点免 Key 免费（rate-limited，FREE · NO CARD）；本次执行仅 2 次免 Key 读请求、22 行，验收复核另用 2 次请求，均在 Keyless 限额内；执行环境未提供账户、Key 或支付方式，无注册、无付款。; https://www.bargo.ai/free-apis/congress; https://www.bargo.ai/free-apis/terms
 - [bargo-disclosures-002-r1](../data/experiments/evaluations/bargo-disclosures-002-r1.json)：模型费用 —；Per-request usage capture is incomplete. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard）。服务费用 $0；confirmed_free: 官方文档声明读端点免 Key 免费（rate-limited），无账户/卡片要求；免 Key 限额 30 请求/100 行每天每 IP。; https://www.bargo.ai/free-apis/congress
 - [bargo-disclosures-001-r1](../data/experiments/evaluations/bargo-disclosures-001-r1.json)：模型费用 —；Per-request usage capture is incomplete. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard）。服务费用 $0；confirmed_free: 服务侧费用为 0（免 Key 免费档内使用）；模型用量与模型费用不在本字段范围。; https://www.bargo.ai/free-apis/congress; grading/artifacts/evidence/verification-summary.md
-
-<a id="comparison-eff87a506310"></a>
-
-### financial-disclosures-001 v1, financial-disclosures-002 v1, financial-disclosures-003 v1, financial-disclosures-004 v1
-
-**capitol-exposed / data-api-keyless** — 3 完成 / 0 未完成 / 1 环境无效。
-
-1.18.29 / glm-5.3-flash / high · 600s · natural · none · 独立验收可参考同期 2 家服务的答案
-
-准备：Continues the independently passed 2026-09-15 keyless access setup in the same service/route container. Reuses service configuration and installed dependencies only; new workspace/session per task. Controller prepared tasks and official references. Cloud execution and grading GLM-5.3-Flash/high, 600 seconds each; at most two active sessions across batch. Round 1 of this four-task comparison; no fresh signup claimed. Infrastructure collection failure: process exit/timeout/end duration unavailable. ended_at is controller stop confirmation; elapsed_seconds is unknown. Partial capture recovered without rerunning; see receipt recovery and original worker failure.
-
-- [capitol-disclosures-004-r1](../data/experiments/evaluations/capitol-disclosures-004-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 指定服务本次仅使用免 Key 只读公开端点，官方文档载明免费层级无需认证、按 IP 限速并要求署名；未调用付费 AI 或导出功能，无注册或付款发生。; https://www.capitolexposed.com/api-docs; grading/artifacts/evidence/verification-summary.md
-- [capitol-disclosures-003-r1](../data/experiments/evaluations/capitol-disclosures-003-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 依据官方免费规则与本次免 Key 只读调用确认服务费用为零；不是根据账单推定实付。模型用量和估算费用另计。; https://www.capitolexposed.com/api-docs; grading/artifacts/reference.json#free_rule
-- [capitol-disclosures-002-r1](../data/experiments/evaluations/capitol-disclosures-002-r1.json)：模型费用 $0.05；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无服务方收费回执；依据文档化免费规则与本次免 Key 调用观察判定本次服务费用为 0。; https://www.capitolexposed.com/api-docs; grading/artifacts/evidence/verification.md
-- [capitol-disclosures-001-r1](../data/experiments/evaluations/capitol-disclosures-001-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 确认免费：服务文档载明免费层免认证（仅按 IP 限速），本次仅调用免 Key 读取端点 /members 与 /members/{slug}/trades 且均 200，未使用付费 AI 面或批量导出，未注册、未付款，金额为零。; https://www.capitolexposed.com/api-docs
 
 <a id="comparison-bd611da6270b"></a>
 

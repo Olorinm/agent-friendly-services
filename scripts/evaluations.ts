@@ -27,7 +27,7 @@ export interface Evaluation {
     sources: string[]; note: string; items?: { quantity: number; unit: string; usd_per_unit: number }[] };
   service_cost_usd: number | null; human_interventions: number | null;
   review: { method: string; reviewer: string; reviewed_at: string;
-    peer_context?: { group_id: string; round: number; snapshot_sha256: string; run_ids: string[] };
+    peer_context?: { group_id: string; round: number; snapshot_sha256: string; run_ids: string[]; available_run_ids?: string[] };
     checks: { criterion: string; passed: boolean; evidence: string }[] };
   evidence: { path: string; sha256: string; note: string; source_sha256?: string; redactions?: string[] }[];
   provenance: { local_run_dir: string; run_sha256: string; events_sha256: string | null;
@@ -117,6 +117,11 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
       || new Set(peers.run_ids).size !== peers.run_ids.length || !peers.run_ids.includes(v.run_id))) {
     errors.push('peer_context requires a frozen group, round, snapshot hash and distinct run IDs including this run');
   }
+  if (peers?.available_run_ids !== undefined && (!Array.isArray(peers.available_run_ids)
+      || !Array.isArray(peers.run_ids)
+      || peers.available_run_ids.some((id: unknown) => !peers.run_ids.includes(id))
+      || new Set(peers.available_run_ids).size !== peers.available_run_ids.length))
+    errors.push('peer_context.available_run_ids must be a distinct subset of group run IDs');
   for (const key of ['run_sha256', 'review_sha256']) if (!hash(v?.provenance?.[key])) errors.push(`provenance.${key} is required`);
   const evidence = v?.evidence;
   if (!Array.isArray(evidence) || !evidence.length) errors.push('selected evidence is required');

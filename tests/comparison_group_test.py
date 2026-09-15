@@ -9,6 +9,7 @@ from unittest.mock import patch
 import pipeline_test as fixtures
 import pipeline
 import comparison_group as groups
+import comparison_batch as batch
 
 
 class ComparisonGroupTests(unittest.TestCase):
@@ -150,6 +151,78 @@ class ComparisonGroupTests(unittest.TestCase):
             if state['phase'] == 'reviewed':
                 break
         self.assertEqual(state['phase'], 'reviewed')
+
+    def second_group(self):
+        members = []
+        for first in self.members:
+            config = pipeline.read(first / 'config.json')
+            path = first.with_name(first.name + '-round-2')
+            config_path = self.root / (path.name + '.json')
+            pipeline.write(config_path, config)
+            pipeline.prepare(config_path, path)
+            members.append(path)
+        config_path = self.root / 'second-group.json'
+        pipeline.write(config_path, {'round': 2, 'max_concurrency': 10,
+                                    'members': [{'run': str(p)} for p in members]})
+        group = self.group.with_name('comparison-round-2')
+        groups.prepare(config_path, group)
+        return group, members
+
+    def test_batch_overlaps_roles_but_never_reuses_an_active_runtime(self):
+        self.prepare_group(concurrency=10)
+        second, members = self.second_group()
+        directories = [self.group, second]
+        original = pipeline.advance
+        peaks = []
+        def observed(*args, **kwargs):
+            result = original(*args, **kwargs)
+            active = batch.occupied(batch.inventory(directories))
+            peaks.append(len(active))
+            return result
+        with patch.object(pipeline, 'advance', side_effect=observed):
+            for _ in range(20):
+                result = batch.advance(directories, 10)
+                if result['phase'] == 'reviewed': break
+        self.assertEqual(result['phase'], 'reviewed')
+        self.assertGreater(max(peaks), 3)  # execution of one round overlaps grading of another
+        self.assertLessEqual(max(peaks), 6)  # only six distinct runtimes exist
+        self.assertTrue(all(pipeline.read(p / 'state.json')['phase'] == 'reviewed' for p in members))
+
+    def test_batch_enforces_global_cap_even_when_each_group_allows_ten(self):
+        self.prepare_group(concurrency=10)
+        second, _ = self.second_group()
+        directories = [self.group, second]
+        original = pipeline.advance
+        def observed(*args, **kwargs):
+            result = original(*args, **kwargs)
+            self.assertLessEqual(len(batch.occupied(batch.inventory(directories))), 2)
+            return result
+        with patch.object(pipeline, 'advance', side_effect=observed):
+            for _ in range(30):
+                result = batch.advance(directories, 2)
+                if result['phase'] == 'reviewed': break
+        self.assertEqual(result['phase'], 'reviewed')
+
+    def test_unconfirmed_stop_in_one_group_blocks_the_entire_batch(self):
+        self.prepare_group(concurrency=10)
+        second, members = self.second_group()
+        pipeline.write(self.members[0] / 'state.json', {
+            'phase': 'stopped', 'stopped_role': 'execution', 'stop_confirmed': False})
+        with self.assertRaisesRegex(ValueError, 'Unconfirmed runtime stop'):
+            batch.advance([self.group, second], 10)
+        self.assertFalse(any((p / 'execution/started').exists() for p in [*self.members, *members]))
+
+    def test_deferred_member_is_not_an_available_peer_answer(self):
+        self.prepare_group()
+        deferred = self.members[0]
+        pipeline.write(deferred / 'state.json', {'phase': 'stopped', 'stop_reason': 'Deferred before dispatch'})
+        self.assertEqual(self.finish_group()['phase'], 'needs_attention')
+        self.assertFalse((deferred / 'execution/started').exists())
+        for path in self.members[1:]:
+            context = pipeline.read(path / 'peer-context.json')
+            self.assertIn(deferred.name, context['run_ids'])
+            self.assertNotIn(deferred.name, context['available_run_ids'])
+            self.assertEqual(context['available_run_ids'], [p.name for p in self.members[1:]])
 
     def test_collected_failure_without_answer_is_reference_status_not_success(self):
         self.prepare_group()
