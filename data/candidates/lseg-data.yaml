@@ -35,15 +35,15 @@ catalog:
         evidence:
           - docs
         notes: >-
-          Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon
-          login and App Key. Individual admission and trial approval are not established.
+          Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon login and
+          App Key. Individual admission and trial approval are not established.
       auth:
         value: platform_credentials
         evidence:
           - docs
       notes: >-
-        Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon login
-        and App Key. Individual admission and trial approval are not established.
+        Cloud credentials require an account manager; desktop access needs a valid Workspace/Eikon login and
+        App Key. Individual admission and trial approval are not established.
       requirements:
         platform_account:
           value: required
@@ -56,3 +56,7 @@ catalog:
           stage: activation
           evidence:
             - docs
+  notes:
+    - >-
+      Licensed data library spans separately entitled datasets; a library quickstart alone does not identify
+      which product this candidate can supply.

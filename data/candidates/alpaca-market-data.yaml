@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://docs.alpaca.markets/us/docs/about-market-data-api
@@ -39,9 +39,9 @@ catalog:
         evidence:
           - docs
       notes: >-
-        Basic is free with limited real-time feeds; historical coverage and latest-15-minute restrictions
-        are separate. Use market-data endpoints only. Paper-account signup and identity requirements have
-        not been measured.
+        Basic is free with limited real-time feeds; historical coverage and latest-15-minute restrictions are
+        separate. Use market-data endpoints only. Paper-account signup and identity requirements have not been
+        measured.
     - id: crypto-api-keyless
       interface: api
       maintainer: official

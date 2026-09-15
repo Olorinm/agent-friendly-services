@@ -11,7 +11,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://docs.coingecko.com/docs/setting-up-your-api-key
@@ -24,6 +24,10 @@ catalog:
     mcp:
       url: https://docs.coingecko.com/ai-integration/mcp-server
       checked_on: '2026-09-09'
+      kind: official_docs
+    simple-price:
+      url: https://docs.coingecko.com/reference/simple-price
+      checked_on: '2026-09-15'
       kind: official_docs
   routes:
     - id: data-api
@@ -49,9 +53,17 @@ catalog:
         evidence:
           - docs
           - access
+      capabilities:
+        prices.latest:
+          value: documented
+          evidence:
+            - simple-price
+          notes: >-
+            Crypto asset prices in a chosen currency with an optional update timestamp; this Pro reference
+            does not establish Demo or MCP entitlement.
       notes: >-
-        Demo and paid API plans have different history and quotas. Keyless MCP has shared limits and a
-        smaller tool set. Asset IDs and quote currency must match the task.
+        Demo and paid API plans have different history and quotas. Keyless MCP has shared limits and a smaller
+        tool set. Asset IDs and quote currency must match the task.
     - id: keyless-mcp
       interface: mcp
       maintainer: official
@@ -92,5 +104,5 @@ catalog:
         evidence:
           - mcp
       notes: >-
-        Account entitlement and tool set differ from keyless MCP; confirm free Demo compatibility before
-        a paid-server call.
+        Account entitlement and tool set differ from keyless MCP; confirm free Demo compatibility before a
+        paid-server call.

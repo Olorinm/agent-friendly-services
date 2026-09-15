@@ -61,3 +61,18 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - ai-models/image-generation
+    - ai-models/video-generation
+  sources:
+    classification-docs:
+      url: https://docs.lumalabs.ai/docs/welcome
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      The Dream Machine API documentation describes image and video generation and redirects readers to newer
+      platform documentation. Current route/plan details still require review.

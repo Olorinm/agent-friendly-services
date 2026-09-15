@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://coinmarketcap.com/api/

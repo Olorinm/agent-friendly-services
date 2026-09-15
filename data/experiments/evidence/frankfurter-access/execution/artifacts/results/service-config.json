@@ -1,0 +1,43 @@
+{
+  "service": "frankfurter",
+  "base_url": "https://api.frankfurter.dev/v2/",
+  "auth": {
+    "required": false,
+    "api_key": null,
+    "notes": "公开免费读取入口，无账号/无 Key/无配额；仅防滥用限流。禁止写远端数据。"
+  },
+  "doc": "https://frankfurter.dev/",
+  "endpoints": {
+    "latest_rates": "GET rates?base=<CUR>&quotes=<CUR1,CUR2>",
+    "historical_rates": "GET rates?date=<YYYY-MM-DD>&base=<CUR>&quotes=<CUR,...>",
+    "time_series": "GET rates?from=<YYYY-MM-DD>&to=<YYYY-MM-DD>&base=<CUR>&quotes=<CUR,...>",
+    "grouping": "GET rates?from=...&group=week|month （仅 week/month，无 day）",
+    "single_pair": "GET rate/<BASE>/<QUOTE> 可加 ?date=",
+    "currencies": "GET currencies （?scope=all 含已停用历史货币）",
+    "currency_detail": "GET currency/<ISO>",
+    "providers": "GET providers ；GET providers/<key> ；GET providers/<key>/rates[?date=|from=|to=] ；GET providers/<key>/rate/<B>/<Q>",
+    "provider_attribution": "rates?expand=providers",
+    "csv": "路径加 .csv 或 Accept: text/csv",
+    "ndjson": "仅设置 Accept: application/x-ndjson（无 format 参数）"
+  },
+  "errors": {
+    "400": "参数无效或格式错误",
+    "404": "货币/汇率/资源不存在（body: {status,message}）",
+    "422": "请求可理解但无法处理（如 unknown parameter / invalid group）"
+  },
+  "verified": {
+    "date": "2026-09-15",
+    "latest_rates_usd": "HTTP 200, date=2026-09-15, EUR 0.86406 / GBP 0.74009 / JPY 154.33 / CNY 6.7074",
+    "single_pair_eur_usd": "HTTP 200, rate 1.1573",
+    "historical_1999-01-04": "HTTP 200, EUR/USD 1.1759, EUR/GBP 0.70834",
+    "time_series_group_week": "HTTP 200",
+    "ndjson_stream": "HTTP 200 逐行 JSON",
+    "currencies": "HTTP 200, 205 币种含 ISO 编码/符号/起止日期",
+    "error_handling": "无效货币 404 / 未知参数与无效 group 422 均确认"
+  },
+  "constraints": [
+    "业务数据只取自该 API，不用其他服务或模型记忆替代",
+    "无转换端点，需自行用 rate 乘算",
+    "默认混合多源中间价；官方参考价用 providers=ecb 过滤"
+  ]
+}

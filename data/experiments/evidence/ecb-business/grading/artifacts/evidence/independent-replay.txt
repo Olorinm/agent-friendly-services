@@ -1,0 +1,13 @@
+验收环境独立重放（2026-09-15，验收者执行，非执行者脚本）：
+
+1) 独立调用指定服务（无鉴权 GET）：
+curl -sS --http1.1 "https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2026-08-13&endPeriod=2026-08-17&format=csvdata"
+返回（字段 KEY,TIME_PERIOD,OBS_VALUE）：
+EXR.D.USD.EUR.SP00.A,2026-08-13,1.1534
+EXR.D.USD.EUR.SP00.A,2026-08-14,1.1567
+EXR.D.USD.EUR.SP00.A,2026-08-17,1.1593
+-> 2026-08-15（周六）无观测；与执行记录 rates.csv 及 reference.json（ECB eurofxref-hist-90d.xml，2026-08-14=1.1567、2026-08-17=1.1593）一致。
+
+2) 独立核对计算（USD 金额 ÷ USD/EUR 参考价，ROUND_HALF_UP 到分）：
+80.00/1.1567 = 69.16；125.00/1.1567 = 108.07；39.90/1.1593 = 34.42；合计 211.65 EUR。
+另：执行产物 rates.csv 与验收环境重新拉取的同参数 API 响应逐字节一致（diff 为空）。

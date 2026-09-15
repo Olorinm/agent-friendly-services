@@ -40,6 +40,20 @@ class AssessmentTests(unittest.TestCase):
         del original['service_cost']['evidence']
         self.assertEqual(assessment.normalize(original),(original,[]))
 
+class RuntimeStatusTests(unittest.TestCase):
+    def test_worker_exit_race_rechecks_completion_without_redispatch(self):
+        import subprocess
+        from unittest.mock import Mock
+        spec = importlib.util.spec_from_file_location('opencode_status', Path(__file__).resolve().parents[1]/'scripts/runners/opencode/runtime_status.py')
+        status = importlib.util.module_from_spec(spec); spec.loader.exec_module(status)
+        missing = subprocess.CompletedProcess([], 1, b'', b'')
+        done = subprocess.CompletedProcess([], 0, b'{"status":"completed"}', b'')
+        read_done = Mock(side_effect=[missing, done])
+        self.assertEqual(status.query(read_done, lambda: missing), {'status': 'completed'})
+        self.assertEqual(read_done.call_count, 2)
+        with self.assertRaisesRegex(RuntimeError, 'unavailable'):
+            status.query(lambda: missing, lambda: missing)
+
 class ArtifactTests(unittest.TestCase):
     def test_does_not_follow_executor_symlinks(self):
         import sys

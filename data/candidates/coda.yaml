@@ -8,6 +8,7 @@ catalog:
   version: 1
   classifications:
     - productivity-storage/collaborative-tables
+    - productivity-storage/document-collaboration
   sources:
     api:
       url: https://coda.io/developers/apis/v1
@@ -17,6 +18,14 @@ catalog:
       url: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
       checked_on: '2026-09-08'
       kind: official_docs
+    collaboration-scope:
+      url: https://coda.io/developers/apis/v1
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        The official API reference documents page content and creation as well as tables. Only the
+        search-index excerpt was readable on this review; route-specific document capability is not newly
+        asserted.
   routes:
     - id: rest-api
       docs: https://coda.io/developers/apis/v1
@@ -47,8 +56,8 @@ catalog:
           evidence:
             - api
       notes: >-
-        API available in free and paid workspaces. Creating docs requires a Doc Maker role; row
-        writes may be asynchronous. Table/schema creation support must be verified for the task.
+        API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be
+        asynchronous. Table/schema creation support must be verified for the task.
     - id: hosted-mcp
       docs: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
       interface: mcp
@@ -78,4 +87,5 @@ catalog:
           evidence:
             - mcp
       notes: Official hosted MCP; connector setup needs authorization.
-  notes: []
+  notes:
+    - Document and messaging membership does not transfer collaborative-table trial results to those tasks.

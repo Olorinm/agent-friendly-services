@@ -12,15 +12,15 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/disclosures
   sources:
     docs:
       url: https://www.quiverquant.com/api-setup/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     access:
       url: https://api.quiverquant.com/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_site
   routes:
     - id: data-api
@@ -46,9 +46,17 @@ catalog:
         evidence:
           - docs
           - access
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Congressional and insider transaction datasets; exact fields, filing provenance and plan access
+            need task-specific confirmation.
       notes: >-
-        API access is advertised from USD 30/month. Free website signup does not establish free API
-        access; no free execution allowance confirmed.
+        API access is advertised from USD 30/month. Free website signup does not establish free API access; no
+        free execution allowance confirmed.
       costs:
         - kind: minimum_spend
           amount: 30

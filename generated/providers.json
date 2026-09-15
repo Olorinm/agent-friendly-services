@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-09-10T11:09:04.888Z",
+  "generated_at": "2026-09-15T08:49:00.723Z",
   "counts": {
     "providers": 76,
     "categories": 11,
@@ -31,15 +31,126 @@
           "name": "Model Access",
           "name_zh": "模型接入",
           "description": "Access a model through its provider or an inference/router service. Compare only a shared model version and matched request settings; this is not a model-quality leaderboard.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "models.infer",
+              "description": "Obtain an inference response from an identified model."
+            }
+          ],
+          "inclusion": "Accepts inference requests for identifiable models.",
+          "exclusion": "Merely listing models or returning search snippets is insufficient; compare the same model and settings."
+        },
+        {
+          "id": "speech-synthesis",
+          "name": "Speech Synthesis",
+          "name_zh": "语音合成",
+          "description": "Generate spoken audio from supplied text.",
+          "inclusion": "Returns playable speech corresponding to supplied text.",
+          "exclusion": "Transcription and voice-call orchestration alone are separate.",
+          "capabilities": [
+            {
+              "id": "speech.synthesize",
+              "description": "Produce spoken audio for supplied text."
+            }
+          ]
+        },
+        {
+          "id": "speech-recognition",
+          "name": "Speech Recognition",
+          "name_zh": "语音识别",
+          "description": "Transcribe supplied recordings or live speech.",
+          "inclusion": "Returns text derived from supplied speech.",
+          "exclusion": "Audio generation and call transport alone do not qualify.",
+          "capabilities": [
+            {
+              "id": "speech.transcribe",
+              "description": "Return a transcript of supplied speech."
+            }
+          ]
+        },
+        {
+          "id": "image-generation",
+          "name": "Image Generation",
+          "name_zh": "图像生成",
+          "description": "Generate or transform images from a prompt or reference.",
+          "inclusion": "Delivers a generated or edited image.",
+          "exclusion": "Image search, hosting and vector retrieval alone do not qualify.",
+          "capabilities": [
+            {
+              "id": "images.generate",
+              "description": "Produce an image from a text or image brief."
+            }
+          ]
+        },
+        {
+          "id": "video-generation",
+          "name": "Video Generation",
+          "name_zh": "视频生成",
+          "description": "Generate video from a prompt or reference media.",
+          "inclusion": "Delivers generated video frames as a clip.",
+          "exclusion": "Video storage, transcription and playback alone do not qualify.",
+          "capabilities": [
+            {
+              "id": "video.generate",
+              "description": "Produce a video clip from a creative brief."
+            }
+          ]
         }
-      ]
+      ],
+      "inclusion": "Provides model inference or generated/processed content.",
+      "exclusion": "A directory of models or agent connectors alone is insufficient."
     },
     {
       "id": "agent-tooling",
-      "name": "Agent Tooling",
-      "description": "Agent infrastructure, MCP tooling, orchestration services.",
-      "name_zh": "Agent 工具"
+      "name": "Agent Infrastructure & Automation",
+      "description": "Agent memory, tool connections, workflow execution and discovery infrastructure.",
+      "name_zh": "Agent 基础设施与自动化",
+      "inclusion": "Provides reusable infrastructure for building or operating agents and cross-service automation.",
+      "exclusion": "A service exposing an MCP endpoint alone does not belong here.",
+      "subcategories": [
+        {
+          "id": "memory",
+          "name": "Agent Memory",
+          "name_zh": "Agent 记忆",
+          "description": "Retain and retrieve agent context across interactions.",
+          "inclusion": "Provides persistent memory management and retrieval for an agent.",
+          "exclusion": "Raw vector storage alone does not establish a managed memory service.",
+          "capabilities": [
+            {
+              "id": "memory.recall",
+              "description": "Recover relevant saved context across agent sessions."
+            }
+          ]
+        },
+        {
+          "id": "tool-integrations",
+          "name": "Tool Connections",
+          "name_zh": "工具连接",
+          "description": "Connect an agent to actions in external applications.",
+          "inclusion": "Provides callable application actions and connection/authentication management.",
+          "exclusion": "A static directory or one product with its own MCP server is insufficient.",
+          "capabilities": [
+            {
+              "id": "tools.execute",
+              "description": "Execute a selected action in a connected application."
+            }
+          ]
+        },
+        {
+          "id": "workflow-automation",
+          "name": "Workflow Automation",
+          "name_zh": "工作流自动化",
+          "description": "Run repeatable sequences across tools or services.",
+          "inclusion": "Defines and executes workflows with triggers or ordered steps.",
+          "exclusion": "A single connector or a library of templates without execution is insufficient.",
+          "capabilities": [
+            {
+              "id": "workflows.run",
+              "description": "Run a defined workflow and retrieve its execution outcome."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "developer-tools",
@@ -52,9 +163,46 @@
           "name": "Monitoring & Troubleshooting",
           "name_zh": "监控与故障排查",
           "description": "Collect and retrieve application errors, logs and performance evidence to diagnose problems.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "monitoring.diagnose",
+              "description": "Retrieve operational evidence for investigating an application problem."
+            }
+          ],
+          "inclusion": "Collects or retrieves operational errors, logs or performance evidence.",
+          "exclusion": "A status page alone does not establish an application monitoring service."
+        },
+        {
+          "id": "code-hosting",
+          "name": "Code Hosting & Review",
+          "name_zh": "代码托管与评审",
+          "description": "Host versioned code and collaborate on changes.",
+          "inclusion": "Provides repositories and a contribution/review workflow.",
+          "exclusion": "Issue tracking alone belongs under project management.",
+          "capabilities": [
+            {
+              "id": "code.review",
+              "description": "Retrieve proposed code changes and their review context."
+            }
+          ]
+        },
+        {
+          "id": "api-development",
+          "name": "API Development & Testing",
+          "name_zh": "API 开发与测试",
+          "description": "Build, organize and test API interactions.",
+          "inclusion": "Provides reusable API requests, collections or test execution.",
+          "exclusion": "Merely offering a public API does not qualify.",
+          "capabilities": [
+            {
+              "id": "api.test",
+              "description": "Run an API request collection and report the results."
+            }
+          ]
         }
-      ]
+      ],
+      "inclusion": "Supports software development, repository collaboration, API development or operational diagnosis.",
+      "exclusion": "Hosting runtime and application storage are classified separately."
     },
     {
       "id": "cloud-hosting",
@@ -67,23 +215,46 @@
           "name": "Code Sandboxes",
           "name_zh": "代码沙箱",
           "description": "Run code and process files in an isolated temporary environment.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "code.execute",
+              "description": "Execute supplied code and return output or produced files."
+            }
+          ],
+          "inclusion": "Runs supplied code in an isolated execution environment.",
+          "exclusion": "A model returning code without executing it is insufficient."
         },
         {
           "id": "browser-environments",
           "name": "Browser Environments",
           "name_zh": "浏览器运行环境",
           "description": "Create a remote browser session and execute browser operations.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "browser.interact",
+              "description": "Perform browser interactions in a remote session."
+            }
+          ],
+          "inclusion": "Provides a controllable browser session.",
+          "exclusion": "Fetching page text without browser control belongs under web extraction."
         },
         {
           "id": "app-hosting",
           "name": "Application Hosting",
           "name_zh": "应用部署",
           "description": "Deploy a website or application and keep it available at a public endpoint.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "app.deploy",
+              "description": "Deploy an application and return its reachable endpoint."
+            }
+          ],
+          "inclusion": "Deploys an application to an address reachable by its intended users.",
+          "exclusion": "Temporary code execution without a deployed application is insufficient."
         }
-      ]
+      ],
+      "inclusion": "Provides an environment for running code, browser sessions or deployed applications.",
+      "exclusion": "A storage-only service belongs under databases; remote browser execution is not web search."
     },
     {
       "id": "databases",
@@ -108,10 +279,56 @@
               "description": "Export data and restore it into a separate database or namespace."
             }
           ],
-          "name_zh": "托管关系型数据库"
+          "name_zh": "托管关系型数据库",
+          "inclusion": "Offers hosted SQL tables and relational queries.",
+          "exclusion": "Local-only database files, document-only stores and collaborative work tables are separate."
+        },
+        {
+          "id": "vector",
+          "name": "Vector Databases",
+          "name_zh": "向量数据库",
+          "description": "Store and query data by vector similarity.",
+          "inclusion": "Persists indexed vectors and supports similarity queries.",
+          "exclusion": "An embedding model alone does not store or search application data.",
+          "capabilities": [
+            {
+              "id": "vectors.search",
+              "description": "Find stored records similar to a query vector or embedded query."
+            }
+          ]
+        },
+        {
+          "id": "document",
+          "name": "Document Databases",
+          "name_zh": "文档数据库",
+          "description": "Store and query structured application documents.",
+          "inclusion": "Provides persistent document collections with field-based queries.",
+          "exclusion": "A file drive or metadata attached to vectors alone is insufficient.",
+          "capabilities": [
+            {
+              "id": "documents.query",
+              "description": "Retrieve stored application documents matching field conditions."
+            }
+          ]
+        },
+        {
+          "id": "key-value",
+          "name": "Key-value Databases",
+          "name_zh": "键值数据库",
+          "description": "Store and retrieve application values by key.",
+          "inclusion": "Offers addressable keys and values across calls.",
+          "exclusion": "A local cache or temporary execution variable alone does not qualify.",
+          "capabilities": [
+            {
+              "id": "kv.persist",
+              "description": "Write a value and retrieve it in a later operation."
+            }
+          ]
         }
       ],
-      "name_zh": "数据库"
+      "name_zh": "数据库",
+      "inclusion": "Stores and retrieves application data through a database model.",
+      "exclusion": "User-facing work tables belong under workplace collaboration; third-party datasets belong under data access."
     },
     {
       "id": "web-search-data",
@@ -121,35 +338,124 @@
         {
           "id": "web-search",
           "name": "Web Search",
-          "description": "Discover web sources and retrieve evidence for user questions.",
+          "description": "Discover relevant public web pages from a query; answers may include source citations.",
           "capabilities": [
             {
               "id": "web.search",
-              "description": "Return relevant web sources for a question."
-            },
-            {
-              "id": "web.fetch",
-              "description": "Retrieve source content supporting an answer."
+              "description": "Return relevant web sources for a query."
             }
           ],
-          "name_zh": "网页搜索"
+          "name_zh": "网页搜索",
+          "inclusion": "Accepts a topic or query and returns relevant web sources.",
+          "exclusion": "Fetching a supplied URL alone is extraction; source snippets do not establish full-page retrieval."
         },
         {
           "id": "web-extraction",
           "name": "Web Content Extraction",
           "name_zh": "网页内容提取",
           "description": "Retrieve specified web pages or sites as usable text or structured data.",
-          "capabilities": []
+          "capabilities": [
+            {
+              "id": "web.fetch",
+              "description": "Retrieve usable source content from specified web URLs."
+            }
+          ],
+          "inclusion": "Accepts identified web URLs or a specified site and returns its content as usable text or structured data.",
+          "exclusion": "Query-only result lists/snippets are web search; browser control is a runtime, not extraction itself."
         },
         {
           "id": "financial-data",
           "name": "Financial Data",
           "name_zh": "金融数据",
-          "description": "Retrieve market prices, company financials or financial disclosures. Select competing providers by the particular dataset and task.",
-          "capabilities": []
+          "description": "Access identifiable financial or economic datasets; select a data type, then match coverage and task conditions.",
+          "capabilities": [],
+          "inclusion": "Supplies financial/economic observations or original filings; unresolved dataset scope can remain at this parent with an explanation.",
+          "exclusion": "News, trading execution or a generic search API alone does not establish a financial dataset service.",
+          "subcategories": [
+            {
+              "id": "fx",
+              "name": "Exchange Rates",
+              "name_zh": "汇率数据",
+              "description": "Retrieve currency-pair exchange rates.",
+              "inclusion": "Rates identify the currency pair, direction and observation date.",
+              "exclusion": "A payment conversion fee or asset valuation alone is insufficient; reference rates do not imply executable exchange quotes.",
+              "capabilities": [
+                {
+                  "id": "fx.latest",
+                  "description": "Retrieve the latest published rate for a currency pair."
+                },
+                {
+                  "id": "fx.history",
+                  "description": "Retrieve exchange rates for specified historical dates."
+                }
+              ]
+            },
+            {
+              "id": "prices",
+              "name": "Asset Prices",
+              "name_zh": "资产行情",
+              "description": "Retrieve asset price snapshots or historical series.",
+              "inclusion": "Provides prices for identifiable assets and observation times.",
+              "exclusion": "Valuations inside transaction disclosures or news articles alone are insufficient; assets, adjustments and entitlements must match.",
+              "capabilities": [
+                {
+                  "id": "prices.latest",
+                  "description": "Retrieve a recent price snapshot for an identified asset."
+                },
+                {
+                  "id": "prices.history",
+                  "description": "Retrieve a price series for an identified asset and period."
+                }
+              ]
+            },
+            {
+              "id": "statements",
+              "name": "Company Financials",
+              "name_zh": "公司财务数据",
+              "description": "Retrieve company financial statements or reported financial facts.",
+              "inclusion": "Financial values identify the company, reporting period and units, or link to the original statement.",
+              "exclusion": "Company profiles, market prices or valuation ratios alone are insufficient.",
+              "capabilities": [
+                {
+                  "id": "statements.read",
+                  "description": "Retrieve company financial values with reporting periods, units and source context."
+                }
+              ]
+            },
+            {
+              "id": "disclosures",
+              "name": "Transaction Disclosures",
+              "name_zh": "交易披露",
+              "description": "Retrieve publicly reported transactions.",
+              "inclusion": "Records identify the reporting party and distinguish disclosure from transaction timing where available.",
+              "exclusion": "Company annual reports alone are not transaction disclosures; congressional and insider filings are different populations.",
+              "capabilities": [
+                {
+                  "id": "disclosures.search",
+                  "description": "Retrieve public transaction disclosures matching a person, asset or period."
+                }
+              ]
+            },
+            {
+              "id": "macro",
+              "name": "Economic Indicators",
+              "name_zh": "宏观经济指标",
+              "description": "Retrieve named economic indicator series.",
+              "inclusion": "Observations identify the series, periods and units.",
+              "exclusion": "Market asset prices alone are not macro indicators; frequency, seasonality and revisions must match.",
+              "capabilities": [
+                {
+                  "id": "macro.series",
+                  "description": "Retrieve economic observations for a named series and period."
+                }
+              ]
+            }
+          ]
         }
       ],
-      "name_zh": "搜索与数据获取"
+      "name_zh": "搜索与数据获取",
+      "inclusion": "Discovers external information or supplies usable source content or datasets.",
+      "exclusion": "Storage of user-supplied application data is a database; a general model API alone is not a data source."
     },
     {
       "id": "payments-billing",
@@ -174,10 +480,14 @@
               "description": "Prepare recurring collection for a subscription offering."
             }
           ],
-          "name_zh": "收款"
+          "name_zh": "收款",
+          "inclusion": "Enables a merchant to collect customer payments for a product or service.",
+          "exclusion": "A payment link directory or paid API consumption alone is insufficient; merchant eligibility remains separate."
         }
       ],
-      "name_zh": "支付与计费"
+      "name_zh": "支付与计费",
+      "inclusion": "Provides payment collection or billing infrastructure.",
+      "exclusion": "Retrieving financial data or accepting payment for its own API does not qualify."
     },
     {
       "id": "communication",
@@ -198,10 +508,88 @@
               "id": "mailboxes.read",
               "description": "Find and read the intended incoming email."
             }
+          ],
+          "inclusion": "Provides a mailbox with later access to received email.",
+          "exclusion": "Sending email alone and single callback notifications are insufficient; retention and mailbox ownership must match."
+        },
+        {
+          "id": "email-delivery",
+          "name": "Email Delivery",
+          "name_zh": "邮件发送",
+          "description": "Send application email to recipients.",
+          "inclusion": "Provides programmatic email delivery and delivery outcomes.",
+          "exclusion": "Mailbox provisioning and incoming-email reading alone do not qualify.",
+          "capabilities": [
+            {
+              "id": "email.send",
+              "description": "Deliver an email to specified recipients and retrieve its delivery status."
+            }
+          ]
+        },
+        {
+          "id": "messaging",
+          "name": "Messaging",
+          "name_zh": "即时通讯",
+          "description": "Read and send messages in conversations or channels.",
+          "inclusion": "Exposes conversation/channel messaging operations.",
+          "exclusion": "SMS transport and passive social-data retrieval are separate.",
+          "capabilities": [
+            {
+              "id": "messages.send",
+              "description": "Send a message to an authorized conversation."
+            },
+            {
+              "id": "messages.read",
+              "description": "Retrieve messages from an authorized conversation."
+            }
+          ]
+        },
+        {
+          "id": "sms",
+          "name": "SMS Delivery",
+          "name_zh": "短信发送",
+          "description": "Send and receive carrier text messages.",
+          "inclusion": "Provides delivery to phone-number recipients over SMS.",
+          "exclusion": "In-app chat messages and number verification alone are insufficient.",
+          "capabilities": [
+            {
+              "id": "sms.send",
+              "description": "Send an SMS to a specified phone number."
+            }
+          ]
+        },
+        {
+          "id": "voice-calls",
+          "name": "Voice Calls",
+          "name_zh": "语音通话",
+          "description": "Establish and handle live voice calls.",
+          "inclusion": "Provides live calling or a voice agent that can participate in calls.",
+          "exclusion": "Speech synthesis/transcription alone does not establish calling.",
+          "capabilities": [
+            {
+              "id": "calls.connect",
+              "description": "Establish an authorized live voice call."
+            }
+          ]
+        },
+        {
+          "id": "voice-agents",
+          "name": "Voice Agents",
+          "name_zh": "语音 Agent",
+          "description": "Operate conversational agents over live voice.",
+          "inclusion": "Orchestrates listening, response generation and speech in an interactive session.",
+          "exclusion": "A standalone speech model or telephony transport alone is insufficient.",
+          "capabilities": [
+            {
+              "id": "voice.converse",
+              "description": "Conduct a live voice conversation with an agent."
+            }
           ]
         }
       ],
-      "name_zh": "通信"
+      "name_zh": "通信",
+      "inclusion": "Enables email, messaging or live voice communication.",
+      "exclusion": "Text-to-speech alone is an AI content service, not communication delivery."
     },
     {
       "id": "productivity-storage",
@@ -226,16 +614,74 @@
               "description": "Merge follow-up notes without duplicating existing actions."
             }
           ],
-          "name_zh": "协作表格"
+          "name_zh": "协作表格",
+          "inclusion": "Provides user-facing shared tables with structured records.",
+          "exclusion": "A backend database without collaborative work-table features is insufficient."
+        },
+        {
+          "id": "project-management",
+          "name": "Project & Task Management",
+          "name_zh": "项目与任务管理",
+          "description": "Track work items, ownership and progress.",
+          "inclusion": "Provides durable tasks/issues and their status in a shared work context.",
+          "exclusion": "Code storage and free-form documents alone are insufficient.",
+          "capabilities": [
+            {
+              "id": "tasks.track",
+              "description": "Retrieve and update assigned work and progress."
+            }
+          ]
+        },
+        {
+          "id": "document-collaboration",
+          "name": "Document Collaboration",
+          "name_zh": "文档协作",
+          "description": "Create, edit and share working documents.",
+          "inclusion": "Provides collaborative document content and access.",
+          "exclusion": "Files stored without document editing are file sharing; JSON document storage is a database.",
+          "capabilities": [
+            {
+              "id": "docs.collaborate",
+              "description": "Create or update a shared working document."
+            }
+          ]
+        },
+        {
+          "id": "file-sharing",
+          "name": "File Sharing",
+          "name_zh": "文件共享",
+          "description": "Store, organize and share user files.",
+          "inclusion": "Provides user file/folder storage and sharing controls.",
+          "exclusion": "Object storage used only as an application backend is separate.",
+          "capabilities": [
+            {
+              "id": "files.share",
+              "description": "Store a file and grant intended recipients access."
+            }
+          ]
         }
       ],
-      "name_zh": "办公协作"
+      "name_zh": "办公协作",
+      "inclusion": "Organizes shared work, documents, tasks or files for people.",
+      "exclusion": "Application database and object-storage APIs alone are not office collaboration."
     },
     {
       "id": "commerce-marketing",
       "name": "E-commerce",
       "description": "Services for building and operating online stores.",
-      "name_zh": "电商"
+      "name_zh": "电商",
+      "inclusion": "Operates an online store, including products, inventory, carts or orders.",
+      "exclusion": "Payment processing alone belongs under payments; no store subcategory is asserted from one provider.",
+      "capabilities": [
+        {
+          "id": "store.catalog",
+          "description": "Maintain the products and variants offered by an online store."
+        },
+        {
+          "id": "store.orders",
+          "description": "Retrieve and follow up store orders and fulfillment status."
+        }
+      ]
     },
     {
       "id": "travel",
@@ -264,17 +710,23 @@
               "description": "Issue a ticket, beyond search or a purchase link."
             }
           ],
-          "name_zh": "机票"
+          "name_zh": "机票",
+          "inclusion": "Returns flight offers or supports their purchase or ticketing.",
+          "exclusion": "Airport information, schedules or status without offers are insufficient; ticket issuance is separately documented."
         },
         {
           "id": "hotels",
           "name": "Hotels",
           "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
           "capabilities": [],
-          "name_zh": "酒店"
+          "name_zh": "酒店",
+          "inclusion": "Returns room availability/offers or supports hotel reservations.",
+          "exclusion": "Hotel descriptions or reviews alone are insufficient. This branch has no researched candidate set or frozen task yet."
         }
       ],
-      "name_zh": "旅行"
+      "name_zh": "旅行",
+      "inclusion": "Finds or arranges travel inventory for individual travelers.",
+      "exclusion": "Generic map, weather or payment services alone do not qualify."
     }
   ],
   "fields": {

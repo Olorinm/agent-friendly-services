@@ -3,8 +3,8 @@ name: SEC EDGAR Data APIs
 category: web-search-data
 homepage: https://www.sec.gov/
 summary: >-
-  Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account
-  or key.
+  Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no
+  account or key.
 submitted_by: community
 tags:
   - financials
@@ -12,11 +12,11 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/statements
   sources:
     docs:
       url: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
   routes:
     - id: data-api
@@ -38,6 +38,12 @@ catalog:
         value: none
         evidence:
           - docs
+      capabilities:
+        statements.read:
+          value: documented
+          evidence:
+            - docs
+          notes: Company filings and XBRL facts; reporting periods, units and amendments need interpretation.
       notes: >-
         Reading APIs are separate from filer submission APIs. Automated-access policy applies. Facts need
         fiscal-period, unit and amendment interpretation; CORS is not supported.

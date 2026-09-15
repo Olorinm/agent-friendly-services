@@ -2,7 +2,9 @@ id: eodhd
 name: EODHD
 category: web-search-data
 homepage: https://eodhd.com/
-summary: Historical market prices, fundamentals and economic datasets, with free and separately paid packages.
+summary: >-
+  Historical market prices, fundamentals and economic datasets, with free and separately paid
+  packages.
 submitted_by: community
 tags:
   - stocks
@@ -13,7 +15,9 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
+    - web-search-data/financial-data/macro
   sources:
     docs:
       url: https://eodhd.com/financial-apis/
@@ -21,7 +25,7 @@ catalog:
       kind: official_docs
     access:
       url: https://eodhd.com/pricing
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_site
   routes:
     - id: data-api

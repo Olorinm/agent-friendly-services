@@ -4,6 +4,7 @@
  * and how to fix it. Exit code 1 if anything fails.
  */
 import fs from 'node:fs';
+import { taskClassificationErrors, taskClassification } from './task-classifications.ts';
 import path from 'node:path';
 import { Ajv } from 'ajv';
 import { ROOT, loadFields, loadCategories, loadProviders, loadCandidates } from './lib.ts';
@@ -39,6 +40,7 @@ if (JSON.stringify(schemaChecks) !== JSON.stringify(fieldChecks)) {
 
 const categoryIds = new Set(categories.map((c) => c.id));
 for (const message of taxonomyErrors(categories)) fail('data/categories.yaml', message);
+for (const message of taskClassificationErrors(undefined, categories)) fail('data/experiments/task-classifications.yaml', message);
 
 // ---------------------------------------------------------------------------
 // Provider files
@@ -140,6 +142,7 @@ for (const pack of research) {
 // Reviewed task results are distinct from both source claims and legacy badges.
 try {
   for (const result of loadEvaluations()) {
+    if (taskClassification(result.task).classification === 'unclassified') fail('data/experiments/task-classifications.yaml', `Historical task lacks display classification: ${result.task.file}#${result.task.id}`);
     for (const message of evaluationErrors(result, [...providers, ...candidates].map(p => p.data))) {
       fail(`data/experiments/evaluations/${result.run_id}.json`, message);
     }

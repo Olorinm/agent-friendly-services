@@ -13,11 +13,13 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
+    - web-search-data/financial-data/disclosures
   sources:
     docs:
       url: https://docs.financialdatasets.ai/quickstart
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     mcp-discovery:
       url: https://docs.financialdatasets.ai/llms.txt
@@ -47,8 +49,8 @@ catalog:
         evidence:
           - docs
       notes: >-
-        Create an account and key. A free execution allowance has not been established; do not start
-        metered requests without confirming available free credit.
+        Create an account and key. A free execution allowance has not been established; do not start metered
+        requests without confirming available free credit.
 notes:
   - >-
     Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not

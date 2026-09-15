@@ -76,3 +76,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/vector
+  sources:
+    classification-docs:
+      url: https://docs.pinecone.io/guides/get-started/overview
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Persistent vector indexes and semantic retrieval; a separate managed memory product is not inferred from
+      an example memory use case.

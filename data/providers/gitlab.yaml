@@ -83,3 +83,18 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/code-hosting
+    - productivity-storage/project-management
+  sources:
+    classification-docs:
+      url: https://docs.gitlab.com/user/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Repository/merge-request work and issue/epic tracking are separate supported scopes. SaaS and
+      self-managed access must be distinguished.

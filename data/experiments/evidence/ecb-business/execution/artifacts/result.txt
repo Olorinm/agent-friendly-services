@@ -1,0 +1,4 @@
+2026-08-14  80.00 USD / 1.1567 = 69.16 EUR  [rate date 2026-08-14]
+2026-08-15  125.00 USD / 1.1567 = 108.07 EUR  [rate date 2026-08-14 (fallback from 2026-08-15, no publication)]
+2026-08-17  39.90 USD / 1.1593 = 34.42 EUR  [rate date 2026-08-17]
+TOTAL 211.65 EUR

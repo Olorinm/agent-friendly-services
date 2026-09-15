@@ -105,6 +105,10 @@ class PipelineTests(unittest.TestCase):
 
     def test_complete_pipeline_records_only_measured_usage_and_validated_cost(self):
         self.finish()
+        packet = pipeline.read(self.directory / 'grading-input/review-packet/index.json')
+        self.assertEqual(packet['task']['id'], 'access')
+        self.assertEqual(packet['answer']['content']['text'], 'synthetic answer')
+        self.assertFalse((self.directory / 'frozen/execution/review-packet').exists())
         charges = pipeline.read(self.directory / 'charges.json')
         self.assertAlmostEqual(charges['model_cost']['amount_usd'], 0.0000328)
         self.assertEqual(charges['service_cost_usd'], 1e-11)
@@ -128,6 +132,20 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'reconciliation'):
             pipeline.advance(self.directory)
         self.assertFalse((self.directory / 'execution/started').exists())
+
+    def test_private_grading_packet_copy_cannot_be_published(self):
+        self.finish()
+        packet = self.directory / 'grading-input/review-packet/index.json'
+        copy = self.directory / 'execution/copied-evidence.json'
+        copy.write_bytes(packet.read_bytes())
+        assessment = self.directory / 'grading/assessment.json'
+        review = pipeline.read(assessment)
+        review['evidence'] = [{'path': 'execution/copied-evidence.json'}]
+        pipeline.write(assessment, review)
+        recorder = pipeline.module('test_packet_recorder', 'record-trial.py')
+        with self.assertRaisesRegex(ValueError, 'private adapter'):
+            recorder.record(self.directory, assessment, dry_run=True)
+        self.assertFalse((self.root / 'data/experiments/evaluations').exists())
 
     def test_frozen_task_cannot_change_after_prepare(self):
         self.prepare()

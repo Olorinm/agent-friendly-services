@@ -67,3 +67,19 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - ai-models/model-access
+    - ai-models/image-generation
+    - ai-models/video-generation
+  sources:
+    classification-docs:
+      url: https://fal.ai/docs/documentation/model-apis/overview
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Model APIs expose identifiable media models for image and video generation. A model listing is not proof
+      of every model/route entitlement.

@@ -84,3 +84,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/document
+  sources:
+    classification-docs:
+      url: https://www.mongodb.com/docs/atlas/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Managed document collections and queries. Atlas administration API is not automatically a document
+      data-access route; vector-search coverage is not asserted here.

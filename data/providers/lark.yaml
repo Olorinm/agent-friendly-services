@@ -88,14 +88,16 @@ catalog:
   version: 1
   classifications:
     - productivity-storage/collaborative-tables
+    - communication/messaging
+    - productivity-storage/document-collaboration
   sources:
     api:
       url: https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md
       checked_on: '2026-09-08'
       kind: official_docs
       notes: >-
-        Fetched official Markdown successfully: creates a Base with tenant/user token and
-        base:app:create or bitable:app permission.
+        Fetched official Markdown successfully: creates a Base with tenant/user token and base:app:create or
+        bitable:app permission.
     cli:
       url: https://github.com/larksuite/cli
       checked_on: '2026-09-08'
@@ -108,6 +110,14 @@ catalog:
       url: https://www.larksuite.com/en_us/plans
       checked_on: '2026-09-08'
       kind: official_site
+    collaboration-scope:
+      url: https://www.larksuite.com/en_us/paid/collaboration
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: >-
+        Lark Messenger and Docs support messaging and document collaboration. This classification uses product
+        documentation; Base routes and their results do not establish messaging or Docs API access.
+        International Lark and Feishu remain separate identities.
   routes:
     - id: base-api
       docs: https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md
@@ -139,8 +149,8 @@ catalog:
           evidence:
             - cli
       notes: >-
-        Requires a platform app, authorized identity and Base scopes/resource permissions.
-        Ordinary-person onboarding from a fresh account is not tested.
+        Requires a platform app, authorized identity and Base scopes/resource permissions. Ordinary-person
+        onboarding from a fresh account is not tested.
       costs:
         - kind: free_allowance
           amount: 2000
@@ -183,8 +193,8 @@ catalog:
           evidence:
             - cli
       notes: >-
-        Official CLI covers Base and supports individuals. Account signup, app creation and
-        permission setup still need separate verification.
+        Official CLI covers Base and supports individuals. Account signup, app creation and permission setup
+        still need separate verification.
     - id: official-mcp
       docs: https://github.com/larksuite/lark-openapi-mcp
       interface: mcp
@@ -213,8 +223,7 @@ catalog:
           value: documented
           evidence:
             - mcp
-      notes: >-
-        Local official MCP package uses platform app credentials; identity and tenant domains must
-        match.
+      notes: Local official MCP package uses platform app credentials; identity and tenant domains must match.
   notes:
     - International larksuite.com service. Do not transfer Feishu China results to this identity.
+    - Document and messaging membership does not transfer collaborative-table trial results to those tasks.

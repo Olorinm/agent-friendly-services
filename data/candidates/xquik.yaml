@@ -83,3 +83,18 @@ checks:
 
 notes:
   - The official Streamable HTTP MCP endpoint is https://xquik.com/mcp and supports API key or OAuth authentication.
+catalog:
+  version: 1
+  classifications:
+    - web-search-data
+  sources:
+    classification-docs:
+      url: https://docs.xquik.com/api-reference/overview
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      X-specific post/profile data and account automation. It does not meet broad public-web search or
+      arbitrary-URL extraction criteria. Retained at data access until social-data category coverage is
+      researched.

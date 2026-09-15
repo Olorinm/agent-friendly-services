@@ -36,7 +36,7 @@ test('Exa details keep its successful MCP and failed API results in separate con
 
 test('machine summaries identify exactly one selected protocol per service and task family', () => {
   const json = JSON.parse(fs.readFileSync(`${ROOT}/generated/evaluations.json`, 'utf8'));
-  const keys = json.service_summaries.map((s: any) => `${s.task_file}:${s.service_id}`);
+  const keys = json.service_summaries.map((s: any) => `${s.classification}:${s.phase}:${s.task_file}:${s.service_id}`);
   assert.equal(new Set(keys).size, keys.length);
   const kiwi = json.service_summaries.find((s: any) => s.service_id === 'kiwi');
   assert.equal(kiwi.route_id, 'search-mcp');

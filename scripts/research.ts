@@ -4,6 +4,7 @@ import { Ajv } from 'ajv';
 import { dump, load } from 'js-yaml';
 import { ROOT, loadCategories, type Category } from './lib.ts';
 import { calendarDateValid } from './catalog.ts';
+import { flattenCategories, classificationCapabilities } from './taxonomy.mjs';
 
 export interface Research {
   version: 1;
@@ -38,7 +39,7 @@ export interface Research {
 
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile<Research>(JSON.parse(fs.readFileSync(path.join(ROOT, 'schema/research.schema.json'), 'utf8')));
-const classifications = (categories: Category[]) => categories.flatMap(c => (c.subcategories ?? []).map(s => `${c.id}/${s.id}`));
+const classifications = (categories: Category[]) => flattenCategories(categories).map(node => node.path);
 
 /** Advisory checks for the current view, not admission rules for research. */
 export function researchIssues(value: unknown, expectedClassification: string, categories: Category[], today: string): string[] {
@@ -96,8 +97,7 @@ export function researchIssues(value: unknown, expectedClassification: string, c
     }
     // A sourced need may be retained even when its testability is blocked.
   }
-  const [category, subcategory] = data.classification.split('/');
-  const knownCapabilities = new Set(categories.find(c => c.id === category)?.subcategories?.find(s => s.id === subcategory)?.capabilities.map(c => c.id));
+  const knownCapabilities = new Set(classificationCapabilities(categories, data.classification, true).map(c => c.id));
   for (const cap of data.capability_candidates) {
     checkRefs(cap.need_ids, needIds, `capability_candidates.${cap.id}.need_ids`);
     checkRefs(cap.evidence, sourceIds, `capability_candidates.${cap.id}.evidence`);
@@ -128,7 +128,7 @@ export function loadResearch(root = ROOT) {
 }
 
 export function initializeResearch(classification: string, destinationRoot = ROOT, categories = loadCategories()): string {
-  if (!/^[a-z0-9][a-z0-9-]*\/[a-z0-9][a-z0-9-]*$/.test(classification)) throw new Error('Use a safe category/subcategory path; traversal and absolute paths are not supported.');
+  if (!/^[a-z0-9][a-z0-9-]*(?:\/[a-z0-9][a-z0-9-]*)+$/.test(classification)) throw new Error('Use a safe category/subcategory path; traversal and absolute paths are not supported.');
   if (!classifications(categories).includes(classification)) console.warn(`New research classification: ${classification}. The category dictionary can be updated as the research evolves.`);
   const draft = load(fs.readFileSync(path.join(ROOT, 'templates/research.yaml'), 'utf8')) as Research;
   draft.classification = classification;

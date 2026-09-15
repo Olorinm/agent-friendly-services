@@ -1,4 +1,27 @@
 // Pure discovery filters, shared by the MCP server and regression tests.
+import { flattenCategories, inClassification, serviceClassifications, withinClassification } from '../scripts/taxonomy.mjs';
+
+const scopes = filters => [filters.category, filters.classification, filters.subcategory].filter(Boolean);
+
+export function categoryTree(data) {
+  const walk = (nodes, parent = '') => nodes.map(node => {
+    const path = parent ? `${parent}/${node.id}` : node.id;
+    const members = data.services.filter(service => inClassification(service, path));
+    return { ...node, path, services: new Set(members.map(s => s.id)).size,
+      providers: new Set(members.filter(s => s.record_pool === 'provider').map(s => s.id)).size,
+      candidates: new Set(members.filter(s => s.record_pool === 'candidate').map(s => s.id)).size,
+      subcategories: walk(node.subcategories ?? [], path) };
+  });
+  return walk(data.categories);
+}
+
+export function matchingRuns(service, route, filters, categories = []) {
+  const owner = filters.capability && flattenCategories(categories).find(node =>
+    node.capabilities?.some(cap => cap.id === filters.capability))?.path;
+  return (service.task_runs ?? []).filter(run => run.route_id === route.id
+    && [...scopes(filters), ...(owner ? [owner] : [])].every(scope =>
+      run.classification && withinClassification(run.classification, scope)));
+}
 export function matchingRoutes(service, filters) {
   return (service.catalog?.routes ?? []).filter(r =>
     (!filters.interface || r.interface === filters.interface) &&
@@ -9,23 +32,29 @@ export function matchingRoutes(service, filters) {
 
 export function searchServices(data, filters) {
   return data.services.filter(s => {
-    const classes = s.catalog?.classifications ?? [];
-    if (filters.category && s.category !== filters.category && !classes.some(c => c.split('/')[0] === filters.category)) return false;
-    if (filters.subcategory && !classes.includes(filters.subcategory)) return false;
+    const classes = serviceClassifications(s);
+    if (!scopes(filters).every(scope => inClassification(s, scope))) return false;
+    if (filters.capability && scopes(filters).length && data.categories) {
+      const owner = flattenCategories(data.categories).find(node => node.capabilities?.some(cap => cap.id === filters.capability))?.path;
+      if (!owner || !scopes(filters).every(scope => withinClassification(owner, scope) || withinClassification(scope, owner))) return false;
+    }
     if (filters.query && ![s.id, s.name, s.summary, ...(s.tags ?? []), ...classes, ...(s.catalog?.routes ?? []).map(r => r.upstream ?? '')].join(' ').toLowerCase().includes(filters.query.toLowerCase())) return false;
     const routeFilter = filters.interface || filters.capability || filters.personal_access;
     return !routeFilter || matchingRoutes(s, filters).length > 0;
   }).map(s => ({
-    id: s.id, name: s.name, category: s.category, classifications: s.catalog?.classifications ?? [],
+    id: s.id, name: s.name, category: s.category, classifications: serviceClassifications(s),
     summary: s.summary, record_pool: s.record_pool, evidence_level: s.evidence_level,
-    route_tests: (s.task_runs ?? []).some(run => matchingRoutes(s, filters).some(r => r.id === run.route_id)) ? 'recorded' : 'not_recorded',
+    route_tests: matchingRoutes(s, filters).some(r => matchingRuns(s, r, filters, data.categories).length) ? 'recorded' : 'not_recorded',
+    notes: s.catalog?.notes ?? [],
     routes: matchingRoutes(s, filters).map(r => ({
       id: r.id, interface: r.interface, entry_url: r.entry_url,
       availability: r.availability?.value ?? 'unknown',
       personal_access: r.personal_access?.value ?? 'unknown',
       data_kind: r.data_kind?.value ?? 'unknown',
       upstream: r.upstream ?? 'unknown',
-      task_runs: (s.task_runs ?? []).filter(run => run.route_id === r.id).map(run => ({
+      capabilities: r.capabilities ?? {}, notes: r.notes ?? '',
+      task_runs: matchingRuns(s, r, filters, data.categories).map(run => ({
+        classification: run.classification, phase: run.phase,
         run_id: run.run_id, task: run.task, status: run.status, reason: run.reason,
         harness: run.harness, model: run.model, reasoning_effort: run.reasoning_effort,
         started_at: run.started_at, ended_at: run.ended_at,

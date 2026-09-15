@@ -72,3 +72,19 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - ai-models/speech-synthesis
+    - ai-models/speech-recognition
+    - communication/voice-agents
+  sources:
+    classification-docs:
+      url: https://elevenlabs.io/docs/overview/intro
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Speech synthesis, transcription and conversational agents are documented separately. Other creative
+      products need product-specific route research.

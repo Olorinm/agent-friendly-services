@@ -97,27 +97,42 @@ notes:
 # Existing developer-tools scope; access routes do not require a new subcategory.
 catalog:
   version: 1
-  classifications: [developer-tools]
+  classifications:
+    - developer-tools/code-hosting
+    - productivity-storage/project-management
   sources:
     quickstart:
       url: https://docs.github.com/en/rest/quickstart
       checked_on: '2026-09-10'
       kind: official_docs
+    classification-docs:
+      url: https://docs.github.com/en/rest
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        Repository/pull-request and issue/project operations have distinct user outcomes. Historical
+        issue-tracking tasks are displayed under project management.
   routes:
     - id: rest-api
       interface: api
       maintainer: official
       entry_url: https://api.github.com/
       docs: https://docs.github.com/en/rest/quickstart
-      evidence: [quickstart]
+      evidence:
+        - quickstart
       availability:
         value: self_serve
-        evidence: [quickstart]
+        evidence:
+          - quickstart
       personal_access:
         value: documented
-        evidence: [quickstart]
+        evidence:
+          - quickstart
       auth:
         value: platform_credentials
-        evidence: [quickstart]
+        evidence:
+          - quickstart
       capabilities: {}
-      notes: Authenticated REST access; existing account setup and token permissions must be recorded separately from the task.
+      notes: >-
+        Authenticated REST access; existing account setup and token permissions must be recorded separately
+        from the task.

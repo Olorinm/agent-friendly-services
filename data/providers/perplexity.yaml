@@ -71,3 +71,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: API terms not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/web-search
+  sources:
+    classification-docs:
+      url: https://docs.perplexity.ai/docs/getting-started/overview
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Search API and source-grounded answers support web discovery. General URL extraction is not inferred
+      from citations or snippets; newer model-router products require separate route review.

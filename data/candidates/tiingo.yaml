@@ -11,12 +11,20 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/fx
   sources:
     docs:
       url: https://www.tiingo.com/documentation/general/overview
       checked_on: '2026-09-09'
       kind: official_docs
+    fx-classification:
+      url: https://www.tiingo.com/documentation/forex
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        Documents current and historical FX quotes; permissions and data source are distinct from equity price
+        feeds.
   routes:
     - id: data-api
       interface: api
@@ -36,5 +44,5 @@ catalog:
         evidence:
           - docs
       notes: >-
-        Token is assigned after account creation. Request and bandwidth limits apply; current free
-        allowance and target-feed entitlement are not yet established.
+        Token is assigned after account creation. Request and bandwidth limits apply; current free allowance
+        and target-feed entitlement are not yet established.

@@ -8,6 +8,10 @@
 
 一次执行对应一个独立验收会话。执行者只获得该次任务、材料、环境和执行角色指令；验收者只获得该次冻结要求、必要参考、执行记录及交付物，不混用其他运行的答案。历史记录保留实际验收方式，不改称独立盲评。
 
+执行采集后，pipeline 机械生成私有 `grading-input/review-packet/index.json`：汇集冻结要求、输入、实际答案、运行回执、已计算用量与费用、工具记录预览和完整文件索引，并提供空白 `assessment.template.json`。预览明确标记截断，每条完整工具记录保留原始日志位置与哈希；未支持规范化记录的执行器仍使用原始日志。索引不判分、不猜服务费、不自动批准公开证据。验收 Agent 据此直接核对必要事实，输出简短结论，避免重复解析整份会话和另写报告。
+
+验收把证据写成自身工作目录相对路径时，pipeline 仅在对应采集文件确实存在且路径位于 `grading/artifacts/` 内时解析成运行目录路径，保留 `assessment.raw.json` 和 `evidence-path-resolutions.json`；不猜文件、不补依据、不改结论。解析后仍经过统一证据与费用校验。
+
 ## 第一个任务：接入服务
 
 每个服务先测试“接入服务”：按需注册、验证、授权、获取凭据或安装配置，通过指定 API、CLI、SDK 或 MCP 完成一次基础调用，确认可以开始使用。业务要求和授权资源在执行前明确；具体操作由执行 Agent 查官方资料决定，不提供预写服务调用代码。账号注册成功不等于接入完成。
@@ -131,6 +135,8 @@ python3 scripts/pipeline.py record data/experiments/results/<run-id> --generate
 - `collect`：将该次记录导出到 output，返回 `{"collected":true}`，必须可重复采集；不运行题目、不自评。
 
 执行 output 包含 `answer.md`（失败可缺）、`events.jsonl`、原始用量来源、`usage.json`、必要业务证据和 `receipt.json`；验收 output 包含 `assessment.json`、原始来源、`usage.json`、`receipt.json`。验收能读取本次执行材料，但不可补做业务。公开证据路径相对运行根目录，例如 `execution/evidence/response.json`。
+
+适配器可额外提供私有 `tool-records.json`（schema_version 1），包含原始 `source: {path, sha256}`、`complete`、`errors` 和 `calls`；每条调用保留 `tool`、完整 `state`（status/input/output 或 error）、`source: {path, sha256, line}`。pipeline 校验原始来源哈希后生成逐条阅读文件。OpenCode 适配器从 JSON CLI 日志逐条提取，不执行日志中的代码，失败和无法解析的行均保留说明。规范化工具记录、验收索引及其完整副本不得直接录入公开证据。
 
 `receipt.json` 记录实际 `session_id`、`workspace`、`model`、`reasoning_effort`、`harness`、`runtime`、`started_at`、`ended_at`、`exit_code`、`timed_out`、`isolation`、`input_verified`。`input_verified` 必须基于实际模型输入或执行器明确加载记录，不能因为文件存在就填 true。需要重载 MCP 的接入任务由适配器关联所有相关会话、累计用量并保持完整证据，不漏掉初始化阶段。
 

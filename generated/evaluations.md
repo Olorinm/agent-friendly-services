@@ -3,9 +3,35 @@
 
 每行只说明该服务入口在该任务和运行配置下的观察。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
-按任务所属大类 / 子类分组，再展示同一任务版本和冻结内容的运行。分类标题来自当前任务表，仅用于导航；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
+按当前分类和接入／业务阶段分组，再展示同一任务版本和冻结内容的运行。展示归属来自 task-classifications.yaml；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
+
+<a id="web-search-data-financial-data-fx"></a>
+
+## 搜索与数据获取 / 金融数据 / 汇率数据（web-search-data/financial-data/fx）
+
+### financial-fx-001 / v1
+
+把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| ecb-data / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15T07:15:18.031345+00:00 | 1.18.29 / glm-5.3-flash / high | 60837 / 56064 / 1994 | 81.215126s | 0 | 0 |
+| frankfurter / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15T07:11:48.392690+00:00 | 1.18.29 / glm-5.3-flash / high | 51862 / 42880 / 2384 | 88.202808s | 0 | 0 |
+
+<a id="web-search-data-financial-data"></a>
+
+## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
+
+### financial-access-001 / v1
+
+帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15T07:06:04.074344+00:00 | 1.18.29 / glm-5.3-flash / high | 84240 / 72512 / 2596 | 115.282949s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15T07:06:04.069023+00:00 | 1.18.29 / glm-5.3-flash / high | 216483 / 199488 / 5383 | 216.897575s | 0 | 0 |
 
 <a id="communication-mailboxes"></a>
 
@@ -31,7 +57,7 @@
 
 <a id="payments-billing-accept-payments"></a>
 
-## 支付与账单 / 收款（payments-billing/accept-payments）
+## 支付与计费 / 收款（payments-billing/accept-payments）
 
 ### payment-acceptance-001 / v1
 
@@ -44,7 +70,7 @@
 
 <a id="productivity-storage-collaborative-tables"></a>
 
-## 协作办公与存储 / 在线任务表（productivity-storage/collaborative-tables）
+## 办公协作 / 协作表格（productivity-storage/collaborative-tables）
 
 ### collaborative-tables-001 / v2
 
@@ -79,7 +105,7 @@
 
 <a id="web-search-data-web-search"></a>
 
-## 网页搜索与数据 / 网页搜索（web-search-data/web-search）
+## 搜索与数据获取 / 网页搜索（web-search-data/web-search）
 
 ### web-search-001 / v1
 
@@ -93,7 +119,7 @@
 
 <a id="travel-flights"></a>
 
-## 旅行 / 航空机票（travel/flights）
+## 旅行 / 机票（travel/flights）
 
 ### flights-search-001 / v1
 
@@ -114,6 +140,46 @@
 | kiwi / search-mcp | flights-search-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T083627.884537Z-kiwi.json) | 2026-09-07T08:36:27.894085+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 184152 / 129408 / 3754 | 156.912s | 0 | 0 |
 
 ## 汇总条件与费用依据
+
+<a id="comparison-d86a11990066"></a>
+
+### financial-fx-001 v1
+
+**ecb-data / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [ecb-business](../data/experiments/evaluations/ecb-business.json)：模型费用 $0.0034；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 规则：ECB 版权政策允许免费使用其网站直接获取的信息（需注明来源），且 Data Portal SDMX REST API 为公开 web 服务，无需注册、Key 或付款（站点注册仅用于门户个性化功能）；适用：本次仅无鉴权 GET 且 HTTP 200，环境未提供账户或支付方式，验收环境独立重放同样成功。无账单回执，实付为 0。; https://www.ecb.europa.eu/services/disclaimer/html/index.en.html; https://data.ecb.europa.eu/help/api/overview; https://data.ecb.europa.eu/help/api/data-examples; review-packet/tools/0005.json
+
+**frankfurter / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [frankfurter-business](../data/experiments/evaluations/frankfurter-business.json)：模型费用 $0.0038；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务本身免费：官方声明无 Key、无配额，本次仅匿名 GET 读取，无任何付费路径; https://frankfurter.dev/ （官方文档："Free, open-source exchange rates API ... No API key required"；FAQ：commercial use free、no quotas，仅防滥用限流）
+
+<a id="comparison-bd611da6270b"></a>
+
+### financial-access-001 v1
+
+**ecb-data / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [ecb-access](../data/experiments/evaluations/ecb-access.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 免费结论依据 ECB 官方免费使用规则与本次实际无凭据只读请求，而非执行者自述或仅因成功响应；未发生任何服务端计费。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; execution/artifacts/ENVIRONMENT.md; grading/artifacts/evidence/ecb-independent-check.md
+
+**frankfurter / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.29 / glm-5.3-flash / high · 600s · natural · none
+
+准备：Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.
+
+- [frankfurter-access](../data/experiments/evaluations/frankfurter-access.json)：模型费用 $0.0052；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json)（2026-09-09T10:51:49.718Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务端无计费回执；本次调用确认免费，无实付金额，故金额字段保留 null。模型费用由运行器与统一计价脚本处理，不在此填写。; https://frankfurter.dev/; grading/artifacts/evidence/independent-check.md
 
 <a id="comparison-8624e51d6979"></a>
 

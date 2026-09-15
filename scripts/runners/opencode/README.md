@@ -112,6 +112,14 @@ messages/tools, streaming responses, artifacts and a runtime receipt. The wire
 capture lives outside the executor's permissions. All of this stays private;
 only explicitly selected and reviewed evidence belongs in public results.
 
+The collector also extracts `tool-records.json` from the CLI events, preserving
+each tool's exact input, output/error, status, and source line/hash. Failed or
+unrecognized events are not silently treated as success. The shared pipeline
+uses these private records to build `review-packet/index.json`, full per-call
+files, and an empty assessment template for the grader. Previews explicitly mark
+truncation; the original logs remain available. This saves log parsing and file
+discovery without inferring a verdict or publishing raw tool records.
+
 Token normalization reconciles each wire response with OpenCode's independent
 `step_finish` counters. OpenCode's `input` excludes cache hits and its `output`
 excludes reasoning; both are restored to inclusive canonical counts. BigModel's

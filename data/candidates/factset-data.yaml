@@ -22,3 +22,7 @@ catalog:
       checked_on: '2026-09-09'
       kind: official_docs
   routes: []
+  notes:
+    - >-
+      Institutional API marketplace; select a concrete dataset/product and source before assigning a narrower
+      class.

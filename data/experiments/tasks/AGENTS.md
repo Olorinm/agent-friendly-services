@@ -22,6 +22,8 @@
 
 任务表写清 ID、版本、大类/子类、用户任务、输入、预计输出、完成与未完成条件、运行资源及必要需求来源。明确所需材料、授权条件与验收方法；缺少设计依据或判定方法的任务标为草案，并说明材料如何生成或取得。区分可生成的合成材料、需要实际获取的服务资源和需要用户提供的身份信息，不把注册接通藏成默认已完成的准备。
 
+新增或调整展示归属时，同步 `data/experiments/task-classifications.yaml` 中的任务文件、稳定 ID、分类路径和接入／业务阶段。它只管当前导航与分组，不能重写冻结任务与历史证据。
+
 通过现有生成函数从任务表生成 prompt 和附件，不另维护手写的一套题。将执行材料与验收材料分开交付给总控：前者包含委托、原始材料与环境要求，后者包含判定方法和必要参考。任务或指导方式改变时升级版本，保留历史条件。
 
 参考已核对版本：[Terminal-Bench 出题规范](https://github.com/harbor-framework/terminal-bench/blob/v4.0.0/rubrics/task-proposal.md)、[题目与验收一致性](https://github.com/harbor-framework/terminal-bench/blob/v4.0.0/rubrics/task-implementation.toml)。借鉴材料分离与结果验收，不照搬高难度门槛。脚本与格式可迭代，本文件不提供给执行 Agent。

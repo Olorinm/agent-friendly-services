@@ -1,6 +1,7 @@
 import { taskDisplay } from './task-display.ts';
 import { createHash } from 'node:crypto';
 import type { Evaluation } from './evaluations.ts';
+import { taskClassification } from './task-classifications.ts';
 
 const stable = (value: unknown): string => {
   if (Array.isArray(value)) return JSON.stringify(value.map(v => JSON.parse(stable(v))));
@@ -30,7 +31,7 @@ export function summarize(runs: Evaluation[]) {
   };
 }
 export interface BoardRow { service_id: string; route_id: string; runs: Evaluation[]; metrics: ReturnType<typeof summarize> }
-export interface Board { id: string; task_file: string; tasks: Evaluation['task'][]; rows: BoardRow[]; latest: string }
+export interface Board { id: string; task_file: string; classification: string; phase: 'setup' | 'business'; tasks: Evaluation['task'][]; rows: BoardRow[]; latest: string }
 
 /** Homepage selection is chronological, never a claim of the cheapest or best route.
  * Keep a whole recorded protocol; do not select a different route for each task. */
@@ -41,8 +42,9 @@ export function selectServiceBoards(boards: Board[]): Board[] {
     .map(r => r.started_at).sort().at(-1) ?? '';
   entries.sort((a, b) => latest(b.row).localeCompare(latest(a.row))
     || b.board.latest.localeCompare(a.board.latest) || a.row.route_id.localeCompare(b.row.route_id));
-  for (const entry of entries) if (!chosen.has(entry.row.service_id)) chosen.set(entry.row.service_id, entry);
-  return boards.map(board => ({ ...board, rows: board.rows.filter(row => chosen.get(row.service_id)?.row === row) }))
+  const key = (board: Board, service: string) => `${board.classification}:${board.phase}:${board.task_file}:${service}`;
+  for (const entry of entries) if (!chosen.has(key(entry.board, entry.row.service_id))) chosen.set(key(entry.board, entry.row.service_id), entry);
+  return boards.map(board => ({ ...board, rows: board.rows.filter(row => chosen.get(key(board, row.service_id))?.row === row) }))
     .filter(board => board.rows.length);
 }
 
@@ -53,7 +55,8 @@ export const interfaceLabel = (type: string | undefined, zh = false) => type ===
 export function buildBoards(records: Evaluation[]): Board[] {
   const byRoute = new Map<string, Evaluation[]>();
   for (const run of records) {
-    const key = `${run.task.file}:${run.service_id}:${run.route_id}`;
+    const { classification, phase } = taskClassification(run.task);
+    const key = `${classification}:${phase}:${run.task.file}:${run.service_id}:${run.route_id}`;
     byRoute.set(key, [...(byRoute.get(key) ?? []), run]);
   }
   const boards = new Map<string, Board>();
@@ -70,7 +73,7 @@ export function buildBoards(records: Evaluation[]): Board[] {
     const manifest = tasks.map(t => [t.id, t.sha256, selected.filter(r => r.task.id === t.id && r.status !== 'invalid_run').length]);
     const key = stable([reference.task.file, config, manifest]);
     if (!boards.has(key)) boards.set(key, { id: `comparison-${createHash('sha256').update(key).digest('hex').slice(0, 12)}`,
-      task_file: reference.task.file, tasks, rows: [], latest: reference.started_at });
+      task_file: reference.task.file, ...taskClassification(reference.task), tasks, rows: [], latest: reference.started_at });
     const board = boards.get(key)!;
     board.rows.push({ service_id: reference.service_id, route_id: reference.route_id, runs: selected, metrics: summarize(selected) });
     if (reference.started_at > board.latest) board.latest = reference.started_at;

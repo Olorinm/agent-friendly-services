@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-10T11:09:04.890Z",
-  "count": 89,
+  "generated_at": "2026-09-15T08:49:00.725Z",
+  "count": 92,
   "candidates": [
     {
       "id": "adyen",
@@ -23,6 +23,17 @@
       "homepage": "https://www.agentmail.to/",
       "summary": "Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and MCP access.",
       "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "agentservices",
+      "name": "AgentServices",
+      "category": "web-search-data",
+      "homepage": "https://agentservices.to/",
+      "summary": "Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.",
+      "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [],
       "m1": null
@@ -139,7 +150,9 @@
       "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [
-        "Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; included in the broader financial-data discovery pass. PR remains open; no task result implied."
+        "Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; incorporated during the broader financial-data discovery pass. This record covers the Congress product, not Bargo's separate market-intelligence platform; no task result is implied.",
+        "The OpenAPI date filters select transaction dates, not disclosure dates; filing_portal points to the source filing portal and does not establish a direct link to each original filing. Preserve these distinctions when selecting a task or checking provenance.",
+        "Free API Terms allow personal applications, agents and analysis with visible Bargo attribution. Raw records may not be redistributed, including partial exports; derivative work must not expose or reconstruct them. Evidence publication must respect this restriction."
       ],
       "m1": null
     },
@@ -198,6 +211,17 @@
       "homepage": "https://coda.io/",
       "summary": "Docs and tables with a free REST API; current API page is branded Superhuman Docs.",
       "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "cog-depot",
+      "name": "Cog Depot",
+      "category": "agent-tooling",
+      "homepage": "https://cogdepot.com/",
+      "summary": "Hosted marketplace for agents to discover counterparties, negotiate capability exchanges and obtain direct contact details after paying platform fees.",
+      "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [],
       "m1": null
@@ -1027,6 +1051,17 @@
       "homepage": "https://data.worldbank.org/",
       "summary": "Country-level economic and development indicators through the public Indicators API.",
       "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "xiurouter",
+      "name": "XiuRouter",
+      "category": "ai-models",
+      "homepage": "https://router.xiu.ai/",
+      "summary": "Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols, scoped keys and request-level usage records.",
+      "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [],
       "m1": null

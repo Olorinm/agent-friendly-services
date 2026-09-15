@@ -82,7 +82,10 @@ export interface Category {
   name: string;
   name_zh?: string;
   description: string;
-  subcategories?: { id: string; name: string; name_zh?: string; description: string; capabilities: { id: string; description: string }[] }[];
+  inclusion?: string;
+  exclusion?: string;
+  capabilities?: { id: string; description: string }[];
+  subcategories?: Category[];
 }
 
 export function loadYamlFile<T = unknown>(file: string): T {

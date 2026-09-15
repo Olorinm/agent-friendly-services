@@ -2,7 +2,7 @@ import { initializeResearch } from './research.ts';
 
 const args = process.argv.slice(2);
 if (args.length !== 1 || args[0] === '--help') {
-  console.log('Usage: npm run research:init -- <category/subcategory>\nCreates a blank research brief; never overwrites existing research.');
+  console.log('Usage: npm run research:init -- <classification/path>\nCreates a blank research brief; never overwrites existing research.');
   process.exit(args[0] === '--help' ? 0 : 1);
 }
 try {

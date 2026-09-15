@@ -23,3 +23,7 @@ catalog:
       checked_on: '2026-09-09'
       kind: official_docs
   routes: []
+  notes:
+    - >-
+      Chinese-market data remains discoverable. The recorded documentation was region-restricted; supported
+      datasets and reporting fields need direct evidence before narrowing.

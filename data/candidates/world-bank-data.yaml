@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/macro
   sources:
     docs:
       url: >-
@@ -39,5 +39,5 @@ catalog:
         evidence:
           - docs
       notes: >-
-        Annual country indicators have publication lags and revisions. Confirm each series and year; do
-        not substitute annual GDP or inflation for monthly US indicators.
+        Annual country indicators have publication lags and revisions. Confirm each series and year; do not
+        substitute annual GDP or inflation for monthly US indicators.

@@ -86,3 +86,15 @@ checks:
 
 notes:
   - The official OpenAPI spec is published by Discord but marked public preview / subject to change.
+catalog:
+  version: 1
+  classifications:
+    - communication/messaging
+  sources:
+    classification-docs:
+      url: https://docs.discord.com/developers/intro
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - Scope is authorized bot/application messaging, not unrestricted access to personal messages.

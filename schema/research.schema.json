@@ -7,7 +7,7 @@
   "required": ["version", "classification", "title", "purpose", "audience", "scope", "sources", "search_log", "needs", "scenarios", "capability_candidates", "gaps"],
   "properties": {
     "version": { "const": 1 },
-    "classification": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$" },
+    "classification": { "type": "string", "pattern": "^[a-z0-9-]+(?:/[a-z0-9-]+)+$" },
     "title": { "$ref": "#/definitions/text" },
     "purpose": { "$ref": "#/definitions/text" },
     "audience": { "$ref": "#/definitions/text" },

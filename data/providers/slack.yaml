@@ -83,3 +83,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: Slack API ToS governs apps/bots explicitly; clause not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - communication/messaging
+  sources:
+    classification-docs:
+      url: https://docs.slack.dev/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Conversation/channel messaging through authorized Slack apps; permissions determine accessible
+      conversations.

@@ -79,3 +79,20 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/code-hosting
+    - productivity-storage/project-management
+    - productivity-storage/document-collaboration
+  sources:
+    classification-docs:
+      url: https://developer.atlassian.com/cloud/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Legacy suite record: Bitbucket supports repository work, Jira supports issue/project work, and
+      Confluence supports document collaboration. These are product-specific scopes, not capabilities shared
+      by one route.

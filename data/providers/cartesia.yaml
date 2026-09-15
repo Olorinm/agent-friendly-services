@@ -66,3 +66,19 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - ai-models/speech-synthesis
+    - ai-models/speech-recognition
+    - communication/voice-agents
+  sources:
+    classification-docs:
+      url: https://docs.cartesia.ai/get-started/overview
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Sonic speech synthesis, Ink transcription and Managed Agents are distinct products/features;
+      model-specific route coverage remains unrecorded.

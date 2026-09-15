@@ -7,10 +7,12 @@ import path from 'node:path';
 import * as yaml from 'js-yaml';
 import { ROOT, legacyTaskCategory, loadFields, loadCategories, loadProviders, loadCandidates, daysSince, type Provider, type Check } from './lib.ts';
 import { catalogService } from './catalog.ts';
+import { flattenCategories, inClassification, serviceClassifications, withinClassification, classificationLabel } from './taxonomy.mjs';
 import { generateResearch } from './research.ts';
 import { loadPrices, estimateModelCost } from './model-costs.ts';
 import { readmeTable } from './readme-table.ts';
 import { taskDisplay } from './task-display.ts';
+import { taskClassification } from './task-classifications.ts';
 import { serviceAccess } from './service-access.ts';
 import { renderServiceResults, renderSetup } from './service-results.ts';
 import { buildBoards, selectServiceBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
@@ -283,7 +285,7 @@ const catalogOut = {
 };
 fs.writeFileSync(path.join(GENERATED_DIR, 'catalog.json'), JSON.stringify(catalogOut, null, 2) + '\n');
 const cell = (v: string) => v.replaceAll('|', '\\|').replaceAll('\n', ' ');
-const catalogRows = (items: typeof services) => items.filter(s => s.catalog).flatMap(s => {
+const catalogRows = (items: typeof services, classification: string) => items.filter(s => s.catalog).flatMap(s => {
   const c = s.catalog!;
   const identity = `[${cell(s.name)}](../data/${s.record_pool === 'provider' ? 'providers' : 'candidates'}/${s.id}.yaml)`;
   if (!c.routes.length) return [`| ${identity} | ${c.classifications.join(', ')} | unknown | unknown | unknown | unknown | No route established; see source record | not recorded |`];
@@ -295,7 +297,7 @@ const catalogRows = (items: typeof services) => items.filter(s => s.catalog).fla
       ...(r.human_steps ?? []).map(x => `Human: ${x.step}`),
       r.notes ?? '',
     ].filter(Boolean).join('; ');
-    const observed = s.task_runs.filter(run => run.route_id === r.id).map(run =>
+    const observed = s.task_runs.filter(run => run.route_id === r.id && withinClassification(run.classification, classification)).map(run =>
       `[${cell(run.task.id)}: ${run.status} (${run.started_at.slice(0, 10)})](../data/experiments/evaluations/${run.run_id}.json)`).join('; ') || 'not recorded';
     return `| ${identity} | ${c.classifications.join(', ')} | [${r.id} (${r.interface})](${r.entry_url}) | ${r.data_kind?.value ?? 'unknown'} | ${r.availability?.value ?? 'unknown'} | ${r.personal_access?.value ?? 'unknown'} | ${cell(detail)} | ${observed} |`;
   });
@@ -307,7 +309,12 @@ Access, requirements and published costs below are **public-source claims**. Sou
 
 Each row is an access route, not an independent data supplier. Services without an established route remain discoverable. No cost/quality ranking is implied.
 
-${[...new Set(services.flatMap(s => s.catalog?.classifications ?? []))].sort().map(classification => `\n<a id="${classification.replaceAll('/', '-')}"></a>\n\n## ${classification}\n\n| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n${catalogRows(services.filter(s => s.catalog?.classifications.includes(classification))).join('\n')}`).join('\n')}
+${flattenCategories(categories).filter(node => services.some(s => inClassification(s, node.path))).map(node => {
+  const items = services.filter(s => serviceClassifications(s).includes(node.path));
+  const children = (node.subcategories ?? []).filter(child => services.some(s => inClassification(s, `${node.path}/${child.id}`)));
+  const links = children.map(child => `[${child.name}](#${node.path.replaceAll('/', '-')}-${child.id})`).join(' · ');
+  return `\n<a id="${node.path.replaceAll('/', '-')}"></a>\n\n## ${classificationLabel(categories, node.path)}\n\n${node.description}\n\n**Includes:** ${node.inclusion}\n\n**Boundary:** ${node.exclusion}\n\n${links}${items.length ? `\n\n| Service | Classification | Route | Data kind | Availability | Personal access | Requirements, published costs and limits | Observed tasks |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n${catalogRows(items, node.path).join('\n')}` : ''}`;
+}).join('\n')}
 `);
 
 // ---------------------------------------------------------------------------
@@ -494,24 +501,10 @@ ${notes.length ? `\n**Run notes** (agent-reported, verbatim):\n\n${notes.join('\
 fs.writeFileSync(path.join(GENERATED_DIR, 'agent-runs.md'), agentRunsMd);
 
 // README is the entry point; detailed catalogs and historical experiments have their own pages.
-// Derive coverage from task files and recorded runs so new domains appear on generation.
-const taskDir = 'data/experiments/tasks';
-const taskPages = fs.readdirSync(path.join(ROOT, taskDir)).filter(f => f.endsWith('.md') && f !== 'AGENTS.md')
-  .sort().map(file => {
-    const relative = `${taskDir}/${file}`;
-    const source = fs.readFileSync(path.join(ROOT, relative), 'utf8');
-    const classification = source.match(/^分类：(.+)$/m)?.[1].trim();
-    if (!classification) return null;
-    const ids = classification.match(/（([^）]+)）/)?.[1] ?? classification;
-    const runs = evaluations.filter(r => r.task.file === relative);
-    const serviceNames = [...new Set(runs.map(r => r.service_id))].sort()
-      .map(id => [...providers, ...candidates].find(p => p.id === id)?.name ?? id).join(', ');
-    return { relative, classification: classification.replace(/（[^）]+）/, '').trim(), ids, runs, serviceNames };
-  }).filter(p => p !== null);
 // Show services in their recorded categories; cross-category services share one source record.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
 const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
-const listedCategories = categories.filter(c => listedServices.some(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))))
+const listedCategories = categories.filter(c => listedServices.some(p => inClassification(p, c.id)))
   .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
 const accessLinks = (p: Provider, zh: boolean) => serviceAccess(p, zh).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
 const profileUrl = (id: string) => `./generated/services.md#${id}`;
@@ -541,52 +534,50 @@ const profiles = listedServices.map(p => {
   const costClaims = routes.flatMap(r => (r.costs ?? []).map(c => `- ${cell(r.id)}: ${c.amount} ${c.currency ?? c.unit} / ${cell(c.per)} (${cell(c.kind)}; ${cell(c.scope)})`));
   const pricing = [p.entrypoints.pricing ? `[Official pricing](${[p.entrypoints.pricing].flat()[0]})` : '', ...costClaims].filter(Boolean).join('\n\n') || '—';
   const recorded = evaluations.filter(r => r.service_id === p.id);
-  const results = renderServiceResults(p, boards, recorded);
+  const results = renderServiceResults(p, boards.filter(b => b.phase === 'business'), recorded.filter(r => taskClassification(r.task).phase === 'business'));
+  const setupRecords = recorded.filter(r => taskClassification(r.task).phase === 'setup');
+  const setupResults = renderServiceResults(p, boards.filter(b => b.phase === 'setup'), setupRecords);
+  const scopeNotes = [...(p.catalog?.notes ?? []), ...(p.notes ?? [])];
   const sources = Object.values(p.catalog?.sources ?? {}).map(x => `- [${cell(x.kind)}](${x.url}) — checked ${x.checked_on}`).join('\n');
-  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access <a id="${p.id}-access"></a>\n\n${extraLinks ? `${extraLinks}\n\n` : ''}${access}\n\n### Service pricing\n\n${pricing}\n\n${recorded.length ? `### Setup observations\n\n${renderSetup(p, recorded)}\n\n` : ''}### Task results\n\n${results}\n\n${p.notes?.length ? `### Notes\n\n${p.notes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || '—'}`;
+  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n**Classification:** ${serviceClassifications(p).map(id => classificationLabel(categories, id)).join('; ')}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access <a id="${p.id}-access"></a>\n\n${extraLinks ? `${extraLinks}\n\n` : ''}${access}\n\n### Service pricing\n\n${pricing}\n\n${recorded.length ? `### Setup observations\n\n${renderSetup(p, recorded)}${setupRecords.length ? `\n\n${setupResults}` : ''}\n\n` : ''}### Task results\n\n${results}\n\n${scopeNotes.length ? `### Notes\n\n${scopeNotes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || '—'}`;
 });
 fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nToken and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use saved LiteLLM prices; ~ marks estimated service charges. — means no data. Setup costs are separate from business task costs. Access and pricing are source claims; a listed route does not establish task support. Compare only matching tasks and conditions.\n\n${profiles.join('\n\n')}\n`);
 function serviceList(zh: boolean): string {
   const navigation = listedCategories.map(c => `[${zh ? c.name_zh ?? c.name : c.name}](#services-${c.id})`).join(' · ');
-  const sections = listedCategories.map(c => {
-    const categoryBoards = boards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids.split('/')[0] === c.id);
-
-    const rows = listedServices.filter(p => p.category === c.id || p.catalog?.classifications.some(id => id.startsWith(`${c.id}/`))).map(p => {
-      const identity = `[${cell(p.name)}](${profileUrl(p.id)})`;
-      return { id: p.id, classifications: p.catalog?.classifications ?? [],
-        unmeasured: `| ${identity} | — | — | — | — | — | ${accessLinks(p, zh)} |`,
-        directory: `| ${identity} | ${cell(p.summary)} | ${accessLinks(p, zh)} |` };
-    });
-    const names = new Map(listedServices.map(p => [p.id, p.name]));
-    const subcategories = (c.subcategories ?? []).filter(sub =>
-      rows.some(r => r.classifications.includes(`${c.id}/${sub.id}`))
-      || categoryBoards.some(b => taskPages.find(t => t.relative === b.task_file)?.ids === `${c.id}/${sub.id}`));
-    const groups = subcategories.map(sub => {
-      const id = `${c.id}/${sub.id}`;
-      const task = taskPages.find(t => t.ids === id);
-      return { id, name: zh ? (sub.name_zh ?? task?.classification.split(' / ').at(-1) ?? sub.name) : sub.name,
-        rows: rows.filter(r => r.classifications.includes(id)),
-        boards: categoryBoards.filter(b => taskPages.find(t => t.relative === b.task_file)?.ids === id) };
-    });
-    const remaining = rows.filter(r => !groups.some(g => g.rows.includes(r)));
-    if (remaining.length || !groups.length) groups.push({ id: `${c.id}/other`, name: zh ? '其他服务' : 'Other services', rows: remaining,
-      boards: categoryBoards.filter(b => !groups.some(g => g.boards.includes(b))) });
-    const content = groups.map(group => {
-      const measured = new Set(group.boards.flatMap(b => b.rows.map(r => r.service_id)));
-      const pending = group.rows.filter(r => !measured.has(r.id));
-      const selected = selectServiceBoards(group.boards);
-      const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
-      const measuredRows = renderBoardRows(selected, names, './', new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }])), interfaces, zh);
-      const table = group.boards.length
-        ? readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(r => r.unmeasured)].filter(Boolean).join('\n')}`, true)
-        : readmeTable(`${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${group.rows.map(r => r.directory).join('\n')}`, false);
-      const details = renderBoardDetails(selected, names, zh, './', interfaces);
-      const heading = subcategories.length ? `<a id="services-${group.id.replaceAll('/', '-')}"></a>\n\n#### ${group.name}\n\n` : '';
-      return `${heading}${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
-    }).join('\n\n');
-    return `<a id="services-${c.id}"></a>\n\n### ${zh ? c.name_zh ?? c.name : c.name} (${rows.length})\n\n${content}`;
-  });
-  return `${navigation}\n\n${sections.join('\n\n')}`;
+  const names = new Map(listedServices.map(p => [p.id, p.name]));
+  const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
+  const links = new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }]));
+  const renderResults = (groupBoards: typeof boards, members: typeof listedServices) => {
+    const selected = selectServiceBoards(groupBoards);
+    const measured = new Set(selected.flatMap(b => b.rows.map(r => r.service_id)));
+    const pending = members.filter(p => !measured.has(p.id));
+    const measuredRows = renderBoardRows(selected, names, './', links, interfaces, zh);
+    const table = readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(p =>
+      `| [${cell(p.name)}](${profileUrl(p.id)}) | — | — | — | — | — | ${accessLinks(p, zh)} |`)].filter(Boolean).join('\n')}`, true);
+    const details = renderBoardDetails(selected, names, zh, './', interfaces);
+    return `${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
+  };
+  const renderNode = (node: typeof categories[number], id: string, depth: number): string => {
+    const members = listedServices.filter(p => inClassification(p, id));
+    const scopedBoards = boards.filter(b => b.classification === id);
+    const children = (node.subcategories ?? []).filter(child => listedServices.some(p => inClassification(p, `${id}/${child.id}`))
+      || boards.some(b => withinClassification(b.classification, `${id}/${child.id}`)));
+    if (!members.length && !scopedBoards.length && !children.length) return '';
+    const direct = members.filter(p => serviceClassifications(p).includes(id));
+    const business = scopedBoards.filter(b => b.phase === 'business');
+    const setup = scopedBoards.filter(b => b.phase === 'setup');
+    const content: string[] = [];
+    if (setup.length) content.push(`<details>\n<summary>${zh ? '接入测试（单独记录）' : 'Setup tests (recorded separately)'}</summary>\n\n${renderResults(setup, [])}\n\n</details>`);
+    if (direct.length || business.length) {
+      if (children.length && direct.length) content.push(zh ? '以下服务暂按本层范围收录，细分缺口见服务详情。' : 'These services remain at this scope; see their profiles for unresolved classification details.');
+      content.push(business.length ? renderResults(business, direct) : readmeTable(
+        `${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${direct.map(p =>
+          `| [${cell(p.name)}](${profileUrl(p.id)}) | ${cell(p.summary)} | ${accessLinks(p, zh)} |`).join('\n')}`, false));
+    }
+    content.push(...children.map(child => renderNode(child, `${id}/${child.id}`, depth + 1)));
+    return `<a id="services-${id.replaceAll('/', '-')}"></a>\n\n${'#'.repeat(Math.min(depth + 3, 6))} ${zh ? node.name_zh ?? node.name : node.name} (${members.length})\n\n${content.join('\n\n')}`;
+  };
+  return `${navigation}\n\n${listedCategories.map(c => renderNode(c, c.id, 0)).join('\n\n')}`;
 }
 
 const readme = `<!-- GENERATED — edit scripts/generate.ts; run npm run generate. -->
@@ -605,7 +596,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
-Each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions.
+Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions.
 
 ${serviceList(false)}
 
@@ -641,7 +632,7 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 
 Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
 
-每个服务展示最近取得有效结果的测试方式，其他方式和接入准备见服务详情。当前不排名，仅在任务与条件一致时比较。
+每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。
 
 ${serviceList(true)}
 

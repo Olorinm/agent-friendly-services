@@ -91,4 +91,13 @@ catalog:
       url: https://docs.apify.com/platform/integrations/api
       checked_on: '2026-07-07'
       kind: official_docs
+    extraction-scope:
+      url: https://apify.com/apify/website-content-crawler
+      checked_on: '2026-09-15'
+      kind: publisher_listing
   routes: []
+  notes:
+    - >-
+      Extraction scope is supported by the Apify-maintained Website Content Crawler, which takes start URLs
+      and returns page content. This platform record does not inherit every third-party Actor capability;
+      route, Actor version and access must be selected before a task.

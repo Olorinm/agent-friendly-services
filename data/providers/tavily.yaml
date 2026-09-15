@@ -87,6 +87,10 @@ catalog:
       url: https://docs.tavily.com/documentation/api-credits
       checked_on: '2026-09-07'
       kind: official_docs
+    extract-docs:
+      url: https://docs.tavily.com/documentation/api-reference/endpoint/extract
+      checked_on: '2026-09-15'
+      kind: official_docs
   routes:
     - id: search-api
       docs: https://docs.tavily.com/documentation/quickstart
@@ -126,3 +130,22 @@ catalog:
           scope: Free account allowance, not requests.
           evidence:
             - pricing
+    - id: extract-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.tavily.com/extract
+      docs: https://docs.tavily.com/documentation/api-reference/endpoint/extract
+      evidence:
+        - extract-docs
+      capabilities:
+        web.fetch:
+          value: documented
+          evidence:
+            - extract-docs
+      notes: >-
+        Extract accepts one or more URLs. Search pricing and search trials do not establish extraction cost or
+        success.
+      auth:
+        value: api_key
+        evidence:
+          - extract-docs

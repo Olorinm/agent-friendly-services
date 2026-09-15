@@ -87,3 +87,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: Partner Program agreement not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - commerce-marketing
+  sources:
+    classification-docs:
+      url: https://shopify.dev/docs/api
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Admin and Storefront surfaces support store products, inventory, carts and orders. This broad category
+      already describes the product; finer commerce branches await wider candidate research.

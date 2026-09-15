@@ -189,6 +189,21 @@ test('generated data and the real MCP protocol preserve legacy behavior and expo
     assert.equal((await call('get_provider', { id: 'serpapi' })).provider.id, 'serpapi');
     assert((await call('search_services', { subcategory: 'travel/typo' })).error);
     assert((await call('get_service', { id: 'missing' })).error);
+    const financial = await call('search_services', { classification: 'web-search-data/financial-data' });
+    assert.equal(financial.count, new Set(financial.services.map((s: any) => s.id)).size);
+    const fx = await call('search_services', { classification: 'web-search-data/financial-data/fx', capability: 'fx.history' });
+    assert(fx.services.some((s: any) => s.id === 'frankfurter'));
+    assert(fx.services.every((s: any) => s.routes.every((r: any) => r.task_runs.every((run: any) => run.phase === 'business' && run.classification.endsWith('/fx')))));
+    assert.equal((await call('search_services', { subcategory: 'web-search-data/financial-data/fx', capability: 'fx.history' })).count, fx.count);
+    assert((await call('search_services', { classification: 'web-search-data/financial-data/fx', subcategory: 'travel/flights' })).error);
+    const tree = (await call('list_categories')).categories;
+    const finance = tree.find((c: any) => c.id === 'web-search-data').subcategories.find((c: any) => c.id === 'financial-data');
+    assert.equal(finance.services, financial.count);
+    assert.equal(finance.subcategories.length, 5);
+    assert(finance.subcategories.every((c: any) => c.path && c.inclusion && c.exclusion));
+    const extraction = await call('search_services', { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
+    assert(extraction.services.every((s: any) => s.route_tests === 'not_recorded'));
+
   } finally {
     if (connected) await client.close();
     fs.rmSync(output, { recursive: true, force: true });

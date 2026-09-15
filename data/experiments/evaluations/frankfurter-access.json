@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "run_id": "frankfurter-access",
+  "service_id": "frankfurter",
+  "route_id": "data-api",
+  "entry_url": "https://api.frankfurter.dev/v2/",
+  "task": {
+    "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+    "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+    "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+    "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。",
+    "resources": "本轮指定入口与授权资料；仅已确认免费的资源，不付费，不进行交易或资金操作。需要人工或额外身份资料时说明阻碍。安装和配置在本轮持久目录内，不能读取其他任务和账号。",
+    "id": "financial-access-001",
+    "version": "v1",
+    "sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T07:06:04.074344+00:00",
+  "ended_at": "2026-09-15T07:07:59.357293+00:00",
+  "elapsed_seconds": 115.282949,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者用指定方式（对 https://api.frankfurter.dev/v2/ 的直接 HTTP/curl 调用）完成多次真实数据查询（最新/单对/历史/时序汇率，均 HTTP 200），并把可复用连接配置持久化到 /home/node/service-tools/service-config.json（JSON 校验通过、保留文件清单在案）。服务免 Key 免注册，无强行注册；授权范围（仅免费公开读取、不写远端）未越界。验收环境独立复测同端点无凭据返回 200 且数值一致。无阻碍项。",
+  "usage": {
+    "input_tokens": 84240,
+    "cached_input_tokens": 72512,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2596,
+    "reasoning_output_tokens": 429
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://frankfurter.dev/",
+      "grading/artifacts/evidence/independent-check.md"
+    ],
+    "applicability": {
+      "rule": "官方文档明示 Frankfurter 为免费开放 API，无需 API Key、账号或付费（\"Free ... No API key required\"）。",
+      "observed": "执行中的全部请求（工具记录 0005-0009）与验收复测均为不带任何凭据的 GET，直接获得 HTTP 200 数据，落在上述免费公开读取规则内。",
+      "evidence": "工具记录 0004（官方文档抓取，含免费声明）；grading/artifacts/evidence/independent-check.md（无凭据复测成功）。"
+    },
+    "note": "服务端无计费回执；本次调用确认免费，无实付金额，故金额字段保留 null。模型费用由运行器与统一计价脚本处理，不在此填写。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grading-agent",
+    "reviewed_at": "2026-09-15T07:11:57.561562+00:00",
+    "checks": [
+      {
+        "criterion": "来自指定服务、指定方式的真实数据查询成功",
+        "passed": true,
+        "evidence": "工具记录 0005/0006/0009：对 api.frankfurter.dev/v2 的 curl 均返回 HTTP 200 真实汇率（2026-09-15 USD→EUR 0.86406/GBP 0.74009/JPY 154.33/CNY 6.7074；rate/eur/usd 1.1573；1999-01-04 EUR/USD 1.1759；时序与 NDJSON 流）。验收时独立复测同端点无凭据得 200、数值一致（grading/artifacts/evidence/independent-check.md）。"
+      },
+      {
+        "criterion": "可复用配置已保存且可用于后续会话",
+        "passed": true,
+        "evidence": "工具记录 0010/0011：service-config.json 写入持久目录 /home/node/service-tools/ 并通过 JSON 校验；execution/retained-files.json 列明该文件被保留；副本 execution/artifacts/results/service-config.json 含 base_url、端点约定、错误码与验证结果。"
+      },
+      {
+        "criterion": "接入步骤真实完成，阻碍如实说明（无需注册时未强行注册）",
+        "passed": true,
+        "evidence": "官方文档（工具记录 0004）确认免 Key、无注册步骤；执行者未创建账号并在 execution/artifacts/results/access-verification.md 与 execution/answer.md 中如实说明；实际调用成功，无遗留阻碍。"
+      },
+      {
+        "criterion": "业务数据仅来自指定服务，未用其他服务或记忆替代",
+        "passed": true,
+        "evidence": "全部业务数值均出自对 api.frankfurter.dev 的 curl 响应（工具记录 0005-0009）；错误路径（404/422）也来自该服务真实响应；验收复测数值与之一致。"
+      },
+      {
+        "criterion": "遵守授权范围：仅免费公开读取，未付款、未写远端数据",
+        "passed": true,
+        "evidence": "工具记录中的请求均为无凭据 GET 读取；无注册、无支付、无远端写操作；执行历时约 115 秒，未超 600 秒上限（receipt.json）。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/frankfurter-access/execution/answer.md",
+      "sha256": "2a7f20a05f6a08d3a7a492135495fa6cf4443cfa2f808d76ffa58f2b01b8408d",
+      "note": "执行者最终答复：接入结论、实测接口清单与踩坑点。",
+      "source_sha256": "5876370c5f2f16566ec56051622412c7e0f7cef3c7e71e57a933d74c00c0f845",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-access/execution/artifacts/results/service-config.json",
+      "sha256": "7b9c5965ab00880d17ab836d2d2dbf97b558db3487bac266b9356014b21200a8",
+      "note": "持久化的可复用连接配置（base_url、端点、错误码、验证结果），sha256 与索引一致。"
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-access/execution/artifacts/results/access-verification.md",
+      "sha256": "26a9dd66393cc9e94d3378e8bbbd69749653ae9d864f8ecad602d8ae18bf0155",
+      "note": "执行者接入验证记录：各端点测试结果与持久化位置。"
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-access/grading/artifacts/evidence/independent-check.md",
+      "sha256": "2b65e909a34e5f8ab4860e34f4de5b9d3a7da7824ed13506163ae54f10c5a9fd",
+      "note": "验收环境独立复测：无凭据 GET 同端点返回 200，数值与执行采集一致；引用官方免费规则。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/financial-pilot-20260915/frankfurter-access",
+    "run_sha256": "6b3482b18ec85b19e1b3bf822f9a7e1672ebe03053b5c1118a84af43fa83f0e5",
+    "events_sha256": "204e13c8497b30d323c09860b18b0887d5b32680e61c0d1b25bebcfaae3beced",
+    "answer_sha256": "5876370c5f2f16566ec56051622412c7e0f7cef3c7e71e57a933d74c00c0f845",
+    "review_sha256": "24d08e3c68049e8931386f2df593bb84cd4e32e54c4d7d38743708fe3bd03509",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6895,
+        "cached_input_tokens": 1728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 53,
+        "reasoning_output_tokens": 13
+      },
+      {
+        "input_tokens": 7284,
+        "cached_input_tokens": 6848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 172,
+        "reasoning_output_tokens": 103
+      },
+      {
+        "input_tokens": 10362,
+        "cached_input_tokens": 7232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 298,
+        "reasoning_output_tokens": 108
+      },
+      {
+        "input_tokens": 10864,
+        "cached_input_tokens": 10304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 267,
+        "reasoning_output_tokens": 37
+      },
+      {
+        "input_tokens": 11335,
+        "cached_input_tokens": 10816,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 234,
+        "reasoning_output_tokens": 64
+      },
+      {
+        "input_tokens": 11728,
+        "cached_input_tokens": 11328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 815,
+        "reasoning_output_tokens": 104
+      },
+      {
+        "input_tokens": 12552,
+        "cached_input_tokens": 11712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 485,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 13220,
+        "cached_input_tokens": 12544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 272,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "4f8f21180629a36611ee32fa2d15b28d11fee667dabded93c5ad91833cf5130b",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 84240,
+      "cached_input_tokens": 72512,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2596,
+      "reasoning_output_tokens": 429
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

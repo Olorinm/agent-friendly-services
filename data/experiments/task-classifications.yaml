@@ -1,0 +1,74 @@
+# Current display/discovery metadata. Execution prompts, versions and hashes remain unchanged.
+tasks:
+  - file: data/experiments/tasks/cloud-hosting.md
+    id: cloudflare-access-001
+    classification: databases/key-value
+    phase: setup
+  - file: data/experiments/tasks/cloud-hosting.md
+    id: cloudflare-kv-config-001
+    classification: databases/key-value
+    phase: business
+  - file: data/experiments/tasks/developer-tools.md
+    id: github-access-001
+    classification: developer-tools/code-hosting
+    phase: setup
+  - file: data/experiments/tasks/developer-tools.md
+    id: github-open-bugs-001
+    classification: productivity-storage/project-management
+    phase: business
+  - file: data/experiments/tasks/collaborative-tables.md
+    id: collaborative-tables-001
+    classification: productivity-storage/collaborative-tables
+    phase: business
+  - file: data/experiments/tasks/collaborative-tables.md
+    id: collaborative-tables-002
+    classification: productivity-storage/collaborative-tables
+    phase: business
+  - file: data/experiments/tasks/databases.md
+    id: database-todos-001
+    classification: databases/hosted-relational
+    phase: business
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-access-001
+    classification: web-search-data/financial-data
+    phase: setup
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-prices-001
+    classification: web-search-data/financial-data/prices
+    phase: business
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-statements-001
+    classification: web-search-data/financial-data/statements
+    phase: business
+  - file: data/experiments/tasks/financial-data.md
+    id: financial-fx-001
+    classification: web-search-data/financial-data/fx
+    phase: business
+  - file: data/experiments/tasks/mailboxes.md
+    id: mailboxes-create-001
+    classification: communication/mailboxes
+    phase: business
+  - file: data/experiments/tasks/mailboxes.md
+    id: mailboxes-code-001
+    classification: communication/mailboxes
+    phase: business
+  - file: data/experiments/tasks/payment-acceptance.md
+    id: payment-acceptance-001
+    classification: payments-billing/accept-payments
+    phase: business
+  - file: data/experiments/tasks/payment-acceptance.md
+    id: payment-acceptance-002
+    classification: payments-billing/accept-payments
+    phase: business
+  - file: data/experiments/tasks/payment-acceptance.md
+    id: payment-acceptance-003
+    classification: payments-billing/accept-payments
+    phase: business
+  - file: data/experiments/tasks/travel-flights.md
+    id: flights-search-001
+    classification: travel/flights
+    phase: business
+  - file: data/experiments/tasks/web-search.md
+    id: web-search-001
+    classification: web-search-data/web-search
+    phase: business

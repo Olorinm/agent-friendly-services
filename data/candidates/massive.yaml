@@ -2,14 +2,16 @@ id: massive
 name: Massive (formerly Polygon.io)
 category: web-search-data
 homepage: https://massive.com/
-summary: Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.
+summary: >-
+  Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD
+  0/month.
 submitted_by: community
 tags:
   - stocks
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://massive.com/docs/rest/quickstart
@@ -17,7 +19,7 @@ catalog:
       kind: official_docs
     access:
       url: https://massive.com/pricing
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_site
   routes:
     - id: data-api
@@ -44,5 +46,15 @@ catalog:
           - docs
           - access
       notes: >-
-        Select the exact data product and history entitlement. A free Stocks Basic account does not imply
-        access to all datasets or real-time consolidated data.
+        Stocks Basic: USD 0/month for individual use, 5 calls/minute, two years of historical end-of-day data.
+        A free stock plan does not establish free fundamentals or permission to redistribute data. Confirm
+        unadjusted daily aggregate settings and actual access in the trial.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: month on Stocks Basic
+          scope: Individual Stocks Basic plan only; no other datasets, subscriptions or paid entitlements inferred.
+          evidence:
+            - access

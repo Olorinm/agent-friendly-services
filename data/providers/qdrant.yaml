@@ -74,3 +74,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/vector
+  sources:
+    classification-docs:
+      url: https://qdrant.tech/documentation/overview/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Vector collections and similarity retrieval, with managed and self-hosted deployments distinguished at
+      access time.

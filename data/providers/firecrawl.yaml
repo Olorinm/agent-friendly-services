@@ -85,6 +85,10 @@ catalog:
       url: https://www.firecrawl.dev/pricing
       checked_on: '2026-09-07'
       kind: official_site
+    scrape-docs:
+      url: https://docs.firecrawl.dev/features/scrape
+      checked_on: '2026-09-15'
+      kind: official_docs
   routes:
     - id: public-search-api
       docs: https://docs.firecrawl.dev/features/search
@@ -111,9 +115,10 @@ catalog:
           evidence:
             - docs
         web.fetch:
-          value: documented
-          evidence:
-            - docs
+          value: unknown
+          notes: >-
+            This route records query-based Search and optional content from its results; it does not establish
+            specified-URL extraction. See the separately documented Scrape route.
       notes: >-
         Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account
         free credits cannot be assumed for this route.
@@ -142,9 +147,10 @@ catalog:
           evidence:
             - docs
         web.fetch:
-          value: documented
-          evidence:
-            - docs
+          value: unknown
+          notes: >-
+            This route records query-based Search and optional content from its results; it does not establish
+            specified-URL extraction. See the separately documented Scrape route.
       notes: 'Search: 2 credits per 10 results; extra scraping can consume credits.'
       requirements:
         payment_method:
@@ -159,3 +165,22 @@ catalog:
           scope: Account Free plan; separate from anonymous access.
           evidence:
             - pricing
+    - id: public-scrape-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.firecrawl.dev/v2/scrape
+      docs: https://docs.firecrawl.dev/features/scrape
+      evidence:
+        - scrape-docs
+      capabilities:
+        web.fetch:
+          value: documented
+          evidence:
+            - scrape-docs
+      notes: >-
+        Specified-URL scraping. Docs allow starting without a key; anonymous limits and paid-account costs are
+        separate and no extraction task has been run.
+      auth:
+        value: none
+        evidence:
+          - scrape-docs

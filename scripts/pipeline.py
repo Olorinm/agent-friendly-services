@@ -19,6 +19,7 @@ import sys
 import time
 from adapter_usage import read_usage
 from service_cost import service_charge
+from grading_packet import build as build_grading_packet, resolve_evidence_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -235,12 +236,15 @@ def finish_execution(directory, config, receipt, elapsed):
     shutil.copytree(directory / 'frozen/grading', grade)
     shutil.copytree(directory / 'frozen/execution', grade / 'frozen-execution')
     shutil.copytree(output, grade / 'execution')
-    (grade / 'prompt.txt').write_text('按 AGENTS.md 验收 task.json 的这一次执行。frozen-execution 是冻结输入，execution 是实际记录。'
-                                    '不补做用户任务。在当前工作目录写 assessment.json，采用项目约定字段和费用依据。\n'
+    build_grading_packet(directory)
+    (grade / 'prompt.txt').write_text('按 AGENTS.md 验收这一次执行。先读 review-packet/index.json：包含冻结要求、输入、实际结果、工具记录预览与完整文件索引。'
+                                    'reference.json（如有）是独立参考；索引不替代真实证据。按需读取标记截断的完整记录，不必重新解析整份会话或重复核算模型费用。\n'
+                                    '用 assessment.template.json 的字段写 assessment.json。逐项给简短判断与具体依据；不补做用户任务，不另写报告或自评程序。\n'
                                     'evidence.path 相对整次运行目录：执行者最终答复是 execution/answer.md；工作文件是 execution/artifacts/文件名（仅在实际存在时引用）；'
                                     '你新建的简短脱敏证据请放当前目录 evidence/，条目路径使用 grading/artifacts/evidence/文件名。\n'
                                     '禁止将 events.jsonl、session.json、wire/ 或任何原始会话与模型用量源文件选为公开证据。'
                                     '引用最少业务结果即可；如使用日志，摘录必要业务字段到简短证据文件，删除账号、资源标识和密钥。\n'
+                                    'review-packet/ 和 tool-records.json 是私有辅助材料，也不能整份选为公开证据。\n'
                                     'confirmed_free 必须给出真实免费规则来源与本次适用证据；执行者自称没有付款不证明免费。无法确认则 unknown。\n')
 
 
@@ -304,6 +308,7 @@ def advance(directory):
     else:
         if receipt.get('exit_code') != 0 or receipt.get('timed_out'):
             raise ValueError('Grading did not finish successfully')
+        resolve_evidence_paths(directory)
         assessment = read(directory / 'grading/assessment.json')
         # Reuse the exact recording validator, without publishing anything.
         recorder = module('recorder', 'record-trial.py')

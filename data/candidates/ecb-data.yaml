@@ -3,8 +3,8 @@ name: ECB Data Portal API
 category: web-search-data
 homepage: https://data.ecb.europa.eu/
 summary: >-
-  European Central Bank statistical data, including historical reference exchange rates, through SDMX
-  REST.
+  European Central Bank statistical data, including historical reference exchange rates, through
+  SDMX REST.
 submitted_by: community
 tags:
   - fx
@@ -12,20 +12,51 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/fx
+    - web-search-data/financial-data/macro
   sources:
     docs:
       url: https://data.ecb.europa.eu/help/api/data-examples
       checked_on: '2026-09-09'
       kind: official_docs
+      notes: >-
+        This documentation URL returned HTTP 503 to the research reader on 2026-09-15. Earlier documentation
+        claims remain dated 2026-09-09; a failed page read does not establish API failure.
+    reference-rates:
+      url: >-
+        https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
+      checked_on: '2026-09-15'
+      kind: official_site
+    reuse-policy:
+      url: https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html
+      checked_on: '2026-09-15'
+      kind: official_site
+      notes: >-
+        Website information may be obtained free of charge; accurate reproduction and ECB attribution
+        required. Applies to the published reference-rate information.
+    api-schema:
+      url: https://data.ecb.europa.eu/help/api/schemas
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        Official indexed schema documentation identifies the HTTPS web-service base. This is documentation
+        evidence, not an API trial.
+    macro-classification:
+      url: https://www.ecb.europa.eu/stats/accessing-our-data/html/index.en.html
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        ECB Data Portal includes named economic indicators. This classification does not assert a particular
+        indicator is available on every route.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://data.ecb.europa.eu/help/api/data-examples
+      entry_url: https://data-api.ecb.europa.eu/service/
       docs: https://data.ecb.europa.eu/help/api/data-examples
       evidence:
         - docs
+        - api-schema
       availability:
         value: self_serve
         evidence:
@@ -38,6 +69,21 @@ catalog:
         value: none
         evidence:
           - docs
+      capabilities:
+        fx.latest:
+          value: documented
+          evidence:
+            - docs
+            - reference-rates
+          notes: ECB reference-rate series; published rates are not executable conversion prices.
+        fx.history:
+          value: documented
+          evidence:
+            - docs
+            - reference-rates
+          notes: ECB reference-rate series; published rates are not executable conversion prices.
       notes: >-
-        Series dimensions, quote direction, observation frequency and date range must be selected
-        correctly. Reference rates are not executable conversion prices.
+        Series dimensions, quote direction, observation frequency and date range must be selected correctly.
+        Reference rates are not executable conversion prices. Reference-rate information is freely published
+        under the ECB reuse policy; fees for a run still require observation of the actual route. The
+        documentation page was temporarily unreadable during the latest research pass.

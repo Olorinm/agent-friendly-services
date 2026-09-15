@@ -80,3 +80,15 @@ checks:
     evidence: https://core.telegram.org/bots
     verified: "2026-07-07"
     notes: Bots are the product; automation through the Bot API is the intended use.
+catalog:
+  version: 1
+  classifications:
+    - communication/messaging
+  sources:
+    classification-docs:
+      url: https://core.telegram.org/bots/api
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - Scope is Telegram Bot API messaging, not user-account automation or arbitrary private-chat access.

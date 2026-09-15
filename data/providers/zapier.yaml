@@ -74,3 +74,18 @@ checks:
 
 notes:
   - "MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official."
+catalog:
+  version: 1
+  classifications:
+    - agent-tooling/tool-integrations
+    - agent-tooling/workflow-automation
+  sources:
+    classification-docs:
+      url: https://docs.zapier.com/integrations
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Application integrations provide actions/triggers and power executable workflows. Connector availability
+      does not prove a downstream task passes.

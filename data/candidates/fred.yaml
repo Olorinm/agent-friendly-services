@@ -10,11 +10,11 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/macro
   sources:
     docs:
       url: https://fred.stlouisfed.org/docs/api/fred/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     access:
       url: https://fred.stlouisfed.org/docs/api/api_key.html
@@ -44,6 +44,14 @@ catalog:
         evidence:
           - docs
           - access
+      capabilities:
+        macro.series:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Economic series observations and historical vintages; units, seasonal adjustment and revision
+            cutoff must match the task.
       notes: >-
-        A registered account can request an API key. Series units, seasonal adjustment, source and
-        vintage matter; not a stock-price provider.
+        A registered account can request an API key. Series units, seasonal adjustment, source and vintage
+        matter; not a stock-price provider.

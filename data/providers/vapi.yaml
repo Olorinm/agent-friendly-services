@@ -67,3 +67,18 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - communication/voice-agents
+    - communication/voice-calls
+  sources:
+    classification-docs:
+      url: https://docs.vapi.ai/quickstart/introduction
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Voice-agent orchestration with phone and web sessions. Underlying STT/TTS providers do not establish a
+      standalone Vapi speech-model API.

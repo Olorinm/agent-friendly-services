@@ -83,3 +83,18 @@ checks:
   automation_permitted:
     status: unknown
     notes: Messaging compliance rules (A2P etc.) constrain usage; ToS clause not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - communication/sms
+    - communication/voice-calls
+  sources:
+    classification-docs:
+      url: https://www.twilio.com/docs
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Messaging/SMS and Voice are separate products. SendGrid email is not automatically included in this
+      Twilio record.

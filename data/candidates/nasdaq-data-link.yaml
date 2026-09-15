@@ -36,3 +36,7 @@ catalog:
       notes: >-
         Choose a specific dataset before comparison. Most datasets are premium. The legacy documentation
         announces retirement on 2026-08-31; its replacement link was not readable in this research pass.
+  notes:
+    - >-
+      Dataset marketplace retained at the parent. Select a concrete dataset and verify its current
+      documentation and availability before assigning child categories.

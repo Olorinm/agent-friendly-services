@@ -14,6 +14,8 @@ import subprocess
 import tarfile
 from assessment import normalize as normalize_assessment
 from config import load, ssh as remote_ssh
+from tool_records import extract as extract_tool_records
+from runtime_status import query as query_runtime_status
 
 p=argparse.ArgumentParser();p.add_argument('--config',type=Path,required=True);p.add_argument('operation',choices=['start','status','collect','stop']);p.add_argument('request',type=Path);a=p.parse_args()
 c=load(a.config);r=json.loads(a.request.read_text());container=c['containers'][r['runtime']];run=(r.get('handle') if a.operation!='start' else None) or r['run_id']+'-'+r['role']
@@ -48,13 +50,9 @@ if a.operation=='start':
     docker('exec','-d','-u','0',container,'sh','-c',script)
     print(json.dumps({'handle':run}))
 elif a.operation=='status':
-    result=exec_root('cat','/run/afs/'+run+'/done.json',check=False)
-    if result.returncode==0:print(result.stdout.decode())
-    else:
-        if result.returncode != 1:raise RuntimeError('Remote status read failed: '+result.stderr.decode())
-        process=exec_root('pgrep','-af','^python3 /run/afs/worker.py /run/afs/'+run+'.request.json$',check=False)
-        if process.returncode != 0:raise RuntimeError('Worker state unavailable; do not infer completion or redispatch: '+process.stderr.decode())
-        print(json.dumps({'status':'running'}))
+    print(json.dumps(query_runtime_status(
+        lambda: exec_root('cat','/run/afs/'+run+'/done.json',check=False),
+        lambda: exec_root('pgrep','-af','^python3 /run/afs/worker.py /run/afs/'+run+'.request.json$',check=False))))
 elif a.operation=='collect':
     out=Path(r['output']);out.mkdir(parents=True,exist_ok=True)
     # Tar comes only from the controller directory, never execute collected files.
@@ -66,6 +64,8 @@ elif a.operation=='collect':
             if item.isdir():dest.mkdir(parents=True,exist_ok=True)
             else:
                 dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(tar.extractfile(item).read());dest.chmod(0o600)
+    if (out/'events.jsonl').is_file():
+        extract_tool_records(out)
     assessment=out/'assessment.json'
     if r['role']=='grading' and assessment.exists():
         raw=assessment.read_bytes()

@@ -73,3 +73,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - agent-tooling/workflow-automation
+  sources:
+    classification-docs:
+      url: https://docs.n8n.io/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Executes workflows with cloud and self-hosted options. Workflow templates alone do not establish any
+      downstream business capability.

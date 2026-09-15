@@ -76,3 +76,15 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/file-sharing
+  sources:
+    classification-docs:
+      url: https://www.dropbox.com/developers/documentation
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - Dropbox file/folder access and shared links; document editing is not established by file storage alone.

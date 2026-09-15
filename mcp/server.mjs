@@ -12,7 +12,8 @@ import { fileURLToPath } from 'node:url';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { searchServices } from './catalog.mjs';
+import { searchServices, categoryTree } from './catalog.mjs';
+import { flattenCategories } from '../scripts/taxonomy.mjs';
 
 const DATA_URL =
   process.env.AFS_DATA_URL ??
@@ -78,7 +79,7 @@ async function loadCatalog() {
   }
 }
 
-// Capability filters an agent can require. Entrypoint filters mean "a known
+// Legacy access-attribute filters an agent can require. Entrypoint filters mean "a known
 // official URL exists"; check filters mean the check is verified `supported`.
 const REQUIREMENTS = {
   official_mcp: (p) => Boolean(p.entrypoints.mcp_official),
@@ -126,11 +127,12 @@ const server = new McpServer({ name: 'agent-friendly-services', version: '0.1.0'
 
 server.registerTool('search_services', {
   title: 'Discover services and access routes',
-  description: 'Search candidates and access routes, including gated/unknown access. Documented access fields are public-source claims. Separately reviewed task_runs give outcomes, Agent token usage, service costs and configuration for the matching route only; invalid_run is not a service failure. Interface, capability and personal-access filters must match the SAME route. Missing service costs mean unknown; Agent usage is not converted to money. Use get_service for full review and evidence.',
+  description: 'Search candidates and access routes, including gated/unknown access. Documented access fields are public-source claims. Separately reviewed task_runs give outcomes, Agent token usage, service costs and configuration for the matching route and classification only; setup and business phases are separate. A run is not proof of every capability in its class; invalid_run is not a service failure. Interface, capability and personal-access filters must match the SAME route. Missing service costs mean unknown; Agent usage is not converted to money. Use get_service for full review and evidence.',
   inputSchema: {
     query: z.string().optional(),
     category: z.string().optional().describe('Top-level category, e.g. travel.'),
-    subcategory: z.string().optional().describe('Full category/subcategory path, e.g. travel/flights.'),
+    classification: z.string().optional().describe('Classification path at any depth, including descendants; e.g. web-search-data/financial-data/fx.'),
+    subcategory: z.string().optional().describe('Compatibility alias for classification; accepts any path depth.'),
     interface: z.enum(['api', 'sdk', 'cli', 'mcp', 'web', 'mobile']).optional(),
     capability: z.string().optional().describe('Documented outcome, e.g. flights.search; not a measured pass.'),
     personal_access: z.enum(['documented', 'restricted', 'unknown']).optional(),
@@ -138,8 +140,11 @@ server.registerTool('search_services', {
 }, async (filters) => {
   const data = await loadCatalog();
   const validCategories = data.categories.map(c => c.id);
-  const validSubcategories = data.categories.flatMap(c => (c.subcategories ?? []).map(s => `${c.id}/${s.id}`));
-  const validCapabilities = [...new Set(data.categories.flatMap(c => (c.subcategories ?? []).flatMap(s => s.capabilities.map(x => x.id))))];
+  const taxonomy = flattenCategories(data.categories);
+  const validSubcategories = taxonomy.map(node => node.path);
+  const validCapabilities = taxonomy.flatMap(node => (node.capabilities ?? []).map(cap => cap.id));
+  if (filters.classification && !validSubcategories.includes(filters.classification)) return json({ error: 'Unknown classification', valid_classifications: validSubcategories });
+  if (filters.classification && filters.subcategory && filters.classification !== filters.subcategory) return json({ error: 'classification and its subcategory alias must agree' });
   if (filters.category && !validCategories.includes(filters.category)) return json({ error: 'Unknown category', valid_categories: validCategories });
   if (filters.subcategory && !validSubcategories.includes(filters.subcategory)) return json({ error: 'Unknown subcategory', valid_subcategories: validSubcategories });
   if (filters.capability && !validCapabilities.includes(filters.capability)) return json({ error: 'Unknown capability', valid_capabilities: validCapabilities });
@@ -164,7 +169,7 @@ server.registerTool(
     title: 'Search providers',
     description:
       'Search the Agent-Friendly Services Index for service providers matching your needs. ' +
-      'Filter by category (see list_categories), required capabilities, and/or a free-text query. ' +
+      'Filter by category (see list_categories), required access attributes, and/or a free-text query. ' +
       'All filters are AND-ed. Returns compact provider cards; use get_provider for the full ' +
       'evidence-backed profile. A missing entrypoint means "no known official URL", not ' +
       'confirmed absence.',
@@ -181,7 +186,7 @@ server.registerTool(
         .array(z.enum(REQUIREMENT_KEYS))
         .optional()
         .describe(
-          'Capabilities every result must have. Entrypoint filters (official_mcp, llms_txt, openapi, graphql, cli, agent_docs, webhooks) require a known official URL; check filters (sandbox, self_serve, free_tier, oauth, scoped_tokens, idempotency) require verified "supported" status.'
+          'Access attributes every result must have. Entrypoint filters (official_mcp, llms_txt, openapi, graphql, cli, agent_docs, webhooks) require a known official URL; check filters (sandbox, self_serve, free_tier, oauth, scoped_tokens, idempotency) require verified "supported" status.'
         ),
     },
   },
@@ -270,18 +275,13 @@ server.registerTool(
   {
     title: 'List categories',
     description:
-      'List all categories in the index with descriptions and provider counts. ' +
-      'Category ids are valid inputs for search_providers.',
+      'List the classification tree, definitions, boundaries, capabilities and unique service counts across both pools. ' +
+      'Paths filter search_services including descendants; top-level ids also filter legacy search_providers.',
     inputSchema: {},
   },
   async () => {
-    const data = await loadData();
-    const counts = {};
-    for (const p of data.providers) counts[p.category] = (counts[p.category] ?? 0) + 1;
-    return json({
-      generated_at: data.generated_at,
-      categories: data.categories.map((c) => ({ ...c, providers: counts[c.id] ?? 0 })),
-    });
+    const data = await loadCatalog();
+    return json({ generated_at: data.generated_at, categories: categoryTree(data) });
   }
 );
 

@@ -92,6 +92,10 @@ catalog:
       url: https://exa.ai/docs/reference/search
       checked_on: '2026-09-07'
       kind: official_docs
+    fetch-docs:
+      url: https://exa.ai/docs/get-started/exa-mcp
+      checked_on: '2026-09-15'
+      kind: official_docs
   routes:
     - id: public-mcp
       interface: mcp
@@ -120,7 +124,10 @@ catalog:
         web.fetch:
           value: documented
           evidence:
-            - mcp
+            - fetch-docs
+          notes: >-
+            The current MCP guide lists web_fetch_exa for known URLs. This is documentation evidence, separate
+            from historical search tests.
       notes: >-
         Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires
         authentication and separate usage charges; it is excluded from this pilot. API signup credits are not

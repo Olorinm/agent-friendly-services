@@ -3,8 +3,8 @@ name: Financial Modeling Prep (FMP)
 category: web-search-data
 homepage: https://financialmodelingprep.com/
 summary: >-
-  Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and
-  official MCP.
+  Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API
+  and official MCP.
 submitted_by: community
 tags:
   - stocks
@@ -15,7 +15,10 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
+    - web-search-data/financial-data/fx
+    - web-search-data/financial-data/disclosures
   sources:
     docs:
       url: https://site.financialmodelingprep.com/developer/docs
@@ -23,7 +26,7 @@ catalog:
       kind: official_docs
     access:
       url: https://site.financialmodelingprep.com/developer/docs/pricing
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     mcp:
       url: https://site.financialmodelingprep.com/developer/docs/mcp-server
@@ -54,8 +57,10 @@ catalog:
           - docs
           - access
       notes: >-
-        Account and API key required. Personal and commercial plans differ; endpoint access must be
-        checked against the selected plan.
+        Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are
+        listed under paid Starter; a free key does not establish access to the fiscal-year comparison task.
+        Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing
+        page.
     - id: data-mcp
       interface: mcp
       maintainer: official
@@ -76,5 +81,5 @@ catalog:
         evidence:
           - mcp
       notes: >-
-        Uses the existing API key and plan limits; key must be injected privately, never stored in the
-        URL in public results.
+        Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in
+        public results.

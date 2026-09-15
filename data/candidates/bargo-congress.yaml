@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/disclosures
   sources:
     docs:
       url: https://www.bargo.ai/free-apis/congress
@@ -51,9 +51,18 @@ catalog:
         value: none
         evidence:
           - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+            - openapi
+          notes: >-
+            US congressional trades; rolling history, date-filter semantics and filing provenance are task
+            constraints.
       notes: >-
-        Rolling three-month coverage. Preserve transaction and disclosure dates; the Free API Terms
-        require attribution and restrict raw-data redistribution.
+        Rolling three-month coverage. Preserve transaction and disclosure dates; the Free API Terms require
+        attribution and restrict raw-data redistribution.
       costs:
         - kind: free_allowance
           amount: 30
@@ -93,10 +102,16 @@ catalog:
         value: api_key
         evidence:
           - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: Keyed access to the Congress dataset; a larger quota does not establish broader history.
       notes: >-
         Free keys are issued through Google sign-in. REST accepts Bearer or X-Api-Key authentication;
-        regenerating a key invalidates the old one. Signup and key acquisition have not been measured.
-        The published quota covers the same key across Bargo Free APIs, not a separate allowance per route.
+        regenerating a key invalidates the old one. Signup and key acquisition have not been measured. The
+        published quota covers the same key across Bargo Free APIs, not a separate allowance per route.
       costs:
         - kind: free_allowance
           amount: 100
@@ -142,9 +157,17 @@ catalog:
         value: api_key
         evidence:
           - docs
+      capabilities:
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Documented Congress trade/member tools; tool coverage and output must still satisfy the selected
+            task.
       notes: >-
-        Uses the free key obtained through Google sign-in. Bearer authentication is documented;
-        no separate MCP data or quota allowance is claimed. Verify tool coverage per task.
+        Uses the free key obtained through Google sign-in. Bearer authentication is documented; no separate
+        MCP data or quota allowance is claimed. Verify tool coverage per task.
       costs:
         - kind: free_allowance
           amount: 100

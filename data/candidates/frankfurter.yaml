@@ -9,11 +9,11 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/fx
   sources:
     docs:
       url: https://frankfurter.dev/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     mcp:
       url: https://frankfurter.dev/mcp/
@@ -23,7 +23,7 @@ catalog:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://frankfurter.dev/
+      entry_url: https://api.frankfurter.dev/v2/
       docs: https://frankfurter.dev/
       evidence:
         - docs
@@ -39,9 +39,41 @@ catalog:
         value: none
         evidence:
           - docs
+      capabilities:
+        fx.latest:
+          value: documented
+          evidence:
+            - docs
+          notes: Dated currency-pair reference rates; provider selection determines the source series.
+        fx.history:
+          value: documented
+          evidence:
+            - docs
+          notes: Dated currency-pair reference rates; provider selection determines the source series.
       notes: >-
-        Reference rates are not bank/card execution quotes. Specify the rate date and underlying source;
-        v2 can combine central-bank sources.
+        The hosted public API is free with no key or daily/monthly quota; abuse rate limits apply. Default v2
+        rates blend sources; filter by ECB when the task requires ECB reference data. Reference rates are not
+        executable bank/card quotes.
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+        platform_account:
+          value: not_required
+          evidence:
+            - docs
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public API request
+          scope: >-
+            Hosted public API under its documented fair-use rate limiting; underlying provider terms still
+            apply.
+          evidence:
+            - docs
     - id: rates-mcp
       interface: mcp
       maintainer: official

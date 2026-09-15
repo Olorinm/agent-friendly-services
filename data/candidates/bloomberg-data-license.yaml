@@ -17,10 +17,14 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://professional.bloomberg.com/products/data/data-license/
       checked_on: '2026-09-09'
       kind: official_site
   routes: []
+  notes:
+    - >-
+      Pricing is explicit in the recorded Data License scope. Fundamentals alone are insufficient here to
+      confirm statement fields; no route or personal license is established.

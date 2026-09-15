@@ -2,6 +2,7 @@ import type { Provider } from './lib.ts';
 import type { Evaluation } from './evaluations.ts';
 import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel } from './leaderboard.ts';
 import { taskDisplay } from './task-display.ts';
+import { taskClassification } from './task-classifications.ts';
 
 const cell = (v: unknown) => String(v ?? '—').replaceAll('|', '\\|').replaceAll('\n', ' ');
 const table = (headers: string[], rows: string[][]) => `| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.map(row => `| ${row.join(' | ')} |`).join('\n')}`;
@@ -14,16 +15,19 @@ const routeName = (p: Provider, id: string) => {
 };
 
 /** Supplied credentials are evidence of the starting state, not an autonomous signup score.
- * Historical runs have no separately metered setup; never repurpose execution measurements. */
+ * Only explicit setup tasks provide setup measurements; business usage is never reused. */
 export function renderSetup(p: Provider, records: Evaluation[]) {
   const latest = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at));
   const rows = (p.catalog?.routes ?? []).map(route => {
     const r = latest.find(r => r.route_id === route.id);
     const supplied = r && String(r.environment.service_credentials ?? 'none').startsWith('provided:');
     const state = !r ? '—' : supplied ? 'Credentials supplied before trial' : 'No account or key supplied';
-    return [routeName(p, route.id), r ? `[${state}](${recordLink(r)})` : state, '—', '—', '—'];
+    const setup = latest.find(r => r.route_id === route.id && taskClassification(r.task).phase === 'setup' && r.status !== 'invalid_run');
+    const measured = setup ? `[${tokenLabel(setup.usage ? setup.usage.input_tokens + setup.usage.output_tokens : null)}](${recordLink(setup)})` : '—';
+    return [routeName(p, route.id), r ? `[${state}](${recordLink(r)})` : state, measured,
+      setup ? `${setup.elapsed_seconds}s` : '—', setup ? cell(setup.human_interventions) : '—'];
   });
-  return table(['Route', 'Starting resources', 'Setup tokens', 'Setup time', 'Human involvement'], rows);
+  return table(['Route', 'Starting resources', 'Latest setup tokens', 'Latest setup time', 'Latest setup human involvement'], rows);
 }
 
 /** Compare routes within each task. Each row retains its frozen task and protocol;

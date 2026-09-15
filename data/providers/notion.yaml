@@ -85,6 +85,7 @@ catalog:
   version: 1
   classifications:
     - productivity-storage/collaborative-tables
+    - productivity-storage/document-collaboration
   sources:
     api:
       url: https://developers.notion.com/reference/intro
@@ -114,6 +115,13 @@ catalog:
       url: https://developers.notion.com/guides/mcp/get-started-with-mcp
       checked_on: '2026-09-08'
       kind: official_docs
+    collaboration-scope:
+      url: https://developers.notion.com/guides/data-apis/working-with-page-content
+      checked_on: '2026-09-15'
+      kind: official_docs
+      notes: >-
+        The Notion API can read and add page content. Table-task results do not establish document-editing
+        task results or identical MCP coverage.
   routes:
     - id: rest-api
       docs: https://developers.notion.com/reference/intro
@@ -144,14 +152,14 @@ catalog:
           evidence:
             - api
       notes: >-
-        Internal connection requires workspace owner creation and explicit page sharing; PAT acts
-        with creator permissions in the selected workspace. Free-plan PAT creation is restricted to
-        workspace owners; being a free member alone is insufficient.
+        Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator
+        permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being
+        a free member alone is insufficient.
       human_steps:
         - stage: credentials
           step: >-
-            Create internal connection and grant only the test page, or create a PAT in a dedicated
-            test workspace.
+            Create internal connection and grant only the test page, or create a PAT in a dedicated test
+            workspace.
           evidence:
             - auth
             - pat
@@ -251,6 +259,7 @@ catalog:
           evidence:
             - mcp
       notes: >-
-        Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer
-        actively maintained.
-  notes: []
+        Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer actively
+        maintained.
+  notes:
+    - Document and messaging membership does not transfer collaborative-table trial results to those tasks.

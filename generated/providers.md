@@ -38,7 +38,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [xAI (Grok API)](#xai) | — | ✓ | — | — | — | — | — | 2026-07-08 |
 | [Z.ai (GLM)](#zai) | — | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 
-### Agent Tooling
+### Agent Infrastructure & Automation
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -278,7 +278,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.
 
-**Category:** Agent Tooling · `Official MCP` `llms.txt`
+**Category:** Agent Infrastructure & Automation · `Official MCP` `llms.txt`
 
 **Links:** [Documentation](https://docs.composio.dev) · [llms.txt](https://docs.composio.dev/llms.txt) · [Pricing](https://composio.dev/pricing) · [Signup](https://app.composio.dev) · [Official MCP](https://mcp.composio.dev) · [MCP Setup Documentation](https://docs.composio.dev/docs/composio-connect)
 
@@ -569,7 +569,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.
 
-**Category:** Agent Tooling · **Scope:** Hosted platform + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
+**Category:** Agent Infrastructure & Automation · **Scope:** Hosted platform + open-source · `Official MCP` `llms.txt` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.mem0.ai) · [API Reference](https://docs.mem0.ai/api-reference) · [llms.txt](https://docs.mem0.ai/llms.txt) · [Status Page](https://status.mem0.ai) · [Pricing](https://mem0.ai/pricing) · [Signup](https://app.mem0.ai) · [API Keys](https://app.mem0.ai) · [Official MCP](https://docs.mem0.ai/openmemory/overview)
 
@@ -635,7 +635,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.
 
-**Category:** Agent Tooling · **Scope:** n8n Cloud + self-hosted · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
+**Category:** Agent Infrastructure & Automation · **Scope:** n8n Cloud + self-hosted · `Official MCP` `llms.txt` `CLI` `Sandbox` `Self-serve`
 
 **Links:** [Documentation](https://docs.n8n.io) · [API Reference](https://docs.n8n.io/api/) · [llms.txt](https://docs.n8n.io/llms.txt) · [Status Page](https://status.n8n.cloud) · [Pricing](https://n8n.io/pricing) · [Signup](https://n8n.io) · [API Keys](https://docs.n8n.io/api/authentication/) · [CLI](https://docs.n8n.io/hosting/cli-commands/) · [Official MCP](https://docs.n8n.io/connect/connect-to-n8n-mcp-server)
 
@@ -976,7 +976,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.
 
-**Category:** Agent Tooling · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Agent Infrastructure & Automation · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.vapi.ai) · [API Reference](https://docs.vapi.ai/api-reference) · [llms.txt](https://docs.vapi.ai/llms.txt) · [Status Page](https://status.vapi.ai) · [Pricing](https://vapi.ai/pricing) · [Signup](https://dashboard.vapi.ai) · [API Keys](https://dashboard.vapi.ai) · [Official MCP](https://github.com/VapiAI/mcp-server)
 
@@ -1033,7 +1033,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.
 
-**Category:** Agent Tooling · `Official MCP` `llms.txt` `CLI` `Self-serve`
+**Category:** Agent Infrastructure & Automation · `Official MCP` `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.zapier.com) · [llms.txt](https://docs.zapier.com/llms.txt) · [Status Page](https://status.zapier.com) · [Pricing](https://zapier.com/pricing) · [Signup](https://zapier.com/sign-up) · [CLI](https://github.com/zapier/zapier-platform) · [Official MCP](https://zapier.com/mcp) · [MCP Setup Documentation](https://docs.zapier.com/mcp/get-started/quickstart)
 

@@ -71,3 +71,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/vector
+  sources:
+    classification-docs:
+      url: https://docs.weaviate.io/weaviate
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      This record covers the vector database and its Cloud deployment. Engram is a separate named product; its
+      memory capabilities are not transferred to this record.

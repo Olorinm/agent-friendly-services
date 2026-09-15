@@ -80,4 +80,27 @@ catalog:
       url: https://jina.ai/api-dashboard
       checked_on: '2026-07-08'
       kind: official_site
-  routes: []
+    reader-docs:
+      url: https://jina.ai/reader/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes:
+    - id: reader-api
+      interface: api
+      maintainer: official
+      entry_url: https://r.jina.ai/
+      docs: https://jina.ai/reader/
+      evidence:
+        - reader-docs
+      capabilities:
+        web.fetch:
+          value: documented
+          evidence:
+            - reader-docs
+      notes: >-
+        Reader converts a supplied URL to text. Keyless basic usage is documented; keyed rate limits and
+        billing are separate. No broader search or embedding capability is inferred from this route.
+      auth:
+        value: none
+        evidence:
+          - reader-docs

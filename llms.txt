@@ -4,10 +4,12 @@
 
 ## Query
 
-- [Catalog JSON](https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/catalog.json): categories, subcategories, services, access routes, personal eligibility, published costs and route-specific task observations.
+- [Catalog JSON](https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/catalog.json): classification tree, outcome capabilities, services, access routes, personal eligibility, published costs and route-specific task observations.
 - [Results JSON](https://raw.githubusercontent.com/Olorinm/agent-friendly-services/main/generated/evaluations.json): frozen tasks, outcomes, run conditions, tokens, service charges and evidence paths.
 - [MCP setup and parameters](./mcp/README.md): `search_services` filters candidates; `get_service` returns full service details.
-- Example: `search_services({"subcategory":"travel/flights"})`, then `get_service({"id":"kiwi"})`.
+- Example: `search_services({"classification":"travel/flights"})`, then `get_service({"id":"kiwi"})`.
+- Financial example: `search_services({"classification":"web-search-data/financial-data/fx","capability":"fx.history"})`. Parent paths include descendants; `subcategory` remains an alias. Types are classifications, deliverable outcomes are capabilities, API/MCP/CLI are access attributes. Search (`web.search`) does not imply URL extraction (`web.fetch`).
+- Task observations carry current `classification` and `phase` (`setup` or `business`), without modifying historical prompts or results. Scoped queries do not transfer parent setup or another class’s results into a business outcome.
 
 Start with the user's domain and constraints. Inspect candidate routes and relevant task records before recommending a service. Report why it fits, access requirements, observed results, costs, evidence dates and unresolved gaps. Read `access_links` for selected API/SDK/CLI/MCP setup documentation (the same links shown on the homepage). Concrete endpoints and other discovery URLs remain in `catalog.routes[].entry_url`; route-specific instructions are in `docs`. Missing documentation does not mean the route is unavailable.
 
@@ -17,7 +19,7 @@ A documented route is not a task pass. Results apply only to the recorded route,
 
 - [Service catalog](./generated/catalog.md)
 - [Task definitions](./data/experiments/tasks/)
-- [Financial-data needs and draft tasks](./data/experiments/tasks/financial-data.md): source-backed demand, first task definitions and preparation gaps; no task runs yet.
+- [Financial-data needs and draft tasks](./data/experiments/tasks/financial-data.md): source-backed demand, five data types, task definitions and preparation gaps; initial ECB/Frankfurter access and FX trials.
 - [Task results](./generated/evaluations.md)
 - [Legacy provider facts](./generated/providers.md)
 

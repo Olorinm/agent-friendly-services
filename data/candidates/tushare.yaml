@@ -10,7 +10,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
   sources:
     docs:
       url: https://tushare.pro/document/1?doc_id=40
@@ -50,9 +51,9 @@ catalog:
           - docs
           - access
       notes: >-
-        Daily unadjusted prices start at 120 points; financial statements start at 2,000. Points are an
-        access threshold, not per-call spending. Some datasets need separate permissions. The HTTP
-        example uses an unencrypted endpoint; verify a secure credential path before testing.
+        Daily unadjusted prices start at 120 points; financial statements start at 2,000. Points are an access
+        threshold, not per-call spending. Some datasets need separate permissions. The HTTP example uses an
+        unencrypted endpoint; verify a secure credential path before testing.
     - id: python-sdk
       interface: sdk
       maintainer: official

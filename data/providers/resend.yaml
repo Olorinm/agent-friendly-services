@@ -81,3 +81,15 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed; anti-spam rules obviously constrain sending behavior.
+catalog:
+  version: 1
+  classifications:
+    - communication/email-delivery
+  sources:
+    classification-docs:
+      url: https://resend.com/docs/introduction
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - Application email delivery. A persistent user mailbox is not inferred from receiving webhooks.

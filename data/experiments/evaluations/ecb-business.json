@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "run_id": "ecb-business",
+  "service_id": "ecb-data",
+  "route_id": "data-api",
+  "entry_url": "https://data-api.ecb.europa.eu/service/",
+  "task": {
+    "description": "把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。",
+    "inputs": "合成支出：2026-08-14，80.00 USD；2026-08-15，125.00 USD；2026-08-17，39.90 USD。若当日未发布汇率，使用此前最近一个发布日；逐笔四舍五入到欧分，再加总。不计手续费。",
+    "expected_output": "三行换算表，包含支出日、实际使用的汇率日、汇率方向、美元金额与欧元金额；欧元合计和可核对出处。",
+    "success": "使用指定日期对应的 ECB USD/EUR 参考数据；非发布日回退正确；币种方向及乘除关系正确；三笔金额和按规定舍入后的合计与独立计算一致；核心汇率来自指定服务。",
+    "failure": "用最新汇率替代历史值、换成其他机构口径、币种方向错误、周末回退错误、舍入或合计错误；无可核对来源；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；只读取汇率并处理上述合成材料，不访问私人账单或发起换汇；只用免费额度。",
+    "id": "financial-fx-001",
+    "version": "v1",
+    "sha256": "7306d5c6211fe5e63275e0cde99da38d609cd435c349b1d7e106c66fd67669e3",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "9453787b3dfa2af132459653adb82d9e3fc1b495d53d67aa4a832b9ce84c74ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T07:15:18.031345+00:00",
+  "ended_at": "2026-09-15T07:16:39.246471+00:00",
+  "elapsed_seconds": 81.215126,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者按指定方式（无鉴权 GET 调用 ECB Data Portal SDMX REST API，数据流 EXR/D.USD.EUR.SP00.A）取得 2026-08-14 与 2026-08-17 的 USD/EUR 参考汇率，正确识别 2026-08-15（周六）无发布并回退至 2026-08-14；三笔金额逐笔 ROUND_HALF_UP 到欧分为 69.16、108.07、34.42，合计 211.65 EUR，与独立参考及验收环境独立重放和重算完全一致；answer.md 含三行换算表、合计与可核对出处。全程仅使用免费公开读取入口，无人工介入。",
+  "usage": {
+    "input_tokens": 60837,
+    "cached_input_tokens": 56064,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1994,
+    "reasoning_output_tokens": 1088
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+      "https://data.ecb.europa.eu/help/api/overview",
+      "https://data.ecb.europa.eu/help/api/data-examples",
+      "review-packet/tools/0005.json"
+    ],
+    "note": "规则：ECB 版权政策允许免费使用其网站直接获取的信息（需注明来源），且 Data Portal SDMX REST API 为公开 web 服务，无需注册、Key 或付款（站点注册仅用于门户个性化功能）；适用：本次仅无鉴权 GET 且 HTTP 200，环境未提供账户或支付方式，验收环境独立重放同样成功。无账单回执，实付为 0。",
+    "applicability": {
+      "rule": "ECB 版权政策允许免费使用其网站直接获取的信息（需注明来源），且 Data Portal SDMX REST API 为公开 web 服务，无需注册、Key 或付款（站点注册仅用于门户个性化功能）",
+      "observed": "本次仅无鉴权 GET 且 HTTP 200，环境未提供账户或支付方式，验收环境独立重放同样成功。无账单回执，实付为 0。",
+      "evidence": "grading/artifacts/evidence/independent-replay.txt；grading/artifacts/evidence/free-rule.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-acceptance-agent@opencode/glm-5.3-flash",
+    "reviewed_at": "2026-09-15T07:22:19.904132+00:00",
+    "checks": [
+      {
+        "criterion": "核心汇率来自指定服务（ecb-data REST API 直接 HTTP 调用），未用其他服务、网页数值或模型记忆替代",
+        "passed": true,
+        "evidence": "执行真实会话记录 review-packet/tools/0005.json 显示 curl 直接 GET https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A?startPeriod=2026-08-10&endPeriod=2026-08-18&format=csvdata，无鉴权头；产物 rates.csv 与验收环境重新拉取的同参数响应逐字节一致（evidence/independent-replay.txt）"
+      },
+      {
+        "criterion": "使用指定日期的 ECB USD/EUR 参考数据，数值真实",
+        "passed": true,
+        "evidence": "rates.csv 记录 2026-08-14=1.1567、2026-08-17=1.1593；验收环境独立重放同序列返回相同值，并与独立参考 reference.json（eurofxref-hist-90d.xml）一致"
+      },
+      {
+        "criterion": "非发布日回退正确",
+        "passed": true,
+        "evidence": "2026-08-15 为周六，API 响应无该日观测；执行者回退至 2026-08-14（result.txt 第 2 行标注 fallback），与独立重放确认的观测序列一致"
+      },
+      {
+        "criterion": "币种方向及乘除关系正确（USD ÷ USD/EUR 参考价 = EUR）",
+        "passed": true,
+        "evidence": "execution/artifacts/convert.py 以 Decimal(usd)/rate 计算，answer.md 表格同向；与独立重算一致"
+      },
+      {
+        "criterion": "三笔金额与按规定舍入后的合计与独立计算一致",
+        "passed": true,
+        "evidence": "独立重算 80.00/1.1567=69.16、125.00/1.1567=108.07、39.90/1.1593=34.42、合计 211.65 EUR（ROUND_HALF_UP 到分），与 result.txt、answer.md 及 reference.json 的 expected/eur_total 完全一致"
+      },
+      {
+        "criterion": "交付物满足 expected_output：三行换算表、欧元合计与可核对出处",
+        "passed": true,
+        "evidence": "execution/answer.md（sha256 与索引一致）给出三行表（支出日、实际汇率日、汇率方向标注、USD 与 EUR 金额）、合计 211.65 EUR，并注明出处为 ECB 数据门户 REST API 数据流 EXR/D.USD.EUR.SP00.A 及实际调用 URL（HTTP 200）"
+      },
+      {
+        "criterion": "任务版本、模型、harness 与运行回执符合测评配置，预算内完成",
+        "passed": true,
+        "evidence": "review-packet/index.json task 为 financial-fx-001/v1；receipt.json：model glm-5.3-flash，OpenCode 1.18.29 run --format json，exit_code 0，未超时（07:15:18–07:16:39，约 81 秒 < 600 秒），input_verified true；tool_capture complete 且 errors 为空"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/ecb-business/execution/answer.md",
+      "sha256": "41f749334eacc9283de817b350a6d71603321bbe924a01023d26f9d5dc31329e",
+      "note": "执行者最终答复：三行换算表、合计 211.65 EUR 与汇率出处（EXR 数据流及实际调用 URL）"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-business/execution/artifacts/result.txt",
+      "sha256": "7062aca4aad655eee42891afd6daf9ba2be935ca975df956b95edcbdff141e55",
+      "note": "逐笔舍入明细与合计，含周六回退标注"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-business/execution/artifacts/rates.csv",
+      "sha256": "7483639f1e12e7f615482dafa336e5ef0cf97b42918baef408d032b6a8672b90",
+      "note": "指定服务 API 原始 CSV 响应（业务字段，无敏感信息），与验收环境重放响应逐字节一致"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-business/grading/artifacts/evidence/independent-replay.txt",
+      "sha256": "83a15884a370aa372af5ebddcee0a8f58199672c511bedef50edc70155271cf0",
+      "note": "验收环境独立重放 API 与独立重算记录（仅业务字段）"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-business/grading/artifacts/evidence/free-rule.md",
+      "sha256": "8f2b880fe13f26bab1fd25d542eaa1c21d78ae9a56c647dc5ae8a75bc2c1d548",
+      "note": "免费规则来源（ECB 免责/版权页与 API 文档摘录）及本次适用观察，仅公开信息"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/financial-pilot-20260915/ecb-business",
+    "run_sha256": "e48ac263ff97a9ac879f3f37aaee73c4f0a7be992f301bd6149afe633b749e47",
+    "events_sha256": "e5ef3a2acebd1480ea008bb747ee462bb079260137d1c26b931dc8b81668178e",
+    "answer_sha256": "41f749334eacc9283de817b350a6d71603321bbe924a01023d26f9d5dc31329e",
+    "review_sha256": "2ccd851d9cfa744e0fbea2360fccb0a1c607648106b6f312f7add7fbc6f61288"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6890,
+        "cached_input_tokens": 5952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 52,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 7306,
+        "cached_input_tokens": 6848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 382,
+        "reasoning_output_tokens": 352
+      },
+      {
+        "input_tokens": 7710,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 34,
+        "reasoning_output_tokens": 17
+      },
+      {
+        "input_tokens": 8544,
+        "cached_input_tokens": 7680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 154,
+        "reasoning_output_tokens": 44
+      },
+      {
+        "input_tokens": 9425,
+        "cached_input_tokens": 8512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 968,
+        "reasoning_output_tokens": 631
+      },
+      {
+        "input_tokens": 10402,
+        "cached_input_tokens": 9408,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 26,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 10560,
+        "cached_input_tokens": 10368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 378,
+        "reasoning_output_tokens": 28
+      }
+    ],
+    "source_sha256": "e60c0eedeab29854df9410b0327297396c79e84f0c8107a6acdacc0569abd47d",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 60837,
+      "cached_input_tokens": 56064,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1994,
+      "reasoning_output_tokens": 1088
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

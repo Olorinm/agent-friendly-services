@@ -14,7 +14,8 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
   sources:
     docs:
       url: https://www.simfin.com/en/prices/

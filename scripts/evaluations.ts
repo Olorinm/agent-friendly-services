@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { ROOT, type Provider } from './lib.ts';
+import { ROOT, loadCategories, type Provider } from './lib.ts';
 import type { ModelCost, PriceSnapshot } from './model-costs.ts';
 import { buildBoards, selectServiceBoards, moneyLabel } from './leaderboard.ts';
+import { taskClassification } from './task-classifications.ts';
+import { classificationLabel } from './taxonomy.mjs';
 
 export interface Evaluation {
   schema_version: 1;
@@ -130,11 +132,11 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
     route_id: row.route_id, metrics: row.metrics, run_ids: row.runs.map(r => r.run_id) });
   const serviceSummaries = [...new Set(records.map(r => r.task.file))].flatMap(file =>
     selectServiceBoards(boards.filter(b => b.task_file === file)).flatMap(b => b.rows.map(row => ({
-      task_file: file, ...summaryRow(row), comparison_id: b.id,
+      task_file: file, classification: b.classification, phase: b.phase, ...summaryRow(row), comparison_id: b.id,
       selection: row.metrics.trials ? 'most_recent_valid_route_protocol' : 'no_valid_trials',
     }))));
   fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1,
-    evaluations: sorted, service_summaries: serviceSummaries,
+    evaluations: sorted.map(r => ({ ...r, ...taskClassification(r.task) })), service_summaries: serviceSummaries,
     comparisons: boards.map(b => ({ ...b, rows: b.rows.map(summaryRow) })),
   }, null, 2) + '\n');
   const row = (r: Evaluation) => {
@@ -144,11 +146,10 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   // Classify the task, not the provider: one provider may serve several domains.
   // This is a current display label, not a rewrite of frozen historical evidence.
   const groups = new Map<string, Map<string, Evaluation[]>>();
+  const categories = loadCategories();
   for (const r of sorted) {
-    const file = path.resolve(ROOT, r.task.file);
-    const taskText = file.startsWith(ROOT + path.sep) && fs.existsSync(file)
-      ? fs.readFileSync(file, 'utf8') : '';
-    const classification = taskText.match(/^分类：(.+)$/m)?.[1].trim() ?? '未标明分类';
+    const display = taskClassification(r.task);
+    const classification = `${classificationLabel(categories, display.classification, true)}（${display.classification}）${display.phase === 'setup' ? ' · 接入测试' : ''}`;
     if (!groups.has(classification)) groups.set(classification, new Map());
     const tasks = groups.get(classification)!;
     const key = `${r.task.file}:${r.task.id}:${r.task.version ?? r.task.sha256}:${r.task.sha256}`;
@@ -167,7 +168,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
 
 每行只说明该服务入口在该任务和运行配置下的观察。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
-按任务所属大类 / 子类分组，再展示同一任务版本和冻结内容的运行。分类标题来自当前任务表，仅用于导航；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
+按当前分类和接入／业务阶段分组，再展示同一任务版本和冻结内容的运行。展示归属来自 task-classifications.yaml；历史任务、结果和用量不改写。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
 

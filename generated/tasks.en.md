@@ -114,3 +114,31 @@ mailboxes-code-001 v1 · [Original task definition](../data/experiments/tasks/ma
 **Completion criteria:** The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.
 
 **Failure criteria:** Wrong code or email; documentation examples substituted for real messages; fabricated delivery state; or failure within the budget. A failure to deliver fixtures is not attributed to the measured Agent.
+
+<a id="financial-access-001-v1"></a>
+
+## Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+financial-access-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Expected output:** One genuine financial-data query result from the specified service, reusable configuration where needed, and the actual setup steps or specific blockers.
+
+**Completion criteria:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+**Failure criteria:** No genuine data query, substitution of another service, signup or installation only, required credentials or human steps unfinished, or failure within the budget. Environment failures are invalid runs.
+
+<a id="financial-fx-001-v1"></a>
+
+## Convert these three USD expenses into EUR using the European Central Bank reference rate for each expense date. List each converted amount and the total, and cite the exchange-rate source.
+
+financial-fx-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
+
+**Inputs:** Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; August 17, 2026: USD 39.90. If no rate was published on the expense date, use the most recent earlier publication date. Round each converted amount to euro cents, then sum. Exclude fees.
+
+**Expected output:** A three-row conversion table with expense dates, effective rate dates, quote direction, USD and EUR amounts; the EUR total and a verifiable source.
+
+**Completion criteria:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
+
+**Failure criteria:** Latest rates substituted for historical rates, a different publishing institution, incorrect quote direction, weekend fallback, rounding or total; no verifiable source; or failure within the budget. Environment failures are invalid runs.

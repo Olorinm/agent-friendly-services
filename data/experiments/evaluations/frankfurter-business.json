@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "run_id": "frankfurter-business",
+  "service_id": "frankfurter",
+  "route_id": "data-api",
+  "entry_url": "https://api.frankfurter.dev/v2/",
+  "task": {
+    "description": "把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。",
+    "inputs": "合成支出：2026-08-14，80.00 USD；2026-08-15，125.00 USD；2026-08-17，39.90 USD。若当日未发布汇率，使用此前最近一个发布日；逐笔四舍五入到欧分，再加总。不计手续费。",
+    "expected_output": "三行换算表，包含支出日、实际使用的汇率日、汇率方向、美元金额与欧元金额；欧元合计和可核对出处。",
+    "success": "使用指定日期对应的 ECB USD/EUR 参考数据；非发布日回退正确；币种方向及乘除关系正确；三笔金额和按规定舍入后的合计与独立计算一致；核心汇率来自指定服务。",
+    "failure": "用最新汇率替代历史值、换成其他机构口径、币种方向错误、周末回退错误、舍入或合计错误；无可核对来源；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；只读取汇率并处理上述合成材料，不访问私人账单或发起换汇；只用免费额度。",
+    "id": "financial-fx-001",
+    "version": "v1",
+    "sha256": "7306d5c6211fe5e63275e0cde99da38d609cd435c349b1d7e106c66fd67669e3",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "9453787b3dfa2af132459653adb82d9e3fc1b495d53d67aa4a832b9ce84c74ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.29",
+    "mode": "run --format json"
+  },
+  "model": "glm-5.3-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-09-15T07:11:48.392690+00:00",
+  "ended_at": "2026-09-15T07:13:16.595498+00:00",
+  "elapsed_seconds": 88.202808,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Account-free public API; no account, key or call code pre-provisioned. Dedicated service/route container; fresh session per task, retaining only service configuration and installed dependencies. Controller researched candidates and froze independent references; cloud execution and grading use GLM-5.3-Flash/high.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "三笔支出均用指定 frankfurter API 的 ECB 参考汇率折算：2026-08-15（周六）正确回退到 2026-08-14，币种方向 USD→EUR 且乘法关系正确，逐笔 69.16/108.07/34.42 与四舍五入后合计 211.65 EUR 与独立参考（ECB 官方 XML）完全一致；汇率数值与验收环境直连复核一致，出处（ECB，经 providers=ecb 与 expand=providers 确认）可核对。",
+  "usage": {
+    "input_tokens": 51862,
+    "cached_input_tokens": 42880,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2384,
+    "reasoning_output_tokens": 1200
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://frankfurter.dev/ （官方文档：\"Free, open-source exchange rates API ... No API key required\"；FAQ：commercial use free、no quotas，仅防滥用限流）"
+    ],
+    "note": "服务本身免费：官方声明无 Key、无配额，本次仅匿名 GET 读取，无任何付费路径",
+    "applicability": {
+      "rule": "frankfurter 公开读取入口免费、无需 API Key、无配额（仅防滥用限流），官方 FAQ 明确商用免费",
+      "observed": "本轮及验收复核均仅对 api.frankfurter.dev 发起匿名 GET 读取，HTTP 200，无注册、无 Key、无支付方式；服务无计费回执路径",
+      "evidence": "官方文档 https://frankfurter.dev/；执行工具记录（rates 查询与 expand=providers 响应）；验收环境直连复核记录 evidence/verification.md 第6节"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-independent-acceptance",
+    "reviewed_at": "2026-09-15T07:18:05.172161+00:00",
+    "checks": [
+      {
+        "criterion": "核心汇率来自指定服务（frankfurter REST API），参数符合任务",
+        "passed": true,
+        "evidence": "执行记录 tools/0004-0005：GET https://api.frankfurter.dev/v2/rates?from=2026-08-13&to=2026-08-17&base=USD&quotes=EUR&providers=ecb，采集件 execution/artifacts/rates_raw.json 含 08-14 rate 0.86453、08-17 rate 0.86259；验收环境直连同端点复现相同数值，expand=providers 响应含 {key:\"ECB\"} 确认发布方。"
+      },
+      {
+        "criterion": "非发布日回退正确（2026-08-15 周六用 2026-08-14）",
+        "passed": true,
+        "evidence": "验收环境独立计算星期：08-15=Saturday、08-14=Friday；answer.md 对 125.00 一笔标注适用发布日 2026-08-14 并用汇率 0.86453；验收环境请求 date=2026-08-15 服务端同样返回 08-14 行 0.86453。"
+      },
+      {
+        "criterion": "币种方向与乘除关系正确",
+        "passed": true,
+        "evidence": "服务返回 base=USD/quote=EUR，答案按美元金额×汇率折算；与独立参考 ECB USD per EUR（08-14=1.1567、08-17=1.1593）互为倒数：1/1.1567=0.86453、1/1.1593=0.86259（evidence/verification.md 第4节）。"
+      },
+      {
+        "criterion": "三笔欧元金额、逐笔舍入与合计与独立计算一致",
+        "passed": true,
+        "evidence": "独立重算（Decimal ROUND_HALF_UP）：80.00×0.86453→69.16；125.00×0.86453→108.07；39.90×0.86259→34.42；合计 211.65，与 reference.json 期望逐笔与合计完全一致（evidence/verification.md 第5节）。"
+      },
+      {
+        "criterion": "交付包含三行换算表（支出日、实际汇率日、方向、两币种金额）、欧元合计与可核对出处",
+        "passed": true,
+        "evidence": "execution/answer.md 含三行表格（支出日/金额 USD/适用发布日/汇率 USD→EUR/欧元金额）、合计 211.65 EUR 及来源说明（frankfurter API、providers=ecb、ECB 归属），并说明周末回退理由。"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/frankfurter-business/execution/answer.md",
+      "sha256": "9313babd97f0ddce5fbcc7d1eb0f4dbb4a378aa4ebd9ffbc12212c397ba22841",
+      "note": "执行者最终答复：三笔折算表、合计 211.65 EUR 与 ECB/frankfurter 出处说明",
+      "source_sha256": "54800a3c6e0d6c3766cad14633102e02f2389802b95549dcd941efd7d689e436",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-business/execution/artifacts/rates_raw.json",
+      "sha256": "a0af743a546399d6cf099aa03bbe2e8bc634993903ee52706c1a021e5e4fe879",
+      "note": "执行时采集的服务原始响应：三行 USD→EUR 汇率（08-13/08-14/08-17），周末无行"
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-business/grading/artifacts/evidence/verification.md",
+      "sha256": "f0446ce9c69291482283fc6013bdb9b78460ec2b9d08901e87914e674c985f57",
+      "note": "验收方独立核验摘录：星期回退、直连复核、与 ECB 官方 XML 参考的倒数一致性、独立重算与免费规则来源"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/financial-pilot-20260915/frankfurter-business",
+    "run_sha256": "10fff366ebcd43b1763ac10860969a87134af2519bf811f2a2e9c54a20c7ef14",
+    "events_sha256": "f861ef8da7319a3d90a7d5eabf5ffee1a1dfe09e71b7043f58506182bf44d96e",
+    "answer_sha256": "54800a3c6e0d6c3766cad14633102e02f2389802b95549dcd941efd7d689e436",
+    "review_sha256": "47c46e996e889c2fb58e9b6b5adcc01d7bea67bb49fcc7443ca179f7647a954b",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 6894,
+        "cached_input_tokens": 2304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 18
+      },
+      {
+        "input_tokens": 7315,
+        "cached_input_tokens": 5952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 452,
+        "reasoning_output_tokens": 410
+      },
+      {
+        "input_tokens": 8532,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 416,
+        "reasoning_output_tokens": 298
+      },
+      {
+        "input_tokens": 9028,
+        "cached_input_tokens": 8512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 620,
+        "reasoning_output_tokens": 337
+      },
+      {
+        "input_tokens": 9825,
+        "cached_input_tokens": 9024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 434,
+        "reasoning_output_tokens": 36
+      },
+      {
+        "input_tokens": 10268,
+        "cached_input_tokens": 9792,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 404,
+        "reasoning_output_tokens": 101
+      }
+    ],
+    "source_sha256": "0ce6ff78fd58c7703e98ee9d3bde9603d3b0bab5d4d6a75db7793d8a5dbafd88",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 51862,
+      "cached_input_tokens": 42880,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2384,
+      "reasoning_output_tokens": 1200
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/328a5f5d6024c673c4d5e37bad8dab17ab8e79ee/model_prices_and_context_window.json",
+    "revision": "328a5f5d6024c673c4d5e37bad8dab17ab8e79ee",
+    "fetched_at": "2026-09-09T10:51:49.718Z",
+    "sha256": "e1ff725162543106373ca4758e479e6581c85cc8f64105977690611df7624387",
+    "models": {
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

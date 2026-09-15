@@ -1,6 +1,6 @@
 # 网页搜索：任务表
 
-分类：网页搜索与数据 / 网页搜索（web-search-data/web-search）
+分类：搜索与数据获取 / 网页搜索（web-search-data/web-search）
 
 目标是回答真实问题并给出可核对的出处。公开用户需求支持“答案 + 来源”的需求；Python 版本问题是为了首轮可验收而改编的试题，尚无证据证明它是最高频查询。中间研究不另建重复报告。
 
@@ -11,3 +11,11 @@
 需求来源（2026-09-07 查阅）：[公开用户希望自动获取答案及其来源](https://www.reddit.com/r/LangChain/comments/1cigfv9/any_apis_that_use_llms_to_grab_updated_citations/)。原帖关注可核验引用，未提出 Python 试题。首轮能力是搜索与证据读取；后续应补充非技术、中文、时效性需求，避免只偏向英文开发者。
 
 统一首轮条件：Codex CLI、新会话和目录、gpt-6-astra、xhigh、600 秒。无账号入口与预先提供免费账户凭据的入口分开标注；注册准备不计入被测会话 token。执行器保存冻结任务，外部 Agent 逐项复核，结果写入统一结果表。
+
+## 搜索与提取的边界
+
+分类和能力词典以 [`categories.yaml`](../../categories.yaml) 为准。网页搜索从查询发现来源，对应 `web.search`；网页内容提取从指定 URL/站点取得可用内容，对应 `web.fetch`。返回标题、摘要、链接或带引用的答案，不足以证明能提取指定页面。远程浏览器提供可操作会话，属于浏览器运行环境，不能只因能打开网页就自动继承搜索或提取能力。
+
+现有 `web-search-001/v1` 允许执行 Agent 直接读取搜索返回的页面。它检验来源发现和答案证据，不要求被测服务自身提供 URL 提取，因此旧成绩只展示在网页搜索下，不据此填 `web.fetch`。题目行、冻结 prompt 和历史结果保持不变。
+
+Exa、Firecrawl、Tavily、AgentServices 已记录搜索和提取的不同范围。Firecrawl 的 Search 返回正文不能代替指定 URL 提取证明，因此旧搜索入口的 `web.fetch` 改为未知，另按 Scrape 文档登记提取入口；Tavily 的 Extract 也单列入口。Apify、Jina 的当前记录以提取为主；Brave Search、SerpApi、Serper、Perplexity 不因搜索摘要自动获得提取能力。Xquik 的 X 专门数据归宽范围的数据获取，不当作全网搜索。后续独立提取题应提供相同 URL/快照与交付字段，冻结原文和核验条件后再开展，当前尚无这类独立任务成绩。

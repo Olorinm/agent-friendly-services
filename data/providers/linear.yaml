@@ -74,3 +74,15 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/project-management
+  sources:
+    classification-docs:
+      url: https://linear.app/developers
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - Issue and project workflows through the Linear developer platform.

@@ -68,3 +68,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - agent-tooling/memory
+  sources:
+    classification-docs:
+      url: https://docs.mem0.ai/introduction
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Persistent memory across sessions, with save/search operations. Hosted platform and self-hosted library
+      are separate access scopes.

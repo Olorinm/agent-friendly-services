@@ -135,6 +135,11 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         for source in json.loads((run_dir / 'usage.json').read_text()).get('sources', []):
             private_usage_files.add((run_dir / source['path']).resolve())
     private_usage_hashes = {sha(path) for path in private_usage_files if path.is_file()}
+    # Indexed tool records can contain commands, credentials, and private inputs.
+    # Protect their copies as well as the original raw-session sources.
+    private_packet_files = [run_dir / 'execution/tool-records.json']
+    private_packet_files += list((run_dir / 'grading-input/review-packet').rglob('*.json'))
+    private_usage_hashes.update(sha(path) for path in private_packet_files if path.is_file())
     evidence = review.get('evidence', [])
     if not isinstance(evidence, list) or not evidence:
         raise ValueError('Select evidence files, including evidence of any failure/blocker')

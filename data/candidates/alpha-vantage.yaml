@@ -3,8 +3,8 @@ name: Alpha Vantage
 category: web-search-data
 homepage: https://www.alphavantage.co/
 summary: >-
-  Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota;
-  premium endpoints are separate.
+  Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily
+  quota; premium endpoints are separate.
 submitted_by: community
 tags:
   - stocks
@@ -16,23 +16,27 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/fx
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/statements
+    - web-search-data/financial-data/disclosures
+    - web-search-data/financial-data/macro
   sources:
     docs:
       url: https://www.alphavantage.co/documentation/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_docs
     access:
       url: https://www.alphavantage.co/support/
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_site
     mcp-discovery:
       url: https://www.alphavantage.co/support/
       checked_on: '2026-09-09'
       kind: official_docs
       notes: >-
-        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
-        could not be extracted in this pass.
+        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not
+        be extracted in this pass.
   routes:
     - id: data-api
       interface: api
@@ -57,9 +61,55 @@ catalog:
         evidence:
           - docs
           - access
+      capabilities:
+        fx.latest:
+          value: documented
+          evidence:
+            - docs
+          notes: Currency-pair quotes and FX series; not established as the ECB reference series.
+        fx.history:
+          value: documented
+          evidence:
+            - docs
+          notes: Currency-pair quotes and FX series; not established as the ECB reference series.
+        prices.latest:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Asset quotes and time series; supported assets, price adjustment and history depend on endpoint
+            and entitlement.
+        prices.history:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Asset quotes and time series; supported assets, price adjustment and history depend on endpoint
+            and entitlement.
+        statements.read:
+          value: documented
+          evidence:
+            - docs
+          notes: Annual and quarterly income statements, balance sheets and cash flows.
+        disclosures.search:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Separate Congress Trades and Insider Transactions datasets; population, fields and access must
+            match the task.
+        macro.series:
+          value: documented
+          evidence:
+            - docs
+          notes: >-
+            Named economic series including GDP, CPI and unemployment; frequency and revision treatment
+            require task-specific checks.
       notes: >-
-        Free key: 25 requests/day. Real-time and delayed US quotes are premium; check each task endpoint
-        before execution.
+        Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100
+        observations) is available to free keys; full history and intraday are premium. This may cover the
+        current short historical task, subject to access and source precision. Real-time quotes and adjusted
+        data require separate entitlement checks.
       costs:
         - kind: free_allowance
           amount: 25
@@ -70,5 +120,5 @@ catalog:
             - access
 notes:
   - >-
-    Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could
-    not be extracted in this pass.
+    Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
+    could not be extracted in this pass.

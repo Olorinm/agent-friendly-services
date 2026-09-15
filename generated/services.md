@@ -9,6 +9,8 @@ Token and costs are means per valid trial, including successes and failures; inv
 
 Payment processing with hosted Pay by Link checkout; test merchant accounts and live onboarding have separate requirements.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://www.adyen.com/) · [Source record](../data/candidates/adyen.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="adyen-access"></a>
@@ -37,6 +39,8 @@ Payment processing with hosted Pay by Link checkout; test merchant accounts and 
 
 Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and MCP access.
 
+**Classification:** Communication / Mailboxes
+
 [Website](https://www.agentmail.to/) · [Source record](../data/candidates/agentmail.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="agentmail-access"></a>
@@ -62,11 +66,55 @@ Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and M
 - [official_docs](https://www.agentmail.to/pricing) — checked 2026-09-09
 - [official_docs](https://docs.agentmail.to/agent-onboarding) — checked 2026-09-09
 
+<a id="agentservices"></a>
+
+## AgentServices
+
+Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.
+
+**Classification:** Search & Data Access / Web Search; Search & Data Access / Web Content Extraction; AI Services / Model Access; Search & Data Access / Financial Data / Asset Prices
+
+[Website](https://agentservices.to/) · [Source record](../data/candidates/agentservices.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="agentservices-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [rest-api (API)](https://api.agentservices.to/) | [Docs](https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md) | self serve / documented | Buyer guide names api.agentservices.to as the API host; agentservices.to serves the inspected documentation. The free-price example is distinct from a paid data result. An HTTP 402 challenge would establish quoted terms only, not delivery or settlement. Paid prices remain unresolved. |
+| [official-mcp (MCP)](https://agentservices.to/mcp) | [Docs](https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc) | self serve / documented | Protocol configuration is documented, not executed here. MCP discovery, a free tool call and fulfillment of a paid tool are separate checks; neither MCP support nor a registry listing establishes hosted-service terms or read-only behavior for every tool. |
+| [javascript-sdk (SDK)](https://github.com/vbkotecha/agentservices-api/tree/main/sdk) | [Docs](https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md) | self serve / documented | Package installation and execution were not tested. SDK price examples are indicative, and a payment challenge surfaced by the client is not a successful paid result. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- One service identity covers its REST, MCP and SDK routes, including the older AIServices name. The README attributes free crypto prices to CoinGecko and OpenAPI attributes chat completions to OpenRouter; these routes are not independent underlying data or model sources.
+- A written version/deprecation policy and hosted-service automation terms remain unknown; version labels and protocol endpoints do not establish either policy.
+- Data retrieval and x402 settlement are separate actions. The current platform also documents trading and persistent-memory writes; no service-wide read-only or idempotency conclusion is made.
+
+### Sources
+
+- [publisher_listing](https://github.com/Olorinm/agent-friendly-services/pull/4) — checked 2026-09-15
+- [official_docs](https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/docs/buyer-quickstart.md) — checked 2026-09-15
+- [official_docs](https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/README.md) — checked 2026-09-15
+- [official_docs](https://agentservices.to/openapi.json) — checked 2026-09-15
+- [official_docs](https://agentservices.to/.well-known/x402) — checked 2026-09-15
+- [official_docs](https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/README.md) — checked 2026-09-15
+- [official_repo](https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/index.js) — checked 2026-09-15
+
 <a id="airgateway"></a>
 
 ## AirGateway Platform API
 
 Air distribution API with sandbox keys, production certification and an agency application.
+
+**Classification:** Travel / Flights
 
 [Website](https://airgateway.com/) · [Source record](../data/candidates/airgateway.yaml) · [Back to directory](../README.md#all-services)
 
@@ -94,6 +142,8 @@ Air distribution API with sandbox keys, production certification and an agency a
 ## Airtable
 
 Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
+
+**Classification:** Workplace Collaboration / Collaborative Tables
 
 [Website](https://www.airtable.com) · [Source record](../data/providers/airtable.yaml) · [Back to directory](../README.md#all-services)
 
@@ -130,6 +180,8 @@ Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAut
 
 Hosted payment links with fixed or customer-selected amounts and payment status webhooks.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://www.airwallex.com/) · [Source record](../data/candidates/airwallex.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="airwallex-access"></a>
@@ -159,6 +211,8 @@ Hosted payment links with fixed or customer-selected amounts and payment status 
 
 Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.
 
+**Classification:** Databases / Hosted Relational Databases
+
 [Website](https://aiven.io/) · [Source record](../data/candidates/aiven.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="aiven-access"></a>
@@ -186,6 +240,8 @@ Managed databases including free hosted PostgreSQL. Account signup and provision
 
 Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).
 
+**Classification:** AI Services / Model Access
+
 [Website](https://www.alibabacloud.com/en/product/modelstudio) · [Source record](../data/providers/qwen.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="qwen-access"></a>
@@ -211,6 +267,8 @@ Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with a
 ## Alipay
 
 Online merchant payment integrations for websites and apps through Alipay APIs and SDKs.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://open.alipay.com/) · [Source record](../data/candidates/alipay.yaml) · [Back to directory](../README.md#all-services)
 
@@ -239,6 +297,8 @@ Online merchant payment integrations for websites and apps through Alipay APIs a
 
 Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices
+
 [Website](https://alpaca.markets/) · [Source record](../data/candidates/alpaca-market-data.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="alpaca-market-data-access"></a>
@@ -266,13 +326,15 @@ Read-only equities, options and crypto market data, separate from trading operat
 
 Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.
 
+**Classification:** Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures; Search & Data Access / Financial Data / Economic Indicators
+
 [Website](https://www.alphavantage.co/) · [Source record](../data/candidates/alpha-vantage.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="alpha-vantage-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://www.alphavantage.co/documentation/) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day. Real-time and delayed US quotes are premium; check each task endpoint before execution. |
+| [data-api (API)](https://www.alphavantage.co/documentation/) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100 observations) is available to free keys; full history and intraday are premium. This may cover the current short historical task, subject to access and source precision. Real-time quotes and adjusted data require separate entitlement checks. |
 
 ### Service pricing
 
@@ -288,8 +350,8 @@ Stock prices, company financials, FX, crypto and economic indicators. Free keys 
 
 ### Sources
 
-- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-09-09
-- [official_site](https://www.alphavantage.co/support/) — checked 2026-09-09
+- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-09-15
+- [official_site](https://www.alphavantage.co/support/) — checked 2026-09-15
 - [official_docs](https://www.alphavantage.co/support/) — checked 2026-09-09
 
 <a id="amadeus-flights"></a>
@@ -297,6 +359,8 @@ Stock prices, company financials, FX, crypto and economic indicators. Free keys 
 ## Amadeus Flight APIs
 
 Historical Self-Service flight API and the current Enterprise portal; individual onboarding must be re-established.
+
+**Classification:** Travel / Flights
 
 [Website](https://developers.amadeus.com/) · [Source record](../data/candidates/amadeus-flights.yaml) · [Back to directory](../README.md#all-services)
 
@@ -325,6 +389,8 @@ Historical Self-Service flight API and the current Enterprise portal; individual
 ## Anthropic
 
 Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://www.anthropic.com) · [Source record](../data/providers/anthropic.yaml) · [Back to directory](../README.md#all-services)
 
@@ -357,6 +423,8 @@ Claude model APIs with agent-focused documentation, llms.txt, and the company be
 
 Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 
+**Classification:** Search & Data Access / Web Content Extraction
+
 [Website](https://apify.com) · [Source record](../data/providers/apify.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="apify-access"></a>
@@ -375,17 +443,21 @@ Web scraping and automation platform with thousands of ready-made actors, a vers
 
 ### Notes
 
+- Extraction scope is supported by the Apify-maintained Website Content Crawler, which takes start URLs and returns page content. This platform record does not inherit every third-party Actor capability; route, Actor version and access must be selected before a task.
 - mcp.apify.com hosts the official remote MCP server; the docs page above explains setup.
 
 ### Sources
 
 - [official_docs](https://docs.apify.com/platform/integrations/api) — checked 2026-07-07
+- [publisher_listing](https://apify.com/apify/website-content-crawler) — checked 2026-09-15
 
 <a id="apiheya-air-scraper"></a>
 
 ## apiheya Air Scraper
 
 An apiheya flight-data product distributed through RapidAPI; distinct from the official Skyscanner partner API.
+
+**Classification:** Travel / Flights
 
 [Website](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) · [Source record](../data/candidates/apiheya-air-scraper.yaml) · [Back to directory](../README.md#all-services)
 
@@ -414,6 +486,8 @@ An apiheya flight-data product distributed through RapidAPI; distinct from the o
 
 Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.
 
+**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management; Workplace Collaboration / Document Collaboration
+
 [Website](https://www.atlassian.com) · [Source record](../data/providers/atlassian.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="atlassian-access"></a>
@@ -430,15 +504,21 @@ Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official rem
 
 —
 
+### Notes
+
+- Legacy suite record: Bitbucket supports repository work, Jira supports issue/project work, and Confluence supports document collaboration. These are product-specific scopes, not capabilities shared by one route.
+
 ### Sources
 
-—
+- [official_docs](https://developer.atlassian.com/cloud/) — checked 2026-09-15
 
 <a id="aviasales"></a>
 
 ## Aviasales via Travelpayouts
 
 Travelpayouts-distributed live flight search and a separately accessible historical price-data API.
+
+**Classification:** Travel / Flights
 
 [Website](https://www.aviasales.com/) · [Source record](../data/candidates/aviasales.yaml) · [Back to directory](../README.md#all-services)
 
@@ -469,15 +549,17 @@ Travelpayouts-distributed live flight search and a separately accessible histori
 
 Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.
 
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+
 [Website](https://www.bargo.ai/free-apis/congress) · [Source record](../data/candidates/bargo-congress.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="bargo-congress-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [congress-api-keyless (API)](https://www.bargo.ai/free-apis/congress) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Keyless: 30 requests and 100 rows per IP/day; free key: 100 requests and 1,000 rows/day. Rolling three-month coverage; preserve transaction and disclosure dates. Attribution required; raw-data redistribution restricted. |
-| [congress-api-keyed (API)](https://www.bargo.ai/free-apis/congress/v1) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Free key raises the quota; signup and key acquisition have not been measured. |
-| [congress-mcp (MCP)](https://www.bargo.ai/free-apis/congress/mcp) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Uses the free Congress key. Same rolling data window; verify available tool coverage per task. |
+| [congress-api-keyless (API)](https://www.bargo.ai/free-apis/congress/v1) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Rolling three-month coverage. Preserve transaction and disclosure dates; the Free API Terms require attribution and restrict raw-data redistribution. |
+| [congress-api-keyed (API)](https://www.bargo.ai/free-apis/congress/v1) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Requires: platform_account; Free keys are issued through Google sign-in. REST accepts Bearer or X-Api-Key authentication; regenerating a key invalidates the old one. Signup and key acquisition have not been measured. The published quota covers the same key across Bargo Free APIs, not a separate allowance per route. |
+| [congress-mcp (MCP)](https://www.bargo.ai/free-apis/congress/mcp) | [Docs](https://www.bargo.ai/free-apis/congress) | self serve / documented | Requires: platform_account; Uses the free key obtained through Google sign-in. Bearer authentication is documented; no separate MCP data or quota allowance is claimed. Verify tool coverage per task. |
 
 ### Service pricing
 
@@ -485,13 +567,13 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 - congress-api-keyless: 100 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
 
-- congress-api-keyed: 100 requests / day (free_allowance; Free-key quota shared by API and MCP.)
+- congress-api-keyed: 100 requests / day (free_allowance; Free-key allowance across Bargo Free APIs, including REST and MCP.)
 
-- congress-api-keyed: 1000 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
+- congress-api-keyed: 1000 rows / day (free_allowance; Same free-key allowance; Congress data is limited to a rolling three-month window.)
 
-- congress-mcp: 100 requests / day (free_allowance; Free-key quota shared by API and MCP.)
+- congress-mcp: 100 requests / day (free_allowance; Free-key allowance across Bargo Free APIs, including REST and MCP.)
 
-- congress-mcp: 1000 rows / day (free_allowance; Rolling three-month Congress dataset; redistribution restrictions apply.)
+- congress-mcp: 1000 rows / day (free_allowance; Same free-key allowance; Congress data is limited to a rolling three-month window.)
 
 ### Task results
 
@@ -499,17 +581,24 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 ### Notes
 
-- Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; included in the broader financial-data discovery pass. PR remains open; no task result implied.
+- Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/6; incorporated during the broader financial-data discovery pass. This record covers the Congress product, not Bargo's separate market-intelligence platform; no task result is implied.
+- The OpenAPI date filters select transaction dates, not disclosure dates; filing_portal points to the source filing portal and does not establish a direct link to each original filing. Preserve these distinctions when selecting a task or checking provenance.
+- Free API Terms allow personal applications, agents and analysis with visible Bargo attribution. Raw records may not be redistributed, including partial exports; derivative work must not expose or reconstruct them. Evidence publication must respect this restriction.
 
 ### Sources
 
-- [official_docs](https://www.bargo.ai/free-apis/congress) — checked 2026-09-09
+- [official_docs](https://www.bargo.ai/free-apis/congress) — checked 2026-09-15
+- [official_docs](https://www.bargo.ai/free-apis/congress/openapi.json) — checked 2026-09-15
+- [official_site](https://www.bargo.ai/free-apis/dash) — checked 2026-09-15
+- [official_site](https://www.bargo.ai/free-apis/terms) — checked 2026-09-15
 
 <a id="baserow"></a>
 
 ## Baserow Cloud
 
 Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.
+
+**Classification:** Workplace Collaboration / Collaborative Tables
 
 [Website](https://baserow.io/) · [Source record](../data/candidates/baserow.yaml) · [Back to directory](../README.md#all-services)
 
@@ -541,6 +630,8 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 
 Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices
+
 [Website](https://professional.bloomberg.com/products/data/data-license/) · [Source record](../data/candidates/bloomberg-data-license.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="bloomberg-data-license-access"></a>
@@ -557,6 +648,7 @@ Enterprise pricing, fundamentals, reference and other financial datasets deliver
 
 ### Notes
 
+- Pricing is explicit in the recorded Data License scope. Fundamentals alone are insufficient here to confirm statement fields; no route or personal license is established.
 - Existing-client data portal and demo request are documented. Personal self-service API signup and a free execution allowance have not been established.
 
 ### Sources
@@ -568,6 +660,8 @@ Enterprise pricing, fundamentals, reference and other financial datasets deliver
 ## Brave Search API
 
 Independent web search index with a developer API, self-serve registration, and a free plan.
+
+**Classification:** Search & Data Access / Web Search
 
 [Website](https://brave.com/search/api/) · [Source record](../data/providers/brave-search.yaml) · [Back to directory](../README.md#all-services)
 
@@ -601,6 +695,8 @@ Independent web search index with a developer API, self-serve registration, and 
 
 SERP API with a documented Google Flights request; structured fare extraction and onboarding need verification.
 
+**Classification:** Travel / Flights
+
 [Website](https://brightdata.com/) · [Source record](../data/candidates/bright-data-serp.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="bright-data-serp-access"></a>
@@ -628,6 +724,8 @@ SERP API with a documented Google Flights request; structured fare extraction an
 ## Browserbase
 
 Headless browser infrastructure for AI agents and automation, with session APIs and an official MCP server.
+
+**Classification:** Cloud Computing & Hosting / Browser Environments
 
 [Website](https://www.browserbase.com) · [Source record](../data/providers/browserbase.yaml) · [Back to directory](../README.md#all-services)
 
@@ -659,6 +757,8 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 
 Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.
 
+**Classification:** AI Services / Speech Synthesis; AI Services / Speech Recognition; Communication / Voice Agents
+
 [Website](https://cartesia.ai) · [Source record](../data/providers/cartesia.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="cartesia-access"></a>
@@ -675,15 +775,21 @@ Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MC
 
 —
 
+### Notes
+
+- Sonic speech synthesis, Ink transcription and Managed Agents are distinct products/features; model-specific route coverage remains unrecorded.
+
 ### Sources
 
-—
+- [official_docs](https://docs.cartesia.ai/get-started/overview) — checked 2026-09-15
 
 <a id="cerebras"></a>
 
 ## Cerebras Inference
 
 Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://cloud.cerebras.ai) · [Source record](../data/providers/cerebras.yaml) · [Back to directory](../README.md#all-services)
 
@@ -711,6 +817,8 @@ Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible
 
 Payment Links API for hosted checkout, with separate sandbox and production API hosts.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://www.checkout.com/) · [Source record](../data/candidates/checkout-com.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="checkout-com-access"></a>
@@ -737,6 +845,8 @@ Payment Links API for hosted checkout, with separate sandbox and production API 
 
 Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.
 
+**Classification:** Databases / Vector Databases
+
 [Website](https://www.trychroma.com) · [Source record](../data/providers/chroma.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="chroma-access"></a>
@@ -753,15 +863,21 @@ Open-source embedding database with a hosted Chroma Cloud, official CLI, officia
 
 —
 
+### Notes
+
+- Chroma stores embeddings and searches vectors. The record covers Cloud and open-source deployment; their access requirements are separate. Document payload storage is not evidence of a general document database.
+
 ### Sources
 
-—
+- [official_docs](https://docs.trychroma.com/docs/overview/introduction) — checked 2026-09-15
 
 <a id="cloudflare"></a>
 
 ## Cloudflare
 
 Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.
+
+**Classification:** Cloud Computing & Hosting / Application Hosting; Databases / Hosted Relational Databases; Databases / Key-value Databases
 
 [Website](https://www.cloudflare.com) · [Source record](../data/providers/cloudflare.yaml) · [Back to directory](../README.md#all-services)
 
@@ -795,12 +911,15 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 - [official_docs](https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/) — checked 2026-09-10
 - [official_docs](https://developers.cloudflare.com/kv/reference/kv-commands/) — checked 2026-09-10
 - [official_docs](https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/) — checked 2026-09-10
+- [official_docs](https://developers.cloudflare.com/kv/) — checked 2026-09-15
 
 <a id="coda"></a>
 
 ## Coda / Superhuman Docs
 
 Docs and tables with a free REST API; current API page is branded Superhuman Docs.
+
+**Classification:** Workplace Collaboration / Collaborative Tables; Workplace Collaboration / Document Collaboration
 
 [Website](https://coda.io/) · [Source record](../data/candidates/coda.yaml) · [Back to directory](../README.md#all-services)
 
@@ -819,16 +938,74 @@ Docs and tables with a free REST API; current API page is branded Superhuman Doc
 
 —
 
+### Notes
+
+- Document and messaging membership does not transfer collaborative-table trial results to those tasks.
+
 ### Sources
 
 - [official_docs](https://coda.io/developers/apis/v1) — checked 2026-09-08
 - [official_docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) — checked 2026-09-08
+- [official_docs](https://coda.io/developers/apis/v1) — checked 2026-09-15
+
+<a id="cog-depot"></a>
+
+## Cog Depot
+
+Hosted marketplace for agents to discover counterparties, negotiate capability exchanges and obtain direct contact details after paying platform fees.
+
+**Classification:** Agent Infrastructure & Automation
+
+[Website](https://cogdepot.com/) · [Source record](../data/candidates/cog-depot.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="cog-depot-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [marketplace-api (API)](https://api.cogdepot.com) | [Docs](https://cogdepot.com/docs) | self serve | Complete email, Google or GitHub web signup and transfer the issued key to the agent.; Registration alone does not establish readiness to trade. Negotiation needs enough credits for its fee hold; x402-funded accounts receive no welcome grant merely for paying. |
+| [marketplace-a2a (API)](https://api.cogdepot.com/a2a) | [Docs](https://cogdepot.com/docs/machine-discovery) | — | Official docs describe A2A v1.0 over JSON-RPC and the Agent Card at /.well-known/agent-card.json. Authentication details and protocol conformance were not independently verified; no task result is implied. |
+| [marketplace-mcp-local (MCP)](https://github.com/cogdepot/mcp-server) | [Docs](https://github.com/cogdepot/mcp-server#install) | self serve | Local stdio wrapper published as @cogdepot/mcp-server, started with npx. A preview has no search or pagination; the full feed is charged. Uses the same service credits; no local installation or task was tested. |
+| [marketplace-mcp-remote (MCP)](https://mcp.cogdepot.com) | [Docs](https://github.com/cogdepot/mcp-server#remote-hosted-oauth) | self serve | Sign in and authorize the hosted MCP connector.; Hosted OAuth documents action-scoped access, unlike the original PR's account-key-only description. This does not establish scopes for static API keys or imply tested authorization behavior. |
+
+### Service pricing
+
+- marketplace-api: 20000 credits / eligible account (free_allowance; Web signup receives the grant immediately; API signup starts at zero and must verify domain control, once per domain and account. Granted credits are not cash or measured savings.)
+
+- marketplace-api: 1 credits / billable listing request (usage; Published metering for posting a listing, a feed page or an individual listing read; pricing explicitly values one credit at USD 0.0005.)
+
+- marketplace-api: 200 credits / posted listing (usage; Posting fee in addition to the metered request. Unfunded accounts have a lifetime limit of three listings regardless of granted balance.)
+
+- marketplace-api: 2000 credits / party per sealed deal (usage; The opener reserves this platform fee when a thread opens; capture occurs at seal, when the poster also pays. The underlying service purchase is separate.)
+
+- marketplace-api: 0.5 USD / smallest listed x402 credit pack (minimum_spend; Published equivalent for 1000 credits paid in USDC on Base; insufficient by itself for the 2000-credit deal fee. Not a required signup payment or observed expenditure.)
+
+### Task results
+
+—
+
+### Notes
+
+- Originally submitted by the vendor in https://github.com/Olorinm/agent-friendly-services/pull/7; reviewed on 2026-09-15 at head f97e8ef286f3feeba7e83ef086fbd5b354213cb2. The July submission's absent-MCP claim is superseded by current official documentation.
+- The terms exclude users located in, or nationals/residents of, Cuba, Iran, North Korea, Syria and Russia and named restricted parties. Their B2B description does not establish a company-registration requirement or ordinary-person eligibility; those remain unknown.
+- Escrow covers platform fees only. Counterparties exchange work and payment directly after introduction; Cog Depot does not hold the purchase price or guarantee delivery. Crypto funding of platform credits must not be described as settlement of the underlying deal.
+
+### Sources
+
+- [official_docs](https://cogdepot.com/docs) — checked 2026-09-15
+- [official_docs](https://cogdepot.com/docs/machine-discovery) — checked 2026-09-15
+- [official_repo](https://github.com/cogdepot/mcp-server) — checked 2026-09-15
+- [official_docs](https://cogdepot.com/docs/full-flow) — checked 2026-09-15
+- [official_site](https://cogdepot.com/auth/signup) — checked 2026-09-15
+- [official_docs](https://cogdepot.com/pricing) — checked 2026-09-15
+- [official_docs](https://cogdepot.com/terms) — checked 2026-09-15
 
 <a id="cohere"></a>
 
 ## Cohere
 
 Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://cohere.com) · [Source record](../data/providers/cohere.yaml) · [Back to directory](../README.md#all-services)
 
@@ -856,6 +1033,8 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 
 Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices
+
 [Website](https://www.coingecko.com/) · [Source record](../data/candidates/coingecko.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="coingecko-access"></a>
@@ -879,12 +1058,15 @@ Crypto prices and market data with a free Demo API plan and official keyless or 
 - [official_docs](https://docs.coingecko.com/docs/setting-up-your-api-key) — checked 2026-09-09
 - [official_docs](https://docs.coingecko.com/) — checked 2026-09-09
 - [official_docs](https://docs.coingecko.com/ai-integration/mcp-server) — checked 2026-09-09
+- [official_docs](https://docs.coingecko.com/reference/simple-price) — checked 2026-09-15
 
 <a id="coinmarketcap"></a>
 
 ## CoinMarketCap
 
 Crypto market data with selected keyless endpoints and a free authenticated Basic plan.
+
+**Classification:** Search & Data Access / Financial Data / Asset Prices
 
 [Website](https://coinmarketcap.com/) · [Source record](../data/candidates/coinmarketcap.yaml) · [Back to directory](../README.md#all-services)
 
@@ -912,6 +1094,8 @@ Crypto market data with selected keyless endpoints and a free authenticated Basi
 
 Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.
 
+**Classification:** Agent Infrastructure & Automation / Tool Connections
+
 [Website](https://composio.dev) · [Source record](../data/providers/composio.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="composio-access"></a>
@@ -930,17 +1114,20 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 
 ### Notes
 
+- Managed app authentication and callable tool actions establish tool connections; an integration listing does not certify every connected application task.
 - MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official.
 
 ### Sources
 
-—
+- [official_docs](https://docs.composio.dev/docs) — checked 2026-09-15
 
 <a id="creem"></a>
 
 ## Creem
 
 Digital-product checkout and billing APIs with separate test mode and reviewed merchant accounts.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://www.creem.io/) · [Source record](../data/candidates/creem.yaml) · [Back to directory](../README.md#all-services)
 
@@ -974,6 +1161,8 @@ Digital-product checkout and billing APIs with separate test mode and reviewed m
 
 Observability platform with a full REST API, llms.txt, documented OAuth for integrations, rate limits, and webhooks.
 
+**Classification:** Developer Tools / Monitoring & Troubleshooting
+
 [Website](https://www.datadoghq.com) · [Source record](../data/providers/datadog.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="datadog-access"></a>
@@ -1000,6 +1189,8 @@ Observability platform with a full REST API, llms.txt, documented OAuth for inte
 
 Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.
 
+**Classification:** AI Services / Speech Recognition; AI Services / Speech Synthesis; Communication / Voice Agents
+
 [Website](https://deepgram.com) · [Source record](../data/providers/deepgram.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="deepgram-access"></a>
@@ -1016,15 +1207,21 @@ Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API
 
 —
 
+### Notes
+
+- Transcription, speech synthesis and the Voice Agent API have separate model/route coverage.
+
 ### Sources
 
-—
+- [official_docs](https://developers.deepgram.com/home) — checked 2026-09-15
 
 <a id="deepseek"></a>
 
 ## DeepSeek
 
 OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://www.deepseek.com) · [Source record](../data/providers/deepseek.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1052,6 +1249,8 @@ OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a
 
 Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.
 
+**Classification:** Communication / Messaging
+
 [Website](https://discord.com) · [Source record](../data/providers/discord.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="discord-access"></a>
@@ -1070,17 +1269,20 @@ Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), 
 
 ### Notes
 
+- Scope is authorized bot/application messaging, not unrestricted access to personal messages.
 - The official OpenAPI spec is published by Discord but marked public preview / subject to change.
 
 ### Sources
 
-—
+- [official_docs](https://docs.discord.com/developers/intro) — checked 2026-09-15
 
 <a id="dodo-payments"></a>
 
 ## Dodo Payments
 
 Merchant-of-record checkout for one-time and subscription sales, with test mode, APIs, CLI and MCP documentation.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://dodopayments.com/) · [Source record](../data/candidates/dodo-payments.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1120,6 +1322,8 @@ Merchant-of-record checkout for one-time and subscription sales, with test mode,
 
 File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
+**Classification:** Workplace Collaboration / File Sharing
+
 [Website](https://www.dropbox.com) · [Source record](../data/providers/dropbox.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="dropbox-access"></a>
@@ -1136,15 +1340,21 @@ File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and
 
 —
 
+### Notes
+
+- Dropbox file/folder access and shared links; document editing is not established by file storage alone.
+
 ### Sources
 
-—
+- [official_docs](https://www.dropbox.com/developers/documentation) — checked 2026-09-15
 
 <a id="duffel-flights"></a>
 
 ## Duffel Flights API
 
 Flight API whose self-serve test environment must be distinguished from live account activation.
+
+**Classification:** Travel / Flights
 
 [Website](https://duffel.com/) · [Source record](../data/candidates/duffel-flights.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1174,6 +1384,8 @@ Flight API whose self-serve test environment must be distinguished from live acc
 
 Isolated cloud sandboxes for running AI-generated code, with llms.txt, an official MCP server, and self-serve keys.
 
+**Classification:** Cloud Computing & Hosting / Code Sandboxes
+
 [Website](https://e2b.dev) · [Source record](../data/providers/e2b.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="e2b-access"></a>
@@ -1200,31 +1412,103 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.
 
+**Classification:** Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Economic Indicators
+
 [Website](https://data.ecb.europa.eu/) · [Source record](../data/candidates/ecb-data.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="ecb-data-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://data.ecb.europa.eu/help/api/data-examples) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. |
+| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The documentation page was temporarily unreadable during the latest research pass. |
 
 ### Service pricing
 
 —
 
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [No account or key supplied](../data/experiments/evaluations/ecb-business.json) | [221.9k](../data/experiments/evaluations/ecb-access.json) | 216.897575s | 0 |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 221.9k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15 |
+
+</details>
+
 ### Task results
 
-—
+#### Convert these three USD expenses into EUR using the European Central Bank reference rate for each expense date. List each converted amount and the total, and cite the exchange-rate source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 62.8k | $0.0034 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; August 17, 2026: USD 39.90. If no rate was published on the expense date, use the most recent earlier publication date. Round each converted amount to euro cents, then sum. Exclude fees.
+
+**Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
+
+[Task definition](./tasks.en.md#financial-fx-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15 |
+
+</details>
 
 ### Sources
 
 - [official_docs](https://data.ecb.europa.eu/help/api/data-examples) — checked 2026-09-09
+- [official_site](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) — checked 2026-09-15
+- [official_site](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html) — checked 2026-09-15
+- [official_docs](https://data.ecb.europa.eu/help/api/schemas) — checked 2026-09-15
+- [official_docs](https://www.ecb.europa.eu/stats/accessing-our-data/html/index.en.html) — checked 2026-09-15
 
 <a id="elevenlabs"></a>
 
 ## ElevenLabs
 
 Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.
+
+**Classification:** AI Services / Speech Synthesis; AI Services / Speech Recognition; Communication / Voice Agents
 
 [Website](https://elevenlabs.io) · [Source record](../data/providers/elevenlabs.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1242,15 +1526,21 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 
 —
 
+### Notes
+
+- Speech synthesis, transcription and conversational agents are documented separately. Other creative products need product-specific route research.
+
 ### Sources
 
-—
+- [official_docs](https://elevenlabs.io/docs/overview/intro) — checked 2026-09-15
 
 <a id="eodhd"></a>
 
 ## EODHD
 
 Historical market prices, fundamentals and economic datasets, with free and separately paid packages.
+
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Economic Indicators
 
 [Website](https://eodhd.com/) · [Source record](../data/candidates/eodhd.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1271,13 +1561,15 @@ Historical market prices, fundamentals and economic datasets, with free and sepa
 ### Sources
 
 - [official_docs](https://eodhd.com/financial-apis/) — checked 2026-09-09
-- [official_site](https://eodhd.com/pricing) — checked 2026-09-09
+- [official_site](https://eodhd.com/pricing) — checked 2026-09-15
 
 <a id="exa"></a>
 
 ## Exa
 
 Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
+
+**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
 
 [Website](https://exa.ai) · [Source record](../data/providers/exa.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1300,7 +1592,7 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | MCP | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | — | — | — |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | — | — | — |
@@ -1348,12 +1640,15 @@ codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 - [official_docs](https://exa.ai/docs/reference/exa-mcp) — checked 2026-09-07
 - [official_site](https://exa.ai/pricing) — checked 2026-09-07
 - [official_docs](https://exa.ai/docs/reference/search) — checked 2026-09-07
+- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-09-15
 
 <a id="expedia-xap-flights"></a>
 
 ## Expedia XAP Flight Listings
 
 Travel Redirect/XAP flight listings product whose new API applications are currently paused.
+
+**Classification:** Travel / Flights
 
 [Website](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) · [Source record](../data/candidates/expedia-xap-flights.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1382,6 +1677,8 @@ Travel Redirect/XAP flight listings product whose new API applications are curre
 
 Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.
 
+**Classification:** Search & Data Access / Financial Data
+
 [Website](https://www.factset.com/) · [Source record](../data/candidates/factset-data.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="factset-data-access"></a>
@@ -1398,6 +1695,7 @@ Financial-data API catalog; retained as an institutional candidate while product
 
 ### Notes
 
+- Institutional API marketplace; select a concrete dataset/product and source before assigning a narrower class.
 - Developer portal is discoverable, but the exact dataset, individual eligibility, credentials and price remain unconfirmed. No claim of free self-service access.
 
 ### Sources
@@ -1409,6 +1707,8 @@ Financial-data API catalog; retained as an institutional candidate while product
 ## fal.ai
 
 Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.
+
+**Classification:** AI Services / Model Access; AI Services / Image Generation; AI Services / Video Generation
 
 [Website](https://fal.ai) · [Source record](../data/providers/fal.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1426,15 +1726,21 @@ Generative media platform (image, video, audio models) with queue/streaming APIs
 
 —
 
+### Notes
+
+- Model APIs expose identifiable media models for image and video generation. A model listing is not proof of every model/route entitlement.
+
 ### Sources
 
-—
+- [official_docs](https://fal.ai/docs/documentation/model-apis/overview) — checked 2026-09-15
 
 <a id="fastmail"></a>
 
 ## Fastmail
 
 Persistent email with JMAP API tokens, OAuth and standard mail protocols.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://www.fastmail.com/) · [Source record](../data/candidates/fastmail.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1462,6 +1768,8 @@ Persistent email with JMAP API tokens, OAuth and standard mail protocols.
 
 Checkout and subscription platform with API, JavaScript checkout libraries and order webhooks.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://fastspring.com/) · [Source record](../data/candidates/fastspring.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="fastspring-access"></a>
@@ -1488,6 +1796,8 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures
+
 [Website](https://financialdatasets.ai/) · [Source record](../data/candidates/financial-datasets.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="financial-datasets-access"></a>
@@ -1510,7 +1820,7 @@ US company financial statements, historical prices, filings and insider trades, 
 
 ### Sources
 
-- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-09-09
+- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-09-15
 - [official_docs](https://docs.financialdatasets.ai/llms.txt) — checked 2026-09-09
 
 <a id="fmp"></a>
@@ -1519,13 +1829,15 @@ US company financial statements, historical prices, filings and insider trades, 
 
 Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Transaction Disclosures
+
 [Website](https://financialmodelingprep.com/) · [Source record](../data/candidates/fmp.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="fmp-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Account and API key required. Personal and commercial plans differ; endpoint access must be checked against the selected plan. |
+| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. |
 | [data-mcp (MCP)](https://financialmodelingprep.com/mcp) | [Docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) | self serve / documented | Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in public results. |
 
 ### Service pricing
@@ -1539,7 +1851,7 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 ### Sources
 
 - [official_docs](https://site.financialmodelingprep.com/developer/docs) — checked 2026-09-09
-- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-09
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-15
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) — checked 2026-09-09
 
 <a id="finnhub"></a>
@@ -1547,6 +1859,8 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 ## Finnhub
 
 Stock quotes, historical candles and fundamentals; stock candles are documented as premium.
+
+**Classification:** Search & Data Access / Financial Data / Asset Prices
 
 [Website](https://finnhub.io/) · [Source record](../data/candidates/finnhub.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1564,6 +1878,10 @@ Stock quotes, historical candles and fundamentals; stock candles are documented 
 
 —
 
+### Notes
+
+- Company fundamentals are mentioned in discovery, but the recorded quote reference does not establish financial-statement fields. Statement classification awaits a specific source.
+
 ### Sources
 
 - [official_docs](https://finnhub.io/docs/api/quote) — checked 2026-09-09
@@ -1573,6 +1891,8 @@ Stock quotes, historical candles and fundamentals; stock candles are documented 
 ## Firecrawl
 
 Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
+
+**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
 
 [Website](https://www.firecrawl.dev) · [Source record](../data/providers/firecrawl.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1584,6 +1904,7 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 | --- | --- | --- | --- |
 | [public-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. |
 | [account-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Search: 2 credits per 10 results; extra scraping can consume credits. |
+| [public-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | — | Specified-URL scraping. Docs allow starting without a key; anonymous limits and paid-account costs are separate and no extraction task has been run. |
 
 ### Service pricing
 
@@ -1593,10 +1914,11 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API (public-search-api) | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) | — | — | — |
 | API (account-search-api) | — | — | — | — |
+| API (public-scrape-api) | — | — | — | — |
 
 ### Task results
 
@@ -1606,6 +1928,7 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 | --- | --- | --- | --- | --- | --- |
 | API (public-search-api) | [1](./evaluations.md#comparison-b5f21fc39ab4) | [100%](./evaluations.md#comparison-b5f21fc39ab4) | 346.8k | — | $0 |
 | API (account-search-api) | — | — | — | — | — |
+| API (public-scrape-api) | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1635,12 +1958,15 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 - [official_docs](https://docs.firecrawl.dev/features/search) — checked 2026-09-07
 - [official_site](https://www.firecrawl.dev/pricing) — checked 2026-09-07
+- [official_docs](https://docs.firecrawl.dev/features/scrape) — checked 2026-09-15
 
 <a id="fireworks"></a>
 
 ## Fireworks AI
 
 Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://fireworks.ai) · [Source record](../data/providers/fireworks.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1667,6 +1993,8 @@ Fast open-model inference and fine-tuning with an OpenAI-compatible API, officia
 ## Flight MCP
 
 Authenticated flight lookup and a separate, restricted public cache exposed through REST and MCP.
+
+**Classification:** Travel / Flights
 
 [Website](https://flight-mcp.com/) · [Source record](../data/candidates/flight-mcp.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1700,6 +2028,8 @@ Authenticated flight lookup and a separate, restricted public cache exposed thro
 
 Flight-price search for one-way, round-trip and multi-city itineraries, with credit-based usage.
 
+**Classification:** Travel / Flights
+
 [Website](https://www.flightapi.io/) · [Source record](../data/candidates/flightapi-io.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="flightapi-io-access"></a>
@@ -1729,6 +2059,8 @@ Flight-price search for one-way, round-trip and multi-city itineraries, with cre
 ## Fly.io
 
 Run full-stack apps and machines close to users, with a spec'd Machines API, scoped macaroon tokens, and official MCP docs.
+
+**Classification:** Cloud Computing & Hosting / Application Hosting
 
 [Website](https://fly.io) · [Source record](../data/providers/fly-io.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1760,26 +2092,95 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 Public exchange-rate API and official MCP using central-bank reference data, with no API key.
 
+**Classification:** Search & Data Access / Financial Data / Exchange Rates
+
 [Website](https://frankfurter.dev/) · [Source record](../data/candidates/frankfurter.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="frankfurter-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://frankfurter.dev/) | [Docs](https://frankfurter.dev/) | self serve / documented | Reference rates are not bank/card execution quotes. Specify the rate date and underlying source; v2 can combine central-bank sources. |
+| [data-api (API)](https://api.frankfurter.dev/v2/) | [Docs](https://frankfurter.dev/) | self serve / documented | The hosted public API is free with no key or daily/monthly quota; abuse rate limits apply. Default v2 rates blend sources; filter by ECB when the task requires ECB reference data. Reference rates are not executable bank/card quotes. |
 | [rates-mcp (MCP)](https://frankfurter.dev/mcp/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading service. |
 
 ### Service pricing
 
-—
+- data-api: 0 USD / public API request (usage; Hosted public API under its documented fair-use rate limiting; underlying provider terms still apply.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [No account or key supplied](../data/experiments/evaluations/frankfurter-business.json) | [86.8k](../data/experiments/evaluations/frankfurter-access.json) | 115.282949s | 0 |
+| MCP | — | — | — | — |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 86.8k | $0.0052 | $0 |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15 |
+
+</details>
 
 ### Task results
 
-—
+#### Convert these three USD expenses into EUR using the European Central Bank reference rate for each expense date. List each converted amount and the total, and cite the exchange-rate source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 54.2k | $0.0038 | $0 |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; August 17, 2026: USD 39.90. If no rate was published on the expense date, use the most recent earlier publication date. Round each converted amount to euro cents, then sum. Exclude fees.
+
+**Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
+
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
+
+[Task definition](./tasks.en.md#financial-fx-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15 |
+
+</details>
 
 ### Sources
 
-- [official_docs](https://frankfurter.dev/) — checked 2026-09-09
+- [official_docs](https://frankfurter.dev/) — checked 2026-09-15
 - [official_docs](https://frankfurter.dev/mcp/) — checked 2026-09-09
 
 <a id="fred"></a>
@@ -1787,6 +2188,8 @@ Public exchange-rate API and official MCP using central-bank reference data, wit
 ## FRED / ALFRED
 
 Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.
+
+**Classification:** Search & Data Access / Financial Data / Economic Indicators
 
 [Website](https://fred.stlouisfed.org/) · [Source record](../data/candidates/fred.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1806,7 +2209,7 @@ Economic time series and historical vintages from the Federal Reserve Bank of St
 
 ### Sources
 
-- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-09-09
+- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-09-15
 - [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-09-09
 
 <a id="gemini-api"></a>
@@ -1814,6 +2217,8 @@ Economic time series and historical vintages from the Federal Reserve Bank of St
 ## Gemini API
 
 Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://ai.google.dev) · [Source record](../data/providers/gemini-api.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1841,6 +2246,8 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
 
+**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management
+
 [Website](https://github.com) · [Source record](../data/providers/github.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="github-access"></a>
@@ -1866,12 +2273,15 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 ### Sources
 
 - [official_docs](https://docs.github.com/en/rest/quickstart) — checked 2026-09-10
+- [official_docs](https://docs.github.com/en/rest) — checked 2026-09-15
 
 <a id="gitlab"></a>
 
 ## GitLab
 
 DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
+
+**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management
 
 [Website](https://gitlab.com) · [Source record](../data/providers/gitlab.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1889,15 +2299,21 @@ DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an offi
 
 —
 
+### Notes
+
+- Repository/merge-request work and issue/epic tracking are separate supported scopes. SaaS and self-managed access must be distinguished.
+
 ### Sources
 
-—
+- [official_docs](https://docs.gitlab.com/user/) — checked 2026-09-15
 
 <a id="gmail"></a>
 
 ## Gmail
 
 Persistent Google mailboxes accessible through the Gmail API after account and OAuth setup.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://mail.google.com/) · [Source record](../data/candidates/gmail.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1924,6 +2340,8 @@ Persistent Google mailboxes accessible through the Gmail API after account and O
 ## Google Sheets
 
 Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.
+
+**Classification:** Workplace Collaboration / Collaborative Tables
 
 [Website](https://workspace.google.com/products/sheets/) · [Source record](../data/candidates/google-sheets.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1952,6 +2370,8 @@ Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup
 
 Observability platform (dashboards, metrics, logs, traces) with a documented HTTP API, official MCP server, llms.txt, and a standing free cloud tier.
 
+**Classification:** Developer Tools / Monitoring & Troubleshooting
+
 [Website](https://grafana.com) · [Source record](../data/providers/grafana.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="grafana-access"></a>
@@ -1978,6 +2398,8 @@ Observability platform (dashboards, metrics, logs, traces) with a documented HTT
 
 Hosted relational spreadsheets with a free personal site, REST API and official MCP.
 
+**Classification:** Workplace Collaboration / Collaborative Tables
+
 [Website](https://www.getgrist.com/) · [Source record](../data/candidates/grist.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="grist-access"></a>
@@ -1995,7 +2417,7 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json) | — | — | — |
 | MCP | — | — | — | — |
@@ -2051,6 +2473,8 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://groq.com) · [Source record](../data/providers/groq.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="groq-access"></a>
@@ -2077,6 +2501,8 @@ Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and sel
 
 Temporary email addresses and message retrieval through a public session-based API.
 
+**Classification:** Communication / Mailboxes
+
 [Website](https://www.guerrillamail.com/) · [Source record](../data/candidates/guerrilla-mail.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="guerrilla-mail-access"></a>
@@ -2091,7 +2517,7 @@ Temporary email addresses and message retrieval through a public session-based A
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
 
@@ -2140,6 +2566,8 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 Model hub and inference platform with fine-grained tokens, OAuth, an official MCP server, and a full Hub API.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://huggingface.co) · [Source record](../data/providers/hugging-face.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="hugging-face-access"></a>
@@ -2170,6 +2598,8 @@ Model hub and inference platform with fine-grained tokens, OAuth, an official MC
 
 Flight search and purchase-link API with email signup and an official MCP; individual eligibility remains untested.
 
+**Classification:** Travel / Flights
+
 [Website](https://ignav.com/) · [Source record](../data/candidates/ignav.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="ignav-access"></a>
@@ -2188,7 +2618,7 @@ Flight search and purchase-link API with email signup and an official MCP; indiv
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | Web | [No account or key supplied](../data/experiments/evaluations/codex-20260907T083644.877057Z-ignav.json) | — | — | — |
 | API | — | — | — | — |
@@ -2243,13 +2673,17 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
 
+**Classification:** Search & Data Access / Web Content Extraction
+
 [Website](https://jina.ai) · [Source record](../data/providers/jina.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="jina-access"></a>
 
 [Docs](https://docs.jina.ai) · [MCP entry](https://github.com/jina-ai/MCP)
 
-—
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [reader-api (API)](https://r.jina.ai/) | [Docs](https://jina.ai/reader/) | — | Reader converts a supplied URL to text. Keyless basic usage is documented; keyed rate limits and billing are separate. No broader search or embedding capability is inferred from this route. |
 
 ### Service pricing
 
@@ -2262,12 +2696,15 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 ### Sources
 
 - [official_site](https://jina.ai/api-dashboard) — checked 2026-07-08
+- [official_docs](https://jina.ai/reader/) — checked 2026-09-15
 
 <a id="joinquant-data"></a>
 
 ## JoinQuant JQData
 
 Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.
+
+**Classification:** Search & Data Access / Financial Data
 
 [Website](https://www.joinquant.com/) · [Source record](../data/candidates/joinquant-data.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2285,6 +2722,7 @@ Chinese-market data candidate. The official documentation returned a non-Mainlan
 
 ### Notes
 
+- Chinese-market data remains discoverable. The recorded documentation was region-restricted; supported datasets and reporting fields need direct evidence before narrowing.
 - The documentation access restriction was observed through the research browser, not a local API trial. API availability, personal onboarding, transport and free trial remain unverified.
 
 ### Sources
@@ -2296,6 +2734,8 @@ Chinese-market data candidate. The official documentation returned a non-Mainlan
 ## KAYAK Affiliate API
 
 Affiliate flight APIs with a business application and an optional requested sandbox.
+
+**Classification:** Travel / Flights
 
 [Website](https://affiliates.kayak.com/) · [Source record](../data/candidates/kayak-affiliate.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2324,6 +2764,8 @@ Affiliate flight APIs with a business application and an optional requested sand
 
 Flight search through a publicized MCP path and the separately gated Tequila partnership API.
 
+**Classification:** Travel / Flights
+
 [Website](https://www.kiwi.com/) · [Source record](../data/candidates/kiwi.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="kiwi-access"></a>
@@ -2339,7 +2781,7 @@ Flight search through a publicized MCP path and the separately gated Tequila par
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | MCP | [No account or key supplied](../data/experiments/evaluations/codex-20260907T092329.724439Z-kiwi.json) | — | — | — |
 | API | — | — | — | — |
@@ -2390,6 +2832,8 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.
 
+**Classification:** Workplace Collaboration / Collaborative Tables; Communication / Messaging; Workplace Collaboration / Document Collaboration
+
 [Website](https://www.larksuite.com) · [Source record](../data/providers/lark.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="lark-access"></a>
@@ -2412,18 +2856,26 @@ Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt,
 
 —
 
+### Notes
+
+- International larksuite.com service. Do not transfer Feishu China results to this identity.
+- Document and messaging membership does not transfer collaborative-table trial results to those tasks.
+
 ### Sources
 
 - [official_docs](https://open.larksuite.com/document/server-docs/docs/bitable-v1/app/create.md) — checked 2026-09-08
 - [official_repo](https://github.com/larksuite/cli) — checked 2026-09-08
 - [official_repo](https://github.com/larksuite/lark-openapi-mcp) — checked 2026-09-08
 - [official_site](https://www.larksuite.com/en_us/plans) — checked 2026-09-08
+- [official_site](https://www.larksuite.com/en_us/paid/collaboration) — checked 2026-09-15
 
 <a id="lemonsqueezy"></a>
 
 ## Lemon Squeezy
 
 Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, documented test mode, and self-serve keys.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://www.lemonsqueezy.com) · [Source record](../data/providers/lemonsqueezy.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2454,6 +2906,8 @@ Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, 
 
 Personal flight search through MCP, CLI and SDKs, with a human payment-method authorization step.
 
+**Classification:** Travel / Flights
+
 [Website](https://letsfg.co/) · [Source record](../data/candidates/letsfg.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="letsfg-access"></a>
@@ -2472,6 +2926,10 @@ Personal flight search through MCP, CLI and SDKs, with a human payment-method au
 
 —
 
+### Notes
+
+- Documentation conflict: current site describes zero-amount Revolut/card setup; repository README described Stripe and older token lifetimes. Recheck current auth discovery before any onboarding. Developer API is a separate paid offering.
+
 ### Sources
 
 - [official_docs](https://letsfg.co/for-agents) — checked 2026-09-07
@@ -2482,6 +2940,8 @@ Personal flight search through MCP, CLI and SDKs, with a human payment-method au
 ## Linear
 
 Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.
+
+**Classification:** Workplace Collaboration / Project & Task Management
 
 [Website](https://linear.app) · [Source record](../data/providers/linear.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2499,15 +2959,21 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 
 —
 
+### Notes
+
+- Issue and project workflows through the Linear developer platform.
+
 ### Sources
 
-—
+- [official_docs](https://linear.app/developers) — checked 2026-09-15
 
 <a id="lseg-data"></a>
 
 ## LSEG Data Platform
 
 Financial-data platform and Python library with licensed desktop and cloud access paths.
+
+**Classification:** Search & Data Access / Financial Data
 
 [Website](https://www.lseg.com/en/data-analytics) · [Source record](../data/candidates/lseg-data.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2525,6 +2991,10 @@ Financial-data platform and Python library with licensed desktop and cloud acces
 
 —
 
+### Notes
+
+- Licensed data library spans separately entitled datasets; a library quickstart alone does not identify which product this candidate can supply.
+
 ### Sources
 
 - [official_docs](https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start) — checked 2026-09-09
@@ -2534,6 +3004,8 @@ Financial-data platform and Python library with licensed desktop and cloud acces
 ## Lufthansa Partner Fare API
 
 Lufthansa fare methods are partner-scoped; the developer portal currently pauses new Open API registrations.
+
+**Classification:** Travel / Flights
 
 [Website](https://developer.lufthansa.com/page) · [Source record](../data/candidates/lufthansa-partner.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2564,6 +3036,8 @@ Lufthansa fare methods are partner-scoped; the developer portal currently pauses
 
 Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.
 
+**Classification:** AI Services / Image Generation; AI Services / Video Generation
+
 [Website](https://lumalabs.ai) · [Source record](../data/providers/luma.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="luma-access"></a>
@@ -2580,15 +3054,21 @@ Dream Machine video and image generation via the Luma API, with llms.txt and pub
 
 —
 
+### Notes
+
+- The Dream Machine API documentation describes image and video generation and redirects readers to newer platform documentation. Current route/plan details still require review.
+
 ### Sources
 
-—
+- [official_docs](https://docs.lumalabs.ai/docs/welcome) — checked 2026-09-15
 
 <a id="mail-tm"></a>
 
 ## Mail.tm
 
 Temporary receive-only mailboxes with an account/password and authenticated REST access.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://mail.tm/) · [Source record](../data/candidates/mail-tm.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2604,7 +3084,7 @@ Temporary receive-only mailboxes with an account/password and authenticated REST
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | — | — | — |
 
@@ -2651,6 +3131,8 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 Public disposable inboxes and a paid private email-testing platform with API access.
 
+**Classification:** Communication / Mailboxes
+
 [Website](https://www.mailinator.com/) · [Source record](../data/candidates/mailinator.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="mailinator-access"></a>
@@ -2677,6 +3159,8 @@ Public disposable inboxes and a paid private email-testing platform with API acc
 
 Email receiving and testing APIs with public and private mailbox options.
 
+**Classification:** Communication / Mailboxes
+
 [Website](https://mailsac.com/) · [Source record](../data/candidates/mailsac.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="mailsac-access"></a>
@@ -2702,6 +3186,8 @@ Email receiving and testing APIs with public and private mailbox options.
 ## MailSink
 
 Temporary inbox API and MCP with message, verification-code and verification-link retrieval.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://mailsink.dev/) · [Source record](../data/candidates/mailsink.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2730,6 +3216,8 @@ Temporary inbox API and MCP with message, verification-code and verification-lin
 ## MailSlurp
 
 Programmable mailboxes for email automation and testing, including message waiting and agent integrations.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://www.mailslurp.com/) · [Source record](../data/candidates/mailslurp.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2760,17 +3248,19 @@ Programmable mailboxes for email automation and testing, including message waiti
 
 Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices
+
 [Website](https://massive.com/) · [Source record](../data/candidates/massive.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="massive-access"></a>
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://massive.com/docs/rest/quickstart) | [Docs](https://massive.com/docs/rest/quickstart) | self serve / documented | Select the exact data product and history entitlement. A free Stocks Basic account does not imply access to all datasets or real-time consolidated data. |
+| [data-api (API)](https://massive.com/docs/rest/quickstart) | [Docs](https://massive.com/docs/rest/quickstart) | self serve / documented | Stocks Basic: USD 0/month for individual use, 5 calls/minute, two years of historical end-of-day data. A free stock plan does not establish free fundamentals or permission to redistribute data. Confirm unadjusted daily aggregate settings and actual access in the trial. |
 
 ### Service pricing
 
-—
+- data-api: 0 USD / month on Stocks Basic (usage; Individual Stocks Basic plan only; no other datasets, subscriptions or paid entitlements inferred.)
 
 ### Task results
 
@@ -2779,13 +3269,15 @@ Market-data APIs with stock history and separate data products. Stocks Basic is 
 ### Sources
 
 - [official_docs](https://massive.com/docs/rest/quickstart) — checked 2026-09-09
-- [official_site](https://massive.com/pricing) — checked 2026-09-09
+- [official_site](https://massive.com/pricing) — checked 2026-09-15
 
 <a id="mem0"></a>
 
 ## Mem0
 
 Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.
+
+**Classification:** Agent Infrastructure & Automation / Agent Memory
 
 [Website](https://mem0.ai) · [Source record](../data/providers/mem0.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2803,15 +3295,21 @@ Memory layer for AI agents (hosted platform + open-source), with REST API, llms.
 
 —
 
+### Notes
+
+- Persistent memory across sessions, with save/search operations. Hosted platform and self-hosted library are separate access scopes.
+
 ### Sources
 
-—
+- [official_docs](https://docs.mem0.ai/introduction) — checked 2026-09-15
 
 <a id="minimax"></a>
 
 ## MiniMax
 
 MiniMax text, speech, video and music models via the international platform API, with an official MCP server.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://platform.minimax.io) · [Source record](../data/providers/minimax.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2839,6 +3337,8 @@ MiniMax text, speech, video and music models via the international platform API,
 
 European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs repo, a free experiment tier, and self-serve keys.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://mistral.ai) · [Source record](../data/providers/mistral.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="mistral-access"></a>
@@ -2865,6 +3365,8 @@ European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs 
 
 Serverless compute for Python with first-class Sandboxes for agent code execution, llms.txt, and an official CLI.
 
+**Classification:** Cloud Computing & Hosting / Code Sandboxes
+
 [Website](https://modal.com) · [Source record](../data/providers/modal.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="modal-access"></a>
@@ -2890,6 +3392,8 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 ## Mollie
 
 Payment links and payment APIs with isolated test mode and a simulated checkout screen.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://www.mollie.com/) · [Source record](../data/candidates/mollie.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2919,6 +3423,8 @@ Payment links and payment APIs with isolated test mode and a simulated checkout 
 
 Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.
 
+**Classification:** Databases / Document Databases
+
 [Website](https://www.mongodb.com/products/platform/atlas-database) · [Source record](../data/providers/mongodb-atlas.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="mongodb-atlas-access"></a>
@@ -2935,15 +3441,21 @@ Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, of
 
 —
 
+### Notes
+
+- Managed document collections and queries. Atlas administration API is not automatically a document data-access route; vector-search coverage is not asserted here.
+
 ### Sources
 
-—
+- [official_docs](https://www.mongodb.com/docs/atlas/) — checked 2026-09-15
 
 <a id="moonshot"></a>
 
 ## Moonshot AI (Kimi)
 
 Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi platform, with an official terminal CLI agent (kimi-cli).
+
+**Classification:** AI Services / Model Access
 
 [Website](https://platform.kimi.ai) · [Source record](../data/providers/moonshot.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2971,6 +3483,8 @@ Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi pla
 
 Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.
 
+**Classification:** Agent Infrastructure & Automation / Workflow Automation
+
 [Website](https://n8n.io) · [Source record](../data/providers/n8n.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="n8n-access"></a>
@@ -2987,15 +3501,21 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 —
 
+### Notes
+
+- Executes workflows with cloud and self-hosted options. Workflow templates alone do not establish any downstream business capability.
+
 ### Sources
 
-—
+- [official_docs](https://docs.n8n.io/) — checked 2026-09-15
 
 <a id="nasdaq-data-link"></a>
 
 ## Nasdaq Data Link
 
 Marketplace for financial and economic datasets with free and separately subscribed products.
+
+**Classification:** Search & Data Access / Financial Data
 
 [Website](https://data.nasdaq.com/) · [Source record](../data/candidates/nasdaq-data-link.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3013,6 +3533,10 @@ Marketplace for financial and economic datasets with free and separately subscri
 
 —
 
+### Notes
+
+- Dataset marketplace retained at the parent. Select a concrete dataset and verify its current documentation and availability before assigning child categories.
+
 ### Sources
 
 - [official_docs](https://docs.data.nasdaq.com/docs/getting-started) — checked 2026-09-09
@@ -3022,6 +3546,8 @@ Marketplace for financial and economic datasets with free and separately subscri
 ## Neon
 
 Serverless Postgres with instant branching, a full management API, official MCP server, and agent-oriented docs.
+
+**Classification:** Databases / Hosted Relational Databases
 
 [Website](https://neon.com) · [Source record](../data/providers/neon.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3039,7 +3565,7 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | — | — | — |
 
@@ -3086,6 +3612,8 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Web platform for deploying sites and functions, with an OpenAPI-specified API, llms.txt, official CLI and MCP server.
 
+**Classification:** Cloud Computing & Hosting / Application Hosting
+
 [Website](https://www.netlify.com) · [Source record](../data/providers/netlify.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="netlify-access"></a>
@@ -3112,6 +3640,8 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.
 
+**Classification:** Workplace Collaboration / Collaborative Tables; Workplace Collaboration / Document Collaboration
+
 [Website](https://www.notion.com) · [Source record](../data/providers/notion.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="notion-access"></a>
@@ -3133,7 +3663,7 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json) | — | — | — |
 | SDK | — | — | — | — |
@@ -3176,6 +3706,10 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 </details>
 
+### Notes
+
+- Document and messaging membership does not transfer collaborative-table trial results to those tasks.
+
 ### Sources
 
 - [official_docs](https://developers.notion.com/reference/intro) — checked 2026-09-08
@@ -3185,12 +3719,15 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 - [official_repo](https://github.com/makenotion/notion-sdk-js) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/cli/get-started/overview) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/guides/mcp/get-started-with-mcp) — checked 2026-09-08
+- [official_docs](https://developers.notion.com/guides/data-apis/working-with-page-content) — checked 2026-09-15
 
 <a id="open-exchange-rates"></a>
 
 ## Open Exchange Rates
 
 Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.
+
+**Classification:** Search & Data Access / Financial Data / Exchange Rates
 
 [Website](https://openexchangerates.org/) · [Source record](../data/candidates/open-exchange-rates.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3219,6 +3756,8 @@ Currency reference rates via a keyed API with a free signup plan; base-currency 
 
 GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK ecosystem.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://openai.com) · [Source record](../data/providers/openai.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="openai-access"></a>
@@ -3244,6 +3783,8 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 ## OpenRouter
 
 Unified OpenAI-compatible API over hundreds of models from many labs, with one key, per-model pricing, automatic fallbacks, and an llms.txt.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://openrouter.ai) · [Source record](../data/providers/openrouter.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3271,6 +3812,8 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 
 Persistent Microsoft mailboxes with mail retrieval and management through Microsoft Graph.
 
+**Classification:** Communication / Mailboxes
+
 [Website](https://outlook.live.com/) · [Source record](../data/candidates/outlook-mail.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="outlook-mail-access"></a>
@@ -3297,6 +3840,8 @@ Persistent Microsoft mailboxes with mail retrieval and management through Micros
 
 Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authorised No. 929994) — opens a real merchant account via progressive KYB and creates checkouts through MCP or REST.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://paas.build) · [Source record](../data/candidates/paas-build.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="paas-build-access"></a>
@@ -3312,7 +3857,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T113239.160717Z-paas-build.json) | — | — | — |
 | MCP | — | — | — | — |
@@ -3376,6 +3921,8 @@ Invalid runs: 1
 
 Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt, and webhooks.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://www.paddle.com) · [Source record](../data/providers/paddle.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="paddle-access"></a>
@@ -3392,7 +3939,7 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T032011.000426Z-paddle.json) | — | — | — |
 
@@ -3441,6 +3988,8 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 Online payment acceptance through Orders API and buyer approval checkout; separate sandbox buyer and business seller accounts.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://www.paypal.com/) · [Source record](../data/candidates/paypal.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="paypal-access"></a>
@@ -3471,6 +4020,8 @@ Online payment acceptance through Orders API and buyer approval checkout; separa
 
 Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
 
+**Classification:** Search & Data Access / Web Search
+
 [Website](https://www.perplexity.ai) · [Source record](../data/providers/perplexity.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="perplexity-access"></a>
@@ -3487,15 +4038,21 @@ Sonar API for web-grounded answers and search, with llms.txt, an official MCP se
 
 —
 
+### Notes
+
+- Search API and source-grounded answers support web discovery. General URL extraction is not inferred from citations or snippets; newer model-router products require separate route review.
+
 ### Sources
 
-—
+- [official_docs](https://docs.perplexity.ai/docs/getting-started/overview) — checked 2026-09-15
 
 <a id="pinecone"></a>
 
 ## Pinecone
 
 Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.
+
+**Classification:** Databases / Vector Databases
 
 [Website](https://www.pinecone.io) · [Source record](../data/providers/pinecone.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3513,15 +4070,21 @@ Managed vector database for search and RAG, with llms.txt, an official MCP serve
 
 —
 
+### Notes
+
+- Persistent vector indexes and semantic retrieval; a separate managed memory product is not inferred from an example memory use case.
+
 ### Sources
 
-—
+- [official_docs](https://docs.pinecone.io/guides/get-started/overview) — checked 2026-09-15
 
 <a id="pingxx"></a>
 
 ## Ping++
 
 Unified payment integration across payment channels, with API keys, a web SDK and simulated test transactions.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://www.pingxx.com/) · [Source record](../data/candidates/pingxx.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3552,6 +4115,8 @@ Unified payment integration across payment channels, with API keys, a web SDK an
 
 PostgreSQL single-node plans start at USD 5/month. No free writable database allowance verified; not provisioned in this no-payment round. Public pricing SQL is read-only and does not meet the task.
 
+**Classification:** Databases / Hosted Relational Databases
+
 [Website](https://planetscale.com/) · [Source record](../data/candidates/planetscale.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="planetscale-access"></a>
@@ -3578,6 +4143,8 @@ PostgreSQL single-node plans start at USD 5/month. No free writable database all
 ## Polar
 
 Merchant-of-record service for digital products, with checkout APIs and a separate developer sandbox.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://polar.sh/) · [Source record](../data/candidates/polar.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3612,6 +4179,8 @@ Merchant-of-record service for digital products, with checkout APIs and a separa
 
 API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.
 
+**Classification:** Developer Tools / API Development & Testing
+
 [Website](https://www.postman.com) · [Source record](../data/providers/postman.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="postman-access"></a>
@@ -3628,15 +4197,21 @@ API development platform with a public Postman API, llms.txt, official CLI, and 
 
 —
 
+### Notes
+
+- Reusable request collections and API testing. Having an API does not classify an arbitrary service as API development.
+
 ### Sources
 
-—
+- [official_docs](https://learning.postman.com/docs/getting-started/overview/) — checked 2026-09-15
 
 <a id="qdrant"></a>
 
 ## Qdrant
 
 Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.
+
+**Classification:** Databases / Vector Databases
 
 [Website](https://qdrant.tech) · [Source record](../data/providers/qdrant.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3654,15 +4229,21 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 
 —
 
+### Notes
+
+- Vector collections and similarity retrieval, with managed and self-hosted deployments distinguished at access time.
+
 ### Sources
 
-—
+- [official_docs](https://qdrant.tech/documentation/overview/) — checked 2026-09-15
 
 <a id="quiver-quantitative"></a>
 
 ## Quiver Quantitative
 
 Congressional and insider transactions, institutional activity and other alternative financial datasets.
+
+**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
 
 [Website](https://www.quiverquant.com/) · [Source record](../data/candidates/quiver-quantitative.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3682,14 +4263,16 @@ Congressional and insider transactions, institutional activity and other alterna
 
 ### Sources
 
-- [official_docs](https://www.quiverquant.com/api-setup/) — checked 2026-09-09
-- [official_site](https://api.quiverquant.com/) — checked 2026-09-09
+- [official_docs](https://www.quiverquant.com/api-setup/) — checked 2026-09-15
+- [official_site](https://api.quiverquant.com/) — checked 2026-09-15
 
 <a id="railway"></a>
 
 ## Railway
 
 App/database hosting with a public GraphQL API, official CLI, llms.txt, and usage-based pricing.
+
+**Classification:** Cloud Computing & Hosting / Application Hosting
 
 [Website](https://railway.com) · [Source record](../data/providers/railway.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3717,6 +4300,8 @@ App/database hosting with a public GraphQL API, official CLI, llms.txt, and usag
 
 Payment Links API for collecting specified amounts through hosted checkout, including a documented test mode.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://razorpay.com/) · [Source record](../data/candidates/razorpay.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="razorpay-access"></a>
@@ -3743,6 +4328,8 @@ Payment Links API for collecting specified amounts through hosted checkout, incl
 
 In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.
 
+**Classification:** Databases / Key-value Databases; Databases / Vector Databases; Databases / Document Databases
+
 [Website](https://redis.io) · [Source record](../data/providers/redis.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="redis-access"></a>
@@ -3759,15 +4346,21 @@ In-memory data platform for caching, vector search and real-time apps; Redis Clo
 
 —
 
+### Notes
+
+- Redis key/value operations, vector search and queryable JSON are documented features. Cloud and open-source versions/entitlements are not interchangeable.
+
 ### Sources
 
-—
+- [official_docs](https://redis.io/docs/latest/) — checked 2026-09-15
 
 <a id="render"></a>
 
 ## Render
 
 Cloud hosting for web services, static sites and databases with a REST API, official CLI, official MCP server, and llms.txt.
+
+**Classification:** Cloud Computing & Hosting / Application Hosting
 
 [Website](https://render.com) · [Source record](../data/providers/render.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3799,6 +4392,8 @@ Cloud hosting for web services, static sites and databases with a REST API, offi
 
 Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://replicate.com) · [Source record](../data/providers/replicate.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="replicate-access"></a>
@@ -3825,6 +4420,8 @@ Run and fine-tune open-source models via a simple predictions API, with llms.txt
 
 Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.
 
+**Classification:** Communication / Email Delivery
+
 [Website](https://resend.com) · [Source record](../data/providers/resend.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="resend-access"></a>
@@ -3841,15 +4438,21 @@ Email API for developers with test mode, scoped API keys, idempotency support, a
 
 —
 
+### Notes
+
+- Application email delivery. A persistent user mailbox is not inferred from receiving webhooks.
+
 ### Sources
 
-—
+- [official_docs](https://resend.com/docs/introduction) — checked 2026-09-15
 
 <a id="sabre-air"></a>
 
 ## Sabre Air APIs
 
 Air API workflows with assigned credentials, plus a separately researched Agentic API/MCP lead.
+
+**Classification:** Travel / Flights
 
 [Website](https://developer.sabre.com/) · [Source record](../data/candidates/sabre-air.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3879,6 +4482,8 @@ Air API workflows with assigned credentials, plus a separately researched Agenti
 
 Google Flights extraction endpoint charged in platform credits rather than one credit per flight search.
 
+**Classification:** Travel / Flights
+
 [Website](https://www.scrapingdog.com/) · [Source record](../data/candidates/scrapingdog-flights.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="scrapingdog-flights-access"></a>
@@ -3905,6 +4510,8 @@ Google Flights extraction endpoint charged in platform credits rather than one c
 ## SearchApi Google Flights
 
 Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.
+
+**Classification:** Travel / Flights
 
 [Website](https://www.searchapi.io/) · [Source record](../data/candidates/searchapi.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3935,6 +4542,8 @@ Google Flights extraction API and a hosted MCP integration supporting token or b
 
 Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.
 
+**Classification:** Search & Data Access / Financial Data / Company Financials
+
 [Website](https://www.sec.gov/) · [Source record](../data/candidates/sec-edgar.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="sec-edgar-access"></a>
@@ -3953,13 +4562,15 @@ Official public company filings and XBRL financial facts; data.sec.gov reading A
 
 ### Sources
 
-- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-09-09
+- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-09-15
 
 <a id="sentry"></a>
 
 ## Sentry
 
 Error monitoring and performance tracing with llms.txt, an official MCP server, scoped auth tokens, and a full API.
+
+**Classification:** Developer Tools / Monitoring & Troubleshooting
 
 [Website](https://sentry.io) · [Source record](../data/providers/sentry.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3986,6 +4597,8 @@ Error monitoring and performance tracing with llms.txt, an official MCP server, 
 ## SerpApi
 
 Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
+
+**Classification:** Travel / Flights; Search & Data Access / Web Search
 
 [Website](https://serpapi.com) · [Source record](../data/providers/serpapi.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4021,6 +4634,8 @@ Real-time JSON API for Google and other search engines' results, with an officia
 
 Google results API with signup trial queries; actual account flow and authentication remain untested.
 
+**Classification:** Search & Data Access / Web Search
+
 [Website](https://serper.dev/) · [Source record](../data/candidates/serper.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="serper-access"></a>
@@ -4047,6 +4662,8 @@ Google results API with signup trial queries; actual account flow and authentica
 
 Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, access-scoped tokens, free development stores, and a CLI.
 
+**Classification:** E-commerce
+
 [Website](https://www.shopify.com) · [Source record](../data/providers/shopify.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="shopify-access"></a>
@@ -4063,15 +4680,21 @@ Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, acce
 
 —
 
+### Notes
+
+- Admin and Storefront surfaces support store products, inventory, carts and orders. This broad category already describes the product; finer commerce branches await wider candidate research.
+
 ### Sources
 
-—
+- [official_docs](https://shopify.dev/docs/api) — checked 2026-09-15
 
 <a id="simfin"></a>
 
 ## SimFin
 
 Company fundamentals and price data with API and CSV access advertised across free and paid plans.
+
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials
 
 [Website](https://www.simfin.com/) · [Source record](../data/candidates/simfin.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4101,6 +4724,8 @@ Company fundamentals and price data with API and CSV access advertised across fr
 
 A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.
 
+**Classification:** Travel / Flights
+
 [Website](https://apify.com/skootle/google-flights-scraper) · [Source record](../data/candidates/skootle-google-flights.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="skootle-google-flights-access"></a>
@@ -4126,6 +4751,8 @@ A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and
 ## Skyscanner Travel APIs
 
 Partner flight APIs and an official MCP, with independently documented business-access paths.
+
+**Classification:** Travel / Flights
 
 [Website](https://www.skyscanner.net/) · [Source record](../data/candidates/skyscanner.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4155,6 +4782,8 @@ Partner flight APIs and an official MCP, with independently documented business-
 
 Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.
 
+**Classification:** Communication / Messaging
+
 [Website](https://slack.com) · [Source record](../data/providers/slack.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="slack-access"></a>
@@ -4171,15 +4800,21 @@ Workspace messaging platform with a mature Web API, granular OAuth scopes, an Op
 
 —
 
+### Notes
+
+- Conversation/channel messaging through authorized Slack apps; permissions determine accessible conversations.
+
 ### Sources
 
-—
+- [official_docs](https://docs.slack.dev/) — checked 2026-09-15
 
 <a id="square"></a>
 
 ## Square
 
 Hosted payment links and payment APIs with a free developer sandbox; merchant availability depends on country.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://squareup.com/) · [Source record](../data/candidates/square.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4208,6 +4843,8 @@ Hosted payment links and payment APIs with a free developer sandbox; merchant av
 
 Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and self-hostable, with llms.txt and a free tier.
 
+**Classification:** Cloud Computing & Hosting / Browser Environments
+
 [Website](https://steel.dev) · [Source record](../data/providers/steel.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="steel-access"></a>
@@ -4233,6 +4870,8 @@ Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and se
 ## Stripe
 
 Payments, billing, subscriptions, and financial infrastructure with a famously complete API surface.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://stripe.com) · [Source record](../data/providers/stripe.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4268,6 +4907,8 @@ Payments, billing, subscriptions, and financial infrastructure with a famously c
 
 Postgres platform with auth, storage, edge functions, a management API, official MCP server, and LLM-ready docs.
 
+**Classification:** Databases / Hosted Relational Databases
+
 [Website](https://supabase.com) · [Source record](../data/providers/supabase.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="supabase-access"></a>
@@ -4299,6 +4940,8 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
 
+**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
+
 [Website](https://www.tavily.com) · [Source record](../data/providers/tavily.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="tavily-access"></a>
@@ -4308,6 +4951,7 @@ Search and extraction API built for AI agents, with llms.txt, an official MCP se
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [search-api (API)](https://docs.tavily.com/documentation/quickstart) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. |
+| [extract-api (API)](https://api.tavily.com/extract) | [Docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) | — | Extract accepts one or more URLs. Search pricing and search trials do not establish extraction cost or success. |
 
 ### Service pricing
 
@@ -4323,12 +4967,15 @@ Search and extraction API built for AI agents, with llms.txt, an official MCP se
 
 - [official_docs](https://docs.tavily.com/documentation/quickstart) — checked 2026-09-07
 - [official_docs](https://docs.tavily.com/documentation/api-credits) — checked 2026-09-07
+- [official_docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) — checked 2026-09-15
 
 <a id="telegram"></a>
 
 ## Telegram Bot API
 
 Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.
+
+**Classification:** Communication / Messaging
 
 [Website](https://telegram.org) · [Source record](../data/providers/telegram.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4346,15 +4993,21 @@ Free bot platform with instant token issuance via BotFather, webhooks, a documen
 
 —
 
+### Notes
+
+- Scope is Telegram Bot API messaging, not user-account automation or arbitrary private-chat access.
+
 ### Sources
 
-—
+- [official_docs](https://core.telegram.org/bots/api) — checked 2026-09-15
 
 <a id="temp-mail"></a>
 
 ## Temp Mail
 
 Disposable email receiving service with a developer API for automated email workflows.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://temp-mail.org/) · [Source record](../data/candidates/temp-mail.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4382,6 +5035,8 @@ Disposable email receiving service with a developer API for automated email work
 
 Market data covering end-of-day prices and other feeds, with an account-issued authentication token.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Exchange Rates
+
 [Website](https://www.tiingo.com/) · [Source record](../data/candidates/tiingo.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="tiingo-access"></a>
@@ -4401,12 +5056,15 @@ Market data covering end-of-day prices and other feeds, with an account-issued a
 ### Sources
 
 - [official_docs](https://www.tiingo.com/documentation/general/overview) — checked 2026-09-09
+- [official_docs](https://www.tiingo.com/documentation/forex) — checked 2026-09-15
 
 <a id="together-ai"></a>
 
 ## Together AI
 
 Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://www.together.ai) · [Source record](../data/providers/together-ai.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4433,6 +5091,8 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 ## Travelport TripServices
 
 Travel distribution API requiring trial requests and provider-provisioned production credentials.
+
+**Classification:** Travel / Flights
 
 [Website](https://developer.travelport.com/) · [Source record](../data/candidates/travelport-tripservices.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4461,6 +5121,8 @@ Travel distribution API requiring trial requests and provider-provisioned produc
 
 Trip.com supplier fare-maintenance API lead; a consumer flight-search access path is not yet established.
 
+**Classification:** Travel / Flights
+
 [Website](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) · [Source record](../data/candidates/trip-com-flights.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="trip-com-flights-access"></a>
@@ -4487,6 +5149,8 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.
 
+**Classification:** Databases / Hosted Relational Databases
+
 [Website](https://turso.tech/) · [Source record](../data/candidates/turso.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="turso-access"></a>
@@ -4502,7 +5166,7 @@ Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million 
 
 ### Setup observations
 
-| Route | Starting resources | Setup tokens | Setup time | Human involvement |
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | CLI | — | — | — | — |
 | API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | — | — | — |
@@ -4552,6 +5216,8 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials
+
 [Website](https://tushare.pro/) · [Source record](../data/candidates/tushare.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="tushare-access"></a>
@@ -4581,6 +5247,8 @@ Chinese-market prices and financial statements through a token-based HTTP API an
 
 Global stock, FX and crypto time series with API, Python SDK and CLI access.
 
+**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Exchange Rates
+
 [Website](https://twelvedata.com/) · [Source record](../data/candidates/twelve-data.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="twelve-data-access"></a>
@@ -4606,7 +5274,7 @@ Global stock, FX and crypto time series with API, Python SDK and CLI access.
 ### Sources
 
 - [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
-- [official_site](https://twelvedata.com/pricing) — checked 2026-09-09
+- [official_site](https://twelvedata.com/pricing) — checked 2026-09-15
 - [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
 - [official_repo](https://github.com/twelvedata/twelvedata-cli) — checked 2026-09-09
 
@@ -4615,6 +5283,8 @@ Global stock, FX and crypto time series with API, Python SDK and CLI access.
 ## Twilio
 
 Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.
+
+**Classification:** Communication / SMS Delivery; Communication / Voice Calls
 
 [Website](https://www.twilio.com) · [Source record](../data/providers/twilio.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4632,15 +5302,21 @@ Programmable messaging and voice APIs with test credentials, an OpenAPI spec, ll
 
 —
 
+### Notes
+
+- Messaging/SMS and Voice are separate products. SendGrid email is not automatically included in this Twilio record.
+
 ### Sources
 
-—
+- [official_docs](https://www.twilio.com/docs) — checked 2026-09-15
 
 <a id="upstash"></a>
 
 ## Upstash
 
 Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.
+
+**Classification:** Databases / Key-value Databases; Databases / Vector Databases
 
 [Website](https://upstash.com) · [Source record](../data/providers/upstash.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4658,15 +5334,21 @@ Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llm
 
 —
 
+### Notes
+
+- Legacy multi-product record: Redis maps to key-value and Vector to vector databases. QStash is a message queue, not user chat; separate new products are not inferred to share these routes.
+
 ### Sources
 
-—
+- [official_docs](https://upstash.com/docs/introduction) — checked 2026-09-15
 
 <a id="vapi"></a>
 
 ## Vapi
 
 Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.
+
+**Classification:** Communication / Voice Agents; Communication / Voice Calls
 
 [Website](https://vapi.ai) · [Source record](../data/providers/vapi.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4684,15 +5366,21 @@ Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with
 
 —
 
+### Notes
+
+- Voice-agent orchestration with phone and web sessions. Underlying STT/TTS providers do not establish a standalone Vapi speech-model API.
+
 ### Sources
 
-—
+- [official_docs](https://docs.vapi.ai/quickstart/introduction) — checked 2026-09-15
 
 <a id="vercel"></a>
 
 ## Vercel
 
 Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server, and AI SDK ecosystem.
+
+**Classification:** Cloud Computing & Hosting / Application Hosting
 
 [Website](https://vercel.com) · [Source record](../data/providers/vercel.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4720,6 +5408,8 @@ Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server
 
 Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.
 
+**Classification:** Databases / Vector Databases
+
 [Website](https://weaviate.io) · [Source record](../data/providers/weaviate.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="weaviate-access"></a>
@@ -4736,15 +5426,21 @@ Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free san
 
 —
 
+### Notes
+
+- This record covers the vector database and its Cloud deployment. Engram is a separate named product; its memory capabilities are not transferred to this record.
+
 ### Sources
 
-—
+- [official_docs](https://docs.weaviate.io/weaviate) — checked 2026-09-15
 
 <a id="wechat-pay"></a>
 
 ## WeChat Pay
 
 Merchant payment APIs including Native QR checkout; merchant credentials and channel-specific setup are required.
+
+**Classification:** Payments / Billing / Payment Acceptance
 
 [Website](https://pay.weixin.qq.com/) · [Source record](../data/candidates/wechat-pay.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4772,6 +5468,8 @@ Merchant payment APIs including Native QR checkout; merchant credentials and cha
 
 Payment APIs and checkout integration for existing apps, with TypeScript, Python and Ruby SDKs.
 
+**Classification:** Payments / Billing / Payment Acceptance
+
 [Website](https://whop.com/) · [Source record](../data/candidates/whop.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="whop-access"></a>
@@ -4797,6 +5495,8 @@ Payment APIs and checkout integration for existing apps, with TypeScript, Python
 ## World Bank Indicators API
 
 Country-level economic and development indicators through the public Indicators API.
+
+**Classification:** Search & Data Access / Financial Data / Economic Indicators
 
 [Website](https://data.worldbank.org/) · [Source record](../data/candidates/world-bank-data.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4824,6 +5524,8 @@ Country-level economic and development indicators through the public Indicators 
 
 xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.
 
+**Classification:** AI Services / Model Access
+
 [Website](https://x.ai) · [Source record](../data/providers/xai.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="xai-access"></a>
@@ -4844,11 +5546,56 @@ xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-s
 
 - [official_docs](https://docs.x.ai/overview) — checked 2026-07-08
 
+<a id="xiurouter"></a>
+
+## XiuRouter
+
+Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols, scoped keys and request-level usage records.
+
+**Classification:** AI Services / Model Access
+
+[Website](https://router.xiu.ai/) · [Source record](../data/candidates/xiurouter.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="xiurouter-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [model-api (API)](https://router-api.xiu.ai) | [Docs](https://docs.xiu.ai/en/router/quickstart/) | — | Requires: platform_account; Documents Chat Completions, Responses, Messages and Gemini GenerateContent. The exact model, account group and protocol must match; ordinary text support does not establish tool compatibility. Responses storage, previous_response_id and background mode are outside the documented scope; Gemini Interactions, Files and fine-tuning are also excluded. Keys can restrict models, quota, expiration and IP access. No signup, authentication or model request was performed for this review. |
+| [vercel-ai-sdk (SDK)](https://docs.xiu.ai/router/integrations/vercel-ai-sdk/) | [Docs](https://docs.xiu.ai/router/integrations/vercel-ai-sdk/) | — | The supplier guide installs ai and @ai-sdk/openai-compatible and configures a server-side client for the Chat Completions API. This is a third-party client path, not a XiuRouter-owned SDK or an independent service. Text, streaming and tool behavior remain untested. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Vendor contribution by XiuAI / XiuLab Inc., reviewed from PR #10 at head d7395f6decec10bfbdb1cdf8cac453dc2a88da7c: https://github.com/Olorinm/agent-friendly-services/pull/10 (checked September 15, 2026). This record contains public-source claims only; it does not establish successful access or task completion.
+- Usage and pricing sources describe variable charges by model, group, context length, processing mode, token/cache usage and hosted tools. A reference discount is not a guaranteed saving or an actual charge. Free allowance, sandbox availability and minimum spend remain unknown; no zero-cost claim is made.
+- The current usage documentation says the benefit group is closed to new selection and will cease after September 30, 2026. Existing keys require migration to another available group; a public model listing does not grant account access. This notice concerns one group, not retirement of XiuRouter.
+- The privacy source says conversation content is not stored or used for training by XiuRouter, while usage and performance records are retained long term. Model developers apply their own retention and training policies; this statement does not establish end-to-end zero retention.
+- The OpenCode integration guide documents using XiuRouter as a Chat Completions model provider; that client configuration has not been tested here.
+
+### Sources
+
+- [official_docs](https://docs.xiu.ai/en/router/quickstart/index.md) — checked 2026-09-15
+- [official_docs](https://docs.xiu.ai/en/router/api-compatibility/index.md) — checked 2026-09-15
+- [official_docs](https://docs.xiu.ai/en/router/models-pricing-usage/index.md) — checked 2026-09-15
+- [official_site](https://router.xiu.ai/en/pricing) — checked 2026-09-15
+- [official_site](https://router.xiu.ai/en/data-privacy) — checked 2026-09-15
+- [official_docs](https://docs.xiu.ai/router/integrations/vercel-ai-sdk/) — checked 2026-09-15
+- [official_docs](https://docs.xiu.ai/router/integrations/opencode/) — checked 2026-09-15
+
 <a id="xquik"></a>
 
 ## Xquik
 
 Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.
+
+**Classification:** Search & Data Access
 
 [Website](https://xquik.com) · [Source record](../data/candidates/xquik.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4868,17 +5615,20 @@ Hosted X data and account automation service with a REST API, official MCP serve
 
 ### Notes
 
+- X-specific post/profile data and account automation. It does not meet broad public-web search or arbitrary-URL extraction criteria. Retained at data access until social-data category coverage is researched.
 - The official Streamable HTTP MCP endpoint is https://xquik.com/mcp and supports API key or OAuth authentication.
 
 ### Sources
 
-—
+- [official_docs](https://docs.xquik.com/api-reference/overview) — checked 2026-09-15
 
 <a id="zai"></a>
 
 ## Z.ai (GLM)
 
 GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.
+
+**Classification:** AI Services / Model Access
 
 [Website](https://z.ai) · [Source record](../data/providers/zai.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4906,6 +5656,8 @@ GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, publis
 
 Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.
 
+**Classification:** Agent Infrastructure & Automation / Tool Connections; Agent Infrastructure & Automation / Workflow Automation
+
 [Website](https://zapier.com) · [Source record](../data/providers/zapier.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="zapier-access"></a>
@@ -4924,17 +5676,20 @@ Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpo
 
 ### Notes
 
+- Application integrations provide actions/triggers and power executable workflows. Connector availability does not prove a downstream task passes.
 - MCP setup documentation checked on 2026-09-09: https://docs.zapier.com/mcp/get-started/quickstart. The server or product entry remains separately recorded in mcp_official.
 
 ### Sources
 
-—
+- [official_docs](https://docs.zapier.com/integrations) — checked 2026-09-15
 
 <a id="zoho-mail"></a>
 
 ## Zoho Mail
 
 Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
+
+**Classification:** Communication / Mailboxes
 
 [Website](https://www.zoho.com/mail/) · [Source record](../data/candidates/zoho-mail.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4962,6 +5717,8 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 去哪儿官方机票及分销合作渠道线索；个人自助机票搜索 API 或 MCP 尚未确认。
 
+**Classification:** Travel / Flights
+
 [Website](https://www.qunar.com/site/zh/Cooperate_4.shtml) · [Source record](../data/candidates/qunar-flights.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="qunar-flights-access"></a>
@@ -4976,6 +5733,10 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 —
 
+### Notes
+
+- 商务联系入口不证明禁止个人；酒店供应商 API 不作为机票搜索证据，routes 暂为空。
+
 ### Sources
 
 - [official_site](https://www.qunar.com/site/zh/Cooperate_4.shtml) — checked 2026-09-07
@@ -4985,6 +5746,8 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 ## 同程机票合作
 
 同程官方机票与出行平台合作线索；普通个人自助搜索 API 的准入、费用和能力尚未确认。
+
+**Classification:** Travel / Flights
 
 [Website](https://www.ly.com/public/about17u/contactus) · [Source record](../data/candidates/tongcheng-flights.yaml) · [Back to directory](../README.md#all-services)
 
@@ -5000,6 +5763,10 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 —
 
+### Notes
+
+- 开放平台页面动态内容无法提取；这不是停服或没有 API 的证据，routes 暂为空。
+
 ### Sources
 
 - [official_site](https://www.ly.com/public/about17u/contactus) — checked 2026-09-07
@@ -5010,6 +5777,8 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 ## 携程机票合作
 
 携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。
+
+**Classification:** Travel / Flights
 
 [Website](https://pages.ctrip.com/public/dlhz.htm) · [Source record](../data/candidates/ctrip-flights.yaml) · [Back to directory](../README.md#all-services)
 
@@ -5025,6 +5794,10 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 —
 
+### Notes
+
+- 仅发现合作入口，未把开发者主页登记成已知可调用 API。公开资料不足不等于没有 API。
+
 ### Sources
 
 - [official_site](https://pages.ctrip.com/public/dlhz.htm) — checked 2026-09-07
@@ -5035,6 +5808,8 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 ## 飞书 Feishu
 
 China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.
+
+**Classification:** Workplace Collaboration / Collaborative Tables
 
 [Website](https://www.feishu.cn/) · [Source record](../data/candidates/feishu.yaml) · [Back to directory](../README.md#all-services)
 
@@ -5054,6 +5829,10 @@ China-region Feishu workspace and Base APIs; separate account/tenant from intern
 
 —
 
+### Notes
+
+- China Feishu service. Do not reuse international Lark onboarding or test results.
+
 ### Sources
 
 - [official_docs](https://open.feishu.cn/document/server-docs/docs/bitable-v1/app/create.md) — checked 2026-09-08
@@ -5066,6 +5845,8 @@ China-region Feishu workspace and Base APIs; separate account/tenant from intern
 ## 飞猪国内机票开放平台
 
 面向机票商家的政策与订单接口，需要企业、代理商身份、店铺和聚石塔；不等同于旅客搜索接口。
+
+**Classification:** Travel / Flights
 
 [Website](https://open.alitrip.com/businessDetail.htm?tagId=85) · [Source record](../data/candidates/fliggy-domestic-flights.yaml) · [Back to directory](../README.md#all-services)
 

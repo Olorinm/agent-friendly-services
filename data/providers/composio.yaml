@@ -69,3 +69,17 @@ checks:
 
 notes:
   - "MCP setup documentation checked on 2026-09-09: https://docs.composio.dev/docs/composio-connect. The server or product entry remains separately recorded in mcp_official."
+catalog:
+  version: 1
+  classifications:
+    - agent-tooling/tool-integrations
+  sources:
+    classification-docs:
+      url: https://docs.composio.dev/docs
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Managed app authentication and callable tool actions establish tool connections; an integration listing
+      does not certify every connected application task.

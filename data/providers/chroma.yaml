@@ -68,3 +68,18 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/vector
+  sources:
+    classification-docs:
+      url: https://docs.trychroma.com/docs/overview/introduction
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Chroma stores embeddings and searches vectors. The record covers Cloud and open-source deployment; their
+      access requirements are separate. Document payload storage is not evidence of a general document
+      database.

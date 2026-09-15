@@ -1,0 +1,2 @@
+指定服务 ecb-data，通过 REST API 直接 HTTP 调用；官方接入文档：https://data.ecb.europa.eu/help/api/data-examples。业务数据必须来自该服务 API，不用其他服务、网页数值或模型记忆替代。Linux 独立容器；终端、curl、Python、Node 和联网查文档可用。未提供账户、Key 或支付方式；只使用已确认免费的公开读取入口，不注册、不付款、不交易、不写远端数据、不发消息。持久目录 /home/node/service-tools：必要连接配置保存为 service-config.json，自行安装的依赖放 installed-tools；临时解题脚本和结果放本题工作目录。后续任务保留配置和依赖，归档本题材料并另开会话。仅使用本题及明确持久目录，不搜索其他任务、账户或历史，不调用其他 Agent。执行上限 600 秒。
+指定入口：https://data-api.ecb.europa.eu/service/

@@ -1,22 +1,21 @@
 import type { Category, Provider } from './lib.ts';
 import { serviceAccess } from './service-access.ts';
 import type { Evaluation } from './evaluations.ts';
+import { flattenCategories, classificationCapabilities } from './taxonomy.mjs';
+import { taskClassification } from './task-classifications.ts';
 
 export function taxonomyErrors(categories: Category[]): string[] {
   const errors: string[] = [];
-  const ids = new Set<string>();
-  for (const cat of categories) {
-    if (!/^[a-z0-9][a-z0-9-]*$/.test(cat.id) || ids.has(cat.id)) errors.push(`Invalid or duplicate category: ${cat.id}`);
-    ids.add(cat.id);
-    const children = new Set<string>();
-    for (const sub of cat.subcategories ?? []) {
-      if (!/^[a-z0-9][a-z0-9-]*$/.test(sub.id) || children.has(sub.id)) errors.push(`Invalid or duplicate subcategory: ${cat.id}/${sub.id}`);
-      children.add(sub.id);
-      const caps = new Set<string>();
-      for (const cap of sub.capabilities) {
-        if (!/^[a-z0-9-]+\.[a-z0-9-]+$/.test(cap.id) || caps.has(cap.id)) errors.push(`Invalid or duplicate capability: ${cap.id}`);
-        caps.add(cap.id);
-      }
+  const ids = new Set<string>(), caps = new Set<string>();
+  for (const node of flattenCategories(categories)) {
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(node.id) || ids.has(node.path)) errors.push(`Invalid or duplicate category: ${node.path}`);
+    ids.add(node.path);
+    if (!node.name?.trim() || !node.description?.trim()) errors.push(`Missing category definition: ${node.path}`);
+    if (!node.inclusion?.trim() || !node.exclusion?.trim()) errors.push(`Missing category inclusion or boundary: ${node.path}`);
+    for (const cap of node.capabilities ?? []) {
+      if (!/^[a-z0-9-]+\.[a-z0-9-]+$/.test(cap.id) || caps.has(cap.id)) errors.push(`Invalid or duplicate capability: ${cap.id}`);
+      if (!cap.description?.trim()) errors.push(`Missing capability definition: ${cap.id}`);
+      caps.add(cap.id);
     }
   }
   return errors;
@@ -33,15 +32,12 @@ export function catalogErrors(p: Provider, categories: Category[], today: string
   if (!p.catalog) return [];
   const errors: string[] = [];
   const catalog = p.catalog;
-  const taxonomy = new Map<string, NonNullable<Category['subcategories']>[number]>(
-    categories.flatMap(c => (c.subcategories ?? []).map(s => [`${c.id}/${s.id}`, s] as const)),
-  );
+  const taxonomy = new Map(flattenCategories(categories).map(node => [node.path, node]));
   const allowedCaps = new Set<string>();
   for (const id of catalog.classifications) {
-    if (categories.some(c => c.id === id)) continue; // A route does not require inventing a subcategory.
     const sub = taxonomy.get(id);
     if (!sub) errors.push(`Unknown classification: ${id}; add it to data/categories.yaml first.`);
-    else sub.capabilities.forEach(c => allowedCaps.add(c.id));
+    else classificationCapabilities(categories, id).forEach(c => allowedCaps.add(c.id));
   }
   for (const [id, source] of Object.entries(catalog.sources)) {
     if (!calendarDateValid(source.checked_on, today)) errors.push(`sources.${id}.checked_on must be a real, non-future calendar date.`);
@@ -82,7 +78,7 @@ export function catalogErrors(p: Provider, categories: Category[], today: string
 }
 
 export function catalogService(p: Provider, pool: 'provider' | 'candidate', evaluations: Evaluation[] = []) {
-  const runs = evaluations.filter(r => r.service_id === p.id);
+  const runs = evaluations.filter(r => r.service_id === p.id).map(r => ({ ...r, ...taskClassification(r.task) }));
   return {
     id: p.id, name: p.name, category: p.category, homepage: p.homepage,
     access_links: serviceAccess(p).map(([label, url]) => ({ label, url, kind: 'documentation' })),

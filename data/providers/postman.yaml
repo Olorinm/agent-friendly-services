@@ -71,3 +71,17 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/api-development
+  sources:
+    classification-docs:
+      url: https://learning.postman.com/docs/getting-started/overview/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Reusable request collections and API testing. Having an API does not classify an arbitrary service as
+      API development.

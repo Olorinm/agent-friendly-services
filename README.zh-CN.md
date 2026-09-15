@@ -10,13 +10,13 @@
 
 <a id="all-services"></a>
 
-## 服务目录（165）
+## 服务目录（168）
 
 Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
 
-每个服务展示最近取得有效结果的测试方式，其他方式和接入准备见服务详情。当前不排名，仅在任务与条件一致时比较。
+每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。
 
-[旅行](#services-travel) · [数据库](#services-databases) · [搜索与数据获取](#services-web-search-data) · [办公协作](#services-productivity-storage) · [AI 服务](#services-ai-models) · [Agent 工具](#services-agent-tooling) · [开发工具](#services-developer-tools) · [云计算与托管](#services-cloud-hosting) · [支付与计费](#services-payments-billing) · [通信](#services-communication) · [电商](#services-commerce-marketing)
+[旅行](#services-travel) · [数据库](#services-databases) · [搜索与数据获取](#services-web-search-data) · [办公协作](#services-productivity-storage) · [AI 服务](#services-ai-models) · [Agent 基础设施与自动化](#services-agent-tooling) · [开发工具](#services-developer-tools) · [云计算与托管](#services-cloud-hosting) · [支付与计费](#services-payments-billing) · [通信](#services-communication) · [电商](#services-commerce-marketing)
 
 <a id="services-travel"></a>
 
@@ -24,7 +24,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-travel-flights"></a>
 
-#### 机票
+#### 机票 (26)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -81,7 +81,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-databases-hosted-relational"></a>
 
-#### 托管关系型数据库
+#### 托管关系型数据库 (6)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -115,15 +115,14 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 </details>
 
-<a id="services-databases-other"></a>
+<a id="services-databases-vector"></a>
 
-#### 其他服务
+#### 向量数据库 (6)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#chroma">Chroma</a></td><td align="left">Open-source embedding database with a hosted Chroma Cloud, official CLI, official MCP server, and llms.txt.</td><td align="left"><a href="https://docs.trychroma.com/docs/overview/introduction">API</a> · <a href="https://docs.trychroma.com/docs/cli/install">CLI</a> · <a href="https://github.com/chroma-core/chroma-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#mongodb-atlas">MongoDB Atlas</a></td><td align="left">Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.</td><td align="left"><a href="https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/">API</a> · <a href="https://www.mongodb.com/docs/drivers/">SDK</a> · <a href="https://www.mongodb.com/docs/atlas/cli/">CLI</a> · <a href="https://github.com/mongodb-js/mongodb-mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#pinecone">Pinecone</a></td><td align="left">Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.</td><td align="left"><a href="https://docs.pinecone.io/reference/api/introduction">API</a> · <a href="https://github.com/pinecone-io/cli">CLI</a> · <a href="https://docs.pinecone.io/guides/operations/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#qdrant">Qdrant</a></td><td align="left">Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.</td><td align="left"><a href="https://api.qdrant.tech">API</a> · <a href="https://qdrant.tech/documentation/interfaces">SDK</a> · <a href="https://github.com/qdrant/mcp-server-qdrant">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#redis">Redis (Redis Cloud)</a></td><td align="left">In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.</td><td align="left"><a href="https://redis.io/docs/latest/operate/rc/api/">API</a> · <a href="https://redis.io/docs/latest/develop/tools/cli/">CLI</a> · <a href="https://github.com/redis/mcp-redis">MCP</a></td></tr>
@@ -132,20 +131,56 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 </tbody>
 </table>
 
+<a id="services-databases-document"></a>
+
+#### 文档数据库 (2)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#mongodb-atlas">MongoDB Atlas</a></td><td align="left">Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, official CLI and MCP server.</td><td align="left"><a href="https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/">API</a> · <a href="https://www.mongodb.com/docs/drivers/">SDK</a> · <a href="https://www.mongodb.com/docs/atlas/cli/">CLI</a> · <a href="https://github.com/mongodb-js/mongodb-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#redis">Redis (Redis Cloud)</a></td><td align="left">In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.</td><td align="left"><a href="https://redis.io/docs/latest/operate/rc/api/">API</a> · <a href="https://redis.io/docs/latest/develop/tools/cli/">CLI</a> · <a href="https://github.com/redis/mcp-redis">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-databases-key-value"></a>
+
+#### 键值数据库 (3)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="left">Edge network, Workers serverless platform, storage, and AI services with agent-focused docs and official MCP servers.</td><td align="left"><a href="https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/">API</a> · <a href="https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/">SDK</a> · <a href="https://developers.cloudflare.com/d1/get-started/">CLI</a> · <a href="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#redis">Redis (Redis Cloud)</a></td><td align="left">In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.</td><td align="left"><a href="https://redis.io/docs/latest/operate/rc/api/">API</a> · <a href="https://redis.io/docs/latest/develop/tools/cli/">CLI</a> · <a href="https://github.com/redis/mcp-redis">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#upstash">Upstash</a></td><td align="left">Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://upstash.com/docs/devops/developer-api/introduction">API</a> · <a href="https://github.com/upstash/cli">CLI</a> · <a href="https://github.com/upstash/mcp-server">MCP</a></td></tr>
+</tbody>
+</table>
+
 <a id="services-web-search-data"></a>
 
-### 搜索与数据获取 (36)
+### 搜索与数据获取 (37)
+
+以下服务暂按本层范围收录，细分缺口见服务详情。
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#xquik">Xquik</a></td><td align="left">Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.</td><td align="left"><a href="https://docs.xquik.com/api-reference/overview">API</a> · <a href="https://docs.xquik.com/sdks">SDK</a> · <a href="https://docs.xquik.com/mcp/overview">MCP</a></td></tr>
+</tbody>
+</table>
 
 <a id="services-web-search-data-web-search"></a>
 
-#### 网页搜索
+#### 网页搜索 (8)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right"><a href="./generated/evaluations.md#comparison-9dbe771526ac">0%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://exa.ai/docs/reference/search">API</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/reference/exa-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b5f21fc39ab4">100%</a></td><td align="right">346.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.firecrawl.dev/features/search">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#brave-search">Brave Search API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/brave/brave-search-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#perplexity">Perplexity API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/ppl-ai/modelcontextprotocol">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serpapi.com/google-flights-api">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#serper">Serper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
@@ -174,74 +209,179 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-web-search-data-web-extraction"></a>
 
-#### 网页内容提取
+#### 网页内容提取 (6)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="left">Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="left">Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.</td><td align="left"><a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="left">Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.</td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/reference/exa-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="left">Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.</td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://docs.jina.ai">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="left">Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
 </tbody>
 </table>
 
 <a id="services-web-search-data-financial-data"></a>
 
-#### 金融数据
+#### 金融数据 (27)
+
+<details>
+<summary>接入测试（单独记录）</summary>
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">221.9k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">86.8k</td><td align="right">$0.0052</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>测了什么，怎么测的</summary>
+
+**任务：帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。**
+
+服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。
+
+完成标准：按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。
+
+**测试配置：** 1.18.29 · glm-5.3-flash / high · 10 分钟 · 2026-09-15（UTC） · 未预供账号或密钥
+
+部分早期记录缺少环境信息，尚待统一复跑。
+
+[任务定义](./data/experiments/tasks/financial-data.md) · [完整运行记录与证据](./generated/evaluations.md)
+
+</details>
+
+</details>
+
+以下服务暂按本层范围收录，细分缺口见服务详情。
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#factset-data">FactSet Data APIs</a></td><td align="left">Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#joinquant-data">JoinQuant JQData</a></td><td align="left">Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#lseg-data">LSEG Data Platform</a></td><td align="left">Financial-data platform and Python library with licensed desktop and cloud access paths.</td><td align="left"><a href="https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#nasdaq-data-link">Nasdaq Data Link</a></td><td align="left">Marketplace for financial and economic datasets with free and separately subscribed products.</td><td align="left"><a href="https://docs.data.nasdaq.com/docs/getting-started">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-web-search-data-financial-data-fx"></a>
+
+##### 汇率数据 (7)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d86a11990066">100%</a></td><td align="right">62.8k</td><td align="right">$0.0034</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d86a11990066">100%</a></td><td align="right">54.2k</td><td align="right">$0.0038</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#open-exchange-rates">Open Exchange Rates</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.openexchangerates.org/reference/api-introduction">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tiingo">Tiingo</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.tiingo.com/documentation/general/overview">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#twelve-data">Twelve Data</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://twelvedata.com/docs/introduction/quickstart">API / SDK</a> · <a href="https://github.com/twelvedata/twelvedata-cli">CLI</a></td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>测了什么，怎么测的</summary>
+
+**任务：把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。**
+
+合成支出：2026-08-14，80.00 USD；2026-08-15，125.00 USD；2026-08-17，39.90 USD。若当日未发布汇率，使用此前最近一个发布日；逐笔四舍五入到欧分，再加总。不计手续费。
+
+完成标准：使用指定日期对应的 ECB USD/EUR 参考数据；非发布日回退正确；币种方向及乘除关系正确；三笔金额和按规定舍入后的合计与独立计算一致；核心汇率来自指定服务。
+
+**测试配置：** 1.18.29 · glm-5.3-flash / high · 10 分钟 · 2026-09-15（UTC） · 未预供账号或密钥
+
+部分早期记录缺少环境信息，尚待统一复跑。
+
+[任务定义](./data/experiments/tasks/financial-data.md) · [完整运行记录与证据](./generated/evaluations.md)
+
+</details>
+
+<a id="services-web-search-data-financial-data-prices"></a>
+
+##### 资产行情 (15)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="left">Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#alpaca-market-data">Alpaca Market Data</a></td><td align="left">Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.</td><td align="left"><a href="https://docs.alpaca.markets/us/docs/about-market-data-api">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="left">Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#bloomberg-data-license">Bloomberg Data License</a></td><td align="left">Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#coingecko">CoinGecko</a></td><td align="left">Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.</td><td align="left"><a href="https://docs.coingecko.com/docs/setting-up-your-api-key">API</a> · <a href="https://docs.coingecko.com/ai-integration/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#coinmarketcap">CoinMarketCap</a></td><td align="left">Crypto market data with selected keyless endpoints and a free authenticated Basic plan.</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#factset-data">FactSet Data APIs</a></td><td align="left">Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#finnhub">Finnhub</a></td><td align="left">Stock quotes, historical candles and fundamentals; stock candles are documented as premium.</td><td align="left"><a href="https://finnhub.io/docs/api/quote">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="left">Public exchange-rate API and official MCP using central-bank reference data, with no API key.</td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#joinquant-data">JoinQuant JQData</a></td><td align="left">Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#lseg-data">LSEG Data Platform</a></td><td align="left">Financial-data platform and Python library with licensed desktop and cloud access paths.</td><td align="left"><a href="https://developers.lseg.com/en/api-catalog/refinitiv-data-platform/refinitiv-data-library-for-python/quick-start">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#massive">Massive (formerly Polygon.io)</a></td><td align="left">Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.</td><td align="left"><a href="https://massive.com/docs/rest/quickstart">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#nasdaq-data-link">Nasdaq Data Link</a></td><td align="left">Marketplace for financial and economic datasets with free and separately subscribed products.</td><td align="left"><a href="https://docs.data.nasdaq.com/docs/getting-started">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#open-exchange-rates">Open Exchange Rates</a></td><td align="left">Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.</td><td align="left"><a href="https://docs.openexchangerates.org/reference/api-introduction">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="left">Congressional and insider transactions, institutional activity and other alternative financial datasets.</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="left">Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.</td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#tiingo">Tiingo</a></td><td align="left">Market data covering end-of-day prices and other feeds, with an account-issued authentication token.</td><td align="left"><a href="https://www.tiingo.com/documentation/general/overview">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="left">Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#twelve-data">Twelve Data</a></td><td align="left">Global stock, FX and crypto time series with API, Python SDK and CLI access.</td><td align="left"><a href="https://twelvedata.com/docs/introduction/quickstart">API / SDK</a> · <a href="https://github.com/twelvedata/twelvedata-cli">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>
 </table>
 
-<a id="services-web-search-data-other"></a>
+<a id="services-web-search-data-financial-data-statements"></a>
 
-#### 其他服务
+##### 公司财务数据 (7)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#perplexity">Perplexity API</a></td><td align="left">Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.</td><td align="left"><a href="https://github.com/ppl-ai/modelcontextprotocol">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#xquik">Xquik</a></td><td align="left">Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.</td><td align="left"><a href="https://docs.xquik.com/api-reference/overview">API</a> · <a href="https://docs.xquik.com/sdks">SDK</a> · <a href="https://docs.xquik.com/mcp/overview">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="left">Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.</td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="left">Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-web-search-data-financial-data-disclosures"></a>
+
+##### 交易披露 (5)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="left">Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="left">Congressional and insider transactions, institutional activity and other alternative financial datasets.</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-web-search-data-financial-data-macro"></a>
+
+##### 宏观经济指标 (5)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals and economic datasets, with free and separately paid packages.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>
 </table>
 
 <a id="services-productivity-storage"></a>
 
-### 办公协作 (10)
+### 办公协作 (13)
 
 <a id="services-productivity-storage-collaborative-tables"></a>
 
-#### 协作表格
+#### 协作表格 (8)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -272,34 +412,63 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 </details>
 
-<a id="services-productivity-storage-other"></a>
+<a id="services-productivity-storage-project-management"></a>
 
-#### 其他服务
+#### 项目与任务管理 (4)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#atlassian">Atlassian (Jira &amp; Confluence)</a></td><td align="left">Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.</td><td align="left"><a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/">API</a> · <a href="https://developer.atlassian.com/cloud/acli/">CLI</a> · <a href="https://github.com/atlassian/atlassian-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="left">Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.</td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#gitlab">GitLab</a></td><td align="left">DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.</td><td align="left"><a href="https://docs.gitlab.com/api/rest/">API</a> · <a href="https://gitlab.com/gitlab-org/cli">CLI</a> · <a href="https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#linear">Linear</a></td><td align="left">Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.</td><td align="left"><a href="https://linear.app/docs/mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-productivity-storage-document-collaboration"></a>
+
+#### 文档协作 (4)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#atlassian">Atlassian (Jira &amp; Confluence)</a></td><td align="left">Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.</td><td align="left"><a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/">API</a> · <a href="https://developer.atlassian.com/cloud/acli/">CLI</a> · <a href="https://github.com/atlassian/atlassian-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#coda">Coda / Superhuman Docs</a></td><td align="left">Docs and tables with a free REST API; current API page is branded Superhuman Docs.</td><td align="left"><a href="https://coda.io/developers/apis/v1">API</a> · <a href="https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="left">Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.</td><td align="left"><a href="https://open.larksuite.com/document/server-docs/getting-started/server-api-list">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#notion">Notion</a></td><td align="left">Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.</td><td align="left"><a href="https://developers.notion.com/reference/intro">API</a> · <a href="https://github.com/makenotion/notion-sdk-js">SDK</a> · <a href="https://developers.notion.com/cli/get-started/overview">CLI</a> · <a href="https://developers.notion.com/guides/mcp/get-started-with-mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-productivity-storage-file-sharing"></a>
+
+#### 文件共享 (1)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#dropbox">Dropbox</a></td><td align="left">File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.</td><td align="left"><a href="https://www.dropbox.com/developers/documentation/http/documentation">API</a> · <a href="https://github.com/dropbox/dbxcli">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#linear">Linear</a></td><td align="left">Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.</td><td align="left"><a href="https://linear.app/docs/mcp">MCP</a></td></tr>
 </tbody>
 </table>
 
 <a id="services-ai-models"></a>
 
-### AI 服务 (23)
+### AI 服务 (25)
 
 <a id="services-ai-models-model-access"></a>
 
-#### 模型接入
+#### 模型接入 (21)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="left">Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#qwen">Alibaba Qwen (Model Studio)</a></td><td align="left">Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with an official open-source coding CLI agent (qwen-code).</td><td align="left"><a href="https://www.alibabacloud.com/help/en/model-studio/models">API</a> · <a href="https://github.com/QwenLM/qwen-code">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#anthropic">Anthropic</a></td><td align="left">Claude model APIs with agent-focused documentation, llms.txt, and the company behind the MCP standard itself.</td><td align="left"><a href="https://docs.anthropic.com/en/api">API</a> · <a href="https://docs.anthropic.com/en/api/client-sdks">SDK</a> · <a href="https://docs.anthropic.com/en/docs/claude-code">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cerebras">Cerebras Inference</a></td><td align="left">Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible API, llms.txt, and a standing free tier.</td><td align="left"><a href="https://inference-docs.cerebras.ai/api-reference/chat-completions">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cohere">Cohere</a></td><td align="left">Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API versioning, free trial keys, and error/rate-limit docs.</td><td align="left"><a href="https://docs.cohere.com/reference/about">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#deepseek">DeepSeek</a></td><td align="left">OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a detailed changelog, and self-serve keys.</td><td align="left"><a href="https://api-docs.deepseek.com">文档</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fal">fal.ai</a></td><td align="left">Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.</td><td align="left"><a href="https://fal.ai/docs/model-apis">API</a> · <a href="https://github.com/fal-ai/fal">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fireworks">Fireworks AI</a></td><td align="left">Fast open-model inference and fine-tuning with an OpenAI-compatible API, official firectl CLI, llms.txt, and published pricing.</td><td align="left"><a href="https://docs.fireworks.ai/api-reference/introduction">API</a> · <a href="https://docs.fireworks.ai/tools-sdks/firectl/firectl">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#gemini-api">Gemini API</a></td><td align="left">Google's Gemini model APIs via AI Studio, with generous free tier and documented API versioning.</td><td align="left"><a href="https://ai.google.dev/api">API</a> · <a href="https://ai.google.dev/gemini-api/docs/libraries">SDK</a> · <a href="https://github.com/google-gemini/gemini-cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#groq">Groq</a></td><td align="left">Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and self-serve keys with a free tier.</td><td align="left"><a href="https://console.groq.com/docs/api-reference">API</a> · <a href="https://console.groq.com/docs/libraries">SDK</a></td></tr>
@@ -312,13 +481,14 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#replicate">Replicate</a></td><td align="left">Run and fine-tune open-source models via a simple predictions API, with llms.txt, webhooks, and an official CLI.</td><td align="left"><a href="https://replicate.com/docs/reference/http">API</a> · <a href="https://replicate.com/docs/reference/client-libraries">SDK</a> · <a href="https://github.com/replicate/cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#together-ai">Together AI</a></td><td align="left">Inference and fine-tuning platform for open-source models with an OpenAI-compatible API and llms.txt.</td><td align="left"><a href="https://docs.together.ai/reference/chat-completions">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#xai">xAI (Grok API)</a></td><td align="left">xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-serve console keys.</td><td align="left"><a href="https://docs.x.ai/developers/rest-api-reference/inference">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#xiurouter">XiuRouter</a></td><td align="left">Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols, scoped keys and request-level usage records.</td><td align="left"><a href="https://docs.xiu.ai/en/router/quickstart/">API</a> · <a href="https://docs.xiu.ai/router/integrations/vercel-ai-sdk/">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#zai">Z.ai (GLM)</a></td><td align="left">GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, published pricing, and self-serve keys.</td><td align="left"><a href="https://docs.z.ai/api-reference">API</a></td></tr>
 </tbody>
 </table>
 
-<a id="services-ai-models-other"></a>
+<a id="services-ai-models-speech-synthesis"></a>
 
-#### 其他服务
+#### 语音合成 (3)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -326,6 +496,41 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#cartesia">Cartesia</a></td><td align="left">Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.</td><td align="left"><a href="https://docs.cartesia.ai/api-reference">API</a> · <a href="https://github.com/cartesia-ai/cartesia-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#deepgram">Deepgram</a></td><td align="left">Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.</td><td align="left"><a href="https://developers.deepgram.com/reference">API</a> · <a href="https://developers.deepgram.com/docs/deepgram-sdks">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#elevenlabs">ElevenLabs</a></td><td align="left">Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://elevenlabs.io/docs/api-reference/introduction">API</a> · <a href="https://github.com/elevenlabs/elevenlabs-mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-ai-models-speech-recognition"></a>
+
+#### 语音识别 (3)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#cartesia">Cartesia</a></td><td align="left">Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.</td><td align="left"><a href="https://docs.cartesia.ai/api-reference">API</a> · <a href="https://github.com/cartesia-ai/cartesia-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#deepgram">Deepgram</a></td><td align="left">Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.</td><td align="left"><a href="https://developers.deepgram.com/reference">API</a> · <a href="https://developers.deepgram.com/docs/deepgram-sdks">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#elevenlabs">ElevenLabs</a></td><td align="left">Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://elevenlabs.io/docs/api-reference/introduction">API</a> · <a href="https://github.com/elevenlabs/elevenlabs-mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-ai-models-image-generation"></a>
+
+#### 图像生成 (2)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#fal">fal.ai</a></td><td align="left">Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.</td><td align="left"><a href="https://fal.ai/docs/model-apis">API</a> · <a href="https://github.com/fal-ai/fal">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#luma">Luma AI (Dream Machine)</a></td><td align="left">Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.</td><td align="left"><a href="https://docs.lumalabs.ai/reference">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-ai-models-video-generation"></a>
+
+#### 视频生成 (2)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
 <tr><td align="left"><a href="./generated/services.md#fal">fal.ai</a></td><td align="left">Generative media platform (image, video, audio models) with queue/streaming APIs, an official CLI/serving framework, llms.txt, and self-serve keys.</td><td align="left"><a href="https://fal.ai/docs/model-apis">API</a> · <a href="https://github.com/fal-ai/fal">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#luma">Luma AI (Dream Machine)</a></td><td align="left">Dream Machine video and image generation via the Luma API, with llms.txt and published API pricing.</td><td align="left"><a href="https://docs.lumalabs.ai/reference">API</a></td></tr>
 </tbody>
@@ -333,15 +538,48 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-agent-tooling"></a>
 
-### Agent 工具 (5)
+### Agent 基础设施与自动化 (5)
+
+以下服务暂按本层范围收录，细分缺口见服务详情。
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#cog-depot">Cog Depot</a></td><td align="left">Hosted marketplace for agents to discover counterparties, negotiate capability exchanges and obtain direct contact details after paying platform fees.</td><td align="left"><a href="https://cogdepot.com/docs">API</a> · <a href="https://github.com/cogdepot/mcp-server#install">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-agent-tooling-memory"></a>
+
+#### Agent 记忆 (1)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#mem0">Mem0</a></td><td align="left">Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.</td><td align="left"><a href="https://docs.mem0.ai/api-reference">API</a> · <a href="https://docs.mem0.ai/openmemory/overview">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-agent-tooling-tool-integrations"></a>
+
+#### 工具连接 (2)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#composio">Composio</a></td><td align="left">Tool and integration layer for AI agents (hundreds of app connectors with managed auth), with llms.txt and a hosted MCP directory.</td><td align="left"><a href="https://docs.composio.dev/docs/composio-connect">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#mem0">Mem0</a></td><td align="left">Memory layer for AI agents (hosted platform + open-source), with REST API, llms.txt, and the official OpenMemory MCP server.</td><td align="left"><a href="https://docs.mem0.ai/api-reference">API</a> · <a href="https://docs.mem0.ai/openmemory/overview">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#zapier">Zapier</a></td><td align="left">Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.</td><td align="left"><a href="https://github.com/zapier/zapier-platform">CLI</a> · <a href="https://docs.zapier.com/mcp/get-started/quickstart">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-agent-tooling-workflow-automation"></a>
+
+#### 工作流自动化 (2)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
 <tr><td align="left"><a href="./generated/services.md#n8n">n8n</a></td><td align="left">Workflow automation platform with native AI/agent nodes, a public REST API, official hosted MCP server, CLI, and llms.txt; fair-code and self-hostable.</td><td align="left"><a href="https://docs.n8n.io/api/">API</a> · <a href="https://docs.n8n.io/hosting/cli-commands/">CLI</a> · <a href="https://docs.n8n.io/connect/connect-to-n8n-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#vapi">Vapi</a></td><td align="left">Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.</td><td align="left"><a href="https://docs.vapi.ai/api-reference">API</a> · <a href="https://github.com/VapiAI/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#zapier">Zapier</a></td><td align="left">Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpoint that gives agents access to those integrations.</td><td align="left"><a href="https://github.com/zapier/zapier-platform">CLI</a> · <a href="https://docs.zapier.com/mcp/get-started/quickstart">MCP</a></td></tr>
 </tbody>
 </table>
@@ -352,7 +590,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-developer-tools-monitoring"></a>
 
-#### 监控与故障排查
+#### 监控与故障排查 (3)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -363,9 +601,9 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 </tbody>
 </table>
 
-<a id="services-developer-tools-other"></a>
+<a id="services-developer-tools-code-hosting"></a>
 
-#### 其他服务
+#### 代码托管与评审 (3)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -373,6 +611,16 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#atlassian">Atlassian (Jira &amp; Confluence)</a></td><td align="left">Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.</td><td align="left"><a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/">API</a> · <a href="https://developer.atlassian.com/cloud/acli/">CLI</a> · <a href="https://github.com/atlassian/atlassian-mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="left">Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.</td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#gitlab">GitLab</a></td><td align="left">DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.</td><td align="left"><a href="https://docs.gitlab.com/api/rest/">API</a> · <a href="https://gitlab.com/gitlab-org/cli">CLI</a> · <a href="https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-developer-tools-api-development"></a>
+
+#### API 开发与测试 (1)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
 <tr><td align="left"><a href="./generated/services.md#postman">Postman</a></td><td align="left">API development platform with a public Postman API, llms.txt, official CLI, and self-serve keys.</td><td align="left"><a href="https://learning.postman.com/docs/developer/postman-api/intro-api/">API</a> · <a href="https://learning.postman.com/docs/postman-cli/postman-cli-overview/">CLI</a> · <a href="https://github.com/postmanlabs/postman-mcp-server">MCP</a></td></tr>
 </tbody>
 </table>
@@ -383,7 +631,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-cloud-hosting-code-sandboxes"></a>
 
-#### 代码沙箱
+#### 代码沙箱 (2)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -395,7 +643,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-cloud-hosting-browser-environments"></a>
 
-#### 浏览器运行环境
+#### 浏览器运行环境 (2)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -407,7 +655,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-cloud-hosting-app-hosting"></a>
 
-#### 应用部署
+#### 应用部署 (6)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -427,7 +675,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-payments-billing-accept-payments"></a>
 
-#### 收款
+#### 收款 (19)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -471,11 +719,11 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-communication"></a>
 
-### 通信 (18)
+### 通信 (22)
 
 <a id="services-communication-mailboxes"></a>
 
-#### 邮箱
+#### 邮箱 (12)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
@@ -510,19 +758,65 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 </details>
 
-<a id="services-communication-other"></a>
+<a id="services-communication-email-delivery"></a>
 
-#### 其他服务
+#### 邮件发送 (1)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#resend">Resend</a></td><td align="left">Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.</td><td align="left"><a href="https://resend.com/docs/api-reference/introduction">API</a> · <a href="https://resend.com/docs/sdks">SDK</a> · <a href="https://github.com/resend/mcp-send-email">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-communication-messaging"></a>
+
+#### 即时通讯 (4)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#discord">Discord</a></td><td align="left">Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), webhooks, and documented rate limits.</td><td align="left"><a href="https://discord.com/developers/docs/reference">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#lark">Lark</a></td><td align="left">Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.</td><td align="left"><a href="https://open.larksuite.com/document/server-docs/getting-started/server-api-list">API</a> · <a href="https://github.com/larksuite/cli">CLI</a> · <a href="https://github.com/larksuite/lark-openapi-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#resend">Resend</a></td><td align="left">Email API for developers with test mode, scoped API keys, idempotency support, and an official MCP server.</td><td align="left"><a href="https://resend.com/docs/api-reference/introduction">API</a> · <a href="https://resend.com/docs/sdks">SDK</a> · <a href="https://github.com/resend/mcp-send-email">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#slack">Slack</a></td><td align="left">Workspace messaging platform with a mature Web API, granular OAuth scopes, an OpenAPI spec, and llms.txt.</td><td align="left"><a href="https://api.slack.com/methods">API</a> · <a href="https://tools.slack.dev">SDK</a> · <a href="https://docs.slack.dev/tools/slack-cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#telegram">Telegram Bot API</a></td><td align="left">Free bot platform with instant token issuance via BotFather, webhooks, a documented test environment, and a detailed changelog.</td><td align="left"><a href="https://core.telegram.org/bots/api">API</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-communication-sms"></a>
+
+#### 短信发送 (1)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
 <tr><td align="left"><a href="./generated/services.md#twilio">Twilio</a></td><td align="left">Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.</td><td align="left"><a href="https://www.twilio.com/docs/usage/api">API</a> · <a href="https://www.twilio.com/docs/libraries">SDK</a> · <a href="https://www.twilio.com/docs/twilio-cli">CLI</a> · <a href="https://github.com/twilio-labs/mcp">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-communication-voice-calls"></a>
+
+#### 语音通话 (2)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#twilio">Twilio</a></td><td align="left">Programmable messaging and voice APIs with test credentials, an OpenAPI spec, llms.txt, and an official CLI.</td><td align="left"><a href="https://www.twilio.com/docs/usage/api">API</a> · <a href="https://www.twilio.com/docs/libraries">SDK</a> · <a href="https://www.twilio.com/docs/twilio-cli">CLI</a> · <a href="https://github.com/twilio-labs/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#vapi">Vapi</a></td><td align="left">Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.</td><td align="left"><a href="https://docs.vapi.ai/api-reference">API</a> · <a href="https://github.com/VapiAI/mcp-server">MCP</a></td></tr>
+</tbody>
+</table>
+
+<a id="services-communication-voice-agents"></a>
+
+#### 语音 Agent (4)
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#cartesia">Cartesia</a></td><td align="left">Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MCP server, llms.txt, and a free tier.</td><td align="left"><a href="https://docs.cartesia.ai/api-reference">API</a> · <a href="https://github.com/cartesia-ai/cartesia-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#deepgram">Deepgram</a></td><td align="left">Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API keys, and $200 free credit without a card.</td><td align="left"><a href="https://developers.deepgram.com/reference">API</a> · <a href="https://developers.deepgram.com/docs/deepgram-sdks">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#elevenlabs">ElevenLabs</a></td><td align="left">Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://elevenlabs.io/docs/api-reference/introduction">API</a> · <a href="https://github.com/elevenlabs/elevenlabs-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#vapi">Vapi</a></td><td align="left">Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with an official MCP server and an llms.txt that opens with instructions for AI agents.</td><td align="left"><a href="https://docs.vapi.ai/api-reference">API</a> · <a href="https://github.com/VapiAI/mcp-server">MCP</a></td></tr>
 </tbody>
 </table>
 

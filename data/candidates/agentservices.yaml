@@ -18,152 +18,200 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
     - web-search-data/web-search
     - web-search-data/web-extraction
     - ai-models/model-access
+    - web-search-data/financial-data/prices
   sources:
     vendor-pr:
       url: https://github.com/Olorinm/agent-friendly-services/pull/4
       checked_on: '2026-09-15'
       kind: publisher_listing
       notes: >-
-        Vendor submission by vbkotecha; reviewed head afb6370c80f7f73b54a5dca8f808d3a2fa785472.
-        The July submission and requested changes are discovery history, not current capability evidence.
+        Vendor submission by vbkotecha; reviewed head afb6370c80f7f73b54a5dca8f808d3a2fa785472. The July
+        submission and requested changes are discovery history, not current capability evidence.
     buyer-guide:
-      url: https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/docs/buyer-quickstart.md
+      url: >-
+        https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/docs/buyer-quickstart.md
       checked_on: '2026-09-15'
       kind: official_docs
       notes: >-
-        Documents credential-free discovery/free prices and a separate wallet-funded x402 purchase path.
-        Its example proofs are vendor examples, not this project's test results.
+        Documents credential-free discovery/free prices and a separate wallet-funded x402 purchase path. Its
+        example proofs are vendor examples, not this project's test results.
     readme:
       url: https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/README.md
       checked_on: '2026-09-15'
       kind: official_docs
       notes: >-
-        Documents Streamable HTTP MCP configuration and Google OAuth with Stripe prepaid credits for
-        paid MCP tools, separately from wallet-funded REST. Also documents signed trading writes.
+        Documents Streamable HTTP MCP configuration and Google OAuth with Stripe prepaid credits for paid MCP
+        tools, separately from wallet-funded REST. Also documents signed trading writes.
     openapi:
       url: https://agentservices.to/openapi.json
       checked_on: '2026-09-15'
       kind: official_docs
       notes: >-
-        Describes market data, search, extraction and chat-completion routes. Some price metadata
-        conflicts with its own descriptions: stocks and chat completions describe charges while
-        x-payment-info says free with amount $0.00. Do not infer free access from that metadata.
+        Describes market data, search, extraction and chat-completion routes. Some price metadata conflicts
+        with its own descriptions: stocks and chat completions describe charges while x-payment-info says free
+        with amount $0.00. Do not infer free access from that metadata.
     pricing:
       url: https://agentservices.to/.well-known/x402
       checked_on: '2026-09-15'
       kind: official_docs
       notes: >-
-        Lists selected free endpoints and indicative per-call amounts in USDC on Base. The buyer guide
-        treats a request's returned payment challenge as authoritative; no challenge or payment was
-        obtained in this review. Unreconciled paid prices remain unknown.
+        Lists selected free endpoints and indicative per-call amounts in USDC on Base. The buyer guide treats
+        a request's returned payment challenge as authoritative; no challenge or payment was obtained in this
+        review. Unreconciled paid prices remain unknown.
     sdk-docs:
-      url: https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/README.md
+      url: >-
+        https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/README.md
       checked_on: '2026-09-15'
       kind: official_docs
       notes: Installation and usage of the official JavaScript package @agentservices/client.
     sdk-source:
-      url: https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/index.js
+      url: >-
+        https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/index.js
       checked_on: '2026-09-15'
       kind: official_repo
       notes: >-
-        The request implementation throws a structured error on HTTP 402; passing wallet options
-        does not implement signing, payment or retry. The README's automatic-payment example is
-        insufficient evidence of a working paid SDK path.
+        The request implementation throws a structured error on HTTP 402; passing wallet options does not
+        implement signing, payment or retry. The README's automatic-payment example is insufficient evidence
+        of a working paid SDK path.
   routes:
     - id: rest-api
       interface: api
       maintainer: official
       entry_url: https://api.agentservices.to/
       docs: https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md
-      evidence: [buyer-guide, openapi]
+      evidence:
+        - buyer-guide
+        - openapi
       availability:
         value: self_serve
-        evidence: [buyer-guide]
+        evidence:
+          - buyer-guide
       personal_access:
         value: documented
-        evidence: [buyer-guide]
+        evidence:
+          - buyer-guide
         notes: >-
-          Selected free requests need no account or wallet. Paid access requires a funded compatible
-          wallet; user-region and funding eligibility have not been established.
+          Selected free requests need no account or wallet. Paid access requires a funded compatible wallet;
+          user-region and funding eligibility have not been established.
       auth:
         value: unknown
-        evidence: [buyer-guide]
+        evidence:
+          - buyer-guide
         notes: >-
-          Free requests have no authentication. Paid requests use x402 payment proof, which is not an
-          API key or a catalog auth enum; lack of API-key provisioning does not mean unrestricted access.
+          Free requests have no authentication. Paid requests use x402 payment proof, which is not an API key
+          or a catalog auth enum; lack of API-key provisioning does not mean unrestricted access.
       data_kind:
         value: unknown
         notes: Current data, history depth and caching depend on the selected dataset and remain untested.
       capabilities:
         web.search:
           value: documented
-          evidence: [openapi]
+          evidence:
+            - openapi
         web.fetch:
           value: documented
-          evidence: [openapi]
+          evidence:
+            - openapi
+        prices.latest:
+          value: documented
+          evidence:
+            - buyer-guide
+          notes: >-
+            Free crypto-price lookup is documented; AAPL daily history, price timestamps and source precision
+            remain unverified.
       notes: >-
         Buyer guide names api.agentservices.to as the API host; agentservices.to serves the inspected
-        documentation. The free-price example is distinct from a paid data result. An HTTP 402 challenge
-        would establish quoted terms only, not delivery or settlement. Paid prices remain unresolved.
+        documentation. The free-price example is distinct from a paid data result. An HTTP 402 challenge would
+        establish quoted terms only, not delivery or settlement. Paid prices remain unresolved.
     - id: official-mcp
       interface: mcp
       maintainer: official
       entry_url: https://agentservices.to/mcp
-      docs: https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc
-      evidence: [buyer-guide, readme]
+      docs: >-
+        https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc
+      evidence:
+        - buyer-guide
+        - readme
       availability:
         value: self_serve
-        evidence: [buyer-guide, readme]
+        evidence:
+          - buyer-guide
+          - readme
       personal_access:
         value: documented
-        evidence: [buyer-guide, readme]
+        evidence:
+          - buyer-guide
+          - readme
         notes: >-
-          Free discovery and selected tools are documented without credentials. The separate paid-human
-          path requires Google sign-in and Stripe prepaid credits; current activation and regional
-          eligibility were not verified.
+          Free discovery and selected tools are documented without credentials. The separate paid-human path
+          requires Google sign-in and Stripe prepaid credits; current activation and regional eligibility were
+          not verified.
       auth:
         value: unknown
-        evidence: [buyer-guide, readme]
+        evidence:
+          - buyer-guide
+          - readme
         notes: >-
-          Selected free tools need no credentials; the documented paid-human path uses OAuth. This
-          mixed surface must not inherit REST wallet payment or a service-wide no-account claim.
+          Selected free tools need no credentials; the documented paid-human path uses OAuth. This mixed
+          surface must not inherit REST wallet payment or a service-wide no-account claim.
+      capabilities:
+        prices.latest:
+          value: documented
+          evidence:
+            - buyer-guide
+          notes: >-
+            The guide names the free crypto_prices tool; no other market dataset or paid fulfillment is
+            inferred.
       notes: >-
         Protocol configuration is documented, not executed here. MCP discovery, a free tool call and
-        fulfillment of a paid tool are separate checks; neither MCP support nor a registry listing
-        establishes hosted-service terms or read-only behavior for every tool.
+        fulfillment of a paid tool are separate checks; neither MCP support nor a registry listing establishes
+        hosted-service terms or read-only behavior for every tool.
     - id: javascript-sdk
       interface: sdk
       maintainer: official
       entry_url: https://github.com/vbkotecha/agentservices-api/tree/main/sdk
       docs: https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md
       via: rest-api
-      evidence: [sdk-docs, sdk-source]
+      evidence:
+        - sdk-docs
+        - sdk-source
       availability:
         value: self_serve
-        evidence: [sdk-docs]
+        evidence:
+          - sdk-docs
       personal_access:
         value: documented
-        evidence: [sdk-docs]
+        evidence:
+          - sdk-docs
         notes: Documents credential-free selected methods; paid fulfillment requires separate payment handling.
       auth:
         value: unknown
-        evidence: [sdk-source]
+        evidence:
+          - sdk-source
         notes: Free calls are unauthenticated; the inspected request code exposes 402 without paying or retrying.
+      capabilities:
+        prices.latest:
+          value: documented
+          evidence:
+            - buyer-guide
+            - sdk-docs
+          notes: >-
+            The guide documents a free SDK crypto-price call; examples do not establish tested package
+            behavior.
       notes: >-
-        Package installation and execution were not tested. SDK price examples are indicative, and a
-        payment challenge surfaced by the client is not a successful paid result.
+        Package installation and execution were not tested. SDK price examples are indicative, and a payment
+        challenge surfaced by the client is not a successful paid result.
   notes:
     - >-
-      One service identity covers its REST, MCP and SDK routes, including the older AIServices name.
-      The README attributes free crypto prices to CoinGecko and OpenAPI attributes chat completions to
-      OpenRouter; these routes are not independent underlying data or model sources.
+      One service identity covers its REST, MCP and SDK routes, including the older AIServices name. The
+      README attributes free crypto prices to CoinGecko and OpenAPI attributes chat completions to OpenRouter;
+      these routes are not independent underlying data or model sources.
     - >-
-      A written version/deprecation policy and hosted-service automation terms remain unknown;
-      version labels and protocol endpoints do not establish either policy.
+      A written version/deprecation policy and hosted-service automation terms remain unknown; version labels
+      and protocol endpoints do not establish either policy.
     - >-
-      Data retrieval and x402 settlement are separate actions. The current platform also documents
-      trading and persistent-memory writes; no service-wide read-only or idempotency conclusion is made.
+      Data retrieval and x402 settlement are separate actions. The current platform also documents trading and
+      persistent-memory writes; no service-wide read-only or idempotency conclusion is made.

@@ -11,7 +11,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
+    - web-search-data/financial-data/fx
   sources:
     docs:
       url: https://twelvedata.com/docs/introduction/quickstart
@@ -19,7 +20,7 @@ catalog:
       kind: official_docs
     access:
       url: https://twelvedata.com/pricing
-      checked_on: '2026-09-09'
+      checked_on: '2026-09-15'
       kind: official_site
     sdk:
       url: https://twelvedata.com/docs/introduction/quickstart

@@ -126,5 +126,37 @@
     "expected_output": "The correct verification code, corresponding email subject and timestamp.",
     "success": "The result matches the latest login email in the fixtures frozen before execution and is supported by real reads through the specified service. Do not confuse an older message or unrelated notice with the target email.",
     "failure": "Wrong code or email; documentation examples substituted for real messages; fabricated delivery state; or failure within the budget. A failure to deliver fixtures is not attributed to the measured Agent."
+  },
+  "financial-access-001/v1": {
+    "description": "Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.",
+    "inputs": "The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.",
+    "expected_output": "One genuine financial-data query result from the specified service, reusable configuration where needed, and the actual setup steps or specific blockers.",
+    "success": "Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.",
+    "failure": "No genuine data query, substitution of another service, signup or installation only, required credentials or human steps unfinished, or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+        "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+        "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+        "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。"
+      }
+    ]
+  },
+  "financial-fx-001/v1": {
+    "description": "Convert these three USD expenses into EUR using the European Central Bank reference rate for each expense date. List each converted amount and the total, and cite the exchange-rate source.",
+    "inputs": "Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; August 17, 2026: USD 39.90. If no rate was published on the expense date, use the most recent earlier publication date. Round each converted amount to euro cents, then sum. Exclude fees.",
+    "expected_output": "A three-row conversion table with expense dates, effective rate dates, quote direction, USD and EUR amounts; the EUR total and a verifiable source.",
+    "success": "Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.",
+    "failure": "Latest rates substituted for historical rates, a different publishing institution, incorrect quote direction, weekend fallback, rounding or total; no verifiable source; or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。",
+        "inputs": "合成支出：2026-08-14，80.00 USD；2026-08-15，125.00 USD；2026-08-17，39.90 USD。若当日未发布汇率，使用此前最近一个发布日；逐笔四舍五入到欧分，再加总。不计手续费。",
+        "expected_output": "三行换算表，包含支出日、实际使用的汇率日、汇率方向、美元金额与欧元金额；欧元合计和可核对出处。",
+        "success": "使用指定日期对应的 ECB USD/EUR 参考数据；非发布日回退正确；币种方向及乘除关系正确；三笔金额和按规定舍入后的合计与独立计算一致；核心汇率来自指定服务。",
+        "failure": "用最新汇率替代历史值、换成其他机构口径、币种方向错误、周末回退错误、舍入或合计错误；无可核对来源；预算内未完成。环境故障单列无效。"
+      }
+    ]
   }
 }

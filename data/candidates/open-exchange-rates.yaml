@@ -11,7 +11,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/fx
   sources:
     docs:
       url: https://docs.openexchangerates.org/reference/api-introduction
@@ -42,5 +42,5 @@ catalog:
         evidence:
           - docs
       notes: >-
-        A free signup route is published. Confirm whether the chosen historical date and currency base
-        are included; rates are indicative rather than executable bank/card quotes.
+        A free signup route is published. Confirm whether the chosen historical date and currency base are
+        included; rates are indicative rather than executable bank/card quotes.

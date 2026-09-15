@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - web-search-data/financial-data/prices
   sources:
     docs:
       url: https://finnhub.io/docs/api/quote
@@ -35,5 +35,9 @@ catalog:
         evidence:
           - docs
       notes: >-
-        Dashboard API key required. Stock candles require premium access; a working free quote endpoint
-        would not establish free historical-data access.
+        Dashboard API key required. Stock candles require premium access; a working free quote endpoint would
+        not establish free historical-data access.
+  notes:
+    - >-
+      Company fundamentals are mentioned in discovery, but the recorded quote reference does not establish
+      financial-statement fields. Statement classification awaits a specific source.

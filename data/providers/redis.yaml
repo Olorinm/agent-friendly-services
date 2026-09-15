@@ -73,3 +73,19 @@ checks:
   automation_permitted:
     status: unknown
     notes: ToS not yet reviewed and recorded.
+catalog:
+  version: 1
+  classifications:
+    - databases/key-value
+    - databases/vector
+    - databases/document
+  sources:
+    classification-docs:
+      url: https://redis.io/docs/latest/
+      checked_on: '2026-09-15'
+      kind: official_docs
+  routes: []
+  notes:
+    - >-
+      Redis key/value operations, vector search and queryable JSON are documented features. Cloud and
+      open-source versions/entitlements are not interchangeable.
