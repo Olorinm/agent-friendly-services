@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { ROOT, loadProviders, loadCandidates, type Provider } from '../scripts/lib.ts';
 import { serviceAccess } from '../scripts/service-access.ts';
 const services = [...loadProviders(), ...loadCandidates()].map(p => p.data);
@@ -33,10 +36,19 @@ test('quickstarts are preferred, generic Docs disappear, shared guides are linke
 });
 
 test('generated Agent links match the homepage selector for every catalog service', () => {
-  const catalog = JSON.parse(fs.readFileSync(`${ROOT}/generated/catalog.json`, 'utf8'));
-  for (const p of services) {
-    const published = catalog.services.find((s: any) => s.id === p.id);
-    assert.deepEqual(published.access_links, serviceAccess(p).map(([label, url]) => ({ label, url, kind: 'documentation' })));
-    assert.equal(new Set(published.access_links.map((l: any) => l.url)).size, published.access_links.length);
+  const output = fs.mkdtempSync(path.join(os.tmpdir(), 'afs-access-links-test-'));
+  try {
+    execFileSync(process.execPath, ['--import', 'tsx', 'scripts/generate.ts'], {
+      cwd: ROOT, env: { ...process.env, AFS_OUTPUT_DIR: output }, stdio: 'pipe',
+    });
+    const catalog = JSON.parse(fs.readFileSync(path.join(output, 'generated/catalog.json'), 'utf8'));
+    for (const p of services) {
+      const published = catalog.services.find((s: any) => s.id === p.id);
+      assert.ok(published, `Generated catalog is missing ${p.id}`);
+      assert.deepEqual(published.access_links, serviceAccess(p).map(([label, url]) => ({ label, url, kind: 'documentation' })));
+      assert.equal(new Set(published.access_links.map((l: any) => l.url)).size, published.access_links.length);
+    }
+  } finally {
+    fs.rmSync(output, { recursive: true, force: true });
   }
 });
