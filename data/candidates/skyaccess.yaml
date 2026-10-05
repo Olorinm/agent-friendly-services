@@ -1,0 +1,125 @@
+id: skyaccess
+name: SkyAccess
+category: travel
+homepage: https://skyaccess.com/
+summary: Search 5,000+ live empty leg flights, get charter price estimates and booking links. No account or API key.
+submitted_by: vendor
+tags:
+  - private-jet
+  - empty-legs
+  - charter
+  - remote-mcp
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    repo:
+      url: https://github.com/sky-access/skyaccess-mcp
+      checked_on: '2026-10-04'
+      kind: official_repo
+      notes: >-
+        README documents the hosted endpoint, connection details (no authentication), the five tools and
+        their read/write annotations, rate limits and client setup. Inventory figures in the README are
+        publisher claims, not this directory's measurements.
+    registry:
+      url: https://registry.modelcontextprotocol.io/v0/servers?search=com.skyaccess
+      checked_on: '2026-10-04'
+      kind: publisher_listing
+      notes: >-
+        Official MCP Registry entry com.skyaccess/skyaccess; version 1.0.2 is latest and lists the same
+        streamable HTTP remote. Earlier versions are marked deprecated.
+    privacy:
+      url: https://skyaccess.com/privacy#connector
+      checked_on: '2026-10-04'
+      kind: official_site
+      notes: >-
+        Connector section (last updated September 30, 2026): searches need no account or contact details;
+        a charter request sends name, email and trip details; no payment information passes through the
+        connector.
+  routes:
+    - id: remote-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.skyaccess.com/mcp
+      docs: https://github.com/sky-access/skyaccess-mcp
+      evidence: [repo, registry]
+      availability:
+        value: self_serve
+        evidence: [repo]
+        notes: The published setup is the server URL only; nothing is installed.
+      personal_access:
+        value: documented
+        evidence: [repo, privacy]
+        notes: >-
+          The source documents anonymous use with no account, sign-up, API key or OAuth for the MCP tools.
+          This covers search, re-read, link and estimate tools only; eligibility to complete a purchase on
+          the booking page was not reviewed.
+      auth:
+        value: none
+        evidence: [repo]
+      data_kind:
+        value: live
+        evidence: [repo]
+        notes: >-
+          Publisher claim that results reflect currently published empty leg flights. Prices are
+          whole-aircraft prices in USD, with taxes and fees shown at checkout. Not independently verified.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence: [repo]
+          notes: >-
+            search_empty_legs filters by origin, destination, date range, passengers and max_price, and
+            returns up to 5 flights. Inventory is empty leg private charter flights priced per aircraft, not
+            scheduled airline fares.
+        flights.reprice:
+          value: documented
+          evidence: [repo]
+          notes: get_flight re-reads one flight by flightId as currently published, or reports that it is no longer available.
+        flights.booking-link:
+          value: documented
+          evidence: [repo]
+          notes: booking_handoff returns the SkyAccess booking page link for a flightId; search results also include a booking link.
+        flights.ticketing:
+          value: unsupported
+          evidence: [repo, privacy]
+          notes: >-
+            No tool issues a ticket or creates a booking. booking_handoff creates, holds or changes nothing,
+            and request_booking sends an enquiry, takes no payment and creates no booking.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [repo, privacy]
+      human_steps:
+        - step: The traveler reviews and books the flight on the SkyAccess booking page.
+          stage: task
+          evidence: [repo]
+          notes: The MCP route stops at the booking link; payment happens on the page, outside the connector.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: tool call
+          scope: >-
+            The source describes the MCP server as free. Flight and charter prices are separate and are paid
+            on the booking page, not through the connector.
+          evidence: [repo]
+      notes: >-
+        Streamable HTTP, POST only and stateless; GET returns 405 by design. Documented limits per client
+        IP: 30 tool calls per 60 seconds and 10 request_booking calls per hour. get_charter_estimate returns
+        an indicative USD price range per aircraft category and is not an offer. request_booking is the only
+        write tool; it sends the traveler's name, email and trip details so a specialist can follow up by
+        email. Coverage is global with most inventory in the United States.
+  notes:
+    - >-
+      Vendor contribution by SkyAccess Inc. This record contains public-source claims only; it does not
+      establish successful access or task completion.
+    - >-
+      On 2026-10-04 the submitter sent only initialize and tools/list to the endpoint. It negotiated protocol
+      version 2025-06-18 and listed search_empty_legs, get_flight, booking_handoff, get_charter_estimate and
+      request_booking, the first four annotated readOnlyHint true. No tool was called, so no search, link or
+      enquiry result is claimed.
+    - >-
+      The repository also ships a Claude Code plugin and a Gemini CLI extension manifest. Both point at the
+      same hosted endpoint and are not separate services or routes.
