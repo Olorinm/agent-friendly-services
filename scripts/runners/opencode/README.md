@@ -1,7 +1,7 @@
 # OpenCode runner
 
 This command adapter runs the repository pipeline on an SSH-accessible Linux
-host. It uses the BigModel **Coding Plan** endpoint and OpenCode's JSON CLI;
+host. It supports the DeepSeek direct API and BigModel **Coding Plan** through OpenCode's JSON CLI;
 no desktop automation or ZCode login is involved. The pipeline remains independent
 of this adapter; another runner implements the same four-command protocol.
 
@@ -14,17 +14,32 @@ checking. They do not create cloud resources or purchase capacity.
 
 Build `Dockerfile` once. `OPENCODE_VERSION` pins the CLI; `DEBIAN_MIRROR` can select
 an appropriate Debian mirror. Keep image digests and installed versions in the
-private batch manifest. Preinstall `ripgrep`, since OpenCode otherwise downloads
-it on the first file search in each fresh home.
+private batch manifest. The image includes `ripgrep`, `pip`, and Poppler's
+`pdftotext` so ordinary file search, Python dependency installation, and public
+PDF extraction work in fresh runtimes without task-specific helper scripts.
 
 Provision a dedicated container per service/route and a separate grader container.
 Limit memory, CPUs and PIDs; publish no ports and mount neither the host home nor
 the Docker socket. The image runs as uid 1000. Only the controller uses root to
 collect records and maintain `/run/afs` with mode 0700. `provision.py up` installs
-the worker and recorder there and sends a mode-0600 `bigmodel.key` over SSH stdin.
-The key
-must be a Coding Plan key; the proxy cannot forward to the normal pay-as-you-go
-API. Do not put these private files in the model's workspace.
+the worker and recorder there and sends a mode-0600 `model.key` and provider
+settings over SSH stdin. Choose `provider: "deepseek"` for the DeepSeek API, or
+`provider: "zhipuai-coding-plan"` for a BigModel Coding Plan key. Omitting the
+provider preserves the legacy BigModel route. The proxy forwards only to the
+selected provider's fixed endpoint and never exposes its key to the model.
+Do not put these private files in the model's workspace.
+
+Optional private settings `max_model_requests` and `deadline_epoch` bound each
+role's forwarded requests and its absolute Unix deadline. The proxy checks these
+before contacting the provider, pins the requested model, and caps DeepSeek
+output at 32,000 tokens per request. Failed upstream attempts still consume the
+request ceiling; proxy restarts count previously captured requests. The worker
+also stops its model process before the absolute deadline. Each result retains
+`controller-limits.json` and any proxy guard events. Declare the limits in every
+affected batch's frozen environment and preparation note; changed budgets are
+separate experimental conditions. These per-role limits are not a shared dollar
+budget: the controller must reserve a conservative cost for all dispatched roles,
+including grading, and retain the reservation when usage cannot be reconciled.
 
 Create a private adapter configuration outside Git (for example under the ignored
 `data/experiments/results/` directory). Infrastructure values below are placeholders:
@@ -33,8 +48,10 @@ Create a private adapter configuration outside Git (for example under the ignore
 {
   "host": "your-ssh-alias",
   "remote_root": "/private/runner-root",
-  "key_file": "/private/coding-plan.key",
-  "image": "afs-opencode:1.18.29",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "key_file": "/private/deepseek.key",
+  "image": "afs-opencode:1.18.35",
   "memory": "2g",
   "cpus": 1,
   "pids_limit": 256,
@@ -66,6 +83,9 @@ python3 scripts/runners/opencode/provision.py --config /private/adapter.json up
 `up` prints the actual OpenCode version, image ID and resource limits. Save that
 output in the private batch manifest; use the measured version in the pipeline's
 `harness`. It refuses running containers and containers it did not create.
+After changing runner code or provider settings, run `up` on stopped runtimes
+to install the updated worker, recorder and provider configuration. Use separate
+containers and batch records when changing the model for a new comparison.
 It does not migrate existing containers to a new image: use new container names
 when changing the image. Failed setup can leave its own containers present;
 inspect their state before retrying. Optional `build_args` can set
@@ -99,10 +119,14 @@ its own frozen role instructions and the completed execution evidence. It does
 not inherit the execution session or its service credentials. Follow the
 [pipeline configuration](../../../data/experiments/AGENTS.md#通用-pipeline-的使用)
 for task selection, permissions, attachments and references. In each role set
-`model` to `glm-5.3-flash`, `reasoning_effort` to `high`, the measured OpenCode
+`model` to `deepseek-flash` (DeepSeek V4.1 Flash), `reasoning_effort` to `high`, the measured OpenCode
 version, and one distinct configured runtime. Fill all four command arrays with
 the adapter's absolute path and the external configuration path. Service/task IDs
 belong to the task configuration; connection details and keys stay private.
+Both execution and grading must explicitly select the new model. Existing
+frozen GLM runs keep their recorded configuration; do not rewrite them or combine
+their results with the new batch. The adapter rejects a GLM model sent to a
+DeepSeek runtime, and vice versa.
 
 ```sh
 python3 scripts/pipeline.py prepare data/experiments/results/<run-id> --config /private/task.json
@@ -133,6 +157,14 @@ controller also excludes occupied runtimes, so successive tasks can overlap
 execution and grading without sharing a container concurrently. Each group still
 seals its same-task answer snapshot before grading. Actual concurrency is bounded
 by the available distinct runtimes; raising the ceiling does not create containers.
+Container CPU and memory settings are upper limits, not reserved allocations.
+Choose the batch ceiling from measured throughput and host memory headroom,
+including cold OpenCode startup, tool execution and independent grading. More
+sessions can increase local startup time enough to reduce overall throughput,
+even when model inference runs remotely. Measure time to the first captured
+model request separately from upstream response time before changing capacity.
+Shared grader runtimes may be assigned to different runs while idle; each uses
+a fresh home/session/workspace and retains no executor credentials or task state.
 The controller holds all group/member locks and refuses further dispatch after an
 unconfirmed runtime stop. Run the whole batch together, rather than independently
 starting controllers that reuse its runtimes.
@@ -154,14 +186,16 @@ uses these private records to build `review-packet/index.json`, full per-call
 files, and an empty assessment template for the grader. Previews explicitly mark
 truncation; the original logs remain available. This saves log parsing and file
 discovery without inferring a verdict or publishing raw tool records.
+JSON CLI and SSE records are split on LF only; Unicode separators inside JSON
+strings must remain part of the captured tool output.
 
 Token normalization reconciles each wire response with OpenCode's independent
 `step_finish` counters. OpenCode's `input` excludes cache hits and its `output`
-excludes reasoning; both are restored to inclusive canonical counts. BigModel's
+excludes reasoning; both are restored to inclusive canonical counts. Both providers'
 automatic cache has a hit count and no separate billable cache-write counter.
 Missing/failed requests or inconsistent totals remain incomplete. The pipeline
-computes model estimates from its frozen LiteLLM rates, not OpenCode's Coding
-Plan `$0` display. Service charges still require the independent grader's
+computes model estimates from its frozen LiteLLM rates. Missing model prices stay
+unknown; a Coding Plan `$0` display is not a model-cost estimate. Service charges still require the independent grader's
 supported billing evidence.
 
 This adapter is initially exercised with the GitHub REST route. Native MCP,

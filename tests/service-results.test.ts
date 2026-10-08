@@ -23,15 +23,29 @@ test('Kiwi details show current MCP costs, retain untested API and keep old runs
   assert.match(setup, /\| — \| — \| — \|/);
 });
 
-test('Exa details keep its successful MCP and failed API results in separate conditions', () => {
+test('historical Exa MCP success and API failure remain separate without later trials changing the fixture', () => {
   const p = providers.find(p => p.id === 'exa')!;
-  const runs = records.filter(r => r.service_id === p.id);
+  const runs = records.filter(r => r.service_id === p.id && r.started_at.startsWith('2026-09-07'));
   const text = renderServiceResults(p, buildBoards(runs), runs);
   assert.match(text, /\| Conditions \|/);
   assert.match(text, /\| API .*\[0%\]/);
   assert.match(text, /\| MCP .*\[100%\]/);
   assert.match(text, /931\.5k/);
   assert(!text.includes('50%'));
+});
+
+test('supplied and unspecified account descriptions never become anonymous starting resources', () => {
+  const p = providers.find(p => p.id === 'exa')!;
+  const base = structuredClone(records.find(r => r.service_id === p.id)!);
+  const conditions = ['none', 'controller-registered ordinary free API key', 'pre-existing management account', 'unknown'];
+  const samples = conditions.map((value, i) => ({ ...structuredClone(base), run_id: `credential-fixture-${i}`, service_id: `credential-service-${i}`,
+    environment: { ...base.environment, service_credentials: value } }));
+  assert.equal(buildBoards(samples).length, 4, 'different credential prerequisites must not be pooled');
+  for (const sample of samples.slice(1)) {
+    const text = renderSetup(p, [sample]);
+    assert(!text.includes('No account or key supplied'));
+    assert.match(text, /controller-registered|pre-existing|preparation unknown/);
+  }
 });
 
 test('machine summaries identify exactly one selected protocol per service and task family', () => {

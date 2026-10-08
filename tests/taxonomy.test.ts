@@ -14,6 +14,7 @@ const categories = loadCategories();
 const providers = [...loadProviders(), ...loadCandidates()].map(record => record.data);
 const data = { categories, services: providers.map(p => catalogService(p, 'candidate', loadEvaluations())) };
 const finance = 'web-search-data/financial-data';
+const today = new Date().toISOString().slice(0, 10);
 const ids = (filters: Record<string, string>) => searchServices(data, filters).map(s => s.id);
 
 test('classification paths accept deeper branches, inherit only ancestor capabilities and require definitions', () => {
@@ -24,9 +25,9 @@ test('classification paths accept deeper branches, inherit only ancestor capabil
   p.catalog!.classifications = [`${finance}/fx/reference-rates`];
   const valid = new Ajv().compile(JSON.parse(fs.readFileSync(`${ROOT}/schema/catalog.schema.json`, 'utf8')));
   assert.equal(valid(p.catalog), true);
-  assert.deepEqual(catalogErrors(p, tree, '2026-09-15'), []);
+  assert.deepEqual(catalogErrors(p, tree, today), []);
   p.catalog!.routes[0].capabilities!['prices.latest'] = { value: 'documented', evidence: ['docs'] };
-  assert.match(catalogErrors(p, tree, '2026-09-15').join('\n'), /prices.latest does not belong/);
+  assert.match(catalogErrors(p, tree, today).join('\n'), /prices.latest does not belong/);
   assert(inClassification(p, finance));
   assert(!inClassification(p, `${finance}/fx/reference`));
   const researchScope = classificationCapabilities(tree, finance, true).map(c => c.id);
@@ -86,7 +87,8 @@ test('search results cannot masquerade as specified-URL extraction or inherit a 
 test('shared finance setup is separated from FX business results in queries and comparison means', () => {
   const fx = searchServices(data, { classification: `${finance}/fx` }).find(s => s.id === 'ecb-data')!;
   const runs = fx.routes.flatMap(r => r.task_runs);
-  assert.deepEqual(runs.map(r => r.task.id), ['financial-fx-001']);
+  assert(runs.length > 0);
+  assert.deepEqual(new Set(runs.map(r => r.task.id)), new Set(['financial-fx-001']));
   assert(runs.every(r => r.phase === 'business'));
   const all = searchServices(data, { classification: finance }).find(s => s.id === 'ecb-data')!;
   assert(all.routes.flatMap(r => r.task_runs).some(r => r.phase === 'setup'));

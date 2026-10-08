@@ -16,6 +16,7 @@ from assessment import normalize as normalize_assessment
 from config import load, ssh as remote_ssh
 from tool_records import extract as extract_tool_records
 from runtime_status import query as query_runtime_status
+from providers import DEFAULT_PROVIDER, validate_model
 
 p=argparse.ArgumentParser();p.add_argument('--config',type=Path,required=True);p.add_argument('operation',choices=['start','status','collect','stop']);p.add_argument('request',type=Path);a=p.parse_args()
 c=load(a.config);r=json.loads(a.request.read_text());container=c['containers'][r['runtime']];run=(r.get('handle') if a.operation!='start' else None) or r['run_id']+'-'+r['role']
@@ -35,6 +36,10 @@ def put(directory):
     return buf.getvalue()
 
 if a.operation=='start':
+    r['provider']=c.get('provider',DEFAULT_PROVIDER)
+    validate_model(r['provider'],r['model'])
+    for key in ('max_model_requests','deadline_epoch'):
+        if key in c:r[key]=c[key]
     r['retained_paths']=c['retained_paths'][r['runtime']]
     r['retained_children']=c.get('retained_children',{}).get(r['runtime'],{})
     if not isinstance(r['retained_paths'],list):raise ValueError('Specify retained_paths for each runtime')

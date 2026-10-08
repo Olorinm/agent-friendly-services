@@ -28,6 +28,14 @@ tasks:
     id: database-todos-001
     classification: databases/hosted-relational
     phase: business
+  - file: data/experiments/tasks/databases-v2.md
+    id: database-access-001
+    classification: databases/hosted-relational
+    phase: setup
+  - file: data/experiments/tasks/databases-v2.md
+    id: database-todos-001
+    classification: databases/hosted-relational
+    phase: business
   - file: data/experiments/tasks/financial-data.md
     id: financial-access-001
     classification: web-search-data/financial-data
@@ -72,6 +80,10 @@ tasks:
     id: flights-search-001
     classification: travel/flights
     phase: business
+  - file: data/experiments/tasks/web-search.md
+    id: web-search-access-001
+    classification: web-search-data/web-search
+    phase: setup
   - file: data/experiments/tasks/web-search.md
     id: web-search-001
     classification: web-search-data/web-search

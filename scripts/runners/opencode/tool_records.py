@@ -10,7 +10,7 @@ def extract(output):
     raw = source.read_bytes()
     source_hash = hashlib.sha256(raw).hexdigest()
     calls, errors = [], []
-    for number, line in enumerate(raw.decode().splitlines(), 1):
+    for number, line in enumerate(raw.decode().split('\n'), 1):
         if not line.strip():
             continue
         try:

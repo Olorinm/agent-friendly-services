@@ -89,12 +89,25 @@ catalog:
   sources:
     launchpad:
       url: https://neon.new/
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
     launchpad-guide:
       url: https://neon.com/blog/neon-launchpad
       checked_on: '2026-09-07'
       kind: official_announcement
+    claimable:
+      url: https://neon.com/claimable-neon
+      checked_on: '2026-10-08'
+      kind: official_site
+    claimable-docs:
+      url: https://neon.com/docs/reference/claimable-neon
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: The same official document is available as /docs/reference/claimable-neon.md.
+    claimable-auth:
+      url: https://neon.com/auth.md
+      checked_on: '2026-10-08'
+      kind: official_docs
   routes:
     - id: ephemeral-api
       interface: api
@@ -104,10 +117,65 @@ catalog:
       availability:
         value: unknown
         evidence: [launchpad]
-        notes: Page still advertises provisioning but now says neon.new is being sunset in favor of Claimable Neon; actual availability must be tested.
+        notes: Page advertises provisioning while announcing sunset in favor of Claimable Neon. This legacy route was not called; its replacement is recorded separately as claimable-api.
       personal_access: {value: documented, evidence: [launchpad]}
       auth: {value: none, evidence: [launchpad]}
       capabilities:
         database.provision: {value: documented, evidence: [launchpad]}
         database.persist: {value: documented, evidence: [launchpad-guide]}
       notes: No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials.
+    - id: claimable-api
+      interface: api
+      maintainer: official
+      entry_url: https://claimable.neon.tech/v1/agent/identity
+      docs: https://neon.com/docs/reference/claimable-neon
+      evidence:
+        - claimable
+        - claimable-docs
+        - claimable-auth
+      availability:
+        value: self_serve
+        evidence:
+          - claimable
+      personal_access:
+        value: documented
+        evidence:
+          - claimable
+      auth:
+        value: none
+        evidence:
+          - claimable
+          - claimable-docs
+        notes: No preexisting account or key at provisioning; an issued identity assertion is exchanged for Bearer tokens to retrieve scoped database credentials.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - claimable
+        payment_method:
+          value: not_required
+          evidence:
+            - claimable
+      capabilities:
+        database.provision:
+          value: documented
+          evidence:
+            - claimable-docs
+        database.persist:
+          value: documented
+          evidence:
+            - claimable-docs
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: MB
+          per: project
+          scope: Unclaimed project storage, with 1 GB transfer and a 72-hour lifetime.
+          evidence:
+            - claimable
+      notes: >-
+        Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works
+        with standard Postgres clients; identity assertions, tokens and connection URLs are private.
+        The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts
+        15 minutes and is a different clock. Short-term persistence does not establish a permanent free
+        account. Claiming rotates credentials and must not occur between write and independent read.

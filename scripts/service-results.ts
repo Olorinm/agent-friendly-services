@@ -1,6 +1,6 @@
 import type { Provider } from './lib.ts';
 import type { Evaluation } from './evaluations.ts';
-import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel, peerReviewLabel } from './leaderboard.ts';
+import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel, peerReviewLabel, credentialLabel } from './leaderboard.ts';
 import { taskDisplay } from './task-display.ts';
 import { taskClassification } from './task-classifications.ts';
 
@@ -20,8 +20,7 @@ export function renderSetup(p: Provider, records: Evaluation[]) {
   const latest = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at));
   const rows = (p.catalog?.routes ?? []).map(route => {
     const r = latest.find(r => r.route_id === route.id);
-    const supplied = r && String(r.environment.service_credentials ?? 'none').startsWith('provided:');
-    const state = !r ? '—' : supplied ? 'Credentials supplied before trial' : 'No account or key supplied';
+    const state = r ? cell(credentialLabel(r)) : '—';
     const setup = latest.find(r => r.route_id === route.id && taskClassification(r.task).phase === 'setup' && r.status !== 'invalid_run');
     const measured = setup ? `[${tokenLabel(setup.usage ? setup.usage.input_tokens + setup.usage.output_tokens : null)}](${recordLink(setup)})` : '—';
     return [routeName(p, route.id), r ? `[${state}](${recordLink(r)})` : state, measured,
@@ -65,7 +64,7 @@ export function renderServiceResults(p: Provider, boards: Board[], records: Eval
     const configs = conditions.map(id => {
       const entry = matching.find(e => e.board.id === id)!;
       const r = entry.runs[0];
-      const credentials = String(r.environment.service_credentials ?? 'none').startsWith('provided:') ? 'Credentials supplied' : 'No account or key supplied';
+      const credentials = cell(credentialLabel(r));
       return `${conditions.length > 1 ? `**${label(id)}:** ${routeName(p, r.route_id)} · ` : ''}${commonConfigs.length > 1 ? config(r) + ' · ' : ''}${credentials}${taskVariants.length > 1 ? ` · Task variant ${taskVariants.indexOf(r.task.sha256) + 1}` : ''} · [Full configuration and evidence](./evaluations.md#${id})`;
     });
     const invalid = matching.flatMap(e => e.runs).filter(r => r.status === 'invalid_run');

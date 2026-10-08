@@ -5,6 +5,14 @@ def normalize(value):
     result=deepcopy(value)
     cost=result.get('service_cost')
     changes=[]
+    if isinstance(cost,dict) and isinstance(cost.get('sources'),list):
+        sources=cost['sources']
+        valid=lambda item: (isinstance(item,str) and bool(item.strip())) or (isinstance(item,dict)
+            and set(item)<= {'url','note'} and isinstance(item.get('url'),str) and bool(item['url'].strip())
+            and isinstance(item.get('note',''),str))
+        if sources and all(valid(item) for item in sources) and any(isinstance(item,dict) for item in sources):
+            cost['sources']=[item if isinstance(item,str) else item['url']+(' — '+item['note'] if item.get('note') else '') for item in sources]
+            changes.append('Joined existing service_cost.sources URL/note objects into source strings; all supplied values retained')
     fields=('rule','observed','evidence')
     if (isinstance(cost,dict) and cost.get('kind')=='confirmed_free'
             and isinstance(cost.get('applicability'),str) and cost['applicability'].strip()
@@ -25,7 +33,8 @@ def normalize(value):
                 and all(isinstance(applicability.get(k),str) and applicability[k].strip() for k in ('rule','observed'))):
             applicability['evidence']='\n'.join(evidence)
             changes.append('Joined existing service_cost.applicability.evidence references with newlines; references unchanged')
-    if (changes and 'note' not in cost):
+    if (changes and 'note' not in cost and isinstance(cost.get('applicability'),dict)
+            and isinstance(cost['applicability'].get('rule'),str)):
         cost['note']=cost['applicability']['rule']
         changes.append('Copied the existing free-rule text into service_cost.note; no billing fact added')
     return result,changes

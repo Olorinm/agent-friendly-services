@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-15T09:35:33.214Z",
-  "count": 98,
+  "generated_at": "2026-10-08T12:42:19.258Z",
+  "count": 100,
   "candidates": [
     {
       "id": "adyen",
@@ -67,7 +67,7 @@
       "name": "Aiven",
       "category": "databases",
       "homepage": "https://aiven.io/",
-      "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
+      "summary": "Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API provisioning and standard PostgreSQL client access; inactive free services may be powered off.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -104,7 +104,7 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [
-        "Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass."
+        "MCP remains a documented discovery lead rather than a verified access route; no account was registered and no keyed financial-data call was made during this documentation review."
       ],
       "m1": null
     },
@@ -420,12 +420,10 @@
       "name": "Financial Datasets",
       "category": "web-search-data",
       "homepage": "https://financialdatasets.ai/",
-      "summary": "US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.",
+      "summary": "US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.",
       "submitted_by": "community",
       "entrypoints": {},
-      "notes": [
-        "Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass."
-      ],
+      "notes": [],
       "m1": null
     },
     {
@@ -499,7 +497,7 @@
       "name": "FRED / ALFRED",
       "category": "web-search-data",
       "homepage": "https://fred.stlouisfed.org/",
-      "summary": "Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.",
+      "summary": "Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -935,7 +933,7 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [
-        "Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification."
+        "Free Web API and bulk downloads have different history limits. The pricing card says five years of fundamentals, while its comparison table says seven API years and five delayed bulk years. The free Web API rate is two calls/second and the filing allowance is eight/day; 500 monthly high-speed credits apply to backtesting, not an API request allowance. Actual FY2025 coverage and filing provenance through the selected route remain untested."
       ],
       "m1": null
     },
@@ -946,6 +944,17 @@
       "homepage": "https://apify.com/skootle/google-flights-scraper",
       "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
       "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "skyaccess",
+      "name": "SkyAccess",
+      "category": "travel",
+      "homepage": "https://skyaccess.com/",
+      "summary": "Private-jet empty-leg search, indicative charter estimates and booking links through a public remote MCP.",
+      "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [],
       "m1": null
@@ -980,6 +989,17 @@
       "category": "communication",
       "homepage": "https://temp-mail.org/",
       "summary": "Disposable email receiving service with a developer API for automated email workflows.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "tencent-agently-mail",
+      "name": "Tencent Agently Mail",
+      "category": "communication",
+      "homepage": "https://agent.qq.com/",
+      "summary": "Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for reading, searching and sending email.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -1045,7 +1065,7 @@
       "name": "Turso",
       "category": "databases",
       "homepage": "https://turso.tech/",
-      "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
+      "summary": "Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],

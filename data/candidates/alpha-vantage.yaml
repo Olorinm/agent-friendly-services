@@ -24,24 +24,24 @@ catalog:
   sources:
     docs:
       url: https://www.alphavantage.co/documentation/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
     access:
       url: https://www.alphavantage.co/support/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_site
     mcp-discovery:
-      url: https://www.alphavantage.co/support/
-      checked_on: '2026-09-09'
+      url: https://mcp.alphavantage.co/
+      checked_on: '2026-10-08'
       kind: official_docs
       notes: >-
-        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
-        could not be extracted in this pass.
+        Official support links this MCP setup surface; its rendered documentation was not available
+        to the document reader, so endpoint/auth details are not inferred.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://www.alphavantage.co/documentation/
+      entry_url: https://www.alphavantage.co/query
       docs: https://www.alphavantage.co/documentation/
       evidence:
         - docs
@@ -90,7 +90,10 @@ catalog:
           value: documented
           evidence:
             - docs
-          notes: Annual and quarterly income statements, balance sheets and cash flows.
+          notes: >-
+            INCOME_STATEMENT and CASH_FLOW document annual and quarterly reports and link to free-key
+            signup. Availability for both requested companies and FY2025 still needs a real access check.
+            A returned original filing URL is not established by the reviewed endpoint descriptions.
         disclosures.search:
           value: documented
           evidence:
@@ -110,7 +113,9 @@ catalog:
         Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output
         (latest 100 observations) is available to free keys; full history and intraday are premium.
         This may cover the current short historical task, subject to access and source precision.
-        Real-time quotes and adjusted data require separate entitlement checks.
+        Real-time quotes and adjusted data require separate entitlement checks. Higher free limits for
+        approved open-source or educational use are not the ordinary self-serve allowance. Income and
+        cash-flow data for two companies require at least four endpoint calls before provenance checks.
       costs:
         - kind: free_allowance
           amount: 25
@@ -121,5 +126,5 @@ catalog:
             - access
 notes:
   - >-
-    Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
-    could not be extracted in this pass.
+    MCP remains a documented discovery lead rather than a verified access route; no account was
+    registered and no keyed financial-data call was made during this documentation review.

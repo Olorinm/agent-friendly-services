@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "run_id": "ecb-data-fx-001-ds41-r1",
+  "service_id": "ecb-data",
+  "route_id": "data-api",
+  "entry_url": "https://data-api.ecb.europa.eu/service/",
+  "task": {
+    "description": "把这三笔美元支出按发生当日的欧洲央行参考汇率折算成欧元，列出每笔金额和合计，并给出汇率出处。",
+    "inputs": "合成支出：2026-08-14，80.00 USD；2026-08-15，125.00 USD；2026-08-17，39.90 USD。若当日未发布汇率，使用此前最近一个发布日；逐笔四舍五入到欧分，再加总。不计手续费。",
+    "expected_output": "三行换算表，包含支出日、实际使用的汇率日、汇率方向、美元金额与欧元金额；欧元合计和可核对出处。",
+    "success": "使用指定日期对应的 ECB USD/EUR 参考数据；非发布日回退正确；币种方向及乘除关系正确；三笔金额和按规定舍入后的合计与独立计算一致；核心汇率来自指定服务。",
+    "failure": "用最新汇率替代历史值、换成其他机构口径、币种方向错误、周末回退错误、舍入或合计错误；无可核对来源；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；只读取汇率并处理上述合成材料，不访问私人账单或发起换汇；只用免费额度。",
+    "id": "financial-fx-001",
+    "version": "v1",
+    "sha256": "7306d5c6211fe5e63275e0cde99da38d609cd435c349b1d7e106c66fd67669e3",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "9453787b3dfa2af132459653adb82d9e3fc1b495d53d67aa4a832b9ce84c74ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T11:50:51.065816+00:00",
+  "ended_at": "2026-10-08T11:51:07.905695+00:00",
+  "elapsed_seconds": 16.839879,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Reuses independently passed access from this batch with fresh session and cleaned workspace. Same frozen v1 task, model, effort, tools and 25-request budget for both services. Reference values and peer results withheld from executors. Execution 600s; independent grading 300s.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本次执行通过指定 ECB Data Portal REST API（未认证、免费）取得 USD/EUR 参考汇率，正确完成非发布日回退、币种方向与逐笔舍入；三笔欧元金额与合计 211.65 EUR 与独立参考逐一核对一致，并给出可核对的序列键、请求 URL 与官方文档出处。",
+  "usage": {
+    "input_tokens": 56374,
+    "cached_input_tokens": 47488,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1952,
+    "reasoning_output_tokens": 956
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html",
+      "public-review/free-rule.md",
+      "public-review/verification.md"
+    ],
+    "note": "ECB 官方站声明其网站信息可免费使用/免费获取；本次执行未提供账户、Key 或支付方式，对 ECB Data Portal API 单次未认证 GET 成功，无计费、订阅或超出免费范围的操作。",
+    "applicability": {
+      "rule": "ECB 官方版权与使用说明允许按规定免费取得及使用其直接提供的信息；本题读取官方参考汇率，非署名作者论文再版。",
+      "observed": "执行环境未提供账户/Key/支付方式；对 https://data-api.ecb.europa.eu/service/data/EXR/D.USD.EUR.SP00.A 发起一次无 Authorization/无 API key 的 GET，HTTP 200 返回所需 ECB 参考汇率，无任何付款或订阅行为。",
+      "evidence": "public-review/free-rule.md; public-review/verification.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-acceptance-agent",
+    "reviewed_at": "2026-10-08T12:05:11.263789+00:00",
+    "checks": [
+      {
+        "criterion": "核心汇率来自指定的 ECB 服务，且为任务日期对应的历史参考汇率（非最新汇率、非其他机构口径）。",
+        "passed": true,
+        "evidence": "execution/answer.md 给出序列键 EXR/D.USD.EUR.SP00.A 及请求 URL；执行仅访问 data-api.ecb.europa.eu，未使用其他汇率来源。当次 API 观测 2026-08-14=1.1567、2026-08-17=1.1593（evidence/ecb_api_rates.md），与独立参考 reference.json 一致。"
+      },
+      {
+        "criterion": "非发布日回退正确：2026-08-15（周六）使用此前最近发布日 2026-08-14 的汇率。",
+        "passed": true,
+        "evidence": "API 响应无 2026-08-15/08-16 观测，08-14 后下一行为 08-17；answer.md 对 08-15 注明 1.1567（顺延 08-14）。evidence/ecb_api_rates.md。"
+      },
+      {
+        "criterion": "币种方向及乘除关系正确：1 EUR = 1.1567 USD，将 USD 折算为 EUR 应除以该汇率。",
+        "passed": true,
+        "evidence": "系列 USD.EUR 表示 USD per EUR；convert.py 与 answer.md 均以 USD / rate 计算。"
+      },
+      {
+        "criterion": "三笔欧元金额按规定逐笔四舍五入到欧分，与独立计算一致。",
+        "passed": true,
+        "evidence": "80.00/1.1567=69.16、125.00/1.1567=108.07、39.90/1.1593=34.42；与 reference.json expected 及独立 Decimal 复算一致。"
+      },
+      {
+        "criterion": "合计为先逐笔舍入后加总，等于 211.65 EUR。",
+        "passed": true,
+        "evidence": "69.16+108.07+34.42=211.65；answer.md 合计行与独立复算、reference.json expected_total_eur 一致。"
+      },
+      {
+        "criterion": "给出可核对的汇率出处（服务、序列/端点或文档）。",
+        "passed": true,
+        "evidence": "execution/answer.md 列出序列键、完整请求 URL 与官方文档链接 https://data.ecb.europa.eu/help/api/data-examples。"
+      },
+      {
+        "criterion": "在预算内完成；仅使用免 Key 公开免费入口，未注册、未付款、未写入远端或调用其他服务。",
+        "passed": true,
+        "evidence": "receipt.json exit_code=0、timed_out=false，用时约 17s；events 中仅出现 data-api.ecb.europa.eu 请求，单次未认证 GET。免费规则与适用观察见 service_cost。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "fx-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "8ab4dc25851bac1e922c083e6c9fc1afb6abc013877aa3853e50c10bb950e8f7",
+      "run_ids": [
+        "ecb-data-fx-001-ds41-r1",
+        "frankfurter-fx-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "ecb-data-fx-001-ds41-r1",
+        "frankfurter-fx-001-ds41-r1"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/ecb-data-fx-001-ds41-r1/execution/answer.md",
+      "sha256": "901c2f672477ffb3ac28c135e81431c16da4844e20b38b0d089e3fb953e447c8",
+      "note": "本次执行者实际答复；附带表述不扩大冻结任务的验收范围。"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-data-fx-001-ds41-r1/public-review/verification.md",
+      "sha256": "4a5a6c74c614ec8eb7466b0e945d00db060a82b0162b17457c14d71060fcd647",
+      "note": "独立核验的必要摘录；源文件哈希和编辑范围留底。"
+    },
+    {
+      "path": "data/experiments/evidence/ecb-data-fx-001-ds41-r1/public-review/free-rule.md",
+      "sha256": "3ebfbc507ead94f204a0bd9e0fd1ddb545245f5a7ae401d058fc7bd362468a79",
+      "note": "服务免费规则与本次适用观察的简短释义。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/fx-deepseek-overnight-20261008/ecb-data-fx-001-ds41-r1",
+    "run_sha256": "cfd6eb38d9478d1170c20bbe85e6623ef6a6fffd8e495f954477b422b3569f69",
+    "events_sha256": "863014d44b71e9c5cc547750c90ab65f77ce394074712f1b99fc3597c8f7014b",
+    "answer_sha256": "901c2f672477ffb3ac28c135e81431c16da4844e20b38b0d089e3fb953e447c8",
+    "review_sha256": "d8a7eaef41a3922d7c34ce6d043c244142e0b05a490f91dd428548082c488b83",
+    "original_independent_review_sha256": "73502d808b7843b72ae8b6c12a257a08242ae87f00cdd5a98b5ceb99e688c6cc",
+    "publication_review_note": "Controller selected minimal evidence; original independent verdict and checks unchanged. Published a sourced paraphrase of the free-use policy instead of long quotations."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7169,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 116,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 7709,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 591,
+        "reasoning_output_tokens": 461
+      },
+      {
+        "input_tokens": 8329,
+        "cached_input_tokens": 8192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 6
+      },
+      {
+        "input_tokens": 10544,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 675,
+        "reasoning_output_tokens": 377
+      },
+      {
+        "input_tokens": 11235,
+        "cached_input_tokens": 11008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11388,
+        "cached_input_tokens": 11136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 456,
+        "reasoning_output_tokens": 103
+      }
+    ],
+    "source_sha256": "440a9ba0c17f541e77386e292d5a67b1934637572d8a19f4f26a26901a4c2e36",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 56374,
+      "cached_input_tokens": 47488,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1952,
+      "reasoning_output_tokens": 956
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

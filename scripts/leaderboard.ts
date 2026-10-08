@@ -9,11 +9,22 @@ const stable = (value: unknown): string => {
     Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, JSON.parse(stable(v))])));
   return JSON.stringify(value ?? null);
 };
+export const credentialPreparation = (r: Evaluation) => {
+  const value = String(r.environment.service_credentials ?? 'unknown').trim() || 'unknown';
+  return value.startsWith('provided:') ? 'provided' : value;
+};
+export const credentialLabel = (r: Evaluation, zh = false) => {
+  const value = credentialPreparation(r);
+  if (value === 'provided') return zh ? '已预供服务凭据' : 'Service credentials supplied';
+  if (value === 'none') return zh ? '未预供账号或密钥' : 'No account or key supplied';
+  if (value === 'unknown') return zh ? '账号或密钥准备情况未知' : 'Account/key preparation unknown';
+  return `${zh ? '接入准备' : 'Access preparation'}: ${value}`;
+};
 const configKey = (r: Evaluation, services: Map<string, string>) => stable({ model: r.model, effort: r.reasoning_effort,
   harness: r.harness, budget: r.budget_seconds, host: r.environment.host,
   isolation: r.environment.isolation, prompt_style: r.environment.prompt_style ?? 'legacy',
   input_delivery: r.environment.input_delivery ?? 'inline',
-  credentials: String(r.environment.service_credentials ?? 'none').startsWith('provided:') ? 'provided' : 'none',
+  credentials: credentialPreparation(r),
   web_search: r.environment.web_search,
   // Compare the available peer services, not per-task group IDs or round IDs.
   // An unrecorded member stays distinct until its service identity is available.
@@ -136,8 +147,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const dates = [...new Set(runs.map(r => new Date(r.started_at).toISOString().slice(0, 10)))].sort();
   const date = dates.length === 1 ? dates[0] : `${dates[0]} – ${dates.at(-1)}`;
   const varyingTasks = new Set(entries.map(({ board }) => stable(board.tasks.map(taskKey).sort()))).size > 1;
-  const preparation = (r: Evaluation) => String(r.environment.service_credentials ?? 'none').startsWith('provided:')
-    ? label('已预供服务凭据', 'Service credentials supplied') : label('未预供账号或密钥', 'No account or key supplied');
+  const preparation = (r: Evaluation) => cell(credentialLabel(r, zh));
   const preparations = [...new Set(runs.map(preparation))];
   const varying = varyingTasks || configs.length > 1 || preparations.length > 1;
   const headers = [label('服务', 'Service'),

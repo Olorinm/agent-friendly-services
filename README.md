@@ -10,7 +10,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 <a id="all-services"></a>
 
-## Services (174)
+## Services (176)
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
@@ -20,11 +20,11 @@ Within each classification and task family, each service shows its most recently
 
 <a id="services-travel"></a>
 
-### Travel (26)
+### Travel (27)
 
 <a id="services-travel-flights"></a>
 
-#### Flights (26)
+#### Flights (27)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
@@ -48,6 +48,7 @@ Within each classification and task family, each service shows its most recently
 <tr><td align="left"><a href="./generated/services.md#searchapi">SearchApi Google Flights</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.searchapi.io/docs/google-flights-api">API</a> · <a href="https://www.searchapi.io/integrations/mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serpapi.com/google-flights-api">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#skootle-google-flights">Skootle Google Flights Scraper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#skyaccess">SkyAccess</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/sky-access/skyaccess-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#skyscanner">Skyscanner Travel APIs</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.skyscanner.net/docs/getting-started/authentication">API</a> · <a href="https://developers.skyscanner.net/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#travelport-tripservices">Travelport TripServices</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developer.travelport.com/docs/getting-started">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#trip-com-flights">Trip.com Flight Distribution</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html">API</a></td></tr>
@@ -86,9 +87,9 @@ Some early records lack environment details and await a controlled rerun.
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#neon">Neon</a></td><td align="right"><a href="./generated/evaluations.md#comparison-fdecec09a4b6">100%</a></td><td align="right">465.4k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://neon.new/">API</a></td><td align="left"><a href="https://api-docs.neon.tech">API</a> · <a href="https://neon.com/docs/reference/neon-cli">CLI</a> · <a href="https://github.com/neondatabase/mcp-server-neon">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right"><a href="./generated/evaluations.md#comparison-1420586eae17">100%</a></td><td align="right">767.6k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.turso.tech/api-reference/introduction">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/introduction">API</a> · <a href="https://docs.turso.tech/cli/introduction">CLI</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#aiven">Aiven</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://aiven.io/docs/tools/cli">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#neon">Neon</a></td><td align="right"><a href="./generated/evaluations.md#comparison-fdecec09a4b6">100%</a></td><td align="right">465.4k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://neon.new/">API</a></td><td align="left"><a href="https://neon.com/docs/reference/claimable-neon">API</a> · <a href="https://neon.com/docs/reference/neon-cli">CLI</a> · <a href="https://github.com/neondatabase/mcp-server-neon">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right"><a href="./generated/evaluations.md#comparison-1420586eae17">100%</a></td><td align="right">767.6k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.turso.tech/api-reference/introduction">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#aiven">Aiven</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://aiven.io/docs/tools/api">API</a> · <a href="https://aiven.io/docs/products/postgresql/howto/connect-python">SDK</a> · <a href="https://aiven.io/docs/tools/cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/">API</a> · <a href="https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/">SDK</a> · <a href="https://developers.cloudflare.com/d1/get-started/">CLI</a> · <a href="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#planetscale">PlanetScale</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://planetscale.com/docs/cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#supabase">Supabase</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://supabase.com/docs/reference/api/introduction">API</a> · <a href="https://supabase.com/docs/reference">SDK</a> · <a href="https://supabase.com/docs/guides/cli">CLI</a> · <a href="https://supabase.com/docs/guides/getting-started/mcp">MCP</a></td></tr>
@@ -173,17 +174,47 @@ These services remain at this scope; see their profiles for unresolved classific
 
 #### Web Search (8)
 
+<details>
+<summary>Setup tests (recorded separately)</summary>
+
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right"><a href="./generated/evaluations.md#comparison-9dbe771526ac">0%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://exa.ai/docs/reference/search">API</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/reference/exa-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7aef90c6de38">100%</a></td><td align="right">204.4k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://mcp.exa.ai/mcp">MCP</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7aef90c6de38">100%</a></td><td align="right">92.2k</td><td align="right">$0.0061</td><td align="right">$0</td><td align="left"><a href="https://api.tavily.com/search">API</a></td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/keyless">MCP</a></td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>What we tested and how</summary>
+
+**Task: Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.**
+
+The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
+
+Completion criteria: Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
+
+**Test configuration:** 1.18.35 · deepseek-flash / high · 5 min · 2026-10-08 (UTC) · No account or key supplied
+
+Some early records lack environment details and await a controlled rerun.
+
+[Task definitions](./generated/tasks.en.md#web-search-access-001-v1) · [Full runs and evidence](./generated/evaluations.md)
+
+</details>
+
+</details>
+
+<table width="100%">
+<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
+<tbody>
+<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b8056c1607c9">100%</a></td><td align="right">230.6k</td><td align="right">$0.02</td><td align="right">—</td><td align="left"><a href="https://mcp.exa.ai/mcp">MCP</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b5f21fc39ab4">100%</a></td><td align="right">346.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.firecrawl.dev/features/search">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b8056c1607c9">100%</a></td><td align="right">527.2k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.tavily.com/search">API</a></td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/keyless">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#brave-search">Brave Search API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/brave/brave-search-mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#perplexity">Perplexity API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/ppl-ai/modelcontextprotocol">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#serpapi">SerpApi</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://serpapi.com/google-flights-api">API</a> · <a href="https://github.com/serpapi/serpapi-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#serper">Serper</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -196,12 +227,15 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 
 Completion criteria: All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
 
-| Service | Starting resources |
+| Service | Configuration |
 | --- | --- |
-| [Exa](./generated/evaluations.md#comparison-9dbe771526ac) | Service credentials supplied |
-| [Firecrawl](./generated/evaluations.md#comparison-b5f21fc39ab4) | No account or key supplied |
+| [Exa](./generated/evaluations.md#comparison-b8056c1607c9) | 1.18.35 · deepseek-flash / high · 10 min · Independent review with same-task answers from 2 services |
+| [Tavily](./generated/evaluations.md#comparison-b8056c1607c9) | 1.18.35 · deepseek-flash / high · 10 min · Independent review with same-task answers from 2 services |
+| [Firecrawl](./generated/evaluations.md#comparison-b5f21fc39ab4) | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min |
 
-**Test configuration:** codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 min · 2026-09-07 (UTC)
+**Test configuration:** 2026-09-07 – 2026-10-08 (UTC) · No account or key supplied
+
+Some early records lack environment details and await a controlled rerun.
 
 [Task definitions](./generated/tasks.en.md#web-search-001-v1) · [Full runs and evidence](./generated/evaluations.md)
 
@@ -216,10 +250,10 @@ Completion criteria: All three questions are answered correctly and supported by
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="left">Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="left">Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.</td><td align="left"><a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="left">Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.</td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/reference/exa-mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="left">Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.</td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="left">Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.</td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="left">Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.</td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="left">Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/mcp">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="left">Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/keyless">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -233,10 +267,12 @@ Completion criteria: All three questions are answered correctly and supported by
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">95.8k</td><td align="right">$0.0068</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">192.5k</td><td align="right">$0.0091</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">221.9k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">100%</a></td><td align="right">86.8k</td><td align="right">$0.0052</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d1ad42ce8a0d">100%</a></td><td align="right">84.3k</td><td align="right">$0.0058</td><td align="right">$0</td><td align="left"><a href="https://www.alphavantage.co/query">API</a></td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-90e1d23f0407">100%</a></td><td align="right">97.5k</td><td align="right">$0.0068</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-90e1d23f0407">0%</a></td><td align="right">300.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d5ebeb408e55">100%</a></td><td align="right">123.3k</td><td align="right">$0.0086</td><td align="right">—</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d5ebeb408e55">100%</a></td><td align="right">113.3k</td><td align="right">$0.0081</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="right"><a href="./generated/evaluations.md#comparison-04dea4e239e0">100%</a></td><td align="right">111.5k</td><td align="right">$0.0100</td><td align="right">$0</td><td align="left"><a href="https://data.sec.gov/">API</a></td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tracefour">Tracefour</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bd611da6270b">0%</a></td><td align="right">107.3k</td><td align="right">$0.0071</td><td align="right">$0</td><td align="left"><a href="https://tracefour.com/v1">API</a></td><td align="left"><a href="https://tracefour.com/api-docs">API</a> · <a href="https://tracefour.com/api-docs/mcp">MCP</a></td></tr>
 </tbody>
 </table>
@@ -250,7 +286,17 @@ The service, required interface, and any supplied account or signup information 
 
 Completion criteria: Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-**Test configuration:** 1.18.29 · glm-5.3-flash / high · 10 min · 2026-09-15 (UTC) · No account or key supplied
+| Service | Configuration | Starting resources |
+| --- | --- | --- |
+| [SEC EDGAR Data APIs](./generated/evaluations.md#comparison-04dea4e239e0) | 1.18.35 · deepseek-flash / high · 5 min | Access preparation: none; contact identity only |
+| [Alpha Vantage](./generated/evaluations.md#comparison-d1ad42ce8a0d) | 1.18.35 · deepseek-flash / high · 5 min | Access preparation: controller-registered ordinary free API key |
+| [ECB Data Portal API](./generated/evaluations.md#comparison-d5ebeb408e55) | 1.18.35 · deepseek-flash / high · 5 min | No account or key supplied |
+| [Frankfurter](./generated/evaluations.md#comparison-d5ebeb408e55) | 1.18.35 · deepseek-flash / high · 5 min | No account or key supplied |
+| [Bargo Congress Trades API](./generated/evaluations.md#comparison-90e1d23f0407) | 1.18.35 · glm-5.3-flash / high · 15 min | No account or key supplied |
+| [CapitolExposed](./generated/evaluations.md#comparison-90e1d23f0407) | 1.18.35 · glm-5.3-flash / high · 15 min | No account or key supplied |
+| [Tracefour](./generated/evaluations.md#comparison-bd611da6270b) | 1.18.29 · glm-5.3-flash / high · 10 min | No account or key supplied |
+
+**Test configuration:** 2026-09-15 – 2026-10-08 (UTC)
 
 Some early records lack environment details and await a controlled rerun.
 
@@ -279,8 +325,8 @@ These services remain at this scope; see their profiles for unresolved classific
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d86a11990066">100%</a></td><td align="right">62.8k</td><td align="right">$0.0034</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-d86a11990066">100%</a></td><td align="right">54.2k</td><td align="right">$0.0038</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-6c4685dc77de">100%</a></td><td align="right">58.3k</td><td align="right">$0.0053</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-6c4685dc77de">100%</a></td><td align="right">51.8k</td><td align="right">$0.0052</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#open-exchange-rates">Open Exchange Rates</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.openexchangerates.org/reference/api-introduction">API</a></td></tr>
@@ -298,7 +344,7 @@ Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; Aug
 
 Completion criteria: Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
-**Test configuration:** 1.18.29 · glm-5.3-flash / high · 10 min · 2026-09-15 (UTC) · No account or key supplied
+**Test configuration:** 1.18.35 · deepseek-flash / high · 10 min · Independent review with same-task answers from 2 services · 2026-10-08 (UTC) · No account or key supplied
 
 Some early records lack environment details and await a controlled rerun.
 
@@ -320,11 +366,11 @@ Some early records lack environment details and await a controlled rerun.
 <tr><td align="left"><a href="./generated/services.md#coingecko">CoinGecko</a></td><td align="left">Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.</td><td align="left"><a href="https://docs.coingecko.com/docs/setting-up-your-api-key">API</a> · <a href="https://docs.coingecko.com/ai-integration/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#coinmarketcap">CoinMarketCap</a></td><td align="left">Crypto market data with selected keyless endpoints and a free authenticated Basic plan.</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a> · <a href="https://docs.financialdatasets.ai/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#finnhub">Finnhub</a></td><td align="left">Stock quotes, historical candles and fundamentals; stock candles are documented as premium.</td><td align="left"><a href="https://finnhub.io/docs/api/quote">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#massive">Massive (formerly Polygon.io)</a></td><td align="left">Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.</td><td align="left"><a href="https://massive.com/docs/rest/quickstart">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left">—</td></tr>
+<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left"><a href="https://github.com/SimFin/simfin#readme">SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tiingo">Tiingo</a></td><td align="left">Market data covering end-of-day prices and other feeds, with an account-issued authentication token.</td><td align="left"><a href="https://www.tiingo.com/documentation/general/overview">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="left">Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#twelve-data">Twelve Data</a></td><td align="left">Global stock, FX and crypto time series with API, Python SDK and CLI access.</td><td align="left"><a href="https://twelvedata.com/docs/introduction/quickstart">API / SDK</a> · <a href="https://github.com/twelvedata/twelvedata-cli">CLI</a></td></tr>
@@ -336,17 +382,39 @@ Some early records lack environment details and await a controlled rerun.
 ##### Company Financials (7)
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
+<thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="left">US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="left">Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="left">Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.</td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="left">Company fundamentals and price data with API and CSV access advertised across free and paid plans.</td><td align="left">—</td></tr>
-<tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="left">Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right"><a href="./generated/evaluations.md#comparison-6ea769563771">100%</a></td><td align="right">188.6k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://www.alphavantage.co/query">API</a></td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8f6f28f05196">100%</a></td><td align="right">96.3k</td><td align="right">$0.0084</td><td align="right">$0</td><td align="left"><a href="https://data.sec.gov/">API</a></td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a> · <a href="https://docs.financialdatasets.ai/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#simfin">SimFin</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/SimFin/simfin#readme">SDK</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tushare">Tushare Pro</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://tushare.pro/document/1?doc_id=40">API / SDK</a></td></tr>
 </tbody>
 </table>
+
+<details>
+<summary>What we tested and how</summary>
+
+**Task: Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.**
+
+Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
+
+Completion criteria: All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
+
+| Service | Starting resources |
+| --- | --- |
+| [Alpha Vantage](./generated/evaluations.md#comparison-6ea769563771) | Access preparation: controller-registered ordinary free API key |
+| [SEC EDGAR Data APIs](./generated/evaluations.md#comparison-8f6f28f05196) | Access preparation: none; contact identity only |
+
+**Test configuration:** 1.18.35 · deepseek-flash / high · 10 min · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
+
+Some early records lack environment details and await a controlled rerun.
+
+[Task definitions](./generated/tasks.en.md#financial-statements-001-v1) · [Full runs and evidence](./generated/evaluations.md)
+
+</details>
 
 <a id="services-web-search-data-financial-data-disclosures"></a>
 
@@ -355,13 +423,13 @@ Some early records lack environment details and await a controlled rerun.
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-864872ad88ab">25%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-fb6dcb23321f">50%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-cbad562eed82">100%</a></td><td align="right">227.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#capitol-trades">Capitol Trades</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left">—</td></tr>
 <tr><td align="left"><a href="./generated/services.md#congress-stock-tracker">Congress Stock Tracker</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.congressstock.com/congress-trading-api">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#financial-datasets">Financial Datasets</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.financialdatasets.ai/quickstart">API</a> · <a href="https://docs.financialdatasets.ai/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#fmp">Financial Modeling Prep (FMP)</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://site.financialmodelingprep.com/developer/docs">API</a> · <a href="https://site.financialmodelingprep.com/developer/docs/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#insynet">Insynet</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://insynet.se/developers">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#quiver-quantitative">Quiver Quantitative</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.quiverquant.com/api-setup/">API</a> · <a href="https://api.quiverquant.com/mcp-server/">MCP</a></td></tr>
@@ -382,10 +450,10 @@ Some early records lack environment details and await a controlled rerun.
 
 | Service | Configuration |
 | --- | --- |
+| [Bargo Congress Trades API](./generated/evaluations.md#comparison-fb6dcb23321f) | 1.18.35 · glm-5.3-flash / high · 15 min |
 | [CapitolExposed](./generated/evaluations.md#comparison-cbad562eed82) | 1.18.29 · glm-5.3-flash / high · 15 min · Independent review; no other service answer available this round |
-| [Bargo Congress Trades API](./generated/evaluations.md#comparison-864872ad88ab) | 1.18.29 · glm-5.3-flash / high · 10 min · Independent review with same-task answers from 2 services |
 
-**Test configuration:** 2026-09-15 (UTC) · No account or key supplied
+**Test configuration:** 2026-09-15 – 2026-10-08 (UTC) · No account or key supplied
 
 Some early records lack environment details and await a controlled rerun.
 
@@ -403,7 +471,7 @@ Some early records lack environment details and await a controlled rerun.
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a> · <a href="https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>
 </table>
@@ -752,11 +820,11 @@ Completion criteria: The evaluator independently reads the remote product, order
 
 <a id="services-communication"></a>
 
-### Communication (22)
+### Communication (23)
 
 <a id="services-communication-mailboxes"></a>
 
-#### Mailboxes (12)
+#### Mailboxes (13)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="12%" align="right">Resolution rate</th><th width="11%" align="right">Tokens</th><th width="11%" align="right">Model cost</th><th width="11%" align="right">Service cost</th><th width="9%" align="left">Tested via</th><th width="20%" align="left">Access links</th></tr></thead>
@@ -772,6 +840,7 @@ Completion criteria: The evaluator independently reads the remote product, order
 <tr><td align="left"><a href="./generated/services.md#mailslurp">MailSlurp</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.mailslurp.com/guides/getting-started/">API</a> · <a href="https://www.mailslurp.com/docs/agents/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#outlook-mail">Outlook Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://learn.microsoft.com/en-us/graph/outlook-mail-concept-overview">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#temp-mail">Temp Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://temp-mail.org/en/api/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#tencent-agently-mail">Tencent Agently Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#zoho-mail">Zoho Mail</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.zoho.com/mail/help/api/getting-started-with-api.html">API</a></td></tr>
 </tbody>
 </table>

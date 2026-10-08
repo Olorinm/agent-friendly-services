@@ -34,8 +34,10 @@ checks:
     verified: "2026-07-07"
 
   oauth_support:
-    status: unknown
-    notes: API-key auth only, as far as documented.
+    status: supported
+    evidence: https://exa.ai/docs/get-started/exa-mcp
+    verified: "2026-10-08"
+    notes: Official remote MCP supports OAuth; the REST API uses an API key and anonymous MCP is separate.
 
   scoped_tokens:
     status: unknown
@@ -81,27 +83,27 @@ catalog:
     - web-search-data/web-search
   sources:
     mcp:
-      url: https://exa.ai/docs/reference/exa-mcp
-      checked_on: '2026-09-07'
+      url: https://exa.ai/docs/get-started/exa-mcp
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://exa.ai/pricing
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
     docs:
       url: https://exa.ai/docs/reference/search
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_docs
     fetch-docs:
       url: https://exa.ai/docs/get-started/exa-mcp
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
   routes:
     - id: public-mcp
       interface: mcp
       maintainer: official
       entry_url: https://mcp.exa.ai/mcp
-      docs: https://exa.ai/docs/reference/exa-mcp
+      docs: https://exa.ai/docs/get-started/exa-mcp
       evidence:
         - mcp
       availability:
@@ -129,14 +131,29 @@ catalog:
             The current MCP guide lists web_fetch_exa for known URLs. This is documentation evidence, separate
             from historical search tests.
       notes: >-
-        Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires
-        authentication and separate usage charges; it is excluded from this pilot. API signup credits are not
-        a quota guarantee for anonymous MCP.
+        Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published.
+        Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain
+        filters. Authenticated agent_run has separate charges and is outside this route. API account
+        credits and the account Search QPS limit do not establish anonymous MCP limits.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - mcp
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Free rate-limited keyless MCP tools; excludes authenticated agent_run.
+          evidence:
+            - mcp
     - id: search-api
       docs: https://exa.ai/docs/reference/search
       interface: api
       maintainer: official
-      entry_url: https://exa.ai/docs/reference/search
+      entry_url: https://api.exa.ai/search
       evidence:
         - docs
         - pricing
@@ -158,8 +175,9 @@ catalog:
           evidence:
             - docs
       notes: >-
-        Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed
-        for part of initial credits. No payment method required. Anonymous MCP quota is separate.
+        The current free account plan advertises USD 10/month plus a USD 10 onboarding bonus, no card,
+        and 10 Search requests/second. Actual bonus award and balance should be checked. Anonymous MCP
+        quota is separate.
       requirements:
         payment_method:
           value: not_required
@@ -167,10 +185,10 @@ catalog:
             - pricing
       costs:
         - kind: free_allowance
-          amount: 20
+          amount: 10
           unit: money
           per: one_time
-          scope: Published signup credits; some may require onboarding. Actual account award should be checked.
+          scope: Published onboarding bonus; actual account award should be checked.
           evidence:
             - pricing
           currency: USD

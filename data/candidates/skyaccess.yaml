@@ -1,0 +1,93 @@
+id: skyaccess
+name: SkyAccess
+category: travel
+homepage: https://skyaccess.com/
+summary: Private-jet empty-leg search, indicative charter estimates and booking links through a public remote MCP.
+submitted_by: vendor
+tags:
+  - private-jet
+  - empty-legs
+  - charter
+catalog:
+  version: 1
+  classifications:
+    - travel/flights
+  sources:
+    vendor-pr:
+      url: https://github.com/Olorinm/agent-friendly-services/pull/13
+      checked_on: '2026-10-08'
+      kind: publisher_listing
+      notes: Vendor submission; catalog inclusion does not imply PR merge or independent task completion.
+    repo:
+      url: https://github.com/sky-access/skyaccess-mcp
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: Inventory size and discount percentages are publisher claims, not independently measured.
+    registry:
+      url: https://registry.modelcontextprotocol.io/v0/servers?search=com.skyaccess
+      checked_on: '2026-10-08'
+      kind: publisher_listing
+      notes: com.skyaccess/skyaccess version 1.0.3 is listed with the same hosted endpoint; the PR cites older version 1.0.2.
+    privacy:
+      url: https://skyaccess.com/privacy#connector
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Searches require no contact details; charter enquiries send the supplied name, email and itinerary to SkyAccess.
+  routes:
+    - id: remote-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.skyaccess.com/mcp
+      docs: https://github.com/sky-access/skyaccess-mcp
+      evidence: [repo, registry]
+      availability:
+        value: self_serve
+        evidence: [repo]
+      personal_access:
+        value: documented
+        evidence: [repo, privacy]
+        notes: Anonymous search access; traveler eligibility for a completed charter is not established here.
+      auth:
+        value: none
+        evidence: [repo]
+      data_kind:
+        value: live
+        evidence: [repo]
+        notes: Described by the publisher as current listings; no inventory freshness test recorded.
+      capabilities:
+        flights.search:
+          value: documented
+          evidence: [repo]
+          notes: Private charter inventory, priced per aircraft in USD; not scheduled airline seats.
+        flights.reprice:
+          value: unknown
+          evidence: [repo]
+          notes: get_flight re-reads a listing; this does not establish a confirmed, tax-inclusive payable quote.
+        flights.booking-link:
+          value: documented
+          evidence: [repo]
+        flights.ticketing:
+          value: unsupported
+          evidence: [repo]
+          notes: Tools do not issue tickets, reserve inventory, take payment or create bookings.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [repo, privacy]
+      human_steps:
+        - step: Review and complete any purchase on the returned booking page.
+          stage: task
+          evidence: [repo]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: MCP tool call
+          scope: Published free connector; flight purchase costs are separate.
+          evidence: [repo]
+      notes: >-
+        Stateless Streamable HTTP; POST requests only. Published limit: 30 tool calls per minute per IP.
+        Search returns at most five listings; unknown prices can survive the maximum-price filter.
+        Estimates are indicative. request_booking submits a contact enquiry, with a separate limit of ten
+        per hour. Read-only search is distinct from asking a specialist to contact the traveler.

@@ -10,6 +10,7 @@ import re
 import shutil
 
 import pipeline as runs
+from grading_privacy import secrets_for, redact_tree
 
 
 def binding(directory):
@@ -163,6 +164,10 @@ def seal(directory, manifest, state):
             entry['collection_note'] = status.get('stop_reason', 'No collected execution result; not a business verdict.')
         index['members'].append(entry)
     runs.write(snapshot / 'index.json', index)
+    secrets=[secret for member in manifest['members'] for secret in secrets_for(member['directory'])]
+    redactions=redact_tree(snapshot,secrets)
+    if redactions:
+        runs.write(snapshot/'privacy-redactions.json',{'notice':'Registered credentials removed before sealing peer evidence; original files remain private.','files':redactions})
     runs.write(directory / 'snapshot-hashes.json', runs.frozen_files(snapshot))
     state.update(phase='grading', snapshot_sha256=runs.digest(directory / 'snapshot-hashes.json'), sealed_at=runs.now())
     runs.write(directory / 'state.json', state)

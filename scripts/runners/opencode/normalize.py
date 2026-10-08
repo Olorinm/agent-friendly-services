@@ -1,4 +1,4 @@
-"""Reconcile Coding Plan wire usage against OpenCode step_finish counters."""
+"""Reconcile model wire usage against OpenCode step_finish counters."""
 import hashlib
 import json
 from pathlib import Path
@@ -13,7 +13,10 @@ def normalize(root, model):
         result['sources'].append(dict(path=str(path.relative_to(root)), sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
     try:
         events = root / 'events.jsonl';source(events)
-        for line in events.read_text().splitlines():
+        # NDJSON uses LF framing. Unicode NEL/paragraph separators can occur
+        # inside valid JSON strings (for example binary-looking tool output).
+        for line in events.read_text().split('\n'):
+            if not line.strip(): continue
             row = json.loads(line)
             if row.get('type') != 'step_finish': continue
             t = row['part']['tokens'];c = t['cache']
@@ -26,11 +29,11 @@ def normalize(root, model):
             request = json.loads((directory/'request.json').read_text())
             if meta.get('status') != 200 or meta.get('error'): raise ValueError('Incomplete/failed wire request')
             if request['model'] != model: raise ValueError('Unexpected model')
-            chunks = [json.loads(line[5:]) for line in (directory/'response.body').read_text().splitlines() if line.startswith('data:') and line[5:].strip() != '[DONE]']
+            chunks = [json.loads(line[5:]) for line in (directory/'response.body').read_text().split('\n') if line.startswith('data:') and line[5:].strip() != '[DONE]']
             usage = [c['usage'] for c in chunks if c.get('usage')]
             if len(usage) != 1: raise ValueError('Expected one final usage event per request')
             u = usage[0]
-            # BigModel exposes automatic cache hits, not a separate billable cache-write counter.
+            # BigModel and DeepSeek expose cache hits, with no billable cache-write counter.
             values = (u['prompt_tokens'],u['prompt_tokens_details']['cached_tokens'],0,u['completion_tokens'],u.get('completion_tokens_details',{}).get('reasoning_tokens',0))
             result['requests'].append(dict(id=directory.name, model=model, usage=dict(zip(FIELDS,values))))
         if not result['requests']: raise ValueError('No requests')

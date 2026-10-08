@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "run_id": "tavily-access-ds41-r1",
+  "service_id": "tavily",
+  "route_id": "keyless-search-api",
+  "entry_url": "https://api.tavily.com/search",
+  "task": {
+    "description": "帮我接通这个搜索服务，通过指定方式做一次简单的真实网页搜索，确认能用，并保存后续搜索需要的本地配置；说明完成了哪些接入步骤，遇到阻碍也请说明。",
+    "inputs": "服务、指定入口、允许使用的账户或注册资料及其来源见 ENVIRONMENT.md。自行选择一个普通公开主题做小型搜索，给出查询内容和至少一条搜索结果的标题、网页链接。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。将必要连接配置保存在本轮指定的持久目录，秘密只保存在私有文件中，答复只给配置位置。说明已有账号来源、实际自助完成的步骤、人工介入或额外申请要求。",
+    "expected_output": "指定服务的一次真实网页搜索结果，含查询内容和至少一条结果标题、链接；可复用的本地配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体受阻原因。",
+    "success": "按指定方式完成必要注册、认证、安装与配置，真实搜索返回至少一条含标题和有效网页 URL 的结果，答复与响应一致；所需配置可供新会话复用且不泄露秘密。免注册入口不强行注册；已有账号不算本轮自助注册，人工步骤和额外申请如实记录。仅文档示例、健康检查、工具清单、安装成功或保存配置不足以证明接通搜索。",
+    "failure": "未取得真实搜索结果、改用其他服务或入口、仅返回教程或示例、结果与响应不符、配置不可复用、泄露凭据或预算内未完成；缺少身份资料、授权、人工操作或额度时记录具体接入阻碍，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务和已确认免费的额度；可查官方文档，在本轮隔离环境安装通用依赖和保存连接配置。不访问个人内容、不注册无关服务、不邀请或通知他人、不付费。仅做确认接通所需的小型搜索；具体请求、时间与资源上限按 ENVIRONMENT.md。不得读取本机其他账号、历史会话或其他任务材料。",
+    "id": "web-search-access-001",
+    "version": "v1",
+    "sha256": "18b6f2e9bbc4dfc0a9ad5f50e212e5932f1682b206df237d1c6ff34dbd44abff",
+    "file": "data/experiments/tasks/web-search.md"
+  },
+  "prompt_sha256": "6272ca3b99b49c1729f0413050736d11e70569fd59608725b4fb9bed2b0453dc",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T12:01:59.416003+00:00",
+  "ended_at": "2026-10-08T12:02:26.428417+00:00",
+  "elapsed_seconds": 27.012414,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Fresh runtime, no account, prewritten calling scripts or previous results. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 model requests per role, 32000 output tokens/request, execution and grading 300s. New budget conditions retained separately from older runs.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "通过指定入口 Tavily 官方 keyless Search API 完成一次真实网页搜索，HTTP 200 返回含标题与有效 URL 的结果，答复与响应一致；连接配置已写入指定持久目录且无秘密泄露；免注册入口未强行注册，未使用付费端点。独立复测同入口同样返回真实结果。",
+  "usage": {
+    "input_tokens": 89861,
+    "cached_input_tokens": 80512,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2329,
+    "reasoning_output_tokens": 710
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://docs.tavily.com/documentation/keyless"
+    ],
+    "note": "仅使用 Tavily 官方 keyless 模式，未付款、未绑定支付、未使用付费端点。",
+    "applicability": {
+      "rule": "官方文档说明 keyless access 免费且限流，无需账号/Key（可后续升级免费 API Key）。",
+      "observed": "本次两次搜索均以 X-Tavily-Access-Mode: keyless 且无 Authorization/Key 调用，返回 HTTP 200；验收方独立复测同样无 Key 返回 200。",
+      "evidence": "execution/artifacts/search-result.json 与 grading/artifacts/evidence/keyless-live-check.md。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-08T12:28:28.331767+00:00",
+    "checks": [
+      {
+        "criterion": "使用本轮指定服务与指定接入方式（Tavily 官方 keyless Search API，入口 https://api.tavily.com/search），未改用其他服务或绕道入口",
+        "passed": true,
+        "evidence": "执行记录 curl 直接请求 https://api.tavily.com/search，带 X-Tavily-Access-Mode: keyless；工作脚本 execution/artifacts/tavily-search.sh 同入口同头部；验收方独立复测同入口（grading/artifacts/evidence/keyless-live-check.md）。"
+      },
+      {
+        "criterion": "完成真实网页搜索，至少一条结果含标题与有效网页 URL",
+        "passed": true,
+        "evidence": "execution/artifacts/search-result.json 记录 query=latest stable Python release version 2025 及 3 条结果，首条标题 'Latest Python Version (2025) – What's New in Python 3.14?'，URL https://www.liquidweb.com/blog/latest-python-version，HTTP 200。"
+      },
+      {
+        "criterion": "答复与真实响应一致（查询内容、结果标题与链接相符）",
+        "passed": true,
+        "evidence": "execution/answer.md 所列查询/标题/链接与 search-result.json 及第二次查询输出（日本樱花主题标题与链接）逐条一致。"
+      },
+      {
+        "criterion": "后续搜索所需连接配置保存在指定持久目录，可复用",
+        "passed": true,
+        "evidence": "执行记录写明 /home/node/service-tools/service-config.json（端点、方法、必需请求头、默认参数）；retained-files.json 列为保留文件；answer.md 给出配置位置。"
+      },
+      {
+        "criterion": "不泄露秘密，答复仅给出配置位置",
+        "passed": true,
+        "evidence": "keyless 模式无账号无 API Key，service-config.json 中 api_key 为 null，answer.md 未输出任何凭据。"
+      },
+      {
+        "criterion": "如实说明接入步骤、账号来源与人工/额外申请门槛；免注册入口未强行注册",
+        "passed": true,
+        "evidence": "execution/answer.md 说明全部自助完成、无账号来源、keyless 无需注册；执行记录未见创建账号或人工步骤。"
+      },
+      {
+        "criterion": "仅使用免费匿名额度，未使用付费/需 Key 端点",
+        "passed": true,
+        "evidence": "仅调用 keyless /search；正式免费规则见 https://docs.tavily.com/documentation/keyless（keyless 免费且限流），独立复测无 Key 返回 200；未调用 /crawl、/research 等。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.01621134,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.01621134,
+          "usage_sha256": "3e80456cdf23a63a13967c37ccbc835d8eac411e882449c23e4df2d998d7d755"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/tavily-access-ds41-r1/execution/answer.md",
+      "sha256": "db7ddd30b5246dcc4fdf37c02c3c816b9238cf4e966b63f0961eba7448418e07",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/tavily-access-ds41-r1/public-review/verification.md",
+      "sha256": "f74b3973f838f72c818d9be77f28d59130b03cfe3836c916f5560fbdac4e03bd",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/search-deepseek-overnight-20261008/tavily-access-ds41-r1",
+    "run_sha256": "5b24f2341229f8a1fa6694e7632b8bd63eb9aa3039aafc56b6eb6e3518f1e940",
+    "events_sha256": "29386261753e7eb0fbff5d68d66ff60aa92be6646513989b32a47f633de168f3",
+    "answer_sha256": "db7ddd30b5246dcc4fdf37c02c3c816b9238cf4e966b63f0961eba7448418e07",
+    "review_sha256": "97f69ec2c0c626bfbb166d1b9df994421d736f9afad9c816b1f5b3879158c0bf",
+    "original_independent_review_sha256": "3e7c9e70de5897b73cfe530b6c3fdec9a0cefe17666a2c5ccdeb7954161af985",
+    "selected_independent_review_sha256": "3e7c9e70de5897b73cfe530b6c3fdec9a0cefe17666a2c5ccdeb7954161af985",
+    "publication_review_note": "Minimal independent evidence selected; task verdict and checks unchanged."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7171,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 108,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 7760,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 239,
+        "reasoning_output_tokens": 89
+      },
+      {
+        "input_tokens": 9535,
+        "cached_input_tokens": 7936,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 295,
+        "reasoning_output_tokens": 149
+      },
+      {
+        "input_tokens": 9855,
+        "cached_input_tokens": 9600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 10498,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 188,
+        "reasoning_output_tokens": 128
+      },
+      {
+        "input_tokens": 10765,
+        "cached_input_tokens": 10624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 307,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11088,
+        "cached_input_tokens": 10880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 378,
+        "reasoning_output_tokens": 190
+      },
+      {
+        "input_tokens": 11482,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 134,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11707,
+        "cached_input_tokens": 11520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 626,
+        "reasoning_output_tokens": 145
+      }
+    ],
+    "source_sha256": "b5c543131415a4b59d6ea6216d5cedc568dae48fb76d5d869739973859d06d2f",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 89861,
+      "cached_input_tokens": 80512,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2329,
+      "reasoning_output_tokens": 710
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

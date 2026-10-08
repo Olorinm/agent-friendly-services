@@ -21,7 +21,15 @@ catalog:
       kind: official_docs
       notes: >-
         This documentation URL returned HTTP 503 to the research reader on 2026-09-15. Earlier documentation
-        claims remain dated 2026-09-09; a failed page read does not establish API failure.
+        claims remain dated 2026-09-09. Direct reads also timed out on 2026-10-08; a failed documentation
+        read does not establish API failure. Indexed official examples remain discoverable.
+    api-query:
+      url: https://data.ecb.europa.eu/help/api/data
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: >-
+        Official indexed documentation reviewed; the direct page reader failed. Defines dataflow and series
+        keys, date filtering, observation limits and CSV/JSON/SDMX formats. This is not an API trial.
     reference-rates:
       url: >-
         https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
@@ -57,6 +65,7 @@ catalog:
       evidence:
         - docs
         - api-schema
+        - api-query
       availability:
         value: self_serve
         evidence:
@@ -82,8 +91,14 @@ catalog:
             - docs
             - reference-rates
           notes: ECB reference-rate series; published rates are not executable conversion prices.
+        macro.series:
+          value: documented
+          evidence: [api-query, macro-classification]
+          notes: Named economic series require the corresponding dataflow, dimensions and frequency.
       notes: >-
         Series dimensions, quote direction, observation frequency and date range must be selected correctly.
         Reference rates are not executable conversion prices. Reference-rate information is freely published
         under the ECB reuse policy; fees for a run still require observation of the actual route. The
-        documentation page was temporarily unreadable during the latest research pass.
+        query supports startPeriod/endPeriod, lastNObservations and format selection; narrow requests to the
+        needed series. Direct documentation reads failed during the latest research pass; indexed official
+        documentation was readable.

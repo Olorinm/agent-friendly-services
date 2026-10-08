@@ -9,8 +9,11 @@ tags:
   - financials
 notes:
   - >-
-    Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup
-    documentation and execution allowance still need verification.
+    Free Web API and bulk downloads have different history limits. The pricing card says five years
+    of fundamentals, while its comparison table says seven API years and five delayed bulk years.
+    The free Web API rate is two calls/second and the filing allowance is eight/day; 500 monthly
+    high-speed credits apply to backtesting, not an API request allowance. Actual FY2025 coverage
+    and filing provenance through the selected route remain untested.
 catalog:
   version: 1
   classifications:
@@ -19,6 +22,72 @@ catalog:
   sources:
     docs:
       url: https://www.simfin.com/en/prices/
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_site
-  routes: []
+    python-sdk:
+      url: https://github.com/SimFin/simfin
+      checked_on: '2026-10-08'
+      kind: official_repo
+    fundamentals:
+      url: https://www.simfin.com/en/fundamental-data-download/
+      checked_on: '2026-10-08'
+      kind: official_site
+    api-version:
+      url: https://www.simfin.com/en/technical-updates-to-api-v3-and-bulk-download/
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        The publisher describes API v3. Older v2 examples alone do not establish the current HTTP
+        endpoint; the documented Python package below is a separate bulk-data route.
+  routes:
+    - id: data-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://github.com/SimFin/simfin
+      docs: https://github.com/SimFin/simfin#readme
+      evidence:
+        - python-sdk
+      availability:
+        value: self_serve
+        evidence:
+          - python-sdk
+      personal_access:
+        value: documented
+        evidence:
+          - python-sdk
+          - docs
+      auth:
+        value: api_key
+        evidence:
+          - python-sdk
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - python-sdk
+        payment_method:
+          value: not_required
+          evidence:
+            - docs
+      capabilities:
+        statements.read:
+          value: documented
+          evidence:
+            - python-sdk
+            - fundamentals
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: download
+          scope: Datasets included in the free account; excludes paid datasets and upgrades.
+          evidence:
+            - python-sdk
+            - docs
+      notes: >-
+        The official simfin Python package downloads datasets, caches them on disk and loads Pandas
+        tables. Registration supplies a free API key; paid-only datasets are separate. Free bulk data
+        is delayed, so availability of each requested fiscal year and original-report links needs
+        verification. The pricing FAQ restricts data use to a valid subscription and requires deletion
+        of downloaded data and backups after cancellation; raw evidence publication is not implied.

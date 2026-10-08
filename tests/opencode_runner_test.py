@@ -8,6 +8,21 @@ spec=importlib.util.spec_from_file_location('opencode_normalize',Path(__file__).
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 
 class UsageTests(unittest.TestCase):
+    def test_unicode_separators_inside_events_and_sse_do_not_break_usage_capture(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);wire=root/'wire/request1';wire.mkdir(parents=True)
+            tool={'type':'tool_use','part':{'state':{'output':'binary-looking\u0085\u2028\u2029text'}}}
+            finish={'type':'step_finish','part':{'tokens':{'input':80,'output':12,'reasoning':8,'cache':{'read':20,'write':0}}}}
+            (root/'events.jsonl').write_text('\n'.join(json.dumps(x,ensure_ascii=False) for x in [tool,finish])+'\n')
+            (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash'}))
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            chunk={'choices':[{'delta':{'content':'text\u0085\u2028\u2029'}}]}
+            usage={'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':20,'completion_tokens_details':{'reasoning_tokens':8}}}
+            (wire/'response.body').write_text('data: '+json.dumps(chunk,ensure_ascii=False)+'\n\ndata: '+json.dumps(usage)+'\n\ndata: [DONE]\n')
+            result=module.normalize(root,'deepseek-flash')
+            self.assertTrue(result['complete'])
+            self.assertEqual(result['totals']['output_tokens'],20)
+
     def test_cache_and_reasoning_are_subsets_and_reconcile(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d); wire=root/'wire'/'request1';wire.mkdir(parents=True)
@@ -27,7 +42,48 @@ class UsageTests(unittest.TestCase):
             self.assertFalse(module.normalize(root,'glm-5.3-flash')['complete'])
 
 
+class ProviderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        directory=Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        spec=importlib.util.spec_from_file_location('opencode_providers',directory/'providers.py')
+        cls.providers=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.providers)
+
+    def test_deepseek_uses_its_own_route_and_keeps_credentials_out_of_agent_config(self):
+        cfg=self.providers.opencode_config({'model':'deepseek-flash','reasoning_effort':'high'},'deepseek')
+        self.assertEqual(cfg['model'],'afs-deepseek/deepseek-flash')
+        provider=cfg['provider']['afs-deepseek']
+        self.assertEqual(provider['options'],{'apiKey':'local-capture-proxy','baseURL':'http://127.0.0.1:18181/v1'})
+        self.assertEqual(provider['models']['deepseek-flash']['interleaved'],{'field':'reasoning_content'})
+        self.assertEqual(provider['models']['deepseek-flash']['variants']['high'],{'reasoningEffort':'high'})
+        self.assertEqual(cfg['permission']['task'],'deny')
+        self.assertEqual(self.providers.profile('deepseek')['host'],'api.deepseek.com')
+
+    def test_legacy_route_remains_explicit_and_cross_provider_models_are_rejected(self):
+        name=self.providers.DEFAULT_PROVIDER
+        cfg=self.providers.opencode_config({'model':'glm-5.3-flash','reasoning_effort':'high'},name)
+        self.assertEqual(cfg['model'],'zhipuai-coding-plan/glm-5.3-flash')
+        self.assertEqual(cfg['provider'][name]['options']['baseURL'],'http://127.0.0.1:18181/api/coding/paas/v4')
+        for provider,model in [('deepseek','glm-5.3-flash'),(name,'deepseek-flash')]:
+            with self.assertRaisesRegex(ValueError,'does not match'):
+                self.providers.validate_model(provider,model)
+        with self.assertRaisesRegex(ValueError,'Unsupported'):
+            self.providers.profile('https://untrusted.example')
+
+
 class AssessmentTests(unittest.TestCase):
+    def test_source_objects_preserve_url_and_note_without_promoting_unknown(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        original={'status':'completed','service_cost_usd':None,'service_cost':{'kind':'unknown','sources':[{'url':'https://example.com/rule','note':'existing observation'},'other source']}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['service_cost']['sources'],['https://example.com/rule — existing observation','other source'])
+        self.assertEqual(normalized['service_cost']['kind'],'unknown')
+        self.assertNotIn('note',normalized['service_cost'])
+        self.assertIsInstance(original['service_cost']['sources'][0],dict)
+        self.assertEqual(len(changes),1)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+
     def test_billing_evidence_list_is_joined_without_adding_facts(self):
         spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
         assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
@@ -181,7 +237,8 @@ class ProvisionTests(unittest.TestCase):
                                  ('retained_paths', {'execution': ['..'], 'grading': []}),
                                  ('retained_children', {'unknown': {}}),
                                  ('retained_children', {'execution': {'unknown': []}}),
-                                 ('retained_children', {'execution': {'credentials.json': ['..']}})]:
+                                 ('retained_children', {'execution': {'credentials.json': ['..']}}),
+                                 ('provider', 'untrusted-host'), ('model', 'deepseek-flash')]:
                 settings = self.settings(); settings[field] = value
                 config.write_text(json.dumps(settings))
                 with self.assertRaises(ValueError):
@@ -207,6 +264,7 @@ class ProvisionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             key = Path(d)/'key'; key.write_text('test-private-key')
             settings = self.settings(); settings['key_file'] = str(key)
+            settings['provider']='deepseek';settings['model']='deepseek-flash'
             def reply(config, args, data=None):
                 if args[-2:] == ['ps', '-aq']:
                     out = b''
@@ -228,7 +286,8 @@ class ProvisionTests(unittest.TestCase):
                     self.assertFalse(set(args) & {'-v', '--volume', '--mount', '-p', '--publish', '--privileged'})
                 if call.kwargs.get('data'):
                     with tarfile.open(fileobj=io.BytesIO(call.kwargs['data'])) as tar:
-                        self.assertEqual(set(tar.getnames()), set(self.provision.WORKER_FILES) | {'bigmodel.key'})
-                        self.assertEqual(tar.getmember('bigmodel.key').mode, 0o600)
+                        self.assertEqual(set(tar.getnames()), set(self.provision.WORKER_FILES) | {'model.key','provider.json'})
+                        self.assertEqual(tar.getmember('model.key').mode, 0o600)
+                        self.assertEqual(json.load(tar.extractfile('provider.json')),{'provider':'deepseek'})
 
 if __name__=='__main__':unittest.main()

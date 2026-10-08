@@ -3,9 +3,8 @@ name: Turso
 category: databases
 homepage: https://turso.tech/
 summary: >-
-  Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10
-  million writes/month. Signup/login required; local engine alone does not
-  satisfy remote storage.
+  Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan,
+  management CLI/API, remote SQL over HTTP and language SDKs.
 submitted_by: community
 
 catalog:
@@ -15,19 +14,43 @@ catalog:
   sources:
     docs:
       url: https://docs.turso.tech/cli/introduction
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_docs
     api:
-      url: https://docs.turso.tech/api-reference/introduction
-      checked_on: '2026-09-07'
+      url: https://docs.turso.tech/api-reference/quickstart
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://turso.tech/pricing
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
+    cloud-quickstart:
+      url: https://docs.turso.tech/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
+    cli-auth:
+      url: https://docs.turso.tech/cli/authentication
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sql-http:
+      url: https://docs.turso.tech/sdk/http/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sdk:
+      url: https://docs.turso.tech/sdk/introduction
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sdk-auth:
+      url: https://docs.turso.tech/sdk/authentication
+      checked_on: '2026-10-08'
+      kind: official_docs
+    ts-sdk:
+      url: https://docs.turso.tech/sdk/ts/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
   routes:
     - id: cloud-cli
-      docs: https://docs.turso.tech/cli/introduction
+      docs: https://docs.turso.tech/quickstart
       interface: cli
       maintainer: official
       entry_url: https://docs.turso.tech/cli/introduction
@@ -50,15 +73,22 @@ catalog:
         database.provision:
           value: documented
           evidence:
-            - docs
+            - cloud-quickstart
         database.persist:
           value: documented
           evidence:
-            - docs
+            - cloud-quickstart
       notes: >-
-        Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month.
-        Signup/login required; local engine alone does not satisfy remote storage.
+        Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month.
+        Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub
+        login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine:
+        --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not
+        establish remote persistence. Paid overages are separate from the free allowance.
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - cli-auth
         payment_method:
           value: not_required
           evidence:
@@ -72,10 +102,10 @@ catalog:
           evidence:
             - pricing
     - id: platform-api
-      docs: https://docs.turso.tech/api-reference/introduction
+      docs: https://docs.turso.tech/api-reference/quickstart
       interface: api
       maintainer: official
-      entry_url: https://docs.turso.tech/api-reference/introduction
+      entry_url: https://api.turso.tech/v1/
       evidence:
         - api
       availability:
@@ -92,5 +122,65 @@ catalog:
           evidence:
             - api
       notes: >-
-        Management API; SQL connectivity uses separate database credentials created during execution.
-        Provision only within a dedicated free test organization; no precreated database.
+        Account/organization management uses a Bearer Platform API token, which can be organization-scoped.
+        This provisions databases; SQL uses a separate database token and endpoint. The quickstart
+        obtains the platform token through an authenticated CLI account. Existing account access and
+        new database provisioning are distinct steps.
+    - id: sql-http-api
+      interface: api
+      maintainer: official
+      entry_url: https://docs.turso.tech/sdk/http/quickstart
+      docs: https://docs.turso.tech/sdk/http/quickstart
+      evidence:
+        - sql-http
+      availability:
+        value: self_serve
+        evidence:
+          - sql-http
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - sql-http
+      capabilities:
+        database.persist:
+          value: documented
+          evidence:
+            - sql-http
+      notes: >-
+        SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer
+        token. The endpoint is specific to each database, so the setup guide is retained as the entry
+        clue. It supports both cloud engines. Provisioning and account authorization are separate.
+    - id: cloud-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://docs.turso.tech/sdk/ts/quickstart
+      docs: https://docs.turso.tech/sdk/ts/quickstart
+      evidence:
+        - ts-sdk
+        - sdk
+      availability:
+        value: self_serve
+        evidence:
+          - ts-sdk
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - sdk-auth
+      capabilities:
+        database.persist:
+          value: documented
+          evidence:
+            - ts-sdk
+            - sql-http
+      notes: >-
+        For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or
+        @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local
+        SDK modes and cached replicas do not by themselves prove a fresh remote read.

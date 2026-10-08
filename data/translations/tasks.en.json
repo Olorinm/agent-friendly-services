@@ -222,5 +222,213 @@
         "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 任一主张误判、遗漏、更正无据或把合成说法当真实报道均不通过。"
       }
     ]
+  },
+  "web-search-access-001/v1": {
+    "description": "Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.",
+    "inputs": "The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.",
+    "expected_output": "One genuine web search result from the specified service, including the query and at least one result title and link; the location of reusable local configuration; actual setup steps, account origin, and human or application requirements, or a specific blocker.",
+    "success": "Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.",
+    "failure": "No real search result; another service or interface substituted; tutorials or examples only; answer inconsistent with the response; unusable configuration; credential exposure; or failure within the budget. Record missing identity details, authorization, human steps or quota as specific access barriers. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个搜索服务，通过指定方式做一次简单的真实网页搜索，确认能用，并保存后续搜索需要的本地配置；说明完成了哪些接入步骤，遇到阻碍也请说明。",
+        "inputs": "服务、指定入口、允许使用的账户或注册资料及其来源见 ENVIRONMENT.md。自行选择一个普通公开主题做小型搜索，给出查询内容和至少一条搜索结果的标题、网页链接。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。将必要连接配置保存在本轮指定的持久目录，秘密只保存在私有文件中，答复只给配置位置。说明已有账号来源、实际自助完成的步骤、人工介入或额外申请要求。",
+        "expected_output": "指定服务的一次真实网页搜索结果，含查询内容和至少一条结果标题、链接；可复用的本地配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体受阻原因。",
+        "success": "按指定方式完成必要注册、认证、安装与配置，真实搜索返回至少一条含标题和有效网页 URL 的结果，答复与响应一致；所需配置可供新会话复用且不泄露秘密。免注册入口不强行注册；已有账号不算本轮自助注册，人工步骤和额外申请如实记录。仅文档示例、健康检查、工具清单、安装成功或保存配置不足以证明接通搜索。",
+        "failure": "未取得真实搜索结果、改用其他服务或入口、仅返回教程或示例、结果与响应不符、配置不可复用、泄露凭据或预算内未完成；缺少身份资料、授权、人工操作或额度时记录具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "database-access-001/v1": {
+    "description": "Connect to this database service through the specified interface, prepare an empty remote test database dedicated to this trial, verify it with a query that writes no business data, and save the connection configuration. Explain the setup steps, human requirements, and free-tier or expiry limits.",
+    "inputs": "The service, interface, authorized account or signup identity and its origin are specified in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed; use account-free access directly. Create only this trial's separate test database and the minimum parent resources required, without accessing existing user databases. Confirm connectivity with a read-only database query; create no business tables or records. Save resource identifiers and connection configuration in the designated persistent directory. Keep secrets in private files and report only their configuration location. Accurately state existing-account origin, steps completed without assistance, human intervention, special applications and specific blockers.",
+    "expected_output": "A newly created remote database dedicated to this trial, accessible and containing no business data; a genuine read-only query result through the specified interface; reusable configuration location and resource identifiers; account origin, actual setup steps, human or application requirements, and known free-tier or expiry limits.",
+    "success": "Complete necessary access through the specified service and interface, create a separate empty test database and query it successfully. Installation and configuration are reusable in a fresh session without credential exposure. Do not count an existing account as newly registered or force signup for account-free access. Accurately explain the evidence for free-tier or expiry conditions and any unknowns. Installation, resource listings, creation receipts and health checks alone do not prove the database can be queried.",
+    "failure": "No usable dedicated remote database or genuine query; local simulation only; another service or interface substituted; business data written prematurely; unusable configuration; credential exposure; or failure within the budget. Missing identity, permissions, human steps or free quota are specific access barriers; execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。",
+        "inputs": "指定服务、入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；无需账号的入口直接使用。仅新建本轮独立测试数据库及必需的最小父资源，不访问既有用户数据库。用一次只读数据库查询确认能连接，不创建业务表或记录。将资源标识和必要连接配置保存在本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。已有账号来源、自助步骤、人工介入、特殊申请和具体阻碍如实说明。",
+        "expected_output": "一个本轮新建、可访问且无业务数据的远程测试数据库；指定方式的真实只读查询结果；可复用配置位置与资源标识；账号来源、实际接入步骤、人工或申请门槛，以及已知免费额度或到期限制。",
+        "success": "通过指定服务及入口完成必要接入，新建本轮独立空数据库并真实查询成功；所需安装和配置可供新会话复用且不泄露凭据；已有账号不算本轮自助注册，免账号入口不强行注册，免费或期限依据及未知项如实说明。仅有安装、资源列表、创建回执或健康检查不足以证明数据库可查询。",
+        "failure": "无可用的专用远程数据库或真实查询、仅本地模拟、改用其他服务或入口、提前写入业务数据、配置不可复用、泄露凭据或预算内未完成；缺身份、权限、人工步骤或免费额度记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "database-todos-001/v2": {
+    "description": "Prepare a separate remote database for my personal todo app and use the attached data to verify that inserts and updates persist. After the writing program exits, reconnect to the same database from a completely fresh program. Give me all todos ordered by id, the incomplete todos, and the total and completed counts, and explain the database's free-tier or expiry limits.",
+    "inputs": "Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2, leaving other content unchanged. Use the separate empty remote test database newly created and explicitly handed over in this trial's access phase; ENVIRONMENT.md identifies the resource and private connection configuration. Installation and authentication may be reused, but not business tables, data, answers or calling scripts. Do not access or modify existing user projects.",
+    "expected_output": "All three todos sorted by id, the incomplete items, and total/completed counts; actual free-tier or expiry restrictions and their sources. Run records preserve verifiable non-sensitive requests or SQL, real remote responses, and evidence that a completely fresh process reads the same database after the writing process exits. Credentials must not appear in public evidence or the final answer.",
+    "success": "Insert three items into the specified service's remote database and update id=2. After the writing process ends, a completely fresh process reconnects to the same database and reads back all three items. Only id=1 is incomplete; there are three total and two completed, with titles and other original values unchanged. The final full list is sorted by id. Real requests, responses and process records substantiate remote persistence and independent reading. Correctly explain supported free-tier or expiry limits, marking unconfirmed details unknown. Credentials remain in private workspace files, not public evidence or the final answer. Temporary resources are acceptable only with their expiry disclosed, without claiming permanent availability.",
+    "failure": "Local-only or simulated storage; no real response from the specified service; no actual insert or update; reads in the writing process presented as a fresh process; a different database used; incorrect data, counts or final order; insufficient evidence; known expiry concealed; credential exposure; or failure within the budget. Missing authorized resources are access barriers; material or execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "为我的个人待办应用准备一个独立的远程数据库，用附件数据验证新增和修改后的保存情况。写入程序退出后，用一个全新的程序重新连接同一数据库读取；给我按 id 排列的全部待办、未完成待办，以及总数和完成数，并说明数据库的免费或到期限制。",
+        "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true，其他内容不变。使用本轮接入阶段新建并明确交付的独立空远程测试数据库，其标识和私有连接配置见 ENVIRONMENT.md；允许复用安装和认证，不继承业务表、数据、答案或调用脚本。不得访问或修改既有用户项目。",
+        "expected_output": "按 id 排序的全部三条待办、未完成项、总数与完成数；实际免费或到期限制及来源。运行记录保存可核对的非敏感请求或 SQL、远程真实响应，以及写入进程退出后由另一全新进程读取同一数据库的证据；凭据不进入公开证据或最终答案。",
+        "success": "实际在指定服务的远程数据库中新增三项并修改 id=2，随后写入进程结束，另一全新进程重新连接同一数据库读回三项；只有 id=1 未完成，总数 3、完成数 2，标题与其他原值不变；最终全部待办按 id 排序。真实请求、响应和进程记录支持远程保存与独立读取；正确说明有依据的免费或到期限制，无法确认的细项如实标未知。凭据只保存在工作目录私有文件，不进入公开证据或最终答案。限时资源可完成此题，但必须明确期限，不声称永久可用。",
+        "failure": "仅本地或模拟存储、无指定服务真实响应、未实际新增或修改、同一写入进程中读回冒充全新进程、连接了不同数据库、数据或计数不符、最终顺序不符、证据不足、隐瞒已知期限、泄露凭据或预算内未完成；缺少授权资源记接入阻碍，材料或执行环境故障单列无效。"
+      }
+    ]
+  },
+  "financial-statements-001/v1": {
+    "description": "Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.",
+    "inputs": "Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.",
+    "expected_output": "A comparison table covering two companies and three metrics, with fiscal year-end dates, currency and units, plus sources locating the original annual reports or regulatory filings.",
+    "success": "All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.",
+    "failure": "Missing metrics or sources; net income confused with earnings per share; incorrect period, company, accounting basis or units; citations that do not support the figures; a summary without the comparison table; or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "比较苹果和微软 2025 财年的营收、净利润和经营现金流，做成表格并附原始财报出处。",
+        "inputs": "Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合并报表；使用截至 2026-09-09 已公开的 GAAP 报告。注明各自财年结束日期，金额统一为十亿美元。",
+        "expected_output": "两家公司、三个指标的比较表；财年结束日期、币种和单位；可定位原始年报或监管披露的出处。",
+        "success": "六个指标与事前保存的各公司 2025 年报匹配，允许显示单位带来的舍入；不混用自然年、单季度、TTM 或调整后利润；财年结束日期和单位正确；原始披露能支持所列指标；核心数据来自指定服务。",
+        "failure": "缺指标或来源；把净利润与每股收益混淆；期间、公司、口径或单位错误；引用无法支持数值；只给摘要不提供比较表；预算内未完成。环境故障单列无效。"
+      }
+    ]
+  },
+  "financial-prices-001/v1": {
+    "description": "Plot Apple's daily closing prices for August 2026 using unadjusted prices, and include a CSV and the data source.",
+    "inputs": "Apple Inc., NASDAQ ticker AAPL, quoted in US dollars; 2026-08-01 through 2026-08-31. Use regular-session daily closing prices on trading days, excluding pre-market and after-hours prices.",
+    "expected_output": "An openable price chart and CSV with each trading date and closing price, an identifiable data source, and a clear statement that the prices are unadjusted.",
+    "success": "Dates cover every trading day in the month without invented rows for market closures, duplicates, omissions or an incorrect currency. Prices match the independently frozen reference series on the same basis; differences exceeding quote precision are checked individually. Chart and CSV values agree, and the data genuinely comes from the specified service.",
+    "failure": "Live snapshots or after-hours prices substituted for daily closes; adjusted prices used without authorization; trading days omitted; demo data, another service or model memory used to fill gaps; missing CSV or chart; or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我画出苹果公司 2026 年 8 月的每日收盘价走势，使用不复权价格，并附上 CSV 和数据来源。",
+        "inputs": "苹果公司 Apple Inc.，纳斯达克 AAPL，美元计价；2026-08-01 至 2026-08-31；常规交易日的日收盘价，不含盘前盘后。",
+        "expected_output": "可打开的走势图和 CSV；每个交易日的日期与收盘价；可识别的数据来源与不复权口径。",
+        "success": "日期覆盖该月全部交易日且不含伪造的休市日；无重复、缺失或错误币种；价格与事前冻结的同口径参考序列一致，差异超过报价精度时逐项复核；图表与 CSV 数值一致；数据确实来自指定服务。",
+        "failure": "用实时快照或盘后价替代日收盘价；擅自使用复权数据；缺交易日；用演示数据、别的服务或模型记忆填补；CSV 或图表缺失；预算内未完成。环境故障单列无效。"
+      }
+    ]
+  },
+  "cloudflare-access-001/v1": {
+    "description": "Set up access to Cloudflare, confirm that the test KV namespace is accessible through the specified interface, and retain the local configuration needed for later use.",
+    "inputs": "ENVIRONMENT.md provides the account and test KV namespace identifiers, official entry point, authorized account or credentials, and their origin. Perform a read-only check of namespace identity or the key list; do not read configuration values. Keep secrets in private local configuration and report only whether access works and where the configuration is saved.",
+    "expected_output": "A genuine successful call through the specified interface, the correct KV namespace identity, and the location of reusable local configuration, or an explanation of the blocker.",
+    "success": "A genuine response establishes that the specified interface can access the correct remote KV namespace. Local configuration is reusable without exposing credentials. Grading separately records the origin of supplied accounts, steps completed without assistance, human intervention and special applications; previously obtained accounts or resources are not counted as created during this trial.",
+    "failure": "Installation or saved configuration without a successful call; local simulation or a different namespace used; another interface substituted; unusable configuration; or unfinished execution. Missing authorized resources and execution-environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我接通 Cloudflare，确认能够通过指定方式访问测试 KV 空间，保留后续使用需要的本地配置。",
+        "inputs": "账号与测试 KV 空间标识、官方入口、允许使用的账号或凭据及其来源在 ENVIRONMENT.md。只读验证空间身份或键列表即可，不读取配置值。秘密保存在本地私有配置中，答复只说明是否可用和配置位置。",
+        "expected_output": "指定方式真实调用成功、正确 KV 空间身份、后续可使用的本地配置位置；受阻时说明原因。",
+        "success": "真实响应证明指定方式可访问正确远端 KV 空间；本地配置可复用且不泄露凭据；验收分别记录已有账号来源、自助完成步骤、人工介入及特殊申请，不将预先取得的账号或资源算作本轮自助创建。",
+        "failure": "只安装或只保存配置，没有成功调用；误用本地模拟数据或其他空间；改走其他方式；配置不可复用；实际运行未完成。缺少授权资源或执行环境故障单列原因。"
+      }
+    ]
+  },
+  "cloudflare-kv-config-001/v1": {
+    "description": "Read the test application's current configuration, list its settings, and tell me whether maintenance mode is enabled.",
+    "inputs": "The configuration is a JSON object stored under app:config in the test KV namespace; maintenance_mode indicates maintenance mode. Account and namespace identifiers are in ENVIRONMENT.md. Read only; change nothing.",
+    "expected_output": "All app:config fields and values, and an explicit conclusion that maintenance mode is enabled or disabled.",
+    "success": "The specified interface genuinely reads app:config from the correct remote namespace. Output matches the independently frozen and reread JSON semantically, with all fields and values present, the correct maintenance-mode conclusion, and no remote data changes.",
+    "failure": "Listing keys without reading the value; missing or altered fields; incorrect maintenance-mode conclusion; local simulation, documentation examples or another namespace substituted; another interface used; or failure within the budget. Unready materials, data drift and environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我读一下测试应用的当前配置，列出配置内容，并告诉我维护模式开着吗。",
+        "inputs": "配置保存在测试 KV 空间的 app:config 键中，是 JSON 对象；maintenance_mode 表示维护模式。账号和空间标识在 ENVIRONMENT.md。只读，不更改任何内容。",
+        "expected_output": "app:config 的全部配置字段和值，以及维护模式开启或关闭的明确结论。",
+        "success": "指定方式真实读取正确远端空间的 app:config；输出与冻结并独立重读的 JSON 语义一致，字段和值完整；维护模式结论正确；没有修改远端数据。",
+        "failure": "只列出键名却没读取值；漏字段或改值；错误判断维护模式；使用本地模拟、文档示例或其他空间；改走其他入口；预算内未完成。材料未就绪、数据漂移或环境故障单列无效。"
+      }
+    ]
+  },
+  "github-access-001/v1": {
+    "description": "Set up the specified way of accessing GitHub, confirm that the test repository is accessible, and retain the local configuration needed for subsequent use.",
+    "inputs": "Access only this trial's test repository. ENVIRONMENT.md provides its identifier, official entry point, authorized account or credentials, and their origin. Verify repository identity with read-only access; do not compile an issue list. Keep secrets in private local configuration and report only whether access works and where the configuration is saved.",
+    "expected_output": "A genuine successful call through the specified interface, correct repository identity, and the location of reusable local configuration, or a specific explanation of the blocker.",
+    "success": "A genuine response establishes that the specified interface can access the correct repository. Required local configuration is reusable without exposing credentials. Grading separately records supplied-account origin, steps completed without assistance, human intervention and special applications; an existing account is not counted as registered during this trial.",
+    "failure": "Installation or saved configuration without a successful call; the wrong repository accessed; another interface substituted; unusable configuration; or unfinished execution. Missing authorized resources and execution-environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我接通 GitHub，确认能够通过指定方式访问测试仓库，保留后续使用需要的本地配置。",
+        "inputs": "仅访问本轮测试仓库；仓库标识、官方入口、允许使用的账号或凭据及其来源在 ENVIRONMENT.md。只读验证仓库身份即可，不整理 issue。秘密保存在本地私有配置中，答复只说明是否可用和配置位置。",
+        "expected_output": "指定方式真实调用成功、正确仓库身份、可供后续使用的本地配置位置；受阻时说明具体原因。",
+        "success": "真实响应证明指定方式能够访问正确仓库；所需本地配置可复用且不泄露凭据；验收分别记录已有账号来源、自助完成步骤、人工介入和特殊申请，不将已有账号算作本轮注册。",
+        "failure": "只安装或只保存配置，没有成功调用；访问错误仓库；用其他方式替代指定方式；配置不可复用；实际运行未完成。缺少授权资源或执行环境故障单列原因。"
+      }
+    ]
+  },
+  "github-open-bugs-001/v1": {
+    "description": "List all open issues labeled bug in the test repository, including each title and link.",
+    "inputs": "The test repository identifier is in ENVIRONMENT.md. Include issues only, not pull requests; modify nothing. Any list order is acceptable.",
+    "expected_output": "Titles and web links for every matching issue.",
+    "success": "Results match the repository state independently frozen and reread for this trial. Every open issue bearing the bug label is included with the correct title and link, without closed issues, issues lacking the required label, pull requests or duplicates. Genuine calls use the specified interface.",
+    "failure": "Missing or extra items; incorrect titles or links; tutorials or examples only; no actual read of the specified repository; another interface used; or failure within the budget. Material changes and environment failures are invalid runs; do not infer success without evidence.",
+    "source_variants": [
+      {
+        "description": "帮我列出测试仓库里所有尚未关闭、带 bug 标签的 issue，给出标题和链接。",
+        "inputs": "测试仓库标识在 ENVIRONMENT.md；只需 issue，不包括 pull request，不修改任何内容。列表顺序不限。",
+        "expected_output": "符合条件的全部 issue 标题及网页链接。",
+        "success": "与本轮冻结并独立重读的仓库状态一致；所有 open 且带 bug 标签的 issue 均列出，标题和链接正确，无已关闭项、无其他标签项、无 pull request 或重复项；真实调用通过指定方式完成。",
+        "failure": "漏项、多项、错误标题或链接、只返回教程或示例、未实际读取指定仓库、改走其他入口、预算内未完成；材料变化或环境故障单列无效，不猜测成功。"
+      }
+    ]
+  },
+  "collaborative-tables-001/v3": {
+    "description": "Turn the attached book-club meeting todos into an online task table with owners, deadlines and completion status. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "Book-club planning meeting notes, 2026-09-08: Lin Qing will confirm the venue by September 15; Zhou Zhou will compile the reading list by September 16; Chen He will design the poster, originally due September 18. None was completed at the meeting. Follow-up: Zhou Zhou says the reading list is now complete, and the poster deadline moves to September 20. Other arrangements remain unchanged.",
+    "expected_output": "A real online task-table link, and the two incomplete tasks with their owners and deadlines.",
+    "success": "The remote table contains exactly three tasks: confirm venue / Lin Qing / 2026-09-15 / incomplete; compile reading list / Zhou Zhou / 2026-09-16 / complete; design poster / Chen He / 2026-09-20 / incomplete. The answer links to that table and its incomplete-task list agrees with the remote state. An independent grading agent reads and verifies the table; field names and operation order are unrestricted.",
+    "failure": "No real online table; omitted or duplicate items; incorrect data or answer; wrong link; timeout; or violation of resource, free-use or no-notification constraints. Credential and environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "真实在线任务表链接；两项未完成事项及负责人、截止日期",
+        "success": "远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。评测 Agent 独立读取复核，字段命名与操作顺序自由",
+        "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列"
+      }
+    ]
+  },
+  "collaborative-tables-002/v2": {
+    "description": "The reading list in this book-club task table is complete, and the poster deadline has moved to September 20, 2026. Update those items and leave everything else unchanged. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "The environment identifies the existing online task table. Its three original rows are: confirm venue, Lin Qing, 2026-09-15, incomplete; compile reading list, Zhou Zhou, 2026-09-16, incomplete; design poster, Chen He, 2026-09-18, incomplete.",
+    "expected_output": "The link to the updated original table, and the two incomplete tasks with their owners and deadlines.",
+    "success": "Independent before-and-after reads of the same remote table show the reading list marked complete and the poster deadline changed to 2026-09-20. There are still three rows and all other original content is unchanged. The answer links to the original table and lists confirm venue / Lin Qing / 2026-09-15 and design poster / Chen He / 2026-09-20 as incomplete.",
+    "failure": "A replacement table created instead of updating the original; incorrect content; deletion, omission or duplication; unsupported changes to other content; incorrect answer; timeout; or violation of resource constraints. Credential and environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "这张读书会任务表里的书单已经完成，海报延期到2026年9月20日。帮我更新，其他内容保持不变。给我链接，并列出还没完成的事项、负责人和截止日期。",
+        "inputs": "已有在线任务表的资源标识由本轮环境提供。原表三项：确认场地，林青，2026-09-15，未完成；整理书单，周舟，2026-09-16，未完成；制作海报，陈禾，2026-09-18，未完成。",
+        "expected_output": "原任务表更新后的链接；两项未完成事项及负责人、截止日期",
+        "success": "独立读取前后同一远端表：书单改为已完成、海报日期改为2026-09-20；行数仍为三，其他原有内容不变；答复链接为原表，未完成清单为确认场地/林青/2026-09-15及制作海报/陈禾/2026-09-20",
+        "failure": "未修改原表而另建替代表、内容错误、删除/遗漏/重复、无依据改写其他内容、答复错误、超时或违反资源约束；凭据或环境故障单列"
+      }
+    ]
+  },
+  "payment-acceptance-002/v1": {
+    "description": "Check which of these three orders have been paid, how much was paid for each and in which currency. Clearly mark any unsuccessful payments too.",
+    "inputs": "Real resource identifiers for three test orders. The attachment supplies identifiers only, not answers. The orders are for the same test product, with one completed payment, one unpaid order and one failed payment.",
+    "expected_output": "The payment status of each of the three orders, with the amount actually received and currency for paid orders.",
+    "success": "Independent reads of server-side payment records confirm all three statuses and the correct amount and currency for the completed payment. Opening a page, an uncaptured authorization or a processing state is not treated as payment; failed or unpaid amounts are excluded from money received.",
+    "failure": "An order omitted; status guessed; order creation treated as payment success; incorrect amount or currency; timeout; or changes to an original order. Environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我查一下这三笔订单哪些已经付了款，分别付了多少钱、什么币种；没付成功的也标清楚。",
+        "inputs": "三笔测试订单的真实资源标识；附件只提供标识，不提供答案。订单来自同一测试商品，状态分别为已完成付款、尚未付款、付款失败",
+        "expected_output": "三笔订单逐笔列明付款状态，已付款订单列出实收金额与币种",
+        "success": "独立读取服务端支付记录：三笔状态全部正确，已完成付款的金额与币种正确；不把打开页面、授权未捕获或处理中当作已付款，不将失败/未付金额计入已收款",
+        "failure": "漏单、猜测状态、把创建订单当成支付成功、金额或币种错误、超时或改动原订单；环境故障单列"
+      }
+    ]
+  },
+  "payment-acceptance-003/v1": {
+    "description": "My app needs a membership costing USD 12 per month, with no free trial or setup fee. Create the subscription page in the test environment first and give me its link.",
+    "inputs": "Membership name: “散步计划 Pro”. Price: USD 12 per month; quantity: 1. No trial period or one-time setup fee.",
+    "expected_output": "A test subscription-page link for the specified membership.",
+    "success": "The remote product and price match an accessible test checkout page: automatic monthly renewal, a listed price of USD 12, quantity 1, and no trial or setup fee. An independent grading agent verifies these details. A buyer need not complete the subscription or actually renew it.",
+    "failure": "A one-time payment presented as a subscription; incorrect interval, amount or name; an added trial or setup fee; no usable test page; timeout; or actions outside the test environment. Environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "我的应用要卖一个每月12美元的会员，没有免费试用，也没有开通费。先在测试环境做好订阅页面，把链接给我。",
+        "inputs": "会员名为“散步计划 Pro”，标价12 USD/月，数量1；无试用期、无一次性开通费",
+        "expected_output": "对应会员的测试订阅页面链接",
+        "success": "远端商品/价格与可打开的测试结账页面一致：每月自动续费、标价12 USD、数量1、无试用和开通费。评测 Agent 独立核验；不要求买家完成订阅或实际续费",
+        "failure": "一次性支付冒充订阅、周期/金额/名称错误、额外试用或开通费、无可用测试页面、超时或越过测试环境；环境故障单列"
+      }
+    ]
   }
 }

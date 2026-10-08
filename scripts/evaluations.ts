@@ -195,7 +195,7 @@ ${buildBoards(records).map(board => `<a id="${board.id}"></a>\n\n### ${board.tas
   const first = row.runs[0];
   return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}${peerReviewLabel(first, true) ? ` · ${peerReviewLabel(first, true)}` : ''}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
     const price = r.model_cost;
-    return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${moneyLabel(price?.amount_usd ?? null)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? `${r.service_cost.kind}: ${r.service_cost.note}; ${r.service_cost.sources.join('; ')}` : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}`;
+    return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${moneyLabel(price?.amount_usd ?? null)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? [`${r.service_cost.kind}: ${r.service_cost.note}`, ...r.service_cost.sources].join('; ') : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}\n\n  结论与限制：${cell(r.reason)}`;
   }).join('\n');
 }).join('\n\n')).join('\n\n')}
 `);

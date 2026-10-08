@@ -95,7 +95,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
-| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
 | [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
@@ -378,9 +378,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://docs.exa.ai) · [API Reference](https://docs.exa.ai/reference/getting-started) · [llms.txt](https://docs.exa.ai/llms.txt) · [Changelog](https://docs.exa.ai/changelog) · [Pricing](https://exa.ai/pricing) · [Signup](https://dashboard.exa.ai) · [API Keys](https://docs.exa.ai/reference/getting-started) · [SDKs](https://docs.exa.ai/sdks/typescript-sdk-specification) · [Official MCP](https://github.com/exa-labs/exa-mcp-server) · [Rate Limits](https://docs.exa.ai/reference/rate-limits)
 
-- **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
+- **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [OAuth](https://exa.ai/docs/get-started/exa-mcp) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
 - **N/A:** Idempotency — Read-only search/retrieval API; requests are inherently repeatable.
-- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
 ### fal.ai <a id="fal"></a>
 
@@ -913,7 +913,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 ### Tavily <a id="tavily"></a>
 
-> Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
+> Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 
 **Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 

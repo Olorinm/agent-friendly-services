@@ -20,6 +20,7 @@ import time
 from adapter_usage import read_usage
 from service_cost import service_charge
 from grading_packet import build as build_grading_packet, resolve_evidence_paths
+from grading_privacy import protect_grading
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -228,6 +229,7 @@ def finish_execution(directory, config, receipt, elapsed):
             'pricing_sha256': digest(directory / 'pricing.json'),
             'prompt_sha256': digest(directory / 'frozen/execution/prompt.txt'),
             'prompt_style': 'natural', 'preparation_note': config.get('preparation_note', ''),
+            'service_credentials': config.get('service_credentials', 'none'),
             'environment_id': config['environment_id'], 'phase': config['phase']}
     write(directory / 'run.json', meta)
     grade = directory / 'grading-input'
@@ -287,6 +289,8 @@ def advance(directory, group_directory=None):
     if phase in ('prepared', 'execution_collected'):
         if phase == 'execution_collected' and group_directory is not None:
             attach(directory, group_directory)
+        if phase == 'execution_collected':
+            protect_grading(directory)
             write(directory / 'grading-input-hashes.json', frozen_files(directory / 'grading-input'))
         state.update(phase=role + '_starting', dispatched_at=now())
         write(directory / 'state.json', state)

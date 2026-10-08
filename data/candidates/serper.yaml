@@ -14,7 +14,7 @@ catalog:
   sources:
     docs:
       url: https://serper.dev/
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
   routes:
     - id: search-api
@@ -40,7 +40,11 @@ catalog:
           value: documented
           evidence:
             - docs
-      notes: Google results API with signup trial queries; actual account flow and authentication remain untested.
+      notes: >-
+        The homepage advertises 2500 initial free queries without a card; requests stop when credits
+        are exhausted. No monthly renewal or trial expiry is established here. The dashboard/playground
+        is the setup lead, but this public-page review did not establish API authentication details.
+        Account registration, key acquisition and actual official-source search results remain untested.
       requirements:
         payment_method:
           value: not_required
