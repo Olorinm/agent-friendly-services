@@ -1,0 +1,98 @@
+id: daytona
+name: Daytona
+category: cloud-hosting
+homepage: https://www.daytona.io/
+summary: Hosted sandboxes with SDK, CLI and API access for code execution and file transfer.
+submitted_by: community
+tags:
+  - sandboxes
+  - code-execution
+catalog:
+  version: 1
+  classifications:
+    - cloud-hosting/code-sandboxes
+  sources:
+    docs:
+      url: https://www.daytona.io/docs/en/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    authentication:
+      url: https://www.daytona.io/docs/en/api-keys
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sandboxes:
+      url: https://www.daytona.io/docs/en/sandboxes
+      checked_on: '2026-10-08'
+      kind: official_docs
+    files:
+      url: https://www.daytona.io/docs/en/file-system-operations
+      checked_on: '2026-10-08'
+      kind: official_docs
+    execution:
+      url: https://www.daytona.io/docs/en/process-code-execution
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://www.daytona.io/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    limits:
+      url: https://www.daytona.io/docs/en/limits
+      checked_on: '2026-10-08'
+      kind: official_docs
+    billing:
+      url: https://www.daytona.io/docs/en/billing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.daytona.io/terms-of-service
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: sandbox-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://app.daytona.io/api
+      docs: https://www.daytona.io/docs/en/
+      evidence: [docs, authentication]
+      availability:
+        value: self_serve
+        evidence: [docs, limits]
+      personal_access:
+        value: documented
+        evidence: [pricing, limits, terms]
+        notes: Initial Tier 1 requires email verification; no organization qualification is listed. Terms require an adult capable of contracting. Actual registration, email-domain acceptance, region access and awarded credit remain unverified.
+      auth:
+        value: api_key
+        evidence: [authentication]
+      requirements:
+        platform_account:
+          value: required
+          evidence: [authentication]
+        payment_method:
+          value: not_required
+          evidence: [pricing, limits]
+          notes: No card for the initial trial/Tier 1. Tier 2 requires a linked card and $25 top-up.
+      capabilities:
+        code.execute:
+          value: documented
+          evidence: [execution, files]
+      costs:
+        - kind: usage
+          amount: 0.0504
+          unit: money
+          currency: USD
+          per: allocated vCPU hour
+          scope: CPU sandbox compute, billed by second; RAM and disk are additional and trial credits may offset charges.
+          evidence: [pricing]
+        - kind: usage
+          amount: 0.0162
+          unit: money
+          currency: USD
+          per: allocated GiB RAM hour
+          scope: CPU sandbox memory, billed by second; separate from CPU and storage.
+          evidence: [pricing]
+      notes: Official Python/TypeScript and other SDKs upload/download files and run code or commands. Pricing offers $200 free compute credits without a card, not recurring free compute. Free credits exclude GPU workloads. Defaults are 1 vCPU, 1 GiB RAM and 3 GiB disk; documented minima are 1/1/1. Tier 1 is organization-scoped; the same limits page inconsistently lists 10 and 20 GiB RAM, so confirm the account quota before relying on either. No registration or compute API was called in this research pass.
+  notes:
+    - For temporary work, ephemeral sandboxes delete when stopped; auto_delete_interval=0 expresses immediate deletion after stopping. Auto-stop defaults to 15 minutes and 0 disables it. A positive ttl_minutes also destroys the sandbox regardless of running/paused/stopped state; unset or 0 provides no wall-clock deadline. Deletion normally returns before destruction; use its wait option and confirm the resource is gone. Stopped/paused sandboxes retain billable disk; deleted sandboxes are not billed, but separately created snapshots remain billable. Account closure alone is not resource cleanup.
+    - Terms sections 7 and 8 cover internal-business use, competing products, disruption and unapproved vulnerability probing. No express publication-of-benchmarks prohibition was found in the reviewed terms. This is not a new license or permission; ordinary synthetic file processing does not establish isolation strength or allow vulnerability testing. Customer content remains customer-owned. Preserve nonpublic service information and credentials when publishing minimal results.

@@ -54,8 +54,8 @@ checks:
   free_tier_or_trial:
     status: supported
     evidence: https://modal.com/pricing
-    verified: "2026-07-07"
-    notes: Monthly free compute credits on the starter plan.
+    verified: "2026-10-08"
+    notes: Starter includes $30 per month in compute credits, but current billing documentation requires a payment method on file before use (https://modal.com/docs/guide/billing). Free credits are not a no-card route or a spending cap.
 
   self_serve_paid_upgrade:
     status: supported
@@ -87,4 +87,55 @@ catalog:
       url: https://modal.com/docs/reference/cli
       checked_on: '2026-07-07'
       kind: official_docs
-  routes: []
+    sandboxes:
+      url: https://modal.com/docs/guide/sandboxes
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://modal.com/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    billing:
+      url: https://modal.com/docs/guide/billing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    signup:
+      url: https://modal.com/signup
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://modal.com/legal/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: sandbox-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://modal.com/docs/guide/sandboxes
+      docs: https://modal.com/docs/guide/sandboxes
+      evidence: [sandboxes]
+      availability:
+        value: self_serve
+        evidence: [signup, sandboxes]
+      personal_access:
+        value: documented
+        evidence: [pricing]
+        notes: Starter targets independent developers; current signup offers GitHub, Google and SSO. Direct email signup was not established by the public page.
+      auth:
+        value: platform_credentials
+        evidence: [existing-docs]
+      requirements:
+        platform_account:
+          value: required
+          evidence: [signup]
+        payment_method:
+          value: required
+          evidence: [billing]
+      capabilities:
+        code.execute:
+          value: documented
+          evidence: [sandboxes]
+      notes: Official SDK Sandbox.create/exec provides remote process execution and stdout retrieval. Sandboxes default to a five-minute lifetime, configurable up to 24 hours; terminate(wait=True) waits for termination. Persistent Volumes and snapshots have separate lifecycles. Starter credits offset metered use and do not mean every workload costs zero.
+  notes:
+    - Current billing requires a payment method, even with Starter credits. A free-registration-only project cannot assume it can start compute without one. This is a documented preparation requirement, not an observed execution failure.
+    - Reviewed May 2026 SaaS terms limit access to internal business purposes and impose ordinary use/confidentiality restrictions; no explicit benchmark-publication prohibition was identified in that document. This bounded review does not establish permission for unrelated redistribution or competing services.
