@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "run_id": "valhalla-routing-bridge-001-ds41-r1",
+  "service_id": "valhalla",
+  "route_id": "public-route-api",
+  "entry_url": "https://valhalla1.openstreetmap.de/route",
+  "task": {
+    "description": "我在整理旅行地图，想保存从附件南侧点到北侧点、开车穿过金门大桥的路线。请给出总里程、服务估算的驾驶时间、主要道路和行驶方向，交付一份可留存到地图中的路线文件，并注明来源。",
+    "inputs": "美国 San Francisco Bay 的 Golden Gate Bridge 公路段。WGS84 十进制度：A 南侧点纬度 37.810193、经度 -122.477383；B 北侧点纬度 37.830233、经度 -122.479740。普通小汽车，从 A 到 B 沿金门大桥公路向北，不加中途停靠或绕回，不改走其他桥、渡轮、步行或骑行路线。这是行程地图记录，不需车道级精度：实际路线的起终点允许分别匹配在给定点 50 米内的同一公路上；跨桥线路相对所述公路中心线的道路级位置偏差允许 50 米。不指定出发时刻，只要指定服务给出的普通路线估算，不要求实时交通、当前开放状态或到达时间保证。距离用公里、驾驶时间用分钟并标明是估算；保留主要道路名称和北行方向的简短概述，不必逐条转写所有导航指令。文件为 GPX track 或 WGS84 GeoJSON LineString 之一（GeoJSON 可包在 Feature 或 FeatureCollection 中），保存同一真实服务路线的连续形状和起终点顺序，供以后放入地图，不只保存两个标记或自行连接起终点代替服务路线。通过本轮指定服务查询，不用另一服务、预存轨迹或模型记忆补答案。",
+    "expected_output": "与指定服务真实响应一致的公里距离、估算驾驶分钟数、主要道路与方向概述；可解析、可留存的 GPX 轨迹或 GeoJSON 线路文件和文件位置；可核对的服务来源及所需署名。",
+    "success": "实际使用指定入口按 A→B 和小汽车模式取得路线；交付文件来自同一返回线路，坐标轴、顺序及连续性正确，起终点分别满足可见的 50 米范围，沿独立官方道路参考确认的金门大桥公路走廊向北且满足可见的 50 米道路级容差；没有其他桥、渡轮、步行路线、增加停靠或绕回。距离和时间按服务响应正确换算为公里、分钟，允许合理舍入；主要道路、方向、文件位置与来源准确。不同服务的路线细节、距离和估算时间不必相同，不以另一家结果或独立参考线长度作统一数值答案。",
+    "failure": "没有真实指定服务查询、起终点或模式错误、路线越出已告知的范围、走错桥或交通方式、增加停靠或绕回、没有可用路径文件、坐标轴或顺序错误、用自画直线或旧轨迹冒充服务返回形状、距离时间与响应不符或单位错误、主要道路方向与路线矛盾、缺少来源或预算内未完成。参考材料实质失效、采集或运行环境故障须核实单列；不同服务估计不同本身不是失败，也不据此判断当前实际驾驶时间。",
+    "resources": "只做本题固定点对的小量只读查询，可查指定服务官方文档、安装通用依赖和自行转换其返回形状，不接入其他地图或路由服务补路线、不付费、不注册、不写个人在线地图、不开始真实导航或支付通行费。遵守客户端标识、署名、限流与停止条件，入口和预算由 ENVIRONMENT.md 冻结。只继承接入阶段的通用安装与配置；不获得接入答案、调用脚本、业务参考线或预先生成的路径。运行器保留真实原始响应供验收，不要求执行者另交审计日志、自评或核验脚本。",
+    "id": "route-planning-bridge-001",
+    "version": "v1",
+    "sha256": "e6ed564c316b94961c18cd0b2ddada73ff43e698a732292e3767939a1719113e",
+    "file": "data/experiments/tasks/route-planning.md"
+  },
+  "prompt_sha256": "d6268f72242b3c661a77b87a20764a12f946517c78546a6025d470332eb645dd",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T19:20:57.252254+00:00",
+  "ended_at": "2026-10-08T19:21:21.943265+00:00",
+  "elapsed_seconds": 24.691011,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous FOSSGIS public demos, no account/token/email/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task/model/budget, public OSRM vs Valhalla engines hosted by FOSSGIS using OSM; not independent providers or map truth. All candidate executions serial; 4routecalls per service per stage,>=2s,stop first403/429 or two consecutive connection failures. Service limits are instructions; model/output/time caps enforced. Explicit truthful UA/project URL and Valhalla X-Client-Id. No account/key/paid fallback/prewritten client. Same image2GiB/1CPU/pids256,pipTUNA/emptycache. Access then audited generic configuration/installed dependencies retained; restart owned executor before fresh businesshome/session/workspace. Exec25requests/access300s/business600s;grading40/300s;output32000/request. Independent roads/reference and official operator rules frozen before candidate queries and grader-only; business peers sealed before separate grading without peer verdicts. No grader candidateAPI calls. Official summary allows low-volume noncommercial use; full linked German policy was blocked and not read, no blanket complete terms-review claim. AttributionOSM/FOSSGIS andfix-maplink accompany public facts. Official source manifest SHA256 c316e7244f96b20dc106f32047f9a055d1684b6c52a4fc0699e8d4e28dd80a05. Retention audit SHA256 83fc21262ffafb4959ab6f50b7c6161fb4da0beb7e96adb54d87ddff0b11d200.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定 FOSSGIS 托管 Valhalla 入口以 auto 模式对 A→B 取得真实路线（HTTP 200，本次 1 次请求）。交付 GeoJSON LineString 由该响应 polyline6 形状独立解码所得，起终点距给定点分别 0.62 m、0.0 m（<50 m），与冻结官方道路参考中心线加密双向比对最大偏差约 6.2 m（<50 m），南→北、无渡轮/其他桥；距离 2.24 km、估时约 1.3 分钟与响应一致，道路名/方向与来源署名准确。",
+  "usage": {
+    "input_tokens": 178879,
+    "cached_input_tokens": 157440,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3233,
+    "reasoning_output_tokens": 1302
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [
+      "official-route-sources/valhalla-demo.source",
+      "official-route-sources/operator-services.source",
+      "official-route-sources/operator-about.source"
+    ],
+    "note": "官方文档仅说明 FOSSGIS 公共演示服务器面向公众开放、无需注册并遵循 fair-usage/速率限制，未给出明确免费或无计费条款；完整德文运营方 Nutzungsbedingungen 未读取，依据不足，保留 unknown，不因本次成功响应或未付款认定免费。",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader",
+    "reviewed_at": "2026-10-08T19:25:48.374931+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定入口 valhalla1.openstreetmap.de/route，普通小汽车（auto）按 A→B 真实查询成功",
+        "passed": true,
+        "evidence": "execution/artifacts/request.json：locations A(37.810193,-122.477383)→B(37.830233,-122.479740)、costing=auto、units=kilometers；工具记录 curl POST 该指定入口返回 HTTP 200；execution/artifacts/response.json status=0 'Found route between points'，travel_mode=drive、travel_type=car、has_ferry=false。"
+      },
+      {
+        "criterion": "交付可解析的路线文件，含同一响应返回的连续有序形状而非自画直线",
+        "passed": true,
+        "evidence": "execution/artifacts/golden_gate_bridge_route.geojson 为合法 FeatureCollection/LineString；独立解码 response.json trip.legs[0].shape(polyline6) 得 6 点并与文件坐标逐点一致（见 grading/artifacts/evidence/routing-verification.json）。"
+      },
+      {
+        "criterion": "起终点在给定点 50 m 内（同一公路），保持 A 南→B 北顺序",
+        "passed": true,
+        "evidence": "起坐标[-122.47739,37.810192]距 A 0.62 m，终坐标[-122.47974,37.830233]距 B 0.0 m；纬度单调递增（南→北）；见 grading/artifacts/evidence/routing-verification.json。"
+      },
+      {
+        "criterion": "路线沿金门大桥公路走廊，与独立官方参考线满足 50 m 道路级容差，无其他桥/渡轮/停靠/绕回",
+        "passed": true,
+        "evidence": "对候选线段与 reference-sources/route-planning-golden-gate-reference-line.geojson 双向加密比对，最大偏差约 6.2 m（<50 m）；响应 has_ferry=false，路径无中途停靠、走错桥或改交通方式；见 grading/artifacts/evidence/routing-verification.json。"
+      },
+      {
+        "criterion": "距离与估算时间按响应正确换算为公里、分钟",
+        "passed": true,
+        "evidence": "response summary.length=2.24（kilometers）、time=80.66 秒；execution/answer.md 报 2.24 km 与约 1.3 分钟（80.66/60≈1.34），并标注为估算。"
+      },
+      {
+        "criterion": "主要道路与北行方向概述与响应一致",
+        "passed": true,
+        "evidence": "响应 maneuver street_names=['US 101 North','CA 1','Golden Gate Bridge']、instruction='Drive north on US 101 North/CA 1/Golden Gate Bridge.'、bearing_after=355；execution/answer.md 与 geojson properties 描述一致。"
+      },
+      {
+        "criterion": "注明可核对来源与所需 FOSSGIS/OSM 署名",
+        "passed": true,
+        "evidence": "execution/answer.md 与 execution/artifacts/golden_gate_bridge_route.geojson 注明 'Routing: Valhalla on FOSSGIS demo servers'、地图数据 © OpenStreetMap contributors，并附 https://www.openstreetmap.org/copyright 与 https://www.openstreetmap.org/fixthemap 链接。"
+      },
+      {
+        "criterion": "遵守冻结预算与请求方式（≤4 次、真实客户端标识、不换服务）",
+        "passed": true,
+        "evidence": "本次仅 1 次路由数据请求（工具记录 0007），带 User-Agent AgentFriendlyServices/0.1 与 X-Client-Id；会话中未出现其他路由服务或托管域名调用。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "routing-bridge-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "a7d36f47af4fb982ec0e86dd22a4061a98b486d241e32fc3341ce48d45ebc216",
+      "run_ids": [
+        "osrm-routing-bridge-001-ds41-r1",
+        "valhalla-routing-bridge-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "osrm-routing-bridge-001-ds41-r1",
+        "valhalla-routing-bridge-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.029405304,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.029405304,
+          "usage_sha256": "48b890e0da218dca8fde2e6a2504f7e5d32c7da0cbd61ed140536d781b01324a"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/valhalla-routing-bridge-001-ds41-r1/public-review/verification.json",
+      "sha256": "f84e86990585468d7fc9a8c52562c6672eac757676fdca65880841a2b05c1468",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full route geometry and raw service responses remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/routing-deepseek-overnight-20261008/valhalla-routing-bridge-001-ds41-r1",
+    "run_sha256": "6e09693c7b3e000d0eb5fa406d3b21ca7c81cc4c210d71bbcc23a0b5236a4193",
+    "events_sha256": "6bbb1281626df2b0c4eff45473d1daa23b11127a2581f873f10959257b5e1d09",
+    "answer_sha256": "cc1d09c651475f81cdeaa4fdd2f1c9690e5c4e589d48724a1e7b0be020da38f5",
+    "review_sha256": "818ddc1d1216da52f3eacd1d8a3cd2f284d669fa880b27e1d51a82011a3cdf4d",
+    "original_independent_review_sha256": "2651a6d5143e52d519b8a65497a4aed581a4b4556469107dc8f089506025e633",
+    "selected_independent_review_sha256": "2651a6d5143e52d519b8a65497a4aed581a4b4556469107dc8f089506025e633",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; full route geometry, raw responses and transcripts stay private. Independent verdict, reason and checks preserved. Fixed point pair and ordinary driving mode, declared 50m road-level tolerance, shared operator/map data, actual response units and audited lifecycle preparation disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7199,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 120,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8462,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 656,
+        "reasoning_output_tokens": 453
+      },
+      {
+        "input_tokens": 21463,
+        "cached_input_tokens": 9088,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 179,
+        "reasoning_output_tokens": 75
+      },
+      {
+        "input_tokens": 22101,
+        "cached_input_tokens": 21632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 485,
+        "reasoning_output_tokens": 205
+      },
+      {
+        "input_tokens": 22622,
+        "cached_input_tokens": 22400,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 66,
+        "reasoning_output_tokens": 6
+      },
+      {
+        "input_tokens": 23292,
+        "cached_input_tokens": 22656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 928,
+        "reasoning_output_tokens": 226
+      },
+      {
+        "input_tokens": 24236,
+        "cached_input_tokens": 24064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 64,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 24345,
+        "cached_input_tokens": 24192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 220,
+        "reasoning_output_tokens": 151
+      },
+      {
+        "input_tokens": 25159,
+        "cached_input_tokens": 24448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 515,
+        "reasoning_output_tokens": 177
+      }
+    ],
+    "source_sha256": "30653cc67aaa54ca7abc0fd308ba0d10b5654dd8feda106cd5aced3ae8cdc0cc",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 178879,
+      "cached_input_tokens": 157440,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3233,
+      "reasoning_output_tokens": 1302
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

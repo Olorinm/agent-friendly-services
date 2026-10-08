@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "run_id": "valhalla-routing-access-ds41-r1",
+  "service_id": "valhalla",
+  "route_id": "public-route-api",
+  "entry_url": "https://valhalla1.openstreetmap.de/route",
+  "task": {
+    "description": "帮我接通这个路线规划服务，通过指定入口查询附件两个点之间的一段小汽车路线，告诉我服务给出的距离和估算驾驶时间，确认可以用；保存后续调用所需配置，并说明接入步骤和实际门槛。",
+    "inputs": "接通用的示例位于美国 Seattle 的 I-5。WGS84 十进制度：起点纬度 47.628282、经度 -122.327649；终点纬度 47.619214、经度 -122.328222。按起点到终点查询普通小汽车路线，不用步行、骑行或公交，不做地址搜索。通过 ENVIRONMENT.md 指定的服务和入口取得真实路线，给出返回距离和估算驾驶时间并标明单位。无需账号的入口直接使用；需额外身份、授权或人工操作时说明阻碍，不借用本机账号。必要安装和通用配置存本轮指定持久目录，秘密不出现在答复中；如实说明自助步骤、人工介入和额外申请。",
+    "expected_output": "一次指定服务的真实小汽车路线及与其响应相符、单位明确的距离和估算时间；可复用通用配置位置；实际接入步骤与门槛，或具体受阻原因。",
+    "success": "必要安装、配置和认证完成，实际按给定起终点及小汽车模式查询指定入口并取得有效路线；答复距离与时间正确反映该响应，通用配置可供新会话复用，不泄露秘密，接入来源与人工门槛如实说明。不要求接入阶段另交路线文件或证明预计用时等于实测驾驶时间。",
+    "failure": "未取得真实路线、只做安装或健康检查、坐标顺序或行驶模式错误、改用其他服务或入口、用静态样例代替、距离时间与响应不符或无单位、通用配置不可复用、隐瞒接入阻碍或预算内未完成；额度、限流和权限问题具体记录，执行环境故障单列无效。",
+    "resources": "只用本轮确认允许的免费入口，可读官方文档并在隔离环境安装依赖、自行编写调用代码。仅对这两个示例点做接通所需的小量只读查询；不注册、不付费、不模拟或开始真实导航、不调用其他路由或地理编码服务。遵守服务客户端标识、署名、限流和停止条件；入口及预算由 ENVIRONMENT.md 冻结。运行器采集原始请求与响应，执行者不另写审计日志；后续只保留通用安装与配置，不保留本题查询答案或调用脚本。",
+    "id": "route-planning-access-001",
+    "version": "v1",
+    "sha256": "c5be0dec0254b0a9cf22c32d126f2bbcd020309f6073f2bf78d21ed64fba379e",
+    "file": "data/experiments/tasks/route-planning.md"
+  },
+  "prompt_sha256": "7face180d0ac4d772115a7bbfad88c81234b1a30e81a10fa08828df33608a5c1",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T19:17:01.066382+00:00",
+  "ended_at": "2026-10-08T19:17:31.170499+00:00",
+  "elapsed_seconds": 30.104117,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous FOSSGIS public demos, no account/token/email/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task/model/budget, public OSRM vs Valhalla engines hosted by FOSSGIS using OSM; not independent providers or map truth. All candidate executions serial; 4routecalls per service per stage,>=2s,stop first403/429 or two consecutive connection failures. Service limits are instructions; model/output/time caps enforced. Explicit truthful UA/project URL and Valhalla X-Client-Id. No account/key/paid fallback/prewritten client. Same image2GiB/1CPU/pids256,pipTUNA/emptycache. Access then audited generic configuration/installed dependencies retained; restart owned executor before fresh businesshome/session/workspace. Exec25requests/access300s/business600s;grading40/300s;output32000/request. Independent roads/reference and official operator rules frozen before candidate queries and grader-only; business peers sealed before separate grading without peer verdicts. No grader candidateAPI calls. Official summary allows low-volume noncommercial use; full linked German policy was blocked and not read, no blanket complete terms-review claim. AttributionOSM/FOSSGIS andfix-maplink accompany public facts. Official source manifest SHA256 c316e7244f96b20dc106f32047f9a055d1684b6c52a4fc0699e8d4e28dd80a05.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定入口 FOSSGIS Valhalla 公共路线 API 实际返回有效小汽车路线：POST https://valhalla1.openstreetmap.de/route 得 HTTP 200、trip.status 0，按给定起点→终点坐标与 costing=auto 取得 4.579 km / 404.622 s；答复与响应逐值相符且单位明确；非秘密通用配置已保存到持久目录 /home/node/service-tools/service-config.json；零账号自助接入、无人工介入或额外申请，门槛如实说明；预算内完成（1 次路由请求、约 30 秒）。免费公共演示规则有官方来源支持。",
+  "usage": {
+    "input_tokens": 276819,
+    "cached_input_tokens": 255360,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4440,
+    "reasoning_output_tokens": 904
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [
+      "official-route-sources/operator-services.source",
+      "official-route-sources/valhalla-demo.source"
+    ],
+    "note": "Controller source review could not confirm an explicit hosted-demo zero-fee rule in the frozen official sources. Donation-funded, public, no-registration use and open-source/map licences do not establish price. Original independent confirmed_free assessment is preserved privately with its hash and unchanged task verdict/reason/checks; publication conservatively retains unknown rather than inferring zero. No additional model review or service query.",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "grading-agent",
+    "reviewed_at": "2026-10-08T19:25:48.253393+00:00",
+    "checks": [
+      {
+        "criterion": "实际通过指定入口 POST https://valhalla1.openstreetmap.de/route 取得有效小汽车路线",
+        "passed": true,
+        "evidence": "execution/artifacts/route_response.json 含 trip.status=0、status_message='Found route between points'、1 段 leg；调用记录 HTTP 200。"
+      },
+      {
+        "criterion": "请求使用给定坐标、起点→终点顺序及普通小汽车模式，未换服务/入口",
+        "passed": true,
+        "evidence": "execution/artifacts/route_request.json：locations=[{lat:47.628282,lon:-122.327649},{lat:47.619214,lon:-122.328222}]（与 input.md 一致，起点在前），costing='auto'，units='kilometers'，端点即冻结入口。"
+      },
+      {
+        "criterion": "答复距离与估算驾驶时间与响应逐值相符且单位明确",
+        "passed": true,
+        "evidence": "execution/answer.md：4.579 千米(km)、404.622 秒≈6.74 分钟；对应 route_response.json 的 trip.summary.length=4.579、time=404.622、trip.units=kilometers。"
+      },
+      {
+        "criterion": "通用配置已保存到指定持久目录且可供新会话复用、不含秘密",
+        "passed": true,
+        "evidence": "写往 /home/node/service-tools/service-config.json（execution/retained-files.json 记录；内容为非秘密端点/请求头/schema/单位/使用策略），答复仅给路径未泄露秘密。"
+      },
+      {
+        "criterion": "接入步骤与实际门槛如实说明（免账号自助、无人工介入/额外申请）",
+        "passed": true,
+        "evidence": "execution/answer.md 说明零身份门槛、直接调用、请求体/请求头与响应取值方式，并列明限流/停止条件与精度门槛。"
+      },
+      {
+        "criterion": "遵守预算、限流与客户端标识及署名要求",
+        "passed": true,
+        "evidence": "1 次路由请求（≤4/阶段）、执行约 30 秒（≤300 秒）；请求带 User-Agent 与 X-Client-Id；answer.md 含 FOSSGIS/OSM 署名链接。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.026526492,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026526492,
+          "usage_sha256": "9f34066417fcea35d8f28ce2ee371d0f1a1573bd5c53b3a5d59a4c8b55b1844e"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/valhalla-routing-access-ds41-r1/public-review/verification.json",
+      "sha256": "75a22b661f9297f97bac1ad2960ef0a62c39768c7b9a4b79923098903ca7f19e",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full route geometry and raw service responses remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/routing-deepseek-overnight-20261008/valhalla-routing-access-ds41-r1",
+    "run_sha256": "92c7270e25c01918fb72393eb67917a00b50e947c02a6c78566ff2fc4d593ac5",
+    "events_sha256": "f08a15ef09a40eeeede8822c7b9eb5a1c7723e400e09b2c53064d2895fcbd065",
+    "answer_sha256": "dc0511f9a7299e7ac8be2482dbd62bf1c4bb1b303588aa50a5d2cc94028e66cf",
+    "review_sha256": "30c093f213acb05379b5ca68569ffbaaa25028ff5f324aff4bc0dff3ea5e8be4",
+    "original_independent_review_sha256": "fd8a2a489003d47f944fe4464d833ff90b5329781da8ebb737793d77f05d460e",
+    "selected_independent_review_sha256": "fd8a2a489003d47f944fe4464d833ff90b5329781da8ebb737793d77f05d460e",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; full route geometry, raw responses and transcripts stay private. Independent verdict, reason and checks preserved. Fixed point pair and ordinary driving mode, declared 50m road-level tolerance, shared operator/map data, actual response units and audited lifecycle preparation disclosed. Service fee projected from original confirmed_free to unknown after controller and discovery-role recheck of unchanged official source snapshots; no explicit zero-fee rule found. Original assessment/hash preserved, no task-verdict change or model replay."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7184,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 71,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 7393,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 152,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 8673,
+        "cached_input_tokens": 7424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 373,
+        "reasoning_output_tokens": 198
+      },
+      {
+        "input_tokens": 21014,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 425,
+        "reasoning_output_tokens": 241
+      },
+      {
+        "input_tokens": 21631,
+        "cached_input_tokens": 21376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 218,
+        "reasoning_output_tokens": 70
+      },
+      {
+        "input_tokens": 21865,
+        "cached_input_tokens": 21632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 206,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 22098,
+        "cached_input_tokens": 21888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 260,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 22467,
+        "cached_input_tokens": 22272,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 320,
+        "reasoning_output_tokens": 184
+      },
+      {
+        "input_tokens": 22896,
+        "cached_input_tokens": 22656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 141,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 23169,
+        "cached_input_tokens": 22912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 710,
+        "reasoning_output_tokens": 41
+      },
+      {
+        "input_tokens": 23895,
+        "cached_input_tokens": 23680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 142,
+        "reasoning_output_tokens": 45
+      },
+      {
+        "input_tokens": 24290,
+        "cached_input_tokens": 23936,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 630,
+        "reasoning_output_tokens": 92
+      },
+      {
+        "input_tokens": 24936,
+        "cached_input_tokens": 24704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 182,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 25308,
+        "cached_input_tokens": 25088,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 610,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "6861c787425d6b6f8a3187bd6d9306d958b52534fe5f807db6fedf55d6523831",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 276819,
+      "cached_input_tokens": 255360,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4440,
+      "reasoning_output_tokens": 904
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

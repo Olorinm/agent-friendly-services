@@ -1,0 +1,52 @@
+{
+  "independent_status": "completed",
+  "scope": "One fresh anonymous route access query between supplied Seattle coordinates. No business file/corridor requirement applied at access.",
+  "sources": {
+    "execution/answer.md": "7ae420c054edf54d2d9a1903f41d50f88ea51b4016a7cb3a10a1482d0df688b3",
+    "execution/receipt.json": "46deba093676e9d6d137110018bb34fc24ef501fe31abfb4930b74441465275b",
+    "execution/usage.json": "530f0a855a261f0a4f13ec14d02cfc4b0a18dae31abb60c4824ba8098ab30175",
+    "execution/tool-records.json": "176913c8b65bdcdba369aa00c94e5c9cb8816437bc5bbe2e420defb5a2c06220",
+    "grading/assessment.json": "1385f90b3597bc7bcbf88ba7934b55cbcfd88d21ad949432f6d9c50c3aac008b"
+  },
+  "route": "public-route-api",
+  "configuration": "OpenCode1.18.35/DeepSeekV4.1Flash high; execution25requests/access300s/business600s, grading40requests/300s, output32000tokens/request. Sameimage2GiB/1CPU/pids256,pipTUNAandemptyinitialcache; newhome/session/workspace. All candidate executions serial under one shared operator.",
+  "request_limits": "At most4routecalls perstage,>=2seconds apart, stop first403/429 or2consecutiveconnectionfailures. CandidateAPI limits are instructions; model/time/output caps enforced.",
+  "actual_route_requests": 1,
+  "http_status": 200,
+  "client_identification": "Truthful AgentFriendlyServices non-commercial evaluation User-Agent with project URL; Valhalla additionally X-Client-Id; no fabricated Referer.",
+  "elapsed_seconds": 16.986749,
+  "fee_publication": {
+    "kind": "unknown",
+    "amount_usd": null,
+    "original_grader_kind": "confirmed_free",
+    "reason": "No explicit hosted-demo zero-fee statement found in frozen official sources. Donation sponsorship, public/no-registration access and open-source/map licensing do not establish price. Original independent grade stays unchanged; where it said confirmed_free, publication conservatively projects to unknown with source-review audit, no model rerun.",
+    "source_correction_sha256": "7158b5650ce808e26f04172f94653f6f996c0804668b82a7bb264c5b1759f44b"
+  },
+  "source_and_operator_limit": "OSRM and Valhalla are different engines/response formats hosted by FOSSGIS and use shared OSM data. They are not independent operators or map ground truth. Complete linked German terms were blocked and not read; no complete-terms-review claim. Small noncommercial functional check, not load testing, current navigation safety, live traffic or arrival-time accuracy.",
+  "official_source_manifest_sha256": "c316e7244f96b20dc106f32047f9a055d1684b6c52a4fc0699e8d4e28dd80a05",
+  "attribution": {
+    "text": "Routing: OSRM on FOSSGIS demo servers. Map data © OpenStreetMap contributors.",
+    "links": [
+      "https://project-osrm.org/",
+      "https://www.openstreetmap.org/copyright",
+      "https://www.openstreetmap.org/fixthemap"
+    ]
+  },
+  "resources": "No registration, account/key/payment or mutable remote resource created. All four dedicated batch containers stopped after review and complete usage collection.",
+  "public_selection": "Minimal route values, counts, actual file/source hashes and independent verification observations. Full geometry and raw responses/requests remain private; no harvested map dataset published.",
+  "snapped_waypoint_names": [
+    "Lakeview Boulevard East",
+    ""
+  ],
+  "reported_snap_distance_m": [
+    0.2347261579,
+    0.7516455395
+  ],
+  "response_file_sha256": "90bc05cd20b8f1f4ac00da6f55be2c18295aad019525fd857ee13236c072a601",
+  "response_summary": {
+    "distance_km": 3.85,
+    "estimated_time_seconds": 381.1,
+    "estimated_time_minutes": 6.3516666666666675
+  },
+  "access_limit": "Input points were selected from an official USGS I-5 highway feature; at the start both captured routes used nearby/overlapping Lakeview Boulevard East. Coordinate-only snapping does not establish highway-level identity in a multi-level road network. Access criterion required an actual car route for those coordinates, with correctly reported values, not an I-5-only corridor. No cross-engine optimality/accuracy ranking."
+}
