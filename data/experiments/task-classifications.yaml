@@ -159,3 +159,13 @@ tasks:
     id: database-restore-001
     classification: databases/hosted-relational
     phase: business
+
+  - file: data/experiments/tasks/public-holidays.md
+    id: public-holidays-access-001
+    classification: web-search-data/public-holidays
+    phase: setup
+
+  - file: data/experiments/tasks/public-holidays.md
+    id: public-holidays-berlin-001
+    classification: web-search-data/public-holidays
+    phase: business

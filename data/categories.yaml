@@ -266,6 +266,21 @@ categories:
         capabilities:
           - id: places.geocode
             description: Resolve a place name or address to an identified geographic position.
+      - id: public-holidays
+        name: Public Holidays
+        name_zh: 公共节假日
+        description: Retrieve dated public holidays applicable to an identified country or region for personal planning.
+        inclusion: >-
+          Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context
+          to determine the requested regional scope; supported years and subdivisions must be stated.
+        exclusion: >-
+          Personal calendar editing, school vacations alone, general web search and extraction from a
+          supplied page are separate. Holiday data does not establish shop opening hours, individual
+          employment or pay entitlements, bank operations or travel availability; observances and
+          substitute dates must not be silently treated as applicable public holidays.
+        capabilities:
+          - id: holidays.lookup
+            description: Retrieve public holiday dates and names for a specified jurisdiction and period.
       - id: weather-data
         name: Weather Data
         name_zh: 天气数据

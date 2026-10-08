@@ -622,5 +622,37 @@
         "failure": "只做本地模拟、仅克隆云端分支而无可留存且实际使用的逻辑备份、没有独立新目标、备份或恢复漏结构关系或记录、数据语义改变、源库被修改、不能重新连接读回、缺少必要业务交付或预算内未完成。权限或额度不足记具体路线障碍；准备数据或运行环境失效单列无效。不能因格式、SQL 方言或客户端选择不同就判失败。"
       }
     ]
+  },
+  "public-holidays-access-001/v1": {
+    "description": "Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.",
+    "inputs": "The service, assigned route, permitted account or registration details and their source are in ENVIRONMENT.md. Choose a supported country or region and year for a small public-holiday query. Report the query scope, the date and name of one holiday actually returned, and the service and query source. Use account-free routes directly; if registration or authorization is required, use only the identity supplied for this run. Save necessary configuration in the designated persistent directory, with secrets only in private files. In the answer, give the configuration location, account source, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "One real holiday query from the assigned service, identifying the region and year, at least one returned holiday date and name, the source and reusable configuration location; actual setup steps and barriers, or a specific obstacle.",
+    "success": "Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.",
+    "failure": "No real holiday-data query; only installation, a health check, a supported-country list or an example; another service or route used; answer inconsistent with the response; unusable configuration; secret disclosure; or failure to finish within budget. Record identity, quota and human-intervention barriers accurately; runtime faults are separate invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个公共节假日查询服务，通过指定方式做一次真实的小范围假日查询，确认能查到日期和名称，并保存后续查询所需配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个服务支持的国家或地区及年份，做一次小型公共节假日查询；报告查询范围、一个实际返回节日的日期与名称，并注明所用服务及查询来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的身份。必要配置保存在指定持久目录，秘密只存私有文件；答复给出配置位置、账号来源、自助步骤、人工介入和额外申请要求。",
+        "expected_output": "指定服务的一次真实假日查询，包含查询地区与年份、至少一个实际返回的假日日期与名称、来源及可复用配置位置；真实接入步骤和门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、授权、安装或配置；真实假日查询返回可识别的日期和名称，答复及范围与响应相符，配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册。",
+        "failure": "没有真实假日数据查询，仅安装、健康检查、支持国家清单或示例；改用其他服务或入口；答复与响应不符、配置不可复用、泄露秘密或预算内未完成。身份、额度和人工障碍如实记录；运行环境故障单列无效。"
+      }
+    ]
+  },
+  "public-holidays-berlin-001/v1": {
+    "description": "I am organizing my personal schedule in Berlin for next year. Use the assigned service to find all public holidays applicable to the German state of Berlin in 2027. List their dates and holiday names in date order, give the total, and identify the query source.",
+    "inputs": "Region: the whole German state of Berlin, not another place with the same name. Period: local Gregorian dates from 2027-01-01 through 2027-12-31, inclusive. Include public holidays applying nationally or to Berlin; exclude holidays applying only to other states, school breaks, observances that are not public holidays, and ordinary Sundays. Include public holidays even when they fall on Saturday or Sunday. Use their actual local date in Berlin; do not shift them to a weekday or infer substitute days off. Dates must identify year, month and day clearly. Use German or English holiday names returned by the service; Chinese translation is unnecessary. List the same holiday on the same date only once. This is date information for personal planning; shop or bank opening, work schedules, wages and personal leave entitlements are outside scope. Obtain real holiday data through this run’s assigned service. You may consult its official documentation to understand region and date semantics, but must not substitute another holiday service, a web calendar, examples or memory for the query.",
+    "expected_output": "A list of Berlin public holidays in 2027 in ascending date order, each with a clear date and an identifiable German or English name; an accurate total without duplicates; and the assigned service and a verifiable query source. The answer itself may contain the list; no separate file or calendar import is required.",
+    "success": "Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.",
+    "failure": "No real assigned-service query; an applicable Berlin holiday omitted; another state’s exclusive holiday, school break, non-public observance or other year included; incorrect date or holiday identity; duplicates; incorrect ordering or total; data supplemented from elsewhere and misrepresented as the service’s result; missing query source; or failure within budget. Record actual missing data, permission or rate-limit barriers. Material changes to the official reference or runtime failures require separate investigation rather than automatically blaming the service.",
+    "source_variants": [
+      {
+        "description": "我在整理明年在柏林的个人日程。请通过指定服务查出 2027 年适用于德国柏林州的全部公共节假日，按日期列出日期和节日名称，给出总数并注明查询来源。",
+        "inputs": "地区：德国 Berlin（柏林州，德国境内的整个州，不是其他同名城市）；时间：当地公历 2027-01-01 至 2027-12-31，含首尾。包括全国适用及柏林州适用的公共节假日，不混入只在其他州适用的节日、学校假期、仅纪念而非公共假日的日子或普通星期日。公共节假日即使落在周六或周日也照列，使用节日在柏林的实际当地日期，不自行移到工作日或推算补休。日期须明确到年、月、日；名称可用服务返回的德文或英文，无须中文翻译，同一节日同一天只列一次。这里仅整理日期供日程参考，不要求判断商店或银行营业、工作安排、工资或个人休假权益。通过本轮指定服务取得真实假日数据；可查其官方文档理解地区与日期含义，不用其他假日服务、网页日历、示例或记忆替代查询。",
+        "expected_output": "一份按日期升序排列的 2027 年柏林公共节假日清单，每项含明确日期和可辨认的德文或英文名称；无重复的准确总数；指定服务及可核对的查询来源。可直接在答复中列出，不要求另存文件或导入日历。",
+        "success": "实际查询指定服务并正确限定柏林州及 2027 年；交付清单与事前冻结的独立官方日期参考对应，完整且无重复、无越界节日，日期与节日身份正确并按日期升序，总数准确，来源可追溯真实查询。允许德英文名称、正常标点和等价节日译名差异，不以供应商字段名、是否服务端过滤或响应条目排列作为完成条件。",
+        "failure": "没有真实指定服务查询，遗漏柏林适用节日，混入他州独有节日、学校假期、非公共假日或其他年份，日期或节日身份错误、重复、顺序或总数不符，靠其他来源补齐而冒充指定服务结果，缺少查询来源或预算内未完成。真实无数据、权限或限流障碍如实记录；官方参考实质更新或执行环境失效单列核实，不强判服务错误。"
+      }
+    ]
   }
 }
