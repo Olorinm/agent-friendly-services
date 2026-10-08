@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-10-08T12:42:19.256Z",
+  "generated_at": "2026-09-15T09:35:33.211Z",
   "counts": {
     "providers": 76,
     "categories": 11,
     "entrypoint_urls": 719,
-    "checks_answered": 428
+    "checks_answered": 427
   },
   "categories": [
     {
@@ -2786,10 +2786,8 @@
           "verified": "2026-07-07"
         },
         "oauth_support": {
-          "status": "supported",
-          "evidence": "https://exa.ai/docs/get-started/exa-mcp",
-          "verified": "2026-10-08",
-          "notes": "Official remote MCP supports OAuth; the REST API uses an API key and anonymous MCP is separate."
+          "status": "unknown",
+          "notes": "API-key auth only, as far as documented."
         },
         "scoped_tokens": {
           "status": "unknown"
@@ -2836,8 +2834,9 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-10-08",
+        "last_verified": "2026-07-07",
         "unknown_checks": [
+          "oauth_support",
           "scoped_tokens",
           "token_revocation",
           "sandbox_or_test_mode",
@@ -7279,7 +7278,7 @@
       "name": "Tavily",
       "category": "web-search-data",
       "homepage": "https://www.tavily.com",
-      "summary": "Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.",
+      "summary": "Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.",
       "submitted_by": "community",
       "tags": [
         "search",

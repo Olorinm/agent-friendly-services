@@ -209,7 +209,7 @@ Hosted payment links with fixed or customer-selected amounts and payment status 
 
 ## Aiven
 
-Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API provisioning and standard PostgreSQL client access; inactive free services may be powered off.
+Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.
 
 **Classification:** Databases / Hosted Relational Databases
 
@@ -219,13 +219,11 @@ Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API p
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | [Docs](https://aiven.io/docs/tools/cli) | self serve / documented | Requires: platform_account; The avn CLI accepts account password or personal token; SQL uses the new service's connection credentials and a standard client such as psql. Free PostgreSQL includes one node, 1 CPU, 1 GB RAM and 1 GB storage, limited to one free service of this type per organization and 20 connections. No fixed expiry, but unused services may be powered off and can be restarted. Free-tier region selection is unavailable; choose an explicitly free plan, not paid trial capacity. Signup, free capacity availability and actual provisioning remain untested. |
-| [platform-api (API)](https://api.aiven.io/v1/) | [Docs](https://aiven.io/docs/tools/api) | self serve / documented | Management API requires a personal token from the account console. The token is shown once and has a selected session duration. API management and database SQL credentials are distinct; free-plan availability must be checked before creating a service. |
-| [postgres-python (SDK)](https://aiven.io/docs/products/postgresql/howto/connect-python) | [Docs](https://aiven.io/docs/products/postgresql/howto/connect-python) | self serve / documented | Aiven documents Python access through the third-party psycopg2 PostgreSQL driver. This connects to an already provisioned remote service using its private PostgreSQL URI; it does not create an Aiven account or provision the service. SQL clients do not imply access to the separate, limited-availability REST Data API. |
+| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | [Docs](https://aiven.io/docs/tools/cli) | self serve / documented | Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. |
 
 ### Service pricing
 
-- postgres-cli: 1 GB / service (free_allowance; Free PostgreSQL storage; one free PostgreSQL service per organization, without fixed expiry.)
+—
 
 ### Task results
 
@@ -233,13 +231,8 @@ Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API p
 
 ### Sources
 
-- [official_docs](https://aiven.io/docs/tools/cli) — checked 2026-10-08
-- [official_site](https://aiven.io/free-postgresql-database) — checked 2026-10-08
-- [official_docs](https://aiven.io/docs/products/postgresql/concepts/pg-free-tier) — checked 2026-10-08
-- [official_docs](https://aiven.io/docs/products/postgresql/get-started) — checked 2026-10-08
-- [official_docs](https://aiven.io/docs/tools/api) — checked 2026-10-08
-- [official_docs](https://aiven.io/docs/platform/howto/create_authentication_token) — checked 2026-10-08
-- [official_docs](https://aiven.io/docs/products/postgresql/howto/connect-python) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/tools/cli) — checked 2026-09-07
+- [official_site](https://aiven.io/free-postgresql-database) — checked 2026-09-07
 
 <a id="qwen"></a>
 
@@ -341,89 +334,25 @@ Stock prices, company financials, FX, crypto and economic indicators. Free keys 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://www.alphavantage.co/query) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100 observations) is available to free keys; full history and intraday are premium. This may cover the current short historical task, subject to access and source precision. Real-time quotes and adjusted data require separate entitlement checks. Higher free limits for approved open-source or educational use are not the ordinary self-serve allowance. Income and cash-flow data for two companies require at least four endpoint calls before provenance checks. |
+| [data-api (API)](https://www.alphavantage.co/documentation/) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100 observations) is available to free keys; full history and intraday are premium. This may cover the current short historical task, subject to access and source precision. Real-time quotes and adjusted data require separate entitlement checks. |
 
 ### Service pricing
 
 - data-api: 25 requests / day (free_allowance; Free API key allowance; excludes premium endpoints.)
 
-### Setup observations
-
-| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
-| --- | --- | --- | --- | --- |
-| API | [Access preparation: controller-registered ordinary free API key](../data/experiments/evaluations/alpha-vantage-statements-001-ds41-r1.json) | [84.3k](../data/experiments/evaluations/alpha-vantage-access-ds41-r1.json) | 24.074587s | 0 |
-
-#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-d1ad42ce8a0d) | [100%](./evaluations.md#comparison-d1ad42ce8a0d) | 84.3k | $0.0058 | $0 |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
-
-**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
-
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
-
-Access preparation: controller-registered ordinary free API key · [Full configuration and evidence](./evaluations.md#comparison-d1ad42ce8a0d)
-
-[Task definition](./tasks.en.md#financial-access-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/alpha-vantage-access-ds41-r1.json) | 2026-10-08 |
-
-</details>
-
 ### Task results
 
-#### Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-6ea769563771) | [100%](./evaluations.md#comparison-6ea769563771) | 188.6k | $0.02 | $0 |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
-
-**Completion:** All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
-
-1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
-
-Access preparation: controller-registered ordinary free API key · [Full configuration and evidence](./evaluations.md#comparison-6ea769563771)
-
-[Task definition](./tasks.en.md#financial-statements-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| financial-statements-001 v1 | API | [completed](../data/experiments/evaluations/alpha-vantage-statements-001-ds41-r1.json) | 2026-10-08 |
-
-</details>
+—
 
 ### Notes
 
-- MCP remains a documented discovery lead rather than a verified access route; no account was registered and no keyed financial-data call was made during this documentation review.
+- Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass.
 
 ### Sources
 
-- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-10-08
-- [official_site](https://www.alphavantage.co/support/) — checked 2026-10-08
-- [official_docs](https://mcp.alphavantage.co/) — checked 2026-10-08
+- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-09-15
+- [official_site](https://www.alphavantage.co/support/) — checked 2026-09-15
+- [official_docs](https://www.alphavantage.co/support/) — checked 2026-09-09
 
 <a id="amadeus-flights"></a>
 
@@ -650,7 +579,7 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) | [97.5k](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 121.069769s | 0 |
+| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | [95.8k](../data/experiments/evaluations/bargo-access.json) | 157.266045s | 0 |
 | API (congress-api-keyed) | — | — | — | — |
 | MCP | — | — | — | — |
 
@@ -658,7 +587,7 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-90e1d23f0407) | [100%](./evaluations.md#comparison-90e1d23f0407) | 97.5k | $0.0068 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 95.8k | $0.0068 | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -669,20 +598,19 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-90e1d23f0407)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-access-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15 |
 
 </details>
@@ -693,7 +621,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-fb6dcb23321f) | [100%](./evaluations.md#comparison-fb6dcb23321f) | 778.4k | $0.03 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -704,11 +632,13 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 **Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-fb6dcb23321f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
+
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-001-r1.json) — 独立验收判定未完成：已通过指定 Bargo API 取得业务数据并核对原始文件，但执行超时前仅留下过程旁白，没有交付要求的表格、原始出处和服务署名。该次失败发生在执行交付环节，不证明服务缺少目标数据；原始交易行私有保留。
 
 </details>
 
@@ -716,7 +646,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-fb6dcb23321f) | [0%](./evaluations.md#comparison-fb6dcb23321f) | — | — | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -727,13 +657,13 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-fb6dcb23321f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
 
 [Task definition](./tasks.en.md#financial-disclosures-002-v1)
 
-- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-002-oc11835-r1.json) — 独立验收判定本题未完成：运行触及预算上限，交付未完整列出所需交易日期、金额区间、数据服务与具体申报出处，也未完成四名成员的结果汇总。属本次 Agent 在预算内未完成，未判为服务能力不支持；本次执行用量与模型费因最后请求未完整采集而保持未知。 公开版由总控删减交易明细；原独立验收判断未改，原始验收 SHA256：a363a37b97c0f1ff220ec0754252691a834a12bfbfe76a78ccb2e851462c1ee7 本轮未向验收者提供其他服务的同题答案；每题仅一次尝试，使用线上服务与历史冻结参考，不能把相对历史成绩的变化单独归因于 OpenCode 升级。
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) — 独立验收判定未完成：指定服务已返回股票查询结果，但官方申报批量解析未完成，执行超时前只有过程叙述，没有交付四人最终结论、完整明细及原始出处。属于本次执行未完成，不是服务不可用；中间空结果不足以支持无匹配结论。
 
 </details>
 
@@ -741,7 +671,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-fb6dcb23321f) | [100%](./evaluations.md#comparison-fb6dcb23321f) | 603.7k | $0.03 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [100%](./evaluations.md#comparison-864872ad88ab) | 578.4k | $0.03 | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -752,9 +682,9 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-fb6dcb23321f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
 
 [Task definition](./tasks.en.md#financial-disclosures-003-v1)
 
@@ -764,7 +694,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-fb6dcb23321f) | [0%](./evaluations.md#comparison-fb6dcb23321f) | — | — | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -775,25 +705,21 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-fb6dcb23321f)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
 
 [Task definition](./tasks.en.md#financial-disclosures-004-v1)
 
-- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) — 独立验收判定本题未完成：执行触及预算上限，虽已取得相关业务数据并完成部分核对，但未交付四项说法的逐项判断、有依据的成文更正和完整原始申报出处。属本次 Agent 在预算内未完成，未判为服务能力不支持；本次执行 Token 与模型费因最后请求未完整采集而保持未知。 公开版由总控删减交易明细；原独立验收判断未改，原始验收 SHA256：6e3e4bb1a7c76306e9388aa9dfd2d6ba8cd4a458125ab1c98af0e98d4a9d6fa0 本轮未向验收者提供其他服务的同题答案；每题仅一次尝试，使用线上服务与历史冻结参考，不能把相对历史成绩的变化单独归因于 OpenCode 升级。
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) — 独立验收判定未完成：指定服务和官方资料已取得，过程叙述有部分正确判断，但未交付交易性质判断及完整更正与出处；执行约 590 秒后超时终止。这是执行行为造成的未交付，不证明服务没有数据。
 
 </details>
 
 <details>
-<summary>Run history (9)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-disclosures-004 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) | 2026-10-08 |
-| financial-disclosures-003 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-003-oc11835-r1.json) | 2026-10-08 |
-| financial-disclosures-002 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-oc11835-r1.json) | 2026-10-08 |
-| financial-disclosures-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-001-oc11835-r1.json) | 2026-10-08 |
 | financial-disclosures-004 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | 2026-09-15 |
 | financial-disclosures-003 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-003-r1.json) | 2026-09-15 |
 | financial-disclosures-002 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) | 2026-09-15 |
@@ -1027,13 +953,13 @@ Congressional disclosures and related public records, with a keyless read API an
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | [300.5k](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 169.698703s | — |
+| API | [No account or key supplied](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-90e1d23f0407) | [0%](./evaluations.md#comparison-90e1d23f0407) | 300.5k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 192.5k | $0.0091 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1042,22 +968,19 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-90e1d23f0407)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
-
-- API: [Not completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) — 接入本身成立：经指定入口 REST 直接 HTTP 调用，/trades、/members、/top-traders 均返回 200 真实数据，service-config.json 与辅助脚本保存到 /home/node/service-tools 并经实调用验证，全程免 Key、未注册未付款。但违反冻结环境的接入资源约束「接入只做必要的少量真实数据查询，最多返回 5 条记录」：本次对指定入口共 7 次请求，5 次成功取数实际返回 7 条记录（trades 3 + members 2 + top-traders 1×2 次，第 5、7 次为重复返回；/stats 为聚合不计条），执行者自报 6 条亦超限；交付调用表漏记 2 次调用（第二次 403 归因复测与辅助脚本验证调用）。偏离属执行行为（超授权查询规模且交付统计不完整），非服务能力、接入门槛或环境问题；据冻结要求不能放宽，故判 not_completed。
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-access-001 v1 | API | [not_completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15 |
 
 </details>
@@ -1867,7 +1790,7 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The query supports startPeriod/endPeriod, lastNObservations and format selection; narrow requests to the needed series. Direct documentation reads failed during the latest research pass; indexed official documentation was readable. |
+| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The documentation page was temporarily unreadable during the latest research pass. |
 
 ### Service pricing
 
@@ -1877,13 +1800,13 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | [123.3k](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 29.506871s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/ecb-business.json) | [221.9k](../data/experiments/evaluations/ecb-access.json) | 216.897575s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-d5ebeb408e55) | [100%](./evaluations.md#comparison-d5ebeb408e55) | 123.3k | $0.0086 | — |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 221.9k | $0.01 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1892,20 +1815,19 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d5ebeb408e55)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15 |
 
 </details>
@@ -1916,7 +1838,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-6c4685dc77de) | [100%](./evaluations.md#comparison-6c4685dc77de) | 58.3k | $0.0053 | $0 |
+| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 62.8k | $0.0034 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1925,20 +1847,19 @@ Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; Aug
 
 **Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-6c4685dc77de)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
 
 [Task definition](./tasks.en.md#financial-fx-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | 2026-10-08 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15 |
 
 </details>
@@ -1946,7 +1867,6 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 ### Sources
 
 - [official_docs](https://data.ecb.europa.eu/help/api/data-examples) — checked 2026-09-09
-- [official_docs](https://data.ecb.europa.eu/help/api/data) — checked 2026-10-08
 - [official_site](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) — checked 2026-09-15
 - [official_site](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html) — checked 2026-09-15
 - [official_docs](https://data.ecb.europa.eu/help/api/schemas) — checked 2026-09-15
@@ -2031,16 +1951,14 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-mcp (MCP)](https://mcp.exa.ai/mcp) | [Docs](https://exa.ai/docs/get-started/exa-mcp) | self serve / documented | Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published. Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain filters. Authenticated agent_run has separate charges and is outside this route. API account credits and the account Search QPS limit do not establish anonymous MCP limits. |
-| [search-api (API)](https://api.exa.ai/search) | [Docs](https://exa.ai/docs/reference/search) | self serve / documented | The current free account plan advertises USD 10/month plus a USD 10 onboarding bonus, no card, and 10 Search requests/second. Actual bonus award and balance should be checked. Anonymous MCP quota is separate. |
+| [public-mcp (MCP)](https://mcp.exa.ai/mcp) | [Docs](https://exa.ai/docs/reference/exa-mcp) | self serve / documented | Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. |
+| [search-api (API)](https://exa.ai/docs/reference/search) | [Docs](https://exa.ai/docs/reference/search) | self serve / documented | Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. |
 
 ### Service pricing
 
 [Official pricing](https://exa.ai/pricing)
 
-- public-mcp: 0 USD / request (usage; Free rate-limited keyless MCP tools; excludes authenticated agent_run.)
-
-- search-api: 10 USD / one_time (free_allowance; Published onboarding bonus; actual account award should be checked.)
+- search-api: 20 USD / one_time (free_allowance; Published signup credits; some may require onboarding. Actual account award should be checked.)
 
 - search-api: 10 USD / month (free_allowance; Free account monthly allowance, not anonymous MCP quota.)
 
@@ -2048,39 +1966,8 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| MCP | [No account or key supplied](../data/experiments/evaluations/exa-search-001-ds41-r1.json) | [204.4k](../data/experiments/evaluations/exa-access-ds41-r1.json) | 38.345252s | 0 |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | — | — | — |
-
-#### Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-7aef90c6de38) | [100%](./evaluations.md#comparison-7aef90c6de38) | 204.4k | $0.01 | $0 |
-| API | — | — | — | — | — |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
-
-**Completion:** Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
-
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
-
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-7aef90c6de38)
-
-[Task definition](./tasks.en.md#web-search-access-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| web-search-access-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-access-ds41-r1.json) | 2026-10-08 |
-
-</details>
+| MCP | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | — | — | — |
 
 ### Task results
 
@@ -2088,8 +1975,8 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-b8056c1607c9) | [100%](./evaluations.md#comparison-b8056c1607c9) | 230.6k | $0.02 | — | A |
-| API | [1](./evaluations.md#comparison-9dbe771526ac) | [0%](./evaluations.md#comparison-9dbe771526ac) | — | — | $0 | B |
+| API | [1](./evaluations.md#comparison-9dbe771526ac) | [0%](./evaluations.md#comparison-9dbe771526ac) | — | — | $0 | A |
+| MCP | [1](./evaluations.md#comparison-87ab787b88b3) | [100%](./evaluations.md#comparison-87ab787b88b3) | 931.5k | — | $0 | B |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -2098,11 +1985,11 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 
 **Completion:** All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
 
-2026-09-07, 2026-10-08 (UTC)
+codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-**A:** MCP · 1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-b8056c1607c9)
+**A:** API · Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-9dbe771526ac)
 
-**B:** API · codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-9dbe771526ac)
+**B:** MCP · No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-87ab787b88b3)
 
 [Task definition](./tasks.en.md#web-search-001-v1)
 
@@ -2111,11 +1998,10 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 </details>
 
 <details>
-<summary>Run history (3)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| web-search-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-search-001-ds41-r1.json) | 2026-10-08 |
 | web-search-001 v1 | API | [not_completed](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | 2026-09-07 |
 | web-search-001 v1 | MCP | [completed](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | 2026-09-07 |
 
@@ -2123,10 +2009,10 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 
 ### Sources
 
-- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-10-08
-- [official_site](https://exa.ai/pricing) — checked 2026-10-08
-- [official_docs](https://exa.ai/docs/reference/search) — checked 2026-10-08
-- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/reference/exa-mcp) — checked 2026-09-07
+- [official_site](https://exa.ai/pricing) — checked 2026-09-07
+- [official_docs](https://exa.ai/docs/reference/search) — checked 2026-09-07
+- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-09-15
 
 <a id="expedia-xap-flights"></a>
 
@@ -2280,7 +2166,7 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 ## Financial Datasets
 
-US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.
+US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.
 
 **Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures
 
@@ -2290,24 +2176,24 @@ US company financial statements, historical prices, filings and insider trades, 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://api.financialdatasets.ai/) | [Docs](https://docs.financialdatasets.ai/quickstart) | self serve / documented | API keys use X-API-KEY. Agent onboarding issues a key but data calls return HTTP 402 until the account is funded; the minimum credit purchase is USD 20 and automatic refills are optional. Free signup is not free data access. A separate free allowance for ordinary signup has not been established, so this is not ready for a free-only batch without account-specific evidence. |
-| [data-mcp (MCP)](https://mcp.financialdatasets.ai/) | [Docs](https://docs.financialdatasets.ai/mcp-server) | self serve / documented | Interactive clients sign in through OAuth. The connector lists income, balance-sheet, cash-flow and filing tools; authentication does not establish a free execution allowance. |
-| [data-mcp-keyed (MCP)](https://mcp.financialdatasets.ai/api) | [Docs](https://docs.financialdatasets.ai/mcp-server) | self serve / documented | Programmatic MCP uses the /api endpoint with X-API-KEY or Bearer authentication. Annual and quarterly statement tools support an as_reported option. Account funding and actual task entitlement remain separate from successful connection. |
+| [data-api (API)](https://docs.financialdatasets.ai/quickstart) | [Docs](https://docs.financialdatasets.ai/quickstart) | self serve / documented | Create an account and key. A free execution allowance has not been established; do not start metered requests without confirming available free credit. |
 
 ### Service pricing
 
-- data-api: 20 USD / credit_purchase (minimum_spend; Minimum credit purchase in documented agent onboarding; not a per-request price.)
+—
 
 ### Task results
 
 —
 
+### Notes
+
+- Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass.
+
 ### Sources
 
-- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-10-08
-- [official_docs](https://docs.financialdatasets.ai/mcp-server) — checked 2026-10-08
-- [official_docs](https://docs.financialdatasets.ai/agents) — checked 2026-10-08
-- [official_docs](https://docs.financialdatasets.ai/data-provenance) — checked 2026-10-08
+- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-09-15
+- [official_docs](https://docs.financialdatasets.ai/llms.txt) — checked 2026-09-09
 
 <a id="fmp"></a>
 
@@ -2323,12 +2209,12 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://financialmodelingprep.com/stable/) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day, 500 MB trailing-30-day bandwidth, and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the AAPL and MSFT fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. The House Trades endpoint is documented, but Congress-specific free-plan entitlement is not confirmed. |
+| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. The House Trades endpoint is documented, but Congress-specific free-plan entitlement is not confirmed. |
 | [data-mcp (MCP)](https://financialmodelingprep.com/mcp) | [Docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) | self serve / documented | Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in public results. |
 
 ### Service pricing
 
-- data-api: 250 requests / day (free_allowance; Basic-plan calls; this allowance does not establish paid-dataset entitlement.)
+—
 
 ### Task results
 
@@ -2337,9 +2223,7 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 ### Sources
 
 - [official_docs](https://site.financialmodelingprep.com/developer/docs) — checked 2026-09-09
-- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-10-08
-- [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/income-statement) — checked 2026-10-08
-- [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/cashflow-statement) — checked 2026-10-08
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-15
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) — checked 2026-09-09
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/house-trading) — checked 2026-09-15
 
@@ -2590,7 +2474,7 @@ Public exchange-rate API and official MCP using central-bank reference data, wit
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [data-api (API)](https://api.frankfurter.dev/v2/) | [Docs](https://frankfurter.dev/) | self serve / documented | The hosted public API is free with no key or daily/monthly quota; abuse rate limits apply. Default v2 rates blend sources; filter by ECB when the task requires ECB reference data. Reference rates are not executable bank/card quotes. |
-| [rates-mcp (MCP)](https://mcp.frankfurter.dev/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Hosted HTTP MCP with conversion, rate, currency and provider tools. The optional provider argument selects one institution instead of the default blend. Uses reference rates, not executable payment quotes. REST time-series capability must not be assumed for this route. |
+| [rates-mcp (MCP)](https://frankfurter.dev/mcp/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading service. |
 
 ### Service pricing
 
@@ -2600,14 +2484,14 @@ Public exchange-rate API and official MCP using central-bank reference data, wit
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/frankfurter-fx-001-ds41-r1.json) | [113.3k](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 38.641535s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/frankfurter-business.json) | [86.8k](../data/experiments/evaluations/frankfurter-access.json) | 115.282949s | 0 |
 | MCP | — | — | — | — |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-d5ebeb408e55) | [100%](./evaluations.md#comparison-d5ebeb408e55) | 113.3k | $0.0081 | $0 |
+| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 86.8k | $0.0052 | $0 |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -2617,20 +2501,19 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d5ebeb408e55)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15 |
 
 </details>
@@ -2641,7 +2524,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-6c4685dc77de) | [100%](./evaluations.md#comparison-6c4685dc77de) | 51.8k | $0.0052 | $0 |
+| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 54.2k | $0.0038 | $0 |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -2651,34 +2534,33 @@ Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; Aug
 
 **Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
+1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-6c4685dc77de)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
 
 [Task definition](./tasks.en.md#financial-fx-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (1)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-fx-001-ds41-r1.json) | 2026-10-08 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15 |
 
 </details>
 
 ### Sources
 
-- [official_docs](https://frankfurter.dev/) — checked 2026-10-08
-- [official_docs](https://frankfurter.dev/mcp/) — checked 2026-10-08
+- [official_docs](https://frankfurter.dev/) — checked 2026-09-15
+- [official_docs](https://frankfurter.dev/mcp/) — checked 2026-09-09
 
 <a id="fred"></a>
 
 ## FRED / ALFRED
 
-Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.
+Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.
 
 **Classification:** Search & Data Access / Financial Data / Economic Indicators
 
@@ -2688,14 +2570,11 @@ Economic time series through a keyed API or an official account-authorized MCP; 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://api.stlouisfed.org/fred/) | [Docs](https://fred.stlouisfed.org/docs/api/fred/) | self serve / documented | Requires: platform_account; Register a FRED account and request a distinct key for each application; each application user needs their own key. This route describes the series-oriented V1 API, including ALFRED vintages; V2 bulk release retrieval is documented separately. Missing observations and revisions need explicit handling. |
-| [data-mcp (MCP)](https://mcp.stlouisfed.org) | [Docs](https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector) | self serve / documented | Requires: platform_account; Sign into the MCP Connector account and authorize the assistant in the browser.; Account setup is separate from the traditional FRED account. Observations can be limited by date, transformed or aggregated; inspect units, frequency and seasonal adjustment. A missing observation is not zero, and the observation period differs from retrieval or publication date. Raw-data retention and redistribution require review of the linked terms before an archived evaluation. |
+| [data-api (API)](https://fred.stlouisfed.org/docs/api/fred/) | [Docs](https://fred.stlouisfed.org/docs/api/fred/) | self serve / documented | A registered account can request an API key. Series units, seasonal adjustment, source and vintage matter; not a stock-price provider. |
 
 ### Service pricing
 
-- data-api: 0 USD / API request (usage; Published free API under service terms and data-owner restrictions.)
-
-- data-mcp: 0 USD / MCP tool call (usage; Published free personal FRED access; host assistant costs and data-owner rights are separate.)
+—
 
 ### Task results
 
@@ -2703,12 +2582,8 @@ Economic time series through a keyed API or an official account-authorized MCP; 
 
 ### Sources
 
-- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-10-08
-- [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-10-08
-- [official_docs](https://fred.stlouisfed.org/help/account/fred-account-features/register) — checked 2026-10-08
-- [official_docs](https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector) — checked 2026-10-08
-- [official_docs](https://mcp.stlouisfed.org/.well-known/oauth-protected-resource) — checked 2026-10-08
-- [official_site](https://fred.stlouisfed.org/legal/) — checked 2026-10-08
+- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-09-15
+- [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-09-09
 
 <a id="gemini-api"></a>
 
@@ -2917,7 +2792,7 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json) | — | — | — |
 | MCP | — | — | — | — |
 | SDK (python-sdk) | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — |
@@ -2942,7 +2817,7 @@ Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue b
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
 
 [Task definition](./tasks.en.md#collaborative-tables-001-v2)
 
@@ -3017,7 +2892,7 @@ Temporary email addresses and message retrieval through a public session-based A
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
 
 ### Task results
 
@@ -3036,7 +2911,7 @@ The dedicated test inbox contains three synthetic messages: two AFS Demo login m
 
 codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
 
 [Task definition](./tasks.en.md#mailboxes-code-001-v1)
 
@@ -3612,7 +3487,7 @@ Temporary receive-only mailboxes with an account/password and authenticated REST
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | — | — | — |
 
 ### Task results
 
@@ -3631,7 +3506,7 @@ The dedicated test inbox contains three synthetic messages: two AFS Demo login m
 
 codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
 
 [Task definition](./tasks.en.md#mailboxes-code-001-v1)
 
@@ -4084,20 +3959,16 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [ephemeral-api (API)](https://neon.new/) | — | documented | No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials. |
-| [claimable-api (API)](https://claimable.neon.tech/v1/agent/identity) | [Docs](https://neon.com/docs/reference/claimable-neon) | self serve / documented | Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works with standard Postgres clients; identity assertions, tokens and connection URLs are private. The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts 15 minutes and is a different clock. Short-term persistence does not establish a permanent free account. Claiming rotates credentials and must not occur between write and independent read. |
 
 ### Service pricing
 
 [Official pricing](https://neon.com/pricing)
 
-- claimable-api: 100 MB / project (free_allowance; Unclaimed project storage, with 1 GB transfer and a 72-hour lifetime.)
-
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API (ephemeral-api) | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | — | — | — |
-| API (claimable-api) | — | — | — | — |
+| API | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | — | — | — |
 
 ### Task results
 
@@ -4105,8 +3976,7 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (ephemeral-api) | [1](./evaluations.md#comparison-fdecec09a4b6) | [100%](./evaluations.md#comparison-fdecec09a4b6) | 465.4k | — | $0 |
-| API (claimable-api) | — | — | — | — | — |
+| API | [1](./evaluations.md#comparison-fdecec09a4b6) | [100%](./evaluations.md#comparison-fdecec09a4b6) | 465.4k | — | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -4128,17 +3998,14 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| database-todos-001 v1 | API (ephemeral-api) | [completed](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | 2026-09-07 |
+| database-todos-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | 2026-09-07 |
 
 </details>
 
 ### Sources
 
-- [official_site](https://neon.new/) — checked 2026-10-08
+- [official_site](https://neon.new/) — checked 2026-09-07
 - [official_announcement](https://neon.com/blog/neon-launchpad) — checked 2026-09-07
-- [official_site](https://neon.com/claimable-neon) — checked 2026-10-08
-- [official_docs](https://neon.com/docs/reference/claimable-neon) — checked 2026-10-08
-- [official_docs](https://neon.com/auth.md) — checked 2026-10-08
 
 <a id="netlify"></a>
 
@@ -4199,7 +4066,7 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json) | — | — | — |
 | SDK | — | — | — | — |
 | CLI | — | — | — | — |
 | MCP | — | — | — | — |
@@ -4224,7 +4091,7 @@ Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue b
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
 
 [Task definition](./tasks.en.md#collaborative-tables-001-v2)
 
@@ -4393,7 +4260,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260908T113239.160717Z-paas-build.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T113239.160717Z-paas-build.json) | — | — | — |
 | MCP | — | — | — | — |
 
 ### Task results
@@ -4414,7 +4281,7 @@ Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Deli
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-bc10c53a81ca)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-bc10c53a81ca)
 
 [Task definition](./tasks.en.md#payment-acceptance-001-v1)
 
@@ -4475,7 +4342,7 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260909T032011.000426Z-paddle.json) | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T032011.000426Z-paddle.json) | — | — | — |
 
 ### Task results
 
@@ -4494,7 +4361,7 @@ Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Deli
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-09 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1149cab0b0f0)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1149cab0b0f0)
 
 [Task definition](./tasks.en.md#payment-acceptance-001-v1)
 
@@ -5086,85 +4953,19 @@ Official public company filings and XBRL financial facts; data.sec.gov reading A
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://data.sec.gov/) | [Docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | self serve / documented | Public reading APIs require no account or key. Fair access requires an identifying User-Agent with contact information and no more than 10 requests/second. Companyfacts and submissions support financial facts and filing provenance. Frames align to calendar periods and do not substitute for each company's fiscal year; units, duration, filing cutoff and amendments need interpretation. CORS is not supported. Filer submission APIs are separate. |
+| [data-api (API)](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | [Docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | self serve / documented | Reading APIs are separate from filer submission APIs. Automated-access policy applies. Facts need fiscal-period, unit and amendment interpretation; CORS is not supported. |
 
 ### Service pricing
 
-- data-api: 0 USD / request (usage; Public EDGAR data access, subject to SEC fair-access policy.)
-
-### Setup observations
-
-| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
-| --- | --- | --- | --- | --- |
-| API | [Access preparation: none; contact identity only](../data/experiments/evaluations/sec-edgar-statements-001-ds41-r1.json) | [111.5k](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 40.119431s | 0 |
-
-#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-04dea4e239e0) | [100%](./evaluations.md#comparison-04dea4e239e0) | 111.5k | $0.0100 | $0 |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
-
-**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
-
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
-
-Access preparation: none; contact identity only · [Full configuration and evidence](./evaluations.md#comparison-04dea4e239e0)
-
-[Task definition](./tasks.en.md#financial-access-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 2026-10-08 |
-
-</details>
+—
 
 ### Task results
 
-#### Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-8f6f28f05196) | [100%](./evaluations.md#comparison-8f6f28f05196) | 96.3k | $0.0084 | $0 |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
-
-**Completion:** All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
-
-1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
-
-Access preparation: none; contact identity only · [Full configuration and evidence](./evaluations.md#comparison-8f6f28f05196)
-
-[Task definition](./tasks.en.md#financial-statements-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| financial-statements-001 v1 | API | [completed](../data/experiments/evaluations/sec-edgar-statements-001-ds41-r1.json) | 2026-10-08 |
-
-</details>
+—
 
 ### Sources
 
-- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-10-08
-- [official_docs](https://www.sec.gov/about/webmaster-frequently-asked-questions) — checked 2026-10-08
-- [official_docs](https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data) — checked 2026-10-08
+- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-09-15
 
 <a id="sentry"></a>
 
@@ -5244,7 +5045,7 @@ Google results API with signup trial queries; actual account flow and authentica
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [search-api (API)](https://serper.dev/) | — | self serve / documented | The homepage advertises 2500 initial free queries without a card; requests stop when credits are exhausted. No monthly renewal or trial expiry is established here. The dashboard/playground is the setup lead, but this public-page review did not establish API authentication details. Account registration, key acquisition and actual official-source search results remain untested. |
+| [search-api (API)](https://serper.dev/) | — | self serve / documented | Google results API with signup trial queries; actual account flow and authentication remain untested. |
 
 ### Service pricing
 
@@ -5256,7 +5057,7 @@ Google results API with signup trial queries; actual account flow and authentica
 
 ### Sources
 
-- [official_site](https://serper.dev/) — checked 2026-10-08
+- [official_site](https://serper.dev/) — checked 2026-09-07
 
 <a id="shopify"></a>
 
@@ -5302,13 +5103,11 @@ Company fundamentals and price data with API and CSV access advertised across fr
 
 ### Documentation and access <a id="simfin-access"></a>
 
-| Route | Docs | Personal access | Requirements and human steps |
-| --- | --- | --- | --- |
-| [data-sdk (SDK)](https://github.com/SimFin/simfin) | [Docs](https://github.com/SimFin/simfin#readme) | self serve / documented | Requires: platform_account; The official simfin Python package downloads datasets, caches them on disk and loads Pandas tables. Registration supplies a free API key; paid-only datasets are separate. Free bulk data is delayed, so availability of each requested fiscal year and original-report links needs verification. The pricing FAQ restricts data use to a valid subscription and requires deletion of downloaded data and backups after cancellation; raw evidence publication is not implied. |
+—
 
 ### Service pricing
 
-- data-sdk: 0 USD / download (usage; Datasets included in the free account; excludes paid datasets and upgrades.)
+—
 
 ### Task results
 
@@ -5316,14 +5115,11 @@ Company fundamentals and price data with API and CSV access advertised across fr
 
 ### Notes
 
-- Free Web API and bulk downloads have different history limits. The pricing card says five years of fundamentals, while its comparison table says seven API years and five delayed bulk years. The free Web API rate is two calls/second and the filing allowance is eight/day; 500 monthly high-speed credits apply to backtesting, not an API request allowance. Actual FY2025 coverage and filing provenance through the selected route remain untested.
+- Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification.
 
 ### Sources
 
-- [official_site](https://www.simfin.com/en/prices/) — checked 2026-10-08
-- [official_repo](https://github.com/SimFin/simfin) — checked 2026-10-08
-- [official_site](https://www.simfin.com/en/fundamental-data-download/) — checked 2026-10-08
-- [official_site](https://www.simfin.com/en/technical-updates-to-api-v3-and-bulk-download/) — checked 2026-10-08
+- [official_site](https://www.simfin.com/en/prices/) — checked 2026-09-09
 
 <a id="skootle-google-flights"></a>
 
@@ -5352,37 +5148,6 @@ A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and
 ### Sources
 
 - [publisher_listing](https://apify.com/skootle/google-flights-scraper) — checked 2026-09-07
-
-<a id="skyaccess"></a>
-
-## SkyAccess
-
-Private-jet empty-leg search, indicative charter estimates and booking links through a public remote MCP.
-
-**Classification:** Travel / Flights
-
-[Website](https://skyaccess.com/) · [Source record](../data/candidates/skyaccess.yaml) · [Back to directory](../README.md#all-services)
-
-### Documentation and access <a id="skyaccess-access"></a>
-
-| Route | Docs | Personal access | Requirements and human steps |
-| --- | --- | --- | --- |
-| [remote-mcp (MCP)](https://mcp.skyaccess.com/mcp) | [Docs](https://github.com/sky-access/skyaccess-mcp) | self serve / documented | Review and complete any purchase on the returned booking page.; Stateless Streamable HTTP; POST requests only. Published limit: 30 tool calls per minute per IP. Search returns at most five listings; unknown prices can survive the maximum-price filter. Estimates are indicative. request_booking submits a contact enquiry, with a separate limit of ten per hour. Read-only search is distinct from asking a specialist to contact the traveler. |
-
-### Service pricing
-
-- remote-mcp: 0 USD / MCP tool call (usage; Published free connector; flight purchase costs are separate.)
-
-### Task results
-
-—
-
-### Sources
-
-- [publisher_listing](https://github.com/Olorinm/agent-friendly-services/pull/13) — checked 2026-10-08
-- [official_repo](https://github.com/sky-access/skyaccess-mcp) — checked 2026-10-08
-- [publisher_listing](https://registry.modelcontextprotocol.io/v0/servers?search=com.skyaccess) — checked 2026-10-08
-- [official_site](https://skyaccess.com/privacy#connector) — checked 2026-10-08
 
 <a id="skyscanner"></a>
 
@@ -5576,7 +5341,7 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 ## Tavily
 
-Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
+Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
 
 **Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
 
@@ -5588,102 +5353,23 @@ Search and extraction for AI agents, with free rate-limited keyless API/MCP acce
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [keyless-search-api (API)](https://api.tavily.com/search) | [Docs](https://docs.tavily.com/documentation/keyless) | self serve / documented | Requires X-Tavily-Access-Mode: keyless. The publisher documents the standard Search parameters and response schema. A valid Authorization key takes precedence and uses account limits instead, so keyless access must be recorded separately from preconfigured credentials. No task success is implied. |
-| [public-mcp (MCP)](https://mcp.tavily.com/mcp/) | [Docs](https://docs.tavily.com/documentation/keyless) | self serve / documented | Free rate-limited Search and Extract require X-Tavily-Access-Mode: keyless; without that header the server requests login. Clients that accept only a server URL cannot select this mode. Numerical keyless limits are not stated. Crawl, Map and Research require a key and are outside this route. |
-| [search-api (API)](https://api.tavily.com/search) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Development keys have a 100 requests/minute limit. The 1000 credits/month allowance is separate from anonymous access, and is not 1000 advanced searches. Paid overage must be enabled separately; a free-only test should check the account setting and balance. |
+| [search-api (API)](https://docs.tavily.com/documentation/quickstart) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. |
 | [extract-api (API)](https://api.tavily.com/extract) | [Docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) | — | Extract accepts one or more URLs. Search pricing and search trials do not establish extraction cost or success. |
 
 ### Service pricing
 
 [Official pricing](https://www.tavily.com/pricing)
 
-- keyless-search-api: 0 USD / request (usage; Free keyless Search, subject to rate limits; the numerical allowance is not published here.)
-
 - search-api: 1000 credits / month (free_allowance; Free account allowance, not requests.)
-
-### Setup observations
-
-| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
-| --- | --- | --- | --- | --- |
-| API (keyless-search-api) | [No account or key supplied](../data/experiments/evaluations/tavily-search-001-ds41-r1.json) | [92.2k](../data/experiments/evaluations/tavily-access-ds41-r1.json) | 27.012414s | 0 |
-| MCP | — | — | — | — |
-| API (search-api) | — | — | — | — |
-| API (extract-api) | — | — | — | — |
-
-#### Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API (keyless-search-api) | [1](./evaluations.md#comparison-7aef90c6de38) | [100%](./evaluations.md#comparison-7aef90c6de38) | 92.2k | $0.0061 | $0 |
-| MCP | — | — | — | — | — |
-| API (search-api) | — | — | — | — | — |
-| API (extract-api) | — | — | — | — | — |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
-
-**Completion:** Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
-
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
-
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-7aef90c6de38)
-
-[Task definition](./tasks.en.md#web-search-access-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| web-search-access-001 v1 | API (keyless-search-api) | [completed](../data/experiments/evaluations/tavily-access-ds41-r1.json) | 2026-10-08 |
-
-</details>
 
 ### Task results
 
-#### I am upgrading a Python app to 3.13. Find out whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions, with official sources
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API (keyless-search-api) | [1](./evaluations.md#comparison-b8056c1607c9) | [100%](./evaluations.md#comparison-b8056c1607c9) | 527.2k | $0.02 | $0 |
-| MCP | — | — | — | — | — |
-| API (search-api) | — | — | — | — | — |
-| API (extract-api) | — | — | — | — | — |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-Target Python 3.13; official sources under python.org. Discover sources through the search service assigned to this trial; directly reading the pages it returns is allowed. Do not answer from model memory or another search engine.
-
-**Completion:** All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
-
-1.18.35 · deepseek-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-10-08 (UTC)
-
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-b8056c1607c9)
-
-[Task definition](./tasks.en.md#web-search-001-v1)
-
-</details>
-
-<details>
-<summary>Run history (1)</summary>
-
-| Task | Route | Result | Date (UTC) |
-| --- | --- | --- | --- |
-| web-search-001 v1 | API (keyless-search-api) | [completed](../data/experiments/evaluations/tavily-search-001-ds41-r1.json) | 2026-10-08 |
-
-</details>
+—
 
 ### Sources
 
-- [official_docs](https://docs.tavily.com/documentation/quickstart) — checked 2026-10-08
-- [official_docs](https://docs.tavily.com/documentation/api-credits) — checked 2026-10-08
-- [official_docs](https://docs.tavily.com/documentation/keyless) — checked 2026-10-08
-- [official_docs](https://docs.tavily.com/documentation/rate-limits) — checked 2026-10-08
+- [official_docs](https://docs.tavily.com/documentation/quickstart) — checked 2026-09-07
+- [official_docs](https://docs.tavily.com/documentation/api-credits) — checked 2026-09-07
 - [official_docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) — checked 2026-09-15
 
 <a id="telegram"></a>
@@ -5745,39 +5431,6 @@ Disposable email receiving service with a developer API for automated email work
 ### Sources
 
 - [official_docs](https://temp-mail.org/en/api/) — checked 2026-09-09
-
-<a id="tencent-agently-mail"></a>
-
-## Tencent Agently Mail
-
-Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for reading, searching and sending email.
-
-**Classification:** Communication / Mailboxes
-
-[Website](https://agent.qq.com/) · [Source record](../data/candidates/tencent-agently-mail.yaml) · [Back to directory](../README.md#all-services)
-
-### Documentation and access <a id="tencent-agently-mail-access"></a>
-
-| Route | Docs | Personal access | Requirements and human steps |
-| --- | --- | --- | --- |
-| [mail-cli (CLI)](https://github.com/Tencent/AgentlyMail) | [Docs](https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md) | self serve / documented | Requires: platform_account; Complete the browser login and authorize mailbox access for the CLI.; Install @tencent-qqmail/agently-cli; auth login starts browser authorization and +me returns mailbox identity and aliases. Sending, replies and forwarding are also documented. Pricing, retention outside deleted mail, quota and suitability for third-party account recovery remain unknown. |
-
-### Service pricing
-
-—
-
-### Task results
-
-—
-
-### Notes
-
-- Separate product from agentmail.to. Public documentation does not establish successful registration or a completed mail task.
-
-### Sources
-
-- [official_repo](https://github.com/Tencent/AgentlyMail) — checked 2026-10-08
-- [official_docs](https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md) — checked 2026-10-08
 
 <a id="tiingo"></a>
 
@@ -5968,7 +5621,7 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 ## Turso
 
-Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.
+Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.
 
 **Classification:** Databases / Hosted Relational Databases
 
@@ -5978,10 +5631,8 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/quickstart) | self serve / documented | Requires: platform_account; Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month. Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine: --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not establish remote persistence. Paid overages are separate from the free allowance. |
-| [platform-api (API)](https://api.turso.tech/v1/) | [Docs](https://docs.turso.tech/api-reference/quickstart) | self serve | Account/organization management uses a Bearer Platform API token, which can be organization-scoped. This provisions databases; SQL uses a separate database token and endpoint. The quickstart obtains the platform token through an authenticated CLI account. Existing account access and new database provisioning are distinct steps. |
-| [sql-http-api (API)](https://docs.turso.tech/sdk/http/quickstart) | [Docs](https://docs.turso.tech/sdk/http/quickstart) | self serve / documented | SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer token. The endpoint is specific to each database, so the setup guide is retained as the entry clue. It supports both cloud engines. Provisioning and account authorization are separate. |
-| [cloud-sdk (SDK)](https://docs.turso.tech/sdk/ts/quickstart) | [Docs](https://docs.turso.tech/sdk/ts/quickstart) | self serve / documented | For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local SDK modes and cached replicas do not by themselves prove a fresh remote read. |
+| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/cli/introduction) | self serve / documented | Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. |
+| [platform-api (API)](https://docs.turso.tech/api-reference/introduction) | [Docs](https://docs.turso.tech/api-reference/introduction) | self serve | Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. |
 
 ### Service pricing
 
@@ -5992,9 +5643,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | CLI | — | — | — | — |
-| API (platform-api) | [Service credentials supplied](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | — | — | — |
-| API (sql-http-api) | — | — | — | — |
-| SDK | — | — | — | — |
+| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | — | — | — |
 
 ### Task results
 
@@ -6002,10 +5651,8 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (platform-api) | [1](./evaluations.md#comparison-1420586eae17) | [100%](./evaluations.md#comparison-1420586eae17) | 767.6k | — | $0 |
+| API | [1](./evaluations.md#comparison-1420586eae17) | [100%](./evaluations.md#comparison-1420586eae17) | 767.6k | — | $0 |
 | CLI | — | — | — | — | — |
-| API (sql-http-api) | — | — | — | — | — |
-| SDK | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6016,7 +5663,7 @@ Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,d
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1420586eae17)
+Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1420586eae17)
 
 [Task definition](./tasks.en.md#database-todos-001-v1)
 
@@ -6027,21 +5674,15 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| database-todos-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | 2026-09-07 |
+| database-todos-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | 2026-09-07 |
 
 </details>
 
 ### Sources
 
-- [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/api-reference/quickstart) — checked 2026-10-08
-- [official_site](https://turso.tech/pricing) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/quickstart) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/cli/authentication) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/sdk/http/quickstart) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/sdk/introduction) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/sdk/authentication) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/sdk/ts/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-09-07
+- [official_docs](https://docs.turso.tech/api-reference/introduction) — checked 2026-09-07
+- [official_site](https://turso.tech/pricing) — checked 2026-09-07
 
 <a id="tushare"></a>
 
@@ -6366,11 +6007,11 @@ Country-level economic and development indicators through the public Indicators 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://api.worldbank.org/v2/) | [Docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | self serve / documented | Annual country indicators have publication lags and revisions. Confirm each series and year; do not substitute annual GDP or inflation for monthly US indicators. V2 requires the /v2 path and supports JSON, date filtering and pagination; the default page contains 50 results, so one response need not be complete. No API key or other authentication is required. |
+| [data-api (API)](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | [Docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | self serve / documented | Annual country indicators have publication lags and revisions. Confirm each series and year; do not substitute annual GDP or inflation for monthly US indicators. |
 
 ### Service pricing
 
-- data-api: 0 USD / public Indicators API request (usage; Dataset access under the published dataset terms; not a guaranteed service level.)
+—
 
 ### Task results
 
@@ -6378,9 +6019,7 @@ Country-level economic and development indicators through the public Indicators 
 
 ### Sources
 
-- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) — checked 2026-10-08
-- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures) — checked 2026-10-08
-- [official_site](https://www.worldbank.org/ext/en/legal/terms-conditions/datasets) — checked 2026-10-08
+- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) — checked 2026-09-09
 
 <a id="xai"></a>
 

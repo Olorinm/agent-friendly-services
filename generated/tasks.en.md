@@ -17,20 +17,6 @@ financial-access-001 v1 · [Original task definition](../data/experiments/tasks/
 
 **Failure criteria:** No genuine data query, substitution of another service, signup or installation only, required credentials or human steps unfinished, or failure within the budget. Environment failures are invalid runs.
 
-<a id="financial-statements-001-v1"></a>
-
-## Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.
-
-financial-statements-001 v1 · [Original task definition](../data/experiments/tasks/financial-data.md)
-
-**Inputs:** Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
-
-**Expected output:** A comparison table covering two companies and three metrics, with fiscal year-end dates, currency and units, plus sources locating the original annual reports or regulatory filings.
-
-**Completion criteria:** All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
-
-**Failure criteria:** Missing metrics or sources; net income confused with earnings per share; incorrect period, company, accounting basis or units; citations that do not support the figures; a summary without the comparison table; or failure within the budget. Environment failures are invalid runs.
-
 <a id="financial-disclosures-001-v1"></a>
 
 ## Summarize the stock purchases and sales Richard W. Allen filed with the U.S. House in August 2026. Include the stock, direction, transaction date, filing date, amount range and original filing source.
@@ -212,17 +198,3 @@ financial-fx-001 v1 · [Original task definition](../data/experiments/tasks/fina
 **Completion criteria:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
 **Failure criteria:** Latest rates substituted for historical rates, a different publishing institution, incorrect quote direction, weekend fallback, rounding or total; no verifiable source; or failure within the budget. Environment failures are invalid runs.
-
-<a id="web-search-access-001-v1"></a>
-
-## Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.
-
-web-search-access-001 v1 · [Original task definition](../data/experiments/tasks/web-search.md)
-
-**Inputs:** The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
-
-**Expected output:** One genuine web search result from the specified service, including the query and at least one result title and link; the location of reusable local configuration; actual setup steps, account origin, and human or application requirements, or a specific blocker.
-
-**Completion criteria:** Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
-
-**Failure criteria:** No real search result; another service or interface substituted; tutorials or examples only; answer inconsistent with the response; unusable configuration; credential exposure; or failure within the budget. Record missing identity details, authorization, human steps or quota as specific access barriers. Execution-environment failures are invalid runs.
