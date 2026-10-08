@@ -500,11 +500,27 @@ categories:
     inclusion: Enables email, messaging or live voice communication.
     exclusion: Text-to-speech alone is an AI content service, not communication delivery.
   - id: productivity-storage
-    name: Workplace Collaboration
+    name: Productivity & Collaboration
     description: >-
-      Documents, collaborative tables, project management and file sharing; application object storage belongs
-      under cloud services.
+      Documents, collaborative tables, project management, file sharing and preparing information materials
+      for people to share; application object storage belongs under cloud services.
     subcategories:
+      - id: qr-codes
+        name: QR Code Images
+        name_zh: 二维码图片
+        description: Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.
+        inclusion: >-
+          A hosted service accepts an explicit payload and returns a downloadable QR image with documented
+          format and sizing controls. The stored payload can be checked by an independent decoder;
+          local-only encoding libraries are not hosted service alternatives.
+        exclusion: >-
+          Payment processing, scanner-only services, dynamic redirect or scan-tracking management and
+          general AI image generation are separate. An image that looks like a QR code without correctly
+          decoding the requested payload is insufficient; decoding does not prove its destination is
+          safe, reachable or permanent, or that every phone and print condition can scan it.
+        capabilities:
+          - id: qr.generate
+            description: Produce a downloadable static QR image encoding the supplied payload.
       - id: collaborative-tables
         name: Collaborative Tables
         description: User-facing online tables for organizing and following up shared work.
@@ -545,9 +561,11 @@ categories:
         capabilities:
           - id: files.share
             description: Store a file and grant intended recipients access.
-    name_zh: 办公协作
-    inclusion: Organizes shared work, documents, tasks or files for people.
-    exclusion: Application database and object-storage APIs alone are not office collaboration.
+    name_zh: 办公与协作
+    inclusion: Organizes work, documents, tasks or files for people, or prepares information materials for sharing.
+    exclusion: >-
+      Application database and object-storage APIs alone are not office productivity; general AI image
+      generation belongs under AI services rather than deterministic information-material preparation.
   - id: commerce-marketing
     name: E-commerce
     description: Services for building and operating online stores.

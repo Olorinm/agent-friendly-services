@@ -1,0 +1,104 @@
+id: quickchart
+name: QuickChart
+category: productivity-storage
+homepage: https://quickchart.io/qr-code-api/
+summary: Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.
+submitted_by: community
+tags:
+  - qr-codes
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/qr-codes
+  sources:
+    qr-api:
+      url: https://quickchart.io/documentation/qr-codes/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    qr-overview:
+      url: https://quickchart.io/qr-code-api/
+      checked_on: '2026-10-08'
+      kind: official_site
+    qr-pricing:
+      url: https://quickchart.io/pricing/qr/
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://quickchart.io/terms/
+      checked_on: '2026-10-08'
+      kind: official_site
+    privacy:
+      url: https://quickchart.io/privacy/
+      checked_on: '2026-10-08'
+      kind: official_site
+    security:
+      url: https://quickchart.io/security/
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: public-qr-api
+      interface: api
+      maintainer: official
+      entry_url: https://quickchart.io/qr
+      docs: https://quickchart.io/documentation/qr-codes/
+      evidence: [qr-api, qr-overview, qr-pricing]
+      availability:
+        value: self_serve
+        evidence: [qr-api, qr-overview]
+        notes: Direct hosted static QR API; paid keys and dynamic QR management are separate.
+      personal_access:
+        value: documented
+        evidence: [qr-pricing, qr-overview, terms]
+        notes: No purchase required for Community; terms require users to be over 18 and comply with stated legal restrictions.
+      auth:
+        value: none
+        evidence: [qr-api, qr-overview]
+        notes: Official QR builder marks the API key optional and uses it for higher limits.
+      capabilities:
+        qr.generate:
+          value: documented
+          evidence: [qr-api]
+          notes: >-
+            GET /qr with text, or POST /qr with JSON, returns a static image encoding that payload.
+            PNG is default; SVG, JPEG and base64 output are also documented. size sets square pixel
+            dimensions up to 3000; margin is measured in QR modules, default 4. ecLevel supports L/M/Q/H,
+            default M for a plain code. Foreground/background colors are configurable.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [qr-api, qr-overview, qr-pricing]
+        payment_method:
+          value: not_required
+          evidence: [qr-pricing]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: Community static QR render within free limits
+          scope: QR pricing lists Community at USD 0/month and the QR overview explicitly offers rendering free of charge.
+          evidence: [qr-pricing, qr-overview]
+        - kind: free_allowance
+          amount: 1000
+          unit: QR codes
+          per: month
+          scope: Community static QR images, with a separate limit of 60 QR codes per minute; dynamic QR codes are not included.
+          evidence: [qr-pricing]
+      notes: >-
+        Community uses shared servers with variable latency and no SLA. The documented quota does not
+        establish how anonymous requests share an IP-level allowance or its reset boundary. Static /qr
+        stores the requested content in the image; scan analytics, editable redirects and paid dynamic
+        QR records are different products. No account resource needs deletion after saving a static image.
+  notes:
+    - >-
+      The official QR overview permits use of generated QR images for any purpose, including public or
+      printed material; no required image attribution or explicit public-comparison prohibition was
+      identified in the reviewed terms. The generated-image permission is separate from licensing
+      QuickChart's source code or purchasing paid features. Supplied content must still respect others'
+      rights and the service content rules.
+    - >-
+      The privacy policy says ordinary QR images/payloads are rendered on demand and not stored, with
+      opt-in short URLs as an exception. It also allows temporary request logging for support/debugging,
+      potentially including GET payloads. Privacy states seven-day log deletion while the security page
+      states thirty days; that inconsistency is unresolved. Do not promise zero retention or submit secrets
+      based on the marketing summary. This route records no account or anonymous generation trial yet.
