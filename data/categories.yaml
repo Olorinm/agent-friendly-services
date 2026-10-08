@@ -281,6 +281,22 @@ categories:
         capabilities:
           - id: places.geocode
             description: Resolve a place name or address to an identified geographic position.
+      - id: route-planning
+        name: Route Planning
+        name_zh: 路线规划
+        description: Plan a journey between specified locations using a transport network and an identified travel mode.
+        inclusion: >-
+          Returns a connected route with distance, estimated travel time and enough path or direction
+          information to understand the journey. Hosted endpoint coverage, supported travel modes and
+          public-service usage conditions must be stated.
+        exclusion: >-
+          Resolving an address to coordinates alone is geocoding; map tiles, straight-line distance,
+          transport ticket inventory and a self-hosted routing library alone are separate. A planned
+          route does not establish live traffic, actual arrival time, road safety, accessibility or
+          turn-by-turn navigation reliability. Shared map data does not provide independent ground truth.
+        capabilities:
+          - id: routes.plan
+            description: Return a network route with distance, estimated duration and path information for a travel mode.
       - id: public-holidays
         name: Public Holidays
         name_zh: 公共节假日

@@ -1,0 +1,106 @@
+id: osrm
+name: OSRM Public Demo API
+category: web-search-data
+homepage: https://project-osrm.org/
+summary: FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.
+submitted_by: community
+tags:
+  - routing
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/route-planning
+  sources:
+    demo:
+      url: https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api:
+      url: https://project-osrm.org/docs/v26.5.0/http
+      checked_on: '2026-10-08'
+      kind: official_docs
+    operator:
+      url: https://routing.openstreetmap.de/about.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    operator-services:
+      url: https://github.com/fossgis/openstreetmap.de/blob/main/content/nutzen/dienste-osm-de.md
+      checked_on: '2026-10-08'
+      kind: official_docs
+    policy-scope:
+      url: https://github.com/Project-OSRM/osrm-backend/wiki/Api-usage-policy
+      checked_on: '2026-10-08'
+      kind: official_docs
+    licence:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+    attribution:
+      url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
+      checked_on: '2026-10-08'
+      kind: official_docs
+  routes:
+    - id: public-route-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://router.project-osrm.org/route/v1/driving
+      docs: https://project-osrm.org/docs/v26.5.0/http
+      evidence: [demo, api, operator]
+      availability:
+        value: self_serve
+        evidence: [demo, operator-services]
+        notes: Project-documented FOSSGIS hosted demo; no uptime, latency or data-update guarantee.
+      personal_access:
+        value: documented
+        evidence: [demo, operator-services]
+        notes: Reasonable non-commercial use, without registration or enterprise qualification.
+      auth:
+        value: none
+        evidence: [demo, operator-services, operator]
+        notes: No API key; identify the application with a valid User-Agent and a correct Referer when applicable.
+      capabilities:
+        routes.plan:
+          value: documented
+          evidence: [api, demo]
+          notes: >-
+            GET /route/v1/driving/{longitude},{latitude};{longitude},{latitude} returns routes and
+            snapped waypoints. Route distance is meters and estimated duration is seconds. steps=true
+            includes road names and maneuvers; overview and geometries control path output, including
+            GeoJSON. Profile names do not switch a statically prepared backend to arbitrary modes.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [operator-services, demo]
+        payment_method:
+          value: not_required
+          evidence: [operator-services, demo]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: eligible public demo request
+          scope: Sponsored public demo within reasonable non-commercial use; not reserved capacity or a production SLA.
+          evidence: [demo, operator-services]
+      notes: >-
+        At most one request per second; no scraping or heavy usage. Display data attribution and a
+        fix-the-map link as required by the operator. Cache captured responses rather than repeatedly
+        requesting the same route; no mandatory cache lifetime was specified in the reviewed summary.
+        FOSSGIS also hosts the Valhalla demo, and both use OSM: they are different engines, not independent
+        operators or map truth. Latest API documentation does not prove the demo runs that software version.
+  notes:
+    - >-
+      Reviewed official demo policy and operator summary permit reasonable non-commercial public use;
+      no explicit ban on publishing a small functional comparison was found in those reviewed sources.
+      The linked full German FOSSGIS policy at
+      https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/ returned an Anubis access-denied
+      page during the 2026-10-08 source review, so this is not a claim to have reviewed its full text.
+      The older rules below the divider on the OSRM Api-usage-policy wiki explicitly applied to a previous
+      demo server; do not treat them as the current operator's complete terms.
+    - >-
+      OSM data uses ODbL, separate from the routing software licence. Attribute OpenStreetMap contributors
+      and link its copyright/licence page when publishing route-derived material; the operator also asks
+      for https://www.openstreetmap.org/fixthemap. OSMF's routing guidance distinguishes individual routing
+      instructions from a derivative database. Do not turn a low-volume check into harvesting map data.
+      Requests and coordinates are logged by the operator. Service access and driving results remain untested.

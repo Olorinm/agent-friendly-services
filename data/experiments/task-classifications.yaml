@@ -108,6 +108,14 @@ tasks:
     id: web-extraction-pdf-hikes-001
     classification: web-search-data/web-extraction
     phase: business
+  - file: data/experiments/tasks/route-planning.md
+    id: route-planning-access-001
+    classification: web-search-data/route-planning
+    phase: setup
+  - file: data/experiments/tasks/route-planning.md
+    id: route-planning-bridge-001
+    classification: web-search-data/route-planning
+    phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-002
