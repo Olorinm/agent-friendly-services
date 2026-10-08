@@ -59,7 +59,10 @@ catalog:
           evidence: [repo, cli-guide]
       notes: >-
         Install @tencent-qqmail/agently-cli; auth login starts browser authorization and +me returns mailbox
-        identity and aliases. Sending, replies and forwarding are also documented. Pricing, retention outside
-        deleted mail, quota and suitability for third-party account recovery remain unknown.
+        identity and aliases. Sending, replies and forwarding are also documented and require an explicit
+        user-authorized action. The guide documents a rate-limit error with Retry-After, but no numeric
+        allowance. Deleted mail is retained in Trash for 30 days before permanent deletion. Pricing,
+        retention outside deleted mail, total quota and suitability for third-party account recovery remain unknown.
   notes:
     - Separate product from agentmail.to. Public documentation does not establish successful registration or a completed mail task.
+    - Reviewed CLI documentation does not establish creating a fresh independent test mailbox, alias provisioning, or a per-inbox read-only authorization scope. Access to an existing registration mailbox is not evidence that its full credential is suitable for an isolated executor. Service terms governing public test publication have not been fully retrieved; repository licence alone is not a service-use permission.

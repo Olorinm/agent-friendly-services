@@ -14,24 +14,70 @@ catalog:
   sources:
     docs:
       url: https://docs.mail.tm/
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
+    authentication:
+      url: https://docs.mail.tm/getting-started/authentication
+      checked_on: '2026-10-08'
+      kind: official_docs
+    accounts:
+      url: https://docs.mail.tm/api/accounts
+      checked_on: '2026-10-08'
+      kind: official_docs
+    messages:
+      url: https://docs.mail.tm/api/messages
+      checked_on: '2026-10-08'
+      kind: official_docs
+    faq:
+      url: https://mail.tm/en/faq/
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Separates mailbox lifetime from seven-day message retention; does not provide outbound email or password reset.
   routes:
   - id: mail-api
     interface: api
     maintainer: official
-    entry_url: https://docs.mail.tm/
+    entry_url: https://api.mail.tm
     docs: https://docs.mail.tm/
     evidence:
     - docs
+    availability:
+      value: self_serve
+      evidence: [docs, accounts]
+    personal_access:
+      value: documented
+      evidence: [docs, faq]
+      notes: Anonymous temporary mailboxes; no personal identity or pre-existing upstream account is required.
+    capabilities:
+      mailboxes.provision:
+        value: documented
+        evidence: [accounts]
+      mailboxes.read:
+        value: documented
+        evidence: [messages]
+    costs:
+      - kind: usage
+        amount: 0
+        unit: money
+        currency: USD
+        per: API request within published limits
+        scope: Free service with an 8 QPS per-IP limit; no paid tier.
+        evidence: [docs]
     notes: Free public API; creating the mailbox also creates its account. No upstream user account or paid
-      API key is required. Temporary domains and retention must be checked before using for important accounts.
+      API key is required. Domain listing and account creation are unauthenticated; obtain a Bearer token
+      using the new address/password for mailbox access. FAQ says the mailbox stays valid until deletion,
+      while received messages are retained only seven days. Password reset is unavailable. This remains
+      a disposable mailbox, not a guarantee of durable project correspondence or account recovery.
       On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse
       of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term
       retention. A subsequent independent medium session retrieved the correct latest login code, subject and
       timestamp from three real synthetic emails delivered by Gmail. This does not establish acceptance by
       arbitrary signup websites.
     auth:
-      value: none
+      value: platform_credentials
       evidence:
-      - docs
+      - authentication
+      notes: New mailbox address/password are exchanged for a Bearer token; no credential is needed before creating the account.
+  notes:
+    - API terms require a visible link to Mail.tm and prohibit illegal use, reselling a paid wrapper, or mirroring/proxying the API under another domain. No explicit public-test/comparison prohibition appears in the reviewed API terms; these terms do not grant rights to publish other people's mail.
+    - DELETE /accounts/{id} with that account's Bearer token permanently deletes the mailbox account and is not reversible. The service does not support outbound mail. Neither historical trials nor current documentation establish acceptance by arbitrary signup sites or long-term reliability.

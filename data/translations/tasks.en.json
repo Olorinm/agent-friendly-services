@@ -654,5 +654,21 @@
         "failure": "没有真实指定服务查询，遗漏柏林适用节日，混入他州独有节日、学校假期、非公共假日或其他年份，日期或节日身份错误、重复、顺序或总数不符，靠其他来源补齐而冒充指定服务结果，缺少查询来源或预算内未完成。真实无数据、权限或限流障碍如实记录；官方参考实质更新或执行环境失效单列核实，不强判服务错误。"
       }
     ]
+  },
+  "mailboxes-create-001/v2": {
+    "description": "Prepare a temporary receiving mailbox for this automated test, give me its address, and save the access information needed to read its inbox later.",
+    "inputs": "Use a domain supplied by the service to create one new receiving mailbox dedicated to this test; do not reuse an existing mailbox. It only needs to be usable during this test, with no long-term retention or custom-domain requirement. You may create the minimal free anonymous service identity and authentication information necessary for it. Do not use an existing service account or any human email address for verification; report a blocker if these are required. Confirm that you can read this mailbox’s message list and state whether it currently contains any messages. Save passwords, tokens or session information in a local private file; give only the file location in your answer, not the secrets.",
+    "expected_output": "A real mailbox address, its current inbox state, a private access-information file, and instructions for later use.",
+    "success": "The assigned service returns an actual mailbox address; a real inbox read succeeds; an evaluator can reuse the saved access state in an independent request to the same mailbox; the answer matches the observed state, and no secrets appear in it.",
+    "failure": "Only an address string or tutorial is produced; the mailbox cannot be read; reusable access state is not saved; the actual mailbox differs from the answer; or the task is not completed within budget. Platform or execution-environment faults are separate invalid runs.",
+    "source_variants": [
+      {
+        "description": "为这次自动化测试准备一个临时收件邮箱，给我地址，并保存后续读取收件箱需要的访问信息。",
+        "inputs": "使用服务提供的域名，新建一个仅供本次测试使用的收件邮箱，不复用既有邮箱。只需本次测试期间使用，不要求长期保留或自定义域名。可以为此建立服务必需的最小免费匿名身份及认证信息，不使用现有服务账号或任何人类邮箱完成验证；需要这些条件时说明阻碍。确认能够读取该邮箱的收件箱列表，说明当前是否有邮件。将密码、令牌或会话信息保存在本地私有文件中，答复只给文件位置，不输出秘密。",
+        "expected_output": "一个真实邮箱地址、当前收件箱状态、私有访问信息文件和后续使用说明。",
+        "success": "指定服务返回实际邮箱地址；真实收件箱读取成功；已保存的访问状态可由评测者在独立请求中复用到同一邮箱；答复与实际状态相符，秘密不出现在答复中。",
+        "failure": "只生成地址字符串或给出教程；无法读取邮箱；未保存可复用访问状态；实际邮箱与答复不同；预算内未完成。平台或执行环境故障单列无效。"
+      }
+    ]
   }
 }

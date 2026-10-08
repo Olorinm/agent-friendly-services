@@ -169,3 +169,8 @@ tasks:
     id: public-holidays-berlin-001
     classification: web-search-data/public-holidays
     phase: business
+
+  - file: data/experiments/tasks/mailboxes-v2.md
+    id: mailboxes-create-001
+    classification: communication/mailboxes
+    phase: setup

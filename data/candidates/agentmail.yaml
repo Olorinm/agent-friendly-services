@@ -14,32 +14,97 @@ catalog:
   sources:
     docs:
       url: https://docs.agentmail.to/quickstart
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://www.agentmail.to/pricing
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
     onboarding:
       url: https://docs.agentmail.to/agent-onboarding
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
+    signup:
+      url: https://docs.agentmail.to/api-reference/agent/sign-up
+      checked_on: '2026-10-08'
+      kind: official_docs
+    messages:
+      url: https://docs.agentmail.to/api-reference/inboxes/messages/list
+      checked_on: '2026-10-08'
+      kind: official_docs
+    permissions:
+      url: https://docs.agentmail.to/permissions
+      checked_on: '2026-10-08'
+      kind: official_docs
+    delete-inbox:
+      url: https://docs.agentmail.to/api-reference/inboxes/delete
+      checked_on: '2026-10-08'
+      kind: official_docs
+    delete-key:
+      url: https://docs.agentmail.to/api-reference/api-keys/delete
+      checked_on: '2026-10-08'
+      kind: official_docs
+    expiry:
+      url: https://docs.agentmail.to/message-expiry
+      checked_on: '2026-10-08'
+      kind: official_docs
+    mcp:
+      url: https://docs.agentmail.to/integrations/mcp
+      checked_on: '2026-10-08'
+      kind: official_docs
+    cli:
+      url: https://docs.agentmail.to/integrations/cli
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.agentmail.to/legal/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Terms updated September 27, 2026 apply to free services and API access; require age 18 or older and prohibit unsolicited messages and bypassing limits.
   routes:
   - id: mail-api
     interface: api
     maintainer: official
-    entry_url: https://docs.agentmail.to/quickstart
-    docs: https://docs.agentmail.to/quickstart
-    evidence:
-    - docs
-    notes: 'Agent signup accepts an owner email and sends an OTP. Verification unlocks full permissions; existing
-      owner accounts cannot use first-time signup. Signup can rotate an existing unverified key, so inspect
-      account state before retrying. Published Free plan: 3 inboxes and 3,000 emails/month, no card required;
-      not observed account entitlement.'
+    entry_url: https://api.agentmail.to/v0/
+    docs: https://docs.agentmail.to/agent-onboarding
+    evidence: [docs, onboarding, signup, messages]
+    availability:
+      value: self_serve
+      evidence: [onboarding, signup]
+    personal_access:
+      value: documented
+      evidence: [onboarding, pricing, terms]
+      notes: First-time programmatic signup can omit a human email. Terms require an adult with authority to agree, not company affiliation.
+    capabilities:
+      mailboxes.provision:
+        value: documented
+        evidence: [signup]
+      mailboxes.read:
+        value: documented
+        evidence: [messages]
+    requirements:
+      payment_method:
+        value: not_required
+        evidence: [onboarding, pricing]
+        notes: Free onboarding; do not select a paid subscription trial.
+      platform_account:
+        value: required
+        evidence: [signup]
+        notes: Signup itself creates a new organization, inbox and key; no pre-existing Console account is needed for the receive-only path.
+    notes: >-
+      POST /v0/agent/sign-up accepts a username and optional human_email. Omitting human_email creates
+      a receive-only inbox and returns an API key without human-email verification; it cannot send to anyone.
+      Store the key privately: it cannot be recovered without an attached human, and another anonymous
+      signup creates a separate organization rather than recovering it. With human_email, an OTP is sent
+      there; repeating signup for that email rotates the key. Existing Console users should use their
+      existing organization instead. Subsequent REST calls use Bearer authentication. The published Free
+      plan lists 3 inboxes, 3,000 emails/month, 100 emails/day and 3 GB; the exact unverified, human-less
+      account entitlement and API request rate are not established by those headline limits. No signup,
+      delivery or sending result is inferred from these documents.
     auth:
       value: api_key
       evidence:
-      - docs
+      - messages
   - id: mail-sdk
     interface: sdk
     maintainer: official
@@ -53,17 +118,21 @@ catalog:
     interface: cli
     maintainer: official
     entry_url: https://docs.agentmail.to/quickstart
-    docs: https://docs.agentmail.to/quickstart
+    docs: https://docs.agentmail.to/integrations/cli
     evidence:
-    - docs
+    - cli
     notes: Separate route; shares the service account and plan limits. No task result inherited from other
       routes.
   - id: mail-mcp
     interface: mcp
     maintainer: official
     entry_url: https://mcp.agentmail.to/mcp
-    docs: https://docs.agentmail.to/agent-onboarding
+    docs: https://docs.agentmail.to/integrations/mcp
     evidence:
+    - mcp
     - onboarding
-    notes: Separate route; shares the service account and plan limits. No task result inherited from other
-      routes.
+    notes: Hosted MCP accepts OAuth or an x-api-key header. Reviewed tool catalog supports inbox/message operations and human attachment/verification; anonymous signup is documented separately through REST, SDK or CLI. Account permissions and limits still apply; no result is inherited from another route.
+  notes:
+  - Unverified organizations cannot create additional API keys, manage list entries or pods, or connect apps. Official cleanup endpoints delete an inbox and revoke an API key; those permissions are not among the documented verification-denied list, but actual signup-key access remains untested. Deleting these resources does not establish deletion of the organization.
+  - Optional 24-hour message expiry is off by default and requires early-access enablement. The reviewed documentation does not establish a fixed expiry for an unclaimed inbox or a long-term retention guarantee.
+  - Reviewed terms contain no explicit ban on publishing a small factual test or comparison. This is not a separate licence to publish message content, credentials or branding; applicable privacy, intellectual-property and anti-abuse rules remain.
