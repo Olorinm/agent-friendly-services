@@ -88,6 +88,14 @@ tasks:
     id: web-search-001
     classification: web-search-data/web-search
     phase: business
+  - file: data/experiments/tasks/web-extraction.md
+    id: web-extraction-access-001
+    classification: web-search-data/web-extraction
+    phase: setup
+  - file: data/experiments/tasks/web-extraction.md
+    id: web-extraction-holidays-001
+    classification: web-search-data/web-extraction
+    phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-002

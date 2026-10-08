@@ -71,7 +71,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed and recorded.
+    evidence: https://www.tavily.com/terms
+    verified: "2026-10-08"
+    notes: Platform terms section 3.2(x) restrict disclosure of service performance information or analysis to third parties. Documented API access does not establish permission to publish a benchmark.
 
 catalog:
   version: 1
@@ -97,8 +99,12 @@ catalog:
       kind: official_docs
     extract-docs:
       url: https://docs.tavily.com/documentation/api-reference/endpoint/extract
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
+    terms:
+      url: https://www.tavily.com/terms
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: keyless-search-api
       interface: api
@@ -224,6 +230,59 @@ catalog:
           scope: Free account allowance, not requests.
           evidence:
             - pricing
+    - id: keyless-extract-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.tavily.com/extract
+      docs: https://docs.tavily.com/documentation/keyless
+      evidence:
+        - keyless
+        - extract-docs
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - keyless
+      personal_access:
+        value: documented
+        evidence:
+          - keyless
+      auth:
+        value: none
+        evidence:
+          - keyless
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - keyless
+        payment_method:
+          value: not_required
+          evidence:
+            - keyless
+      capabilities:
+        web.fetch:
+          value: documented
+          evidence:
+            - extract-docs
+            - keyless
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Free rate-limited keyless Extract; numerical anonymous quota is not published here.
+          evidence:
+            - keyless
+      notes: >-
+        POST urls (one URL or up to 20) with X-Tavily-Access-Mode: keyless. A valid Authorization key takes
+        precedence and uses account limits. Markdown is the default; basic and advanced depths are available.
+        An optional query selects relevant chunks instead of the whole page: chunks_per_source ranges from
+        1 to 5, each at most 500 characters. Inspect both results and failed_results even for HTTP 200.
+        Timeout ranges from 1 to 60 seconds. Account credits do not quantify anonymous limits. Terms section
+        3.2(x) restrict third-party disclosure of performance information or analysis; free technical access
+        is not evidence of benchmark publication permission. No extraction trial is implied.
     - id: extract-api
       interface: api
       maintainer: official
@@ -231,15 +290,45 @@ catalog:
       docs: https://docs.tavily.com/documentation/api-reference/endpoint/extract
       evidence:
         - extract-docs
+        - pricing
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - docs
+      personal_access:
+        value: documented
+        evidence:
+          - docs
       capabilities:
         web.fetch:
           value: documented
           evidence:
             - extract-docs
       notes: >-
-        Extract accepts one or more URLs. Search pricing and search trials do not establish extraction cost or
-        success.
+        Extract accepts up to 20 supplied URLs. Basic costs one credit per five successful URL extractions;
+        advanced costs two. Failed extractions are not charged. The 1000 monthly account credits are shared
+        with other endpoints. Query-based chunks and partial failures follow the same schema described under
+        keyless-extract-api. Keyed usage and anonymous access are distinct; Search trials do not establish
+        extraction success. Terms section 3.2(x) also applies to performance disclosure for this route.
       auth:
         value: api_key
         evidence:
           - extract-docs
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - docs
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
+      costs:
+        - kind: free_allowance
+          amount: 1000
+          unit: credits
+          per: month
+          scope: Shared Free account allowance, not an additional allowance for Extract.
+          evidence:
+            - pricing

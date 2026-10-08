@@ -430,5 +430,37 @@
         "failure": "一次性支付冒充订阅、周期/金额/名称错误、额外试用或开通费、无可用测试页面、超时或越过测试环境；环境故障单列"
       }
     ]
+  },
+  "web-extraction-access-001/v1": {
+    "description": "Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.",
+    "inputs": "Example page: https://example.com/ . The service, assigned interface, authorized account or signup identity and their origin are in ENVIRONMENT.md. Use account-free interfaces directly; use only the identity supplied for this trial if signup or authorization is needed. Retrieve this URL’s body through the assigned service, without substituting search snippets or fetching the origin directly. Save necessary configuration in the assigned persistent directory, keep secrets in private files, and report only its location. State the origin of any existing account, self-service steps, human intervention, extra applications and concrete blockers accurately.",
+    "expected_output": "The page title and a one-sentence summary based on real content returned by the assigned service; reusable configuration location; account origin, setup steps, human or application requirements, or a specific blocker.",
+    "success": "Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.",
+    "failure": "No page body returned by the assigned service, a different service or interface, only examples or search snippets, a title or summary inconsistent with the response, unusable configuration, exposed credentials, or failure to finish within budget. Record missing identity, authorization, human action or quota as concrete access barriers; execution environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个网页内容提取服务，通过指定方式读取附件里的示例网页，给我页面标题和一句内容概述，确认能用；保存后续调用所需配置，并说明接入步骤和遇到的门槛。",
+        "inputs": "示例网页：https://example.com/ 。服务、指定入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。无需账号的入口直接使用；需注册或授权时只使用本轮提供的身份资料。通过指定服务提取此 URL 的正文，不用搜索摘要或绕过服务直读网页代替。将必要配置保存在本轮指定的持久目录，秘密仅存私有文件，答复只给配置位置；如实说明已有账号来源、自助步骤、人工介入、额外申请及具体阻碍。",
+        "expected_output": "从指定服务真实取得的页面标题和一句内容概述；可复用配置位置；账号来源、接入步骤和人工或申请门槛，或具体受阻原因。",
+        "success": "通过指定入口完成必要注册、认证、安装与配置，真实提取指定网页且标题、概述与返回正文相符；必要配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册，实际人工和额外申请如实记录。仅安装、健康检查、工具清单或搜索结果不足以证明正文提取可用。",
+        "failure": "未取得指定服务返回的网页正文、改用其他服务或入口、仅给示例或搜索摘要、标题或概述与响应不符、配置不可复用、泄露凭据或预算内未完成；缺身份资料、授权、人工操作或额度时记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "web-extraction-holidays-001/v1": {
+    "description": "I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.",
+    "inputs": "Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.",
+    "expected_output": "A parseable UTF-8 CSV file containing every holiday in the specified table, with its date, English weekday and name, sorted by ascending date. The answer identifies the file location and official source link. The runner retains the assigned service’s real requests, responses and retrieval time for independent checking.",
+    "success": "The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.",
+    "failure": "The target content was not retrieved through the assigned service, only search snippets or links were obtained, other sources supplied the answer, the file is absent or unparseable, fields or any row are incorrect, rows are missing or duplicated, other years are mixed in, computed dates replace published dates, the source is absent, or the task exceeds its budget. Material changes to the source page, invalid materials and execution environment failures must be checked separately rather than automatically attributed to service capability.",
+    "source_variants": [
+      {
+        "description": "我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。",
+        "inputs": "官方页面：https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ 。只整理其中的“2027 Holiday Schedule”表，不混入其他年份或页面说明。CSV 使用 UTF-8，列名为 date、weekday、holiday；date 为 YYYY-MM-DD，weekday 为英文完整星期名，holiday 保留表中的英文名称，去掉脚注标记。日期按表中公布值记录，不自行换成节日的日历日期。通过本轮指定的网页内容提取服务取得此 URL 的内容，允许自行处理服务返回的 HTML、文本或结构化内容；不用其他网站、日历数据集、模型记忆、搜索摘要或绕过指定服务直读原网页代替。",
+        "expected_output": "一个可解析的 UTF-8 CSV 文件，含指定表全部假日的日期、英文星期与名称，按日期升序；答复提供文件位置和官方来源链接。运行器保留指定服务真实请求、响应及取得时间，供独立核对。",
+        "success": "指定服务真实取得该网页的目标表内容；CSV 三列与输入约定一致，全部假日逐项日期、星期、名称正确，无漏行、重复或其他年份，日期升序，脚注标记不混入字段；文件确实存在且可解析，答复含文件位置及来源链接。允许不改变含义的空白、换行和直弯撇号差异；不要求特定解析库、调用次数或服务原始返回格式。",
+        "failure": "未通过指定服务取得目标内容、仅有搜索摘要或链接、用其他来源补答案、缺文件、CSV 不可解析、字段或任何行的内容不符、漏行、重复、混入其他年份、把表中日期替换成自行计算的日期、无来源或预算内未完成；页面内容发生实质变化、材料失效或运行环境故障须单列核实，不直接归咎服务能力。"
+      }
+    ]
   }
 }

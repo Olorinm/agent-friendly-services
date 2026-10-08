@@ -74,7 +74,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed.
+    evidence: https://exa.ai/terms
+    verified: "2026-10-08"
+    notes: Terms section 1.1 permits API use within documentation. Section 4.2(a) restricts redistribution of obtained information with stated exceptions; no benchmark-specific disclosure prohibition was found in these terms. This is not a blanket publication license.
 
 catalog:
   version: 1
@@ -98,6 +100,14 @@ catalog:
       url: https://exa.ai/docs/get-started/exa-mcp
       checked_on: '2026-10-08'
       kind: official_docs
+    mcp-repo:
+      url: https://github.com/exa-labs/exa-mcp-server
+      checked_on: '2026-10-08'
+      kind: official_repo
+    terms:
+      url: https://exa.ai/terms
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: public-mcp
       interface: mcp
@@ -106,6 +116,8 @@ catalog:
       docs: https://exa.ai/docs/get-started/exa-mcp
       evidence:
         - mcp
+        - mcp-repo
+        - terms
       availability:
         value: self_serve
         evidence:
@@ -127,16 +139,24 @@ catalog:
           value: documented
           evidence:
             - fetch-docs
+            - mcp-repo
           notes: >-
-            The current MCP guide lists web_fetch_exa for known URLs. This is documentation evidence, separate
-            from historical search tests.
+            web_fetch_exa reads clean Markdown from one or more known URLs. Maximum URL count, output-size
+            limits and cache/freshness controls were not quantified in this MCP guide; inspect the tool
+            schema before execution. Documentation and historical search tests do not establish extraction
+            completeness or success.
       notes: >-
         Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published.
         Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain
         filters. Authenticated agent_run has separate charges and is outside this route. API account
-        credits and the account Search QPS limit do not establish anonymous MCP limits.
+        credits and the account Search QPS limit do not establish anonymous MCP limits. Terms section 10.7
+        imposes export and restricted-party conditions; no unrestricted global availability is inferred.
       requirements:
         platform_account:
+          value: not_required
+          evidence:
+            - mcp
+        payment_method:
           value: not_required
           evidence:
             - mcp
