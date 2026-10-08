@@ -75,15 +75,12 @@ catalog:
         payment_method:
           value: not_required
           evidence: [operator-services, demo]
-      costs:
-        - kind: usage
-          amount: 0
-          unit: money
-          currency: USD
-          per: eligible public demo request
-          scope: Sponsored public demo within reasonable non-commercial use; not reserved capacity or a production SLA.
-          evidence: [demo, operator-services]
+      costs: []
       notes: >-
+        Service price is unknown: the reviewed sources document a sponsored, anonymous public demo,
+        but do not explicitly state a zero service fee. No registration, donation support and free/open
+        software or map data do not establish the hosted API's price. A previous zero-cost entry was
+        withdrawn on 2026-10-08 after source review; the original source snapshots are preserved.
         At most one request per second; no scraping or heavy usage. Display data attribution and a
         fix-the-map link as required by the operator. Cache captured responses rather than repeatedly
         requesting the same route; no mandatory cache lifetime was specified in the reviewed summary.

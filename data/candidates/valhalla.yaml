@@ -86,21 +86,18 @@ catalog:
         payment_method:
           value: not_required
           evidence: [operator-services, demo-limits]
-      costs:
-        - kind: usage
-          amount: 0
-          unit: money
-          currency: USD
-          per: eligible public demo request
-          scope: FOSSGIS-funded community demo within fair use; no reserved capacity or production SLA.
-          evidence: [demo, demo-limits, operator-services]
+      costs: []
       notes: >-
+        Service price is unknown: FOSSGIS funding and anonymous public access do not explicitly establish
+        a zero service fee. No registration, donation support and the open-source engine or OSM data
+        licence are not hosted-service pricing rules. A previous zero-cost entry was withdrawn on
+        2026-10-08 after source review; the original source snapshots are preserved.
         The current homepage links a maintainer announcement documenting one call per user per second,
         100 calls per second overall and stricter endpoint limits than upstream defaults; that numeric
         announcement dates to November 2021, not a measured current quota. Keep small non-commercial
         queries below the per-user ceiling and stop on denial or rate limiting. The public API host is
         valhalla1.openstreetmap.de; valhalla.openstreetmap.de is the interactive frontend. No registration,
-        paid resources or account cleanup are required for the documented public route.
+        account resource provisioning or account cleanup are required for the documented public route.
   notes:
     - >-
       Valhalla's homepage applies the usual OSRM/Nominatim demo fair-use policy. The reviewed operator
