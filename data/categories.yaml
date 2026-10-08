@@ -523,7 +523,7 @@ categories:
             description: Produce a downloadable static QR image encoding the supplied payload.
       - id: collaborative-tables
         name: Collaborative Tables
-        description: User-facing online tables for organizing and following up shared work.
+        description: User-facing online tables for organizing shared records, following up work and maintaining calculated summaries.
         capabilities:
           - id: records.organize
             description: Turn supplied notes into a structured online action list.
@@ -531,6 +531,8 @@ categories:
             description: Update progress and retrieve outstanding actions.
           - id: records.reconcile
             description: Merge follow-up notes without duplicating existing actions.
+          - id: records.calculate
+            description: Calculate summaries from online records and keep them updated when those records change.
         name_zh: 协作表格
         inclusion: Provides user-facing shared tables with structured records.
         exclusion: A backend database without collaborative work-table features is insufficient.

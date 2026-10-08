@@ -25,6 +25,10 @@ catalog:
       url: https://support.getgrist.com/mcp/
       checked_on: '2026-10-08'
       kind: official_docs
+    formulas:
+      url: https://support.getgrist.com/formulas/
+      checked_on: '2026-10-08'
+      kind: official_docs
     limits:
       url: https://support.getgrist.com/limits/
       checked_on: '2026-10-08'
@@ -68,6 +72,10 @@ catalog:
           value: documented
           evidence:
             - api
+        records.calculate:
+          value: documented
+          evidence: [api, formulas]
+          notes: REST supports formula columns and record reads and updates; Grist maintains formula results as document data changes.
       notes: >-
         Hosted documents remain editable online; the API can create documents, tables and records rather
         than only store opaque data. The account key inherits the user's access. Personal documents use
@@ -135,6 +143,10 @@ catalog:
           value: documented
           evidence:
             - mcp
+        records.calculate:
+          value: documented
+          evidence: [mcp, formulas]
+          notes: Hosted MCP can change column formulas and read and update records; calculations use the same Grist document engine as REST.
       notes: >-
         Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. Documented tools
         include create_doc, create_table, add_table_column and record updates, so an existing business

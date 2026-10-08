@@ -210,3 +210,7 @@ tasks:
     id: qr-codes-travel-link-001
     classification: productivity-storage/qr-codes
     phase: business
+  - file: data/experiments/tasks/collaborative-tables-shared-expenses.md
+    id: collaborative-tables-shared-expenses-001
+    classification: productivity-storage/collaborative-tables
+    phase: business
