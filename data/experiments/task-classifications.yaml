@@ -196,3 +196,13 @@ tasks:
     id: dependency-advisories-check-001
     classification: developer-tools/dependency-advisories
     phase: business
+
+  - file: data/experiments/tasks/qr-codes.md
+    id: qr-codes-access-001
+    classification: productivity-storage/qr-codes
+    phase: setup
+
+  - file: data/experiments/tasks/qr-codes.md
+    id: qr-codes-travel-link-001
+    classification: productivity-storage/qr-codes
+    phase: business

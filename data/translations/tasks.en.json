@@ -750,5 +750,37 @@
         "failure": "没有真实指定服务查询、起终点或模式错误、路线越出已告知的范围、走错桥或交通方式、增加停靠或绕回、没有可用路径文件、坐标轴或顺序错误、用自画直线或旧轨迹冒充服务返回形状、距离时间与响应不符或单位错误、主要道路方向与路线矛盾、缺少来源或预算内未完成。参考材料实质失效、采集或运行环境故障须核实单列；不同服务估计不同本身不是失败，也不据此判断当前实际驾驶时间。"
       }
     ]
+  },
+  "qr-codes-access-001/v1": {
+    "description": "Connect this QR code service, generate and save a test QR image through the specified entry point, and confirm that I can start using it. Retain the general configuration needed for later calls and explain the setup steps and actual access barriers.",
+    "inputs": "The test content is https://example.com/ . Save an openable PNG QR image that decodes to exactly this URL. Generate it through the service and entry point specified in ENVIRONMENT.md; use an account-free route directly when available. Store necessary installations and general configuration in the designated persistent directory. Report self-service steps, human intervention, extra applications or specific blockers without exposing secrets.",
+    "expected_output": "A saved, openable PNG image that decodes to the test URL, with its file location; the reusable general configuration location and actual setup steps and barriers, or a concrete blocker.",
+    "success": "Necessary installation and configuration are complete. The specified service actually generates a saved, openable PNG whose independently decoded content exactly matches the test URL. A fresh session can reuse the general configuration. Access provenance, human steps and blockers are accurately described without exposing secrets. Access does not require a particular pixel size, color scheme, quiet-zone width or physical phone scan.",
+    "failure": "Only documentation or a health check is inspected; no real service generation; an image link without a saved file; a file that is not an openable PNG or cannot decode to the complete test URL; another service or local encoder substitutes for the specified service; non-reusable configuration, undisclosed barriers, or failure to finish within budget. Record quota and network barriers specifically and separate collection or execution-environment failures.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个二维码服务，通过指定入口生成一张测试二维码并保存图片，确认我能开始使用；留下后续调用需要的通用配置，并说明接入步骤和实际门槛。",
+        "inputs": "测试内容为 https://example.com/ 。保存可打开的 PNG 二维码图片，扫码内容逐字就是这个网址。通过 ENVIRONMENT.md 指定的服务和入口生成；无需账号的入口直接使用。必要安装和通用配置保存在本轮指定持久目录；说明自助完成的步骤、人工介入、额外申请或具体阻碍，秘密不出现在答复中。",
+        "expected_output": "一份真实保存、可打开且扫码得到测试网址的 PNG 图片及其位置；可复用通用配置位置和实际接入步骤、门槛，或具体受阻原因。",
+        "success": "必要安装和配置完成，通过指定服务实际生成并保存可打开的 PNG，独立离线解码内容与测试网址逐字相同；通用配置可供新会话复用，接入来源、人工步骤和阻碍如实说明，未泄露秘密。接入阶段不要求特定像素尺寸、配色、静区宽度或手机实扫。",
+        "failure": "只看文档或做健康检查、没有真实服务生成、只有图片链接而无保存文件、文件不是可打开的 PNG、不能解码出完整测试网址、改用其他服务或本地编码代替、通用配置不可复用、隐瞒接入门槛或预算内未完成；额度或网络阻碍具体记录，采集及执行环境故障单列。"
+      }
+    ]
+  },
+  "qr-codes-travel-link-001/v1": {
+    "description": "Turn the national park travel-guide link in the materials into a static PNG QR code for my printed travel handout. Use the requested size and colors, make scanning return the complete original link directly, and give me the image file.",
+    "inputs": "Original URL: https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 . The image must be 600×600 pixels with black modules on an opaque white background; grayscale antialiasing at module edges is allowed. Include only this one QR code, without text or a logo. Decoding must yield the complete original URL character for character, without a short link, tracking redirect, or added, removed or rewritten query parameters. Generate the image through the specified service, save it locally and give its file location. Do not visit the destination, physically print the image or scan it with a phone.",
+    "expected_output": "A retained, openable 600×600 PNG file and its location, containing a black QR code on an opaque white background with the complete original URL.",
+    "success": "The specified service actually generates the delivered, openable PNG. Its dimensions are exactly 600×600, the white background is opaque, the modules are black with only grayscale edge pixels, and there is no extra text or logo. Independent offline decoding returns raw bytes exactly equal to the visible complete ASCII URL, without omissions, rewriting or a tracking wrapper; the answer identifies the real file. Different QR versions, error correction levels, masks, PNG color modes and compression are allowed. Pixel or file-hash equality across services, measured quiet-zone modules, DPI and physical printing performance are not completion criteria.",
+    "failure": "No actual use of the specified service; substitution by a local encoder or another service; only an image link without a file; an unreadable PNG, wrong dimensions, transparency or a colored background, non-black-on-white styling, added text or logo, failure to decode to the full original URL, a short link or rewritten parameters, a nonexistent output file, or failure to finish within budget. Distinguish image-delivery failures from collection, decoder or execution-environment faults. Different valid encoding patterns are not failures.",
+    "source_variants": [
+      {
+        "description": "帮我把材料里的国家公园旅行指南链接做成一张静态二维码 PNG，放进我打印的旅行资料。按材料里的尺寸和配色制作，扫码直接得到完整原链接，并把图片文件交给我。",
+        "inputs": "原始链接：https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 。图片为 600×600 像素，黑色码块、不透明白色背景，允许码块边缘有灰度抗锯齿；图里只放这一个二维码，不加文字或 logo。扫码内容必须逐字等于上面的完整原始链接，不使用短链接、跳转跟踪链接，也不要增删或改写查询参数。通过本轮指定服务生成这张图片并保存到本地，答复给出文件位置；不用访问链接目标，也不用做实物打印或手机扫描。",
+        "expected_output": "一份可打开、可留存的 600×600 PNG 文件及其位置；黑色二维码在不透明白底上，内容是完整原始链接。",
+        "success": "实际通过指定服务生成二维码并交付可打开的 PNG 文件，尺寸恰为 600×600，白底不透明、码块黑色且只有灰度边缘，没有额外文字或 logo；独立离线解码所得原始字节与可见的完整 ASCII URL 逐字相同，无缺失、改写或跟踪跳转包装，答复指出真实文件位置。允许不同 QR 版本、纠错等级、掩码、PNG 色彩模式与压缩方式；不要求两服务图片像素或文件哈希相同，不用静区模块数、DPI 或实物打印表现判定完成。",
+        "failure": "未真实使用指定服务、用本地编码或另一服务替代、只交图片链接而无文件、PNG 无法打开、尺寸不符、透明底或有色背景、并非白底黑码、添加文字或 logo、不能离线解码出完整原链接、换成短链或改写参数、答复文件不存在或预算内未完成。先区分图像交付失败与采集、解码工具或执行环境故障；不同合法编码图案本身不算失败。"
+      }
+    ]
   }
 }
