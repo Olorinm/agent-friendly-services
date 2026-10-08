@@ -238,6 +238,22 @@ categories:
         exclusion: >-
           Query-only result lists/snippets are web search; browser control is a runtime, not extraction
           itself.
+      - id: weather-data
+        name: Weather Data
+        name_zh: 天气数据
+        description: >-
+          Retrieve weather forecasts or observations for an identified location and time, for personal
+          planning and weather-aware applications.
+        inclusion: >-
+          Supplies weather variables with identifiable locations, valid times and units, distinguishing
+          forecasts from observations and historical reconstructions.
+        exclusion: >-
+          Place-name geocoding, general web search and a weather model without a callable data service are
+          separate. Forecast access does not establish historical observation access or forecast accuracy;
+          those require their own evidence and task conditions.
+        capabilities:
+          - id: weather.forecast
+            description: Retrieve a weather forecast for a specified location and future period.
       - id: financial-data
         name: Financial Data
         name_zh: 金融数据

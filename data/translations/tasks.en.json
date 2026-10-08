@@ -510,5 +510,37 @@
         "failure": "未调用指定搜索服务、用其他搜索替代、引用来源无法追溯到该服务发现的来源、缺少任一问题的答案或官方依据、版本混淆、未提供所用官方链接或预算内未完成；运行环境或采集故障导致证据不足时单列无效，不因缺少额外审计文件判服务失败。"
       }
     ]
+  },
+  "weather-access-001/v1": {
+    "description": "Connect this weather service, make one real weather query through the assigned route, and save the local configuration needed for later queries. Explain the setup steps completed and any actual blockers.",
+    "inputs": "The service, assigned route, authorized account or registration details and their origin are in ENVIRONMENT.md. Choose a public location for a small query and report its location, weather value with units and forecast or observation time. Use account-free routes directly; use only supplied identity information when registration or authorization is needed. Store necessary configuration in the assigned persistent directory and secrets only in private files. Report the configuration path, existing-account origin, self-service steps, human intervention and any extra application requirements.",
+    "expected_output": "One real weather result from the assigned service, including location, value, unit and forecast or observation time; a reusable configuration path; completed setup steps, account origin and human or application requirements, or concrete blockers.",
+    "success": "Complete the required registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable location, valid time and at least one weather value; the answer matches it and states units. Configuration is reusable by a new session without leaking secrets. Do not force registration for account-free routes or claim an existing account was registered during this run.",
+    "failure": "No real weather query, another service or route substituted, only a health check, installation, example or configuration, an answer inconsistent with the response, unusable configuration, leaked secrets or an exceeded budget. Record identity, authorization, human or quota blockers; environment failures are separately invalid.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个天气服务，通过指定方式做一次真实天气查询，确认能用，并保存后续查询需要的本地配置；说明完成的接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个公开地点做小型查询，报告地点、天气数值与单位及其预报或观测时间。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实天气查询结果，含地点、数值、单位及预报或观测时间；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置，真实响应含可识别地点、有效时间及至少一个天气数值，答复与响应一致且注明单位；配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实天气查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "weather-outing-001/v1": {
+    "description": "I will be walking in central London on the morning of October 10. In Chinese, make a small table of forecast temperature and precipitation for the three hours from 09:00 to 12:00 local time. State the units, data source and query time with its time zone, and briefly identify which periods have precipitation forecast.",
+    "inputs": "Date: 2026-10-10. Location: central London, using the supplied WGS84 coordinates, latitude 51.5074 and longitude -0.1278; no address lookup or geocoding is needed. Local time zone: Europe/London. Include three full hourly intervals: 09:00–10:00, 10:00–11:00 and 11:00–12:00. For each row, use near-surface air temperature at the start of the interval in degrees Celsius, and total precipitation accumulated during that hour in millimetres, including rain and snow as water equivalent. Use only the forecast available from the assigned service at query time. Report missing data honestly; do not replace it with zero or evenly divide a longer-period total into hourly values.",
+    "expected_output": "A concise Chinese table covering the three local hourly intervals, with temperature at each interval start (°C) and total precipitation during that hour (mm). Identify the location, local date and time zone, data source, and actual query time with its time zone. The precipitation summary agrees with the forecast used.",
+    "success": "Obtain a real forecast from the assigned service for the supplied coordinate vicinity and all requested periods. Valid times, time zone, temperature instants, precipitation intervals and unit conversions are correct, and values match the actual response, allowing correct rounding at displayed precision. No requested interval is omitted or repeated, and missing values are not disguised as zero. Source and query time are verifiable, and the precipitation summary is supported by the data. Verify each service against its own response; agreement between forecasting models or later observed weather is not the completion criterion.",
+    "failure": "No real forecast from the assigned service; another service or an example substituted; wrong place, date, time zone, interval or units; confused instantaneous temperatures and precipitation periods; arbitrarily divided longer totals or invented missing values; omitted requested information; conclusions contradict the response; or an exceeded budget. Record missing hourly coverage and incomplete work honestly. Environment or capture failures are separately invalid; normal forecast updates and model differences are not automatically service failures.",
+    "source_variants": [
+      {
+        "description": "我 10 月 10 日上午要去伦敦市中心散步，请用中文把当地时间 09:00–12:00 三个小时的预报气温和降水量整理成小表，标明单位、数据来源和查询时间（注明时区），并简要指出哪些时段预计有降水。",
+        "inputs": "日期为 2026-10-10；地点为伦敦市中心，直接使用给定的 WGS84 坐标：纬度 51.5074、经度 -0.1278，不需另找地址或地理编码。当地时区 Europe/London。表格分别列出 09:00–10:00、10:00–11:00、11:00–12:00 三个完整小时区间；每行气温取该区间开始整点的近地面气温，使用摄氏度；降水使用该整小时累计总降水量，单位毫米，雨雪按水当量合计。只用本轮指定服务在查询时提供的预报；缺失数据如实说明，不把缺失当零，也不把较长时段的总量平均分配成小时数值。",
+        "expected_output": "中文小表覆盖三个指定的当地小时区间，包含各区间开始时的气温（°C）及该小时累计总降水量（mm）；标明地点、当地日期和时区、数据来源以及含时区的实际查询时间；降水时段说明与所用预报相符。",
+        "success": "实际通过指定服务取得该坐标附近、覆盖全部指定时段的预报；表格的有效时间、时区、温度时点、降水累计区间和单位转换正确，数值与本次真实预报响应一致，允许按展示精度正确舍入；三个区间无遗漏或重复，缺失不伪装成零；来源和查询时间可核对，降水说明由所用数据支持。各服务按其本次真实预报独立核验，不以不同预报模型数值相同或未来实况是否命中作为本题通过标准。",
+        "failure": "未取得指定服务的真实预报，换用其他服务或示例，地点、日期、时区、小时区间或单位错误，混淆温度瞬时值和降水累计时段，擅自均摊较长时段或填造缺失数据，遗漏用户要求的信息，结论与响应矛盾或预算内未完成。服务缺少需要的小时覆盖时如实记录未完成部分；执行环境或采集故障单列无效，正常预报更新和模型间差异不直接算服务失败。"
+      }
+    ]
   }
 }

@@ -124,3 +124,13 @@ tasks:
     id: web-search-001
     classification: web-search-data/web-search
     phase: business
+
+  - file: data/experiments/tasks/weather-data.md
+    id: weather-access-001
+    classification: web-search-data/weather-data
+    phase: setup
+
+  - file: data/experiments/tasks/weather-data.md
+    id: weather-outing-001
+    classification: web-search-data/weather-data
+    phase: business

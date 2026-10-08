@@ -1,0 +1,96 @@
+id: met-norway
+name: MET Norway Locationforecast
+category: web-search-data
+homepage: https://api.met.no/
+summary: Public global point forecasts from MET Norway, with no API key and mandatory client identification.
+submitted_by: community
+tags:
+  - weather
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/weather-data
+  sources:
+    docs:
+      url: https://api.met.no/weatherapi/locationforecast/2.0/documentation
+      checked_on: '2026-10-08'
+      kind: official_docs
+    getting-started:
+      url: https://docs.api.met.no/doc/GettingStarted.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    datamodel:
+      url: https://docs.api.met.no/doc/locationforecast/datamodel.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    forecast-format:
+      url: https://docs.api.met.no/doc/ForecastJSON.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    faq:
+      url: https://docs.api.met.no/doc/FAQ
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://docs.api.met.no/doc/TermsOfService
+      checked_on: '2026-10-08'
+      kind: official_docs
+    licence:
+      url: https://docs.api.met.no/doc/License
+      checked_on: '2026-10-08'
+      kind: official_docs
+  routes:
+    - id: locationforecast-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.met.no/weatherapi/locationforecast/2.0/compact
+      docs: https://docs.api.met.no/doc/GettingStarted.html
+      evidence: [docs, getting-started]
+      availability:
+        value: self_serve
+        evidence: [getting-started, faq]
+      personal_access:
+        value: documented
+        evidence: [faq, terms]
+        notes: Public service available to all; comply with client identification and fair traffic rules.
+      auth:
+        value: none
+        evidence: [docs, getting-started]
+        notes: No API key; an identifying User-Agent with application identity and contact information is required.
+      capabilities:
+        weather.forecast:
+          value: documented
+          evidence: [docs, datamodel, forecast-format]
+          notes: >-
+            HTTP GET requires decimal lat/lon and optionally ground altitude in metres. Global point
+            forecasts include instantaneous 2m air_temperature in Celsius and next_1_hours
+            precipitation_amount in millimetres. Timestamps are UTC; period values start at the timestamp.
+            One-hour periods are short-range only, typically the first 50-60 records; later periods are
+            six hours. Missing period fields must not be treated as zero or interpolated observations.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [getting-started, faq]
+        payment_method:
+          value: not_required
+          evidence: [faq]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public API request
+          scope: >-
+            Free public service under fair-use conditions. More than 20 requests/second in total per
+            application requires a separate agreement; this is not a per-client entitlement or daily quota.
+          evidence: [faq, terms]
+      notes: >-
+        Use a real descriptive User-Agent with a contactable website or email; generic or missing
+        identification can return 403. Truncate coordinates to at most four decimal places, cache until
+        Expires, and use If-Modified-Since from the prior Last-Modified value when refreshing. HTTPS,
+        redirects and gzip support are required. Public data use is under NLOD 2.0 and CC BY 4.0 unless
+        otherwise specified; credit MET Norway, link the licence and disclose changes. Reviewed public
+        terms contain no explicit benchmark-publication prohibition. Do not imply MET/Yr endorsement.
+        Nordic and Arctic coverage has regional models; global coverage uses ECMWF. This endpoint
+        supplies current model forecasts, not historical observations or proof of forecast accuracy.
+        No SLA is offered. Documentation-only review; no tested connection is claimed.
