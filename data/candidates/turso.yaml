@@ -48,6 +48,22 @@ catalog:
       url: https://docs.turso.tech/sdk/ts/quickstart
       checked_on: '2026-10-08'
       kind: official_docs
+    ts-reference:
+      url: https://docs.turso.tech/sdk/ts/reference
+      checked_on: '2026-10-08'
+      kind: official_docs
+    http-reference:
+      url: https://docs.turso.tech/sdk/http/reference
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sqlite-conflict:
+      url: https://www.sqlite.org/lang_conflict.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://turso.tech/terms-of-use
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: cloud-cli
       docs: https://docs.turso.tech/quickstart
@@ -154,6 +170,9 @@ catalog:
         SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer
         token. The endpoint is specific to each database, so the setup guide is retained as the entry
         clue. It supports both cloud engines. Provisioning and account authorization are separate.
+        A list of pipeline requests is not itself an atomic transaction. The HTTP guide documents
+        connection reuse for explicit transactions and states a 5-second transaction window and
+        10-second idle-connection timeout.
     - id: cloud-sdk
       interface: sdk
       maintainer: official
@@ -184,3 +203,16 @@ catalog:
         For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or
         @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local
         SDK modes and cached replicas do not by themselves prove a fresh remote read.
+        For libSQL, the official reference documents atomic client.batch transactions: all statements
+        commit on success and any failure rolls back the batch. Interactive transactions require
+        appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT
+        conflict handling only reverses the failing statement, not prior statements in the transaction.
+  notes:
+    - >-
+      Reviewed terms contain no specific public-benchmark disclosure ban. They limit use to the
+      customer's "own internal business, personal, non-commercial use", exclude use on behalf of or
+      for the benefit of third parties, protect content and credentials, and prohibit disruptive use.
+      This is not permission to redistribute
+      another user's data or offer an unrestricted third-party database service. Small functional
+      tests with the customer's own synthetic records do not establish concurrency, latency or
+      production durability guarantees.

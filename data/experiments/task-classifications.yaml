@@ -214,3 +214,8 @@ tasks:
     id: collaborative-tables-shared-expenses-001
     classification: productivity-storage/collaborative-tables
     phase: business
+
+  - file: data/experiments/tasks/database-atomic-import.md
+    id: database-atomic-import-001
+    classification: databases/hosted-relational
+    phase: business
