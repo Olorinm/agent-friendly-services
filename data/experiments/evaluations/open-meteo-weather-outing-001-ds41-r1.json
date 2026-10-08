@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "run_id": "open-meteo-weather-outing-001-ds41-r1",
+  "service_id": "open-meteo",
+  "route_id": "forecast-api",
+  "entry_url": "https://api.open-meteo.com/v1/forecast",
+  "task": {
+    "description": "我 10 月 10 日上午要去伦敦市中心散步，请用中文把当地时间 09:00–12:00 三个小时的预报气温和降水量整理成小表，标明单位、数据来源和查询时间（注明时区），并简要指出哪些时段预计有降水。",
+    "inputs": "日期为 2026-10-10；地点为伦敦市中心，直接使用给定的 WGS84 坐标：纬度 51.5074、经度 -0.1278，不需另找地址或地理编码。当地时区 Europe/London。表格分别列出 09:00–10:00、10:00–11:00、11:00–12:00 三个完整小时区间；每行气温取该区间开始整点的近地面气温，使用摄氏度；降水使用该整小时累计总降水量，单位毫米，雨雪按水当量合计。只用本轮指定服务在查询时提供的预报；缺失数据如实说明，不把缺失当零，也不把较长时段的总量平均分配成小时数值。",
+    "expected_output": "中文小表覆盖三个指定的当地小时区间，包含各区间开始时的气温（°C）及该小时累计总降水量（mm）；标明地点、当地日期和时区、数据来源以及含时区的实际查询时间；降水时段说明与所用预报相符。",
+    "success": "实际通过指定服务取得该坐标附近、覆盖全部指定时段的预报；表格的有效时间、时区、温度时点、降水累计区间和单位转换正确，数值与本次真实预报响应一致，允许按展示精度正确舍入；三个区间无遗漏或重复，缺失不伪装成零；来源和查询时间可核对，降水说明由所用数据支持。各服务按其本次真实预报独立核验，不以不同预报模型数值相同或未来实况是否命中作为本题通过标准。",
+    "failure": "未取得指定服务的真实预报，换用其他服务或示例，地点、日期、时区、小时区间或单位错误，混淆温度瞬时值和降水累计时段，擅自均摊较长时段或填造缺失数据，遗漏用户要求的信息，结论与响应矛盾或预算内未完成。服务缺少需要的小时覆盖时如实记录未完成部分；执行环境或采集故障单列无效，正常预报更新和模型间差异不直接算服务失败。",
+    "resources": "仅用本轮指定天气服务及其公开文档，使用已确认免费的只读资源；可在隔离环境安装依赖和生成本题本地文件。不调用其他天气服务补数、不使用模型记忆替代预报、不付费、不注册无关服务、不发消息。遵守服务的客户端标识、署名、缓存和限流要求。实际入口、账号来源、请求和时间上限由 ENVIRONMENT.md 冻结；原始运行证据由外部采集，执行者无需额外编写审计日志。",
+    "id": "weather-outing-001",
+    "version": "v1",
+    "sha256": "6314d033a1595ea97494ed236a9963bd31ab6b099165dfd7a4e030f29c69f0bf",
+    "file": "data/experiments/tasks/weather-data.md"
+  },
+  "prompt_sha256": "a761b39733542aa52f4b9a541fd038d9117c89ee2570f008afb2bf335d19517f",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T14:54:22.604013+00:00",
+  "ended_at": "2026-10-08T14:54:36.390246+00:00",
+  "elapsed_seconds": 13.786233,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; official public read-only free noncommercial route",
+    "web_search": "live",
+    "preparation_note": "Fresh access then business sessions. Same frozen weather task,model/effort/generic tools and budgets for both routes. Execution25modelrequests,access300s/business600s;independent grading40modelrequests/300s after prior search grader exhausted25, no service execution budget increase.32000outputtokens/request. Two providers can run concurrently on shared16CPU/31.34GiB host;eachruntime2GiB/1CPU. ProjectUser-Agent/contact preprovided, no account/key or answer supplied.10weatherdatareads/phase maximum subject to officialcache/rate limits. Controller method/source snapshots and two private before-business publicGETreceipts are separate overhead and grader-only. Each actual query-time forecast is its own evidence; no cross-provider numerical truth, commonupstream possible, no forecastskill/reliabilityranking. Generic setup retention inspected, no business data carried over.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本次执行通过指定服务 Open-Meteo Forecast API 入口 https://api.open-meteo.com/v1/forecast 真实取得 2026-10-10 伦敦市中心坐标 51.5074,-0.1278 的小时预报（HTTP 200，查询时间 2026-10-08 14:54 UTC / 当地 15:54 Europe/London UTC+1）。交付的中文小表对 09:00–10:00、10:00–11:00、11:00–12:00 三个当地整点小时区间，按区间起始整点取近地面气温 11.3/12.0/13.3 °C，按该小时累计总降水取 0.0/0.0/0.0 mm，与当次响应逐值一致，时区、单位、温度时点与降水区间均正确，来源、署名与含时区查询时间齐备，降水说明与数据相符，无缺失/填造。",
+  "usage": {
+    "input_tokens": 34038,
+    "cached_input_tokens": 26496,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1464,
+    "reasoning_output_tokens": 648
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "execution/artifacts/ENVIRONMENT.md",
+      "execution/artifacts/headers.txt",
+      "reference-sources/open-meteo-forecast-docs-20261008.html"
+    ],
+    "note": "Open-Meteo 非商业免费公共 Forecast API：官方文档标注 Usage licence 分 Non-Commercial/Commercial，apikey 仅商业用途需要；ENVIRONMENT.md 冻结本轮为非商业研究、使用已确认免费的只读公共资源且未提供账号/Key。本次以无 key 公共请求访问 /v1/forecast 得到 HTTP 200，未付款、未绑定支付方式。",
+    "applicability": {
+      "rule": "Open-Meteo 非商业用途可免费使用公共 Forecast API，无需账号或 API Key（apikey 仅商业用途需要）。",
+      "observed": "本次为个人非商业研究；未提供/未使用账号或 API Key；对 /v1/forecast 的无 key GET 返回 HTTP 200。",
+      "evidence": "execution/artifacts/ENVIRONMENT.md；execution/artifacts/headers.txt；官方文档快照 reference-sources/open-meteo-forecast-docs-20261008.html（Usage licence: Non-Commercial；apikey 仅商业用途）。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grading-agent",
+    "reviewed_at": "2026-10-08T14:58:02.933586+00:00",
+    "checks": [
+      {
+        "criterion": "实际通过本轮指定服务 open-meteo 的 Forecast API 入口取得真实预报，未换用其他服务或模型记忆",
+        "passed": true,
+        "evidence": "execution/artifacts/response.json 为 api.open-meteo.com/v1/forecast 的真实 JSON 响应；execution/artifacts/headers.txt 显示 HTTP/1.1 200 OK、Date: Thu, 08 Oct 2026 14:54:33 GMT；执行记录中无其他天气服务调用。"
+      },
+      {
+        "criterion": "请求地点为给定 WGS84 坐标 51.5074,-0.1278，允许返回邻近网格点",
+        "passed": true,
+        "evidence": "response.json 返回网格点 51.5115,-0.1308、elevation 16.0；answer.md 说明所用坐标与返回网格点。"
+      },
+      {
+        "criterion": "日期 2026-10-10 与当地时区 Europe/London（当日 UTC+1）处理正确",
+        "passed": true,
+        "evidence": "response.json utc_offset_seconds=3600、timezone=Europe/London、timezone_abbreviation=GMT+1；answer.md 明确当地时区与查询时区换算。"
+      },
+      {
+        "criterion": "三个指定当地小时区间无遗漏或重复",
+        "passed": true,
+        "evidence": "answer.md 表格仅列 09:00–10:00、10:00–11:00、11:00–12:00 三行，覆盖完整。"
+      },
+      {
+        "criterion": "气温取各区间起始整点近地面 2 m 气温，且数值与响应一致",
+        "passed": true,
+        "evidence": "response.json temperature_2m 在 09:00=11.3、10:00=12.0、11:00=13.3，与 answer.md 表格逐值一致。"
+      },
+      {
+        "criterion": "降水使用整小时累计总降水量、单位 mm，数值与响应一致且未均摊长时段或填造缺失",
+        "passed": true,
+        "evidence": "response.json precipitation 全日均为 0.00，对应三区间取 0.0 mm；answer.md 三个时段均记 0.0 并说明无缺失。"
+      },
+      {
+        "criterion": "标明数据来源与署名，并给出含时区的实际查询时间",
+        "passed": true,
+        "evidence": "answer.md 标注来源 Open-Meteo Forecast API、署名 Weather data by Open-Meteo.com (CC BY 4.0)，查询时间 2026-10-08 14:54 UTC / 当地 15:54（Europe/London, UTC+1），与 headers.txt 的 Date 一致。"
+      },
+      {
+        "criterion": "降水时段说明与所用预报数据相符",
+        "passed": true,
+        "evidence": "三小时累计降水均 0.0 mm，answer.md 据此说明 09:00–12:00 无降水。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "weather-outing-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "1bd75bf37819eea99e39888e1edab2c6fa9c557d13203a107bdb1e4c85b562af",
+      "run_ids": [
+        "open-meteo-weather-outing-001-ds41-r1",
+        "met-norway-weather-outing-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "open-meteo-weather-outing-001-ds41-r1",
+        "met-norway-weather-outing-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.0238992,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.0238992,
+          "usage_sha256": "d3957b48a30531fdc3234c9344fb80e60c7d4b4530916f2ec4e50d83a0ba098e"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/open-meteo-weather-outing-001-ds41-r1/execution/answer.md",
+      "sha256": "ce646e39e6230aa8ff7c5d4380f383474f2014cc1c28f1b3f0c95595e83472b7",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/open-meteo-weather-outing-001-ds41-r1/public-review/verification.md",
+      "sha256": "04d9b3d5b391ff24aab74f5fc7c5d40a7f8d5be96cc1d139ad3589100cae2084",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/weather-deepseek-overnight-20261008/open-meteo-weather-outing-001-ds41-r1",
+    "run_sha256": "9dcbf3a3f96459ddc46f1c175270778a71217094ba61417cef0dd931939e2b33",
+    "events_sha256": "32274d0c8172de918484feeea3e80818a4ea239aec908258fda05ff85594c046",
+    "answer_sha256": "ce646e39e6230aa8ff7c5d4380f383474f2014cc1c28f1b3f0c95595e83472b7",
+    "review_sha256": "5fa0b37b13b401da83ec9ad32de0f2197d6ea5b538cfaf29ca388c17a063f1f8",
+    "original_independent_review_sha256": "51fa5fbfdf23b1727b0e0cae2952233813a7049fbc646375e3b492a48bbe0ff2",
+    "selected_independent_review_sha256": "51fa5fbfdf23b1727b0e0cae2952233813a7049fbc646375e3b492a48bbe0ff2",
+    "publication_review_note": "Minimal executor answer and independent task-field extraction, with attribution/license and field/time transformation notice. Full forecast responses remain private. Both services judged against actual query-time responses, not forecast agreement or future accuracy. Original verdict, checks, service fee and measured usage preserved."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7205,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 120,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8070,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 262,
+        "reasoning_output_tokens": 129
+      },
+      {
+        "input_tokens": 8867,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 381,
+        "reasoning_output_tokens": 168
+      },
+      {
+        "input_tokens": 9896,
+        "cached_input_tokens": 9216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 701,
+        "reasoning_output_tokens": 342
+      }
+    ],
+    "source_sha256": "8bec24b040866163eae72e11a84afdff966a8ad08c3ee2fe61938fd697fb1833",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 34038,
+      "cached_input_tokens": 26496,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1464,
+      "reasoning_output_tokens": 648
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}
