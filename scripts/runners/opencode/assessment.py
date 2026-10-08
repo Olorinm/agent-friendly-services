@@ -7,12 +7,20 @@ def normalize(value):
     changes=[]
     if isinstance(cost,dict) and isinstance(cost.get('sources'),list):
         sources=cost['sources']
-        valid=lambda item: (isinstance(item,str) and bool(item.strip())) or (isinstance(item,dict)
-            and set(item)<= {'url','note'} and isinstance(item.get('url'),str) and bool(item['url'].strip())
-            and isinstance(item.get('note',''),str))
+        def valid(item):
+            if isinstance(item,str):return bool(item.strip())
+            if not isinstance(item,dict):return False
+            key='url' if 'url' in item else 'ref'
+            allowed={'url','note'} if key=='url' else {'ref','type','note'}
+            return (set(item)<=allowed and isinstance(item.get(key),str) and bool(item[key].strip())
+                    and isinstance(item.get('note',''),str) and isinstance(item.get('type',''),str))
+        def source_text(item):
+            if isinstance(item,str):return item
+            prefix='['+item['type']+'] ' if item.get('type') else ''
+            return prefix+item.get('url',item.get('ref'))+(' — '+item['note'] if item.get('note') else '')
         if sources and all(valid(item) for item in sources) and any(isinstance(item,dict) for item in sources):
-            cost['sources']=[item if isinstance(item,str) else item['url']+(' — '+item['note'] if item.get('note') else '') for item in sources]
-            changes.append('Joined existing service_cost.sources URL/note objects into source strings; all supplied values retained')
+            cost['sources']=[source_text(item) for item in sources]
+            changes.append('Joined existing service_cost.sources URL or typed reference objects into source strings; all supplied values retained')
     fields=('rule','observed','evidence')
     if (isinstance(cost,dict) and cost.get('kind')=='confirmed_free'
             and isinstance(cost.get('applicability'),str) and cost['applicability'].strip()

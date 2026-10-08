@@ -72,6 +72,23 @@ class ProviderTests(unittest.TestCase):
 
 
 class AssessmentTests(unittest.TestCase):
+    def test_typed_source_references_preserve_all_values_and_reject_ambiguity(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        source={'type':'api_response','ref':'evidence/plan.txt','note':'actual free-plan fields'}
+        original={'status':'completed','service_cost_usd':None,'service_cost':{'kind':'unknown','sources':[source]}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['service_cost']['sources'],['[api_response] evidence/plan.txt — actual free-plan fields'])
+        self.assertIsNone(normalized['service_cost_usd'])
+        self.assertEqual(normalized['service_cost']['kind'],'unknown')
+        self.assertEqual(original['service_cost']['sources'],[source])
+        self.assertEqual(len(changes),1)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+        for invalid in ({**source,'url':'https://conflicting.example'}, {**source,'extra':'unrecognized fact'},
+                        {**source,'ref':''}, {**source,'type':None}):
+            original['service_cost']['sources']=[invalid]
+            self.assertEqual(assessment.normalize(original),(original,[]))
+
     def test_source_objects_preserve_url_and_note_without_promoting_unknown(self):
         spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
         assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)

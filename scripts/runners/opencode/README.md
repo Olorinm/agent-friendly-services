@@ -216,6 +216,9 @@ this layout repair lacks a `note`, it copies the existing rule text into it.
 Conflicting or incomplete facts remain rejected; this is not another grading pass.
 An existing nonempty list of evidence references may be joined with newlines for
 the scalar `applicability.evidence` field, retaining every reference and its order.
+Source objects containing only `url`/`note`, or `ref`/`type`/`note`, may likewise
+be joined into source strings with all supplied values retained. Ambiguous or
+unrecognized fields are left for validation rather than silently discarded.
 
 Artifact collection never follows symbolic or hard links. It copies regular files
 and lists omitted links in private `artifact-omissions.json`; other unsafe archive

@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "run_id": "grist-rest-tables-001v4-ds41-r1",
+  "service_id": "grist",
+  "route_id": "rest-api",
+  "entry_url": "https://docs.getgrist.com/api",
+  "task": {
+    "description": "把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。",
+    "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+    "expected_output": "真实在线任务表链接；两项未完成事项及负责人、截止日期",
+    "success": "远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。总控在执行结束后，以自己的可信只读 API 请求重新取得本轮新表的元数据、字段和全部记录，冻结原始回执、读取时间、资源对应关系及哈希；独立验收 Agent 核对脱敏回执、用户答复和冻结参考，不继承执行凭据、不执行被测者的代码。字段命名与操作顺序自由。",
+    "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列。若总控未能取得约定的独立只读回执，记验收材料缺口，不凭执行者自报判完成，也不直接判服务失败。",
+    "resources": "提供免费账户和空测试容器，资源标识见凭据文件；不预建业务字段、记录或调用代码。仅可新建一份任务表及必要父文档，最多10行、40次业务API请求",
+    "id": "collaborative-tables-001",
+    "version": "v4",
+    "sha256": "a90838489d0997814551861ff5d29c22aecebacc5202500c0760917075396197",
+    "file": "data/experiments/tasks/collaborative-tables-v4.md"
+  },
+  "prompt_sha256": "8aebd63b333424f36af5f209c79f624d22776a135ac3fd4b12169b6b926c965c",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T13:48:16.280786+00:00",
+  "ended_at": "2026-10-08T13:49:39.481688+00:00",
+  "elapsed_seconds": 83.200902,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "provided: existing Grist Personal account; new empty parent workspace prepared by controller",
+    "web_search": "live",
+    "preparation_note": "Same existing Personal account and API key, two distinct newly created empty parent workspaces, fresh route-specific containers. Account registration and controller parent provisioning precede measured access; executor must create and read its own empty document. Serial REST then MCP execution avoids shared-account quota interference. No prewritten calls or business data. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 requests per role, 32000 output-token cap per request, access300s/business600s/grading300s. One sample per route, no cross-service or general protocol ranking. No peer snapshot: same-provider routes use separate independent grading. Controller GET-only remote verification is separate overhead; backend API counts behind MCP are unknown.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本轮唯一执行入口为 Grist REST API，任务在总控预建并授权的工作区/文档内完成。总控在执行结束后（13:49:48 > 13:49:39）以只读 GET 独立重读，冻结回执完整（controller-verification/manifest.json，complete=true），Tasks 表恰有 3 条记录，字段、内容、日期、完成状态与期望一致；答复链接指向承载该表的文档（urlId [SERVICE_SECRET]），未完成清单为确认场地/林青/2026-09-15 与 制作海报/陈禾/2026-09-20，与远端一致。资源约束满足：1 个业务表、3 行、约 13 次业务调用（<40）、工作区仅 1 个文档，无分享/邀请/通知/付费。账号/密钥/空工作区由总控预建并授权（非本轮自主注册，已提供账号），执行阶段无人工介入。服务费用按 Grist Free(personalFree) 免费档确认免费（见 evidence/free-plan-usage.md）。",
+  "usage": {
+    "input_tokens": 439512,
+    "cached_input_tokens": 413056,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8661,
+    "reasoning_output_tokens": 5316
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://support.getgrist.com/limits/",
+      "grading/artifacts/evidence/free-plan-usage.md",
+      "public-review/verification.json — actual controller GET metadata product.name=personalFree; remaining monthly usage unknown"
+    ],
+    "note": "无付款回执。账号套餐为 personalFree（免费档），免费档包含 REST API 且仅受每月 3,000 次共享调用额度限制，无按次费用；本轮执行约 13 次业务调用 + 总控 7 次只读读取，远低于额度。故确认免费，金额为 $0，无实付/估算支出。 Publication review supplements the same fee conclusion with actual non-identifying plan fields from unchanged controller GET bytes; it is not inferred solely from the Personal name or a free-only instruction.",
+    "applicability": {
+      "rule": "Grist Free（personal/team）套餐包含 REST API 访问，免费档每月上限 3,000 次调用（站点内所有文档共享），官方文档未列按次费率；提升额度仅在 Pro/Business 付费档。",
+      "observed": "本次文档所属账号 product.name=personalFree、individual=true、inGoodStanding=true；本轮仅使用免费 REST 接口，执行阶段约 13 次业务调用加总控 7 次只读 GET，均远低于 3,000 次/月；未购买或开启付费功能，未公开分享或邀请。",
+      "evidence": "套餐字段与用量摘要见 grading/artifacts/evidence/free-plan-usage.md；免费规则见 https://support.getgrist.com/limits/（API limits 段）。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader",
+    "reviewed_at": "2026-10-08T13:55:30.752595+00:00",
+    "checks": [
+      {
+        "criterion": "远端存在真实在线任务表，且恰好三条任务记录（无漏项、无重复）",
+        "passed": true,
+        "evidence": "controller-verification/07-records-6.json 显示 Tasks 表 3 条记录 id 1-3；controller-verification/03-tables-1.json 中仅 Tasks 为业务表，Table1 为服务自带空占位（05-records-4.json 记录为空）。"
+      },
+      {
+        "criterion": "三条记录的任务/负责人/截止日期/完成状态与期望完全一致",
+        "passed": true,
+        "evidence": "controller-verification/07-records-6.json：确认场地/林青/1789430400/未完成、整理书单/周舟/1789516800/已完成、制作海报/陈禾/1789862400/未完成；epoch 换算为 2026-09-15、2026-09-16、2026-09-20（UTC，日期无时区偏移）。"
+      },
+      {
+        "criterion": "表中包含负责人、截止日期、完成状态字段",
+        "passed": true,
+        "evidence": "controller-verification/06-columns-5.json：owner(label 负责人,Text)、due(label 截止日期,Date)、status(label 完成状态,Choice)、task(label 任务,Text)。"
+      },
+      {
+        "criterion": "答复中的链接指向承载该任务表的真实文档",
+        "passed": true,
+        "evidence": "execution/answer.md 链接 https://docs.getgrist.com/doc/[SERVICE_SECRET]/p/2；controller-verification/01-workspace.json 与 02-doc-1.json 中该文档 urlId=[SERVICE_SECRET]、docId=[SERVICE_SECRET]，access=owners（私有链接，符合授权）。"
+      },
+      {
+        "criterion": "答复列出的未完成事项、负责人、截止日期与远端一致",
+        "passed": true,
+        "evidence": "execution/answer.md 列出 2 项未完成：确认场地/林青/2026-09-15、制作海报/陈禾/2026-09-20，与 controller-verification/07-records-6.json 中 status=未完成 的两行一致；已完成项 整理书单/周舟/2026-09-16 未混入清单。"
+      },
+      {
+        "criterion": "遵守资源与授权约束（单表、≤10 行、≤40 次业务 API、单文档、未公开分享/邀请/通知/付费）",
+        "passed": true,
+        "evidence": "controller-verification/03-tables-1.json 仅 1 个新业务表 Tasks、07-records-6.json 3 行；执行阶段共约 13 次 Grist REST 调用；controller-verification/01-workspace.json 工作区仅 1 个文档，文档 access=owners，无分享/邀请/通知/付费记录。"
+      },
+      {
+        "criterion": "总控在执行后提供的独立只读回执完整，且与执行结果一致",
+        "passed": true,
+        "evidence": "controller-verification/manifest.json：read_after_execution=true，started_at 13:49:48.06 > execution_ended_at 13:49:39.48，采集 7 条 GET（元数据/字段/全部记录）、complete=true、含各回执 sha256 与资源绑定。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.041995512,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen standard API estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.041995512,
+          "usage_sha256": "1dd51f4a7141f0b725a0d2662d359b95acea15d8df19a3c252415d545bc4bc13"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/grist-rest-tables-001v4-ds41-r1/execution/answer.md",
+      "sha256": "1fb03b92ac8441836ce5ebcaf2f7da30dd5aba151705d3309e0960cff444f803",
+      "note": "Actual final answer, with private account/resource identifiers removed.",
+      "source_sha256": "fa81047e50f2a1fccb63cd170da00e21508d677bc528d05f23dbecd81eaacf19",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/grist-rest-tables-001v4-ds41-r1/public-review/verification.json",
+      "sha256": "5c4e9c8739165d9671fc47d611d600fecebef626bf89349910565762642c5d1a",
+      "note": "Independent controller read-back: complete table schema/rows, timing, hashes and actual non-identifying entitlement fields.",
+      "source_sha256": "f43718c61a35a76e0fede77ec01f86029d2742991b1f762598ac71e3272b3d9a",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/grist-routes-deepseek-overnight-20261008/grist-rest-tables-001v4-ds41-r1",
+    "run_sha256": "30f470facdc8de5c825b945854504746857cd751747dd4d355ed66076dfcacde",
+    "events_sha256": "45bee5ada63a3979afa1f05727472c516a7b8fd7d81e90de24c7b46bfd046cee",
+    "answer_sha256": "fa81047e50f2a1fccb63cd170da00e21508d677bc528d05f23dbecd81eaacf19",
+    "review_sha256": "9b938232344eb0df2519b712d496305dbbcd966045691e1db35d353ff47b9615",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "e0b31f8389ef21259ed0d39deed83c90ac37755f3f27433d54d0745d685a0698",
+    "publication_review_note": "Selected minimal answer and independent read-back; removed private identity/resource IDs. Added actual controller-captured personalFree fields as fee-source corroboration. Preserved status, checks, original fee kind/amount, intervention counts and measured usage."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7179,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 123,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 7990,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 123,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8450,
+        "cached_input_tokens": 8064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 122,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 9175,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1335,
+        "reasoning_output_tokens": 1078
+      },
+      {
+        "input_tokens": 11633,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1674,
+        "reasoning_output_tokens": 1494
+      },
+      {
+        "input_tokens": 25526,
+        "cached_input_tokens": 13184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 147,
+        "reasoning_output_tokens": 36
+      },
+      {
+        "input_tokens": 25765,
+        "cached_input_tokens": 25600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 27480,
+        "cached_input_tokens": 25856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 995,
+        "reasoning_output_tokens": 682
+      },
+      {
+        "input_tokens": 28502,
+        "cached_input_tokens": 28288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 511,
+        "reasoning_output_tokens": 219
+      },
+      {
+        "input_tokens": 29046,
+        "cached_input_tokens": 28800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 322,
+        "reasoning_output_tokens": 110
+      },
+      {
+        "input_tokens": 29878,
+        "cached_input_tokens": 29312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 355,
+        "reasoning_output_tokens": 178
+      },
+      {
+        "input_tokens": 30248,
+        "cached_input_tokens": 30080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 877,
+        "reasoning_output_tokens": 772
+      },
+      {
+        "input_tokens": 31184,
+        "cached_input_tokens": 30976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 32471,
+        "cached_input_tokens": 31232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 337,
+        "reasoning_output_tokens": 94
+      },
+      {
+        "input_tokens": 32847,
+        "cached_input_tokens": 32640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 320,
+        "reasoning_output_tokens": 75
+      },
+      {
+        "input_tokens": 33317,
+        "cached_input_tokens": 33152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 375,
+        "reasoning_output_tokens": 139
+      },
+      {
+        "input_tokens": 34264,
+        "cached_input_tokens": 33664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 278,
+        "reasoning_output_tokens": 88
+      },
+      {
+        "input_tokens": 34557,
+        "cached_input_tokens": 34304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 531,
+        "reasoning_output_tokens": 328
+      }
+    ],
+    "source_sha256": "6ecbcf4a34800579a78882d91e8d870e6a44c9f6367b6ae694fdfd5678714370",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 439512,
+      "cached_input_tokens": 413056,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8661,
+      "reasoning_output_tokens": 5316
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}
