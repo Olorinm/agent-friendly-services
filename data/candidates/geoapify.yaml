@@ -1,0 +1,96 @@
+id: geoapify
+name: Geoapify
+category: web-search-data
+homepage: https://www.geoapify.com/
+summary: Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.
+submitted_by: community
+tags: [geocoding]
+catalog:
+  version: 1
+  classifications: [web-search-data/geocoding]
+  sources:
+    api:
+      url: https://apidocs.geoapify.com/docs/geocoding/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://www.geoapify.com/pricing/
+      checked_on: '2026-10-08'
+      kind: official_site
+    signup:
+      url: https://www.geoapify.com/get-started-with-maps-api/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.geoapify.com/terms-and-conditions/
+      checked_on: '2026-10-08'
+      kind: official_site
+    storage:
+      url: https://www.geoapify.com/geocoding-api/
+      checked_on: '2026-10-08'
+      kind: official_site
+    coordinates:
+      url: https://www.geoapify.com/python-geospatial-data-analysis/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    osm-license:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: geocoding-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://api.geoapify.com/v1/geocode/search
+      docs: https://apidocs.geoapify.com/docs/geocoding/
+      evidence: [api]
+      availability:
+        value: self_serve
+        evidence: [api, signup]
+      personal_access:
+        value: documented
+        evidence: [pricing, signup, terms]
+      auth:
+        value: api_key
+        evidence: [api]
+      capabilities:
+        places.geocode:
+          value: documented
+          evidence: [api, coordinates]
+          notes: >-
+            GET with text or structured address fields, including a place name, returns coordinates,
+            address components and match information in WGS84. JSON, GeoJSON and XML are supported. A matching
+            place is not a guarantee of an exact entrance coordinate.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [signup]
+        payment_method:
+          value: not_required
+          evidence: [pricing, signup]
+      human_steps:
+        - stage: signup
+          step: Register an email/password account, complete the normal verification flow and create a Free project in MyProjects; an API key is generated for the project.
+          evidence: [signup]
+      costs:
+        - kind: free_allowance
+          amount: 3000
+          unit: credits
+          per: day
+          scope: Free plan; a standard forward-geocoding request costs one credit. Other APIs can share credits and use different credit costs.
+          evidence: [pricing, api]
+      notes: >-
+        Free plan supports up to 5 requests/second. Registration documentation names Google reCAPTCHA;
+        phone requirements and acceptance of a particular email domain were not observed. An official
+        API key is required for integration; the public playground is not an anonymous production route.
+        Terms version 5 dated 2024-02-02 prohibits overload, access-control bypass and distributing usage
+        across accounts/projects to evade limits. No explicit public-benchmark prohibition was found in
+        the reviewed terms. Free use requires Geoapify attribution and OSM attribution; preserve any
+        additional returned data-source attribution. Results may be stored with attribution, according
+        to the geocoding FAQ. Shared OSM inputs do not constitute independent geographic ground truth.
+        Controller preparation observation on 2026-10-09 (Asia/Shanghai), separate from official-source
+        claims and any formal trial: the email form was not submitted. A normal reCAPTCHA checkbox action
+        led to an image challenge while Create account remained disabled. The challenge was not completed;
+        no account or API key was confirmed. This establishes a registration-preparation barrier, not email
+        domain rejection or failure of the geocoding capability. No business API was queried.
