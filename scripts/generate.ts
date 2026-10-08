@@ -596,7 +596,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
-Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions.
+Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.
 
 ${serviceList(false)}
 
@@ -632,7 +632,7 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 
 Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
 
-每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。
+每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。
 
 ${serviceList(true)}
 

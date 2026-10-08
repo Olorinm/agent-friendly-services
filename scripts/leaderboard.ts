@@ -25,6 +25,10 @@ const configKey = (r: Evaluation, services: Map<string, string>) => stable({ mod
   isolation: r.environment.isolation, prompt_style: r.environment.prompt_style ?? 'legacy',
   input_delivery: r.environment.input_delivery ?? 'inline',
   credentials: credentialPreparation(r),
+  // Preparation notes record material conditions absent from the older schema,
+  // such as package mirrors and per-role request limits. Require exact equality:
+  // different or missing notes do not establish an equivalent environment.
+  preparation_note: r.environment.preparation_note,
   web_search: r.environment.web_search,
   // Compare the available peer services, not per-task group IDs or round IDs.
   // An unrecorded member stays distinct until its service identity is available.
@@ -166,7 +170,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const setup = `**${label('测试配置：', 'Test configuration:')}** ${configs.length === 1 ? `${cell(configs[0])} · ` : ''}${date}${label('（UTC）', ' (UTC)')}${preparations.length === 1 ? ` · ${preparations[0]}` : ''}`;
   const notes: string[] = [];
   if (runs.some(r => !r.environment.host || !r.harness.launcher_sha256)) notes.push(label(
-    '部分早期记录缺少环境信息，尚待统一复跑。', 'Some early records lack environment details and await a controlled rerun.'));
+    '部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。', 'Some records do not publish host details or a launcher hash; see the full records for their environment and limitations.'));
   const files = [...new Set(tasks.map(t => t.file))];
   const links = files.map((file, i) => `[${label('任务定义', 'Task definitions')}${files.length > 1 ? ` ${i + 1}` : ''}](${prefix}${zh ? file : 'generated/tasks.en.md#' + boards.find(b => b.task_file === file)!.tasks[0].id + '-' + boards.find(b => b.task_file === file)!.tasks[0].version})`).join(' · ')
     + ` · [${label('完整运行记录与证据', 'Full runs and evidence')}](${prefix}generated/evaluations.md)`;

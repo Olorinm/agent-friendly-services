@@ -166,9 +166,11 @@ catalog:
             web_fetch_exa reads clean Markdown from known URLs. The reviewed official implementation
             accepts URLs and maxCharacters (default 3000 per URL), invokes /contents with text, and has
             a 60-second outer timeout. It has no PDF-extension filter, but the MCP guide does not separately
-            guarantee PDF parsing. Actual hosted schema/deployment and PDF behavior remain to be checked.
-            No page-count or cache/freshness control is exposed by this implementation. Documentation
-            and historical search tests do not establish extraction completeness or success.
+            guarantee PDF parsing or OCR for scanned pages. This is a documentation review of a fixed
+            implementation revision, not a guarantee about every hosted deployment or document.
+            No page-count or cache/freshness control is exposed by this implementation. Independent
+            trials in evaluations record the tested route and document outcomes; a successful native-text
+            PDF does not establish OCR support, completeness or correct tables for other PDFs.
       notes: >-
         Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published.
         Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain

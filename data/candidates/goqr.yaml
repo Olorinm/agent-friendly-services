@@ -70,15 +70,13 @@ catalog:
         payment_method:
           value: not_required
           evidence: [api, create, homepage]
-      costs:
-        - kind: usage
-          amount: 0
-          unit: money
-          currency: USD
-          per: public static QR image generation
-          scope: Official site explicitly offers free QR generation and free commercial/print usage; API documentation and privacy explanation identify this endpoint as that generator.
-          evidence: [homepage, create, api-privacy]
+      costs: []
       notes: >-
+        The public website advertises free QR generation and free commercial/print use of generated
+        images. The API documentation and privacy page link this endpoint to that generator, but no
+        explicit API-specific fee rule was established and the linked API terms had no substantive
+        text in the reviewed response. API service cost therefore remains unknown; website claims,
+        no-account access and a successful image response are not sufficient to confirm a zero charge.
         API documentation states no fixed request limit but reserves rejection of abusive or inappropriate
         requests, including apparent DoS traffic. It asks services regularly exceeding 10000 requests/day
         to make contact; this is not a guaranteed quota or a condition on a few personal requests.
@@ -100,4 +98,4 @@ catalog:
       a claim to have reviewed missing terms. Links/donations are requested as support, not stated as a
       condition for ordinary generation. The discovery review preceding trials used documentation only;
       independent access and task outcomes, including unresolved fee-rule applicability, are recorded in
-      evaluations separately from these published pricing facts.
+      evaluations separately from these official website claims and API documentation limits.

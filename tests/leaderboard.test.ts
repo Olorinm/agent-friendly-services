@@ -79,6 +79,37 @@ test('historical task versions are retained in records but not pooled into curre
   assert.equal(records.length, 2);
 });
 
+test('preparation changes select the latest conditions without averaging older outcomes', () => {
+  const older = run({ run_id: 'original', started_at: '2026-09-01T00:00:00Z', status: 'not_completed',
+    usage: null, service_cost_usd: null,
+    environment: { ...run().environment, preparation_note: 'Default package index; 25 grading requests.' } });
+  const current = run({ run_id: 'mirror',
+    environment: { ...run().environment, preparation_note: 'Mirror package index; 40 grading requests.' } });
+  const records = [older, current];
+  const frozen = JSON.stringify(records);
+  const row = selectServiceBoards(buildBoards(records))[0].rows[0];
+  assert.deepEqual(row.runs.map(r => r.run_id), ['mirror']);
+  assert.equal(row.metrics.resolution_rate, 1);
+  assert.equal(JSON.stringify(records), frozen);
+  // A later failure under the same conditions must remain in the mean.
+  const repeat = { ...current, run_id: 'repeat', started_at: '2026-09-09T00:00:00Z', status: 'not_completed' as const };
+  const repeated = buildBoards([...records, repeat])[0].rows[0];
+  assert.deepEqual(repeated.runs.map(r => r.run_id), ['repeat', 'mirror']);
+  assert.equal(repeated.metrics.resolution_rate, .5);
+  // Preparation equivalence cannot be inferred from missing notes or another service.
+  assert.equal(buildBoards([older, { ...current, service_id: 'b' }]).length, 2);
+  assert.equal(buildBoards([run(), { ...current, service_id: 'b' }]).length, 2);
+  assert.equal(buildBoards([current, { ...current, run_id: 'b', service_id: 'b' }]).length, 1);
+});
+
+test('missing public host details do not imply an old run or a required rerun', () => {
+  for (const zh of [true, false]) {
+    const details = renderBoardDetails(buildBoards([run()]), new Map(), zh);
+    assert.doesNotMatch(details, /早期|复跑|early records|controlled rerun/);
+    assert.match(details, zh ? /未公开主机信息/ : /do not publish host details/);
+  }
+});
+
 test('peer review separates earlier solo trials and different cohorts, while pooling matching rounds', () => {
   const reviewed = (id: string, service: string, ids: string[], group: string) => run({
     run_id: id, service_id: service,

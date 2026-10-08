@@ -176,6 +176,9 @@ catalog:
       notes: >-
         Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works
         with standard Postgres clients; identity assertions, tokens and connection URLs are private.
+        The 100 MB storage and 1 GB transfer allowances apply to the whole unclaimed project, not each
+        logical database. Multiple databases within that project share these limits and the same
+        project.expires_at; they are not separately provisioned free projects.
         The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts
         15 minutes and is a different clock. Short-term persistence does not establish a permanent free
         account. Claiming rotates credentials and must not occur between write and independent read.
