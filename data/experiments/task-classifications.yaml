@@ -24,6 +24,14 @@ tasks:
     id: collaborative-tables-002
     classification: productivity-storage/collaborative-tables
     phase: business
+  - file: data/experiments/tasks/collaborative-tables-access.md
+    id: collaborative-tables-access-001
+    classification: productivity-storage/collaborative-tables
+    phase: setup
+  - file: data/experiments/tasks/collaborative-tables-v4.md
+    id: collaborative-tables-001
+    classification: productivity-storage/collaborative-tables
+    phase: business
   - file: data/experiments/tasks/databases.md
     id: database-todos-001
     classification: databases/hosted-relational

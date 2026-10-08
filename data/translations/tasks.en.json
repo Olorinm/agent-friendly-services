@@ -462,5 +462,37 @@
         "failure": "未通过指定服务取得目标内容、仅有搜索摘要或链接、用其他来源补答案、缺文件、CSV 不可解析、字段或任何行的内容不符、漏行、重复、混入其他年份、把表中日期替换成自行计算的日期、无来源或预算内未完成；页面内容发生实质变化、材料失效或运行环境故障须单列核实，不直接归咎服务能力。"
       }
     ]
+  },
+  "collaborative-tables-access-001/v1": {
+    "description": "Connect this online table service through the assigned interface, create a new empty test space for this trial, read it to confirm access, and save the configuration needed to create a task table later. Give me the space link and explain the setup steps, human requirements and free-plan limits.",
+    "inputs": "The service, assigned interface, authorized account or signup identity and its origin are in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed, and state the origin of any existing account. Create one separate empty container that can hold a future task table, such as a workspace, base or parent document, with the trial marker supplied by the environment in its name. Read its metadata again through the assigned interface to confirm access to that same remote resource. Do not organize meeting content or prebuild business fields or records during this phase. Save necessary installations, container identifiers and connection settings in the assigned persistent directory. Secrets stay in private files; report only the configuration location. Explain actual self-service steps, human intervention, extra applications and known free limits, or specific blockers if incomplete.",
+    "expected_output": "A valid link and identifier for the new empty trial container; a real metadata read through the assigned interface; reusable configuration location; account origin, setup steps, human or application requirements, and supported free limits or explicitly unknown details.",
+    "success": "Complete necessary access setup, create a separate empty trial container through the assigned service and interface, then read that same remote container’s metadata to confirm it is accessible. The link and identifier agree, required configuration is reusable in a fresh session without exposing secrets, and no business fields, records or answers are preloaded. Describe the account origin, self-service steps, human barriers and free limits accurately. Registration, installation, tool lists, a creation receipt or a local simulation alone do not prove usable access.",
+    "failure": "No new separate empty trial container, no genuine remote read-back, a link to the wrong resource, unusable configuration, a different service or interface, preloaded business data, exposed credentials, or failure to finish within budget. Record account, permission, quota, human and application restrictions as concrete access barriers; execution environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我通过指定方式接通这个在线表格服务，新建一个本轮专用的空测试空间，读取它确认可用，并保存后续创建任务表所需的配置；给我空间链接，说明接入步骤、人工门槛和免费限制。",
+        "inputs": "服务、指定入口、允许使用的账户或注册身份及来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；已有账号如实说明来源。新建一个可容纳后续任务表的独立空测试容器，例如工作区、base 或父文档，名称带本轮环境提供的标识。通过指定方式重新读取该容器的元数据，确认访问的是同一远端资源；本阶段不整理会议内容、不预建业务字段或记录。保存必要安装、容器标识和连接配置到本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。说明真实自助步骤、人工介入、额外申请和已知免费限制；无法完成时说明具体阻碍。",
+        "expected_output": "本轮新建空测试容器的有效链接与标识；指定接口真实读取其元数据的结果；可复用配置位置；账号来源、接入步骤、人工或申请门槛，以及有依据的免费限制或未知项。",
+        "success": "完成必要接入，通过指定服务及入口新建本轮独立空容器，并重新读取同一远端容器的元数据确认可访问；链接和标识一致，必要配置可供新会话复用且不泄露秘密。未预建业务字段、记录或答案；实际账号来源、自助步骤、人工门槛和免费限制如实说明。只有注册、安装、工具列表、创建回执或本地模拟不足以证明接通。",
+        "failure": "无本轮新建独立空容器、无真实远端读回、链接指错资源、配置不可复用、改用其他服务或入口、预填业务数据、泄露凭据或预算内未完成；账号、权限、额度、人工或申请限制记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "collaborative-tables-001/v4": {
+    "description": "Turn the attached book-club meeting todos into an online task table with owners, deadlines and completion status. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "Book-club planning meeting notes, 2026-09-08: Lin Qing will confirm the venue by September 15; Zhou Zhou will compile the reading list by September 16; Chen He will design the poster, originally due September 18. None was completed at the meeting. Follow-up: Zhou Zhou says the reading list is now complete, and the poster deadline moves to September 20. Other arrangements remain unchanged.",
+    "expected_output": "A real online task-table link, and the two incomplete tasks with their owners and deadlines.",
+    "success": "The remote table contains exactly three items: confirm venue / 林青 / 2026-09-15 / incomplete; prepare book list / 周舟 / 2026-09-16 / complete; make poster / 陈禾 / 2026-09-20 / incomplete. The answer links to that table and its incomplete list agrees with the remote state. After execution ends, the controller independently retrieves metadata, fields and all records from this new trial table through its own trusted read-only API requests, and freezes the raw receipts, read times, resource mapping and hashes. An independent grading Agent checks redacted receipts, the user answer and frozen reference without inheriting execution credentials or running the tested Agent’s code. Field names and operation order are unrestricted.",
+    "failure": "No real online table, missing or duplicate items, incorrect data or answer, a wrong link, timeout, or violation of resource, free-only or no-notification limits. Credential and environment failures are classified separately. If the controller cannot obtain the agreed independent read-only receipts, record a verification-material gap; neither declare completion from the executor’s own report nor automatically declare the service failed.",
+    "source_variants": [
+      {
+        "description": "把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "真实在线任务表链接；两项未完成事项及负责人、截止日期",
+        "success": "远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。总控在执行结束后，以自己的可信只读 API 请求重新取得本轮新表的元数据、字段和全部记录，冻结原始回执、读取时间、资源对应关系及哈希；独立验收 Agent 核对脱敏回执、用户答复和冻结参考，不继承执行凭据、不执行被测者的代码。字段命名与操作顺序自由。",
+        "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列。若总控未能取得约定的独立只读回执，记验收材料缺口，不凭执行者自报判完成，也不直接判服务失败。"
+      }
+    ]
   }
 }

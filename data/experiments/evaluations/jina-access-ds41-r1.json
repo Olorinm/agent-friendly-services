@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "run_id": "jina-access-ds41-r1",
+  "service_id": "jina",
+  "route_id": "reader-api",
+  "entry_url": "https://r.jina.ai/",
+  "task": {
+    "description": "帮我接通这个网页内容提取服务，通过指定方式读取附件里的示例网页，给我页面标题和一句内容概述，确认能用；保存后续调用所需配置，并说明接入步骤和遇到的门槛。",
+    "inputs": "示例网页：https://example.com/ 。服务、指定入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。无需账号的入口直接使用；需注册或授权时只使用本轮提供的身份资料。通过指定服务提取此 URL 的正文，不用搜索摘要或绕过服务直读网页代替。将必要配置保存在本轮指定的持久目录，秘密仅存私有文件，答复只给配置位置；如实说明已有账号来源、自助步骤、人工介入、额外申请及具体阻碍。",
+    "expected_output": "从指定服务真实取得的页面标题和一句内容概述；可复用配置位置；账号来源、接入步骤和人工或申请门槛，或具体受阻原因。",
+    "success": "通过指定入口完成必要注册、认证、安装与配置，真实提取指定网页且标题、概述与返回正文相符；必要配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册，实际人工和额外申请如实记录。仅安装、健康检查、工具清单或搜索结果不足以证明正文提取可用。",
+    "failure": "未取得指定服务返回的网页正文、改用其他服务或入口、仅给示例或搜索摘要、标题或概述与响应不符、配置不可复用、泄露凭据或预算内未完成；缺身份资料、授权、人工操作或额度时记具体接入阻碍，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务和已确认免费额度；可查官方接入文档，在隔离环境安装通用依赖、保存私有配置。仅对示例 URL 做确认接通所需的小型提取，不抓取其他业务页面、不访问个人内容、不注册无关服务、不邀请或通知他人、不购买或开启付费超额。请求和时间上限见 ENVIRONMENT.md；不读取其他账号、历史会话或任务材料。",
+    "id": "web-extraction-access-001",
+    "version": "v1",
+    "sha256": "9bda52da522a0fcc44d9253583277d31f4d0ce073dc8e229e958d632073a869c",
+    "file": "data/experiments/tasks/web-extraction.md"
+  },
+  "prompt_sha256": "b042cad4cf15e92af31cd8611a2e0123116e0bf79bcb5b8eba384e13688504a6",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T13:02:53.059652+00:00",
+  "ended_at": "2026-10-08T13:04:22.239513+00:00",
+  "elapsed_seconds": 89.179861,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Fresh runtime, no account, prewritten calling scripts or previous results. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 model requests per role, 32000 output tokens/request, execution and grading 300s. New budget conditions retained separately from older runs.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "invalid_run",
+  "reason": "本轮运行器被总控外部中断，非服务或执行者能力问题。controller-event.json 记载：另一成员出现重复本地公开记录名后批次错误处理停止了全部成员；本运行在 elapsed 89.18s、退出码 -15（SIGTERM）、未超时的情况下结束。实际进度仅为：读取 input.md/ENVIRONMENT.md、列目录与工具、访问官方文档 https://jina.ai/reader/ 超时；随后模型拟执行 curl https://r.jina.ai/https://example.com/，但命令尚未执行运行器即被终止，故未产生任何 r.jina.ai 请求响应、未生成配置、answer.md 为空。用户任务未能在本轮被真正执行，依运行环境失效记为 invalid_run。",
+  "usage": null,
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [],
+    "note": "本轮未发起任何 Jina Reader 服务调用，无回执或用量依据；无法确认免费规则是否适用，保留 unknown，不推断为 0 或免费。",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-08T13:21:44.145725+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定入口 https://r.jina.ai/ 真实取得 https://example.com/ 的正文",
+        "passed": false,
+        "evidence": "events.jsonl / tool-records.json 仅有 read、bash、webfetch 三类调用；webfetch 目标是文档 https://jina.ai/reader/ 且 Request timed out；未见任何 r.jina.ai 请求或返回正文。"
+      },
+      {
+        "criterion": "给出与返回正文相符的页面标题与一句内容概述",
+        "passed": false,
+        "evidence": "execution/answer.md 为 0 字节，无标题、概述或任何答复内容。"
+      },
+      {
+        "criterion": "在持久目录保存可复用的接入配置且不泄露秘密",
+        "passed": false,
+        "evidence": "execution/retained-files.json 为空；bash 输出显示 /home/node/service-tools 为空目录，未生成 service-config.json。"
+      },
+      {
+        "criterion": "如实说明账号来源、自助/人工/额外申请门槛及具体阻碍",
+        "passed": false,
+        "evidence": "answer.md 为空，未说明任何账号来源、接入步骤、人工介入或门槛。"
+      },
+      {
+        "criterion": "未改用其他服务或入口，未绕过服务直读目标网页",
+        "passed": true,
+        "evidence": "已采集调用中无直读 example.com 或调用其他服务的记录。"
+      },
+      {
+        "criterion": "在授权环境与时限内完成本次执行",
+        "passed": false,
+        "evidence": "controller-event.json：总控在第 89.18s 因批次错误处理终止本运行（exit -15），独立于本服务行为，执行未完成。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.021770256,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.021770256,
+          "usage_sha256": "16247d804eff57914041b67b27f14de8b92a6f12329783cfee82a8b3a485d1e7"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/jina-access-ds41-r1/public-review/verification.md",
+      "sha256": "46e9d28dfb31e56f740b62c09c81600b5575ab8ec336a250a77f1684e8ac226f",
+      "note": "Minimal independently checked service evidence with original evidence hash and labelled controller limits."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/web-extraction-deepseek-overnight-20261008/jina-access-ds41-r1",
+    "run_sha256": "710823774d953e881a8700862cedd7c00f470c2e4c4ee0e2b4eb68a01252d218",
+    "events_sha256": "a60b7309777be1d1ca776f5793607485206175b315a01039edfe55f612722f56",
+    "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "review_sha256": "b1dd0e3a4fe5841469da360b8ce0ad715557e4d9ec5a67eb99c77efb61b364ad",
+    "original_independent_review_sha256": "acfb504824bbc9878f69c5433c1f5b8032f142aea6b571e4bff2dd95595f362f",
+    "publication_review_note": "Selected final deliverable and minimal independent evidence; raw responses, scripts, sessions and tool logs remain private. Independent verdict and checks preserved. Disclosed controller-caused interruption and unreconciled model usage; invalid_run remains excluded from valid trial means."
+  },
+  "request_usage": {
+    "status": "incomplete",
+    "method": "runner adapter",
+    "requests": [],
+    "source_sha256": "65af8979c8d81995f3f613f71326edf7c0745a38e476406f28b141ccd9fa8ce6",
+    "reason": "Adapter usage is incomplete"
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

@@ -77,7 +77,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed and recorded.
+    evidence: https://www.airtable.com/company/developer-terms
+    verified: "2026-10-08"
+    notes: No benchmark-specific disclosure prohibition found in reviewed service/developer terms. Developer terms forbid misleading performance statements and third-party integrations requesting users' PATs; own-account PAT scripts are separately documented.
 
 catalog:
   version: 1
@@ -86,7 +88,7 @@ catalog:
   sources:
     api:
       url: https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     auth:
       url: https://airtable.com/developers/web/guides/personal-access-tokens
@@ -94,20 +96,42 @@ catalog:
       kind: official_docs
     pricing:
       url: https://support.airtable.com/articles/2277136852-airtable-plans-overview
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     limits:
       url: https://support.airtable.com/articles/7735693959-managing-api-call-limits-in-airtable
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
+    auth-help:
+      url: https://support.airtable.com/articles/9934989703-creating-personal-access-tokens
+      checked_on: '2026-10-08'
+      kind: official_docs
+    signup:
+      url: https://support.airtable.com/articles/2675548758-creating-canceling-and-deleting-your-airtable-account
+      checked_on: '2026-10-08'
+      kind: official_docs
+    email-verification:
+      url: https://support.airtable.com/articles/8468540431-Airtable-account-email-verification
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.airtable.com/company/tos
+      checked_on: '2026-10-08'
+      kind: official_site
+    developer-terms:
+      url: https://www.airtable.com/company/developer-terms
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: web-api
       docs: https://airtable.com/developers/web/api/introduction
       interface: api
       maintainer: official
-      entry_url: https://airtable.com/developers/web/api/introduction
+      entry_url: https://api.airtable.com/v0
       evidence:
         - api
+        - auth-help
+        - pricing
       availability:
         value: self_serve
         evidence:
@@ -130,13 +154,36 @@ catalog:
           evidence:
             - api
       notes: >-
-        PAT scopes plus selected workspace/base access required. Base creation is documented on all
-        plans; do not infer paid-only access from outdated posts.
+        An own-account PAT needs operation scopes and selected workspace/base access. Current docs explicitly
+        allow POST /v0/meta/bases on Free with PAT or OAuth; legacy API-key restrictions do not apply to PATs.
+        Tables remain editable in Airtable's hosted UI. Free allows 1000 calls/workspace/month, including
+        schema calls, at 5 requests/second/base and 50/second across a user's PATs. New accounts' first
+        workspace starts a 14-day Team trial: observe the actual plan and avoid paid-only features rather
+        than labelling all no-payment use as Free. Adding payment details during that trial starts billing.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - signup
+        email_verification:
+          value: required
+          evidence:
+            - email-verification
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
       human_steps:
+        - stage: signup
+          step: Sign up on desktop with email or a supported identity provider, verify email and check the workspace plan.
+          evidence:
+            - signup
+            - email-verification
+            - pricing
         - stage: credentials
           step: Create a personal access token with required scopes and selected test resources.
           evidence:
-            - auth
+            - auth-help
       costs:
         - kind: free_allowance
           amount: 1000
@@ -152,4 +199,6 @@ catalog:
           scope: Free plan storage limit across all tables in a base.
           evidence:
             - pricing
-  notes: []
+  notes:
+    - Free includes 1000 records/base, 1 GB attachments/base and two-week history. Keep the actual workspace plan in trial evidence because the initial Team trial has higher limits.
+    - Own-account PAT usage is distinct from a third-party integration collecting another user's token. The reviewed service and developer terms contain no explicit benchmark-disclosure ban; content rights, confidentiality and accurate descriptions still apply.

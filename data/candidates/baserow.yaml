@@ -17,24 +17,37 @@ catalog:
       kind: official_docs
     auth:
       url: https://baserow.io/user-docs/personal-api-tokens
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://baserow.io/pricing
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_site
     mcp:
       url: https://baserow.io/user-docs/mcp-server
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
+    signup:
+      url: https://baserow.io/signup
+      checked_on: '2026-10-08'
+      kind: official_site
+    cloud-setup:
+      url: https://baserow.io/user-docs/set-up-baserow
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://baserow.io/terms-and-conditions
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: database-api
       docs: https://baserow.io/docs/apis/rest-api
       interface: api
       maintainer: official
-      entry_url: https://baserow.io/docs/apis/rest-api
+      entry_url: https://api.baserow.io/api
       evidence:
         - api
+        - auth
       availability:
         value: self_serve
         evidence:
@@ -58,8 +71,25 @@ catalog:
             - api
       notes: >-
         Database token can read/create/update/delete rows in permitted tables; creating the
-        table/schema requires a short-lived JWT. A precreated table changes the test setup.
+        table/schema requires the separate backend-jwt-api route. A precreated business schema changes the
+        setup of a create-table task. Cloud permits 10 concurrent API requests; a monthly request allowance
+        was not established in these sources. This path updates real hosted tables and is suitable for
+        an existing-table task when scoped to that table.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - cloud-setup
+        email_verification:
+          value: required
+          evidence:
+            - cloud-setup
       human_steps:
+        - stage: signup
+          step: Create a Cloud account with email, name and password; verify the email and use a Free workspace.
+          evidence:
+            - signup
+            - cloud-setup
         - stage: credentials
           step: Generate a database token and select permitted tables and operations.
           evidence:
@@ -70,6 +100,65 @@ catalog:
           unit: rows
           per: workspace
           scope: Cloud Free plan. 2 GB storage. JWT/schema access and database row tokens are distinct.
+          evidence:
+            - pricing
+    - id: backend-jwt-api
+      docs: https://baserow.io/user-docs/personal-api-tokens
+      interface: api
+      maintainer: official
+      entry_url: https://api.baserow.io/api
+      evidence:
+        - auth
+        - cloud-setup
+        - pricing
+      availability:
+        value: self_serve
+        evidence:
+          - cloud-setup
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: platform_credentials
+        evidence:
+          - auth
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - cloud-setup
+        email_verification:
+          value: required
+          evidence:
+            - cloud-setup
+      capabilities:
+        records.organize:
+          value: documented
+          evidence:
+            - auth
+        records.track:
+          value: documented
+          evidence:
+            - auth
+      notes: >-
+        The documented login flow exchanges account credentials for a seven-minute JWT sent as
+        Authorization: JWT. Unlike a permanent database token, this grants database/table and schema
+        operations using the user's account permissions. A dedicated Free Cloud workspace can hold an
+        editable online action table; do not silently replace this route with a precreated table or
+        self-hosted database. Token expiry, login refresh and actual registration remain to be tested.
+      human_steps:
+        - stage: signup
+          step: Create and verify a Cloud account, retaining an empty Free workspace and account credentials privately.
+          evidence:
+            - cloud-setup
+            - auth
+      costs:
+        - kind: free_allowance
+          amount: 3000
+          unit: rows
+          per: workspace
+          scope: Shared Free Cloud workspace capacity, not an extra allowance for JWT access; 2 GB storage.
           evidence:
             - pricing
     - id: native-mcp
@@ -110,4 +199,6 @@ catalog:
           step: Create a workspace MCP endpoint in account settings and securely store its private URL.
           evidence:
             - mcp
-  notes: []
+  notes:
+    - Free Cloud provides Grid, Form and Gallery views, 3000 rows and 2 GB storage per workspace, with 14-day row history. Self-hosted unlimited capacity is not the hosted offer. Public signup shows email, name and password; payment-card requirements beyond that form have not been independently observed.
+    - No explicit benchmark or performance-analysis disclosure prohibition was found in the reviewed general terms. Article 11 broadly protects confidential information and describes supplied software as confidential; Article 3 separately covers open-source and paid code. Do not treat source licensing as blanket hosted-service publication permission.

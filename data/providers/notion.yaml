@@ -18,7 +18,7 @@ entrypoints:
   status_page: https://status.notion.so
   pricing: https://www.notion.com/pricing
   signup: https://www.notion.com/signup
-  api_keys: https://developers.notion.com/docs/authorization
+  api_keys: https://developers.notion.com/guides/get-started/authorization
   mcp_official: https://developers.notion.com/docs/mcp
   rate_limits: https://developers.notion.com/reference/request-limits
   errors: https://developers.notion.com/reference/status-codes
@@ -31,9 +31,9 @@ checks:
 
   api_key_self_serve:
     status: supported
-    evidence: https://developers.notion.com/docs/authorization
-    verified: "2026-07-07"
-    notes: Internal integration tokens are self-serve.
+    evidence: https://developers.notion.com/guides/get-started/internal-connections
+    verified: "2026-10-08"
+    notes: Workspace owners can create internal connection tokens; explicit page access is a separate step.
 
   oauth_support:
     status: supported
@@ -43,9 +43,9 @@ checks:
 
   scoped_tokens:
     status: partial
-    evidence: https://developers.notion.com/docs/authorization
-    verified: "2026-07-07"
-    notes: Integrations carry capability scopes (read/update/insert) and page-level access grants.
+    evidence: https://developers.notion.com/reference/capabilities
+    verified: "2026-10-08"
+    notes: Internal connections have separate read/update/insert capabilities and page grants; PATs instead use the creator's page permissions.
 
   token_revocation:
     status: unknown
@@ -58,7 +58,7 @@ checks:
   free_tier_or_trial:
     status: supported
     evidence: https://www.notion.com/pricing
-    verified: "2026-07-07"
+    verified: "2026-10-08"
 
   self_serve_paid_upgrade:
     status: supported
@@ -74,12 +74,18 @@ checks:
   versioning_policy:
     status: supported
     evidence: https://developers.notion.com/reference/versioning
-    verified: "2026-07-07"
-    notes: Notion-Version header with dated API versions.
+    verified: "2026-10-08"
+    notes: Required Notion-Version header; current version is 2026-03-11. Database and data_source objects have been separate since 2025-09-03.
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed and recorded.
+    evidence: https://notion.notion.site/Terms-Conditions-4e1c5dd3e3de45dfa4a8ed60f1a43da0
+    verified: "2026-10-08"
+    notes: >-
+      API automation is documented, but applicable account terms matter. The current MSA section 2.1(9)
+      requires prior written consent for evaluation, benchmarking or comparative analysis intended for
+      publication. Pure personal use is directed to separate Personal Use Terms; do not infer either a
+      blanket publication permission or a blanket ban for all free personal workspaces.
 
 catalog:
   version: 1
@@ -97,12 +103,77 @@ catalog:
       kind: official_docs
     pat:
       url: https://developers.notion.com/guides/get-started/personal-access-tokens
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://www.notion.com/pricing
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_site
+    internal-connections:
+      url: https://developers.notion.com/guides/get-started/internal-connections
+      checked_on: '2026-10-08'
+      kind: official_docs
+    capabilities:
+      url: https://developers.notion.com/reference/capabilities
+      checked_on: '2026-10-08'
+      kind: official_docs
+    database-model:
+      url: https://developers.notion.com/guides/data-apis/working-with-databases
+      checked_on: '2026-10-08'
+      kind: official_docs
+    create-database:
+      url: https://developers.notion.com/reference/create-database
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: POST /v1/databases creates a database, its initial data source and its first table view.
+    create-row:
+      url: https://developers.notion.com/guides/data-apis/create-pages-in-a-data-source
+      checked_on: '2026-10-08'
+      kind: official_docs
+    query-rows:
+      url: https://developers.notion.com/reference/query-a-data-source
+      checked_on: '2026-10-08'
+      kind: official_docs
+    update-row:
+      url: https://developers.notion.com/reference/patch-page
+      checked_on: '2026-10-08'
+      kind: official_docs
+    versioning:
+      url: https://developers.notion.com/reference/versioning
+      checked_on: '2026-10-08'
+      kind: official_docs
+    request-limits:
+      url: https://developers.notion.com/reference/request-limits
+      checked_on: '2026-10-08'
+      kind: official_docs
+    workspace-block-limits:
+      url: https://developers.notion.com/reference/workspace-block-limits
+      checked_on: '2026-10-08'
+      kind: official_docs
+    personal-terms:
+      url: https://notion.notion.site/Personal-Use-Terms-of-Service-00e4e5d0f2b9411cbee6493f15779500
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Reviewed the rendered official page. No explicit public-benchmark clause found in section 2;
+        section 20 protects non-public information including service/API performance. The introduction
+        distinguishes personal use from organizational use and eligible paid plans governed by the MSA.
+    developer-terms:
+      url: https://www.notion.so/Developer-Terms-ba4131408d0844e08330da2cbb225c20
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Reviewed the rendered official page. Its stated scope is integrations distributed through the
+        Gallery or otherwise to third parties; sections 3 and 12 cover API restrictions and confidentiality.
+        No separate explicit public-benchmark clause found in the reviewed text.
+    msa:
+      url: https://notion.notion.site/Terms-Conditions-4e1c5dd3e3de45dfa4a8ed60f1a43da0
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Effective August 17, 2026. Section 2.1(9) requires prior written consent for evaluation,
+        benchmarking or comparative analysis intended for publication. Its introduction directs purely
+        personal, non-organizational use to the Personal Use Terms.
     sdk:
       url: https://github.com/makenotion/notion-sdk-js
       checked_on: '2026-09-08'
@@ -124,12 +195,13 @@ catalog:
         task results or identical MCP coverage.
   routes:
     - id: rest-api
-      docs: https://developers.notion.com/reference/intro
+      docs: https://developers.notion.com/guides/get-started/internal-connections
       interface: api
       maintainer: official
-      entry_url: https://developers.notion.com/reference/intro
+      entry_url: https://api.notion.com/v1
       evidence:
         - api
+        - create-database
       availability:
         value: self_serve
         evidence:
@@ -138,40 +210,60 @@ catalog:
         value: documented
         evidence:
           - pat
+          - internal-connections
       auth:
         value: api_key
         evidence:
-          - api
+          - internal-connections
+          - pat
       capabilities:
         records.organize:
           value: documented
           evidence:
-            - api
+            - create-database
+            - create-row
         records.track:
           value: documented
           evidence:
-            - api
+            - query-rows
+            - update-row
       notes: >-
-        Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator
-        permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being
-        a free member alone is insufficient.
+        Current API version 2026-03-11 uses separate database, data_source and page objects. Creating a
+        database also creates its first table view; initial_data_source.properties defines columns, and
+        page properties provide editable rows. Subsequent row creation/query uses the data_source ID,
+        while page updates use the page ID. Internal connections need explicit access to the parent page
+        plus read/insert/update capabilities; a new token has no page access by default. PATs use their
+        creator's permissions, and only workspace owners can create API PATs on Free. Free single-member
+        workspaces have unlimited blocks. Multi-member Free workspaces have a 1,000 lifetime-block cap;
+        internal-connection block-creating writes fail after the grace period, and deleting content does
+        not replenish the allowance. This API enforcement does not apply to PATs, but is not permission
+        to bypass plan restrictions. Free connections allow 180 requests per 60 seconds; a separate
+        workspace-wide rate limit can also apply. Documented capability does not establish test success
+        or permission to publish an evaluation under every account's terms.
       human_steps:
         - stage: credentials
           step: >-
-            Create internal connection and grant only the test page, or create a PAT in a dedicated test
-            workspace.
+            A workspace owner creates an internal connection with the required content capabilities and
+            grants an empty parent page, or creates a PAT with Notion API access in a dedicated workspace.
+            Existing credentials still require checking resource access and available Free-plan capacity.
           evidence:
-            - auth
+            - internal-connections
+            - capabilities
             - pat
+            - workspace-block-limits
       costs:
         - kind: free_allowance
           amount: 0
           unit: money
           currency: USD
           per: month
-          scope: Free workspace subscription; API limits and resource permissions still apply.
+          scope: >-
+            Free workspace subscription; single-member unlimited blocks, with separate limits for
+            multi-member Free workspaces. API rate limits and resource permissions still apply.
           evidence:
             - pricing
+            - request-limits
+            - workspace-block-limits
     - id: javascript-sdk
       docs: https://github.com/makenotion/notion-sdk-js
       interface: sdk
