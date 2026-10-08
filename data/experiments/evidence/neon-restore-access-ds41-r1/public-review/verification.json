@@ -1,0 +1,21 @@
+{
+  "scope": "Controller-selected minimal access evidence; source and task verdict remain unchanged. No restore business was dispatched from this original batch.",
+  "independent_status": "not_completed",
+  "sources": {
+    "execution/answer.md": "69c76595621a4a9f929187189540a8c1cc50f1597b09d756e08ecd851f0852cb",
+    "execution/receipt.json": "abdd31df9db1759248a660280006ab8d209356b84e399b10e7f31ca9d0edd5a0",
+    "execution/usage.json": "7ebb77c037198d9aa272574bf25e15fe99bc9deafd52315ececbe0a86c480e9f",
+    "grading/assessment.json": "3062188143c8cc4b752cadbca3de92bd0ec3cec355020d8a90c88cb1988d55b5"
+  },
+  "model_and_environment": "OpenCode1.18.35,DeepSeekV4.1Flash/high; originaldefaultPyPI packageindex;exec25requests/300s,grade40requests/300s;one fresh source resource perprovider;no syntheticfixture seeded.",
+  "controller_notes": [
+    "总控在执行尚未结束时只读检查进程，确认正在pip install psycopg；独立验收可见的完成日志没有成功安装/连接证据，因此不能将实际查询视为完成。此观察不证明超时唯一原因，也不改独立not_completed。",
+    "执行者中间答复先研究自动项目名称及重命名限制；冻结环境本意为Turso库前缀并允许Neon默认库名，表达仍可能造成额外调查。后续新环境明确Neon项目/默认库不要求改名，旧输入保留。",
+    "原始接入结果和费用均保留。另起两家同条件的镜像配置跟进批次，旧接入不和新环境合并，也不作为供应商整体能力结论。没有在本次冻结运行中修改包源或延长时间。",
+    "源资源在原始采集与独立验收完成后清理；只核验本轮资源，不读取其他用户库数据。控制器清理/诊断是单独准备开销，未伪装成执行Agent自行完成。"
+  ],
+  "actual_result": "Anonymous identityregistered andoneproject/defaultdatabase created; no completedcredentialfetch, SQL query, retainedserviceconfigorfinaldelivery. Receipt timed_out true,exit-15,about290s elapsed.",
+  "model_usage": "Incomplete; published modelcost unknown, conservativeUSD12.50 request-ceilingreserve keptinprivatebudget.",
+  "project_expiry": "2026-10-11T16:28:26Z",
+  "cleanup": "Originalproject/identity recoveredfromownedstoppedruntime; exactnewproject DELETE204 accepted. Subsequentcredentialendpoint401,not404; no claim that a separateauthenticatedGETprovedabsence. Earlierprojectuntouched."
+}
