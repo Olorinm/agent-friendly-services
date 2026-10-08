@@ -4,7 +4,7 @@ category: developer-tools
 homepage: https://github.com
 summary: Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
 submitted_by: community
-scope: Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately.
+scope: Core platform (repos, issues, PRs, REST/GraphQL APIs) and public Advisory Database lookup. Actions/Packages/Copilot not assessed separately.
 
 tags:
   - git
@@ -92,14 +92,15 @@ checks:
     notes: API automation and bots are permitted within rate limits and acceptable-use rules; scraping restrictions apply.
 
 notes:
-  - Multi-product platform; this entry covers the core developer platform only (see scope).
+  - Multi-product platform; this entry covers the core developer platform and public advisory lookup (see scope).
 
-# Existing developer-tools scope; access routes do not require a new subcategory.
+# Preserve core platform routes; public advisories have their own anonymous access conditions.
 catalog:
   version: 1
   classifications:
     - developer-tools/code-hosting
     - productivity-storage/project-management
+    - developer-tools/dependency-advisories
   sources:
     quickstart:
       url: https://docs.github.com/en/rest/quickstart
@@ -112,6 +113,32 @@ catalog:
       notes: >-
         Repository/pull-request and issue/project operations have distinct user outcomes. Historical
         issue-tracking tasks are displayed under project management.
+    global-advisories:
+      url: https://docs.github.com/en/rest/security-advisories/global-advisories
+      checked_on: '2026-10-08'
+      kind: official_docs
+    advisory-data:
+      url: https://github.com/github/advisory-database
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: Public advisory corpus and its upstream sources; these overlap with OSV's sources.
+    advisory-rate-limits:
+      url: https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+      checked_on: '2026-10-08'
+      kind: official_docs
+    service-terms:
+      url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+      checked_on: '2026-10-08'
+      kind: official_site
+    acceptable-use:
+      url: https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies
+      checked_on: '2026-10-08'
+      kind: official_site
+    advisory-terms:
+      url: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Advisory Database licence and Competitive Benchmarking clauses; the latter is reciprocal access for competing products, not a blanket publication ban.
   routes:
     - id: rest-api
       interface: api
@@ -136,3 +163,51 @@ catalog:
       notes: >-
         Authenticated REST access; existing account setup and token permissions must be recorded separately
         from the task.
+    - id: public-advisories-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.github.com/advisories
+      docs: https://docs.github.com/en/rest/security-advisories/global-advisories
+      evidence: [global-advisories]
+      availability:
+        value: self_serve
+        evidence: [global-advisories]
+      personal_access:
+        value: documented
+        evidence: [global-advisories, advisory-terms]
+        notes: Public global advisories support unauthenticated access; no repository ownership or paid security subscription is required for this route.
+      auth:
+        value: none
+        evidence: [global-advisories]
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [global-advisories]
+        payment_method:
+          value: not_required
+          evidence: [global-advisories, advisory-data]
+      capabilities:
+        advisories.lookup:
+          value: documented
+          evidence: [global-advisories]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: anonymous public advisory request within API limits
+          scope: Free public corpus and unauthenticated public REST access; no paid Advanced Security feature is invoked.
+          evidence: [global-advisories, advisory-data, advisory-rate-limits]
+      notes: >-
+        GET /advisories supports ecosystem, affects=package@version, cve_id and ghsa_id filters;
+        GET /advisories/{ghsa_id} retrieves a record. Python's ecosystem label is pip here, versus PyPI in
+        OSV. Results identify package-specific vulnerable_version_range and first_patched_version where
+        available; missing remediation metadata does not prove safety. The default type is reviewed and
+        excludes malware. Per-page maximum is 100, with Link-header cursor pagination. Current official
+        examples use X-GitHub-Api-Version 2026-03-10. Anonymous requests share a 60/hour originating-IP
+        allowance with other anonymous REST use, and secondary limits can apply; preserve rate headers
+        and honor backoff. This route has not been tested merely by reviewing its documentation.
+  notes:
+    - Public Advisory Database records are CC BY 4.0; the stated attribution option is a link to https://github.com/advisories or the individual advisory used. Do not confuse contributors' CC0 grant with the database's CC BY licence.
+    - GitHub AUP section 7 permits research using public non-personal information when resulting publications are open access. API terms prohibit excessive/abusive requests and token sharing to evade limits. Reviewed terms contain no blanket ban on publishing factual API comparisons. Competitive Benchmarking applies reciprocal conditions to providers of competing services, not a requirement that every test obtain prior permission.
+    - OSV imports this advisory corpus, and both aggregate other common sources. Agreement between these entry points is not independent confirmation of vulnerability completeness, exploitability or a globally safe upgrade version.

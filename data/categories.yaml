@@ -100,6 +100,21 @@ categories:
     description: Code hosting, API development, testing, monitoring and troubleshooting.
     name_zh: 开发工具
     subcategories:
+      - id: dependency-advisories
+        name: Dependency Security Advisories
+        name_zh: 依赖漏洞公告
+        description: Find published security advisories for identifiable software packages and interpret their affected and fixed versions.
+        inclusion: >-
+          Retrieves identifiable public advisories using a package ecosystem, package name, version or
+          advisory identifier, with source links and affected-version or remediation metadata where available.
+        exclusion: >-
+          Source-code analysis, exploit execution, infrastructure scanning and discovering previously unknown
+          vulnerabilities are separate. A successful lookup or no match does not establish that software is
+          secure, exploitable in a particular application, or free of other vulnerabilities. Aggregators can
+          share upstream records; matching answers are not independent security findings.
+        capabilities:
+          - id: advisories.lookup
+            description: Retrieve published dependency advisories and their package/version applicability and documented fixes.
       - id: monitoring
         name: Monitoring & Troubleshooting
         name_zh: 监控与故障排查

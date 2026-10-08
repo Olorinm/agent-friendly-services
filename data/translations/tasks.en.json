@@ -670,5 +670,37 @@
         "failure": "只生成地址字符串或给出教程；无法读取邮箱；未保存可复用访问状态；实际邮箱与答复不同；预算内未完成。平台或执行环境故障单列无效。"
       }
     ]
+  },
+  "dependency-advisories-access-001/v1": {
+    "description": "Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.",
+    "inputs": "The assigned service, entry point and authorized identity or credentials are in ENVIRONMENT.md. Choose a small public advisory query and report the advisory identifier, associated package name and source actually returned. Use keyless access directly when available; use only the supplied information for any required signup or authorization. Save necessary configuration in the persistent directory for this trial and keep secrets in private files. State the configuration location, origin of any existing account, self-service steps, and actual human assistance or application requirements.",
+    "expected_output": "A real advisory from the assigned service with an identifiable ID, associated package and source; the location of reusable configuration; actual setup steps and access requirements, or a specific blocker.",
+    "success": "Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.",
+    "failure": "No real advisory query, use of another service or entry point, installation/health checks/static examples/configuration only, an answer that contradicts the response, unusable configuration, exposed secrets, or failure to finish within budget. Record identity, authorization, quota and human-assistance barriers honestly; execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口及本轮允许使用的身份或凭据见 ENVIRONMENT.md。自行选择一个小型公开公告查询，报告实际取得的公告标识、关联包名和来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的资料。必要配置保存在本轮持久目录，秘密只存私有文件；答复给出配置位置、已有账号来源、自助步骤及实际人工或申请要求。",
+        "expected_output": "一条来自指定服务的真实公告记录，含可识别标识、关联包名及来源；可复用配置位置；真实接入步骤与门槛，或具体阻碍。",
+        "success": "按指定方式完成必要安装、认证和配置，实际响应含可识别的公告及关联包，答复与响应一致；配置可供新会话复用且不泄露秘密。无需账号不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实公告查询，改用其他服务或入口，仅有安装、健康检查、静态示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成。身份、授权、额度或人工阻碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "dependency-advisories-check-001/v1": {
+    "description": "I am reviewing two dependency security alerts for my project. Use the assigned service to check whether the installed version still falls within each advisory’s affected versions and identify the first fixed release for each in the 5.2.x branch. Tell me the minimum upgrade needed for these two alerts only, with links supporting your conclusions.",
+    "inputs": "Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alerts CVE-2025-57833 and CVE-2025-59681. Check only package-version matching and fix boundaries for these two alerts. Do not attempt to list every vulnerability, select today’s latest release, or assess project code, database configuration or exploitability. Give a short explanation in Chinese and identify the lookup source. You may follow references in records returned by the assigned service to maintainer advisories or release notes. Do not replace the assigned service with another vulnerability database, general web search or model memory. If no record is found, report uncertainty rather than conclude there is no impact. Do not install, upgrade or modify the project.",
+    "expected_output": "For each alert, the installed-version match decision, the first fixed 5.2.x release, and supporting links; the minimum upgrade addressing these two alerts only, with a short explanation in Chinese naming the service used.",
+    "success": "Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.",
+    "failure": "No assigned-service query, either alert omitted, wrong package/ecosystem/advisory/branch, incorrect installed-version decision or fix boundary, a no-impact claim based only on an empty response or memory, untraceable evidence, another lookup service substituted, actions beyond the read-only scope, or failure to finish within budget. Report missing records, insufficient metadata, rate limits and access barriers honestly; execution or collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。",
+        "inputs": "依赖笔记：生态 PyPI，包 Django，当前版本 5.2.6；待核对告警 CVE-2025-57833、CVE-2025-59681。只核对这两条的包版本匹配和修复边界，不要求列出所有漏洞或选择当前最新版本，也不判断本项目的代码、数据库配置或漏洞可利用性。用中文简要说明判断及查询来源。可以沿本次指定服务记录中的引用链接核对维护者公告或发布记录；不要用其他漏洞库、通用网页搜索或模型记忆代替指定服务查询。没有查到记录时说明未知，不据此断言没有影响。不安装、升级或修改项目。",
+        "expected_output": "两条告警各自的当前版本匹配结论、5.2.x 最早修复版本和可核对的依据链接；仅针对这两条的最低升级版本及简短中文解释，注明所用服务。",
+        "success": "真实查询指定服务，答复逐条正确判断给定包版本是否匹配两条告警，修复版本属于所要求的 5.2.x 分支，最低升级边界正确；结论与实际服务记录或从记录可追溯的维护者引用链相符，并由事前独立取得的维护者发布参考核对。来源链接能支持对应判断，不将未命中当作不受影响，不把本题结论扩大为全部漏洞已修复或应用不可利用。",
+        "failure": "未查询指定服务，遗漏任一告警，混淆包、生态、告警或版本分支，当前版本匹配或修复边界错误，仅凭空响应或记忆断言无影响，依据无法追溯，替换为其他检索服务，越过只读范围或预算内未完成。真实无记录、元数据不足、限流和访问阻碍如实记录；执行环境或采集故障单列无效。"
+      }
+    ]
   }
 }

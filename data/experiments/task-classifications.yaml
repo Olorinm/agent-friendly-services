@@ -174,3 +174,13 @@ tasks:
     id: mailboxes-create-001
     classification: communication/mailboxes
     phase: setup
+
+  - file: data/experiments/tasks/dependency-advisories.md
+    id: dependency-advisories-access-001
+    classification: developer-tools/dependency-advisories
+    phase: setup
+
+  - file: data/experiments/tasks/dependency-advisories.md
+    id: dependency-advisories-check-001
+    classification: developer-tools/dependency-advisories
+    phase: business
