@@ -1,0 +1,166 @@
+{
+  "scope": "Controller-selected minimal actual evidence; original independent verdict/checks preserved. Same-source logical backup and restore, not cross-engine or general disaster recovery benchmark.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "0a5a5f7d7f7608f3cc3a64da989b6dfabdf1c9a907520564380671b1c8817661",
+    "execution/receipt.json": "ce070ccc4f3350449040e60729daf313a4dbbda037dc0b95124222c2f7b76d29",
+    "execution/usage.json": "c6888d2726e3dc34a5d7ab43874ca0d601b77813b6fe852be2df2d5a408d4d45",
+    "grading/assessment.json": "bc5bec7b0a69cb458b6bb7e5a7d1d7c22fc2d6b57f34a0731dfbcf17dd50c5aa"
+  },
+  "model_and_environment": "OpenCode1.18.35,DeepSeekV4.1Flash/high; samebaseimage2GiB/1CPU/pids256; commonTUNApipindexconfigured beforeaccess, initiallyemptycache. Access25requests/300s,business25/600s,grade40/300s;32000output/request;max2providerstreams.",
+  "controller_notes": [
+    "本批与默认PyPI原始接入分开记录。原批Neon超时结果不变；本批同时明确项目及默认库名无需定制，不是单变量因果实验。",
+    "Turso既有账户由总控提供；Neon本批匿名Claimable临时项目。账户来源和权限差异明确保留，不视为同等自主注册。",
+    "业务源材料由总控在已通过接入的新空库内准备；实际两表、主外键、非空、默认值、7条合成记录全部在派发前读回核对。执行者只拿到实际源库，不拿fixture、参考答案或种库代码。准备/读回属总控额外开销。",
+    "两家共同允许官方API/SDK/CLI/兼容SQL客户端，自行选择。本次实际Turso为Platform API管理加SQL HTTP、Neon为Claimable项目内psycopg2/Postgres；不是严格API-only或协议性能排名。",
+    "Neon复用它在接入中自行安装的psycopg2-binary2.9.13虚拟环境；Turso无已装客户端。总控仅清理旧配置中空库描述并明确保留依赖，原配置已归档；不是无干预配置复用。",
+    "仅小型无并发写入的同引擎恢复，不证明跨SQL方言迁移、大数据性能、在线一致性、PITR或生产级灾难恢复。",
+    "业务验收将服务费用保留unknown，虽然本批接入验收为confirmed_free；原判断均保留。本批未claim/付费不单独证明费用为零，不选择更有利结论覆盖未知。"
+  ],
+  "actual_result": "Both source and restored target independentlyread: complete lists2/todos5 rows match frozen fixture; source applicationcatalog and rows unchanged. Actual backupfile and import linkage independentlyreviewed; newtargetdistinct and absentfrom preexecutionmetadata.",
+  "backup_original_bytes": 1697,
+  "backup_original_sha256": "7292fd62a067cd6463c345a749acf8000587af8c8cb066308f60ec8a370de81c",
+  "before_receipt_sha256": "bb7681f5374eb0da304201f181f4ea554583aedfd7660dc8562889d978e84149",
+  "after_receipt_sha256": "f1fe289f3af94adcc21f9c78b59aba426df0968c549e0eaadb5354da5605bcfd",
+  "source_unchanged": true,
+  "target_column_schema_exact": true,
+  "observed_complete_target_rows": {
+    "lists": [
+      {
+        "id": 1,
+        "name": "生活"
+      },
+      {
+        "id": 2,
+        "name": "学习"
+      }
+    ],
+    "todos": [
+      {
+        "id": 101,
+        "list_id": 1,
+        "title": "买牛奶",
+        "done": false,
+        "note": null
+      },
+      {
+        "id": 102,
+        "list_id": 1,
+        "title": "预约自行车保养",
+        "done": false,
+        "note": "周六上午"
+      },
+      {
+        "id": 103,
+        "list_id": 2,
+        "title": "Read \"Designing Data-Intensive Applications\"",
+        "done": true,
+        "note": ""
+      },
+      {
+        "id": 104,
+        "list_id": 2,
+        "title": "复习 SQL 事务",
+        "done": false,
+        "note": "先读笔记，再做练习"
+      },
+      {
+        "id": 105,
+        "list_id": 1,
+        "title": "给绿植浇水",
+        "done": true,
+        "note": null
+      }
+    ]
+  },
+  "observed_target_catalog": [
+    {
+      "sql": "SELECT table_name,column_name,ordinal_position,data_type,is_nullable,column_default FROM information_schema.columns WHERE table_schema='public' ORDER BY table_name,ordinal_position",
+      "rows": [
+        {
+          "table_name": "lists",
+          "column_name": "id",
+          "ordinal_position": 1,
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "table_name": "lists",
+          "column_name": "name",
+          "ordinal_position": 2,
+          "data_type": "text",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "table_name": "todos",
+          "column_name": "id",
+          "ordinal_position": 1,
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "table_name": "todos",
+          "column_name": "list_id",
+          "ordinal_position": 2,
+          "data_type": "integer",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "table_name": "todos",
+          "column_name": "title",
+          "ordinal_position": 3,
+          "data_type": "text",
+          "is_nullable": "NO",
+          "column_default": null
+        },
+        {
+          "table_name": "todos",
+          "column_name": "done",
+          "ordinal_position": 4,
+          "data_type": "boolean",
+          "is_nullable": "NO",
+          "column_default": "false"
+        },
+        {
+          "table_name": "todos",
+          "column_name": "note",
+          "ordinal_position": 5,
+          "data_type": "text",
+          "is_nullable": "YES",
+          "column_default": null
+        }
+      ]
+    },
+    {
+      "sql": "SELECT c.relname AS table_name, con.conname AS constraint_name, con.contype AS type, pg_get_constraintdef(con.oid) AS definition FROM pg_constraint con JOIN pg_class c ON c.oid=con.conrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' ORDER BY c.relname,con.contype,con.conname",
+      "rows": [
+        {
+          "table_name": "lists",
+          "constraint_name": "lists_pkey",
+          "type": "p",
+          "definition": "PRIMARY KEY (id)"
+        },
+        {
+          "table_name": "todos",
+          "constraint_name": "todos_list_id_fkey",
+          "type": "f",
+          "definition": "FOREIGN KEY (list_id) REFERENCES lists(id)"
+        },
+        {
+          "table_name": "todos",
+          "constraint_name": "todos_pkey",
+          "type": "p",
+          "definition": "PRIMARY KEY (id)"
+        }
+      ]
+    }
+  ],
+  "actual_delivery": "Retained1697byteplainSQLbackup, RESULT.md restorationmethod plus targetidentity/counts/fullcomparison and expiry. Customdump/psycopg2restore used; psqlmethoddocumented butnotexecutedbecausepsqlnotinstalled.",
+  "resource_expiry": "2026-10-11T16:39:36.935Z",
+  "limits": "SameunclaimedClaimableprojectshares100MBstorage/1GBtransfer/72hexpiry; newlogicalDBdoesnotrenew or multiplyquota.",
+  "cleanup": "Afterfullcaptureandindependentreview,Tursoexactnewsource+target DELETE200andGET404; NeonexactnewprojectDELETE204accepted,credentialsfollowup401tokenrevoked,notseparateauthenticatedabsenceproof. Earlierprojects/database/groupuntouched. All4ownedruntimecontainersstopped."
+}

@@ -8,6 +8,28 @@ spec=importlib.util.spec_from_file_location('opencode_normalize',Path(__file__).
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 
 class UsageTests(unittest.TestCase):
+    def test_budget_rejection_sidecar_preserves_reconciled_forwarded_usage(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); wire = root/'wire/request1'; wire.mkdir(parents=True)
+            (root/'events.jsonl').write_text(json.dumps({'type':'step_finish','part':{'tokens':{'input':80,'output':12,'reasoning':8,'cache':{'read':20,'write':0}}}})+'\n')
+            (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash'}))
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            usage = {'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':20,'completion_tokens_details':{'reasoning_tokens':8}}}
+            (wire/'response.body').write_text('data: '+json.dumps(usage)+'\n\ndata: [DONE]\n')
+            guard = root/'wire/guard-events.jsonl'
+            guard.write_text(json.dumps({'time':123.5,'error':'Model request budget exhausted'})+'\n')
+            result = module.normalize(root,'deepseek-flash')
+            self.assertTrue(result['complete'])
+            self.assertEqual(len(result['requests']),1)
+            self.assertEqual(result['totals']['input_tokens'],100)
+            self.assertEqual(len(result['local_rejections']),1)
+            self.assertIn('wire/guard-events.jsonl',[s['path'] for s in result['sources']])
+            (wire/'meta.json').write_text(json.dumps({'status':200,'error':'ConnectionResetError'}))
+            self.assertFalse(module.normalize(root,'deepseek-flash')['complete'])
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            guard.write_text('{"time":123.5}\n')
+            self.assertFalse(module.normalize(root,'deepseek-flash')['complete'])
+
     def test_unicode_separators_inside_events_and_sse_do_not_break_usage_capture(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d);wire=root/'wire/request1';wire.mkdir(parents=True)

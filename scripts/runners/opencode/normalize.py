@@ -24,6 +24,17 @@ def normalize(root, model):
             for k, v in zip(FIELDS, values): totals[k] += v
         result['totals'] = totals
         for directory in sorted((root/'wire').iterdir()):
+            if directory.name == 'guard-events.jsonl' and directory.is_file():
+                # Local rejections never reach the provider. Preserve their
+                # provenance without treating this sidecar as a billed request.
+                source(directory)
+                guards = [json.loads(line) for line in directory.read_text().split('\n') if line.strip()]
+                if any(not isinstance(event, dict)
+                       or type(event.get('time')) not in (int, float)
+                       or not isinstance(event.get('error'), str) for event in guards):
+                    raise ValueError('Malformed local guard event')
+                result['local_rejections'] = guards
+                continue
             for path in sorted(directory.iterdir()): source(path)
             meta = json.loads((directory/'meta.json').read_text())
             request = json.loads((directory/'request.json').read_text())
