@@ -1,0 +1,74 @@
+{
+  "notice": "Minimal actual delivery measurements and independentchecks. All quotes, rawseries,CSV/chart bytes and answer content stayprivate; hashes identify retained originals, not publicdownload URLs.",
+  "original_independent_assessment_sha256": "285965678c98dbd5c41ba3d94c30565a0a0970a6702138c78f16947a136ce5eb",
+  "original_service_fee_kind": "unknown",
+  "published_service_fee_kind": "unknown",
+  "fee_publication_note": "Independent service-cost judgment preserved; missing evidence is not priced at zero.",
+  "independent_status": "completed",
+  "independent_reason": "指定入口 https://mcp.alphavantage.co/mcp (streamable-http) 接通：initialize 返回 serverInfo alphavantage-mcp-server 1.0.0，tools/list 返回 133 个工具；使用本轮提供的 API key（credentials.json 的 api_key）经 URL 查询参数 ?apikey= 认证，成功调用一次 GLOBAL_QUOTE(symbol=IBM) 并取得真实行情（200，最新交易日 2026-10-07，price [market value retained privately]）。可复用连接配置已写入持久位置 /home/node/service-tools/service-config.json（执行回执 retained-files.json 确认保留），密钥只留 credentials.json、配置内用占位符、答复未含密钥。账号为总控事前提供的普通免费账号，本次非自主注册；全过程无人工介入。仅调用 1 次金融数据请求（接入额度 1/1），未用 REST 或他服务代替，未付费、未调用付费端点。",
+  "independent_checks": [
+    {
+      "criterion": "通过指定的官方托管 MCP 入口 https://mcp.alphavantage.co/mcp 完成接入，未改用 REST 或其他服务",
+      "passed": true,
+      "evidence": "execution/artifacts/mcp_client.mjs 与 call_tool.mjs 对该 endpoint POST initialize/tools/call；实测 initialize 200 serverInfo=alphavantage-mcp-server 1.0.0，tools/list 200/133 工具。见 grading/artifacts/evidence/data-query-evidence.txt、execution/artifacts/verification/README.md"
+    },
+    {
+      "criterion": "使用本轮提供的 API key、经文档支持的非交互认证方式完成认证",
+      "passed": true,
+      "evidence": "auth_probe/auth_probe2 探测显示无凭据 initialize 返回 401 \"Missing access token\"；README 记录的凭据来自 credentials.json 的 api_key，选用 ?apikey= 方式（官方文档列为 legacy/deprecated 但文档化的非交互方式）。见 grading/artifacts/evidence/auth-method-and-docs.txt、data-query-evidence.txt"
+    },
+    {
+      "criterion": "以指定 MCP 方式成功完成一次真实金融数据查询，返回真实行情数据",
+      "passed": true,
+      "evidence": "tools/call GLOBAL_QUOTE {symbol:IBM} -> HTTP 200，structuredContent.result 返回 CSV：IBM,[market value retained privately],[market value retained privately],[market value retained privately],[market value retained privately],[market value retained privately],2026-10-07,... 见 grading/artifacts/evidence/data-query-evidence.txt"
+    },
+    {
+      "criterion": "查询结果有真实依据（非文档示例/固定 canned 数据）",
+      "passed": true,
+      "evidence": "返回行含具体实时字段（volume=[market value retained privately]、latestDay=2026-10-07、changePercent=[market value retained privately]），由服务端 structuredContent 原样返回，与官方示例无关"
+    },
+    {
+      "criterion": "保存可复用的连接配置到指定持久位置，供后续新会话使用，且不把密钥写入配置",
+      "passed": true,
+      "evidence": "写入 /home/node/service-tools/service-config.json（工具记录 0023，写入成功并 chmod 600）；execution/retained-files.json 列出 credentials.json 与 service-config.json 为保留文件；内容含 endpoint/transport/auth/keySource，url 用 <API_KEY> 占位符无真实密钥。见 grading/artifacts/evidence/service-config-summary.md"
+    },
+    {
+      "criterion": "符合授权范围：仅用免费账号资源、未付费、仅调用 1 次接入数据请求、未做交易或写远端数据，且答复未泄露密钥",
+      "passed": true,
+      "evidence": "tool-records 显示仅 1 条 node call_tool.mjs GLOBAL_QUOTE 命令；未出现付费/交易操作；execution/answer.md 与配置均无 api_key 明文。见 grading/artifacts/evidence/data-query-evidence.txt"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T15:29:43.509122+00:00",
+    "ended_at": "2026-10-08T15:32:48.183505+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "actual_answer_sha256": "530026805198bd364cbaf70008aae2b0d26bb5f020c12d25a939e9c4d47d43fc",
+  "actual_answer_bytes": 2102,
+  "private_deliverable_sha256": {},
+  "environment": {
+    "base_image_sha256": "b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "pip_default_index": "https://pypi.tuna.tsinghua.edu.cn/simple",
+    "pip_config_sha256": "d4bcb0da1ab0fea5b2203d6b00cd570cb7f8bf357af86763a7d44d108a3709c5",
+    "effective_config_verified_as_executor_before_access": true,
+    "new_packages_preinstalled": false,
+    "prior_task_data_or_code_provided": false,
+    "execution_model_request_cap": 25,
+    "grading_model_request_cap": 40,
+    "financial_request_caps_per_route": {
+      "access": 1,
+      "business": 3
+    }
+  },
+  "limits": [
+    "Distinct environment/resource cohort. Previous default-PyPI two not_completed business runs remain unchanged. Do not pool old/new means or call this a mirror-only controlled experiment.",
+    "One run per route on the same pre-existing freeaccount; serial REST thenMCP, same model/effort/time/resources. Sharedaccount quota/order effectsremainpossible; no general protocol-speed orreliabilityranking.",
+    "Packageindexchanged; financialcallcaps changedfrom3access/5business to1/3; graderrequestcap25to40, executorcap25unchanged. Original taskv1 andindependentNasdaqreference unchanged.",
+    "Both newaccess sessions independentlypassed. Controller archived and removed priorIBMverification fieldsfromgenericconfiguration beforebusiness; onlycredentials andgenericconnection setupretained, no oldresults or scripts.",
+    "Both businesses produced chartandCSV from realassignedroute data. Independentchecks usedfrozenNasdaq reference, not the othercandidate answer; no sameprovider peer snapshot.",
+    "Knownfinancialcalls beforebatch13,access2,business2=17knownthisevening. Thisisnot aproviderremainingquota or invoice. No extra servicecalls for controllerreadback.",
+    "Provisioning and earliernetworkdiagnostics are externalpreparation, not silently counted as agentwork. Actual newpackageinstallation is in executorusage. Modelpriceestimates are notproviderinvoice.",
+    "Independent service-cost judgment preserved; missing evidence is not priced at zero."
+  ]
+}

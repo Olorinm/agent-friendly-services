@@ -1,0 +1,74 @@
+{
+  "notice": "Minimal actual delivery measurements and independentchecks. All quotes, rawseries,CSV/chart bytes and answer content stayprivate; hashes identify retained originals, not publicdownload URLs.",
+  "original_independent_assessment_sha256": "7a68f6e56b569948bc3a5695363a7d4002cd6e92cde7858c4d1bb92e4709e404",
+  "original_service_fee_kind": "confirmed_free",
+  "published_service_fee_kind": "confirmed_free",
+  "fee_publication_note": "Independent service-cost judgment preserved; missing evidence is not priced at zero.",
+  "independent_status": "completed",
+  "independent_reason": "经指定 REST 入口 https://www.alphavantage.co/query 完成一次真实金融数据查询（function=GLOBAL_QUOTE&symbol=IBM，HTTP 200，返回有效报价），并把可复用连接配置写入持久目录且未泄露密钥。使用本轮提供的既有免费账号，未自主注册、未用 MCP、未触碰付费端点或付款；无阻碍。",
+  "independent_checks": [
+    {
+      "criterion": "使用本轮指定入口 REST https://www.alphavantage.co/query 完成调用，未用 MCP 或其它服务代替",
+      "passed": true,
+      "evidence": "执行记录中的 curl 直接请求 alphavantage.co/query 的 GLOBAL_QUOTE；答复声明仅用 REST；事件记录中无其它金融数据服务调用。见 execution/answer.md 与 evidence/query-verification.md。"
+    },
+    {
+      "criterion": "成功查询到一项真实金融数据，且结果有真实响应依据",
+      "passed": true,
+      "evidence": "HTTP 200 返回 Global Quote（IBM price=[market value retained privately]，latest trading day=2026-10-07），原始响应保存为 execution/artifacts/raw_global_quote_ibm.json，内容与执行记录一致。"
+    },
+    {
+      "criterion": "保存后续会话可复用的必要连接配置于指定持久位置",
+      "passed": true,
+      "evidence": "写入 /home/node/service-tools/service-config.json（执行时 1646 字节，合法 JSON，含入口、认证参数名 apikey、免费额度与端点说明、不含密钥）；retained-files.json 记录保留该文件；脚本 execution/artifacts/query.py 依此配置调用。"
+    },
+    {
+      "criterion": "密钥未进入公开答复或连接配置，仅存私有凭据文件",
+      "passed": true,
+      "evidence": "执行时核验 service-config.json 不含 Key；execution/answer.md 仅给文件位置、无 Key 或带 Key 的 URL。"
+    },
+    {
+      "criterion": "身份处理正确：复用本轮提供的既有账号，未冒充自主注册",
+      "passed": true,
+      "evidence": "ENVIRONMENT.md 说明复用总控此前注册的免费账号；答复未声称由本次注册。"
+    },
+    {
+      "criterion": "遵守免费范围与额度：仅 1 次金融数据请求、无付费端点、无付款/交易",
+      "passed": true,
+      "evidence": "事件记录仅 1 次数据请求、无重试；使用非 Premium 的 GLOBAL_QUOTE；无付款或交易操作。见 evidence/query-verification.md。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T15:28:08.583876+00:00",
+    "ended_at": "2026-10-08T15:28:41.216213+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "actual_answer_sha256": "0cef5131c96dcf015198e70c0de0a020b2d5f116bc59e4d82099944dd8ac9c0a",
+  "actual_answer_bytes": 1460,
+  "private_deliverable_sha256": {},
+  "environment": {
+    "base_image_sha256": "b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "pip_default_index": "https://pypi.tuna.tsinghua.edu.cn/simple",
+    "pip_config_sha256": "d4bcb0da1ab0fea5b2203d6b00cd570cb7f8bf357af86763a7d44d108a3709c5",
+    "effective_config_verified_as_executor_before_access": true,
+    "new_packages_preinstalled": false,
+    "prior_task_data_or_code_provided": false,
+    "execution_model_request_cap": 25,
+    "grading_model_request_cap": 40,
+    "financial_request_caps_per_route": {
+      "access": 1,
+      "business": 3
+    }
+  },
+  "limits": [
+    "Distinct environment/resource cohort. Previous default-PyPI two not_completed business runs remain unchanged. Do not pool old/new means or call this a mirror-only controlled experiment.",
+    "One run per route on the same pre-existing freeaccount; serial REST thenMCP, same model/effort/time/resources. Sharedaccount quota/order effectsremainpossible; no general protocol-speed orreliabilityranking.",
+    "Packageindexchanged; financialcallcaps changedfrom3access/5business to1/3; graderrequestcap25to40, executorcap25unchanged. Original taskv1 andindependentNasdaqreference unchanged.",
+    "Both newaccess sessions independentlypassed. Controller archived and removed priorIBMverification fieldsfromgenericconfiguration beforebusiness; onlycredentials andgenericconnection setupretained, no oldresults or scripts.",
+    "Both businesses produced chartandCSV from realassignedroute data. Independentchecks usedfrozenNasdaq reference, not the othercandidate answer; no sameprovider peer snapshot.",
+    "Knownfinancialcalls beforebatch13,access2,business2=17knownthisevening. Thisisnot aproviderremainingquota or invoice. No extra servicecalls for controllerreadback.",
+    "Provisioning and earliernetworkdiagnostics are externalpreparation, not silently counted as agentwork. Actual newpackageinstallation is in executorusage. Modelpriceestimates are notproviderinvoice.",
+    "Independent service-cost judgment preserved; missing evidence is not priced at zero."
+  ]
+}

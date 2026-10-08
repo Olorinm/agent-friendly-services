@@ -1,0 +1,97 @@
+{
+  "notice": "Minimal actual delivery measurements and independentchecks. All quotes, rawseries,CSV/chart bytes and answer content stayprivate; hashes identify retained originals, not publicdownload URLs.",
+  "original_independent_assessment_sha256": "a316fa30ce7432ef3a15f6b1ac36aa067398b994d1285e8f3eaa6b18c4716cbb",
+  "original_service_fee_kind": "confirmed_free",
+  "published_service_fee_kind": "unknown",
+  "fee_publication_note": "Publication bookkeeping conservatively usesunknown because originalgrader fee kindconfirmed_free conflictswithnote金额留未知 andnullamount. Originaljudgment/hash retained; no completioncheck or measuredmodelusage altered.",
+  "independent_status": "completed",
+  "independent_reason": "执行者用指定入口 Alpha Vantage REST 的 TIME_SERIES_DAILY（AAPL, outputsize=compact，不复权原始日线）发起 1 次业务请求，产出可打开的 PNG 走势图与 CSV。独立核对：CSV 含 2026-08 全部 21 个常规交易日，无重复、缺失、周末/休市日脏数据；21/21 收盘价与冻结参考在 USD 0.01 精度上完全一致；图表为有效非空 PNG 且由同一 CSV 生成；来源与不复权口径可识别；未用 MCP、未调用付费端点、未泄漏 Key。",
+  "independent_checks": [
+    {
+      "criterion": "交付可打开的走势图产物",
+      "passed": true,
+      "evidence": "execution/artifacts/aapl_2026-08_daily_close.png 存在；独立解析为有效 PNG（1650x825, 8-bit RGBA, 非隔行），像素含约 7579 个数据线颜色像素与约 20752 个深色文字像素，非空白占位图。"
+    },
+    {
+      "criterion": "交付 CSV，含每个交易日的日期与收盘价",
+      "passed": true,
+      "evidence": "execution/artifacts/aapl_2026-08_daily.csv 存在，表头 date,open,high,low,close,volume，共 21 行数据。"
+    },
+    {
+      "criterion": "日期覆盖该月全部交易日且不含伪造休市日，无重复或缺失",
+      "passed": true,
+      "evidence": "CSV 21 个日期与冻结参考的 21 个常规交易日完全一致；缺失 0、重复 0、周末/休市日 0（8月无法定假日或提前收盘）。"
+    },
+    {
+      "criterion": "价格与事前冻结的同口径参考序列一致",
+      "passed": true,
+      "evidence": "21/21 收盘价与 reference.json 的 Nasdaq NOCP 同口径序列在 USD 0.01 报价精度上逐一完全相等，无差异需复核。"
+    },
+    {
+      "criterion": "使用不复权（原始/未调整）价格",
+      "passed": true,
+      "evidence": "请求 function=TIME_SERIES_DAILY（原始 as-traded 日线），未使用 premium 的 TIME_SERIES_DAILY_ADJUSTED；原始响应 Meta Data 标注 Daily Prices，无拆分/分红调整。"
+    },
+    {
+      "criterion": "标的与币种正确（AAPL，USD）",
+      "passed": true,
+      "evidence": "请求 symbol=AAPL；原始响应 Meta Data Symbol=AAPL，价格为美元计价收盘价。"
+    },
+    {
+      "criterion": "数据确实来自指定服务且调用方式符合指定入口",
+      "passed": true,
+      "evidence": "execution/artifacts/fetch_daily.py 通过 https://www.alphavantage.co/query 发起 REST 请求；execution/artifacts/aapl_daily_raw.json 为真实响应结构（仅 Meta Data + Time Series (Daily)，100 条，Last Refreshed 2026-10-07，无限流/错误键），8 月值独立复现权威参考。"
+    },
+    {
+      "criterion": "图表与 CSV 数值一致",
+      "passed": true,
+      "evidence": "execution/artifacts/plot_chart.py 直接读取 aapl_2026-08_daily.csv 的 date/close 列绘图并逐点标注；图表与 CSV 同源。"
+    },
+    {
+      "criterion": "可识别的数据来源与不复权口径",
+      "passed": true,
+      "evidence": "execution/answer.md 说明来源为 Alpha Vantage REST TIME_SERIES_DAILY outputsize=compact 及 as-traded/unadjusted 口径；图表底部亦标注来源与抓取/刷新时间。"
+    },
+    {
+      "criterion": "预算与路由合规（仅 REST、未用 MCP、未用付费端点、请求数在限额内）",
+      "passed": true,
+      "evidence": "本次仅 1 次业务金融数据请求（限额 3 内），走指定 REST 入口，未调用 MCP 与服务配置列出的 premium 端点；答复与本题产物中未发现 Key 或带 Key 的 URL。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T15:35:30.920720+00:00",
+    "ended_at": "2026-10-08T15:36:40.864174+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "actual_answer_sha256": "6e61c38719991fb6a94ccd33ebf008af852b5ca5ecc2c6d1dc4bc9e7925632f0",
+  "actual_answer_bytes": 1664,
+  "private_deliverable_sha256": {
+    "aapl_2026-08_daily_close.png": "aadc9bcf5223ad8adf364669b1e0858d8db82021b665d3e7e8e3c42cdd7d72f9",
+    "aapl_2026-08_daily.csv": "2a2316050dfc277e3745d76b447d79fe74709e7c8d740dbd8712a98dddf0370d"
+  },
+  "environment": {
+    "base_image_sha256": "b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "pip_default_index": "https://pypi.tuna.tsinghua.edu.cn/simple",
+    "pip_config_sha256": "d4bcb0da1ab0fea5b2203d6b00cd570cb7f8bf357af86763a7d44d108a3709c5",
+    "effective_config_verified_as_executor_before_access": true,
+    "new_packages_preinstalled": false,
+    "prior_task_data_or_code_provided": false,
+    "execution_model_request_cap": 25,
+    "grading_model_request_cap": 40,
+    "financial_request_caps_per_route": {
+      "access": 1,
+      "business": 3
+    }
+  },
+  "limits": [
+    "Distinct environment/resource cohort. Previous default-PyPI two not_completed business runs remain unchanged. Do not pool old/new means or call this a mirror-only controlled experiment.",
+    "One run per route on the same pre-existing freeaccount; serial REST thenMCP, same model/effort/time/resources. Sharedaccount quota/order effectsremainpossible; no general protocol-speed orreliabilityranking.",
+    "Packageindexchanged; financialcallcaps changedfrom3access/5business to1/3; graderrequestcap25to40, executorcap25unchanged. Original taskv1 andindependentNasdaqreference unchanged.",
+    "Both newaccess sessions independentlypassed. Controller archived and removed priorIBMverification fieldsfromgenericconfiguration beforebusiness; onlycredentials andgenericconnection setupretained, no oldresults or scripts.",
+    "Both businesses produced chartandCSV from realassignedroute data. Independentchecks usedfrozenNasdaq reference, not the othercandidate answer; no sameprovider peer snapshot.",
+    "Knownfinancialcalls beforebatch13,access2,business2=17knownthisevening. Thisisnot aproviderremainingquota or invoice. No extra servicecalls for controllerreadback.",
+    "Provisioning and earliernetworkdiagnostics are externalpreparation, not silently counted as agentwork. Actual newpackageinstallation is in executorusage. Modelpriceestimates are notproviderinvoice.",
+    "Publication bookkeeping conservatively usesunknown because originalgrader fee kindconfirmed_free conflictswithnote金额留未知 andnullamount. Originaljudgment/hash retained; no completioncheck or measuredmodelusage altered."
+  ]
+}
