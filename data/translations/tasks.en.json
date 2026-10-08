@@ -574,5 +574,37 @@
         "failure": "未真实查询指定服务，使用其他服务、静态示例或模型记忆代替，匹配到错误地点或仅粗略区域却称为场馆，经纬度颠倒或格式错误，坐标超出公开告知的容差，伪造或混淆输入与返回地址，遗漏必要交付，结论与响应矛盾或预算内未完成。缺少场馆覆盖或有效精度时如实记录未完成部分；执行环境或采集故障单列无效。"
       }
     ]
+  },
+  "scholarly-access-001/v1": {
+    "description": "Connect this scholarly literature search service through the assigned entry point, make one real literature query to confirm that it returns an identifiable paper record, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.",
+    "inputs": "The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose a small literature query and report an actual title, identifiable document link or identifier, and source. Use a keyless entry directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "A real document record from the assigned service, including its title, identifiable link or identifier, and source; reusable configuration location; actual setup steps, account origin and human or application barriers, or specific blockers.",
+    "success": "Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable document and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.",
+    "failure": "No real literature query; another service or route; only a health check, installation, example or configuration; an answer inconsistent with the response; unusable configuration; exposed secrets; or failure to finish within budget. Record identity, authorization, human and quota barriers faithfully. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个学术文献检索服务，通过指定方式做一次真实文献查询，确认能查到可识别的论文记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个小型文献查询，报告实际查到的题名及可识别的文献链接或标识，并注明来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实文献记录，含题名、可识别链接或标识及来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别文献，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实文献查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "scholarly-reference-001/v1": {
+    "description": "Use the assigned service to find the paper described in the attached reading note and complete its entry in my notes: original title, all authors in their original order, publication year, journal name and a clickable DOI link. Briefly explain in Chinese why it matches the clues, and identify the search source.",
+    "inputs": "Reading note: 2015; Nature; one author’s surname is Bengio; the title contains deep learning. Find the formally published paper. Author names may be full names or conventional surname-and-initial forms, but do not omit authors. No particular APA, MLA or other citation style is required. You may follow a DOI or publisher link returned by the assigned service to verify original bibliographic information. Do not replace the assigned service query with another scholarly database or general web search, or fill missing fields from memory. Only bibliographic information is needed, not full-text retrieval or a summary.",
+    "expected_output": "An identifiable entry for the formally published paper, containing its original title, all authors in their original order, publication year, journal name and correct DOI link; a Chinese explanation of the match and the search source used.",
+    "success": "A real query through the assigned service retrieves a paper record matching all note clues. Required bibliographic information agrees with the publisher reference frozen before execution, with no missing or reordered authors and a DOI link for the same paper. The match explanation is evidence-based and the source is verifiable. Allow reasonable case, punctuation, author-name abbreviation and DOI URL variations. No particular result ranking, output file, extra field or citation style is required.",
+    "failure": "No real assigned-service query; confusion with a different or similarly titled work; omitted or incorrect required bibliographic fields; missing or reordered authors; a DOI for another work; guesses or model memory represented as query results; another search service substituted; contradictions with actual sources; or failure to finish within budget. Record genuine no-result, missing-metadata, access or quota barriers faithfully. Execution-environment or evidence-collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "请用指定服务根据附件中的阅读笔记找到那篇论文，为我的笔记补齐文献条目：原文题名、全部作者（保持原顺序）、发表年份、期刊名和可点击的 DOI 链接；用中文简单说明为什么匹配这些线索，并注明检索来源。",
+        "inputs": "阅读笔记：2015 年，Nature，一位作者姓 Bengio，题名包含 deep learning。需要找到这篇论文的正式发表记录。作者可用完整姓名或规范的姓与名字首字母表示，但不要省略作者；不限定 APA、MLA 等引用格式。可以沿本次指定服务返回的 DOI 或出版链接核对原始书目信息；不要用其他学术库或通用网页搜索替代指定服务查询，也不要凭记忆填补缺失字段。只需书目信息，不需要获取或概括全文。",
+        "expected_output": "一条可识别的正式发表文献条目，包含原文题名、按原顺序列出的全部作者、年份、期刊名和正确的 DOI 链接；中文匹配说明及所用检索来源。",
+        "success": "实际通过指定服务取得与全部笔记线索相符的论文记录；交付的必要书目信息与事前冻结的出版社官方参考一致，作者无遗漏或错序，DOI 链接指向同一论文；匹配说明有数据依据，来源可核对。允许合理大小写、标点、作者姓名缩写及 DOI URL 形式差异；不要求特定结果排名、输出文件、额外字段或引用格式。",
+        "failure": "没有真实查询指定服务，混淆同名或相近论文，遗漏或错误填写必要书目字段，作者漏列或错序，DOI 属于其他作品，把笔记猜测或模型记忆冒充查询结果，使用其他检索服务代替，结论与实际来源矛盾或预算内未完成。真实无结果、元数据缺失、访问或额度阻碍如实记录；执行环境或采集故障单列无效。"
+      }
+    ]
   }
 }

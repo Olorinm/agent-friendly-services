@@ -216,6 +216,20 @@ categories:
     name: Search & Data Access
     description: Search APIs, crawling and scraping, data providers.
     subcategories:
+      - id: scholarly-search
+        name: Scholarly Literature Search
+        name_zh: 学术文献检索
+        description: Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.
+        inclusion: >-
+          Searches an identifiable scholarly corpus and returns work identities with citation metadata
+          such as title, authors, publication venue, year and persistent identifiers where available.
+        exclusion: >-
+          General web-page search, guaranteed full-text access, literature-review synthesis and research-quality
+          rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement
+          between indexes do not independently establish a paper's identity, quality or completeness.
+        capabilities:
+          - id: scholarly.search
+            description: Find scholarly works with enough bibliographic metadata to identify and cite them.
       - id: web-search
         name: Web Search
         description: Discover relevant public web pages from a query; answers may include source citations.

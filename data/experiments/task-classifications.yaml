@@ -144,3 +144,13 @@ tasks:
     id: geocoding-venue-001
     classification: web-search-data/geocoding
     phase: business
+
+  - file: data/experiments/tasks/scholarly-search.md
+    id: scholarly-access-001
+    classification: web-search-data/scholarly-search
+    phase: setup
+
+  - file: data/experiments/tasks/scholarly-search.md
+    id: scholarly-reference-001
+    classification: web-search-data/scholarly-search
+    phase: business
