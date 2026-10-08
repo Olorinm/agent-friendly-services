@@ -1,0 +1,78 @@
+{
+  "service": "openalex",
+  "phase": "business",
+  "independent_status": "completed",
+  "source_hashes": [
+    {
+      "path": "execution/artifacts/resp1.json",
+      "sha256": "7234d38dc643b2f1d93f3eed28f83ca893f29c41f5d13d6954279d7abae4de61"
+    },
+    {
+      "path": "execution/artifacts/prompt.txt",
+      "sha256": "931c3763e872b3c6700a83ff433c3202dc89366256b367ddf3f2c8edc7eefb86"
+    },
+    {
+      "path": "execution/artifacts/resp2.json",
+      "sha256": "61dc90991e14384dfffd2d11b94e83e3a658a1357d4aecccca560678f4c99046"
+    },
+    {
+      "path": "execution/artifacts/headers2.txt",
+      "sha256": "914c6c6022dd45cb949cbce221d0815a1a416504cda786541f5a361fa34539da"
+    },
+    {
+      "path": "execution/artifacts/headers1.txt",
+      "sha256": "ff981bb5e956850414fe50ff08081019d976ffdfc6a6db192f80483b9b25297b"
+    },
+    {
+      "path": "grading/artifacts/evidence/openalex-cost-and-free-tier.md",
+      "sha256": "41ab132d40430613b5055ef8a2d486818e478e497445f0265bd205d732e1d04c"
+    }
+  ],
+  "publisher_reference": {
+    "title": "Deep learning",
+    "authors_in_published_order": [
+      "Yann LeCun",
+      "Yoshua Bengio",
+      "Geoffrey Hinton"
+    ],
+    "year": 2015,
+    "journal": "Nature",
+    "doi": "https://doi.org/10.1038/nature14539",
+    "source": "https://www.nature.com/articles/nature14539",
+    "html_sha256": "528a37b890c6dea1178451c426377a0892da431fc7dc5ea11a8668492528cb1e",
+    "metadata_sha256": "437e61760532f3373081aab519479095cfa994f9bec0ba130d14f1f50fea85c9"
+  },
+  "service_api_requests": 2,
+  "retention_audit_sha256": "fa597023514b81c739918ae218dc62c1d7459e8818aa0913d1228c9f245c26d2",
+  "free_allowance_limit_usd": 0.1,
+  "observed_usage_credit_cost_usd": 0.0011,
+  "cash_service_fee_usd": 0,
+  "observed_requests": [
+    {
+      "kind": "filtered title/byline query",
+      "cost_usd": 0.001,
+      "remaining_usd": 0.098
+    },
+    {
+      "kind": "lookup by DOI",
+      "cost_usd": 0.0001,
+      "remaining_usd": 0.0979
+    }
+  ],
+  "author_name_variant": {
+    "raw_author_name": "Geoffrey Hinton",
+    "author_display_name": "Geoffrey E. Hinton",
+    "delivered_name": "Geoffrey E. Hinton"
+  },
+  "controller_publication_notes": [
+    "仅发布原答复、书目事实和核验说明；完整服务响应、摘要、出版社页面及原始会话私有保存。以下说明由总控复核添加，独立验收状态、检查项、原理由与费用判定均保留。",
+    "模型为DeepSeek V4.1 Flash/high，OpenCode1.18.35。两服务执行及验收分别使用独立容器/新会话；每阶段最多3次请求、单线程、请求开始间隔至少5秒是本轮约束，不是服务通用配额。官方默认包源未更改。",
+    "两家均使用匿名入口，无账号、邮箱、Key或付款；无需注册的入口没有强行注册。Crossref为标准public池，未传mailto；OpenAlex为无Key匿名免费额度，其共享范围不据单个响应猜测。",
+    "参考来自候选调用前冻结的Nature出版页及其书目元数据；原网页有cookie-support重定向，但实际取得200页面并核对citation标签与可见题名/作者。公开仅保留基本书目事实、官方URL和哈希，不转载正文或摘要。",
+    "仅一篇知名英文论文的已知条目查找，不能推出主题检索召回率、排名、全文可得性或整体学术检索质量。OpenAlex使用Crossref等上游数据，二者相同不等于两份独立真值；独立出版社参考决定核验。",
+    "同题两份执行结果全部冻结后才分别验收，验收者只看同一版交叉执行快照，没有其他验收结论。外部清理从两家接入配置移除了指向旧题目录的cache.dir，并从OpenAlex配置移除旧配额头；原配置归档、前后哈希保存。仅通用配置带入业务，没有旧题响应/答案/调用脚本或预写查询，不能称无外部准备的直接配置复用。",
+    "OpenAlex规范化作者名为Geoffrey E. Hinton，同条响应raw_author_name为Geoffrey Hinton，与出版社一致；原验收称“完全一致”不应解读为字面相同。人物、人数与顺序匹配，姓名显示存在中间首字母差异。",
+    "实际响应头：搜索扣0.001美元计价的免费额度，按DOI查询另扣0.0001，总计0.0011；现金费用为0。执行者称该DOI查询免费，与实际额度回执不符；不能因官方“single entity免费”概述把此请求额度记0，也不能将免费额度消耗当现金支出。未额外调用API调查原因。",
+    "元数据来源OpenAlex，官方元数据CC0说明不代表论文全文许可。当前匿名额度由实际x-ratelimit-limit-usd=0.1支持，账户免费额度与匿名额度不得混用。"
+  ]
+}
