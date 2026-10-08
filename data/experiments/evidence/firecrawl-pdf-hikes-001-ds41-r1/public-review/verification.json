@@ -1,0 +1,161 @@
+{
+  "scope": "One fixed official two-page, native-text NPS brochure table, not a scanned-OCR, all-PDF, freshness, trail-access or safety benchmark.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "db558108427049f8792782e535d54a8191df9e4c8db13dde9443bff6958e250c",
+    "execution/receipt.json": "0f6659a5ba6166bff10777de0fea40d2303d182e6357e55a2d4aa1940d8c86d6",
+    "execution/usage.json": "29376d9b60bbf81388ecfc88b4a44fac64f8ed1674d0fab5c1388a8d1e91dc50",
+    "execution/tool-records.json": "6bc47b288e1fe4e7e0edfab994c6c32f205b025be535f267be13d99960636f10",
+    "grading/assessment.json": "cc7f1f19f1c5a7aaf901feebff382b5222f883a0ff6645868c28bcd942b7aabc"
+  },
+  "configuration": "OpenCode1.18.35; DeepSeekV4.1Flash/high; execution25requests (access300s/business600s), grading40requests/300s,32000outputtokens/request. Same image,2GiB/1CPU/pids256,pipTUNA, initially emptycache; freshhome/session/workspace. Two service execution streams, separate fresh graders.",
+  "route": "public-scrape-api",
+  "account": "Anonymous only; no account, key, payment or mutable remote resource created.",
+  "api_call_limit": 6,
+  "limit_enforcement": "Service extraction count and >=1s spacing are instructions; model request, output and time limits are enforced. Stop after two consecutive 403/429/connection failures. MCP initialize/notifications/list calls are not extraction calls but are recorded in tools/time.",
+  "elapsed_seconds": 44.747639,
+  "service_cost_judgment": {
+    "kind": "confirmed_free",
+    "sources": [
+      "official-route-sources/firecrawl-rate-limits.md#keyless-no-api-key",
+      "grading/artifacts/evidence/firecrawl_scrape_evidence.md"
+    ],
+    "applicability": {
+      "rule": "Firecrawl 官方文档：keyless（无 API Key）使用 Scrape/Parse/Search 免费，按 IP 每日限额（两项限制：每日请求数与每日 credits），超额返回 429；未使用注册账号或付费方案。",
+      "observed": "本次两次调用均为匿名、请求未携带任何 API Key（scrape.py 仅设 Content-Type），POST /v2/scrape 两次均返回 HTTP 200、creditsUsed=2，未见 402/429 或付费超额，全程无付款方式。",
+      "evidence": "official-route-sources/firecrawl-rate-limits.md 第 71-82 行免费规则；execution/artifacts/firecrawl_markdown.json 与 firecrawl_html.json 的 metadata（statusCode 200、creditsUsed 2）；evidence/firecrawl_scrape_evidence.md。"
+    },
+    "note": "匿名 keyless 层级官方文档列为免费，本次 2 次调用均在免费额度内且无计费回执，故 service_cost_usd 记 0；未套用注册账号免费额度或付费 keyed 费率。"
+  },
+  "service_cost_usd": 0.0,
+  "fee_limit": "Official anonymous free rules matched to actual anonymous requests by the independent grader. Remaining quota and provider billing statement unavailable; public free result does not establish unlimited access. Credits are separate from dollar charges.",
+  "official_route_source_snapshots": [
+    {
+      "url": "https://docs.firecrawl.dev/features/document-parsing.md",
+      "sha256": "5f28112cf1cc6b780662d53da2b2102f39bf78eb35061fc4b899c9f6c1becc6a"
+    },
+    {
+      "url": "https://docs.firecrawl.dev/rate-limits.md",
+      "sha256": "cfd9035121bd0c06f2d1f11ad6643c6b4548f6dd912cdc8622b9c186cf1a178d"
+    },
+    {
+      "url": "https://docs.firecrawl.dev/billing.md",
+      "sha256": "bcfa062071d5d706cfaa296615cd70cc4868eab79e1808ddb1b4a8e24163ad11"
+    }
+  ],
+  "public_selection": "Only minimal factual observations, selected short table data and original evidence hashes. Full PDF, images, maps, raw service responses, complete sessions and request identifiers remain private.",
+  "resources": "All four dedicated batch containers stopped after independent review and complete usage collection.",
+  "published_csv": {
+    "name": "zion_easy_hikes.csv",
+    "sha256": "a550ab5848ec4981cdc4b267581cdc544e364dce36a020d00ac1dad177ac105d",
+    "rows": 5,
+    "utf8": true,
+    "columns": [
+      "trail",
+      "round_trip_miles",
+      "average_hours",
+      "elevation_change_feet"
+    ]
+  },
+  "independently_verified_rows": [
+    {
+      "trail": "Pa’rus Trail",
+      "round_trip_miles": "3.5",
+      "average_hours": "2",
+      "elevation_change_feet": "50"
+    },
+    {
+      "trail": "The Grotto Trail",
+      "round_trip_miles": "1",
+      "average_hours": "0.5",
+      "elevation_change_feet": "35"
+    },
+    {
+      "trail": "Lower Emerald Pool Trail",
+      "round_trip_miles": "1.2",
+      "average_hours": "1",
+      "elevation_change_feet": "150"
+    },
+    {
+      "trail": "Weeping Rock Trail",
+      "round_trip_miles": "0.4",
+      "average_hours": "0.5",
+      "elevation_change_feet": "98"
+    },
+    {
+      "trail": "Riverside Walk",
+      "round_trip_miles": "2.2",
+      "average_hours": "1.5",
+      "elevation_change_feet": "57"
+    }
+  ],
+  "reference_sha256": "aeac067dfa0968a438cd03b14f1163ab2fd8c462100bdb817d9e88477c9ead3c",
+  "reference_source": {
+    "url": "https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212",
+    "retrieved_at": "2026-10-08T18:37:51.834742+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf;charset=UTF-8",
+    "content_disposition": "inline; filename=\"Summer-Infoguide-2026.pdf\"",
+    "bytes": 8566287,
+    "sha256": "8834c768e02540e6f45cbd9c38bdb8eb05644c21779d42ac613706ae33b18fea",
+    "method": "Direct HTTPS GET of official NPS source; no extraction-provider API."
+  },
+  "document_identity": {
+    "title": "Zion Information Guide",
+    "author_pdf_metadata": "Zion National Park",
+    "response_filename": "Summer-Infoguide-2026.pdf",
+    "printed_publication_date": "5/18/2026",
+    "printed_date_location": "Physical page 2, bottom right",
+    "pdf_modification_date": "2026-07-31 (PDF metadata; not a claim about online release date)",
+    "physical_page_count": 2,
+    "pdf_bytes": 8566287,
+    "input_url_suffix": "loader.cfm; official HTTP content type application/pdf;charset=UTF-8",
+    "target_physical_page": 1,
+    "target_label": "Hiking Guide, EASY through immediately before MODERATE"
+  },
+  "independent_reference_method": "Task-design role directly downloaded official NPS PDF before service execution, extracted native text with pdftotext -layout, rendered both physical pages with pdftoppm and visually inspected them. Page 1 EASY black heading and MODERATE next heading bound exactly these five rows. Multiline Lower Emerald / Pool Trail is one name. Miles and feet are primary source values; do not recalculate from rounded km or m. No candidate API/response or prior executor answer used.",
+  "comparison": "Both business executions collected and peer outputs sealed before separate grading; reference source PDF/derived files and official route rules were independently frozen before dispatch, grader-only. Graders cannot see peer verdicts.",
+  "retention_audit_sha256": "f9b6d1e386992f1977d2ef298e94ad82ce3e9a184571db02121284d92cb9f56e",
+  "retention_preparation": "Controller archived access config and removed old example query/receipt fields and obsolete workspace-client pointers. No client/helper/answer added; no extra dependencies installed. Restarted both owned execution containers and verified unchanged config hashes, leaving only baseline processes. First Firecrawl restart verification mistakenly rejected normal uid1000 sleep/ps; audit recovery confirmed owner/config and repeated restart before business. No model replay; this is extra controller preparation, not unassisted reuse. Generic price claims in executor-written configs were not independently validated or corrected.",
+  "attribution": "Selected factual table from National Park Service, Zion National Park, Summer-Infoguide-2026.pdf, printed Published5/18/2026. Extracted to CSV; values retain original miles/hours/feet. No endorsement; no whole brochure or third-party artwork reproduced.",
+  "candidate_extraction_calls": 2,
+  "extraction_receipts": [
+    {
+      "file": "firecrawl_markdown.json",
+      "sha256": "5d44f65735d78f524bc1bc2d5e27e6ee5ed803e3d6efd19f3a7a6499b04ef680",
+      "metadata": {
+        "statusCode": 200,
+        "numPages": 2,
+        "totalPages": 2,
+        "title": "Zion National Park Information Guide ",
+        "contentType": "application/pdf",
+        "proxyUsed": "basic",
+        "creditsUsed": 2,
+        "concurrencyLimited": false
+      },
+      "returned_formats": [
+        "markdown"
+      ]
+    },
+    {
+      "file": "firecrawl_html.json",
+      "sha256": "17ed5ca0bc63ac3ac1a2da1e956781b708230fd062f355849010a87df6055404",
+      "metadata": {
+        "statusCode": 200,
+        "numPages": 2,
+        "totalPages": 2,
+        "title": "Zion National Park Information Guide ",
+        "contentType": "application/pdf",
+        "proxyUsed": "basic",
+        "creditsUsed": 2,
+        "concurrencyLimited": false
+      },
+      "returned_formats": [
+        "html"
+      ]
+    }
+  ],
+  "observed_credits": 4,
+  "cache_limit": "No cacheState/cachedAt field was returned for either PDF response; freshness cannot be inferred. Each response reported2pages and2credits. Official PDF metering descriptions differ; these actual receipts do not resolve the general pricing rule.",
+  "format_observation": "Executor requested markdown and then HTML and compared their EASY table values. Printed publication date was not present in returned text; requested table matched the frozen official PDF. Both formats may share the same underlying extraction, not independent provenance."
+}
