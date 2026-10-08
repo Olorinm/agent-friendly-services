@@ -104,6 +104,28 @@ catalog:
       url: https://github.com/exa-labs/exa-mcp-server
       checked_on: '2026-10-08'
       kind: official_repo
+    mcp-web-fetch:
+      url: https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/webFetch.ts
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: Public implementation snapshot, not confirmation of the version deployed at the hosted endpoint.
+    mcp-fetch-config:
+      url: https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/config.ts
+      checked_on: '2026-10-08'
+      kind: official_repo
+    contents-guide:
+      url: https://exa.ai/docs/contents/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Contents API documents PDF content extraction; this is not a separate guarantee for anonymous hosted MCP.
+    contents-reference:
+      url: https://exa.ai/docs/reference/get-contents
+      checked_on: '2026-10-08'
+      kind: official_docs
+    contents-pricing:
+      url: https://exa.ai/docs/admin/pricing
+      checked_on: '2026-10-08'
+      kind: official_docs
     terms:
       url: https://exa.ai/terms
       checked_on: '2026-10-08'
@@ -141,10 +163,12 @@ catalog:
             - fetch-docs
             - mcp-repo
           notes: >-
-            web_fetch_exa reads clean Markdown from one or more known URLs. Maximum URL count, output-size
-            limits and cache/freshness controls were not quantified in this MCP guide; inspect the tool
-            schema before execution. Documentation and historical search tests do not establish extraction
-            completeness or success.
+            web_fetch_exa reads clean Markdown from known URLs. The reviewed official implementation
+            accepts URLs and maxCharacters (default 3000 per URL), invokes /contents with text, and has
+            a 60-second outer timeout. It has no PDF-extension filter, but the MCP guide does not separately
+            guarantee PDF parsing. Actual hosted schema/deployment and PDF behavior remain to be checked.
+            No page-count or cache/freshness control is exposed by this implementation. Documentation
+            and historical search tests do not establish extraction completeness or success.
       notes: >-
         Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published.
         Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain
@@ -220,3 +244,7 @@ catalog:
           evidence:
             - pricing
           currency: USD
+  notes:
+    - The Contents API guide documents PDF and complex-layout extraction rather than merely downloading a binary file. The official web_fetch_exa implementation calls that API, providing a source-based reason to test a public PDF URL through anonymous MCP. It does not establish that the hosted anonymous route runs the same revision, permits every document size, or successfully parses a particular PDF. No new keyed route was substituted for public-mcp in this review.
+    - The reviewed MCP formatter retains title, URL and text, with optional author/date and a server searchTime metadata field; it does not expose the REST cached/crawled source or costDollars fields. Its tool input lacks REST maxAgeHours. REST freshness controls, account credits, request rates and content charges must not be presented as anonymous-MCP controls or fees.
+    - For REST Contents, pricing defines a page as one returned URL and bills each requested content type separately at $1 per 1000 pages. Its costDollars is an estimate, not an invoice. Neither the reviewed REST schema nor the MCP guide guarantees physical PDF page numbers, OCR for arbitrary scans, a PDF page/file-size limit, or correct table structure. Keep a source URL and verify the requested facts against the original document; a truncated excerpt is not a complete table.

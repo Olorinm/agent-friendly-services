@@ -104,6 +104,10 @@ tasks:
     id: web-extraction-holidays-001
     classification: web-search-data/web-extraction
     phase: business
+  - file: data/experiments/tasks/web-extraction-pdf.md
+    id: web-extraction-pdf-hikes-001
+    classification: web-search-data/web-extraction
+    phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-002

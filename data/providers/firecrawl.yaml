@@ -101,6 +101,22 @@ catalog:
       url: https://docs.firecrawl.dev/api-reference/endpoint/scrape
       checked_on: '2026-10-08'
       kind: official_docs
+    document-parsing:
+      url: https://docs.firecrawl.dev/features/document-parsing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pdf-options:
+      url: https://docs.firecrawl.dev/features/parse
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pdf-engine:
+      url: https://www.firecrawl.dev/blog/fire-pdf-launch
+      checked_on: '2026-10-08'
+      kind: official_site
+    billing:
+      url: https://docs.firecrawl.dev/billing
+      checked_on: '2026-10-08'
+      kind: official_docs
     rate-limits:
       url: https://docs.firecrawl.dev/rate-limits
       checked_on: '2026-10-08'
@@ -264,6 +280,9 @@ catalog:
         excludes batch scrape and the separate Extract endpoint. Scrape renders JavaScript, defaults to a
         two-day cache (maxAge: 172800000), and accepts maxAge: 0 for a fresh fetch. Timeout is 1–300 seconds,
         default 60. Fetch location defaults to the US; this is not a caller-country eligibility guarantee.
+        The same Scrape endpoint detects public PDF inputs by extension or content type and parses content;
+        no .pdf URL suffix is required. PDF pages consume anonymous credit allowance, whose numerical cap
+        is unpublished. Registered account quotas and paid PDF rates do not quantify anonymous access.
         A returned 403/404 page is not evidence of useful extraction. Terms restrict commercial use without
         express authorization. No task success or content redistribution permission is inferred.
       auth:
@@ -329,3 +348,13 @@ catalog:
         extraction can cost more. Failed requests without results are not charged, but returned 403/404 pages
         can consume a credit. The public-scrape-api route records anonymous limits separately. Free access
         does not override the commercial-use restriction or rights in the target page.
+  notes:
+    - Document Parsing and Parse describe public PDF URL parsing through /v2/scrape, separately from uploading bytes to /v2/parse. The default PDF parser uses auto mode (native text with OCR fallback); fast uses embedded text only, while ocr forces OCR. The documented pipeline detects tables and produces Markdown, but correct values and row/column relationships remain task-level checks. An empty parsers array returns base64 rather than extracted content and does not establish PDF extraction.
+    - The Scrape reference accepts maxPages from 1 to 10000 as a processing cap, not a guarantee that every document of that size succeeds. PDF metadata numPages counts parsed pages and totalPages reports the original count when known; a larger totalPages indicates truncation. Optional pages returns physical per-page Markdown; blocks adds typed regions and geometry. pageMarkers has no leading page-1 marker and may skip boundaries when cross-page content is merged. These options do not add credits. The 50 MB limit is stated for upload Parse; this review did not establish an equal URL-Scrape file-size ceiling.
+    - >-
+      Cached Scrape results still consume credits; the usual two-day maxAge window also applies to URL
+      requests unless overridden. PDF billing wording is inconsistent across the reviewed documents:
+      Scrape/Parse describe one credit per PDF page, while Billing lists PDF parsing as an additional
+      one credit per page above the Scrape base. Record actual usage or preserve uncertainty instead
+      of assuming a flat one-credit URL charge. Keyless Scrape remains free within its unpublished
+      per-IP daily request and credit caps; do not apply an account allowance to it.
