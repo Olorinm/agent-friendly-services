@@ -40,7 +40,7 @@
 - `status`、`reason`、`reviewer`：完成状态、有依据的说明、本次验收者标识。
 - `checks`：每项有 `criterion`、布尔值 `passed` 和具体 `evidence`；全部通过才能判完成。
 - `evidence`：选取可公开的最少文件，条目含 `path`、`note`；路径相对本次运行记录目录。原始会话、用量源文件和凭据不作为公开附件。
-- `human_interventions`：实际观察次数，缺失用 `null`。
+- `human_interventions`：本次被测执行开始后，实际需要人类参与的次数；证据缺失用 `null`。总控 Agent 的自动调度不算人类操作。事前提供的账号、Key、空资源等准备条件另在原因/接入门槛中说明，不仅因“凭据已提供”就给本次运行加一次人工介入；未观察的历史注册步骤不补填次数。历史验收的原始口径保留并注明差异。
 - `service_cost_usd`：有回执时填金额；按量估算或未知时填 `null`，由脚本计算或保留未知。
 - `service_cost`：对象，含 `kind`、`sources`（来源引用数组）与 `note`。`reported` 对应真实报告金额；`estimated` 还须有 `items`，每项为计费 `quantity`、`unit`、`usd_per_unit`；`confirmed_free` 还须有 `applicability`，写清 `rule`（免费规则）、`observed`（本次满足条件的观察）、`evidence`（观察依据）；`unknown` 不填已知金额。
 
