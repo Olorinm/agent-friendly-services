@@ -494,5 +494,21 @@
         "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列。若总控未能取得约定的独立只读回执，记验收材料缺口，不凭执行者自报判完成，也不直接判服务失败。"
       }
     ]
+  },
+  "web-search-001/v2": {
+    "description": "I am upgrading a Python app to 3.13. Briefly explain in Chinese whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions. Include official page links supporting these conclusions.",
+    "inputs": "Target Python 3.13; official sources under python.org. Discover sources through the assigned search service. You may directly read search result pages and the official documentation they link to. The official evidence you cite must be traceable to those search results; do not answer from model memory or another search engine.",
+    "expected_output": "A concise answer in Chinese covering the default setting, how to enable free threading, and C-extension compatibility, with official page links sufficient to support all three conclusions. There is no fixed source count; one official page may support multiple conclusions.",
+    "success": "All three questions are answered correctly and supported by official Python 3.13 documentation. The final official links support the conclusions, and their real sources are traceable to the assigned service’s search results and linked official documentation. Directly reading these sources is allowed; another search engine must not replace the assigned service for discovery. Actual calls, responses and source content captured by the runner make the answer and source chain verifiable. The executor need not produce separate audit logs.",
+    "failure": "The assigned service was not called, another search engine replaced it, cited sources cannot be traced to sources it discovered, an answer or official support for any of the three questions is missing, Python versions are confused, the official links used are omitted, or the budget is exceeded. Evidence gaps caused by environment or collection failures are separately invalid; missing extra audit files alone does not mean service failure.",
+    "source_variants": [
+      {
+        "description": "我准备把 Python 应用升级到 3.13，请用中文简要查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并附上支持这些结论的官方页面链接。",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org。使用本轮指定搜索服务发现来源；可直接读取搜索结果页面及其中指向的官方文档。所引用的官方依据应能追溯到这些搜索结果；不依赖模型记忆或其他搜索引擎提供答案。",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；给出足以支持三个结论的官方页面链接。来源数量不限；同一官方页面能支持多个结论时可复用。",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；最终提供的官方链接与结论对应，真实来源能追溯到指定服务的搜索结果及其官方文档链接。直接读取这些来源页面允许；其他搜索引擎不能替代指定服务发现来源。来源链与回答可通过运行器采集的实际调用、响应和所读内容核对；不要求执行者另外编写审计日志。",
+        "failure": "未调用指定搜索服务、用其他搜索替代、引用来源无法追溯到该服务发现的来源、缺少任一问题的答案或官方依据、版本混淆、未提供所用官方链接或预算内未完成；运行环境或采集故障导致证据不足时单列无效，不因缺少额外审计文件判服务失败。"
+      }
+    ]
   }
 }

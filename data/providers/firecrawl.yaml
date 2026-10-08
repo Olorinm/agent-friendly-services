@@ -83,7 +83,11 @@ catalog:
   sources:
     docs:
       url: https://docs.firecrawl.dev/features/search
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
+      kind: official_docs
+    search-reference:
+      url: https://docs.firecrawl.dev/api-reference/endpoint/search
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://www.firecrawl.dev/pricing
@@ -105,14 +109,21 @@ catalog:
       url: https://www.firecrawl.dev/terms-of-service
       checked_on: '2026-10-08'
       kind: official_site
+      notes: >-
+        No explicit benchmark/comparison-publication ban was found in the reviewed terms.
+        Commercial purposes require express authorization, and third-party content rights still
+        apply. Those restrictions do not by themselves establish that publishing a self-measured
+        result without redistributing source pages is prohibited.
   routes:
     - id: public-search-api
       docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
-      entry_url: https://docs.firecrawl.dev/features/search
+      entry_url: https://api.firecrawl.dev/v2/search
       evidence:
         - docs
+        - search-reference
+        - rate-limits
       availability:
         value: self_serve
         evidence:
@@ -136,15 +147,40 @@ catalog:
             This route records query-based Search and optional content from its results; it does not establish
             specified-URL extraction. See the separately documented Scrape route.
       notes: >-
-        Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account
-        free credits cannot be assumed for this route.
+        POST a query (up to 500 characters) for titles, descriptions and URLs; limit is 1-100 results
+        per source type. Keyless access is explicitly documented. Anonymous usage is free but capped
+        per IP per day by both request count and credits; numerical ceilings are unpublished and
+        either limit can produce 429. Account Free credits and its per-minute limits do not quantify
+        this route. Optional scrapeOptions fetches result content at additional credit cost; plain
+        search discovery does not require that option and is separate from specified-URL extraction.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - rate-limits
+        payment_method:
+          value: not_required
+          evidence:
+            - rate-limits
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Keyless Search within unpublished per-IP daily request and credit caps; no paid account allowance inferred.
+          evidence:
+            - rate-limits
     - id: account-search-api
       docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
-      entry_url: https://docs.firecrawl.dev/features/search
+      entry_url: https://api.firecrawl.dev/v2/search
       evidence:
         - docs
+        - search-reference
+        - pricing
+        - rate-limits
       availability:
         value: self_serve
         evidence:
@@ -167,8 +203,17 @@ catalog:
           notes: >-
             This route records query-based Search and optional content from its results; it does not establish
             specified-URL extraction. See the separately documented Scrape route.
-      notes: 'Search: 2 credits per 10 results; extra scraping can consume credits.'
+      notes: >-
+        Account Search uses a Bearer API key. Basic web search costs 2 credits per 10 results,
+        rounded up; optional scraping adds its own cost. Free accounts receive 1000 credits/month
+        shared across endpoints, with 10 Search requests/minute per team. Search-result location
+        controls are not a guarantee of caller-country eligibility. Registration and available
+        account balance are separate from the documented keyless route.
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - docs
         payment_method:
           value: not_required
           evidence:
@@ -178,7 +223,7 @@ catalog:
           amount: 1000
           unit: credits
           per: month
-          scope: Account Free plan; separate from anonymous access.
+          scope: Shared Free account balance across endpoints; separate from anonymous access.
           evidence:
             - pricing
     - id: public-scrape-api
