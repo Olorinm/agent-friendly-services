@@ -154,3 +154,8 @@ tasks:
     id: scholarly-reference-001
     classification: web-search-data/scholarly-search
     phase: business
+
+  - file: data/experiments/tasks/database-restore.md
+    id: database-restore-001
+    classification: databases/hosted-relational
+    phase: business
