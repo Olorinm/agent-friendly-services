@@ -238,6 +238,20 @@ categories:
         exclusion: >-
           Query-only result lists/snippets are web search; browser control is a runtime, not extraction
           itself.
+      - id: geocoding
+        name: Geocoding
+        name_zh: 地理编码
+        description: Resolve named places or supplied public addresses to geographic coordinates.
+        inclusion: >-
+          Returns a geographic position with enough place or address context to identify the match;
+          coverage, result granularity and public-endpoint conditions must be specified.
+        exclusion: >-
+          General web search, weather at known coordinates, map tiles and route navigation are separate.
+          A place or building coordinate does not establish an exact entrance, postal deliverability or
+          safe navigation to a destination.
+        capabilities:
+          - id: places.geocode
+            description: Resolve a place name or address to an identified geographic position.
       - id: weather-data
         name: Weather Data
         name_zh: 天气数据

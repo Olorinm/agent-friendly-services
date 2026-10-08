@@ -134,3 +134,13 @@ tasks:
     id: weather-outing-001
     classification: web-search-data/weather-data
     phase: business
+
+  - file: data/experiments/tasks/geocoding.md
+    id: geocoding-access-001
+    classification: web-search-data/geocoding
+    phase: setup
+
+  - file: data/experiments/tasks/geocoding.md
+    id: geocoding-venue-001
+    classification: web-search-data/geocoding
+    phase: business

@@ -542,5 +542,37 @@
         "failure": "未取得指定服务的真实预报，换用其他服务或示例，地点、日期、时区、小时区间或单位错误，混淆温度瞬时值和降水累计时段，擅自均摊较长时段或填造缺失数据，遗漏用户要求的信息，结论与响应矛盾或预算内未完成。服务缺少需要的小时覆盖时如实记录未完成部分；执行环境或采集故障单列无效，正常预报更新和模型间差异不直接算服务失败。"
       }
     ]
+  },
+  "geocoding-access-001/v1": {
+    "description": "Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.",
+    "inputs": "The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose one public place for a small query and report its match, explicitly labeled latitude and longitude, and source. Use a keyless entry point directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "A real place match and labeled coordinates from the assigned service, with the source; reusable configuration location; actual setup steps, account origin and human or application barriers, or specific blockers.",
+    "success": "Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable place and valid coordinates, and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.",
+    "failure": "No real place query; another service or route; only a health check, installation, example or configuration; an answer inconsistent with the response; incorrect or confused coordinate axes; unusable configuration; exposed secrets; or failure to finish within the budget. Record identity, authorization, human and quota barriers faithfully. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选一个公开地点做小型查询，给出匹配地点、明确标注纬度和经度的坐标及来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实地点匹配和带经纬度标签的坐标，注明来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别地点和有效经纬度，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实地点查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，经纬度错误或混淆，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "geocoding-venue-001/v1": {
+    "description": "I want to mark the British Museum on a travel map. Use the assigned service to convert the venue address in the attachment to usable coordinates. Answer in Chinese with the matched place name, explicitly labeled WGS84 decimal latitude and longitude, address information actually returned by the service, and data source. Explain whether the location represents the venue, an entrance or a coarser area.",
+    "inputs": "Place: The British Museum. Address: Great Russell Street, London WC1B 3DG, United Kingdom. The purpose is a venue marker for an itinerary overview. A venue center or entrance is acceptable, with a place-level position within 200 meters of the venue’s official location point; exact doorway navigation is unnecessary. A street, postal-code or city center must not be presented as the venue. Use only actual query results from the assigned service. Disclose missing address fields rather than inventing them, distinguish the supplied address from the returned address, and state when adequate precision is unavailable.",
+    "expected_output": "A Chinese answer with the correct venue name, WGS84 decimal coordinates explicitly labeled as latitude and longitude, actual returned address information and data source; explain the returned object’s location granularity and any material uncertainty.",
+    "success": "A real query through the assigned service matches the British Museum in London or its entrance. Final coordinates agree with that object’s real response, with correct axes and units, and lie within 200 meters of the independently frozen official venue point, allowing reasonable display rounding. Name, location and returned object semantics jointly support the venue identity; proximity alone does not turn a coarse area object into a venue match. The source, returned address and granularity explanation are verifiable, without invented missing fields. Services need not return identical coordinates, word-for-word addresses or a fixed field set.",
+    "failure": "No real assigned-service query; another service, static example or model memory substituted; a wrong place or coarse area presented as the venue; swapped axes or an invalid coordinate format; coordinates beyond the disclosed tolerance; invented or conflated supplied and returned addresses; missing necessary deliverables; contradictions with the response; or failure to finish within budget. Record incomplete coverage or precision honestly. Execution-environment or evidence-collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。",
+        "inputs": "地点：The British Museum；地址：Great Russell Street, London WC1B 3DG, United Kingdom。用途是行程概览中的场馆标记，定位到场馆本身即可，场馆中心或入口都可以；相对场馆官方位置点，200 米以内的地点级位置误差可接受，无需精确到门口。街道、邮编或城市中心不能冒充场馆。只用本轮指定服务的实际查询结果；没有返回的地址字段如实注明，不补造，输入地址与服务返回地址分开说明；未提供足够精度时如实说明。",
+        "expected_output": "中文答复包含正确的场馆名称、带纬度和经度标签的 WGS84 十进制度坐标、实际返回的地址信息和数据来源；说明返回对象的定位粒度和任何重要的不确定性。",
+        "success": "通过指定服务真实查询并匹配到伦敦大英博物馆或其入口；最终坐标与该对象的真实响应一致，坐标轴及单位正确，并位于事前冻结的官方场馆位置点 200 米内，允许合理展示舍入。名称、位置和返回对象的语义共同支持场馆身份，不能仅凭落在半径内把粗略区域对象当场馆。来源、实际返回的地址及粒度说明可核对，未返回字段不捏造；不要求两家服务坐标相同、地址逐字相同或提供固定字段集。",
+        "failure": "未真实查询指定服务，使用其他服务、静态示例或模型记忆代替，匹配到错误地点或仅粗略区域却称为场馆，经纬度颠倒或格式错误，坐标超出公开告知的容差，伪造或混淆输入与返回地址，遗漏必要交付，结论与响应矛盾或预算内未完成。缺少场馆覆盖或有效精度时如实记录未完成部分；执行环境或采集故障单列无效。"
+      }
+    ]
   }
 }
