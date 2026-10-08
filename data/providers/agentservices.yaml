@@ -1,0 +1,79 @@
+id: agentservices
+name: AgentServices
+category: agent-tooling
+homepage: https://agentservices.to
+summary: Paid data APIs for AI agents — 54 services (finance, market intelligence, analytics) with x402 per-call payments and an official MCP server.
+submitted_by: vendor
+
+tags:
+  - api
+  - data
+  - payments
+  - x402
+  - mcp
+
+entrypoints:
+  docs: https://agentservices.to
+  api_reference: https://agentservices.to/openapi.json
+  openapi: https://agentservices.to/openapi.json
+  pricing: https://agentservices.to
+  mcp_official: https://agentservices.to/mcp
+  mcp_registry: https://registry.modelcontextprotocol.io/~/
+
+checks:
+  self_serve_signup:
+    status: supported
+    evidence: https://agentservices.to
+    verified: "2026-07-13"
+    notes: API is self-serve; agents discover endpoints via MCP handshake or OpenAPI spec and pay per-call via x402.
+
+  api_key_self_serve:
+    status: supported
+    evidence: https://agentservices.to/openapi.json
+    verified: "2026-07-13"
+    notes: x402 payment-native; no API key required for standard calls. Agents receive 402 responses with payment requirements.
+
+  free_tier_or_trial:
+    status: supported
+    evidence: https://agentservices.to/.well-known/x402
+    verified: "2026-07-13"
+    notes: Many endpoints are free (health, catalog); paid endpoints settle via x402 at per-call rates (typically 0.001-0.01 USDC).
+
+  self_serve_paid_upgrade:
+    status: supported
+    evidence: https://agentservices.to/.well-known/x402
+    verified: "2026-07-13"
+    notes: x402 per-call pricing is the default billing model. No subscription required.
+
+  automation_permitted:
+    status: supported
+    evidence: https://agentservices.to/mcp
+    verified: "2026-07-13"
+    notes: Built for agent consumption — MCP server with 37 tools, OpenAPI spec, and agents.json route for discovery.
+
+  idempotency:
+    status: not_applicable
+    notes: Read-only data APIs (market data, analytics, health checks); requests are inherently repeatable.
+
+  oauth_support:
+    status: unknown
+    notes: No OAuth flow documented; auth is via x402 payment settlement.
+
+  scoped_tokens:
+    status: unknown
+
+  token_revocation:
+    status: unknown
+
+  sandbox_or_test_mode:
+    status: unknown
+    notes: Free endpoints serve as no-cost evaluation; no separate sandbox documented.
+
+  usage_dashboard:
+    status: unknown
+
+  versioning_policy:
+    status: supported
+    evidence: https://agentservices.to/openapi.json
+    verified: "2026-07-13"
+    notes: API versioned at v5.3.0 with semantic versioning. OpenAPI spec includes version field.
