@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "run_id": "neon-atomic-access-ds41-r1",
+  "service_id": "neon",
+  "route_id": "claimable-api",
+  "entry_url": "https://claimable.neon.tech/v1/agent/identity",
+  "task": {
+    "description": "帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。",
+    "inputs": "指定服务、入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；无需账号的入口直接使用。仅新建本轮独立测试数据库及必需的最小父资源，不访问既有用户数据库。用一次只读数据库查询确认能连接，不创建业务表或记录。将资源标识和必要连接配置保存在本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。已有账号来源、自助步骤、人工介入、特殊申请和具体阻碍如实说明。",
+    "expected_output": "一个本轮新建、可访问且无业务数据的远程测试数据库；指定方式的真实只读查询结果；可复用配置位置与资源标识；账号来源、实际接入步骤、人工或申请门槛，以及已知免费额度或到期限制。",
+    "success": "通过指定服务及入口完成必要接入，新建本轮独立空数据库并真实查询成功；所需安装和配置可供新会话复用且不泄露凭据；已有账号不算本轮自助注册，免账号入口不强行注册，免费或期限依据及未知项如实说明。仅有安装、资源列表、创建回执或健康检查不足以证明数据库可查询。",
+    "failure": "无可用的专用远程数据库或真实查询、仅本地模拟、改用其他服务或入口、提前写入业务数据、配置不可复用、泄露凭据或预算内未完成；缺身份、权限、人工步骤或免费额度记具体接入阻碍，执行环境故障单列无效。",
+    "resources": "仅用本轮授权身份和已确认免费资源；最多新建一个专用测试数据库及服务必需的最小父资源，不购买、绑付费方式或开启超额计费，不邀请或通知他人。不读取或修改既有数据库，不访问其他项目凭据。不得写入待办材料或预建业务表。仅在隔离环境安装通用依赖、保存私有连接配置；调用与时间上限见 ENVIRONMENT.md。新建资源保留至业务任务和验收结束，由总控按确切资源标识清理或记录自动到期。",
+    "id": "database-access-001",
+    "version": "v1",
+    "sha256": "7ae679da9de8a65a31f2a5e24becc1e7a2c0875551e04b2696639d5d4fee892d",
+    "file": "data/experiments/tasks/databases-v2.md"
+  },
+  "prompt_sha256": "c4c4fd6a2a2a69907178626c8337aa24c548d4b6d6ef62bc809160e120a571c1",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T21:36:57.665333+00:00",
+  "ended_at": "2026-10-08T21:37:38.537233+00:00",
+  "elapsed_seconds": 40.8719,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "Preprovided existing authorized parent identity; executor creates one fresh empty logical database",
+    "web_search": "live",
+    "preparation_note": "Fresh containers, current injected runner source hashes, same image/OpenCode1.18.35 DeepSeekFlash/high, TUNA pip index and empty cache. Existing Turso personal starter management account and existing authorized Neon Claimable parent credentials provided; no registration measured. Agent creates and queries one new empty logical database; earlier user/test databases untouched. New Neondatabase shares existing parent100MB/1GB and2026-10-11T12:36:21.796Zexpiry; no new parent/identity. New cohort not pooled with anonymous-parent-creation access. Executor25modelrequests/300s andgrader40/300s,20serviceoperations instructed,first403/429stop,2parallelproviderstreams. Controller entitlement preflight and runtime preparation are external setup, costs not separately measured. Injected file hashes in private preparation and runtime receipts.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "已在总控预提供的 Neon 父项目内，用授权管理连接真实新建单一逻辑空库 [SERVICE_SECRET]，并通过标准 Postgres 驱动完成一次只读连通查询（返回新库与 [SERVICE_SECRET]，用户表数=0），未建业务表、未写业务行；配置保存到指定持久目录且答复只给路径、未泄露凭据；账号来源、接入步骤、人工门槛与到期/限额如实说明。费用无回执或可核计价规则，保留 unknown。",
+  "usage": {
+    "input_tokens": 161771,
+    "cached_input_tokens": 149632,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5465,
+    "reasoning_output_tokens": 2452
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [],
+    "note": "无付费回执或账单；父项目与免费额度由总控预先提供，本次未捕获 Neon 的计价规则或用量计费证据。执行答复依据环境说明称免费，但材料未提供可独立核验的免费规则来源，故保留 unknown。已观察的限额为项目到期 2026-10-11T12:36:21.796Z、100MB 存储/1GB 传输/72h 由项目内全部逻辑库共享。",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "grader",
+    "reviewed_at": "2026-10-08T21:56:17.133395+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定 Neon 服务与授权链路接入：使用总控提供的父项目管理连接建库，未新建身份/项目/分支、未改用其他服务或入口",
+        "passed": true,
+        "evidence": "provision.py 读取 credentials.json 中的 PARENT_DATABASE_URL 执行建库；answer.md 说明未调用身份注册入口；全过程仅出现 Neon/psycopg2，无其他服务或入口。"
+      },
+      {
+        "criterion": "新建且仅新建一个本轮专用空逻辑库，命名符合 afs_atomic_20261009_ 前缀要求",
+        "passed": true,
+        "evidence": "建库前查询以该前缀的既有库为空；执行一次 CREATE DATABASE 后返回新库 [SERVICE_SECRET]；无第二个新建库。"
+      },
+      {
+        "criterion": "通过标准 Postgres 驱动对新库完成一次真实只读查询确证可用，且库内无业务表/数据",
+        "passed": true,
+        "evidence": "对新库 SELECT current_database(),current_user,1 返回 ([SERVICE_SECRET], [SERVICE_SECRET], 1)；information_schema 用户表计数=0；未执行任何写业务数据的语句。"
+      },
+      {
+        "criterion": "连接配置保存到指定持久目录且可供新会话复用，秘密仅存私有文件，答复不泄露凭据",
+        "passed": true,
+        "evidence": "credentials.json 写入 NEW_DATABASE_URL，service-config.json 写入标识/参数/限制；用保存后的配置二次只读连接成功；answer.md 仅给出路径，未输出密钥或连接串。"
+      },
+      {
+        "criterion": "如实说明账号来源与人工门槛",
+        "passed": true,
+        "evidence": "answer.md 说明父身份/项目由总控预先提供、非本轮自助注册，且未调用 claimable 身份注册入口；本轮无人工介入（claim 仅用于长期持有场景，未涉及）。"
+      },
+      {
+        "criterion": "如实说明免费与到期限制及未知项",
+        "passed": true,
+        "evidence": "answer.md 记录项目到期 2026-10-11T12:36:21.796Z、未认领窗口 72h、claim code 15 分钟、100MB 存储/1GB 传输由项目内全部逻辑库共享且新库不延长到期；免费结论来源为环境说明，无计费规则或回执可独立核验。"
+      },
+      {
+        "criterion": "遵守资源与预算约束：不读写既有业务数据、未建业务表/写业务行、未超请求与时间预算",
+        "passed": true,
+        "evidence": "仅执行权限/目录查询、一次建库与只读 SELECT；receipt 显示运行约 41s、exit_code 0，measured 记录 12 次模型请求（上限 25）；只新建 1 个数据库。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.02611656,
+      "kind": "estimated",
+      "scope": "Independentgrading overhead separately measured; frozen standardAPIestimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.02611656,
+          "usage_sha256": "c94a234f965a2eceb2b04f1db4f9ca1d56147c206cae41675e14caa547ca75e1"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/neon-atomic-access-ds41-r1/public-review/verification.json",
+      "sha256": "50455ed023d3268b31a1f841c133c9b8329a127a3d428f651c03d2f98f444efc",
+      "note": "实际原始来源哈希、前后完整合成状态/结构、代码执行绑定、费用与准备限制、精确资源清理。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/database-atomic-deepseek-overnight-20261009/neon-atomic-access-ds41-r1",
+    "run_sha256": "fc02bfcc01e4ecddd94bea49713868e001ecff19b4d1fd3dbbee4ce33b59ad19",
+    "events_sha256": "f6201bdc9ed9ef585f38ea511c2dcc22a30b51242147cf6a972d30f0a0e2d5da",
+    "answer_sha256": "6b6f6bb27d0cc65e25963ad190161162e3cbc11c34f2f170d03182326e3432e2",
+    "review_sha256": "64326a6606b120ce4665db22fab8f7dad08dd1079c2193716e8cc4e7c76d039e",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "1bb371e48c189db3e70a41e48c1e50086ae27aae4ccc5fed086009fc114d258d",
+    "publication_review_note": "Select minimal reproducible synthetic evidence and source/invocation binding; original independent status/check outcomes and fee kind/amount preserved. No execution or grading replay, no task repair. Exact new resources cleaned after review; prior parent/resources retained."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7182,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 117,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8146,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 284,
+        "reasoning_output_tokens": 100
+      },
+      {
+        "input_tokens": 8738,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 256,
+        "reasoning_output_tokens": 159
+      },
+      {
+        "input_tokens": 12612,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 755,
+        "reasoning_output_tokens": 623
+      },
+      {
+        "input_tokens": 13479,
+        "cached_input_tokens": 13312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 374,
+        "reasoning_output_tokens": 276
+      },
+      {
+        "input_tokens": 14056,
+        "cached_input_tokens": 13824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1087,
+        "reasoning_output_tokens": 459
+      },
+      {
+        "input_tokens": 15159,
+        "cached_input_tokens": 14976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 15443,
+        "cached_input_tokens": 15232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 390,
+        "reasoning_output_tokens": 97
+      },
+      {
+        "input_tokens": 15848,
+        "cached_input_tokens": 15616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 16099,
+        "cached_input_tokens": 15872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1110,
+        "reasoning_output_tokens": 450
+      },
+      {
+        "input_tokens": 17353,
+        "cached_input_tokens": 17152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 264,
+        "reasoning_output_tokens": 129
+      },
+      {
+        "input_tokens": 17656,
+        "cached_input_tokens": 17408,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 646,
+        "reasoning_output_tokens": 145
+      }
+    ],
+    "source_sha256": "a7e5959b87d4d3730fb7eaa3f6e19d25450ecbb9441629315bca9af2a3859c48",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 161771,
+      "cached_input_tokens": 149632,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5465,
+      "reasoning_output_tokens": 2452
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

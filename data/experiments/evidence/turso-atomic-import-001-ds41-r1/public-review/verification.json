@@ -1,0 +1,257 @@
+{
+  "scope": "One small observed import task per service, separately measured access. Native transaction source/call/error evidence plus independently read states; no general reliability, concurrency/crash/ACID certification or SQL latency ranking.",
+  "independent_status": "completed",
+  "originals": {
+    "execution/answer.md": "fb23ed47ab850b5fb1792375cf7ee09b93e0e042498e191d8075b8fba9d42453",
+    "execution/receipt.json": "2f7d6e7962dc268d0eb4c90218b10e86cb5cb53dd16a5d2ff241925b760ea052",
+    "execution/usage.json": "90e9c63b38424b79ee3fe394f1b17d60ab647dec8d567a3d4268907620853c46",
+    "grading/assessment.json": "a06f56c3d6daff1aa28d94151564b3e1fae05ec01bf1d60d68cd0e5efee9158c"
+  },
+  "runtime": {
+    "harness": {
+      "name": "OpenCode",
+      "version": "1.18.35",
+      "mode": "run --format json"
+    },
+    "model": "deepseek-flash",
+    "reasoning_effort": "high",
+    "started_at": "2026-10-08T21:46:08.207709+00:00",
+    "ended_at": "2026-10-08T21:47:12.248529+00:00",
+    "exit_code": 0,
+    "timed_out": false,
+    "source_preflight": {
+      "source_sha256": {
+        "worker.py": "c9bf499b9bb1e30a164af81baad835305433c3a4e022b788a17264886d87d0fa",
+        "normalize.py": "2d8d0dc3d724e7de35d78416a482b5c8c8337a086d67e0362778536513c8a9aa",
+        "capture-proxy.py": "9df399ca9bc63f3d8c18129bd6b9bc52ed20f0ea7517d16e142d0233b84d546d",
+        "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+        "request_limits.py": "142c561df8c0704336151c2d200a364a720c234c3a456fe8b7510c2474a10877"
+      },
+      "verified_at": "2026-10-08T21:46:06.431126+00:00",
+      "scope": "Controller read of root-injected support files before run allocation; not a mid-run immutability guarantee."
+    },
+    "image": "sha256:b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "resources": "2GiB /1CPU /pids256, nohostmount/socket/publishedports; fresh home/session/workspace; max2providerstreams",
+    "model_limits": "Execution25requests,access300s/business600s;grading40requests300s;32000output/request;2026-10-09T00:00Zdeadline",
+    "package_index": "TUNA pip configured before access; no extra preinstalled clients"
+  },
+  "account_preparation": "Existing Turso starter organization management identity, or existing already-authorized Neon Claimable parent with CREATEDB; both preprovided, no signup measured. Executor creates exactly one new empty database; older application data outside scope.",
+  "cleanup": {
+    "at": "2026-10-08T21:51:15.683888+00:00",
+    "delete_http_status": 200,
+    "metadata_after_http_status": 404,
+    "exact_resource_identity_verified": true,
+    "previous_group_and_database_untouched": true
+  },
+  "controller_notes": [
+    "Account/parent/runtime preparation, root fixture construction, independent reads and cleanup are separate overhead; not included as executor achievement or known-zero costs.",
+    "One observation per provider/task/route/conditions. Different SQL engines and chosen clients; cannot interpret Agent total wall time as database query latency or protocol superiority.",
+    "Service-operation limit is an instruction; model count/output/time limits are proxy/worker enforced.",
+    "Both remote test tables were initialized by controller after independently passed access: same explicit primarykey/NOTNULL schema and100/已有书目. Only rawCSV/schema/baseline and connectionsettings provided, no importer/initializationcode or reference answers.",
+    "The complete source is mechanically reconstructed from captured writes/edits and bound to actual invocations; final source matches byteforbyte. This supporting publication audit did not run any candidate code or alter a verdict.",
+    "Both final tables alone are insufficient; original independent graders also reviewed source, real native constraint errors, documented transaction semantics and absence of compensating writes.",
+    "Source description uses attachments/ while frozen pipeline materials actually use materials/. Both routes received byte-identical CSVs and located them; discrepancy/any discovery overhead retained, no repaired input or model replay.",
+    "Two executor metadataSELECT statements had SQL quoting errors; an early importer invocation failed Node syntax before reaching database. Agent fixed its own async syntax in the same bounded session, then ran both real samples using the exact final source. These errors and overhead remain in source/call history; no controller repair or reset.",
+    "Turso原验收将无绑卡/支付方式当作事实，以及业务把派发前账户累计39writes/212reads写成执行期用量；公开副本仅勘误这些事实，费用kind/amount和任务判决保持原样，原始验收私有哈希保留。"
+  ],
+  "before_rows": {
+    "reject_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ],
+    "accept_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ]
+  },
+  "after_rows": {
+    "reject_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ],
+    "accept_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      },
+      {
+        "book_id": 101,
+        "title": "候选书目甲"
+      },
+      {
+        "book_id": 102,
+        "title": "候选书目乙"
+      },
+      {
+        "book_id": 103,
+        "title": "更正编号书目"
+      }
+    ]
+  },
+  "schema_unchanged": true,
+  "rows_equal_expected": {
+    "reject_case": true,
+    "accept_case": true
+  },
+  "observed_schema": [
+    [
+      {
+        "name": "accept_case",
+        "type": "table",
+        "tbl_name": "accept_case",
+        "sql": "CREATE TABLE accept_case (book_id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL)",
+        "sqlite_version": "3.47.0"
+      },
+      {
+        "name": "reject_case",
+        "type": "table",
+        "tbl_name": "reject_case",
+        "sql": "CREATE TABLE reject_case (book_id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL)",
+        "sqlite_version": "3.47.0"
+      }
+    ],
+    [
+      {
+        "cid": 0,
+        "name": "book_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "title",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ],
+    [
+      {
+        "cid": 0,
+        "name": "book_id",
+        "type": "INTEGER",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 1
+      },
+      {
+        "cid": 1,
+        "name": "title",
+        "type": "TEXT",
+        "notnull": 1,
+        "dflt_value": null,
+        "pk": 0
+      }
+    ]
+  ],
+  "before_receipt_sha256": "bc981442ec1cb61694e7c5b2584c3c34ea63aa0ce3ee6ccd1a14a2a0a89d0179",
+  "after_receipt_sha256": "7195e4f05e8ba4b501c406fd832a19de445162359f90b37f1870e3b91ba00860",
+  "source_binding": {
+    "method": "Mechanical replay of recorded write/edit text, not importer execution; native tool outputs kept with source locations. Shell wrapper exit can differ from printed importer exit.",
+    "file": "import-books.mjs",
+    "final_original_sha256": "37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a",
+    "original_bytes": 5401,
+    "source_versions": [
+      {
+        "call_index_zero_based": 13,
+        "operation": "write",
+        "sha256": "0f9ed4cc34656a3cd1bc471fb3f3830b80bfe7df3f55f3f0155fc26a0f1b7107"
+      },
+      {
+        "call_index_zero_based": 14,
+        "operation": "edit",
+        "sha256": "39997d72b6d00218bea5b14b15373de177eb8a6490eb0e0bc00e77537a03b16f"
+      },
+      {
+        "call_index_zero_based": 16,
+        "operation": "edit",
+        "sha256": "053a301850f44e8ee8e0c8c8d851d47719d7684e90d13a88e19719a4be8d539b"
+      },
+      {
+        "call_index_zero_based": 17,
+        "operation": "edit",
+        "sha256": "37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a"
+      }
+    ],
+    "invocations": [
+      {
+        "call_index_zero_based": 15,
+        "command": "cd [WORKSPACE] && node import-books.mjs materials/batch-reject.csv reject_case; echo \"EXIT=$?\"",
+        "source_sha256_at_invocation": "39997d72b6d00218bea5b14b15373de177eb8a6490eb0e0bc00e77537a03b16f",
+        "output": "file://[WORKSPACE]/import-books.mjs:145\n  await db\n  ^^^^^\n\nSyntaxError: Unexpected reserved word\n    at compileSourceTextModule (node:internal/modules/esm/utils:319:16)\n    at ModuleLoader.moduleStrategy (node:internal/modules/esm/translators:89:18)\n    at #translate (node:internal/modules/esm/loader:438:20)\n    at afterLoad (node:internal/modules/esm/loader:506:29)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:511:12)\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:564:36)\n    at afterResolve (node:internal/modules/esm/loader:611:52)\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:617:12)\n    at node:internal/modules/esm/loader:636:32\n    at TracingChannel.tracePromise (node:diagnostics_channel:361:14)\n\nNode.js v24.20.0\nEXIT=1\n",
+        "metadata_exit": 0,
+        "metadata_truncated": false,
+        "source_event": {
+          "path": "events.jsonl",
+          "sha256": "0f106840979ce7d5ec52c41c6fb6ef18732c4bc8ce6e3de8bf0fd15881a4327c",
+          "line": 35
+        }
+      },
+      {
+        "call_index_zero_based": 18,
+        "command": "cd [WORKSPACE] && node import-books.mjs materials/batch-reject.csv reject_case; echo \"EXIT=$?\"",
+        "source_sha256_at_invocation": "37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a",
+        "output": "{\n  \"target_table\": \"reject_case\",\n  \"csv\": \"materials/batch-reject.csv\",\n  \"rows_in_file\": 3,\n  \"book_ids\": [\n    101,\n    100,\n    102\n  ],\n  \"committed\": false,\n  \"db_error\": {\n    \"code\": \"SQLITE_CONSTRAINT\",\n    \"message\": \"SQLITE_CONSTRAINT: SQLITE_CONSTRAINT: SQLite error: UNIQUE constraint failed: reject_case.book_id\"\n  }\n}\nEXIT=1\n",
+        "metadata_exit": 0,
+        "metadata_truncated": false,
+        "source_event": {
+          "path": "events.jsonl",
+          "sha256": "0f106840979ce7d5ec52c41c6fb6ef18732c4bc8ce6e3de8bf0fd15881a4327c",
+          "line": 44
+        }
+      },
+      {
+        "call_index_zero_based": 20,
+        "command": "cd [WORKSPACE] && node import-books.mjs materials/batch-corrected.csv accept_case; echo \"EXIT=$?\"",
+        "source_sha256_at_invocation": "37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a",
+        "output": "{\n  \"target_table\": \"accept_case\",\n  \"csv\": \"materials/batch-corrected.csv\",\n  \"rows_in_file\": 3,\n  \"book_ids\": [\n    101,\n    103,\n    102\n  ],\n  \"committed\": true,\n  \"db_error\": null\n}\nEXIT=0\n",
+        "metadata_exit": 0,
+        "metadata_truncated": false,
+        "source_event": {
+          "path": "events.jsonl",
+          "sha256": "0f106840979ce7d5ec52c41c6fb6ef18732c4bc8ce6e3de8bf0fd15881a4327c",
+          "line": 48
+        }
+      }
+    ],
+    "source_reconstructs_final_byte_exactly": true,
+    "tool_records_sha256": "10dc53081dd30e0cda7a9c5ed101552a0aee4270deb44501015093b12742d855"
+  },
+  "controller_verification": {
+    "only_after_all_executors_stopped": true,
+    "importer_reruns": 0,
+    "repair_writes": 0,
+    "read_operation_count": 12,
+    "count_scope": "Includes pre-seed empty-catalog/identity checks, before and after full schema/row reads; Turso metadataGET included. Preparationwrites and post-reviewcleanup separate."
+  },
+  "business_operation_rule": "40maximum: eachsubmittedSQLstatement includingBEGIN/COMMIT/ROLLBACK counts1; Nstatements inoneHTTP/SDKbatch countN forbothproviders; nonSQLserviceHTTP counts1, withoutdoublecountingcarriedSQL. Hiddenclient/backendwork not fully observable.",
+  "attachment_path_disclosure": {
+    "notice": "Task prose names attachments/batch-*.csv; the pipeline actually freezes and copies attachments under materials/batch-*.csv for both routes. The original filenames/bytes are identical; actual invocation paths and complete transcripts remain available. No material repair or rerun. This preparation path discrepancy and any discovery overhead must be disclosed, not hidden by editing frozen task.",
+    "files": [
+      {
+        "actual_path": "materials/batch-corrected.csv",
+        "sha256": "cc00f878acc07b794d45798dc8e5b8a4b7c5b1dd2d69da3fa8899370553273b3"
+      },
+      {
+        "actual_path": "materials/batch-reject.csv",
+        "sha256": "e15509e8773a5f780d90b838fc42b063c4ccf17abe9f185058cf9bcb82a5a9e8"
+      }
+    ]
+  },
+  "observed_client": {
+    "node": "24.20.0",
+    "client": "@libsql/client0.18.0",
+    "database": "libSQL/SQLite3.47.0",
+    "mode": "OfficialremoteSDK transaction(write), SQLHTTP used for independent executor reads",
+    "installation": "Client installed duringbusiness; no prior retainedclient"
+  }
+}

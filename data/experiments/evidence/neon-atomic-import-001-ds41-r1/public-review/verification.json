@@ -1,0 +1,226 @@
+{
+  "scope": "One small observed import task per service, separately measured access. Native transaction source/call/error evidence plus independently read states; no general reliability, concurrency/crash/ACID certification or SQL latency ranking.",
+  "independent_status": "completed",
+  "originals": {
+    "execution/answer.md": "d3e5dd9fc7f6496d0d92b6a691674d116718e1710e855155b9421403dbd6dc00",
+    "execution/receipt.json": "45162f7c342ab388b5b07d7ae70f3a1e565e6bd2d540fda8dea6eaaac41d323b",
+    "execution/usage.json": "41db585a6551a8fbd7bacc06d0a4115594eb1ead1c5ff58a90b5fde9698c0be3",
+    "grading/assessment.json": "7cdfc6a58bd62a7cf7116ce9acf25456e130fa08daf5509f5a6717dc822b8fdb"
+  },
+  "runtime": {
+    "harness": {
+      "name": "OpenCode",
+      "version": "1.18.35",
+      "mode": "run --format json"
+    },
+    "model": "deepseek-flash",
+    "reasoning_effort": "high",
+    "started_at": "2026-10-08T21:46:10.206848+00:00",
+    "ended_at": "2026-10-08T21:46:51.743604+00:00",
+    "exit_code": 0,
+    "timed_out": false,
+    "source_preflight": {
+      "source_sha256": {
+        "worker.py": "c9bf499b9bb1e30a164af81baad835305433c3a4e022b788a17264886d87d0fa",
+        "normalize.py": "2d8d0dc3d724e7de35d78416a482b5c8c8337a086d67e0362778536513c8a9aa",
+        "capture-proxy.py": "9df399ca9bc63f3d8c18129bd6b9bc52ed20f0ea7517d16e142d0233b84d546d",
+        "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+        "request_limits.py": "142c561df8c0704336151c2d200a364a720c234c3a456fe8b7510c2474a10877"
+      },
+      "verified_at": "2026-10-08T21:46:08.422350+00:00",
+      "scope": "Controller read of root-injected support files before run allocation; not a mid-run immutability guarantee."
+    },
+    "image": "sha256:b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "resources": "2GiB /1CPU /pids256, nohostmount/socket/publishedports; fresh home/session/workspace; max2providerstreams",
+    "model_limits": "Execution25requests,access300s/business600s;grading40requests300s;32000output/request;2026-10-09T00:00Zdeadline",
+    "package_index": "TUNA pip configured before access; no extra preinstalled clients"
+  },
+  "account_preparation": "Existing Turso starter organization management identity, or existing already-authorized Neon Claimable parent with CREATEDB; both preprovided, no signup measured. Executor creates exactly one new empty database; older application data outside scope.",
+  "cleanup": {
+    "at": "2026-10-08T21:51:18.272809+00:00",
+    "drop_database_completed": true,
+    "catalog_absence_confirmed": true,
+    "prior_database_names_unchanged": true,
+    "existing_parent_project_retained": true,
+    "parent_expiry": "2026-10-11T12:36:21.796Z",
+    "no_force_or_old_application_queries": true
+  },
+  "controller_notes": [
+    "Account/parent/runtime preparation, root fixture construction, independent reads and cleanup are separate overhead; not included as executor achievement or known-zero costs.",
+    "One observation per provider/task/route/conditions. Different SQL engines and chosen clients; cannot interpret Agent total wall time as database query latency or protocol superiority.",
+    "Service-operation limit is an instruction; model count/output/time limits are proxy/worker enforced.",
+    "Both remote test tables were initialized by controller after independently passed access: same explicit primarykey/NOTNULL schema and100/已有书目. Only rawCSV/schema/baseline and connectionsettings provided, no importer/initializationcode or reference answers.",
+    "The complete source is mechanically reconstructed from captured writes/edits and bound to actual invocations; final source matches byteforbyte. This supporting publication audit did not run any candidate code or alter a verdict.",
+    "Both final tables alone are insufficient; original independent graders also reviewed source, real native constraint errors, documented transaction semantics and absence of compensating writes.",
+    "Source description uses attachments/ while frozen pipeline materials actually use materials/. Both routes received byte-identical CSVs and located them; discrepancy/any discovery overhead retained, no repaired input or model replay.",
+    "Business grader confirmedfree while access grader kept servicefeeunknown; original independent fee conclusions are retained, not pooled into a selected favorable result. The observed smallnewlogicaldatabase shares existingClaimableparent100MB/1GB/72hlifetime; newDBdoesnotresetquota, transferremainingunknown."
+  ],
+  "before_rows": {
+    "reject_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ],
+    "accept_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ]
+  },
+  "after_rows": {
+    "reject_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      }
+    ],
+    "accept_case": [
+      {
+        "book_id": 100,
+        "title": "已有书目"
+      },
+      {
+        "book_id": 101,
+        "title": "候选书目甲"
+      },
+      {
+        "book_id": 102,
+        "title": "候选书目乙"
+      },
+      {
+        "book_id": 103,
+        "title": "更正编号书目"
+      }
+    ]
+  },
+  "schema_unchanged": true,
+  "rows_equal_expected": {
+    "reject_case": true,
+    "accept_case": true
+  },
+  "observed_schema": [
+    [
+      {
+        "table_name": "accept_case",
+        "column_name": "book_id",
+        "ordinal_position": 1,
+        "data_type": "integer",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "accept_case",
+        "column_name": "title",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "reject_case",
+        "column_name": "book_id",
+        "ordinal_position": 1,
+        "data_type": "integer",
+        "is_nullable": "NO",
+        "column_default": null
+      },
+      {
+        "table_name": "reject_case",
+        "column_name": "title",
+        "ordinal_position": 2,
+        "data_type": "text",
+        "is_nullable": "NO",
+        "column_default": null
+      }
+    ],
+    [
+      {
+        "table_name": "accept_case",
+        "constraint_name": "accept_case_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (book_id)"
+      },
+      {
+        "table_name": "reject_case",
+        "constraint_name": "reject_case_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (book_id)"
+      }
+    ]
+  ],
+  "before_receipt_sha256": "1d8e100e6abfd29e70255cde3e7a6b2376ef4ca9a59dacf2b51131687fc576ac",
+  "after_receipt_sha256": "b9171ec8187d737b01d07b2ddc706f06dc79bbaf48477b7151d7012c7d9a89cb",
+  "source_binding": {
+    "method": "Mechanical replay of recorded write/edit text, not importer execution; native tool outputs kept with source locations. Shell wrapper exit can differ from printed importer exit.",
+    "file": "importer.py",
+    "final_original_sha256": "975b094a12bd5870e737447c12dd2bdf040b0b681127f55aa2dec824a8df7a7a",
+    "original_bytes": 3675,
+    "source_versions": [
+      {
+        "call_index_zero_based": 9,
+        "operation": "write",
+        "sha256": "975b094a12bd5870e737447c12dd2bdf040b0b681127f55aa2dec824a8df7a7a"
+      }
+    ],
+    "invocations": [
+      {
+        "call_index_zero_based": 10,
+        "command": "cd [WORKSPACE] && PYTHONPATH=/home/node/service-tools/installed-tools python3 importer.py materials/batch-reject.csv --table reject_case; echo \"exit=$?\"",
+        "source_sha256_at_invocation": "975b094a12bd5870e737447c12dd2bdf040b0b681127f55aa2dec824a8df7a7a",
+        "output": "{\n  \"table\": \"reject_case\",\n  \"file\": \"materials/batch-reject.csv\",\n  \"rows_read\": 3,\n  \"rows_inserted\": 0,\n  \"committed\": false,\n  \"error\": {\n    \"type\": \"UniqueViolation\",\n    \"pgcode\": \"23505\",\n    \"diag\": \"duplicate key value violates unique constraint \\\"reject_case_pkey\\\"\",\n    \"message\": \"duplicate key value violates unique constraint \\\"reject_case_pkey\\\"\"\n  }\n}\nexit=2\n",
+        "metadata_exit": 0,
+        "metadata_truncated": false,
+        "source_event": {
+          "path": "events.jsonl",
+          "sha256": "a5f1df2cd8da46e7aaa8d6ee8bfc53f686738cecc3c023d5659fe32cd9cb301d",
+          "line": 22
+        }
+      },
+      {
+        "call_index_zero_based": 11,
+        "command": "cd [WORKSPACE] && PYTHONPATH=/home/node/service-tools/installed-tools python3 importer.py materials/batch-corrected.csv --table accept_case; echo \"exit=$?\"",
+        "source_sha256_at_invocation": "975b094a12bd5870e737447c12dd2bdf040b0b681127f55aa2dec824a8df7a7a",
+        "output": "{\n  \"table\": \"accept_case\",\n  \"file\": \"materials/batch-corrected.csv\",\n  \"rows_read\": 3,\n  \"rows_inserted\": 3,\n  \"committed\": true,\n  \"error\": null\n}\nexit=0\n",
+        "metadata_exit": 0,
+        "metadata_truncated": false,
+        "source_event": {
+          "path": "events.jsonl",
+          "sha256": "a5f1df2cd8da46e7aaa8d6ee8bfc53f686738cecc3c023d5659fe32cd9cb301d",
+          "line": 25
+        }
+      }
+    ],
+    "source_reconstructs_final_byte_exactly": true,
+    "tool_records_sha256": "eab4bfdab19500c449be1fb148355510a2a43e2e8d926049fdf2ffffbdefbe8e"
+  },
+  "controller_verification": {
+    "only_after_all_executors_stopped": true,
+    "importer_reruns": 0,
+    "repair_writes": 0,
+    "read_operation_count": 11,
+    "count_scope": "Includes pre-seed empty-catalog/identity checks, before and after full schema/row reads; Turso metadataGET included. Preparationwrites and post-reviewcleanup separate."
+  },
+  "business_operation_rule": "40maximum: eachsubmittedSQLstatement includingBEGIN/COMMIT/ROLLBACK counts1; Nstatements inoneHTTP/SDKbatch countN forbothproviders; nonSQLserviceHTTP counts1, withoutdoublecountingcarriedSQL. Hiddenclient/backendwork not fully observable.",
+  "attachment_path_disclosure": {
+    "notice": "Task prose names attachments/batch-*.csv; the pipeline actually freezes and copies attachments under materials/batch-*.csv for both routes. The original filenames/bytes are identical; actual invocation paths and complete transcripts remain available. No material repair or rerun. This preparation path discrepancy and any discovery overhead must be disclosed, not hidden by editing frozen task.",
+    "files": [
+      {
+        "actual_path": "materials/batch-corrected.csv",
+        "sha256": "cc00f878acc07b794d45798dc8e5b8a4b7c5b1dd2d69da3fa8899370553273b3"
+      },
+      {
+        "actual_path": "materials/batch-reject.csv",
+        "sha256": "e15509e8773a5f780d90b838fc42b063c4ccf17abe9f185058cf9bcb82a5a9e8"
+      }
+    ]
+  },
+  "observed_client": {
+    "python": "3.11.2",
+    "client": "psycopg2-binary2.9.13",
+    "database": "PostgreSQL17.11",
+    "mode": "Issued pooled connection; psycopg2 connection context transaction",
+    "installation": "Access-installed genericpackage retained viaPYTHONPATH; no businessscript retainedfromaccess"
+  }
+}

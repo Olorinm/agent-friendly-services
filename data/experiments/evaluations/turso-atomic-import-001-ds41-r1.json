@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "run_id": "turso-atomic-import-001-ds41-r1",
+  "service_id": "turso",
+  "route_id": "platform-api",
+  "entry_url": "https://api.turso.tech/v1/",
+  "task": {
+    "description": "我的个人书目目录要按文件批量导入，遇到重复编号不能留下半批数据。请做一个可复用的导入器，用数据库的整批原子操作或事务保护，在提供的两个独立测试表中分别实际验证错误样本整批拒绝、更正样本全部保存，原有书目不变。交付导入器、简短用法和两次结果，凭据单独保存。",
+    "inputs": "两张远程测试表的实际名称、连接配置与角色对应见 ENVIRONMENT.md；它们都有 book_id（非空整数主键）、title（非空文本），最初各只有 book_id=100、title=已有书目。附件 attachments/batch-reject.csv 与 attachments/batch-corrected.csv 均为 UTF-8 CSV，首行为 book_id,title。错误文件只导入 reject_case 对应表，更正文件只导入 accept_case 对应表；两个表互不覆盖。同一个交付的导入器应接受文件路径和这两个授权目标表之一，实际读取文件内容，不把预期终态写死。错误样本须实际触发数据库的重复主键拒绝，不能只在本地预检后跳过；不得忽略或替换冲突记录。每个文件作为一个整体提交或拒绝，可使用数据库支持的单条原子批量写入或整批事务，不限定语言、客户端或 SQL 条数。不能通过 UPDATE、DELETE、替换记录、改约束、清空、删除或重建表来修复或伪装回滚；未提交事务内的正常回滚允许。完成后保留两个表的结果供核对，说明每个样本的实际结果和遇到的数据库错误。",
+    "expected_output": "可留存、接受文件与授权目标表参数的导入器；适用于实际环境的简短安装与运行说明；错误与更正样本的真实结果。认证配置与源代码分离，交付答案不含密钥；无需另写审计日志或自评程序。",
+    "success": "通过指定服务真实运行同一交付导入器：错误文件由数据库拒绝，整批没有已提交新增记录，原有记录不变；更正文件的全部记录提交到另一个表，原有记录不变。结构与约束保持不变，实际执行路径使用可核对的数据库整批原子操作或正确事务处理，无提交后补偿删改。导入器及简短用法可留存且与实际执行相符，两次结果如实说明。",
+    "failure": "仅本地模拟、只预检而未实际触发数据库拒绝、逐条提交后留下半批、忽略或替换冲突、提交后删改清理来凑终态、更改原记录或结构、缺漏更正记录、交付程序与实际执行不符或缺少必要交付、预算内未完成。完整终态但缺少可核对的实际调用或程序绑定时，保留证据缺口，不据终态单独宣布原子性；运行器采集或准备失效与业务失败分开。",
+    "resources": "仅操作本轮接入后准备的一个专用数据库内两张测试表，没有并发写入者。可读取元数据和记录、插入原始文件中的记录并使用正常事务控制；不得访问旧库、创建其他资源、修改结构、更新或删除记录。允许自行查官方文档、安装官方客户端和编写导入器，不提供预写调用代码。仅用已授权免费资源，不付费、不绑定支付、不邀请或通知他人。实际入口、表名、私有配置、模型、安装条件、时间和操作预算在 ENVIRONMENT.md 冻结；遇服务 403、429 或付费要求立即停止继续调用并报告，预期重复主键错误不属于此类停止条件。",
+    "id": "database-atomic-import-001",
+    "version": "v1",
+    "sha256": "5d21f01a161a9a53b0f7433b93c9342e8bec2b516e1cd251c455cb62df7eb72d",
+    "file": "data/experiments/tasks/database-atomic-import.md"
+  },
+  "prompt_sha256": "4a7c4f81f9f430d8f94be4d3093d22a4cedf7dc2f57f159821dc54d6bf600cb6",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T21:46:08.207709+00:00",
+  "ended_at": "2026-10-08T21:47:12.248529+00:00",
+  "elapsed_seconds": 64.04082,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "Preprovided existing authorized parent identity; executor creates one fresh empty logical database",
+    "web_search": "live",
+    "preparation_note": "Fresh independently passed access resources; controller then creates two matching synthetic initial tables in each new database. Same fields/constraints/baseline andtwoCSVfiles; no executor importer/code supplied. Current injected runner file hashes verified before each dispatch and saved inreceipt. Samebaseimage/TUNApip; Neon retains its own access-installedpsycopg2-binary2.9.13 underinstalled-tools, Turso no installedclient. Broad management/parentURL removed, old access verification data archived root-only; Neon SQL role stilltechnicallyprojectwide, only newtables authorized. RetentionauditSHA256 6889f9c6c62e5cf961116b1ce826490cfa88c62612305871c45d6de2468b449f. Identicalexec25requests600s/grade40requests300s/32000output/2GiB1CPU256pids;2providerstreams, service40operation/first403429stop rulesare instructions;modelrequest/timeceilings enforced. ExistingTursostarteraccount vs existingNeonClaimableparent/preprovidedidentity, sharedquota/lifetime, no newregistration. Rootseed+readonlybefore/after12readoperationsmax/provider are externalunmeteredpreparation/verification; executors allstopped before afterreads. Independentexactsynthetictruth, frozenpeeroutputs notverdicts, gradersnocredentials/noSQL/noimporterrerun. Grader mustbindactualsource/invocations/nativeerror/atomicpath plusunchangedschema/terminalrows, notterminalonly. One rejected andonecorrectedbatch perprovider, nosingle-protocol/engine-superiority orACID/crash/concurrency/performanceclaim.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "在指定 Turso/libSQL 新库上，用同一交付导入器真实运行两个样本：错误文件由数据库以重复主键拒绝（SQLITE_CONSTRAINT: UNIQUE constraint failed: reject_case.book_id）并在未提交事务内整批回滚，reject_case 终态仅剩原有 100/已有书目；更正文件 3 行全部提交到 accept_case，原有 100 不变，两表互不覆盖。执行路径为单个 db.transaction(\"write\") + COMMIT/ROLLBACK，全部命令仅 SELECT/INSERT，无 UPDATE/DELETE/DDL/补偿删改；结构与约束前后一致。交付导入器、用法与两次结果与实际执行相符，凭据与源码分离且答复无密钥。错误样本重复键拒绝为预期结果，服务本身可用。",
+  "usage": {
+    "input_tokens": 318702,
+    "cached_input_tokens": 303104,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 9179,
+    "reasoning_output_tokens": 4155
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "controller-verification/resource-limits.json"
+    ],
+    "applicability": {
+      "rule": "Turso starter 计划免费：plan_id=starter、starter_price=0、overages=false（超量不自动计费）、支付方式状态未单独核实",
+      "observed": "本轮账号 entitlement 为 personal/starter、overages=false；派发前账户累计用量快照 rows_written=39、rows_read=212，远低于免费配额（10M 写/500M 读）；无 402/403/付费阻断，未触发 billing",
+      "evidence": "controller-verification/resource-limits.json"
+    },
+    "note": "无账单回执；依据平台账户快照与本次实际用量判定，未按量估算。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-independent-grader",
+    "reviewed_at": "2026-10-08T21:56:17.021325+00:00",
+    "checks": [
+      {
+        "criterion": "交付可复用导入器，接受 CSV 文件路径与授权目标表参数，实际读取文件内容且不硬编码终态",
+        "passed": true,
+        "evidence": "execution/artifacts/import-books.mjs:98-131 读取 argv 与 CSV 内容、仅允许 reject_case/accept_case；execution/artifacts/USAGE.md:9-18 用法"
+      },
+      {
+        "criterion": "错误样本实际触发数据库重复主键拒绝，整批无已提交新增记录，原 reject_case 记录不变",
+        "passed": true,
+        "evidence": "运行时输出 committed=false 且 db_error.code=SQLITE_CONSTRAINT、message=UNIQUE constraint failed: reject_case.book_id（review-packet/tools/0019.json；命令与回执见 execution/tool-records.json）；随后独立只读查询与 controller-verification/after.json 显示 reject_case 仅 (100,已有书目)"
+      },
+      {
+        "criterion": "更正样本全部提交到另一张表 accept_case，原有记录不变，两表互不覆盖",
+        "passed": true,
+        "evidence": "运行时输出 committed=true、db_error=null（review-packet/tools/0021.json）；controller-verification/after.json 中 accept_case=100/101/102/103，reject_case 不变"
+      },
+      {
+        "criterion": "实际执行路径使用整批事务/原子操作，未提交事务内回滚，无提交后补偿删改",
+        "passed": true,
+        "evidence": "execution/artifacts/import-books.mjs:145-173 单个 db.transaction(\"write\")，全部成功才 commit，异常即 rollback；@libsql/client 将事务映射为对服务端 BEGIN/COMMIT/ROLLBACK（node_modules/@libsql/client/lib-esm/hrana.js）；execution/tool-records.json 全部命令仅 SELECT/INSERT，无 UPDATE/DELETE/REPLACE/DDL"
+      },
+      {
+        "criterion": "两张表的表结构与约束（INTEGER PRIMARY KEY NOT NULL、TEXT NOT NULL）保持不变",
+        "passed": true,
+        "evidence": "controller-verification/before.json 与 after.json 的 sqlite_schema 与 PRAGMA table_info 完全一致（均 CREATE TABLE <t> (book_id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL)）"
+      },
+      {
+        "criterion": "交付导入器、简短用法与两次结果可留存且与实际执行相符，凭据与源码分离、答复不含密钥",
+        "passed": true,
+        "evidence": "execution/answer.md；交付 import-books.mjs sha256=37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a 与索引一致；导入器仅按路径读取凭据（import-books.mjs:19-24,33-54），源码与答复均无 token；USAGE.md 记录两次实测"
+      },
+      {
+        "criterion": "确在指定 Turso/libSQL 服务上真实调用（非本地/嵌入副本），接入可实际使用",
+        "passed": true,
+        "evidence": "SQL HTTP /v2/pipeline 返回 sqlite_version 3.47.0 与真实表数据；安装并运行官方 @libsql/client（review-packet/tools/0013、0019、0021）"
+      }
+    ],
+    "peer_context": {
+      "group_id": "database-atomic-import-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "f50b08c325cbf30ecd6394dd9281efedc4d500a72d87ff329e701abaef77e407",
+      "run_ids": [
+        "turso-atomic-import-001-ds41-r1",
+        "neon-atomic-import-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "turso-atomic-import-001-ds41-r1",
+        "neon-atomic-import-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.054255576,
+      "kind": "estimated",
+      "scope": "Independentgrading overhead separately measured; frozen standardAPIestimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.054255576,
+          "usage_sha256": "bc98be5192a4433f2e88081d46a07838bb6b236a8cd63f745b52fe35548c13cd"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/verification.json",
+      "sha256": "6792fd1c76bdc134628cf997e18a7839da04807653d2a315d8588acc763312d9",
+      "note": "实际原始来源哈希、前后完整合成状态/结构、代码执行绑定、费用与准备限制、精确资源清理。",
+      "source_sha256": "6627e799428b4ff4951d2625287a6fbf85e88babccf1f66e9f2b04b529bf24f3",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/import-books.mjs",
+      "sha256": "37b559254d7e9982f375b52ccf93037f2bf3f239e14280bce98ea083045c785a",
+      "note": "实际交付物；私有资源标识仅按统一规则脱敏。importer原始字节哈希和实际执行绑定见verification。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/USAGE.md",
+      "sha256": "d53ab3d38ef00f7fd6ba65670becbb34e682c080bd04f27ed45c2d0d63fa3081",
+      "note": "实际交付物；私有资源标识仅按统一规则脱敏。importer原始字节哈希和实际执行绑定见verification。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/package.json",
+      "sha256": "2d238f8e04d34116e22de6a6f54ca747cfb12a2cca36973a0360b3292a264257",
+      "note": "实际交付物；私有资源标识仅按统一规则脱敏。importer原始字节哈希和实际执行绑定见verification。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/package-lock.json",
+      "sha256": "74aec4633c41ef44c1f233bdc078943ca2a8e94dcb43c3d74b0b653c85725be4",
+      "note": "实际交付物；私有资源标识仅按统一规则脱敏。importer原始字节哈希和实际执行绑定见verification。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/batch-corrected.csv",
+      "sha256": "cc00f878acc07b794d45798dc8e5b8a4b7c5b1dd2d69da3fa8899370553273b3",
+      "note": "执行前冻结的原始合成CSV；发布副本与实际输入字节一致。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/batch-reject.csv",
+      "sha256": "e15509e8773a5f780d90b838fc42b063c4ccf17abe9f185058cf9bcb82a5a9e8",
+      "note": "执行前冻结的原始合成CSV；发布副本与实际输入字节一致。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/initial-state.sql",
+      "sha256": "b2d8af55d83c26aadab164c8c403c31579dbfbfd010db83438d9af42b9fa59c2",
+      "note": "总控初始化两张合成测试表的SQL；并非被测Agent成果，只在独立新空测试库执行一次。"
+    },
+    {
+      "path": "data/experiments/evidence/turso-atomic-import-001-ds41-r1/public-review/REPRODUCE.md",
+      "sha256": "e67602c6821cdf70c708e2a9094816bda677b3c6f23138b692d7839eb6935db9",
+      "note": "公开的合成初态、原始输入、实测程序/版本、凭据外置步骤与独立验收办法；窄样本和模型随机性限制。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/database-atomic-deepseek-overnight-20261009/turso-atomic-import-001-ds41-r1",
+    "run_sha256": "1514f4598a13ba752701910610ee23efed0608bd034dd26018bcd4c4b2eef9fd",
+    "events_sha256": "0f106840979ce7d5ec52c41c6fb6ef18732c4bc8ce6e3de8bf0fd15881a4327c",
+    "answer_sha256": "fb23ed47ab850b5fb1792375cf7ee09b93e0e042498e191d8075b8fba9d42453",
+    "review_sha256": "1845ecb69448327ba09c92deb563f2925d2c0bf61dbce96d5d65b8f9fcb8c5a4",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "a06f56c3d6daff1aa28d94151564b3e1fae05ec01bf1d60d68cd0e5efee9158c",
+    "publication_review_note": "Select minimal reproducible synthetic evidence and source/invocation binding; original independent status/check outcomes and fee kind/amount preserved. No execution or grading replay, no task repair. Exact new resources cleaned after review; prior parent/resources retained. Tursofee ancillary prose corrected: paymentmethod status was notverified, and39writes/212reads are predispatchaccounttotals, not this trial usage. Actualstarterprice0/overagesfalse andsmallscopeduse remain the fee basis; original assessment preservedbyhash."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7217,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 116,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8398,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 175,
+        "reasoning_output_tokens": 15
+      },
+      {
+        "input_tokens": 8922,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 247,
+        "reasoning_output_tokens": 12
+      },
+      {
+        "input_tokens": 10403,
+        "cached_input_tokens": 9088,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2112,
+        "reasoning_output_tokens": 1919
+      },
+      {
+        "input_tokens": 12716,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 16787,
+        "cached_input_tokens": 12800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 595,
+        "reasoning_output_tokens": 346
+      },
+      {
+        "input_tokens": 17674,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 83
+      },
+      {
+        "input_tokens": 17893,
+        "cached_input_tokens": 17664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2233,
+        "reasoning_output_tokens": 712
+      },
+      {
+        "input_tokens": 20142,
+        "cached_input_tokens": 19968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 345,
+        "reasoning_output_tokens": 150
+      },
+      {
+        "input_tokens": 20502,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 166,
+        "reasoning_output_tokens": 71
+      },
+      {
+        "input_tokens": 20945,
+        "cached_input_tokens": 20608,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 173,
+        "reasoning_output_tokens": 71
+      },
+      {
+        "input_tokens": 21133,
+        "cached_input_tokens": 20992,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 21266,
+        "cached_input_tokens": 21120,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 95,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 21486,
+        "cached_input_tokens": 21248,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 468,
+        "reasoning_output_tokens": 193
+      },
+      {
+        "input_tokens": 22172,
+        "cached_input_tokens": 21888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 481,
+        "reasoning_output_tokens": 254
+      },
+      {
+        "input_tokens": 22891,
+        "cached_input_tokens": 22528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 963,
+        "reasoning_output_tokens": 286
+      },
+      {
+        "input_tokens": 23870,
+        "cached_input_tokens": 23680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 216,
+        "reasoning_output_tokens": 25
+      },
+      {
+        "input_tokens": 24285,
+        "cached_input_tokens": 24064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 357,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "fb5bec87e39f7539991284d64b88c3dfcd80a0bbe554c3baf8eabee36d6d521a",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 318702,
+      "cached_input_tokens": 303104,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9179,
+      "reasoning_output_tokens": 4155
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}
