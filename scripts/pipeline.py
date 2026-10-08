@@ -65,6 +65,11 @@ def prepare(config_path, directory):
         raise ValueError('Run directory must be in data/experiments/results')
     if not re.fullmatch(r'[a-zA-Z0-9._-]+', directory.name):
         raise ValueError('Invalid run directory name')
+    if ((ROOT / 'data/experiments/evaluations' / (directory.name + '.json')).exists()
+            or (ROOT / 'data/experiments/evidence' / directory.name).exists()
+            or any(p.parent != directory and p.parent.name == directory.name
+                   for p in (ROOT / 'data/experiments/results').rglob('state.json'))):
+        raise ValueError('Run ID already exists; choose a globally unique name before dispatch')
     for role in ('execution', 'grading'):
         settings = config[role]
         if not all(settings.get(k) for k in ('model', 'reasoning_effort', 'harness', 'runtime')):

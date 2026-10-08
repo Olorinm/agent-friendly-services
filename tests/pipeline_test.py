@@ -133,6 +133,23 @@ class PipelineTests(unittest.TestCase):
             pipeline.advance(self.directory)
         self.assertFalse((self.directory / 'execution/started').exists())
 
+    def test_duplicate_run_id_is_rejected_before_preparation_or_dispatch(self):
+        conflicts = [
+            self.root / 'data/experiments/evaluations/run-001.json',
+            self.root / 'data/experiments/evidence/run-001/answer.md',
+            self.root / 'data/experiments/results/earlier-batch/run-001/state.json',
+        ]
+        for conflict in conflicts:
+            with self.subTest(conflict=str(conflict)):
+                conflict.parent.mkdir(parents=True, exist_ok=True)
+                conflict.write_text('{}')
+                with self.assertRaisesRegex(ValueError, 'Run ID already exists'):
+                    self.prepare()
+                self.assertFalse(self.directory.exists())
+                conflict.unlink()
+                if conflict.parent.name == 'run-001':
+                    conflict.parent.rmdir()
+
     def test_private_grading_packet_copy_cannot_be_published(self):
         self.finish()
         packet = self.directory / 'grading-input/review-packet/index.json'
