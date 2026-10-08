@@ -1,0 +1,105 @@
+{
+  "scope": "One11-row segment of the original21-page scanned/mixed TTB historical table, with incomplete existing OCR text. Not a general OCR benchmark, a native-PDF repeat, service reliability estimate or regulatory/measurement advice.",
+  "independent_status": "completed",
+  "initial_independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "00786becb22889806ba6d19af1aea96ef02eb7260a64e09a1a9d8c1900262149",
+    "execution/receipt.json": "d4981738ec63ec92cee4d6ff298796320aec7066855631019ffeb4cbadade5e1",
+    "execution/usage.json": "3ffc308c6b6dad677825a0d795efd7b03efe782267db2f7fe0bcc6ad1a1828cd",
+    "execution/tool-records.json": "0abf88bccdc8d429a5f97545a57a1893ddf9d34c8a18801ba7a3916801334c3f",
+    "grading/assessment.json": "bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c"
+  },
+  "selected_assessment_sha256": "bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c",
+  "configuration": "New scanned/mixed PDF business follow-up after independently completed anonymous PDF access on the same two owned runtimes. Prior native-PDF runs and original access remain immutable; no new access sample. Exact same image,2GiB/1CPU/pids256,pipTUNA, execution25requests/600s, grading40/300s,32000outputtokens/request. Retained config byte-identical to prior audited generic setup; no installed dependencies or query material in retained paths. Owned runtimes resumed with only baseline sleep/inspection processes; adapter archives previous home/workspace/tmp before each fresh session. Retention audit SHA256 0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213. Source PDF, page render, and visually transcribed numeric reference frozen by independent task-design role before queries; controller independently checked all selected values before dispatch. Text-only DeepSeek grader uses that frozen readable reference and actual candidate evidence; no claim that it visually read source images. Controller/reference preparation overhead unmetered. Maximum2 extraction calls per service (including retries), first403/429/402 stop,2consecutive connection failures stop; anonymous remaining quotas unknown. Same original URL and user request; no pre-cropped PDF or answer/helper delivered to executors. Business peers sealed before separate grading with no peer verdicts. Single small scanned-table sample, not general OCR reliability or regulatory advice.",
+  "route": "public-scrape-api",
+  "original_url": "https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf",
+  "original_pdf_sha256": "9ec318069cf85acab2dac669f9fb3189d92dc200a0b0abd5f4a3843271a40150",
+  "reference_sha256": "ee8adb605a42bb6505beb58c85b0a5dea959c2cbfeb3a7a06166f01909a074e8",
+  "source_scope": {
+    "physical_page": 2,
+    "printed_page": "532",
+    "proof_start": "1.0",
+    "proof_end": "2.0",
+    "required_rows": 11,
+    "columns": [
+      "proof",
+      "wine_gallons_per_pound",
+      "proof_gallons_per_pound"
+    ]
+  },
+  "reference_preparation": "Independent task-design role rendered original official page and visually transcribed33selected values before any candidate query; controller independently checked same image and CSV before dispatch. Text-only DeepSeek graders compare that frozen reference against actual outputs, not a claim they viewed source pixels.",
+  "controller_reference_check_sha256": "30f9079a0566ab041503f0ae39aca08782fcf17d8ca352238f07d7fc6403079c",
+  "retention_audit_sha256": "0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213",
+  "setup_reuse": "Same previously independently verified PDF access runtimes. Generic config hashes unchanged, no installed dependencies or old task materials retained; adapter archives old home/workspace/tmp before fresh sessions. No new access samples.",
+  "elapsed_seconds": 57.05532,
+  "execution": {
+    "started_at": "2026-10-08T20:14:49.046726+00:00",
+    "ended_at": "2026-10-08T20:15:46.102046+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "csv_observation": {
+    "name": "table4_proof_1.0-2.0.csv",
+    "sha256": "914cb3338b5d9b0aa0dca593746889aa0766435cc7c2ba7bdfd3c87e6a6e42d8",
+    "bytes": 285,
+    "utf8": true,
+    "columns": [
+      "proof",
+      "wine_gallons_per_pound",
+      "proof_gallons_per_pound"
+    ],
+    "actual_rows": 11,
+    "all_required_values_match": true
+  },
+  "account": "Anonymous only; no account, key, payment or remote mutable resource created.",
+  "stopping_rules": "Maximum2target-extraction calls including retries; first403/429/402 stops;2consecutive connection failures stop. These service-side instructions are not enforced by the model proxy; model/time/output caps are enforced. Transport discovery calls are additional and not counted as target extractions.",
+  "peer_review": "Both executions collected and peer outputs sealed before original independent graders; no peer verdicts. Exception review sees original frozen execution/reference and same peer snapshot, no initial grade.",
+  "selected_service_cost_judgment": {
+    "kind": "confirmed_free",
+    "amount_usd": null,
+    "official_source": "https://docs.firecrawl.dev/rate-limits",
+    "original_judgment_sha256": "bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c"
+  },
+  "selected_service_cost_usd": null,
+  "attribution": "Selected factual numeric rows from U.S. Alcohol and Tobacco Tax and Trade Bureau (TTB), Gauging Manual, Table No.4 / Gallons per Pound, printed page532. Transcribed, without recomputation, into CSV. TTB website section11 allows attributed copying subject to protected marks/third-party exceptions; no endorsement or tax/calibration advice.",
+  "reuse_policy_source": "https://www.ttb.gov/about-ttb/privacy-policy",
+  "public_selection": "Only minimum factual audit, hashes and the successful11-row CSV. Complete PDF/page image, raw responses, sessions and request/session identifiers remain private.",
+  "resources": "Original four owned runtimes and the one exception grader stopped after collection; all model attempts included in cost ledger.",
+  "published_csv": {
+    "name": "table4_proof_1.0-2.0.csv",
+    "sha256": "914cb3338b5d9b0aa0dca593746889aa0766435cc7c2ba7bdfd3c87e6a6e42d8"
+  },
+  "candidate_extraction_calls": 1,
+  "extraction_response": {
+    "sha256": "cb8e266348803e1a4e3d69d2f8c6eed7fdec7899945d6aaa31fb3958c40075ea",
+    "metadata": {
+      "statusCode": 200,
+      "numPages": 2,
+      "totalPages": 21,
+      "title": "TTB GAUGING MANAUL",
+      "contentType": "application/pdf",
+      "creditsUsed": 2
+    }
+  },
+  "request_parameters": {
+    "formats": [
+      "markdown"
+    ],
+    "parsers": [
+      {
+        "type": "pdf",
+        "mode": "auto",
+        "maxPages": 2,
+        "pages": true,
+        "blocks": true,
+        "pageMarkers": true
+      }
+    ]
+  },
+  "extraction_limit": "Actual response reports2of21pages and2credits. maxPages was selected by executor after reading official docs, not supplied as a solution. No cache timestamp returned; PDF parser modeauto does not prove the internal OCR algorithm.",
+  "fee_publication_projection": {
+    "kind": "unknown",
+    "amount_usd": null,
+    "reason": "Original grader simultaneously markedconfirmed_free and explicitly leftamountnull/unknown. Conservatively keep unknown in public record; original wording/hash retained."
+  }
+}
