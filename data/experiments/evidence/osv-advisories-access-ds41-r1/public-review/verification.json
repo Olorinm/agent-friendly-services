@@ -1,0 +1,46 @@
+{
+  "scope": "One anonymous basic metadata access test; does not assess corpus coverage, all optional routes, exploitability or future availability. Complete raw advisory records and transcripts retained privately.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "bc7c910d12dcec6f3bb04069f959269efe14e7412632fa4081977a87baed5471",
+    "execution/receipt.json": "e13048363e667c1eb5ca80e7aff8927732ddafb584a4bc3ec97bf91a8d176827",
+    "execution/usage.json": "2150901e1652951c39139a1d324616ad1681723dcbd33118ad30e8b6352f9103",
+    "execution/tool-records.json": "7e098838b7cf4124366445457a7ef4f1f10de149da6fc4ab3f669e87194d974f",
+    "grading/assessment.json": "d9e8ff77c5fdc87e6ecb743b663d4a6d861bfb5b455233b322fcb25369bdfe37"
+  },
+  "configuration": "OpenCode 1.18.35; DeepSeek V4.1 Flash / high; execution: 25 model requests / 300 s; grading: 40 requests / 300 s; at most 32,000 output tokens per request; 2 GiB / 1 CPU / pids 256; at most two provider streams. Uniform pip TUNA index and empty initial cache, without a prewritten client or credentials.",
+  "candidate_api_requests": 3,
+  "candidate_api_request_instruction_limit": 6,
+  "api_statuses": [
+    200,
+    200,
+    200
+  ],
+  "query_target_chosen_by_executor": true,
+  "account_or_authentication": "Anonymous. No account, key, email, payment, signup or special qualification. Independent grader reports zero human interventions.",
+  "retained_configuration": "Non-secret connection configuration saved. Access-specific scripts remain in the archived workspace and are not retained for business. The controller later archived the original config and removed query examples, answers and old quota observations; it added no helper or answer.",
+  "service_cost_limitation": "The independent grader retained an unknown service fee: API responses, absence of payment and rate-limit headers do not establish an explicit free rule and its applicability. Sourced catalog conditions are separate from this trial fee.",
+  "attribution": [
+    "OSV.dev public API: https://google.github.io/osv.dev/",
+    "GitHub Advisory Database (CC BY 4.0): https://github.com/advisories"
+  ],
+  "shared_upstream_limit": "OSV imports GitHub and other upstream data. Matching records are not independent security findings.",
+  "endpoint": "POST https://api.osv.dev/v1/query for jinja2 / PyPI / 2.4.1 and GET /v1/vulns/{id}; the third request repeated the package query through an executor-written client.",
+  "response_records": 18,
+  "example": {
+    "id": "GHSA-462w-v97r-4m45",
+    "package": {
+      "name": "jinja2",
+      "ecosystem": "PyPI",
+      "purl": "pkg:pypi/jinja2"
+    },
+    "source": "https://github.com/advisories/GHSA-462w-v97r-4m45"
+  },
+  "response_hashes": {
+    "osv-query-jinja2-2.4.1.json": "07f657b53665db685e6c3ccd9eba61626451e99d04f68749c424e1cc0af0efaf",
+    "osv-vuln-GHSA-462w-v97r-4m45.json": "aa699023804f4a5198a77e29158594b335b82f2e1c227788832fa5c22a9bb42c"
+  },
+  "license_limit": "Upstream data licenses vary. This GHSA example uses CC BY 4.0. Full advisory descriptions and contributor data are not reproduced.",
+  "resources": "All four dedicated containers stopped after collection and independent grading. No account or mutable remote resource created.",
+  "fee_comparability": "Access unknown judgments are preserved. Business graders separately accepted public-free conditions; this difference is evidence interpretation, not a service price change."
+}

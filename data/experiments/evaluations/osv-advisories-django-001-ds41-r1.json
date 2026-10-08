@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "run_id": "osv-advisories-django-001-ds41-r1",
+  "service_id": "osv",
+  "route_id": "public-api",
+  "entry_url": "https://api.osv.dev/v1/query",
+  "task": {
+    "description": "我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。",
+    "inputs": "依赖笔记：生态 PyPI，包 Django，当前版本 5.2.6；待核对告警 CVE-2025-57833、CVE-2025-59681。只核对这两条的包版本匹配和修复边界，不要求列出所有漏洞或选择当前最新版本，也不判断本项目的代码、数据库配置或漏洞可利用性。用中文简要说明判断及查询来源。可以沿本次指定服务记录中的引用链接核对维护者公告或发布记录；不要用其他漏洞库、通用网页搜索或模型记忆代替指定服务查询。没有查到记录时说明未知，不据此断言没有影响。不安装、升级或修改项目。",
+    "expected_output": "两条告警各自的当前版本匹配结论、5.2.x 最早修复版本和可核对的依据链接；仅针对这两条的最低升级版本及简短中文解释，注明所用服务。",
+    "success": "真实查询指定服务，答复逐条正确判断给定包版本是否匹配两条告警，修复版本属于所要求的 5.2.x 分支，最低升级边界正确；结论与实际服务记录或从记录可追溯的维护者引用链相符，并由事前独立取得的维护者发布参考核对。来源链接能支持对应判断，不将未命中当作不受影响，不把本题结论扩大为全部漏洞已修复或应用不可利用。",
+    "failure": "未查询指定服务，遗漏任一告警，混淆包、生态、告警或版本分支，当前版本匹配或修复边界错误，仅凭空响应或记忆断言无影响，依据无法追溯，替换为其他检索服务，越过只读范围或预算内未完成。真实无记录、元数据不足、限流和访问阻碍如实记录；执行环境或采集故障单列无效。",
+    "resources": "使用本轮指定免费公开公告服务及官方文档；允许读取从本次公告记录可追溯到的维护者安全公告、官方发布记录及其必要链接，不以其他聚合库补答。只读少量防御性元数据，不下载或运行漏洞样例，不安装待查软件，不扫描任何目标，不修改仓库或依赖，不付费、注册无关服务或发消息。可在隔离环境安装通用客户端依赖和生成本地笔记。请求、时间和身份来源由 ENVIRONMENT.md 冻结，证据由外部采集，不要求执行者另写审计日志。",
+    "id": "dependency-advisories-check-001",
+    "version": "v1",
+    "sha256": "6e9cfc85b927eadb9b77812a50fea6e1d8fb3140e74bb95e8120b5fdf158d815",
+    "file": "data/experiments/tasks/dependency-advisories.md"
+  },
+  "prompt_sha256": "cc50cd4a750c3d022758944eec96e651ddb2a2318554d4335827705db2b22ff6",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T18:23:44.313467+00:00",
+  "ended_at": "2026-10-08T18:26:31.412599+00:00",
+  "elapsed_seconds": 167.099132,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public advisory API, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created. Retention audit SHA256 7b1887aa539fb9c744c89b63df042874d9756ca439422714010d852a9d0057e5.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本次执行真实查询指定 OSV 公共 API（匿名 POST https://api.osv.dev/v1/query）并按 CVE 别名定位两条记录；答复逐条正确判断 PyPI Django 5.2.6 的匹配情况与 5.2.x 修复边界，与采集到的 API 原始响应及事前冻结的 Django 维护者公告一致，且未越权。",
+  "usage": {
+    "input_tokens": 193502,
+    "cached_input_tokens": 166272,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7536,
+    "reasoning_output_tokens": 5339
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "frozen-execution/ENVIRONMENT.md",
+      "task.json"
+    ],
+    "note": "被测服务为 OSV 公共公告 API。任务冻结材料将本轮指定服务描述为免费公开公告服务（task.json resources），ENVIRONMENT.md 载明“OSV公开服务当前免费”。本次全部候选查询均为匿名、无 Key/Token/鉴权头，且未发生任何付费流程，费用为 0。",
+    "applicability": {
+      "rule": "OSV 公开漏洞公告 API 为免费、匿名公共服务，无需账号、Key、Token 或付款即可查询（frozen-execution/ENVIRONMENT.md：“OSV公开服务当前免费”；task.json 称本轮指定服务为免费公开公告服务）。",
+      "observed": "本次对 https://api.osv.dev/v1/query 的全部候选 API 请求均以匿名方式发出（未使用任何鉴权头/凭据），返回 HTTP 200；未调用任何付费端点，未触发计费或付款步骤。",
+      "evidence": "frozen-execution/ENVIRONMENT.md 的免费声明，以及本次采集的匿名查询 200 响应 execution/artifacts/q_5.2.6.json、execution/artifacts/q_all_django.json。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-deepseek-flash-independent-grader",
+    "reviewed_at": "2026-10-08T18:29:33.995393+00:00",
+    "checks": [
+      {
+        "criterion": "assigned_service：真实使用指定 OSV 公共 API 完成本题查询，未以其他漏洞库/搜索/记忆替代。",
+        "passed": true,
+        "evidence": "采集的工具记录显示两次匿名 POST https://api.osv.dev/v1/query（5.2.6 版本过滤与 Django 全量），均 HTTP 200；应答亦注明所用服务为 OSV。另有一次 GET /v1/vulns/CVE-2025-57833 超时，执行者如实说明并改用同入口包查询。原始响应见 execution/artifacts/q_5.2.6.json、q_all_django.json。"
+      },
+      {
+        "criterion": "two_match_decisions：正确判断 5.2.6 对 CVE-2025-57833 已修复/不在受影响区间，对 CVE-2025-59681 仍命中。",
+        "passed": true,
+        "evidence": "q_5.2.6.json 的 64 条结果包含 GHSA-hpr9-3m2g-3j9p（CVE-2025-59681）但不含 GHSA-6w2r-r2m5-xq5w（CVE-2025-57833）；q_all_django.json 中 57833 的 5.2.x 区间为 introduced 5.2a1→fixed 5.2.6，59681 为 introduced 5.2→fixed 5.2.7。答复结论与此一致。"
+      },
+      {
+        "criterion": "branch_specific_fixes：分别给出 5.2.x 分支最早修复版本 5.2.6 与 5.2.7。",
+        "passed": true,
+        "evidence": "q_all_django.json 记录 affected.ranges 显示两条 5.2.x 修复边界为 5.2.6 与 5.2.7；答复表格一致，未以 4.2.x/5.1.x 或其他包替代。"
+      },
+      {
+        "criterion": "combined_minimum：仅处理这两条时给出 5.2.x 内最低升级版本 5.2.7。",
+        "passed": true,
+        "evidence": "答复明确“5.2.x 分支至少升级到 5.2.7”，与两条修复边界取较大值一致，未扩大为“当前完全安全版本”或应用不可利用。"
+      },
+      {
+        "criterion": "sources_explanation：给出可核对的依据链接与简短中文说明，并注明查询来源。",
+        "passed": true,
+        "evidence": "answer.md 列出两条 OSV 记录链接及记录内引用的 Django 官方公告（2025-09-03 发布 5.2.6、2025-10-01 发布 5.2.7），并有中文判断与查询来源说明；引用链与记录内 references 一致。"
+      },
+      {
+        "criterion": "read_only_scope：仅做只读公告元数据查询与官方文档访问，未安装/升级/修改项目、未扫描或运行漏洞样例。",
+        "passed": true,
+        "evidence": "工具记录仅含 ls、curl 只读查询 api.osv.dev、本地 Python JSON 解析及 djangoproject.com 文档读取；无 pip install、无仓库写入、无扫描、无付费或消息发送。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "dependency-advisories-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "de4ebbc75c817c49b08ac9d267e8cd35728759cb4f67bfd8e33f0ea55dbc1442",
+      "run_ids": [
+        "osv-advisories-django-001-ds41-r1",
+        "github-advisories-django-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "osv-advisories-django-001-ds41-r1",
+        "github-advisories-django-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.026301204,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026301204,
+          "usage_sha256": "4e3c640244ba6730f6e623a0dc83206d916dfc8428464adfe293f930a7473711"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/osv-advisories-django-001-ds41-r1/public-review/verification.json",
+      "sha256": "27fff5349e8bdf93d613943f01ac0d3e5b7f3223d2c3da5cfdfbd8511f050bc5",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; raw advisory records remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/dependency-advisories-deepseek-overnight-20261008/osv-advisories-django-001-ds41-r1",
+    "run_sha256": "9c7bc573094a8ec72ba874c77de2d87ab8b5ea1b2e527d17338b311bdc6194d8",
+    "events_sha256": "3fece20b567ed13257002e3d4996bffaaf9048f827142f8a45a570caf04a9593",
+    "answer_sha256": "15df0c213d71c4d4b6783e01d933db4830718d1458f55c2057fb442894bb77b7",
+    "review_sha256": "090b5aa93fad9ce21d1a0a593ca9857b2be3bdb86468a9a5ca41a8c537ec88c3",
+    "original_independent_review_sha256": "f72485ad89c6b58b5bfbd32f730ed1a01a6eb00eece7314d1b21673ce196a8e4",
+    "selected_independent_review_sha256": "f72485ad89c6b58b5bfbd32f730ed1a01a6eb00eece7314d1b21673ce196a8e4",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete API records/raw transcripts stay private. Independent verdict, reason and checks preserved. Shared upstream, bounded two-alert scope, anonymous conditions and audited config cleanup disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7203,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 123,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8174,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 909,
+        "reasoning_output_tokens": 810
+      },
+      {
+        "input_tokens": 9698,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 149,
+        "reasoning_output_tokens": 90
+      },
+      {
+        "input_tokens": 9996,
+        "cached_input_tokens": 9728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 434,
+        "reasoning_output_tokens": 248
+      },
+      {
+        "input_tokens": 10461,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 204,
+        "reasoning_output_tokens": 47
+      },
+      {
+        "input_tokens": 13916,
+        "cached_input_tokens": 10624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 858,
+        "reasoning_output_tokens": 658
+      },
+      {
+        "input_tokens": 17441,
+        "cached_input_tokens": 14720,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 660,
+        "reasoning_output_tokens": 501
+      },
+      {
+        "input_tokens": 18163,
+        "cached_input_tokens": 17920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 635,
+        "reasoning_output_tokens": 545
+      },
+      {
+        "input_tokens": 18966,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 912,
+        "reasoning_output_tokens": 732
+      },
+      {
+        "input_tokens": 19908,
+        "cached_input_tokens": 19712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 179,
+        "reasoning_output_tokens": 12
+      },
+      {
+        "input_tokens": 25750,
+        "cached_input_tokens": 19968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1023,
+        "reasoning_output_tokens": 866
+      },
+      {
+        "input_tokens": 33826,
+        "cached_input_tokens": 26752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1450,
+        "reasoning_output_tokens": 816
+      }
+    ],
+    "source_sha256": "c73eab200111abbf0d9b020aa73ef776550f6df228b064e794fc5e85bd32a7ec",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 193502,
+      "cached_input_tokens": 166272,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7536,
+      "reasoning_output_tokens": 5339
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}
