@@ -26,4 +26,6 @@
 
 通过现有生成函数从任务表生成 prompt 和附件，不另维护手写的一套题。将执行材料与验收材料分开交付给总控：前者包含委托、原始材料与环境要求，后者包含判定方法和必要参考。任务或指导方式改变时升级版本，保留历史条件。
 
+附件来源目录与被测工作目录的路径不同：当前 pipeline 的 `attachments` 配置将原始材料复制到 `materials/`。新题面需要写路径时使用 `materials/<文件名>`，交接给总控时列明执行附件的文件名与哈希，私有参考单独列出。派发前核对冻结执行目录中的实际路径；不要为纠正路径而覆盖已执行题目的版本或输入。
+
 参考已核对版本：[Terminal-Bench 出题规范](https://github.com/harbor-framework/terminal-bench/blob/v4.0.0/rubrics/task-proposal.md)、[题目与验收一致性](https://github.com/harbor-framework/terminal-bench/blob/v4.0.0/rubrics/task-implementation.toml)。借鉴材料分离与结果验收，不照搬高难度门槛。脚本与格式可迭代，本文件不提供给执行 Agent。
