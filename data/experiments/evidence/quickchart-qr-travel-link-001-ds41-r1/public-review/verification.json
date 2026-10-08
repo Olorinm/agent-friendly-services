@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "run_id": "quickchart-qr-travel-link-001-ds41-r1",
+  "service_id": "quickchart",
+  "route_id": "public-qr-api",
+  "phase": "business",
+  "independent_status": "completed",
+  "sources": {
+    "task.json": "ee6a6745433531e856f798a5885d4c4b3338ab5f98f9e7bb48a7e61e871486be",
+    "execution/receipt.json": "7199eabdb6cb80ca776016f8fee37e8f7e8a6b680f0c430f319a15e7a1e890bd",
+    "execution/tool-records.json": "406c10ba403541dd3fa847ed438b8341970c2d6e0dcb6debf80a610600e2c59c",
+    "execution/usage.json": "50ef2f8d7839a33a2eeae926b55111396363c51a572793641ca59f0330fa651a",
+    "grading/assessment.json": "da1a60bc0be1f7769ededd4fa54a8f7baf5cb8a8be4ddd9d9f516797244e9871",
+    "grading/receipt.json": "1eff9939ba7c68542eb791f255d37fc385850994ea7f8e9744832b972a53f92c",
+    "grading/usage.json": "d90d58dd44042c55976b812d872399e3f6597ce84ef8ae13596e92e33aa0b700",
+    "grading-input/controller-visual-observations.json": "0c870588141a2357afd018c2ac4b64eed19a4de7c64f7be85e36497965f56b20",
+    "frozen/grading/reference.json": "18693817ae8a4ee0cf2b7d9f38cdcc828c960be2f5c3b40682022cb056b82872"
+  },
+  "actual_request": {
+    "observed_generation_invocations": 1,
+    "calls": [
+      {
+        "tool_call_index": 6,
+        "tool": "bash",
+        "method": "POST",
+        "endpoint": "https://quickchart.io/qr",
+        "reported_http_status": 200
+      }
+    ],
+    "encoded_payload": "https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212",
+    "payload_sha256_utf8_no_newline": "eeade077715cab26e6a7ce212c53fa4c0579c05610662c0b0592e726c1746449",
+    "account_or_api_key_provided": false
+  },
+  "actual_image": {
+    "sha256": "ba1edef9fd619071fa308f400e2c697d751e8129345c349f04a732e27afd3546",
+    "packages": {
+      "zxing-cpp": "3.1.1",
+      "pillow": "12.3.0",
+      "numpy": "2.3.5"
+    },
+    "format": "PNG",
+    "size": [
+      600,
+      600
+    ],
+    "mode": "RGBA",
+    "all_opaque": true,
+    "all_grayscale": true,
+    "has_black": true,
+    "has_white": true,
+    "barcodes": [
+      {
+        "format": "QR Code",
+        "bytes_hex": "68747470733a2f2f7777772e6e70732e676f762f7a696f6e2f706c616e796f757276697369742f6c6f616465722e63666d3f63734d6f64756c653d73656375726974792f67657466696c65267061676569643d38313636323132",
+        "text": "https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212",
+        "valid": true
+      }
+    ],
+    "bytes": 5044,
+    "png_metadata": {}
+  },
+  "published_png": {
+    "name": "zion_qr.png",
+    "sha256": "ba1edef9fd619071fa308f400e2c697d751e8129345c349f04a732e27afd3546"
+  },
+  "visual_observation": {
+    "receipt_sha256": "0c870588141a2357afd018c2ac4b64eed19a4de7c64f7be85e36497965f56b20",
+    "method": "Controller native view_image of unchanged exact-hash original PNG before grader dispatch; DeepSeek did not have declared vision input. Independent grader separately checked decoded bytes, pixels, provenance and these frozen appearance facts.",
+    "facts": {
+      "background": "white",
+      "qr_foreground": "black",
+      "visible_qr_symbol_count": 1,
+      "extra_text_present": false,
+      "logo_present": false,
+      "notes": "Native viewing of this collected PNG shows one black QR symbol on a white background with visible white border. No letters, caption, logo or additional image decoration visible. Exact payload, pixels and task verdict remain for the independent grader."
+    },
+    "overhead": {
+      "kind": "controller preparation/verification, outside execution and DeepSeek grading",
+      "cost_usd": null,
+      "duration_seconds": null,
+      "note": "Not separately metered; unknown, not zero. No candidate query, image edit, target visit or regeneration."
+    }
+  },
+  "service_fee": {
+    "kind": "confirmed_free",
+    "amount_usd": 0,
+    "notice": "Independent assessment retained; free statements in candidate documentation do not overwrite a particular grader unknown applicability finding."
+  },
+  "scope_limitations": "One anonymous static QR sample in each phase; no account, key, payment, dynamic tracking, target URL visit or extra grader generation. Observed calls count executor invocations from original tool evidence, not hidden provider backend activity. Different masks/ECC/PNG encoding or byte sizes are not task-quality rankings. Four-module margin, DPI and physical printer/phone performance were not graded. Unknown remaining anonymous allowance is not zero consumption.",
+  "preparation": {
+    "decoder": "Grader-only ZXing-C++3.1.1, Pillow12.3.0, NumPy2.3.5; official wheel hashes checked and independent neutral positive/wrongpayload/blank/nonimage controls passed before any candidate generation. Executor had no prewritten API client or grading helper.",
+    "linux_decoder_preparation_sha256": "07f8be8e1cc396b6315ef1e5ecf9cb037e68a6f618312b62a18cdd4c007303f7",
+    "helper_sha256": "bcd82881535f346b96d578d07436edb4877101c6ebaf916f3a21dc91cf9e58ca",
+    "access_installed_by_executor": {
+      "opencv-python-headless": "5.0.0.93",
+      "numpy": "2.4.6"
+    },
+    "retention_audit_sha256": "5aa551a6989858d3f5ddaebc8740f3372738ba2132b963b11b3b3476d8a59322",
+    "retention": "Executor-authored generic configs unchanged; measured access installations retained at their actual venv locations using symmetric audited allowlist adjustment; prior workspace/home/tmp archived by adapter and owned executors restarted before fresh business. No new client, query, expected bitmap or library supplied after access.",
+    "executor_global_pip_attempt_blocked_and_recovered": true,
+    "global_pip_note": "QuickChart attempted system pip in both stages, hit the managed-environment restriction, then used its own access-installed virtual environment; final artifact completed. This extra executor work remains in measured usage."
+  },
+  "official_service_sources": {
+    "manifest_sha256": "898dcf4ba868d3259742f29892fc95bf83f06c05b9b19767e8611412d4996ecf",
+    "urls": [
+      "https://quickchart.io/documentation/qr-codes/",
+      "https://quickchart.io/qr-code-api/",
+      "https://quickchart.io/pricing/qr/",
+      "https://quickchart.io/terms/",
+      "https://quickchart.io/privacy/",
+      "https://quickchart.io/security/"
+    ]
+  }
+}

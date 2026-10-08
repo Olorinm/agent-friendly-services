@@ -101,4 +101,5 @@ catalog:
       opt-in short URLs as an exception. It also allows temporary request logging for support/debugging,
       potentially including GET payloads. Privacy states seven-day log deletion while the security page
       states thirty days; that inconsistency is unresolved. Do not promise zero retention or submit secrets
-      based on the marketing summary. This route records no account or anonymous generation trial yet.
+      based on the marketing summary. The discovery review preceding trials used documentation only;
+      independent access and task outcomes, including trial-specific service costs, are recorded in evaluations.
