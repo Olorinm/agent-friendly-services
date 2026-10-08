@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "run_id": "photon-geocoding-venue-001-ds41-r1",
+  "service_id": "photon",
+  "route_id": "public-search-api",
+  "entry_url": "https://photon.komoot.io/api/",
+  "task": {
+    "description": "我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。",
+    "inputs": "地点：The British Museum；地址：Great Russell Street, London WC1B 3DG, United Kingdom。用途是行程概览中的场馆标记，定位到场馆本身即可，场馆中心或入口都可以；相对场馆官方位置点，200 米以内的地点级位置误差可接受，无需精确到门口。街道、邮编或城市中心不能冒充场馆。只用本轮指定服务的实际查询结果；没有返回的地址字段如实注明，不补造，输入地址与服务返回地址分开说明；未提供足够精度时如实说明。",
+    "expected_output": "中文答复包含正确的场馆名称、带纬度和经度标签的 WGS84 十进制度坐标、实际返回的地址信息和数据来源；说明返回对象的定位粒度和任何重要的不确定性。",
+    "success": "通过指定服务真实查询并匹配到伦敦大英博物馆或其入口；最终坐标与该对象的真实响应一致，坐标轴及单位正确，并位于事前冻结的官方场馆位置点 200 米内，允许合理展示舍入。名称、位置和返回对象的语义共同支持场馆身份，不能仅凭落在半径内把粗略区域对象当场馆。来源、实际返回的地址及粒度说明可核对，未返回字段不捏造；不要求两家服务坐标相同、地址逐字相同或提供固定字段集。",
+    "failure": "未真实查询指定服务，使用其他服务、静态示例或模型记忆代替，匹配到错误地点或仅粗略区域却称为场馆，经纬度颠倒或格式错误，坐标超出公开告知的容差，伪造或混淆输入与返回地址，遗漏必要交付，结论与响应矛盾或预算内未完成。缺少场馆覆盖或有效精度时如实记录未完成部分；执行环境或采集故障单列无效。",
+    "resources": "仅用本轮指定地理编码服务及其官方文档，使用已确认免费的只读资源；可在隔离环境安装依赖和生成本题本地文件。不用其他地理编码服务补答案、不直接以场馆官网坐标代替指定服务查询、不付费、不处理个人地址、不发消息。遵守客户端标识、署名、缓存及限流要求；实际入口、账号来源、请求和时间上限由 ENVIRONMENT.md 冻结。原始证据由外部采集，执行者无需额外编写审计日志。",
+    "id": "geocoding-venue-001",
+    "version": "v1",
+    "sha256": "e59e438be349d25a955dbd839142bbf9d067d97e4c7a1f8e5d35d11150d12165",
+    "file": "data/experiments/tasks/geocoding.md"
+  },
+  "prompt_sha256": "b2cfbb8d4bdf69b54a3950ddadeebad46ccb2b60d2f6a054edaaee03ffc32dbe",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T15:24:18.918504+00:00",
+  "ended_at": "2026-10-08T15:25:28.445307+00:00",
+  "elapsed_seconds": 69.526803,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; official low-volume public route selected deliberately for one public-venue research task",
+    "web_search": "live",
+    "preparation_note": "Fresh access then business sessions. Same frozen venue task,model/effort/generic tools/limits. Execution25modelrequests,access300s/business600s;grading40requests/300s;32000outputtokens/request. Two provider runtimes may overlap on shared16CPU/31.34GiB host,each2GiB/1CPU;one serial stream per APIhost,4calls/phase max and15s spacing,cache same query. Truthful projectUA supplied, no targetanswer or callscript. Generic setup inspected between sessions; all business data cleared. Graders use actual captured execution request/response and independent official venue reference; no extra candidate APIcalls. Both services shareOSM, so agreement is not independent geographic truth. One publicvenue,place-level mapmarking only, no entrance navigation or general geocoding accuracy claim. PublicOSMF policy explicitly linked/explained; not a generic arbitrary-query platform or recurring bulk geocoder.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本次真实调用冻结指定服务 Photon（https://photon.komoot.io/api/）并命中伦敦大英博物馆场馆对象（R 177044, tourism=museum），答复给出的 WGS84 纬度 51.5193118 / 经度 -0.1267051 与响应一致、轴序正确，距冻结官方场馆点约 20.7 m（≤200 m），并完整披露返回地址、来源与场馆级粒度，未把街道对象冒充场馆。",
+  "usage": {
+    "input_tokens": 95519,
+    "cached_input_tokens": 86400,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4760,
+    "reasoning_output_tokens": 2195
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://photon.komoot.io/ (official Terms of Use)",
+      "execution/artifacts/ENVIRONMENT.md"
+    ],
+    "note": "未提供付费账号/Key，也无付费入口；本次对指定入口的查询未附任何认证或支付信息。",
+    "applicability": {
+      "rule": "Photon 为 komoot 官方托管的公开 demo API；官方站点 Terms of Use 允许将其 API 用于项目（仅要求公平使用、过量则限流，不保证可用性），无账号/Key/付费路径。冻结的 ENVIRONMENT.md 明确：免注册公开路径，不注册、不付费。",
+      "observed": "本次对 https://photon.komoot.io/api/ 的查询在无任何 Authorization/Key/支付信息下返回 HTTP 200。",
+      "evidence": "execution/artifacts/cache/q_british_museum_headers.txt（200，无认证/计费头）；execution/artifacts/ENVIRONMENT.md；grading/artifacts/evidence/verification-notes.md 摘录官方条款原文。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-independent-reviewer",
+    "reviewed_at": "2026-10-08T15:29:14.686881+00:00",
+    "checks": [
+      {
+        "criterion": "使用冻结指定的 Photon 入口真实发起查询，而非其他服务、静态示例或模型记忆",
+        "passed": true,
+        "evidence": "execution/artifacts/cache/q_british_museum.json 及 q_british_museum_headers.txt：对 https://photon.komoot.io/api/?q=British%20Museum 的真实 200 响应（Server: nginx, Date 2026-10-08 15:24:32），请求带真实 UA agent-friendly-services/20261008。"
+      },
+      {
+        "criterion": "匹配对象为伦敦大英博物馆场馆本身，名称/类型/地理语义共同支持身份",
+        "passed": true,
+        "evidence": "响应 properties: name=British Museum, osm_key=tourism, osm_value=museum, osm_type=R, osm_id=177044, city=London, country=United Kingdom；为场馆对象而非街道/邮编/城市中心。"
+      },
+      {
+        "criterion": "答复给出带经纬度标签的 WGS84 十进制度坐标，与真实响应一致且坐标轴单位正确",
+        "passed": true,
+        "evidence": "execution/answer.md 标注 纬度 51.5193118 / 经度 -0.1267051；响应 geometry.coordinates=[-0.1267051,51.5193118]（GeoJSON 经度,纬度）一致，未见颠倒或格式错误。"
+      },
+      {
+        "criterion": "最终坐标位于冻结官方场馆位置点 200 米内",
+        "passed": true,
+        "evidence": "Haversine（R=6371008.8）计算返回点 (51.5193118,-0.1267051) 距官方点 (51.519413319978,-0.12695659999997) 约 20.7 m；见 grading/artifacts/evidence/verification-notes.md。"
+      },
+      {
+        "criterion": "报告服务实际返回的地址信息，输入地址与返回地址分开，未返回字段不捏造",
+        "passed": true,
+        "evidence": "execution/answer.md 原样列出 name/street/locality/district/city/state/country/postcode/countrycode 等字段，并单列附件输入地址；注明按输入地址原文查询返回的是 Great Russell Street 街道段。"
+      },
+      {
+        "criterion": "注明数据来源与许可",
+        "passed": true,
+        "evidence": "execution/answer.md 给出 Photon（https://photon.komoot.io/ ）与底层 OpenStreetMap，及 https://www.openstreetmap.org/copyright。"
+      },
+      {
+        "criterion": "说明定位粒度与不确定性，未把面/重心对象称为入口",
+        "passed": true,
+        "evidence": "execution/answer.md 说明为场馆级（relation 代表点/重心，落在场馆范围），服务未返回单独入口节点，明确非入口级。"
+      },
+      {
+        "criterion": "中文答复包含匹配名称、带标签坐标、返回地址、来源与粒度说明等可见交付项",
+        "passed": true,
+        "evidence": "execution/answer.md 为中文，逐项覆盖名称、经纬度标签坐标、返回地址、数据来源与定位粒度。"
+      },
+      {
+        "criterion": "遵守调用与预算限制（≤4 请求/阶段、相邻请求≥15s、真实 UA、免注册无付费、模型请求≤25）",
+        "passed": true,
+        "evidence": "本服务仅 2 次请求（15:24:32 与 15:25:16，间隔 44s），带指定 UA、无认证；execution/receipt.json 与 measured.json 显示 9 次模型请求（≤25）、exit_code 0、未超时。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.026698152,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026698152,
+          "usage_sha256": "b460f14171ff9177045c80b8eef861a3666a8d346cef3756b3671feb85d4e7d8"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/photon-geocoding-venue-001-ds41-r1/execution/answer.md",
+      "sha256": "27091c475a0f477ae062fb02064de56e619ae2965d05976c9cb96a8a4248556d",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/photon-geocoding-venue-001-ds41-r1/public-review/verification.md",
+      "sha256": "fe822891e19043b854d0974e3519bd93081e5510007123164a8928ce9e391a99",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/geocoding-deepseek-overnight-20261008/photon-geocoding-venue-001-ds41-r1",
+    "run_sha256": "7aad652557255e1c8cce4805d87d1b1a780adcf45a23d58be4c1de8e9b1508fd",
+    "events_sha256": "dde97d75b010e9ac67a19cf48307d15705427212d7a673e9172ff1ee5ac84cfc",
+    "answer_sha256": "27091c475a0f477ae062fb02064de56e619ae2965d05976c9cb96a8a4248556d",
+    "review_sha256": "397797087e900a109215c8ffbb9f06d89805fcf261c3f94450f955befbcb2383",
+    "original_independent_review_sha256": "7c08f120482e69bdbd43d60fa66cd91e56e93678e275579df57b5a5df46b5973",
+    "selected_independent_review_sha256": "7c08f120482e69bdbd43d60fa66cd91e56e93678e275579df57b5a5df46b5973",
+    "publication_review_note": "Original executor answer preserved with explicit unsupportedapproximatepoint/centroid/order caveats; actualgradedpoint is20.7mfromfrozenofficialindexedreference. Onevenue,oneproviderbusiness; no pairedaccuracyranking. Indexedsourceacquisition and200mtolerance limitations disclosed. Minimal originalanswer and independent evidence selection; long third-party quotes paraphrased, OSMattribution/license added. All independentstatus/reason/checks/fees preserved; publicnotice narrows unsupportedinferences without rewritinghistory."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7209,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8101,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 263,
+        "reasoning_output_tokens": 140
+      },
+      {
+        "input_tokens": 8630,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 136,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 9463,
+        "cached_input_tokens": 8704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 313,
+        "reasoning_output_tokens": 103
+      },
+      {
+        "input_tokens": 10301,
+        "cached_input_tokens": 9728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1329,
+        "reasoning_output_tokens": 1152
+      },
+      {
+        "input_tokens": 11745,
+        "cached_input_tokens": 11520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 299,
+        "reasoning_output_tokens": 89
+      },
+      {
+        "input_tokens": 12322,
+        "cached_input_tokens": 12032,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1007,
+        "reasoning_output_tokens": 683
+      },
+      {
+        "input_tokens": 13395,
+        "cached_input_tokens": 13184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 942,
+        "reasoning_output_tokens": 11
+      },
+      {
+        "input_tokens": 14353,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 353,
+        "reasoning_output_tokens": 8
+      }
+    ],
+    "source_sha256": "ff9078a88a575eb7a5c3988644e85b2f12bf5e42814179ab716a79f58a4d1a4d",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 95519,
+      "cached_input_tokens": 86400,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4760,
+      "reasoning_output_tokens": 2195
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

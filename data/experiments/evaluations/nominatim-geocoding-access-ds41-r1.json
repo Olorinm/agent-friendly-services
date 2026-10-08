@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "run_id": "nominatim-geocoding-access-ds41-r1",
+  "service_id": "nominatim",
+  "route_id": "public-search-api",
+  "entry_url": "https://nominatim.openstreetmap.org/search",
+  "task": {
+    "description": "帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选一个公开地点做小型查询，给出匹配地点、明确标注纬度和经度的坐标及来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+    "expected_output": "一次来自指定服务的真实地点匹配和带经纬度标签的坐标，注明来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别地点和有效经纬度，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实地点查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，经纬度错误或混淆，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务及已确认免费的资源，可查官方文档、安装通用依赖和保存私有配置。只查询公开地点，不处理个人地址、不批量抓取、不自动补全、不注册无关服务、不付费、不通知或邀请他人。遵守客户端标识、署名、缓存及限流要求；请求与时间上限见 ENVIRONMENT.md。运行记录由外部采集，不要求额外审计报告。",
+    "id": "geocoding-access-001",
+    "version": "v1",
+    "sha256": "b17c5d4612b54125b32d066149250d4a3b9a415f61b5a8a37cba9ae8d3b619b2",
+    "file": "data/experiments/tasks/geocoding.md"
+  },
+  "prompt_sha256": "64250276f49addcd218fc4b0cc874329060c8cfa4895fd8e4d42b5ae5eee3c32",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T15:16:36.665691+00:00",
+  "ended_at": "2026-10-08T15:21:26.730832+00:00",
+  "elapsed_seconds": 290.065141,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; official low-volume public route selected deliberately for one public-venue research task",
+    "web_search": "live",
+    "preparation_note": "Fresh access then business sessions. Same frozen venue task,model/effort/generic tools/limits. Execution25modelrequests,access300s/business600s;grading40requests/300s;32000outputtokens/request. Two provider runtimes may overlap on shared16CPU/31.34GiB host,each2GiB/1CPU;one serial stream per APIhost,4calls/phase max and15s spacing,cache same query. Truthful projectUA supplied, no targetanswer or callscript. Generic setup inspected between sessions; all business data cleared. Graders use actual captured execution request/response and independent official venue reference; no extra candidate APIcalls. Both services shareOSM, so agreement is not independent geographic truth. One publicvenue,place-level mapmarking only, no entrance navigation or general geocoding accuracy claim. PublicOSMF policy explicitly linked/explained; not a generic arbitrary-query platform or recurring bulk geocoder.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "invalid_run",
+  "reason": "执行环境无法连通指定入口 https://nominatim.openstreetmap.org/search：DNS 把 nominatim.openstreetmap.org 解析为与 OSM 无关的轮换 IP（含 Facebook 段 2a03:2880:...:face:b00c...、31.13.84.2 等），urllib/curl/webfetch 对该入口的连接一律超时或 Network unreachable；同一容器内 example.com、api.github.com、nominatim.org、operations.osmfoundation.org 均 HTTP 200，而 www.openstreetmap.org、www.google.com 同为 HTTP 000，指向容器级 DNS/出口限制。工作目录未产生 result.json 或 cache，last_request.json 仅记录一次尝试；会话在约 290 秒时被超时终止（exit_code=-15, timed_out=true），answer.md 仅剩未完成片段。核心阻碍属于执行环境网络（DNS/出口）而非服务能力、接入门槛或执行者行为，故记 invalid_run；未做接入补测。",
+  "usage": null,
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://operations.osmfoundation.org/policies/nominatim/"
+    ],
+    "note": "公共 OSM Nominatim 为捐赠运行的免费公开服务，无账号/Key/付费机制；本次无计费回执。本次因环境网络失败未发出成功请求，故无实际用量金额。",
+    "applicability": {
+      "rule": "OSMF Nominatim 公共 API 为捐赠运行的公开服务，低量非商业使用免费、无需账号或支付；要求真实标识 UA、ODbL 署名，且最大 1 请求/秒。",
+      "observed": "本运行按低量单次公开地点查询设计，仅使用免注册公开入口并设置真实应用 UA，未提供账号、Key 或支付方式；使用量远低于 1 请求/秒。",
+      "evidence": "execution/artifacts/geocode.py 第68-71行仅含 User-Agent/Accept-Language；ENVIRONMENT.md 明确未提供账号、Key 或支付方式。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-acceptance-agent",
+    "reviewed_at": "2026-10-08T15:29:14.573005+00:00",
+    "checks": [
+      {
+        "criterion": "运行环境可访问指定服务与入口（完成真实查询的前提）",
+        "passed": false,
+        "evidence": "DNS 将 nominatim.openstreetmap.org 解析为无关轮换 IP 且 HTTPS 连接一律超时，而同容器其它受测主机返回 200，见 grading/artifacts/evidence/environment-network-failure.md。"
+      },
+      {
+        "criterion": "通过指定服务与入口完成一次真实查询，返回可识别公开地点与有效经纬度",
+        "passed": false,
+        "evidence": "工作目录无 result.json、无 cache/；执行者的 urllib/curl/webfetch 调用均在建立连接阶段失败（Network unreachable / timed out），从未收到任何响应体。"
+      },
+      {
+        "criterion": "答复给出匹配地点、明确标注纬度/经度及来源",
+        "passed": false,
+        "evidence": "execution/answer.md 仅含一句 'Now the business script in this task's working directory (with cache + 15s gate):'，无地点、坐标或来源。"
+      },
+      {
+        "criterion": "可复用通用配置保存到持久目录且不含秘密",
+        "passed": true,
+        "evidence": "execution/retained-files.json 显示持久目录保留 service-config.json；execution/artifacts/geocode.py 仅读取 endpoint/identity/request_defaults/rate_limit/attribution 等通用字段，无业务数据或凭据。"
+      },
+      {
+        "criterion": "走免注册公开入口、使用真实应用标识、未注册未付费",
+        "passed": true,
+        "evidence": "execution/artifacts/geocode.py 第68-71行仅设置 User-Agent 'agent-friendly-services/20261008 (+https://github.com/Olorinm/agent-friendly-services)' 与 Accept-Language，无账号/Key/支付。"
+      },
+      {
+        "criterion": "遵守入口限流与缓存要求（每阶段至多4次请求、间隔至少15秒）",
+        "passed": false,
+        "evidence": "对指定入口的调用尝试约9次（urllib 1次 + curl 多次 + webfetch 1次 + curl q=test 重试3次），超出每阶段4次上限；多数为网络失败后的重复诊断，见 evidence/environment-network-failure.md。"
+      },
+      {
+        "criterion": "在时间预算内产出最终答复",
+        "passed": false,
+        "evidence": "会话在开始后约290秒被超时终止（timed_out=true, exit_code=-15），answer.md 为未完成片段。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.034596516,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.034596516,
+          "usage_sha256": "2cbe3f207ff6de48851201a21013f63884c225408c53529b55c9b1d3c4cffd1f"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/nominatim-geocoding-access-ds41-r1/execution/answer.md",
+      "sha256": "abf9c2c56df33de337de85acce4a6eeee2cdaa5c65e0db68ee3c200eb40e664b",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/nominatim-geocoding-access-ds41-r1/public-review/verification.md",
+      "sha256": "0dd47d63b7f3393af94420c0159e3cf3e7de85994e9802718dd09f380f6d075d",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/geocoding-deepseek-overnight-20261008/nominatim-geocoding-access-ds41-r1",
+    "run_sha256": "1a9f9311b78c70afad01ab5d5a2a3e051244e4961e789228a3c6eb1d1a2d65e4",
+    "events_sha256": "b4c5b4398754f5106c27db32405e74e7b0c85061d5b452c59d6d7d2c4b200b78",
+    "answer_sha256": "abf9c2c56df33de337de85acce4a6eeee2cdaa5c65e0db68ee3c200eb40e664b",
+    "review_sha256": "40f94a0edd25b3557f275207472dccc69910833df9cbb0ffcb705735395822bb",
+    "original_independent_review_sha256": "e99e5fbf9b8da5171a69da03c0ea34e6518e4a8daf1b8a8e2efce32d5f2bd8fe",
+    "selected_independent_review_sha256": "e99e5fbf9b8da5171a69da03c0ea34e6518e4a8daf1b8a8e2efce32d5f2bd8fe",
+    "publication_review_note": "Independent invalid_run and failed request-limit check preserved. No further NominatimAPIcalls; no business result created. DNS-only followup observedhostandcontainer;rootcause remains unlocated. Unknownmodelusage remainsunknown. Minimal originalanswer and independent evidence selection; long third-party quotes paraphrased, OSMattribution/license added. All independentstatus/reason/checks/fees preserved; publicnotice narrows unsupportedinferences without rewritinghistory."
+  },
+  "request_usage": {
+    "status": "incomplete",
+    "method": "runner adapter",
+    "requests": [],
+    "source_sha256": "1d10d39071849f4023e118f852aa0c42bb03512245920d111992416ac7321a47",
+    "reason": "Adapter usage is incomplete"
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}
