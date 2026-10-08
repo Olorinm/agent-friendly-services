@@ -1,0 +1,21 @@
+{
+  "scope": "Minimal non-commercial service verification, not a holiday calendar or portal; complete candidate holiday tables and final answers retained privately.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "c492c98b3e140ab239f245f989779adda9ee33f9bfb57c325955a9de362a3977",
+    "execution/receipt.json": "b5ad8d31a324960aa5e2cb886bc05899362d68f30c79cfd46e2cef6cdc205529",
+    "execution/usage.json": "86d3740786377276d3a6010faff5660229637ddddcd3a2c5705026813cdc7460",
+    "grading/assessment.json": "cd642e85e83a4e7ff9bd4d07c606275ab5e11e1b1644fd51096e2d0fc56c876a"
+  },
+  "configuration": "OpenCode1.18.35,DeepSeekV4.1Flash/high;exec25requests(300saccess/600sbusiness),grade40/300s,32000outputtokens/request;2GiB/1CPU/pids256;max2providerstreams;samebaseimage,pipTUNAconfigured beforeaccess,initialemptycache,nopreinstalledclients.",
+  "controller_notes": [
+    "匿名公共入口，无预提供账号/Key/邮箱/支付方式，无本轮注册或人工身份步骤。免费须匹配当前使用条件，API成功不单独证明免费。",
+    "只测试一个明确地区/年份的小型清单；不代表全球覆盖、未来法律变更、可用性、吞吐量、商店/银行营业或个人休假权益。",
+    "Nager免费限private/non-profit项目，商业用途需active sponsorship，不能运营holiday portal。完整候选表/答案私有，仅公开最少核对事实。",
+    "OpenHolidays API：https://www.openholidaysapi.org/en/；数据采用ODbL1.0：https://github.com/openpotato/openholidaysapi.data/blob/main/LICENSE 。此公开摘要不重发假日数据表；服务/软件许可不同。"
+  ],
+  "actual_result": "Real smallholidaylookup returnedHTTP200 with identifiabledate/name; range/example matchedprivateoriginalresponse, necessarygenericconfigsaved; no account/key/registration/payment or extraapplication.",
+  "sample_scope": "Germany2025firstquarter",
+  "reuse_limit": "Basicqueryconfirmed; passingaccessdoesnotvalidatealloptionalendpointtemplatesorinferfuturebusinesscoverage.",
+  "runtimes": "All4ownedcontainersstopped aftercollectionandindependentreview; no service resourcecreated or registrationto cleanup."
+}
