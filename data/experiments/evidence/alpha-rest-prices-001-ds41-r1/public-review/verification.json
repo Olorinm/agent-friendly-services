@@ -1,0 +1,76 @@
+{
+  "notice": "Minimal original measurements and independent judgments. Financial quotes, daily prices, CSV and chart data remain private. Source hashes identify retained originals, not publicly downloadable raw files.",
+  "initial_assessment_sha256": "807eb98001abc038ee610a1028ab8bfebb31422676ce0bc3d6ee24a8356cca4d",
+  "selected_assessment_sha256": "05a732067c6bfe336c4db7eb369bf5b53cda4c1ff82b86844510e205e1515de4",
+  "initial_status": "not_completed",
+  "selected_status": "not_completed",
+  "initial_fee_kind": "confirmed_free",
+  "selected_fee_kind": "unknown",
+  "independent_reason": "用户要求的走势图未交付：本次仅完成指定服务取数与 CSV，图表缺失且 execution/answer.md 为空，无用户可见最终答复。服务取数成功不等于图表交付完成。判为 not_completed 而非 invalid_run：容器整体环境可用——Alpha Vantage REST 调用成功（HTTP 200，100 个日线点），官方文档可抓取，CPU/内存未达配额；瓶颈仅是 files.pythonhosted.org 下载 matplotlib wheel 异常缓慢（诊断约 234–340KB/20s，wheel 9.85MB）。原题只要求『走势图』，未指定 matplotlib，且环境提供 Node，可用无外部依赖的 SVG/HTML 产图；执行者却先阻塞 300s 再持续轮询同一后台下载直至预算耗尽，未做替代实现，故缺失归因于执行策略/预算内未完成，环境未失效。事前已提供普通免费账号与 Key（非本次执行注册），执行期间未观察到人工介入。免费额度声明来自事前材料且无账单/用量回执，服务费用保留 unknown。",
+  "checks": [
+    {
+      "criterion": "通过指定入口 Alpha Vantage REST 实际取数（TIME_SERIES_DAILY, symbol=AAPL），未使用其他服务或模型记忆",
+      "passed": true,
+      "evidence": "execution/artifacts/fetch_aapl.py 使用 base https://www.alphavantage.co/query 与 function=TIME_SERIES_DAILY；execution/artifacts/aapl_daily_raw.json 含 Meta Data(Symbol=AAPL) 与 Time Series (Daily)；source URL 记录于 aapl_2026-08_data.json（api key 已剥离）。仅 1 次业务取数调用。"
+    },
+    {
+      "criterion": "日期覆盖 2026-08 全部常规交易日，无重复、缺失或伪造休市日",
+      "passed": true,
+      "evidence": "execution/artifacts/aapl_2026-08_close.csv 共 21 行；日期集合与冻结参考的 21 个交易日完全一致（日期全等，无重复/缺失，无周末或休市日）。"
+    },
+    {
+      "criterion": "不复权收盘价与冻结同口径参考在报价精度内一致",
+      "passed": true,
+      "evidence": "逐行比对 21 个交易日，日期全等、最大绝对差 0.00 USD；CSV 列名为 close_unadjusted，口径为不复权常规收盘价。"
+    },
+    {
+      "criterion": "CSV 交付物存在且可用",
+      "passed": true,
+      "evidence": "execution/artifacts/aapl_2026-08_close.csv，442 字节，sha256 1d521600fc7dafe5048f7bfaf97968e56dac840766c58f3b5d6cee7369f620b7。"
+    },
+    {
+      "criterion": "数据来源与不复权口径可识别",
+      "passed": true,
+      "evidence": "execution/artifacts/aapl_2026-08_data.json 记录 source URL 与 Meta Data(Symbol/Time Zone)；CSV 表头标注 close_unadjusted。"
+    },
+    {
+      "criterion": "可打开的走势图交付物存在（PNG/SVG/PDF/HTML 任一）",
+      "passed": false,
+      "evidence": "execution/artifacts/ 仅有数据文件、原始响应与调用脚本，不存在任何图像/HTML/SVG 产物；matplotlib 未安装成功，也无替代方式产图。"
+    },
+    {
+      "criterion": "面向用户的最终答复/交付说明存在",
+      "passed": false,
+      "evidence": "execution/answer.md 为 0 字节空文件（sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855），无来源与口径说明。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T14:12:41.161084+00:00",
+    "ended_at": "2026-10-08T14:22:31.226132+00:00",
+    "exit_code": -15,
+    "timed_out": true
+  },
+  "actual_answer_bytes": 0,
+  "actual_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "limits": [
+    "One sample per route on the same pre-provided free account. Account registration not measured; no general reliability or protocol-speed ranking.",
+    "Serial REST then MCP execution. Both used the assigned data route; graders received no other route results or other grading conclusions.",
+    "Only generic setup and authentication survive between tasks. MCP transport client source was inspected and explicitly retained before business; no business answer or data was supplied.",
+    "Raw financial quotes, daily series and possible reconstructions are not redistributed. Public evidence reports the coverage and independent comparison result.",
+    "Unknown execution usage/model costs remain unknown; conservative budget reserves retained, not reported as zero."
+  ],
+  "exception_review": {
+    "reason": "Both workflows stalled on a dependency download; a separate same-image post-run network diagnostic raised a material validity question.",
+    "initial_verdict_preserved": true,
+    "new_session": true,
+    "execution_not_rerun": true,
+    "original_frozen_inputs_unchanged": true,
+    "finding": "Both independent rechecks kept not_completed: the user deliverables were missing, service data retrieval worked, and the task did not require the stalled library. Network limitation disclosed; this is not a service-availability failure.",
+    "fee_change": "Exception reviewers kept service fee unknown rather than inferring free status from setup constraints; original confirmed_free judgments and hashes retained privately.",
+    "diagnostic_sha256": "700e23c2c5b1fe2bf2ef6b44faca7909dbdec581ae593e9a7ea44e6796a41fa0",
+    "diagnostic_timing_limit": "Measured after execution; does not reconstruct execution-time network conditions.",
+    "diagnostic_default_bytes_in_20s": 234101,
+    "diagnostic_ipv4_bytes_in_20s": 340187,
+    "wheel_bytes": 9854405
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "notice": "Minimal original measurements and independent judgments. Financial quotes, daily prices, CSV and chart data remain private. Source hashes identify retained originals, not publicly downloadable raw files.",
+  "initial_assessment_sha256": "5dbad2959074e03ab540525208cfe23f752327607bf2f456aeadf83d3c82a957",
+  "selected_assessment_sha256": "5dbad2959074e03ab540525208cfe23f752327607bf2f456aeadf83d3c82a957",
+  "initial_status": "completed",
+  "selected_status": "completed",
+  "initial_fee_kind": "confirmed_free",
+  "selected_fee_kind": "confirmed_free",
+  "independent_reason": "指定入口 Alpha Vantage REST（https://www.alphavantage.co/query）用本轮提供的既存免费账号 Key 成功返回真实行情（GLOBAL_QUOTE IBM、MSFT，均 HTTP 200，交易日 2026-10-07），可复用连接配置已写入指定持久位置 /home/node/service-tools/service-config.json 并被保留。账号为本轮复用的既存账号，未自行注册或付费；答复/配置不含 Key，未使用 MCP 或其他服务代替。",
+  "checks": [
+    {
+      "criterion": "按指定入口与方式（REST GET https://www.alphavantage.co/query）实际发起调用并成功返回真实金融数据",
+      "passed": true,
+      "evidence": "GLOBAL_QUOTE/IBM HTTP 200，price [market value retained privately]、latest trading day 2026-10-07（execution/artifacts/global_quote_IBM_raw.json）；GLOBAL_QUOTE/MSFT HTTP 200，price [market value retained privately]；调用摘录见 grading/artifacts/evidence/query-verification.md。"
+    },
+    {
+      "criterion": "使用本轮授权的既存免费账号凭据，未自行注册、未付费、未启用付费超额",
+      "passed": true,
+      "evidence": "execution/artifacts/ENVIRONMENT.md 声明本轮复用既存普通免费账号；execution/answer.md 明确注明非本次注册；仅调用免费端点，无付款/绑卡/开通超额行为。"
+    },
+    {
+      "criterion": "把后续可用的连接配置保存到指定持久位置",
+      "passed": true,
+      "evidence": "service-config.json 写入 /home/node/service-tools/（含 base_url、query_param 认证、free_tier、verified 记录）；execution/retained-files.json 列出 credentials.json 与 service-config.json；内容摘录见 grading/artifacts/evidence/persisted-config.md。"
+    },
+    {
+      "criterion": "已保存配置可用于新会话：用持久配置与可复用客户端再次成功调用",
+      "passed": true,
+      "evidence": "execution/artifacts/av_client.py 读取 service-config.json + credentials.json，运行 GLOBAL_QUOTE symbol=MSFT 返回 HTTP 200 真实数据。"
+    },
+    {
+      "criterion": "未泄露密钥：答复、配置与工作文件不含 Key 或带 Key 的 URL",
+      "passed": true,
+      "evidence": "execution/answer.md 不含 Key；执行期对 service-config.json 及工作目录 grep 密钥标记计数为 0；配置以 credentials_file 引用密钥位置。"
+    },
+    {
+      "criterion": "遵守免费额度与接入请求次数上限（≤3 次数据请求），未使用 MCP/其他服务代替",
+      "passed": true,
+      "evidence": "本次仅 2 次金融数据请求（IBM、MSFT），均走指定 REST 入口；另 1 次为官方文档页面 GET（非数据请求）；未触碰付费端点、未重试。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T14:07:21.955843+00:00",
+    "ended_at": "2026-10-08T14:07:55.765155+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "actual_answer_bytes": 1670,
+  "actual_answer_sha256": "94624dc30fa9b92dc5ef55c264e463573bb539501409d3719237b758721bf61e",
+  "limits": [
+    "One sample per route on the same pre-provided free account. Account registration not measured; no general reliability or protocol-speed ranking.",
+    "Serial REST then MCP execution. Both used the assigned data route; graders received no other route results or other grading conclusions.",
+    "Only generic setup and authentication survive between tasks. MCP transport client source was inspected and explicitly retained before business; no business answer or data was supplied.",
+    "Raw financial quotes, daily series and possible reconstructions are not redistributed. Public evidence reports the coverage and independent comparison result.",
+    "Unknown execution usage/model costs remain unknown; conservative budget reserves retained, not reported as zero."
+  ]
+}

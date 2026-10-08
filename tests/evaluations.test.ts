@@ -24,7 +24,10 @@ test('evaluation evidence tampering and cached-token double counting are detecte
         `Selected evidence must be available to a future checkout: ${item.path}`);
     }
   }
-  const modified = structuredClone(records[0]);
+  const complete = records.find(record => record.status === 'completed' && record.usage
+    && record.evidence.length > 0 && record.review.checks.length > 0);
+  assert(complete, 'Tampering fixture needs a completed trial with measured usage and evidence');
+  const modified = structuredClone(complete);
   modified.evidence[0].sha256 = '0'.repeat(64);
   assert(evaluationErrors(modified, providers).some(s => s.includes('hash mismatch')));
   modified.usage!.cached_input_tokens = modified.usage!.input_tokens + 1;
