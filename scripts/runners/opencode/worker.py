@@ -147,6 +147,10 @@ def main():
     verified=bool(requests) and role in payload and all(line in payload for line in prompt.decode().splitlines() if line.strip()) and all(r.get('model')==request['model'] and r.get('reasoning_effort')==request['reasoning_effort'] for r in requests)
     dump(out/'receipt.json',dict(session_id=session,workspace=str(workspace),provider=provider,model_api='https://'+route['host']+route['base_path']+'/chat/completions',model=request['model'],reasoning_effort=request['reasoning_effort'],harness=request['harness'],runtime=request['runtime'],started_at=started,ended_at=ended,exit_code=process.returncode,timed_out=timed_out,isolation='Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools',input_verified=verified))
     dump(out/'controller-limits.json',{key:request[key] for key in ('max_model_requests','deadline_epoch') if key in request})
+    if 'runtime_code_preflight' in request:
+        receipt=json.loads((out/'receipt.json').read_text())
+        receipt['runtime_code_preflight']=request['runtime_code_preflight']
+        dump(out/'receipt.json',receipt)
     normalize(out,request['model'])
     # Persist actual process status and usage before collecting untrusted files.
     # Collection errors must not erase the already observed runtime receipt.

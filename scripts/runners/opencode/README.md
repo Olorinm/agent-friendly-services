@@ -80,7 +80,8 @@ python3 scripts/runners/opencode/provision.py --config /private/adapter.json bui
 python3 scripts/runners/opencode/provision.py --config /private/adapter.json up
 ```
 
-`up` prints the actual OpenCode version, image ID and resource limits. Save that
+`up` prints the actual OpenCode version, image ID, resource limits and injected
+runner source hashes. Save that
 output in the private batch manifest; use the measured version in the pipeline's
 `harness`. It refuses running containers and containers it did not create.
 After changing runner code or provider settings, run `up` on stopped runtimes
@@ -90,6 +91,16 @@ It does not migrate existing containers to a new image: use new container names
 when changing the image. Failed setup can leave its own containers present;
 inspect their state before retrying. Optional `build_args` can set
 `OPENCODE_VERSION` and `DEBIAN_MIRROR`.
+
+The image digest does not identify the worker files installed under `/run/afs`.
+Before allocating each new run, the adapter compares those files with its local
+runner checkout. Missing or stale files stop dispatch before any model request;
+there is no automatic upgrade or retry. Inspect and stop only the idle owned
+runtime, preserve its preparation evidence, then use `up` to install the intended
+version and record the changed conditions. The request and runtime receipt retain
+this preflight hash manifest and timestamp. It describes the pre-dispatch read,
+not protection against a controller changing files during a run. Collection and
+status queries remain available for historical runs without requiring new code.
 
 The remote root must be writable by the SSH user. Supply service credentials separately
 under `/home/node/service-tools` and authorize their exact scope in the pipeline

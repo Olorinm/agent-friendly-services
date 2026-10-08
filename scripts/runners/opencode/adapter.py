@@ -5,6 +5,7 @@ Private config: {host, remote_root, containers: {runtime_id: container_name}}.
 No infrastructure addresses, service credentials, or subscription keys belong here.
 """
 import argparse
+from datetime import datetime, timezone
 import io
 import json
 from pathlib import Path
@@ -17,6 +18,7 @@ from config import load, ssh as remote_ssh
 from tool_records import extract as extract_tool_records
 from runtime_status import query as query_runtime_status
 from providers import DEFAULT_PROVIDER, validate_model
+from runtime_code import manifest as code_manifest, verify as verify_runtime_code
 
 p=argparse.ArgumentParser();p.add_argument('--config',type=Path,required=True);p.add_argument('operation',choices=['start','status','collect','stop']);p.add_argument('request',type=Path);a=p.parse_args()
 c=load(a.config);r=json.loads(a.request.read_text());container=c['containers'][r['runtime']];run=(r.get('handle') if a.operation!='start' else None) or r['run_id']+'-'+r['role']
@@ -38,6 +40,10 @@ def put(directory):
 if a.operation=='start':
     r['provider']=c.get('provider',DEFAULT_PROVIDER)
     validate_model(r['provider'],r['model'])
+    observed = verify_runtime_code(exec_root, code_manifest(Path(__file__).parent))
+    r['runtime_code_preflight'] = {'source_sha256': observed,
+        'verified_at': datetime.now(timezone.utc).isoformat(),
+        'scope': 'Controller read of root-injected support files before run allocation; not a mid-run immutability guarantee.'}
     for key in ('max_model_requests','deadline_epoch'):
         if key in c:r[key]=c[key]
     r['retained_paths']=c['retained_paths'][r['runtime']]

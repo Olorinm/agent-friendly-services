@@ -14,10 +14,10 @@ import sys
 import tarfile
 from config import load, ssh
 from providers import DEFAULT_PROVIDER
+from runtime_code import WORKER_FILES
 
 HERE = Path(__file__).resolve().parent
 LABEL = 'org.agent-friendly-services.runner'
-WORKER_FILES = ('worker.py', 'normalize.py', 'capture-proxy.py', 'providers.py', 'request_limits.py')
 
 
 def archive(files):
@@ -93,6 +93,7 @@ def run(config, action):
         version = docker('exec', name, 'opencode', '--version').stdout.decode().strip()
         info = json.loads(docker('inspect', name).stdout)[0]
         result[runtime] = {'container': name, 'provider': config.get('provider', DEFAULT_PROVIDER),
+                           'runner_source_sha256': {f: hashlib.sha256(files[f]).hexdigest() for f in WORKER_FILES},
                            'image_id': info['Image'], 'opencode_version': version,
                            'memory_bytes': info['HostConfig']['Memory'], 'nano_cpus': info['HostConfig']['NanoCpus'],
                            'pids_limit': info['HostConfig']['PidsLimit']}

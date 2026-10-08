@@ -186,6 +186,68 @@ class RuntimeStatusTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'unavailable'):
             status.query(lambda: missing, lambda: missing)
 
+class RuntimeCodeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.directory = Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        spec = importlib.util.spec_from_file_location('opencode_runtime_code', cls.directory/'runtime_code.py')
+        cls.code = importlib.util.module_from_spec(spec); spec.loader.exec_module(cls.code)
+
+    def test_real_probe_rejects_stale_missing_and_symlinked_code_without_reading_credentials(self):
+        import subprocess
+        import sys
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            for name in self.code.WORKER_FILES:
+                (root/name).write_bytes((self.directory/name).read_bytes())
+            expected = self.code.manifest(root)
+            # An unreadable/unrelated credential must not be included in the probe.
+            (root/'model.key').mkdir()
+            def execute(*args):
+                return subprocess.run([sys.executable, *args[1:3], str(root), *args[4:]],
+                                      capture_output=True, check=True)
+            self.assertEqual(self.code.verify(execute, expected), expected)
+            normalizer = root/'normalize.py'; original = normalizer.read_bytes()
+            normalizer.write_text('old sidecar parser')
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+            normalizer.unlink()
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+            replacement = root/'outside.py'; replacement.write_bytes(original)
+            normalizer.symlink_to(replacement)
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+
+    def test_adapter_rejects_stale_runtime_before_allocating_or_starting_a_run(self):
+        import runpy
+        import subprocess
+        import sys
+        import types
+        from unittest.mock import patch
+        calls = []
+        observed = self.code.manifest(self.directory)
+        observed['normalize.py'] = '0'*64
+        def ssh(config, argv, **kwargs):
+            calls.append(argv)
+            return subprocess.CompletedProcess(argv, 0, json.dumps(observed).encode(), b'')
+        cfg = {'host':'unused', 'remote_root':'/private/test', 'provider':'deepseek',
+               'containers':{'runtime':'owned-container'}}
+        stub = types.SimpleNamespace(load=lambda path: cfg, ssh=ssh)
+        with tempfile.TemporaryDirectory() as d:
+            request = Path(d)/'request.json'
+            request.write_text(json.dumps({'runtime':'runtime', 'run_id':'new-run',
+                                           'role':'execution', 'model':'deepseek-flash'}))
+            argv = ['adapter.py', '--config', '/unused/private-config.json', 'start', str(request)]
+            with patch.object(sys, 'path', [str(self.directory), *sys.path]), \
+                 patch.object(sys, 'argv', argv), patch.dict(sys.modules, {'config':stub}):
+                with self.assertRaisesRegex(ValueError, 'No run was allocated'):
+                    runpy.run_path(str(self.directory/'adapter.py'), run_name='__main__')
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0][:7], ['sudo','-n','docker','exec','-u','0','owned-container'])
+        self.assertEqual(calls[0][7:9], ['python3','-c'])
+
+
 class ArtifactTests(unittest.TestCase):
     def test_fresh_session_archives_shared_temporary_files_without_following_links(self):
         import sys

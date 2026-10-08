@@ -81,8 +81,10 @@ checks:
     notes: Stable v4 REST API with a documented deprecation and removals process.
 
   automation_permitted:
-    status: unknown
-    notes: ToS not yet reviewed and recorded.
+    status: supported
+    evidence: https://handbook.gitlab.com/handbook/legal/api-terms/
+    verified: "2026-10-08"
+    notes: API Terms section 1.1 permits developing, testing and supporting integrations, subject to documentation, rate limits and truthful identity. Section 1.3.7 separately restricts API comparisons and performance disclosure; see catalog notes for the unresolved agreement-coverage distinction.
 catalog:
   version: 1
   classifications:
@@ -93,8 +95,43 @@ catalog:
       url: https://docs.gitlab.com/user/
       checked_on: '2026-09-15'
       kind: official_docs
+    repository-files:
+      url: https://docs.gitlab.com/api/repository_files/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms-index:
+      url: https://about.gitlab.com/terms/
+      checked_on: '2026-10-08'
+      kind: official_site
+    api-terms:
+      url: https://handbook.gitlab.com/handbook/legal/api-terms/
+      checked_on: '2026-10-08'
+      kind: official_site
+    subscription-agreement:
+      url: https://handbook.gitlab.com/handbook/legal/subscription-agreement/
+      checked_on: '2026-10-08'
+      kind: official_site
+    acceptable-use:
+      url: https://handbook.gitlab.com/handbook/legal/acceptable-use-policy/
+      checked_on: '2026-10-08'
+      kind: official_site
   routes: []
   notes:
     - >-
       Repository/merge-request work and issue/epic tracking are separate supported scopes. SaaS and
       self-managed access must be distinguished.
+    - >-
+      Public repository file reads are documented without authentication and can select a branch,
+      tag or commit. This establishes a personal read path, not permission to publish a comparison
+      or proof of zero service cost. No business API request or account registration was performed
+      in this documentation review.
+    - >-
+      API Terms section 1.3.7 restricts competitive analysis and dissemination of API or Software
+      performance information, including uptime, response time and benchmarks. Separately, the current
+      Subscription Agreement section 5.2 says benchmark testing and comparative analysis are not
+      prohibited. API Terms preamble F gives an applicable Software or partnership agreement priority
+      where inconsistent; the terms index distinguishes public API use from Software use. Whether the
+      proposed anonymous public-API study falls under that override was not established. This project
+      therefore holds the proposed public API comparison, without claiming a universal GitLab testing
+      ban or a technical service failure. Ordinary integration access remains subject to rate limits,
+      accurate identity, intellectual-property rights and the Acceptable Use Policy.
