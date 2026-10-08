@@ -73,14 +73,17 @@ test('financial parent queries include all child types once, while prices and di
 test('search results cannot masquerade as specified-URL extraction or inherit a search trial', () => {
   const searchOnly = structuredClone(providers.find(p => p.id === 'exa')!);
   searchOnly.catalog!.classifications = ['web-search-data/web-search'];
-  assert.match(catalogErrors(searchOnly, categories, '2026-09-15').join('\n'), /web.fetch does not belong/);
-  const fetch = searchServices(data, { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
+  assert.match(catalogErrors(searchOnly, categories, today).join('\n'), /web.fetch does not belong/);
+  const searchEvaluations = loadEvaluations().filter(e => e.task.id === 'web-search-001');
+  const searchData = { categories, services: providers.map(p => catalogService(p, 'candidate', searchEvaluations)) };
+  const fetch = searchServices(searchData, { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
   const firecrawl = fetch.find(s => s.id === 'firecrawl')!;
-  assert.deepEqual(firecrawl.routes.map(r => r.id), ['public-scrape-api']);
+  assert(firecrawl.routes.some(r => r.id === 'public-scrape-api'));
+  assert(firecrawl.routes.some(r => r.id === 'account-scrape-api'));
   assert(fetch.find(s => s.id === 'tavily')!.routes.some(r => r.id === 'extract-api'));
   assert(fetch.find(s => s.id === 'jina')!.routes.some(r => r.id === 'reader-api'));
   assert(fetch.every(s => s.route_tests === 'not_recorded' && s.routes.every(r => !r.task_runs.length)));
-  const search = searchServices(data, { classification: 'web-search-data/web-search' });
+  const search = searchServices(searchData, { classification: 'web-search-data/web-search' });
   assert(search.find(s => s.id === 'exa')!.routes.some(r => r.task_runs.length));
 });
 
