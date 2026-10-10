@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-09-15T09:35:33.214Z",
-  "count": 98,
+  "generated_at": "2026-10-10T09:14:25.359Z",
+  "count": 118,
   "candidates": [
     {
       "id": "adyen",
@@ -67,7 +67,7 @@
       "name": "Aiven",
       "category": "databases",
       "homepage": "https://aiven.io/",
-      "summary": "Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.",
+      "summary": "Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API provisioning and standard PostgreSQL client access; inactive free services may be powered off.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -104,7 +104,7 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [
-        "Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass."
+        "This discovery review checked official documentation and a pinned implementation before the independent trials. No account was registered, no private credential was read and no financial-data or MCP method call was made during that documentation review. This describes the review's scope, not the service's current trial status; see independent evaluations for dated access and task results."
       ],
       "m1": null
     },
@@ -298,11 +298,33 @@
       "m1": null
     },
     {
+      "id": "crossref",
+      "name": "Crossref",
+      "category": "web-search-data",
+      "homepage": "https://www.crossref.org/",
+      "summary": "Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "ctrip-flights",
       "name": "携程机票合作",
       "category": "travel",
       "homepage": "https://pages.ctrip.com/public/dlhz.htm",
       "summary": "携程的分销与供应商合作线索；尚未确认面向普通个人的旅客机票搜索 API。",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "daytona",
+      "name": "Daytona",
+      "category": "cloud-hosting",
+      "homepage": "https://www.daytona.io/",
+      "summary": "Hosted sandboxes with SDK, CLI and API access for code execution and file transfer.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -420,12 +442,10 @@
       "name": "Financial Datasets",
       "category": "web-search-data",
       "homepage": "https://financialdatasets.ai/",
-      "summary": "US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.",
+      "summary": "US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.",
       "submitted_by": "community",
       "entrypoints": {},
-      "notes": [
-        "Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass."
-      ],
+      "notes": [],
       "m1": null
     },
     {
@@ -499,7 +519,29 @@
       "name": "FRED / ALFRED",
       "category": "web-search-data",
       "homepage": "https://fred.stlouisfed.org/",
-      "summary": "Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.",
+      "summary": "Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "geoapify",
+      "name": "Geoapify",
+      "category": "web-search-data",
+      "homepage": "https://www.geoapify.com/",
+      "summary": "Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "geocode-maps-co",
+      "name": "Geocode Maps.co",
+      "category": "web-search-data",
+      "homepage": "https://geocode.maps.co/",
+      "summary": "Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -522,6 +564,17 @@
       "category": "productivity-storage",
       "homepage": "https://workspace.google.com/products/sheets/",
       "summary": "Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "goqr",
+      "name": "goQR QR Code API",
+      "category": "productivity-storage",
+      "homepage": "https://goqr.me/api/",
+      "summary": "Foundata's hosted static QR image API at api.qrserver.com, with public no-account generation and downloadable raster or vector formats.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -618,6 +671,17 @@
       "m1": null
     },
     {
+      "id": "locationiq",
+      "name": "LocationIQ",
+      "category": "web-search-data",
+      "homepage": "https://locationiq.com/",
+      "summary": "Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "lseg-data",
       "name": "LSEG Data Platform",
       "category": "web-search-data",
@@ -706,6 +770,17 @@
       "m1": null
     },
     {
+      "id": "met-norway",
+      "name": "MET Norway Locationforecast",
+      "category": "web-search-data",
+      "homepage": "https://api.met.no/",
+      "summary": "Public global point forecasts from MET Norway, with no API key and mandatory client identification.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "mollie",
       "name": "Mollie",
       "category": "payments-billing",
@@ -715,6 +790,17 @@
       "entrypoints": {
         "docs": "https://docs.mollie.com/reference/create-payment-link"
       },
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "nager-date",
+      "name": "Nager.Date",
+      "category": "web-search-data",
+      "homepage": "https://nagerholidays.com/",
+      "summary": "Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.",
+      "submitted_by": "community",
+      "entrypoints": {},
       "notes": [],
       "m1": null
     },
@@ -730,11 +816,77 @@
       "m1": null
     },
     {
+      "id": "nominatim",
+      "name": "Nominatim Public API",
+      "category": "web-search-data",
+      "homepage": "https://nominatim.org/",
+      "summary": "OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "open-exchange-rates",
       "name": "Open Exchange Rates",
       "category": "web-search-data",
       "homepage": "https://openexchangerates.org/",
       "summary": "Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "open-meteo",
+      "name": "Open-Meteo",
+      "category": "web-search-data",
+      "homepage": "https://open-meteo.com/",
+      "summary": "Global weather forecast API with a keyless non-commercial free tier and attributed open data.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "openalex",
+      "name": "OpenAlex",
+      "category": "web-search-data",
+      "homepage": "https://openalex.org/",
+      "summary": "Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "openholidays",
+      "name": "OpenHolidays API",
+      "category": "web-search-data",
+      "homepage": "https://www.openholidaysapi.org/en/",
+      "summary": "Free hosted public and school holiday data API with regional filters and an openly licensed data collection.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "osrm",
+      "name": "OSRM Public Demo API",
+      "category": "web-search-data",
+      "homepage": "https://project-osrm.org/",
+      "summary": "FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "osv",
+      "name": "OSV.dev",
+      "category": "developer-tools",
+      "homepage": "https://osv.dev/",
+      "summary": "Public vulnerability metadata aggregated across open-source ecosystems, queryable by package version or commit.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -797,6 +949,17 @@
       "m1": null
     },
     {
+      "id": "photon",
+      "name": "Photon Public Demo API",
+      "category": "web-search-data",
+      "homepage": "https://photon.komoot.io/",
+      "summary": "Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "pingxx",
       "name": "Ping++",
       "category": "payments-billing",
@@ -834,6 +997,17 @@
       "notes": [
         "Pricing checked 2026-09-08: new organizations on Starter pay a published 5% + USD 0.50 per transaction. Older Early Member pricing and paid plans differ; international-card, payout and dispute fees may apply. This is a published pricing claim, not a measured sandbox charge."
       ],
+      "m1": null
+    },
+    {
+      "id": "quickchart",
+      "name": "QuickChart",
+      "category": "productivity-storage",
+      "homepage": "https://quickchart.io/qr-code-api/",
+      "summary": "Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
       "m1": null
     },
     {
@@ -895,10 +1069,10 @@
     },
     {
       "id": "searchapi",
-      "name": "SearchApi Google Flights",
+      "name": "SearchApi",
       "category": "travel",
       "homepage": "https://www.searchapi.io/",
-      "summary": "Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.",
+      "summary": "Google web-search and flight-results APIs, plus a hosted MCP integration; free signup requires a human account owner.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -916,11 +1090,22 @@
       "m1": null
     },
     {
+      "id": "semantic-scholar",
+      "name": "Semantic Scholar",
+      "category": "web-search-data",
+      "homepage": "https://www.semanticscholar.org/",
+      "summary": "Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
       "id": "serper",
       "name": "Serper",
       "category": "web-search-data",
       "homepage": "https://serper.dev/",
-      "summary": "Google results API with signup trial queries; actual account flow and authentication remain untested.",
+      "summary": "Google results API with initial free queries. Its terms describe a B2B service rather than consumer access; personal eligibility and authenticated setup remain unverified.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -935,7 +1120,7 @@
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [
-        "Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification."
+        "Free Web API and bulk downloads have different history limits. The pricing card says five years of fundamentals, while its comparison table says seven API years and five delayed bulk years. The free Web API rate is two calls/second and the filing allowance is eight/day; 500 monthly high-speed credits apply to backtesting, not an API request allowance. Actual FY2025 coverage and filing provenance through the selected route remain untested."
       ],
       "m1": null
     },
@@ -946,6 +1131,17 @@
       "homepage": "https://apify.com/skootle/google-flights-scraper",
       "summary": "A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and output records.",
       "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "skyaccess",
+      "name": "SkyAccess",
+      "category": "travel",
+      "homepage": "https://skyaccess.com/",
+      "summary": "Private-jet empty-leg search, indicative charter estimates and booking links through a public remote MCP.",
+      "submitted_by": "vendor",
       "entrypoints": {},
       "notes": [],
       "m1": null
@@ -980,6 +1176,17 @@
       "category": "communication",
       "homepage": "https://temp-mail.org/",
       "summary": "Disposable email receiving service with a developer API for automated email workflows.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "tencent-agently-mail",
+      "name": "Tencent Agently Mail",
+      "category": "communication",
+      "homepage": "https://agent.qq.com/",
+      "summary": "Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for reading, searching and sending email.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -1045,7 +1252,7 @@
       "name": "Turso",
       "category": "databases",
       "homepage": "https://turso.tech/",
-      "summary": "Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.",
+      "summary": "Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
@@ -1079,6 +1286,17 @@
       "category": "web-search-data",
       "homepage": "https://disclosures-clerk.house.gov/FinancialDisclosure",
       "summary": "Original House financial disclosure filings and searchable annual indexes, published by the Clerk.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "valhalla",
+      "name": "Valhalla Public Demo API",
+      "category": "web-search-data",
+      "homepage": "https://valhalla.github.io/valhalla/",
+      "summary": "FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],

@@ -12,12 +12,12 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-09-15T09:35:33.211Z",
+  "generated_at": "2026-10-10T09:14:25.357Z",
   "counts": {
     "providers": 76,
     "categories": 11,
     "entrypoint_urls": 719,
-    "checks_answered": 427
+    "checks_answered": 431
   },
   "categories": [
     {
@@ -158,6 +158,20 @@
       "description": "Code hosting, API development, testing, monitoring and troubleshooting.",
       "name_zh": "开发工具",
       "subcategories": [
+        {
+          "id": "dependency-advisories",
+          "name": "Dependency Security Advisories",
+          "name_zh": "依赖漏洞公告",
+          "description": "Find published security advisories for identifiable software packages and interpret their affected and fixed versions.",
+          "inclusion": "Retrieves identifiable public advisories using a package ecosystem, package name, version or advisory identifier, with source links and affected-version or remediation metadata where available.",
+          "exclusion": "Source-code analysis, exploit execution, infrastructure scanning and discovering previously unknown vulnerabilities are separate. A successful lookup or no match does not establish that software is secure, exploitable in a particular application, or free of other vulnerabilities. Aggregators can share upstream records; matching answers are not independent security findings.",
+          "capabilities": [
+            {
+              "id": "advisories.lookup",
+              "description": "Retrieve published dependency advisories and their package/version applicability and documented fixes."
+            }
+          ]
+        },
         {
           "id": "monitoring",
           "name": "Monitoring & Troubleshooting",
@@ -336,6 +350,20 @@
       "description": "Search APIs, crawling and scraping, data providers.",
       "subcategories": [
         {
+          "id": "scholarly-search",
+          "name": "Scholarly Literature Search",
+          "name_zh": "学术文献检索",
+          "description": "Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.",
+          "inclusion": "Searches an identifiable scholarly corpus and returns work identities with citation metadata such as title, authors, publication venue, year and persistent identifiers where available.",
+          "exclusion": "General web-page search, guaranteed full-text access, literature-review synthesis and research-quality rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement between indexes do not independently establish a paper's identity, quality or completeness.",
+          "capabilities": [
+            {
+              "id": "scholarly.search",
+              "description": "Find scholarly works with enough bibliographic metadata to identify and cite them."
+            }
+          ]
+        },
+        {
           "id": "web-search",
           "name": "Web Search",
           "description": "Discover relevant public web pages from a query; answers may include source citations.",
@@ -362,6 +390,62 @@
           ],
           "inclusion": "Accepts identified web URLs or a specified site and returns its content as usable text or structured data.",
           "exclusion": "Query-only result lists/snippets are web search; browser control is a runtime, not extraction itself."
+        },
+        {
+          "id": "geocoding",
+          "name": "Geocoding",
+          "name_zh": "地理编码",
+          "description": "Resolve named places or supplied public addresses to geographic coordinates.",
+          "inclusion": "Returns a geographic position with enough place or address context to identify the match; coverage, result granularity and public-endpoint conditions must be specified.",
+          "exclusion": "General web search, weather at known coordinates, map tiles and route navigation are separate. A place or building coordinate does not establish an exact entrance, postal deliverability or safe navigation to a destination.",
+          "capabilities": [
+            {
+              "id": "places.geocode",
+              "description": "Resolve a place name or address to an identified geographic position."
+            }
+          ]
+        },
+        {
+          "id": "route-planning",
+          "name": "Route Planning",
+          "name_zh": "路线规划",
+          "description": "Plan a journey between specified locations using a transport network and an identified travel mode.",
+          "inclusion": "Returns a connected route with distance, estimated travel time and enough path or direction information to understand the journey. Hosted endpoint coverage, supported travel modes and public-service usage conditions must be stated.",
+          "exclusion": "Resolving an address to coordinates alone is geocoding; map tiles, straight-line distance, transport ticket inventory and a self-hosted routing library alone are separate. A planned route does not establish live traffic, actual arrival time, road safety, accessibility or turn-by-turn navigation reliability. Shared map data does not provide independent ground truth.",
+          "capabilities": [
+            {
+              "id": "routes.plan",
+              "description": "Return a network route with distance, estimated duration and path information for a travel mode."
+            }
+          ]
+        },
+        {
+          "id": "public-holidays",
+          "name": "Public Holidays",
+          "name_zh": "公共节假日",
+          "description": "Retrieve dated public holidays applicable to an identified country or region for personal planning.",
+          "inclusion": "Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context to determine the requested regional scope; supported years and subdivisions must be stated.",
+          "exclusion": "Personal calendar editing, school vacations alone, general web search and extraction from a supplied page are separate. Holiday data does not establish shop opening hours, individual employment or pay entitlements, bank operations or travel availability; observances and substitute dates must not be silently treated as applicable public holidays.",
+          "capabilities": [
+            {
+              "id": "holidays.lookup",
+              "description": "Retrieve public holiday dates and names for a specified jurisdiction and period."
+            }
+          ]
+        },
+        {
+          "id": "weather-data",
+          "name": "Weather Data",
+          "name_zh": "天气数据",
+          "description": "Retrieve weather forecasts or observations for an identified location and time, for personal planning and weather-aware applications.",
+          "inclusion": "Supplies weather variables with identifiable locations, valid times and units, distinguishing forecasts from observations and historical reconstructions.",
+          "exclusion": "Place-name geocoding, general web search and a weather model without a callable data service are separate. Forecast access does not establish historical observation access or forecast accuracy; those require their own evidence and task conditions.",
+          "capabilities": [
+            {
+              "id": "weather.forecast",
+              "description": "Retrieve a weather forecast for a specified location and future period."
+            }
+          ]
         },
         {
           "id": "financial-data",
@@ -593,13 +677,27 @@
     },
     {
       "id": "productivity-storage",
-      "name": "Workplace Collaboration",
-      "description": "Documents, collaborative tables, project management and file sharing; application object storage belongs under cloud services.",
+      "name": "Productivity & Collaboration",
+      "description": "Documents, collaborative tables, project management, file sharing and preparing information materials for people to share; application object storage belongs under cloud services.",
       "subcategories": [
+        {
+          "id": "qr-codes",
+          "name": "QR Code Images",
+          "name_zh": "二维码图片",
+          "description": "Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.",
+          "inclusion": "A hosted service accepts an explicit payload and returns a downloadable QR image with documented format and sizing controls. The stored payload can be checked by an independent decoder; local-only encoding libraries are not hosted service alternatives.",
+          "exclusion": "Payment processing, scanner-only services, dynamic redirect or scan-tracking management and general AI image generation are separate. An image that looks like a QR code without correctly decoding the requested payload is insufficient; decoding does not prove its destination is safe, reachable or permanent, or that every phone and print condition can scan it.",
+          "capabilities": [
+            {
+              "id": "qr.generate",
+              "description": "Produce a downloadable static QR image encoding the supplied payload."
+            }
+          ]
+        },
         {
           "id": "collaborative-tables",
           "name": "Collaborative Tables",
-          "description": "User-facing online tables for organizing and following up shared work.",
+          "description": "User-facing online tables for organizing shared records, following up work and maintaining calculated summaries.",
           "capabilities": [
             {
               "id": "records.organize",
@@ -612,6 +710,10 @@
             {
               "id": "records.reconcile",
               "description": "Merge follow-up notes without duplicating existing actions."
+            },
+            {
+              "id": "records.calculate",
+              "description": "Calculate summaries from online records and keep them updated when those records change."
             }
           ],
           "name_zh": "协作表格",
@@ -661,9 +763,9 @@
           ]
         }
       ],
-      "name_zh": "办公协作",
-      "inclusion": "Organizes shared work, documents, tasks or files for people.",
-      "exclusion": "Application database and object-storage APIs alone are not office collaboration."
+      "name_zh": "办公与协作",
+      "inclusion": "Organizes work, documents, tasks or files for people, or prepares information materials for sharing.",
+      "exclusion": "Application database and object-storage APIs alone are not office productivity; general AI image generation belongs under AI services rather than deterministic information-material preparation."
     },
     {
       "id": "commerce-marketing",
@@ -970,7 +1072,9 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "evidence": "https://www.airtable.com/company/developer-terms",
+          "verified": "2026-10-08",
+          "notes": "No benchmark-specific disclosure prohibition found in reviewed service/developer terms. Developer terms forbid misleading performance statements and third-party integrations requesting users' PATs; own-account PAT scripts are separately documented."
         }
       },
       "derived": {
@@ -978,7 +1082,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "sandbox_or_test_mode",
           "usage_dashboard",
@@ -2610,8 +2714,8 @@
         "free_tier_or_trial": {
           "status": "supported",
           "evidence": "https://e2b.dev/pricing",
-          "verified": "2026-07-07",
-          "notes": "Free hobby tier."
+          "verified": "2026-10-08",
+          "notes": "Hobby has a one-time $100 usage credit without a credit card, not recurring free compute. Usage is metered; up to 20 concurrent sandboxes and a one-hour session limit."
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -2642,7 +2746,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",
@@ -2786,8 +2890,10 @@
           "verified": "2026-07-07"
         },
         "oauth_support": {
-          "status": "unknown",
-          "notes": "API-key auth only, as far as documented."
+          "status": "supported",
+          "evidence": "https://exa.ai/docs/get-started/exa-mcp",
+          "verified": "2026-10-08",
+          "notes": "Official remote MCP supports OAuth; the REST API uses an API key and anonymous MCP is separate."
         },
         "scoped_tokens": {
           "status": "unknown"
@@ -2824,7 +2930,9 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed."
+          "evidence": "https://exa.ai/terms",
+          "verified": "2026-10-08",
+          "notes": "Terms section 1.1 permits API use within documentation. Section 4.2(a) restricts redistribution of obtained information with stated exceptions; no benchmark-specific disclosure prohibition was found in these terms. This is not a blanket publication license."
         }
       },
       "derived": {
@@ -2834,9 +2942,8 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
-          "oauth_support",
           "scoped_tokens",
           "token_revocation",
           "sandbox_or_test_mode",
@@ -2972,8 +3079,10 @@
           "verified": "2026-07-07"
         },
         "oauth_support": {
-          "status": "unknown",
-          "notes": "API-key auth only, as far as documented."
+          "status": "supported",
+          "evidence": "https://docs.firecrawl.dev/mcp-server",
+          "verified": "2026-10-08",
+          "notes": "Hosted MCP documents OAuth separately from keyless and API-key access."
         },
         "scoped_tokens": {
           "status": "unknown"
@@ -3008,7 +3117,9 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "The product exists for automation, but ToS/robots handling not yet reviewed and recorded."
+          "evidence": "https://www.firecrawl.dev/terms-of-service",
+          "verified": "2026-10-08",
+          "notes": "Terms require express authorization for commercial purposes and compliance with third-party rights; a free quota alone does not establish every permitted use."
         }
       },
       "derived": {
@@ -3018,9 +3129,8 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
-          "oauth_support",
           "scoped_tokens",
           "token_revocation",
           "sandbox_or_test_mode",
@@ -3331,7 +3441,7 @@
       "homepage": "https://github.com",
       "summary": "Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.",
       "submitted_by": "community",
-      "scope": "Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately.",
+      "scope": "Core platform (repos, issues, PRs, REST/GraphQL APIs) and public Advisory Database lookup. Actions/Packages/Copilot not assessed separately.",
       "tags": [
         "git",
         "code-hosting",
@@ -3419,7 +3529,7 @@
         }
       },
       "notes": [
-        "Multi-product platform; this entry covers the core developer platform only (see scope)."
+        "Multi-product platform; this entry covers the core developer platform and public advisory lookup (see scope)."
       ],
       "derived": {
         "badges": [
@@ -3520,8 +3630,10 @@
           "notes": "Stable v4 REST API with a documented deprecation and removals process."
         },
         "automation_permitted": {
-          "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "status": "supported",
+          "evidence": "https://handbook.gitlab.com/handbook/legal/api-terms/",
+          "verified": "2026-10-08",
+          "notes": "API Terms section 1.1 permits developing, testing and supporting integrations, subject to documentation, rate limits and truthful identity. Section 1.3.7 separately restricts API comparisons and performance disclosure; see catalog notes for the unresolved agreement-coverage distinction."
         }
       },
       "derived": {
@@ -3533,12 +3645,11 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "sandbox_or_test_mode",
           "usage_dashboard",
-          "idempotency",
-          "automation_permitted"
+          "idempotency"
         ]
       }
     },
@@ -3911,7 +4022,9 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "evidence": "https://jina.ai/legal/#terms-and-conditions",
+          "verified": "2026-10-08",
+          "notes": "Terms section 4.3 leaves output use unrestricted unless otherwise agreed, subject to third-party rights. Section 4.5(iv) contains a broad automated-extraction restriction; read with the Reader product description. No benchmark-specific disclosure prohibition was found."
         }
       },
       "derived": {
@@ -3921,7 +4034,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-08",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",
@@ -4640,8 +4753,8 @@
         "free_tier_or_trial": {
           "status": "supported",
           "evidence": "https://modal.com/pricing",
-          "verified": "2026-07-07",
-          "notes": "Monthly free compute credits on the starter plan."
+          "verified": "2026-10-08",
+          "notes": "Starter includes $30 per month in compute credits, but current billing documentation requires a payment method on file before use (https://modal.com/docs/guide/billing). Free credits are not a no-card route or a spending cap."
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -4674,7 +4787,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",
@@ -5056,8 +5169,10 @@
           "status": "unknown"
         },
         "automation_permitted": {
-          "status": "unknown",
-          "notes": "ToS not yet reviewed for automated/agent account usage."
+          "status": "supported",
+          "evidence": "https://neon.com/docs/reference/claimable-neon",
+          "verified": "2026-10-08",
+          "notes": "Official Claimable workflow documents agent provisioning and scoped access. This does not establish permission for all automated UI access or waive the current Platform Schedule, MCSA and Acceptable Use Policy."
         }
       },
       "derived": {
@@ -5071,11 +5186,10 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "idempotency",
-          "versioning_policy",
-          "automation_permitted"
+          "versioning_policy"
         ]
       }
     },
@@ -5204,7 +5318,7 @@
         "status_page": "https://status.notion.so",
         "pricing": "https://www.notion.com/pricing",
         "signup": "https://www.notion.com/signup",
-        "api_keys": "https://developers.notion.com/docs/authorization",
+        "api_keys": "https://developers.notion.com/guides/get-started/authorization",
         "mcp_official": "https://developers.notion.com/docs/mcp",
         "rate_limits": "https://developers.notion.com/reference/request-limits",
         "errors": "https://developers.notion.com/reference/status-codes"
@@ -5217,9 +5331,9 @@
         },
         "api_key_self_serve": {
           "status": "supported",
-          "evidence": "https://developers.notion.com/docs/authorization",
-          "verified": "2026-07-07",
-          "notes": "Internal integration tokens are self-serve."
+          "evidence": "https://developers.notion.com/guides/get-started/internal-connections",
+          "verified": "2026-10-08",
+          "notes": "Workspace owners can create internal connection tokens; explicit page access is a separate step."
         },
         "oauth_support": {
           "status": "supported",
@@ -5229,9 +5343,9 @@
         },
         "scoped_tokens": {
           "status": "partial",
-          "evidence": "https://developers.notion.com/docs/authorization",
-          "verified": "2026-07-07",
-          "notes": "Integrations carry capability scopes (read/update/insert) and page-level access grants."
+          "evidence": "https://developers.notion.com/reference/capabilities",
+          "verified": "2026-10-08",
+          "notes": "Internal connections have separate read/update/insert capabilities and page grants; PATs instead use the creator's page permissions."
         },
         "token_revocation": {
           "status": "unknown",
@@ -5244,7 +5358,7 @@
         "free_tier_or_trial": {
           "status": "supported",
           "evidence": "https://www.notion.com/pricing",
-          "verified": "2026-07-07"
+          "verified": "2026-10-08"
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -5260,12 +5374,14 @@
         "versioning_policy": {
           "status": "supported",
           "evidence": "https://developers.notion.com/reference/versioning",
-          "verified": "2026-07-07",
-          "notes": "Notion-Version header with dated API versions."
+          "verified": "2026-10-08",
+          "notes": "Required Notion-Version header; current version is 2026-03-11. Database and data_source objects have been separate since 2025-09-03."
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "evidence": "https://notion.notion.site/Terms-Conditions-4e1c5dd3e3de45dfa4a8ed60f1a43da0",
+          "verified": "2026-10-08",
+          "notes": "API automation is documented, but applicable account terms matter. The current MSA section 2.1(9) requires prior written consent for evaluation, benchmarking or comparative analysis intended for publication. Pure personal use is directed to separate Personal Use Terms; do not infer either a blanket publication permission or a blanket ban for all free personal workspaces."
         }
       },
       "derived": {
@@ -5275,7 +5391,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "token_revocation",
           "sandbox_or_test_mode",
@@ -7278,7 +7394,7 @@
       "name": "Tavily",
       "category": "web-search-data",
       "homepage": "https://www.tavily.com",
-      "summary": "Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.",
+      "summary": "Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.",
       "submitted_by": "community",
       "tags": [
         "search",
@@ -7346,7 +7462,9 @@
         },
         "automation_permitted": {
           "status": "unknown",
-          "notes": "ToS not yet reviewed and recorded."
+          "evidence": "https://www.tavily.com/terms",
+          "verified": "2026-10-08",
+          "notes": "Platform terms section 3.2(x) restrict disclosure of service performance information or analysis to third parties. Documented API access does not establish permission to publish a benchmark."
         }
       },
       "derived": {
@@ -7356,7 +7474,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-07-07",
+        "last_verified": "2026-10-08",
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",

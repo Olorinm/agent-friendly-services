@@ -55,7 +55,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Atlassian (Jira & Confluence)](#atlassian) | ✓ | — | — | ✓ | ◐ | ✓ | — | 2026-07-08 |
 | [Datadog](#datadog) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [GitHub](#github) | ✓ | ✓ | ✓ | ✓ | — | ✓ | [✓ h·c·m](./agent-runs.md#github) | 2026-07-07 |
-| [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
+| [GitLab](#gitlab) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-10-08 |
 | [Grafana (Grafana Cloud)](#grafana) | ✓ | ✓ | — | — | ✓ | ✓ | — | 2026-07-08 |
 | [Postman](#postman) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Sentry](#sentry) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
@@ -66,9 +66,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Browserbase](#browserbase) | ✓ | ✓ | — | — | n/a | ✓ | — | 2026-07-07 |
 | [Cloudflare](#cloudflare) | ✓ | ✓ | ✓ | ✓ | ◐ | ✓ | — | 2026-07-08 |
-| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-07-07 |
+| [E2B](#e2b) | ✓ | ✓ | — | ✓ | n/a | ✓ | — | 2026-10-08 |
 | [Fly.io](#fly-io) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-08 |
-| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Modal](#modal) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-10-08 |
 | [Netlify](#netlify) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Railway](#railway) | — | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [Render](#render) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
@@ -81,7 +81,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Chroma](#chroma) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 | [MongoDB Atlas](#mongodb-atlas) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
-| [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
+| [Neon](#neon) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-10-08 |
 | [Pinecone](#pinecone) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Qdrant](#qdrant) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [Redis (Redis Cloud)](#redis) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
@@ -95,12 +95,12 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
-| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
-| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
-| [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
+| [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
+| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
+| [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [SerpApi](#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
-| [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
 
 ### Payments / Billing
 
@@ -121,14 +121,14 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Telegram Bot API](#telegram) | — | — | — | — | ✓ | ◐ | — | 2026-07-07 |
 | [Twilio](#twilio) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — | 2026-07-07 |
 
-### Workplace Collaboration
+### Productivity & Collaboration
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Airtable](#airtable) | — | — | — | — | — | ✓ | — | 2026-07-07 |
+| [Airtable](#airtable) | — | — | — | — | — | ✓ | — | 2026-10-08 |
 | [Dropbox](#dropbox) | — | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Linear](#linear) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
-| [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
+| [Notion](#notion) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
 
 ### E-commerce
 
@@ -142,7 +142,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
 
-**Category:** Workplace Collaboration · `Self-serve`
+**Category:** Productivity & Collaboration · `Self-serve`
 
 **Links:** [Documentation](https://airtable.com/developers) · [API Reference](https://airtable.com/developers/web/api/introduction) · [Changelog](https://airtable.com/developers/web/api/changelog) · [Status Page](https://status.airtable.com) · [Pricing](https://airtable.com/pricing) · [Signup](https://airtable.com/signup) · [API Keys](https://airtable.com/create/tokens) · [Webhooks](https://airtable.com/developers/web/api/webhooks-overview) · [Rate Limits](https://airtable.com/developers/web/api/rate-limits)
 
@@ -340,7 +340,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
-**Category:** Workplace Collaboration · `llms.txt` `CLI` `Self-serve`
+**Category:** Productivity & Collaboration · `llms.txt` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://www.dropbox.com/developers/documentation) · [API Reference](https://www.dropbox.com/developers/documentation/http/documentation) · [llms.txt](https://www.dropbox.com/llms.txt) · [Status Page](https://status.dropbox.com) · [Pricing](https://www.dropbox.com/plans) · [Signup](https://www.dropbox.com/register) · [API Keys](https://www.dropbox.com/developers/apps) · [CLI](https://github.com/dropbox/dbxcli) · [Webhooks](https://www.dropbox.com/developers/reference/webhooks)
 
@@ -378,9 +378,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://docs.exa.ai) · [API Reference](https://docs.exa.ai/reference/getting-started) · [llms.txt](https://docs.exa.ai/llms.txt) · [Changelog](https://docs.exa.ai/changelog) · [Pricing](https://exa.ai/pricing) · [Signup](https://dashboard.exa.ai) · [API Keys](https://docs.exa.ai/reference/getting-started) · [SDKs](https://docs.exa.ai/sdks/typescript-sdk-specification) · [Official MCP](https://github.com/exa-labs/exa-mcp-server) · [Rate Limits](https://docs.exa.ai/reference/rate-limits)
 
-- **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
+- **Supported:** [Self-serve signup](https://dashboard.exa.ai) · [Self-serve API keys](https://docs.exa.ai/reference/getting-started) · [OAuth](https://exa.ai/docs/get-started/exa-mcp) · [Free tier / trial](https://exa.ai/pricing) · [Self-serve upgrade](https://exa.ai/pricing)
 - **N/A:** Idempotency — Read-only search/retrieval API; requests are inherently repeatable.
-- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
 ### fal.ai <a id="fal"></a>
 
@@ -401,9 +401,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://docs.firecrawl.dev) · [API Reference](https://docs.firecrawl.dev/api-reference/introduction) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [Pricing](https://www.firecrawl.dev/pricing) · [Signup](https://www.firecrawl.dev/signin/signup) · [API Keys](https://docs.firecrawl.dev/introduction) · [SDKs](https://docs.firecrawl.dev/sdks/overview) · [Official MCP](https://docs.firecrawl.dev/mcp-server) · [Rate Limits](https://docs.firecrawl.dev/rate-limits)
 
-- **Supported:** [Self-serve signup](https://www.firecrawl.dev/pricing) · [Self-serve API keys](https://docs.firecrawl.dev/introduction) · [Free tier / trial](https://www.firecrawl.dev/pricing) · [Self-serve upgrade](https://www.firecrawl.dev/pricing)
+- **Supported:** [Self-serve signup](https://www.firecrawl.dev/pricing) · [Self-serve API keys](https://docs.firecrawl.dev/introduction) · [OAuth](https://docs.firecrawl.dev/mcp-server) · [Free tier / trial](https://www.firecrawl.dev/pricing) · [Self-serve upgrade](https://www.firecrawl.dev/pricing)
 - **N/A:** Idempotency — Scrape/crawl jobs are re-runnable reads; no state mutation to protect.
-- **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
+- **Unknown (help wanted):** `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `versioning_policy`, `automation_permitted`
 
 ### Fireworks AI <a id="fireworks"></a>
 
@@ -445,7 +445,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
 
-**Category:** Developer Tools · **Scope:** Core platform (repos, issues, PRs, REST/GraphQL APIs). Actions/Packages/Copilot not assessed separately. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Developer Tools · **Scope:** Core platform (repos, issues, PRs, REST/GraphQL APIs) and public Advisory Database lookup. Actions/Packages/Copilot not assessed separately. · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.github.com) · [API Reference](https://docs.github.com/rest) · [OpenAPI](https://github.com/github/rest-api-description) · [GraphQL](https://docs.github.com/graphql) · [llms.txt](https://docs.github.com/llms.txt) · [Changelog](https://github.blog/changelog/) · [Status Page](https://www.githubstatus.com) · [Pricing](https://github.com/pricing) · [Signup](https://github.com/signup) · [API Keys](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) · [CLI](https://cli.github.com) · [SDKs](https://github.com/octokit) · [Official MCP](https://github.com/github/github-mcp-server) · [Webhooks](https://docs.github.com/webhooks) · [Rate Limits](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api)
 
@@ -460,7 +460,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | core · cli | 3/3 pass | 5 | 16–19 s | $0.09–$0.11 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-cli-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-cli-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-cli-rep3.md) |
 | core · mcp | 3/3 pass | 4 | 15–22 s | $0.14–$0.15 | sonnet | 2026-07-08 | [1](../data/experiments/published/github/2026-07-08-real-mcp-rep1.md) [2](../data/experiments/published/github/2026-07-08-real-mcp-rep2.md) [3](../data/experiments/published/github/2026-07-08-real-mcp-rep3.md) |
 
-> Multi-product platform; this entry covers the core developer platform only (see scope).
+> Multi-product platform; this entry covers the core developer platform and public advisory lookup (see scope).
 
 ### GitLab <a id="gitlab"></a>
 
@@ -470,8 +470,8 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://docs.gitlab.com) · [API Reference](https://docs.gitlab.com/api/rest/) · [OpenAPI](https://docs.gitlab.com/api/openapi/openapi_interactive) · [GraphQL](https://docs.gitlab.com/api/graphql/) · [llms.txt](https://docs.gitlab.com/llms.txt) · [Changelog](https://about.gitlab.com/releases/) · [Status Page](https://status.gitlab.com) · [Pricing](https://about.gitlab.com/pricing/) · [API Keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [CLI](https://gitlab.com/gitlab-org/cli) · [Official MCP](https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server) · [Webhooks](https://docs.gitlab.com/user/project/integrations/webhooks/) · [Rate Limits](https://docs.gitlab.com/security/rate_limits/)
 
-- **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/)
-- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
+- **Supported:** [Self-serve signup](https://about.gitlab.com/pricing/) · [Self-serve API keys](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [OAuth](https://docs.gitlab.com/api/oauth2/) · [Scoped tokens](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Token revocation](https://docs.gitlab.com/user/profile/personal_access_tokens/) · [Free tier / trial](https://about.gitlab.com/pricing/) · [Self-serve upgrade](https://about.gitlab.com/pricing/) · [Versioning policy](https://docs.gitlab.com/api/rest/) · [Automation permitted](https://handbook.gitlab.com/handbook/legal/api-terms/)
+- **Unknown (help wanted):** `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`
 
 ### Grafana (Grafana Cloud) <a id="grafana"></a>
 
@@ -547,7 +547,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.
 
-**Category:** Workplace Collaboration · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Productivity & Collaboration · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://linear.app/developers) · [GraphQL](https://linear.app/developers/graphql) · [llms.txt](https://linear.app/llms.txt) · [Changelog](https://linear.app/changelog) · [Status Page](https://linearstatus.com) · [Pricing](https://linear.app/pricing) · [Signup](https://linear.app/signup) · [API Keys](https://linear.app/developers/graphql) · [Official MCP](https://linear.app/docs/mcp) · [Webhooks](https://linear.app/developers/webhooks) · [Rate Limits](https://linear.app/developers/rate-limiting)
 
@@ -651,9 +651,9 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://neon.com/docs) · [API Reference](https://api-docs.neon.tech) · [OpenAPI](https://neon.tech/api_spec/release/v2.json) · [llms.txt](https://neon.com/llms.txt) · [Changelog](https://neon.com/docs/changelog) · [Status Page](https://neonstatus.com) · [Pricing](https://neon.com/pricing) · [Signup](https://console.neon.tech/signup) · [API Keys](https://neon.com/docs/manage/api-keys) · [CLI](https://neon.com/docs/reference/neon-cli) · [Official MCP](https://github.com/neondatabase/mcp-server-neon) · [Agent Docs](https://neon.com/docs/ai/ai-intro)
 
-- **Supported:** [Self-serve signup](https://console.neon.tech/signup) · [Self-serve API keys](https://neon.com/docs/manage/api-keys) · [OAuth](https://neon.com/docs/guides/oauth-integration) · [Token revocation](https://neon.com/docs/manage/api-keys) · [Sandbox / test mode](https://neon.com/docs/introduction/branching) · [Free tier / trial](https://neon.com/pricing) · [Self-serve upgrade](https://neon.com/pricing) · [Usage dashboard](https://neon.com/docs/introduction/monitor-usage)
+- **Supported:** [Self-serve signup](https://console.neon.tech/signup) · [Self-serve API keys](https://neon.com/docs/manage/api-keys) · [OAuth](https://neon.com/docs/guides/oauth-integration) · [Token revocation](https://neon.com/docs/manage/api-keys) · [Sandbox / test mode](https://neon.com/docs/introduction/branching) · [Free tier / trial](https://neon.com/pricing) · [Self-serve upgrade](https://neon.com/pricing) · [Usage dashboard](https://neon.com/docs/introduction/monitor-usage) · [Automation permitted](https://neon.com/docs/reference/claimable-neon)
 - **Partial:** [Scoped tokens](https://neon.com/docs/manage/api-keys) — Organization- and project-scoped API keys; no per-permission scoping.
-- **Unknown (help wanted):** `idempotency`, `versioning_policy`, `automation_permitted`
+- **Unknown (help wanted):** `idempotency`, `versioning_policy`
 
 ### Netlify <a id="netlify"></a>
 
@@ -671,12 +671,12 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.
 
-**Category:** Workplace Collaboration · **Scope:** Notion API integrations; the editor product itself is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Productivity & Collaboration · **Scope:** Notion API integrations; the editor product itself is not assessed. · `Official MCP` `llms.txt` `Self-serve`
 
-**Links:** [Documentation](https://developers.notion.com) · [API Reference](https://developers.notion.com/reference/intro) · [llms.txt](https://developers.notion.com/llms.txt) · [Status Page](https://status.notion.so) · [Pricing](https://www.notion.com/pricing) · [Signup](https://www.notion.com/signup) · [API Keys](https://developers.notion.com/docs/authorization) · [Official MCP](https://developers.notion.com/docs/mcp) · [Rate Limits](https://developers.notion.com/reference/request-limits) · [Errors](https://developers.notion.com/reference/status-codes)
+**Links:** [Documentation](https://developers.notion.com) · [API Reference](https://developers.notion.com/reference/intro) · [llms.txt](https://developers.notion.com/llms.txt) · [Status Page](https://status.notion.so) · [Pricing](https://www.notion.com/pricing) · [Signup](https://www.notion.com/signup) · [API Keys](https://developers.notion.com/guides/get-started/authorization) · [Official MCP](https://developers.notion.com/docs/mcp) · [Rate Limits](https://developers.notion.com/reference/request-limits) · [Errors](https://developers.notion.com/reference/status-codes)
 
-- **Supported:** [Self-serve signup](https://www.notion.com/signup) · [Self-serve API keys](https://developers.notion.com/docs/authorization) · [OAuth](https://developers.notion.com/docs/authorization) · [Free tier / trial](https://www.notion.com/pricing) · [Self-serve upgrade](https://www.notion.com/pricing) · [Versioning policy](https://developers.notion.com/reference/versioning)
-- **Partial:** [Scoped tokens](https://developers.notion.com/docs/authorization) — Integrations carry capability scopes (read/update/insert) and page-level access grants.
+- **Supported:** [Self-serve signup](https://www.notion.com/signup) · [Self-serve API keys](https://developers.notion.com/guides/get-started/internal-connections) · [OAuth](https://developers.notion.com/docs/authorization) · [Free tier / trial](https://www.notion.com/pricing) · [Self-serve upgrade](https://www.notion.com/pricing) · [Versioning policy](https://developers.notion.com/reference/versioning)
+- **Partial:** [Scoped tokens](https://developers.notion.com/reference/capabilities) — Internal connections have separate read/update/insert capabilities and page grants; PATs instead use the creator's page permissions.
 - **Unknown (help wanted):** `token_revocation`, `sandbox_or_test_mode`, `usage_dashboard`, `idempotency`, `automation_permitted`
 
 ### OpenAI <a id="openai"></a>
@@ -913,7 +913,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 ### Tavily <a id="tavily"></a>
 
-> Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
+> Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 
 **Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
 

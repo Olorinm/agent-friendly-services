@@ -47,24 +47,87 @@ Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and M
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [mail-api (API)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Agent signup accepts an owner email and sends an OTP. Verification unlocks full permissions; existing owner accounts cannot use first-time signup. Signup can rotate an existing unverified key, so inspect account state before retrying. Published Free plan: 3 inboxes and 3,000 emails/month, no card required; not observed account entitlement. |
+| [mail-api (API)](https://api.agentmail.to/v0/) | [Docs](https://docs.agentmail.to/agent-onboarding) | self serve / documented | Requires: platform_account; POST /v0/agent/sign-up accepts a username and optional human_email. Omitting human_email creates a receive-only inbox and returns an API key without human-email verification; it cannot send to anyone. Store the key privately: it cannot be recovered without an attached human, and another anonymous signup creates a separate organization rather than recovering it. With human_email, an OTP is sent there; repeating signup for that email rotates the key. Existing Console users should use their existing organization instead. Subsequent REST calls use Bearer authentication. The published Free plan lists 3 inboxes, 3,000 emails/month, 100 emails/day and 3 GB; the exact unverified, human-less account entitlement and API request rate are not established by those headline limits. No signup, delivery or sending result is inferred from these documents. |
 | [mail-sdk (SDK)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
-| [mail-cli (CLI)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/quickstart) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
-| [mail-mcp (MCP)](https://mcp.agentmail.to/mcp) | [Docs](https://docs.agentmail.to/agent-onboarding) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
+| [mail-cli (CLI)](https://docs.agentmail.to/quickstart) | [Docs](https://docs.agentmail.to/integrations/cli) | — | Separate route; shares the service account and plan limits. No task result inherited from other routes. |
+| [mail-mcp (MCP)](https://mcp.agentmail.to/mcp) | [Docs](https://docs.agentmail.to/integrations/mcp) | — | Hosted MCP accepts OAuth or an x-api-key header. Reviewed tool catalog supports inbox/message operations and human attachment/verification; anonymous signup is documented separately through REST, SDK or CLI. Account permissions and limits still apply; no result is inherited from another route. |
 
 ### Service pricing
 
 —
 
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none initially; one fresh anonymous mailbox and necessary identity created inside measured execution](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json) | [783.4k](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json) | 137.407982s | 0 |
+| SDK | — | — | — | — |
+| CLI | — | — | — | — |
+| MCP | — | — | — | — |
+
+#### Prepare a temporary receiving mailbox for this automated test, give me its address, and save the access information needed to read its inbox later.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-183e17ccb640) | [0%](./evaluations.md#comparison-183e17ccb640) | 783.4k | $0.03 | — |
+| SDK | — | — | — | — | — |
+| CLI | — | — | — | — | — |
+| MCP | — | — | — | — | — |
+
+**Additional context from controller review; original verdict unchanged:**
+
+- [agentmail-mailbox-create-v2-ds41-r1](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json): Controller clarification; the original independent verdict is unchanged. No mailbox, inbox access or reusable credentials were obtained. API requests from the tested host and container received CloudFront 403 responses. This shows that the tested access path was blocked at that time; the specific cause remains undetermined and does not establish service-wide unavailability. Separately, the executor exceeded the 12-request limit and made four signup POSTs while reporting one.
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Use a domain supplied by the service to create one new receiving mailbox dedicated to this test; do not reuse an existing mailbox. It only needs to be usable during this test, with no long-term retention or custom-domain requirement. You may create the minimal free anonymous service identity and authentication information necessary for it. Do not use an existing service account or any human email address for verification; report a blocker if these are required. Confirm that you can read this mailbox’s message list and state whether it currently contains any messages. Save passwords, tokens or session information in a local private file; give only the file location in your answer, not the secrets.
+
+**Completion:** The assigned service returns an actual mailbox address; a real inbox read succeeds; an evaluator can reuse the saved access state in an independent request to the same mailbox; the answer matches the observed state, and no secrets appear in it.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none initially; one fresh anonymous mailbox and necessary identity created inside measured execution · [Full configuration and evidence](./evaluations.md#comparison-183e17ccb640)
+
+[Task definition](./tasks.en.md#mailboxes-create-001-v2)
+
+- API: [Not completed](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json) — 未达到交付：没有创建任何邮箱、没有真实收件箱读取、也没有可复用的访问状态。执行者按匿名 receive-only 路径向 https://api.agentmail.to/v0/agent/sign-up 发起创建，但对 api.agentmail.to 的全部请求（含无认证根路径与 /v0/inboxes）都被 CloudFront 边缘以 403 Request blocked 拦截，应用层未返回 api_key/inbox；保存的 credentials.json 为空 {}。总控独立诊断从 host 与执行容器同样得到 CloudFront 403，且未做独立复用（independent_reuse=not_performed）。该阻碍属网络/接入障碍（环境侧），执行者已如实说明，非服务能力或资质问题；因基础执行环境与工具（shell/curl/python/node、常规联网及同服务 docs/console）均正常，未记为 invalid_run。另有执行行为问题：对指定 API 主机的候选请求超过 12 次上限（总控核为 17 次以上），且答复称 sign-up“唯一一次”与实际 4 次 POST 不符。
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| mailboxes-create-001 v2 | API | [not_completed](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
 ### Task results
 
 —
 
+### Notes
+
+- Unverified organizations cannot create additional API keys, manage list entries or pods, or connect apps. Official cleanup endpoints delete an inbox and revoke an API key; those permissions are not among the documented verification-denied list, but actual signup-key access remains untested. Deleting these resources does not establish deletion of the organization.
+- Optional 24-hour message expiry is off by default and requires early-access enablement. The reviewed documentation does not establish a fixed expiry for an unclaimed inbox or a long-term retention guarantee.
+- Reviewed terms contain no explicit ban on publishing a small factual test or comparison. This is not a separate licence to publish message content, credentials or branding; applicable privacy, intellectual-property and anti-abuse rules remain.
+
 ### Sources
 
-- [official_docs](https://docs.agentmail.to/quickstart) — checked 2026-09-09
-- [official_docs](https://www.agentmail.to/pricing) — checked 2026-09-09
-- [official_docs](https://docs.agentmail.to/agent-onboarding) — checked 2026-09-09
+- [official_docs](https://docs.agentmail.to/quickstart) — checked 2026-10-08
+- [official_docs](https://www.agentmail.to/pricing) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/agent-onboarding) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/api-reference/agent/sign-up) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/api-reference/inboxes/messages/list) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/permissions) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/api-reference/inboxes/delete) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/api-reference/api-keys/delete) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/message-expiry) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/integrations/mcp) — checked 2026-10-08
+- [official_docs](https://docs.agentmail.to/integrations/cli) — checked 2026-10-08
+- [official_site](https://www.agentmail.to/legal/terms) — checked 2026-10-08
 
 <a id="agentservices"></a>
 
@@ -143,7 +206,7 @@ Air distribution API with sandbox keys, production certification and an agency a
 
 Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAuth, webhooks, and documented rate limits.
 
-**Classification:** Workplace Collaboration / Collaborative Tables
+**Classification:** Productivity & Collaboration / Collaborative Tables
 
 [Website](https://www.airtable.com) · [Source record](../data/providers/airtable.yaml) · [Back to directory](../README.md#all-services)
 
@@ -153,7 +216,7 @@ Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAut
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [web-api (API)](https://airtable.com/developers/web/api/introduction) | [Docs](https://airtable.com/developers/web/api/introduction) | self serve / documented | Create a personal access token with required scopes and selected test resources.; PAT scopes plus selected workspace/base access required. Base creation is documented on all plans; do not infer paid-only access from outdated posts. |
+| [web-api (API)](https://api.airtable.com/v0) | [Docs](https://airtable.com/developers/web/api/introduction) | self serve / documented | Requires: platform_account, email_verification; Sign up on desktop with email or a supported identity provider, verify email and check the workspace plan.; Create a personal access token with required scopes and selected test resources.; An own-account PAT needs operation scopes and selected workspace/base access. Current docs explicitly allow POST /v0/meta/bases on Free with PAT or OAuth; legacy API-key restrictions do not apply to PATs. Tables remain editable in Airtable's hosted UI. Free allows 1000 calls/workspace/month, including schema calls, at 5 requests/second/base and 50/second across a user's PATs. New accounts' first workspace starts a 14-day Team trial: observe the actual plan and avoid paid-only features rather than labelling all no-payment use as Free. Adding payment details during that trial starts billing. |
 
 ### Service pricing
 
@@ -167,12 +230,22 @@ Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAut
 
 —
 
+### Notes
+
+- Free includes 1000 records/base, 1 GB attachments/base and two-week history. Keep the actual workspace plan in trial evidence because the initial Team trial has higher limits.
+- Own-account PAT usage is distinct from a third-party integration collecting another user's token. The reviewed service and developer terms contain no explicit benchmark-disclosure ban; content rights, confidentiality and accurate descriptions still apply.
+
 ### Sources
 
-- [official_docs](https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api) — checked 2026-09-08
+- [official_docs](https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api) — checked 2026-10-08
 - [official_docs](https://airtable.com/developers/web/guides/personal-access-tokens) — checked 2026-09-08
-- [official_docs](https://support.airtable.com/articles/2277136852-airtable-plans-overview) — checked 2026-09-08
-- [official_docs](https://support.airtable.com/articles/7735693959-managing-api-call-limits-in-airtable) — checked 2026-09-08
+- [official_docs](https://support.airtable.com/articles/2277136852-airtable-plans-overview) — checked 2026-10-08
+- [official_docs](https://support.airtable.com/articles/7735693959-managing-api-call-limits-in-airtable) — checked 2026-10-08
+- [official_docs](https://support.airtable.com/articles/9934989703-creating-personal-access-tokens) — checked 2026-10-08
+- [official_docs](https://support.airtable.com/articles/2675548758-creating-canceling-and-deleting-your-airtable-account) — checked 2026-10-08
+- [official_docs](https://support.airtable.com/articles/8468540431-Airtable-account-email-verification) — checked 2026-10-08
+- [official_site](https://www.airtable.com/company/tos) — checked 2026-10-08
+- [official_site](https://www.airtable.com/company/developer-terms) — checked 2026-10-08
 
 <a id="airwallex"></a>
 
@@ -209,7 +282,7 @@ Hosted payment links with fixed or customer-selected amounts and payment status 
 
 ## Aiven
 
-Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use.
+Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API provisioning and standard PostgreSQL client access; inactive free services may be powered off.
 
 **Classification:** Databases / Hosted Relational Databases
 
@@ -219,11 +292,13 @@ Managed databases including free hosted PostgreSQL. Account signup and provision
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | [Docs](https://aiven.io/docs/tools/cli) | self serve / documented | Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested; free lifecycle limits need checking before production use. |
+| [postgres-cli (CLI)](https://aiven.io/docs/tools/cli) | [Docs](https://aiven.io/docs/tools/cli) | self serve / documented | Requires: platform_account; The avn CLI accepts account password or personal token; SQL uses the new service's connection credentials and a standard client such as psql. Free PostgreSQL includes one node, 1 CPU, 1 GB RAM and 1 GB storage, limited to one free service of this type per organization and 20 connections. No fixed expiry, but unused services may be powered off and can be restarted. Free-tier region selection is unavailable; choose an explicitly free plan, not paid trial capacity. Signup, free capacity availability and actual provisioning remain untested. |
+| [platform-api (API)](https://api.aiven.io/v1/) | [Docs](https://aiven.io/docs/tools/api) | self serve / documented | Management API requires a personal token from the account console. The token is shown once and has a selected session duration. API management and database SQL credentials are distinct; free-plan availability must be checked before creating a service. |
+| [postgres-python (SDK)](https://aiven.io/docs/products/postgresql/howto/connect-python) | [Docs](https://aiven.io/docs/products/postgresql/howto/connect-python) | self serve / documented | Aiven documents Python access through the third-party psycopg2 PostgreSQL driver. This connects to an already provisioned remote service using its private PostgreSQL URI; it does not create an Aiven account or provision the service. SQL clients do not imply access to the separate, limited-availability REST Data API. |
 
 ### Service pricing
 
-—
+- postgres-cli: 1 GB / service (free_allowance; Free PostgreSQL storage; one free PostgreSQL service per organization, without fixed expiry.)
 
 ### Task results
 
@@ -231,8 +306,13 @@ Managed databases including free hosted PostgreSQL. Account signup and provision
 
 ### Sources
 
-- [official_docs](https://aiven.io/docs/tools/cli) — checked 2026-09-07
-- [official_site](https://aiven.io/free-postgresql-database) — checked 2026-09-07
+- [official_docs](https://aiven.io/docs/tools/cli) — checked 2026-10-08
+- [official_site](https://aiven.io/free-postgresql-database) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/products/postgresql/concepts/pg-free-tier) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/products/postgresql/get-started) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/tools/api) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/platform/howto/create_authentication_token) — checked 2026-10-08
+- [official_docs](https://aiven.io/docs/products/postgresql/howto/connect-python) — checked 2026-10-08
 
 <a id="qwen"></a>
 
@@ -334,25 +414,127 @@ Stock prices, company financials, FX, crypto and economic indicators. Free keys 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://www.alphavantage.co/documentation/) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100 observations) is available to free keys; full history and intraday are premium. This may cover the current short historical task, subject to access and source precision. Real-time quotes and adjusted data require separate entitlement checks. |
+| [data-api (API)](https://www.alphavantage.co/query) | [Docs](https://www.alphavantage.co/documentation/) | self serve / documented | Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output (latest 100 observations) is available to free keys; full history and intraday are premium. This may cover the current short historical task, subject to access and source precision. Real-time quotes and adjusted data require separate entitlement checks. Higher free limits for approved open-source or educational use are not the ordinary self-serve allowance. Income and cash-flow data for two companies require at least four endpoint calls before provenance checks. Historical task coverage is a moving window, so verify the returned first/last dates at execution time. Account eligibility and personal/non-commercial use conditions still apply; they should not be described as a blanket prohibition on publishing self-measured service results. |
+| [hosted-mcp (MCP)](https://mcp.alphavantage.co/mcp) | [Docs](https://mcp.alphavantage.co/) | self serve / documented | Official hosted Streamable HTTP route. Discover functions with tools/list and invoke with tools/call. The implementation forwards data calls to the standard API using the same key, so plan shared usage against the ordinary 25-request/day pool rather than a second MCP allowance; shared accounting is inferred from that implementation, not measured here. Documentation alone does not establish connection success, tool availability, requested-date coverage or hosted/source parity for a particular run. Independent evaluations record the actual tested conditions and outcomes. |
 
 ### Service pricing
 
 - data-api: 25 requests / day (free_allowance; Free API key allowance; excludes premium endpoints.)
 
+- hosted-mcp: 25 underlying API requests / day (free_allowance; Ordinary free-key allowance; same-key sharing inferred from official forwarding code, with no separate MCP quota documented.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: controller-registered ordinary free API key; same existing account for REST and MCP](../data/experiments/evaluations/alpha-rest-prices-mirror-001-ds41-r1.json) | [188.3k](../data/experiments/evaluations/alpha-rest-prices-mirror-access-ds41-r1.json) | 32.632337s | 0 |
+| MCP | [Access preparation: controller-registered ordinary free API key; same existing account for REST and MCP](../data/experiments/evaluations/alpha-mcp-prices-mirror-001-ds41-r1.json) | [564.6k](../data/experiments/evaluations/alpha-mcp-prices-mirror-access-ds41-r1.json) | 184.674383s | 0 |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-29077cd73ecd) | [100%](./evaluations.md#comparison-29077cd73ecd) | 564.6k | $0.03 | — |
+| API | [1](./evaluations.md#comparison-29077cd73ecd) | [100%](./evaluations.md#comparison-29077cd73ecd) | 188.3k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: controller-registered ordinary free API key; same existing account for REST and MCP · [Full configuration and evidence](./evaluations.md#comparison-29077cd73ecd)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (5)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | MCP | [completed](../data/experiments/evaluations/alpha-mcp-prices-mirror-access-ds41-r1.json) | 2026-10-08 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/alpha-rest-prices-mirror-access-ds41-r1.json) | 2026-10-08 |
+| financial-access-001 v1 | MCP | [completed](../data/experiments/evaluations/alpha-mcp-prices-access-ds41-r1.json) | 2026-10-08 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/alpha-rest-prices-access-ds41-r1.json) | 2026-10-08 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/alpha-vantage-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
 ### Task results
 
-—
+#### Plot Apple's daily closing prices for August 2026 using unadjusted prices, and include a CSV and the data source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-965a5e31dfe6) | [100%](./evaluations.md#comparison-965a5e31dfe6) | 214.9k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-965a5e31dfe6) | [100%](./evaluations.md#comparison-965a5e31dfe6) | 438.1k | $0.02 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Apple Inc., NASDAQ ticker AAPL, quoted in US dollars; 2026-08-01 through 2026-08-31. Use regular-session daily closing prices on trading days, excluding pre-market and after-hours prices.
+
+**Completion:** Dates cover every trading day in the month without invented rows for market closures, duplicates, omissions or an incorrect currency. Prices match the independently frozen reference series on the same basis; differences exceeding quote precision are checked individually. Chart and CSV values agree, and the data genuinely comes from the specified service.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-08 (UTC)
+
+Access preparation: controller-registered ordinary free API key; same existing account for REST and MCP · [Full configuration and evidence](./evaluations.md#comparison-965a5e31dfe6)
+
+[Task definition](./tasks.en.md#financial-prices-001-v1)
+
+</details>
+
+#### Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-85831928a49a) | [100%](./evaluations.md#comparison-85831928a49a) | 188.6k | $0.02 | $0 |
+| MCP | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
+
+**Completion:** All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: controller-registered ordinary free API key · [Full configuration and evidence](./evaluations.md#comparison-85831928a49a)
+
+[Task definition](./tasks.en.md#financial-statements-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (5)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-prices-001 v1 | MCP | [completed](../data/experiments/evaluations/alpha-mcp-prices-mirror-001-ds41-r1.json) | 2026-10-08 |
+| financial-prices-001 v1 | API | [completed](../data/experiments/evaluations/alpha-rest-prices-mirror-001-ds41-r1.json) | 2026-10-08 |
+| financial-prices-001 v1 | MCP | [not_completed](../data/experiments/evaluations/alpha-mcp-prices-001-ds41-r1.json) | 2026-10-08 |
+| financial-prices-001 v1 | API | [not_completed](../data/experiments/evaluations/alpha-rest-prices-001-ds41-r1.json) | 2026-10-08 |
+| financial-statements-001 v1 | API | [completed](../data/experiments/evaluations/alpha-vantage-statements-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Notes
 
-- Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup could not be extracted in this pass.
+- This discovery review checked official documentation and a pinned implementation before the independent trials. No account was registered, no private credential was read and no financial-data or MCP method call was made during that documentation review. This describes the review's scope, not the service's current trial status; see independent evaluations for dated access and task results.
 
 ### Sources
 
-- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-09-15
-- [official_site](https://www.alphavantage.co/support/) — checked 2026-09-15
-- [official_docs](https://www.alphavantage.co/support/) — checked 2026-09-09
+- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-10-08
+- [official_site](https://www.alphavantage.co/support/) — checked 2026-10-08
+- [official_site](https://www.alphavantage.co/terms_of_service/) — checked 2026-10-08
+- [official_docs](https://mcp.alphavantage.co/) — checked 2026-10-08
+- [official_repo](https://github.com/alphavantage/alpha_vantage_mcp/tree/3ed9b05db06d16476d326a12441d68ad071b261a) — checked 2026-10-08
 
 <a id="amadeus-flights"></a>
 
@@ -486,7 +668,7 @@ An apiheya flight-data product distributed through RapidAPI; distinct from the o
 
 Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official remote MCP server (OAuth 2.1), and the acli CLI.
 
-**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management; Workplace Collaboration / Document Collaboration
+**Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management; Productivity & Collaboration / Document Collaboration
 
 [Website](https://www.atlassian.com) · [Source record](../data/providers/atlassian.yaml) · [Back to directory](../README.md#all-services)
 
@@ -579,7 +761,7 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | [95.8k](../data/experiments/evaluations/bargo-access.json) | 157.266045s | 0 |
+| API (congress-api-keyless) | [No account or key supplied](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) | [97.5k](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 121.069769s | 0 |
 | API (congress-api-keyed) | — | — | — | — |
 | MCP | — | — | — | — |
 
@@ -587,7 +769,7 @@ Read-only US congressional trade disclosures through a free REST API and keyed M
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 95.8k | $0.0068 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-a3477334d9b4) | [100%](./evaluations.md#comparison-a3477334d9b4) | 97.5k | $0.0068 | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -598,19 +780,20 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-a3477334d9b4)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-access-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15 |
 
 </details>
@@ -621,7 +804,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-1d87fed8bbbd) | [100%](./evaluations.md#comparison-1d87fed8bbbd) | 778.4k | $0.03 | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -632,13 +815,11 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 **Completion:** Match all applicable records in the independently frozen official index and PTR, without duplicates or unsupported additions. Real queries to the specified service support the disclosures; original filings may supplement date and provenance verification. Use the official index filing date, distinct from trade, notification and service ingestion/publication dates. Do not present midpoints, estimated prices or family-member trades as exact personal trades by the member. Identify the specific original filing rather than only the portal.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-1d87fed8bbbd)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
-
-- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-001-r1.json) — 独立验收判定未完成：已通过指定 Bargo API 取得业务数据并核对原始文件，但执行超时前仅留下过程旁白，没有交付要求的表格、原始出处和服务署名。该次失败发生在执行交付环节，不证明服务缺少目标数据；原始交易行私有保留。
 
 </details>
 
@@ -646,7 +827,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-1d87fed8bbbd) | [0%](./evaluations.md#comparison-1d87fed8bbbd) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -657,13 +838,13 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Correct identities and period, with all matching details consistent with the frozen official index and PTRs. No-match conclusions require both specified-service queries and verification of the official scope, not only errors or empty responses. Retain amount ranges and identify specific filings.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-1d87fed8bbbd)
 
 [Task definition](./tasks.en.md#financial-disclosures-002-v1)
 
-- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) — 独立验收判定未完成：指定服务已返回股票查询结果，但官方申报批量解析未完成，执行超时前只有过程叙述，没有交付四人最终结论、完整明细及原始出处。属于本次执行未完成，不是服务不可用；中间空结果不足以支持无匹配结论。
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-002-oc11835-r1.json) — 独立验收判定本题未完成：运行触及预算上限，交付未完整列出所需交易日期、金额区间、数据服务与具体申报出处，也未完成四名成员的结果汇总。属本次 Agent 在预算内未完成，未判为服务能力不支持；本次执行用量与模型费因最后请求未完整采集而保持未知。 公开版由总控删减交易明细；原独立验收判断未改，原始验收 SHA256：a363a37b97c0f1ff220ec0754252691a834a12bfbfe76a78ccb2e851462c1ee7 本轮未向验收者提供其他服务的同题答案；每题仅一次尝试，使用线上服务与历史冻结参考，不能把相对历史成绩的变化单独归因于 OpenCode 升级。
 
 </details>
 
@@ -671,7 +852,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [100%](./evaluations.md#comparison-864872ad88ab) | 578.4k | $0.03 | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-1d87fed8bbbd) | [100%](./evaluations.md#comparison-1d87fed8bbbd) | 603.7k | $0.03 | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -682,9 +863,9 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** All matching transactions and dates for both filers agree with the independent frozen reference. Per-transaction calendar-day differences, counts and minimum/maximum values are correct. Do not invent statistics for empty sets. Core records come from the specified service; official index or PTRs may verify dates.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-1d87fed8bbbd)
 
 [Task definition](./tasks.en.md#financial-disclosures-003-v1)
 
@@ -694,7 +875,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (congress-api-keyless) | [1](./evaluations.md#comparison-864872ad88ab) | [0%](./evaluations.md#comparison-864872ad88ab) | — | — | $0 |
+| API (congress-api-keyless) | [1](./evaluations.md#comparison-1d87fed8bbbd) | [0%](./evaluations.md#comparison-1d87fed8bbbd) | — | — | $0 |
 | API (congress-api-keyed) | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -705,21 +886,25 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 **Completion:** Actual specified-service records and the specific official filing support the verification. Ownership, dates, amounts and transaction nature agree with the frozen reference. Do not treat a range midpoint as an exact transaction amount or the filer as the transaction owner. Include original remarks material to the claim.
 
-1.18.29 · glm-5.3-flash / high · 600s · Independent review with same-task answers from 2 services · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-864872ad88ab)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-1d87fed8bbbd)
 
 [Task definition](./tasks.en.md#financial-disclosures-004-v1)
 
-- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) — 独立验收判定未完成：指定服务和官方资料已取得，过程叙述有部分正确判断，但未交付交易性质判断及完整更正与出处；执行约 590 秒后超时终止。这是执行行为造成的未交付，不证明服务没有数据。
+- API (congress-api-keyless): [Not completed](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) — 独立验收判定本题未完成：执行触及预算上限，虽已取得相关业务数据并完成部分核对，但未交付四项说法的逐项判断、有依据的成文更正和完整原始申报出处。属本次 Agent 在预算内未完成，未判为服务能力不支持；本次执行 Token 与模型费因最后请求未完整采集而保持未知。 公开版由总控删减交易明细；原独立验收判断未改，原始验收 SHA256：6e3e4bb1a7c76306e9388aa9dfd2d6ba8cd4a458125ab1c98af0e98d4a9d6fa0 本轮未向验收者提供其他服务的同题答案；每题仅一次尝试，使用线上服务与历史冻结参考，不能把相对历史成绩的变化单独归因于 OpenCode 升级。
 
 </details>
 
 <details>
-<summary>Run history (5)</summary>
+<summary>Run history (9)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-disclosures-004 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-oc11835-r1.json) | 2026-10-08 |
+| financial-disclosures-003 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-003-oc11835-r1.json) | 2026-10-08 |
+| financial-disclosures-002 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-oc11835-r1.json) | 2026-10-08 |
+| financial-disclosures-001 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-001-oc11835-r1.json) | 2026-10-08 |
 | financial-disclosures-004 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-004-r1.json) | 2026-09-15 |
 | financial-disclosures-003 v1 | API (congress-api-keyless) | [completed](../data/experiments/evaluations/bargo-disclosures-003-r1.json) | 2026-09-15 |
 | financial-disclosures-002 v1 | API (congress-api-keyless) | [not_completed](../data/experiments/evaluations/bargo-disclosures-002-r1.json) | 2026-09-15 |
@@ -747,7 +932,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Hosted collaborative tables; free workspace and scoped row-access tokens. Schema management uses a different credential.
 
-**Classification:** Workplace Collaboration / Collaborative Tables
+**Classification:** Productivity & Collaboration / Collaborative Tables
 
 [Website](https://baserow.io/) · [Source record](../data/candidates/baserow.yaml) · [Back to directory](../README.md#all-services)
 
@@ -755,23 +940,34 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [database-api (API)](https://baserow.io/docs/apis/rest-api) | [Docs](https://baserow.io/docs/apis/rest-api) | self serve / documented | Generate a database token and select permitted tables and operations.; Database token can read/create/update/delete rows in permitted tables; creating the table/schema requires a short-lived JWT. A precreated table changes the test setup. |
+| [database-api (API)](https://api.baserow.io/api) | [Docs](https://baserow.io/docs/apis/rest-api) | self serve / documented | Requires: platform_account, email_verification; Create a Cloud account with email, name and password; verify the email and use a Free workspace.; Generate a database token and select permitted tables and operations.; Database token can read/create/update/delete rows in permitted tables; creating the table/schema requires the separate backend-jwt-api route. A precreated business schema changes the setup of a create-table task. Cloud permits 10 concurrent API requests; a monthly request allowance was not established in these sources. This path updates real hosted tables and is suitable for an existing-table task when scoped to that table. |
+| [backend-jwt-api (API)](https://api.baserow.io/api) | [Docs](https://baserow.io/user-docs/personal-api-tokens) | self serve / documented | Requires: platform_account, email_verification; Create and verify a Cloud account, retaining an empty Free workspace and account credentials privately.; The documented login flow exchanges account credentials for a seven-minute JWT sent as Authorization: JWT. Unlike a permanent database token, this grants database/table and schema operations using the user's account permissions. A dedicated Free Cloud workspace can hold an editable online action table; do not silently replace this route with a precreated table or self-hosted database. Token expiry, login refresh and actual registration remain to be tested. |
 | [native-mcp (MCP)](https://baserow.io/user-docs/mcp-server) | [Docs](https://baserow.io/user-docs/mcp-server) | — | Create a workspace MCP endpoint in account settings and securely store its private URL.; Workspace admin creates a unique secret-bearing endpoint URL; the URL is itself a credential and must not be published. Documented tools read schema/list tables and create/update/delete rows, but do not list table creation. Cloud plan availability is not yet verified; do not assume this route can provision task 001 from an empty container. |
 
 ### Service pricing
 
 - database-api: 3000 rows / workspace (free_allowance; Cloud Free plan. 2 GB storage. JWT/schema access and database row tokens are distinct.)
 
+- backend-jwt-api: 3000 rows / workspace (free_allowance; Shared Free Cloud workspace capacity, not an extra allowance for JWT access; 2 GB storage.)
+
 ### Task results
 
 —
 
+### Notes
+
+- Free Cloud provides Grid, Form and Gallery views, 3000 rows and 2 GB storage per workspace, with 14-day row history. Self-hosted unlimited capacity is not the hosted offer. Public signup shows email, name and password; payment-card requirements beyond that form have not been independently observed.
+- No explicit benchmark or performance-analysis disclosure prohibition was found in the reviewed general terms. Article 11 broadly protects confidential information and describes supplied software as confidential; Article 3 separately covers open-source and paid code. Do not treat source licensing as blanket hosted-service publication permission.
+
 ### Sources
 
 - [official_docs](https://baserow.io/docs/apis/rest-api) — checked 2026-09-08
-- [official_docs](https://baserow.io/user-docs/personal-api-tokens) — checked 2026-09-08
-- [official_site](https://baserow.io/pricing) — checked 2026-09-08
-- [official_docs](https://baserow.io/user-docs/mcp-server) — checked 2026-09-08
+- [official_docs](https://baserow.io/user-docs/personal-api-tokens) — checked 2026-10-08
+- [official_site](https://baserow.io/pricing) — checked 2026-10-08
+- [official_docs](https://baserow.io/user-docs/mcp-server) — checked 2026-10-08
+- [official_site](https://baserow.io/signup) — checked 2026-10-08
+- [official_docs](https://baserow.io/user-docs/set-up-baserow) — checked 2026-10-08
+- [official_site](https://baserow.io/terms-and-conditions) — checked 2026-10-08
 
 <a id="bloomberg-data-license"></a>
 
@@ -953,13 +1149,17 @@ Congressional disclosures and related public records, with a keyless read API an
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/capitol-disclosures-004-900s-c10-r1.json) | [192.5k](../data/experiments/evaluations/capitol-access.json) | 138.671707s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | [300.5k](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 169.698703s | — |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 192.5k | $0.0091 | $0 |
+| API | [1](./evaluations.md#comparison-a3477334d9b4) | [0%](./evaluations.md#comparison-a3477334d9b4) | 300.5k | $0.01 | $0 |
+
+**Additional context from controller review; original verdict unchanged:**
+
+- [capitol-access-oc11835-r1](../data/experiments/evaluations/capitol-access-oc11835-r1.json): Controller clarification; the original independent verdict is unchanged. Real data access and configuration reuse were verified. This run remained incomplete because it returned seven records against the trial's five-record setup limit and reported an incomplete call count. The limit belonged to this test, not the service's data coverage or free-tier capacity.
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -968,19 +1168,22 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · glm-5.3-flash / high · 900s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-a3477334d9b4)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
+
+- API: [Not completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) — 接入本身成立：经指定入口 REST 直接 HTTP 调用，/trades、/members、/top-traders 均返回 200 真实数据，service-config.json 与辅助脚本保存到 /home/node/service-tools 并经实调用验证，全程免 Key、未注册未付款。但违反冻结环境的接入资源约束「接入只做必要的少量真实数据查询，最多返回 5 条记录」：本次对指定入口共 7 次请求，5 次成功取数实际返回 7 条记录（trades 3 + members 2 + top-traders 1×2 次，第 5、7 次为重复返回；/stats 为聚合不计条），执行者自报 6 条亦超限；交付调用表漏记 2 次调用（第二次 403 归因复测与辅助脚本验证调用）。偏离属执行行为（超授权查询规模且交付统计不完整），非服务能力、接入门槛或环境问题；据冻结要求不能放宽，故判 not_completed。
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-access-001 v1 | API | [not_completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15 |
 
 </details>
@@ -991,7 +1194,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 163.1k | $0.0100 | $0 |
+| API | [1](./evaluations.md#comparison-60de41521941) | [100%](./evaluations.md#comparison-60de41521941) | 163.1k | $0.0100 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1002,7 +1205,7 @@ Filer: Richard W. Allen, Georgia district 12 (GA12). Select Periodic Transaction
 
 1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-60de41521941)
 
 [Task definition](./tasks.en.md#financial-disclosures-001-v1)
 
@@ -1012,7 +1215,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 309.7k | $0.02 | $0 |
+| API | [1](./evaluations.md#comparison-60de41521941) | [100%](./evaluations.md#comparison-60de41521941) | 309.7k | $0.02 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1023,7 +1226,7 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-60de41521941)
 
 [Task definition](./tasks.en.md#financial-disclosures-002-v1)
 
@@ -1033,7 +1236,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 206.5k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-60de41521941) | [100%](./evaluations.md#comparison-60de41521941) | 206.5k | $0.01 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1044,7 +1247,7 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-60de41521941)
 
 [Task definition](./tasks.en.md#financial-disclosures-003-v1)
 
@@ -1054,7 +1257,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-cbad562eed82) | [100%](./evaluations.md#comparison-cbad562eed82) | 230.9k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-60de41521941) | [100%](./evaluations.md#comparison-60de41521941) | 230.9k | $0.01 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1065,7 +1268,7 @@ Select U.S. House PTRs by official filing date from 2026-08-01 through 2026-08-3
 
 1.18.29 · glm-5.3-flash / high · 900s · Independent review; no other service answer available this round · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-cbad562eed82)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-60de41521941)
 
 [Task definition](./tasks.en.md#financial-disclosures-004-v1)
 
@@ -1261,7 +1464,7 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 
 Docs and tables with a free REST API; current API page is branded Superhuman Docs.
 
-**Classification:** Workplace Collaboration / Collaborative Tables; Workplace Collaboration / Document Collaboration
+**Classification:** Productivity & Collaboration / Collaborative Tables; Productivity & Collaboration / Document Collaboration
 
 [Website](https://coda.io/) · [Source record](../data/candidates/coda.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1269,8 +1472,8 @@ Docs and tables with a free REST API; current API page is branded Superhuman Doc
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://coda.io/developers/apis/v1) | [Docs](https://coda.io/developers/apis/v1) | self serve | API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be asynchronous. Table/schema creation support must be verified for the task. |
-| [hosted-mcp (MCP)](https://coda.io/apis/mcp) | [Docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) | self serve | Official hosted MCP; connector setup needs authorization. |
+| [rest-api (API)](https://coda.io/apis/v1) | [Docs](https://coda.io/developers/apis/v1) | self serve / documented | Requires: platform_account; Create a personal Free account using a supported email or identity-provider flow; current email-domain acceptance and verification gates are untested.; Generate an API token in account settings with the permissions needed for the intended document.; Free API access in free and paid workspaces; document creation requires Doc Maker/Admin permissions. Writes can return 202 before mutation completion, and reads can lag. REST 1.6.0 supports existing-table row operations but does not document creating a native table/schema from a blank document. This is a route boundary, not a limitation of the separate MCP. Per-user limits include 100 reads/6 seconds, 10 writes/6 seconds and 5 document-content writes/10 seconds. See developer-terms before public testing. |
+| [hosted-mcp (MCP)](https://coda.io/apis/mcp) | [Docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) | self serve / documented | Requires: platform_account; Official hosted MCP, now branded Superhuman Docs. Existing Coda connections remain supported. OAuth clients and MCP-scoped personal access tokens are documented; this route retains its OAuth auth designation. MCP tools can create native tables and modify columns/rows. Free-plan Doc Makers have a limited allowance of 30 requests/week, at most 60/month, with all tools; Editors' allowance is read-only. These are MCP-specific limits, not REST quotas. Beta behavior may change. The developer terms restrict public performance disclosure; documented capability is not a successful trial. |
 
 ### Service pricing
 
@@ -1283,12 +1486,18 @@ Docs and tables with a free REST API; current API page is branded Superhuman Doc
 ### Notes
 
 - Document and messaging membership does not transfer collaborative-table trial results to those tasks.
+- Free personal unshared documents have no row/object limit; shared Free documents allow 1000 rows and 50 objects. Actual account readiness, email-domain acceptance and payment-card gates were not observed.
+- Superhuman Developer Terms section 7(a)(g) explicitly restricts disseminating platform/service performance information and competitive analysis. This blocks the project's proposed public performance comparison absent an applicable exception; it is not a technical failure or an inference from missing publication permission.
 
 ### Sources
 
-- [official_docs](https://coda.io/developers/apis/v1) — checked 2026-09-08
-- [official_docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) — checked 2026-09-08
-- [official_docs](https://coda.io/developers/apis/v1) — checked 2026-09-15
+- [official_docs](https://coda.io/developers/apis/v1) — checked 2026-10-08
+- [official_docs](https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP) — checked 2026-10-08
+- [official_docs](https://coda.io/developers/apis/v1) — checked 2026-10-08
+- [official_docs](https://help.superhuman.com/hc/en-us/articles/46210102879629-Using-the-Superhuman-Docs-MCP) — checked 2026-10-08
+- [official_docs](https://help.coda.io/hc/en-us/articles/39555798022797-Doc-limits-on-Free-plan) — checked 2026-10-08
+- [official_docs](https://help.coda.io/hc/en-us/articles/39555865037581-Sign-in-and-out-of-Coda) — checked 2026-10-08
+- [official_site](https://superhuman.com/legal/terms/developer) — checked 2026-10-08
 
 <a id="cog-depot"></a>
 
@@ -1525,6 +1734,102 @@ Digital-product checkout and billing APIs with separate test mode and reviewed m
 - [official_docs](https://docs.creem.io/merchant-of-record/account-reviews/account-reviews) — checked 2026-09-08
 - [official_docs](https://docs.creem.io/getting-started/introduction) — checked 2026-09-08
 
+<a id="crossref"></a>
+
+## Crossref
+
+Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.
+
+**Classification:** Search & Data Access / Scholarly Literature Search
+
+[Website](https://www.crossref.org/) · [Source record](../data/candidates/crossref.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="crossref-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-rest-api (API)](https://api.crossref.org/works) | [Docs](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) | self serve / documented | July 2026 policy limits public list/search requests to 1/second and single-record lookups to 5/second; public concurrency is 1. The optional polite pool has 3 list requests/second, 10 single-record requests/second and concurrency 3. Follow response limit headers, cache results, identify the application and back off on 429 or increasing response time. A real email is recommended for contact, not a new account; polite limits are shared by that email. Almost all bibliographic metadata may be reused for any purpose, but abstracts can retain publisher/author copyright. Metadata access does not grant full-text rights. No explicit public comparison prohibition was found in the reviewed retrieval/access policies. This entry is documentation research, not evidence of successful API access or correct reference matching. |
+
+### Service pricing
+
+- public-rest-api: 0 USD / public metadata request (usage; Free public REST access within service limits; paid Metadata Plus is optional.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only](../data/experiments/evaluations/crossref-scholarly-reference-001-ds41-r1.json) | [220.9k](../data/experiments/evaluations/crossref-scholarly-access-ds41-r1.json) | 59.090171s | 0 |
+
+#### Connect this scholarly literature search service through the assigned entry point, make one real literature query to confirm that it returns an identifiable paper record, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-e571efbd864f) | [100%](./evaluations.md#comparison-e571efbd864f) | 220.9k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose a small literature query and report an actual title, identifiable document link or identifier, and source. Use a keyless entry directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable document and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only · [Full configuration and evidence](./evaluations.md#comparison-e571efbd864f)
+
+[Task definition](./tasks.en.md#scholarly-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| scholarly-access-001 v1 | API | [completed](../data/experiments/evaluations/crossref-scholarly-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### Use the assigned service to find the paper described in the attached reading note and complete its entry in my notes: original title, all authors in their original order, publication year, journal name and a clickable DOI link. Briefly explain in Chinese why it matches the clues, and identify the search source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-b5f2b1f41c23) | [100%](./evaluations.md#comparison-b5f2b1f41c23) | 72.9k | $0.0064 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Reading note: 2015; Nature; one author’s surname is Bengio; the title contains deep learning. Find the formally published paper. Author names may be full names or conventional surname-and-initial forms, but do not omit authors. No particular APA, MLA or other citation style is required. You may follow a DOI or publisher link returned by the assigned service to verify original bibliographic information. Do not replace the assigned service query with another scholarly database or general web search, or fill missing fields from memory. Only bibliographic information is needed, not full-text retrieval or a summary.
+
+**Completion:** A real query through the assigned service retrieves a paper record matching all note clues. Required bibliographic information agrees with the publisher reference frozen before execution, with no missing or reordered authors and a DOI link for the same paper. The match explanation is evidence-based and the source is verifiable. Allow reasonable case, punctuation, author-name abbreviation and DOI URL variations. No particular result ranking, output file, extra field or citation style is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only · [Full configuration and evidence](./evaluations.md#comparison-b5f2b1f41c23)
+
+[Task definition](./tasks.en.md#scholarly-reference-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| scholarly-reference-001 v1 | API | [completed](../data/experiments/evaluations/crossref-scholarly-reference-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) — checked 2026-10-08
+- [official_docs](https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/) — checked 2026-10-08
+- [official_site](https://community.crossref.org/t/refining-rest-api-limits-for-improved-stability-and-reliability/16137) — checked 2026-10-08
+- [official_docs](https://www.crossref.org/documentation/retrieve-metadata/rest-api/tips-for-using-the-crossref-rest-api/) — checked 2026-10-08
+- [official_site](https://www.crossref.org/services/metadata-retrieval/) — checked 2026-10-08
+
 <a id="datadog"></a>
 
 ## Datadog
@@ -1552,6 +1857,50 @@ Observability platform with a full REST API, llms.txt, documented OAuth for inte
 ### Sources
 
 - [official_docs](https://docs.datadoghq.com/account_management/api-app-keys) — checked 2026-07-07
+
+<a id="daytona"></a>
+
+## Daytona
+
+Hosted sandboxes with SDK, CLI and API access for code execution and file transfer.
+
+**Classification:** Cloud Computing & Hosting / Code Sandboxes
+
+[Website](https://www.daytona.io/) · [Source record](../data/candidates/daytona.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="daytona-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [sandbox-sdk (SDK)](https://app.daytona.io/api) | [Docs](https://www.daytona.io/docs/en/) | self serve / documented | Requires: platform_account; Official Python/TypeScript and other SDKs upload/download files and run code or commands. Pricing offers $200 free compute credits without a card, not recurring free compute. Free credits exclude GPU workloads. Defaults are 1 vCPU, 1 GiB RAM and 3 GiB disk; documented minima are 1/1/1. Tier 1 is organization-scoped; the same limits page inconsistently lists 10 and 20 GiB RAM, so confirm the account quota before relying on either. No registration or compute API was called in this research pass. |
+
+### Service pricing
+
+- sandbox-sdk: 0.0504 USD / allocated vCPU hour (usage; CPU sandbox compute, billed by second; RAM and disk are additional and trial credits may offset charges.)
+
+- sandbox-sdk: 0.0162 USD / allocated GiB RAM hour (usage; CPU sandbox memory, billed by second; separate from CPU and storage.)
+
+### Task results
+
+—
+
+### Notes
+
+- On 2026-10-09 Asia/Shanghai (2026-10-08 UTC), the controller followed the official app email/password registration flow and submitted once. The authentication page reported that access was blocked and directed the user to support. No account verification, API key, credit balance or compute access was established. This is a controller preparation observation, not a formal execution trial or service-capability failure; the cause is unknown and does not establish email-domain rejection, a regional restriction or global availability. No retry or bypass was attempted.
+- For temporary work, ephemeral sandboxes delete when stopped; auto_delete_interval=0 expresses immediate deletion after stopping. Auto-stop defaults to 15 minutes and 0 disables it. A positive ttl_minutes also destroys the sandbox regardless of running/paused/stopped state; unset or 0 provides no wall-clock deadline. Deletion normally returns before destruction; use its wait option and confirm the resource is gone. Stopped/paused sandboxes retain billable disk; deleted sandboxes are not billed, but separately created snapshots remain billable. Account closure alone is not resource cleanup.
+- Terms sections 7 and 8 cover internal-business use, competing products, disruption and unapproved vulnerability probing. No express publication-of-benchmarks prohibition was found in the reviewed terms. This is not a new license or permission; ordinary synthetic file processing does not establish isolation strength or allow vulnerability testing. Customer content remains customer-owned. Preserve nonpublic service information and credentials when publishing minimal results.
+
+### Sources
+
+- [official_docs](https://www.daytona.io/docs/en/) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/api-keys) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/sandboxes) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/file-system-operations) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/process-code-execution) — checked 2026-10-08
+- [official_site](https://www.daytona.io/pricing) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/limits) — checked 2026-10-08
+- [official_docs](https://www.daytona.io/docs/en/billing) — checked 2026-10-08
+- [official_site](https://www.daytona.io/terms-of-service) — checked 2026-10-08
 
 <a id="deepgram"></a>
 
@@ -1692,7 +2041,7 @@ Merchant-of-record checkout for one-time and subscription sales, with test mode,
 
 File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and webhooks.
 
-**Classification:** Workplace Collaboration / File Sharing
+**Classification:** Productivity & Collaboration / File Sharing
 
 [Website](https://www.dropbox.com) · [Source record](../data/providers/dropbox.yaml) · [Back to directory](../README.md#all-services)
 
@@ -1762,7 +2111,9 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 [Docs](https://e2b.dev/docs) · [CLI](https://e2b.dev/docs/cli) · [SDK](https://e2b.dev/docs/sdk-reference) · [MCP entry](https://github.com/e2b-dev/mcp-server)
 
-—
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [sandbox-sdk (SDK)](https://docs.e2b.dev/quickstart) | [Docs](https://docs.e2b.dev/quickstart) | self serve / documented | Requires: platform_account; Python and TypeScript code-interpreter SDKs create a hosted sandbox, execute code, and transfer files through files.write/read. Set a finite timeout and explicitly kill the sandbox after retrieving outputs. The free-credit offer does not establish this project's account balance or actual cash charge; runtime and allocated resources remain metered. |
 
 ### Service pricing
 
@@ -1772,9 +2123,18 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 —
 
+### Notes
+
+- The reviewed terms contain no express benchmark-publication ban. Prohibited Conduct item 9 requires prior written consent for developing third-party applications interacting with the Website or Services; items 3 and 10 concern competing services or competitive website use. Official quickstart separately instructs developers to write SDK clients. This review does not resolve the broad application's-consent clause for a new evaluation client and does not equate absence of a benchmark ban with permission. No hosted test was performed in this research pass.
+
 ### Sources
 
 - [official_docs](https://e2b.dev/docs/api-key) — checked 2026-07-07
+- [official_docs](https://docs.e2b.dev/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.e2b.dev/quickstart/upload-download-files) — checked 2026-10-08
+- [official_docs](https://docs.e2b.dev/sandbox) — checked 2026-10-08
+- [official_site](https://e2b.dev/pricing) — checked 2026-10-08
+- [official_site](https://e2b.dev/terms) — checked 2026-10-08
 
 <a id="ecb-data"></a>
 
@@ -1790,7 +2150,7 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The documentation page was temporarily unreadable during the latest research pass. |
+| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The query supports startPeriod/endPeriod, lastNObservations and format selection; narrow requests to the needed series. Direct documentation reads failed during the latest research pass; indexed official documentation was readable. |
 
 ### Service pricing
 
@@ -1800,13 +2160,13 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/ecb-business.json) | [221.9k](../data/experiments/evaluations/ecb-access.json) | 216.897575s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | [123.3k](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 29.506871s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 221.9k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-8a11046c9744) | [100%](./evaluations.md#comparison-8a11046c9744) | 123.3k | $0.0086 | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1815,19 +2175,20 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-8a11046c9744)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15 |
 
 </details>
@@ -1838,7 +2199,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 62.8k | $0.0034 | $0 |
+| API | [1](./evaluations.md#comparison-8c4b61fb41be) | [100%](./evaluations.md#comparison-8c4b61fb41be) | 58.3k | $0.0053 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1847,19 +2208,20 @@ Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; Aug
 
 **Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-8c4b61fb41be)
 
 [Task definition](./tasks.en.md#financial-fx-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | 2026-10-08 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15 |
 
 </details>
@@ -1867,6 +2229,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 ### Sources
 
 - [official_docs](https://data.ecb.europa.eu/help/api/data-examples) — checked 2026-09-09
+- [official_docs](https://data.ecb.europa.eu/help/api/data) — checked 2026-10-08
 - [official_site](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) — checked 2026-09-15
 - [official_site](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html) — checked 2026-09-15
 - [official_docs](https://data.ecb.europa.eu/help/api/schemas) — checked 2026-09-15
@@ -1918,7 +2281,8 @@ Historical market prices, fundamentals, economic datasets and congressional trad
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://eodhd.com/financial-apis/) | [Docs](https://eodhd.com/financial-apis/) | self serve / documented | Free registration advertises 20 API calls/day without a card; some data types are excluded. Check dataset and market coverage before choosing a trial. Congressional Trades is documented for the All-in-one plan; the generic 20-call free allowance does not establish access to this dataset. |
+| [data-api (API)](https://eodhd.com/api/) | [Docs](https://eodhd.com/financial-apis/) | self serve / documented | Free Starter advertises 20 API calls/day, 20 requests/minute and the past year of EOD history without a payment card; some data types are excluded. The EOD endpoint returns a raw close field separately from adjusted_close; one instrument and date range can be fetched as JSON or CSV. Check dataset, market coverage and account entitlement before choosing a trial. Congressional Trades is documented for the All-in-one plan; the generic 20-call free allowance does not establish access to this dataset. |
+| [public-demo-api (API)](https://eodhd.com/api/eod/) | [Docs](https://eodhd.com/financial-apis/api-for-historical-data-and-volumes) | self serve / documented | Official documentation offers no-signup API access on AAPL.US, TSLA.US, BTC-USD.CC, VTI.US, AMZN.US and EURUSD.FOREX using the shared demo token. It describes querying historical series with date bounds, not substituting the page's static example response. Actual response freshness, requested-month coverage and exact price agreement remain untested; no separate numeric demo rate limit is established. Limited-symbol access does not inherit unrestricted data publication rights or establish general free access to other tickers and datasets. |
 
 ### Service pricing
 
@@ -1931,7 +2295,10 @@ Historical market prices, fundamentals, economic datasets and congressional trad
 ### Sources
 
 - [official_docs](https://eodhd.com/financial-apis/) — checked 2026-09-09
-- [official_site](https://eodhd.com/pricing) — checked 2026-09-15
+- [official_site](https://eodhd.com/pricing) — checked 2026-10-08
+- [official_docs](https://eodhd.com/financial-apis/api-for-historical-data-and-volumes) — checked 2026-10-08
+- [official_site](https://eodhd.com/financial-apis/terms-conditions) — checked 2026-10-08
+- [official_docs](https://eodhd.com/financial-apis/commercial-vs-personal-license-use) — checked 2026-10-08
 - [official_docs](https://eodhd.com/financial-apis/congressional-trades-api) — checked 2026-09-15
 - [official_announcement](https://eodhd.com/financial-apis-blog/introducing-the-congressional-trades-api) — checked 2026-09-15
 
@@ -1951,14 +2318,16 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-mcp (MCP)](https://mcp.exa.ai/mcp) | [Docs](https://exa.ai/docs/reference/exa-mcp) | self serve / documented | Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires authentication and separate usage charges; it is excluded from this pilot. API signup credits are not a quota guarantee for anonymous MCP. |
-| [search-api (API)](https://exa.ai/docs/reference/search) | [Docs](https://exa.ai/docs/reference/search) | self serve / documented | Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed for part of initial credits. No payment method required. Anonymous MCP quota is separate. |
+| [public-mcp (MCP)](https://mcp.exa.ai/mcp) | [Docs](https://exa.ai/docs/get-started/exa-mcp) | self serve / documented | Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published. Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain filters. Authenticated agent_run has separate charges and is outside this route. API account credits and the account Search QPS limit do not establish anonymous MCP limits. Terms section 10.7 imposes export and restricted-party conditions; no unrestricted global availability is inferred. |
+| [search-api (API)](https://api.exa.ai/search) | [Docs](https://exa.ai/docs/reference/search) | self serve / documented | The current free account plan advertises USD 10/month plus a USD 10 onboarding bonus, no card, and 10 Search requests/second. Actual bonus award and balance should be checked. Anonymous MCP quota is separate. |
 
 ### Service pricing
 
 [Official pricing](https://exa.ai/pricing)
 
-- search-api: 20 USD / one_time (free_allowance; Published signup credits; some may require onboarding. Actual account award should be checked.)
+- public-mcp: 0 USD / request (usage; Free rate-limited keyless MCP tools; excludes authenticated agent_run.)
+
+- search-api: 10 USD / one_time (free_allowance; Published onboarding bonus; actual account award should be checked.)
 
 - search-api: 10 USD / month (free_allowance; Free account monthly allowance, not anonymous MCP quota.)
 
@@ -1966,17 +2335,141 @@ Search API built for AI — semantic web search, content retrieval, and research
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| MCP | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | — | — | — |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | — | — | — |
+| MCP | [Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied](../data/experiments/evaluations/exa-pdf-scanned-table-001-ds41-r1.json) | [165.8k](../data/experiments/evaluations/exa-pdf-access-ds41-r1.json) | 33.987788s | 0 |
+| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | — | — | — |
+
+#### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-bde1a47b7eaa) | [100%](./evaluations.md#comparison-bde1a47b7eaa) | 165.8k | $0.01 | $0 |
+| API | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Example page: https://example.com/ . The service, assigned interface, authorized account or signup identity and their origin are in ENVIRONMENT.md. Use account-free interfaces directly; use only the identity supplied for this trial if signup or authorization is needed. Retrieve this URL’s body through the assigned service, without substituting search snippets or fetching the origin directly. Save necessary configuration in the assigned persistent directory, keep secrets in private files, and report only its location. State the origin of any existing account, self-service steps, human intervention, extra applications and concrete blockers accurately.
+
+**Completion:** Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-bde1a47b7eaa)
+
+[Task definition](./tasks.en.md#web-extraction-access-001-v1)
+
+</details>
+
+#### Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-5244b7150d7c) | [100%](./evaluations.md#comparison-5244b7150d7c) | 294.5k | $0.01 | $0 |
+| API | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
+
+**Completion:** Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; documented anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-5244b7150d7c)
+
+[Task definition](./tasks.en.md#web-search-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (4)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| web-extraction-access-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-pdf-access-ds41-r1.json) | 2026-10-08 |
+| web-search-access-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-searchv2-access-ds41-r1.json) | 2026-10-08 |
+| web-extraction-access-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-extraction-access-ds41-r1.json) | 2026-10-08 |
+| web-search-access-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
+
+#### I am turning an old scanned manual into a searchable table. From the TTB Table No. 4 specified in the supplied materials, put the short segment with Proof from 1.0 through 2.0 into a CSV, retaining both gallons-per-pound values. Give me the file and official source link. Transcribe the table only; do not perform tax or other business calculations.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-c49d8e01e18c) | [0%](./evaluations.md#comparison-c49d8e01e18c) | 745.5k | $0.06 | $0 |
+| API | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official PDF: https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf . Use TABLE NO. 4 / GALLONS PER POUND from the TTB Gauging Manual. The original file has 21 pages. The target is the left-hand table on physical page 2 (printed page 532), covering Proof 1.0 through 2.0 inclusive, for 11 rows. Use UTF-8 CSV with the columns proof, wine_gallons_per_pound, proof_gallons_per_pound, in ascending Proof order. Preserve all printed numerical precision without unit conversion, recalculation or rounding. Obtain the target table text from this PDF through the content extraction service assigned to this trial. You may process text, Markdown, HTML or structured content returned by the service. Do not substitute other pages, search snippets, model memory, direct download followed by local parsing or OCR, a cropped and re-uploaded PDF, or just the original PDF link/binary for extraction from the original URL through the service. If the assigned URL returns a materially different target table, describe the difference instead of combining editions.
+
+**Completion:** The assigned service actually returns the target table content from the original URL. The three CSV columns, Proof and both gallons-per-pound values for all 11 rows correspond correctly and preserve the printed numerical precision, without missing, duplicate, extra or out-of-order rows. The file is usable and the answer gives its location and official source. Numerically equivalent leading or trailing zeros and harmless whitespace or line-ending differences are accepted. No particular parser, service response format, OCR mode, page-number field, cache policy or audit log is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-c49d8e01e18c)
+
+[Task definition](./tasks.en.md#web-extraction-scanned-table-001-v1)
+
+- MCP: [Not completed](../data/experiments/evaluations/exa-pdf-scanned-table-001-ds41-r1.json) — 用户委托的 11 行 CSV 未交付：指定服务 web_fetch_exa 对原 URL 两次返回同一 12017 字符劣质 OCR 正文（sha256 f29f0df5…），不含物理第2页/印刷532 左半表 Proof 1.0–2.0（Proof 标签最小 96.0，数值范围 0.03175–190.9，无 0.0005–0.003 区间值），因此未产生目标表文字；交付 CSV 仅表头，最终答复 execution/answer.md 仅为过程叙述、无文件位置与官方来源。另有执行违规：首次 MCP initialize 返回 HTTP 403（Cloudflare 1010 browser_signature_banned），ENVIRONMENT.md 要求首次 403 即停止，执行者却循环探测 User-Agent 并改 UA 为 Chrome 后继续初始化与提取，故两次提取发生在强制停止之后，只能记录“换 UA 重试返回了文本”，不能支撑合规的服务比较结论。该 403 属该入口对默认客户端的路由/环境条件，本次失败由“服务返回内容不含目标段”与“执行者违反停止规则”共同导致，不据此断言服务普遍不支持 OCR/PDF，也不归为环境失效。模型请求 25/25 耗尽、exit_code=1，时间约 3 分 13 秒（未超 600 秒）；提取调用 2 次（≤2，单一 URL）合规。
+
+</details>
+
+#### I am upgrading a Python app to 3.13. Briefly explain in Chinese whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions. Include official page links supporting these conclusions.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-f351c20d0bf2) | [100%](./evaluations.md#comparison-f351c20d0bf2) | 183.4k | $0.01 | $0 |
+| API | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Target Python 3.13; official sources under python.org. Discover sources through the assigned search service. You may directly read search result pages and the official documentation they link to. The official evidence you cite must be traceable to those search results; do not answer from model memory or another search engine.
+
+**Completion:** All three questions are answered correctly and supported by official Python 3.13 documentation. The final official links support the conclusions, and their real sources are traceable to the assigned service’s search results and linked official documentation. Directly reading these sources is allowed; another search engine must not replace the assigned service for discovery. Actual calls, responses and source content captured by the runner make the answer and source chain verifiable. The executor need not produce separate audit logs.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; documented anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f351c20d0bf2)
+
+[Task definition](./tasks.en.md#web-search-001-v2)
+
+</details>
+
+#### I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-032f75889210) | [100%](./evaluations.md#comparison-032f75889210) | 312.8k | $0.01 | $0 |
+| API | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.
+
+**Completion:** The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-032f75889210)
+
+[Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
+
+</details>
 
 #### I am upgrading a Python app to 3.13. Find out whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions, with official sources
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-9dbe771526ac) | [0%](./evaluations.md#comparison-9dbe771526ac) | — | — | $0 | A |
-| MCP | [1](./evaluations.md#comparison-87ab787b88b3) | [100%](./evaluations.md#comparison-87ab787b88b3) | 931.5k | — | $0 | B |
+| MCP | [1](./evaluations.md#comparison-db274edc24f6) | [100%](./evaluations.md#comparison-db274edc24f6) | 230.6k | $0.02 | — | A |
+| API | [1](./evaluations.md#comparison-53b484528301) | [0%](./evaluations.md#comparison-53b484528301) | — | — | $0 | B |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -1985,11 +2478,11 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 
 **Completion:** All three questions are answered correctly and supported by official Python 3.13 documentation. At least two distinct official URLs appear in the specified service's real search response, with verifiable evidence. Fetching those pages directly is allowed; built-in web search may only locate service integration documentation and must not replace the tested search service.
 
-codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
+2026-09-07, 2026-10-08 (UTC)
 
-**A:** API · Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-9dbe771526ac)
+**A:** MCP · 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-db274edc24f6)
 
-**B:** MCP · No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-87ab787b88b3)
+**B:** API · codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-53b484528301)
 
 [Task definition](./tasks.en.md#web-search-001-v1)
 
@@ -1998,21 +2491,39 @@ codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (7)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| web-extraction-scanned-table-001 v1 | MCP | [not_completed](../data/experiments/evaluations/exa-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08 |
+| web-extraction-pdf-hikes-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-pdf-hikes-001-ds41-r1.json) | 2026-10-08 |
+| web-search-001 v2 | MCP | [completed](../data/experiments/evaluations/exa-search-001v2-ds41-r1.json) | 2026-10-08 |
+| web-extraction-holidays-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-extraction-holidays-001-ds41-r1.json) | 2026-10-08 |
+| web-search-001 v1 | MCP | [completed](../data/experiments/evaluations/exa-search-001-ds41-r1.json) | 2026-10-08 |
 | web-search-001 v1 | API | [not_completed](../data/experiments/evaluations/codex-20260907T112952.581354Z-exa.json) | 2026-09-07 |
 | web-search-001 v1 | MCP | [completed](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | 2026-09-07 |
 
 </details>
 
+### Notes
+
+- The Contents API guide documents PDF and complex-layout extraction rather than merely downloading a binary file. The official web_fetch_exa implementation calls that API, providing a source-based reason to test a public PDF URL through anonymous MCP. It does not establish that the hosted anonymous route runs the same revision, permits every document size, or successfully parses a particular PDF. No new keyed route was substituted for public-mcp in this review.
+- The reviewed MCP formatter retains title, URL and text, with optional author/date and a server searchTime metadata field; it does not expose the REST cached/crawled source or costDollars fields. Its tool input lacks REST maxAgeHours. REST freshness controls, account credits, request rates and content charges must not be presented as anonymous-MCP controls or fees.
+- For REST Contents, pricing defines a page as one returned URL and bills each requested content type separately at $1 per 1000 pages. Its costDollars is an estimate, not an invoice. Neither the reviewed REST schema nor the MCP guide guarantees physical PDF page numbers, OCR for arbitrary scans, a PDF page/file-size limit, or correct table structure. Keep a source URL and verify the requested facts against the original document; a truncated excerpt is not a complete table.
+
 ### Sources
 
-- [official_docs](https://exa.ai/docs/reference/exa-mcp) — checked 2026-09-07
-- [official_site](https://exa.ai/pricing) — checked 2026-09-07
-- [official_docs](https://exa.ai/docs/reference/search) — checked 2026-09-07
-- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-09-15
+- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-10-08
+- [official_site](https://exa.ai/pricing) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/reference/search) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/get-started/exa-mcp) — checked 2026-10-08
+- [official_repo](https://github.com/exa-labs/exa-mcp-server) — checked 2026-10-08
+- [official_repo](https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/webFetch.ts) — checked 2026-10-08
+- [official_repo](https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/config.ts) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/contents/quickstart) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/reference/get-contents) — checked 2026-10-08
+- [official_docs](https://exa.ai/docs/admin/pricing) — checked 2026-10-08
+- [official_site](https://exa.ai/terms) — checked 2026-10-08
 
 <a id="expedia-xap-flights"></a>
 
@@ -2166,7 +2677,7 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 ## Financial Datasets
 
-US company financial statements, historical prices, filings and insider trades, with API and an officially listed MCP integration.
+US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.
 
 **Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures
 
@@ -2176,24 +2687,24 @@ US company financial statements, historical prices, filings and insider trades, 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://docs.financialdatasets.ai/quickstart) | [Docs](https://docs.financialdatasets.ai/quickstart) | self serve / documented | Create an account and key. A free execution allowance has not been established; do not start metered requests without confirming available free credit. |
+| [data-api (API)](https://api.financialdatasets.ai/) | [Docs](https://docs.financialdatasets.ai/quickstart) | self serve / documented | API keys use X-API-KEY. Agent onboarding issues a key but data calls return HTTP 402 until the account is funded; the minimum credit purchase is USD 20 and automatic refills are optional. Free signup is not free data access. A separate free allowance for ordinary signup has not been established, so this is not ready for a free-only batch without account-specific evidence. |
+| [data-mcp (MCP)](https://mcp.financialdatasets.ai/) | [Docs](https://docs.financialdatasets.ai/mcp-server) | self serve / documented | Interactive clients sign in through OAuth. The connector lists income, balance-sheet, cash-flow and filing tools; authentication does not establish a free execution allowance. |
+| [data-mcp-keyed (MCP)](https://mcp.financialdatasets.ai/api) | [Docs](https://docs.financialdatasets.ai/mcp-server) | self serve / documented | Programmatic MCP uses the /api endpoint with X-API-KEY or Bearer authentication. Annual and quarterly statement tools support an as_reported option. Account funding and actual task entitlement remain separate from successful connection. |
 
 ### Service pricing
 
-—
+- data-api: 20 USD / credit_purchase (minimum_spend; Minimum credit purchase in documented agent onboarding; not a per-request price.)
 
 ### Task results
 
 —
 
-### Notes
-
-- Official index lists https://docs.financialdatasets.ai/mcp-server.md; the setup page was not retrievable in this pass.
-
 ### Sources
 
-- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-09-15
-- [official_docs](https://docs.financialdatasets.ai/llms.txt) — checked 2026-09-09
+- [official_docs](https://docs.financialdatasets.ai/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.financialdatasets.ai/mcp-server) — checked 2026-10-08
+- [official_docs](https://docs.financialdatasets.ai/agents) — checked 2026-10-08
+- [official_docs](https://docs.financialdatasets.ai/data-provenance) — checked 2026-10-08
 
 <a id="fmp"></a>
 
@@ -2209,12 +2720,12 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://site.financialmodelingprep.com/developer/docs) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. The House Trades endpoint is documented, but Congress-specific free-plan entitlement is not confirmed. |
+| [data-api (API)](https://financialmodelingprep.com/stable/) | [Docs](https://site.financialmodelingprep.com/developer/docs) | self serve / documented | Basic is free with 250 calls/day, 500 MB trailing-30-day bandwidth, and end-of-day/profile/reference features. Annual fundamentals are listed under paid Starter; a free key does not establish access to the AAPL and MSFT fiscal-year comparison task. Displaying or redistributing FMP data requires a separate licensing agreement according to its pricing page. The House Trades endpoint is documented, but Congress-specific free-plan entitlement is not confirmed. |
 | [data-mcp (MCP)](https://financialmodelingprep.com/mcp) | [Docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) | self serve / documented | Uses the existing API key and plan limits; key must be injected privately, never stored in the URL in public results. |
 
 ### Service pricing
 
-—
+- data-api: 250 requests / day (free_allowance; Basic-plan calls; this allowance does not establish paid-dataset entitlement.)
 
 ### Task results
 
@@ -2223,7 +2734,9 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 ### Sources
 
 - [official_docs](https://site.financialmodelingprep.com/developer/docs) — checked 2026-09-09
-- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-09-15
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/pricing) — checked 2026-10-08
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/income-statement) — checked 2026-10-08
+- [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/cashflow-statement) — checked 2026-10-08
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/mcp-server) — checked 2026-09-09
 - [official_docs](https://site.financialmodelingprep.com/developer/docs/stable/house-trading) — checked 2026-09-15
 
@@ -2275,33 +2788,173 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account free credits cannot be assumed for this route. |
-| [account-search-api (API)](https://docs.firecrawl.dev/features/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Search: 2 credits per 10 results; extra scraping can consume credits. |
-| [public-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | — | Specified-URL scraping. Docs allow starting without a key; anonymous limits and paid-account costs are separate and no extraction task has been run. |
+| [public-search-api (API)](https://api.firecrawl.dev/v2/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | POST a query (up to 500 characters) for titles, descriptions and URLs; limit is 1-100 results per source type. Keyless access is explicitly documented. Anonymous usage is free but capped per IP per day by both request count and credits; numerical ceilings are unpublished and either limit can produce 429. Account Free credits and its per-minute limits do not quantify this route. Optional scrapeOptions fetches result content at additional credit cost; plain search discovery does not require that option and is separate from specified-URL extraction. |
+| [account-search-api (API)](https://api.firecrawl.dev/v2/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Requires: platform_account; Account Search uses a Bearer API key. Basic web search costs 2 credits per 10 results, rounded up; optional scraping adds its own cost. Free accounts receive 1000 credits/month shared across endpoints, with 10 Search requests/minute per team. Search-result location controls are not a guarantee of caller-country eligibility. Registration and available account balance are separate from the documented keyless route. |
+| [public-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | self serve / documented | POST one URL with formats such as markdown. Free keyless access has separate daily per-IP request and credit limits, with no published numerical ceilings; either limit can return 429. Keyless access excludes batch scrape and the separate Extract endpoint. Scrape renders JavaScript, defaults to a two-day cache (maxAge: 172800000), and accepts maxAge: 0 for a fresh fetch. Timeout is 1–300 seconds, default 60. Fetch location defaults to the US; this is not a caller-country eligibility guarantee. The same Scrape endpoint detects public PDF inputs by extension or content type and parses content; no .pdf URL suffix is required. PDF pages consume anonymous credit allowance, whose numerical cap is unpublished. Registered account quotas and paid PDF rates do not quantify anonymous access. A returned 403/404 page is not evidence of useful extraction. Terms restrict commercial use without express authorization. No task success or content redistribution permission is inferred. |
+| [account-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | self serve / documented | Requires: platform_account; Free accounts receive 1000 credits/month without a card, 10 Scrape requests/minute and two concurrent browsers. Standard Scrape costs one credit/page, including cache hits; advanced options such as JSON extraction can cost more. Failed requests without results are not charged, but returned 403/404 pages can consume a credit. The public-scrape-api route records anonymous limits separately. Free access does not override the commercial-use restriction or rights in the target page. |
 
 ### Service pricing
 
 [Official pricing](https://www.firecrawl.dev/pricing)
 
-- account-search-api: 1000 credits / month (free_allowance; Account Free plan; separate from anonymous access.)
+- public-search-api: 0 USD / request (usage; Keyless Search within unpublished per-IP daily request and credit caps; no paid account allowance inferred.)
+
+- account-search-api: 1000 credits / month (free_allowance; Shared Free account balance across endpoints; separate from anonymous access.)
+
+- public-scrape-api: 0 USD / request (usage; Keyless Scrape within anonymous daily limits; account credits do not quantify these limits.)
+
+- account-scrape-api: 1000 credits / month (free_allowance; Shared Free account allowance across endpoints, not an additional Scrape allowance.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API (public-search-api) | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) | — | — | — |
+| API (public-search-api) | [Access preparation: none; documented anonymous public route](../data/experiments/evaluations/firecrawl-search-001v2-ds41-r1.json) | [106.4k](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 21.400023s | 0 |
 | API (account-search-api) | — | — | — | — |
-| API (public-scrape-api) | — | — | — | — |
+| API (public-scrape-api) | [Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | [186.8k](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 23.34858s | 0 |
+| API (account-scrape-api) | — | — | — | — |
+
+#### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-scrape-api) | [1](./evaluations.md#comparison-bde1a47b7eaa) | [100%](./evaluations.md#comparison-bde1a47b7eaa) | 186.8k | $0.01 | $0 |
+| API (public-search-api) | — | — | — | — | — |
+| API (account-search-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Example page: https://example.com/ . The service, assigned interface, authorized account or signup identity and their origin are in ENVIRONMENT.md. Use account-free interfaces directly; use only the identity supplied for this trial if signup or authorization is needed. Retrieve this URL’s body through the assigned service, without substituting search snippets or fetching the origin directly. Save necessary configuration in the assigned persistent directory, keep secrets in private files, and report only its location. State the origin of any existing account, self-service steps, human intervention, extra applications and concrete blockers accurately.
+
+**Completion:** Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-bde1a47b7eaa)
+
+[Task definition](./tasks.en.md#web-extraction-access-001-v1)
+
+</details>
+
+#### Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-search-api) | [1](./evaluations.md#comparison-5244b7150d7c) | [100%](./evaluations.md#comparison-5244b7150d7c) | 106.4k | $0.0082 | $0 |
+| API (account-search-api) | — | — | — | — | — |
+| API (public-scrape-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.
+
+**Completion:** Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; documented anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-5244b7150d7c)
+
+[Task definition](./tasks.en.md#web-search-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (3)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| web-extraction-access-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 2026-10-08 |
+| web-search-access-001 v1 | API (public-search-api) | [completed](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 2026-10-08 |
+| web-extraction-access-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
+
+#### I am turning an old scanned manual into a searchable table. From the TTB Table No. 4 specified in the supplied materials, put the short segment with Proof from 1.0 through 2.0 into a CSV, retaining both gallons-per-pound values. Give me the file and official source link. Transcribe the table only; do not perform tax or other business calculations.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-scrape-api) | [1](./evaluations.md#comparison-c49d8e01e18c) | [100%](./evaluations.md#comparison-c49d8e01e18c) | 365.7k | $0.02 | — |
+| API (public-search-api) | — | — | — | — | — |
+| API (account-search-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official PDF: https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf . Use TABLE NO. 4 / GALLONS PER POUND from the TTB Gauging Manual. The original file has 21 pages. The target is the left-hand table on physical page 2 (printed page 532), covering Proof 1.0 through 2.0 inclusive, for 11 rows. Use UTF-8 CSV with the columns proof, wine_gallons_per_pound, proof_gallons_per_pound, in ascending Proof order. Preserve all printed numerical precision without unit conversion, recalculation or rounding. Obtain the target table text from this PDF through the content extraction service assigned to this trial. You may process text, Markdown, HTML or structured content returned by the service. Do not substitute other pages, search snippets, model memory, direct download followed by local parsing or OCR, a cropped and re-uploaded PDF, or just the original PDF link/binary for extraction from the original URL through the service. If the assigned URL returns a materially different target table, describe the difference instead of combining editions.
+
+**Completion:** The assigned service actually returns the target table content from the original URL. The three CSV columns, Proof and both gallons-per-pound values for all 11 rows correspond correctly and preserve the printed numerical precision, without missing, duplicate, extra or out-of-order rows. The file is usable and the answer gives its location and official source. Numerically equivalent leading or trailing zeros and harmless whitespace or line-ending differences are accepted. No particular parser, service response format, OCR mode, page-number field, cache policy or audit log is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-c49d8e01e18c)
+
+[Task definition](./tasks.en.md#web-extraction-scanned-table-001-v1)
+
+</details>
+
+#### I am upgrading a Python app to 3.13. Briefly explain in Chinese whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions. Include official page links supporting these conclusions.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-search-api) | [1](./evaluations.md#comparison-f351c20d0bf2) | [100%](./evaluations.md#comparison-f351c20d0bf2) | 245.2k | $0.02 | $0 |
+| API (account-search-api) | — | — | — | — | — |
+| API (public-scrape-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Target Python 3.13; official sources under python.org. Discover sources through the assigned search service. You may directly read search result pages and the official documentation they link to. The official evidence you cite must be traceable to those search results; do not answer from model memory or another search engine.
+
+**Completion:** All three questions are answered correctly and supported by official Python 3.13 documentation. The final official links support the conclusions, and their real sources are traceable to the assigned service’s search results and linked official documentation. Directly reading these sources is allowed; another search engine must not replace the assigned service for discovery. Actual calls, responses and source content captured by the runner make the answer and source chain verifiable. The executor need not produce separate audit logs.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; documented anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f351c20d0bf2)
+
+[Task definition](./tasks.en.md#web-search-001-v2)
+
+</details>
+
+#### I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-scrape-api) | [1](./evaluations.md#comparison-032f75889210) | [100%](./evaluations.md#comparison-032f75889210) | 264.2k | $0.01 | $0 |
+| API (public-search-api) | — | — | — | — | — |
+| API (account-search-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.
+
+**Completion:** The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-032f75889210)
+
+[Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
+
+</details>
 
 #### I am upgrading a Python app to 3.13. Find out whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions, with official sources
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-search-api) | [1](./evaluations.md#comparison-b5f21fc39ab4) | [100%](./evaluations.md#comparison-b5f21fc39ab4) | 346.8k | — | $0 |
+| API (public-search-api) | [1](./evaluations.md#comparison-3f655dc71038) | [100%](./evaluations.md#comparison-3f655dc71038) | 346.8k | — | $0 |
 | API (account-search-api) | — | — | — | — | — |
 | API (public-scrape-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -2312,26 +2965,44 @@ Target Python 3.13; official sources under python.org. Discover sources through 
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-b5f21fc39ab4)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-3f655dc71038)
 
 [Task definition](./tasks.en.md#web-search-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| web-extraction-scanned-table-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08 |
+| web-extraction-pdf-hikes-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-hikes-001-ds41-r1.json) | 2026-10-08 |
+| web-search-001 v2 | API (public-search-api) | [completed](../data/experiments/evaluations/firecrawl-search-001v2-ds41-r1.json) | 2026-10-08 |
+| web-extraction-holidays-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-extraction-holidays-001-ds41-r1.json) | 2026-10-08 |
 | web-search-001 v1 | API (public-search-api) | [completed](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) | 2026-09-07 |
 
 </details>
 
+### Notes
+
+- Document Parsing and Parse describe public PDF URL parsing through /v2/scrape, separately from uploading bytes to /v2/parse. The default PDF parser uses auto mode (native text with OCR fallback); fast uses embedded text only, while ocr forces OCR. The documented pipeline detects tables and produces Markdown, but correct values and row/column relationships remain task-level checks. An empty parsers array returns base64 rather than extracted content and does not establish PDF extraction.
+- The Scrape reference accepts maxPages from 1 to 10000 as a processing cap, not a guarantee that every document of that size succeeds. PDF metadata numPages counts parsed pages and totalPages reports the original count when known; a larger totalPages indicates truncation. Optional pages returns physical per-page Markdown; blocks adds typed regions and geometry. pageMarkers has no leading page-1 marker and may skip boundaries when cross-page content is merged. These options do not add credits. The 50 MB limit is stated for upload Parse; this review did not establish an equal URL-Scrape file-size ceiling.
+- Cached Scrape results still consume credits; the usual two-day maxAge window also applies to URL requests unless overridden. PDF billing wording is inconsistent across the reviewed documents: Scrape/Parse describe one credit per PDF page, while Billing lists PDF parsing as an additional one credit per page above the Scrape base. Record actual usage or preserve uncertainty instead of assuming a flat one-credit URL charge. Keyless Scrape remains free within its unpublished per-IP daily request and credit caps; do not apply an account allowance to it.
+
 ### Sources
 
-- [official_docs](https://docs.firecrawl.dev/features/search) — checked 2026-09-07
-- [official_site](https://www.firecrawl.dev/pricing) — checked 2026-09-07
-- [official_docs](https://docs.firecrawl.dev/features/scrape) — checked 2026-09-15
+- [official_docs](https://docs.firecrawl.dev/features/search) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/api-reference/endpoint/search) — checked 2026-10-08
+- [official_site](https://www.firecrawl.dev/pricing) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/features/scrape) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/api-reference/endpoint/scrape) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/features/document-parsing) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/features/parse) — checked 2026-10-08
+- [official_site](https://www.firecrawl.dev/blog/fire-pdf-launch) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/billing) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/rate-limits) — checked 2026-10-08
+- [official_site](https://www.firecrawl.dev/terms-of-service) — checked 2026-10-08
 
 <a id="fireworks"></a>
 
@@ -2474,7 +3145,7 @@ Public exchange-rate API and official MCP using central-bank reference data, wit
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [data-api (API)](https://api.frankfurter.dev/v2/) | [Docs](https://frankfurter.dev/) | self serve / documented | The hosted public API is free with no key or daily/monthly quota; abuse rate limits apply. Default v2 rates blend sources; filter by ECB when the task requires ECB reference data. Reference rates are not executable bank/card quotes. |
-| [rates-mcp (MCP)](https://frankfurter.dev/mcp/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading service. |
+| [rates-mcp (MCP)](https://mcp.frankfurter.dev/) | [Docs](https://frankfurter.dev/mcp/) | self serve / documented | Hosted HTTP MCP with conversion, rate, currency and provider tools. The optional provider argument selects one institution instead of the default blend. Uses reference rates, not executable payment quotes. REST time-series capability must not be assumed for this route. |
 
 ### Service pricing
 
@@ -2484,14 +3155,14 @@ Public exchange-rate API and official MCP using central-bank reference data, wit
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/frankfurter-business.json) | [86.8k](../data/experiments/evaluations/frankfurter-access.json) | 115.282949s | 0 |
+| API | [No account or key supplied](../data/experiments/evaluations/frankfurter-fx-001-ds41-r1.json) | [113.3k](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 38.641535s | 0 |
 | MCP | — | — | — | — |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-bd611da6270b) | [100%](./evaluations.md#comparison-bd611da6270b) | 86.8k | $0.0052 | $0 |
+| API | [1](./evaluations.md#comparison-8a11046c9744) | [100%](./evaluations.md#comparison-8a11046c9744) | 113.3k | $0.0081 | $0 |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -2501,19 +3172,20 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-8a11046c9744)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15 |
 
 </details>
@@ -2524,7 +3196,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-d86a11990066) | [100%](./evaluations.md#comparison-d86a11990066) | 54.2k | $0.0038 | $0 |
+| API | [1](./evaluations.md#comparison-8c4b61fb41be) | [100%](./evaluations.md#comparison-8c4b61fb41be) | 51.8k | $0.0052 | $0 |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -2534,33 +3206,34 @@ Synthetic expenses: August 14, 2026: USD 80.00; August 15, 2026: USD 125.00; Aug
 
 **Completion:** Use the corresponding ECB USD/EUR reference observations. Select the preceding published rate on non-publication dates. Quote direction, multiplication or division, individual cent rounding and the total match the independent reference. Core rates come from the specified service.
 
-1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-d86a11990066)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-8c4b61fb41be)
 
 [Task definition](./tasks.en.md#financial-fx-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (2)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-fx-001-ds41-r1.json) | 2026-10-08 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15 |
 
 </details>
 
 ### Sources
 
-- [official_docs](https://frankfurter.dev/) — checked 2026-09-15
-- [official_docs](https://frankfurter.dev/mcp/) — checked 2026-09-09
+- [official_docs](https://frankfurter.dev/) — checked 2026-10-08
+- [official_docs](https://frankfurter.dev/mcp/) — checked 2026-10-08
 
 <a id="fred"></a>
 
 ## FRED / ALFRED
 
-Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.
+Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.
 
 **Classification:** Search & Data Access / Financial Data / Economic Indicators
 
@@ -2570,11 +3243,14 @@ Economic time series and historical vintages from the Federal Reserve Bank of St
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://fred.stlouisfed.org/docs/api/fred/) | [Docs](https://fred.stlouisfed.org/docs/api/fred/) | self serve / documented | A registered account can request an API key. Series units, seasonal adjustment, source and vintage matter; not a stock-price provider. |
+| [data-api (API)](https://api.stlouisfed.org/fred/) | [Docs](https://fred.stlouisfed.org/docs/api/fred/) | self serve / documented | Requires: platform_account; Register a FRED account and request a distinct key for each application; each application user needs their own key. This route describes the series-oriented V1 API, including ALFRED vintages; V2 bulk release retrieval is documented separately. Missing observations and revisions need explicit handling. |
+| [data-mcp (MCP)](https://mcp.stlouisfed.org) | [Docs](https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector) | self serve / documented | Requires: platform_account; Sign into the MCP Connector account and authorize the assistant in the browser.; Account setup is separate from the traditional FRED account. Observations can be limited by date, transformed or aggregated; inspect units, frequency and seasonal adjustment. A missing observation is not zero, and the observation period differs from retrieval or publication date. Raw-data retention and redistribution require review of the linked terms before an archived evaluation. |
 
 ### Service pricing
 
-—
+- data-api: 0 USD / API request (usage; Published free API under service terms and data-owner restrictions.)
+
+- data-mcp: 0 USD / MCP tool call (usage; Published free personal FRED access; host assistant costs and data-owner rights are separate.)
 
 ### Task results
 
@@ -2582,8 +3258,12 @@ Economic time series and historical vintages from the Federal Reserve Bank of St
 
 ### Sources
 
-- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-09-15
-- [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-09-09
+- [official_docs](https://fred.stlouisfed.org/docs/api/fred/) — checked 2026-10-08
+- [official_docs](https://fred.stlouisfed.org/docs/api/api_key.html) — checked 2026-10-08
+- [official_docs](https://fred.stlouisfed.org/help/account/fred-account-features/register) — checked 2026-10-08
+- [official_docs](https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector) — checked 2026-10-08
+- [official_docs](https://mcp.stlouisfed.org/.well-known/oauth-protected-resource) — checked 2026-10-08
+- [official_site](https://fred.stlouisfed.org/legal/) — checked 2026-10-08
 
 <a id="gemini-api"></a>
 
@@ -2613,13 +3293,80 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 - [official_docs](https://ai.google.dev/gemini-api/docs/api-key) — checked 2026-07-07
 
+<a id="geoapify"></a>
+
+## Geoapify
+
+Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.
+
+**Classification:** Search & Data Access / Geocoding
+
+[Website](https://www.geoapify.com/) · [Source record](../data/candidates/geoapify.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="geoapify-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [geocoding-api (API)](https://api.geoapify.com/v1/geocode/search) | [Docs](https://apidocs.geoapify.com/docs/geocoding/) | self serve / documented | Requires: platform_account; Register an email/password account, complete the normal verification flow and create a Free project in MyProjects; an API key is generated for the project.; Free plan supports up to 5 requests/second. Registration documentation names Google reCAPTCHA; phone requirements and acceptance of a particular email domain were not observed. An official API key is required for integration; the public playground is not an anonymous production route. Terms version 5 dated 2024-02-02 prohibits overload, access-control bypass and distributing usage across accounts/projects to evade limits. No explicit public-benchmark prohibition was found in the reviewed terms. Free use requires Geoapify attribution and OSM attribution; preserve any additional returned data-source attribution. Results may be stored with attribution, according to the geocoding FAQ. Shared OSM inputs do not constitute independent geographic ground truth. Controller preparation observation on 2026-10-09 (Asia/Shanghai), separate from official-source claims and any formal trial: the email form was not submitted. A normal reCAPTCHA checkbox action led to an image challenge while Create account remained disabled. The challenge was not completed; no account or API key was confirmed. This establishes a registration-preparation barrier, not email domain rejection or failure of the geocoding capability. No business API was queried. |
+
+### Service pricing
+
+- geocoding-api: 3000 credits / day (free_allowance; Free plan; a standard forward-geocoding request costs one credit. Other APIs can share credits and use different credit costs.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://apidocs.geoapify.com/docs/geocoding/) — checked 2026-10-08
+- [official_site](https://www.geoapify.com/pricing/) — checked 2026-10-08
+- [official_docs](https://www.geoapify.com/get-started-with-maps-api/) — checked 2026-10-08
+- [official_site](https://www.geoapify.com/terms-and-conditions/) — checked 2026-10-08
+- [official_site](https://www.geoapify.com/geocoding-api/) — checked 2026-10-08
+- [official_docs](https://www.geoapify.com/python-geospatial-data-analysis/) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
+
+<a id="geocode-maps-co"></a>
+
+## Geocode Maps.co
+
+Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.
+
+**Classification:** Search & Data Access / Geocoding
+
+[Website](https://geocode.maps.co/) · [Source record](../data/candidates/geocode-maps-co.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="geocode-maps-co-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [geocoding-api (API)](https://geocode.maps.co/search) | [Docs](https://geocode.maps.co/docs/) | self serve / documented | Requires: platform_account; Create a Free account with name, email and password, then confirm the email address; the signup page says the API key is emailed.; This is My Maps Inc.'s hosted service using OSM data and Nominatim software, not the OSMF public endpoint or a self-hosted installation. The signup form displays no phone/card fields; email-domain acceptance remains unknown. On 429 reduce request rate and retry later; excessive/repetitive requests can be blocked. Terms section 1 permits legal result use, export and publication subject to applicable data licences; no explicit benchmark/performance disclosure restriction was found. API resale and circumvention are prohibited. Preserve OSM contributor attribution and ODbL information with published data. Shared OSM/Nominatim inputs do not establish independent geographic truth. Controller preparation observation on 2026-10-09 (Asia/Shanghai), separate from official-source claims and any formal trial: the first normal signup submission returned a requirement to complete Human Verification. A normal checkbox interaction did not complete persistent Cloudflare verification; no successful account or API key was confirmed. This is a preparation barrier, not email-domain rejection or a geocoding capability failure. No business API was queried. |
+
+### Service pricing
+
+- geocoding-api: 0 USD / Free Demo API request (usage; Free Demo advertises 25000 requests at 5 requests/second, then 1 request/second; it does not promise a monthly reset of the 25000 faster requests.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://geocode.maps.co/docs/) — checked 2026-10-08
+- [official_docs](https://geocode.maps.co/docs/endpoints/) — checked 2026-10-08
+- [official_site](https://geocode.maps.co/plans/) — checked 2026-10-08
+- [official_site](https://geocode.maps.co/join/) — checked 2026-10-08
+- [official_site](https://geocode.maps.co/terms/) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
+
 <a id="github"></a>
 
 ## GitHub
 
 Code hosting, collaboration, and automation with REST and GraphQL APIs, an official CLI, and an official MCP server.
 
-**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management
+**Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management; Developer Tools / Dependency Security Advisories
 
 [Website](https://github.com) · [Source record](../data/providers/github.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2630,23 +3377,102 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [rest-api (API)](https://api.github.com/) | [Docs](https://docs.github.com/en/rest/quickstart) | self serve / documented | Authenticated REST access; existing account setup and token permissions must be recorded separately from the task. |
+| [public-advisories-api (API)](https://api.github.com/advisories) | [Docs](https://docs.github.com/en/rest/security-advisories/global-advisories) | self serve / documented | GET /advisories supports ecosystem, affects=package@version, cve_id and ghsa_id filters; GET /advisories/{ghsa_id} retrieves a record. Python's ecosystem label is pip here, versus PyPI in OSV. Results identify package-specific vulnerable_version_range and first_patched_version where available; missing remediation metadata does not prove safety. The default type is reviewed and excludes malware. Per-page maximum is 100, with Link-header cursor pagination. Current official examples use X-GitHub-Api-Version 2026-03-10. Anonymous requests share a 60/hour originating-IP allowance with other anonymous REST use, and secondary limits can apply; preserve rate headers and honor backoff. This route has not been tested merely by reviewing its documentation. |
 
 ### Service pricing
 
 [Official pricing](https://github.com/pricing)
 
+- public-advisories-api: 0 USD / anonymous public advisory request within API limits (usage; Free public corpus and unauthenticated public REST access; no paid Advanced Security feature is invoked.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API (rest-api) | — | — | — | — |
+| API (public-advisories-api) | [Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | [185.8k](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 36.125993s | 0 |
+
+#### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-advisories-api) | [1](./evaluations.md#comparison-7a5fd0fd8e1a) | [100%](./evaluations.md#comparison-7a5fd0fd8e1a) | 185.8k | $0.01 | — |
+| API (rest-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The assigned service, entry point and authorized identity or credentials are in ENVIRONMENT.md. Choose a small public advisory query and report the advisory identifier, associated package name and source actually returned. Use keyless access directly when available; use only the supplied information for any required signup or authorization. Save necessary configuration in the persistent directory for this trial and keep secrets in private files. State the configuration location, origin of any existing account, self-service steps, and actual human assistance or application requirements.
+
+**Completion:** Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-7a5fd0fd8e1a)
+
+[Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| dependency-advisories-access-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
 ### Task results
 
-—
+#### I am reviewing two dependency security alerts for my project. Use the assigned service to check whether the installed version still falls within each advisory’s affected versions and identify the first fixed release for each in the 5.2.x branch. Tell me the minimum upgrade needed for these two alerts only, with links supporting your conclusions.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-advisories-api) | [1](./evaluations.md#comparison-644e634b8512) | [100%](./evaluations.md#comparison-644e634b8512) | 75.8k | $0.0076 | $0 |
+| API (rest-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alerts CVE-2025-57833 and CVE-2025-59681. Check only package-version matching and fix boundaries for these two alerts. Do not attempt to list every vulnerability, select today’s latest release, or assess project code, database configuration or exploitability. Give a short explanation in Chinese and identify the lookup source. You may follow references in records returned by the assigned service to maintainer advisories or release notes. Do not replace the assigned service with another vulnerability database, general web search or model memory. If no record is found, report uncertainty rather than conclude there is no impact. Do not install, upgrade or modify the project.
+
+**Completion:** Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-644e634b8512)
+
+[Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| dependency-advisories-check-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Notes
 
-- Multi-product platform; this entry covers the core developer platform only (see scope).
+- Public Advisory Database records are CC BY 4.0; the stated attribution option is a link to https://github.com/advisories or the individual advisory used. Do not confuse contributors' CC0 grant with the database's CC BY licence.
+- GitHub AUP section 7 permits research using public non-personal information when resulting publications are open access. API terms prohibit excessive/abusive requests and token sharing to evade limits. Reviewed terms contain no blanket ban on publishing factual API comparisons. Competitive Benchmarking applies reciprocal conditions to providers of competing services, not a requirement that every test obtain prior permission.
+- OSV imports this advisory corpus, and both aggregate other common sources. Agreement between these entry points is not independent confirmation of vulnerability completeness, exploitability or a globally safe upgrade version.
+- Multi-product platform; this entry covers the core developer platform and public advisory lookup (see scope).
 
 ### Sources
 
 - [official_docs](https://docs.github.com/en/rest/quickstart) — checked 2026-09-10
 - [official_docs](https://docs.github.com/en/rest) — checked 2026-09-15
+- [official_docs](https://docs.github.com/en/rest/security-advisories/global-advisories) — checked 2026-10-08
+- [official_repo](https://github.com/github/advisory-database) — checked 2026-10-08
+- [official_docs](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) — checked 2026-10-08
+- [official_site](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) — checked 2026-10-08
+- [official_site](https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies) — checked 2026-10-08
+- [official_site](https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features) — checked 2026-10-08
 
 <a id="gitlab"></a>
 
@@ -2654,7 +3480,7 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 
 DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an official CLI.
 
-**Classification:** Developer Tools / Code Hosting & Review; Workplace Collaboration / Project & Task Management
+**Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management
 
 [Website](https://gitlab.com) · [Source record](../data/providers/gitlab.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2675,10 +3501,17 @@ DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an offi
 ### Notes
 
 - Repository/merge-request work and issue/epic tracking are separate supported scopes. SaaS and self-managed access must be distinguished.
+- Public repository file reads are documented without authentication and can select a branch, tag or commit. This establishes a personal read path, not permission to publish a comparison or proof of zero service cost. No business API request or account registration was performed in this documentation review.
+- API Terms section 1.3.7 restricts competitive analysis and dissemination of API or Software performance information, including uptime, response time and benchmarks. Separately, the current Subscription Agreement section 5.2 says benchmark testing and comparative analysis are not prohibited. API Terms preamble F gives an applicable Software or partnership agreement priority where inconsistent; the terms index distinguishes public API use from Software use. Whether the proposed anonymous public-API study falls under that override was not established. This project therefore holds the proposed public API comparison, without claiming a universal GitLab testing ban or a technical service failure. Ordinary integration access remains subject to rate limits, accurate identity, intellectual-property rights and the Acceptable Use Policy.
 
 ### Sources
 
 - [official_docs](https://docs.gitlab.com/user/) — checked 2026-09-15
+- [official_docs](https://docs.gitlab.com/api/repository_files/) — checked 2026-10-08
+- [official_site](https://about.gitlab.com/terms/) — checked 2026-10-08
+- [official_site](https://handbook.gitlab.com/handbook/legal/api-terms/) — checked 2026-10-08
+- [official_site](https://handbook.gitlab.com/handbook/legal/subscription-agreement/) — checked 2026-10-08
+- [official_site](https://handbook.gitlab.com/handbook/legal/acceptable-use-policy/) — checked 2026-10-08
 
 <a id="gmail"></a>
 
@@ -2714,7 +3547,7 @@ Persistent Google mailboxes accessible through the Gmail API after account and O
 
 Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup are still prerequisites.
 
-**Classification:** Workplace Collaboration / Collaborative Tables
+**Classification:** Productivity & Collaboration / Collaborative Tables
 
 [Website](https://workspace.google.com/products/sheets/) · [Source record](../data/candidates/google-sheets.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2736,6 +3569,108 @@ Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup
 
 - [official_docs](https://developers.google.com/workspace/sheets/api/quickstart/python) — checked 2026-09-08
 - [official_docs](https://developers.google.com/workspace/sheets/api/limits) — checked 2026-09-08
+
+<a id="goqr"></a>
+
+## goQR QR Code API
+
+Foundata's hosted static QR image API at api.qrserver.com, with public no-account generation and downloadable raster or vector formats.
+
+**Classification:** Productivity & Collaboration / QR Code Images
+
+[Website](https://goqr.me/api/) · [Source record](../data/candidates/goqr.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="goqr-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-qr-api (API)](https://api.qrserver.com/v1/create-qr-code/) | [Docs](https://goqr.me/api/doc/create-qr-code/) | self serve / documented | The public website advertises free QR generation and free commercial/print use of generated images. The API documentation and privacy page link this endpoint to that generator, but no explicit API-specific fee rule was established and the linked API terms had no substantive text in the reviewed response. API service cost therefore remains unknown; website claims, no-account access and a successful image response are not sufficient to confirm a zero charge. API documentation states no fixed request limit but reserves rejection of abusive or inappropriate requests, including apparent DoS traffic. It asks services regularly exceeding 10000 requests/day to make contact; this is not a guaranteed quota or a condition on a few personal requests. The text recommends payloads up to roughly 900 characters in general, with actual capacity depending on error correction and content. No uptime guarantee or numeric requests/second limit is stated. |
+
+### Service pricing
+
+—
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; public static QR APIs, no account/key/email/payment supplied](../data/experiments/evaluations/goqr-qr-travel-link-001-ds41-r1.json) | [113.9k](../data/experiments/evaluations/goqr-qr-access-ds41-r1.json) | 58.588541s | 0 |
+
+#### Connect this QR code service, generate and save a test QR image through the specified entry point, and confirm that I can start using it. Retain the general configuration needed for later calls and explain the setup steps and actual access barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-1c64f31025f0) | [100%](./evaluations.md#comparison-1c64f31025f0) | 113.9k | $0.0078 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The test content is https://example.com/ . Save an openable PNG QR image that decodes to exactly this URL. Generate it through the service and entry point specified in ENVIRONMENT.md; use an account-free route directly when available. Store necessary installations and general configuration in the designated persistent directory. Report self-service steps, human intervention, extra applications or specific blockers without exposing secrets.
+
+**Completion:** Necessary installation and configuration are complete. The specified service actually generates a saved, openable PNG whose independently decoded content exactly matches the test URL. A fresh session can reuse the general configuration. Access provenance, human steps and blockers are accurately described without exposing secrets. Access does not require a particular pixel size, color scheme, quiet-zone width or physical phone scan.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; public static QR APIs, no account/key/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-1c64f31025f0)
+
+[Task definition](./tasks.en.md#qr-codes-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| qr-codes-access-001 v1 | API | [completed](../data/experiments/evaluations/goqr-qr-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### Turn the national park travel-guide link in the materials into a static PNG QR code for my printed travel handout. Use the requested size and colors, make scanning return the complete original link directly, and give me the image file.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-0f505e0eb8fb) | [100%](./evaluations.md#comparison-0f505e0eb8fb) | 58.9k | $0.0059 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Original URL: https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 . The image must be 600×600 pixels with black modules on an opaque white background; grayscale antialiasing at module edges is allowed. Include only this one QR code, without text or a logo. Decoding must yield the complete original URL character for character, without a short link, tracking redirect, or added, removed or rewritten query parameters. Generate the image through the specified service, save it locally and give its file location. Do not visit the destination, physically print the image or scan it with a phone.
+
+**Completion:** The specified service actually generates the delivered, openable PNG. Its dimensions are exactly 600×600, the white background is opaque, the modules are black with only grayscale edge pixels, and there is no extra text or logo. Independent offline decoding returns raw bytes exactly equal to the visible complete ASCII URL, without omissions, rewriting or a tracking wrapper; the answer identifies the real file. Different QR versions, error correction levels, masks, PNG color modes and compression are allowed. Pixel or file-hash equality across services, measured quiet-zone modules, DPI and physical printing performance are not completion criteria.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; public static QR APIs, no account/key/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0f505e0eb8fb)
+
+[Task definition](./tasks.en.md#qr-codes-travel-link-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| qr-codes-travel-link-001 v1 | API | [completed](../data/experiments/evaluations/goqr-qr-travel-link-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- Static API images encode the supplied content directly, without scan tracking or a provider redirect. They are separate from paid QR-Server dynamic campaign management. The official privacy explanation says image caching lasts about thirty seconds, content is not retained/logged, and the API uses no cookies; request metadata such as IP, time, browser and referrer is logged. No precise metadata-log retention duration was established in the reviewed pages. Saving a static image creates no account resource to delete and does not guarantee its destination remains available.
+- The API terms link returned HTTP 200 on 2026-10-08 but its actual HTML contained only a title and a February 2014 update date, without substantive terms. The readable API documentation supplies anti-abuse rules and the site expressly permits free commercial/print use; no explicit public-test disclosure ban or mandatory service attribution was found in those reviewed materials. This is not a claim to have reviewed missing terms. Links/donations are requested as support, not stated as a condition for ordinary generation. The discovery review preceding trials used documentation only; independent access and task outcomes, including unresolved fee-rule applicability, are recorded in evaluations separately from these official website claims and API documentation limits.
+
+### Sources
+
+- [official_docs](https://goqr.me/api/) — checked 2026-10-08
+- [official_docs](https://goqr.me/api/doc/create-qr-code/) — checked 2026-10-08
+- [official_site](https://goqr.me/) — checked 2026-10-08
+- [official_site](https://goqr.me/legal/tos-api.html) — checked 2026-10-08
+- [official_site](https://goqr.me/privacy-safety-security/) — checked 2026-10-08
+- [official_site](https://goqr.me/de/rechtliches/datenschutz-goqrme.html) — checked 2026-10-08
 
 <a id="grafana"></a>
 
@@ -2771,7 +3706,7 @@ Observability platform (dashboards, metrics, logs, traces) with a documented HTT
 
 Hosted relational spreadsheets with a free personal site, REST API and official MCP.
 
-**Classification:** Workplace Collaboration / Collaborative Tables
+**Classification:** Productivity & Collaboration / Collaborative Tables
 
 [Website](https://www.getgrist.com/) · [Source record](../data/candidates/grist.yaml) · [Back to directory](../README.md#all-services)
 
@@ -2779,31 +3714,121 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://support.getgrist.com/api/) | [Docs](https://support.getgrist.com/api/) | self serve / documented | Sign in and generate an API key in account settings.; Account API key grants the user’s existing access. Use a separate free test account; personal site is freely available. |
-| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | [Docs](https://support.getgrist.com/mcp/) | self serve / documented | Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the API pool. |
+| [rest-api (API)](https://docs.getgrist.com/api) | [Docs](https://support.getgrist.com/api/) | self serve / documented | Requires: platform_account; Create a Grist account at docs.getgrist.com and use its free personal site; email or Google sign-in is documented.; Sign in and generate an API key in account settings.; Hosted documents remain editable online; the API can create documents, tables and records rather than only store opaque data. The account key inherits the user's access. Personal documents use docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site, with up to 5 requests/second/document and 10 concurrent document requests. A new blank workspace can be the test container without prebuilding business fields. Current signup gates still require observation; documented access is not a registration or task result. |
+| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | [Docs](https://support.getgrist.com/mcp/) | self serve / documented | Requires: platform_account; Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. Documented tools include create_doc, create_table, add_table_column and record updates, so an existing business schema is not a documented prerequisite. Calls share the Free site's 3000-call monthly API pool; no separate allowance is implied. Documents can subsequently be opened and edited in Grist. |
 | [python-sdk (SDK)](https://pypi.org/project/grist-api/) | [Docs](https://support.getgrist.com/rest-api/) | — | Official Python client linked by Grist REST API guide; SDK installation does not remove account permission requirements. |
 | [javascript-sdk (SDK)](https://www.npmjs.com/package/grist-api) | [Docs](https://support.getgrist.com/rest-api/) | — | Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch returned 403 during public research, not a service failure. |
 
 ### Service pricing
 
-- rest-api: 5000 records / document (free_allowance; Hosted Free plan; API quota must also be checked for the selected site.)
+- rest-api: 5000 records / document (free_allowance; Hosted Free plan; total rows across all tables in one document.)
+
+- rest-api: 3000 API calls / site/month (free_allowance; Shared REST and MCP pool across documents on the Free personal or team site.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json) | — | — | — |
-| MCP | — | — | — | — |
+| API | [Service credentials supplied](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | [111.0k](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 34.159175s | 0 |
+| MCP | [Service credentials supplied](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | [357.7k](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 61.963463s | 1 |
 | SDK (python-sdk) | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — |
 
+#### Connect this online table service through the assigned interface, create a new empty test space for this trial, read it to confirm access, and save the configuration needed to create a task table later. Give me the space link and explain the setup steps, human requirements and free-plan limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-5bcdeb33cbc4) | [100%](./evaluations.md#comparison-5bcdeb33cbc4) | 357.7k | $0.02 | $0 |
+| API | [1](./evaluations.md#comparison-5bcdeb33cbc4) | [100%](./evaluations.md#comparison-5bcdeb33cbc4) | 111.0k | $0.0100 | $0 |
+| SDK (python-sdk) | — | — | — | — | — |
+| SDK (javascript-sdk) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned interface, authorized account or signup identity and its origin are in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed, and state the origin of any existing account. Create one separate empty container that can hold a future task table, such as a workspace, base or parent document, with the trial marker supplied by the environment in its name. Read its metadata again through the assigned interface to confirm access to that same remote resource. Do not organize meeting content or prebuild business fields or records during this phase. Save necessary installations, container identifiers and connection settings in the assigned persistent directory. Secrets stay in private files; report only the configuration location. Explain actual self-service steps, human intervention, extra applications and known free limits, or specific blockers if incomplete.
+
+**Completion:** Complete necessary access setup, create a separate empty trial container through the assigned service and interface, then read that same remote container’s metadata to confirm it is accessible. The link and identifier agree, required configuration is reusable in a fresh session without exposing secrets, and no business fields, records or answers are preloaded. Describe the account origin, self-service steps, human barriers and free limits accurately. Registration, installation, tool lists, a creation receipt or a local simulation alone do not prove usable access.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-5bcdeb33cbc4)
+
+[Task definition](./tasks.en.md#collaborative-tables-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (2)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| collaborative-tables-access-001 v1 | MCP | [completed](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 2026-10-08 |
+| collaborative-tables-access-001 v1 | API | [completed](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
 ### Task results
+
+#### My roommate and I split shared expenses equally. Turn the October records in the materials into an online ledger, retaining each date, purpose, payer and amount in Chinese yuan. Show what each person paid, each person’s share, and who still owes whom how much. The summary must update automatically when we add an expense or correct an amount, without asking an Agent again or running a local script. Give me the private table link, the current settlement amounts and one sentence explaining where to keep recording expenses. Do not transfer money, invite or notify anyone.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-cb6f4b024594) | [100%](./evaluations.md#comparison-cb6f4b024594) | 769.0k | $0.03 | $0 |
+| API | [1](./evaluations.md#comparison-cb6f4b024594) | [0%](./evaluations.md#comparison-cb6f4b024594) | — | — | $0 |
+| SDK (python-sdk) | — | — | — | — | — |
+| SDK (javascript-sdk) | — | — | — | — | — |
+
+**Additional context from controller review; original verdict unchanged:**
+
+- [grist-rest-shared-expenses-001-ds41-r1](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json): Controller clarification; the original independent verdict is unchanged. The online ledger and automatic recalculation after an addition and correction were independently verified. After exhausting 25 model requests in about 177 seconds, the executor omitted the private link, settlement figures and continuation instructions. The service-side result was correct, but the required user delivery was incomplete; time remained within the 600-second limit.
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The two synthetic people are Lin Qing (林青) and Zhou Zhou (周舟). Every listed expense is shared 50/50, with no settlement transfers yet. Records (date / purpose / payer / CNY yuan): 2026-10-01 / 房租 / 林青 / 1800.00; 2026-10-02 / 超市采购（一） / 周舟 / 156.40; 2026-10-03 / 电费 / 林青 / 92.60; 2026-10-04 / 家居用品 / 周舟 / 48.00; 2026-10-05 / 宽带 / 周舟 / 100.00; 2026-10-07 / 超市采购（二） / 林青 / 203.00. Preserve each record exactly once. Amounts and summaries are in CNY yuan, accurate to the cent. Handle only these two people’s shared expenses for this month, without personal expenses, refunds, other currencies, prior transfers or other months. No third person, category report or bank connection is required. The online summary must continuously derive from the details: adding a similar record or correcting an existing amount must update paid totals, shares, settlement direction and amount without editing summary values, rerunning a local program or calling an Agent. Choose your own field names, table structure and calculation implementation. During execution enter only these six records. After delivery, verification will add one shared expense for these people in this month, then correct one existing amount in the same dedicated document to check automatic updates. It will not change the split, add people or introduce excluded conditions. These synthetic changes will remain afterward and be disclosed in the evaluation record. Your initial settlement answer is checked against the original six records.
+
+**Completion:** Through the assigned route, create a real online ledger in the new empty trial container, preserving all six initial records. The online summary and initial answer correctly show paid totals, shares and settlement direction and amount; the link identifies that ledger and the continuation instruction is usable. After execution stops, the controller adds one pre-frozen synthetic expense and then corrects one existing amount only in that new document, without changing formulas, schema or summary values and without restarting the executor. Independent remote reads at each stage show correct corresponding detail and summary changes. A separate grader checks the initial, appended and corrected receipts against the reference without credentials or running executor self-tests. No particular field names, formula syntax, table count or display layout is required; amounts are checked at CNY cent precision with normal native numerical representation noise allowed.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-08 (UTC)
+
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-cb6f4b024594)
+
+[Task definition](./tasks.en.md#collaborative-tables-shared-expenses-001-v1)
+
+- API: [Not completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) — 服务侧账本本身正确且可自动更新：执行者经指定 Grist REST 入口在总控提供的本轮空文档中建立了 Expenses/Settlement 两表并录入六笔明细，独立远端读回初态汇总（总支出 2400.00、每人应分摊 1200.00、林青已付 2095.60、周舟已付 304.40、周舟补给林青 895.60）与输入及冻结参考一致；总控在文档中追加一笔、修正一笔金额后，服务端汇总分别自动变为 2442.40/1221.20/2095.60/346.80/874.40 与 2422.40/1211.20/2075.60/346.80/864.40，与参考一致且公式未变。但执行者没有向用户交付要求的答复：最终产物 execution/answer.md 只有 8 行过程叙述，不含私人账本链接、不含各自已付/应分摊/补差方向与金额、也不含继续记账位置说明；执行回执 exit_code=1，会话最后事件为运行器返回的模型请求预算耗尽（403，25/25 次用尽），执行在“准备核对最终值”前中止。按冻结标准，真实在线账本与完整用户答复分别判定，本次服务计算正确但完整用户交付缺失。
+
+</details>
+
+#### Turn the attached book-club meeting todos into an online task table with owners, deadlines and completion status. Give me the link and list the incomplete tasks with their owners and deadlines.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| MCP | [1](./evaluations.md#comparison-892c10c8ee63) | [100%](./evaluations.md#comparison-892c10c8ee63) | 200.6k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-892c10c8ee63) | [100%](./evaluations.md#comparison-892c10c8ee63) | 448.2k | $0.02 | $0 |
+| SDK (python-sdk) | — | — | — | — | — |
+| SDK (javascript-sdk) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Book-club planning meeting notes, 2026-09-08: Lin Qing will confirm the venue by September 15; Zhou Zhou will compile the reading list by September 16; Chen He will design the poster, originally due September 18. None was completed at the meeting. Follow-up: Zhou Zhou says the reading list is now complete, and the poster deadline moves to September 20. Other arrangements remain unchanged.
+
+**Completion:** The remote table contains exactly three items: confirm venue / 林青 / 2026-09-15 / incomplete; prepare book list / 周舟 / 2026-09-16 / complete; make poster / 陈禾 / 2026-09-20 / incomplete. The answer links to that table and its incomplete list agrees with the remote state. After execution ends, the controller independently retrieves metadata, fields and all records from this new trial table through its own trusted read-only API requests, and freezes the raw receipts, read times, resource mapping and hashes. An independent grading Agent checks redacted receipts, the user answer and frozen reference without inheriting execution credentials or running the tested Agent’s code. Field names and operation order are unrestricted.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-08 (UTC)
+
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-892c10c8ee63)
+
+[Task definition](./tasks.en.md#collaborative-tables-001-v4)
+
+</details>
 
 #### Turn the action items in these book-club meeting notes into an online task table, give me its link, and tell me what is still unfinished and when each item is due
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-6203194a76cd) | [100%](./evaluations.md#comparison-6203194a76cd) | 540.8k | — | $0 |
+| API | [1](./evaluations.md#comparison-ab4e4c0d9054) | [100%](./evaluations.md#comparison-ab4e4c0d9054) | 540.8k | — | $0 |
 | MCP | — | — | — | — | — |
 | SDK (python-sdk) | — | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — | — |
@@ -2817,28 +3842,41 @@ Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue b
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-ab4e4c0d9054)
 
 [Task definition](./tasks.en.md#collaborative-tables-001-v2)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (6)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| collaborative-tables-shared-expenses-001 v1 | MCP | [completed](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | 2026-10-08 |
+| collaborative-tables-shared-expenses-001 v1 | API | [not_completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | 2026-10-08 |
+| collaborative-tables-001 v4 | MCP | [completed](../data/experiments/evaluations/grist-mcp-tables-001v4-ds41-r1.json) | 2026-10-08 |
+| collaborative-tables-001 v4 | API | [completed](../data/experiments/evaluations/grist-rest-tables-001v4-ds41-r1.json) | 2026-10-08 |
 | collaborative-tables-001 v2 | API | [completed](../data/experiments/evaluations/codex-20260908T035504.472694Z-grist.json) | 2026-09-08 |
 | collaborative-tables-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260908T032113.556233Z-grist.json) | 2026-09-08 |
 
 </details>
 
+### Notes
+
+- Hosted Free includes unlimited documents, 5000 rows/document, 1 GB attachments/document, 30-day history and two guests/document. This records hosted limits, not unlimited self-hosted capacity.
+- No benchmark-specific or performance-analysis disclosure prohibition was found in the reviewed EULA. Sections 3.2–3.5 restrict disruption, reverse engineering and software redistribution; section 4.4 makes users responsible for their own content. This is not a blanket publication license.
+
 ### Sources
 
-- [official_docs](https://support.getgrist.com/api/) — checked 2026-09-08
-- [official_docs](https://support.getgrist.com/rest-api/) — checked 2026-09-08
-- [official_site](https://www.getgrist.com/pricing/) — checked 2026-09-08
-- [official_docs](https://support.getgrist.com/mcp/) — checked 2026-09-08
+- [official_docs](https://support.getgrist.com/api/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/rest-api/) — checked 2026-10-08
+- [official_site](https://www.getgrist.com/pricing/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/mcp/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/formulas/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/limits/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/getting-started/) — checked 2026-10-08
+- [official_site](https://www.getgrist.com/terms/) — checked 2026-10-08
 
 <a id="groq"></a>
 
@@ -2892,7 +3930,7 @@ Temporary email addresses and message retrieval through a public session-based A
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
+| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260909T103849.955516Z-guerrilla-mail.json) | — | — | — |
 
 ### Task results
 
@@ -2900,7 +3938,7 @@ Temporary email addresses and message retrieval through a public session-based A
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-8624e51d6979) | [0%](./evaluations.md#comparison-8624e51d6979) | 85.3k | $0.28 | $0 |
+| API | [1](./evaluations.md#comparison-e42af771b245) | [0%](./evaluations.md#comparison-e42af771b245) | 85.3k | $0.28 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -2911,7 +3949,7 @@ The dedicated test inbox contains three synthetic messages: two AFS Demo login m
 
 codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-e42af771b245)
 
 [Task definition](./tasks.en.md#mailboxes-code-001-v1)
 
@@ -3003,7 +4041,7 @@ Flight search and purchase-link API with email signup and an official MCP; indiv
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| Web | [1](./evaluations.md#comparison-45effe165cf4) | [100%](./evaluations.md#comparison-45effe165cf4) | 212.9k | $0.93 | $0 |
+| Web | [1](./evaluations.md#comparison-77a51e093709) | [100%](./evaluations.md#comparison-77a51e093709) | 212.9k | $0.93 | $0 |
 | API | — | — | — | — | — |
 | MCP | — | — | — | — | — |
 
@@ -3016,7 +4054,7 @@ September 25, 2026; depart from MXP, LIN or BGY and arrive at any passenger airp
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-45effe165cf4)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-77a51e093709)
 
 [Task definition](./tasks.en.md#flights-search-001-v1)
 
@@ -3084,11 +4122,52 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [reader-api (API)](https://r.jina.ai/) | [Docs](https://jina.ai/reader/) | — | Reader converts a supplied URL to text. Keyless basic usage is documented; keyed rate limits and billing are separate. No broader search or embedding capability is inferred from this route. |
+| [reader-api (API)](https://r.jina.ai/) | [Docs](https://jina.ai/reader/) | self serve / documented | Prefix a public URL with https://r.jina.ai/ for rendered Markdown; basic keyless usage is free at 20 requests/minute. Keyed token allowances and limits are separate. Default rendering supports JavaScript; X-Engine: direct instead uses plain HTTP. A URL may be cached for five minutes; X-No-Cache: true or X-Cache-Tolerance: 0 requests fresh content. X-Token-Budget rejects oversized requests rather than silently truncating them. No universal page-byte limit or caller-country eligibility list was established here. Target-site restrictions and content rights still apply; this route does not document a blanket redistribution license or successful extraction trial. |
 
 ### Service pricing
 
-—
+- reader-api: 0 USD / request (usage; Basic keyless Reader at the documented rate limit; not a keyed token allowance.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [No account or key supplied](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | — | — | — |
+
+#### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [0](./evaluations.md#comparison-4582424b2cd6) | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Example page: https://example.com/ . The service, assigned interface, authorized account or signup identity and their origin are in ENVIRONMENT.md. Use account-free interfaces directly; use only the identity supplied for this trial if signup or authorization is needed. Retrieve this URL’s body through the assigned service, without substituting search snippets or fetching the origin directly. Save necessary configuration in the assigned persistent directory, keep secrets in private files, and report only its location. State the origin of any existing account, self-service steps, human intervention, extra applications and concrete blockers accurately.
+
+**Completion:** Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-4582424b2cd6)
+
+[Task definition](./tasks.en.md#web-extraction-access-001-v1)
+
+Invalid runs: 1
+
+- API: [Invalid run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) — 指定服务入口 https://r.jina.ai/ 在测试网络内被域名级 DNS 污染与出网阻断（r.jina.ai、jina.ai 解析为无关/轮换地址并连接超时），而对照域名 example.com、github.com 等均返回 200，同期题面涉及的 firecrawl、exa 域名也可达，故无法通过指定入口取得 https://example.com/ 正文与标题。失败原因属执行环境网络限制而非服务能力、凭据或执行行为；执行者仅用指定入口、未切换其他服务、未绕过直读，并如实保存配置与阻碍。因环境无法访问指定服务，本次无法对 Jina Reader 的可接入性做有效评测，故记 invalid_run。
+
+</details>
+
+<details>
+<summary>Run history (2)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| web-extraction-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | 2026-10-08 |
+| web-extraction-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/jina-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
 
@@ -3097,7 +4176,8 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 ### Sources
 
 - [official_site](https://jina.ai/api-dashboard) — checked 2026-07-08
-- [official_docs](https://jina.ai/reader/) — checked 2026-09-15
+- [official_docs](https://jina.ai/reader/) — checked 2026-10-08
+- [official_site](https://jina.ai/legal/#terms-and-conditions) — checked 2026-10-08
 
 <a id="joinquant-data"></a>
 
@@ -3193,7 +4273,7 @@ Flight search through a publicized MCP path and the separately gated Tequila par
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-c77feef961a0) | [100%](./evaluations.md#comparison-c77feef961a0) | 209.6k | $0.84 | $0 |
+| MCP | [1](./evaluations.md#comparison-521dd3fb476a) | [100%](./evaluations.md#comparison-521dd3fb476a) | 209.6k | $0.84 | $0 |
 | API | — | — | — | — | — |
 
 <details>
@@ -3205,7 +4285,7 @@ September 25, 2026; depart from MXP, LIN or BGY and arrive at any passenger airp
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-c77feef961a0)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-521dd3fb476a)
 
 [Task definition](./tasks.en.md#flights-search-001-v1)
 
@@ -3233,7 +4313,7 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt, an official CLI with 200+ commands and agent skills, and an official OpenAPI MCP server.
 
-**Classification:** Workplace Collaboration / Collaborative Tables; Communication / Messaging; Workplace Collaboration / Document Collaboration
+**Classification:** Productivity & Collaboration / Collaborative Tables; Communication / Messaging; Productivity & Collaboration / Document Collaboration
 
 [Website](https://www.larksuite.com) · [Source record](../data/providers/lark.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3342,7 +4422,7 @@ Personal flight search through MCP, CLI and SDKs, with a human payment-method au
 
 Issue tracking and product planning with a GraphQL API, llms.txt, an official MCP server, and webhooks.
 
-**Classification:** Workplace Collaboration / Project & Task Management
+**Classification:** Productivity & Collaboration / Project & Task Management
 
 [Website](https://linear.app) · [Source record](../data/providers/linear.yaml) · [Back to directory](../README.md#all-services)
 
@@ -3367,6 +4447,39 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 ### Sources
 
 - [official_docs](https://linear.app/developers) — checked 2026-09-15
+
+<a id="locationiq"></a>
+
+## LocationIQ
+
+Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.
+
+**Classification:** Search & Data Access / Geocoding
+
+[Website](https://locationiq.com/) · [Source record](../data/candidates/locationiq.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="locationiq-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [geocoding-api (API)](https://us1.locationiq.com/v1/search) | [Docs](https://docs.locationiq.com/docs/search-forward-geocoding) | self serve | Requires: platform_account; Complete the official Free signup with accurate email, full name and use case; current identity/domain requirements need observation before claiming access.; Free commercial use requires a prominent Search by LocationIQ link. Data-source attribution includes OSM/ODbL and other sources listed on the attribution page; preserve the response licence. Terms updated 2026-03-31 distinguish permanent storage of response data from request-response pair collection, which is limited to temporary caching for 48 hours on Free accounts absent written permission. Long-lived complete request/response evidence therefore needs separate consideration. No explicit benchmark/performance-publication ban was found; restrictions on competitor access, competing-system development and inaccurate/misleading statements should not be generalized into such a ban. Registration, phone/card gates and task completion remain untested. |
+
+### Service pricing
+
+- geocoding-api: 5000 requests / day (free_allowance; Free plan; also limited to 2 requests/second and 60 requests/minute, with one access token.)
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://docs.locationiq.com/docs/search-forward-geocoding) — checked 2026-10-08
+- [official_docs](https://docs.locationiq.com/reference/search) — checked 2026-10-08
+- [official_site](https://locationiq.com/pricing) — checked 2026-10-08
+- [official_site](https://my.locationiq.com/register) — checked 2026-10-08
+- [official_site](https://locationiq.com/tos) — checked 2026-10-08
+- [official_site](https://locationiq.com/attribution) — checked 2026-10-08
 
 <a id="lseg-data"></a>
 
@@ -3477,17 +4590,47 @@ Temporary receive-only mailboxes with an account/password and authenticated REST
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [mail-api (API)](https://docs.mail.tm/) | [Docs](https://docs.mail.tm/) | — | Free public API; creating the mailbox also creates its account. No upstream user account or paid API key is required. Temporary domains and retention must be checked before using for important accounts. On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term retention. A subsequent independent medium session retrieved the correct latest login code, subject and timestamp from three real synthetic emails delivered by Gmail. This does not establish acceptance by arbitrary signup websites. |
+| [mail-api (API)](https://api.mail.tm) | [Docs](https://docs.mail.tm/) | self serve / documented | Free public API; creating the mailbox also creates its account. No upstream user account or paid API key is required. Domain listing and account creation are unauthenticated; obtain a Bearer token using the new address/password for mailbox access. FAQ says the mailbox stays valid until deletion, while received messages are retained only seven days. Password reset is unavailable. This remains a disposable mailbox, not a guarantee of durable project correspondence or account recovery. On 2026-09-09, a fresh Codex session created a mailbox without upstream credentials; independent reuse of its saved access state succeeded. This tests provisioning/listing only, not external delivery or long-term retention. A subsequent independent medium session retrieved the correct latest login code, subject and timestamp from three real synthetic emails delivered by Gmail. This does not establish acceptance by arbitrary signup websites. |
 
 ### Service pricing
 
-—
+- mail-api: 0 USD / API request within published limits (usage; Free service with an 8 QPS per-IP limit; no paid tier.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T103356.699996Z-mail-tm.json) | — | — | — |
+| API | [Access preparation: none initially; one fresh anonymous mailbox and necessary identity created inside measured execution](../data/experiments/evaluations/mail-tm-mailbox-create-v2-ds41-r1.json) | [116.2k](../data/experiments/evaluations/mail-tm-mailbox-create-v2-ds41-r1.json) | 28.614918s | 0 |
+
+#### Prepare a temporary receiving mailbox for this automated test, give me its address, and save the access information needed to read its inbox later.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-183e17ccb640) | [100%](./evaluations.md#comparison-183e17ccb640) | 116.2k | $0.0070 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Use a domain supplied by the service to create one new receiving mailbox dedicated to this test; do not reuse an existing mailbox. It only needs to be usable during this test, with no long-term retention or custom-domain requirement. You may create the minimal free anonymous service identity and authentication information necessary for it. Do not use an existing service account or any human email address for verification; report a blocker if these are required. Confirm that you can read this mailbox’s message list and state whether it currently contains any messages. Save passwords, tokens or session information in a local private file; give only the file location in your answer, not the secrets.
+
+**Completion:** The assigned service returns an actual mailbox address; a real inbox read succeeds; an evaluator can reuse the saved access state in an independent request to the same mailbox; the answer matches the observed state, and no secrets appear in it.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none initially; one fresh anonymous mailbox and necessary identity created inside measured execution · [Full configuration and evidence](./evaluations.md#comparison-183e17ccb640)
+
+[Task definition](./tasks.en.md#mailboxes-create-001-v2)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| mailboxes-create-001 v2 | API | [completed](../data/experiments/evaluations/mail-tm-mailbox-create-v2-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
 
@@ -3495,7 +4638,7 @@ Temporary receive-only mailboxes with an account/password and authenticated REST
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-8624e51d6979) | [100%](./evaluations.md#comparison-8624e51d6979) | 75.5k | $0.18 | $0 |
+| API | [1](./evaluations.md#comparison-e42af771b245) | [100%](./evaluations.md#comparison-e42af771b245) | 75.5k | $0.18 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3506,7 +4649,7 @@ The dedicated test inbox contains three synthetic messages: two AFS Demo login m
 
 codex-cli 0.153.4 · gpt-6-astra / medium · 600s · 2026-09-09 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8624e51d6979)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-e42af771b245)
 
 [Task definition](./tasks.en.md#mailboxes-code-001-v1)
 
@@ -3522,9 +4665,18 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 </details>
 
+### Notes
+
+- API terms require a visible link to Mail.tm and prohibit illegal use, reselling a paid wrapper, or mirroring/proxying the API under another domain. No explicit public-test/comparison prohibition appears in the reviewed API terms; these terms do not grant rights to publish other people's mail.
+- DELETE /accounts/{id} with that account's Bearer token permanently deletes the mailbox account and is not reversible. The service does not support outbound mail. Neither historical trials nor current documentation establish acceptance by arbitrary signup sites or long-term reliability.
+
 ### Sources
 
-- [official_docs](https://docs.mail.tm/) — checked 2026-09-09
+- [official_docs](https://docs.mail.tm/) — checked 2026-10-08
+- [official_docs](https://docs.mail.tm/getting-started/authentication) — checked 2026-10-08
+- [official_docs](https://docs.mail.tm/api/accounts) — checked 2026-10-08
+- [official_docs](https://docs.mail.tm/api/messages) — checked 2026-10-08
+- [official_site](https://mail.tm/en/faq/) — checked 2026-10-08
 
 <a id="mailinator"></a>
 
@@ -3657,7 +4809,7 @@ Market-data APIs with stock history and separate data products. Stocks Basic is 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://massive.com/docs/rest/quickstart) | [Docs](https://massive.com/docs/rest/quickstart) | self serve / documented | Stocks Basic: USD 0/month for individual use, 5 calls/minute, two years of historical end-of-day data. A free stock plan does not establish free fundamentals or permission to redistribute data. Confirm unadjusted daily aggregate settings and actual access in the trial. |
+| [data-api (API)](https://api.massive.com/) | [Docs](https://massive.com/docs/rest/quickstart) | self serve / documented | Stocks Basic is USD 0/month for individual use, no payment card, 5 calls/minute and two years of historical end-of-day data. The daily open-close endpoint is explicitly included in Basic; adjusted=false requests prices without split adjustment. Its close is separate from afterHours and preMarket. Do not assume every custom aggregate excludes extended hours: that API has separate session-selection and trade-eligibility considerations. Signup supplies a dashboard API key; actual account access is untested. Personal/non-professional eligibility and the restrictions on Market Data, derived research and Services confidentiality are separate from technical endpoint entitlement; their scope is not a blanket explicit benchmark ban. |
 
 ### Service pricing
 
@@ -3669,8 +4821,12 @@ Market-data APIs with stock history and separate data products. Stocks Basic is 
 
 ### Sources
 
-- [official_docs](https://massive.com/docs/rest/quickstart) — checked 2026-09-09
-- [official_site](https://massive.com/pricing) — checked 2026-09-15
+- [official_docs](https://massive.com/docs/rest/quickstart) — checked 2026-10-08
+- [official_site](https://www.massive.com/stocks) — checked 2026-10-08
+- [official_docs](https://massive.com/docs/rest/stocks/aggregates/daily-ticker-summary) — checked 2026-10-08
+- [official_docs](https://massive.com/knowledge-base/article/market-data-outside-of-normal-hours) — checked 2026-10-08
+- [official_site](https://massive.com/legal/individuals-terms-of-service) — checked 2026-10-08
+- [official_site](https://massive.com/legal/market-data-terms-of-service) — checked 2026-10-08
 
 <a id="mem0"></a>
 
@@ -3703,6 +4859,104 @@ Memory layer for AI agents (hosted platform + open-source), with REST API, llms.
 ### Sources
 
 - [official_docs](https://docs.mem0.ai/introduction) — checked 2026-09-15
+
+<a id="met-norway"></a>
+
+## MET Norway Locationforecast
+
+Public global point forecasts from MET Norway, with no API key and mandatory client identification.
+
+**Classification:** Search & Data Access / Weather Data
+
+[Website](https://api.met.no/) · [Source record](../data/candidates/met-norway.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="met-norway-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [locationforecast-api (API)](https://api.met.no/weatherapi/locationforecast/2.0/compact) | [Docs](https://docs.api.met.no/doc/GettingStarted.html) | self serve / documented | Use a real descriptive User-Agent with a contactable website or email; generic or missing identification can return 403. Truncate coordinates to at most four decimal places, cache until Expires, and use If-Modified-Since from the prior Last-Modified value when refreshing. HTTPS, redirects and gzip support are required. Public data use is under NLOD 2.0 and CC BY 4.0 unless otherwise specified; credit MET Norway, link the licence and disclose changes. Reviewed public terms contain no explicit benchmark-publication prohibition. Do not imply MET/Yr endorsement. Nordic and Arctic coverage has regional models; global coverage uses ECMWF. This endpoint supplies current model forecasts, not historical observations or proof of forecast accuracy. No SLA is offered. Documentation-only review; no tested connection is claimed. |
+
+### Service pricing
+
+- locationforecast-api: 0 USD / public API request (usage; Free public service under fair-use conditions. More than 20 requests/second in total per application requires a separate agreement; this is not a per-client entitlement or daily quota.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; official public read-only free noncommercial route](../data/experiments/evaluations/met-norway-weather-outing-001-ds41-r1.json) | [112.5k](../data/experiments/evaluations/met-norway-weather-access-ds41-r1.json) | 31.329883s | 0 |
+
+#### Connect this weather service, make one real weather query through the assigned route, and save the local configuration needed for later queries. Explain the setup steps completed and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-7e7df525d550) | [100%](./evaluations.md#comparison-7e7df525d550) | 112.5k | $0.0082 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned route, authorized account or registration details and their origin are in ENVIRONMENT.md. Choose a public location for a small query and report its location, weather value with units and forecast or observation time. Use account-free routes directly; use only supplied identity information when registration or authorization is needed. Store necessary configuration in the assigned persistent directory and secrets only in private files. Report the configuration path, existing-account origin, self-service steps, human intervention and any extra application requirements.
+
+**Completion:** Complete the required registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable location, valid time and at least one weather value; the answer matches it and states units. Configuration is reusable by a new session without leaking secrets. Do not force registration for account-free routes or claim an existing account was registered during this run.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; official public read-only free noncommercial route · [Full configuration and evidence](./evaluations.md#comparison-7e7df525d550)
+
+[Task definition](./tasks.en.md#weather-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| weather-access-001 v1 | API | [completed](../data/experiments/evaluations/met-norway-weather-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I will be walking in central London on the morning of October 10. In Chinese, make a small table of forecast temperature and precipitation for the three hours from 09:00 to 12:00 local time. State the units, data source and query time with its time zone, and briefly identify which periods have precipitation forecast.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-728ca7b6aa38) | [100%](./evaluations.md#comparison-728ca7b6aa38) | 115.2k | $0.0088 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Date: 2026-10-10. Location: central London, using the supplied WGS84 coordinates, latitude 51.5074 and longitude -0.1278; no address lookup or geocoding is needed. Local time zone: Europe/London. Include three full hourly intervals: 09:00–10:00, 10:00–11:00 and 11:00–12:00. For each row, use near-surface air temperature at the start of the interval in degrees Celsius, and total precipitation accumulated during that hour in millimetres, including rain and snow as water equivalent. Use only the forecast available from the assigned service at query time. Report missing data honestly; do not replace it with zero or evenly divide a longer-period total into hourly values.
+
+**Completion:** Obtain a real forecast from the assigned service for the supplied coordinate vicinity and all requested periods. Valid times, time zone, temperature instants, precipitation intervals and unit conversions are correct, and values match the actual response, allowing correct rounding at displayed precision. No requested interval is omitted or repeated, and missing values are not disguised as zero. Source and query time are verifiable, and the precipitation summary is supported by the data. Verify each service against its own response; agreement between forecasting models or later observed weather is not the completion criterion.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; official public read-only free noncommercial route · [Full configuration and evidence](./evaluations.md#comparison-728ca7b6aa38)
+
+[Task definition](./tasks.en.md#weather-outing-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| weather-outing-001 v1 | API | [completed](../data/experiments/evaluations/met-norway-weather-outing-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://api.met.no/weatherapi/locationforecast/2.0/documentation) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/GettingStarted.html) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/locationforecast/datamodel.html) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/ForecastJSON.html) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/FAQ) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/TermsOfService) — checked 2026-10-08
+- [official_docs](https://docs.api.met.no/doc/License) — checked 2026-10-08
 
 <a id="minimax"></a>
 
@@ -3774,7 +5028,9 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 
 [Docs](https://modal.com/docs) · [API reference](https://modal.com/docs/reference) · [CLI](https://modal.com/docs/reference/cli)
 
-—
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [sandbox-sdk (SDK)](https://modal.com/docs/guide/sandboxes) | [Docs](https://modal.com/docs/guide/sandboxes) | self serve / documented | Requires: platform_account, payment_method; Official SDK Sandbox.create/exec provides remote process execution and stdout retrieval. Sandboxes default to a five-minute lifetime, configurable up to 24 hours; terminate(wait=True) waits for termination. Persistent Volumes and snapshots have separate lifecycles. Starter credits offset metered use and do not mean every workload costs zero. |
 
 ### Service pricing
 
@@ -3784,9 +5040,19 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 
 —
 
+### Notes
+
+- Current billing requires a payment method, even with Starter credits. A free-registration-only project cannot assume it can start compute without one. This is a documented preparation requirement, not an observed execution failure.
+- Reviewed May 2026 SaaS terms limit access to internal business purposes and impose ordinary use/confidentiality restrictions; no explicit benchmark-publication prohibition was identified in that document. This bounded review does not establish permission for unrelated redistribution or competing services.
+
 ### Sources
 
 - [official_docs](https://modal.com/docs/reference/cli) — checked 2026-07-07
+- [official_docs](https://modal.com/docs/guide/sandboxes) — checked 2026-10-08
+- [official_site](https://modal.com/pricing) — checked 2026-10-08
+- [official_docs](https://modal.com/docs/guide/billing) — checked 2026-10-08
+- [official_site](https://modal.com/signup) — checked 2026-10-08
+- [official_site](https://modal.com/legal/terms) — checked 2026-10-08
 
 <a id="mollie"></a>
 
@@ -3910,6 +5176,105 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 - [official_docs](https://docs.n8n.io/) — checked 2026-09-15
 
+<a id="nager-date"></a>
+
+## Nager.Date
+
+Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.
+
+**Classification:** Search & Data Access / Public Holidays
+
+[Website](https://nagerholidays.com/) · [Source record](../data/candidates/nager-date.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="nager-date-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [community-api-v4 (API)](https://nagerholidays.com/api/v4/Holidays) | [Docs](https://nagerholidays.com/api) | self serve / documented | The API overview advertises no rate limits; this is not a measured throughput or availability guarantee. The current official repository links nagerholidays.com and Community v4; its version table lists v3 support ending 2027-01-31. Old date.nager.at landing-page redirection does not by itself establish compatibility of every old API URL. v4 provides English names; do not assume v3 localName or Pro observedDate/translations exist. First-level subdivision support does not guarantee municipal coverage. Hosted API terms prohibit operating a holiday portal and disclaim availability, accuracy and reliability. No explicit public-benchmark disclosure prohibition was found in those terms. Keep raw holiday tables private for the planned non-commercial service comparison; publish only verification summaries, hashes, conditions and usage/cost evidence. Software MIT licensing does not override hosted-service terms; Docker/NuGet require a licence key. Documentation and source coverage are not a live API result. |
+
+### Service pricing
+
+- community-api-v4: 0 USD / eligible Community API request (usage; Private or non-profit use; commercial use requires active sponsorship at separately applicable terms.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | [63.8k](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 17.740838s | 0 |
+
+#### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-0ce2de00d325) | [100%](./evaluations.md#comparison-0ce2de00d325) | 63.8k | $0.0064 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned route, permitted account or registration details and their source are in ENVIRONMENT.md. Choose a supported country or region and year for a small public-holiday query. Report the query scope, the date and name of one holiday actually returned, and the service and query source. Use account-free routes directly; if registration or authorization is required, use only the identity supplied for this run. Save necessary configuration in the designated persistent directory, with secrets only in private files. In the answer, give the configuration location, account source, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0ce2de00d325)
+
+[Task definition](./tasks.en.md#public-holidays-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I am organizing my personal schedule in Berlin for next year. Use the assigned service to find all public holidays applicable to the German state of Berlin in 2027. List their dates and holiday names in date order, give the total, and identify the query source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-39d86ae45d95) | [100%](./evaluations.md#comparison-39d86ae45d95) | 158.8k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Region: the whole German state of Berlin, not another place with the same name. Period: local Gregorian dates from 2027-01-01 through 2027-12-31, inclusive. Include public holidays applying nationally or to Berlin; exclude holidays applying only to other states, school breaks, observances that are not public holidays, and ordinary Sundays. Include public holidays even when they fall on Saturday or Sunday. Use their actual local date in Berlin; do not shift them to a weekday or infer substitute days off. Dates must identify year, month and day clearly. Use German or English holiday names returned by the service; Chinese translation is unnecessary. List the same holiday on the same date only once. This is date information for personal planning; shop or bank opening, work schedules, wages and personal leave entitlements are outside scope. Obtain real holiday data through this run’s assigned service. You may consult its official documentation to understand region and date semantics, but must not substitute another holiday service, a web calendar, examples or memory for the query.
+
+**Completion:** Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-39d86ae45d95)
+
+[Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://nagerholidays.com/api) — checked 2026-10-08
+- [official_docs](https://nagerholidays.com/scalar/#community-api-v4) — checked 2026-10-08
+- [official_repo](https://github.com/nager/Nager.Date) — checked 2026-10-08
+- [official_announcement](https://github.com/nager/Nager.Date/issues/986) — checked 2026-10-08
+- [official_announcement](https://github.com/nager/Nager.Date/issues/986#issuecomment-5031919449) — checked 2026-10-08
+- [official_repo](https://github.com/nager/Nager.Date/blob/main/src/Nager.Date/HolidayProviders/GermanyHolidayProvider.cs) — checked 2026-10-08
+- [official_site](https://nagerholidays.com/legal/termsofservice) — checked 2026-10-08
+- [official_docs](https://nagerholidays.com/integration/getstarted) — checked 2026-10-08
+
 <a id="nasdaq-data-link"></a>
 
 ## Nasdaq Data Link
@@ -3959,24 +5324,129 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [ephemeral-api (API)](https://neon.new/) | — | documented | No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials. |
+| [claimable-api (API)](https://claimable.neon.tech/v1/agent/identity) | [Docs](https://neon.com/docs/reference/claimable-neon) | self serve / documented | Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works with standard Postgres clients; identity assertions, tokens and connection URLs are private. The 100 MB storage and 1 GB transfer allowances apply to the whole unclaimed project, not each logical database. Multiple databases within that project share these limits and the same project.expires_at; they are not separately provisioned free projects. The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts 15 minutes and is a different clock. Short-term persistence does not establish a permanent free account. Claiming rotates credentials and must not occur between write and independent read. The provisioned Postgres connection supports SQL transactions. Its pooler uses transaction mode; ordinary short transactions are compatible, while session state across separate transactions must not be assumed. Individually committed writes are not an atomic multi-step import. |
 
 ### Service pricing
 
 [Official pricing](https://neon.com/pricing)
 
+- claimable-api: 100 MB / project (free_allowance; Unclaimed project storage, with 1 GB transfer and a 72-hour lifetime.)
+
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | — | — | — |
+| API (ephemeral-api) | [No account or key supplied](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | — | — | — |
+| API (claimable-api) | [Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database](../data/experiments/evaluations/neon-atomic-import-001-ds41-r1.json) | [167.2k](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json) | 40.8719s | 0 |
+
+#### Connect to this database service through the specified interface, prepare an empty remote test database dedicated to this trial, verify it with a query that writes no business data, and save the connection configuration. Explain the setup steps, human requirements, and free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (claimable-api) | [1](./evaluations.md#comparison-7a86e94d64f8) | [100%](./evaluations.md#comparison-7a86e94d64f8) | 167.2k | $0.01 | — |
+| API (ephemeral-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, interface, authorized account or signup identity and its origin are specified in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed; use account-free access directly. Create only this trial's separate test database and the minimum parent resources required, without accessing existing user databases. Confirm connectivity with a read-only database query; create no business tables or records. Save resource identifiers and connection configuration in the designated persistent directory. Keep secrets in private files and report only their configuration location. Accurately state existing-account origin, steps completed without assistance, human intervention, special applications and specific blockers.
+
+**Completion:** Complete necessary access through the specified service and interface, create a separate empty test database and query it successfully. Installation and configuration are reusable in a fresh session without credential exposure. Do not count an existing account as newly registered or force signup for account-free access. Accurately explain the evidence for free-tier or expiry conditions and any unknowns. Installation, resource listings, creation receipts and health checks alone do not prove the database can be queried.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database · [Full configuration and evidence](./evaluations.md#comparison-7a86e94d64f8)
+
+[Task definition](./tasks.en.md#database-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (4)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| database-access-001 v1 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-restore-mirror-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (claimable-api) | [not_completed](../data/experiments/evaluations/neon-restore-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
+
+#### My personal book catalog needs file-based batch imports without leaving a partial batch when an ID is duplicated. Build a reusable importer protected by a database atomic operation or transaction covering the whole batch. Actually test that the erroneous sample is rejected as a whole and the corrected sample is fully saved in the two supplied independent test tables, preserving existing books. Deliver the importer, brief usage instructions and both outcomes; keep credentials separate.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (claimable-api) | [1](./evaluations.md#comparison-eb4cee33eee8) | [100%](./evaluations.md#comparison-eb4cee33eee8) | 142.3k | $0.01 | $0 |
+| API (ephemeral-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+ENVIRONMENT.md maps reject_case and accept_case to actual remote table names and connection configuration. Both have book_id (non-null integer primary key) and title (non-null text), initially containing only book_id=100,title=已有书目. The UTF-8 CSV attachments attachments/batch-reject.csv and attachments/batch-corrected.csv have the header book_id,title. Import the erroneous file only into reject_case and the corrected file only into accept_case; do not overwrite one case with the other. The same delivered importer must accept a file path and one of the two authorized target tables, read the file rows and not hard-code the expected final state. The erroneous sample must actually trigger a database duplicate-primary-key rejection; local prevalidation alone is insufficient. Do not ignore or replace conflicting records. Each complete file must commit or be rejected together. A database-atomic single bulk statement or a whole-batch transaction is acceptable, with no prescribed language, client or number of SQL statements. Do not UPDATE, DELETE, replace records, alter constraints, empty, drop or recreate tables to repair data or simulate rollback; normal rollback inside an uncommitted transaction is allowed. Leave both final table states available for verification and report each actual outcome and database error.
+
+**Completion:** Actually run the same delivered importer through the assigned service: the database rejects the erroneous file, no new rows from that batch remain committed, and original rows are unchanged; all corrected-file rows commit to the other table while original rows remain unchanged. Preserve schema and constraints. The observed implementation uses a verifiable database-atomic batch operation or correctly handled transaction, without compensating changes after commit. Preserve the tested importer and brief usable instructions, and report both outcomes accurately.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database · [Full configuration and evidence](./evaluations.md#comparison-eb4cee33eee8)
+
+[Task definition](./tasks.en.md#database-atomic-import-001-v1)
+
+</details>
+
+#### Run a backup and restore rehearsal for my personal todo app: export the source database as a logical backup I can download and keep, create a separate empty database on the same service, and actually restore from that backup without changing the source. Reconnect to the new database after restoration to check it. Deliver the backup, brief restoration instructions, the new database location, each table’s row count and verification results, and explain the new database’s free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (claimable-api) | [1](./evaluations.md#comparison-bfa31194c37d) | [100%](./evaluations.md#comparison-bfa31194c37d) | 479.4k | $0.03 | — |
+| API (ephemeral-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The source is this run’s dedicated remote database, populated with synthetic data by the preparer after setup; its identity and connection configuration are in ENVIRONMENT.md. It has two application tables: lists (id, name) and todos (id, list_id, title, done, note), with list_id referencing lists.id. Preserve both tables’ column names, data-type semantics, primary keys, foreign keys, nullability constraints, default values and every original record. Preserve list membership, completion status, text, and the distinction between an empty note and a missing note. The destination must be a separate remote database created during this run with no application tables initially; it may share a project or compute with the source. The backup must contain the application schema and data needed to restore on a compatible SQL engine even if the source is unavailable later, rather than just a snapshot or branch link dependent on the original service. Cross-dialect restoration is not required. Service-internal tables, account permissions and the host machine are outside scope. No other writer will modify the source during this task; do not change or delete its application tables or records.
+
+**Completion:** Through the assigned service and route, export a real backup containing both tables’ logical schema and every record, then actually use it to restore into a separate remote destination created during this run and initially empty. New connections can read equivalent application schema and all original records, while the source application schema and rows remain unchanged. Deliver the retained backup, usable brief restoration instructions, destination location, accurate per-table counts and verification results, and disclose known expiry or free-tier terms accurately. Credentials stay in private configuration and are not included in the answer or public evidence.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none initially; generated anonymous Claimable project credentials · [Full configuration and evidence](./evaluations.md#comparison-bfa31194c37d)
+
+[Task definition](./tasks.en.md#database-restore-001-v1)
+
+</details>
+
+#### Prepare a separate remote database for my personal todo app and use the attached data to verify that inserts and updates persist. After the writing program exits, reconnect to the same database from a completely fresh program. Give me all todos ordered by id, the incomplete todos, and the total and completed counts, and explain the database's free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (claimable-api) | [1](./evaluations.md#comparison-2f500bd738e2) | [100%](./evaluations.md#comparison-2f500bd738e2) | 274.8k | $0.01 | $0 |
+| API (ephemeral-api) | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2, leaving other content unchanged. Use the separate empty remote test database newly created and explicitly handed over in this trial's access phase; ENVIRONMENT.md identifies the resource and private connection configuration. Installation and authentication may be reused, but not business tables, data, answers or calling scripts. Do not access or modify existing user projects.
+
+**Completion:** Insert three items into the specified service's remote database and update id=2. After the writing process ends, a completely fresh process reconnects to the same database and reads back all three items. Only id=1 is incomplete; there are three total and two completed, with titles and other original values unchanged. The final full list is sorted by id. Real requests, responses and process records substantiate remote persistence and independent reading. Correctly explain supported free-tier or expiry limits, marking unconfirmed details unknown. Credentials remain in private workspace files, not public evidence or the final answer. Temporary resources are acceptable only with their expiry disclosed, without claiming permanent availability.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none initially; executor obtains anonymous scoped test credentials · [Full configuration and evidence](./evaluations.md#comparison-2f500bd738e2)
+
+[Task definition](./tasks.en.md#database-todos-001-v2)
+
+</details>
 
 #### Prepare a separate remote database for my personal todo app and verify adding, updating and reading todos after reconnecting
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-fdecec09a4b6) | [100%](./evaluations.md#comparison-fdecec09a4b6) | 465.4k | — | $0 |
+| API (ephemeral-api) | [1](./evaluations.md#comparison-b514e81afd38) | [100%](./evaluations.md#comparison-b514e81afd38) | 465.4k | — | $0 |
+| API (claimable-api) | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3987,25 +5457,40 @@ Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,d
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-fdecec09a4b6)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-b514e81afd38)
 
 [Task definition](./tasks.en.md#database-todos-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| database-todos-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | 2026-09-07 |
+| database-atomic-import-001 v1 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-atomic-import-001-ds41-r1.json) | 2026-10-08 |
+| database-restore-001 v1 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-restore-mirror-001-ds41-r1.json) | 2026-10-08 |
+| database-todos-001 v2 | API (claimable-api) | [completed](../data/experiments/evaluations/neon-todos-001v2-ds41-r1.json) | 2026-10-08 |
+| database-todos-001 v1 | API (ephemeral-api) | [completed](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | 2026-09-07 |
 
 </details>
 
+### Notes
+
+- The current Neon Platform Schedule incorporates the Databricks MCSA and its Acceptable Use Policy. The AUP permits benchmarking and disclosure except for Beta Services, with disclosure of information needed to reproduce the benchmark and reciprocal benchmarking rights. The reviewed Claimable reference does not label the service Beta; absence of that label is not an independent determination of contractual status. Customer-content rights and confidentiality obligations remain applicable. Small tests using synthetic records should preserve reproducible conditions and disclose only task-owned evidence; they do not establish general production reliability.
+
 ### Sources
 
-- [official_site](https://neon.new/) — checked 2026-09-07
+- [official_site](https://neon.new/) — checked 2026-10-08
 - [official_announcement](https://neon.com/blog/neon-launchpad) — checked 2026-09-07
+- [official_site](https://neon.com/claimable-neon) — checked 2026-10-08
+- [official_docs](https://neon.com/docs/reference/claimable-neon) — checked 2026-10-08
+- [official_docs](https://neon.com/auth.md) — checked 2026-10-08
+- [official_docs](https://www.postgresql.org/docs/18/tutorial-transactions.html) — checked 2026-10-08
+- [official_docs](https://neon.com/docs/connect/connection-pooling) — checked 2026-10-08
+- [official_site](https://neon.com/platform-terms) — checked 2026-10-08
+- [official_site](https://www.databricks.com/legal/mcsa) — checked 2026-10-08
+- [official_site](https://www.databricks.com/legal/acceptable-use-policy) — checked 2026-10-08
 
 <a id="netlify"></a>
 
@@ -4035,23 +5520,97 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 - [official_docs](https://docs.netlify.com/api/get-started/) — checked 2026-07-07
 
+<a id="nominatim"></a>
+
+## Nominatim Public API
+
+OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.
+
+**Classification:** Search & Data Access / Geocoding
+
+[Website](https://nominatim.org/) · [Source record](../data/candidates/nominatim.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="nominatim-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-search-api (API)](https://nominatim.openstreetmap.org/search) | [Docs](https://nominatim.org/release-docs/latest/api/Search/) | self serve / documented | Public API policy: https://operations.osmfoundation.org/policies/nominatim/ . Maximum one request/second across the application. Small one-time bulk scripts must use one thread on one machine and cache results; regular or longer-than-one-day scripts are limited to four requests/minute. Autocomplete, systematic harvesting, automated details-page scraping and geocoding-result resale are prohibited. Apps must be able to switch service on request. Do not submit personal/confidential data. OSMF terms include age and UK sanctions eligibility conditions. OSM data use requires attribution and ODbL compliance; derived databases have share-alike obligations. No explicit public-benchmark prohibition was found in the reviewed terms. Postcodes may be interpolated and address components can come from nearby place nodes; coverage or matching text alone does not prove a precise position. No live access is claimed. |
+
+### Service pricing
+
+- public-search-api: 0 USD / eligible public API request (usage; Donated public-server access within its acceptable-use policy; no reserved capacity or SLA.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; official low-volume public route selected deliberately for one public-venue research task](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | — | — | — |
+
+#### Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [0](./evaluations.md#comparison-d21a9019050d) | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose one public place for a small query and report its match, explicitly labeled latitude and longitude, and source. Use a keyless entry point directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable place and valid coordinates, and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; official low-volume public route selected deliberately for one public-venue research task · [Full configuration and evidence](./evaluations.md#comparison-d21a9019050d)
+
+[Task definition](./tasks.en.md#geocoding-access-001-v1)
+
+Invalid runs: 1
+
+- API: [Invalid run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) — 执行环境无法连通指定入口 https://nominatim.openstreetmap.org/search：DNS 把 nominatim.openstreetmap.org 解析为与 OSM 无关的轮换 IP（含 Facebook 段 2a03:2880:...:face:b00c...、31.13.84.2 等），urllib/curl/webfetch 对该入口的连接一律超时或 Network unreachable；同一容器内 example.com、api.github.com、nominatim.org、operations.osmfoundation.org 均 HTTP 200，而 www.openstreetmap.org、www.google.com 同为 HTTP 000，指向容器级 DNS/出口限制。工作目录未产生 result.json 或 cache，last_request.json 仅记录一次尝试；会话在约 290 秒时被超时终止（exit_code=-15, timed_out=true），answer.md 仅剩未完成片段。核心阻碍属于执行环境网络（DNS/出口）而非服务能力、接入门槛或执行者行为，故记 invalid_run；未做接入补测。
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| geocoding-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+—
+
+### Sources
+
+- [official_docs](https://nominatim.org/release-docs/latest/api/Search/) — checked 2026-10-08
+- [official_docs](https://nominatim.org/release-docs/latest/api/Output/) — checked 2026-10-08
+- [official_docs](https://nominatim.org/release-docs/latest/api/Faq/) — checked 2026-10-08
+- [official_docs](https://operations.osmfoundation.org/policies/nominatim/) — checked 2026-10-08
+- [official_site](https://osmfoundation.org/wiki/Terms_of_Use) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
+- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-08
+
 <a id="notion"></a>
 
 ## Notion
 
 Connected workspace with a versioned REST API, capability-scoped integrations, llms.txt, and an official MCP server.
 
-**Classification:** Workplace Collaboration / Collaborative Tables; Workplace Collaboration / Document Collaboration
+**Classification:** Productivity & Collaboration / Collaborative Tables; Productivity & Collaboration / Document Collaboration
 
 [Website](https://www.notion.com) · [Source record](../data/providers/notion.yaml) · [Back to directory](../README.md#all-services)
 
 ### Documentation and access <a id="notion-access"></a>
 
-[Docs](https://developers.notion.com) · [MCP entry](https://developers.notion.com/docs/mcp)
+[Docs](https://developers.notion.com) · [API reference](https://developers.notion.com/reference/intro) · [MCP entry](https://developers.notion.com/docs/mcp)
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://developers.notion.com/reference/intro) | [Docs](https://developers.notion.com/reference/intro) | self serve / documented | Create internal connection and grant only the test page, or create a PAT in a dedicated test workspace.; Internal connection requires workspace owner creation and explicit page sharing; PAT acts with creator permissions in the selected workspace. Free-plan PAT creation is restricted to workspace owners; being a free member alone is insufficient. |
+| [rest-api (API)](https://api.notion.com/v1) | [Docs](https://developers.notion.com/guides/get-started/internal-connections) | self serve / documented | A workspace owner creates an internal connection with the required content capabilities and grants an empty parent page, or creates a PAT with Notion API access in a dedicated workspace. Existing credentials still require checking resource access and available Free-plan capacity.; Current API version 2026-03-11 uses separate database, data_source and page objects. Creating a database also creates its first table view; initial_data_source.properties defines columns, and page properties provide editable rows. Subsequent row creation/query uses the data_source ID, while page updates use the page ID. Internal connections need explicit access to the parent page plus read/insert/update capabilities; a new token has no page access by default. PATs use their creator's permissions, and only workspace owners can create API PATs on Free. Free single-member workspaces have unlimited blocks. Multi-member Free workspaces have a 1,000 lifetime-block cap; internal-connection block-creating writes fail after the grace period, and deleting content does not replenish the allowance. This API enforcement does not apply to PATs, but is not permission to bypass plan restrictions. Free connections allow 180 requests per 60 seconds; a separate workspace-wide rate limit can also apply. Documented capability does not establish test success or permission to publish an evaluation under every account's terms. |
 | [javascript-sdk (SDK)](https://github.com/makenotion/notion-sdk-js) | [Docs](https://github.com/makenotion/notion-sdk-js) | self serve | Official client library over the REST API; credentials and resource grants remain necessary. |
 | [official-cli (CLI)](https://developers.notion.com/cli/get-started/overview) | [Docs](https://developers.notion.com/cli/get-started/overview) | self serve | Official CLI discovered in current docs; measure separately from raw REST. |
 | [hosted-mcp (MCP)](https://mcp.notion.com/mcp) | [Docs](https://developers.notion.com/guides/mcp/get-started-with-mcp) | self serve | Official hosted MCP requires interactive OAuth. Token-based open-source server is no longer actively maintained. |
@@ -4060,13 +5619,13 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 [Official pricing](https://www.notion.com/pricing)
 
-- rest-api: 0 USD / month (free_allowance; Free workspace subscription; API limits and resource permissions still apply.)
+- rest-api: 0 USD / month (free_allowance; Free workspace subscription; single-member unlimited blocks, with separate limits for multi-member Free workspaces. API rate limits and resource permissions still apply.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json) | — | — | — |
+| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260908T035504.906378Z-notion.json) | — | — | — |
 | SDK | — | — | — | — |
 | CLI | — | — | — | — |
 | MCP | — | — | — | — |
@@ -4077,7 +5636,7 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-6203194a76cd) | [100%](./evaluations.md#comparison-6203194a76cd) | 215.5k | $0.75 | $0 |
+| API | [1](./evaluations.md#comparison-8cc2ab7b2dcd) | [100%](./evaluations.md#comparison-8cc2ab7b2dcd) | 215.5k | $0.75 | $0 |
 | SDK | — | — | — | — | — |
 | CLI | — | — | — | — | — |
 | MCP | — | — | — | — | — |
@@ -4091,7 +5650,7 @@ Book-club planning meeting, September 8, 2026: Lin Qing will confirm the venue b
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-6203194a76cd)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-8cc2ab7b2dcd)
 
 [Task definition](./tasks.en.md#collaborative-tables-001-v2)
 
@@ -4115,8 +5674,21 @@ Credentials supplied · [Full configuration and evidence](./evaluations.md#compa
 
 - [official_docs](https://developers.notion.com/reference/intro) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/guides/get-started/authorization) — checked 2026-09-08
-- [official_docs](https://developers.notion.com/guides/get-started/personal-access-tokens) — checked 2026-09-08
-- [official_site](https://www.notion.com/pricing) — checked 2026-09-08
+- [official_docs](https://developers.notion.com/guides/get-started/personal-access-tokens) — checked 2026-10-08
+- [official_site](https://www.notion.com/pricing) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/guides/get-started/internal-connections) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/capabilities) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/guides/data-apis/working-with-databases) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/create-database) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/guides/data-apis/create-pages-in-a-data-source) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/query-a-data-source) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/patch-page) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/versioning) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/request-limits) — checked 2026-10-08
+- [official_docs](https://developers.notion.com/reference/workspace-block-limits) — checked 2026-10-08
+- [official_site](https://notion.notion.site/Personal-Use-Terms-of-Service-00e4e5d0f2b9411cbee6493f15779500) — checked 2026-10-08
+- [official_site](https://www.notion.so/Developer-Terms-ba4131408d0844e08330da2cbb225c20) — checked 2026-10-08
+- [official_site](https://notion.notion.site/Terms-Conditions-4e1c5dd3e3de45dfa4a8ed60f1a43da0) — checked 2026-10-08
 - [official_repo](https://github.com/makenotion/notion-sdk-js) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/cli/get-started/overview) — checked 2026-09-08
 - [official_docs](https://developers.notion.com/guides/mcp/get-started-with-mcp) — checked 2026-09-08
@@ -4151,6 +5723,102 @@ Currency reference rates via a keyed API with a free signup plan; base-currency 
 - [official_docs](https://docs.openexchangerates.org/reference/api-introduction) — checked 2026-09-09
 - [official_site](https://openexchangerates.org/signup/free) — checked 2026-09-09
 
+<a id="open-meteo"></a>
+
+## Open-Meteo
+
+Global weather forecast API with a keyless non-commercial free tier and attributed open data.
+
+**Classification:** Search & Data Access / Weather Data
+
+[Website](https://open-meteo.com/) · [Source record](../data/candidates/open-meteo.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="open-meteo-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [forecast-api (API)](https://api.open-meteo.com/v1/forecast) | [Docs](https://open-meteo.com/en/docs) | self serve / documented | No signup, API key or credit card is needed for the non-commercial free route. Commercial hosted usage requires a paid customer endpoint; the CC BY 4.0 data licence does not remove that API-use restriction. Data may be shared/adapted with attribution, a licence link and change disclosure; display a source link beside Open-Meteo data. Reviewed public terms contain no explicit prohibition on publishing benchmark summaries. Forecasts are model output, not measured observations. Default model selection can share upstream models with other services, including MET Norway and ECMWF; service alternatives are not necessarily independent forecasts. Free service has no uptime guarantee. Sources establish documentation only, not tested access. |
+
+### Service pricing
+
+- forecast-api: 0 USD / eligible free API call (usage; Non-commercial free endpoint within published limits: 600 calls/minute, 5000/hour, 10000/day and 300000/month. Large variable/time requests may count as multiple calls.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; official public read-only free noncommercial route](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | [238.5k](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 44.047586s | 0 |
+
+#### Connect this weather service, make one real weather query through the assigned route, and save the local configuration needed for later queries. Explain the setup steps completed and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-7e7df525d550) | [100%](./evaluations.md#comparison-7e7df525d550) | 238.5k | $0.02 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned route, authorized account or registration details and their origin are in ENVIRONMENT.md. Choose a public location for a small query and report its location, weather value with units and forecast or observation time. Use account-free routes directly; use only supplied identity information when registration or authorization is needed. Store necessary configuration in the assigned persistent directory and secrets only in private files. Report the configuration path, existing-account origin, self-service steps, human intervention and any extra application requirements.
+
+**Completion:** Complete the required registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable location, valid time and at least one weather value; the answer matches it and states units. Configuration is reusable by a new session without leaking secrets. Do not force registration for account-free routes or claim an existing account was registered during this run.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; official public read-only free noncommercial route · [Full configuration and evidence](./evaluations.md#comparison-7e7df525d550)
+
+[Task definition](./tasks.en.md#weather-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| weather-access-001 v1 | API | [completed](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I will be walking in central London on the morning of October 10. In Chinese, make a small table of forecast temperature and precipitation for the three hours from 09:00 to 12:00 local time. State the units, data source and query time with its time zone, and briefly identify which periods have precipitation forecast.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-728ca7b6aa38) | [100%](./evaluations.md#comparison-728ca7b6aa38) | 35.5k | $0.0042 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Date: 2026-10-10. Location: central London, using the supplied WGS84 coordinates, latitude 51.5074 and longitude -0.1278; no address lookup or geocoding is needed. Local time zone: Europe/London. Include three full hourly intervals: 09:00–10:00, 10:00–11:00 and 11:00–12:00. For each row, use near-surface air temperature at the start of the interval in degrees Celsius, and total precipitation accumulated during that hour in millimetres, including rain and snow as water equivalent. Use only the forecast available from the assigned service at query time. Report missing data honestly; do not replace it with zero or evenly divide a longer-period total into hourly values.
+
+**Completion:** Obtain a real forecast from the assigned service for the supplied coordinate vicinity and all requested periods. Valid times, time zone, temperature instants, precipitation intervals and unit conversions are correct, and values match the actual response, allowing correct rounding at displayed precision. No requested interval is omitted or repeated, and missing values are not disguised as zero. Source and query time are verifiable, and the precipitation summary is supported by the data. Verify each service against its own response; agreement between forecasting models or later observed weather is not the completion criterion.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; official public read-only free noncommercial route · [Full configuration and evidence](./evaluations.md#comparison-728ca7b6aa38)
+
+[Task definition](./tasks.en.md#weather-outing-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| weather-outing-001 v1 | API | [completed](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_site](https://open-meteo.com/) — checked 2026-10-08
+- [official_docs](https://open-meteo.com/en/docs) — checked 2026-10-08
+- [official_site](https://open-meteo.com/en/pricing) — checked 2026-10-08
+- [official_site](https://open-meteo.com/en/terms) — checked 2026-10-08
+- [official_site](https://open-meteo.com/en/licence) — checked 2026-10-08
+
 <a id="openai"></a>
 
 ## OpenAI
@@ -4179,6 +5847,208 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 
 - [official_docs](https://platform.openai.com/docs/quickstart) — checked 2026-07-07
 
+<a id="openalex"></a>
+
+## OpenAlex
+
+Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.
+
+**Classification:** Search & Data Access / Scholarly Literature Search
+
+[Website](https://openalex.org/) · [Source record](../data/candidates/openalex.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="openalex-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-rest-api (API)](https://api.openalex.org/works) | [Docs](https://help.openalex.org/api/authentication/) | self serve / documented | Current documentation allows basic no-key use. Its pricing overview lists search at $0.001 per call, list/filter at $0.0001 and single-entity retrieval as free; reranking adds $0.001. These documented categories are not a guarantee that every identifier-based request consumes zero allowance. Thus the anonymous budget covers about 100 plain searches if used for nothing else. Response headers and meta report actual usage; the quota's anonymous sharing scope was not specified in the reviewed pages. A free account raises the daily allowance to $1 with no payment method; that optional keyed route has not been registered or tested here. More than 100 requests/second or budget exhaustion triggers 429; use backoff. API pages return at most 100 results each. Official metadata is released under CC0; abstracts and linked full texts can involve third-party rights, and a paper's availability is not permission to republish it. Reviewed terms contain no explicit public-benchmark ban; access abuse, bypassing restrictions and misleading trademark use remain restricted. Crossref is one upstream source, so agreement with Crossref is not independent confirmation. No business API query was made for this source review. |
+
+### Service pricing
+
+- public-rest-api: 0 USD / request within anonymous daily allowance (usage; Anonymous allowance is $0.10 of API usage per UTC day; this is not an unlimited free API.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only](../data/experiments/evaluations/openalex-scholarly-reference-001-ds41-r1.json) | [168.2k](../data/experiments/evaluations/openalex-scholarly-access-ds41-r1.json) | 43.797491s | 0 |
+
+#### Connect this scholarly literature search service through the assigned entry point, make one real literature query to confirm that it returns an identifiable paper record, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-e571efbd864f) | [100%](./evaluations.md#comparison-e571efbd864f) | 168.2k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose a small literature query and report an actual title, identifiable document link or identifier, and source. Use a keyless entry directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable document and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only · [Full configuration and evidence](./evaluations.md#comparison-e571efbd864f)
+
+[Task definition](./tasks.en.md#scholarly-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| scholarly-access-001 v1 | API | [completed](../data/experiments/evaluations/openalex-scholarly-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### Use the assigned service to find the paper described in the attached reading note and complete its entry in my notes: original title, all authors in their original order, publication year, journal name and a clickable DOI link. Briefly explain in Chinese why it matches the clues, and identify the search source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-b5f2b1f41c23) | [100%](./evaluations.md#comparison-b5f2b1f41c23) | 104.5k | $0.0083 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Reading note: 2015; Nature; one author’s surname is Bengio; the title contains deep learning. Find the formally published paper. Author names may be full names or conventional surname-and-initial forms, but do not omit authors. No particular APA, MLA or other citation style is required. You may follow a DOI or publisher link returned by the assigned service to verify original bibliographic information. Do not replace the assigned service query with another scholarly database or general web search, or fill missing fields from memory. Only bibliographic information is needed, not full-text retrieval or a summary.
+
+**Completion:** A real query through the assigned service retrieves a paper record matching all note clues. Required bibliographic information agrees with the publisher reference frozen before execution, with no missing or reordered authors and a DOI link for the same paper. The match explanation is evidence-based and the source is verifiable. Allow reasonable case, punctuation, author-name abbreviation and DOI URL variations. No particular result ranking, output file, extra field or citation style is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only · [Full configuration and evidence](./evaluations.md#comparison-b5f2b1f41c23)
+
+[Task definition](./tasks.en.md#scholarly-reference-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| scholarly-reference-001 v1 | API | [completed](../data/experiments/evaluations/openalex-scholarly-reference-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- Published trial observation, separate from the official pricing overview: the business run openalex-scholarly-reference-001-ds41-r1 recorded $0.001 of free usage allowance for search and $0.0001 for its DOI lookup, total $0.0011. Cash service cost remained $0. In the same batch's access run, lookup by OpenAlex W-ID recorded zero usage cost. These observations do not establish why the identifier routes differed, and no extra API call was made to investigate. See the existing [public verification](https://github.com/Olorinm/agent-friendly-services/blob/faa1238a8522296fc2c6c28ed607da74a572e876/data/experiments/evidence/openalex-scholarly-reference-001-ds41-r1/public-review/verification.json).
+
+### Sources
+
+- [official_docs](https://help.openalex.org/api/authentication/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/access/pricing/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/access/example-costs/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/api/searching/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/data/works/attributes/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/data/authorships/) — checked 2026-10-08
+- [official_docs](https://help.openalex.org/data/how-its-built/) — checked 2026-10-08
+- [official_site](https://openalex.org/OpenAlex_termsofservice.pdf) — checked 2026-10-08
+
+<a id="openholidays"></a>
+
+## OpenHolidays API
+
+Free hosted public and school holiday data API with regional filters and an openly licensed data collection.
+
+**Classification:** Search & Data Access / Public Holidays
+
+[Website](https://www.openholidaysapi.org/en/) · [Source record](../data/candidates/openholidays.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="openholidays-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-holidays-api (API)](https://openholidaysapi.org/PublicHolidays) | [Docs](https://www.openholidaysapi.org/en/) | self serve / documented | PublicHolidays and SchoolHolidays are separate endpoints; response type and regional scope still matter. Date fields are calendar dates, not UTC instants. A date-range query can include a holiday overlapping its boundaries; retain the requested period when presenting results. Names are localized arrays rather than one assumed English field. No numerical request-rate allowance, dedicated capacity or uptime guarantee was found in the reviewed docs; keep one-off use low-volume and retain responses for the trial. Data is ODbL 1.0: attribution and licence notices apply to public use, with share-alike requirements where a derivative database is publicly used. This differs from the web-service software licence. No explicit public-benchmark disclosure ban was found in the reviewed service docs or data licence. Planned evidence can publish verification summaries and hashes while retaining holiday tables privately. Sources are public government and other referenced materials; agreement with another API alone is not independent verification. No live API access or task result is claimed. |
+
+### Service pricing
+
+- public-holidays-api: 0 USD / public API request (usage; Hosted API access documented as free, including commercial projects; no priced request allowance stated.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | [145.0k](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 29.527567s | 0 |
+
+#### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-0ce2de00d325) | [100%](./evaluations.md#comparison-0ce2de00d325) | 145.0k | $0.0091 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned route, permitted account or registration details and their source are in ENVIRONMENT.md. Choose a supported country or region and year for a small public-holiday query. Report the query scope, the date and name of one holiday actually returned, and the service and query source. Use account-free routes directly; if registration or authorization is required, use only the identity supplied for this run. Save necessary configuration in the designated persistent directory, with secrets only in private files. In the answer, give the configuration location, account source, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0ce2de00d325)
+
+[Task definition](./tasks.en.md#public-holidays-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I am organizing my personal schedule in Berlin for next year. Use the assigned service to find all public holidays applicable to the German state of Berlin in 2027. List their dates and holiday names in date order, give the total, and identify the query source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-39d86ae45d95) | [100%](./evaluations.md#comparison-39d86ae45d95) | 174.3k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Region: the whole German state of Berlin, not another place with the same name. Period: local Gregorian dates from 2027-01-01 through 2027-12-31, inclusive. Include public holidays applying nationally or to Berlin; exclude holidays applying only to other states, school breaks, observances that are not public holidays, and ordinary Sundays. Include public holidays even when they fall on Saturday or Sunday. Use their actual local date in Berlin; do not shift them to a weekday or infer substitute days off. Dates must identify year, month and day clearly. Use German or English holiday names returned by the service; Chinese translation is unnecessary. List the same holiday on the same date only once. This is date information for personal planning; shop or bank opening, work schedules, wages and personal leave entitlements are outside scope. Obtain real holiday data through this run’s assigned service. You may consult its official documentation to understand region and date semantics, but must not substitute another holiday service, a web calendar, examples or memory for the query.
+
+**Completion:** Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-39d86ae45d95)
+
+[Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://www.openholidaysapi.org/en/) — checked 2026-10-08
+- [official_docs](https://openholidaysapi.org/swagger/v1/swagger.json) — checked 2026-10-08
+- [official_docs](https://www.openholidaysapi.org/en/faq/) — checked 2026-10-08
+- [official_repo](https://github.com/openpotato/openholidaysapi.data/blob/main/LICENSE) — checked 2026-10-08
+- [official_docs](https://www.openholidaysapi.org/en/sources-europe/#germany) — checked 2026-10-08
+- [official_repo](https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/subdivisions.csv) — checked 2026-10-08
+- [official_repo](https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/holidays/holidays.public.csv) — checked 2026-10-08
+- [official_repo](https://github.com/openpotato/openholidaysapi/blob/main/src/webservice/Controllers/HolidaysController.cs) — checked 2026-10-08
+
 <a id="openrouter"></a>
 
 ## OpenRouter
@@ -4206,6 +6076,214 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 ### Sources
 
 - [official_docs](https://openrouter.ai/docs/quickstart) — checked 2026-07-08
+
+<a id="osrm"></a>
+
+## OSRM Public Demo API
+
+FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.
+
+**Classification:** Search & Data Access / Route Planning
+
+[Website](https://project-osrm.org/) · [Source record](../data/candidates/osrm.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="osrm-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-route-api (API)](https://router.project-osrm.org/route/v1/driving) | [Docs](https://project-osrm.org/docs/v26.5.0/http) | self serve / documented | Service price is unknown: the reviewed sources document a sponsored, anonymous public demo, but do not explicitly state a zero service fee. No registration, donation support and free/open software or map data do not establish the hosted API's price. A previous zero-cost entry was withdrawn on 2026-10-08 after source review; the original source snapshots are preserved. At most one request per second; no scraping or heavy usage. Display data attribution and a fix-the-map link as required by the operator. Cache captured responses rather than repeatedly requesting the same route; no mandatory cache lifetime was specified in the reviewed summary. FOSSGIS also hosts the Valhalla demo, and both use OSM: they are different engines, not independent operators or map truth. Latest API documentation does not prove the demo runs that software version. |
+
+### Service pricing
+
+—
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied](../data/experiments/evaluations/osrm-routing-bridge-001-ds41-r1.json) | [57.9k](../data/experiments/evaluations/osrm-routing-access-ds41-r1.json) | 16.986749s | 0 |
+
+#### Connect this route-planning service through the assigned interface and request a short car route between the two points in the attachment. Give me the service’s distance and estimated driving time to confirm it works, save reusable configuration, and explain setup steps and actual barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-6d420b99e4b1) | [100%](./evaluations.md#comparison-6d420b99e4b1) | 57.9k | $0.0054 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The setup example is on I-5 in Seattle, USA. WGS84 decimal degrees: origin latitude 47.628282, longitude -122.327649; destination latitude 47.619214, longitude -122.328222. Request an ordinary car route from origin to destination, not walking, cycling or transit, without address search. Retrieve a real route through the service and interface in ENVIRONMENT.md and report its distance and estimated driving time with units. Use account-free access directly when available. Report any additional identity, authorization or human requirement without borrowing local accounts. Save necessary installations and general configuration in the assigned persistent directory, keep secrets out of the answer, and accurately describe self-service steps, human intervention and extra applications.
+
+**Completion:** Complete necessary installation, configuration and authentication, then query the assigned interface with the given origin, destination and car mode to obtain a valid route. Report distance and time faithfully from the response, retain reusable general configuration for a fresh session without exposing secrets, and accurately state access origin and human barriers. No route file is required during setup, and the estimate need not equal a measured real-world driving time.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-6d420b99e4b1)
+
+[Task definition](./tasks.en.md#route-planning-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| route-planning-access-001 v1 | API | [completed](../data/experiments/evaluations/osrm-routing-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I am organizing a travel map and want to save a driving route across the Golden Gate Bridge from the southern point in the attachment to the northern point. Give me the total distance, the service’s estimated driving time, main roads and direction of travel, plus a route file I can keep for a map, with its source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-f0300fd67f1a) | [100%](./evaluations.md#comparison-f0300fd67f1a) | 166.3k | $0.01 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Golden Gate Bridge roadway in San Francisco Bay, USA. WGS84 decimal degrees: A, southern point, latitude 37.810193, longitude -122.477383; B, northern point, latitude 37.830233, longitude -122.479740. Use an ordinary car, travel north from A to B on the Golden Gate Bridge roadway, add no stops or backtracking, and do not substitute another bridge, ferry, walking or cycling route. This is a trip-map record, not lane-level positioning: the actual route endpoints may snap to the same road within 50 meters of the corresponding given point, and the crossing line may deviate by up to 50 meters from that road’s centerline at road-level precision. No departure time is specified; report the assigned service’s ordinary route estimate without requiring real-time traffic, current opening conditions or guaranteed arrival time. Use kilometers and estimated driving minutes. Briefly state the main roads and northbound direction without transcribing every navigation instruction. Deliver either a GPX track or a WGS84 GeoJSON LineString, optionally wrapped in a Feature or FeatureCollection. Preserve the continuous shape and endpoint order of the same real service route for later map use, rather than only two markers or a self-drawn endpoint connection substituted for that route. Query the assigned service; do not fill gaps using another service, a saved track or model memory.
+
+**Completion:** Actually query the assigned interface with A-to-B order and car mode. The delivered file represents that same returned route with correct coordinate axes, order and continuity, endpoints within the visible 50-meter limits, and a northbound Golden Gate Bridge roadway crossing within the visible 50-meter corridor tolerance checked against independent official road evidence. No other bridge, ferry, walking route, added stops or backtracking. Convert distance/time accurately from the response to kilometers/minutes with reasonable rounding, and give accurate main roads, direction, file location and source. Different services need not return identical route details, distances or times; neither another service’s output nor the independent reference-line length is a common numerical answer.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-f0300fd67f1a)
+
+[Task definition](./tasks.en.md#route-planning-bridge-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| route-planning-bridge-001 v1 | API | [completed](../data/experiments/evaluations/osrm-routing-bridge-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- Reviewed official demo policy and operator summary permit reasonable non-commercial public use; no explicit ban on publishing a small functional comparison was found in those reviewed sources. The linked full German FOSSGIS policy at https://www.fossgis.de/arbeitsgruppen/osm-server/nutzungsbedingungen/ returned an Anubis access-denied page during the 2026-10-08 source review, so this is not a claim to have reviewed its full text. The older rules below the divider on the OSRM Api-usage-policy wiki explicitly applied to a previous demo server; do not treat them as the current operator's complete terms.
+- OSM data uses ODbL, separate from the routing software licence. Attribute OpenStreetMap contributors and link its copyright/licence page when publishing route-derived material; the operator also asks for https://www.openstreetmap.org/fixthemap. OSMF's routing guidance distinguishes individual routing instructions from a derivative database. Do not turn a low-volume check into harvesting map data. Requests and coordinates are logged by the operator. Service access and driving results remain untested.
+
+### Sources
+
+- [official_docs](https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server) — checked 2026-10-08
+- [official_docs](https://project-osrm.org/docs/v26.5.0/http) — checked 2026-10-08
+- [official_docs](https://routing.openstreetmap.de/about.html) — checked 2026-10-08
+- [official_docs](https://github.com/fossgis/openstreetmap.de/blob/main/content/nutzen/dienste-osm-de.md) — checked 2026-10-08
+- [official_docs](https://github.com/Project-OSRM/osrm-backend/wiki/Api-usage-policy) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
+- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-08
+
+<a id="osv"></a>
+
+## OSV.dev
+
+Public vulnerability metadata aggregated across open-source ecosystems, queryable by package version or commit.
+
+**Classification:** Developer Tools / Dependency Security Advisories
+
+[Website](https://osv.dev/) · [Source record](../data/candidates/osv.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="osv-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-api (API)](https://api.osv.dev/v1/query) | [Docs](https://google.github.io/osv.dev/quickstart/) | self serve / documented | POST /v1/query accepts package name plus ecosystem and version, or a package URL; commit queries are also supported. Specify the version once, not in both a versioned purl and the top-level version field. GET /v1/vulns/{id} retrieves a case-sensitive record ID. Follow next_page_token until absent, including an empty page with a token. Fields include affected packages, aliases, version ranges and reference links. A fixed event is distinct from last_affected or limit; missing fixed metadata is not proof of no vulnerability. The current no-rate-limit statement is not a throughput guarantee or permission to overload the service. HTTP/1.1 responses are limited to 32 MiB; HTTP/2 is recommended for large queries. |
+
+### Service pricing
+
+- public-api: 0 USD / public API query (usage; Official free public resource; the reviewed API documentation currently states no API rate limit.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | [178.5k](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 42.586955s | 0 |
+
+#### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-7a5fd0fd8e1a) | [100%](./evaluations.md#comparison-7a5fd0fd8e1a) | 178.5k | $0.01 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The assigned service, entry point and authorized identity or credentials are in ENVIRONMENT.md. Choose a small public advisory query and report the advisory identifier, associated package name and source actually returned. Use keyless access directly when available; use only the supplied information for any required signup or authorization. Save necessary configuration in the persistent directory for this trial and keep secrets in private files. State the configuration location, origin of any existing account, self-service steps, and actual human assistance or application requirements.
+
+**Completion:** Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-7a5fd0fd8e1a)
+
+[Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| dependency-advisories-access-001 v1 | API | [completed](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I am reviewing two dependency security alerts for my project. Use the assigned service to check whether the installed version still falls within each advisory’s affected versions and identify the first fixed release for each in the 5.2.x branch. Tell me the minimum upgrade needed for these two alerts only, with links supporting your conclusions.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-644e634b8512) | [100%](./evaluations.md#comparison-644e634b8512) | 201.0k | $0.02 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alerts CVE-2025-57833 and CVE-2025-59681. Check only package-version matching and fix boundaries for these two alerts. Do not attempt to list every vulnerability, select today’s latest release, or assess project code, database configuration or exploitability. Give a short explanation in Chinese and identify the lookup source. You may follow references in records returned by the assigned service to maintainer advisories or release notes. Do not replace the assigned service with another vulnerability database, general web search or model memory. If no record is found, report uncertainty rather than conclude there is no impact. Do not install, upgrade or modify the project.
+
+**Completion:** Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-644e634b8512)
+
+[Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| dependency-advisories-check-001 v1 | API | [completed](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- OSV aggregates and enriches records from GitHub Advisory Database, PyPI, Go, Rust and other databases. Licences vary by upstream; OSV software's licence is not a blanket data licence. Preserve source identity, source licence and attribution when redistributing records or excerpts.
+- The reviewed public documentation and service announcement contain no explicit ban on small factual public tests or comparisons. No separate OSV-specific hosted-service publication agreement was identified; this is a bounded document review, not a new permission from its operator.
+- Withdrawn records are excluded from package-query responses but remain retrievable by record ID. No match does not establish that a package is secure, that all advisories are covered, or that an application cannot be exploited. Shared GHSA or other upstream records must not be counted as independent security evidence.
+
+### Sources
+
+- [official_docs](https://google.github.io/osv.dev/quickstart/) — checked 2026-10-08
+- [official_docs](https://google.github.io/osv.dev/api/) — checked 2026-10-08
+- [official_docs](https://google.github.io/osv.dev/post-v1-query/) — checked 2026-10-08
+- [official_docs](https://google.github.io/osv.dev/get-v1-vulns/) — checked 2026-10-08
+- [official_docs](https://google.github.io/osv.dev/data/) — checked 2026-10-08
+- [official_docs](https://google.github.io/osv.dev/faq/) — checked 2026-10-08
+- [official_docs](https://ossf.github.io/osv-schema/) — checked 2026-10-08
+- [official_site](https://osv.dev/blog/posts/announcing-osv-service-level-objectives/) — checked 2026-10-08
 
 <a id="outlook-mail"></a>
 
@@ -4260,7 +6338,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260908T113239.160717Z-paas-build.json) | — | — | — |
+| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260908T113239.160717Z-paas-build.json) | — | — | — |
 | MCP | — | — | — | — |
 
 ### Task results
@@ -4269,7 +6347,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [0](./evaluations.md#comparison-bc10c53a81ca) | — | — | — | — |
+| API | [0](./evaluations.md#comparison-b073a7f72e8c) | — | — | — | — |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -4281,7 +6359,7 @@ Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Deli
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-08 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-bc10c53a81ca)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-b073a7f72e8c)
 
 [Task definition](./tasks.en.md#payment-acceptance-001-v1)
 
@@ -4342,7 +6420,7 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260909T032011.000426Z-paddle.json) | — | — | — |
+| API | [Service credentials supplied](../data/experiments/evaluations/codex-20260909T032011.000426Z-paddle.json) | — | — | — |
 
 ### Task results
 
@@ -4350,7 +6428,7 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-1149cab0b0f0) | [0%](./evaluations.md#comparison-1149cab0b0f0) | 455.2k | $1.20 | $0 |
+| API | [1](./evaluations.md#comparison-3a57cb066008) | [0%](./evaluations.md#comparison-3a57cb066008) | 455.2k | $1.20 | $0 |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -4361,7 +6439,7 @@ Ebook title: 城市散步指南; price 12 USD; one-time charge; quantity 1. Deli
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-09 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1149cab0b0f0)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-3a57cb066008)
 
 [Task definition](./tasks.en.md#payment-acceptance-001-v1)
 
@@ -4446,6 +6524,104 @@ Sonar API for web-grounded answers and search, with llms.txt, an official MCP se
 ### Sources
 
 - [official_docs](https://docs.perplexity.ai/docs/getting-started/overview) — checked 2026-09-15
+
+<a id="photon"></a>
+
+## Photon Public Demo API
+
+Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.
+
+**Classification:** Search & Data Access / Geocoding
+
+[Website](https://photon.komoot.io/) · [Source record](../data/candidates/photon.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="photon-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-search-api (API)](https://photon.komoot.io/api/) | [Docs](https://photon.komoot.io/) | self serve / documented | This is the actual komoot-hosted demo, separate from installing the open-source package. Extensive use can be throttled or banned; no fixed request/second or daily limit is published. A maintainer confirmed in April 2026 that generic User-Agent/Referer combinations can trigger abuse protection, including false positives. Identify the application honestly from the first request; do not rotate identities or IPs to bypass a denial. Low-volume caching is prudent, but a mandatory cache interval was not documented in the reviewed demo policy. Latest repository features are not automatically proven deployed on the demo. OSM data licensing and attribution are separate from Photon's Apache 2.0 software licence. No explicit public-benchmark prohibition was found in the reviewed demo terms. Both Photon and Nominatim use OSM, so their agreement is not independent evidence of geographic truth. Availability remains untested. |
+
+### Service pricing
+
+- public-search-api: 0 USD / public demo API request (usage; Public project use within reasonable limits; no numeric quota or reserved service capacity is promised.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; official low-volume public route selected deliberately for one public-venue research task](../data/experiments/evaluations/photon-geocoding-venue-001-ds41-r1.json) | [253.5k](../data/experiments/evaluations/photon-geocoding-access-ds41-r1.json) | 75.763506s | 0 |
+
+#### Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-3bcbfb46bd35) | [100%](./evaluations.md#comparison-3bcbfb46bd35) | 253.5k | $0.01 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose one public place for a small query and report its match, explicitly labeled latitude and longitude, and source. Use a keyless entry point directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.
+
+**Completion:** Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable place and valid coordinates, and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; official low-volume public route selected deliberately for one public-venue research task · [Full configuration and evidence](./evaluations.md#comparison-3bcbfb46bd35)
+
+[Task definition](./tasks.en.md#geocoding-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| geocoding-access-001 v1 | API | [completed](../data/experiments/evaluations/photon-geocoding-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I want to mark the British Museum on a travel map. Use the assigned service to convert the venue address in the attachment to usable coordinates. Answer in Chinese with the matched place name, explicitly labeled WGS84 decimal latitude and longitude, address information actually returned by the service, and data source. Explain whether the location represents the venue, an entrance or a coarser area.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-c820e750045c) | [100%](./evaluations.md#comparison-c820e750045c) | 100.3k | $0.0090 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Place: The British Museum. Address: Great Russell Street, London WC1B 3DG, United Kingdom. The purpose is a venue marker for an itinerary overview. A venue center or entrance is acceptable, with a place-level position within 200 meters of the venue’s official location point; exact doorway navigation is unnecessary. A street, postal-code or city center must not be presented as the venue. Use only actual query results from the assigned service. Disclose missing address fields rather than inventing them, distinguish the supplied address from the returned address, and state when adequate precision is unavailable.
+
+**Completion:** A real query through the assigned service matches the British Museum in London or its entrance. Final coordinates agree with that object’s real response, with correct axes and units, and lie within 200 meters of the independently frozen official venue point, allowing reasonable display rounding. Name, location and returned object semantics jointly support the venue identity; proximity alone does not turn a coarse area object into a venue match. The source, returned address and granularity explanation are verifiable, without invented missing fields. Services need not return identical coordinates, word-for-word addresses or a fixed field set.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-08 (UTC)
+
+Access preparation: none; official low-volume public route selected deliberately for one public-venue research task · [Full configuration and evidence](./evaluations.md#comparison-c820e750045c)
+
+[Task definition](./tasks.en.md#geocoding-venue-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| geocoding-venue-001 v1 | API | [completed](../data/experiments/evaluations/photon-geocoding-venue-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://photon.komoot.io/) — checked 2026-10-08
+- [official_docs](https://github.com/komoot/photon) — checked 2026-10-08
+- [official_docs](https://github.com/komoot/photon/blob/master/docs/api-v1.md) — checked 2026-10-08
+- [official_site](https://github.com/komoot/photon/discussions/1044) — checked 2026-10-08
+- [official_site](https://github.com/komoot/photon/discussions/598) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
+- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-08
 
 <a id="pinecone"></a>
 
@@ -4637,6 +6813,110 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 ### Sources
 
 - [official_docs](https://qdrant.tech/documentation/overview/) — checked 2026-09-15
+
+<a id="quickchart"></a>
+
+## QuickChart
+
+Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.
+
+**Classification:** Productivity & Collaboration / QR Code Images
+
+[Website](https://quickchart.io/qr-code-api/) · [Source record](../data/candidates/quickchart.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="quickchart-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-qr-api (API)](https://quickchart.io/qr) | [Docs](https://quickchart.io/documentation/qr-codes/) | self serve / documented | Community uses shared servers with variable latency and no SLA. The documented quota does not establish how anonymous requests share an IP-level allowance or its reset boundary. Static /qr stores the requested content in the image; scan analytics, editable redirects and paid dynamic QR records are different products. No account resource needs deletion after saving a static image. |
+
+### Service pricing
+
+- public-qr-api: 0 USD / Community static QR render within free limits (usage; QR pricing lists Community at USD 0/month and the QR overview explicitly offers rendering free of charge.)
+
+- public-qr-api: 1000 QR codes / month (free_allowance; Community static QR images, with a separate limit of 60 QR codes per minute; dynamic QR codes are not included.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; public static QR APIs, no account/key/email/payment supplied](../data/experiments/evaluations/quickchart-qr-travel-link-001-ds41-r1.json) | [127.3k](../data/experiments/evaluations/quickchart-qr-access-ds41-r1.json) | 58.362095s | 0 |
+
+#### Connect this QR code service, generate and save a test QR image through the specified entry point, and confirm that I can start using it. Retain the general configuration needed for later calls and explain the setup steps and actual access barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-1c64f31025f0) | [100%](./evaluations.md#comparison-1c64f31025f0) | 127.3k | $0.0082 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The test content is https://example.com/ . Save an openable PNG QR image that decodes to exactly this URL. Generate it through the service and entry point specified in ENVIRONMENT.md; use an account-free route directly when available. Store necessary installations and general configuration in the designated persistent directory. Report self-service steps, human intervention, extra applications or specific blockers without exposing secrets.
+
+**Completion:** Necessary installation and configuration are complete. The specified service actually generates a saved, openable PNG whose independently decoded content exactly matches the test URL. A fresh session can reuse the general configuration. Access provenance, human steps and blockers are accurately described without exposing secrets. Access does not require a particular pixel size, color scheme, quiet-zone width or physical phone scan.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; public static QR APIs, no account/key/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-1c64f31025f0)
+
+[Task definition](./tasks.en.md#qr-codes-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| qr-codes-access-001 v1 | API | [completed](../data/experiments/evaluations/quickchart-qr-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### Turn the national park travel-guide link in the materials into a static PNG QR code for my printed travel handout. Use the requested size and colors, make scanning return the complete original link directly, and give me the image file.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-0f505e0eb8fb) | [100%](./evaluations.md#comparison-0f505e0eb8fb) | 145.8k | $0.0084 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Original URL: https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 . The image must be 600×600 pixels with black modules on an opaque white background; grayscale antialiasing at module edges is allowed. Include only this one QR code, without text or a logo. Decoding must yield the complete original URL character for character, without a short link, tracking redirect, or added, removed or rewritten query parameters. Generate the image through the specified service, save it locally and give its file location. Do not visit the destination, physically print the image or scan it with a phone.
+
+**Completion:** The specified service actually generates the delivered, openable PNG. Its dimensions are exactly 600×600, the white background is opaque, the modules are black with only grayscale edge pixels, and there is no extra text or logo. Independent offline decoding returns raw bytes exactly equal to the visible complete ASCII URL, without omissions, rewriting or a tracking wrapper; the answer identifies the real file. Different QR versions, error correction levels, masks, PNG color modes and compression are allowed. Pixel or file-hash equality across services, measured quiet-zone modules, DPI and physical printing performance are not completion criteria.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; public static QR APIs, no account/key/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0f505e0eb8fb)
+
+[Task definition](./tasks.en.md#qr-codes-travel-link-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| qr-codes-travel-link-001 v1 | API | [completed](../data/experiments/evaluations/quickchart-qr-travel-link-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- The official QR overview permits use of generated QR images for any purpose, including public or printed material; no required image attribution or explicit public-comparison prohibition was identified in the reviewed terms. The generated-image permission is separate from licensing QuickChart's source code or purchasing paid features. Supplied content must still respect others' rights and the service content rules.
+- The privacy policy says ordinary QR images/payloads are rendered on demand and not stored, with opt-in short URLs as an exception. It also allows temporary request logging for support/debugging, potentially including GET payloads. Privacy states seven-day log deletion while the security page states thirty days; that inconsistency is unresolved. Do not promise zero retention or submit secrets based on the marketing summary. The discovery review preceding trials used documentation only; independent access and task outcomes, including trial-specific service costs, are recorded in evaluations.
+
+### Sources
+
+- [official_docs](https://quickchart.io/documentation/qr-codes/) — checked 2026-10-08
+- [official_site](https://quickchart.io/qr-code-api/) — checked 2026-10-08
+- [official_site](https://quickchart.io/pricing/qr/) — checked 2026-10-08
+- [official_site](https://quickchart.io/terms/) — checked 2026-10-08
+- [official_site](https://quickchart.io/privacy/) — checked 2026-10-08
+- [official_site](https://quickchart.io/security/) — checked 2026-10-08
 
 <a id="quiver-quantitative"></a>
 
@@ -4910,11 +7190,11 @@ Google Flights extraction endpoint charged in platform credits rather than one c
 
 <a id="searchapi"></a>
 
-## SearchApi Google Flights
+## SearchApi
 
-Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.
+Google web-search and flight-results APIs, plus a hosted MCP integration; free signup requires a human account owner.
 
-**Classification:** Travel / Flights
+**Classification:** Travel / Flights; Search & Data Access / Web Search
 
 [Website](https://www.searchapi.io/) · [Source record](../data/candidates/searchapi.yaml) · [Back to directory](../README.md#all-services)
 
@@ -4922,10 +7202,13 @@ Google Flights extraction API and a hosted MCP integration supporting token or b
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
+| [google-search-api (API)](https://www.searchapi.io/api/v1/search) | [Docs](https://www.searchapi.io/docs/google) | self serve / documented | Requires: platform_account; A human must register the account; the form requests full name, email and password, with Google/GitHub sign-in alternatives. Automated registration is prohibited.; GET with engine=google and query q returns organic result titles, links and snippets. The documentation supports ordinary search queries; directly reading the returned sources is separate from search and does not establish a URL-extraction capability here. Pricing states an hourly ceiling of 20% of plan credits; the trial's exact effective counter is untested. No account, confirmation email, key or search result was obtained during this review. |
 | [google-flights-api (API)](https://www.searchapi.io/docs/google-flights-api) | [Docs](https://www.searchapi.io/docs/google-flights-api) | self serve | — |
 | [hosted-mcp (MCP)](https://www.searchapi.io/mcp) | [Docs](https://www.searchapi.io/integrations/mcp) | — | Authorize in browser when choosing OAuth; Supports browser OAuth or a separate MCP token. Which tools expose the flight task remains untested. |
 
 ### Service pricing
+
+- google-search-api: 100 requests / trial (free_allowance; Advertised signup allowance, not a verified recurring free plan or a second allowance per engine.)
 
 - google-flights-api: 100 requests / trial (free_allowance; Product-page trial; whether shared across engines requires account verification.)
 
@@ -4935,6 +7218,11 @@ Google Flights extraction API and a hosted MCP integration supporting token or b
 
 ### Sources
 
+- [official_docs](https://www.searchapi.io/docs/google) — checked 2026-10-08
+- [official_site](https://www.searchapi.io/) — checked 2026-10-08
+- [official_site](https://www.searchapi.io/pricing) — checked 2026-10-08
+- [official_site](https://www.searchapi.io/users/sign_up) — checked 2026-10-08
+- [official_site](https://www.searchapi.io/legal/terms) — checked 2026-10-08
 - [official_docs](https://www.searchapi.io/docs/google-flights-api) — checked 2026-09-07
 - [official_site](https://www.searchapi.io/google-flights-api) — checked 2026-09-07
 - [official_docs](https://www.searchapi.io/integrations/mcp) — checked 2026-09-07
@@ -4953,11 +7241,105 @@ Official public company filings and XBRL financial facts; data.sec.gov reading A
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | [Docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | self serve / documented | Reading APIs are separate from filer submission APIs. Automated-access policy applies. Facts need fiscal-period, unit and amendment interpretation; CORS is not supported. |
+| [data-api (API)](https://data.sec.gov/) | [Docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) | self serve / documented | Public reading APIs require no account or key. Fair access requires an identifying User-Agent with contact information and no more than 10 requests/second. Companyfacts and submissions support financial facts and filing provenance. Frames align to calendar periods and do not substitute for each company's fiscal year; units, duration, filing cutoff and amendments need interpretation. CORS is not supported. Filer submission APIs are separate. |
 
 ### Service pricing
 
-—
+- data-api: 0 USD / request (usage; Public EDGAR data access, subject to SEC fair-access policy.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; contact identity only](../data/experiments/evaluations/sec-edgar-statements-001-ds41-r1.json) | [111.5k](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 40.119431s | 0 |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-33be83cbd5a7) | [100%](./evaluations.md#comparison-33be83cbd5a7) | 111.5k | $0.0100 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; contact identity only · [Full configuration and evidence](./evaluations.md#comparison-33be83cbd5a7)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-01f9c83debc7) | [100%](./evaluations.md#comparison-01f9c83debc7) | 96.3k | $0.0084 | $0 |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.
+
+**Completion:** All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; contact identity only · [Full configuration and evidence](./evaluations.md#comparison-01f9c83debc7)
+
+[Task definition](./tasks.en.md#financial-statements-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-statements-001 v1 | API | [completed](../data/experiments/evaluations/sec-edgar-statements-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-10-08
+- [official_docs](https://www.sec.gov/about/webmaster-frequently-asked-questions) — checked 2026-10-08
+- [official_docs](https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data) — checked 2026-10-08
+
+<a id="semantic-scholar"></a>
+
+## Semantic Scholar
+
+Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.
+
+**Classification:** Search & Data Access / Scholarly Literature Search
+
+[Website](https://www.semanticscholar.org/) · [Source record](../data/candidates/semantic-scholar.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="semantic-scholar-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-graph-api (API)](https://api.semanticscholar.org/graph/v1) | [Docs](https://api.semanticscholar.org/api-docs/graph) | self serve / documented | The published 1,000 requests/second is shared by all unauthenticated users, not an individual allowance; heavy traffic can impose tighter limits. A requested API key is sent by email and starts at 1 request/second, but grant timing and eligibility were not verified. No key was requested. Relevance search returns at most 1,000 ranked results and 100 per page; an empty field or match score is not proof of identity or a complete corpus. The API licence requires Semantic Scholar attribution for public contributions and its platform-paper citation for scientific publications. Data licences and third-party content rights apply separately; the API licence is not a blanket CC0 licence. Reviewed API terms contain no explicit public-comparison ban, while prohibiting rate-limit circumvention and repackaging/reselling the API. No service task was executed. |
+
+### Service pricing
+
+- public-graph-api: 0 USD / public API request (usage; Free public endpoints within shared throttling; no individual anonymous quota is promised.)
 
 ### Task results
 
@@ -4965,7 +7347,11 @@ Official public company filings and XBRL financial facts; data.sec.gov reading A
 
 ### Sources
 
-- [official_docs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) — checked 2026-09-15
+- [official_docs](https://www.semanticscholar.org/product/api) — checked 2026-10-08
+- [official_docs](https://www.semanticscholar.org/product/api/tutorial) — checked 2026-10-08
+- [official_docs](https://api.semanticscholar.org/api-docs/graph) — checked 2026-10-08
+- [official_docs](https://api.semanticscholar.org/graph/v1/swagger.json) — checked 2026-10-08
+- [official_site](https://www.semanticscholar.org/product/api/license) — checked 2026-10-08
 
 <a id="sentry"></a>
 
@@ -5035,7 +7421,7 @@ Real-time JSON API for Google and other search engines' results, with an officia
 
 ## Serper
 
-Google results API with signup trial queries; actual account flow and authentication remain untested.
+Google results API with initial free queries. Its terms describe a B2B service rather than consumer access; personal eligibility and authenticated setup remain unverified.
 
 **Classification:** Search & Data Access / Web Search
 
@@ -5045,7 +7431,7 @@ Google results API with signup trial queries; actual account flow and authentica
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [search-api (API)](https://serper.dev/) | — | self serve / documented | Google results API with signup trial queries; actual account flow and authentication remain untested. |
+| [search-api (API)](https://serper.dev/) | [Docs](https://serper.dev/) | self serve / restricted | Requires: platform_account; The homepage advertises 2500 initial free queries without a card; requests stop when credits are exhausted. No monthly renewal or trial expiry is established here. The dashboard/playground is the setup lead, but the public Playground redirected to login, so API authentication and a callable endpoint were not established by this review. The homepage remains a discovery lead rather than an asserted API endpoint. No registration or search was performed. |
 
 ### Service pricing
 
@@ -5057,7 +7443,9 @@ Google results API with signup trial queries; actual account flow and authentica
 
 ### Sources
 
-- [official_site](https://serper.dev/) — checked 2026-09-07
+- [official_site](https://serper.dev/) — checked 2026-10-08
+- [official_site](https://serper.dev/signup) — checked 2026-10-08
+- [official_site](https://serper.dev/terms) — checked 2026-10-08
 
 <a id="shopify"></a>
 
@@ -5103,11 +7491,13 @@ Company fundamentals and price data with API and CSV access advertised across fr
 
 ### Documentation and access <a id="simfin-access"></a>
 
-—
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [data-sdk (SDK)](https://github.com/SimFin/simfin) | [Docs](https://github.com/SimFin/simfin#readme) | self serve / documented | Requires: platform_account; The official simfin Python package downloads datasets, caches them on disk and loads Pandas tables. Registration supplies a free API key; paid-only datasets are separate. Free bulk data is delayed, so availability of each requested fiscal year and original-report links needs verification. The pricing FAQ restricts data use to a valid subscription and requires deletion of downloaded data and backups after cancellation; raw evidence publication is not implied. |
 
 ### Service pricing
 
-—
+- data-sdk: 0 USD / download (usage; Datasets included in the free account; excludes paid datasets and upgrades.)
 
 ### Task results
 
@@ -5115,11 +7505,14 @@ Company fundamentals and price data with API and CSV access advertised across fr
 
 ### Notes
 
-- Free account exists, but API versus bulk-CSV permissions and history differ. Exact API setup documentation and execution allowance still need verification.
+- Free Web API and bulk downloads have different history limits. The pricing card says five years of fundamentals, while its comparison table says seven API years and five delayed bulk years. The free Web API rate is two calls/second and the filing allowance is eight/day; 500 monthly high-speed credits apply to backtesting, not an API request allowance. Actual FY2025 coverage and filing provenance through the selected route remain untested.
 
 ### Sources
 
-- [official_site](https://www.simfin.com/en/prices/) — checked 2026-09-09
+- [official_site](https://www.simfin.com/en/prices/) — checked 2026-10-08
+- [official_repo](https://github.com/SimFin/simfin) — checked 2026-10-08
+- [official_site](https://www.simfin.com/en/fundamental-data-download/) — checked 2026-10-08
+- [official_site](https://www.simfin.com/en/technical-updates-to-api-v3-and-bulk-download/) — checked 2026-10-08
 
 <a id="skootle-google-flights"></a>
 
@@ -5148,6 +7541,37 @@ A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and
 ### Sources
 
 - [publisher_listing](https://apify.com/skootle/google-flights-scraper) — checked 2026-09-07
+
+<a id="skyaccess"></a>
+
+## SkyAccess
+
+Private-jet empty-leg search, indicative charter estimates and booking links through a public remote MCP.
+
+**Classification:** Travel / Flights
+
+[Website](https://skyaccess.com/) · [Source record](../data/candidates/skyaccess.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="skyaccess-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [remote-mcp (MCP)](https://mcp.skyaccess.com/mcp) | [Docs](https://github.com/sky-access/skyaccess-mcp) | self serve / documented | Review and complete any purchase on the returned booking page.; Stateless Streamable HTTP; POST requests only. Published limit: 30 tool calls per minute per IP. Search returns at most five listings; unknown prices can survive the maximum-price filter. Estimates are indicative. request_booking submits a contact enquiry, with a separate limit of ten per hour. Read-only search is distinct from asking a specialist to contact the traveler. |
+
+### Service pricing
+
+- remote-mcp: 0 USD / MCP tool call (usage; Published free connector; flight purchase costs are separate.)
+
+### Task results
+
+—
+
+### Sources
+
+- [publisher_listing](https://github.com/Olorinm/agent-friendly-services/pull/13) — checked 2026-10-08
+- [official_repo](https://github.com/sky-access/skyaccess-mcp) — checked 2026-10-08
+- [publisher_listing](https://registry.modelcontextprotocol.io/v0/servers?search=com.skyaccess) — checked 2026-10-08
+- [official_site](https://skyaccess.com/privacy#connector) — checked 2026-10-08
 
 <a id="skyscanner"></a>
 
@@ -5341,7 +7765,7 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 ## Tavily
 
-Search and extraction API built for AI agents, with llms.txt, an official MCP server, and a free tier.
+Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 
 **Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
 
@@ -5353,14 +7777,23 @@ Search and extraction API built for AI agents, with llms.txt, an official MCP se
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [search-api (API)](https://docs.tavily.com/documentation/quickstart) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Paid overage setting is separate. |
-| [extract-api (API)](https://api.tavily.com/extract) | [Docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) | — | Extract accepts one or more URLs. Search pricing and search trials do not establish extraction cost or success. |
+| [keyless-search-api (API)](https://api.tavily.com/search) | [Docs](https://docs.tavily.com/documentation/keyless) | self serve / documented | Requires X-Tavily-Access-Mode: keyless. The publisher documents the standard Search parameters and response schema. A valid Authorization key takes precedence and uses account limits instead, so keyless access must be recorded separately from preconfigured credentials. No task success is implied. |
+| [public-mcp (MCP)](https://mcp.tavily.com/mcp/) | [Docs](https://docs.tavily.com/documentation/keyless) | self serve / documented | Free rate-limited Search and Extract require X-Tavily-Access-Mode: keyless; without that header the server requests login. Clients that accept only a server URL cannot select this mode. Numerical keyless limits are not stated. Crawl, Map and Research require a key and are outside this route. |
+| [search-api (API)](https://api.tavily.com/search) | [Docs](https://docs.tavily.com/documentation/quickstart) | self serve / documented | Basic search costs 1 credit; advanced search 2. Development keys have a 100 requests/minute limit. The 1000 credits/month allowance is separate from anonymous access, and is not 1000 advanced searches. Paid overage must be enabled separately; a free-only test should check the account setting and balance. |
+| [keyless-extract-api (API)](https://api.tavily.com/extract) | [Docs](https://docs.tavily.com/documentation/keyless) | self serve / documented | POST urls (one URL or up to 20) with X-Tavily-Access-Mode: keyless. A valid Authorization key takes precedence and uses account limits. Markdown is the default; basic and advanced depths are available. An optional query selects relevant chunks instead of the whole page: chunks_per_source ranges from 1 to 5, each at most 500 characters. Inspect both results and failed_results even for HTTP 200. Timeout ranges from 1 to 60 seconds. Account credits do not quantify anonymous limits. Terms section 3.2(x) restrict third-party disclosure of performance information or analysis; free technical access is not evidence of benchmark publication permission. No extraction trial is implied. |
+| [extract-api (API)](https://api.tavily.com/extract) | [Docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) | self serve / documented | Requires: platform_account; Extract accepts up to 20 supplied URLs. Basic costs one credit per five successful URL extractions; advanced costs two. Failed extractions are not charged. The 1000 monthly account credits are shared with other endpoints. Query-based chunks and partial failures follow the same schema described under keyless-extract-api. Keyed usage and anonymous access are distinct; Search trials do not establish extraction success. Terms section 3.2(x) also applies to performance disclosure for this route. |
 
 ### Service pricing
 
 [Official pricing](https://www.tavily.com/pricing)
 
+- keyless-search-api: 0 USD / request (usage; Free keyless Search, subject to rate limits; the numerical allowance is not published here.)
+
 - search-api: 1000 credits / month (free_allowance; Free account allowance, not requests.)
+
+- keyless-extract-api: 0 USD / request (usage; Free rate-limited keyless Extract; numerical anonymous quota is not published here.)
+
+- extract-api: 1000 credits / month (free_allowance; Shared Free account allowance, not an additional allowance for Extract.)
 
 ### Task results
 
@@ -5368,9 +7801,12 @@ Search and extraction API built for AI agents, with llms.txt, an official MCP se
 
 ### Sources
 
-- [official_docs](https://docs.tavily.com/documentation/quickstart) — checked 2026-09-07
-- [official_docs](https://docs.tavily.com/documentation/api-credits) — checked 2026-09-07
-- [official_docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) — checked 2026-09-15
+- [official_docs](https://docs.tavily.com/documentation/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.tavily.com/documentation/api-credits) — checked 2026-10-08
+- [official_docs](https://docs.tavily.com/documentation/keyless) — checked 2026-10-08
+- [official_docs](https://docs.tavily.com/documentation/rate-limits) — checked 2026-10-08
+- [official_docs](https://docs.tavily.com/documentation/api-reference/endpoint/extract) — checked 2026-10-08
+- [official_site](https://www.tavily.com/terms) — checked 2026-10-08
 
 <a id="telegram"></a>
 
@@ -5431,6 +7867,40 @@ Disposable email receiving service with a developer API for automated email work
 ### Sources
 
 - [official_docs](https://temp-mail.org/en/api/) — checked 2026-09-09
+
+<a id="tencent-agently-mail"></a>
+
+## Tencent Agently Mail
+
+Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for reading, searching and sending email.
+
+**Classification:** Communication / Mailboxes
+
+[Website](https://agent.qq.com/) · [Source record](../data/candidates/tencent-agently-mail.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="tencent-agently-mail-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [mail-cli (CLI)](https://github.com/Tencent/AgentlyMail) | [Docs](https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md) | self serve / documented | Requires: platform_account; Complete the browser login and authorize mailbox access for the CLI.; Install @tencent-qqmail/agently-cli; auth login starts browser authorization and +me returns mailbox identity and aliases. Sending, replies and forwarding are also documented and require an explicit user-authorized action. The guide documents a rate-limit error with Retry-After, but no numeric allowance. Deleted mail is retained in Trash for 30 days before permanent deletion. Pricing, retention outside deleted mail, total quota and suitability for third-party account recovery remain unknown. |
+
+### Service pricing
+
+—
+
+### Task results
+
+—
+
+### Notes
+
+- Separate product from agentmail.to. Public documentation does not establish successful registration or a completed mail task.
+- Reviewed CLI documentation does not establish creating a fresh independent test mailbox, alias provisioning, or a per-inbox read-only authorization scope. Access to an existing registration mailbox is not evidence that its full credential is suitable for an isolated executor. Service terms governing public test publication have not been fully retrieved; repository licence alone is not a service-use permission.
+
+### Sources
+
+- [official_repo](https://github.com/Tencent/AgentlyMail) — checked 2026-10-08
+- [official_docs](https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md) — checked 2026-10-08
 
 <a id="tiingo"></a>
 
@@ -5521,7 +7991,7 @@ Public trading disclosures through keyless REST and MCP, with attribution and or
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-bd611da6270b) | [0%](./evaluations.md#comparison-bd611da6270b) | 107.3k | $0.0071 | $0 |
+| API | [1](./evaluations.md#comparison-f170f4b6c34f) | [0%](./evaluations.md#comparison-f170f4b6c34f) | 107.3k | $0.0071 | $0 |
 | MCP | — | — | — | — | — |
 
 <details>
@@ -5533,7 +8003,7 @@ The service, required interface, and any supplied account or signup information 
 
 1.18.29 · glm-5.3-flash / high · 600s · 2026-09-15 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-bd611da6270b)
+No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-f170f4b6c34f)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
@@ -5621,7 +8091,7 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 ## Turso
 
-Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage.
+Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.
 
 **Classification:** Databases / Hosted Relational Databases
 
@@ -5631,8 +8101,10 @@ Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/cli/introduction) | self serve / documented | Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million writes/month. Signup/login required; local engine alone does not satisfy remote storage. |
-| [platform-api (API)](https://docs.turso.tech/api-reference/introduction) | [Docs](https://docs.turso.tech/api-reference/introduction) | self serve | Management API; SQL connectivity uses separate database credentials created during execution. Provision only within a dedicated free test organization; no precreated database. |
+| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/quickstart) | self serve / documented | Requires: platform_account; Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month. Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine: --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not establish remote persistence. Paid overages are separate from the free allowance. |
+| [platform-api (API)](https://api.turso.tech/v1/) | [Docs](https://docs.turso.tech/api-reference/quickstart) | self serve | Account/organization management uses a Bearer Platform API token, which can be organization-scoped. This provisions databases; SQL uses a separate database token and endpoint. The quickstart obtains the platform token through an authenticated CLI account. Existing account access and new database provisioning are distinct steps. |
+| [sql-http-api (API)](https://docs.turso.tech/sdk/http/quickstart) | [Docs](https://docs.turso.tech/sdk/http/quickstart) | self serve / documented | SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer token. The endpoint is specific to each database, so the setup guide is retained as the entry clue. It supports both cloud engines. Provisioning and account authorization are separate. A list of pipeline requests is not itself an atomic transaction. The HTTP guide documents connection reuse for explicit transactions and states a 5-second transaction window and 10-second idle-connection timeout. |
+| [cloud-sdk (SDK)](https://docs.turso.tech/sdk/ts/quickstart) | [Docs](https://docs.turso.tech/sdk/ts/quickstart) | self serve / documented | For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local SDK modes and cached replicas do not by themselves prove a fresh remote read. For libSQL, the official reference documents atomic client.batch transactions: all statements commit on success and any failure rolls back the batch. Interactive transactions require appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT conflict handling only reverses the failing statement, not prior statements in the transaction. |
 
 ### Service pricing
 
@@ -5643,16 +8115,134 @@ Free cloud account: 100 databases, 5 GB, 500 million reads/month and 10 million 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | CLI | — | — | — | — |
-| API | [Credentials supplied before trial](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | — | — | — |
+| API (platform-api) | [Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database](../data/experiments/evaluations/turso-atomic-import-001-ds41-r1.json) | [232.6k](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 50.403294s | 0 |
+| API (sql-http-api) | — | — | — | — |
+| SDK | — | — | — | — |
+
+#### Connect to this database service through the specified interface, prepare an empty remote test database dedicated to this trial, verify it with a query that writes no business data, and save the connection configuration. Explain the setup steps, human requirements, and free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (platform-api) | [1](./evaluations.md#comparison-7a86e94d64f8) | [100%](./evaluations.md#comparison-7a86e94d64f8) | 232.6k | $0.01 | $0 |
+| CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, interface, authorized account or signup identity and its origin are specified in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed; use account-free access directly. Create only this trial's separate test database and the minimum parent resources required, without accessing existing user databases. Confirm connectivity with a read-only database query; create no business tables or records. Save resource identifiers and connection configuration in the designated persistent directory. Keep secrets in private files and report only their configuration location. Accurately state existing-account origin, steps completed without assistance, human intervention, special applications and specific blockers.
+
+**Completion:** Complete necessary access through the specified service and interface, create a separate empty test database and query it successfully. Installation and configuration are reusable in a fresh session without credential exposure. Do not count an existing account as newly registered or force signup for account-free access. Accurately explain the evidence for free-tier or expiry conditions and any unknowns. Installation, resource listings, creation receipts and health checks alone do not prove the database can be queried.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database · [Full configuration and evidence](./evaluations.md#comparison-7a86e94d64f8)
+
+[Task definition](./tasks.en.md#database-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (4)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-restore-mirror-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-restore-access-ds41-r1.json) | 2026-10-08 |
+| database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
 
 ### Task results
+
+#### My personal book catalog needs file-based batch imports without leaving a partial batch when an ID is duplicated. Build a reusable importer protected by a database atomic operation or transaction covering the whole batch. Actually test that the erroneous sample is rejected as a whole and the corrected sample is fully saved in the two supplied independent test tables, preserving existing books. Deliver the importer, brief usage instructions and both outcomes; keep credentials separate.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (platform-api) | [1](./evaluations.md#comparison-eb4cee33eee8) | [100%](./evaluations.md#comparison-eb4cee33eee8) | 327.9k | $0.02 | $0 |
+| CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+ENVIRONMENT.md maps reject_case and accept_case to actual remote table names and connection configuration. Both have book_id (non-null integer primary key) and title (non-null text), initially containing only book_id=100,title=已有书目. The UTF-8 CSV attachments attachments/batch-reject.csv and attachments/batch-corrected.csv have the header book_id,title. Import the erroneous file only into reject_case and the corrected file only into accept_case; do not overwrite one case with the other. The same delivered importer must accept a file path and one of the two authorized target tables, read the file rows and not hard-code the expected final state. The erroneous sample must actually trigger a database duplicate-primary-key rejection; local prevalidation alone is insufficient. Do not ignore or replace conflicting records. Each complete file must commit or be rejected together. A database-atomic single bulk statement or a whole-batch transaction is acceptable, with no prescribed language, client or number of SQL statements. Do not UPDATE, DELETE, replace records, alter constraints, empty, drop or recreate tables to repair data or simulate rollback; normal rollback inside an uncommitted transaction is allowed. Leave both final table states available for verification and report each actual outcome and database error.
+
+**Completion:** Actually run the same delivered importer through the assigned service: the database rejects the erroneous file, no new rows from that batch remain committed, and original rows are unchanged; all corrected-file rows commit to the other table while original rows remain unchanged. Preserve schema and constraints. The observed implementation uses a verifiable database-atomic batch operation or correctly handled transaction, without compensating changes after commit. Preserve the tested importer and brief usable instructions, and report both outcomes accurately.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database · [Full configuration and evidence](./evaluations.md#comparison-eb4cee33eee8)
+
+[Task definition](./tasks.en.md#database-atomic-import-001-v1)
+
+</details>
+
+#### Run a backup and restore rehearsal for my personal todo app: export the source database as a logical backup I can download and keep, create a separate empty database on the same service, and actually restore from that backup without changing the source. Reconnect to the new database after restoration to check it. Deliver the backup, brief restoration instructions, the new database location, each table’s row count and verification results, and explain the new database’s free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (platform-api) | [1](./evaluations.md#comparison-3961c742b40e) | [0%](./evaluations.md#comparison-3961c742b40e) | — | — | $0 |
+| CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
+
+**Additional context from controller review; original verdict unchanged:**
+
+- [turso-restore-mirror-001-ds41-r1](../data/experiments/evaluations/turso-restore-mirror-001-ds41-r1.json): Controller clarification; the original independent verdict is unchanged. Backup, restoration to a new database, complete schema and data, reconnection and an unchanged source were independently verified. The run exhausted 25 model requests after about 86 seconds and omitted the required locations, recovery instructions and result/expiry explanation. This was a user-delivery gap, not a failed restore or service rejection; time remained within the 600-second limit.
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The source is this run’s dedicated remote database, populated with synthetic data by the preparer after setup; its identity and connection configuration are in ENVIRONMENT.md. It has two application tables: lists (id, name) and todos (id, list_id, title, done, note), with list_id referencing lists.id. Preserve both tables’ column names, data-type semantics, primary keys, foreign keys, nullability constraints, default values and every original record. Preserve list membership, completion status, text, and the distinction between an empty note and a missing note. The destination must be a separate remote database created during this run with no application tables initially; it may share a project or compute with the source. The backup must contain the application schema and data needed to restore on a compatible SQL engine even if the source is unavailable later, rather than just a snapshot or branch link dependent on the original service. Cross-dialect restoration is not required. Service-internal tables, account permissions and the host machine are outside scope. No other writer will modify the source during this task; do not change or delete its application tables or records.
+
+**Completion:** Through the assigned service and route, export a real backup containing both tables’ logical schema and every record, then actually use it to restore into a separate remote destination created during this run and initially empty. New connections can read equivalent application schema and all original records, while the source application schema and rows remain unchanged. Deliver the retained backup, usable brief restoration instructions, destination location, accurate per-table counts and verification results, and disclose known expiry or free-tier terms accurately. Credentials stay in private configuration and are not included in the answer or public evidence.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: existing authorized Turso management account · [Full configuration and evidence](./evaluations.md#comparison-3961c742b40e)
+
+[Task definition](./tasks.en.md#database-restore-001-v1)
+
+- API (platform-api): [Not completed](../data/experiments/evaluations/turso-restore-mirror-001-ds41-r1.json) — 备份导出、在指定服务经 Platform API 新建独立空目标、用该备份实际恢复、恢复后结构与全部记录等价、源库未变、重连读回均已由执行记录与控制器独立核对确认；但本次执行在写出最终答复前因模型请求预算耗尽（403 Model request budget exhausted，回执 exit_code=1）终止，执行者最终答复 execution/answer.md 只有 8 行过程旁白，未交付备份路径、简短恢复方法、新库位置、各表行数与核对结果、免费/期限说明，工作目录亦无该说明文件，缺少必要业务交付，故未完成。属执行预算/交付缺口，非服务或运行环境失效。
+
+</details>
+
+#### Prepare a separate remote database for my personal todo app and use the attached data to verify that inserts and updates persist. After the writing program exits, reconnect to the same database from a completely fresh program. Give me all todos ordered by id, the incomplete todos, and the total and completed counts, and explain the database's free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (platform-api) | [1](./evaluations.md#comparison-785fde9d2ce4) | [100%](./evaluations.md#comparison-785fde9d2ce4) | 276.6k | $0.02 | $0 |
+| CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2, leaving other content unchanged. Use the separate empty remote test database newly created and explicitly handed over in this trial's access phase; ENVIRONMENT.md identifies the resource and private connection configuration. Installation and authentication may be reused, but not business tables, data, answers or calling scripts. Do not access or modify existing user projects.
+
+**Completion:** Insert three items into the specified service's remote database and update id=2. After the writing process ends, a completely fresh process reconnects to the same database and reads back all three items. Only id=1 is incomplete; there are three total and two completed, with titles and other original values unchanged. The final full list is sorted by id. Real requests, responses and process records substantiate remote persistence and independent reading. Correctly explain supported free-tier or expiry limits, marking unconfirmed details unknown. Credentials remain in private workspace files, not public evidence or the final answer. Temporary resources are acceptable only with their expiry disclosed, without claiming permanent availability.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: pre-existing Turso management account · [Full configuration and evidence](./evaluations.md#comparison-785fde9d2ce4)
+
+[Task definition](./tasks.en.md#database-todos-001-v2)
+
+</details>
 
 #### Prepare a separate remote database for my personal todo app and verify adding, updating and reading todos after reconnecting
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-1420586eae17) | [100%](./evaluations.md#comparison-1420586eae17) | 767.6k | — | $0 |
+| API (platform-api) | [1](./evaluations.md#comparison-07edbec76825) | [100%](./evaluations.md#comparison-07edbec76825) | 767.6k | — | $0 |
 | CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -5663,26 +8253,43 @@ Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,d
 
 codex-cli 0.153.4 · gpt-6-astra / xhigh · 600s · 2026-09-07 (UTC)
 
-Credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-1420586eae17)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-07edbec76825)
 
 [Task definition](./tasks.en.md#database-todos-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| database-todos-001 v1 | API | [completed](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | 2026-09-07 |
+| database-atomic-import-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-atomic-import-001-ds41-r1.json) | 2026-10-08 |
+| database-restore-001 v1 | API (platform-api) | [not_completed](../data/experiments/evaluations/turso-restore-mirror-001-ds41-r1.json) | 2026-10-08 |
+| database-todos-001 v2 | API (platform-api) | [completed](../data/experiments/evaluations/turso-todos-001v2-ds41-r1.json) | 2026-10-08 |
+| database-todos-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | 2026-09-07 |
 
 </details>
 
+### Notes
+
+- Reviewed terms contain no specific public-benchmark disclosure ban. They limit use to the customer's "own internal business, personal, non-commercial use", exclude use on behalf of or for the benefit of third parties, protect content and credentials, and prohibit disruptive use. This is not permission to redistribute another user's data or offer an unrestricted third-party database service. Small functional tests with the customer's own synthetic records do not establish concurrency, latency or production durability guarantees.
+
 ### Sources
 
-- [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-09-07
-- [official_docs](https://docs.turso.tech/api-reference/introduction) — checked 2026-09-07
-- [official_site](https://turso.tech/pricing) — checked 2026-09-07
+- [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/api-reference/quickstart) — checked 2026-10-08
+- [official_site](https://turso.tech/pricing) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/cli/authentication) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/http/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/introduction) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/authentication) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/ts/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/ts/reference) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/http/reference) — checked 2026-10-08
+- [official_docs](https://www.sqlite.org/lang_conflict.html) — checked 2026-10-08
+- [official_site](https://turso.tech/terms-of-use) — checked 2026-10-08
 
 <a id="tushare"></a>
 
@@ -5729,7 +8336,7 @@ Global stock, FX and crypto time series with API, Python SDK and CLI access.
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://twelvedata.com/docs/introduction/quickstart) | [Docs](https://twelvedata.com/docs/introduction/quickstart) | self serve / documented | Basic advertises 800 API credits/day. Credits are not necessarily requests. Market coverage, fundamentals and display rights depend on plan. |
+| [data-api (API)](https://api.twelvedata.com/) | [Docs](https://twelvedata.com/docs/introduction/quickstart) | self serve / documented | Basic advertises 8 API credits/minute and 800/day without a payment card. The time_series endpoint costs one credit per symbol, supports interval=1day, date bounds and adjust=none (default splits); daily timestamps use exchange local time. prepost defaults to false and extended-hour support is confined to documented intraday intervals. The Basic pricing page lists internal non-display usage; internal display is listed under paid Grow. A free API key therefore does not establish that a user-facing price chart is permitted. Account, actual symbol/history entitlement and intended display rights remain unverified. |
 | [python-sdk (SDK)](https://twelvedata.com/docs/introduction/quickstart) | [Docs](https://twelvedata.com/docs/introduction/quickstart) | self serve / documented | Official Python TDClient example; same account entitlement as REST. |
 | [data-cli (CLI)](https://github.com/twelvedata/twelvedata-cli) | [Docs](https://github.com/twelvedata/twelvedata-cli) | self serve / documented | Official CLI repository; installation and command coverage not yet tested. |
 
@@ -5748,7 +8355,10 @@ Global stock, FX and crypto time series with API, Python SDK and CLI access.
 ### Sources
 
 - [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
-- [official_site](https://twelvedata.com/pricing) — checked 2026-09-15
+- [official_site](https://twelvedata.com/pricing) — checked 2026-10-08
+- [official_docs](https://twelvedata.com/docs/llms/market-data/time-series.md) — checked 2026-10-08
+- [official_site](https://twelvedata.com/stocks/) — checked 2026-10-08
+- [official_site](https://twelvedata.com/terms) — checked 2026-10-08
 - [official_docs](https://twelvedata.com/docs/introduction/quickstart) — checked 2026-09-09
 - [official_repo](https://github.com/twelvedata/twelvedata-cli) — checked 2026-09-09
 
@@ -5844,6 +8454,111 @@ Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llm
 ### Sources
 
 - [official_docs](https://upstash.com/docs/introduction) — checked 2026-09-15
+
+<a id="valhalla"></a>
+
+## Valhalla Public Demo API
+
+FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.
+
+**Classification:** Search & Data Access / Route Planning
+
+[Website](https://valhalla.github.io/valhalla/) · [Source record](../data/candidates/valhalla.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="valhalla-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [public-route-api (API)](https://valhalla1.openstreetmap.de/route) | [Docs](https://valhalla.github.io/valhalla/api/route/api-reference/) | self serve / documented | Service price is unknown: FOSSGIS funding and anonymous public access do not explicitly establish a zero service fee. No registration, donation support and the open-source engine or OSM data licence are not hosted-service pricing rules. A previous zero-cost entry was withdrawn on 2026-10-08 after source review; the original source snapshots are preserved. The current homepage links a maintainer announcement documenting one call per user per second, 100 calls per second overall and stricter endpoint limits than upstream defaults; that numeric announcement dates to November 2021, not a measured current quota. Keep small non-commercial queries below the per-user ceiling and stop on denial or rate limiting. The public API host is valhalla1.openstreetmap.de; valhalla.openstreetmap.de is the interactive frontend. No registration, account resource provisioning or account cleanup are required for the documented public route. |
+
+### Service pricing
+
+—
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied](../data/experiments/evaluations/valhalla-routing-bridge-001-ds41-r1.json) | [281.3k](../data/experiments/evaluations/valhalla-routing-access-ds41-r1.json) | 30.104117s | 0 |
+
+#### Connect this route-planning service through the assigned interface and request a short car route between the two points in the attachment. Give me the service’s distance and estimated driving time to confirm it works, save reusable configuration, and explain setup steps and actual barriers.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-6d420b99e4b1) | [100%](./evaluations.md#comparison-6d420b99e4b1) | 281.3k | $0.01 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The setup example is on I-5 in Seattle, USA. WGS84 decimal degrees: origin latitude 47.628282, longitude -122.327649; destination latitude 47.619214, longitude -122.328222. Request an ordinary car route from origin to destination, not walking, cycling or transit, without address search. Retrieve a real route through the service and interface in ENVIRONMENT.md and report its distance and estimated driving time with units. Use account-free access directly when available. Report any additional identity, authorization or human requirement without borrowing local accounts. Save necessary installations and general configuration in the assigned persistent directory, keep secrets out of the answer, and accurately describe self-service steps, human intervention and extra applications.
+
+**Completion:** Complete necessary installation, configuration and authentication, then query the assigned interface with the given origin, destination and car mode to obtain a valid route. Report distance and time faithfully from the response, retain reusable general configuration for a fresh session without exposing secrets, and accurately state access origin and human barriers. No route file is required during setup, and the estimate need not equal a measured real-world driving time.
+
+1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-6d420b99e4b1)
+
+[Task definition](./tasks.en.md#route-planning-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| route-planning-access-001 v1 | API | [completed](../data/experiments/evaluations/valhalla-routing-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I am organizing a travel map and want to save a driving route across the Golden Gate Bridge from the southern point in the attachment to the northern point. Give me the total distance, the service’s estimated driving time, main roads and direction of travel, plus a route file I can keep for a map, with its source.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-f0300fd67f1a) | [100%](./evaluations.md#comparison-f0300fd67f1a) | 182.1k | $0.01 | — |
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Golden Gate Bridge roadway in San Francisco Bay, USA. WGS84 decimal degrees: A, southern point, latitude 37.810193, longitude -122.477383; B, northern point, latitude 37.830233, longitude -122.479740. Use an ordinary car, travel north from A to B on the Golden Gate Bridge roadway, add no stops or backtracking, and do not substitute another bridge, ferry, walking or cycling route. This is a trip-map record, not lane-level positioning: the actual route endpoints may snap to the same road within 50 meters of the corresponding given point, and the crossing line may deviate by up to 50 meters from that road’s centerline at road-level precision. No departure time is specified; report the assigned service’s ordinary route estimate without requiring real-time traffic, current opening conditions or guaranteed arrival time. Use kilometers and estimated driving minutes. Briefly state the main roads and northbound direction without transcribing every navigation instruction. Deliver either a GPX track or a WGS84 GeoJSON LineString, optionally wrapped in a Feature or FeatureCollection. Preserve the continuous shape and endpoint order of the same real service route for later map use, rather than only two markers or a self-drawn endpoint connection substituted for that route. Query the assigned service; do not fill gaps using another service, a saved track or model memory.
+
+**Completion:** Actually query the assigned interface with A-to-B order and car mode. The delivered file represents that same returned route with correct coordinate axes, order and continuity, endpoints within the visible 50-meter limits, and a northbound Golden Gate Bridge roadway crossing within the visible 50-meter corridor tolerance checked against independent official road evidence. No other bridge, ferry, walking route, added stops or backtracking. Convert distance/time accurately from the response to kilometers/minutes with reasonable rounding, and give accurate main roads, direction, file location and source. Different services need not return identical route details, distances or times; neither another service’s output nor the independent reference-line length is a common numerical answer.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+
+Access preparation: none; anonymous FOSSGIS public demos, no account/token/email/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-f0300fd67f1a)
+
+[Task definition](./tasks.en.md#route-planning-bridge-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (1)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| route-planning-bridge-001 v1 | API | [completed](../data/experiments/evaluations/valhalla-routing-bridge-001-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Notes
+
+- Valhalla's homepage applies the usual OSRM/Nominatim demo fair-use policy. The reviewed operator summary requires valid application identification, attribution, a fix-the-map link, and no scraping or heavy usage. The linked full German FOSSGIS terms returned an Anubis denial on 2026-10-08 and were not fully reviewed. No explicit public-comparison ban was found in the reviewed sources; that is not an assurance about unreviewed terms. A small internal evaluation is not publishing an end-user application that proxies requests to the demo. The homepage's Generative AI rules concern code contributions and PR review, not a blanket ban on automated API clients.
+- This hosted service is distinct from self-installing the MIT-licensed Valhalla engine. Its OSM data requires separate attribution and ODbL consideration; Valhalla's documentation specifies OpenStreetMap contributors, with additional sources if elevation data is used. Attribute the FOSSGIS-hosted engine and link https://www.openstreetmap.org/copyright and https://www.openstreetmap.org/fixthemap alongside public route-derived material. It shares FOSSGIS hosting and OSM data with the OSRM demo. Agreement between their routes is not independent proof of road conditions or arrival times. Service access and driving results remain untested.
+
+### Sources
+
+- [official_docs](https://valhalla.github.io/valhalla/) — checked 2026-10-08
+- [official_docs](https://valhalla.github.io/valhalla/api/route/api-reference/) — checked 2026-10-08
+- [official_docs](https://github.com/valhalla/valhalla/blob/master/docs/docs/api/openapi.yaml) — checked 2026-10-08
+- [official_docs](https://github.com/valhalla/valhalla/blob/master/src/tyr/route_serializer_valhalla.cc) — checked 2026-10-08
+- [official_site](https://github.com/valhalla/valhalla/discussions/3373) — checked 2026-10-08
+- [official_docs](https://github.com/fossgis/openstreetmap.de/blob/main/content/nutzen/dienste-osm-de.md) — checked 2026-10-08
+- [official_docs](https://routing.openstreetmap.de/about.html) — checked 2026-10-08
+- [official_docs](https://valhalla.github.io/valhalla/contributing/data/attribution/) — checked 2026-10-08
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
 
 <a id="vapi"></a>
 
@@ -6007,11 +8722,11 @@ Country-level economic and development indicators through the public Indicators 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | [Docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | self serve / documented | Annual country indicators have publication lags and revisions. Confirm each series and year; do not substitute annual GDP or inflation for monthly US indicators. |
+| [data-api (API)](https://api.worldbank.org/v2/) | [Docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) | self serve / documented | Annual country indicators have publication lags and revisions. Confirm each series and year; do not substitute annual GDP or inflation for monthly US indicators. V2 requires the /v2 path and supports JSON, date filtering and pagination; the default page contains 50 results, so one response need not be complete. No API key or other authentication is required. |
 
 ### Service pricing
 
-—
+- data-api: 0 USD / public Indicators API request (usage; Dataset access under the published dataset terms; not a guaranteed service level.)
 
 ### Task results
 
@@ -6019,7 +8734,9 @@ Country-level economic and development indicators through the public Indicators 
 
 ### Sources
 
-- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) — checked 2026-09-09
+- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) — checked 2026-10-08
+- [official_docs](https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures) — checked 2026-10-08
+- [official_site](https://www.worldbank.org/ext/en/legal/terms-conditions/datasets) — checked 2026-10-08
 
 <a id="xai"></a>
 
@@ -6078,7 +8795,7 @@ Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols,
 
 - Vendor contribution by XiuAI / XiuLab Inc., reviewed from PR #10 at head d7395f6decec10bfbdb1cdf8cac453dc2a88da7c: https://github.com/Olorinm/agent-friendly-services/pull/10 (checked September 15, 2026). This record contains public-source claims only; it does not establish successful access or task completion.
 - Usage and pricing sources describe variable charges by model, group, context length, processing mode, token/cache usage and hosted tools. A reference discount is not a guaranteed saving or an actual charge. Free allowance, sandbox availability and minimum spend remain unknown; no zero-cost claim is made.
-- The current usage documentation says the benefit group is closed to new selection and will cease after September 30, 2026. Existing keys require migration to another available group; a public model listing does not grant account access. This notice concerns one group, not retirement of XiuRouter.
+- The usage documentation announces that the benefit group is closed to new selection and that existing access would stop after September 30, 2026. That deadline has passed, but actual account availability has not been tested here. The notice instructs migration to another available group; a public model listing does not grant account access. It concerns one group, not retirement of XiuRouter.
 - The privacy source says conversation content is not stored or used for training by XiuRouter, while usage and performance records are retained long term. Model developers apply their own retention and training policies; this statement does not establish end-to-end zero retention.
 - The OpenCode integration guide documents using XiuRouter as a Chat Completions model provider; that client configuration has not been tested here.
 
@@ -6086,7 +8803,7 @@ Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols,
 
 - [official_docs](https://docs.xiu.ai/en/router/quickstart/index.md) — checked 2026-09-15
 - [official_docs](https://docs.xiu.ai/en/router/api-compatibility/index.md) — checked 2026-09-15
-- [official_docs](https://docs.xiu.ai/en/router/models-pricing-usage/index.md) — checked 2026-09-15
+- [official_docs](https://docs.xiu.ai/en/router/models-pricing-usage/index.md) — checked 2026-10-08
 - [official_site](https://router.xiu.ai/en/pricing) — checked 2026-09-15
 - [official_site](https://router.xiu.ai/en/data-privacy) — checked 2026-09-15
 - [official_docs](https://docs.xiu.ai/router/integrations/vercel-ai-sdk/) — checked 2026-09-15
@@ -6312,7 +9029,7 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 China-region Feishu workspace and Base APIs; separate account/tenant from international Lark.
 
-**Classification:** Workplace Collaboration / Collaborative Tables
+**Classification:** Productivity & Collaboration / Collaborative Tables
 
 [Website](https://www.feishu.cn/) · [Source record](../data/candidates/feishu.yaml) · [Back to directory](../README.md#all-services)
 
