@@ -237,3 +237,155 @@ entries still fail collection. The worker persists its observed process receipt
 and usage before artifact collection, so a collection error does not erase them.
 Historical captures that lack the process receipt must retain unknown status or
 timing fields; a final model message alone does not establish a successful exit.
+
+## Continuous handoffs (protocol `afs-20261010`)
+
+`scripts/task_queue.py` owns one runner pool and accepts new ready jobs while it
+runs. Discovery and task-design sessions produce sourced inputs; the controller
+checks those handoffs and submits a private job with `ready: true`. This flag is
+an explicit readiness decision, not an automatic check of research quality.
+The queue freezes the selected task/route, reference, materials, role files and
+price snapshot. Unrelated catalog additions do not replace a submitted task.
+It prepares business jobs only after their access dependencies pass independent
+grading. Independent jobs overlap; each comparison still freezes all member
+answers before launching its separate graders. Publication remains a separate
+reviewed `pipeline.py record` operation and does not block the execution queue.
+
+Initialize a **new authorized window**, with an explicit pool identity, deadline,
+model-cost cap and total session concurrency:
+
+```sh
+python3 scripts/task_queue.py init /absolute/private/queue \
+  --pool afs-johor --max-concurrency 8 \
+  --budget-usd AMOUNT --expires-at TIMESTAMP_WITH_TIMEZONE
+python3 scripts/task_queue.py submit /absolute/private/queue --spec /absolute/private/job.json
+python3 scripts/task_queue.py run /absolute/private/queue
+python3 scripts/task_queue.py status /absolute/private/queue
+```
+
+`--once` performs a resumable tick. The controller keeps waiting when the inbox
+is empty, so a new handoff does not need a new heartbeat or batch restart. At the
+deadline it stops paid workers, collects measured usage, saves state and exits.
+It does not extend an expired authorization. Interrupted/uncertain starts are
+never resent; a partial preparation or unconfirmed stop requires inspection.
+
+Single-run handoff example (all paths private and absolute):
+
+```json
+{
+  "id": "access-001",
+  "kind": "run",
+  "ready": true,
+  "directory": "/absolute/repo/data/experiments/results/access-001",
+  "config": "/absolute/private/access.config.json",
+  "depends_on": []
+}
+```
+
+For a business handoff, `depends_on` lists access job IDs; its run config also
+keeps the existing `depends_on` prerequisite directory. A comparison handoff has
+`kind: "comparison"`, `directory` for the new group, `round`, and `members`, each
+with a new run `directory`, private `config`, and optional peer `evidence` paths.
+Member identity is `(service, route)`, allowing REST/MCP comparison of one service
+without inventing separate service IDs. Every execution and grader still needs
+a distinct runtime. Three repeats are three predeclared rounds, not reruns until
+three successes. See [the first repeat protocol](../../../data/experiments/tasks/resource-guards-and-repeats.md).
+
+Queued roles require `max_model_requests` and the bounded OpenCode/DeepSeek
+adapter. The ledger reserves a whole session ceiling before dispatch: every
+request at the saved worst context/cache rate, 1,048,576 input tokens (or a larger
+saved model limit) and the enforced 32,000 output cap. Known reconciled costs
+replace reservations. Incomplete usage keeps its full ceiling, with any known
+lower bound alongside it. These are estimates at frozen standard API rates,
+not a provider bill; service fees and server fees remain separate. The queue
+shows holds for insufficient budget, time or occupied shared resources. It
+requires enough time for the full frozen role budget before starting it.
+
+Optional `execution.resource_locks`, such as `["grist-account-a"]`, serialize
+sessions sharing an account across distinct containers. They do not calculate a
+provider's remaining quota. Quota/rate-limit observations still need inspection;
+there is no blind registration retry or automatic account/region switching.
+CLI controllers for the same pool share an OS lock. Use this one controller for
+the pool: legacy batch/direct pipeline commands and controllers on other Macs do
+not participate in that pool registry. Remote worker locks remain the final
+container exclusion check.
+
+### Entry check and closure reminder
+
+A queued run config requires a `preflight` plan and an execution adapter command:
+
+```json
+{
+  "preflight": [
+    {"url": "https://api.example.com/auth", "method": "GET", "accepted_statuses": [401]}
+  ],
+  "execution": {
+    "max_model_requests": 40,
+    "closure_fraction": 0.85,
+    "commands": {
+      "preflight": ["python3", "/absolute/repo/scripts/runners/opencode/adapter.py", "--config", "/absolute/private/adapter.json", "preflight", "{request}"]
+    }
+  }
+}
+```
+
+Merge these fields into the usual full role config. Select a documented, safe,
+unauthenticated GET/HEAD target for the actual entry; no mutation, signup,
+credentials, redirects or response bodies are collected. At most three targets
+run inside the execution container, bounded to 18 seconds including DNS. An
+accepted 401 proves only reachability of the authentication surface. A 403 is
+ambiguous. Failed checks save a `preflight_blocked` operational hold and do not
+start a model or create a service-failure score. Inspect the cause and submit a
+new run/cohort rather than silently discarding a failed test.
+
+At 85% of time or reserved request count, the proxy inserts a controller reminder
+into the **next** model request to save deliverables and close. It preserves the
+original task, does not create an extra model request, and cannot interrupt a
+single already-running model call or long tool operation. The original hard
+bounds remain. `wire/budget-warnings.jsonl` records actual delivery of the hint;
+`controller-limits.json` records the effective bounds. Provision updated support
+code into idle runtimes before using this protocol; the adapter rejects stale
+runner hashes before allocating a run.
+
+### Partial accounting and separate result facts
+
+The normalizer scans each provider response independently. A failed or truncated
+request no longer discards valid requests around it. `adapter_usage.py` verifies
+raw-source hashes, request identities and numeric counters before exposing
+`requests_verified` and `lower_bound_usage`. An interrupted total stays null;
+model cost shows `lower_bound_usd` as “at least X; total unknown”. Complete means
+remain unknown when a member lacks full cost/usage. Source tampering, duplicate
+identities, unknown pricing or inconsistent partial counters establish no bound.
+Receipt failures still preserve measured cost but cannot authorize grading or
+publication. A confirmed budget stop is collected and passed to independent
+grading when its receipt is valid; it is not automatically a service failure.
+
+New graders must return evidence-backed `outcome` facets: `service_execution`,
+`user_delivery`, `blocking_factors`, and `evidence`. The whole user-task verdict
+continues to require the user's complete delivery. Network, access, model budget,
+Agent execution, test protection, materials and service capability are distinct
+possible blockers, not inferred from a single HTTP code. New protocol, request
+bounds and runner support hashes participate in comparison grouping; wall-clock
+receipt timestamps do not split otherwise identical repeats. Historical records
+are unchanged.
+
+Write tasks needing post-execution independent readback (such as Grist formula
+recalculation) submit `"grading_gate": true`. Their executions are collected and
+the comparison barrier seals normally, but no grader starts until the controller
+has performed the predeclared verification and frozen its minimal data:
+
+```sh
+python3 scripts/task_queue.py release-grading /absolute/private/queue \
+  --job JOB_ID --proofs /absolute/private/independent-readback
+```
+
+A comparison proof directory has one subdirectory per exact run ID; a single-run
+proof directory directly contains that run's data. The release binds the original
+execution, captured files and proof hashes; changed proof cannot dispatch a
+grader. Data enters `grading-input/controller-verification/` and its packet index,
+never the executor. This gate does not run readback scripts or supply a verdict.
+The controller must use the frozen authorized mutations and independently
+collected evidence, not execute an Agent's self-check. Other ready jobs keep
+running while the gate waits. Expiry does not authorize extra verification
+model calls. Account lock identities and physical container bindings apply
+across admitted jobs; the pool must never use an executor container as a grader.

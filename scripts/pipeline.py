@@ -60,6 +60,7 @@ def frozen_files(directory):
 
 def prepare(config_path, directory):
     config = read(config_path)
+    config.setdefault('trial_protocol', 'afs-20261010')
     directory = Path(directory).resolve()
     if not directory.is_relative_to((ROOT / 'data/experiments/results').resolve()):
         raise ValueError('Run directory must be in data/experiments/results')
@@ -78,6 +79,14 @@ def prepare(config_path, directory):
             raise ValueError('Record harness name, version and mode')
         if type(settings['seconds']) is not int or settings['seconds'] <= 0:
             raise ValueError('Each role needs a positive seconds budget')
+        settings.setdefault('closure_fraction', 0.85)
+        if type(settings['closure_fraction']) not in (int, float) or not 0 < settings['closure_fraction'] < 1:
+            raise ValueError('closure_fraction must be between zero and one')
+        if 'max_model_requests' in settings and (type(settings['max_model_requests']) is not int or settings['max_model_requests'] <= 0):
+            raise ValueError('max_model_requests must be a positive integer')
+        resource_locks = settings.get('resource_locks', [])
+        if not isinstance(resource_locks, list) or any(not isinstance(k, str) or not k.strip() for k in resource_locks):
+            raise ValueError('resource_locks must list private shared account/resource identities')
         for op in ('start', 'status', 'collect', 'stop'):
             argv = settings['commands'][op]
             if not isinstance(argv, list) or not argv or not all(isinstance(a, str) for a in argv):
@@ -88,6 +97,11 @@ def prepare(config_path, directory):
         raise ValueError('Grading must use a separate runtime')
     if not config.get('environment') or not config.get('environment_id'):
         raise ValueError('Explicit environment description and stable environment_id are required')
+    if config.get('preflight'):
+        module('network_preflight', 'runners/opencode/network_preflight.py').validate(config['preflight'])
+        argv = config['execution']['commands'].get('preflight')
+        if not isinstance(argv, list) or not argv or not all(isinstance(a, str) for a in argv) or not any('{request}' in a for a in argv):
+            raise ValueError('Preflight plan requires an execution adapter preflight command')
     if config['phase'] not in ('access', 'business'):
         raise ValueError('phase must be access or business')
     if config['phase'] == 'business':
@@ -108,6 +122,8 @@ def prepare(config_path, directory):
     inputs.mkdir(parents=True)
     context = parser.natural_context(task, route['entry_url'], [], config['execution']['seconds'])
     context['ENVIRONMENT.md'] = config['environment'] + '\n指定入口：' + route['entry_url'] + '\n'
+    context['ENVIRONMENT.md'] += ('测试协议：' + config['trial_protocol'] + '。接近时间或模型请求额度的末段时，运行器会提醒保存交付物并收尾；'
+                                 '提醒不增加用户任务要求。预算、费用保护与用户完成要求分开记录。\n')
     for name, content in context.items():
         (inputs / name).write_text(content)
     shutil.copyfile(ROOT / 'scripts/roles/execution/AGENTS.md', inputs / 'AGENTS.md')
@@ -171,12 +187,21 @@ def stage_request(directory, role, settings):
             'seconds': settings['seconds'], 'runtime': settings['runtime'],
             'input': str(directory / ('frozen/execution' if role == 'execution' else 'grading-input')),
             'output': str(directory / ('execution' if role == 'execution' else 'grading')),
-            'fresh_session': True}
+            'fresh_session': True,
+            **{k: settings[k] for k in ('closure_fraction', 'max_model_requests', 'deadline_epoch') if k in settings}}
 
 
 def collect(directory, role, settings, request):
     invoke(directory, role, 'collect', settings, request)
     output = Path(request['output'])
+    # Cost capture must survive a missing/invalid receipt. It cannot authorize
+    # grading or publication, but already observed requests remain accountable.
+    usage, request_usage = read_usage(output, settings['model'])
+    measured = {'model': settings['model'], 'usage': usage, 'request_usage': request_usage}
+    write(output / 'measured.json', measured)
+    cost = subprocess.check_output(['node', '--import', 'tsx', str(ROOT / 'scripts/calculate-cost.ts'),
+                                   str(output / 'measured.json'), str(directory / 'frozen/pricing.json')], cwd=ROOT, text=True)
+    write(output / 'model-cost.json', json.loads(cost))
     receipt = read(output / 'receipt.json')
     if not receipt.get('session_id') or not receipt.get('workspace'):
         raise ValueError('Collection needs actual session_id and workspace')
@@ -197,12 +222,6 @@ def collect(directory, role, settings, request):
         execution = read(directory / 'execution/receipt.json')
         if receipt['session_id'] == execution['session_id'] or receipt['workspace'] == execution['workspace']:
             raise ValueError('Execution and grading need distinct sessions and workspaces')
-    usage, request_usage = read_usage(output, settings['model'])
-    measured = {'model': settings['model'], 'usage': usage, 'request_usage': request_usage}
-    write(output / 'measured.json', measured)
-    cost = subprocess.check_output(['node', '--import', 'tsx', str(ROOT / 'scripts/calculate-cost.ts'),
-                                   str(output / 'measured.json'), str(directory / 'frozen/pricing.json')], cwd=ROOT, text=True)
-    write(output / 'model-cost.json', json.loads(cost))
     return receipt, elapsed
 
 
@@ -236,6 +255,11 @@ def finish_execution(directory, config, receipt, elapsed):
             'prompt_style': 'natural', 'preparation_note': config.get('preparation_note', ''),
             'service_credentials': config.get('service_credentials', 'none'),
             'environment_id': config['environment_id'], 'phase': config['phase']}
+    meta.update(trial_protocol=config.get('trial_protocol'), controller_limits=read(output / 'controller-limits.json')
+                if (output / 'controller-limits.json').exists() else {},
+                runner_source_sha256=receipt.get('runtime_code_preflight', {}).get('source_sha256'),
+                runtime_image_id=receipt.get('runtime_image_id'),
+                host=config.get('host'))
     write(directory / 'run.json', meta)
     grade = directory / 'grading-input'
     if grade.exists():
@@ -276,7 +300,7 @@ def verify_grading_input(directory):
         raise ValueError('Frozen grading input changed')
 
 
-def advance(directory, group_directory=None):
+def advance(directory, group_directory=None, dispatch_guard=None):
     from comparison_group import require_group, attach
     directory = Path(directory).resolve()
     verify(directory)
@@ -286,12 +310,31 @@ def advance(directory, group_directory=None):
     phase = state['phase']
     if phase in ('reviewed', 'recorded'):
         return state
+    if phase == 'preflight_blocked':
+        return state  # Explicit retry only; never charge a model to diagnose a hold.
     if phase in ('execution_starting', 'grading_starting', 'stopped'):
         raise ValueError('Dispatch state needs reconciliation; do not automatically resend')
     role = 'execution' if phase in ('prepared', 'execution_running', 'execution_collecting') else 'grading'
     settings = config[role]
     request = stage_request(directory, role, settings)
     if phase in ('prepared', 'execution_collected'):
+        if dispatch_guard is not None:
+            permission = dispatch_guard(directory, role, settings)
+            if not permission: return state
+            if isinstance(permission, dict):
+                if set(permission) - {'deadline_epoch'}: raise ValueError('Dispatch guard may only tighten deadline')
+                request.update(permission)
+        if phase == 'prepared' and config.get('preflight'):
+            request['preflight'] = config['preflight']
+            try:
+                checked = invoke(directory, role, 'preflight', settings, request)
+            except Exception as error:
+                checked = {'ready': False, 'reason': str(error)}
+            write(directory / 'preflight.json', {**checked, 'checked_at': now()})
+            if checked.get('ready') is not True:
+                state.update(phase='preflight_blocked', reason='Execution environment requires inspection; no model dispatched')
+                write(directory / 'state.json', state)
+                return state
         if phase == 'execution_collected' and group_directory is not None:
             attach(directory, group_directory)
         if phase == 'execution_collected':
@@ -321,7 +364,14 @@ def advance(directory, group_directory=None):
             raise RuntimeError('Adapter could not confirm runtime stopped; reconcile before dispatch')
         state['stop_confirmed'] = True
         write(directory / 'state.json', state)
-        invoke(directory, role, 'collect', settings, request)
+        write(directory / role / 'controller-stop.json', {'reason': 'budget exceeded', 'stop_confirmed': True, 'at': now()})
+        # Preserve measured partial cost after a confirmed forced stop. Execution
+        # still goes to independent grading; the controller supplies no verdict.
+        receipt, elapsed = collect(directory, role, settings, request)
+        if role == 'execution':
+            finish_execution(directory, config, receipt, elapsed)
+            state.update(phase='execution_collected', controller_stopped=True)
+            write(directory / 'state.json', state)
         return state
     state.update(phase=role + '_collecting')
     write(directory / 'state.json', state)
@@ -428,7 +478,14 @@ def main():
                 # Persist before touching the external runtime, including uncertain starts.
                 write(directory / 'state.json', {**state, 'phase': 'stopped', 'stopped_role': role,
                                                 'stop_reason': 'explicit controller stop'})
-                print(json.dumps(invoke(directory, role, 'stop', config[role], request)))
+                stopped = invoke(directory, role, 'stop', config[role], request)
+                if stopped.get('stopped') is True:
+                    write(directory / 'state.json', {**read(directory / 'state.json'), 'stop_confirmed': True})
+                    try:
+                        collect(directory, role, config[role], request)
+                    except Exception as error:
+                        write(directory / 'state.json', {**read(directory / 'state.json'), 'collection_error': str(error)})
+                print(json.dumps(stopped))
             else:
                 print(json.dumps({'controller': state, 'runtime': invoke(directory, role, 'status', config[role], request)}))
         else:
@@ -443,7 +500,7 @@ def main():
             while True:
                 state = advance(args.directory)
                 print(json.dumps(state), flush=True)
-                if args.action == 'advance' or state['phase'] in ('reviewed', 'recorded', 'stopped'):
+                if args.action == 'advance' or state['phase'] in ('reviewed', 'recorded', 'stopped', 'preflight_blocked'):
                     break
                 time.sleep(2)
 

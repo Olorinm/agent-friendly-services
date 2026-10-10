@@ -44,6 +44,7 @@ elif op=='collect':
         write('evidence.json',{'answer':'synthetic answer'})
     else:
         write('assessment.json',{'status':'completed','reason':'Synthetic answer matches frozen requirement','reviewer':'fixture-independent-session',
+          'outcome':{'service_execution':'completed','user_delivery':'completed','blocking_factors':[],'evidence':'execution/evidence.json'},
           'checks':[{'criterion':'answer matches','passed':True,'evidence':'execution/evidence.json'}],
           'evidence':[{'path':'execution/evidence.json'}],'human_interventions':0,
           'service_cost_usd':None,'service_cost':{'kind':'estimated','note':'One metered fixture request',
@@ -201,7 +202,7 @@ class PipelineTests(unittest.TestCase):
         (out / 'raw.json').write_text('tampered')
         self.assertIn('hash', read_usage(out)[1]['reason'])
 
-    def test_timeout_stops_owned_runtime_and_never_starts_grader(self):
+    def test_timeout_stops_collects_measures_then_can_be_independently_graded(self):
         self.prepare();pipeline.advance(self.directory)
         state = pipeline.read(self.directory / 'state.json')
         state['dispatched_at'] = '2000-01-01T00:00:00+00:00'
@@ -209,11 +210,11 @@ class PipelineTests(unittest.TestCase):
         adapter = self.root / 'adapter.py'
         adapter.write_text(adapter.read_text().replace("elif op=='status':print(json.dumps({'status':'completed'}))",
                                                     "elif op=='status':print(json.dumps({'status':'running'}))"))
-        self.assertEqual(pipeline.advance(self.directory)['phase'],'stopped')
+        self.assertEqual(pipeline.advance(self.directory)['phase'],'execution_collected')
         self.assertTrue((self.directory / 'execution-stop.json').exists())
         self.assertFalse((self.directory / 'grading/started').exists())
-        with self.assertRaisesRegex(ValueError,'reconciliation'):
-            pipeline.advance(self.directory)
+        self.assertTrue((self.directory / 'execution/model-cost.json').exists())
+        self.assertEqual(pipeline.advance(self.directory)['phase'],'grading_running')
 
     def test_changed_review_cannot_be_recorded(self):
         self.finish()

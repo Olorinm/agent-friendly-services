@@ -1,3 +1,4 @@
+import { resultNotesFor } from './result-notes.ts';
 import type { Category, Provider } from './lib.ts';
 import { serviceAccess } from './service-access.ts';
 import type { Evaluation } from './evaluations.ts';
@@ -88,6 +89,7 @@ export function catalogService(p: Provider, pool: 'provider' | 'candidate', eval
     // Records apply only to their exact route/task; do not promote source claims.
     route_tests: runs.length ? 'recorded' : 'not_recorded',
     task_runs: runs,
+    result_notes: resultNotesFor(runs),
     catalog: p.catalog ? { ...p.catalog, routes: p.catalog.routes.map(r => ({ ...r,
       task_run_ids: runs.filter(run => run.route_id === r.id).map(run => run.run_id),
     })) } : null,

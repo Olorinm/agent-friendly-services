@@ -8,6 +8,26 @@ spec=importlib.util.spec_from_file_location('opencode_normalize',Path(__file__).
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 
 class UsageTests(unittest.TestCase):
+    def test_truncated_request_preserves_valid_requests_on_both_sides_as_a_lower_bound(self):
+        from adapter_usage import read_usage
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'events.jsonl').write_text('{truncated')
+            for name in ('a','b','c'):
+                wire=root/'wire'/name;wire.mkdir(parents=True)
+                (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash','stream':True}))
+                (wire/'meta.json').write_text(json.dumps({'status':200}))
+                u={'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':10}}
+                (wire/'response.body').write_text('data: '+json.dumps(u)+'\n\n' if name!='b' else 'data: {truncated')
+            normalized=module.normalize(root,'deepseek-flash')
+            self.assertFalse(normalized['complete'])
+            self.assertEqual([r['id'] for r in normalized['requests']],['a','c'])
+            usage, detail=read_usage(root,'deepseek-flash')
+            self.assertIsNone(usage)
+            self.assertTrue(detail['requests_verified'])
+            self.assertEqual(detail['lower_bound_usage']['input_tokens'],200)
+            (root/'wire/a/response.body').write_text('tampered')
+            self.assertNotIn('lower_bound_usage',read_usage(root,'deepseek-flash')[1])
+
     def test_budget_rejection_sidecar_preserves_reconciled_forwarded_usage(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d); wire = root/'wire/request1'; wire.mkdir(parents=True)

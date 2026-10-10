@@ -15,12 +15,17 @@ import comparison_batch as batch
 class ComparisonGroupTests(unittest.TestCase):
     setUp = fixtures.PipelineTests.setUp
 
-    def prepare_group(self, concurrency=2, third_model=None, third_input=None, evidence=False):
+    def prepare_group(self, concurrency=2, third_model=None, third_input=None, evidence=False, same_service=False, blocked=None):
         catalog = {'services': [{'id': name, 'catalog': {'routes': [
             {'id': 'api', 'entry_url': 'https://example.com/' + name}]}}
             for name in ('fixture-a', 'fixture-b', 'fixture-c')]}
         pipeline.write(self.root / 'generated/catalog.json', catalog)
+        if same_service:
+            catalog['services'][0]['catalog']['routes'].append({'id':'cli','entry_url':'https://example.com/cli'})
+            pipeline.write(self.root / 'generated/catalog.json', catalog)
         adapter = fixtures.ADAPTER.replace("q['role']+'-session'", "q['run_id']+'-'+q['role']+'-session'")
+        if blocked:
+            adapter = adapter.replace("if op=='start':", "if op=='preflight':print(json.dumps({'ready':False}))\nelif op=='start':")
         adapter = adapter.replace("assert not (Path(q['input'])/'reference.json').exists()",
                                   "assert not (Path(q['input'])/'reference.json').exists()\n        assert not (Path(q['input'])/'peer-results').exists()")
         adapter = adapter.replace("print(json.dumps({'handle':q['role']+'-handle'}))", """
@@ -39,6 +44,10 @@ class ComparisonGroupTests(unittest.TestCase):
         for name in ('fixture-a', 'fixture-b', 'fixture-c'):
             cfg = copy.deepcopy(self.config)
             cfg.update(service=name, environment_id=name, phase='business')
+            if same_service and name == 'fixture-b': cfg.update(service='fixture-a', route='cli')
+            if blocked == name:
+                cfg['preflight']=[{'url':'https://example.com'}]
+                cfg['execution']['commands']['preflight']=[sys.executable,str(self.root/'adapter.py'),'preflight','{request}']
             for role in ('execution', 'grading'):
                 cfg[role]['runtime'] = name + '-' + role
             if third_model and name == 'fixture-c':
@@ -99,6 +108,21 @@ class ComparisonGroupTests(unittest.TestCase):
             self.assertEqual(context['run_ids'], [m.name for m in self.members])
             self.assertEqual(context['snapshot_sha256'], pipeline.digest(self.group / 'snapshot-hashes.json'))
             self.assertNotIn(str(self.root), json.dumps(context))
+
+    def test_same_service_different_routes_are_distinct_group_members(self):
+        self.prepare_group(same_service=True)
+        manifest, _ = groups.load(self.group)
+        self.assertEqual([(m['service'],m['route']) for m in manifest['members'][:2]], [('fixture-a','api'),('fixture-a','cli')])
+        self.assertEqual(self.finish_group()['phase'],'reviewed')
+
+    def test_preflight_block_is_not_graded_as_a_service_failure(self):
+        self.prepare_group(blocked='fixture-a')
+        self.assertEqual(self.finish_group()['phase'],'needs_attention')
+        path=self.members[0]
+        self.assertEqual(pipeline.read(path/'state.json')['phase'],'preflight_blocked')
+        self.assertFalse((path/'execution/started').exists())
+        self.assertFalse((path/'grading/started').exists())
+        self.assertTrue(all(pipeline.read(p/'state.json')['phase']=='reviewed' for p in self.members[1:]))
 
     def test_grouped_run_cannot_bypass_barrier_or_be_regrouped(self):
         self.prepare_group()
@@ -252,13 +276,14 @@ class ComparisonGroupTests(unittest.TestCase):
         adapter.write_text(adapter.read_text().replace("elif op=='status':print(json.dumps({'status':'completed'}))",
             "elif op=='status':print(json.dumps({'status':'running' if q['role']=='execution' and q['run_id']=='fixture-a-business' else 'completed'}))"))
         state = self.finish_group()
-        self.assertEqual(state['phase'], 'needs_attention')
-        self.assertEqual(pipeline.read(p / 'state.json')['phase'], 'stopped')
-        self.assertFalse((p / 'grading/started').exists())
+        self.assertEqual(state['phase'], 'reviewed')
+        self.assertEqual(pipeline.read(p / 'state.json')['phase'], 'reviewed')
+        self.assertTrue(pipeline.read(p / 'state.json')['controller_stopped'])
+        self.assertTrue((p / 'grading/started').exists())
         self.assertTrue(all(pipeline.read(m / 'state.json')['phase'] == 'reviewed' for m in self.members[1:]))
         entry = pipeline.read(self.group / 'peer-results/index.json')['members'][0]
-        self.assertEqual(entry['controller_phase'], 'stopped')
-        self.assertNotIn('execution', entry)
+        self.assertEqual(entry['controller_phase'], 'execution_collected')
+        self.assertIn('execution', entry)
 
     def test_uncertain_start_is_stopped_without_resubmission_and_other_runs_finish(self):
         self.prepare_group()

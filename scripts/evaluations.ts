@@ -3,9 +3,11 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { ROOT, loadCategories, type Provider } from './lib.ts';
 import type { ModelCost, PriceSnapshot } from './model-costs.ts';
+import { modelCostLabel } from './model-costs.ts';
 import { buildBoards, selectServiceBoards, moneyLabel, peerReviewLabel } from './leaderboard.ts';
 import { taskClassification } from './task-classifications.ts';
 import { classificationLabel } from './taxonomy.mjs';
+import { resultNotesFor } from './result-notes.ts';
 
 export interface Evaluation {
   schema_version: 1;
@@ -17,10 +19,13 @@ export interface Evaluation {
   model: string; reasoning_effort: string; started_at: string; ended_at: string;
   elapsed_seconds: number | null; budget_seconds: number; environment: Record<string, unknown>;
   status: 'completed' | 'not_completed' | 'invalid_run'; reason: string;
+  outcome?: { service_execution: 'completed' | 'not_completed' | 'not_observed' | 'unknown';
+    user_delivery: 'completed' | 'not_completed' | 'unknown'; blocking_factors: string[]; evidence: string };
   usage: null | { input_tokens: number; cached_input_tokens: number; output_tokens: number;
     reasoning_output_tokens?: number; cache_write_input_tokens?: number };
   request_usage?: { status: 'complete' | 'incomplete'; method: string; reason: string; source_sha256: string | null;
-    requests: NonNullable<Evaluation['usage']>[]; totals?: NonNullable<Evaluation['usage']> };
+    requests: NonNullable<Evaluation['usage']>[]; totals?: NonNullable<Evaluation['usage']>;
+    requests_verified?: boolean; lower_bound_usage?: NonNullable<Evaluation['usage']> };
   model_cost?: ModelCost;
   pricing_snapshot?: PriceSnapshot;
   service_cost?: { kind: 'reported' | 'estimated' | 'confirmed_free' | 'unknown'; amount_usd: number | null;
@@ -77,6 +82,15 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
     }
     if (v?.usage?.cached_input_tokens > v?.usage?.input_tokens) errors.push('cached input is a subset of input tokens');
   }
+  if (v.outcome !== undefined) {
+    const o = v.outcome;
+    if (!['completed', 'not_completed', 'not_observed', 'unknown'].includes(o?.service_execution)
+        || !['completed', 'not_completed', 'unknown'].includes(o?.user_delivery) || !text(o?.evidence)
+        || !Array.isArray(o?.blocking_factors) || o.blocking_factors.some((f: unknown) =>
+          !['network', 'access', 'model_budget', 'agent_execution', 'test_constraint', 'materials', 'service_capability', 'unknown'].includes(f as string))
+        || new Set(o.blocking_factors).size !== o.blocking_factors.length
+        || (v.status === 'completed' && o.user_delivery !== 'completed')) errors.push('invalid outcome facets');
+  }
   if (v.request_usage) {
     const detail = v.request_usage;
     if (!['complete', 'incomplete'].includes(detail.status) || !text(detail.method) || !text(detail.reason)
@@ -86,6 +100,15 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
       for (const key of ['input_tokens', 'cached_input_tokens', 'cache_write_input_tokens', 'output_tokens', 'reasoning_output_tokens']) {
         if (!Array.isArray(detail.requests) || detail.requests.some((r: any) => !Number.isInteger(r[key] ?? 0) || (r[key] ?? 0) < 0)
             || detail.requests.reduce((sum: number, r: any) => sum + (r[key] ?? 0), 0) !== (v.usage?.[key] ?? 0)) errors.push(`request_usage mismatch: ${key}`);
+      }
+    }
+    if (detail.lower_bound_usage !== undefined || detail.requests_verified !== undefined) {
+      if (detail.requests_verified !== true || !hash(detail.source_sha256) || !detail.requests?.length || !detail.lower_bound_usage)
+        errors.push('partial usage needs verified sources and request counters');
+      for (const key of ['input_tokens', 'cached_input_tokens', 'cache_write_input_tokens', 'output_tokens', 'reasoning_output_tokens']) {
+        if (!Array.isArray(detail.requests) || detail.requests.some((r: any) => !Number.isInteger(r[key]) || r[key] < 0)
+            || detail.requests.reduce((n: number, r: any) => n + r[key], 0) !== detail.lower_bound_usage?.[key])
+          errors.push(`partial usage mismatch: ${key}`);
       }
     }
   }
@@ -139,6 +162,7 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
 
 const cell = (v: unknown) => String(v ?? 'unknown').replaceAll('|', '\\|').replaceAll('\n', ' ');
 export function generateEvaluations(records: Evaluation[], outputRoot: string) {
+  const resultNotes = resultNotesFor(records);
   const dir = path.join(outputRoot, 'generated');
   fs.mkdirSync(dir, { recursive: true });
   const sorted = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at) || a.run_id.localeCompare(b.run_id));
@@ -152,6 +176,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
     }))));
   fs.writeFileSync(path.join(dir, 'evaluations.json'), JSON.stringify({ schema_version: 1,
     evaluations: sorted.map(r => ({ ...r, ...taskClassification(r.task) })), service_summaries: serviceSummaries,
+    result_notes: resultNotes,
     comparisons: boards.map(b => ({ ...b, rows: b.rows.map(summaryRow) })),
   }, null, 2) + '\n');
   const row = (r: Evaluation) => {
@@ -176,12 +201,12 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   const sections = [...groups].map(([classification, tasks]) => `${classification.match(/（([a-z0-9/-]+)）/) ? `<a id="${classification.match(/（([a-z0-9/-]+)）/)![1].replaceAll('/', '-')}"></a>\n\n` : ''}## ${cell(classification)}\n\n` +
     [...tasks.values()].map(runs => {
       const task = runs[0].task;
-      return `### ${cell(task.id)} / ${cell(task.version ?? task.sha256.slice(0, 8))}\n\n${cell(task.description)}\n\n${header}\n${runs.map(row).join('\n')}`;
+      return `### ${cell(task.id)} / ${cell(task.version ?? task.sha256.slice(0, 8))}\n\n${cell(task.description)}\n\n${header}\n${runs.map(row).join('\n')}${runs.some(r => resultNotes[r.run_id]) ? '\n\n**主持复核补充说明（原判定不变）：**\n\n' + runs.filter(r => resultNotes[r.run_id]).map(r => `- [${cell(r.run_id)}](../data/experiments/evaluations/${r.run_id}.json)：${cell(resultNotes[r.run_id].zh)}`).join('\n') : ''}`;
     }).join('\n\n')).join('\n\n');
   fs.writeFileSync(path.join(dir, 'evaluations.md'), `<!-- GENERATED — npm run generate; source: data/experiments/evaluations/ -->
 # 任务实测结果
 
-每行只说明该服务入口在该任务和运行配置下的观察。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
+每行只说明该服务入口在该任务和运行配置下的观察。完成率衡量 Agent 在本轮环境及约束下是否交付完整任务，不等于服务可用率；未完成须结合已验证能力、用户交付缺口与具体阻碍阅读。主持复核补充说明来自 result-notes.json，独立于原始验收，不改变历史状态或统计。Token用量为输入总数（含缓存）加输出，缓存不重复相加。模型费用根据保存的LiteLLM价格表自动估算，估价日期不冒充运行日期；服务费用单独记录，unknown不等于0。点击结果可查看冻结的任务、独立复核与选取的证据；原始日志仍在本地。免费账号的注册准备若发生在计时前，说明保存在 environment.preparation_note；表中 token 与耗时不包含这部分准备。历史记录保留，不把不同任务、配置或日期直接平均成服务排名。
 
 按当前分类和接入／业务阶段分组，再展示同一任务版本和冻结内容的运行。展示归属来自 task-classifications.yaml；历史任务、结果和用量不改写。汇总要求准备说明完全相同，包下载源、请求上限等条件改变后分别统计；说明不同或缺失时不推定等价，因此措辞差异也可能拆分汇总。同组仍需核对接入前提与模型等配置，不能仅按耗时排序判断优劣。
 
@@ -195,7 +220,7 @@ ${buildBoards(records).map(board => `<a id="${board.id}"></a>\n\n### ${board.tas
   const first = row.runs[0];
   return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}${peerReviewLabel(first, true) ? ` · ${peerReviewLabel(first, true)}` : ''}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
     const price = r.model_cost;
-    return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${moneyLabel(price?.amount_usd ?? null)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? [`${r.service_cost.kind}: ${r.service_cost.note}`, ...r.service_cost.sources].join('; ') : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}\n\n  结论与限制：${cell(r.reason)}`;
+    return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${modelCostLabel(price, moneyLabel, true)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? [`${r.service_cost.kind}: ${r.service_cost.note}`, ...r.service_cost.sources].join('; ') : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}\n\n  结论与限制：${cell(r.reason)}${r.outcome ? `；服务操作 ${r.outcome.service_execution}；用户交付 ${r.outcome.user_delivery}；阻碍 ${r.outcome.blocking_factors.join(', ') || '无'}；${cell(r.outcome.evidence)}` : ''}`;
   }).join('\n');
 }).join('\n\n')).join('\n\n')}
 `);

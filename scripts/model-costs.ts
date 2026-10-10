@@ -10,6 +10,7 @@ export interface PriceSnapshot {
 }
 export interface ModelCost {
   amount_usd: number | null;
+  lower_bound_usd?: number;
   kind: 'estimated' | 'unknown';
   reason: string;
   pricing: { source: string; revision: string; fetched_at: string; sha256: string; model: string; tier: string } | null;
@@ -42,6 +43,18 @@ function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, p
   if (!entry) return unknown('No matching model in the saved LiteLLM price table.');
   if (run.request_usage) {
     const detail = run.request_usage;
+    if (detail.status === 'incomplete' && detail.requests_verified === true && detail.lower_bound_usage
+        && /^[a-f0-9]{64}$/.test(detail.source_sha256 ?? '') && detail.requests.length) {
+      for (const field of ['input_tokens', 'cached_input_tokens', 'cache_write_input_tokens', 'output_tokens', 'reasoning_output_tokens'] as const) {
+        if (detail.requests.some(r => !Number.isInteger(r[field]) || r[field]! < 0)
+            || detail.requests.reduce((n, r) => n + r[field]!, 0) !== detail.lower_bound_usage[field])
+          return unknown('Invalid verified partial usage.');
+      }
+      const costs = detail.requests.map(usage => calculate({ model: run.model, usage }, prices, true));
+      if (costs.some(c => c.amount_usd === null)) return unknown('Partial requests cannot all be priced.');
+      return { ...unknown('Total unknown; verified captured requests establish a lower bound at saved API rates, not an account charge.'),
+        lower_bound_usd: Number(costs.reduce((n, c) => n + c.amount_usd!, 0).toPrecision(15)), request_count: costs.length };
+    }
     if (detail.status !== 'complete' || !Array.isArray(detail.requests) || !detail.requests.length || !run.usage)
       return unknown('Per-request usage capture is incomplete.');
     for (const field of ['input_tokens', 'cached_input_tokens', 'cache_write_input_tokens', 'output_tokens', 'reasoning_output_tokens'] as const) {
@@ -96,4 +109,10 @@ function calculate(run: Pick<Evaluation, 'model' | 'usage' | 'request_usage'>, p
   }
   return { amount_usd: Number(amount.toPrecision(15)), kind: 'estimated', pricing, rates,
     reason: 'Actual recorded usage × saved LiteLLM standard API rates; estimate at the snapshot date, not an account charge. Excludes non-token tool fees.' };
+}
+
+/** Partial observations never become full costs or inputs to complete means. */
+export function modelCostLabel(cost: ModelCost | undefined, money: (n: number | null) => string, zh = false) {
+  return cost?.amount_usd != null ? money(cost.amount_usd) : cost?.lower_bound_usd != null
+    ? `${zh ? '至少 ' : 'at least '}$${cost.lower_bound_usd}${zh ? '（总额未知）' : ' (total unknown)'}` : money(null);
 }

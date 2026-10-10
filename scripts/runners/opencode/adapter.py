@@ -20,7 +20,7 @@ from runtime_status import query as query_runtime_status
 from providers import DEFAULT_PROVIDER, validate_model
 from runtime_code import manifest as code_manifest, verify as verify_runtime_code
 
-p=argparse.ArgumentParser();p.add_argument('--config',type=Path,required=True);p.add_argument('operation',choices=['start','status','collect','stop']);p.add_argument('request',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--config',type=Path,required=True);p.add_argument('operation',choices=['preflight','start','status','collect','stop']);p.add_argument('request',type=Path);a=p.parse_args()
 c=load(a.config);r=json.loads(a.request.read_text());container=c['containers'][r['runtime']];run=(r.get('handle') if a.operation!='start' else None) or r['run_id']+'-'+r['role']
 if not re.fullmatch(r'[A-Za-z0-9._-]+',run) or not re.fullmatch(r'[A-Za-z0-9._-]+',container):raise ValueError('Invalid runtime/run name')
 remote=c['remote_root']+'/runs/'+run
@@ -37,15 +37,27 @@ def put(directory):
             if file.is_file():tar.add(file,arcname=str(file.relative_to(directory)),recursive=False)
     return buf.getvalue()
 
-if a.operation=='start':
+if a.operation=='preflight':
+    from network_preflight import validate
+    plan=validate(r['preflight'])
+    script=Path(__file__).with_name('network_preflight.py').read_text()
+    result=docker('exec','-u','1000',container,'python3','-c',script,json.dumps(plan),check=False)
+    print(json.dumps(json.loads(result.stdout) if result.returncode==0 else
+                     {'ready':False,'reason':'Container preflight failed or exceeded its 18-second bound; inspect private adapter log'}))
+elif a.operation=='start':
     r['provider']=c.get('provider',DEFAULT_PROVIDER)
     validate_model(r['provider'],r['model'])
     observed = verify_runtime_code(exec_root, code_manifest(Path(__file__).parent))
     r['runtime_code_preflight'] = {'source_sha256': observed,
         'verified_at': datetime.now(timezone.utc).isoformat(),
         'scope': 'Controller read of root-injected support files before run allocation; not a mid-run immutability guarantee.'}
+    if 'max_model_requests' in r and c.get('max_model_requests',r['max_model_requests']) < r['max_model_requests']:
+        raise ValueError('Adapter request cap is lower than the frozen role budget; reconcile before allocation')
+    if 'deadline_epoch' in c and c['deadline_epoch'] < __import__('time').time()+r['seconds']:
+        raise ValueError('Adapter deadline cannot accommodate the frozen role budget; no run allocated')
+    r['runtime_image_id']=docker('inspect','--format','{{.Image}}',container).stdout.decode().strip()
     for key in ('max_model_requests','deadline_epoch'):
-        if key in c:r[key]=c[key]
+        if key in c:r[key]=min(r.get(key,c[key]),c[key])
     r['retained_paths']=c['retained_paths'][r['runtime']]
     r['retained_children']=c.get('retained_children',{}).get(r['runtime'],{})
     if not isinstance(r['retained_paths'],list):raise ValueError('Specify retained_paths for each runtime')
@@ -77,6 +89,9 @@ elif a.operation=='collect':
             else:
                 dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(tar.extractfile(item).read());dest.chmod(0o600)
     if (out/'events.jsonl').is_file():
+        if not (out/'usage.json').exists():
+            from normalize import normalize
+            normalize(out,r['model'])
         extract_tool_records(out)
     assessment=out/'assessment.json'
     if r['role']=='grading' and assessment.exists():

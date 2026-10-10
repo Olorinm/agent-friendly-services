@@ -596,7 +596,7 @@ We collect options for ordinary personal users and test them on real tasks. Brow
 
 Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
 
-Resolution rates describe the recorded samples: a single completed trial displays 100%. Open the [full results](./generated/evaluations.md) for counts, tasks and conditions; these limited observations do not establish long-term reliability.
+Resolution rates describe complete task delivery by the tested Agent under the recorded conditions, not service availability. Read incomplete runs alongside their blockers and any verified service-side results. A single completed trial displays 100%. Open the [full results](./generated/evaluations.md) for counts, tasks and conditions; these limited observations do not establish long-term reliability.
 
 Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.
 
@@ -634,7 +634,7 @@ const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 n
 
 Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
 
-完成率描述已记录的样本：只测一次且完成，也会显示 100%。次数、任务与条件见[完整结果](./generated/evaluations.md)；有限观察不能证明长期可靠性。
+完成率描述 Agent 在记录的环境及约束下是否交付完整任务，不等于服务可用率；未完成须结合具体阻碍及已验证的服务能力阅读。只测一次且完成，也会显示 100%。次数、任务与条件见[完整结果](./generated/evaluations.md)；有限观察不能证明长期可靠性。
 
 每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。
 

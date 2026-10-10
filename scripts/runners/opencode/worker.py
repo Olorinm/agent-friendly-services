@@ -108,8 +108,11 @@ def main():
     for p in (workspace,home):
         subprocess.run(['chown','-R','1000:1000',str(p)],check=True)
     proxy_command=['python3',str(ROOT/'capture-proxy.py'),'--provider',provider,'--model',request['model'],'--key',str(ROOT/'model.key'),'--output',str(out/'wire')]
+    started_epoch=time.time()
+    deadline=min(started_epoch+max(0,request['seconds']-10),request.get('deadline_epoch',float('inf')))
+    proxy_command += ['--started-at',str(started_epoch),'--deadline',str(deadline),
+                      '--closure-fraction',str(request.get('closure_fraction',0.85))]
     if 'max_model_requests' in request:proxy_command += ['--max-requests',str(request['max_model_requests'])]
-    if 'deadline_epoch' in request:proxy_command += ['--deadline',str(request['deadline_epoch'])]
     proxy=subprocess.Popen(proxy_command,stdout=(private/'proxy.log').open('wb'),stderr=subprocess.STDOUT)
     env={'HOME':str(home),'PATH':'/usr/local/bin:/usr/bin:/bin','LANG':'C.UTF-8','OPENCODE_DISABLE_AUTOUPDATE':'true','OPENCODE_DISABLE_TERMINAL_TITLE':'true','OPENCODE_DISABLE_AUTOCOMPACT':'true'}
     started=now();timed_out=False
@@ -146,10 +149,12 @@ def main():
     # Confirm the actual outbound request contains the role plus frozen prompt.
     verified=bool(requests) and role in payload and all(line in payload for line in prompt.decode().splitlines() if line.strip()) and all(r.get('model')==request['model'] and r.get('reasoning_effort')==request['reasoning_effort'] for r in requests)
     dump(out/'receipt.json',dict(session_id=session,workspace=str(workspace),provider=provider,model_api='https://'+route['host']+route['base_path']+'/chat/completions',model=request['model'],reasoning_effort=request['reasoning_effort'],harness=request['harness'],runtime=request['runtime'],started_at=started,ended_at=ended,exit_code=process.returncode,timed_out=timed_out,isolation='Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools',input_verified=verified))
-    dump(out/'controller-limits.json',{key:request[key] for key in ('max_model_requests','deadline_epoch') if key in request})
+    dump(out/'controller-limits.json',{**{key:request[key] for key in ('max_model_requests','deadline_epoch','closure_fraction') if key in request},
+                                      'effective_deadline_epoch':deadline,'started_epoch':started_epoch})
     if 'runtime_code_preflight' in request:
         receipt=json.loads((out/'receipt.json').read_text())
         receipt['runtime_code_preflight']=request['runtime_code_preflight']
+        receipt['runtime_image_id']=request.get('runtime_image_id')
         dump(out/'receipt.json',receipt)
     normalize(out,request['model'])
     # Persist actual process status and usage before collecting untrusted files.

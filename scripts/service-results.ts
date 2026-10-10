@@ -1,8 +1,10 @@
+import { modelCostLabel } from './model-costs.ts';
 import type { Provider } from './lib.ts';
 import type { Evaluation } from './evaluations.ts';
 import { type Board, summarize, tokenLabel, moneyLabel, interfaceLabel, peerReviewLabel, credentialLabel } from './leaderboard.ts';
 import { taskDisplay } from './task-display.ts';
 import { taskClassification } from './task-classifications.ts';
+import { resultNotesFor } from './result-notes.ts';
 
 const cell = (v: unknown) => String(v ?? '—').replaceAll('|', '\\|').replaceAll('\n', ' ');
 const table = (headers: string[], rows: string[][]) => `| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.map(row => `| ${row.join(' | ')} |`).join('\n')}`;
@@ -32,6 +34,7 @@ export function renderSetup(p: Provider, records: Evaluation[]) {
 /** Compare routes within each task. Each row retains its frozen task and protocol;
  * different versions/configurations are labelled, never averaged together. */
 export function renderServiceResults(p: Provider, boards: Board[], records: Evaluation[]) {
+  const resultNotes = resultNotesFor(records);
   const entries = boards.flatMap(board => board.rows.filter(row => row.service_id === p.id).map(row => ({ board, row })));
   if (!entries.length) return '—';
   const tasks = new Map<string, Evaluation['task']>();
@@ -69,8 +72,17 @@ export function renderServiceResults(p: Provider, boards: Board[], records: Eval
     });
     const invalid = matching.flatMap(e => e.runs).filter(r => r.status === 'invalid_run');
     const failures = matching.flatMap(e => e.runs).filter(r => r.status !== 'completed');
+    const notes = matching.flatMap(e => e.runs).filter(r => resultNotes[r.run_id]).map(r =>
+      `- [${cell(r.run_id)}](${recordLink(r)}): ${cell(resultNotes[r.run_id].en)}`);
+    const facets = matching.flatMap(e => e.runs).filter(r => r.outcome).map(r =>
+      `- [${cell(r.run_id)}](${recordLink(r)}): Service operation ${r.outcome!.service_execution}; user delivery ${r.outcome!.user_delivery}; blockers ${r.outcome!.blocking_factors.join(', ') || 'none'}. ${cell(r.outcome!.evidence)}`);
+    const partialCosts = matching.flatMap(e => e.runs).filter(r => r.model_cost?.lower_bound_usd != null).map(r =>
+      `- [${cell(r.run_id)}](${recordLink(r)}): Model cost ${modelCostLabel(r.model_cost, moneyLabel)}; captured tokens at least ${tokenLabel(r.request_usage!.lower_bound_usage!.input_tokens + r.request_usage!.lower_bound_usage!.output_tokens)}. Excluded from complete cost/token means.`);
     const reasons = failures.map(r => `- ${routeName(p, r.route_id)}: [${r.status === 'invalid_run' ? 'Invalid run' : 'Not completed'}](${recordLink(r)}) — ${cell(r.reason)}`);
     return `#### ${cell(display.description)}\n\n${table(['Route', 'Trials', 'Resolution rate', 'Tokens', 'Model cost', 'Service cost', ...(conditions.length > 1 ? ['Conditions'] : [])], rows)}\n\n`
+      + (notes.length ? `**Additional context from controller review; original verdict unchanged:**\n\n${notes.join('\n')}\n\n` : '')
+      + (facets.length ? facets.join('\n') + '\n\n' : '')
+      + (partialCosts.length ? partialCosts.join('\n') + '\n\n' : '')
       + `<details>\n<summary>Task, conditions and evidence</summary>\n\n${cell(display.inputs)}\n\n**Completion:** ${cell(display.success)}\n\n${shared}\n\n${configs.join('\n\n')}\n\n[Task definition](./tasks.en.md#${task.id}-${task.version})${invalid.length ? `\n\nInvalid runs: ${invalid.length}` : ''}${reasons.length ? `\n\n${reasons.join('\n')}` : ''}\n\n</details>`;
   });
   const history = [...records].sort((a, b) => b.started_at.localeCompare(a.started_at)).map(r =>

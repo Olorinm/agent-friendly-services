@@ -29,6 +29,10 @@ const configKey = (r: Evaluation, services: Map<string, string>) => stable({ mod
   // such as package mirrors and per-role request limits. Require exact equality:
   // different or missing notes do not establish an equivalent environment.
   preparation_note: r.environment.preparation_note,
+  ...(r.environment.trial_protocol ? { trial_protocol: r.environment.trial_protocol,
+    controller_limits: r.environment.controller_limits ? Object.fromEntries(
+      ['max_model_requests', 'closure_fraction'].map(k => [k, (r.environment.controller_limits as Record<string, unknown>)[k]])) : null,
+    runner_source_sha256: r.environment.runner_source_sha256, runtime_image_id: r.environment.runtime_image_id } : {}),
   web_search: r.environment.web_search,
   // Compare the available peer services, not per-task group IDs or round IDs.
   // An unrecorded member stays distinct until its service identity is available.
@@ -39,8 +43,8 @@ export const peerReviewLabel = (r: Evaluation, zh = false) => {
   if (!r.review?.peer_context) return '';
   if (!peerAnswers(r).some(id => id !== r.run_id)) return zh
     ? '独立验收（本轮无其他服务答案可参考）' : 'Independent review; no other service answer available this round';
-  return zh ? `独立验收可参考同期 ${peerAnswers(r).length} 家服务的答案`
-    : `Independent review with same-task answers from ${peerAnswers(r).length} services`;
+  return zh ? `独立验收可参考同期 ${peerAnswers(r).length} 份同题答案`
+    : `Independent review with ${peerAnswers(r).length} same-task answers`;
 };
 const mean = (values: (number | null)[]) => values.length && values.every(v => v !== null && Number.isFinite(v))
   ? values.reduce<number>((sum, v) => sum + v!, 0) / values.length : null;
@@ -80,7 +84,7 @@ export const interfaceLabel = (type: string | undefined, zh = false) => type ===
 
 /** Latest recorded protocol per service/route; compare only identical frozen task sets and settings. */
 export function buildBoards(records: Evaluation[]): Board[] {
-  const services = new Map(records.map(r => [r.run_id, r.service_id]));
+  const services = new Map(records.map(r => [r.run_id, `${r.service_id}/${r.route_id}`]));
   const byRoute = new Map<string, Evaluation[]>();
   for (const run of records) {
     const { classification, phase } = taskClassification(run.task);

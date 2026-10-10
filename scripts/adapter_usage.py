@@ -18,8 +18,8 @@ def read_usage(directory, expected_model=None):
         raw = file.read_bytes()
         detail['source_sha256'] = hashlib.sha256(raw).hexdigest()
         data = json.loads(raw)
-        if data.get('schema_version') != 1 or data.get('complete') is not True:
-            raise ValueError('Adapter usage is incomplete')
+        if data.get('schema_version') != 1 or type(data.get('complete')) is not bool:
+            raise ValueError('Unsupported adapter usage')
         if not isinstance(data.get('model'), str) or not data['model'] or (expected_model and data['model'] != expected_model):
             raise ValueError('Adapter usage model is missing or differs from runtime')
         if not data.get('sources'):
@@ -43,6 +43,14 @@ def read_usage(directory, expected_model=None):
             detail['requests'].append(tokens(row['usage']))
         if not seen:
             raise ValueError('No requests captured')
+        # These counters are independently reported by captured provider responses.
+        # They remain useful when termination loses the runner's final counters.
+        # Only expose a lower bound after every source, identity and row validates.
+        verified = list(detail['requests'])
+        bound = {k: sum(r[k] for r in verified) for k in FIELDS}
+        detail.update(requests_verified=True, lower_bound_usage=bound)
+        if data['complete'] is not True:
+            raise ValueError(data.get('reason') or 'Adapter usage is incomplete')
         if 'cache_write_input_tokens' not in data['totals']:
             raise ValueError('Explicit total cache-write counter is required')
         totals = tokens(data['totals'])
@@ -52,5 +60,7 @@ def read_usage(directory, expected_model=None):
                       reason='Adapter request counters reconcile with runtime totals; raw source hashes verified')
         return totals, detail
     except (OSError, ValueError, TypeError, KeyError) as error:
+        if not detail.get('requests_verified'):
+            detail['requests'] = []
         detail.update(status='incomplete', reason=str(error))
         return None, detail

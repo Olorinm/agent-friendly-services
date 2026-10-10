@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "notes": {
+    "capitol-access-oc11835-r1": {
+      "record_sha256": "1270ed8dda64f87c64673c4eab2a0b214045d27ed993241d5a35b599ba00e41a",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：接入功能已验证，真实数据查询及配置复用成功。未完成源于超出本轮接入阶段最多返回5条记录的测试约束：累计返回7条，且交付统计不完整。这不是服务只支持5条，也不是其免费额度耗尽。",
+      "en": "Controller clarification; the original independent verdict is unchanged. Real data access and configuration reuse were verified. This run remained incomplete because it returned seven records against the trial's five-record setup limit and reported an incomplete call count. The limit belonged to this test, not the service's data coverage or free-tier capacity."
+    },
+    "agentmail-mailbox-create-v2-ds41-r1": {
+      "record_sha256": "d4a243bedeca5c9630c93ba9642b2deb95e1002dba29236206648d913d2b3c0f",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：本轮没有创建邮箱、读取收件箱或取得可复用凭据。测试服务器及容器访问API均收到CloudFront 403，说明该访问路径当时受阻，具体原因未确定，不能据此推断服务整体不可用。另有执行偏离：请求超过12次上限，4次注册POST与答复所称一次不符。",
+      "en": "Controller clarification; the original independent verdict is unchanged. No mailbox, inbox access or reusable credentials were obtained. API requests from the tested host and container received CloudFront 403 responses. This shows that the tested access path was blocked at that time; the specific cause remains undetermined and does not establish service-wide unavailability. Separately, the executor exceeded the 12-request limit and made four signup POSTs while reporting one."
+    },
+    "alpha-rest-prices-001-ds41-r1": {
+      "record_sha256": "5c9d6b7a16018015f7289236052cfab262237d28a91528a2ce2a37b12ce1cf2a",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：指定服务取数及CSV已完成；用户要求的走势图和最终答复未交付。执行约590秒后超时，主要耗在缓慢的matplotlib下载与等待。原题不限定作图库，因此本次记录为执行策略与预算内交付失败，不代表Alpha Vantage无法提供行情。",
+      "en": "Controller clarification; the original independent verdict is unchanged. Service data retrieval and the CSV were completed, but the requested chart and final response were missing. The run timed out after about 590 seconds while waiting on a slow matplotlib download. No plotting library was prescribed; this records a delivery failure under the execution conditions, not a failure of Alpha Vantage to provide prices."
+    },
+    "alpha-mcp-prices-001-ds41-r1": {
+      "record_sha256": "709bf7ac98d8c88ff76d4848e4194fb9d0fa19e40a474c397570800d96af9715",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：官方MCP已返回正确的21个交易日数据，约36秒完成取数；但CSV、走势图和最终答复均未交付。其后依赖安装消耗了剩余时间预算。本轮验证了该入口取数，未完成完整用户任务；不应将其概括为MCP或服务不可用。",
+      "en": "Controller clarification; the original independent verdict is unchanged. The official MCP returned the correct 21 trading days, with retrieval completed in about 36 seconds. The CSV, chart and final response were not delivered before dependency installation exhausted the remaining time. Data access through this route was verified; the complete user task was not. This does not establish that the MCP or service was unavailable."
+    },
+    "turso-restore-mirror-001-ds41-r1": {
+      "record_sha256": "1161b6fbd531387b237d04d085fb5c42b0c0272f8da686e71f8096d3e959bb93",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：真实备份、新库恢复、完整结构与记录、重新连接及源库未变均已独立验证。未完成是因为25次模型请求耗尽后，没有交付备份位置、恢复方法、目标位置及结果和期限说明，不是恢复失败或服务拒绝。约86秒即耗尽请求数，600秒时间预算仍有剩余。",
+      "en": "Controller clarification; the original independent verdict is unchanged. Backup, restoration to a new database, complete schema and data, reconnection and an unchanged source were independently verified. The run exhausted 25 model requests after about 86 seconds and omitted the required locations, recovery instructions and result/expiry explanation. This was a user-delivery gap, not a failed restore or service rejection; time remained within the 600-second limit."
+    },
+    "grist-rest-shared-expenses-001-ds41-r1": {
+      "record_sha256": "d55a7af20977e9400f4f003b49ab716381504bbfa3a770aa0094ed90d497a274",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：在线账本及新增、修改后的自动重算均经独立验证。未完成是因为25次模型请求耗尽，没有向用户交付私人链接、结算金额和继续记账说明。服务端结果正确，但完整用户交付缺失；约177秒结束，未耗尽600秒时间预算。",
+      "en": "Controller clarification; the original independent verdict is unchanged. The online ledger and automatic recalculation after an addition and correction were independently verified. After exhausting 25 model requests in about 177 seconds, the executor omitted the private link, settlement figures and continuation instructions. The service-side result was correct, but the required user delivery was incomplete; time remained within the 600-second limit."
+    },
+    "neon-restore-access-ds41-r1": {
+      "record_sha256": "c8c1d35c5d8efd7680a9e3ffc10e45c13a974a8641e82541b078e3e6332e4bca",
+      "added_at": "2026-10-09T07:29:17.573072+00:00",
+      "zh": "主持复核补充，原独立验收判定不变：匿名身份和项目已创建，但数据库凭据获取、真实只读SQL查询及可复用配置保存均未完成，不能归为只缺最终答复。原300秒批次超时；后来镜像环境的成功属于另一批条件，不能补写本次结果，也不能把旧次未完成解释为Neon不支持数据库访问。",
+      "en": "Controller clarification; the original independent verdict is unchanged. An anonymous identity and project were created, but credential retrieval, a real read-only SQL query and reusable configuration were not completed. This was more than a missing final response. The original 300-second run timed out. Success in the later mirror-configured cohort does not replace this result, and the original failure does not establish that Neon lacks database access support."
+    }
+  }
+}
