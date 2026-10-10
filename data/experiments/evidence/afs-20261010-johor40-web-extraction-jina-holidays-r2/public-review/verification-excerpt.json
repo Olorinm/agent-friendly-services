@@ -1,0 +1,82 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-jina-holidays-r2",
+  "independent_assessment_sha256": "c7d3be5d9d630a17654352e9f16421dac19c57903a634d80fd4cadebca704d87",
+  "status": "completed",
+  "reason": "指定 Jina Reader 服务真实取回目标 OPM 页面（单次无 Key 请求，HTTP 200，响应存于 opm.md 且含 2027 Holiday Schedule 表）；交付 holidays_2027.csv 为可解析 UTF-8 CSV，date/weekday/holiday 三列，11 行与网页表逐项一致、日期升序、无重复或其他年份、脚注标记已去除，日期为公布值；答复给出文件位置与官方来源链接。",
+  "checks": [
+    {
+      "criterion": "通过指定服务 Jina Reader（https://r.jina.ai/）真实取得目标网页内容，而非直读原站或其他来源",
+      "passed": true,
+      "evidence": "采集的工具记录显示唯一提取请求为 curl GET https://r.jina.ai/https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/，无 API Key，返回 HTTP 200、89418 字节；execution/artifacts/opm.md 为该响应的 Markdown 副本，含 2027 Holiday Schedule 表。"
+    },
+    {
+      "criterion": "存在可解析的 UTF-8 CSV 文件，列名为 date、weekday、holiday",
+      "passed": true,
+      "evidence": "execution/artifacts/holidays_2027.csv 共 436 字节，UTF-8 无 BOM，本地 csv 解析表头为 ['date','weekday','holiday']。"
+    },
+    {
+      "criterion": "2027 表全部 11 个假日逐项日期、星期、英文名称正确，无漏行、重复或其他年份",
+      "passed": true,
+      "evidence": "独立解析 CSV 得 11 行，与 execution/artifacts/opm.md 中 2027 表及 reference.json 的 11 条 expected_rows 完全一致；无重复，无 2027 以外年份行；weekday 经 datetime 复核吻合。"
+    },
+    {
+      "criterion": "日期按表公布值记录（未自行替换成节日日历日），日期升序，脚注标记不混入字段",
+      "passed": true,
+      "evidence": "CSV 记 Juneteenth 2027-06-18、Independence Day 2027-07-05、Christmas Day 2027-12-24（均为公布值）；日期严格升序；holiday 字段无 '*'/'**' 脚注标记。"
+    },
+    {
+      "criterion": "答复提供交付文件位置与官方来源链接",
+      "passed": true,
+      "evidence": "execution/answer.md 给出文件 `holidays_2027.csv`（列 date,weekday,holiday）与官方来源 https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/#url=2027，并列明经 Jina Reader 取得。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Jina Reader 单次无 Key 请求 HTTP 200 返回目标页面且含 2027 表；holidays_2027.csv 存在、可解析且 11 行逐项正确；答复含文件位置与来源。无网络、权限、模型预算或执行阻碍。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "97eb48cc9e625e808b9ad1241b711365665753230a88eb70b1632a29ce6bca30",
+      "note": "执行者最终答复：交付文件位置、官方来源链接及所用指定服务说明。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/holidays_2027.csv",
+      "sha256": "0ee36e786b6fda13cc98551273254982e6265478170cb3f77d7b52b8015a38c3",
+      "note": "交付的 UTF-8 CSV，11 行 date,weekday,holiday。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/jina-extraction-and-csv.md",
+      "sha256": "596927bd22fe3359bc877b45ecc06072c1270b068f7461bba4e495c1950e2fee",
+      "note": "核验摘要：Jina 请求/响应业务字段、2027 表节选、CSV 独立解析结果与免费依据。"
+    }
+  ],
+  "task_sha256": "e8bb748e83619e0ea3fa8ac832891235cabc365049eaa60dc5800f4ca9662bec",
+  "prompt_sha256": "a3e07802a2c51ae99bf6e8153c3dc2dbd6ff601fe4bafc8cfcd9d2210c2b8c0c",
+  "reference_sha256": "1bddb3d8496cb47df296c1e6c8deb56f410597d85f4b101c826a783ad4cf9803",
+  "answer_sha256": "97eb48cc9e625e808b9ad1241b711365665753230a88eb70b1632a29ce6bca30",
+  "limits": [
+    "One anonymous access per service followed by three predeclared samepage tasks, one reused physical container per service, newhome/session/taskdir each trial, only generic package/config state allowed to persist.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official OPM2027 table rechecked independently2026-10-10T12:09:16Z. Full original source is withheld from executor. Actual table requirements unchanged from taskv1.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. No OPM logo/endorsement claim.",
+  "actual_csv": {
+    "private_original_locator": "execution/artifacts/holidays_2027.csv",
+    "sha256": "0ee36e786b6fda13cc98551273254982e6265478170cb3f77d7b52b8015a38c3",
+    "row_count": 11,
+    "fields": [
+      "date",
+      "weekday",
+      "holiday"
+    ],
+    "all_rows_and_fields_match_current_reference_under_quote_normalization": true,
+    "ascending_dates": true,
+    "note": "Trusted reading of actual bytes after execution; no Agent code run or CSV repair."
+  }
+}

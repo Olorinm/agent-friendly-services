@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2",
+  "service_id": "nominatim",
+  "route_id": "public-search-api",
+  "entry_url": "https://nominatim.openstreetmap.org/search",
+  "task": {
+    "description": "我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。",
+    "inputs": "地点：The British Museum；地址：Great Russell Street, London WC1B 3DG, United Kingdom。用途是行程概览中的场馆标记，定位到场馆本身即可，场馆中心或入口都可以；相对场馆官方位置点，200 米以内的地点级位置误差可接受，无需精确到门口。街道、邮编或城市中心不能冒充场馆。只用本轮指定服务的实际查询结果；没有返回的地址字段如实注明，不补造，输入地址与服务返回地址分开说明；未提供足够精度时如实说明。",
+    "expected_output": "中文答复包含正确的场馆名称、带纬度和经度标签的 WGS84 十进制度坐标、实际返回的地址信息和数据来源；说明返回对象的定位粒度和任何重要的不确定性。",
+    "success": "通过指定服务真实查询并匹配到伦敦大英博物馆或其入口；最终坐标与该对象的真实响应一致，坐标轴及单位正确，并位于事前冻结的官方场馆位置点 200 米内，允许合理展示舍入。名称、位置和返回对象的语义共同支持场馆身份，不能仅凭落在半径内把粗略区域对象当场馆。来源、实际返回的地址及粒度说明可核对，未返回字段不捏造；不要求两家服务坐标相同、地址逐字相同或提供固定字段集。",
+    "failure": "未真实查询指定服务，使用其他服务、静态示例或模型记忆代替，匹配到错误地点或仅粗略区域却称为场馆，经纬度颠倒或格式错误，坐标超出公开告知的容差，伪造或混淆输入与返回地址，遗漏必要交付，结论与响应矛盾或预算内未完成。缺少场馆覆盖或有效精度时如实记录未完成部分；执行环境或采集故障单列无效。",
+    "resources": "仅用本轮指定地理编码服务及其官方文档，使用已确认免费的只读资源；可在隔离环境安装依赖和生成本题本地文件。不用其他地理编码服务补答案、不直接以场馆官网坐标代替指定服务查询、不付费、不处理个人地址、不发消息。遵守客户端标识、署名、缓存及限流要求；实际入口、账号来源、请求和时间上限由 ENVIRONMENT.md 冻结。原始证据由外部采集，执行者无需额外编写审计日志。",
+    "id": "geocoding-venue-001",
+    "version": "v1",
+    "sha256": "e59e438be349d25a955dbd839142bbf9d067d97e4c7a1f8e5d35d11150d12165",
+    "file": "data/experiments/tasks/geocoding.md"
+  },
+  "prompt_sha256": "b2cfbb8d4bdf69b54a3950ddadeebad46ccb2b60d2f6a054edaaee03ffc32dbe",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:34:46.885180+00:00",
+  "ended_at": "2026-10-10T10:35:29.491381+00:00",
+  "elapsed_seconds": 42.606201,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "Single overseas Nominatim follow-up; existing v1 task unchanged. Fresh container, no service credentials or prewritten client. Config/dependencies and transport cache retained across access/business solely for public-instance policy. 40 model requests each, execution600s/grading300s; same fixed50USD window. Truthful project UA,20s pacing,4 API attempts/stage, first403/429 stop. Restrictions are guards, not hidden user output requirements. Photon held: current explicit free-price evidence insufficient. Prior domestic and old models unchanged. Prior HEAD-root preflight expected200 but observed the official302 redirect to same-host ui/search.html; no model/address query occurred. New logical run preserves that preparation hold, permits the verified redirect as transport reachability only. Actual location matching still requires execution evidence.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791629076.8849838,
+      "started_epoch": 1791628486.8849838
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "本次执行仅使用指定 Nominatim 公共 Search API 真实查询，命中大英博物馆场馆对象（relation/177044，category=tourism/type=museum），返回坐标 51.5193118, -0.1267051 与当次响应一致，距事前冻结官方位置点约 20.7 m（<=200 m）。中文答复包含场馆名称、带纬度/经度标签的 WGS84 十进制度坐标、服务实际返回的地址与 display_name、数据来源及 OSM 署名，并说明定位粒度为场馆多边形中心而非入口；同时如实披露第一次完整地址查询返回空结果、改用查询后命中。无未返回字段被捏造。全部验收项有证据满足。",
+  "usage": {
+    "input_tokens": 69909,
+    "cached_input_tokens": 60928,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3467,
+    "reasoning_output_tokens": 1634
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ",
+      "https://operations.osmfoundation.org/policies/nominatim/"
+    ],
+    "note": "匿名公共实例，无账号、无卡片、无付款；本次未产生计费回执。",
+    "applicability": {
+      "rule": "OSM Foundation 官方 FAQ 将 Nominatim 列为其免费提供的服务之一，公共 Search API 无需付费或注册。",
+      "observed": "本次 2 次未鉴权请求（无 API key/账号/卡）均返回 HTTP 200 业务数据；查询脚本无付费/订阅逻辑。",
+      "evidence": "grading/artifacts/evidence/geocoding-result.md（两次请求 status=200，匿名）"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "afs-grader/opencode",
+    "reviewed_at": "2026-10-10T11:34:31.692254+00:00",
+    "checks": [
+      {
+        "criterion": "使用本轮指定的 Nominatim 公共 Search API 真实查询（非其他服务/静态示例/记忆）",
+        "passed": true,
+        "evidence": "两次请求均指向 https://nominatim.openstreetmap.org/search（jsonv2, addressdetails=1, limit=1），UA 为项目标识；见 evidence/geocoding-result.md 与 execution/artifacts/geocode_query.py。"
+      },
+      {
+        "criterion": "匹配到伦敦大英博物馆场馆对象，而非街道/邮编/城市中心",
+        "passed": true,
+        "evidence": "响应 name=British Museum、category=tourism、type=museum、osm_type=relation/osm_id=177044，display_name 含 Great Russell Street、WC1B 3DG。"
+      },
+      {
+        "criterion": "最终坐标与本次实际响应一致，坐标轴及单位正确（WGS84 十进制度，纬度/经度标签）",
+        "passed": true,
+        "evidence": "答复纬度 51.5193118、经度 -0.1267051，与响应 lat/lon 逐位一致；纬度位于伦敦纬度区间，轴序正确。"
+      },
+      {
+        "criterion": "坐标位于事前冻结官方场馆位置点 200 m 内",
+        "passed": true,
+        "evidence": "官方点 51.519413319978,-0.12695659999997；Haversine ≈ 20.7 m，远小于 200 m（见 evidence/geocoding-result.md）。"
+      },
+      {
+        "criterion": "答复含服务实际返回的地址信息，输入地址与服务返回地址分开说明，未返回字段不捏造",
+        "passed": true,
+        "evidence": "答复列出 display_name、address（road/neighbourhood/suburb/city_district/city/state/postcode/country/country_code）与 boundingbox，并注明结构性字段由服务补全、输入地址另列。"
+      },
+      {
+        "criterion": "说明数据来源与署名/许可",
+        "passed": true,
+        "evidence": "答复给出 OpenStreetMap contributors、Nominatim、ODbL 1.0 及 https://www.openstreetmap.org/copyright；响应 licence 字段一致。"
+      },
+      {
+        "criterion": "说明定位粒度（场馆/入口/更粗略）及不确定性",
+        "passed": true,
+        "evidence": "答复明确为场馆本身（relation 多边形中心，place_rank=30），声明非入口、非街道/邮编/城市中心。"
+      },
+      {
+        "criterion": "遵守接入协议：单线程、相邻请求间隔>=20s、失败/空结果如实披露",
+        "passed": true,
+        "evidence": "两次请求 fetched_at 10:35:00 与 10:35:23（间隔约 23s）；答复如实记录首次完整地址查询返回 [] 及第二次查询。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.0186537,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.0186537,
+          "usage_sha256": "e5ad8fdcb272d68575e2af3bb4a233241c3004d4dd877145b8785a517978f9d8"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2/execution/answer.md",
+      "sha256": "5a7ae14df8f34a5272a48c4e66c6bdefa89a291228f21ecd836c1d8dbcbae06c",
+      "note": "Original captured user answer, private infrastructure and registered identities removed; not a raw model log."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2/public-review/verification-excerpt.json",
+      "sha256": "92159ac1f7fbde62dcfe7d318ebf342521631deae5b7ff6bfe007e9511a6e3b9",
+      "note": "Minimal independent-verification excerpt, original evidence hashes and cohort limits; full holiday tables/raw model logs omitted."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2",
+    "run_sha256": "9e5b34daeb6674169896bec1288f7a3ecb950861b276509626ca3ec74530f002",
+    "events_sha256": "4e9068c490da2019f4de7499ef411db73f542bddebfb8b461f382fb55c71c10f",
+    "answer_sha256": "5a7ae14df8f34a5272a48c4e66c6bdefa89a291228f21ecd836c1d8dbcbae06c",
+    "review_sha256": "09f084afeb3b02286568b1c48df7ead8fd64ee86dfbcd2d3bf0e7c2ab5dc326d",
+    "original_independent_review_sha256": "78d59f32cfc54e4a2dbfc95acf6cf729856d1cd45a857ec5c9f125186cd8c320",
+    "publication_review_note": "Minimal evidence selection and identity redaction; task status/reason/checks/outcome/measured usage unchanged. Any fee-source correction is an explicitly linked anomaly-specific independent clarification."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7225,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 134,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8481,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 145,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 9163,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 164,
+        "reasoning_output_tokens": 11
+      },
+      {
+        "input_tokens": 10057,
+        "cached_input_tokens": 9216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1272,
+        "reasoning_output_tokens": 656
+      },
+      {
+        "input_tokens": 11345,
+        "cached_input_tokens": 11136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 115,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 11501,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 333,
+        "reasoning_output_tokens": 216
+      },
+      {
+        "input_tokens": 12137,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1304,
+        "reasoning_output_tokens": 722
+      }
+    ],
+    "source_sha256": "a2aa95a2f6f132131cde2d4ae5b85e3408e34580f78227e474af536a9d3617f9",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 69909,
+      "cached_input_tokens": 60928,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3467,
+      "reasoning_output_tokens": 1634
+    },
+    "totals": {
+      "input_tokens": 69909,
+      "cached_input_tokens": 60928,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3467,
+      "reasoning_output_tokens": 1634
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

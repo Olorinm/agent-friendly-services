@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-macro-eurostat-access-r1",
+  "service_id": "eurostat",
+  "route_id": "statistics-api",
+  "entry_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+  "task": {
+    "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+    "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+    "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+    "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。",
+    "resources": "本轮指定入口与授权资料；仅已确认免费的资源，不付费，不进行交易或资金操作。需要人工或额外身份资料时说明阻碍。安装和配置在本轮持久目录内，不能读取其他任务和账号。",
+    "id": "financial-access-001",
+    "version": "v1",
+    "sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:23:51.049072+00:00",
+  "ended_at": "2026-10-10T10:24:58.877272+00:00",
+  "elapsed_seconds": 67.8282,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791628421.0488138,
+      "started_epoch": 1791627831.0488138
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "执行者使用指定 Eurostat Statistics API 入口（匿名、无 Key）完成一次真实金融数据查询（HTTP 200，JSON-stat 2.0，含 series/time/value），并保存了可复用的连接配置；答复准确说明免账号/免费与 format=JSON 约束，无注册或人工介入。",
+  "usage": {
+    "input_tokens": 406499,
+    "cached_input_tokens": 378112,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8791,
+    "reasoning_output_tokens": 3077
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction",
+      "grading/artifacts/evidence/eurostat-free-rule.md"
+    ],
+    "applicability": {
+      "rule": "官方 Eurostat API 文档声明这些 API 是 free of charge 的程序化访问；STATISTICS API 为 open for public use 的 REST 服务，无需账号/Key。",
+      "observed": "同一会话对指定入口发起匿名 GET（无 API Key、无账号、无付款头）返回 HTTP 200 及真实数据，本次在免费范围内使用。",
+      "evidence": "grading/artifacts/evidence/eurostat-free-rule.md"
+    },
+    "note": "公开且免费的匿名接口，本次无付费、无账单回执；服务费用按免费规则确认。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader/afs-20261010",
+    "reviewed_at": "2026-10-10T11:34:33.124057+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定的 Eurostat Statistics API 入口与调用方式，未改用其他统计 API",
+        "passed": true,
+        "evidence": "实测 URL 为 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/{datasetId}?format=JSON&lang=EN&... ，与 ENVIRONMENT.md 指定入口完全一致；全程仅访问该端点（见 execution/artifacts/response_irt_lt.json 与 answer.md）。"
+      },
+      {
+        "criterion": "完成至少一次真实的金融数据查询（非仅文档/健康检查）",
+        "passed": true,
+        "evidence": "execution/artifacts/response_irt_lt.json：irt_lt_mcby_m，int_rt=MCBY（EMU convergence criterion bond yields，长期利率），geo=EA，time=2026-08，value=3.60263，HTTP 200；另有 response_hicp.json 的 HICP 观测。"
+      },
+      {
+        "criterion": "保存后续会话可复用的必要连接配置",
+        "passed": true,
+        "evidence": "execution/retained-files.json 列出 service-config.json（执行时写于 /home/node/service-tools/service-config.json，3712 字节且经 JSON 解析校验），包含指定 base_url、auth=none、format=JSON 约束、UA 与限流等；摘录见 grading/artifacts/evidence/eurostat-live-result.md。"
+      },
+      {
+        "criterion": "答复准确说明接入步骤与阻碍，无虚假注册/人工声明",
+        "passed": true,
+        "evidence": "execution/answer.md 明确说明免账号/Key、免费、无需注册，并给出实测值与 format=CSV 返回 400 的约束；未声称自签账号或人工协助。"
+      },
+      {
+        "criterion": "不需要账号时不强行注册，未超授权范围",
+        "passed": true,
+        "evidence": "入口为匿名公共资源；执行记录中无注册、绑定支付或邮件操作，answer.md 声明未创建任何账号。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.034542672,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.034542672,
+          "usage_sha256": "df316237b19273845bde12c5d7057391b60708c8c07d9553aef79757bbfaa939"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-access-r1/execution/answer.md",
+      "sha256": "5119bdd6149f374040dca4c21be298ad183a21694ee0f9627a58bbf25668e0cc",
+      "note": "Original captured user answer, private infrastructure and registered identities removed; not a raw model log."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-access-r1/execution/artifacts/response_hicp.csv",
+      "sha256": "2e017995a932cb066395e674899283db0c1fcfc62988ed6f44892f5bbfac7d06",
+      "note": "Original small task CSV, with official source attribution in answer and verification excerpt."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-access-r1/public-review/verification-excerpt.json",
+      "sha256": "ee4278dc3a087ddea8993e8cb06e8082b01a65134e6a297ea2fffdc6d64be117",
+      "note": "Minimal independent-verification excerpt, original evidence hashes and cohort limits; full holiday tables/raw model logs omitted."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-macro-eurostat-access-r1",
+    "run_sha256": "496b15367b03c2c281647bf3da5db91a48945c921b023d506c98cf1594fe0d21",
+    "events_sha256": "8a921ba8b002e8bbc7cfd7e87b64331a31774c94178c6b583555d3cadd5ffcba",
+    "answer_sha256": "5119bdd6149f374040dca4c21be298ad183a21694ee0f9627a58bbf25668e0cc",
+    "review_sha256": "9d76da661111e4c5a71a681cf7bb1e419989cb7020d3029e9464a8b1cad34ac8",
+    "original_independent_review_sha256": "c2b2db7f61b9e69d281790ad4bbb101e9b844c5537a050f8ef91680785a2fbe4",
+    "publication_review_note": "Minimal evidence selection and identity redaction; task status/reason/checks/outcome/measured usage unchanged. Any fee-source correction is an explicitly linked anomaly-specific independent clarification."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定入口匿名 GET 返回 HTTP 200 及真实金融观测（response_irt_lt.json）；连接配置写入 service-config.json 并保留；answer.md 交付结果与约束说明。无阻碍因素。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7181,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8113,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 272,
+        "reasoning_output_tokens": 96
+      },
+      {
+        "input_tokens": 8822,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 150,
+        "reasoning_output_tokens": 20
+      },
+      {
+        "input_tokens": 15443,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 397,
+        "reasoning_output_tokens": 120
+      },
+      {
+        "input_tokens": 20181,
+        "cached_input_tokens": 15744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 718,
+        "reasoning_output_tokens": 441
+      },
+      {
+        "input_tokens": 21206,
+        "cached_input_tokens": 20864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 788,
+        "reasoning_output_tokens": 387
+      },
+      {
+        "input_tokens": 22385,
+        "cached_input_tokens": 21888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 370,
+        "reasoning_output_tokens": 290
+      },
+      {
+        "input_tokens": 26027,
+        "cached_input_tokens": 22656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 99,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 30287,
+        "cached_input_tokens": 26112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1486,
+        "reasoning_output_tokens": 1126
+      },
+      {
+        "input_tokens": 31909,
+        "cached_input_tokens": 31744,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1981,
+        "reasoning_output_tokens": 376
+      },
+      {
+        "input_tokens": 33906,
+        "cached_input_tokens": 33664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 212,
+        "reasoning_output_tokens": 26
+      },
+      {
+        "input_tokens": 34570,
+        "cached_input_tokens": 34048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1275,
+        "reasoning_output_tokens": 95
+      },
+      {
+        "input_tokens": 35861,
+        "cached_input_tokens": 35712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 177,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 36405,
+        "cached_input_tokens": 35968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 161,
+        "reasoning_output_tokens": 75
+      },
+      {
+        "input_tokens": 36888,
+        "cached_input_tokens": 36480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 206,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 37315,
+        "cached_input_tokens": 36992,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 373,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "6fd9ea19cf7ac49b95706b6a745913f9bdcead3fe701e93852ff56bcd1a8a622",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 406499,
+      "cached_input_tokens": 378112,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8791,
+      "reasoning_output_tokens": 3077
+    },
+    "totals": {
+      "input_tokens": 406499,
+      "cached_input_tokens": 378112,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8791,
+      "reasoning_output_tokens": 3077
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

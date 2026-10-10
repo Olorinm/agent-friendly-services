@@ -1,0 +1,197 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3",
+  "independent_assessment_sha256": "2a00b7f9ccc88c69d8159adf38706512d07276deb5301e4448997a6ce8c16e5e",
+  "status": "not_completed",
+  "reason": "指定服务 Firecrawl 匿名入口确实成功取得 GOV.UK 页面（HTTP 200, success:true），但执行者的解析脚本假定 Markdown 中表注年份在表格之前，而 Firecrawl 转出的 Markdown 里表注年份实际出现在表格之后，导致其取到的是紧跟 “...2027” 文本的 2028 年 England and Wales 表。交付 CSV 的 8 个日期全部与官方 2027 表不符（实为 2028 年该地区表），且 substitute day 标注错误，未满足任务对日期与名称逐项一致、且不混入其他年份的要求，故整体未完成。",
+  "checks": [
+    {
+      "criterion": "通过本轮指定服务（Firecrawl 匿名入口）实际取得目标 GOV.UK 页面内容",
+      "passed": true,
+      "evidence": "执行记录中 1 次 POST https://api.firecrawl.dev/v2/scrape（无 Authorization 头）返回 HTTP 200；响应 JSON success=true，data.markdown 长度 20507，含 GOV.UK bank-holidays 页面正文（execution/artifacts/firecrawl-response.json、execution/artifacts/firecrawl-bank-holidays.md）。"
+    },
+    {
+      "criterion": "交付文件真实存在、UTF-8 可解析、表头清晰",
+      "passed": true,
+      "evidence": "execution/artifacts/england-wales-bank-holidays-2027.csv 存在，UTF-8 可解析，表头 date,holiday，共 8 条数据行。"
+    },
+    {
+      "criterion": "CSV 日期为页面 England and Wales 2027 表公布的日期，逐项与官方原文一致",
+      "passed": false,
+      "evidence": "官方 2027 表为 2027-01-01/03-26/03-29/05-03/05-31/08-30/12-27/12-28；交付为 2027-01-03/04-14/04-17/05-01/05-29/08-28/12-25/12-26，全部不符，实为 2028 年该地区表（见 grading/artifacts/evidence/firecrawl-ew-table-excerpt.md）。"
+    },
+    {
+      "criterion": "只含该地区该年全部条目，无重复、无其他年份/地区混入",
+      "passed": false,
+      "evidence": "交付数值对应 2028 年 England and Wales 表（如 Good Friday 2028-04-14、Easter Monday 2028-04-17、New Year substitute 2028-01-03），属于混入其他年份，且遗漏官方 2027 全部条目。"
+    },
+    {
+      "criterion": "保留页面 substitute day 名称标注及公布日期",
+      "passed": false,
+      "evidence": "CSV 将 2027-01-03 标为 New Year’s Day (substitute day)（官方 2027 并非 substitute），并丢失 Christmas Day/Boxing Day 的 (substitute day) 标注，标注与官方原文不符。"
+    },
+    {
+      "criterion": "日期按升序排列",
+      "passed": true,
+      "evidence": "CSV 数据行日期升序（2027-01-03 至 2027-12-26）。"
+    },
+    {
+      "criterion": "答复含实际文件位置与 GOV.UK 官方来源链接",
+      "passed": true,
+      "evidence": "execution/answer.md 给出文件路径 /workspace/.../england-wales-bank-holidays-2027.csv 与来源 https://www.gov.uk/bank-holidays。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "not_completed",
+    "blocking_factors": [
+      "agent_execution"
+    ],
+    "evidence": "Firecrawl 匿名入口成功返回 HTTP 200、success:true 的 GOV.UK 页面内容，服务操作完成；但执行者解析脚本把 Markdown 中表注与表格的先后顺序判断相反（脚本 parse_holidays.py 在 “England and Wales 2027” 文本之后取表，而该表实为 2028 内容），交付 CSV 日期与 substitute 标注全部错误，用户未得到正确的 2027 CSV。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "4b1d67b957937a30737c70dc5799bd1cc816d0be736e45ad01befc435b3e069a",
+      "note": "执行者最终答复，含文件位置与官方来源链接。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+      "sha256": "6c31dc56dbb6c6328b9a600e2ccaf5e055515bcd43716b8ae0d62cf0f3ee7d0e",
+      "note": "交付的 CSV，8 行日期为 2028 年该地区表，与官方 2027 表不符。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/firecrawl-bank-holidays.md",
+      "sha256": "01fe6c524436640e23e2b48004cfdb33ba0461d8de3e6d59b89508b548e35d9b",
+      "note": "Firecrawl 返回的页面 Markdown 副本，可见表注年份与表格内容错位的真实顺序。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/firecrawl-ew-table-excerpt.md",
+      "sha256": "b3bf19d5637514280714e25dac9b2b0a8dab3ef2e8a070c4054fc7042b3d7bd2",
+      "note": "验收者摘录的采集页 England and Wales 段原文、官方 2027 公布值与交付 CSV 的逐项对比。"
+    }
+  ],
+  "task_sha256": "b3a6fd45ffd0b546a0188dd88268979ed1f6907ca6dd73c5336d1d710073cfa0",
+  "prompt_sha256": "a5ebcec863734593efc236cccf875a73c3d809d3f0ebbddde509cb0970213ded",
+  "reference_sha256": "cbba3dc1b31e40a080f0ab5c7b848b5258f2832cee4a8989351876a8648df1eb",
+  "answer_sha256": "4b1d67b957937a30737c70dc5799bd1cc816d0be736e45ad01befc435b3e069a",
+  "limits": [
+    "Access and three OPM rounds completed before this separate UK task. Three UK pairs declared before first dispatch; existing physical runtime, new home/session/taskdir. Current Jina baseline empty; Firecrawl retained generic config only. No task data or source injected.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official GOV.UK England and Wales2027 table frozen independently2026-10-10T12:29:45Z. This second staticHTML template tests region/yearselection. No broad reliability or JS-only extraction claim. Full source and expected rows withheld from executor.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. Contains public sector information licensed under the Open Government Licence v3.0. Source: https://www.gov.uk/bank-holidays ; licence: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/ . No GOV.UK logo/endorsement claim.",
+  "actual_csv": {
+    "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+    "sha256": "6c31dc56dbb6c6328b9a600e2ccaf5e055515bcd43716b8ae0d62cf0f3ee7d0e",
+    "row_count": 8,
+    "fields": [
+      "date",
+      "holiday"
+    ],
+    "required_field_mapping": {
+      "date": "date",
+      "holiday": "holiday"
+    },
+    "all_rows_and_fields_match_current_reference_under_quote_space_normalization": false,
+    "ascending_dates": true,
+    "mismatches": [
+      {
+        "row": 1,
+        "actual": {
+          "date": "2027-01-03",
+          "holiday": "New Year’s Day (substitute day)"
+        },
+        "reference": {
+          "date": "2027-01-01",
+          "holiday": "New Year’s Day"
+        }
+      },
+      {
+        "row": 2,
+        "actual": {
+          "date": "2027-04-14",
+          "holiday": "Good Friday"
+        },
+        "reference": {
+          "date": "2027-03-26",
+          "holiday": "Good Friday"
+        }
+      },
+      {
+        "row": 3,
+        "actual": {
+          "date": "2027-04-17",
+          "holiday": "Easter Monday"
+        },
+        "reference": {
+          "date": "2027-03-29",
+          "holiday": "Easter Monday"
+        }
+      },
+      {
+        "row": 4,
+        "actual": {
+          "date": "2027-05-01",
+          "holiday": "Early May bank holiday"
+        },
+        "reference": {
+          "date": "2027-05-03",
+          "holiday": "Early May bank holiday"
+        }
+      },
+      {
+        "row": 5,
+        "actual": {
+          "date": "2027-05-29",
+          "holiday": "Spring bank holiday"
+        },
+        "reference": {
+          "date": "2027-05-31",
+          "holiday": "Spring bank holiday"
+        }
+      },
+      {
+        "row": 6,
+        "actual": {
+          "date": "2027-08-28",
+          "holiday": "Summer bank holiday"
+        },
+        "reference": {
+          "date": "2027-08-30",
+          "holiday": "Summer bank holiday"
+        }
+      },
+      {
+        "row": 7,
+        "actual": {
+          "date": "2027-12-25",
+          "holiday": "Christmas Day"
+        },
+        "reference": {
+          "date": "2027-12-27",
+          "holiday": "Christmas Day (substitute day)"
+        }
+      },
+      {
+        "row": 8,
+        "actual": {
+          "date": "2027-12-26",
+          "holiday": "Boxing Day"
+        },
+        "reference": {
+          "date": "2027-12-28",
+          "holiday": "Boxing Day (substitute day)"
+        }
+      }
+    ],
+    "note": "Trusted reading of actual bytes after execution; no Agent code run, outcome repair or CSV repair."
+  },
+  "independent_fee_clarification": {
+    "sha256": "768e0c551bcf12fcaf8106aa606db245f1756f1e2a94709810d1ab5b56ba0d05",
+    "original_assessment_sha256": "2a00b7f9ccc88c69d8159adf38706512d07276deb5301e4448997a6ce8c16e5e",
+    "scope": "Monetary note/applicability only; original task judgment and measured modelusage unchanged. Confirmedfree applies documented anonymous rule to actual captured request, not absence of invoice."
+  }
+}

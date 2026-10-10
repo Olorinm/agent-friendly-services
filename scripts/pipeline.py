@@ -104,6 +104,15 @@ def prepare(config_path, directory):
             raise ValueError('Preflight plan requires an execution adapter preflight command')
     if config['phase'] not in ('access', 'business'):
         raise ValueError('phase must be access or business')
+    secret_bytes = None
+    if config.get('grading_secrets_file'):
+        source = Path(config['grading_secrets_file'])
+        if not source.is_absolute() or source.is_symlink() or not source.is_file():
+            raise ValueError('Grading secrets need an absolute private file without symlinks')
+        secret_bytes = source.read_bytes()
+        values = json.loads(secret_bytes)
+        if not isinstance(values, list) or any(not isinstance(v, str) or len(v) < 8 for v in values):
+            raise ValueError('Grading secrets must be explicit strings of at least eight characters')
     if config['phase'] == 'business':
         previous = Path(config['depends_on']).resolve()
         prev_config, prev_state = read(previous / 'config.json'), read(previous / 'state.json')
@@ -143,6 +152,11 @@ def prepare(config_path, directory):
     if config.get('reference'):
         shutil.copyfile(config['reference'], grade / 'reference.json')
     shutil.copyfile(ROOT / 'data/pricing/litellm.json', frozen / 'pricing.json')
+    if secret_bytes is not None:
+        # Neither file belongs to the executor or grader input directories.
+        for target in (frozen / 'private-secrets.json', directory / 'private-secrets.json'):
+            target.write_bytes(secret_bytes)
+            target.chmod(0o600)
     write(directory / 'config.json', config)
     write(directory / 'task.json', task)
     write(directory / 'route.json', route)
@@ -157,6 +171,11 @@ def verify(directory):
     for rel, expected in read(directory / 'frozen-hashes.json').items():
         if digest(directory / 'frozen' / rel) != expected:
             raise ValueError('Frozen inputs changed: ' + rel)
+    original_secrets = directory / 'frozen/private-secrets.json'
+    if original_secrets.exists():
+        current = read(directory / 'private-secrets.json')
+        if not isinstance(current, list) or not set(read(original_secrets)).issubset(current):
+            raise ValueError('Prepared grading secrets must remain registered')
 
 
 def invoke(directory, role, operation, settings, request):
@@ -386,9 +405,11 @@ def advance(directory, group_directory=None, dispatch_guard=None):
             raise ValueError('Grading did not finish successfully')
         resolve_evidence_paths(directory)
         assessment = read(directory / 'grading/assessment.json')
-        # Reuse the exact recording validator, without publishing anything.
+        # Validate the independent verdict and original evidence privately.
+        # Public redaction must not block a passed access prerequisite; record()
+        # still enforces publication checks before writing any public evidence.
         recorder = module('recorder', 'record-trial.py')
-        recorder.record(directory, directory / 'grading/assessment.json', dry_run=True)
+        recorder.record(directory, directory / 'grading/assessment.json', dry_run=True, private_review=True)
         amount, detail = service_charge(assessment)
         grading_total, grading_attempts = grading_costs(directory)
         write(directory / 'charges.json', {'model_cost': read(directory / 'execution/model-cost.json'),

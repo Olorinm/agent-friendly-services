@@ -1,0 +1,5 @@
+country_code,country,year,indicator,adjustment,unit,value,series_key,source,retrieved_at
+DE,Germany,2023,HICP all items (overall index) - annual average rate of change,Neither seasonally nor working day adjusted,%,6.0,HICP.A.DE.N.000000.4D0.AVR,ECB Data Portal / Eurostat,2026-10-10
+DE,Germany,2024,HICP all items (overall index) - annual average rate of change,Neither seasonally nor working day adjusted,%,2.5,HICP.A.DE.N.000000.4D0.AVR,ECB Data Portal / Eurostat,2026-10-10
+FR,France,2023,HICP all items (overall index) - annual average rate of change,Neither seasonally nor working day adjusted,%,5.7,HICP.A.FR.N.000000.4D0.AVR,ECB Data Portal / Eurostat,2026-10-10
+FR,France,2024,HICP all items (overall index) - annual average rate of change,Neither seasonally nor working day adjusted,%,2.3,HICP.A.FR.N.000000.4D0.AVR,ECB Data Portal / Eurostat,2026-10-10

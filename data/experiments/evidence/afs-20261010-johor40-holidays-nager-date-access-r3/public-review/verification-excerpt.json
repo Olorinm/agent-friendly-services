@@ -1,0 +1,63 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-nager-date-access-r3",
+  "independent_assessment_sha256": "6964a53a9e0912abb4a519c890b30d966731487ca642cc05fff3bc63e6c1d514",
+  "independent_status": "completed",
+  "independent_reason": "执行者通过指定 Community API v4 入口对新加坡(SG)2026完成一次真实查询，HTTP 200 返回 11 条真实假日（示例 2026-08-09 National Day），并将可复用配置写入 ENVIRONMENT 指定的持久路径 /home/node/service-tools/service-config.json；答复给出范围、示例节日、来源、配置位置、账号来源与阻碍，内容与响应一致且无秘密泄露。",
+  "checks": [
+    {
+      "criterion": "经指定服务与入口(/api/v4/Holidays)完成真实假日查询，返回可识别日期与名称，且与答复一致",
+      "passed": true,
+      "evidence": "execution/answer.md 报告 SG 2026 返回 11 条、示例 2026-08-09 National Day；execution/artifacts/cache/v4_Holidays_SG_2026.json 实际响应含该日期与名称；execution/artifacts/cache/sg2026.headers content-type=application/json、HTTP 200。"
+    },
+    {
+      "criterion": "使用指定的 Community v4，而非 v3/Pro、离线库或其他服务",
+      "passed": true,
+      "evidence": "所有业务请求均为 https://nagerholidays.com/api/v4/Holidays/{CC}/{Year}（见 cache/v4_Holidays_SG_2026.json 与 answer.md）；未出现 v3/Pro 或其他服务调用。"
+    },
+    {
+      "criterion": "后续查询所需配置保存在指定持久目录，可供新会话复用且不泄露秘密",
+      "passed": true,
+      "evidence": "配置写入 ENVIRONMENT 指定的 /home/node/service-tools/service-config.json（apiBase、端点模板、响应字段、请求策略、已知限制），execution/retained-files.json 记录保留 service-config.json；内容 type=none，无账号/密钥/令牌。"
+    },
+    {
+      "criterion": "账号来源、自助步骤、人工介入与额外申请/阻碍如实说明",
+      "passed": true,
+      "evidence": "execution/answer.md 说明匿名公共入口、无账号/密钥/付款，故无人工介入、无额外申请；并记录 MY 不受支持（/MY/2026 与 /MY/2025 204、/MY/2024 400）及 /api/v4/Countries 404 等实际阻碍。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务真实查询成功（SG 2026，HTTP 200，11 条），配置写入指定持久路径并已保留；答复完整说明结果、配置与阻碍。MY 不受支持属已如实记录并绕过的障碍，未阻止任务完成。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "49eaa38fe19e9568da0ce9caffb1d93b85bfe05a1539d9ec640c40de00b73e1a",
+      "note": "最终答复：服务/入口、查询范围与示例节日、接入步骤、配置位置、账号来源与阻碍。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/v4_Holidays_SG_2026.json",
+      "private_source_sha256": "efd39cebf80be522dd4ae8d3a3c2f9229bdae3963baf219d28bc5f908ad4b7ea",
+      "note": "真实响应副本：SG 2026 共 11 条，含 2026-08-09 National Day。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "private_source_sha256": "e63e658b65412c3ed84727645de51013ed4b3f4cac0e9c2febc0a63074849c2f",
+      "note": "脱敏核验摘要：查询结果、配置要点与免费规则来源。"
+    }
+  ],
+  "frozen_task_sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+  "frozen_prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "reference_sha256": "681b0bd65e10da8b0d1a6d1874cd9682f3f158e18a3aded88fcfa29f1f60473d",
+  "execution_answer_sha256": "49eaa38fe19e9568da0ce9caffb1d93b85bfe05a1539d9ec640c40de00b73e1a",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Nager.Date Community v4; low-volume noncommercial research. Not a holiday portal or redistributed list."
+}

@@ -31,4 +31,29 @@ class GradingPrivacyTests(unittest.TestCase):
             d=Path(tmp);(d/'api-key-12345.txt').write_text('content')
             with self.assertRaisesRegex(ValueError,'filename'):redact_tree(d,['api-key-12345'])
 
+    def test_json_suffix_with_curl_status_preserves_original_format(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);f=d/'create-db.json'
+            original='{"token":"api-key-12345"}\nHTTP 200\n'
+            f.write_text(original)
+            changed=redact_tree(d,['api-key-12345'])
+            self.assertEqual(f.read_text(),'{"token":"[SERVICE_SECRET]"}\nHTTP 200\n')
+            self.assertEqual(len(changed),1)
+            self.assertIn('not a single JSON',changed[0]['format_note'])
+
+    def test_valid_json_must_remain_valid_and_rejection_changes_no_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);first=d/'first.txt';last=d/'last.json'
+            first.write_text('api-key-12345');last.write_text('{"private_id":12345678}')
+            with self.assertRaises(ValueError):redact_tree(d,['api-key-12345','12345678'])
+            self.assertEqual(first.read_text(),'api-key-12345')
+            self.assertEqual(last.read_text(),'{"private_id":12345678}')
+
+    def test_invalid_json_artifact_removes_encoded_secret(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);f=d/'transcript.json';key='api-key-12345'
+            f.write_text('saved token='+base64.b64encode(key.encode()).decode())
+            redact_tree(d,[key])
+            self.assertEqual(f.read_text(),'saved token=[SERVICE_SECRET]')
+
 if __name__=='__main__':unittest.main()

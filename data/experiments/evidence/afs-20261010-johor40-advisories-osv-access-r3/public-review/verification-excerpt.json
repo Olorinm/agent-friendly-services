@@ -1,0 +1,130 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-osv-access-r3",
+  "independent_assessment_sha256": "4ca2d900b343506814309b8073e125c853929f9c22b3eb04cf3f917664c17c98",
+  "independent_status": "completed",
+  "independent_reason": "指定 OSV 公共 REST API（POST /v1/query 与 GET /v1/vulns/{id}）已实际调用并返回可识别公告与关联包，答复与原始响应一致；后续查询配置写入授权持久目录且无秘密；接入步骤与实际门槛（匿名、无注册/凭据/付费、未触发 403/429）如实说明，均在授权范围内完成。",
+  "checks": [
+    {
+      "criterion": "使用指定服务与入口：通过 OSV 公共 REST API 的 query 与记录路径完成，未改用其他服务或入口",
+      "passed": true,
+      "evidence": "execution/artifacts/raw-query-lodash.json 与 raw-vuln-GHSA-29mw-wpgm-hmr9.json 均取自 api.osv.dev；osv_query.py 的 BASE=\"https://api.osv.dev/v1\"，端点与 ENVIRONMENT.md 指定入口一致。"
+    },
+    {
+      "criterion": "完成一次真实查询，取得可识别公告记录，含公告标识、关联包名及来源，且答复与响应一致",
+      "passed": true,
+      "evidence": "POST /v1/query 以 {lodash,npm,4.17.20} 返回 5 条公告；GHSA-29mw-wpgm-hmr9（别名 CVE-2020-28500，npm:lodash >=4.0.0 fixed 4.17.21）；GET /v1/vulns/GHSA-29mw-wpgm-hmr9 记录一致。answer.md 表格与原始响应相符，见 execution/answer.md 与 grading/artifacts/evidence/osv-query-extract.json。"
+    },
+    {
+      "criterion": "保存后续查询所需本地配置并给出位置，可供新会话复用且不泄露秘密",
+      "passed": true,
+      "evidence": "通用连接配置写入 ENVIRONMENT.md 指定的持久位置 /home/node/service-tools/service-config.json；execution/retained-files.json 列出保留 service-config.json；内容为无秘密的连接信息（base_url/端点/客户端标识），见 grading/artifacts/evidence/service-config-retained.md。"
+    },
+    {
+      "criterion": "如实说明接入步骤、账号来源、自助步骤及实际人工或申请要求",
+      "passed": true,
+      "evidence": "execution/answer.md 说明匿名入口无认证、无注册/凭据/付费，无自助注册步骤与人工或申请要求，未触发 403/429。与本轮无账号、无凭据的接入条件一致。"
+    },
+    {
+      "criterion": "范围合规：仅免费公开防御性元数据，未安装待查软件、运行漏洞样例、扫描、改仓库、付费或发消息",
+      "passed": true,
+      "evidence": "仅发起 OSV 只读查询并只读核对一条 GitHub 提交页（HTTP 200）；未下载/安装/运行脆弱包，未扫描，未注册无关服务或付费。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 OSV API 查询与记录路径均实测返回可识别公告（GHSA-29mw-wpgm-hmr9 等）；最终答复 execution/answer.md 含公告、关联包、复用配置位置与接入门槛，交付完整。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "68acfed67e4a6a81e98f8dbf42334e0ac8aedf908d6e756f7ed1f878ec006bd2",
+      "note": "执行者最终答复（含公告标识、关联包、配置位置、步骤与门槛）"
+    },
+    {
+      "private_source": "execution/artifacts/raw-query-lodash.json",
+      "private_source_sha256": "3b5b0fe26c358fba614176ae5b75837f55a54ff2695cf51a7313297e8b08117f",
+      "note": "POST /v1/query 原始响应，含 5 条可识别公告及受影响包"
+    },
+    {
+      "private_source": "execution/artifacts/raw-vuln-GHSA-29mw-wpgm-hmr9.json",
+      "private_source_sha256": "f4ee883823380325bd68e869239ae304ea2aba9f2c984260d65440b03e77f026",
+      "note": "GET /v1/vulns/{id} 原始记录，核对摘要、CVE 别名与影响范围"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "执行后保留的持久配置文件名 service-config.json"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/osv-query-extract.json",
+      "private_source_sha256": "8156b71e71cc60f483efbb444bad812c1aba2596ea6c1d9b3679fad8d861d0f6",
+      "note": "从两份原始响应摘录的业务字段（公告 ID、别名、关联包、影响范围），已脱敏"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/service-config-retained.md",
+      "private_source_sha256": "4127fd7b91d87eefc7d30cb7efa78ecd1fdc111699507e4deeb8c4ad32d1e2a1",
+      "note": "复用配置保留与无秘密核对摘要，已脱敏"
+    }
+  ],
+  "frozen_task_sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+  "frozen_prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "reference_sha256": "e48f3bdee2177a32b42e49454316e9b8a95c6700ad26555e1cf1d94eed29b694",
+  "execution_answer_sha256": "68acfed67e4a6a81e98f8dbf42334e0ac8aedf908d6e756f7ed1f878ec006bd2",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://osv.dev/blog/posts/announcing-osv-service-level-objectives/",
+          "https://google.github.io/osv.dev/quickstart/",
+          "https://google.github.io/osv.dev/api/"
+        ],
+        "source_ids": [
+          "osv-slo-announcement",
+          "osv-api-quickstart",
+          "osv-api-overview"
+        ],
+        "note": "新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。",
+        "applicability": {
+          "rule": "OSV Team官方将OSV.dev明确称为免费资源，同一服务说明同时涵盖网站与API；官方API文档将公共query及vulns记录读取映射到这项托管服务。适用于本轮公开REST元数据查询，不据数据开源或未列费率推定免费。",
+          "observed": "run.json指定public-api及https://api.osv.dev/v1/query，无预提供账号/凭据；冻结ENVIRONMENT限定query与记录路径。最少保留响应具OSV记录id/schema；access-r2响应封装含200和body。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/run.json sha256=21b62f072bc4a0487f96c9f4199372213963d91640cce7a39ff0a0afea6be5ce; data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/frozen/execution/ENVIRONMENT.md sha256=23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812; data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/execution/artifacts/cache/vuln-GHSA-29mw-wpgm-hmr9.json sha256=5cfd7090437e6d0e52e43e21103f786e176d0ba4cb97c00f22d28d04104016c9"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/run.json",
+          "sha256": "21b62f072bc4a0487f96c9f4199372213963d91640cce7a39ff0a0afea6be5ce"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/frozen/execution/ENVIRONMENT.md",
+          "sha256": "23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r3/execution/artifacts/cache/vuln-GHSA-29mw-wpgm-hmr9.json",
+          "sha256": "5cfd7090437e6d0e52e43e21103f786e176d0ba4cb97c00f22d28d04104016c9"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

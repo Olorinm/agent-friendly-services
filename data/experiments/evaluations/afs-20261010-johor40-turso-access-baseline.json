@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-turso-access-baseline",
+  "service_id": "turso",
+  "route_id": "platform-api",
+  "entry_url": "https://api.turso.tech/v1/",
+  "task": {
+    "description": "帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。",
+    "inputs": "指定服务、入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；无需账号的入口直接使用。仅新建本轮独立测试数据库及必需的最小父资源，不访问既有用户数据库。用一次只读数据库查询确认能连接，不创建业务表或记录。将资源标识和必要连接配置保存在本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。已有账号来源、自助步骤、人工介入、特殊申请和具体阻碍如实说明。",
+    "expected_output": "一个本轮新建、可访问且无业务数据的远程测试数据库；指定方式的真实只读查询结果；可复用配置位置与资源标识；账号来源、实际接入步骤、人工或申请门槛，以及已知免费额度或到期限制。",
+    "success": "通过指定服务及入口完成必要接入，新建本轮独立空数据库并真实查询成功；所需安装和配置可供新会话复用且不泄露凭据；已有账号不算本轮自助注册，免账号入口不强行注册，免费或期限依据及未知项如实说明。仅有安装、资源列表、创建回执或健康检查不足以证明数据库可查询。",
+    "failure": "无可用的专用远程数据库或真实查询、仅本地模拟、改用其他服务或入口、提前写入业务数据、配置不可复用、泄露凭据或预算内未完成；缺身份、权限、人工步骤或免费额度记具体接入阻碍，执行环境故障单列无效。",
+    "resources": "仅用本轮授权身份和已确认免费资源；最多新建一个专用测试数据库及服务必需的最小父资源，不购买、绑付费方式或开启超额计费，不邀请或通知他人。不读取或修改既有数据库，不访问其他项目凭据。不得写入待办材料或预建业务表。仅在隔离环境安装通用依赖、保存私有连接配置；调用与时间上限见 ENVIRONMENT.md。新建资源保留至业务任务和验收结束，由总控按确切资源标识清理或记录自动到期。",
+    "id": "database-access-001",
+    "version": "v1",
+    "sha256": "7ae679da9de8a65a31f2a5e24becc1e7a2c0875551e04b2696639d5d4fee892d",
+    "file": "data/experiments/tasks/databases-v2.md"
+  },
+  "prompt_sha256": "c4c4fd6a2a2a69907178626c8337aa24c548d4b6d6ef62bc809160e120a571c1",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T11:31:14.699283+00:00",
+  "ended_at": "2026-10-10T11:32:10.688605+00:00",
+  "elapsed_seconds": 55.989322,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "Existing authorized project Turso Starter account supplied; not self-registration",
+      "provided": true
+    },
+    "web_search": "live",
+    "preparation_note": "One new overseas libSQL HTTP access baseline; existing Starter$0 account/overages=false actually verified before dispatch. Controller supplied only management credential and existinggroup pointer; executor creates one new empty DB and a separate SQL auth token, then performs true read-only query. No prewritten service helper, no [SERVICE_SECRET] fixture, no old resource contents; defaultpackageindex. Subsequent v2 repeats will clone only independently reviewed generic install/config with new resource pointers. New protocol/40/600/300/.85 fixed50USDdeadline; olddomestic300s and taskv1 remain separate. Policy limits on wideaccount credential do not imply technical scope restriction.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791632464.6991138,
+      "started_epoch": 1791631874.6991138
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "指定入口 api.turso.tech/v1 新建了本轮唯一空 libSQL 库，经官方 libSQL SQL over HTTP /v2/pipeline 完成一次真实只读查询（HTTP 200，版本 3.47.0，user_tables=0，rows_read=1，rows_written=0），资源与连接配置保存到持久目录且答复只给位置未泄露秘密；账号来源、接入步骤、人工门槛与免费/到期条件均有依据陈述。",
+  "usage": {
+    "input_tokens": 225237,
+    "cached_input_tokens": 211456,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7088,
+    "reasoning_output_tokens": 3067
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "data/experiments/evidence/afs-20261010-johor40-turso-access-baseline/public-review/verification-excerpt.json",
+      "https://turso.tech/pricing?frequency=monthly",
+      "https://turso.tech/blog/how-to-provision-turso-databases-using-the-stripe-cli"
+    ],
+    "note": "独立费用异常复核确认本轮适用 Starter/Free 的零月费与免费额度，service_cost_usd=0、kind=confirmed_free。依据是实际套餐/配额读回、overages=false及本轮操作计费指标；匿名或成功响应、未付款和没有付费回执本身均不能证明免费。原私有验收保留，任务判定与测量用量未改。",
+    "applicability": {
+      "rule": "实际 Starter 套餐月费为0，官方定价包含100库、5GB存储、每月500000000行读取、10000000行写入及3GB同步额度；实际 subscription.overages=false。原套餐价格回执与冻结 entitlement 的来源哈希一致，官方资料把 starter 映射为 Free。本轮新建库和只读 SQL 适用该免费规则。",
+      "observed": "执行前实际套餐为 starter、monthly price=0、overages=false。本轮创建1个新库，执行前1库加该操作推算为2/100；所见只读元数据 SQL 响应 rows_read=1、rows_written=0。执行前月累计267读/59写，加该 SQL 为268/500000000读、59/10000000写；执行前存储49152/5000000000 bytes、同步0/3000000000 bytes。没有执行后账户全量读回，精确期末存储、locations和groups保持未知。",
+      "evidence": "verification-excerpt.json 的 service_cost_review、source_hashes 和官方价格来源；独立费用澄清 SHA256 007ec1e89fee60b6c94056d3c47cc5a824eb9b28da7ea7b9a41dca97066065d1。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode/afs-deepseek/deepseek-flash",
+    "reviewed_at": "2026-10-10T12:00:15.063859+00:00",
+    "checks": [
+      {
+        "criterion": "本轮新建独立远程数据库，且为无业务表/记录的空库",
+        "passed": true,
+        "evidence": "create-db.json 显示 POST /v1/organizations/{org}/databases 返回 HTTP 200（Name/DbId 脱敏）；query-result.json 中 user_tables=0。"
+      },
+      {
+        "criterion": "通过指定方式完成真实只读查询，而非仅安装/列表/创建/健康检查",
+        "passed": true,
+        "evidence": "query-result.json：POST https://{host}/v2/pipeline 执行 SELECT sqlite_version(), count(*) FROM sqlite_master，HTTP 200，version=3.47.0、rows_read=1、rows_written=0、affected_row_count=0。"
+      },
+      {
+        "criterion": "可复用连接配置保存于私有持久位置，且答复不泄露凭据",
+        "passed": true,
+        "evidence": "answer.md 仅给出 /home/node/service-tools/credentials.json 与 service-config.json 位置；工具记录显示二者写入且权限 600；采集工作目录内 grep 未发现 JWT 明文。"
+      },
+      {
+        "criterion": "答复披露账号来源、实际接入步骤与人工/申请门槛",
+        "passed": true,
+        "evidence": "answer.md 说明账户/API token/group 由总控预置非自助注册，列出 GET 列表→POST 建库→POST 签发库 token→/v2/pipeline 查询的步骤，并说明无需注册/验证码/绑卡、过程中无人工介入。"
+      },
+      {
+        "criterion": "免费额度或到期限制如实说明，未知项保留",
+        "passed": true,
+        "evidence": "answer.md 写明 starter 价格 0、overages=false、用量与配额、token expiration=never、套餐可能变化及 50 美元窗口截止，与 controller-verification/entitlement.json 读回一致。"
+      },
+      {
+        "criterion": "未越权：仅新建 1 库、未读取既有业务库、未开启付费/overage",
+        "passed": true,
+        "evidence": "仅 1 次 POST 建库回执且使用指定 group；GET 列表显示既有库未被访问内容；entitlement.json 读回 overages=false、price 0。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.022728588,
+      "kind": "estimated",
+      "scope": "Independent grader overhead, frozen estimate not invoice, separate from execution.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.022728588,
+          "usage_sha256": "b781663e1abee9f6b25e084871f25df7927d7bf31b0ead38d3758e16ffbc4825"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-turso-access-baseline/execution/answer.md",
+      "sha256": "0831a2175d50f908e89d42dd9b911f86b08cb96bd3ec6dabfecc767cb1ea9b96",
+      "note": "Original final/intermediate answer with registered private identities/links redacted; delivery verdict unchanged.",
+      "source_sha256": "88f32b84b4e4b7a8ddf04811f6e9e68b3c58120ad533eb303d4e991c5c69cfe4",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-turso-access-baseline/public-review/verification-excerpt.json",
+      "sha256": "26dbc9b3daf2c7f813d9a7ac435bede16d435de899062dc5e19299b9f8099c45",
+      "note": "Minimal unchanged task-grading excerpt with a separate independent fee-only clarification, original source hashes and free-entitlement applicability; no raw logs or credentials.",
+      "source_sha256": "40d4a28e9c30b78779ab6ce464c055b8f984b95b3813869064513be1ecfff0ef",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-turso-access-baseline",
+    "run_sha256": "1ea7a037d6ce52465d6ad544014ac5b1789c49e8f552b6df5f5e8de714311f89",
+    "events_sha256": "10aaa717d2f6dc4d923cbeca7b4512fe643bbec6025923e1380a14ba911c00b5",
+    "answer_sha256": "88f32b84b4e4b7a8ddf04811f6e9e68b3c58120ad533eb303d4e991c5c69cfe4",
+    "review_sha256": "e659633fb711f4d02f826871ac6dd3799390e3b4b00599e7641dd3a0f31abd0c",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "e85e9a660b8a40d0c50be8ac32497bbb8d12046e62f93ff8f9fac697be84d473",
+    "publication_review_note": "Minimal publication evidence and private identity redaction; original task verdict, checks/outcome and measured usage unchanged. Service-cost applicability and the inconsistent null/unknown explanation are clarified by a separate independent fee-only review; its SHA256 is retained, and the original private assessment is unchanged.",
+    "service_cost_clarification": {
+      "reviewer": "codex-independent-publication-cost-review-20261010",
+      "reviewed_at": "2026-10-10T12:12:22.518972+00:00",
+      "clarification_sha256": "007ec1e89fee60b6c94056d3c47cc5a824eb9b28da7ea7b9a41dca97066065d1",
+      "private_source": "turso-access-clarification.private.json",
+      "original_independent_review_sha256": "e85e9a660b8a40d0c50be8ac32497bbb8d12046e62f93ff8f9fac697be84d473",
+      "scope": "Independent fee-only exception review; service cost remains confirmed_free/$0. Original private assessment, task status/checks/outcome and measured usage are unchanged."
+    }
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "服务端：建库、签发库 token、/v2/pipeline 只读查询均 HTTP 200 成功（create-db.json、query-result.json）。交付：answer.md 给出资源标识、真实查询结果、配置位置、步骤与限制，秘密仅存私有文件。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7192,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 151,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8385,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 8820,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 182,
+        "reasoning_output_tokens": 32
+      },
+      {
+        "input_tokens": 9202,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 770,
+        "reasoning_output_tokens": 645
+      },
+      {
+        "input_tokens": 13172,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 446,
+        "reasoning_output_tokens": 197
+      },
+      {
+        "input_tokens": 14777,
+        "cached_input_tokens": 13568,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 931,
+        "reasoning_output_tokens": 763
+      },
+      {
+        "input_tokens": 15994,
+        "cached_input_tokens": 15616,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 314,
+        "reasoning_output_tokens": 87
+      },
+      {
+        "input_tokens": 16439,
+        "cached_input_tokens": 16256,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 686,
+        "reasoning_output_tokens": 419
+      },
+      {
+        "input_tokens": 17166,
+        "cached_input_tokens": 17024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 363,
+        "reasoning_output_tokens": 122
+      },
+      {
+        "input_tokens": 17632,
+        "cached_input_tokens": 17408,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 233,
+        "reasoning_output_tokens": 108
+      },
+      {
+        "input_tokens": 17881,
+        "cached_input_tokens": 17664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 202,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18244,
+        "cached_input_tokens": 18048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1229,
+        "reasoning_output_tokens": 384
+      },
+      {
+        "input_tokens": 19573,
+        "cached_input_tokens": 19328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 400,
+        "reasoning_output_tokens": 291
+      },
+      {
+        "input_tokens": 20189,
+        "cached_input_tokens": 19968,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 187,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 20571,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 808,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "dbb9be2fde7e455a5e399f37d15ad6c693ce18c915ecd170f71c395bc5fc5621",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 225237,
+      "cached_input_tokens": 211456,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7088,
+      "reasoning_output_tokens": 3067
+    },
+    "totals": {
+      "input_tokens": 225237,
+      "cached_input_tokens": 211456,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7088,
+      "reasoning_output_tokens": 3067
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

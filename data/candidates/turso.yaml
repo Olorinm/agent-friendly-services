@@ -18,15 +18,15 @@ catalog:
       kind: official_docs
     api:
       url: https://docs.turso.tech/api-reference/quickstart
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     pricing:
       url: https://turso.tech/pricing
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     cloud-quickstart:
       url: https://docs.turso.tech/quickstart
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     cli-auth:
       url: https://docs.turso.tech/cli/authentication
@@ -34,7 +34,7 @@ catalog:
       kind: official_docs
     sql-http:
       url: https://docs.turso.tech/sdk/http/quickstart
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     sdk:
       url: https://docs.turso.tech/sdk/introduction
@@ -62,8 +62,24 @@ catalog:
       kind: official_docs
     terms:
       url: https://turso.tech/terms-of-use
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
+    logical-backup:
+      url: https://docs.turso.tech/cli/db/shell
+      checked_on: '2026-10-10'
+      kind: official_docs
+    create-database:
+      url: https://docs.turso.tech/cli/db/create
+      checked_on: '2026-10-10'
+      kind: official_docs
+    snapshot-export:
+      url: https://docs.turso.tech/cli/db/export
+      checked_on: '2026-10-10'
+      kind: official_docs
+    usage:
+      url: https://docs.turso.tech/help/usage-and-billing
+      checked_on: '2026-10-10'
+      kind: official_docs
   routes:
     - id: cloud-cli
       docs: https://docs.turso.tech/quickstart
@@ -99,7 +115,10 @@ catalog:
         Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub
         login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine:
         --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not
-        establish remote persistence. Paid overages are separate from the free allowance.
+        establish remote persistence. Published allowances do not establish remaining account quota;
+        paid overages are separate and must not be assumed disabled. The shell reference documents
+        a logical .dump that can rebuild a database without libSQL/SQLite internal tables, and loading
+        that dump into a new database. This CLI capability is not a built-in HTTP dump endpoint.
       requirements:
         platform_account:
           value: required
@@ -208,6 +227,17 @@ catalog:
         appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT
         conflict handling only reverses the failing statement, not prior statements in the transaction.
   notes:
+    - >-
+      Logical backup and snapshot export are different paths. The shell and database-create references
+      document SQL dump export/import. The db export reference instead warns that its SQLite snapshot
+      may omit recent changes until synchronized with an SDK. A successful export alone therefore
+      does not establish a complete current backup; retain and verify the actual schema and records.
+      Restore/branch features do not by themselves supply an independently usable logical backup.
+    - >-
+      A restore needs capacity for both source and target, including any retained test databases.
+      Reads are scanned rows rather than just returned rows, and writes may consume quota even when
+      a transaction is aborted. Account usage, engine, overage setting and actual charges must be
+      checked separately; a small output or a successful request does not prove zero service cost.
     - >-
       Reviewed terms contain no specific public-benchmark disclosure ban. They limit use to the
       customer's "own internal business, personal, non-commercial use", exclude use on behalf of or

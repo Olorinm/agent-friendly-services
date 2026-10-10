@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-macro-eurostat-business-r2",
+  "service_id": "eurostat",
+  "route_id": "statistics-api",
+  "entry_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+  "task": {
+    "description": "我在整理德国和法国的通胀对照表。请通过指定服务取得两国 2023 和 2024 年的全项目 HICP 年度平均涨幅，做成可继续分析的 CSV，并说明各国 2024 年比 2023 年回落了多少个百分点。附上可追溯的数据来源。",
+    "inputs": "国家为德国和法国，年份为完整的 2023、2024 自然年；指标为全国全项目协调消费者价格指数 HICP 的年度平均变化率，未经季节或工作日调整，即该年全年平均指数相对上年全年平均指数的涨幅。不是各国本国 CPI、12 月同比、各月同比的简单平均或指数点位。使用查询时现行公布的数据，保留一位小数，率的单位为 %，两年率的差使用百分点。保存一份 CSV，清楚标注国家、年份、指标和单位；长表或宽表均可。简短答复列出各国的回落幅度，并给出所用数据的来源链接、可定位的指标或系列信息和查询日期；若所用系列附有影响这些数值的修订或口径差异，说明该差异。数据须实际通过本轮指定服务及入口取得，可自行查该服务官方文档；不得用另一服务、搜索结果或模型记忆代替数据查询。",
+    "expected_output": "可读取并继续分析的 CSV，覆盖两国两年四个 HICP 年度平均率；各国两年回落幅度的简短说明；可追溯的来源、指标或系列及查询日期。",
+    "success": "真实指定服务响应的国家、年份、全项目范围、年度平均率口径和单位符合材料，四个率与事前冻结官方参考相符；CSV 可用且数值正确，两个百分点差计算及文字解释正确，来源可以定位实际所用数据。存在经官方资料证实的版本变化时按事前冻结的参考冲突办法处理，不把旧发布稿或另一候选的答案自动视为当前真值。",
+    "failure": "未实际查询指定入口、缺少任一国家年份、口径或单位混淆、数值或差值错误、没有可用 CSV、必要来源无法定位，或预算内未完成。实际阻碍与已有能力分开记录；运行器采集或参考版本冲突不直接归因于服务数据错误。",
+    "resources": "只读查询指定服务的公开宏观数据，不注册、不使用私人账户、不付费、不交易、不发消息或改写远端数据。允许查官方文档、安装依赖并自行编写查询或整理代码；不提供调用脚本、查询解法或参考答案。入口、工具、模型、时间及请求保护在本轮 ENVIRONMENT.md 另行冻结。",
+    "id": "financial-macro-hicp-001",
+    "version": "v1",
+    "sha256": "bee10c57dc749fccf5df5ca0f5e0cc4c892429c455db8b297ffa996e2dcf6cb4",
+    "file": "data/experiments/tasks/financial-macro.md"
+  },
+  "prompt_sha256": "3f6dd72c04bd0c13e52a78e41d55da85efb2fb2b54b88baa7b89883503a150a4",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:27:09.388860+00:00",
+  "ended_at": "2026-10-10T10:27:56.310797+00:00",
+  "elapsed_seconds": 46.921937,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791628619.3886843,
+      "started_epoch": 1791628029.3886843
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "指定 Eurostat Statistics API 公开匿名入口实际返回 HTTP 200，取得德国/法国 2023、2024 全项目 HICP 年度平均率（未季调）DE 6.0/2.5、FR 5.7/2.3，与冻结官方参考一致；CSV 长表可读且标注国家/年份/指标/单位/一位小数，回落 3.5 与 3.4 个百分点计算及说明正确，并给出可定位数据系列、查询日期与修订/口径说明。",
+  "usage": {
+    "input_tokens": 178678,
+    "cached_input_tokens": 167168,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7808,
+    "reasoning_output_tokens": 4255
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "frozen-execution/ENVIRONMENT.md",
+      "https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction"
+    ],
+    "applicability": {
+      "rule": "Eurostat Statistics API 为公开匿名只读接口，免费、免账号/Key；ENVIRONMENT.md 冻结说明亦明确本轮仅小范围只读公开数据、免费且免账号/Key。",
+      "observed": "本次全部候选 API 请求未携带任何 Key、账号或付款凭据，仅用客户端 UA，均返回 HTTP 200，未见 402/403/429，未产生任何金额。",
+      "evidence": "grading/artifacts/evidence/eurostat_api_evidence.md（含指定入口请求与 HTTP 状态摘录）。"
+    },
+    "note": "无回执金额；服务为公开免费接口，本次无付费，故 service_cost_usd 留空。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-10T11:34:33.431812+00:00",
+    "checks": [
+      {
+        "criterion": "通过本轮指定 Eurostat Statistics API 入口实际查询并取回数据（非其他服务、搜索或记忆）",
+        "passed": true,
+        "evidence": "工具记录中 curl 到 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_ainr 与 prc_hicp_aind 均 HTTP 200，响应含 ESTAT 来源、value 与维度；query_hicp.py 使用同一入口。见 evidence/eurostat_api_evidence.md。"
+      },
+      {
+        "criterion": "国家、年份、全项目范围、年度平均率口径与单位符合题目要求",
+        "passed": true,
+        "evidence": "查询维度 freq=A、unit=RCH_A_AVG（Annual average rate of change）、coicop18=TOTAL（all-items）、geo=DE/FR、time=2022-2024；响应元数据标注为 Neither seasonally nor working-day adjusted；CSV 单位列为 %。"
+      },
+      {
+        "criterion": "四个年度平均率与事前冻结官方参考相符（DE 6.0/2.5，FR 5.7/2.3）",
+        "passed": true,
+        "evidence": "执行答案与 hicp_de_fr_2023_2024.csv 四行值为 DE 2023=6.0、2024=2.5、FR 2023=5.7、2024=2.3，与 reference.json expected 完全一致；同业 ECB 执行结果亦相同（交叉参考，非判据）。"
+      },
+      {
+        "criterion": "CSV 可用于继续分析，清楚标注国家、年份、指标与单位，保留一位小数",
+        "passed": true,
+        "evidence": "execution/artifacts/hicp_de_fr_2023_2024.csv 为长表，表头 country_iso,country,year,indicator,coicop,adjustment,unit,value,dataset_code,source_updated,query_date，四行数据值均为一位小数。"
+      },
+      {
+        "criterion": "两国 2024 相对 2023 的回落百分点计算与文字说明正确",
+        "passed": true,
+        "evidence": "德国 6.0-2.5=3.5 个百分点、法国 5.7-2.3=3.4 个百分点，答案以 -3.5/-3.4 个百分点表述，与 reference 的 signed_change 一致。"
+      },
+      {
+        "criterion": "来源可定位到实际所用数据，并给出系列/指标信息、查询日期与修订/口径说明",
+        "passed": true,
+        "evidence": "答案给出数据集 prc_hicp_ainr、查询入口 URL、数据集页面、更新时间 2026-09-17、查询日期 2026-10-10、Eurostat 署名，并说明 RCH_A_AVG 定义及 prc_hicp_aind 已停用/重定基不影响率值。"
+      },
+      {
+        "criterion": "接入门槛符合授权（公开只读、免注册/免 Key，不付费、不改远端）",
+        "passed": true,
+        "evidence": "全部请求无账号/Key/付款方式，仅带任务要求 UA；无写操作、无付费签名操作。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "afs-20261010-johor40-macro-comparison-r2",
+      "round": 2,
+      "snapshot_sha256": "96d9251332ac89f2fe048e3f099b557e63fe4e6c5f8ecd4fbdc00b504343fdc9",
+      "run_ids": [
+        "afs-20261010-johor40-macro-ecb-data-business-r2",
+        "afs-20261010-johor40-macro-eurostat-business-r2"
+      ],
+      "available_run_ids": [
+        "afs-20261010-johor40-macro-ecb-data-business-r2",
+        "afs-20261010-johor40-macro-eurostat-business-r2"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.019998132,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.019998132,
+          "usage_sha256": "bc4b140827d45f434df63d8a134521649ce9f764baa85fe9e44dd6b96aea8c59"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-business-r2/execution/answer.md",
+      "sha256": "65f3827a2d3d9aa45874f0272dc1f2c58cc68def3cb820c53320cccfb4cbbf19",
+      "note": "Original captured user answer, private infrastructure and registered identities removed; not a raw model log."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-business-r2/execution/artifacts/hicp_de_fr_2023_2024.csv",
+      "sha256": "343f23bd9c717d5e1317edca7071dcb60b1235e4a4859407475a2f496e77bb7d",
+      "note": "Original small task CSV, with official source attribution in answer and verification excerpt."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-macro-eurostat-business-r2/public-review/verification-excerpt.json",
+      "sha256": "febf6902cf884946d2631214e55c6f27d07ea5af1e8f32bd868dfbbe9e0c6688",
+      "note": "Minimal independent-verification excerpt, original evidence hashes and cohort limits; full holiday tables/raw model logs omitted."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-macro-eurostat-business-r2",
+    "run_sha256": "5f73970596bb68942da1e777c606bde7635571137fe3d5fcc87b1c75e2f7dd8e",
+    "events_sha256": "173dbba7dcda572be8b5a54b6283fe9f33b1d5f6ffd348bafaae74fdf95b7758",
+    "answer_sha256": "65f3827a2d3d9aa45874f0272dc1f2c58cc68def3cb820c53320cccfb4cbbf19",
+    "review_sha256": "c5e843239d5c3bff47eed7717d56a5b245d86f79e72220bdfb23876cf702c557",
+    "original_independent_review_sha256": "8e02c88a0c1486ccb5dfac52460433e34fd041c2eecf31c182ae0e53e9ab300b",
+    "publication_review_note": "Minimal evidence selection and identity redaction; task status/reason/checks/outcome/measured usage unchanged. Any fee-source correction is an explicitly linked anomaly-specific independent clarification."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Eurostat 入口实际 HTTP 200 返回四个年度平均率，CSV 与文字交付齐全且与冻结参考相符。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7215,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8297,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1282,
+        "reasoning_output_tokens": 1061
+      },
+      {
+        "input_tokens": 9823,
+        "cached_input_tokens": 9472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 150,
+        "reasoning_output_tokens": 15
+      },
+      {
+        "input_tokens": 11767,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1329,
+        "reasoning_output_tokens": 1092
+      },
+      {
+        "input_tokens": 13123,
+        "cached_input_tokens": 12928,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 13278,
+        "cached_input_tokens": 13056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 287,
+        "reasoning_output_tokens": 118
+      },
+      {
+        "input_tokens": 13593,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 234,
+        "reasoning_output_tokens": 83
+      },
+      {
+        "input_tokens": 14304,
+        "cached_input_tokens": 13824,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 658,
+        "reasoning_output_tokens": 257
+      },
+      {
+        "input_tokens": 15414,
+        "cached_input_tokens": 14848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1320,
+        "reasoning_output_tokens": 1154
+      },
+      {
+        "input_tokens": 16863,
+        "cached_input_tokens": 16640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 903,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 17782,
+        "cached_input_tokens": 17536,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 558,
+        "reasoning_output_tokens": 215
+      },
+      {
+        "input_tokens": 18366,
+        "cached_input_tokens": 18176,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18853,
+        "cached_input_tokens": 18432,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 804,
+        "reasoning_output_tokens": 241
+      }
+    ],
+    "source_sha256": "10951368a1154ebceb91b1da372fb877da3c8ebc90cbd76cd0dfb70aba11d394",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 178678,
+      "cached_input_tokens": 167168,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7808,
+      "reasoning_output_tokens": 4255
+    },
+    "totals": {
+      "input_tokens": 178678,
+      "cached_input_tokens": 167168,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7808,
+      "reasoning_output_tokens": 4255
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

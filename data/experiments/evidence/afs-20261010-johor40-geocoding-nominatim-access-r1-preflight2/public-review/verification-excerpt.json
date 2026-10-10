@@ -1,0 +1,71 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2",
+  "independent_assessment_sha256": "1125117938d6a2362e1436d5f3e76b0260009e3a7b8f888d01ead9b19ebb6844",
+  "independent_status": "completed",
+  "independent_reason": "本轮指定的 Nominatim 公共 Search API 匿名入口已实际接通：经 https://nominatim.openstreetmap.org/search 发起真实查询，HTTP 200 返回可识别公开地点 Johor Bahru, Johor, 80730, Malaysia，并给出标注纬度的 latitude=1.4581986、经度 longitude=103.7649059（node/254237831, place=city），答复与原始响应一致；可复用连接配置保存于 ENVIRONMENT 指定的持久位置 /home/node/service-tools/service-config.json，原始响应按完整 URL 缓存于 geocoding-cache/responses.json。该入口匿名免注册、无需付费或资质，全部步骤自助完成；首次查询因具体建筑未被 OSM 收录返回空结果（非服务故障），换用可解析公开地点后成功。",
+  "checks": [
+    {
+      "criterion": "经指定入口（nominatim.openstreetmap.org/search）完成一次真实地点查询",
+      "passed": true,
+      "evidence": "工具记录显示 geocode_query.py 真实发起 [fetched 200] https://nominatim.openstreetmap.org/search?q=Johor+Bahu...，另一次首查 q=Sultan+Ibrahim+Building 也 [fetched 200]；见 execution/answer.md 与 evidence/geocode-result.md"
+    },
+    {
+      "criterion": "真实响应含可识别地点与有效经纬度，且答复与响应一致",
+      "passed": true,
+      "evidence": "响应 matched_place=Johor Bahru, Johor, 80730, Malaysia，latitude=1.4581986、longitude=103.7649059（数值均在有效范围），node/254237831；answer.md 数值与工具输出逐项一致，见 evidence/geocode-result.md"
+    },
+    {
+      "criterion": "可复用本地配置持久保存、路径已报告且不泄露秘密",
+      "passed": true,
+      "evidence": "配置写入 /home/node/service-tools/service-config.json（持久位置），缓存 /home/node/service-tools/geocoding-cache/responses.json，均为 retained-files.json 列出；配置仅含匿名公共入口信息、auth=none，无账号或密钥；answer.md 报告了路径"
+    },
+    {
+      "criterion": "如实说明接入步骤、账号来源与人工/申请门槛或阻碍",
+      "passed": true,
+      "evidence": "answer.md 列出自助步骤（复用指定 UA、urllib、缓存、限流），说明匿名公共实例无需注册/付费/额外申请、无人工介入，并如实记录首次 No match 阻碍"
+    },
+    {
+      "criterion": "遵守客户端标识、缓存、限流与署名要求",
+      "passed": true,
+      "evidence": "脚本使用真实 UA agent-friendly-services/20261010 (...)，按完整请求 URL 缓存原始响应，两次请求起始间隔约 24s（10:33:21Z→10:33:45Z）、单线程、共 2 次（上限 4）；answer.md 保留 © OpenStreetMap contributors 署名与 copyright 链接"
+    },
+    {
+      "criterion": "未改用其他服务或入口、未注册、未付费",
+      "passed": true,
+      "evidence": "仅使用 nominatim.openstreetmap.org/search；配置 auth=none (anonymous public instance)；无注册、无支付或身份资料使用记录"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Nominatim Search 入口经一次真实 HTTP 200 查询返回可识别地点与有效经纬度；配置持久化且路径报告；答复与响应一致，无网络/权限/额度阻碍，故分项均完成。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "ec31b55b2667f7d78e0924621bd96947f77121227b61b7425420c1df7fc705b8",
+      "note": "执行者最终答复：匹配地点、标注经纬度的坐标、来源、配置位置、自助步骤与实际阻碍"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/geocode-result.md",
+      "private_source_sha256": "4ced965122a589a9c0fddcab8bb7114c3054124fcf8b99efafb89c6adac8ab37",
+      "note": "从工具记录摘录的脱敏业务字段：真实请求 URL、HTTP 200、匹配地点、lat/lon/OSM 对象与持久配置位置"
+    },
+    {
+      "private_source": "execution/artifacts/geocode_query.py",
+      "private_source_sha256": "0d25cb7ddb8c9b763a4e5a01baa2c518c8a6211d0fbd3c4fdf821321d9dca0b2",
+      "note": "本次使用的查询/缓存脚本（真实 UA、按 URL 缓存、解析 lat/lon）"
+    }
+  ],
+  "frozen_task_sha256": "b17c5d4612b54125b32d066149250d4a3b9a415f61b5a8a37cba9ae8d3b619b2",
+  "frozen_prompt_sha256": "64250276f49addcd218fc4b0cc874329060c8cfa4895fd8e4d42b5ae5eee3c32",
+  "reference_sha256": "a462ed0b7b275ffcca6e9addb361dfaa54745fd5d151fa0524b71cbffd116dcf",
+  "execution_answer_sha256": "ec31b55b2667f7d78e0924621bd96947f77121227b61b7425420c1df7fc705b8",
+  "limits": [
+    "One access and one venue trial; full-address query returned no match, revised wording matched. Not a mainland/overseas causal comparison or general coverage guarantee.",
+    "Single-threaded public-instance query, cache and identified User-Agent; observed venue queries23 seconds apart. No bulk or systematic geocoding."
+  ],
+  "attribution": "Data © OpenStreetMap contributors, ODbL; https://www.openstreetmap.org/copyright . Venue polygon centroid, not entrance."
+}

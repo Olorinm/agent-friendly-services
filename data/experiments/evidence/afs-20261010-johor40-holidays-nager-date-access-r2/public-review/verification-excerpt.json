@@ -1,0 +1,88 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-nager-date-access-r2",
+  "independent_assessment_sha256": "2de9ceb63b3aff0dca021ab7d6e3f92509cbe9f04047aa0881b678f7dfcf0286",
+  "independent_status": "completed",
+  "independent_reason": "执行者使用指定服务 Nager.Date Community v4 的指定入口 /api/v4/Holidays 完成了一次真实查询：匿名 GET https://nagerholidays.com/api/v4/Holidays/SG/2026 返回 HTTP 200 与 11 条公共假日（含 2026-08-09 National Day），答复中的地区/年份、来源、日期与名称与真实响应一致；非秘密连接配置已写入指定持久目录 /home/node/service-tools/service-config.json，retained-files 确认保留，查询脚本可复用；匿名入口无注册、无人工介入、无额外申请，并如实报告了实际阻碍（MY 不在覆盖范围）。全部要求有证据满足。",
+  "checks": [
+    {
+      "criterion": "用指定服务 Nager.Date Community v4 及指定入口 /api/v4/Holidays 做真实假日查询（非仅安装/清单/文档）",
+      "passed": true,
+      "evidence": "execution/artifacts/holidays_cache/SG_2026.meta.json 记录 url=https://nagerholidays.com/api/v4/Holidays/SG/2026、status=200、真实 User-Agent；对应真实响应落盘为 execution/artifacts/holidays_cache/SG_2026.json（11 条）。"
+    },
+    {
+      "criterion": "返回可识别的假日日期与名称，且答复范围与响应相符",
+      "passed": true,
+      "evidence": "SG_2026.json 含 2026-08-09 National Day（答复示例）、2026-01-01 New Year's Day、2026-12-25 Christmas Day；与 execution/answer.md 所述 SG/2026、11 条一致。"
+    },
+    {
+      "criterion": "可复用配置保存到指定持久目录并给出位置，且不泄露秘密",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列出 service-config.json（写入 /home/node/service-tools/），内容仅为 baseUrl/endpoint/ratePolicy/匿名鉴权，无密钥；execution/artifacts/holidays_query.py 读取该配置并可用 `python3 holidays_query.py SG 2026` 复用。"
+    },
+    {
+      "criterion": "账号来源、自助步骤、人工介入与额外申请报告准确",
+      "passed": true,
+      "evidence": "指定入口为匿名公共 API，本轮未提供账号；答复明确无需注册/密钥/付款、无人工介入、无额外申请，与证据一致。"
+    },
+    {
+      "criterion": "如实报告实际阻碍",
+      "passed": true,
+      "evidence": "答复报告 MY 不在覆盖范围（MY/2026、MY/2025 返回 204，MY/2024 返回 400 不支持年份）并改用 SG，与原始请求响应一致；见 evidence/nager-sg-2026-result.md。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务 v4 匿名入口真实查询成功（HTTP 200，SG/2026 共 11 条，含 2026-08-09 National Day），配置持久保存且可复用；MY 未覆盖属服务能力范围限制，执行者改用受支持地区后任务完成，未构成阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "921334384e29a860d6e247c768f5247875cf8c5c68faaa01663f62e6ce00b875",
+      "note": "执行者最终答复：服务/入口/范围/示例假日/配置位置/接入步骤/门槛与阻碍。"
+    },
+    {
+      "private_source": "execution/artifacts/holidays_cache/SG_2026.meta.json",
+      "private_source_sha256": "f50c0959b4286cd9d91cd9bb80da8d04738998be4214a30a9eb2be3bb9bdb32f",
+      "note": "真实请求记录：URL、HTTP 200、User-Agent。"
+    },
+    {
+      "private_source": "execution/artifacts/holidays_cache/SG_2026.json",
+      "private_source_sha256": "efd39cebf80be522dd4ae8d3a3c2f9229bdae3963baf219d28bc5f908ad4b7ea",
+      "note": "真实返回的 SG/2026 完整 11 条假日表。"
+    },
+    {
+      "private_source": "execution/artifacts/holidays_query.py",
+      "private_source_sha256": "1b3613e99374ec09eeca026ab03dafd7563bc346b267306768df958ab2b28d38",
+      "note": "可复用查询脚本，读取持久配置并落盘缓存。"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "确认 service-config.json 已保留在持久目录。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/nager-sg-2026-result.md",
+      "private_source_sha256": "453d99611e5dac5f367ed38d23091edb3e0b9dea03bda8810cf309e2f3b725f1",
+      "note": "本次查询结果与阻碍的脱敏核验摘录。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/nager-free-rule.md",
+      "private_source_sha256": "41a5f41030424f4c44a6d4fbc57c520d8353e2e8f607f0533c7cda0364e22da9",
+      "note": "官方免费规则来源与本次适用观察。"
+    }
+  ],
+  "frozen_task_sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+  "frozen_prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "reference_sha256": "681b0bd65e10da8b0d1a6d1874cd9682f3f158e18a3aded88fcfa29f1f60473d",
+  "execution_answer_sha256": "921334384e29a860d6e247c768f5247875cf8c5c68faaa01663f62e6ce00b875",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Nager.Date Community v4; low-volume noncommercial research. Not a holiday portal or redistributed list."
+}

@@ -70,7 +70,13 @@ def public_copy(raw, meta, run_dir, reviewer='', secrets=()):
 
 
 
-def record(run_dir, review_path, route_id=None, task_file=None, task_version=None, dry_run=False):
+def record(run_dir, review_path, route_id=None, task_file=None, task_version=None, dry_run=False,
+           private_review=False):
+    # Private grading can inspect unredacted service responses. Publication
+    # checks run later, before any public file is written, and cannot be disabled
+    # for recording (including the CLI's publication dry run).
+    if private_review and not dry_run:
+        raise ValueError('Private review cannot publish evidence')
     run_dir, review_path = run_dir.resolve(), review_path.resolve()
     if not run_dir.is_relative_to((ROOT / 'data/experiments/results').resolve()):
         raise ValueError('Run must be under data/experiments/results/')
@@ -172,7 +178,7 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
             raise ValueError('Do not select the private secret store as evidence')
         raw = source.read_bytes()
         public = public_copy(raw, meta, run_dir, review['reviewer'], secrets)
-        if re.search(rb'eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+', public):
+        if not private_review and re.search(rb'eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+', public):
             raise ValueError('Evidence contains a JWT-like value; review/redact before recording')
         # The reviewer checks content/credentials; strip host identifiers here too.
         relative = source.relative_to(run_dir)

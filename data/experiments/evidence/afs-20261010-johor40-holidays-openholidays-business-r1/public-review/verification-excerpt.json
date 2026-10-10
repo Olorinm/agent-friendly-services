@@ -1,0 +1,63 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-openholidays-business-r1",
+  "independent_assessment_sha256": "f4e3d154e45345774befaa246a778648d571571102bb039c0df75a41887d64ba",
+  "independent_status": "completed",
+  "independent_reason": "本次执行真实调用指定服务 OpenHolidays API 的匿名公共入口，正确限定 DE-BE（柏林州）与 2027-01-01~2027-12-31，返回并交付了与冻结独立官方参考完全一致的 10 条公共节假日，日期升序、无重复、无越界，来源可追溯。",
+  "checks": [
+    {
+      "criterion": "通过指定服务查询并注明可追溯来源（assigned_service）",
+      "passed": true,
+      "evidence": "采集的工具记录显示对 https://openholidaysapi.org 发起真实请求：/Subdivisions?countryIsoCode=DE、/PublicHolidays?...subdivisionCode=DE-BE...validFrom=2027-01-01&validTo=2027-12-31、以及全国对照 /PublicHolidays?countryIsoCode=DE...；响应体保存于 raw/。答案 execution/answer.md 注明服务与接口。"
+    },
+    {
+      "criterion": "2027 年柏林州全部公共节假日完整、无越界（complete_local_year）",
+      "passed": true,
+      "evidence": "DE-BE 响应恰 10 条，与 reference.json 冻结官方表逐条身份/日期一致（Neujahr、Internationaler Frauentag、Karfreitag、Ostermontag、Tag der Arbeit、Christi Himmelfahrt、Pfingstmontag、Tag der Deutschen Einheit、1./2. Weihnachtsfeiertag）。全国对照 20 条中他州独有节日均排除。"
+    },
+    {
+      "criterion": "日期明确到年月日、名称可辨认（dates_and_names）",
+      "passed": true,
+      "evidence": "每题均为 ISO 格式 2027-xx-xx 的本地实际日期；德文名与参考英文身份一一对应，含等价译名（如 1./2. Weihnachtsfeiertag 对应 Christmas Day/Boxing Day）。"
+    },
+    {
+      "criterion": "按日期升序且总数准确（ordered_total）",
+      "passed": true,
+      "evidence": "execution/answer.md 表格按 2027-01-01 至 2027-12-26 升序排列，去重后总数为 10，与参考 expected_count=10 一致。"
+    },
+    {
+      "criterion": "周末照列、排除学校假期/普通星期日、不自行顺延（visible_scope）",
+      "passed": true,
+      "evidence": "2027-05-01、2027-10-03、2027-12-25、2027-12-26 按实际周末日期保留；未加入任何补休或学校假期；服务返回的 startDate==endDate 未作 UTC 转换移位。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "OpenHolidays API 三次真实只读请求均成功返回（Subdivisions、DE-BE PublicHolidays、DE 全国对照），最终答复列出 10 条正确节假日并注明来源；无网络、权限或预算障碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "ff2ce4629f5c1510718b1be84a1adce4fd46ba69ca53e5cfe7d70e75148141a9",
+      "note": "执行者最终交付：2027 年柏林州 10 条公共节假日日期与德文名称、总数及查询来源。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "private_source_sha256": "540b51f70b6cb31cb0ef0eec375e14e48b3884e54c8f6813771228e951be8d8e",
+      "note": "验收方简短核验摘要：请求清单、与冻结官方参考逐条比对、交叉参考与费用/人工介入结论。"
+    }
+  ],
+  "frozen_task_sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+  "frozen_prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "reference_sha256": "a38c7856cd3ffa6652114c2568a05cbbaecee50fb2decf9cab29130527652ce3",
+  "execution_answer_sha256": "ff2ce4629f5c1510718b1be84a1adce4fd46ba69ca53e5cfe7d70e75148141a9",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "OpenHolidays API; ODbL, https://openholidaysapi.org/ . No full holiday database is distributed here."
+}

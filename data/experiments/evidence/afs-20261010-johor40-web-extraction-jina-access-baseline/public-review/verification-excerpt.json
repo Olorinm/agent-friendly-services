@@ -1,0 +1,84 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-jina-access-baseline",
+  "independent_assessment_sha256": "a6f0eb80db0e91c5a9b2850581a06bd48e35862848d5ab4aec378d96ed35a343",
+  "status": "completed",
+  "reason": "指定服务 Jina Reader 匿名入口真实接通：对 https://r.jina.ai/https://example.com/ 单次 GET 返回 HTTP 200，正文 Title 与 Content 可用于标题/概述，均与独立参考及响应正文相符；通用连接配置已写入持久位置 /workspace/service-config.json 且不含密钥；接入步骤与门槛（匿名免费 20 RPM、默认 5 分钟缓存、无注册/无人工介入）如实说明。全部冻结要求有证据满足。",
+  "checks": [
+    {
+      "criterion": "通过指定入口 https://r.jina.ai/ 由指定服务真实提取示例网页正文（非搜索摘要、非直连源站代取）",
+      "passed": true,
+      "evidence": "工具记录 call#10 单次 curl GET https://r.jina.ai/https://example.com/（UB agent-friendly-services/20261010, Accept: text/plain）返回 HTTP 200；响应体 evidence_example_com_body.txt 含 'URL Source: https://example.com/' 与 'Markdown Content:'，由 Jina Reader 生成。全程仅 1 次提取请求。"
+    },
+    {
+      "criterion": "页面标题与响应正文相符，且与独立参考一致",
+      "passed": true,
+      "evidence": "answer.md 标题 'Example Domain'；响应体首行 'Title: Example Domain'；reference.json expected_title 同为 'Example Domain'。"
+    },
+    {
+      "criterion": "一句内容概述忠实于返回正文",
+      "passed": true,
+      "evidence": "answer.md 概述称该域用于文档示例、无需授权、非服务且不建议用于测试/监控；与正文 'for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.' 一致（reference.json content_meaning 亦同）。"
+    },
+    {
+      "criterion": "必要配置保存在指定持久位置、可供新会话复用且不泄露秘密",
+      "passed": true,
+      "evidence": "call#11 写入 /workspace/service-config.json（ENVIRONMENT.md 指定的可保留通用配置），JSON 校验通过；内容含 endpoint、调用格式、header 要求，auth.apiKey=null，无 Key/Cookie/账号。见证据 service-config-key-fields.txt。"
+    },
+    {
+      "criterion": "如实说明账号来源、自助/人工介入与额外申请门槛",
+      "passed": true,
+      "evidence": "answer.md 说明无需注册、无 Key/账号/付款、无人工介入或额外申请；与 ENVIRONMENT.md「仅匿名免费入口，无账号/Key」相符。"
+    },
+    {
+      "criterion": "遵守免费额度与请求保护约束（单线程、每阶段≤6次尝试、首次403/429即停）",
+      "passed": true,
+      "evidence": "仅 1 次提取请求（call#10），无重试；响应头 x-ratelimit-limit: 20, 20;w=60、x-ratelimit-remaining: 19，无 403/429 或付费要求。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务匿名入口单次调用成功（HTTP 200，正文齐全），用户要求的标题/概述/配置位置/接入步骤均在 execution/answer.md 交付；无网络、权限、额度或人工阻碍证据。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "a4b0eb157f080d33c938023107a320c197a971a2a8193fe9c74581997b97c8ef",
+      "note": "最终答复：标题、内容概述、配置位置与接入步骤/门槛。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/evidence_example_com_body.txt",
+      "sha256": "c3f907dd482c46ee03e4dafbba7dfc69d0a52ab753a67182b3b64aa98d0e8fc6",
+      "note": "Jina Reader 返回正文原文，含 Title 与 Markdown Content。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/evidence_example_com_headers.txt",
+      "sha256": "a927ef532b3d141efdab8e206b19a243cb92aed2bd062399b3bfa47f31cecbc6",
+      "note": "HTTP 200 及 x-usage-tokens/x-ratelimit 头，佐证单次匿名请求成功。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/service-config-key-fields.txt",
+      "sha256": "e39a1fdb4b3bee1e73df0b44f0b26cdb123a448fba75c0979e99145154b88969",
+      "note": "脱敏摘录已保存配置的关键字段（无秘密）。"
+    }
+  ],
+  "task_sha256": "9bda52da522a0fcc44d9253583277d31f4d0ce073dc8e229e958d632073a869c",
+  "prompt_sha256": "b042cad4cf15e92af31cd8611a2e0123116e0bf79bcb5b8eba384e13688504a6",
+  "reference_sha256": "a2930b9116afe49fa005dfc986ad698af1a0626eaba9fe572a5f365a593f812f",
+  "answer_sha256": "a4b0eb157f080d33c938023107a320c197a971a2a8193fe9c74581997b97c8ef",
+  "limits": [
+    "One anonymous access per service followed by three predeclared samepage tasks, one reused physical container per service, newhome/session/taskdir each trial, only generic package/config state allowed to persist.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official OPM2027 table rechecked independently2026-10-10T12:09:16Z. Full original source is withheld from executor. Actual table requirements unchanged from taskv1.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. No OPM logo/endorsement claim.",
+  "independent_fee_clarification": {
+    "sha256": "d3e316227186bedaf1907c74204c275a7624be446e06c7e30ba29e1f9fceee21",
+    "original_assessment_sha256": "a6f0eb80db0e91c5a9b2850581a06bd48e35862848d5ab4aec378d96ed35a343",
+    "scope": "Monetary note/applicability only; original task judgment and measured modelusage unchanged. Confirmedfree applies documented anonymous rule to actual captured request, not absence of invoice."
+  }
+}
