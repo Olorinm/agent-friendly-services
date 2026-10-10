@@ -1,0 +1,83 @@
+id: crossref
+name: Crossref
+category: web-search-data
+homepage: https://www.crossref.org/
+summary: Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.
+submitted_by: community
+tags:
+  - scholarly-metadata
+  - doi
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/scholarly-search
+  sources:
+    rest-api:
+      url: https://www.crossref.org/documentation/retrieve-metadata/rest-api/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    access:
+      url: https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    rate-update:
+      url: https://community.crossref.org/t/refining-rest-api-limits-for-improved-stability-and-reliability/16137
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Official July 21, 2026 notice distinguishes list-query and single-record limits; newer than the general access table.
+    tips:
+      url: https://www.crossref.org/documentation/retrieve-metadata/rest-api/tips-for-using-the-crossref-rest-api/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    retrieval:
+      url: https://www.crossref.org/services/metadata-retrieval/
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: public-rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.crossref.org/works
+      docs: https://www.crossref.org/documentation/retrieve-metadata/rest-api/
+      evidence: [rest-api, access]
+      availability:
+        value: self_serve
+        evidence: [access]
+      personal_access:
+        value: documented
+        evidence: [access, retrieval]
+        notes: Public metadata retrieval is available to anyone without membership, registration or institutional affiliation.
+      auth:
+        value: none
+        evidence: [access]
+        notes: Public pool needs no key or email. An optional real contact email selects the separate polite pool.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [access]
+        payment_method:
+          value: not_required
+          evidence: [retrieval]
+      capabilities:
+        scholarly.search:
+          value: documented
+          evidence: [rest-api, tips]
+          notes: Search and filter scholarly work metadata, or retrieve a known DOI record. Depositor coverage and optional fields vary.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public metadata request
+          scope: Free public REST access within service limits; paid Metadata Plus is optional.
+          evidence: [retrieval, access]
+      notes: >-
+        July 2026 policy limits public list/search requests to 1/second and single-record lookups to
+        5/second; public concurrency is 1. The optional polite pool has 3 list requests/second,
+        10 single-record requests/second and concurrency 3. Follow response limit headers, cache results,
+        identify the application and back off on 429 or increasing response time. A real email is
+        recommended for contact, not a new account; polite limits are shared by that email.
+        Almost all bibliographic metadata may be reused for any purpose, but abstracts can retain
+        publisher/author copyright. Metadata access does not grant full-text rights. No explicit public
+        comparison prohibition was found in the reviewed retrieval/access policies. This entry is
+        documentation research, not evidence of successful API access or correct reference matching.

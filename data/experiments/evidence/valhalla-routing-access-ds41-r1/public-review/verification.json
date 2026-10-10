@@ -1,0 +1,44 @@
+{
+  "independent_status": "completed",
+  "scope": "One fresh anonymous route access query between supplied Seattle coordinates. No business file/corridor requirement applied at access.",
+  "sources": {
+    "execution/answer.md": "dc0511f9a7299e7ac8be2482dbd62bf1c4bb1b303588aa50a5d2cc94028e66cf",
+    "execution/receipt.json": "219ddf27c4b9dc9c5f4358d661788b0a38d62170c48a33615a747e1f644699a4",
+    "execution/usage.json": "2a4bc01ab40ea6eb3d52c9ce010662c15d273a9f57e7058e3335e6a4e6db83b0",
+    "execution/tool-records.json": "a99d9cc7e44a4487b56228f890c914f0729649edec73e09ac46d34c5275e05ad",
+    "grading/assessment.json": "fd8a2a489003d47f944fe4464d833ff90b5329781da8ebb737793d77f05d460e"
+  },
+  "route": "public-route-api",
+  "configuration": "OpenCode1.18.35/DeepSeekV4.1Flash high; execution25requests/access300s/business600s, grading40requests/300s, output32000tokens/request. Sameimage2GiB/1CPU/pids256,pipTUNAandemptyinitialcache; newhome/session/workspace. All candidate executions serial under one shared operator.",
+  "request_limits": "At most4routecalls perstage,>=2seconds apart, stop first403/429 or2consecutiveconnectionfailures. CandidateAPI limits are instructions; model/time/output caps enforced.",
+  "actual_route_requests": 1,
+  "http_status": 200,
+  "client_identification": "Truthful AgentFriendlyServices non-commercial evaluation User-Agent with project URL; Valhalla additionally X-Client-Id; no fabricated Referer.",
+  "elapsed_seconds": 30.104117,
+  "fee_publication": {
+    "kind": "unknown",
+    "amount_usd": null,
+    "original_grader_kind": "confirmed_free",
+    "reason": "No explicit hosted-demo zero-fee statement found in frozen official sources. Donation sponsorship, public/no-registration access and open-source/map licensing do not establish price. Original independent grade stays unchanged; where it said confirmed_free, publication conservatively projects to unknown with source-review audit, no model rerun.",
+    "source_correction_sha256": "7158b5650ce808e26f04172f94653f6f996c0804668b82a7bb264c5b1759f44b"
+  },
+  "source_and_operator_limit": "OSRM and Valhalla are different engines/response formats hosted by FOSSGIS and use shared OSM data. They are not independent operators or map ground truth. Complete linked German terms were blocked and not read; no complete-terms-review claim. Small noncommercial functional check, not load testing, current navigation safety, live traffic or arrival-time accuracy.",
+  "official_source_manifest_sha256": "c316e7244f96b20dc106f32047f9a055d1684b6c52a4fc0699e8d4e28dd80a05",
+  "attribution": {
+    "text": "Routing: VALHALLA on FOSSGIS demo servers. Map data © OpenStreetMap contributors.",
+    "links": [
+      "https://valhalla.github.io/valhalla/",
+      "https://www.openstreetmap.org/copyright",
+      "https://www.openstreetmap.org/fixthemap"
+    ]
+  },
+  "resources": "No registration, account/key/payment or mutable remote resource created. All four dedicated batch containers stopped after review and complete usage collection.",
+  "public_selection": "Minimal route values, counts, actual file/source hashes and independent verification observations. Full geometry and raw responses/requests remain private; no harvested map dataset published.",
+  "response_file_sha256": "e4f887188da6842f44085e9bb40c6b91eef7e10fa933f4ed78dcef1eb62d04f4",
+  "response_summary": {
+    "distance_km": 4.579,
+    "estimated_time_seconds": 404.622,
+    "estimated_time_minutes": 6.7437000000000005
+  },
+  "access_limit": "Input points were selected from an official USGS I-5 highway feature; at the start both captured routes used nearby/overlapping Lakeview Boulevard East. Coordinate-only snapping does not establish highway-level identity in a multi-level road network. Access criterion required an actual car route for those coordinates, with correctly reported values, not an I-5-only corridor. No cross-engine optimality/accuracy ranking."
+}

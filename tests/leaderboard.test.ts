@@ -79,6 +79,37 @@ test('historical task versions are retained in records but not pooled into curre
   assert.equal(records.length, 2);
 });
 
+test('preparation changes select the latest conditions without averaging older outcomes', () => {
+  const older = run({ run_id: 'original', started_at: '2026-09-01T00:00:00Z', status: 'not_completed',
+    usage: null, service_cost_usd: null,
+    environment: { ...run().environment, preparation_note: 'Default package index; 25 grading requests.' } });
+  const current = run({ run_id: 'mirror',
+    environment: { ...run().environment, preparation_note: 'Mirror package index; 40 grading requests.' } });
+  const records = [older, current];
+  const frozen = JSON.stringify(records);
+  const row = selectServiceBoards(buildBoards(records))[0].rows[0];
+  assert.deepEqual(row.runs.map(r => r.run_id), ['mirror']);
+  assert.equal(row.metrics.resolution_rate, 1);
+  assert.equal(JSON.stringify(records), frozen);
+  // A later failure under the same conditions must remain in the mean.
+  const repeat = { ...current, run_id: 'repeat', started_at: '2026-09-09T00:00:00Z', status: 'not_completed' as const };
+  const repeated = buildBoards([...records, repeat])[0].rows[0];
+  assert.deepEqual(repeated.runs.map(r => r.run_id), ['repeat', 'mirror']);
+  assert.equal(repeated.metrics.resolution_rate, .5);
+  // Preparation equivalence cannot be inferred from missing notes or another service.
+  assert.equal(buildBoards([older, { ...current, service_id: 'b' }]).length, 2);
+  assert.equal(buildBoards([run(), { ...current, service_id: 'b' }]).length, 2);
+  assert.equal(buildBoards([current, { ...current, run_id: 'b', service_id: 'b' }]).length, 1);
+});
+
+test('missing public host details do not imply an old run or a required rerun', () => {
+  for (const zh of [true, false]) {
+    const details = renderBoardDetails(buildBoards([run()]), new Map(), zh);
+    assert.doesNotMatch(details, /早期|复跑|early records|controlled rerun/);
+    assert.match(details, zh ? /未公开主机信息/ : /do not publish host details/);
+  }
+});
+
 test('peer review separates earlier solo trials and different cohorts, while pooling matching rounds', () => {
   const reviewed = (id: string, service: string, ids: string[], group: string) => run({
     run_id: id, service_id: service,
@@ -100,8 +131,8 @@ test('peer review separates earlier solo trials and different cohorts, while poo
   assert.equal(buildBoards([a, run({ run_id: 'b1', service_id: 'b' })]).length, 2);
   const c = reviewed('c1', 'c', ['a1', 'c1'], 'round-1');
   assert.equal(buildBoards([a, b, c]).length, 2);
-  assert.match(renderBoardDetails(boards, new Map(), true), /同期 2 家服务/);
-  assert.match(renderBoardDetails(boards, new Map(), false), /same-task answers from 2 services/);
+  assert.match(renderBoardDetails(boards, new Map(), true), /同期 2 份同题答案/);
+  assert.match(renderBoardDetails(boards, new Map(), false), /2 same-task answers/);
 });
 
 test('deferred peers neither split a task suite nor count as available answers', () => {
@@ -116,7 +147,7 @@ test('deferred peers neither split a task suite nor count as available answers',
   assert.equal(boards[0].tasks.length, 4);
   assert.equal(boards[0].rows[0].metrics.trials, 4);
   assert.match(renderBoardDetails(boards, new Map(), true), /本轮无其他服务答案可参考/);
-  assert.doesNotMatch(renderBoardDetails(boards, new Map(), true), /同期 2 家服务/);
+  assert.doesNotMatch(renderBoardDetails(boards, new Map(), true), /同期 2 份同题答案/);
 });
 
 test('per-request billing applies context tiers to each call, with final totals reconciled', () => {
@@ -241,4 +272,27 @@ test('small positive costs are preserved, and never displayed as free', () => {
   assert.equal(moneyLabel(value.amount_usd), '<$0.0001');
   assert.equal(moneyLabel(0), '$0');
   assert.equal(moneyLabel(null), '—');
+});
+
+test('verified partial costs show a lower bound while full averages remain unknown', () => {
+  const usage = { input_tokens: 100, cached_input_tokens: 20, cache_write_input_tokens: 0, output_tokens: 10, reasoning_output_tokens: 0 };
+  const partial = run({ usage: null, request_usage: { status: 'incomplete', method: 'runner adapter', reason: 'interrupted',
+    source_sha256: 'a'.repeat(64), requests: [usage], requests_verified: true, lower_bound_usage: usage } });
+  const cost = estimateModelCost(partial, prices());
+  assert.equal(cost.amount_usd, null);
+  assert.equal(cost.lower_bound_usd, .000264);
+  assert.equal(summarize([{ ...partial, model_cost: cost }]).model_cost_usd, null);
+  partial.request_usage!.requests_verified = false;
+  assert.equal(estimateModelCost(partial, prices()).lower_bound_usd, undefined);
+});
+
+test('new protocols and runner source changes stay separate while wall-clock receipt times do not split repeats', () => {
+  const newer = run({ run_id: 'new', started_at: '2026-10-10T00:00:00Z', environment: { trial_protocol: 'afs-20261010',
+    runner_source_sha256: { 'worker.py': 'a' }, controller_limits: { max_model_requests: 40, closure_fraction: .85, started_epoch: 100 } } });
+  const repeated = { ...newer, run_id: 'repeat', started_at: '2026-10-10T00:10:00Z', environment: { ...newer.environment,
+    controller_limits: { max_model_requests: 40, closure_fraction: .85, started_epoch: 200 } } };
+  assert.equal(buildBoards([run(), newer, repeated])[0].rows[0].runs.length, 2);
+  const changed = { ...repeated, run_id: 'changed', started_at: '2026-10-10T01:00:00Z',
+    environment: { ...repeated.environment, runner_source_sha256: { 'worker.py': 'b' } } };
+  assert.equal(buildBoards([newer, repeated, changed])[0].rows[0].runs.length, 1);
 });

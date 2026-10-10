@@ -1,0 +1,87 @@
+{
+  "scope": "One11-row segment of the original21-page scanned/mixed TTB historical table, with incomplete existing OCR text. Not a general OCR benchmark, a native-PDF repeat, service reliability estimate or regulatory/measurement advice.",
+  "independent_status": "not_completed",
+  "initial_independent_status": "not_completed",
+  "sources": {
+    "execution/answer.md": "15cd5d372122b4700cc67b34da4340efd2f64beb96583037a696a7a6df613038",
+    "execution/receipt.json": "537b9e7a042e5e81158e3cc3df160d74130a27fab1f521eab6727fe11691ea7c",
+    "execution/usage.json": "beeea9d9704e1fcd1d0227dcb70802f7561a8ffe242b32bfc863a3fee29968bb",
+    "execution/tool-records.json": "0490fbe76913b41c87db7dfbe3048ec2298973de6e5a95f0f7ba0f7f98815435",
+    "grading/assessment.json": "900b3c0f71f3350008eaa702df0721b0b67a4ccebffdbf5be9e6d80379ebced1",
+    "grading-attempt2/assessment.json": "cfcab0e9ebaa48126f90ffc7374294079fe416961e42adf12c3e04c63607d127"
+  },
+  "selected_assessment_sha256": "cfcab0e9ebaa48126f90ffc7374294079fe416961e42adf12c3e04c63607d127",
+  "configuration": "New scanned/mixed PDF business follow-up after independently completed anonymous PDF access on the same two owned runtimes. Prior native-PDF runs and original access remain immutable; no new access sample. Exact same image,2GiB/1CPU/pids256,pipTUNA, execution25requests/600s, grading40/300s,32000outputtokens/request. Retained config byte-identical to prior audited generic setup; no installed dependencies or query material in retained paths. Owned runtimes resumed with only baseline sleep/inspection processes; adapter archives previous home/workspace/tmp before each fresh session. Retention audit SHA256 0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213. Source PDF, page render, and visually transcribed numeric reference frozen by independent task-design role before queries; controller independently checked all selected values before dispatch. Text-only DeepSeek grader uses that frozen readable reference and actual candidate evidence; no claim that it visually read source images. Controller/reference preparation overhead unmetered. Maximum2 extraction calls per service (including retries), first403/429/402 stop,2consecutive connection failures stop; anonymous remaining quotas unknown. Same original URL and user request; no pre-cropped PDF or answer/helper delivered to executors. Business peers sealed before separate grading with no peer verdicts. Single small scanned-table sample, not general OCR reliability or regulatory advice.",
+  "route": "public-mcp",
+  "original_url": "https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf",
+  "original_pdf_sha256": "9ec318069cf85acab2dac669f9fb3189d92dc200a0b0abd5f4a3843271a40150",
+  "reference_sha256": "ee8adb605a42bb6505beb58c85b0a5dea959c2cbfeb3a7a06166f01909a074e8",
+  "source_scope": {
+    "physical_page": 2,
+    "printed_page": "532",
+    "proof_start": "1.0",
+    "proof_end": "2.0",
+    "required_rows": 11,
+    "columns": [
+      "proof",
+      "wine_gallons_per_pound",
+      "proof_gallons_per_pound"
+    ]
+  },
+  "reference_preparation": "Independent task-design role rendered original official page and visually transcribed33selected values before any candidate query; controller independently checked same image and CSV before dispatch. Text-only DeepSeek graders compare that frozen reference against actual outputs, not a claim they viewed source pixels.",
+  "controller_reference_check_sha256": "30f9079a0566ab041503f0ae39aca08782fcf17d8ca352238f07d7fc6403079c",
+  "retention_audit_sha256": "0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213",
+  "setup_reuse": "Same previously independently verified PDF access runtimes. Generic config hashes unchanged, no installed dependencies or old task materials retained; adapter archives old home/workspace/tmp before fresh sessions. No new access samples.",
+  "elapsed_seconds": 192.427232,
+  "execution": {
+    "started_at": "2026-10-08T20:14:50.718553+00:00",
+    "ended_at": "2026-10-08T20:18:03.145785+00:00",
+    "exit_code": 1,
+    "timed_out": false
+  },
+  "csv_observation": {
+    "name": "table4_proof_1.0_to_2.0.csv",
+    "sha256": "510168fa123a7adb5379508260c3268a34cb09e677d90b1a787dedad6ecc16c4",
+    "bytes": 53,
+    "utf8": true,
+    "columns": [
+      "proof",
+      "wine_gallons_per_pound",
+      "proof_gallons_per_pound"
+    ],
+    "actual_rows": 0,
+    "all_required_values_match": false
+  },
+  "account": "Anonymous only; no account, key, payment or remote mutable resource created.",
+  "stopping_rules": "Maximum2target-extraction calls including retries; first403/429/402 stops;2consecutive connection failures stop. These service-side instructions are not enforced by the model proxy; model/time/output caps are enforced. Transport discovery calls are additional and not counted as target extractions.",
+  "peer_review": "Both executions collected and peer outputs sealed before original independent graders; no peer verdicts. Exception review sees original frozen execution/reference and same peer snapshot, no initial grade.",
+  "selected_service_cost_judgment": {
+    "kind": "confirmed_free",
+    "amount_usd": 0,
+    "official_source": "https://exa.ai/docs/reference/exa-mcp",
+    "original_judgment_sha256": "cfcab0e9ebaa48126f90ffc7374294079fe416961e42adf12c3e04c63607d127"
+  },
+  "selected_service_cost_usd": 0,
+  "attribution": "Selected factual numeric rows from U.S. Alcohol and Tobacco Tax and Trade Bureau (TTB), Gauging Manual, Table No.4 / Gallons per Pound, printed page532. Transcribed, without recomputation, into CSV. TTB website section11 allows attributed copying subject to protected marks/third-party exceptions; no endorsement or tax/calibration advice.",
+  "reuse_policy_source": "https://www.ttb.gov/about-ttb/privacy-policy",
+  "public_selection": "Only minimum factual audit, hashes and the successful11-row CSV. Complete PDF/page image, raw responses, sessions and request/session identifiers remain private.",
+  "resources": "Original four owned runtimes and the one exception grader stopped after collection; all model attempts included in cost ledger.",
+  "candidate_extraction_calls": 2,
+  "fetch_max_characters": [
+    300000,
+    60000
+  ],
+  "response_observation": {
+    "text_characters_each": 12017,
+    "text_sha256_each": [
+      "f29f0df5e4f2006f569b000dbc148e02e7124de53246f1e4e45f69bad53a2b81",
+      "f29f0df5e4f2006f569b000dbc148e02e7124de53246f1e4e45f69bad53a2b81"
+    ],
+    "identical_text": true,
+    "target_rows_delivered": 0
+  },
+  "protocol_violation": "Initial urllib MCP initialize returned403 with Cloudflare1010/browser_signature_banned. Executor then probed User-Agent variants and continued to discovery/two HTTP200 fetches despite the frozen first403stop instruction. No further candidate call was made by controller/reviewer. These post-violation returns are diagnostic observations, not evidence of compliant access or a fair general OCR comparison.",
+  "request_budget": "Proxy blocked further model requests after25forwarded attempts; process exited1 without timeout. Finalanswer contains intermediate statements, no delivery link; local CSV has only header. The metadata does not prove the service cannot handle all scanned PDFs.",
+  "interpretation_limits": "Responses are shorter than both requested character caps, but this does not prove absence of a hidden upstream limit, a specific extraction algorithm, complete absence of a whole source column or current source/cache freshness. Only the required segment and actual CSV are independently checked.",
+  "initial_review_issue": "Original grader incorrectly marked the stop-rule check passed while acknowledging403andcontinuedrequests; initial assessment preserved. Selected independent exception review corrects the boundary assessment without rerunning execution."
+}

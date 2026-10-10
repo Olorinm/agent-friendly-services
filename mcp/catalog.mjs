@@ -56,6 +56,9 @@ export function searchServices(data, filters) {
       task_runs: matchingRuns(s, r, filters, data.categories).map(run => ({
         classification: run.classification, phase: run.phase,
         run_id: run.run_id, task: run.task, status: run.status, reason: run.reason,
+        ...(run.outcome ? { outcome: run.outcome } : {}),
+        ...(run.request_usage ? { request_usage: run.request_usage } : {}),
+        ...(s.result_notes?.[run.run_id] ? { additional_context: s.result_notes[run.run_id] } : {}),
         harness: run.harness, model: run.model, reasoning_effort: run.reasoning_effort,
         started_at: run.started_at, ended_at: run.ended_at,
         usage: run.usage, elapsed_seconds: run.elapsed_seconds,

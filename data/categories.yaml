@@ -100,6 +100,21 @@ categories:
     description: Code hosting, API development, testing, monitoring and troubleshooting.
     name_zh: 开发工具
     subcategories:
+      - id: dependency-advisories
+        name: Dependency Security Advisories
+        name_zh: 依赖漏洞公告
+        description: Find published security advisories for identifiable software packages and interpret their affected and fixed versions.
+        inclusion: >-
+          Retrieves identifiable public advisories using a package ecosystem, package name, version or
+          advisory identifier, with source links and affected-version or remediation metadata where available.
+        exclusion: >-
+          Source-code analysis, exploit execution, infrastructure scanning and discovering previously unknown
+          vulnerabilities are separate. A successful lookup or no match does not establish that software is
+          secure, exploitable in a particular application, or free of other vulnerabilities. Aggregators can
+          share upstream records; matching answers are not independent security findings.
+        capabilities:
+          - id: advisories.lookup
+            description: Retrieve published dependency advisories and their package/version applicability and documented fixes.
       - id: monitoring
         name: Monitoring & Troubleshooting
         name_zh: 监控与故障排查
@@ -216,6 +231,20 @@ categories:
     name: Search & Data Access
     description: Search APIs, crawling and scraping, data providers.
     subcategories:
+      - id: scholarly-search
+        name: Scholarly Literature Search
+        name_zh: 学术文献检索
+        description: Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.
+        inclusion: >-
+          Searches an identifiable scholarly corpus and returns work identities with citation metadata
+          such as title, authors, publication venue, year and persistent identifiers where available.
+        exclusion: >-
+          General web-page search, guaranteed full-text access, literature-review synthesis and research-quality
+          rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement
+          between indexes do not independently establish a paper's identity, quality or completeness.
+        capabilities:
+          - id: scholarly.search
+            description: Find scholarly works with enough bibliographic metadata to identify and cite them.
       - id: web-search
         name: Web Search
         description: Discover relevant public web pages from a query; answers may include source citations.
@@ -238,6 +267,67 @@ categories:
         exclusion: >-
           Query-only result lists/snippets are web search; browser control is a runtime, not extraction
           itself.
+      - id: geocoding
+        name: Geocoding
+        name_zh: 地理编码
+        description: Resolve named places or supplied public addresses to geographic coordinates.
+        inclusion: >-
+          Returns a geographic position with enough place or address context to identify the match;
+          coverage, result granularity and public-endpoint conditions must be specified.
+        exclusion: >-
+          General web search, weather at known coordinates, map tiles and route navigation are separate.
+          A place or building coordinate does not establish an exact entrance, postal deliverability or
+          safe navigation to a destination.
+        capabilities:
+          - id: places.geocode
+            description: Resolve a place name or address to an identified geographic position.
+      - id: route-planning
+        name: Route Planning
+        name_zh: 路线规划
+        description: Plan a journey between specified locations using a transport network and an identified travel mode.
+        inclusion: >-
+          Returns a connected route with distance, estimated travel time and enough path or direction
+          information to understand the journey. Hosted endpoint coverage, supported travel modes and
+          public-service usage conditions must be stated.
+        exclusion: >-
+          Resolving an address to coordinates alone is geocoding; map tiles, straight-line distance,
+          transport ticket inventory and a self-hosted routing library alone are separate. A planned
+          route does not establish live traffic, actual arrival time, road safety, accessibility or
+          turn-by-turn navigation reliability. Shared map data does not provide independent ground truth.
+        capabilities:
+          - id: routes.plan
+            description: Return a network route with distance, estimated duration and path information for a travel mode.
+      - id: public-holidays
+        name: Public Holidays
+        name_zh: 公共节假日
+        description: Retrieve dated public holidays applicable to an identified country or region for personal planning.
+        inclusion: >-
+          Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context
+          to determine the requested regional scope; supported years and subdivisions must be stated.
+        exclusion: >-
+          Personal calendar editing, school vacations alone, general web search and extraction from a
+          supplied page are separate. Holiday data does not establish shop opening hours, individual
+          employment or pay entitlements, bank operations or travel availability; observances and
+          substitute dates must not be silently treated as applicable public holidays.
+        capabilities:
+          - id: holidays.lookup
+            description: Retrieve public holiday dates and names for a specified jurisdiction and period.
+      - id: weather-data
+        name: Weather Data
+        name_zh: 天气数据
+        description: >-
+          Retrieve weather forecasts or observations for an identified location and time, for personal
+          planning and weather-aware applications.
+        inclusion: >-
+          Supplies weather variables with identifiable locations, valid times and units, distinguishing
+          forecasts from observations and historical reconstructions.
+        exclusion: >-
+          Place-name geocoding, general web search and a weather model without a callable data service are
+          separate. Forecast access does not establish historical observation access or forecast accuracy;
+          those require their own evidence and task conditions.
+        capabilities:
+          - id: weather.forecast
+            description: Retrieve a weather forecast for a specified location and future period.
       - id: financial-data
         name: Financial Data
         name_zh: 金融数据
@@ -410,14 +500,30 @@ categories:
     inclusion: Enables email, messaging or live voice communication.
     exclusion: Text-to-speech alone is an AI content service, not communication delivery.
   - id: productivity-storage
-    name: Workplace Collaboration
+    name: Productivity & Collaboration
     description: >-
-      Documents, collaborative tables, project management and file sharing; application object storage belongs
-      under cloud services.
+      Documents, collaborative tables, project management, file sharing and preparing information materials
+      for people to share; application object storage belongs under cloud services.
     subcategories:
+      - id: qr-codes
+        name: QR Code Images
+        name_zh: 二维码图片
+        description: Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.
+        inclusion: >-
+          A hosted service accepts an explicit payload and returns a downloadable QR image with documented
+          format and sizing controls. The stored payload can be checked by an independent decoder;
+          local-only encoding libraries are not hosted service alternatives.
+        exclusion: >-
+          Payment processing, scanner-only services, dynamic redirect or scan-tracking management and
+          general AI image generation are separate. An image that looks like a QR code without correctly
+          decoding the requested payload is insufficient; decoding does not prove its destination is
+          safe, reachable or permanent, or that every phone and print condition can scan it.
+        capabilities:
+          - id: qr.generate
+            description: Produce a downloadable static QR image encoding the supplied payload.
       - id: collaborative-tables
         name: Collaborative Tables
-        description: User-facing online tables for organizing and following up shared work.
+        description: User-facing online tables for organizing shared records, following up work and maintaining calculated summaries.
         capabilities:
           - id: records.organize
             description: Turn supplied notes into a structured online action list.
@@ -425,6 +531,8 @@ categories:
             description: Update progress and retrieve outstanding actions.
           - id: records.reconcile
             description: Merge follow-up notes without duplicating existing actions.
+          - id: records.calculate
+            description: Calculate summaries from online records and keep them updated when those records change.
         name_zh: 协作表格
         inclusion: Provides user-facing shared tables with structured records.
         exclusion: A backend database without collaborative work-table features is insufficient.
@@ -455,9 +563,11 @@ categories:
         capabilities:
           - id: files.share
             description: Store a file and grant intended recipients access.
-    name_zh: 办公协作
-    inclusion: Organizes shared work, documents, tasks or files for people.
-    exclusion: Application database and object-storage APIs alone are not office collaboration.
+    name_zh: 办公与协作
+    inclusion: Organizes work, documents, tasks or files for people, or prepares information materials for sharing.
+    exclusion: >-
+      Application database and object-storage APIs alone are not office productivity; general AI image
+      generation belongs under AI services rather than deterministic information-material preparation.
   - id: commerce-marketing
     name: E-commerce
     description: Services for building and operating online stores.

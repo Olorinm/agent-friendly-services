@@ -1,0 +1,88 @@
+id: semantic-scholar
+name: Semantic Scholar
+category: web-search-data
+homepage: https://www.semanticscholar.org/
+summary: Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.
+submitted_by: community
+tags:
+  - scholarly-metadata
+  - doi
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/scholarly-search
+  sources:
+    overview:
+      url: https://www.semanticscholar.org/product/api
+      checked_on: '2026-10-08'
+      kind: official_docs
+    tutorial:
+      url: https://www.semanticscholar.org/product/api/tutorial
+      checked_on: '2026-10-08'
+      kind: official_docs
+    graph-docs:
+      url: https://api.semanticscholar.org/api-docs/graph
+      checked_on: '2026-10-08'
+      kind: official_docs
+    graph-schema:
+      url: https://api.semanticscholar.org/graph/v1/swagger.json
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Public schema linked by the official Graph documentation; only documentation was retrieved, not paper search results.
+    api-license:
+      url: https://www.semanticscholar.org/product/api/license
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Production page retrieved directly and matches the official webflow host; agreement dated May 17, 2023.
+  routes:
+    - id: public-graph-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.semanticscholar.org/graph/v1
+      docs: https://api.semanticscholar.org/api-docs/graph
+      evidence: [overview, tutorial, graph-docs, graph-schema]
+      availability:
+        value: self_serve
+        evidence: [overview]
+        notes: Most endpoints permit public access, with no reserved anonymous capacity.
+      personal_access:
+        value: documented
+        evidence: [overview, api-license]
+        notes: Public no-key path is available; API agreement covers individual users, with applicable-law and export restrictions.
+      auth:
+        value: none
+        evidence: [overview, graph-schema]
+        notes: Paper relevance and title-match search are documented without required authentication; this does not extend to every API endpoint.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [overview]
+        payment_method:
+          value: not_required
+          evidence: [overview]
+      capabilities:
+        scholarly.search:
+          value: documented
+          evidence: [graph-schema]
+          notes: >-
+            GET /paper/search supports plain query text, year and venue filters; /paper/search/match
+            returns a closest title match. Requested fields can include authors, year, journal and DOI
+            in externalIds. The url field is a Semantic Scholar page, not the publisher landing page.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public API request
+          scope: Free public endpoints within shared throttling; no individual anonymous quota is promised.
+          evidence: [overview]
+      notes: >-
+        The published 1,000 requests/second is shared by all unauthenticated users, not an individual
+        allowance; heavy traffic can impose tighter limits. A requested API key is sent by email and
+        starts at 1 request/second, but grant timing and eligibility were not verified. No key was requested.
+        Relevance search returns at most 1,000 ranked results and 100 per page; an empty field or match
+        score is not proof of identity or a complete corpus. The API licence requires Semantic Scholar
+        attribution for public contributions and its platform-paper citation for scientific publications.
+        Data licences and third-party content rights apply separately; the API licence is not a blanket
+        CC0 licence. Reviewed API terms contain no explicit public-comparison ban, while prohibiting
+        rate-limit circumvention and repackaging/reselling the API. No service task was executed.

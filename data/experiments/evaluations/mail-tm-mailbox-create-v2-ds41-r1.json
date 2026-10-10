@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "run_id": "mail-tm-mailbox-create-v2-ds41-r1",
+  "service_id": "mail-tm",
+  "route_id": "mail-api",
+  "entry_url": "https://api.mail.tm",
+  "task": {
+    "description": "为这次自动化测试准备一个临时收件邮箱，给我地址，并保存后续读取收件箱需要的访问信息。",
+    "inputs": "使用服务提供的域名，新建一个仅供本次测试使用的收件邮箱，不复用既有邮箱。只需本次测试期间使用，不要求长期保留或自定义域名。可以为此建立服务必需的最小免费匿名身份及认证信息，不使用现有服务账号或任何人类邮箱完成验证；需要这些条件时说明阻碍。确认能够读取该邮箱的收件箱列表，说明当前是否有邮件。将密码、令牌或会话信息保存在本地私有文件中，答复只给文件位置，不输出秘密。",
+    "expected_output": "一个真实邮箱地址、当前收件箱状态、私有访问信息文件和后续使用说明。",
+    "success": "指定服务返回实际邮箱地址；真实收件箱读取成功；已保存的访问状态可由评测者在独立请求中复用到同一邮箱；答复与实际状态相符，秘密不出现在答复中。",
+    "failure": "只生成地址字符串或给出教程；无法读取邮箱；未保存可复用访问状态；实际邮箱与答复不同；预算内未完成。平台或执行环境故障单列无效。",
+    "resources": "只使用指定服务的 API 及其官方文档，可创建一个本轮专用免费测试邮箱，以及取得该邮箱所必需的最小免费匿名服务身份和认证信息，例如组织或 API key。不得另建第二个邮箱，不使用既有账户、人类邮箱、第三方登录身份或支付资料，不触发向人类邮箱的验证；缺少这些条件而无法继续时记录阻碍。不得主动发送邮件、注册其他服务、读取他人或既有个人邮箱。允许在隔离环境自行查文档、安装通用依赖和保存本轮私有配置；不提供预写调用脚本。调用、时间、资源保留和确切授权范围见 ENVIRONMENT.md。",
+    "id": "mailboxes-create-001",
+    "version": "v2",
+    "sha256": "69a386070f5930624accbb4663a85c740bee4a95d74f73f83802acde7917586a",
+    "file": "data/experiments/tasks/mailboxes-v2.md"
+  },
+  "prompt_sha256": "27caaf3e8e917cdab4f5abeb7ba8eb54d012b458014cc1393b1de2b8b18ed4a8",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T17:53:30.353516+00:00",
+  "ended_at": "2026-10-08T17:53:58.968434+00:00",
+  "elapsed_seconds": 28.614918,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none initially; one fresh anonymous mailbox and necessary identity created inside measured execution",
+    "web_search": "live",
+    "preparation_note": "Fresh isolated runtime, no supplied account, human email, mailbox, key, answer, or service client. Same v2 task permits minimal anonymous upstream identity for one free mailbox; old v1/harness/results unchanged. Two provider executions can run concurrently; each creates its own mailbox. External controller independently reuses only saved authentication in GET requests after execution; these reads are additional verification overhead. Execution output and controller evidence are frozen before separate credential-free grading. No peer packet for these access runs; own identity/creation/GET evidence supports each verdict. This covers provisioning and authenticated listing only, not real email delivery, sending, website acceptance, long-term retention or account recovery. Executor25requests/300s, grader40/300s, output32000; same image2GiB/1CPU/pids256 and pipTUNA/emptycache. No paid service subscription or human mailbox attached.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本轮在 mail.tm 官方 API 匿名新建了一个专用收件邮箱（maxxspace.com 域，2026-10-08T17:53:45Z 创建），并以 Bearer 令牌成功读取收件箱列表（/messages，HTTP 200，totalItems=0，空列表有效）；访问信息已保存为本执行用户 600 权限的私有文件，总控用保存状态独立只读核验同一邮箱成功（identity_matches_saved_mailbox=true，messages 为空），地址/状态/文件位置与证据一致且答复未泄露秘密。四项交付要求均满足。",
+  "usage": {
+    "input_tokens": 113186,
+    "cached_input_tokens": 103936,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3032,
+    "reasoning_output_tokens": 971
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://docs.mail.tm/",
+      "https://mail.tm/"
+    ],
+    "applicability": {
+      "rule": "mail.tm 官方文档明示 API 完全免费：无 API key、无需注册、无付费层级；一般配额 8 QPS/IP。",
+      "observed": "本轮以匿名方式创建并读取该邮箱，未提交 API key、付费信息或企业资质，POST /accounts 返回 HTTP 201，为免费匿名使用。",
+      "evidence": "grading/artifacts/evidence/business-summary.md（官方免费规则与本轮匿名创建/读取回执）"
+    },
+    "note": "服务本身按官方规则免费，本次未产生服务费用；金额记为 0。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-08T18:04:34.399046+00:00",
+    "checks": [
+      {
+        "criterion": "new_isolated_mailbox：新建仅本轮使用的真实域名邮箱，不复用既有邮箱",
+        "passed": true,
+        "evidence": "POST /accounts 返回 HTTP 201，地址为 afs-20261008-<随机后缀>@maxxspace.com，createdAt 2026-10-08T17:53:45Z，isDisabled=false；/domains 返回的正是该服务域 maxxspace.com。本轮仅此一次账号创建，总控独立 GET /me 身份与保存邮箱一致。见 evidence/business-summary.md。"
+      },
+      {
+        "criterion": "working_inbox_read：真实读取收件箱列表并如实说明当前是否有邮件",
+        "passed": true,
+        "evidence": "GET /messages（Bearer）HTTP 200，hydra:totalItems=0、member=[]；答复称当前列表为空，与响应一致。总控独立 GET /messages?page=1 HTTP 200 body=[]，列为空，无矛盾。"
+      },
+      {
+        "criterion": "retained_reusable_access：保存可复用访问信息，只给文件位置",
+        "passed": true,
+        "evidence": "已写 /home/node/service-tools/credentials.json（密码/令牌/账号 ID）与 service-config.json（服务、域名、地址、端点、收件箱状态），chmod 600。总控用该保存状态在同一新邮箱独立只读核验成功（saved_configuration_sha256=aebaf6b2affb0c7388b96fa5186a2e853ce5a8c7dd24f2926ce59a7b9797304e，identity_matches_saved_mailbox=true，list_shape_valid=true），证明凭证可复用；答复仅给出文件路径。"
+      },
+      {
+        "criterion": "least_scope_anonymous_identity：仅最小免费匿名身份，不使用既有账号/人类邮箱/支付",
+        "passed": true,
+        "evidence": "mail.tm 无需 API key/注册即可创建邮箱；本轮只创建一个账号，未绑定人类邮箱、未使用支付资料或企业资质；创建响应 quota=40000000、used=0，无付费痕迹。"
+      },
+      {
+        "criterion": "no_outbound_or_private_inbox_access：不主动发信、不注册其他服务、不读取他人/既有邮箱",
+        "passed": true,
+        "evidence": "工具记录中仅 GET /domains、POST /accounts、[SERVICE_SECRET]、GET /messages 四次候选请求，全部针对本轮新邮箱；无发送、无 OTP、无其他收件箱读取、无其他服务注册。"
+      },
+      {
+        "criterion": "honest_delivery_without_secrets：答复给出地址、状态与文件位置，不输出秘密",
+        "passed": true,
+        "evidence": "execution/answer.md 给出邮箱地址（公开副本已脱敏）、空收件箱状态及两个私有文件路径，未包含密码、令牌或会话；地址/状态与工具回执及总控回执相符。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.018303648,
+      "kind": "estimated",
+      "scope": "Separate independent grading overhead, frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.018303648,
+          "usage_sha256": "5095135c6ff750650c17538ff6b8feed00ca72a26b105d8ab9a3ffdc817687b1"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/mail-tm-mailbox-create-v2-ds41-r1/public-review/verification.json",
+      "sha256": "ac396d76b5f628688b8ed4766537da09f5764520ccbf6a64451263dfa9c84bca",
+      "note": "Minimal redacted access/independent-read facts, immutable source hashes, environment and request-limit caveats; addresses/credentials/full raw responses remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/mailboxes-deepseek-overnight-20261008/mail-tm-mailbox-create-v2-ds41-r1",
+    "run_sha256": "4e2e321f570abf1f52d1918a22c2b5cef0f34cd1ffa4fa92698e66b365f162ce",
+    "events_sha256": "0f219632068a2812005b37353e7b0da8ed8df18825e82361101c686752c4bfd2",
+    "answer_sha256": "272a1165a6e7afda91932e787d1560aa040024e748e7eaca376aa921d605c655",
+    "review_sha256": "a8ee2ed98e2922da38e5db739459c6d613071db5c165d8f8e10c3be01ef26c89",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "b56f9467603b72c10ce9051974751ee7ae926b08ce2236e5fc24bcebdd55e673",
+    "selected_independent_review_sha256": "b56f9467603b72c10ce9051974751ee7ae926b08ce2236e5fc24bcebdd55e673",
+    "publication_review_note": "Public evidence selection only; independent verdict, checks and service fee unchanged. Added controller limitations and precise cleanup; no new model or service-task execution."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7167,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 123,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8103,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 293,
+        "reasoning_output_tokens": 165
+      },
+      {
+        "input_tokens": 9199,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 164,
+        "reasoning_output_tokens": 70
+      },
+      {
+        "input_tokens": 9710,
+        "cached_input_tokens": 9344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 197,
+        "reasoning_output_tokens": 140
+      },
+      {
+        "input_tokens": 9996,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 368,
+        "reasoning_output_tokens": 273
+      },
+      {
+        "input_tokens": 10409,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 148,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 10711,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 146,
+        "reasoning_output_tokens": 25
+      },
+      {
+        "input_tokens": 11161,
+        "cached_input_tokens": 10752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 417,
+        "reasoning_output_tokens": 94
+      },
+      {
+        "input_tokens": 11634,
+        "cached_input_tokens": 11392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 824,
+        "reasoning_output_tokens": 86
+      },
+      {
+        "input_tokens": 12486,
+        "cached_input_tokens": 12288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 69,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12610,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 283,
+        "reasoning_output_tokens": 71
+      }
+    ],
+    "source_sha256": "517b2b1ba7583a544a92c59b12e889a61d9e1bcb7d85cff959bc82cc539cb6bb",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 113186,
+      "cached_input_tokens": 103936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3032,
+      "reasoning_output_tokens": 971
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

@@ -30,6 +30,18 @@ class GradingPacketTests(unittest.TestCase):
         (self.output / 'events.jsonl').write_text(json.dumps({
             'type': 'tool_use', 'part': {'tool': 'bash', 'callID': 'call-1', 'state': state}}) + '\n')
 
+    def test_unicode_separators_preserve_tool_output_and_lf_source_line_numbers(self):
+        state={'status':'completed','input':{},'output':'binary-looking\u0085\u2028\u2029text'}
+        events=[{'type':'tool_use','part':{'tool':'bash','callID':str(i),'state':state}} for i in range(2)]
+        (self.output/'events.jsonl').write_text('\n'.join(json.dumps(e,ensure_ascii=False) for e in events)+'\n')
+        result=records.extract(self.output)
+        self.assertTrue(result['complete'])
+        self.assertEqual([c['source']['line'] for c in result['calls']],[1,2])
+        self.assertTrue(all(c['state']==state for c in result['calls']))
+        index=grading_packet.build(self.root)
+        self.assertTrue(index['tool_capture']['complete'])
+        self.assertEqual(len(index['tools']),2)
+
     def test_full_private_records_preserve_errors_and_mark_preview_truncation(self):
         state = {'status': 'error', 'input': {'command': 'read-only fixture request'},
                  'error': 'Denied: ' + 'x' * 6000}

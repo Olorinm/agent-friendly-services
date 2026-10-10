@@ -40,7 +40,7 @@ def occupied(entries):
     return active
 
 
-def advance(directories, max_concurrency):
+def advance(directories, max_concurrency, dispatch_guard=None):
     if type(max_concurrency) is not int or max_concurrency < 1:
         raise ValueError('Batch max_concurrency must be a positive integer')
     directories = [Path(p).resolve() for p in directories]
@@ -52,7 +52,7 @@ def advance(directories, max_concurrency):
             raise ValueError('Existing sessions exceed the requested batch ceiling')
         outside = [item for item in active if item[0] != directory]
         groups.advance(directory, busy_runtimes={runtime for _, runtime, _ in outside},
-                       max_active=max_concurrency - len(outside))
+                       max_active=max_concurrency - len(outside), dispatch_guard=dispatch_guard)
     # Check again before reporting: an uncertain stop in the last group is also
     # a batch-level blocker, not permission to dispatch more on the next tick.
     active = occupied(inventory(directories))

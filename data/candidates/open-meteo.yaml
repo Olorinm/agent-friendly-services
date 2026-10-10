@@ -1,0 +1,85 @@
+id: open-meteo
+name: Open-Meteo
+category: web-search-data
+homepage: https://open-meteo.com/
+summary: Global weather forecast API with a keyless non-commercial free tier and attributed open data.
+submitted_by: community
+tags:
+  - weather
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/weather-data
+  sources:
+    homepage:
+      url: https://open-meteo.com/
+      checked_on: '2026-10-08'
+      kind: official_site
+    forecast-docs:
+      url: https://open-meteo.com/en/docs
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://open-meteo.com/en/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://open-meteo.com/en/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+    licence:
+      url: https://open-meteo.com/en/licence
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: forecast-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.open-meteo.com/v1/forecast
+      docs: https://open-meteo.com/en/docs
+      evidence: [homepage, forecast-docs]
+      availability:
+        value: self_serve
+        evidence: [homepage]
+      personal_access:
+        value: documented
+        evidence: [homepage, terms]
+        notes: Free hosted API is for non-commercial use, including personal home automation.
+      auth:
+        value: none
+        evidence: [homepage, forecast-docs]
+      capabilities:
+        weather.forecast:
+          value: documented
+          evidence: [forecast-docs]
+          notes: >-
+            HTTP GET with WGS84 latitude/longitude and selected variables returns hourly forecasts;
+            default seven days, up to sixteen. temperature_2m is instantaneous at the timestamp;
+            precipitation is total precipitation over the preceding hour. Local timezone and units
+            are selectable. Model coverage and native resolution vary; hourly output may be interpolated.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [homepage]
+        payment_method:
+          value: not_required
+          evidence: [homepage]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: eligible free API call
+          scope: >-
+            Non-commercial free endpoint within published limits: 600 calls/minute, 5000/hour,
+            10000/day and 300000/month. Large variable/time requests may count as multiple calls.
+          evidence: [terms, pricing]
+      notes: >-
+        No signup, API key or credit card is needed for the non-commercial free route. Commercial
+        hosted usage requires a paid customer endpoint; the CC BY 4.0 data licence does not remove
+        that API-use restriction. Data may be shared/adapted with attribution, a licence link and
+        change disclosure; display a source link beside Open-Meteo data. Reviewed public terms contain
+        no explicit prohibition on publishing benchmark summaries. Forecasts are model output, not
+        measured observations. Default model selection can share upstream models with other services,
+        including MET Norway and ECMWF; service alternatives are not necessarily independent forecasts.
+        Free service has no uptime guarantee. Sources establish documentation only, not tested access.

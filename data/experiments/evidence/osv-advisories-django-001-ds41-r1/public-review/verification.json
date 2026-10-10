@@ -1,0 +1,103 @@
+{
+  "scope": "Fixed PyPI Django 5.2.6 dependency note and only CVE-2025-57833 / CVE-2025-59681. A historical two-alert metadata check, not a recommendation of a currently safe version, security scan, exploitability test, exhaustive coverage or freshness benchmark.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "15df0c213d71c4d4b6783e01d933db4830718d1458f55c2057fb442894bb77b7",
+    "execution/receipt.json": "337285170a2d654eab267b5f279ae69d15447809c419b949b79b44d9a871ab19",
+    "execution/usage.json": "8dceeaa78c8cdc175e5697bfbeebcbf74d2a8f913fa72a5fda4625f8997c4121",
+    "execution/tool-records.json": "ce1495792b19233d5aa6d400039a8a8eaa4e11dde7840b419c49730148c00b90",
+    "grading/assessment.json": "f72485ad89c6b58b5bfbd32f730ed1a01a6eb00eece7314d1b21673ce196a8e4"
+  },
+  "configuration": "OpenCode 1.18.35; DeepSeek V4.1 Flash / high; execution: 25 model requests / 600 s; grading: 40 requests / 300 s; at most 32,000 output tokens per request; 2 GiB / 1 CPU / pids 256. Same image and pip TUNA index; new session and home, with generic access configuration retained after audit.",
+  "candidate_api_request_instruction_limit": 6,
+  "api_request_spacing_instruction": "At least one second; stop after two consecutive 403/429/connection failures. These API limits are instructions; model and time limits are enforced.",
+  "expected_and_independently_verified": [
+    {
+      "alert": "CVE-2025-57833",
+      "package": "Django",
+      "ecosystem": "PyPI",
+      "current_version": "5.2.6",
+      "current_version_matches_affected_range": false,
+      "first_fixed_in_5_2_x": "5.2.6"
+    },
+    {
+      "alert": "CVE-2025-59681",
+      "package": "Django",
+      "ecosystem": "PyPI",
+      "current_version": "5.2.6",
+      "current_version_matches_affected_range": true,
+      "first_fixed_in_5_2_x": "5.2.7"
+    }
+  ],
+  "minimum_for_only_two_alerts": "5.2.7",
+  "reference_sha256": "ec768ff80dabd85ed6d3e73c98059ea8de932d8f8bbca95bfed1008e6814fb2c",
+  "official_reference_sources": [
+    {
+      "url": "https://www.djangoproject.com/weblog/2025/sep/03/security-releases/",
+      "sha256": "0665a6afe8daa8ba7039abb795a331a00243ce90f169907a7017c4b3af30bf38",
+      "http_status": 200,
+      "retrieved_at": "2026-10-08T18:10:15.853773+00:00"
+    },
+    {
+      "url": "https://docs.djangoproject.com/en/5.2/releases/5.2.6/",
+      "sha256": "65cbe751e6d1c8f90c4f3adc45cd2cf424f3c9519351365f5d9f3f8ac0eee990",
+      "http_status": 200,
+      "retrieved_at": "2026-10-08T18:10:15.854083+00:00"
+    },
+    {
+      "url": "https://www.djangoproject.com/weblog/2025/oct/01/security-releases/",
+      "sha256": "d1762290790d8a20e6591017bede30f86ea7b0c2d56fe2abe6944556439f097f",
+      "http_status": 200,
+      "retrieved_at": "2026-10-08T18:10:15.854281+00:00"
+    },
+    {
+      "url": "https://docs.djangoproject.com/en/5.2/releases/5.2.7/",
+      "sha256": "b6279ed983547e74ec8cc6f1cef6f3e624a27c82d840f99ea0ffe94bcbd814e6",
+      "http_status": 200,
+      "retrieved_at": "2026-10-08T18:10:15.854437+00:00"
+    },
+    {
+      "url": "https://www.djangoproject.com/weblog/2025/sep/03/security-releases/",
+      "sha256": "441f53482bed69d6557bdaf248f6fd58fc46ca44455a940c146dd9b494aeff26"
+    }
+  ],
+  "reference_limits": "Maintainer pages were acquired independently before candidate queries; this is independent acquisition, not independent authorship of the underlying vulnerability. Both candidates import common upstream records. Agreement is not independent security discovery.",
+  "retention_audit_sha256": "7b1887aa539fb9c744c89b63df042874d9756ca439422714010d852a9d0057e5",
+  "retention_notice": "Controller archived original access config and removed prior package examples, answers and obsolete quota observations. No client code, parsing helper, query answer or reference was added; actual access scripts remained in archived workspaces. This preparation is disclosed, not counted as unassisted config reuse.",
+  "comparison": "Both business execution outputs were collected and peer snapshots sealed before separate fresh grading sessions; graders received the maintainer reference and peer executions, without other verdicts or credentials.",
+  "attribution": [
+    "OSV.dev public API: https://google.github.io/osv.dev/",
+    "GitHub Advisory Database, CC BY 4.0: https://github.com/advisories",
+    "PyPA Advisory Database, CC BY 4.0: https://github.com/pypa/advisory-database",
+    "Django maintainer announcements linked under official_reference_sources"
+  ],
+  "public_selection": "Only identifiers, necessary version facts, request outcomes and hashes are published. Full candidate payloads, advisory descriptions and third-party contributor data remain private.",
+  "service_fee_interpretation": "This business grader accepted the frozen public-free conditions with observed anonymous calls. Both access graders retained unknown because explicit free-rule applicability was not confirmed to their satisfaction. Preserve the distinct judgments; this is not a price change or evidence that unknown access cost equals zero.",
+  "resources": "No account, token, signup, payment or mutable service resource created. All four dedicated containers stopped after collection and independent review.",
+  "candidate_api_requests": 3,
+  "api_outcomes": [
+    200,
+    "GET by CVE ID: shell tool timeout after 120 s, no HTTP response collected",
+    200
+  ],
+  "query_strategy": "Version-filtered package POST followed by a direct CVE-ID GET attempt that timed out, then an unversioned package POST. Executor located both alerts by aliases and followed their Django maintainer references.",
+  "returned_records": {
+    "version_filtered": 64,
+    "package_unversioned": 324
+  },
+  "selected_record_ids": [
+    "GHSA-6w2r-r2m5-xq5w",
+    "GHSA-hpr9-3m2g-3j9p",
+    "PYSEC-2025-105",
+    "PYSEC-2025-106"
+  ],
+  "elapsed_seconds": 167.099132,
+  "range_precision_limit": "For CVE-2025-57833, GHSA starts the 5.2 interval at 5.2a1; PYSEC starts at 5.2. The executor table used the stable 5.2 boundary. Both agree on the requested 5.2.6 membership and first fix. This run does not compare prerelease behavior.",
+  "timeout_limit": "The cause of the direct CVE-ID URL timeout is undetermined; a CVE alias is not necessarily a supported OSV record ID. Both package requests succeeded. One run and different query strategies do not establish service-wide latency.",
+  "process_cleanup": "After the shell tool timeout, a curl child was observed still running while the already-collected execution was under independent grading. The normal controller subsequently stopped the entire owned execution container at batch end; no rerun or evidence rewrite was performed.",
+  "response_hashes": {
+    "q_5.2.6.json": "21546e4326caf9849c3e7e7f212052f2f510a37fba29c087811fe5a83dbb3506",
+    "q_all_django.json": "58cff297daca440a72ae25024677fdd1714cc3870884ad1348b06bb31003e241"
+  },
+  "more_pages_indicated": false
+}

@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "run_id": "goqr-qr-access-ds41-r1",
+  "service_id": "goqr",
+  "route_id": "public-qr-api",
+  "entry_url": "https://api.qrserver.com/v1/create-qr-code/",
+  "task": {
+    "description": "帮我接通这个二维码服务，通过指定入口生成一张测试二维码并保存图片，确认我能开始使用；留下后续调用需要的通用配置，并说明接入步骤和实际门槛。",
+    "inputs": "测试内容为 https://example.com/ 。保存可打开的 PNG 二维码图片，扫码内容逐字就是这个网址。通过 ENVIRONMENT.md 指定的服务和入口生成；无需账号的入口直接使用。必要安装和通用配置保存在本轮指定持久目录；说明自助完成的步骤、人工介入、额外申请或具体阻碍，秘密不出现在答复中。",
+    "expected_output": "一份真实保存、可打开且扫码得到测试网址的 PNG 图片及其位置；可复用通用配置位置和实际接入步骤、门槛，或具体受阻原因。",
+    "success": "必要安装和配置完成，通过指定服务实际生成并保存可打开的 PNG，独立离线解码内容与测试网址逐字相同；通用配置可供新会话复用，接入来源、人工步骤和阻碍如实说明，未泄露秘密。接入阶段不要求特定像素尺寸、配色、静区宽度或手机实扫。",
+    "failure": "只看文档或做健康检查、没有真实服务生成、只有图片链接而无保存文件、文件不是可打开的 PNG、不能解码出完整测试网址、改用其他服务或本地编码代替、通用配置不可复用、隐瞒接入门槛或预算内未完成；额度或网络阻碍具体记录，采集及执行环境故障单列。",
+    "resources": "只用本轮确认允许的免费匿名入口，不注册、不借用账号、不付费、不发送邮件、不创建动态跟踪链接或访问二维码指向的网站。可读服务官方文档、安装通用依赖、自行编写调用代码并保存服务图片；不可本地生成二维码或调用其他生成服务替代。入口、请求及时间上限由 ENVIRONMENT.md 冻结。运行器采集真实请求、响应和文件，执行者不另写审计日志或验收程序；后续只保留通用安装与配置，不保留本题图片、答案或调用脚本。",
+    "id": "qr-codes-access-001",
+    "version": "v1",
+    "sha256": "5a0b38f7a498509a93b2713679708ef6f2dd15c092d80d85a9aa3636b9417359",
+    "file": "data/experiments/tasks/qr-codes.md"
+  },
+  "prompt_sha256": "189ec0c48b9c1ae2886c0a725885dcd5878047e44b16a1f83d62ecacc8aaaaca",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T19:42:40.980388+00:00",
+  "ended_at": "2026-10-08T19:43:39.568929+00:00",
+  "elapsed_seconds": 58.588541,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; public static QR APIs, no account/key/email/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task/model/budget. Two public static QR APIs with no account and no target destination visit. Up to2services concurrent, eachstage4generationcalls includingretry,>=2sec, first403/429stop. Service request limits are instructions, model/output/time caps enforced. Same baseimage2GiB/1CPU/pids256,pipTUNA/emptycache; no preinstalled executorclient. Exec25requests/access300s/business600s;grader40/300s;32000outputtokens/request. Access genericconfig/installeddependencies audited and kept, oldtaskimages/queries archived and ownedexecutor restarted before fresh businesssession. Separate graders have read-only offline ZXing3.1.1/Pillow12.3.0/NumPy2.3.5 and neutralfixture-verified generic image inspector; no decoder/helper/reference supplied to executors. Controller directly views exact hashed collectedPNG before grading and supplies factual visual observations; DeepSeek grader has no declared image input and independently verifies decoded bytes/pixels/provenance using offline tools. Controller visual inspection is disclosed separate overhead, not a claimed model-vision benchmark. Reference is original input bytes, no canonicalbitmap. Businesspeers sealedbeforegrading with no peerverdicts. Fourmodulemargin is only observation, not required; no DPI/mask/ECC/PNGmode restriction or realprinter/phone assurance. Officialfee/terms snapshots grader-only; goQRToS body missing, QuickChart retention7vs30days conflict explicit; no complete legal-reviewclaim. Rawtranscripts private; reviewedminimalfacts and requestedpublicURLimage may be published. Official source manifest SHA256 898dcf4ba868d3259742f29892fc95bf83f06c05b9b19767e8611412d4996ecf.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定入口 api.qrserver.com 的一次匿名 GET 生成请求返回 HTTP 200 image/png，响应体 474 字节被保存为 test-qr.png；与视觉回执同 sha256 的该文件经独立离线工具确认为 PNG 300x300，唯一二维码解码 bytes_hex 与测试网址完全一致；持久目录保留可复用的通用端点为 none 的配置；未发生人工介入或秘密泄露。",
+  "usage": {
+    "input_tokens": 110859,
+    "cached_input_tokens": 99328,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3081,
+    "reasoning_output_tokens": 1076
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [
+      "official-route-sources/goqr-home.html",
+      "official-route-sources/goqr-api-terms.html"
+    ],
+    "note": "无计费回执。goqr.me 官网首页称 goQR.me 生成的二维码免费（含商业用途），但冻结的官方来源中 API 专用 ToS 正文缺失、剩余匿名额度未定，无法确认该免费规则对 api.qrserver.com 的本次适用性，故保留 unknown；成功响应与未列费率不作为免费依据。",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "afs-independent-grader (deepseek-flash)",
+    "reviewed_at": "2026-10-08T19:51:24.379276+00:00",
+    "checks": [
+      {
+        "criterion": "由指定服务实际生成并保存为可打开的 PNG 交付物",
+        "passed": true,
+        "evidence": "记录的指定服务请求 GET https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fexample.com%2F&size=300x300&format=png&ecc=M&qzone=4 返回 HTTP 200、Content-Type image/png、474 字节；对应 execution/artifacts/test-qr.png 由离线工具成功打开为 PNG 300x300，sha256 c3ecfefcc2835d9cbb9bcf79526102ea5e5a796ebeea73d4266aba6499bcb635 与总控视觉回执一致。核验摘要见 grading/artifacts/evidence/offline-verification.md。"
+      },
+      {
+        "criterion": "离线解码内容与可见输入网址 https://example.com/ 逐字节一致",
+        "passed": true,
+        "evidence": "inspect_qr.py 对该 PNG 输出唯一 QR Code（valid=true），bytes_hex=68747470733a2f2f6578616d706c652e636f6d2f，与 reference.json 期望 bytes_hex 完全相同；text=https://example.com/。未重调服务、未访问目标网址。"
+      },
+      {
+        "criterion": "通用配置可复用且接入步骤/门槛如实、无秘密",
+        "passed": true,
+        "evidence": "execution/answer.md 如实说明指定端点、GET 参数、下载响应体保存 PNG、无账号/Key/邮箱/支付、无人工介入、未遇 403/429；持久配置 /home/node/service-tools/service-config.json（auth.type=none，api_key_required=false）及 installed-tools/venv 出现在保留清单中，位于本轮指定持久目录，可供新会话复用，未虚构认证、未泄露秘密。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.031479912,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.031479912,
+          "usage_sha256": "f3b334a5e024908c84756db9bd769a8026b045864eea78bed8f5453cd75655de"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/goqr-qr-access-ds41-r1/public-review/verification.json",
+      "sha256": "40fa1dfd4e68ce70c58ca5346578910f19af85094b043084874bd6d7d07b9c58",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full source documents and raw service responses remain private."
+    },
+    {
+      "path": "data/experiments/evidence/goqr-qr-access-ds41-r1/execution/artifacts/test-qr.png",
+      "sha256": "c3ecfefcc2835d9cbb9bcf79526102ea5e5a796ebeea73d4266aba6499bcb635",
+      "note": "Actual executor QR PNG, containing only the requested public URL; original service bytes preserved, no image transformation for publication."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/qr-deepseek-overnight-20261008/goqr-qr-access-ds41-r1",
+    "run_sha256": "12da0ac8fb6428ba8dc7d45827b8fd4597d92d545dbe576a0ab86107aa5aa1f1",
+    "events_sha256": "3e69d76d065ec45242511db7617e706f43cad86a1a78d0c3e92d0fd363cb48c8",
+    "answer_sha256": "7a1ef1d1693c0e93eaca46c50575e61a81be945b0bcf79f46c5dc96dcfaee692",
+    "review_sha256": "0e393609ba586d41c3d1585fa6c63afeeb736d31182eebcec7b9d43825ef4410",
+    "original_independent_review_sha256": "ba82c6eb341eb4cdaac33052a2115a53dc1f49f58d2e00f696a57da0af722ba2",
+    "selected_independent_review_sha256": "ba82c6eb341eb4cdaac33052a2115a53dc1f49f58d2e00f696a57da0af722ba2",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; raw responses and transcripts stay private. Independent verdict, reason, checks and fee judgments preserved. Actual downloaded PNG and offline decoder/pixel facts published; native dimensions and exact raw URL bytes checked, no physical printer/phone reliability claim. Grader preparation and lifecycle cleanup disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7171,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 110,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 7998,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 214,
+        "reasoning_output_tokens": 82
+      },
+      {
+        "input_tokens": 12291,
+        "cached_input_tokens": 8192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 538,
+        "reasoning_output_tokens": 349
+      },
+      {
+        "input_tokens": 12901,
+        "cached_input_tokens": 12672,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 280,
+        "reasoning_output_tokens": 185
+      },
+      {
+        "input_tokens": 13234,
+        "cached_input_tokens": 13056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 411,
+        "reasoning_output_tokens": 236
+      },
+      {
+        "input_tokens": 13666,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 152,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 13848,
+        "cached_input_tokens": 13696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 866,
+        "reasoning_output_tokens": 143
+      },
+      {
+        "input_tokens": 14730,
+        "cached_input_tokens": 14592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 160,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 15020,
+        "cached_input_tokens": 14848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 350,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "a9ff38ddf67826083ac82d1cc2751ab7140a78ea5d2936509a30114229be4f0b",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 110859,
+      "cached_input_tokens": 99328,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3081,
+      "reasoning_output_tokens": 1076
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

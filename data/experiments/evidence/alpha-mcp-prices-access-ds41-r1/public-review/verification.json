@@ -1,0 +1,57 @@
+{
+  "notice": "Minimal original measurements and independent judgments. Financial quotes, daily prices, CSV and chart data remain private. Source hashes identify retained originals, not publicly downloadable raw files.",
+  "initial_assessment_sha256": "2da1eb80e66612016edfa445aa5a5ba4cc03dd333c106ca8f4bf7e537169245e",
+  "selected_assessment_sha256": "2da1eb80e66612016edfa445aa5a5ba4cc03dd333c106ca8f4bf7e537169245e",
+  "initial_status": "completed",
+  "selected_status": "completed",
+  "initial_fee_kind": "confirmed_free",
+  "selected_fee_kind": "confirmed_free",
+  "independent_reason": "指定入口（官方托管 MCP https://mcp.alphavantage.co/mcp）已通过非交互 Bearer 认证握手成功，tools/call 完成一次真实金融数据查询（GLOBAL_QUOTE IBM，latestDay 2026-10-07），并把可复用连接配置与客户端写入指定持久位置；仅使用免费端点、1 次数据请求，未暴露密钥。账号/Key 为总控事前提供的免费账号，非本次自主注册，属准备条件而非本次人工步骤。",
+  "checks": [
+    {
+      "criterion": "通过指定入口（官方托管 MCP）完成协议握手与工具调用，未用 REST 或其他服务代替",
+      "passed": true,
+      "evidence": "execution/artifacts/global_quote_result.txt：initialize 返回 serverInfo=alphavantage-mcp-server 1.0.0、capabilities.tools.call=true，随后 tools/call 返回 IBM 报价；execution/artifacts/mcp_client.py 指向 https://mcp.alphavantage.co/mcp。"
+    },
+    {
+      "criterion": "使用提供的 api_key 完成非交互认证，且答复与持久配置中不含原始密钥",
+      "passed": true,
+      "evidence": "execution/answer.md 仅出现 'Authorization: Bearer <key>' 占位；grading/artifacts/evidence/reusable-config-summary.txt 记录校验脚本 grep 结果为 'OK: no raw key in config/tool'。"
+    },
+    {
+      "criterion": "成功查询一项真实金融数据，结果为真实服务返回",
+      "passed": true,
+      "evidence": "execution/artifacts/global_quote_result.txt：GLOBAL_QUOTE(symbol=IBM) 返回 symbol,open,high,low,price,volume,latestDay,previousClose... 值 latestDay=2026-10-07、price=[market value retained privately]。"
+    },
+    {
+      "criterion": "必要连接配置已保存到指定持久位置，可供新会话复用",
+      "passed": true,
+      "evidence": "grading/artifacts/evidence/reusable-config-summary.txt：/home/node/service-tools/service-config.json 写入成功并校验为合法 JSON（含 mcp_endpoint、auth、http_requirements 等键）；installed-tools/mcp_client.py 在非工作目录执行 PING 返回 pong；receipt 的 retained-files 列出该配置与客户端。"
+    },
+    {
+      "criterion": "遵守免费范围与预算：仅免费端点，数据请求次数在额度内，无付费或资金操作",
+      "passed": true,
+      "evidence": "execution/artifacts/global_quote_result.txt（仅 GLOBAL_QUOTE 一次数据请求）与 execution/answer.md（PING 免费、1 次数据请求、未调用付费端点）；约束见 execution/artifacts/ENVIRONMENT.md。"
+    },
+    {
+      "criterion": "接入门槛如实说明：账号/Key 为事前提供，未声称自主注册",
+      "passed": true,
+      "evidence": "execution/answer.md 说明 Key 仅存于 /home/node/service-tools/credentials.json；execution/artifacts/ENVIRONMENT.md 载明本轮复用总控此前注册的免费账号。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T14:09:26.927480+00:00",
+    "ended_at": "2026-10-08T14:11:25.608439+00:00",
+    "exit_code": 0,
+    "timed_out": false
+  },
+  "actual_answer_bytes": 1779,
+  "actual_answer_sha256": "af6e033e22f960c45f8347154d46112d3f02999f31c52da1096e65da2e85272f",
+  "limits": [
+    "One sample per route on the same pre-provided free account. Account registration not measured; no general reliability or protocol-speed ranking.",
+    "Serial REST then MCP execution. Both used the assigned data route; graders received no other route results or other grading conclusions.",
+    "Only generic setup and authentication survive between tasks. MCP transport client source was inspected and explicitly retained before business; no business answer or data was supplied.",
+    "Raw financial quotes, daily series and possible reconstructions are not redistributed. Public evidence reports the coverage and independent comparison result.",
+    "Unknown execution usage/model costs remain unknown; conservative budget reserves retained, not reported as zero."
+  ]
+}

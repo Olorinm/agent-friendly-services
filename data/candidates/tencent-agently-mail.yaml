@@ -1,0 +1,68 @@
+id: tencent-agently-mail
+name: Tencent Agently Mail
+category: communication
+homepage: https://agent.qq.com/
+summary: Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for reading, searching and sending email.
+submitted_by: community
+tags:
+  - email
+  - mailbox
+  - oauth
+catalog:
+  version: 1
+  classifications:
+    - communication/mailboxes
+  sources:
+    repo:
+      url: https://github.com/Tencent/AgentlyMail
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: Describes a separate Agent mailbox, not access to an existing personal QQ mailbox.
+    cli-guide:
+      url: https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Official installation, browser authorization, mailbox identity and message-command guide.
+  routes:
+    - id: mail-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://github.com/Tencent/AgentlyMail
+      docs: https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md
+      evidence: [repo, cli-guide]
+      availability:
+        value: self_serve
+        evidence: [repo, cli-guide]
+        notes: Published CLI installation and interactive authorization flow; new-account eligibility is untested.
+      personal_access:
+        value: documented
+        evidence: [repo]
+        notes: WeChat login authorization is documented; regional eligibility and account limits are not established.
+      auth:
+        value: oauth
+        evidence: [repo, cli-guide]
+      capabilities:
+        mailboxes.read:
+          value: documented
+          evidence: [cli-guide]
+          notes: Lists, searches and reads messages and attachments; supports waiting for incoming mail.
+        mailboxes.provision:
+          value: unknown
+          notes: The reviewed CLI guide covers authorization and existing aliases, not unattended mailbox creation.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [repo, cli-guide]
+      human_steps:
+        - step: Complete the browser login and authorize mailbox access for the CLI.
+          stage: credentials
+          evidence: [repo, cli-guide]
+      notes: >-
+        Install @tencent-qqmail/agently-cli; auth login starts browser authorization and +me returns mailbox
+        identity and aliases. Sending, replies and forwarding are also documented and require an explicit
+        user-authorized action. The guide documents a rate-limit error with Retry-After, but no numeric
+        allowance. Deleted mail is retained in Trash for 30 days before permanent deletion. Pricing,
+        retention outside deleted mail, total quota and suitability for third-party account recovery remain unknown.
+  notes:
+    - Separate product from agentmail.to. Public documentation does not establish successful registration or a completed mail task.
+    - Reviewed CLI documentation does not establish creating a fresh independent test mailbox, alias provisioning, or a per-inbox read-only authorization scope. Access to an existing registration mailbox is not evidence that its full credential is suitable for an isolated executor. Service terms governing public test publication have not been fully retrieved; repository licence alone is not a service-use permission.

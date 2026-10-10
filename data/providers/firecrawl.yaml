@@ -33,8 +33,10 @@ checks:
     verified: "2026-07-07"
 
   oauth_support:
-    status: unknown
-    notes: API-key auth only, as far as documented.
+    status: supported
+    evidence: https://docs.firecrawl.dev/mcp-server
+    verified: "2026-10-08"
+    notes: Hosted MCP documents OAuth separately from keyless and API-key access.
 
   scoped_tokens:
     status: unknown
@@ -69,7 +71,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: The product exists for automation, but ToS/robots handling not yet reviewed and recorded.
+    evidence: https://www.firecrawl.dev/terms-of-service
+    verified: "2026-10-08"
+    notes: Terms require express authorization for commercial purposes and compliance with third-party rights; a free quota alone does not establish every permitted use.
 
 catalog:
   version: 1
@@ -79,24 +83,63 @@ catalog:
   sources:
     docs:
       url: https://docs.firecrawl.dev/features/search
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
+      kind: official_docs
+    search-reference:
+      url: https://docs.firecrawl.dev/api-reference/endpoint/search
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://www.firecrawl.dev/pricing
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
     scrape-docs:
       url: https://docs.firecrawl.dev/features/scrape
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
+    scrape-reference:
+      url: https://docs.firecrawl.dev/api-reference/endpoint/scrape
+      checked_on: '2026-10-08'
+      kind: official_docs
+    document-parsing:
+      url: https://docs.firecrawl.dev/features/document-parsing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pdf-options:
+      url: https://docs.firecrawl.dev/features/parse
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pdf-engine:
+      url: https://www.firecrawl.dev/blog/fire-pdf-launch
+      checked_on: '2026-10-08'
+      kind: official_site
+    billing:
+      url: https://docs.firecrawl.dev/billing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    rate-limits:
+      url: https://docs.firecrawl.dev/rate-limits
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.firecrawl.dev/terms-of-service
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        No explicit benchmark/comparison-publication ban was found in the reviewed terms.
+        Commercial purposes require express authorization, and third-party content rights still
+        apply. Those restrictions do not by themselves establish that publishing a self-measured
+        result without redistributing source pages is prohibited.
   routes:
     - id: public-search-api
       docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
-      entry_url: https://docs.firecrawl.dev/features/search
+      entry_url: https://api.firecrawl.dev/v2/search
       evidence:
         - docs
+        - search-reference
+        - rate-limits
       availability:
         value: self_serve
         evidence:
@@ -120,15 +163,40 @@ catalog:
             This route records query-based Search and optional content from its results; it does not establish
             specified-URL extraction. See the separately documented Scrape route.
       notes: >-
-        Current search docs explicitly permit starting without a key. Anonymous quota is unquantified; account
-        free credits cannot be assumed for this route.
+        POST a query (up to 500 characters) for titles, descriptions and URLs; limit is 1-100 results
+        per source type. Keyless access is explicitly documented. Anonymous usage is free but capped
+        per IP per day by both request count and credits; numerical ceilings are unpublished and
+        either limit can produce 429. Account Free credits and its per-minute limits do not quantify
+        this route. Optional scrapeOptions fetches result content at additional credit cost; plain
+        search discovery does not require that option and is separate from specified-URL extraction.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - rate-limits
+        payment_method:
+          value: not_required
+          evidence:
+            - rate-limits
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Keyless Search within unpublished per-IP daily request and credit caps; no paid account allowance inferred.
+          evidence:
+            - rate-limits
     - id: account-search-api
       docs: https://docs.firecrawl.dev/features/search
       interface: api
       maintainer: official
-      entry_url: https://docs.firecrawl.dev/features/search
+      entry_url: https://api.firecrawl.dev/v2/search
       evidence:
         - docs
+        - search-reference
+        - pricing
+        - rate-limits
       availability:
         value: self_serve
         evidence:
@@ -151,8 +219,17 @@ catalog:
           notes: >-
             This route records query-based Search and optional content from its results; it does not establish
             specified-URL extraction. See the separately documented Scrape route.
-      notes: 'Search: 2 credits per 10 results; extra scraping can consume credits.'
+      notes: >-
+        Account Search uses a Bearer API key. Basic web search costs 2 credits per 10 results,
+        rounded up; optional scraping adds its own cost. Free accounts receive 1000 credits/month
+        shared across endpoints, with 10 Search requests/minute per team. Search-result location
+        controls are not a guarantee of caller-country eligibility. Registration and available
+        account balance are separate from the documented keyless route.
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - docs
         payment_method:
           value: not_required
           evidence:
@@ -162,7 +239,7 @@ catalog:
           amount: 1000
           unit: credits
           per: month
-          scope: Account Free plan; separate from anonymous access.
+          scope: Shared Free account balance across endpoints; separate from anonymous access.
           evidence:
             - pricing
     - id: public-scrape-api
@@ -172,15 +249,112 @@ catalog:
       docs: https://docs.firecrawl.dev/features/scrape
       evidence:
         - scrape-docs
+        - scrape-reference
+        - rate-limits
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - scrape-docs
+      personal_access:
+        value: documented
+        evidence:
+          - scrape-docs
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - rate-limits
+        payment_method:
+          value: not_required
+          evidence:
+            - rate-limits
       capabilities:
         web.fetch:
           value: documented
           evidence:
             - scrape-docs
       notes: >-
-        Specified-URL scraping. Docs allow starting without a key; anonymous limits and paid-account costs are
-        separate and no extraction task has been run.
+        POST one URL with formats such as markdown. Free keyless access has separate daily per-IP request
+        and credit limits, with no published numerical ceilings; either limit can return 429. Keyless access
+        excludes batch scrape and the separate Extract endpoint. Scrape renders JavaScript, defaults to a
+        two-day cache (maxAge: 172800000), and accepts maxAge: 0 for a fresh fetch. Timeout is 1–300 seconds,
+        default 60. Fetch location defaults to the US; this is not a caller-country eligibility guarantee.
+        The same Scrape endpoint detects public PDF inputs by extension or content type and parses content;
+        no .pdf URL suffix is required. PDF pages consume anonymous credit allowance, whose numerical cap
+        is unpublished. Registered account quotas and paid PDF rates do not quantify anonymous access.
+        A returned 403/404 page is not evidence of useful extraction. Terms restrict commercial use without
+        express authorization. No task success or content redistribution permission is inferred.
       auth:
         value: none
         evidence:
           - scrape-docs
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Keyless Scrape within anonymous daily limits; account credits do not quantify these limits.
+          evidence:
+            - rate-limits
+    - id: account-scrape-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.firecrawl.dev/v2/scrape
+      docs: https://docs.firecrawl.dev/features/scrape
+      evidence:
+        - scrape-docs
+        - pricing
+        - rate-limits
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - scrape-docs
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - scrape-docs
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - scrape-docs
+        payment_method:
+          value: not_required
+          evidence:
+            - pricing
+      capabilities:
+        web.fetch:
+          value: documented
+          evidence:
+            - scrape-docs
+      costs:
+        - kind: free_allowance
+          amount: 1000
+          unit: credits
+          per: month
+          scope: Shared Free account allowance across endpoints, not an additional Scrape allowance.
+          evidence:
+            - pricing
+      notes: >-
+        Free accounts receive 1000 credits/month without a card, 10 Scrape requests/minute and two concurrent
+        browsers. Standard Scrape costs one credit/page, including cache hits; advanced options such as JSON
+        extraction can cost more. Failed requests without results are not charged, but returned 403/404 pages
+        can consume a credit. The public-scrape-api route records anonymous limits separately. Free access
+        does not override the commercial-use restriction or rights in the target page.
+  notes:
+    - Document Parsing and Parse describe public PDF URL parsing through /v2/scrape, separately from uploading bytes to /v2/parse. The default PDF parser uses auto mode (native text with OCR fallback); fast uses embedded text only, while ocr forces OCR. The documented pipeline detects tables and produces Markdown, but correct values and row/column relationships remain task-level checks. An empty parsers array returns base64 rather than extracted content and does not establish PDF extraction.
+    - The Scrape reference accepts maxPages from 1 to 10000 as a processing cap, not a guarantee that every document of that size succeeds. PDF metadata numPages counts parsed pages and totalPages reports the original count when known; a larger totalPages indicates truncation. Optional pages returns physical per-page Markdown; blocks adds typed regions and geometry. pageMarkers has no leading page-1 marker and may skip boundaries when cross-page content is merged. These options do not add credits. The 50 MB limit is stated for upload Parse; this review did not establish an equal URL-Scrape file-size ceiling.
+    - >-
+      Cached Scrape results still consume credits; the usual two-day maxAge window also applies to URL
+      requests unless overridden. PDF billing wording is inconsistent across the reviewed documents:
+      Scrape/Parse describe one credit per PDF page, while Billing lists PDF parsing as an additional
+      one credit per page above the Scrape base. Record actual usage or preserve uncertainty instead
+      of assuming a flat one-credit URL charge. Keyless Scrape remains free within its unpublished
+      per-IP daily request and credit caps; do not apply an account allowance to it.

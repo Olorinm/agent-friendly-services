@@ -3,8 +3,8 @@ name: Serper
 category: web-search-data
 homepage: https://serper.dev/
 summary: >-
-  Google results API with signup trial queries; actual account flow and
-  authentication remain untested.
+  Google results API with initial free queries. Its terms describe a B2B service rather than
+  consumer access; personal eligibility and authenticated setup remain unverified.
 submitted_by: community
 
 catalog:
@@ -14,13 +14,28 @@ catalog:
   sources:
     docs:
       url: https://serper.dev/
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
+    signup:
+      url: https://serper.dev/signup
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Public form asks for first/last name, email and password; a human-verification widget was present. No form was submitted.
+    terms:
+      url: https://serper.dev/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Usage License describes B2B service and excludes consumer services; one account only and
+        no circumvention of API limits. No explicit benchmark/comparison-publication ban found.
+        Data License preserves third-party rights and attribution; it does not grant blanket rights
+        to republish returned page content.
   routes:
     - id: search-api
       interface: api
       maintainer: official
       entry_url: https://serper.dev/
+      docs: https://serper.dev/
       evidence:
         - docs
       availability:
@@ -28,9 +43,10 @@ catalog:
         evidence:
           - docs
       personal_access:
-        value: documented
+        value: restricted
         evidence:
-          - docs
+          - terms
+        notes: Terms exclude consumer services; eligibility for an individual developer's intended use is not established by the free-query offer.
       auth:
         value: unknown
         evidence:
@@ -40,8 +56,17 @@ catalog:
           value: documented
           evidence:
             - docs
-      notes: Google results API with signup trial queries; actual account flow and authentication remain untested.
+      notes: >-
+        The homepage advertises 2500 initial free queries without a card; requests stop when credits
+        are exhausted. No monthly renewal or trial expiry is established here. The dashboard/playground
+        is the setup lead, but the public Playground redirected to login, so API authentication and
+        a callable endpoint were not established by this review. The homepage remains a discovery
+        lead rather than an asserted API endpoint. No registration or search was performed.
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - signup
         payment_method:
           value: not_required
           evidence:

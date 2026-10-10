@@ -1,0 +1,96 @@
+id: photon
+name: Photon Public Demo API
+category: web-search-data
+homepage: https://photon.komoot.io/
+summary: Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.
+submitted_by: community
+tags:
+  - geocoding
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/geocoding
+  sources:
+    public-api:
+      url: https://photon.komoot.io/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    repository:
+      url: https://github.com/komoot/photon
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api-docs:
+      url: https://github.com/komoot/photon/blob/master/docs/api-v1.md
+      checked_on: '2026-10-08'
+      kind: official_docs
+    abuse-protection:
+      url: https://github.com/komoot/photon/discussions/1044
+      checked_on: '2026-10-08'
+      kind: official_site
+    demo-limits:
+      url: https://github.com/komoot/photon/discussions/598
+      checked_on: '2026-10-08'
+      kind: official_site
+    licence:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+    attribution:
+      url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
+      checked_on: '2026-10-08'
+      kind: official_docs
+  routes:
+    - id: public-search-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://photon.komoot.io/api/
+      docs: https://photon.komoot.io/
+      evidence: [public-api, repository]
+      availability:
+        value: self_serve
+        evidence: [public-api, repository]
+        notes: Official hosted demo welcomes reasonable-volume project use; no uptime or compatibility guarantee.
+      personal_access:
+        value: documented
+        evidence: [public-api, repository]
+        notes: Direct public API for projects, with no registration or enterprise qualification in the documented path.
+      auth:
+        value: none
+        evidence: [public-api]
+        notes: No API key; use a truthful application identity because abuse protection can reject generic clients.
+      capabilities:
+        places.geocode:
+          value: documented
+          evidence: [public-api, api-docs]
+          notes: >-
+            GET /api/ with q returns GeoJSON matches for names or addresses, with optional limit, lang
+            and location bias. Point coordinates use longitude then latitude; names, address components
+            and OSM object/type fields depend on available data. An identified place is not necessarily
+            an exact building entrance.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [public-api, repository]
+        payment_method:
+          value: not_required
+          evidence: [public-api, repository]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public demo API request
+          scope: Public project use within reasonable limits; no numeric quota or reserved service capacity is promised.
+          evidence: [public-api, repository, demo-limits]
+      notes: >-
+        This is the actual komoot-hosted demo, separate from installing the open-source package.
+        Extensive use can be throttled or banned; no fixed request/second or daily limit is published.
+        A maintainer confirmed in April 2026 that generic User-Agent/Referer combinations can trigger
+        abuse protection, including false positives. Identify the application honestly from the first
+        request; do not rotate identities or IPs to bypass a denial. Low-volume caching is prudent,
+        but a mandatory cache interval was not documented in the reviewed demo policy. Latest repository
+        features are not automatically proven deployed on the demo. OSM data licensing and attribution
+        are separate from Photon's Apache 2.0 software licence. No explicit public-benchmark prohibition
+        was found in the reviewed demo terms. Both Photon and Nominatim use OSM, so their agreement is
+        not independent evidence of geographic truth. Availability remains untested.

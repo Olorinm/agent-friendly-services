@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "run_id": "quickchart-qr-access-ds41-r1",
+  "service_id": "quickchart",
+  "route_id": "public-qr-api",
+  "phase": "access",
+  "independent_status": "completed",
+  "sources": {
+    "task.json": "edbf7dacda514946a36f9c5cd6a9b5c437f3e7aa68ea0f158801f1da80e6695c",
+    "execution/receipt.json": "7b5b5e8d98eab385fdbbd707f60cc89a65d2edbb6f23ebaa7cbdf107651ee790",
+    "execution/tool-records.json": "4e71dcb678aacbebadd92e665f1a57831cf28ef6999ded836d0b0aa1e1bef548",
+    "execution/usage.json": "1c716e708f36759861c20eaa569918a2ba437462076d6a37ca70f7327fbc36a3",
+    "grading/assessment.json": "0dc66ee6a8195d42e7483fd9edd669bfae2adb477e856e0b81fcf781c639360e",
+    "grading/receipt.json": "7a965985d63296b29fcb17b1b325a159e2435ae78e3ef8a2a27293b358673fc6",
+    "grading/usage.json": "5936bf05ea6f72143636bd4bd73763d20ec86a1333c27fe6ab6877869bce7e05",
+    "grading-input/controller-visual-observations.json": "b9fa6569da8344fecad274de197d2f8320ff124b61162e9592e513ee0a01bd39",
+    "frozen/grading/reference.json": "bdb0ba2c2bafc34b273d9037d96b927be3c3a14322e79c4e356f4f439b06b73b"
+  },
+  "actual_request": {
+    "observed_generation_invocations": 1,
+    "calls": [
+      {
+        "tool_call_index": 4,
+        "tool": "bash",
+        "method": "GET",
+        "endpoint": "https://quickchart.io/qr",
+        "reported_http_status": 200
+      }
+    ],
+    "encoded_payload": "https://example.com/",
+    "payload_sha256_utf8_no_newline": "0f115db062b7c0dd030b16878c99dea5c354b49dc37b38eb8846179c7783e9d7",
+    "account_or_api_key_provided": false
+  },
+  "actual_image": {
+    "sha256": "da2c59f8658109962e4fabce60d5c4abe2c028b71e3d2e26652bca139231f941",
+    "packages": {
+      "zxing-cpp": "3.1.1",
+      "pillow": "12.3.0",
+      "numpy": "2.3.5"
+    },
+    "format": "PNG",
+    "size": [
+      300,
+      300
+    ],
+    "mode": "RGBA",
+    "all_opaque": true,
+    "all_grayscale": true,
+    "has_black": true,
+    "has_white": true,
+    "barcodes": [
+      {
+        "format": "QR Code",
+        "bytes_hex": "68747470733a2f2f6578616d706c652e636f6d2f",
+        "text": "https://example.com/",
+        "valid": true
+      }
+    ],
+    "bytes": 1755,
+    "png_metadata": {}
+  },
+  "published_png": {
+    "name": "qr-example.png",
+    "sha256": "da2c59f8658109962e4fabce60d5c4abe2c028b71e3d2e26652bca139231f941"
+  },
+  "visual_observation": {
+    "receipt_sha256": "b9fa6569da8344fecad274de197d2f8320ff124b61162e9592e513ee0a01bd39",
+    "method": "Controller native view_image of unchanged exact-hash original PNG before grader dispatch; DeepSeek did not have declared vision input. Independent grader separately checked decoded bytes, pixels, provenance and these frozen appearance facts.",
+    "facts": {
+      "background": "white",
+      "qr_foreground": "black",
+      "visible_qr_symbol_count": 1,
+      "extra_text_present": false,
+      "logo_present": false,
+      "notes": "Single black QR symbol on white background, with visible white border; no added letters, captions or logo visible. These are appearance facts; payload and task completion are not judged here."
+    },
+    "overhead": {
+      "kind": "controller preparation/verification, outside execution and DeepSeek grading",
+      "cost_usd": null,
+      "duration_seconds": null,
+      "note": "Not separately metered; unknown, not zero. No candidate query, image edit, target visit or regeneration."
+    }
+  },
+  "service_fee": {
+    "kind": "confirmed_free",
+    "amount_usd": null,
+    "notice": "Independent assessment retained; free statements in candidate documentation do not overwrite a particular grader unknown applicability finding."
+  },
+  "scope_limitations": "One anonymous static QR sample in each phase; no account, key, payment, dynamic tracking, target URL visit or extra grader generation. Observed calls count executor invocations from original tool evidence, not hidden provider backend activity. Different masks/ECC/PNG encoding or byte sizes are not task-quality rankings. Four-module margin, DPI and physical printer/phone performance were not graded. Unknown remaining anonymous allowance is not zero consumption.",
+  "preparation": {
+    "decoder": "Grader-only ZXing-C++3.1.1, Pillow12.3.0, NumPy2.3.5; official wheel hashes checked and independent neutral positive/wrongpayload/blank/nonimage controls passed before any candidate generation. Executor had no prewritten API client or grading helper.",
+    "linux_decoder_preparation_sha256": "07f8be8e1cc396b6315ef1e5ecf9cb037e68a6f618312b62a18cdd4c007303f7",
+    "helper_sha256": "bcd82881535f346b96d578d07436edb4877101c6ebaf916f3a21dc91cf9e58ca",
+    "access_installed_by_executor": {
+      "opencv-python-headless": "5.0.0.93",
+      "numpy": "2.4.6"
+    },
+    "retention_audit_sha256": "5aa551a6989858d3f5ddaebc8740f3372738ba2132b963b11b3b3476d8a59322",
+    "retention": "Executor-authored generic configs unchanged; measured access installations retained at their actual venv locations using symmetric audited allowlist adjustment; prior workspace/home/tmp archived by adapter and owned executors restarted before fresh business. No new client, query, expected bitmap or library supplied after access.",
+    "executor_global_pip_attempt_blocked_and_recovered": true,
+    "global_pip_note": "QuickChart attempted system pip in both stages, hit the managed-environment restriction, then used its own access-installed virtual environment; final artifact completed. This extra executor work remains in measured usage."
+  },
+  "official_service_sources": {
+    "manifest_sha256": "898dcf4ba868d3259742f29892fc95bf83f06c05b9b19767e8611412d4996ecf",
+    "urls": [
+      "https://quickchart.io/documentation/qr-codes/",
+      "https://quickchart.io/qr-code-api/",
+      "https://quickchart.io/pricing/qr/",
+      "https://quickchart.io/terms/",
+      "https://quickchart.io/privacy/",
+      "https://quickchart.io/security/"
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "independent_status": "completed",
+  "scope": "One ordinary-car Golden Gate Bridge northbound point-pair route, map-file delivery, stated50m road-level endpoint/corridor precision.",
+  "sources": {
+    "execution/answer.md": "7748ed8a4eada1d089d862bc88e9cb9b77680a381a93cfc0482a8e0e066269c4",
+    "execution/receipt.json": "bd6ec16a4e87d56b5cca6133cdae47599d4ec89b93ff35be0878557c64d5e575",
+    "execution/usage.json": "50d2002cf84346964a01d536c1f25fbec7134743944e8e59050254fabebc0fab",
+    "execution/tool-records.json": "e273ce370bd3bc8d07e2df3bc73e130a76493a8335f493b4a03fd3c586398f13",
+    "grading/assessment.json": "53ac8e4c281a796c3fd9bbac64ab0188b2000af0d06b37db59b9b17ca0322515"
+  },
+  "route": "public-route-api",
+  "configuration": "OpenCode1.18.35/DeepSeekV4.1Flash high; execution25requests/access300s/business600s, grading40requests/300s, output32000tokens/request. Sameimage2GiB/1CPU/pids256,pipTUNAandemptyinitialcache; newhome/session/workspace. All candidate executions serial under one shared operator.",
+  "request_limits": "At most4routecalls perstage,>=2seconds apart, stop first403/429 or2consecutiveconnectionfailures. CandidateAPI limits are instructions; model/time/output caps enforced.",
+  "actual_route_requests": 1,
+  "http_status": 200,
+  "client_identification": "Truthful AgentFriendlyServices non-commercial evaluation User-Agent with project URL; Valhalla additionally X-Client-Id; no fabricated Referer.",
+  "elapsed_seconds": 33.370304,
+  "fee_publication": {
+    "kind": "unknown",
+    "amount_usd": null,
+    "original_grader_kind": "confirmed_free",
+    "reason": "No explicit hosted-demo zero-fee statement found in frozen official sources. Donation sponsorship, public/no-registration access and open-source/map licensing do not establish price. Original independent grade stays unchanged; where it said confirmed_free, publication conservatively projects to unknown with source-review audit, no model rerun.",
+    "source_correction_sha256": "7158b5650ce808e26f04172f94653f6f996c0804668b82a7bb264c5b1759f44b"
+  },
+  "source_and_operator_limit": "OSRM and Valhalla are different engines/response formats hosted by FOSSGIS and use shared OSM data. They are not independent operators or map ground truth. Complete linked German terms were blocked and not read; no complete-terms-review claim. Small noncommercial functional check, not load testing, current navigation safety, live traffic or arrival-time accuracy.",
+  "official_source_manifest_sha256": "c316e7244f96b20dc106f32047f9a055d1684b6c52a4fc0699e8d4e28dd80a05",
+  "attribution": {
+    "text": "Routing: OSRM on FOSSGIS demo servers. Map data © OpenStreetMap contributors.",
+    "links": [
+      "https://project-osrm.org/",
+      "https://www.openstreetmap.org/copyright",
+      "https://www.openstreetmap.org/fixthemap"
+    ]
+  },
+  "resources": "No registration, account/key/payment or mutable remote resource created. All four dedicated batch containers stopped after review and complete usage collection.",
+  "public_selection": "Minimal route values, counts, actual file/source hashes and independent verification observations. Full geometry and raw responses/requests remain private; no harvested map dataset published.",
+  "snapped_waypoint_names": [
+    "Golden Gate Bridge",
+    "Golden Gate Bridge"
+  ],
+  "reported_snap_distance_m": [
+    0.6262005845,
+    0
+  ],
+  "response_file_sha256": "86f1cb77d414f5c84f106ad48e97d18cd7d0d231d0c565377c495822d0373243",
+  "response_summary": {
+    "distance_km": 2.234,
+    "estimated_time_seconds": 138.8,
+    "estimated_time_minutes": 2.3133333333333335
+  },
+  "deliverables": [
+    {
+      "name": "out/golden_gate_bridge_northbound.geojson",
+      "sha256": "48bec2f72c29c40220d22ad585d68a8fcda64909059eae25e7895462c1c7eff9",
+      "format": "WGS84 GeoJSON FeatureCollection/LineString",
+      "vertices": 6,
+      "same_geometry_as_response": true
+    },
+    {
+      "name": "out/golden_gate_bridge_northbound.gpx",
+      "sha256": "4ca38069063582fa0c36309316a16e839c60aef067a56623d4435d8839e55025",
+      "format": "GPX1.1track",
+      "same_geometry_as_response": true
+    }
+  ],
+  "reference_sha256": "4be88f9e833205bc76a0e8931df2722d62005f10202fcedeb25ff022a8505b5e",
+  "reference_sources": [
+    {
+      "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer/29/query?where=1%3D1&geometry=-122.49%2C37.80%2C-122.46%2C37.84&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&f=geojson",
+      "retrieved_at": "2026-10-08T19:00:26.094559+00:00",
+      "sha256": "627f0aed6faa90529654bd9c3f4ce27ffbc2761f8be5cfc320282caef3bcf9e5",
+      "method": "Official USGS/Census-derived transportation road geometry read, not route calculation or candidate service query."
+    },
+    {
+      "url": "https://carto.nationalmap.gov/arcgis/rest/services/transportation/MapServer?f=pjson",
+      "retrieved_at": "2026-10-08T19:03:28.398714+00:00",
+      "sha256": "7197e4697bd8c9cc5f48cd8ab77efe37cc6594e4a4d8732556d040cb0e9c95b6",
+      "method": "Direct GET independent official documentation/reference, not candidate routing API."
+    }
+  ],
+  "geometry_verification": {
+    "endpoint_distances_m": [
+      0.6248356863230639,
+      0.0
+    ],
+    "bidirectional_max_sampled_deviation_m": 6.196711870410884,
+    "method": "Controller cross-check in local metric projection at37.82degrees, both curves sampled at<=2m and measured to full opposite segments; sampling bound+1m is below50m. Separate original graders reported approx6.2m using independent5m checks.",
+    "max_upper_bound_m": 7.196711870410884,
+    "tolerance_m": 50,
+    "northbound_latitudes_monotonic": true,
+    "task_tolerance_status": "Visible predeclared road-level precision convention; not USGS dataset accuracy guarantee or lane-level navigation proof."
+  },
+  "road": "Golden Gate Bridge / US101 / CA1, northbound",
+  "retention_audit_sha256": "83fc21262ffafb4959ab6f50b7c6161fb4da0beb7e96adb54d87ddff0b11d200",
+  "retention_preparation": "OSRM generic config retained byte-for-byte including overview=false/steps=false, empty responses folder quarantined; Valhalla old query/verification fields removed. No client/answer/parser added, no installeddependencies retained. Both owned executors restarted and retained hashes checked; then freshhomes/sessions/workspaces. This controller preparation is disclosed.",
+  "comparison": "Both business executions collected and peer outputs sealed before independent separate grades. Graders had independent USGS/Census/NPS road geometry plus captured service output, never other verdicts. No grader route-API queries.",
+  "estimate_limit": "Distance and time checked against each actual service response, not a common expected number. Same map/path may receive different time estimates; no measured actual driving-time truth. Executor Valhalla described a free-flow model; this run did not independently validate that characterization or deployed speed model.",
+  "comparison_observed_geometry": "The two captured business shapes contain the same six coordinate pairs. Different summary estimates are not independent geographic corroboration."
+}

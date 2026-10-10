@@ -1,0 +1,97 @@
+id: osv
+name: OSV.dev
+category: developer-tools
+homepage: https://osv.dev/
+summary: Public vulnerability metadata aggregated across open-source ecosystems, queryable by package version or commit.
+submitted_by: community
+tags:
+  - dependencies
+  - security-advisories
+catalog:
+  version: 1
+  classifications:
+    - developer-tools/dependency-advisories
+  sources:
+    quickstart:
+      url: https://google.github.io/osv.dev/quickstart/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api:
+      url: https://google.github.io/osv.dev/api/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    query:
+      url: https://google.github.io/osv.dev/post-v1-query/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    record:
+      url: https://google.github.io/osv.dev/get-v1-vulns/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    sources:
+      url: https://google.github.io/osv.dev/data/
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Each upstream database has its own data licence; GitHub and PyPI advisory databases are listed as CC BY 4.0.
+    faq:
+      url: https://google.github.io/osv.dev/faq/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    schema:
+      url: https://ossf.github.io/osv-schema/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    free-service:
+      url: https://osv.dev/blog/posts/announcing-osv-service-level-objectives/
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Official service announcement describes OSV.dev as a free resource; SLO targets are not an individual request guarantee.
+  routes:
+    - id: public-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.osv.dev/v1/query
+      docs: https://google.github.io/osv.dev/quickstart/
+      evidence: [quickstart, api, query]
+      availability:
+        value: self_serve
+        evidence: [quickstart, faq]
+      personal_access:
+        value: documented
+        evidence: [quickstart, faq, free-service]
+        notes: Public consumer queries are documented without credentials, account creation or institutional affiliation. Actual runner access remains untested.
+      auth:
+        value: none
+        evidence: [quickstart, record]
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [quickstart]
+        payment_method:
+          value: not_required
+          evidence: [quickstart, free-service]
+      capabilities:
+        advisories.lookup:
+          value: documented
+          evidence: [query, record, schema]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public API query
+          scope: Official free public resource; the reviewed API documentation currently states no API rate limit.
+          evidence: [free-service, api]
+      notes: >-
+        POST /v1/query accepts package name plus ecosystem and version, or a package URL; commit queries
+        are also supported. Specify the version once, not in both a versioned purl and the top-level
+        version field. GET /v1/vulns/{id} retrieves a case-sensitive record ID. Follow next_page_token
+        until absent, including an empty page with a token. Fields include affected packages, aliases,
+        version ranges and reference links. A fixed event is distinct from last_affected or limit;
+        missing fixed metadata is not proof of no vulnerability. The current no-rate-limit statement
+        is not a throughput guarantee or permission to overload the service. HTTP/1.1 responses are
+        limited to 32 MiB; HTTP/2 is recommended for large queries.
+  notes:
+    - OSV aggregates and enriches records from GitHub Advisory Database, PyPI, Go, Rust and other databases. Licences vary by upstream; OSV software's licence is not a blanket data licence. Preserve source identity, source licence and attribution when redistributing records or excerpts.
+    - The reviewed public documentation and service announcement contain no explicit ban on small factual public tests or comparisons. No separate OSV-specific hosted-service publication agreement was identified; this is a bounded document review, not a new permission from its operator.
+    - Withdrawn records are excluded from package-query responses but remain retrievable by record ID. No match does not establish that a package is secure, that all advisories are covered, or that an application cannot be exploited. Shared GHSA or other upstream records must not be counted as independent security evidence.

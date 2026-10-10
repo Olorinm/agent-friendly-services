@@ -3,9 +3,8 @@ name: Aiven
 category: databases
 homepage: https://aiven.io/
 summary: >-
-  Managed databases including free hosted PostgreSQL. Account signup and
-  provisioning remain untested; free lifecycle limits need checking before
-  production use.
+  Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API provisioning
+  and standard PostgreSQL client access; inactive free services may be powered off.
 submitted_by: community
 
 catalog:
@@ -15,12 +14,32 @@ catalog:
   sources:
     docs:
       url: https://aiven.io/docs/tools/cli
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://aiven.io/free-postgresql-database
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
+    free-tier:
+      url: https://aiven.io/docs/products/postgresql/concepts/pg-free-tier
+      checked_on: '2026-10-08'
+      kind: official_docs
+    postgres-quickstart:
+      url: https://aiven.io/docs/products/postgresql/get-started
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api:
+      url: https://aiven.io/docs/tools/api
+      checked_on: '2026-10-08'
+      kind: official_docs
+    personal-token:
+      url: https://aiven.io/docs/platform/howto/create_authentication_token
+      checked_on: '2026-10-08'
+      kind: official_docs
+    python-client:
+      url: https://aiven.io/docs/products/postgresql/howto/connect-python
+      checked_on: '2026-10-08'
+      kind: official_docs
   routes:
     - id: postgres-cli
       docs: https://aiven.io/docs/tools/cli
@@ -46,11 +65,92 @@ catalog:
           value: documented
           evidence:
             - docs
+        database.persist:
+          value: documented
+          evidence:
+            - postgres-quickstart
       notes: >-
-        Managed databases including free hosted PostgreSQL. Account signup and provisioning remain untested;
-        free lifecycle limits need checking before production use.
+        The avn CLI accepts account password or personal token; SQL uses the new service's connection
+        credentials and a standard client such as psql. Free PostgreSQL includes one node, 1 CPU,
+        1 GB RAM and 1 GB storage, limited to one free service of this type per organization and 20
+        connections. No fixed expiry, but unused services may be powered off and can be restarted.
+        Free-tier region selection is unavailable; choose an explicitly free plan, not paid trial
+        capacity. Signup, free capacity availability and actual provisioning remain untested.
       requirements:
+        platform_account:
+          value: required
+          evidence:
+            - docs
         payment_method:
           value: not_required
           evidence:
             - pricing
+      costs:
+        - kind: free_allowance
+          amount: 1
+          unit: GB
+          per: service
+          scope: Free PostgreSQL storage; one free PostgreSQL service per organization, without fixed expiry.
+          evidence:
+            - free-tier
+    - id: platform-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.aiven.io/v1/
+      docs: https://aiven.io/docs/tools/api
+      evidence:
+        - api
+        - pricing
+      availability:
+        value: self_serve
+        evidence:
+          - api
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: api_key
+        evidence:
+          - api
+          - personal-token
+      capabilities:
+        database.provision:
+          value: documented
+          evidence:
+            - pricing
+            - api
+      notes: >-
+        Management API requires a personal token from the account console. The token is shown once
+        and has a selected session duration. API management and database SQL credentials are distinct;
+        free-plan availability must be checked before creating a service.
+    - id: postgres-python
+      interface: sdk
+      maintainer: third_party
+      entry_url: https://aiven.io/docs/products/postgresql/howto/connect-python
+      docs: https://aiven.io/docs/products/postgresql/howto/connect-python
+      evidence:
+        - python-client
+      availability:
+        value: self_serve
+        evidence:
+          - python-client
+      personal_access:
+        value: documented
+        evidence:
+          - pricing
+      auth:
+        value: platform_credentials
+        evidence:
+          - python-client
+      capabilities:
+        database.persist:
+          value: documented
+          evidence:
+            - python-client
+            - postgres-quickstart
+      notes: >-
+        Aiven documents Python access through the third-party psycopg2 PostgreSQL driver. This connects
+        to an already provisioned remote service using its private PostgreSQL URI; it does not create
+        an Aiven account or provision the service. SQL clients do not imply access to the separate,
+        limited-availability REST Data API.

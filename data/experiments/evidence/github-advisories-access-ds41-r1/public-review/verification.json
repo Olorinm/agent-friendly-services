@@ -1,0 +1,53 @@
+{
+  "scope": "One anonymous basic metadata access test; does not assess corpus coverage, all optional routes, exploitability or future availability. Complete raw advisory records and transcripts retained privately.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "f0626d6f377d3321bf4aba426d88a878e61f95e7b3acd03bc55d714f2bcfc9b5",
+    "execution/receipt.json": "9aea71d3c281c7991eff25ba2cfd865bdef9258c3c63e536742132328906ffa4",
+    "execution/usage.json": "63329720b96dbbf5e69d6adc319b275d3d495ec4911a79c8e490fbf96b8f7ac0",
+    "execution/tool-records.json": "bcd5cbbaab05c8874026b71d418cf43d104957123108c9addb84893de73495c7",
+    "grading/assessment.json": "8dad1dcfbe2d2c987c71d52510c5416271659569b41082fde767ef69ee51f1b2"
+  },
+  "configuration": "OpenCode 1.18.35; DeepSeek V4.1 Flash / high; execution: 25 model requests / 300 s; grading: 40 requests / 300 s; at most 32,000 output tokens per request; 2 GiB / 1 CPU / pids 256; at most two provider streams. Uniform pip TUNA index and empty initial cache, without a prewritten client or credentials.",
+  "candidate_api_requests": 3,
+  "candidate_api_request_instruction_limit": 6,
+  "api_statuses": [
+    200,
+    200,
+    200
+  ],
+  "query_target_chosen_by_executor": true,
+  "account_or_authentication": "Anonymous. No account, key, email, payment, signup or special qualification. Independent grader reports zero human interventions.",
+  "retained_configuration": "Non-secret connection configuration saved. Access-specific scripts remain in the archived workspace and are not retained for business. The controller later archived the original config and removed query examples, answers and old quota observations; it added no helper or answer.",
+  "service_cost_limitation": "The independent grader retained an unknown service fee: API responses, absence of payment and rate-limit headers do not establish an explicit free rule and its applicability. Sourced catalog conditions are separate from this trial fee.",
+  "attribution": [
+    "OSV.dev public API: https://google.github.io/osv.dev/",
+    "GitHub Advisory Database (CC BY 4.0): https://github.com/advisories"
+  ],
+  "shared_upstream_limit": "OSV imports GitHub and other upstream data. Matching records are not independent security findings.",
+  "endpoint": "GET https://api.github.com/advisories?ecosystem=pip&per_page=3 and GET /advisories/{ghsa_id}; the third request repeated the list through an executor-written client.",
+  "api_version": "2026-03-10",
+  "response_records": 3,
+  "example": {
+    "id": "GHSA-77xj-x4rm-935c",
+    "package": {
+      "ecosystem": "pip",
+      "name": "datamodel-code-generator"
+    },
+    "source": "https://github.com/advisories/GHSA-77xj-x4rm-935c"
+  },
+  "response_hashes": {
+    "advisories.page1.json": "803a1172d566164b27ceaf99881da931588dc83c33789aae169450bc881ad95e",
+    "advisory-GHSA-77xj-x4rm-935c.json": "208c8a7d4922ecfff13165723d1c5337d5c501e652fb54ee4810ab9bd39c12d8"
+  },
+  "quota": {
+    "limit_per_hour_per_ip": 60,
+    "observed_remaining": [
+      59,
+      58,
+      57
+    ]
+  },
+  "resources": "All four dedicated containers stopped after collection and independent grading. No account or mutable remote resource created.",
+  "fee_comparability": "Access unknown judgments are preserved. Business graders separately accepted public-free conditions; this difference is evidence interpretation, not a service price change."
+}

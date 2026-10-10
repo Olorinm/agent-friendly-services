@@ -1,0 +1,56 @@
+{
+  "scope": "One small observed import task per service, separately measured access. Native transaction source/call/error evidence plus independently read states; no general reliability, concurrency/crash/ACID certification or SQL latency ranking.",
+  "independent_status": "completed",
+  "originals": {
+    "execution/answer.md": "6b6f6bb27d0cc65e25963ad190161162e3cbc11c34f2f170d03182326e3432e2",
+    "execution/receipt.json": "095224140837198634593d9da5d151af7af734aa3cdd66492cbb1904ff7e6ccc",
+    "execution/usage.json": "e1f4d2b387b55871611065c70071326b1a791f2e439064d649cb1c154c5f432b",
+    "grading/assessment.json": "1bb371e48c189db3e70a41e48c1e50086ae27aae4ccc5fed086009fc114d258d"
+  },
+  "runtime": {
+    "harness": {
+      "name": "OpenCode",
+      "version": "1.18.35",
+      "mode": "run --format json"
+    },
+    "model": "deepseek-flash",
+    "reasoning_effort": "high",
+    "started_at": "2026-10-08T21:36:57.665333+00:00",
+    "ended_at": "2026-10-08T21:37:38.537233+00:00",
+    "exit_code": 0,
+    "timed_out": false,
+    "source_preflight": {
+      "source_sha256": {
+        "worker.py": "c9bf499b9bb1e30a164af81baad835305433c3a4e022b788a17264886d87d0fa",
+        "normalize.py": "2d8d0dc3d724e7de35d78416a482b5c8c8337a086d67e0362778536513c8a9aa",
+        "capture-proxy.py": "9df399ca9bc63f3d8c18129bd6b9bc52ed20f0ea7517d16e142d0233b84d546d",
+        "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+        "request_limits.py": "142c561df8c0704336151c2d200a364a720c234c3a456fe8b7510c2474a10877"
+      },
+      "verified_at": "2026-10-08T21:36:55.855816+00:00",
+      "scope": "Controller read of root-injected support files before run allocation; not a mid-run immutability guarantee."
+    },
+    "image": "sha256:b223c179a53ea81a5d43abb843275250a0b71b6fab59a41cd71c50ccab740fac",
+    "resources": "2GiB /1CPU /pids256, nohostmount/socket/publishedports; fresh home/session/workspace; max2providerstreams",
+    "model_limits": "Execution25requests,access300s/business600s;grading40requests300s;32000output/request;2026-10-09T00:00Zdeadline",
+    "package_index": "TUNA pip configured before access; no extra preinstalled clients"
+  },
+  "account_preparation": "Existing Turso starter organization management identity, or existing already-authorized Neon Claimable parent with CREATEDB; both preprovided, no signup measured. Executor creates exactly one new empty database; older application data outside scope.",
+  "cleanup": {
+    "at": "2026-10-08T21:51:18.272809+00:00",
+    "drop_database_completed": true,
+    "catalog_absence_confirmed": true,
+    "prior_database_names_unchanged": true,
+    "existing_parent_project_retained": true,
+    "parent_expiry": "2026-10-11T12:36:21.796Z",
+    "no_force_or_old_application_queries": true
+  },
+  "controller_notes": [
+    "Account/parent/runtime preparation, root fixture construction, independent reads and cleanup are separate overhead; not included as executor achievement or known-zero costs.",
+    "One observation per provider/task/route/conditions. Different SQL engines and chosen clients; cannot interpret Agent total wall time as database query latency or protocol superiority.",
+    "Service-operation limit is an instruction; model count/output/time limits are proxy/worker enforced.",
+    "PreprovidedexistingClaimableparent, not an autonomous newproject registration; originalaccessfeeunknown andsharedparentquota/expiry preserved."
+  ],
+  "actual_access": "Executorcreatedonefreshdedicatedemptydatabase and performedrealreadonlySQL; reusablecredentials/connectionconfig retained privately. No business tables/rows until independentlyreviewed and latercontrollerseed.",
+  "service_call_observation": "Postgres newlogicaldatabase andreadonlyquery confirmactualnewdatabase andzeroapplicationtables; originalcallrecords retained."
+}

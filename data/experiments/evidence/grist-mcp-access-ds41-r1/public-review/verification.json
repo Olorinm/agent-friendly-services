@@ -1,0 +1,311 @@
+{
+  "notice": "Public selections from real controller GET receipts, independently graded. Metadata is reduced to resource identity; table lists, schema and unfiltered record values are retained. Private account/resource identifiers are redacted in publication. Each raw_sha256 identifies unchanged privately retained bytes; redacted_sha256 identifies the frozen grader body before this public selection, not this public JSON.",
+  "independent_assessment_sha256": "1cfd2d7495075df3971588489c57108365fcfb5ece610f4f8afd130ae7dd0e36",
+  "independent_status": "completed",
+  "independent_reason": "执行者通过指定官方托管 MCP https://docs.getgrist.com/api/mcp（initialize 2025-06-18 -> notifications/initialized -> tools/call）在授权工作区 [SERVICE_SECRET] 内新建唯一空文档 [SERVICE_SECRET]（id [SERVICE_SECRET]），并用 grist_get_doc_info 重新读取到 id/name/workspace 一致的同一远端资源；独立 controller 读取（read_after_execution）确认该工作区仅此一个文档、仅含默认占位表 Table1（A/B/C）、0 条记录。连接配置保存在持久目录 /home/node/service-tools/service-config.json（无密钥，密钥仍在 credentials.json），答复只给配置位置并给出链接。账号为预提供的既有 Personal 免费账号，非本轮注册；免费限制与官方 limits 页面一致，剩余额度如实记为未知。未发现越权、预建业务数据、泄露凭据或改用 REST 代做的情况。",
+  "controller_manifest_sha256": "4d683d24b29df032bd3b50af279b5fdfe9b36fbf1809ef9a520ff85701a82ef2",
+  "execution_ended_at": "2026-10-08T13:46:39.732211+00:00",
+  "controller_started_at": "2026-10-08T13:46:47.293108+00:00",
+  "controller_ended_at": "2026-10-08T13:46:51.111469+00:00",
+  "complete": true,
+  "resource_binding": {
+    "workspace_id": "[SERVICE_SECRET]",
+    "docs": [
+      {
+        "doc_id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "url_id": "[SERVICE_SECRET]",
+        "tables": [
+          {
+            "table_id": "Table1",
+            "schema_complete": true,
+            "rows_complete": true,
+            "row_count": 0,
+            "row_ids": [],
+            "retrieval": "Unfiltered Grist records endpoint; no filters, limit, view, sorting or field exclusions; this endpoint returns the complete small table, without pagination."
+          }
+        ]
+      }
+    ],
+    "workspace_doc_count": 1
+  },
+  "verification_request_count": 5,
+  "requests_and_responses": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/workspaces/[SERVICE_SECRET]",
+        "query": {},
+        "request_started_at": "2026-10-08T13:46:47.297910+00:00",
+        "response_received_at": "2026-10-08T13:46:48.062107+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 806,
+        "raw_sha256": "928c89e5e9c76ee5956365fde4f6d40c52f4a23e3c64a6f16041448c06ba908e",
+        "body_file": "01-workspace.json",
+        "transformations": [
+          "Removed unrelated account metadata field owner",
+          "JSON formatting only; record values preserved",
+          "Registered service secret replaced"
+        ],
+        "body_before_secret_redaction_sha256": "431e6ed696dcf33bad738fbb00997553428e91856405c1250526e8992ee37c2e",
+        "redacted_sha256": "b4c885852db60ac83fe2966dbab8d59f20a147f3b77ff610287fa94f9d4f3e2b"
+      },
+      "observed_response": {
+        "id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "docs": [
+          {
+            "name": "[SERVICE_SECRET]",
+            "createdAt": "2026-10-08T13:46:15.377Z",
+            "updatedAt": "2026-10-08T13:46:15.389Z",
+            "id": "[SERVICE_SECRET]",
+            "isPinned": false,
+            "urlId": "[SERVICE_SECRET]",
+            "trunkId": null,
+            "type": null,
+            "access": "owners"
+          }
+        ],
+        "access": "owners"
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]",
+        "query": {},
+        "request_started_at": "2026-10-08T13:46:48.062524+00:00",
+        "response_received_at": "2026-10-08T13:46:48.810830+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 1778,
+        "raw_sha256": "67fc940fec57830d34db7eaf6765afb68acd940e28a7c41324258f0ceca9e99f",
+        "body_file": "02-doc-1.json",
+        "transformations": [
+          "Removed unrelated account metadata field owner",
+          "Removed unrelated account metadata field owner",
+          "Removed unrelated account metadata field billingAccount",
+          "JSON formatting only; record values preserved",
+          "Registered service secret replaced"
+        ],
+        "body_before_secret_redaction_sha256": "884ba23f08fc22320983ed8551d3be15404d47568622eb14ca6a7cee26bf1431",
+        "redacted_sha256": "cf145071db184d3ed64fbd08f424da056b0ee6c605520f791e490dacc91325d3"
+      },
+      "observed_response": {
+        "id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "urlId": "[SERVICE_SECRET]",
+        "access": "owners",
+        "workspace": {
+          "id": "[SERVICE_SECRET]",
+          "name": "[SERVICE_SECRET]"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables",
+        "query": {},
+        "request_started_at": "2026-10-08T13:46:48.811239+00:00",
+        "response_received_at": "2026-10-08T13:46:49.599274+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 161,
+        "raw_sha256": "b24c942548b5da1b806394aa613a70ff29df6cac356ae083e91978a803a914cf",
+        "body_file": "03-tables-1.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "c6ddf653e9b2097902d4fa427c6574fa0f700c71a3a1bb2ac50876169045b1ca",
+        "redacted_sha256": "c6ddf653e9b2097902d4fa427c6574fa0f700c71a3a1bb2ac50876169045b1ca"
+      },
+      "observed_response": {
+        "tables": [
+          {
+            "id": "Table1",
+            "fields": {
+              "tableRef": 1,
+              "primaryViewId": 1,
+              "summarySourceTable": 0,
+              "onDemand": false,
+              "rawViewSectionRef": 2,
+              "recordCardViewSectionRef": 3
+            }
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Table1/columns",
+        "query": {},
+        "request_started_at": "2026-10-08T13:46:49.599659+00:00",
+        "response_received_at": "2026-10-08T13:46:50.349132+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 886,
+        "raw_sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+        "body_file": "04-columns-3.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "8d37695b0f9ae037a040691d03905072c6f3d2e82242b3e5758265b99533b247",
+        "redacted_sha256": "8d37695b0f9ae037a040691d03905072c6f3d2e82242b3e5758265b99533b247"
+      },
+      "observed_response": {
+        "columns": [
+          {
+            "id": "A",
+            "fields": {
+              "colRef": 2,
+              "label": "A",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 2,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "B",
+            "fields": {
+              "colRef": 3,
+              "label": "B",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 3,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "C",
+            "fields": {
+              "colRef": 4,
+              "label": "C",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 4,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Table1/records",
+        "query": {},
+        "request_started_at": "2026-10-08T13:46:50.349538+00:00",
+        "response_received_at": "2026-10-08T13:46:51.110304+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 14,
+        "raw_sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+        "body_file": "05-records-4.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "6c1db664439054b14cf5baade95beb5c1b194266ecf60003a2aab24c85fd8359",
+        "redacted_sha256": "6c1db664439054b14cf5baade95beb5c1b194266ecf60003a2aab24c85fd8359"
+      },
+      "observed_response": {
+        "records": []
+      }
+    }
+  ],
+  "entitlement": {
+    "notice": "Controller factual supplement extracted from the original independently fetched document metadata. Main metadata copies removed billingAccount wholesale for privacy; only the following non-identifying entitlement fields are restored here. This is not a service-cost verdict; no request or business operation is repeated.",
+    "source_raw_file": "controller-verification/raw/02-doc-1.json",
+    "source_raw_sha256": "67fc940fec57830d34db7eaf6765afb68acd940e28a7c41324258f0ceca9e99f",
+    "source_request": {
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]",
+      "query": {},
+      "request_started_at": "2026-10-08T13:46:48.062524+00:00",
+      "response_received_at": "2026-10-08T13:46:48.810830+00:00",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "raw_bytes": 1778,
+      "raw_sha256": "67fc940fec57830d34db7eaf6765afb68acd940e28a7c41324258f0ceca9e99f",
+      "body_file": "02-doc-1.json",
+      "transformations": [
+        "Removed unrelated account metadata field owner",
+        "Removed unrelated account metadata field owner",
+        "Removed unrelated account metadata field billingAccount",
+        "JSON formatting only; record values preserved",
+        "Registered service secret replaced"
+      ],
+      "body_before_secret_redaction_sha256": "884ba23f08fc22320983ed8551d3be15404d47568622eb14ca6a7cee26bf1431",
+      "redacted_sha256": "cf145071db184d3ed64fbd08f424da056b0ee6c605520f791e490dacc91325d3"
+    },
+    "observed_fields": {
+      "product_name": "personalFree",
+      "product_features": {
+        "workspaces": true,
+        "maxSharesPerWorkspace": 0,
+        "maxSharesPerDoc": 2,
+        "snapshotWindow": {
+          "count": 30,
+          "unit": "days"
+        },
+        "baseMaxRowsPerDocument": 5000,
+        "baseMaxDataSizePerDocument": 10240000,
+        "baseMaxAttachmentsBytesPerDocument": 1073741824,
+        "maxAttachmentsBytesPerOrg": 53687091200,
+        "maxApiCallsPerOrgMonth": 3000,
+        "gracePeriodDays": 14,
+        "baseMaxAssistantCalls": 100
+      },
+      "individual": true,
+      "inGoodStanding": true,
+      "stripePlanId_is_null": true
+    },
+    "remaining_monthly_usage": "unknown; no remaining-balance response collected",
+    "created_at": "2026-10-08T13:55:30.511527+00:00"
+  },
+  "limits": [
+    "One trial per route on one existing account; not a general reliability or protocol ranking.",
+    "Account/API key and empty parent workspace were supplied. Access still created and read its own new empty document; registration was not measured.",
+    "REST execution preceded MCP execution. Each service operation used its assigned route; controller verification used the same GET-only method for both.",
+    "The 40-call business limit refers to caller-visible REST operations or MCP tool calls; hidden backend calls are unknown. Independent controller reads are separate overhead.",
+    "The two independent graders received no peer-results group. Agent-reported human_interventions counts are retained; they differ in whether pre-provided account preparation is counted, so they are not a standalone onboarding comparison.",
+    "The actual Personal Free plan fields come from controller GET metadata. Remaining monthly usage is unknown; task instructions and lack of payment alone do not establish a free service.",
+    "The MCP business grader received a pre-freeze entitlement supplement. Other copies removed billingAccount for privacy; the same actual raw plan fields are shown here during publication review. No task verdict, fee amount or measured execution usage was changed."
+  ]
+}

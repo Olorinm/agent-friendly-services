@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "run_id": "nager-date-holidays-berlin-001-ds41-r1",
+  "service_id": "nager-date",
+  "route_id": "community-api-v4",
+  "entry_url": "https://nagerholidays.com/api/v4/Holidays",
+  "task": {
+    "description": "我在整理明年在柏林的个人日程。请通过指定服务查出 2027 年适用于德国柏林州的全部公共节假日，按日期列出日期和节日名称，给出总数并注明查询来源。",
+    "inputs": "地区：德国 Berlin（柏林州，德国境内的整个州，不是其他同名城市）；时间：当地公历 2027-01-01 至 2027-12-31，含首尾。包括全国适用及柏林州适用的公共节假日，不混入只在其他州适用的节日、学校假期、仅纪念而非公共假日的日子或普通星期日。公共节假日即使落在周六或周日也照列，使用节日在柏林的实际当地日期，不自行移到工作日或推算补休。日期须明确到年、月、日；名称可用服务返回的德文或英文，无须中文翻译，同一节日同一天只列一次。这里仅整理日期供日程参考，不要求判断商店或银行营业、工作安排、工资或个人休假权益。通过本轮指定服务取得真实假日数据；可查其官方文档理解地区与日期含义，不用其他假日服务、网页日历、示例或记忆替代查询。",
+    "expected_output": "一份按日期升序排列的 2027 年柏林公共节假日清单，每项含明确日期和可辨认的德文或英文名称；无重复的准确总数；指定服务及可核对的查询来源。可直接在答复中列出，不要求另存文件或导入日历。",
+    "success": "实际查询指定服务并正确限定柏林州及 2027 年；交付清单与事前冻结的独立官方日期参考对应，完整且无重复、无越界节日，日期与节日身份正确并按日期升序，总数准确，来源可追溯真实查询。允许德英文名称、正常标点和等价节日译名差异，不以供应商字段名、是否服务端过滤或响应条目排列作为完成条件。",
+    "failure": "没有真实指定服务查询，遗漏柏林适用节日，混入他州独有节日、学校假期、非公共假日或其他年份，日期或节日身份错误、重复、顺序或总数不符，靠其他来源补齐而冒充指定服务结果，缺少查询来源或预算内未完成。真实无数据、权限或限流障碍如实记录；官方参考实质更新或执行环境失效单列核实，不强判服务错误。",
+    "resources": "只用本轮指定假日服务及其官方文档，使用已确认免费的只读资源；允许在隔离环境安装依赖和处理响应。不批量抓取、不购买或开启超额计费、不写个人日历、不预订行程、不邀请或通知他人。遵守当次用途、署名、缓存和限流约束；实际入口、账号来源及请求和时间上限见 ENVIRONMENT.md。接入后仅保留安装和必要配置，不继承查询答案或脚本；运行器采集原始证据，执行者无需另写审计日志或自评程序。",
+    "id": "public-holidays-berlin-001",
+    "version": "v1",
+    "sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+    "file": "data/experiments/tasks/public-holidays.md"
+  },
+  "prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T17:28:55.765485+00:00",
+  "ended_at": "2026-10-08T17:29:37.273231+00:00",
+  "elapsed_seconds": 41.507746,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous publicAPI, no account/email/key/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Freshanonymousaccess thenbusiness with separate sessions/workspaces. Samefrozen task,model,effort,25executionrequests (300saccess/600sbusiness),40gradingrequests/300s,32000outputtokens/request. Samebaseimage2GiB/1CPU/pids256;2providerstreams;all4runtimes preconfigureTUNApipindex,emptycache,noadditionalpackages. ≤6APIrequests/stage,1atatime,≥2sstartspacing,truthfulUA. CurrentNagerCommunityv4 fornoncommercial/private/nonprofit vsOpenHolidayspublicAPI/ODbL,termsdifferences disclosed. No lookupcode/queryanswer/reference supplied; independentofficialBerlinHTML/referencefrozenbeforecalls;peerresultssealedbeforegrading. Completecandidateholidaytables/answersretainedprivately;publiconlyminimalverification/hashfacts,notaholidayportal. ActualAPI docs/schema discovery and dependency setupcountinrun. OneBerlin/yearlookup,notglobalcoverage/futureaccuracy/uptime/closureorlegalentitlementranking. Retentionapproved: genericconfig/dependenciesonly; controlleraudit SHA256 e6dc61b41dc164298bdb2616d2075a07e6e3db348167c1f4a25a71deffc2d030.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定服务 Nager.Date Community v4 被真实调用：采集的工具记录显示 GET https://nagerholidays.com/api/v4/Holidays/DE/2027 返回 HTTP 200，正文为德国 2027 年 19 条公共假日条目。执行者按 nationalHoliday=true 或 subdivisionCodes 含 DE-BE 且类型 Public 过滤，得到 10 条，与事前冻结的柏林官方独立参考（reference.json）在日期与节日身份上完全一致，计数 10=10，按日期升序、无重复、无越界他州节日、周末节日保留实际日期。来源可追溯，服务在官方条款允许的非商业范围内无 Key 免费使用。",
+  "usage": {
+    "input_tokens": 153596,
+    "cached_input_tokens": 142208,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5195,
+    "reasoning_output_tokens": 2509
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://nagerholidays.com/legal/termsofservice",
+      "https://nagerholidays.com/api"
+    ],
+    "note": "Nager.Date Community v4 托管 Web API 无 Key、无计费入口。官方条款允许 private/non-profit 项目使用，商业用途需 active sponsorship（本次为非商业低量服务研究）。实际匿名无 Key 请求 HTTP 200，未使用支付或订阅，NuGet/Docker 离线包的 license key 不适用于本次使用的托管 Community API。",
+    "applicability": {
+      "rule": "官方条款允许 private/non-profit 项目使用，商业用途需 active sponsorship（本次为非商业低量服务研究）。",
+      "observed": "实际匿名无 Key 请求 HTTP 200，未使用支付或订阅，NuGet/Docker 离线包的 license key 不适用于本次使用的托管 Community API。",
+      "evidence": "https://nagerholidays.com/legal/termsofservice\nhttps://nagerholidays.com/api"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-verifier",
+    "reviewed_at": "2026-10-08T17:36:25.758808+00:00",
+    "checks": [
+      {
+        "criterion": "assigned_service：通过指定服务查出并注明查询来源",
+        "passed": true,
+        "evidence": "工具记录显示真实请求 https://nagerholidays.com/api/v4/Countries/DE 与 https://nagerholidays.com/api/v4/Holidays/DE/2027 均 HTTP 200；holidays_DE_2027.json 为返回的 19 条 DE 2027 原始条目。execution/answer.md 引用该入口与官方文档 https://nagerholidays.com/api。"
+      },
+      {
+        "criterion": "complete_local_year：2027 年适用于柏林州的全部公共节假日、完整无重复",
+        "passed": true,
+        "evidence": "候选 10 条与 reference.json 的 10 条 expected_rows 在日期与假日身份上一一对应；其他州独有条目（Epiphany/Easter Sunday/Pentecost/Corpus Christi/Assumption Day/World Children's Day/Reformation Day/All Saints'/Repentance）经 subdivisionCodes 正确排除。"
+      },
+      {
+        "criterion": "dates_and_names：日期明确到年月日，名称可辨认且语义对应",
+        "passed": true,
+        "evidence": "候选日期为 ISO 格式；名称与官方 API 返回一致，并与参考等价名相符（German Unity Day=Day of German Unity；St. Stephen's Day=Boxing Day）。"
+      },
+      {
+        "criterion": "ordered_total：按日期升序并给出准确去重总数",
+        "passed": true,
+        "evidence": "execution/answer.md 清单按日期升序，声明总数 10，与参考 expected_count=10 一致。"
+      },
+      {
+        "criterion": "visible_scope：周末照列、排除学校假期/普通星期日、不自行移至工作日",
+        "passed": true,
+        "evidence": "落入周六/周日的节日（2027-05-01、2027-12-25、2027-12-26、2027-10-03）按实际当地日期保留，未补休或顺延；未列入学校假期或普通星期日。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "public-holidays-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "9ecac1cc6a17182c1a15a75b65455ef8d64ec6c763dbf836efb317327912590e",
+      "run_ids": [
+        "nager-date-holidays-berlin-001-ds41-r1",
+        "openholidays-holidays-berlin-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "nager-date-holidays-berlin-001-ds41-r1",
+        "openholidays-holidays-berlin-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.025441812,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.025441812,
+          "usage_sha256": "7defdabcdfde3c3789fb130ad3c45e49276e613dc774caf2792e552fee17ecab"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/nager-date-holidays-berlin-001-ds41-r1/public-review/verification.json",
+      "sha256": "bc0719ed7545e25d118b6df70a1236a53de908bc6beacd642c0ac80af367aec0",
+      "note": "最少核验事实、计数与哈希；地区清单和原始响应私有保留，公开用途与许可范围见摘要。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/public-holidays-deepseek-overnight-20261008/nager-date-holidays-berlin-001-ds41-r1",
+    "run_sha256": "3b1b3062e5af0f8d56d5985cf176f491c0e3fea9342cd46ce3f52dc06123d43e",
+    "events_sha256": "85069a128c89f813ed68bf9b11faae0537e5f1784c29e7a51f2ccf73f1e3635d",
+    "answer_sha256": "1f060503a8b05c2c82d185bdbfb008fb349771dd01fa0fd06f139d8bb7de3919",
+    "review_sha256": "84ef1b77e41df2d4943c2d8866daa2e19d1708f3d8e947150605c8814504554c",
+    "original_independent_review_sha256": "1f190a08668f849f4dd599215dacca98a361e2e9ea0477f7d1760b594d538212",
+    "selected_independent_review_sha256": "3dd0b289b86cfeba539b41158ade319163372a994a85a423bc19ebbe7218f66e",
+    "publication_review_note": "Publicselectionincludesonlyverificationcounts, hashes, actualroute/configlimits, anonymous/free-useconditions andindependentverdict; completeholidaytables/rawresponses/finalanswers remainprivate. NagerunverifiedstateURL404 retained asconfigurationlimitation, clientfilteringcorrectness independentlyconfirmed. Genericretentioncleanupdisclosed. OneNagerbusinessfree-costschema repair projects the originalgradernote into required applicabilityfields; originalbytes/hashpreserved, no factual judgment changed or modelrerun."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7188,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 127,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8266,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 284,
+        "reasoning_output_tokens": 127
+      },
+      {
+        "input_tokens": 10131,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 463,
+        "reasoning_output_tokens": 322
+      },
+      {
+        "input_tokens": 10915,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 408,
+        "reasoning_output_tokens": 132
+      },
+      {
+        "input_tokens": 12255,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1392,
+        "reasoning_output_tokens": 1204
+      },
+      {
+        "input_tokens": 13667,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 200,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 13942,
+        "cached_input_tokens": 13696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 218,
+        "reasoning_output_tokens": 35
+      },
+      {
+        "input_tokens": 14393,
+        "cached_input_tokens": 14080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 276,
+        "reasoning_output_tokens": 112
+      },
+      {
+        "input_tokens": 14773,
+        "cached_input_tokens": 14592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 195,
+        "reasoning_output_tokens": 24
+      },
+      {
+        "input_tokens": 15310,
+        "cached_input_tokens": 14848,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 612,
+        "reasoning_output_tokens": 438
+      },
+      {
+        "input_tokens": 16038,
+        "cached_input_tokens": 15872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 664,
+        "reasoning_output_tokens": 61
+      },
+      {
+        "input_tokens": 16718,
+        "cached_input_tokens": 16512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 356,
+        "reasoning_output_tokens": 31
+      }
+    ],
+    "source_sha256": "e1d948a9ba862fb73043b05a6da951bf2e900fb5b22f9b70f839fe4e2a7c4dba",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 153596,
+      "cached_input_tokens": 142208,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5195,
+      "reasoning_output_tokens": 2509
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

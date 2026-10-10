@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "run_id": "sec-edgar-statements-001-ds41-r1",
+  "service_id": "sec-edgar",
+  "route_id": "data-api",
+  "entry_url": "https://data.sec.gov/",
+  "task": {
+    "description": "比较苹果和微软 2025 财年的营收、净利润和经营现金流，做成表格并附原始财报出处。",
+    "inputs": "Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合并报表；使用截至 2026-09-09 已公开的 GAAP 报告。注明各自财年结束日期，金额统一为十亿美元。",
+    "expected_output": "两家公司、三个指标的比较表；财年结束日期、币种和单位；可定位原始年报或监管披露的出处。",
+    "success": "六个指标与事前保存的各公司 2025 年报匹配，允许显示单位带来的舍入；不混用自然年、单季度、TTM 或调整后利润；财年结束日期和单位正确；原始披露能支持所列指标；核心数据来自指定服务。",
+    "failure": "缺指标或来源；把净利润与每股收益混淆；期间、公司、口径或单位错误；引用无法支持数值；只给摘要不提供比较表；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；可读取该服务返回链接所指向的公司/监管原始披露，用于追溯出处，不能直接绕过被测服务完成取数。只读、仅免费额度。",
+    "id": "financial-statements-001",
+    "version": "v1",
+    "sha256": "f2bef749ced63841a14631fe40eb3cfcd7f3729498f4c63b53d5cf8fb7333f82",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "5cb318098cb9e018b6b7c963713e65584390319d501e2143df7bb916944a16c1",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T12:25:31.794208+00:00",
+  "ended_at": "2026-10-08T12:26:06.713443+00:00",
+  "elapsed_seconds": 34.919235,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; contact identity only",
+    "web_search": "live",
+    "preparation_note": "Reuses independently passed access from this batch with fresh session and cleaned workspace. Same frozen v1 task, model, effort, tools and 25-request budget for both services. Reference values and peer results withheld from executors. Registered secrets are removed from independent grading copies and peer snapshots; original raw evidence remains controller-private. Execution 600s; independent grading 300s.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "Executor queried the designated service SEC EDGAR (data.sec.gov) XBRL APIs for both companies' FY2025 10-K and produced the required comparison table with fiscal-year ends, USD billions and traceable 10-K provenance. Grader re-read the collected raw SEC responses and re-fetched Apple NetIncomeLoss live; all six metrics, both fiscal-year ends, units and sources match the independent reference.",
+  "usage": {
+    "input_tokens": 92106,
+    "cached_input_tokens": 82560,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4177,
+    "reasoning_output_tokens": 1947
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "frozen-execution/ENVIRONMENT.md"
+    ],
+    "applicability": {
+      "rule": "SEC EDGAR data APIs state they 'do not require any authentication or API keys to access'; SEC data is publicly available at no charge and this task was scoped to read-only free usage.",
+      "observed": "All data retrieval used only the free data.sec.gov companyconcept and submissions endpoints with a descriptive User-Agent; no API key, registration, payment or paid endpoint was involved, and every request returned HTTP 200.",
+      "evidence": "grading/artifacts/evidence/sec-edgar-fy2025-values.md; execution/artifacts/raw/ (the collected HTTP 200 SEC responses) reproduce the data obtained without any key or payment."
+    },
+    "note": "SEC EDGAR is a free public government disclosure service; no per-query charge applies and no account/receipt exists. service_cost_usd left null because there is no billed amount to report.",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader-opencode",
+    "reviewed_at": "2026-10-08T12:29:45.553604+00:00",
+    "checks": [
+      {
+        "criterion": "Output is a comparison table covering both companies and all three metrics (revenue, net income, operating cash flow), with currency and unit stated",
+        "passed": true,
+        "evidence": "execution/artifacts/result.md and execution/answer.md present a 2-company x 3-metric table labelled USD billions, with a caption on fiscal-year-end differences."
+      },
+      {
+        "criterion": "All six indicator values match the independent reference (Apple 416.161 / 112.010 / 111.482; Microsoft 281.724 / 101.832 / 136.162, USD billions)",
+        "passed": true,
+        "evidence": "grading/artifacts/evidence/sec-edgar-fy2025-values.md plus the six raw SEC companyconcept responses under execution/artifacts/raw/ reproduce the exact USD values (416,161,000,000; 112,010,000,000; 111,482,000,000; 281,724,000,000; 101,832,000,000; 136,162,000,000) and match reference.json."
+      },
+      {
+        "criterion": "Fiscal-year end dates are correct (Apple 2025-09-27, Microsoft 2025-06-30)",
+        "passed": true,
+        "evidence": "SEC submissions metadata in execution/artifacts/raw/aapl_submissions.json and msft_submissions.json show Apple 10-K report period 2025-09-27 and Microsoft 10-K report period 2025-06-30; the XBRL annual periods are 2024-09-29..2025-09-27 and 2024-07-01..2025-06-30."
+      },
+      {
+        "criterion": "Amounts carried in a consistent unit (USD billions) as required, without unit confusion",
+        "passed": true,
+        "evidence": "execution/artifacts/result.md and execution/answer.md state USD billions and the displayed values are the USD-million originals divided consistently by 1e9 (416161 -> 416.161 etc.)."
+      },
+      {
+        "criterion": "Original disclosure that supports the figures is locatable (form, accession number, report/regulator URL)",
+        "passed": true,
+        "evidence": "execution/artifacts/result.md lists Apple 10-K accession 0000320193-25-000079 (filed 2025-10-31) and Microsoft 10-K accession 0000950170-25-100235 (filed 2025-07-30) with SEC Archives URLs; accessions match the raw XBRL accn fields and SEC submissions."
+      },
+      {
+        "criterion": "No mixing of calendar year, single quarter, TTM or adjusted figures; annual consolidated GAAP FY2025 values",
+        "passed": true,
+        "evidence": "Only 10-K full-year durations (363-364 days) were selected per metric in the raw responses; a FY2025 live re-fetch of Apple NetIncomeLoss returned the same 2024-09-29..2025-09-27 value."
+      },
+      {
+        "criterion": "Core data were obtained from the designated service (data.sec.gov), not bypassed with another source or model memory",
+        "passed": true,
+        "evidence": "Execution tool logs (review-packet/tools/0007.json, 0009.json) show curl calls to data.sec.gov companyconcept and submissions endpoints returning HTTP 200; URL scan of events.jsonl shows only data.sec.gov used for data retrieval."
+      },
+      {
+        "criterion": "Operated within the read-only, free scope: no registration, payment, writes or paid endpoints",
+        "passed": true,
+        "evidence": "Only SEC free XBRL/submissions endpoints were called with a descriptive User-Agent; no API key or payment was used and no paid endpoint appears in the logs."
+      }
+    ],
+    "peer_context": {
+      "group_id": "statements-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "4cec6fef69e8fd7438ba2162251a13ffca4ac63e9e4adddd3b4d9ca9381ee5b3",
+      "run_ids": [
+        "sec-edgar-statements-001-ds41-r1",
+        "alpha-vantage-statements-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "sec-edgar-statements-001-ds41-r1",
+        "alpha-vantage-statements-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.032979948,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.032979948,
+          "usage_sha256": "8ec0665c180c61ac7d86b364dd6c1b0af4db42393836e3c8248ec251ecea598d"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/sec-edgar-statements-001-ds41-r1/execution/answer.md",
+      "sha256": "a2957ca85b23ac64f40f64e92491fbcb68adc1195cfaaaabbf8b119b97793efb",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/sec-edgar-statements-001-ds41-r1/public-review/verification.md",
+      "sha256": "2b9d16add7f60b42d757d457a2df8f73b8b761e04cf4a098ac1d74fa0c4ce656",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/statements-deepseek-overnight-20261008/sec-edgar-statements-001-ds41-r1",
+    "run_sha256": "fc751374530fb793f98b5d817bd606dcd12467960aa6b2bd140b8c705e6e9dee",
+    "events_sha256": "68f115b443e3ee062b0d7dfd194303bf80d838bdf4eb9d5d062e9955f6738eec",
+    "answer_sha256": "a2957ca85b23ac64f40f64e92491fbcb68adc1195cfaaaabbf8b119b97793efb",
+    "review_sha256": "fcfe8e8cb297acb2f8105e6c942fd93097ddf14e94b075dea971985c126aeff2",
+    "original_independent_review_sha256": "2a2d0766012326d218651358b897d78d38e42339c3c482d9783dcbdd1d71f846",
+    "selected_independent_review_sha256": "2a2d0766012326d218651358b897d78d38e42339c3c482d9783dcbdd1d71f846",
+    "publication_review_note": "Published final answer and a short independent verification excerpt; omitted scripts and raw financial data copies."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7163,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 117,
+        "reasoning_output_tokens": 12
+      },
+      {
+        "input_tokens": 7793,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 150,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 8193,
+        "cached_input_tokens": 7936,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 104,
+        "reasoning_output_tokens": 11
+      },
+      {
+        "input_tokens": 9026,
+        "cached_input_tokens": 8192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 809,
+        "reasoning_output_tokens": 761
+      },
+      {
+        "input_tokens": 9981,
+        "cached_input_tokens": 9728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 363,
+        "reasoning_output_tokens": 96
+      },
+      {
+        "input_tokens": 10675,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 291,
+        "reasoning_output_tokens": 23
+      },
+      {
+        "input_tokens": 12091,
+        "cached_input_tokens": 10880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 869,
+        "reasoning_output_tokens": 531
+      },
+      {
+        "input_tokens": 13056,
+        "cached_input_tokens": 12800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1056,
+        "reasoning_output_tokens": 323
+      },
+      {
+        "input_tokens": 14128,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 418,
+        "reasoning_output_tokens": 132
+      }
+    ],
+    "source_sha256": "722681c9ccec8ad7637f2b6f896cecb5cfefa46ca3387cfa8e99f84bcd066583",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 92106,
+      "cached_input_tokens": 82560,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4177,
+      "reasoning_output_tokens": 1947
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

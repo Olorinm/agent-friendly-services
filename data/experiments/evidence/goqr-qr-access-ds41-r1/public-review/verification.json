@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "run_id": "goqr-qr-access-ds41-r1",
+  "service_id": "goqr",
+  "route_id": "public-qr-api",
+  "phase": "access",
+  "independent_status": "completed",
+  "sources": {
+    "task.json": "edbf7dacda514946a36f9c5cd6a9b5c437f3e7aa68ea0f158801f1da80e6695c",
+    "execution/receipt.json": "ae27d6539abd5b1cf41de791756ae51c0f346c51c5e1e101b87a377fab718318",
+    "execution/tool-records.json": "6fb79438f747718e54743c12d900dafc6072ceffafb0cda9b315ec70b9b4c572",
+    "execution/usage.json": "40f0ed6f47d99364d967b59a84281e7c24c56fee68e8a2459abd719b74b74f0e",
+    "grading/assessment.json": "ba82c6eb341eb4cdaac33052a2115a53dc1f49f58d2e00f696a57da0af722ba2",
+    "grading/receipt.json": "f458935b3a4bf7be8dbdf27047b5a9fd1b937ff8c6e1ec92e90298cd15931e95",
+    "grading/usage.json": "f3b334a5e024908c84756db9bd769a8026b045864eea78bed8f5453cd75655de",
+    "grading-input/controller-visual-observations.json": "71bdbadb904fe1d1fbc68a365be60d98e6c3b1aa19cb6e98e8a5b1e365c02bf2",
+    "frozen/grading/reference.json": "bdb0ba2c2bafc34b273d9037d96b927be3c3a14322e79c4e356f4f439b06b73b"
+  },
+  "actual_request": {
+    "observed_generation_invocations": 1,
+    "calls": [
+      {
+        "tool_call_index": 4,
+        "tool": "bash",
+        "method": "GET",
+        "endpoint": "https://api.qrserver.com/v1/create-qr-code/",
+        "reported_http_status": 200
+      }
+    ],
+    "encoded_payload": "https://example.com/",
+    "payload_sha256_utf8_no_newline": "0f115db062b7c0dd030b16878c99dea5c354b49dc37b38eb8846179c7783e9d7",
+    "account_or_api_key_provided": false
+  },
+  "actual_image": {
+    "sha256": "c3ecfefcc2835d9cbb9bcf79526102ea5e5a796ebeea73d4266aba6499bcb635",
+    "packages": {
+      "zxing-cpp": "3.1.1",
+      "pillow": "12.3.0",
+      "numpy": "2.3.5"
+    },
+    "format": "PNG",
+    "size": [
+      300,
+      300
+    ],
+    "mode": "P",
+    "all_opaque": true,
+    "all_grayscale": true,
+    "has_black": true,
+    "has_white": true,
+    "barcodes": [
+      {
+        "format": "QR Code",
+        "bytes_hex": "68747470733a2f2f6578616d706c652e636f6d2f",
+        "text": "https://example.com/",
+        "valid": true
+      }
+    ],
+    "bytes": 474,
+    "png_metadata": {
+      "dpi": [
+        96.012,
+        96.012
+      ]
+    }
+  },
+  "published_png": {
+    "name": "test-qr.png",
+    "sha256": "c3ecfefcc2835d9cbb9bcf79526102ea5e5a796ebeea73d4266aba6499bcb635"
+  },
+  "visual_observation": {
+    "receipt_sha256": "71bdbadb904fe1d1fbc68a365be60d98e6c3b1aa19cb6e98e8a5b1e365c02bf2",
+    "method": "Controller native view_image of unchanged exact-hash original PNG before grader dispatch; DeepSeek did not have declared vision input. Independent grader separately checked decoded bytes, pixels, provenance and these frozen appearance facts.",
+    "facts": {
+      "background": "white",
+      "qr_foreground": "black",
+      "visible_qr_symbol_count": 1,
+      "extra_text_present": false,
+      "logo_present": false,
+      "notes": "Single black QR symbol on white background, with visible white border; no added letters, captions or logo visible. These are appearance facts; payload and task completion are not judged here."
+    },
+    "overhead": {
+      "kind": "controller preparation/verification, outside execution and DeepSeek grading",
+      "cost_usd": null,
+      "duration_seconds": null,
+      "note": "Not separately metered; unknown, not zero. No candidate query, image edit, target visit or regeneration."
+    }
+  },
+  "service_fee": {
+    "kind": "unknown",
+    "amount_usd": null,
+    "notice": "Independent assessment retained; free statements in candidate documentation do not overwrite a particular grader unknown applicability finding."
+  },
+  "scope_limitations": "One anonymous static QR sample in each phase; no account, key, payment, dynamic tracking, target URL visit or extra grader generation. Observed calls count executor invocations from original tool evidence, not hidden provider backend activity. Different masks/ECC/PNG encoding or byte sizes are not task-quality rankings. Four-module margin, DPI and physical printer/phone performance were not graded. Unknown remaining anonymous allowance is not zero consumption.",
+  "preparation": {
+    "decoder": "Grader-only ZXing-C++3.1.1, Pillow12.3.0, NumPy2.3.5; official wheel hashes checked and independent neutral positive/wrongpayload/blank/nonimage controls passed before any candidate generation. Executor had no prewritten API client or grading helper.",
+    "linux_decoder_preparation_sha256": "07f8be8e1cc396b6315ef1e5ecf9cb037e68a6f618312b62a18cdd4c007303f7",
+    "helper_sha256": "bcd82881535f346b96d578d07436edb4877101c6ebaf916f3a21dc91cf9e58ca",
+    "access_installed_by_executor": {
+      "opencv-python-headless": "5.0.0.93",
+      "numpy": "2.4.6"
+    },
+    "retention_audit_sha256": "5aa551a6989858d3f5ddaebc8740f3372738ba2132b963b11b3b3476d8a59322",
+    "retention": "Executor-authored generic configs unchanged; measured access installations retained at their actual venv locations using symmetric audited allowlist adjustment; prior workspace/home/tmp archived by adapter and owned executors restarted before fresh business. No new client, query, expected bitmap or library supplied after access.",
+    "executor_global_pip_attempt_blocked_and_recovered": false,
+    "global_pip_note": null
+  },
+  "official_service_sources": {
+    "manifest_sha256": "898dcf4ba868d3259742f29892fc95bf83f06c05b9b19767e8611412d4996ecf",
+    "urls": [
+      "https://goqr.me/",
+      "https://goqr.me/api/",
+      "https://goqr.me/api/doc/create-qr-code/",
+      "https://goqr.me/legal/tos-api.html",
+      "https://goqr.me/privacy-safety-security/",
+      "https://goqr.me/de/rechtliches/datenschutz-goqrme.html"
+    ]
+  }
+}

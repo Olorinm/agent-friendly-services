@@ -8,6 +8,63 @@ spec=importlib.util.spec_from_file_location('opencode_normalize',Path(__file__).
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 
 class UsageTests(unittest.TestCase):
+    def test_truncated_request_preserves_valid_requests_on_both_sides_as_a_lower_bound(self):
+        from adapter_usage import read_usage
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'events.jsonl').write_text('{truncated')
+            for name in ('a','b','c'):
+                wire=root/'wire'/name;wire.mkdir(parents=True)
+                (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash','stream':True}))
+                (wire/'meta.json').write_text(json.dumps({'status':200}))
+                u={'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':10}}
+                (wire/'response.body').write_text('data: '+json.dumps(u)+'\n\n' if name!='b' else 'data: {truncated')
+            normalized=module.normalize(root,'deepseek-flash')
+            self.assertFalse(normalized['complete'])
+            self.assertEqual([r['id'] for r in normalized['requests']],['a','c'])
+            usage, detail=read_usage(root,'deepseek-flash')
+            self.assertIsNone(usage)
+            self.assertTrue(detail['requests_verified'])
+            self.assertEqual(detail['lower_bound_usage']['input_tokens'],200)
+            (root/'wire/a/response.body').write_text('tampered')
+            self.assertNotIn('lower_bound_usage',read_usage(root,'deepseek-flash')[1])
+
+    def test_budget_rejection_sidecar_preserves_reconciled_forwarded_usage(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); wire = root/'wire/request1'; wire.mkdir(parents=True)
+            (root/'events.jsonl').write_text(json.dumps({'type':'step_finish','part':{'tokens':{'input':80,'output':12,'reasoning':8,'cache':{'read':20,'write':0}}}})+'\n')
+            (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash'}))
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            usage = {'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':20,'completion_tokens_details':{'reasoning_tokens':8}}}
+            (wire/'response.body').write_text('data: '+json.dumps(usage)+'\n\ndata: [DONE]\n')
+            guard = root/'wire/guard-events.jsonl'
+            guard.write_text(json.dumps({'time':123.5,'error':'Model request budget exhausted'})+'\n')
+            result = module.normalize(root,'deepseek-flash')
+            self.assertTrue(result['complete'])
+            self.assertEqual(len(result['requests']),1)
+            self.assertEqual(result['totals']['input_tokens'],100)
+            self.assertEqual(len(result['local_rejections']),1)
+            self.assertIn('wire/guard-events.jsonl',[s['path'] for s in result['sources']])
+            (wire/'meta.json').write_text(json.dumps({'status':200,'error':'ConnectionResetError'}))
+            self.assertFalse(module.normalize(root,'deepseek-flash')['complete'])
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            guard.write_text('{"time":123.5}\n')
+            self.assertFalse(module.normalize(root,'deepseek-flash')['complete'])
+
+    def test_unicode_separators_inside_events_and_sse_do_not_break_usage_capture(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);wire=root/'wire/request1';wire.mkdir(parents=True)
+            tool={'type':'tool_use','part':{'state':{'output':'binary-looking\u0085\u2028\u2029text'}}}
+            finish={'type':'step_finish','part':{'tokens':{'input':80,'output':12,'reasoning':8,'cache':{'read':20,'write':0}}}}
+            (root/'events.jsonl').write_text('\n'.join(json.dumps(x,ensure_ascii=False) for x in [tool,finish])+'\n')
+            (wire/'request.json').write_text(json.dumps({'model':'deepseek-flash'}))
+            (wire/'meta.json').write_text(json.dumps({'status':200}))
+            chunk={'choices':[{'delta':{'content':'text\u0085\u2028\u2029'}}]}
+            usage={'usage':{'prompt_tokens':100,'prompt_tokens_details':{'cached_tokens':20},'completion_tokens':20,'completion_tokens_details':{'reasoning_tokens':8}}}
+            (wire/'response.body').write_text('data: '+json.dumps(chunk,ensure_ascii=False)+'\n\ndata: '+json.dumps(usage)+'\n\ndata: [DONE]\n')
+            result=module.normalize(root,'deepseek-flash')
+            self.assertTrue(result['complete'])
+            self.assertEqual(result['totals']['output_tokens'],20)
+
     def test_cache_and_reasoning_are_subsets_and_reconcile(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d); wire=root/'wire'/'request1';wire.mkdir(parents=True)
@@ -27,7 +84,65 @@ class UsageTests(unittest.TestCase):
             self.assertFalse(module.normalize(root,'glm-5.3-flash')['complete'])
 
 
+class ProviderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        directory=Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        spec=importlib.util.spec_from_file_location('opencode_providers',directory/'providers.py')
+        cls.providers=importlib.util.module_from_spec(spec);spec.loader.exec_module(cls.providers)
+
+    def test_deepseek_uses_its_own_route_and_keeps_credentials_out_of_agent_config(self):
+        cfg=self.providers.opencode_config({'model':'deepseek-flash','reasoning_effort':'high'},'deepseek')
+        self.assertEqual(cfg['model'],'afs-deepseek/deepseek-flash')
+        provider=cfg['provider']['afs-deepseek']
+        self.assertEqual(provider['options'],{'apiKey':'local-capture-proxy','baseURL':'http://127.0.0.1:18181/v1'})
+        self.assertEqual(provider['models']['deepseek-flash']['interleaved'],{'field':'reasoning_content'})
+        self.assertEqual(provider['models']['deepseek-flash']['variants']['high'],{'reasoningEffort':'high'})
+        self.assertEqual(cfg['permission']['task'],'deny')
+        self.assertEqual(self.providers.profile('deepseek')['host'],'api.deepseek.com')
+
+    def test_legacy_route_remains_explicit_and_cross_provider_models_are_rejected(self):
+        name=self.providers.DEFAULT_PROVIDER
+        cfg=self.providers.opencode_config({'model':'glm-5.3-flash','reasoning_effort':'high'},name)
+        self.assertEqual(cfg['model'],'zhipuai-coding-plan/glm-5.3-flash')
+        self.assertEqual(cfg['provider'][name]['options']['baseURL'],'http://127.0.0.1:18181/api/coding/paas/v4')
+        for provider,model in [('deepseek','glm-5.3-flash'),(name,'deepseek-flash')]:
+            with self.assertRaisesRegex(ValueError,'does not match'):
+                self.providers.validate_model(provider,model)
+        with self.assertRaisesRegex(ValueError,'Unsupported'):
+            self.providers.profile('https://untrusted.example')
+
+
 class AssessmentTests(unittest.TestCase):
+    def test_typed_source_references_preserve_all_values_and_reject_ambiguity(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        source={'type':'api_response','ref':'evidence/plan.txt','note':'actual free-plan fields'}
+        original={'status':'completed','service_cost_usd':None,'service_cost':{'kind':'unknown','sources':[source]}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['service_cost']['sources'],['[api_response] evidence/plan.txt — actual free-plan fields'])
+        self.assertIsNone(normalized['service_cost_usd'])
+        self.assertEqual(normalized['service_cost']['kind'],'unknown')
+        self.assertEqual(original['service_cost']['sources'],[source])
+        self.assertEqual(len(changes),1)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+        for invalid in ({**source,'url':'https://conflicting.example'}, {**source,'extra':'unrecognized fact'},
+                        {**source,'ref':''}, {**source,'type':None}):
+            original['service_cost']['sources']=[invalid]
+            self.assertEqual(assessment.normalize(original),(original,[]))
+
+    def test_source_objects_preserve_url_and_note_without_promoting_unknown(self):
+        spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
+        assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
+        original={'status':'completed','service_cost_usd':None,'service_cost':{'kind':'unknown','sources':[{'url':'https://example.com/rule','note':'existing observation'},'other source']}}
+        normalized,changes=assessment.normalize(original)
+        self.assertEqual(normalized['service_cost']['sources'],['https://example.com/rule — existing observation','other source'])
+        self.assertEqual(normalized['service_cost']['kind'],'unknown')
+        self.assertNotIn('note',normalized['service_cost'])
+        self.assertIsInstance(original['service_cost']['sources'][0],dict)
+        self.assertEqual(len(changes),1)
+        self.assertEqual(assessment.normalize(normalized),(normalized,[]))
+
     def test_billing_evidence_list_is_joined_without_adding_facts(self):
         spec=importlib.util.spec_from_file_location('opencode_assessment',Path(__file__).resolve().parents[1]/'scripts/runners/opencode/assessment.py')
         assessment=importlib.util.module_from_spec(spec);spec.loader.exec_module(assessment)
@@ -90,6 +205,68 @@ class RuntimeStatusTests(unittest.TestCase):
         self.assertEqual(read_done.call_count, 2)
         with self.assertRaisesRegex(RuntimeError, 'unavailable'):
             status.query(lambda: missing, lambda: missing)
+
+class RuntimeCodeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.directory = Path(__file__).resolve().parents[1]/'scripts/runners/opencode'
+        spec = importlib.util.spec_from_file_location('opencode_runtime_code', cls.directory/'runtime_code.py')
+        cls.code = importlib.util.module_from_spec(spec); spec.loader.exec_module(cls.code)
+
+    def test_real_probe_rejects_stale_missing_and_symlinked_code_without_reading_credentials(self):
+        import subprocess
+        import sys
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            for name in self.code.WORKER_FILES:
+                (root/name).write_bytes((self.directory/name).read_bytes())
+            expected = self.code.manifest(root)
+            # An unreadable/unrelated credential must not be included in the probe.
+            (root/'model.key').mkdir()
+            def execute(*args):
+                return subprocess.run([sys.executable, *args[1:3], str(root), *args[4:]],
+                                      capture_output=True, check=True)
+            self.assertEqual(self.code.verify(execute, expected), expected)
+            normalizer = root/'normalize.py'; original = normalizer.read_bytes()
+            normalizer.write_text('old sidecar parser')
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+            normalizer.unlink()
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+            replacement = root/'outside.py'; replacement.write_bytes(original)
+            normalizer.symlink_to(replacement)
+            with self.assertRaisesRegex(ValueError, 'normalize.py'):
+                self.code.verify(execute, expected)
+
+    def test_adapter_rejects_stale_runtime_before_allocating_or_starting_a_run(self):
+        import runpy
+        import subprocess
+        import sys
+        import types
+        from unittest.mock import patch
+        calls = []
+        observed = self.code.manifest(self.directory)
+        observed['normalize.py'] = '0'*64
+        def ssh(config, argv, **kwargs):
+            calls.append(argv)
+            return subprocess.CompletedProcess(argv, 0, json.dumps(observed).encode(), b'')
+        cfg = {'host':'unused', 'remote_root':'/private/test', 'provider':'deepseek',
+               'containers':{'runtime':'owned-container'}}
+        stub = types.SimpleNamespace(load=lambda path: cfg, ssh=ssh)
+        with tempfile.TemporaryDirectory() as d:
+            request = Path(d)/'request.json'
+            request.write_text(json.dumps({'runtime':'runtime', 'run_id':'new-run',
+                                           'role':'execution', 'model':'deepseek-flash'}))
+            argv = ['adapter.py', '--config', '/unused/private-config.json', 'start', str(request)]
+            with patch.object(sys, 'path', [str(self.directory), *sys.path]), \
+                 patch.object(sys, 'argv', argv), patch.dict(sys.modules, {'config':stub}):
+                with self.assertRaisesRegex(ValueError, 'No run was allocated'):
+                    runpy.run_path(str(self.directory/'adapter.py'), run_name='__main__')
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0][:7], ['sudo','-n','docker','exec','-u','0','owned-container'])
+        self.assertEqual(calls[0][7:9], ['python3','-c'])
+
 
 class ArtifactTests(unittest.TestCase):
     def test_fresh_session_archives_shared_temporary_files_without_following_links(self):
@@ -181,7 +358,8 @@ class ProvisionTests(unittest.TestCase):
                                  ('retained_paths', {'execution': ['..'], 'grading': []}),
                                  ('retained_children', {'unknown': {}}),
                                  ('retained_children', {'execution': {'unknown': []}}),
-                                 ('retained_children', {'execution': {'credentials.json': ['..']}})]:
+                                 ('retained_children', {'execution': {'credentials.json': ['..']}}),
+                                 ('provider', 'untrusted-host'), ('model', 'deepseek-flash')]:
                 settings = self.settings(); settings[field] = value
                 config.write_text(json.dumps(settings))
                 with self.assertRaises(ValueError):
@@ -207,6 +385,7 @@ class ProvisionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             key = Path(d)/'key'; key.write_text('test-private-key')
             settings = self.settings(); settings['key_file'] = str(key)
+            settings['provider']='deepseek';settings['model']='deepseek-flash'
             def reply(config, args, data=None):
                 if args[-2:] == ['ps', '-aq']:
                     out = b''
@@ -228,7 +407,8 @@ class ProvisionTests(unittest.TestCase):
                     self.assertFalse(set(args) & {'-v', '--volume', '--mount', '-p', '--publish', '--privileged'})
                 if call.kwargs.get('data'):
                     with tarfile.open(fileobj=io.BytesIO(call.kwargs['data'])) as tar:
-                        self.assertEqual(set(tar.getnames()), set(self.provision.WORKER_FILES) | {'bigmodel.key'})
-                        self.assertEqual(tar.getmember('bigmodel.key').mode, 0o600)
+                        self.assertEqual(set(tar.getnames()), set(self.provision.WORKER_FILES) | {'model.key','provider.json'})
+                        self.assertEqual(tar.getmember('model.key').mode, 0o600)
+                        self.assertEqual(json.load(tar.extractfile('provider.json')),{'provider':'deepseek'})
 
 if __name__=='__main__':unittest.main()

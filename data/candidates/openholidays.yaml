@@ -1,0 +1,101 @@
+id: openholidays
+name: OpenHolidays API
+category: web-search-data
+homepage: https://www.openholidaysapi.org/en/
+summary: Free hosted public and school holiday data API with regional filters and an openly licensed data collection.
+submitted_by: community
+tags:
+  - public-holidays
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/public-holidays
+  sources:
+    quickstart:
+      url: https://www.openholidaysapi.org/en/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    openapi:
+      url: https://openholidaysapi.org/swagger/v1/swagger.json
+      checked_on: '2026-10-08'
+      kind: official_docs
+    faq:
+      url: https://www.openholidaysapi.org/en/faq/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    data-licence:
+      url: https://github.com/openpotato/openholidaysapi.data/blob/main/LICENSE
+      checked_on: '2026-10-08'
+      kind: official_repo
+    regional-sources:
+      url: https://www.openholidaysapi.org/en/sources-europe/#germany
+      checked_on: '2026-10-08'
+      kind: official_docs
+    german-subdivisions:
+      url: https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/subdivisions.csv
+      checked_on: '2026-10-08'
+      kind: official_repo
+    german-coverage:
+      url: https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/holidays/holidays.public.csv
+      checked_on: '2026-10-08'
+      kind: official_repo
+    filter-implementation:
+      url: https://github.com/openpotato/openholidaysapi/blob/main/src/webservice/Controllers/HolidaysController.cs
+      checked_on: '2026-10-08'
+      kind: official_repo
+  routes:
+    - id: public-holidays-api
+      interface: api
+      maintainer: official
+      entry_url: https://openholidaysapi.org/PublicHolidays
+      docs: https://www.openholidaysapi.org/en/
+      evidence: [quickstart, openapi]
+      availability:
+        value: self_serve
+        evidence: [quickstart, faq]
+      personal_access:
+        value: documented
+        evidence: [faq]
+        notes: Free open-data service; FAQ explicitly permits commercial as well as personal use.
+      auth:
+        value: none
+        evidence: [quickstart, openapi]
+        notes: Documented public GET requests have no account or API-key requirement.
+      capabilities:
+        holidays.lookup:
+          value: documented
+          evidence: [quickstart, openapi, german-subdivisions, german-coverage, filter-implementation]
+          notes: >-
+            GET accepts countryIsoCode, validFrom and validTo, with optional subdivisionCode and
+            languageIsoCode. Date ranges are limited to three years. German state codes include Berlin
+            DE-BE; subdivision filtering retains nationwide and relevant regional records. Results
+            include localized names, startDate/endDate, type, nationwide and subdivision references.
+            German source-data coverage includes 2027; this does not prove the deployed API is synchronized.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [quickstart, openapi]
+        payment_method:
+          value: not_required
+          evidence: [quickstart, faq]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public API request
+          scope: Hosted API access documented as free, including commercial projects; no priced request allowance stated.
+          evidence: [faq]
+      notes: >-
+        PublicHolidays and SchoolHolidays are separate endpoints; response type and regional scope still
+        matter. Date fields are calendar dates, not UTC instants. A date-range query can include a holiday
+        overlapping its boundaries; retain the requested period when presenting results. Names are
+        localized arrays rather than one assumed English field. No numerical request-rate allowance,
+        dedicated capacity or uptime guarantee was found in the reviewed docs; keep one-off use low-volume
+        and retain responses for the trial. Data is ODbL 1.0: attribution and licence notices apply to
+        public use, with share-alike requirements where a derivative database is publicly used. This
+        differs from the web-service software licence. No explicit public-benchmark disclosure ban was
+        found in the reviewed service docs or data licence. Planned evidence can publish verification
+        summaries and hashes while retaining holiday tables privately. Sources are public government and
+        other referenced materials; agreement with another API alone is not independent verification.
+        No live API access or task result is claimed.

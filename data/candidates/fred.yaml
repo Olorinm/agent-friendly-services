@@ -2,7 +2,7 @@ id: fred
 name: FRED / ALFRED
 category: web-search-data
 homepage: https://fred.stlouisfed.org/
-summary: Economic time series and historical vintages from the Federal Reserve Bank of St. Louis.
+summary: Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.
 submitted_by: community
 tags:
   - macro
@@ -14,17 +14,39 @@ catalog:
   sources:
     docs:
       url: https://fred.stlouisfed.org/docs/api/fred/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
     access:
       url: https://fred.stlouisfed.org/docs/api/api_key.html
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
+    signup:
+      url: https://fred.stlouisfed.org/help/account/fred-account-features/register
+      checked_on: '2026-10-08'
+      kind: official_docs
+    mcp:
+      url: https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: MCP Connector accounts differ from ordinary FRED accounts; no API key is needed for MCP.
+    mcp-auth:
+      url: https://mcp.stlouisfed.org/.well-known/oauth-protected-resource
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Public OAuth resource metadata lists mcp:read and offline_access scopes; no authenticated task was called.
+    terms:
+      url: https://fred.stlouisfed.org/legal/
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Free personal access is subject to attribution and series-specific rights. API and MCP terms include
+        storage, caching and archiving restrictions; a documentation claim of download support is not blanket
+        permission to redistribute raw datasets or retain benchmark archives.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://fred.stlouisfed.org/docs/api/fred/
+      entry_url: https://api.stlouisfed.org/fred/
       docs: https://fred.stlouisfed.org/docs/api/fred/
       evidence:
         - docs
@@ -52,6 +74,61 @@ catalog:
           notes: >-
             Economic series observations and historical vintages; units, seasonal adjustment and revision
             cutoff must match the task.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [access]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: API request
+          scope: Published free API under service terms and data-owner restrictions.
+          evidence: [terms]
       notes: >-
-        A registered account can request an API key. Series units, seasonal adjustment, source and vintage
-        matter; not a stock-price provider.
+        Register a FRED account and request a distinct key for each application; each application user needs
+        their own key. This route describes the series-oriented V1 API, including ALFRED vintages; V2 bulk
+        release retrieval is documented separately. Missing observations and revisions need explicit handling.
+    - id: data-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.stlouisfed.org
+      docs: https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector
+      evidence: [mcp]
+      availability:
+        value: self_serve
+        evidence: [mcp]
+      personal_access:
+        value: documented
+        evidence: [mcp]
+      auth:
+        value: oauth
+        evidence: [mcp, mcp-auth]
+        notes: Browser sign-in and per-assistant authorization, using a FRED MCP Connector account.
+      capabilities:
+        macro.series:
+          value: documented
+          evidence: [mcp]
+          notes: Search, metadata, observations, download links and graphs; no API-route result inherited.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [mcp]
+      human_steps:
+        - step: Sign into the MCP Connector account and authorize the assistant in the browser.
+          stage: credentials
+          evidence: [mcp]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: MCP tool call
+          scope: Published free personal FRED access; host assistant costs and data-owner rights are separate.
+          evidence: [mcp, terms]
+      notes: >-
+        Account setup is separate from the traditional FRED account. Observations can be limited by date,
+        transformed or aggregated; inspect units, frequency and seasonal adjustment. A missing observation
+        is not zero, and the observation period differs from retrieval or publication date. Raw-data
+        retention and redistribution require review of the linked terms before an archived evaluation.

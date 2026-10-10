@@ -1,0 +1,102 @@
+id: nager-date
+name: Nager.Date
+category: web-search-data
+homepage: https://nagerholidays.com/
+summary: Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.
+submitted_by: community
+tags:
+  - public-holidays
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/public-holidays
+  sources:
+    api-docs:
+      url: https://nagerholidays.com/api
+      checked_on: '2026-10-08'
+      kind: official_docs
+    reference:
+      url: https://nagerholidays.com/scalar/#community-api-v4
+      checked_on: '2026-10-08'
+      kind: official_docs
+    project:
+      url: https://github.com/nager/Nager.Date
+      checked_on: '2026-10-08'
+      kind: official_repo
+    version-announcement:
+      url: https://github.com/nager/Nager.Date/issues/986
+      checked_on: '2026-10-08'
+      kind: official_announcement
+    free-community:
+      url: https://github.com/nager/Nager.Date/issues/986#issuecomment-5031919449
+      checked_on: '2026-10-08'
+      kind: official_announcement
+    germany-coverage:
+      url: https://github.com/nager/Nager.Date/blob/main/src/Nager.Date/HolidayProviders/GermanyHolidayProvider.cs
+      checked_on: '2026-10-08'
+      kind: official_repo
+    terms:
+      url: https://nagerholidays.com/legal/termsofservice
+      checked_on: '2026-10-08'
+      kind: official_site
+    integration:
+      url: https://nagerholidays.com/integration/getstarted
+      checked_on: '2026-10-08'
+      kind: official_docs
+  routes:
+    - id: community-api-v4
+      interface: api
+      maintainer: official
+      entry_url: https://nagerholidays.com/api/v4/Holidays
+      docs: https://nagerholidays.com/api
+      evidence: [api-docs, project, version-announcement]
+      availability:
+        value: self_serve
+        evidence: [api-docs, project]
+      personal_access:
+        value: documented
+        evidence: [terms]
+        notes: >-
+          Terms permit private or non-profit projects; commercial Web API use requires active sponsorship.
+          The reviewed wording does not require an individual to be a registered charity or obtain
+          organization approval. This is not permission to operate a holiday portal.
+      auth:
+        value: none
+        evidence: [api-docs, version-announcement]
+        notes: Public Community route; Pro API key and offline licence-key requirements are separate.
+      capabilities:
+        holidays.lookup:
+          value: documented
+          evidence: [api-docs, project, version-announcement, germany-coverage]
+          notes: >-
+            GET /api/v4/Holidays/{CountryCode}/{Year} returns date, English name, countryCode,
+            nationalHoliday, subdivisionCodes and holidayTypes. Current-year and up-to-five-year-future
+            coverage is described in the v4 announcement. Germany includes Berlin (DE-BE); regional
+            selection must include applicable nationwide entries and distinguish Public from other types.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [api-docs, version-announcement]
+        payment_method:
+          value: not_required
+          evidence: [api-docs, free-community, terms]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: eligible Community API request
+          scope: Private or non-profit use; commercial use requires active sponsorship at separately applicable terms.
+          evidence: [free-community, terms]
+      notes: >-
+        The API overview advertises no rate limits; this is not a measured throughput or availability
+        guarantee. The current official repository links nagerholidays.com and Community v4; its version
+        table lists v3 support ending 2027-01-31. Old date.nager.at landing-page redirection does not by
+        itself establish compatibility of every old API URL. v4 provides English names; do not assume
+        v3 localName or Pro observedDate/translations exist. First-level subdivision support does not
+        guarantee municipal coverage. Hosted API terms prohibit operating a holiday portal and disclaim
+        availability, accuracy and reliability. No explicit public-benchmark disclosure prohibition was
+        found in those terms. Keep raw holiday tables private for the planned non-commercial service
+        comparison; publish only verification summaries, hashes, conditions and usage/cost evidence.
+        Software MIT licensing does not override hosted-service terms; Docker/NuGet require a licence key.
+        Documentation and source coverage are not a live API result.

@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "run_id": "exa-pdf-scanned-table-001-ds41-r1",
+  "service_id": "exa",
+  "route_id": "public-mcp",
+  "entry_url": "https://mcp.exa.ai/mcp",
+  "task": {
+    "description": "我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。",
+    "inputs": "官方 PDF：https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf 。使用 TTB Gauging Manual 的 TABLE NO. 4 / GALLONS PER POUND，原文件共 21 页。目标是物理第 2 页（印刷页码 532）左半表，Proof 从 1.0 到 2.0，含两端，共 11 行。CSV 使用 UTF-8，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound；按 Proof 升序，保留原表印出的全部数值精度，不换算单位、不重新计算或四舍五入。通过本轮指定的内容提取服务取得此 PDF 的目标表文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载后本地解析或 OCR、裁剪重传后的 PDF，或仅取得原 PDF 链接/二进制替代服务对原 URL 的正文提取。若指定 URL 返回的目标表实质不同，请说明差异，不拼接其他版本。",
+    "expected_output": "一个真实存在、可解析的 UTF-8 CSV，包含指定范围内的 11 行和三列数据，按 Proof 升序；答复给出文件位置与指定 TTB 官方 PDF 来源链接。",
+    "success": "指定服务实际返回原 URL 的目标表内容；CSV 三列、11 行的 Proof 与两种 gallons per pound 数值对应准确，保留原表数值精度，无漏行、重复、额外行或顺序混淆；文件可用，答复含文件位置与官方来源。允许不改变数值的前导零、尾零及无损空白、换行差异。不要求特定解析库、服务返回格式、OCR 模式、页码字段、缓存策略或审计日志。",
+    "failure": "未通过指定服务取得目标表文字、只取得链接/二进制/搜索摘要、绕过服务取原文或用其他来源补答案、缺文件、CSV 不可解析、字段或任一数值错误、漏行重复、混入范围外数据、顺序不符、缺来源或预算内未完成。源文件或目标表实质变化、材料失效及执行环境故障须先核实并单列；额度拒绝、截断或无法提取只说明本轮入口和条件下的具体阻碍，不据此断言普遍 OCR 能力。",
+    "resources": "只对指定公开官方 PDF 做本题所需的小型提取，可查指定服务官方文档、在隔离环境安装通用依赖并自行编写整理代码。只用本轮确认允许的免费匿名入口或额度；不注册新身份、不登录 TTB、不提交表单、不写远端数据、不购买或开启付费超额。可复用已验收接入环境的安装和必要配置，但须由总控归档并清理上题原文、答案、业务脚本与会话；执行从新工作目录和新会话开始。请求及时间上限在 ENVIRONMENT.md 冻结，限流或额度不足时说明阻碍；运行器采集请求、响应和用量，执行者无需另写验收程序或审计日志。",
+    "id": "web-extraction-scanned-table-001",
+    "version": "v1",
+    "sha256": "f6ef4d0c89772b4959cdc60e3a3637735bb20780876b62028312c5b69f01097e",
+    "file": "data/experiments/tasks/web-extraction-pdf.md"
+  },
+  "prompt_sha256": "c03c0eae409db628e1a15ac2450c07652f3a4e80d794817235b868f25ecc340d",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T20:14:50.718553+00:00",
+  "ended_at": "2026-10-08T20:18:03.145785+00:00",
+  "elapsed_seconds": 192.427232,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public extraction routes, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "New scanned/mixed PDF business follow-up after independently completed anonymous PDF access on the same two owned runtimes. Prior native-PDF runs and original access remain immutable; no new access sample. Exact same image,2GiB/1CPU/pids256,pipTUNA, execution25requests/600s, grading40/300s,32000outputtokens/request. Retained config byte-identical to prior audited generic setup; no installed dependencies or query material in retained paths. Owned runtimes resumed with only baseline sleep/inspection processes; adapter archives previous home/workspace/tmp before each fresh session. Retention audit SHA256 0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213. Source PDF, page render, and visually transcribed numeric reference frozen by independent task-design role before queries; controller independently checked all selected values before dispatch. Text-only DeepSeek grader uses that frozen readable reference and actual candidate evidence; no claim that it visually read source images. Controller/reference preparation overhead unmetered. Maximum2 extraction calls per service (including retries), first403/429/402 stop,2consecutive connection failures stop; anonymous remaining quotas unknown. Same original URL and user request; no pre-cropped PDF or answer/helper delivered to executors. Business peers sealed before separate grading with no peer verdicts. Single small scanned-table sample, not general OCR reliability or regulatory advice.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "not_completed",
+  "reason": "用户委托的 11 行 CSV 未交付：指定服务 web_fetch_exa 对原 URL 两次返回同一 12017 字符劣质 OCR 正文（sha256 f29f0df5…），不含物理第2页/印刷532 左半表 Proof 1.0–2.0（Proof 标签最小 96.0，数值范围 0.03175–190.9，无 0.0005–0.003 区间值），因此未产生目标表文字；交付 CSV 仅表头，最终答复 execution/answer.md 仅为过程叙述、无文件位置与官方来源。另有执行违规：首次 MCP initialize 返回 HTTP 403（Cloudflare 1010 browser_signature_banned），ENVIRONMENT.md 要求首次 403 即停止，执行者却循环探测 User-Agent 并改 UA 为 Chrome 后继续初始化与提取，故两次提取发生在强制停止之后，只能记录“换 UA 重试返回了文本”，不能支撑合规的服务比较结论。该 403 属该入口对默认客户端的路由/环境条件，本次失败由“服务返回内容不含目标段”与“执行者违反停止规则”共同导致，不据此断言服务普遍不支持 OCR/PDF，也不归为环境失效。模型请求 25/25 耗尽、exit_code=1，时间约 3 分 13 秒（未超 600 秒）；提取调用 2 次（≤2，单一 URL）合规。",
+  "usage": {
+    "input_tokens": 709413,
+    "cached_input_tokens": 682112,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 36074,
+    "reasoning_output_tokens": 29926
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://exa.ai/docs/reference/exa-mcp"
+    ],
+    "applicability": {
+      "rule": "Official MCP documentation describes unauthenticated use as free subject to rate limits; this does not establish unlimited availability.",
+      "observed": "本次所有 MCP 调用均以 keyless 匿名方式对 https://mcp.exa.ai/mcp 发出：调用脚本 execution/artifacts/mcp_client.py 与 execution/artifacts/call_tool.py 的请求头仅含 Content-Type/Accept/MCP-Protocol-Version/User-Agent，未含 Authorization 或 x-api-key，也未连接 ?login OAuth；两次 web_fetch_exa 返回 HTTP 200。全程无付费/超额/绑卡行为。",
+      "evidence": "Frozen official route documentation and actual anonymous request/response facts; original independent judgment SHA256 cfcab0e9ebaa48126f90ffc7374294079fe416961e42adf12c3e04c63607d127."
+    },
+    "note": "匿名免费规则来自冻结官方文档；本次调用确为 keyless 匿名且在免费限流范围内，未观察到计费字段。匿名额度余量未知，但不影响本次免费适用结论。金额按 0 计。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader-deepseek-flash",
+    "reviewed_at": "2026-10-08T20:25:34.629016+00:00",
+    "checks": [
+      {
+        "criterion": "独立参考与被测源件一致，未发现源材料实质变化（reference.json / controller-reference-check.json 与 reference-sources 原件 sha256 相符）",
+        "passed": true,
+        "evidence": "reference.json、controller-reference-check.json、reference-sources/ttb-table-4.original.pdf、ttb-table-4.metadata.json 的 sha256 均为 9ec318069cf85acab2dac669f9fb3189d92dc200a0b0abd5f4a3843271a40150；metadata 记录 HTTP 200、721343 bytes；参考为同一源图逐项转录的 11 行×3 列。"
+      },
+      {
+        "criterion": "指定服务实际返回原 URL 的目标表正文（物理第2页/印刷532，Proof 1.0–2.0）",
+        "passed": false,
+        "evidence": "两次 web_fetch_exa（maxCharacters 300000 与 60000）返回同一 12017 字符文本，sha256 f29f0df5e4f2006f…；Proof 标签最小 96.0、最大 190.9，无 1.0–2.0；数值范围 0.03175–190.9，无 [0.0005,0.003] 区间值，0.12016/0.12021/0.12025 均不存在。见 grading/artifacts/evidence/service_output_facts.md 与 execution/artifacts/fetch1_raw.txt。"
+      },
+      {
+        "criterion": "交付真实可解析 UTF-8 CSV，三列 proof,wine_gallons_per_pound,proof_gallons_per_pound 且含 11 行 Proof 1.0–2.0 升序数据",
+        "passed": false,
+        "evidence": "execution/artifacts/table4_proof_1.0_to_2.0.csv 共 53 字节，仅一行表头，无任何数据行。"
+      },
+      {
+        "criterion": "11 行 33 个数值与冻结 reference 一致并保留原表精度，无漏行/重复/越界/顺序错乱",
+        "passed": false,
+        "evidence": "无数值行可比对；reference-sources/ttb-table-4-first-segment.expected.private.csv 的 11 行值（1.0,0.12016,0.00120 … 2.0,0.12025,0.00241）在交付 CSV 中全部缺失。"
+      },
+      {
+        "criterion": "答复给出 CSV 文件位置与指定 TTB 官方来源链接",
+        "passed": false,
+        "evidence": "execution/answer.md 仅 281 字符过程叙述（‘content looks like degraded OCR…’），无文件位置、无来源链接；官方链接仅出现在 artifacts/service_extraction_finding.md。"
+      },
+      {
+        "criterion": "遵守 ENVIRONMENT.md：首次 403/429/402 即停止、不换身份出口",
+        "passed": false,
+        "evidence": "首次 MCP initialize（python urllib 默认 UA）返回 HTTP 403 Cloudflare 1010 browser_signature_banned（'Do not retry'），执行者未停止，改以 curl/8.5.0、Chrome/124、空 UA 循环探测（均 200），再改客户端 UA 为 Chrome/124 继续 initialize、tools/list 与两次提取。见 grading/artifacts/evidence/stop_rule_sequence.md。"
+      },
+      {
+        "criterion": "目标提取调用不超过 2 次（含重试，每次仅一个本题 URL）",
+        "passed": true,
+        "evidence": "仅两次 web_fetch_exa 调用（fetch1 maxCharacters=300000、fetch2 maxCharacters=60000），urls 均只含本题单个 Table_4.pdf URL。"
+      },
+      {
+        "criterion": "模型请求数在冻结预算 25 内、时间在 600 秒内",
+        "passed": true,
+        "evidence": "measured.json/model-cost.json 记录 25 次模型请求（等于上限 25，未超出）；started 20:14:50、ended 20:18:03，约 193 秒 < 600 秒。"
+      },
+      {
+        "criterion": "在预算内完成用户交付",
+        "passed": false,
+        "evidence": "25/25 模型请求耗尽，receipt exit_code=1；最终答复仍为过程叙述，CSV 仅表头，未产出 11 行数据，属‘预算内未完成’。"
+      },
+      {
+        "criterion": "未以其他网页、搜索摘要、模型记忆、本地下载解析/OCR 或拼接其他版本补值",
+        "passed": true,
+        "evidence": "交付 CSV 未填任何数值行，service_extraction_finding.md 明确未采用公式/记忆/其他来源补齐；未发现绕过指定服务的取值。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "pdf-scanned-table-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "b19ac52afc885e7ac554a49b243172fb21ced0d796eb32c8c5676f4650e24d15",
+      "run_ids": [
+        "firecrawl-pdf-scanned-table-001-ds41-r1",
+        "exa-pdf-scanned-table-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "firecrawl-pdf-scanned-table-001-ds41-r1",
+        "exa-pdf-scanned-table-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.089952372,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading-attempt2",
+          "amount_usd": 0.051824532,
+          "usage_sha256": "ea338943e43d8dbba41bb996bb535aac6c8b46dd800489b6665671f4c0d30250"
+        },
+        {
+          "attempt": "grading",
+          "amount_usd": 0.03812784,
+          "usage_sha256": "d44e18e302f2bfc8edd526c600d004af83042376d6e8cda6a959aea5fadefe88"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/exa-pdf-scanned-table-001-ds41-r1/public-review/verification.json",
+      "sha256": "65cc598731650a1dd460e1ccdbe840bff81435a05f255b585c024c265d16ef15",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full source documents and raw service responses remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/pdf-ocr-deepseek-overnight-20261008/exa-pdf-scanned-table-001-ds41-r1",
+    "run_sha256": "76c380f72c749579658499cf0aa2b284336a57a0e86bf0fb42bce4ba462423a8",
+    "events_sha256": "1c73140b297d3ee3b49ba9028987f56a2c09259cf105ff0264638a74acc09462",
+    "answer_sha256": "15cd5d372122b4700cc67b34da4340efd2f64beb96583037a696a7a6df613038",
+    "review_sha256": "239c04443c0ae7c7dd40c8fbd86d7420fec4c301bb9c9ddcec67dab0acc5ef9e",
+    "original_independent_review_sha256": "900b3c0f71f3350008eaa702df0721b0b67a4ccebffdbf5be9e6d80379ebced1",
+    "selected_independent_review_sha256": "cfcab0e9ebaa48126f90ffc7374294079fe416961e42adf12c3e04c63607d127",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete PDF, raw responses and transcripts stay private. Independent verdict, reason and checks preserved. Original21-page scanned/mixed source, selected eleven-row scope, anonymous conditions, actual parsing/truncation limits and audited reuse of independently reviewed setup disclosed. Text-only grader uses pre-dispatch visual transcription and controller cross-check; original source layer incompleteness is not a candidate verdict. Selected a separate independent stop-rule exception review from the same unchanged execution, because the initial compliance check overlooked continued requests after first403. Both grading attempts are accounted for; no execution rerun. Official fee-rule wording paraphrased and source objects projected to their frozen official URL; original source wording preserved privately with hash."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7217,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8486,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 289,
+        "reasoning_output_tokens": 110
+      },
+      {
+        "input_tokens": 10072,
+        "cached_input_tokens": 8704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 286,
+        "reasoning_output_tokens": 91
+      },
+      {
+        "input_tokens": 10610,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 735,
+        "reasoning_output_tokens": 513
+      },
+      {
+        "input_tokens": 11610,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 903,
+        "reasoning_output_tokens": 153
+      },
+      {
+        "input_tokens": 12529,
+        "cached_input_tokens": 12288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 81,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12889,
+        "cached_input_tokens": 12544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 979,
+        "reasoning_output_tokens": 742
+      },
+      {
+        "input_tokens": 13949,
+        "cached_input_tokens": 13696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 304,
+        "reasoning_output_tokens": 77
+      },
+      {
+        "input_tokens": 14268,
+        "cached_input_tokens": 14080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 130,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 14624,
+        "cached_input_tokens": 14336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 100,
+        "reasoning_output_tokens": 41
+      },
+      {
+        "input_tokens": 15986,
+        "cached_input_tokens": 14720,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1062,
+        "reasoning_output_tokens": 305
+      },
+      {
+        "input_tokens": 17064,
+        "cached_input_tokens": 16896,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 194,
+        "reasoning_output_tokens": 49
+      },
+      {
+        "input_tokens": 17320,
+        "cached_input_tokens": 17152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 71,
+        "reasoning_output_tokens": 11
+      },
+      {
+        "input_tokens": 18474,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 411,
+        "reasoning_output_tokens": 289
+      },
+      {
+        "input_tokens": 18909,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 61,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28730,
+        "cached_input_tokens": 18944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 11765,
+        "reasoning_output_tokens": 11594
+      },
+      {
+        "input_tokens": 41564,
+        "cached_input_tokens": 40448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1944,
+        "reasoning_output_tokens": 1627
+      },
+      {
+        "input_tokens": 43559,
+        "cached_input_tokens": 43392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 408,
+        "reasoning_output_tokens": 99
+      },
+      {
+        "input_tokens": 44278,
+        "cached_input_tokens": 43904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7175,
+        "reasoning_output_tokens": 7007
+      },
+      {
+        "input_tokens": 52709,
+        "cached_input_tokens": 51328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1602,
+        "reasoning_output_tokens": 1339
+      },
+      {
+        "input_tokens": 54403,
+        "cached_input_tokens": 54144,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 589,
+        "reasoning_output_tokens": 340
+      },
+      {
+        "input_tokens": 55307,
+        "cached_input_tokens": 54912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5564,
+        "reasoning_output_tokens": 5170
+      },
+      {
+        "input_tokens": 61073,
+        "cached_input_tokens": 60800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 408,
+        "reasoning_output_tokens": 304
+      },
+      {
+        "input_tokens": 61497,
+        "cached_input_tokens": 61312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 773,
+        "reasoning_output_tokens": 17
+      },
+      {
+        "input_tokens": 62286,
+        "cached_input_tokens": 62080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 122,
+        "reasoning_output_tokens": 39
+      }
+    ],
+    "source_sha256": "97ef13d12a4cb06ed8333cc681059d4ff8a9a3fabee583ebe3363cd0ac39a65f",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 709413,
+      "cached_input_tokens": 682112,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 36074,
+      "reasoning_output_tokens": 29926
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

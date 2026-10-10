@@ -11,28 +11,46 @@ catalog:
   sources:
     api:
       url: https://support.getgrist.com/api/
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     auth:
       url: https://support.getgrist.com/rest-api/
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://www.getgrist.com/pricing/
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_site
     mcp:
       url: https://support.getgrist.com/mcp/
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
+    formulas:
+      url: https://support.getgrist.com/formulas/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    limits:
+      url: https://support.getgrist.com/limits/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    signup:
+      url: https://support.getgrist.com/getting-started/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://www.getgrist.com/terms/
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: rest-api
       docs: https://support.getgrist.com/api/
       interface: api
       maintainer: official
-      entry_url: https://support.getgrist.com/api/
+      entry_url: https://docs.getgrist.com/api
       evidence:
         - api
+        - auth
+        - limits
       availability:
         value: self_serve
         evidence:
@@ -54,10 +72,28 @@ catalog:
           value: documented
           evidence:
             - api
+        records.calculate:
+          value: documented
+          evidence: [api, formulas]
+          notes: REST supports formula columns and record reads and updates; Grist maintains formula results as document data changes.
       notes: >-
-        Account API key grants the user’s existing access. Use a separate free test account;
-        personal site is freely available.
+        Hosted documents remain editable online; the API can create documents, tables and records rather
+        than only store opaque data. The account key inherits the user's access. Personal documents use
+        docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site,
+        with up to 5 requests/second/document and 10 concurrent document requests. A new blank workspace
+        can be the test container without prebuilding business fields. Current signup gates still require
+        observation; documented access is not a registration or task result.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - signup
       human_steps:
+        - stage: signup
+          step: Create a Grist account at docs.getgrist.com and use its free personal site; email or Google sign-in is documented.
+          evidence:
+            - signup
+            - mcp
         - stage: credentials
           step: Sign in and generate an API key in account settings.
           evidence:
@@ -67,8 +103,16 @@ catalog:
           amount: 5000
           unit: records
           per: document
-          scope: Hosted Free plan; API quota must also be checked for the selected site.
+          scope: Hosted Free plan; total rows across all tables in one document.
           evidence:
+            - pricing
+        - kind: free_allowance
+          amount: 3000
+          unit: API calls
+          per: site/month
+          scope: Shared REST and MCP pool across documents on the Free personal or team site.
+          evidence:
+            - limits
             - pricing
     - id: hosted-mcp
       docs: https://support.getgrist.com/mcp/
@@ -77,6 +121,7 @@ catalog:
       entry_url: https://docs.getgrist.com/api/mcp
       evidence:
         - mcp
+        - limits
       availability:
         value: self_serve
         evidence:
@@ -98,9 +143,20 @@ catalog:
           value: documented
           evidence:
             - mcp
+        records.calculate:
+          value: documented
+          evidence: [mcp, formulas]
+          notes: Hosted MCP can change column formulas and read and update records; calculations use the same Grist document engine as REST.
       notes: >-
-        Hosted server accepts API keys or interactive OAuth; available on all plans. Calls share the
-        API pool.
+        Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. Documented tools
+        include create_doc, create_table, add_table_column and record updates, so an existing business
+        schema is not a documented prerequisite. Calls share the Free site's 3000-call monthly API pool;
+        no separate allowance is implied. Documents can subsequently be opened and edited in Grist.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - mcp
     - id: python-sdk
       docs: https://support.getgrist.com/rest-api/
       interface: sdk
@@ -129,4 +185,6 @@ catalog:
       notes: >-
         Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch
         returned 403 during public research, not a service failure.
-  notes: []
+  notes:
+    - Hosted Free includes unlimited documents, 5000 rows/document, 1 GB attachments/document, 30-day history and two guests/document. This records hosted limits, not unlimited self-hosted capacity.
+    - No benchmark-specific or performance-analysis disclosure prohibition was found in the reviewed EULA. Sections 3.2–3.5 restrict disruption, reverse engineering and software redistribution; section 4.4 makes users responsible for their own content. This is not a blanket publication license.

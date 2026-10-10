@@ -13,10 +13,11 @@ import subprocess
 import sys
 import tarfile
 from config import load, ssh
+from providers import DEFAULT_PROVIDER
+from runtime_code import WORKER_FILES
 
 HERE = Path(__file__).resolve().parent
 LABEL = 'org.agent-friendly-services.runner'
-WORKER_FILES = ('worker.py', 'normalize.py', 'capture-proxy.py')
 
 
 def archive(files):
@@ -32,7 +33,7 @@ def archive(files):
 
 def run(config, action):
     owner = hashlib.sha256(config['remote_root'].encode()).hexdigest()[:16]
-    image = config.get('image', 'afs-opencode:1.18.29')
+    image = config.get('image', 'afs-opencode:1.18.35')
 
     def docker(*args, data=None):
         return ssh(config, ['sudo', '-n', 'docker', *args], data=data)
@@ -66,7 +67,7 @@ def run(config, action):
             raise ValueError('key_file must be an absolute private path')
         key = key_path.read_bytes().strip()
         if not key:
-            raise ValueError('Empty Coding Plan key file')
+            raise ValueError('Empty model provider key file')
         ssh(config, ['mkdir', '-p', '-m', '700', config['remote_root'] + '/runs'])
         ssh(config, ['chmod', '700', config['remote_root'], config['remote_root'] + '/runs'])
 
@@ -86,11 +87,14 @@ def run(config, action):
         docker('start', name)
         docker('exec', '-u', '0', name, 'install', '-d', '-m', '700', '/run/afs')
         files = {f: (HERE/f).read_bytes() for f in WORKER_FILES}
-        files['bigmodel.key'] = key
+        files['model.key'] = key
+        files['provider.json'] = json.dumps({'provider': config.get('provider', DEFAULT_PROVIDER)}).encode()
         docker('exec', '-i', '-u', '0', name, 'tar', '-xf', '-', '-C', '/run/afs', data=archive(files))
         version = docker('exec', name, 'opencode', '--version').stdout.decode().strip()
         info = json.loads(docker('inspect', name).stdout)[0]
-        result[runtime] = {'container': name, 'image_id': info['Image'], 'opencode_version': version,
+        result[runtime] = {'container': name, 'provider': config.get('provider', DEFAULT_PROVIDER),
+                           'runner_source_sha256': {f: hashlib.sha256(files[f]).hexdigest() for f in WORKER_FILES},
+                           'image_id': info['Image'], 'opencode_version': version,
                            'memory_bytes': info['HostConfig']['Memory'], 'nano_cpus': info['HostConfig']['NanoCpus'],
                            'pids_limit': info['HostConfig']['PidsLimit']}
     return result

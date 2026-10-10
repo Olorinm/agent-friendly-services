@@ -1,0 +1,1614 @@
+{
+  "notice": "Selections from actual independent controller receipts frozen before grading. Each raw response SHA identifies privately retained bytes, not this redacted public representation. Initial state was read after executor containers stopped; only predeclared source-ledger append and amount correction followed, no formula/schema/summary repairs. Model graders had no live credentials.",
+  "original_independent_assessment_sha256": "d6f48eed153109ab499637073250824e3502570d6bf4a9624b5cbeaedfdb92c9",
+  "independent_status": "completed",
+  "independent_reason": "执行者通过指定入口（Grist 官方托管 MCP）在本轮专属新文档建立了真实在线账本：独立初态回执确认六笔明细逐条与输入一致，服务端自动汇总（总支出2400.00、林青已付2095.60、周舟已付304.40、各应分摊1200.00、周舟需补给林青895.60）与初次答复及独立基准一致，答复给出私人链接并说明在“支出明细”表继续记账。执行者停止后，总控仅追加一笔、再修正一笔金额，服务端汇总分别自动重算为 2442.40/874.40 与 2422.40/864.40，公式与结构未变，证明汇总由明细持续计算。资源在免费 Personal 额度内，未新建文档、未分享/邀请/通知/支付/转账。",
+  "manifest_sha256": "47ea18a10fdd5a733d65d903df29ffef6c853631000992b577b4bb40d7c09b4e",
+  "manifest": {
+    "stages": [
+      "initial",
+      "after-append",
+      "after-correction"
+    ],
+    "verified_resources_sha256": "6249fe80e9070fffe7a2307538441cb39366c1ed7040d5c89eed3ce8a4e80e5a",
+    "notice": "Actual controller GET and predeclared ledger-row mutation receipts. Initial state captured after execution stopped; later snapshots only if safe source-column mapping established. These are facts, not a completion verdict. Controller did not change formula/schema/summary cells. Metadata reduced to resource binding and non-identifying entitlement. Raw hashes refer to retained private originals. Controller calls separate from execution; no remaining quota claim. Final verification state retained as disclosed in input."
+  },
+  "snapshots": [
+    {
+      "manifest": {
+        "stage": "initial",
+        "at": "2026-10-08T20:49:35.100720+00:00",
+        "complete": true,
+        "doc_id": "[SERVICE_SECRET]",
+        "workspace_id": "[SERVICE_SECRET]",
+        "collector_code_sha256": "e6fe75df266caa3058adb389bc73db4f11378ef5431da6eceeafc5e4e123b8f4",
+        "execution_receipt_sha256": "e273d0a498ef0a1d0f93e28533049edadf4214a9ec2025af32ec8396556d9b7e",
+        "requests": [
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]",
+            "at": "2026-10-08T20:49:35.110332+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "01-metadata.json",
+            "sha256": "35da2c6477a51ec45c4a6ed3020f61b70eaff636eaa716a84c7d56134658f9d4",
+            "ended_at": "2026-10-08T20:49:35.866074+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables",
+            "at": "2026-10-08T20:49:35.867984+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-tables.json",
+            "sha256": "5b1a4f816e6cb35c9f3e395d164d3ae48a6c1cb9f6a61fe5d26878eb283cecb9",
+            "ended_at": "2026-10-08T20:49:36.755779+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/columns",
+            "at": "2026-10-08T20:49:36.757521+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-columns-Table1.json",
+            "sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+            "ended_at": "2026-10-08T20:49:37.598818+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:49:37.600126+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:49:38.555989+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/columns",
+            "at": "2026-10-08T20:49:38.557797+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "05-columns-Expenses.json",
+            "sha256": "5a8c8dfaf606dd118799e388d1b2a83042e18592b930ea46e551b2f08323d741",
+            "ended_at": "2026-10-08T20:49:39.317193+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:49:39.318746+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "06-records-Expenses.json",
+            "sha256": "959e3d0ae8f8235a6b1e77ad17733c5e34883832c7f12546de0c0e0647da94f2",
+            "ended_at": "2026-10-08T20:49:40.075078+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/columns",
+            "at": "2026-10-08T20:49:40.076220+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "07-columns-Settlement.json",
+            "sha256": "9b12a903a9713812b29ef9eec585ec0b46c0c630c6579688f9fc0fef2caba6e0",
+            "ended_at": "2026-10-08T20:49:40.834344+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:49:40.835731+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "08-records-Settlement.json",
+            "sha256": "4f3746ced18fe11b79424c4f6fa5224fa9e72471c157b40fe3a893ec0c17f77b",
+            "ended_at": "2026-10-08T20:49:41.590634+00:00"
+          }
+        ],
+        "scope": "Controller verification overhead separate from executor. Only fixed owned document read; at most one predefined append and one amount correction, no formula/schema/summary changes. No evaluator credentials.",
+        "ended_at": "2026-10-08T20:49:41.592126+00:00",
+        "cumulative_controller_requests": 8
+      },
+      "responses": [
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]",
+            "at": "2026-10-08T20:49:35.110332+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "01-metadata.json",
+            "sha256": "35da2c6477a51ec45c4a6ed3020f61b70eaff636eaa716a84c7d56134658f9d4",
+            "ended_at": "2026-10-08T20:49:35.866074+00:00"
+          },
+          "observed_response": {
+            "id": "[SERVICE_SECRET]",
+            "name": "[SERVICE_SECRET]",
+            "urlId": "[SERVICE_SECRET]",
+            "access": "owners",
+            "workspace": {
+              "id": "[SERVICE_SECRET]",
+              "name": "[SERVICE_SECRET]"
+            },
+            "entitlement": {
+              "product": {
+                "id": 8,
+                "name": "personalFree",
+                "features": {
+                  "workspaces": true,
+                  "maxSharesPerWorkspace": 0,
+                  "maxSharesPerDoc": 2,
+                  "snapshotWindow": {
+                    "count": 30,
+                    "unit": "days"
+                  },
+                  "baseMaxRowsPerDocument": 5000,
+                  "baseMaxDataSizePerDocument": 10240000,
+                  "baseMaxAttachmentsBytesPerDocument": 1073741824,
+                  "maxAttachmentsBytesPerOrg": 53687091200,
+                  "maxApiCallsPerOrgMonth": 3000,
+                  "gracePeriodDays": 14,
+                  "baseMaxAssistantCalls": 100
+                }
+              },
+              "individual": true,
+              "inGoodStanding": true,
+              "stripePlanId_is_null": true
+            },
+            "remaining_monthly_quota": "unknown"
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables",
+            "at": "2026-10-08T20:49:35.867984+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-tables.json",
+            "sha256": "5b1a4f816e6cb35c9f3e395d164d3ae48a6c1cb9f6a61fe5d26878eb283cecb9",
+            "ended_at": "2026-10-08T20:49:36.755779+00:00"
+          },
+          "observed_response": {
+            "tables": [
+              {
+                "id": "Table1",
+                "fields": {
+                  "tableRef": 1,
+                  "primaryViewId": 1,
+                  "summarySourceTable": 0,
+                  "onDemand": false,
+                  "rawViewSectionRef": 2,
+                  "recordCardViewSectionRef": 3
+                }
+              },
+              {
+                "id": "Expenses",
+                "fields": {
+                  "tableRef": 2,
+                  "primaryViewId": 2,
+                  "summarySourceTable": 0,
+                  "onDemand": false,
+                  "rawViewSectionRef": 5,
+                  "recordCardViewSectionRef": 6
+                }
+              },
+              {
+                "id": "Settlement",
+                "fields": {
+                  "tableRef": 3,
+                  "primaryViewId": 3,
+                  "summarySourceTable": 0,
+                  "onDemand": false,
+                  "rawViewSectionRef": 8,
+                  "recordCardViewSectionRef": 9
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/columns",
+            "at": "2026-10-08T20:49:36.757521+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-columns-Table1.json",
+            "sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+            "ended_at": "2026-10-08T20:49:37.598818+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "A",
+                "fields": {
+                  "colRef": 2,
+                  "label": "A",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 2,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "B",
+                "fields": {
+                  "colRef": 3,
+                  "label": "B",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 3,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "C",
+                "fields": {
+                  "colRef": 4,
+                  "label": "C",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 4,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:49:37.600126+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:49:38.555989+00:00"
+          },
+          "observed_response": {
+            "records": []
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/columns",
+            "at": "2026-10-08T20:49:38.557797+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "05-columns-Expenses.json",
+            "sha256": "5a8c8dfaf606dd118799e388d1b2a83042e18592b930ea46e551b2f08323d741",
+            "ended_at": "2026-10-08T20:49:39.317193+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "Date",
+                "fields": {
+                  "colRef": 6,
+                  "label": "日期",
+                  "isFormula": false,
+                  "type": "Date",
+                  "parentId": 2,
+                  "parentPos": 6,
+                  "widgetOptions": "{\"dateFormat\":\"YYYY-MM-DD\",\"isCustomDateFormat\":false}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Purpose",
+                "fields": {
+                  "colRef": 7,
+                  "label": "用途",
+                  "isFormula": false,
+                  "type": "Text",
+                  "parentId": 2,
+                  "parentPos": 7,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Payer",
+                "fields": {
+                  "colRef": 8,
+                  "label": "付款人",
+                  "isFormula": false,
+                  "type": "Choice",
+                  "parentId": 2,
+                  "parentPos": 8,
+                  "widgetOptions": "{\"choices\":[\"林青\",\"周舟\"]}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Amount",
+                "fields": {
+                  "colRef": 9,
+                  "label": "金额（元）",
+                  "isFormula": false,
+                  "type": "Numeric",
+                  "parentId": 2,
+                  "parentPos": 9,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:49:39.318746+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "06-records-Expenses.json",
+            "sha256": "959e3d0ae8f8235a6b1e77ad17733c5e34883832c7f12546de0c0e0647da94f2",
+            "ended_at": "2026-10-08T20:49:40.075078+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Date": 1790812800,
+                  "Purpose": "房租",
+                  "Payer": "林青",
+                  "Amount": 1800
+                }
+              },
+              {
+                "id": 2,
+                "fields": {
+                  "Date": 1790899200,
+                  "Purpose": "超市采购（一）",
+                  "Payer": "周舟",
+                  "Amount": 156.4
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "Date": 1790985600,
+                  "Purpose": "电费",
+                  "Payer": "林青",
+                  "Amount": 92.6
+                }
+              },
+              {
+                "id": 4,
+                "fields": {
+                  "Date": 1791072000,
+                  "Purpose": "家居用品",
+                  "Payer": "周舟",
+                  "Amount": 48
+                }
+              },
+              {
+                "id": 5,
+                "fields": {
+                  "Date": 1791158400,
+                  "Purpose": "宽带",
+                  "Payer": "周舟",
+                  "Amount": 100
+                }
+              },
+              {
+                "id": 6,
+                "fields": {
+                  "Date": 1791331200,
+                  "Purpose": "超市采购（二）",
+                  "Payer": "林青",
+                  "Amount": 203
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/columns",
+            "at": "2026-10-08T20:49:40.076220+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "07-columns-Settlement.json",
+            "sha256": "9b12a903a9713812b29ef9eec585ec0b46c0c630c6579688f9fc0fef2caba6e0",
+            "ended_at": "2026-10-08T20:49:40.834344+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "Period",
+                "fields": {
+                  "colRef": 11,
+                  "label": "账期",
+                  "isFormula": false,
+                  "type": "Text",
+                  "parentId": 3,
+                  "parentPos": 11,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "TotalExpense",
+                "fields": {
+                  "colRef": 12,
+                  "label": "总支出",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 12,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.all)",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinPaid",
+                "fields": {
+                  "colRef": 13,
+                  "label": "林青已付",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 13,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.lookupRecords(Payer=\"林青\"))",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouPaid",
+                "fields": {
+                  "colRef": 14,
+                  "label": "周舟已付",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 14,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.lookupRecords(Payer=\"周舟\"))",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinShare",
+                "fields": {
+                  "colRef": 15,
+                  "label": "林青应分摊",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 15,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$TotalExpense / 2",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouShare",
+                "fields": {
+                  "colRef": 16,
+                  "label": "周舟应分摊",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 16,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$TotalExpense / 2",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinAdjust",
+                "fields": {
+                  "colRef": 17,
+                  "label": "林青需补（正=应付）",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 17,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$LinShare - $LinPaid",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouAdjust",
+                "fields": {
+                  "colRef": 18,
+                  "label": "周舟需补（正=应付）",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 18,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$ZhouShare - $ZhouPaid",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Summary",
+                "fields": {
+                  "colRef": 19,
+                  "label": "结算结果",
+                  "isFormula": true,
+                  "type": "Text",
+                  "parentId": 3,
+                  "parentPos": 19,
+                  "widgetOptions": "",
+                  "formula": "if $LinAdjust > 0:\n  return \"林青需补给周舟 %.2f 元\" % $LinAdjust\nif $ZhouAdjust > 0:\n  return \"周舟需补给林青 %.2f 元\" % $ZhouAdjust\nreturn \"两人已结清\"",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:49:40.835731+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "08-records-Settlement.json",
+            "sha256": "4f3746ced18fe11b79424c4f6fa5224fa9e72471c157b40fe3a893ec0c17f77b",
+            "ended_at": "2026-10-08T20:49:41.590634+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Period": "2026年10月",
+                  "TotalExpense": 2400,
+                  "LinPaid": 2095.6,
+                  "ZhouPaid": 304.4,
+                  "LinShare": 1200,
+                  "ZhouShare": 1200,
+                  "LinAdjust": -895.5999999999999,
+                  "ZhouAdjust": 895.6,
+                  "Summary": "周舟需补给林青 895.60 元"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "manifest": {
+        "stage": "after-append",
+        "at": "2026-10-08T20:51:07.632294+00:00",
+        "complete": true,
+        "doc_id": "[SERVICE_SECRET]",
+        "workspace_id": "[SERVICE_SECRET]",
+        "collector_code_sha256": "e6fe75df266caa3058adb389bc73db4f11378ef5431da6eceeafc5e4e123b8f4",
+        "execution_receipt_sha256": "e273d0a498ef0a1d0f93e28533049edadf4214a9ec2025af32ec8396556d9b7e",
+        "requests": [
+          {
+            "method": "POST",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:07.636885+00:00",
+            "payload": {
+              "records": [
+                {
+                  "fields": {
+                    "Date": 1791417600,
+                    "Purpose": "清洁用品",
+                    "Payer": "周舟",
+                    "Amount": 42.4
+                  }
+                }
+              ]
+            },
+            "status": 200,
+            "body_file": "01-mutation.json",
+            "sha256": "6c0a7a53a194f18649a358e1b5e3bccb67d25072715a4c4e65ac472e5aeacfa0",
+            "ended_at": "2026-10-08T20:51:10.302285+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:51:10.304354+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:51:11.075781+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:11.077833+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-records-Expenses.json",
+            "sha256": "0aa8c5d740b9df6589bfcf51672b8e833f594d6edae2f83e84334a2b9a2d85b6",
+            "ended_at": "2026-10-08T20:51:11.820699+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:51:11.822461+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-records-Settlement.json",
+            "sha256": "ccda9fe4ec2f06da3bc1a413b346e967b123ea485bb05125cfb100a77f4b260f",
+            "ended_at": "2026-10-08T20:51:12.578281+00:00"
+          }
+        ],
+        "scope": "Controller verification overhead separate from executor. Only fixed owned document read; at most one predefined append and one amount correction, no formula/schema/summary changes. No evaluator credentials.",
+        "ended_at": "2026-10-08T20:51:12.580391+00:00",
+        "cumulative_controller_requests": 12
+      },
+      "responses": [
+        {
+          "receipt": {
+            "method": "POST",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:07.636885+00:00",
+            "payload": {
+              "records": [
+                {
+                  "fields": {
+                    "Date": 1791417600,
+                    "Purpose": "清洁用品",
+                    "Payer": "周舟",
+                    "Amount": 42.4
+                  }
+                }
+              ]
+            },
+            "status": 200,
+            "body_file": "01-mutation.json",
+            "sha256": "6c0a7a53a194f18649a358e1b5e3bccb67d25072715a4c4e65ac472e5aeacfa0",
+            "ended_at": "2026-10-08T20:51:10.302285+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 7
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:51:10.304354+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:51:11.075781+00:00"
+          },
+          "observed_response": {
+            "records": []
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:11.077833+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-records-Expenses.json",
+            "sha256": "0aa8c5d740b9df6589bfcf51672b8e833f594d6edae2f83e84334a2b9a2d85b6",
+            "ended_at": "2026-10-08T20:51:11.820699+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Date": 1790812800,
+                  "Purpose": "房租",
+                  "Payer": "林青",
+                  "Amount": 1800
+                }
+              },
+              {
+                "id": 2,
+                "fields": {
+                  "Date": 1790899200,
+                  "Purpose": "超市采购（一）",
+                  "Payer": "周舟",
+                  "Amount": 156.4
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "Date": 1790985600,
+                  "Purpose": "电费",
+                  "Payer": "林青",
+                  "Amount": 92.6
+                }
+              },
+              {
+                "id": 4,
+                "fields": {
+                  "Date": 1791072000,
+                  "Purpose": "家居用品",
+                  "Payer": "周舟",
+                  "Amount": 48
+                }
+              },
+              {
+                "id": 5,
+                "fields": {
+                  "Date": 1791158400,
+                  "Purpose": "宽带",
+                  "Payer": "周舟",
+                  "Amount": 100
+                }
+              },
+              {
+                "id": 6,
+                "fields": {
+                  "Date": 1791331200,
+                  "Purpose": "超市采购（二）",
+                  "Payer": "林青",
+                  "Amount": 203
+                }
+              },
+              {
+                "id": 7,
+                "fields": {
+                  "Date": 1791417600,
+                  "Purpose": "清洁用品",
+                  "Payer": "周舟",
+                  "Amount": 42.4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:51:11.822461+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-records-Settlement.json",
+            "sha256": "ccda9fe4ec2f06da3bc1a413b346e967b123ea485bb05125cfb100a77f4b260f",
+            "ended_at": "2026-10-08T20:51:12.578281+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Period": "2026年10月",
+                  "TotalExpense": 2442.4,
+                  "LinPaid": 2095.6,
+                  "ZhouPaid": 346.79999999999995,
+                  "LinShare": 1221.2,
+                  "ZhouShare": 1221.2,
+                  "LinAdjust": -874.3999999999999,
+                  "ZhouAdjust": 874.4000000000001,
+                  "Summary": "周舟需补给林青 874.40 元"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "manifest": {
+        "stage": "after-correction",
+        "at": "2026-10-08T20:51:12.583187+00:00",
+        "complete": true,
+        "doc_id": "[SERVICE_SECRET]",
+        "workspace_id": "[SERVICE_SECRET]",
+        "collector_code_sha256": "e6fe75df266caa3058adb389bc73db4f11378ef5431da6eceeafc5e4e123b8f4",
+        "execution_receipt_sha256": "e273d0a498ef0a1d0f93e28533049edadf4214a9ec2025af32ec8396556d9b7e",
+        "requests": [
+          {
+            "method": "PATCH",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:12.593621+00:00",
+            "payload": {
+              "records": [
+                {
+                  "id": 6,
+                  "fields": {
+                    "Amount": 183.0
+                  }
+                }
+              ]
+            },
+            "status": 200,
+            "body_file": "01-mutation.json",
+            "sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "ended_at": "2026-10-08T20:51:13.350937+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/columns",
+            "at": "2026-10-08T20:51:13.352174+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-columns-Table1.json",
+            "sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+            "ended_at": "2026-10-08T20:51:14.133935+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:51:14.135753+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:51:14.871694+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/columns",
+            "at": "2026-10-08T20:51:14.872725+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-columns-Expenses.json",
+            "sha256": "5a8c8dfaf606dd118799e388d1b2a83042e18592b930ea46e551b2f08323d741",
+            "ended_at": "2026-10-08T20:51:15.630206+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:15.632487+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "05-records-Expenses.json",
+            "sha256": "61974d9b259905d0c3ff970c0a585b938f0b8d3174579d9ac9faa7d8f1411844",
+            "ended_at": "2026-10-08T20:51:16.385422+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/columns",
+            "at": "2026-10-08T20:51:16.387273+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "06-columns-Settlement.json",
+            "sha256": "9b12a903a9713812b29ef9eec585ec0b46c0c630c6579688f9fc0fef2caba6e0",
+            "ended_at": "2026-10-08T20:51:17.137675+00:00"
+          },
+          {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:51:17.139338+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "07-records-Settlement.json",
+            "sha256": "22cc4902fdc48d8c8c9dea39c7428ff521e366d3425bf69b23d2f78f9be7d21e",
+            "ended_at": "2026-10-08T20:51:17.892890+00:00"
+          }
+        ],
+        "scope": "Controller verification overhead separate from executor. Only fixed owned document read; at most one predefined append and one amount correction, no formula/schema/summary changes. No evaluator credentials.",
+        "ended_at": "2026-10-08T20:51:17.894516+00:00",
+        "cumulative_controller_requests": 19
+      },
+      "responses": [
+        {
+          "receipt": {
+            "method": "PATCH",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:12.593621+00:00",
+            "payload": {
+              "records": [
+                {
+                  "id": 6,
+                  "fields": {
+                    "Amount": 183.0
+                  }
+                }
+              ]
+            },
+            "status": 200,
+            "body_file": "01-mutation.json",
+            "sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+            "ended_at": "2026-10-08T20:51:13.350937+00:00"
+          },
+          "observed_response": null
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/columns",
+            "at": "2026-10-08T20:51:13.352174+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "02-columns-Table1.json",
+            "sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+            "ended_at": "2026-10-08T20:51:14.133935+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "A",
+                "fields": {
+                  "colRef": 2,
+                  "label": "A",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 2,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "B",
+                "fields": {
+                  "colRef": 3,
+                  "label": "B",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 3,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "C",
+                "fields": {
+                  "colRef": 4,
+                  "label": "C",
+                  "isFormula": true,
+                  "type": "Any",
+                  "parentId": 1,
+                  "parentPos": 4,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": false,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Table1/records",
+            "at": "2026-10-08T20:51:14.135753+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "03-records-Table1.json",
+            "sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+            "ended_at": "2026-10-08T20:51:14.871694+00:00"
+          },
+          "observed_response": {
+            "records": []
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/columns",
+            "at": "2026-10-08T20:51:14.872725+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "04-columns-Expenses.json",
+            "sha256": "5a8c8dfaf606dd118799e388d1b2a83042e18592b930ea46e551b2f08323d741",
+            "ended_at": "2026-10-08T20:51:15.630206+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "Date",
+                "fields": {
+                  "colRef": 6,
+                  "label": "日期",
+                  "isFormula": false,
+                  "type": "Date",
+                  "parentId": 2,
+                  "parentPos": 6,
+                  "widgetOptions": "{\"dateFormat\":\"YYYY-MM-DD\",\"isCustomDateFormat\":false}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Purpose",
+                "fields": {
+                  "colRef": 7,
+                  "label": "用途",
+                  "isFormula": false,
+                  "type": "Text",
+                  "parentId": 2,
+                  "parentPos": 7,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Payer",
+                "fields": {
+                  "colRef": 8,
+                  "label": "付款人",
+                  "isFormula": false,
+                  "type": "Choice",
+                  "parentId": 2,
+                  "parentPos": 8,
+                  "widgetOptions": "{\"choices\":[\"林青\",\"周舟\"]}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Amount",
+                "fields": {
+                  "colRef": 9,
+                  "label": "金额（元）",
+                  "isFormula": false,
+                  "type": "Numeric",
+                  "parentId": 2,
+                  "parentPos": 9,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Expenses/records",
+            "at": "2026-10-08T20:51:15.632487+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "05-records-Expenses.json",
+            "sha256": "61974d9b259905d0c3ff970c0a585b938f0b8d3174579d9ac9faa7d8f1411844",
+            "ended_at": "2026-10-08T20:51:16.385422+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Date": 1790812800,
+                  "Purpose": "房租",
+                  "Payer": "林青",
+                  "Amount": 1800
+                }
+              },
+              {
+                "id": 2,
+                "fields": {
+                  "Date": 1790899200,
+                  "Purpose": "超市采购（一）",
+                  "Payer": "周舟",
+                  "Amount": 156.4
+                }
+              },
+              {
+                "id": 3,
+                "fields": {
+                  "Date": 1790985600,
+                  "Purpose": "电费",
+                  "Payer": "林青",
+                  "Amount": 92.6
+                }
+              },
+              {
+                "id": 4,
+                "fields": {
+                  "Date": 1791072000,
+                  "Purpose": "家居用品",
+                  "Payer": "周舟",
+                  "Amount": 48
+                }
+              },
+              {
+                "id": 5,
+                "fields": {
+                  "Date": 1791158400,
+                  "Purpose": "宽带",
+                  "Payer": "周舟",
+                  "Amount": 100
+                }
+              },
+              {
+                "id": 6,
+                "fields": {
+                  "Date": 1791331200,
+                  "Purpose": "超市采购（二）",
+                  "Payer": "林青",
+                  "Amount": 183
+                }
+              },
+              {
+                "id": 7,
+                "fields": {
+                  "Date": 1791417600,
+                  "Purpose": "清洁用品",
+                  "Payer": "周舟",
+                  "Amount": 42.4
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/columns",
+            "at": "2026-10-08T20:51:16.387273+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "06-columns-Settlement.json",
+            "sha256": "9b12a903a9713812b29ef9eec585ec0b46c0c630c6579688f9fc0fef2caba6e0",
+            "ended_at": "2026-10-08T20:51:17.137675+00:00"
+          },
+          "observed_response": {
+            "columns": [
+              {
+                "id": "Period",
+                "fields": {
+                  "colRef": 11,
+                  "label": "账期",
+                  "isFormula": false,
+                  "type": "Text",
+                  "parentId": 3,
+                  "parentPos": 11,
+                  "widgetOptions": "",
+                  "formula": "",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "TotalExpense",
+                "fields": {
+                  "colRef": 12,
+                  "label": "总支出",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 12,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.all)",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinPaid",
+                "fields": {
+                  "colRef": 13,
+                  "label": "林青已付",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 13,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.lookupRecords(Payer=\"林青\"))",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouPaid",
+                "fields": {
+                  "colRef": 14,
+                  "label": "周舟已付",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 14,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "sum(r.Amount for r in Expenses.lookupRecords(Payer=\"周舟\"))",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinShare",
+                "fields": {
+                  "colRef": 15,
+                  "label": "林青应分摊",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 15,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$TotalExpense / 2",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouShare",
+                "fields": {
+                  "colRef": 16,
+                  "label": "周舟应分摊",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 16,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$TotalExpense / 2",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "LinAdjust",
+                "fields": {
+                  "colRef": 17,
+                  "label": "林青需补（正=应付）",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 17,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$LinShare - $LinPaid",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "ZhouAdjust",
+                "fields": {
+                  "colRef": 18,
+                  "label": "周舟需补（正=应付）",
+                  "isFormula": true,
+                  "type": "Numeric",
+                  "parentId": 3,
+                  "parentPos": 18,
+                  "widgetOptions": "{\"numMode\":\"currency\",\"currency\":\"CNY\",\"decimals\":2,\"maxDecimals\":2}",
+                  "formula": "$ZhouShare - $ZhouPaid",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              },
+              {
+                "id": "Summary",
+                "fields": {
+                  "colRef": 19,
+                  "label": "结算结果",
+                  "isFormula": true,
+                  "type": "Text",
+                  "parentId": 3,
+                  "parentPos": 19,
+                  "widgetOptions": "",
+                  "formula": "if $LinAdjust > 0:\n  return \"林青需补给周舟 %.2f 元\" % $LinAdjust\nif $ZhouAdjust > 0:\n  return \"周舟需补给林青 %.2f 元\" % $ZhouAdjust\nreturn \"两人已结清\"",
+                  "description": "",
+                  "untieColIdFromLabel": true,
+                  "summarySourceCol": 0,
+                  "displayCol": 0,
+                  "visibleCol": 0,
+                  "rules": null,
+                  "reverseCol": 0,
+                  "recalcWhen": 0,
+                  "recalcDeps": null
+                }
+              }
+            ]
+          }
+        },
+        {
+          "receipt": {
+            "method": "GET",
+            "path": "/docs/[SERVICE_SECRET]/tables/Settlement/records",
+            "at": "2026-10-08T20:51:17.139338+00:00",
+            "payload": null,
+            "status": 200,
+            "body_file": "07-records-Settlement.json",
+            "sha256": "22cc4902fdc48d8c8c9dea39c7428ff521e366d3425bf69b23d2f78f9be7d21e",
+            "ended_at": "2026-10-08T20:51:17.892890+00:00"
+          },
+          "observed_response": {
+            "records": [
+              {
+                "id": 1,
+                "fields": {
+                  "Period": "2026年10月",
+                  "TotalExpense": 2422.4,
+                  "LinPaid": 2075.6,
+                  "ZhouPaid": 346.79999999999995,
+                  "LinShare": 1211.2,
+                  "ZhouShare": 1211.2,
+                  "LinAdjust": -864.3999999999999,
+                  "ZhouAdjust": 864.4000000000001,
+                  "Summary": "周舟需补给林青 864.40 元"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "One synthetic two-person50/50 ledger per route on the same Grist hosted engine/account; not independent providers, multi-user concurrency, general accounting correctness or production reliability.",
+    "Existing authorized Personal account and newly prepared empty parent/documents supplied; registration and controller resource preparation unmetered, not self-service onboarding.",
+    "REST then MCP executed serially with same user input/model/budget, fresh sessions and audited retained generic setup. No shared peer-results group; graders separate and cannot see peer verdicts.",
+    "Caller-visible service request cap40 is an instruction. Model request cap25 enforced by proxy; grader cap40. Hidden MCP backend request counts unknown.",
+    "Controller verification includes at most24 requests/doc and2 intentional writes, separately from executor cost. Actual personalFree metadata retained; remaining shared monthly quota unknown. Successful responses alone do not establish free service.",
+    "Final synthetic probe state retained as disclosed. Executor original answer checked against original six rows; controller later changes do not make that original answer wrong.",
+    "REST original captured model usage remains unknown because the resumed old normalizer misread the local guard-events sidecar. Offline copy reconciliation recovers25actualrequests for the private authorization ledger without rewriting original/public usage or retrying the task.",
+    "Private links/resource/account identifiers redacted. Identity/readback verified with API receipts; no visual interface or actual second-user access claim."
+  ],
+  "citation_errata": [
+    {
+      "issue": "Corrected original grader reference wording: append snapshot has records only; actual MCP tools/call count is17 (2+1+6+4+1+3), not approximately16.",
+      "change": "Factual evidence precision only; no check pass/fail, verdict or fee amount change."
+    },
+    {
+      "issue": "Corrected original grader reference wording: append snapshot has records only; actual MCP tools/call count is17 (2+1+6+4+1+3), not approximately16.",
+      "change": "Factual evidence precision only; no check pass/fail, verdict or fee amount change."
+    }
+  ]
+}

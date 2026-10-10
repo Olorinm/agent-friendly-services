@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "run_id": "openalex-scholarly-reference-001-ds41-r1",
+  "service_id": "openalex",
+  "route_id": "public-rest-api",
+  "entry_url": "https://api.openalex.org/works",
+  "task": {
+    "description": "请用指定服务根据附件中的阅读笔记找到那篇论文，为我的笔记补齐文献条目：原文题名、全部作者（保持原顺序）、发表年份、期刊名和可点击的 DOI 链接；用中文简单说明为什么匹配这些线索，并注明检索来源。",
+    "inputs": "阅读笔记：2015 年，Nature，一位作者姓 Bengio，题名包含 deep learning。需要找到这篇论文的正式发表记录。作者可用完整姓名或规范的姓与名字首字母表示，但不要省略作者；不限定 APA、MLA 等引用格式。可以沿本次指定服务返回的 DOI 或出版链接核对原始书目信息；不要用其他学术库或通用网页搜索替代指定服务查询，也不要凭记忆填补缺失字段。只需书目信息，不需要获取或概括全文。",
+    "expected_output": "一条可识别的正式发表文献条目，包含原文题名、按原顺序列出的全部作者、年份、期刊名和正确的 DOI 链接；中文匹配说明及所用检索来源。",
+    "success": "实际通过指定服务取得与全部笔记线索相符的论文记录；交付的必要书目信息与事前冻结的出版社官方参考一致，作者无遗漏或错序，DOI 链接指向同一论文；匹配说明有数据依据，来源可核对。允许合理大小写、标点、作者姓名缩写及 DOI URL 形式差异；不要求特定结果排名、输出文件、额外字段或引用格式。",
+    "failure": "没有真实查询指定服务，混淆同名或相近论文，遗漏或错误填写必要书目字段，作者漏列或错序，DOI 属于其他作品，把笔记猜测或模型记忆冒充查询结果，使用其他检索服务代替，结论与实际来源矛盾或预算内未完成。真实无结果、元数据缺失、访问或额度阻碍如实记录；执行环境或采集故障单列无效。",
+    "resources": "仅用本轮指定学术文献检索服务及其官方文档，使用已确认免费的只读资源；允许读取从本次结果可追溯到的 DOI 或出版社官方元数据页面。可在隔离环境安装依赖及生成本题本地文件。不购买全文、不调用付费超额、不注册无关服务、不发消息。遵守客户端标识、署名、缓存及限流要求。实际入口、账号来源、请求和时间上限由 ENVIRONMENT.md 冻结；原始证据由外部采集，执行者无需额外编写审计日志。",
+    "id": "scholarly-reference-001",
+    "version": "v1",
+    "sha256": "f0e757ae06b78d19988397a55c4578b25620f650539c2955040f1c34345e5e86",
+    "file": "data/experiments/tasks/scholarly-search.md"
+  },
+  "prompt_sha256": "931c3763e872b3c6700a83ff433c3202dc89366256b367ddf3f2c8edc7eefb86",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T16:00:56.871697+00:00",
+  "ended_at": "2026-10-08T16:01:31.350553+00:00",
+  "elapsed_seconds": 34.478856,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only",
+    "web_search": "live",
+    "preparation_note": "Fresh anonymous access thenbusinesssessions, commonfrozenreadingnote/task/model/effort/generictools/time/requestlimits. SamebaseimageOpenCode1.18.35,DeepSeekFlash/high. Execution25requests/300saccessor600sbusiness;grading40requests/300s,32000outputtokens/request. Eachcontainer2GiB/1CPU,pids256; two providerstreams mayoverlap on16CPU/31.34GiBhost. Eachstage≤3APIrequests,oneatime,≥5secondsbetweenstarts; cacheidenticalqueries, truthfulprojectUA. No prewrittenservicecode or targetanswer. StandardCrossrefpublicpool(noemail) versusOpenAlexanonymousallowance(noKey), conditionsnotidenticalanddisclosed. BothmayuseCrossrefupstream; independentpublisherHTML/referencefrozenbeforequeries,neverhandedtoexecutor. ReturnedDOI/publisherlinkfollowup allowed equally. Gradersuseactualcapturedcalls, noextracandidateAPIqueries. OnefamousEnglishpaperlookup, nottopicsearch/fulltext/citationquality/generalcoverageranking. Controllerarchived originalaccessconfig and removedoldtaskcachepath frombothconfigs pluspriorOpenAlexusageheaders; no newscript/query/data added. Thisisdisclosedexternalcleanup,notunassistedconfigurationreuse. Retentionaudit SHA256 fa597023514b81c739918ae218dc62c1d7459e8818aa0913d1228c9f245c26d2.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者通过指定服务 OpenAlex 公共 API 真实检索（列表+过滤查询 resp1，按 DOI 单条核对 resp2，均 HTTP 200，响应头为 OpenAlex 限流头），取得唯一同时满足 2015、Nature、题名 Deep learning、作者含 Bengio 的正式记录；交付的题名、三位作者原序、年份、期刊与 DOI 链接均与冻结的出版社独立参考一致，作者无遗漏错序，DOI 指向同一论文，中文匹配说明与检索来源齐备。",
+  "usage": {
+    "input_tokens": 100732,
+    "cached_input_tokens": 89984,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3765,
+    "reasoning_output_tokens": 1548
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "execution/artifacts/headers1.txt",
+      "execution/artifacts/headers2.txt",
+      "https://help.openalex.org/access/example-costs/",
+      "https://help.openalex.org/access/pricing/"
+    ],
+    "note": "本轮无账号、无 Key、无支付方式，仅用 OpenAlex 匿名路径。响应头 x-ratelimit-limit-usd=0.1、remaining-usd 由 0.098 降至 0.0979（始终为正），逐次 x-ratelimit-cost-usd 合计约 $0.0011，全部消耗于匿名每日免费额度内，未产生实付费用。",
+    "applicability": {
+      "rule": "OpenAlex 官方：无 Key 匿名访问每日 $0.10 免费额度（pricing 页亦述免费账户每日 $1、无需支付方式）；单条实体查询免费。",
+      "observed": "service-config.json 记录 api_key_present=false、auth.mode=anonymous；headers1/headers2 显示 x-ratelimit-limit-usd=0.1 且 remaining-usd 保持正数，两次请求均在匿名免费额度内完成。",
+      "evidence": "execution/artifacts/headers1.txt、execution/artifacts/headers2.txt；官方规则 https://help.openalex.org/access/example-costs/、https://help.openalex.org/access/pricing/"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-08T16:08:09.464454+00:00",
+    "checks": [
+      {
+        "criterion": "实际调用本轮指定服务 OpenAlex 完成真实查询（非记忆或替代库）",
+        "passed": true,
+        "evidence": "execution/artifacts/headers1.txt、resp1.json（GET /works?filter=publication_year:2015,title.search:deep learning,raw_author_name.search:Bengio&per-page=10，HTTP/2 200）；execution/artifacts/headers2.txt、resp2.json（GET /works/https://doi.org/10.1038/nature14539，HTTP/2 200）。响应含 OpenAlex 专有 x-ratelimit-* 头；events 中对外请求主机仅 api.openalex.org，无其他学术库或通用搜索。"
+      },
+      {
+        "criterion": "原文题名与冻结出版社参考一致",
+        "passed": true,
+        "evidence": "answer 题名“Deep learning”；resp2.json title/display_name=“Deep learning”；与 reference.json expected.title 一致。"
+      },
+      {
+        "criterion": "全部作者按发表顺序列出且无遗漏",
+        "passed": true,
+        "evidence": "answer 列出 Yann LeCun、Yoshua Bengio、Geoffrey E. Hinton；resp2.json authorships 依序 author_position first/middle/last 为同名三人，与 reference.json expected.authors_in_published_order 一致。"
+      },
+      {
+        "criterion": "发表年份正确",
+        "passed": true,
+        "evidence": "resp2.json publication_year=2015，与笔记 2015 及冻结参考一致。"
+      },
+      {
+        "criterion": "期刊名为 Nature",
+        "passed": true,
+        "evidence": "resp2.json primary_location.source.display_name=“Nature”，与冻结参考一致。"
+      },
+      {
+        "criterion": "提供正确且可点击的 DOI 链接，指向同一论文",
+        "passed": true,
+        "evidence": "answer 链接 https://doi.org/10.1038/nature14539；resp2.json doi=https://doi.org/10.1038/nature14539，与 reference.json doi 10.1038/nature14539 一致。"
+      },
+      {
+        "criterion": "给出中文匹配说明并注明检索来源",
+        "passed": true,
+        "evidence": "execution/answer.md 及 execution/artifacts/answer.md 含中文匹配理由（年份/期刊/题名/作者四线索）与检索来源 https://api.openalex.org/works 及官方文档链接。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "scholarly-reference-001-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "826dfa3eda99666b0a7b3280ac0dd02e69bde64d5dcfd7504c16dbc7670cccee",
+      "run_ids": [
+        "crossref-scholarly-reference-001-ds41-r1",
+        "openalex-scholarly-reference-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "crossref-scholarly-reference-001-ds41-r1",
+        "openalex-scholarly-reference-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.025479948,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.025479948,
+          "usage_sha256": "0a7b665476caa89294615073a32f852fcee70b67be0afc0728fe9a9fb8155d5e"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/openalex-scholarly-reference-001-ds41-r1/execution/answer.md",
+      "sha256": "82e4d09c98b12af593fa7ca1ae9dbdb8face29bff540f9c5ffce8407348414ce",
+      "note": "实际执行答复；其中费用概述、作者显示名和保留工具声明的限制见核验说明。"
+    },
+    {
+      "path": "data/experiments/evidence/openalex-scholarly-reference-001-ds41-r1/public-review/verification.json",
+      "sha256": "ac943d9fb8e148edc009145e1dffff2929a53a9f0b96ee5a8b7b7c3e9658940e",
+      "note": "最少书目事实、原始来源哈希及总控复核限制；不转载论文正文/摘要。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/scholarly-deepseek-overnight-20261008/openalex-scholarly-reference-001-ds41-r1",
+    "run_sha256": "acfe584124a14140bd6b2a96f60d61a8dab6fbba8bda1984863186c9560f211b",
+    "events_sha256": "a72e8c019d14e67e0ff7cdd614108914a772c90645728703b0217510b30535b7",
+    "answer_sha256": "82e4d09c98b12af593fa7ca1ae9dbdb8face29bff540f9c5ffce8407348414ce",
+    "review_sha256": "8d93ffa78a6368160b07f4890749299c5433f19e7754bc2acb343788ae9ae125",
+    "original_independent_review_sha256": "d74a67bd6b81dd39588b1a16a150d73d804b7ddb726f562a30be00054be711b1",
+    "selected_independent_review_sha256": "d74a67bd6b81dd39588b1a16a150d73d804b7ddb726f562a30be00054be711b1",
+    "publication_review_note": "Minimal bibliographic facts and original answer selected; raw responses/abstract/full publisher page kept private. Original independent verdict, reason, checks and fees preserved; explicit controller notes disclose name variant, observed credits versus cash, retained-config cleanup, absent query helper, and limited scope as applicable."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7201,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 123,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8163,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 506,
+        "reasoning_output_tokens": 410
+      },
+      {
+        "input_tokens": 8980,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 105,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 9785,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 480,
+        "reasoning_output_tokens": 275
+      },
+      {
+        "input_tokens": 10957,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 281,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 12548,
+        "cached_input_tokens": 11136,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 753,
+        "reasoning_output_tokens": 558
+      },
+      {
+        "input_tokens": 13581,
+        "cached_input_tokens": 13184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 392,
+        "reasoning_output_tokens": 45
+      },
+      {
+        "input_tokens": 14297,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 907,
+        "reasoning_output_tokens": 195
+      },
+      {
+        "input_tokens": 15220,
+        "cached_input_tokens": 14976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 218,
+        "reasoning_output_tokens": 8
+      }
+    ],
+    "source_sha256": "d1e1e42d43a5c48ae97c900d84346c89f45dad78608a1630e6bd9ad9890e1416",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 100732,
+      "cached_input_tokens": 89984,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3765,
+      "reasoning_output_tokens": 1548
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

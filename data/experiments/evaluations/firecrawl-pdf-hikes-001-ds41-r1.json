@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "run_id": "firecrawl-pdf-hikes-001-ds41-r1",
+  "service_id": "firecrawl",
+  "route_id": "public-scrape-api",
+  "entry_url": "https://api.firecrawl.dev/v2/scrape",
+  "task": {
+    "description": "我在整理锡安国家公园的徒步候选清单。请从附件指定的官方 PDF 中，把 Hiking Guide 表里 EASY 一组的全部步道做成 CSV，保留英文名称、往返距离、平均用时和海拔变化，按原表顺序排列，给我文件和来源链接。只整理这份指南，不判断目前是否开放或适合安全出行。",
+    "inputs": "官方 PDF：https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 。目标是 Zion Information Guide 的 Summer-Infoguide-2026.pdf，背面印有 Published 5/18/2026；共两页，使用第一面 Hiking Guide 中 EASY 标题下、MODERATE 标题前的全部步道，不混入其他难度或 Kolob Canyons 表。CSV 使用 UTF-8，列名为 trail、round_trip_miles、average_hours、elevation_change_feet；名称保留英文，后三列写数字，分别采用原表的英里、小时和英尺值，不从四舍五入后的公里或米换算。通过本轮指定的内容提取服务取得此 PDF 的表格文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载原 PDF 后本地解析或只取得 PDF 链接/二进制替代服务的正文提取。若指定 URL 返回的版次或目标表实质不同，请说明差异，不自行拼接其他版本。",
+    "expected_output": "一个真实存在、可解析的 UTF-8 CSV，包含指定 EASY 组的完整步道和四列数据，按原表顺序；答复给出文件位置及指定官方 PDF 来源链接。",
+    "success": "指定服务实际返回目标 PDF 的表格内容；CSV 字段、全部步道的名称、英里距离、小时用时和英尺海拔变化与指定版原表一致，无漏行、重复、其他组或顺序混淆；文件可用，答复包含位置及官方来源。允许无损空白、换行、直弯撇号和数值表示差异（如 1 与 1.0）。不要求特定解析库、服务返回格式、物理页码字段、OCR 或无缓存模式。",
+    "failure": "未通过指定服务取得目标表格文字、仅取得链接/二进制/搜索摘要、绕过服务取原文或用其他来源补答案、缺文件、CSV 不可解析、缺错字段或步道、数值或单位错误、混入其他组、漏行重复、顺序不符、缺来源或预算内未完成。材料版次或目标表实质变更、原文不可取得及执行环境故障需先核实并单列，不用旧参考机械判服务错误。",
+    "resources": "只对指定公开官方 PDF 做本题所需的小型提取，可查指定服务官方文档、在隔离环境安装通用依赖并自行编写整理代码。只用本轮确认允许的免费匿名入口或额度；不注册新身份、不登录 NPS、不提交表单、不写远端数据、不购买或开启付费超额。接入后仅复用安装和必要配置，不继承上题答案、原文快照或调用脚本。入口、请求及时间上限在 ENVIRONMENT.md 冻结，限流或额度不足时说明阻碍；运行器负责采集请求、响应和用量，执行者不需另写验收程序或审计日志。",
+    "id": "web-extraction-pdf-hikes-001",
+    "version": "v1",
+    "sha256": "2066905cc3799c71b24b1b1c7fddc5c9a18cf06bf3df80747df966022a65da37",
+    "file": "data/experiments/tasks/web-extraction-pdf.md"
+  },
+  "prompt_sha256": "dba8d34bb79428c820882894ecf7067403891683396a87a3e553d805bbec82ea",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T18:54:40.401656+00:00",
+  "ended_at": "2026-10-08T18:55:25.149295+00:00",
+  "elapsed_seconds": 44.747639,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public extraction routes, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task, model and budget. Firecrawl anonymous REST scrape versus Exa anonymous hosted MCP content fetch; a specific PDF and route trial, not a general service or interface ranking. No account/key/paid fallback. Fresh access before business; retain only audited generic config and genuinely installed dependencies. Restart each owned execution container after access to remove orphan processes while retaining file hashes, then fresh home/session/workspace. Same image,2GiB/1CPU/pids256,pipTUNA and initial empty cache. Execution25requests/access300s/business600s,grading40/300s,32000outputtokens/request. Candidate API6/stage and at least1s spacing are instructions; model/time caps enforced. Anonymous remaining quota unknown; do not apply keyed account allowance or price. Independent source PDF/reference and official anonymous route/cost documents frozen before candidate executions, supplied only to graders; business peers sealed before separate grading, no peer verdicts. Format, truncation and caching features differ by route; disclose actual behavior, no artificial common freshness claim. Retention audit SHA256 f9b6d1e386992f1977d2ef298e94ad82ce3e9a184571db02121284d92cb9f56e.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "本次执行通过指定匿名服务 Firecrawl Public Scrape REST API（POST https://api.firecrawl.dev/v2/scrape）实际取得目标官方 PDF 的正文，两次调用（markdown/html）均 HTTP 200、contentType=application/pdf、numPages=2，返回文本包含第一面 Hiking Guide 中 EASY 标题下、MODERATE 之前的全部 5 条步道，与独立参考 zion-information-guide-20261009.layout.txt 的 EASY 区块逐行一致。交付的 UTF-8 CSV 列名与数值完全匹配参考：Pa’rus Trail 3.5/2/50、The Grotto Trail 1/0.5/35、Lower Emerald Pool Trail 1.2/1/150、Weeping Rock Trail 0.4/0.5/98、Riverside Walk 2.2/1.5/57，顺序正确、无漏行/重复/其他组，答复给出文件位置与官方来源链接，未判断开放或安全性。材料版次无实质漂移。",
+  "usage": {
+    "input_tokens": 311181,
+    "cached_input_tokens": 285952,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6369,
+    "reasoning_output_tokens": 3477
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "official-route-sources/firecrawl-rate-limits.md#keyless-no-api-key",
+      "grading/artifacts/evidence/firecrawl_scrape_evidence.md"
+    ],
+    "applicability": {
+      "rule": "Firecrawl 官方文档：keyless（无 API Key）使用 Scrape/Parse/Search 免费，按 IP 每日限额（两项限制：每日请求数与每日 credits），超额返回 429；未使用注册账号或付费方案。",
+      "observed": "本次两次调用均为匿名、请求未携带任何 API Key（scrape.py 仅设 Content-Type），POST /v2/scrape 两次均返回 HTTP 200、creditsUsed=2，未见 402/429 或付费超额，全程无付款方式。",
+      "evidence": "official-route-sources/firecrawl-rate-limits.md 第 71-82 行免费规则；execution/artifacts/firecrawl_markdown.json 与 firecrawl_html.json 的 metadata（statusCode 200、creditsUsed 2）；evidence/firecrawl_scrape_evidence.md。"
+    },
+    "note": "匿名 keyless 层级官方文档列为免费，本次 2 次调用均在免费额度内且无计费回执，故 service_cost_usd 记 0；未套用注册账号免费额度或付费 keyed 费率。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-08T18:57:38.213098+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定服务实际取得目标 PDF 的表格正文，而非仅链接、二进制、搜索摘要或绕过服务直读",
+        "passed": true,
+        "evidence": "两次 POST https://api.firecrawl.dev/v2/scrape（匿名、无 Key）均 HTTP 200：metadata.contentType=application/pdf、numPages=2、title=Zion National Park Information Guide，data.markdown/html 内含 EASY 表；见 execution/artifacts/firecrawl_markdown.json、execution/artifacts/firecrawl_html.json。"
+      },
+      {
+        "criterion": "CSV 真实存在、可解析、UTF-8，列名为 trail、round_trip_miles、average_hours、elevation_change_feet",
+        "passed": true,
+        "evidence": "execution/artifacts/zion_easy_hikes.csv（206 字节，sha256 a550ab58…）；python csv 解析得表头与 5 行，首行 Pa’rus 为 3 字节 UTF-8 弯撇号。"
+      },
+      {
+        "criterion": "EASY 组全部 5 条步道的名称、英里、小时、英尺值与指定版原表一致，无漏行/重复/其他难度混入",
+        "passed": true,
+        "evidence": "CSV 5 行与独立参考 reference.json expected_rows 及 reference-sources/zion-information-guide-20261009.layout.txt 第 12–44 行（EASY 到 MODERATE 之间）完全一致，未含 MODERATE/STRENUOUS/Kolob Canyons 行。"
+      },
+      {
+        "criterion": "按原表顺序排列",
+        "passed": true,
+        "evidence": "CSV 顺序 Pa’rus → Grotto → Lower Emerald Pool → Weeping Rock → Riverside Walk，与 layout.txt 及服务返回 markdown 顺序相同。"
+      },
+      {
+        "criterion": "答复给出文件位置与指定官方 PDF 来源链接",
+        "passed": true,
+        "evidence": "execution/answer.md 第 3 行给出 /workspace/.../zion_easy_hikes.csv，第 14 行给出 loader.cfm?csModule=security/getfile&pageid=8166212 官方链接。"
+      },
+      {
+        "criterion": "只整理该指南，不判断当前开放或安全适宜性",
+        "passed": true,
+        "evidence": "answer.md 末行明确“仅整理该指南，未判断开放状态或安全性”，正文无开放/安全结论。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "pdf-table-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "af96aa4a0608fae98a1addde658093b30ef9a9efd4eae8b9903da1f434d56e14",
+      "run_ids": [
+        "firecrawl-pdf-hikes-001-ds41-r1",
+        "exa-pdf-hikes-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "firecrawl-pdf-hikes-001-ds41-r1",
+        "exa-pdf-hikes-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.030969492,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.030969492,
+          "usage_sha256": "bc8bcb5a6ae80429a3104bef994c01227bc6458dd3ff6f19ae9d89fa0619b1f1"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/firecrawl-pdf-hikes-001-ds41-r1/public-review/verification.json",
+      "sha256": "ee9ae3a583797ce695abb05d08306f8be4a7ea7f9ae344a023cad04b79340090",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full source documents and raw service responses remain private."
+    },
+    {
+      "path": "data/experiments/evidence/firecrawl-pdf-hikes-001-ds41-r1/execution/artifacts/zion_easy_hikes.csv",
+      "sha256": "a550ab5848ec4981cdc4b267581cdc544e364dce36a020d00ac1dad177ac105d",
+      "note": "Actual executor CSV containing the selected five short table-fact rows; official NPS source attribution in verification.json."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/pdf-extraction-deepseek-overnight-20261008/firecrawl-pdf-hikes-001-ds41-r1",
+    "run_sha256": "b490926dba14873132c9651b3ec6abb9cbe6eeee406088e481cecad4a1c3b324",
+    "events_sha256": "c145f2112f4d84931cb76073d310a8bc05177389d4c9af1d691638e59e05e797",
+    "answer_sha256": "db558108427049f8792782e535d54a8191df9e4c8db13dde9443bff6958e250c",
+    "review_sha256": "f1f3598d421a4c7002434a90a79d2194616f1826b8e4e3974ddb2e72e89fc90e",
+    "original_independent_review_sha256": "cc7f1f19f1c5a7aaf901feebff382b5222f883a0ff6645868c28bcd942b7aabc",
+    "selected_independent_review_sha256": "cc7f1f19f1c5a7aaf901feebff382b5222f883a0ff6645868c28bcd942b7aabc",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete PDF, raw responses and transcripts stay private. Independent verdict, reason and checks preserved. Fixed two-page source, selected table scope, anonymous conditions, cached/truncated output limits and audited lifecycle preparation disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7221,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 120,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8379,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 215,
+        "reasoning_output_tokens": 117
+      },
+      {
+        "input_tokens": 8935,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 106,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 9790,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 311,
+        "reasoning_output_tokens": 228
+      },
+      {
+        "input_tokens": 10167,
+        "cached_input_tokens": 9984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 566,
+        "reasoning_output_tokens": 94
+      },
+      {
+        "input_tokens": 10749,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 176,
+        "reasoning_output_tokens": 69
+      },
+      {
+        "input_tokens": 10955,
+        "cached_input_tokens": 10752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 179,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 11374,
+        "cached_input_tokens": 11008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 102,
+        "reasoning_output_tokens": 37
+      },
+      {
+        "input_tokens": 12271,
+        "cached_input_tokens": 11392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 183,
+        "reasoning_output_tokens": 48
+      },
+      {
+        "input_tokens": 12472,
+        "cached_input_tokens": 12288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 65,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18442,
+        "cached_input_tokens": 12416,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1767,
+        "reasoning_output_tokens": 1635
+      },
+      {
+        "input_tokens": 20237,
+        "cached_input_tokens": 20096,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 163,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 20629,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28273,
+        "cached_input_tokens": 20608,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1268,
+        "reasoning_output_tokens": 1108
+      },
+      {
+        "input_tokens": 29774,
+        "cached_input_tokens": 29440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 331,
+        "reasoning_output_tokens": 62
+      },
+      {
+        "input_tokens": 30121,
+        "cached_input_tokens": 29952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 143,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 30407,
+        "cached_input_tokens": 30208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 165,
+        "reasoning_output_tokens": 51
+      },
+      {
+        "input_tokens": 30985,
+        "cached_input_tokens": 30464,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 446,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "607a05fac83f3d643d4b98b4d392959ded8406c151f203410c5c899a8eaee662",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 311181,
+      "cached_input_tokens": 285952,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6369,
+      "reasoning_output_tokens": 3477
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

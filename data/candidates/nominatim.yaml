@@ -1,0 +1,101 @@
+id: nominatim
+name: Nominatim Public API
+category: web-search-data
+homepage: https://nominatim.org/
+summary: OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.
+submitted_by: community
+tags:
+  - geocoding
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/geocoding
+  sources:
+    search-docs:
+      url: https://nominatim.org/release-docs/latest/api/Search/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    output-docs:
+      url: https://nominatim.org/release-docs/latest/api/Output/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    faq:
+      url: https://nominatim.org/release-docs/latest/api/Faq/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    usage-policy:
+      url: https://operations.osmfoundation.org/policies/nominatim/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://osmfoundation.org/wiki/Terms_of_Use
+      checked_on: '2026-10-08'
+      kind: official_site
+    licence:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+    attribution:
+      url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
+      checked_on: '2026-10-08'
+      kind: official_docs
+  routes:
+    - id: public-search-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://nominatim.openstreetmap.org/search
+      docs: https://nominatim.org/release-docs/latest/api/Search/
+      evidence: [search-docs, usage-policy]
+      availability:
+        value: self_serve
+        evidence: [usage-policy]
+        notes: Limited public OSMF server; self-hosted and third-party Nominatim instances have separate policies.
+      personal_access:
+        value: documented
+        evidence: [usage-policy, terms]
+        notes: >-
+          Read the public-server policy before choosing this route:
+          https://operations.osmfoundation.org/policies/nominatim/ . LLM suggestions must prominently
+          link and explain it. The developer must deliberately choose the service and remain responsible
+          for compliance; generic no-code, low-code or vibe-coding geocoding backends are prohibited.
+          This is not a blanket prohibition of every LLM-assisted single query.
+      auth:
+        value: none
+        evidence: [search-docs, usage-policy]
+        notes: Supply a valid application-identifying User-Agent or Referer; stock HTTP-library identities are insufficient.
+      capabilities:
+        places.geocode:
+          value: documented
+          evidence: [search-docs, output-docs]
+          notes: >-
+            GET with a free-form q or structured address fields, not both. Explicitly select an output
+            format on the public host; jsonv2 includes lat/lon, display_name and object type. Optional
+            addressdetails, language and country filters help interpret a match. Coordinates identify
+            an object centroid, not a guaranteed entrance or rooftop.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [search-docs, usage-policy]
+        payment_method:
+          value: not_required
+          evidence: [usage-policy]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: eligible public API request
+          scope: Donated public-server access within its acceptable-use policy; no reserved capacity or SLA.
+          evidence: [usage-policy]
+      notes: >-
+        Public API policy: https://operations.osmfoundation.org/policies/nominatim/ . Maximum one
+        request/second across the application. Small one-time bulk scripts must use one thread on one
+        machine and cache results; regular or longer-than-one-day scripts are limited to four
+        requests/minute. Autocomplete, systematic harvesting, automated details-page scraping and
+        geocoding-result resale are prohibited. Apps must be able to switch service on request. Do not
+        submit personal/confidential data. OSMF terms include age and UK sanctions eligibility conditions.
+        OSM data use requires attribution and ODbL compliance; derived databases have share-alike
+        obligations. No explicit public-benchmark prohibition was found in the reviewed terms.
+        Postcodes may be interpolated and address components can come from nearby place nodes;
+        coverage or matching text alone does not prove a precise position. No live access is claimed.

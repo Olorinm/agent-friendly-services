@@ -1,0 +1,117 @@
+id: valhalla
+name: Valhalla Public Demo API
+category: web-search-data
+homepage: https://valhalla.github.io/valhalla/
+summary: FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.
+submitted_by: community
+tags:
+  - routing
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/route-planning
+  sources:
+    demo:
+      url: https://valhalla.github.io/valhalla/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api:
+      url: https://valhalla.github.io/valhalla/api/route/api-reference/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    openapi:
+      url: https://github.com/valhalla/valhalla/blob/master/docs/docs/api/openapi.yaml
+      checked_on: '2026-10-08'
+      kind: official_docs
+    response-format:
+      url: https://github.com/valhalla/valhalla/blob/master/src/tyr/route_serializer_valhalla.cc
+      checked_on: '2026-10-08'
+      kind: official_docs
+    demo-limits:
+      url: https://github.com/valhalla/valhalla/discussions/3373
+      checked_on: '2026-10-08'
+      kind: official_site
+    operator-services:
+      url: https://github.com/fossgis/openstreetmap.de/blob/main/content/nutzen/dienste-osm-de.md
+      checked_on: '2026-10-08'
+      kind: official_docs
+    operator-policy-summary:
+      url: https://routing.openstreetmap.de/about.html
+      checked_on: '2026-10-08'
+      kind: official_docs
+    attribution:
+      url: https://valhalla.github.io/valhalla/contributing/data/attribution/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    licence:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: public-route-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://valhalla1.openstreetmap.de/route
+      docs: https://valhalla.github.io/valhalla/api/route/api-reference/
+      evidence: [demo, api, openapi]
+      availability:
+        value: self_serve
+        evidence: [demo, operator-services]
+        notes: Public FOSSGIS demo with a full-planet graph; not a guaranteed production service.
+      personal_access:
+        value: documented
+        evidence: [demo, operator-services, operator-policy-summary]
+        notes: Public individual access without registration, subject to demo fair use and operator conditions.
+      auth:
+        value: none
+        evidence: [openapi, operator-services, demo]
+        notes: >-
+          No API key. Use truthful application identification; published end-user applications are asked
+          to notify the maintainers through GitHub Discussions and include an identifying X-Client-Id.
+      capabilities:
+        routes.plan:
+          value: documented
+          evidence: [api, openapi, response-format]
+          notes: >-
+            POST /route with JSON locations containing named lat/lon fields and costing=auto plans a car
+            journey. GET with a JSON query is also documented. Default JSON trip includes units,
+            summary length and estimated time in seconds, legs, road-name maneuvers and polyline6 shape. Distance
+            defaults to kilometers; units can request miles. Supported engine modes do not guarantee
+            every feature or transit dataset is deployed on the public demo.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [operator-services, openapi]
+        payment_method:
+          value: not_required
+          evidence: [operator-services, demo-limits]
+      costs: []
+      notes: >-
+        Service price is unknown: FOSSGIS funding and anonymous public access do not explicitly establish
+        a zero service fee. No registration, donation support and the open-source engine or OSM data
+        licence are not hosted-service pricing rules. A previous zero-cost entry was withdrawn on
+        2026-10-08 after source review; the original source snapshots are preserved.
+        The current homepage links a maintainer announcement documenting one call per user per second,
+        100 calls per second overall and stricter endpoint limits than upstream defaults; that numeric
+        announcement dates to November 2021, not a measured current quota. Keep small non-commercial
+        queries below the per-user ceiling and stop on denial or rate limiting. The public API host is
+        valhalla1.openstreetmap.de; valhalla.openstreetmap.de is the interactive frontend. No registration,
+        account resource provisioning or account cleanup are required for the documented public route.
+  notes:
+    - >-
+      Valhalla's homepage applies the usual OSRM/Nominatim demo fair-use policy. The reviewed operator
+      summary requires valid application identification, attribution, a fix-the-map link, and no scraping
+      or heavy usage. The linked full German FOSSGIS terms returned an Anubis denial on 2026-10-08 and were
+      not fully reviewed. No explicit public-comparison ban was found in the reviewed sources; that is
+      not an assurance about unreviewed terms. A small internal evaluation is not publishing an end-user
+      application that proxies requests to the demo. The homepage's Generative AI rules concern code
+      contributions and PR review, not a blanket ban on automated API clients.
+    - >-
+      This hosted service is distinct from self-installing the MIT-licensed Valhalla engine. Its OSM data
+      requires separate attribution and ODbL consideration; Valhalla's documentation specifies
+      OpenStreetMap contributors, with additional sources if elevation data is used. Attribute the
+      FOSSGIS-hosted engine and link https://www.openstreetmap.org/copyright and
+      https://www.openstreetmap.org/fixthemap alongside public route-derived material. It shares FOSSGIS
+      hosting and OSM data with the OSRM demo. Agreement between their routes is not independent proof
+      of road conditions or arrival times. Service access and driving results remain untested.

@@ -98,20 +98,22 @@
     },
     {
       "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/reviewer-remote-read.json",
-      "sha256": "69c72febb712ce8218cae62ccb556482d7bd383b021ac6a155630b7068eb871d",
+      "sha256": "786f09b8e2f7c1fe4ccf5fd8f84c93e5b58def338a947326bc68c258a1690898",
       "note": "External authenticated service read after measured execution; raw service responses plus normalized rows; not counted in executor usage.",
       "source_sha256": "8556ac9720defa3078c285fd9160c3cc2c42df3032967bef39278770d6072e70",
       "redactions": [
-        "local paths, Codex session identifiers or explicitly supplied service secrets"
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Account avatar URL and internal user reference, or private database management group name"
       ]
     },
     {
       "path": "data/experiments/evidence/codex-20260908T035504.472694Z-grist/prepared-empty-container.json",
-      "sha256": "aecb31582f609297bd423a52afaf1b5edc25a41487af8037632a36d77aeeafad",
+      "sha256": "6d62197203b982e30b7a6949824853b83a32c8aa4ba651e53acde885e1660f59",
       "note": "Preparation-stage empty container snapshot, outside measured execution.",
       "source_sha256": "258e3eaaef915e66327d4375c922a0b852b0bc76f81715579f2978624c1bf7a4",
       "redactions": [
-        "local paths, Codex session identifiers or explicitly supplied service secrets"
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Account avatar URL and internal user reference, or private database management group name"
       ]
     }
   ],
@@ -121,6 +123,6 @@
     "events_sha256": "d8fcbe1b1fb1a7e97e3df30a4f6fa091e6b7d85cfa092cca72a3e1293840b12a",
     "answer_sha256": "cc1a42c7f321d334ffc75b087af34c837e3ba95519b2c3a03f60ffe8fcde1a36",
     "review_sha256": "c08b07a90cd1cc214503a40288eb575bd47803d63493176a43564299b689361a",
-    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged. Additional privacy review removed account avatar URLs, internal user references and private database management group names from historical public copies; original source hashes, verdicts and measured usage remain unchanged."
   }
 }

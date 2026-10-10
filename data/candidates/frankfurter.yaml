@@ -13,11 +13,11 @@ catalog:
   sources:
     docs:
       url: https://frankfurter.dev/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
     mcp:
       url: https://frankfurter.dev/mcp/
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
   routes:
     - id: data-api
@@ -77,7 +77,7 @@ catalog:
     - id: rates-mcp
       interface: mcp
       maintainer: official
-      entry_url: https://frankfurter.dev/mcp/
+      entry_url: https://mcp.frankfurter.dev/
       docs: https://frankfurter.dev/mcp/
       evidence:
         - mcp
@@ -93,6 +93,19 @@ catalog:
         value: none
         evidence:
           - mcp
+      capabilities:
+        fx.latest:
+          value: documented
+          evidence: [mcp]
+        fx.history:
+          value: documented
+          evidence: [mcp]
+          notes: Individual historical dates; the guide directs date ranges and bulk data to REST.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [mcp]
       notes: >-
-        Official hosted/local MCP setup guide; uses reference rates, not a payment or currency-trading
-        service.
+        Hosted HTTP MCP with conversion, rate, currency and provider tools. The optional provider argument
+        selects one institution instead of the default blend. Uses reference rates, not executable payment
+        quotes. REST time-series capability must not be assumed for this route.

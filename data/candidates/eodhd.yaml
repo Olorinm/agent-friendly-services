@@ -27,8 +27,31 @@ catalog:
       kind: official_docs
     access:
       url: https://eodhd.com/pricing
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_site
+    eod-history:
+      url: https://eodhd.com/financial-apis/api-for-historical-data-and-volumes
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: >-
+        Daily OHLC values are raw/as-traded; adjusted_close separately includes splits and dividends.
+        Documents inclusive from/to dates, JSON/CSV, and a public demo token for six named tickers.
+        That shared token is an access mechanism, not evidence that the target dates were returned.
+    terms:
+      url: https://eodhd.com/financial-apis/terms-conditions
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Personal use is defined around an individual's own investment activities, with private
+        storage/analysis allowed and redistribution/display of Information or Services to others
+        prohibited. No explicit benchmark/comparison-publication ban was found. A self-measured
+        report without market data is distinct from that redistribution; the own-investment-use
+        condition remains a separate scope question. The disclaimer warns that indicative vendor
+        prices may differ from exchange prices, relevant to an official closing-price reference.
+    license-scope:
+      url: https://eodhd.com/financial-apis/commercial-vs-personal-license-use
+      checked_on: '2026-10-08'
+      kind: official_docs
     congress:
       url: https://eodhd.com/financial-apis/congressional-trades-api
       checked_on: '2026-09-15'
@@ -41,7 +64,7 @@ catalog:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://eodhd.com/financial-apis/
+      entry_url: https://eodhd.com/api/
       docs: https://eodhd.com/financial-apis/
       evidence:
         - docs
@@ -62,8 +85,10 @@ catalog:
           - docs
           - access
       notes: >-
-        Free registration advertises 20 API calls/day without a card; some data types are excluded.
-        Check dataset and market coverage before choosing a trial. Congressional Trades is
+        Free Starter advertises 20 API calls/day, 20 requests/minute and the past year of EOD history
+        without a payment card; some data types are excluded. The EOD endpoint returns a raw close
+        field separately from adjusted_close; one instrument and date range can be fetched as JSON
+        or CSV. Check dataset, market coverage and account entitlement before choosing a trial. Congressional Trades is
         documented for the All-in-one plan; the generic 20-call free allowance does not establish
         access to this dataset.
       costs:
@@ -80,6 +105,10 @@ catalog:
           evidence:
             - access
       capabilities:
+        prices.history:
+          value: documented
+          evidence:
+            - eod-history
         disclosures.search:
           value: documented
           evidence:
@@ -87,3 +116,44 @@ catalog:
           notes: >-
             House and Senate trades with separate transaction/disclosure date filters, amount
             ranges, filing URLs and pagination. Beta dataset.
+    - id: public-demo-api
+      interface: api
+      maintainer: official
+      entry_url: https://eodhd.com/api/eod/
+      docs: https://eodhd.com/financial-apis/api-for-historical-data-and-volumes
+      evidence:
+        - eod-history
+      availability:
+        value: self_serve
+        evidence:
+          - eod-history
+      personal_access:
+        value: documented
+        evidence:
+          - eod-history
+      auth:
+        value: api_key
+        evidence:
+          - eod-history
+        notes: The official shared literal demo is the query-string token; no private account key is required.
+      capabilities:
+        prices.history:
+          value: documented
+          evidence:
+            - eod-history
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - eod-history
+        payment_method:
+          value: not_required
+          evidence:
+            - eod-history
+      notes: >-
+        Official documentation offers no-signup API access on AAPL.US, TSLA.US, BTC-USD.CC,
+        VTI.US, AMZN.US and EURUSD.FOREX using the shared demo token. It describes querying historical
+        series with date bounds, not substituting the page's static example response. Actual response
+        freshness, requested-month coverage and exact price agreement remain untested; no separate
+        numeric demo rate limit is established. Limited-symbol access does not inherit unrestricted
+        data publication rights or establish general free access to other tickers and datasets.

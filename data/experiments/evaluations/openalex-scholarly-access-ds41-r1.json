@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "run_id": "openalex-scholarly-access-ds41-r1",
+  "service_id": "openalex",
+  "route_id": "public-rest-api",
+  "entry_url": "https://api.openalex.org/works",
+  "task": {
+    "description": "帮我接通这个学术文献检索服务，通过指定方式做一次真实文献查询，确认能查到可识别的论文记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个小型文献查询，报告实际查到的题名及可识别的文献链接或标识，并注明来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+    "expected_output": "一次来自指定服务的真实文献记录，含题名、可识别链接或标识及来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别文献，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实文献查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务及已确认免费的资源，可查官方文档、安装通用依赖和保存私有配置。只做小量公开书目信息查询，不批量抓取、不购买或下载付费全文、不注册无关服务、不通知或邀请他人。遵守客户端标识、署名、缓存及限流要求；请求与时间上限见 ENVIRONMENT.md。运行记录由外部采集，不要求额外审计报告。",
+    "id": "scholarly-access-001",
+    "version": "v1",
+    "sha256": "8eb5f13148a26696af27144236d5b08a55fff94e59d4b619849e5433bb1783fe",
+    "file": "data/experiments/tasks/scholarly-search.md"
+  },
+  "prompt_sha256": "0a55ba854c91369be51d927ffc20aa4170ab9add2ba2bcea875874c2d135e93e",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T15:55:05.175832+00:00",
+  "ended_at": "2026-10-08T15:55:48.973323+00:00",
+  "elapsed_seconds": 43.797491,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only",
+    "web_search": "live",
+    "preparation_note": "Fresh anonymous access thenbusinesssessions, commonfrozenreadingnote/task/model/effort/generictools/time/requestlimits. SamebaseimageOpenCode1.18.35,DeepSeekFlash/high. Execution25requests/300saccessor600sbusiness;grading40requests/300s,32000outputtokens/request. Eachcontainer2GiB/1CPU,pids256; two providerstreams mayoverlap on16CPU/31.34GiBhost. Eachstage≤3APIrequests,oneatime,≥5secondsbetweenstarts; cacheidenticalqueries, truthfulprojectUA. No prewrittenservicecode or targetanswer. StandardCrossrefpublicpool(noemail) versusOpenAlexanonymousallowance(noKey), conditionsnotidenticalanddisclosed. BothmayuseCrossrefupstream; independentpublisherHTML/referencefrozenbeforequeries,neverhandedtoexecutor. ReturnedDOI/publisherlinkfollowup allowed equally. Gradersuseactualcapturedcalls, noextracandidateAPIqueries. OnefamousEnglishpaperlookup, nottopicsearch/fulltext/citationquality/generalcoverageranking.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者按指定入口 https://api.openalex.org/works 以匿名无 Key 方式完成 2 次真实 API 调用：1 次全文搜索（HTTP 200，返回 3 条含 OpenAlex ID/DOI 的可识别文献）与 1 次单条 lookup（免费），答复中的题名、标识与响应头数据与捕获响应一致。可复用配置写入持久目录 /home/node/service-tools/service-config.json（匿名、无 api_key），位置已在答复中报告并被 retained-files.json 记录。全程无需注册/付费/人工介入，符合免注册入口不强行注册的要求；未发现阻碍。",
+  "usage": {
+    "input_tokens": 162189,
+    "cached_input_tokens": 150912,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6032,
+    "reasoning_output_tokens": 2757
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://help.openalex.org/access/pricing/",
+      "https://help.openalex.org/access/example-costs/",
+      "grading/artifacts/evidence/openalex_run_evidence.md"
+    ],
+    "note": "匿名无 Key 使用 OpenAlex 属免费层；未提供或使用任何账号、Key 或支付方式，未产生现金费用。本次消耗为免费额度：1 次搜索 $0.001（10 credits）+ 1 次单条 lookup $0（免费）。",
+    "applicability": {
+      "rule": "OpenAlex 数据免费；无 Key 账户每天获 $0.10 免费 API 额度、无需支付方式；Search 每 1000 次 $1（每次约 $0.001），Get single entity 免费，额度 UTC 午夜重置。",
+      "observed": "两次请求均在无凭据、无支付下成功；响应头 x-ratelimit-limit-usd=0.1、x-ratelimit-remaining-usd=0.099（起始 0.1 减去本次搜索 0.001）、x-ratelimit-limit=1000、x-ratelimit-remaining=990、reset=29061s；搜索 meta.cost_usd=0.001，lookup x-ratelimit-cost-usd=0。",
+      "evidence": "execution/artifacts/results/query1_attention.json 与 lookup_W2626778328.json 的捕获响应及响应头；官方定价/示例费用文档。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader/deepseek-flash",
+    "reviewed_at": "2026-10-08T16:08:09.352407+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定服务与入口 https://api.openalex.org/works 完成真实文献查询，返回可识别文献记录",
+        "passed": true,
+        "evidence": "execution/artifacts/results/query1_attention.json 为 HTTP 200 搜索响应，含 Attention Is All You Need (W2626778328, DOI 10.65215/2q58a426) 等 3 条带 OpenAlex ID/DOI 的记录；lookup_W2626778328.json 为同一条目的单条 lookup，确认存在。非健康检查或示例。"
+      },
+      {
+        "criterion": "最终答复与真实响应一致（题名、链接/标识、来源、限额数据）",
+        "passed": true,
+        "evidence": "execution/answer.md 列出的 3 条记录、W2626778328/DOI 与 limit-usd=0.1、remaining-usd=0.099、remaining=990、reset=29061 均与捕获的 results/*.json 及响应头一致。"
+      },
+      {
+        "criterion": "必要配置保存在本轮持久目录、位置已报告、可供新会话复用且不泄露秘密",
+        "passed": true,
+        "evidence": "/home/node/service-tools/service-config.json 含 base_url/入口/匿名模式/规定 UA/限速/缓存，无 api_key（api_key_present=false）；retained-files.json 记录已保留；answer.md 报告该位置与用途。"
+      },
+      {
+        "criterion": "免注册匿名路径：未强行注册、未付费或启用超额，使用规定 UA 并保持 ≥5s 限速",
+        "passed": true,
+        "evidence": "两次请求均无凭据；UA=agent-friendly-services/20261008 (+https://github.com/Olorinm/agent-friendly-services)；两次请求开始相隔约 7s（工具时间戳 1791474925.7 与 1791474932.7）；无注册/支付/超额记录。"
+      },
+      {
+        "criterion": "如实说明接入步骤、账号来源、人工/申请门槛或实际阻碍",
+        "passed": true,
+        "evidence": "answer.md 说明匿名无 Key、无需注册/付费、本轮无账号/Key/邮箱故不注册、匿名额度共享且剩余未知、撞限额即停，并报告未发现阻碍。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.031155792,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.031155792,
+          "usage_sha256": "8a5133199e3fc66d4b64941245576bed93db9377e2a3dcc9bc2427be3adaedbc"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/openalex-scholarly-access-ds41-r1/execution/answer.md",
+      "sha256": "17cc898c3d399f2c34acedea224ca72bbb2d1bc5567d69286505231a4029bd25",
+      "note": "实际执行答复；其中费用概述、作者显示名和保留工具声明的限制见核验说明。"
+    },
+    {
+      "path": "data/experiments/evidence/openalex-scholarly-access-ds41-r1/public-review/verification.json",
+      "sha256": "74d9d8d52c48745906fefd58da32732b71cee7ea176ba21e4bfd9729caa5495a",
+      "note": "最少书目事实、原始来源哈希及总控复核限制；不转载论文正文/摘要。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/scholarly-deepseek-overnight-20261008/openalex-scholarly-access-ds41-r1",
+    "run_sha256": "99aab963c50379db5b56935b970742fbad5e6eda0509f0c640770b1f9e5369bb",
+    "events_sha256": "cde14a51de4212efe036ad8f0ed69c76b6a1e59c4ed214a618b0081c310da7f4",
+    "answer_sha256": "17cc898c3d399f2c34acedea224ca72bbb2d1bc5567d69286505231a4029bd25",
+    "review_sha256": "9db21f3d0044af9506491f99809d46adf56f43e2869bc5db3f29f5ea0fe553fc",
+    "original_independent_review_sha256": "d31045a32f3c791e76883cc7422634267bd606876ec6141b7aad388e64872131",
+    "selected_independent_review_sha256": "d31045a32f3c791e76883cc7422634267bd606876ec6141b7aad388e64872131",
+    "publication_review_note": "Minimal bibliographic facts and original answer selected; raw responses/abstract/full publisher page kept private. Original independent verdict, reason, checks and fees preserved; explicit controller notes disclose name variant, observed credits versus cash, retained-config cleanup, absent query helper, and limited scope as applicable."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7179,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 119,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8121,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 345,
+        "reasoning_output_tokens": 168
+      },
+      {
+        "input_tokens": 8651,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 206,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 9350,
+        "cached_input_tokens": 8832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 109,
+        "reasoning_output_tokens": 12
+      },
+      {
+        "input_tokens": 11114,
+        "cached_input_tokens": 9344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 680,
+        "reasoning_output_tokens": 579
+      },
+      {
+        "input_tokens": 11852,
+        "cached_input_tokens": 11648,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 520,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12388,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 943,
+        "reasoning_output_tokens": 463
+      },
+      {
+        "input_tokens": 13347,
+        "cached_input_tokens": 13184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 300,
+        "reasoning_output_tokens": 136
+      },
+      {
+        "input_tokens": 14133,
+        "cached_input_tokens": 13568,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1072,
+        "reasoning_output_tokens": 806
+      },
+      {
+        "input_tokens": 15553,
+        "cached_input_tokens": 15104,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 735,
+        "reasoning_output_tokens": 483
+      },
+      {
+        "input_tokens": 16303,
+        "cached_input_tokens": 16128,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 211,
+        "reasoning_output_tokens": 96
+      },
+      {
+        "input_tokens": 16920,
+        "cached_input_tokens": 16512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 175,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 17278,
+        "cached_input_tokens": 17024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 617,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "4c037a9d8a87b6ca916a99173df13dbe0058fcb49b970f9267db5e553f3e7ce2",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 162189,
+      "cached_input_tokens": 150912,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6032,
+      "reasoning_output_tokens": 2757
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

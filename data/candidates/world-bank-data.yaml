@@ -14,14 +14,22 @@ catalog:
     docs:
       url: >-
         https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
+    query:
+      url: https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures
+      checked_on: '2026-10-08'
+      kind: official_docs
+    dataset-terms:
+      url: https://www.worldbank.org/ext/en/legal/terms-conditions/datasets
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Dataset access is free; attribution and dataset-specific licensing conditions apply.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: >-
-        https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation
+      entry_url: https://api.worldbank.org/v2/
       docs: >-
         https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation
       evidence:
@@ -38,6 +46,25 @@ catalog:
         value: none
         evidence:
           - docs
+      capabilities:
+        macro.series:
+          value: documented
+          evidence: [docs, query]
+          notes: Country/economy indicators selected by series code and reporting period.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [docs]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: public Indicators API request
+          scope: Dataset access under the published dataset terms; not a guaranteed service level.
+          evidence: [dataset-terms]
       notes: >-
         Annual country indicators have publication lags and revisions. Confirm each series and year; do not
-        substitute annual GDP or inflation for monthly US indicators.
+        substitute annual GDP or inflation for monthly US indicators. V2 requires the /v2 path and supports
+        JSON, date filtering and pagination; the default page contains 50 results, so one response need not
+        be complete. No API key or other authentication is required.

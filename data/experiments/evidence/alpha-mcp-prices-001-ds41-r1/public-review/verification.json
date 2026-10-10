@@ -1,0 +1,71 @@
+{
+  "notice": "Minimal original measurements and independent judgments. Financial quotes, daily prices, CSV and chart data remain private. Source hashes identify retained originals, not publicly downloadable raw files.",
+  "initial_assessment_sha256": "3735a3661ce5e72e38da7e425d48de2e3e833162ca24e74a5a22145eaa9f1b70",
+  "selected_assessment_sha256": "8aef7247a9c3855e295d87925e072858f3daf02f05a94ef2672c3e3732692186",
+  "initial_status": "not_completed",
+  "selected_status": "not_completed",
+  "initial_fee_kind": "confirmed_free",
+  "selected_fee_kind": "unknown",
+  "independent_reason": "指定服务调用成功且口径正确：执行者经 Alpha Vantage 官方托管 MCP 的 TIME_SERIES_DAILY（compact，不复权）取回 AAPL 2026-08 全部 21 个常规交易日收盘价，序列与冻结参考在 0.01 精度逐项一致（取数约 36s 完成）。但用户要求的可打开走势图与 CSV 均未交付，execution/answer.md 为 0 字节，除取数中间文本外无任何图表或 CSV 产物。会话在约 590s 触达 600s 业务预算被超时终止；预算主要耗在反复安装 matplotlib（9.85MB wheel）而非出图。环境并未失效：指定 MCP 调用成功、网络可部分传输、且原题未要求 matplotlib，纯 Python/SVG/本地 HTML 出图与标准库写 CSV 的替代路径存在却未被尝试。执行后诊断显示依赖下载缓慢，但该诊断不能逐秒重建执行时网络，也不足以说明用户任务在本环境内不可完成。故判为执行策略/预算内未完成，非 invalid_run，也非服务失败。",
+  "checks": [
+    {
+      "criterion": "数据确实由指定服务（Alpha Vantage 官方托管 MCP）实际调用获得，未用其他服务或记忆代替",
+      "passed": true,
+      "evidence": "execution/artifacts/raw_daily.json 记录经 mcp.alphavantage.co/mcp 的 TIME_SERIES_DAILY 调用（full 被拒后 compact 成功）；调用经 /home/node/service-tools/installed-tools/mcp_client.py。"
+    },
+    {
+      "criterion": "AAPL 2026-08 常规交易日收盘价完整、不复权、美元，且与事前冻结同口径参考一致",
+      "passed": true,
+      "evidence": "execution/artifacts/data_inner.json 含 21 个 8 月交易日，日期集合与 reference.json 一致，收盘价在 0.01 精度逐项吻合；无休市/重复/缺失行。"
+    },
+    {
+      "criterion": "交付可打开的走势图（图表与 CSV 数值一致）",
+      "passed": false,
+      "evidence": "execution/artifacts/ 内无任何图片/SVG/PDF/HTML 图表文件；execution/answer.md 为 0 字节。"
+    },
+    {
+      "criterion": "交付 CSV 文件",
+      "passed": false,
+      "evidence": "execution/artifacts/ 内无 .csv 交付文件；data_inner.json 仅为中间解析文本且含全区间约 100 行，非交付 CSV；execution/answer.md 为空。"
+    },
+    {
+      "criterion": "最终答复给出结果、可识别数据来源与不复权口径",
+      "passed": false,
+      "evidence": "execution/answer.md 内容为空（0 字节）。"
+    },
+    {
+      "criterion": "在给定业务预算内完成",
+      "passed": false,
+      "evidence": "取数约 36s 完成；其后至会话约 590s 被超时终止期间均用于 matplotlib 安装尝试（见 execution/artifacts/pip_install.log），未产出交付物。"
+    }
+  ],
+  "execution": {
+    "started_at": "2026-10-08T14:22:41.046437+00:00",
+    "ended_at": "2026-10-08T14:32:31.111554+00:00",
+    "exit_code": -15,
+    "timed_out": true
+  },
+  "actual_answer_bytes": 0,
+  "actual_answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "limits": [
+    "One sample per route on the same pre-provided free account. Account registration not measured; no general reliability or protocol-speed ranking.",
+    "Serial REST then MCP execution. Both used the assigned data route; graders received no other route results or other grading conclusions.",
+    "Only generic setup and authentication survive between tasks. MCP transport client source was inspected and explicitly retained before business; no business answer or data was supplied.",
+    "Raw financial quotes, daily series and possible reconstructions are not redistributed. Public evidence reports the coverage and independent comparison result.",
+    "Unknown execution usage/model costs remain unknown; conservative budget reserves retained, not reported as zero."
+  ],
+  "exception_review": {
+    "reason": "Both workflows stalled on a dependency download; a separate same-image post-run network diagnostic raised a material validity question.",
+    "initial_verdict_preserved": true,
+    "new_session": true,
+    "execution_not_rerun": true,
+    "original_frozen_inputs_unchanged": true,
+    "finding": "Both independent rechecks kept not_completed: the user deliverables were missing, service data retrieval worked, and the task did not require the stalled library. Network limitation disclosed; this is not a service-availability failure.",
+    "fee_change": "Exception reviewers kept service fee unknown rather than inferring free status from setup constraints; original confirmed_free judgments and hashes retained privately.",
+    "diagnostic_sha256": "700e23c2c5b1fe2bf2ef6b44faca7909dbdec581ae593e9a7ea44e6796a41fa0",
+    "diagnostic_timing_limit": "Measured after execution; does not reconstruct execution-time network conditions.",
+    "diagnostic_default_bytes_in_20s": 234101,
+    "diagnostic_ipv4_bytes_in_20s": 340187,
+    "wheel_bytes": 9854405
+  }
+}

@@ -12,26 +12,45 @@ catalog:
   sources:
     api:
       url: https://coda.io/developers/apis/v1
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     mcp:
       url: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
-      checked_on: '2026-09-08'
+      checked_on: '2026-10-08'
       kind: official_docs
     collaboration-scope:
       url: https://coda.io/developers/apis/v1
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
       notes: >-
-        The official API reference documents page content and creation as well as tables. Only the
-        search-index excerpt was readable on this review; route-specific document capability is not newly
-        asserted.
+        Read the complete embedded OpenAPI 1.6.0 schema. It documents creating docs/pages and reading or
+        writing rows in existing tables; no table or column creation operation is listed in that REST schema.
+    mcp-tools:
+      url: https://help.superhuman.com/hc/en-us/articles/46210102879629-Using-the-Superhuman-Docs-MCP
+      checked_on: '2026-10-08'
+      kind: official_docs
+    free-plan:
+      url: https://help.coda.io/hc/en-us/articles/39555798022797-Doc-limits-on-Free-plan
+      checked_on: '2026-10-08'
+      kind: official_docs
+    signup:
+      url: https://help.coda.io/hc/en-us/articles/39555865037581-Sign-in-and-out-of-Coda
+      checked_on: '2026-10-08'
+      kind: official_docs
+    developer-terms:
+      url: https://superhuman.com/legal/terms/developer
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        The API reference names Superhuman Developer Terms in its license field. Section 1 covers APIs,
+        keys, CLIs and access tokens; section 7(a)(g) restricts competitive analysis and dissemination of
+        performance information, expressly including uptime, response time and benchmarks.
   routes:
     - id: rest-api
       docs: https://coda.io/developers/apis/v1
       interface: api
       maintainer: official
-      entry_url: https://coda.io/developers/apis/v1
+      entry_url: https://coda.io/apis/v1
       evidence:
         - api
       availability:
@@ -39,9 +58,10 @@ catalog:
         evidence:
           - api
       personal_access:
-        value: unknown
+        value: documented
         evidence:
           - api
+          - free-plan
       auth:
         value: api_key
         evidence:
@@ -56,8 +76,26 @@ catalog:
           evidence:
             - api
       notes: >-
-        API available in free and paid workspaces. Creating docs requires a Doc Maker role; row writes may be
-        asynchronous. Table/schema creation support must be verified for the task.
+        Free API access in free and paid workspaces; document creation requires Doc Maker/Admin permissions.
+        Writes can return 202 before mutation completion, and reads can lag. REST 1.6.0 supports existing-table
+        row operations but does not document creating a native table/schema from a blank document. This is
+        a route boundary, not a limitation of the separate MCP. Per-user limits include 100 reads/6 seconds,
+        10 writes/6 seconds and 5 document-content writes/10 seconds. See developer-terms before public testing.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - signup
+      human_steps:
+        - stage: signup
+          step: Create a personal Free account using a supported email or identity-provider flow; current email-domain acceptance and verification gates are untested.
+          evidence:
+            - signup
+            - free-plan
+        - stage: credentials
+          step: Generate an API token in account settings with the permissions needed for the intended document.
+          evidence:
+            - api
     - id: hosted-mcp
       docs: https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP
       interface: mcp
@@ -70,7 +108,7 @@ catalog:
         evidence:
           - mcp
       personal_access:
-        value: unknown
+        value: documented
         evidence:
           - mcp
       auth:
@@ -82,10 +120,24 @@ catalog:
           value: documented
           evidence:
             - mcp
+            - mcp-tools
         records.track:
           value: documented
           evidence:
             - mcp
-      notes: Official hosted MCP; connector setup needs authorization.
+      notes: >-
+        Official hosted MCP, now branded Superhuman Docs. Existing Coda connections remain supported.
+        OAuth clients and MCP-scoped personal access tokens are documented; this route retains its OAuth
+        auth designation. MCP tools can create native tables and modify columns/rows. Free-plan Doc Makers
+        have a limited allowance of 30 requests/week, at most 60/month, with all tools; Editors' allowance is
+        read-only. These are MCP-specific limits, not REST quotas. Beta behavior may change. The developer
+        terms restrict public performance disclosure; documented capability is not a successful trial.
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - mcp
   notes:
     - Document and messaging membership does not transfer collaborative-table trial results to those tasks.
+    - Free personal unshared documents have no row/object limit; shared Free documents allow 1000 rows and 50 objects. Actual account readiness, email-domain acceptance and payment-card gates were not observed.
+    - Superhuman Developer Terms section 7(a)(g) explicitly restricts disseminating platform/service performance information and competitive analysis. This blocks the project's proposed public performance comparison absent an applicable exception; it is not a technical failure or an inference from missing publication permission.

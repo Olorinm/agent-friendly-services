@@ -1,0 +1,121 @@
+{
+  "scope": "One fixed official two-page, native-text NPS brochure table, not a scanned-OCR, all-PDF, freshness, trail-access or safety benchmark.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "3c6c97e713f4f81211a1dc3d6063a461f4706253d23c7a449bf93378b9abf1be",
+    "execution/receipt.json": "9854c6e7a74b03b5841433eaea61d49970a0393ea0b65a5fc804bb3cfe9fefd2",
+    "execution/usage.json": "6ada0030061f160655447cf4eae4b2fc5694e276829656dda569fb771c3ab87f",
+    "execution/tool-records.json": "4f3e4f4f0737eb8223302ea8ad5f7bc97b36a03ef435f77b16441afe11a2930c",
+    "grading/assessment.json": "521949567d988bcebe0b6b482ab43d5c2bb0285d7f86e25d17ad2c7e3cfe13bd"
+  },
+  "configuration": "OpenCode1.18.35; DeepSeekV4.1Flash/high; execution25requests (access300s/business600s), grading40requests/300s,32000outputtokens/request. Same image,2GiB/1CPU/pids256,pipTUNA, initially emptycache; freshhome/session/workspace. Two service execution streams, separate fresh graders.",
+  "route": "public-mcp",
+  "account": "Anonymous only; no account, key, payment or mutable remote resource created.",
+  "api_call_limit": 6,
+  "limit_enforcement": "Service extraction count and >=1s spacing are instructions; model request, output and time limits are enforced. Stop after two consecutive 403/429/connection failures. MCP initialize/notifications/list calls are not extraction calls but are recorded in tools/time.",
+  "elapsed_seconds": 72.610281,
+  "service_cost_judgment": {
+    "kind": "confirmed_free",
+    "sources": [
+      "official-route-sources/exa-mcp.md (https://exa.ai/docs/get-started/exa-mcp.md, 行 215)：Authentication 表 Keyless 模式注明 'Free rate-limited usage without sign-in or API key'，入口 https://mcp.exa.ai/mcp",
+      "evidence/extraction-and-csv-check.md：本次对 https://mcp.exa.ai/mcp 的匿名 keyless web_fetch_exa 调用返回目标正文（HTTP 200），未使用 API Key/OAuth/登录或付款"
+    ],
+    "note": "按官方 Keyless 免费规则，本次匿名 hosted MCP 调用属免费限流额度，无计费；未套用 keyed REST 或账号额度价格。无回执金额，故服务费用为 0。",
+    "applicability": {
+      "rule": "Exa 官方文档规定 MCP hosted 入口 https://mcp.exa.ai/mcp 的 Keyless 模式为 'Free rate-limited usage without sign-in or API key'（免费但受限流）。",
+      "observed": "本次仅以匿名 keyless 方式连接 https://mcp.exa.ai/mcp，未设置 x-api-key、未走 ?login OAuth、未登录或绑定付款；web_fetch_exa 调用返回目标 PDF 正文，响应无费用字段，符合该免费规则。",
+      "evidence": "official-route-sources/exa-mcp.md 行 215；grading/artifacts/evidence/extraction-and-csv-check.md"
+    }
+  },
+  "service_cost_usd": 0,
+  "fee_limit": "Official anonymous free rules matched to actual anonymous requests by the independent grader. Remaining quota and provider billing statement unavailable; public free result does not establish unlimited access. Credits are separate from dollar charges.",
+  "official_route_source_snapshots": [
+    {
+      "url": "https://exa.ai/docs/get-started/exa-mcp.md",
+      "sha256": "a7283171537f598978feb9bc518240a6696d5b7d2f2c22b7d7233ff7905191ea"
+    }
+  ],
+  "public_selection": "Only minimal factual observations, selected short table data and original evidence hashes. Full PDF, images, maps, raw service responses, complete sessions and request identifiers remain private.",
+  "resources": "All four dedicated batch containers stopped after independent review and complete usage collection.",
+  "published_csv": {
+    "name": "zion_hiking_guide_easy.csv",
+    "sha256": "26effdc2a728559c5d932e26d885cf5e25f85dfb54972039d4052191ec3ca058",
+    "rows": 5,
+    "utf8": true,
+    "columns": [
+      "trail",
+      "round_trip_miles",
+      "average_hours",
+      "elevation_change_feet"
+    ]
+  },
+  "independently_verified_rows": [
+    {
+      "trail": "Pa’rus Trail",
+      "round_trip_miles": "3.5",
+      "average_hours": "2",
+      "elevation_change_feet": "50"
+    },
+    {
+      "trail": "The Grotto Trail",
+      "round_trip_miles": "1",
+      "average_hours": "0.5",
+      "elevation_change_feet": "35"
+    },
+    {
+      "trail": "Lower Emerald Pool Trail",
+      "round_trip_miles": "1.2",
+      "average_hours": "1",
+      "elevation_change_feet": "150"
+    },
+    {
+      "trail": "Weeping Rock Trail",
+      "round_trip_miles": "0.4",
+      "average_hours": "0.5",
+      "elevation_change_feet": "98"
+    },
+    {
+      "trail": "Riverside Walk",
+      "round_trip_miles": "2.2",
+      "average_hours": "1.5",
+      "elevation_change_feet": "57"
+    }
+  ],
+  "reference_sha256": "aeac067dfa0968a438cd03b14f1163ab2fd8c462100bdb817d9e88477c9ead3c",
+  "reference_source": {
+    "url": "https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212",
+    "retrieved_at": "2026-10-08T18:37:51.834742+00:00",
+    "http_status": 200,
+    "content_type": "application/pdf;charset=UTF-8",
+    "content_disposition": "inline; filename=\"Summer-Infoguide-2026.pdf\"",
+    "bytes": 8566287,
+    "sha256": "8834c768e02540e6f45cbd9c38bdb8eb05644c21779d42ac613706ae33b18fea",
+    "method": "Direct HTTPS GET of official NPS source; no extraction-provider API."
+  },
+  "document_identity": {
+    "title": "Zion Information Guide",
+    "author_pdf_metadata": "Zion National Park",
+    "response_filename": "Summer-Infoguide-2026.pdf",
+    "printed_publication_date": "5/18/2026",
+    "printed_date_location": "Physical page 2, bottom right",
+    "pdf_modification_date": "2026-07-31 (PDF metadata; not a claim about online release date)",
+    "physical_page_count": 2,
+    "pdf_bytes": 8566287,
+    "input_url_suffix": "loader.cfm; official HTTP content type application/pdf;charset=UTF-8",
+    "target_physical_page": 1,
+    "target_label": "Hiking Guide, EASY through immediately before MODERATE"
+  },
+  "independent_reference_method": "Task-design role directly downloaded official NPS PDF before service execution, extracted native text with pdftotext -layout, rendered both physical pages with pdftoppm and visually inspected them. Page 1 EASY black heading and MODERATE next heading bound exactly these five rows. Multiline Lower Emerald / Pool Trail is one name. Miles and feet are primary source values; do not recalculate from rounded km or m. No candidate API/response or prior executor answer used.",
+  "comparison": "Both business executions collected and peer outputs sealed before separate grading; reference source PDF/derived files and official route rules were independently frozen before dispatch, grader-only. Graders cannot see peer verdicts.",
+  "retention_audit_sha256": "f9b6d1e386992f1977d2ef298e94ad82ce3e9a184571db02121284d92cb9f56e",
+  "retention_preparation": "Controller archived access config and removed old example query/receipt fields and obsolete workspace-client pointers. No client/helper/answer added; no extra dependencies installed. Restarted both owned execution containers and verified unchanged config hashes, leaving only baseline processes. First Firecrawl restart verification mistakenly rejected normal uid1000 sleep/ps; audit recovery confirmed owner/config and repeated restart before business. No model replay; this is extra controller preparation, not unassisted reuse. Generic price claims in executor-written configs were not independently validated or corrected.",
+  "attribution": "Selected factual table from National Park Service, Zion National Park, Summer-Infoguide-2026.pdf, printed Published5/18/2026. Extracted to CSV; values retain original miles/hours/feet. No endorsement; no whole brochure or third-party artwork reproduced.",
+  "response_hashes": {
+    "fetch_raw.txt": "c84882d2b47d0d867357e1bace6dc95ac5231c62f092d53d0a8a34cc91efd28f"
+  },
+  "candidate_extraction_calls": 1,
+  "fetch_max_characters": 30000,
+  "format_observation": "Returned flattened text placed difficulty headings after table rows; executor selected the first EASY block, which matches all five reference rows. Printed Published5/18/2026 was present. Selecting maxCharacters30000 avoided the documented default3000 limit for this response; no general truncation or OCR guarantee.",
+  "protocol_recovery": "Initial curl MCP initialize succeeded; a later Python urllib initialize returned403 once. Executor added User-Agent Mozilla/5.0 (compatible; opencode-mcp-client/1.0), retried successfully, then fetched once. No account, IP, proxy or service-route change was observed. The cause of403 is undetermined; this was not two consecutive failed requests or a PDF-fetch failure.",
+  "cache_and_usage_limit": "MCP result exposed text and searchTime but no per-request service credits/cost or reliable cache timestamp. No equivalence with Firecrawl cache controls or keyed Exa REST pricing is assumed."
+}

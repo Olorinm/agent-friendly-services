@@ -34,8 +34,10 @@ checks:
     verified: "2026-07-07"
 
   oauth_support:
-    status: unknown
-    notes: API-key auth only, as far as documented.
+    status: supported
+    evidence: https://exa.ai/docs/get-started/exa-mcp
+    verified: "2026-10-08"
+    notes: Official remote MCP supports OAuth; the REST API uses an API key and anonymous MCP is separate.
 
   scoped_tokens:
     status: unknown
@@ -72,7 +74,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed.
+    evidence: https://exa.ai/terms
+    verified: "2026-10-08"
+    notes: Terms section 1.1 permits API use within documentation. Section 4.2(a) restricts redistribution of obtained information with stated exceptions; no benchmark-specific disclosure prohibition was found in these terms. This is not a blanket publication license.
 
 catalog:
   version: 1
@@ -81,29 +85,61 @@ catalog:
     - web-search-data/web-search
   sources:
     mcp:
-      url: https://exa.ai/docs/reference/exa-mcp
-      checked_on: '2026-09-07'
+      url: https://exa.ai/docs/get-started/exa-mcp
+      checked_on: '2026-10-08'
       kind: official_docs
     pricing:
       url: https://exa.ai/pricing
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_site
     docs:
       url: https://exa.ai/docs/reference/search
-      checked_on: '2026-09-07'
+      checked_on: '2026-10-08'
       kind: official_docs
     fetch-docs:
       url: https://exa.ai/docs/get-started/exa-mcp
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
+    mcp-repo:
+      url: https://github.com/exa-labs/exa-mcp-server
+      checked_on: '2026-10-08'
+      kind: official_repo
+    mcp-web-fetch:
+      url: https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/webFetch.ts
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: Public implementation snapshot, not confirmation of the version deployed at the hosted endpoint.
+    mcp-fetch-config:
+      url: https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/config.ts
+      checked_on: '2026-10-08'
+      kind: official_repo
+    contents-guide:
+      url: https://exa.ai/docs/contents/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Contents API documents PDF content extraction; this is not a separate guarantee for anonymous hosted MCP.
+    contents-reference:
+      url: https://exa.ai/docs/reference/get-contents
+      checked_on: '2026-10-08'
+      kind: official_docs
+    contents-pricing:
+      url: https://exa.ai/docs/admin/pricing
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://exa.ai/terms
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: public-mcp
       interface: mcp
       maintainer: official
       entry_url: https://mcp.exa.ai/mcp
-      docs: https://exa.ai/docs/reference/exa-mcp
+      docs: https://exa.ai/docs/get-started/exa-mcp
       evidence:
         - mcp
+        - mcp-repo
+        - terms
       availability:
         value: self_serve
         evidence:
@@ -125,18 +161,45 @@ catalog:
           value: documented
           evidence:
             - fetch-docs
+            - mcp-repo
           notes: >-
-            The current MCP guide lists web_fetch_exa for known URLs. This is documentation evidence, separate
-            from historical search tests.
+            web_fetch_exa reads clean Markdown from known URLs. The reviewed official implementation
+            accepts URLs and maxCharacters (default 3000 per URL), invokes /contents with text, and has
+            a 60-second outer timeout. It has no PDF-extension filter, but the MCP guide does not separately
+            guarantee PDF parsing or OCR for scanned pages. This is a documentation review of a fixed
+            implementation revision, not a guarantee about every hosted deployment or document.
+            No page-count or cache/freshness control is exposed by this implementation. Independent
+            trials in evaluations record the tested route and document outcomes; a successful native-text
+            PDF does not establish OCR support, completeness or correct tables for other PDFs.
       notes: >-
-        Public search MCP has a casual-use free plan; own key lifts limits. Additional agent_run tool requires
-        authentication and separate usage charges; it is excluded from this pilot. API signup credits are not
-        a quota guarantee for anonymous MCP.
+        Keyless MCP is free and rate-limited, with no sign-in. The exact anonymous quota is not published.
+        Default tools include web_search_exa and web_fetch_exa; optional advanced search supports domain
+        filters. Authenticated agent_run has separate charges and is outside this route. API account
+        credits and the account Search QPS limit do not establish anonymous MCP limits. Terms section 10.7
+        imposes export and restricted-party conditions; no unrestricted global availability is inferred.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - mcp
+        payment_method:
+          value: not_required
+          evidence:
+            - mcp
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Free rate-limited keyless MCP tools; excludes authenticated agent_run.
+          evidence:
+            - mcp
     - id: search-api
       docs: https://exa.ai/docs/reference/search
       interface: api
       maintainer: official
-      entry_url: https://exa.ai/docs/reference/search
+      entry_url: https://api.exa.ai/search
       evidence:
         - docs
         - pricing
@@ -158,8 +221,9 @@ catalog:
           evidence:
             - docs
       notes: >-
-        Free account signup advertised at USD 20 initial credits plus USD 10/month; onboarding may be needed
-        for part of initial credits. No payment method required. Anonymous MCP quota is separate.
+        The current free account plan advertises USD 10/month plus a USD 10 onboarding bonus, no card,
+        and 10 Search requests/second. Actual bonus award and balance should be checked. Anonymous MCP
+        quota is separate.
       requirements:
         payment_method:
           value: not_required
@@ -167,10 +231,10 @@ catalog:
             - pricing
       costs:
         - kind: free_allowance
-          amount: 20
+          amount: 10
           unit: money
           per: one_time
-          scope: Published signup credits; some may require onboarding. Actual account award should be checked.
+          scope: Published onboarding bonus; actual account award should be checked.
           evidence:
             - pricing
           currency: USD
@@ -182,3 +246,7 @@ catalog:
           evidence:
             - pricing
           currency: USD
+  notes:
+    - The Contents API guide documents PDF and complex-layout extraction rather than merely downloading a binary file. The official web_fetch_exa implementation calls that API, providing a source-based reason to test a public PDF URL through anonymous MCP. It does not establish that the hosted anonymous route runs the same revision, permits every document size, or successfully parses a particular PDF. No new keyed route was substituted for public-mcp in this review.
+    - The reviewed MCP formatter retains title, URL and text, with optional author/date and a server searchTime metadata field; it does not expose the REST cached/crawled source or costDollars fields. Its tool input lacks REST maxAgeHours. REST freshness controls, account credits, request rates and content charges must not be presented as anonymous-MCP controls or fees.
+    - For REST Contents, pricing defines a page as one returned URL and bills each requested content type separately at $1 per 1000 pages. Its costDollars is an estimate, not an invoice. Neither the reviewed REST schema nor the MCP guide guarantees physical PDF page numbers, OCR for arbitrary scans, a PDF page/file-size limit, or correct table structure. Keep a source URL and verify the requested facts against the original document; a truncated excerpt is not a complete table.

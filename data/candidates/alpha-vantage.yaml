@@ -24,24 +24,46 @@ catalog:
   sources:
     docs:
       url: https://www.alphavantage.co/documentation/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
     access:
       url: https://www.alphavantage.co/support/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_site
-    mcp-discovery:
-      url: https://www.alphavantage.co/support/
-      checked_on: '2026-09-09'
+    terms:
+      url: https://www.alphavantage.co/terms_of_service/
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Section 2 grants personal, non-commercial use and names investment analysis, research,
+        testing and monitoring in its use-scope definition. Acting for an organization, commercial
+        provision of platform information and specified financial-industry affiliations are separate
+        commercial-use conditions. No explicit benchmark/comparison-publication ban was found.
+        A self-measured report without prices is distinct from redistributing market data; publishing
+        such a report alone is not identified as a commercial-use condition in the reviewed text.
+    mcp:
+      url: https://mcp.alphavantage.co/
+      checked_on: '2026-10-08'
       kind: official_docs
       notes: >-
-        Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
-        could not be extracted in this pass.
+        The public page embeds its setup documentation as Markdown in the HTML. It names the hosted
+        /mcp endpoint, recommended OAuth authorization of an existing API key and legacy query-key
+        access. It directly demonstrates TIME_SERIES_DAILY with outputsize=compact.
+    mcp-source:
+      url: https://github.com/alphavantage/alpha_vantage_mcp/tree/3ed9b05db06d16476d326a12441d68ad071b261a
+      checked_on: '2026-10-08'
+      kind: official_repo
+      notes: >-
+        Officially linked implementation: api/src/av_api/tools/core_stock_apis.py exposes raw daily
+        OHLCV with compact and JSON/CSV parameters; api/src/av_api/client.py forwards the caller's
+        key to the normal query API. mcp/src/av_mcp/utils.py accepts apikey/X-API-Key headers as well
+        as query-key and OAuth credentials. This source snapshot does not establish parity with
+        every hosted deployment; dated trials record their actual route and conditions separately.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://www.alphavantage.co/documentation/
+      entry_url: https://www.alphavantage.co/query
       docs: https://www.alphavantage.co/documentation/
       evidence:
         - docs
@@ -84,13 +106,19 @@ catalog:
           evidence:
             - docs
           notes: >-
-            Asset quotes and time series; supported assets, price adjustment and history depend on
-            endpoint and entitlement.
+            TIME_SERIES_DAILY returns raw as-traded daily OHLCV. Free keys support compact output
+            with the latest 100 observations, not an arbitrary 100-day date range; full history is
+            premium. JSON and CSV are supported. Do not substitute TIME_SERIES_DAILY_ADJUSTED or
+            premium intraday data when unadjusted historical closes are required.
         statements.read:
           value: documented
           evidence:
             - docs
-          notes: Annual and quarterly income statements, balance sheets and cash flows.
+          notes: >-
+            INCOME_STATEMENT and CASH_FLOW document annual and quarterly reports and link to free-key
+            signup. These descriptions alone do not establish coverage of a particular company or
+            fiscal year; dated trial results have their own requested scope and access conditions.
+            A returned original filing URL is not established by the reviewed endpoint descriptions.
         disclosures.search:
           value: documented
           evidence:
@@ -110,7 +138,12 @@ catalog:
         Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output
         (latest 100 observations) is available to free keys; full history and intraday are premium.
         This may cover the current short historical task, subject to access and source precision.
-        Real-time quotes and adjusted data require separate entitlement checks.
+        Real-time quotes and adjusted data require separate entitlement checks. Higher free limits for
+        approved open-source or educational use are not the ordinary self-serve allowance. Income and
+        cash-flow data for two companies require at least four endpoint calls before provenance checks.
+        Historical task coverage is a moving window, so verify the returned first/last dates at execution
+        time. Account eligibility and personal/non-commercial use conditions still apply; they should
+        not be described as a blanket prohibition on publishing self-measured service results.
       costs:
         - kind: free_allowance
           amount: 25
@@ -119,7 +152,63 @@ catalog:
           scope: Free API key allowance; excludes premium endpoints.
           evidence:
             - access
+    - id: hosted-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://mcp.alphavantage.co/mcp
+      docs: https://mcp.alphavantage.co/
+      evidence:
+        - mcp
+        - mcp-source
+      availability:
+        value: self_serve
+        evidence:
+          - mcp
+      personal_access:
+        value: documented
+        evidence:
+          - mcp
+          - access
+      auth:
+        value: api_key
+        evidence:
+          - mcp
+          - mcp-source
+        notes: >-
+          Uses an existing Alpha Vantage key. OAuth is the recommended interactive authorization
+          flow; query-string apikey access is documented but marked legacy/deprecated. Official
+          source also accepts apikey or X-API-Key headers; source support alone does not establish
+          acceptance by the hosted deployment.
+      capabilities:
+        prices.history:
+          value: documented
+          evidence:
+            - mcp
+            - mcp-source
+            - docs
+          notes: >-
+            TIME_SERIES_DAILY exposes raw daily OHLCV, compact latest-100-observation output and
+            JSON/CSV. Full history remains subject to underlying API entitlement.
+      notes: >-
+        Official hosted Streamable HTTP route. Discover functions with tools/list and invoke with
+        tools/call. The implementation forwards data calls to the standard API using the same key,
+        so plan shared usage against the ordinary 25-request/day pool rather than a second MCP
+        allowance; shared accounting is inferred from that implementation, not measured here.
+        Documentation alone does not establish connection success, tool availability, requested-date
+        coverage or hosted/source parity for a particular run. Independent evaluations record the
+        actual tested conditions and outcomes.
+      costs:
+        - kind: free_allowance
+          amount: 25
+          unit: underlying API requests
+          per: day
+          scope: Ordinary free-key allowance; same-key sharing inferred from official forwarding code, with no separate MCP quota documented.
+          evidence:
+            - access
+            - mcp-source
 notes:
   - >-
-    Official support links https://mcp.alphavantage.co/ as the MCP setup surface; detailed setup
-    could not be extracted in this pass.
+    This discovery review checked official documentation and a pinned implementation before the
+    independent trials. No account was registered, no private credential was read and no financial-data
+    or MCP method call was made during that documentation review. This describes the review's scope,
+    not the service's current trial status; see independent evaluations for dated access and task results.

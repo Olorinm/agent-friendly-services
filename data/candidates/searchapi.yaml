@@ -1,14 +1,40 @@
 id: searchapi
-name: SearchApi Google Flights
+name: SearchApi
 category: travel
 homepage: https://www.searchapi.io/
-summary: Google Flights extraction API and a hosted MCP integration supporting token or browser authorization.
+summary: Google web-search and flight-results APIs, plus a hosted MCP integration; free signup requires a human account owner.
 submitted_by: community
 catalog:
   version: 1
   classifications:
     - travel/flights
+    - web-search-data/web-search
   sources:
+    google-search:
+      url: https://www.searchapi.io/docs/google
+      checked_on: '2026-10-08'
+      kind: official_docs
+    search-trial:
+      url: https://www.searchapi.io/
+      checked_on: '2026-10-08'
+      kind: official_site
+    pricing:
+      url: https://www.searchapi.io/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    signup:
+      url: https://www.searchapi.io/users/sign_up
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://www.searchapi.io/legal/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Account Terms require a human and prohibit bot/automated registration, with one account per
+        person. No explicit benchmark/comparison-publication ban found. Data Licensing preserves
+        third-party rights and source notices; Prohibited Uses restricts reselling/redistributing
+        the Services. These are distinct from publishing one's own minimal testing observations.
     flights:
       url: https://www.searchapi.io/docs/google-flights-api
       checked_on: '2026-09-07'
@@ -22,6 +48,65 @@ catalog:
       checked_on: '2026-09-07'
       kind: official_docs
   routes:
+    - id: google-search-api
+      docs: https://www.searchapi.io/docs/google
+      interface: api
+      maintainer: official
+      entry_url: https://www.searchapi.io/api/v1/search
+      upstream: google-search
+      evidence:
+        - google-search
+        - search-trial
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - search-trial
+        notes: Human signup is self-serve; terms prohibit bot or automated account registration.
+      personal_access:
+        value: documented
+        evidence:
+          - signup
+          - terms
+      auth:
+        value: api_key
+        evidence:
+          - google-search
+        notes: API key in the Authorization Bearer header or api_key query parameter.
+      capabilities:
+        web.search:
+          value: documented
+          evidence:
+            - google-search
+      requirements:
+        platform_account:
+          value: required
+          evidence:
+            - signup
+        payment_method:
+          value: not_required
+          evidence:
+            - search-trial
+      human_steps:
+        - stage: signup
+          step: A human must register the account; the form requests full name, email and password, with Google/GitHub sign-in alternatives. Automated registration is prohibited.
+          evidence:
+            - signup
+            - terms
+      costs:
+        - kind: free_allowance
+          amount: 100
+          unit: requests
+          per: trial
+          scope: Advertised signup allowance, not a verified recurring free plan or a second allowance per engine.
+          evidence:
+            - search-trial
+      notes: >-
+        GET with engine=google and query q returns organic result titles, links and snippets. The
+        documentation supports ordinary search queries; directly reading the returned sources is
+        separate from search and does not establish a URL-extraction capability here. Pricing states
+        an hourly ceiling of 20% of plan credits; the trial's exact effective counter is untested.
+        No account, confirmation email, key or search result was obtained during this review.
     - id: google-flights-api
       docs: https://www.searchapi.io/docs/google-flights-api
       interface: api

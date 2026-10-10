@@ -20,8 +20,27 @@ catalog:
       kind: official_docs
     access:
       url: https://twelvedata.com/pricing
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_site
+    time-series:
+      url: https://twelvedata.com/docs/llms/market-data/time-series.md
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: >-
+        Linked from the official API reference. The time_series endpoint costs one credit per symbol,
+        accepts daily intervals and start/end dates, and supports adjust=none; the default is splits.
+    stocks-access:
+      url: https://twelvedata.com/stocks/
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://twelvedata.com/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        January 1, 2026 terms sections 2.2-2.4 tie data display and redistribution to plan rights;
+        section 5.6 limits free-trial use to evaluation and prohibits commercial use. No explicit
+        benchmark-publication prohibition was found, but that does not grant data display rights.
     sdk:
       url: https://twelvedata.com/docs/introduction/quickstart
       checked_on: '2026-09-09'
@@ -34,7 +53,7 @@ catalog:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://twelvedata.com/docs/introduction/quickstart
+      entry_url: https://api.twelvedata.com/
       docs: https://twelvedata.com/docs/introduction/quickstart
       evidence:
         - docs
@@ -55,8 +74,23 @@ catalog:
           - docs
           - access
       notes: >-
-        Basic advertises 800 API credits/day. Credits are not necessarily requests. Market coverage,
-        fundamentals and display rights depend on plan.
+        Basic advertises 8 API credits/minute and 800/day without a payment card. The time_series
+        endpoint costs one credit per symbol, supports interval=1day, date bounds and adjust=none
+        (default splits); daily timestamps use exchange local time. prepost defaults to false and
+        extended-hour support is confined to documented intraday intervals. The Basic pricing page
+        lists internal non-display usage; internal display is listed under paid Grow. A free API key
+        therefore does not establish that a user-facing price chart is permitted. Account, actual
+        symbol/history entitlement and intended display rights remain unverified.
+      capabilities:
+        prices.history:
+          value: documented
+          evidence:
+            - time-series
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - stocks-access
       costs:
         - kind: free_allowance
           amount: 800

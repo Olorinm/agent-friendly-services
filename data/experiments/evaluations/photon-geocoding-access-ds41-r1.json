@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "run_id": "photon-geocoding-access-ds41-r1",
+  "service_id": "photon",
+  "route_id": "public-search-api",
+  "entry_url": "https://photon.komoot.io/api/",
+  "task": {
+    "description": "帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选一个公开地点做小型查询，给出匹配地点、明确标注纬度和经度的坐标及来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+    "expected_output": "一次来自指定服务的真实地点匹配和带经纬度标签的坐标，注明来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别地点和有效经纬度，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实地点查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，经纬度错误或混淆，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务及已确认免费的资源，可查官方文档、安装通用依赖和保存私有配置。只查询公开地点，不处理个人地址、不批量抓取、不自动补全、不注册无关服务、不付费、不通知或邀请他人。遵守客户端标识、署名、缓存及限流要求；请求与时间上限见 ENVIRONMENT.md。运行记录由外部采集，不要求额外审计报告。",
+    "id": "geocoding-access-001",
+    "version": "v1",
+    "sha256": "b17c5d4612b54125b32d066149250d4a3b9a415f61b5a8a37cba9ae8d3b619b2",
+    "file": "data/experiments/tasks/geocoding.md"
+  },
+  "prompt_sha256": "64250276f49addcd218fc4b0cc874329060c8cfa4895fd8e4d42b5ae5eee3c32",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T15:16:36.665425+00:00",
+  "ended_at": "2026-10-08T15:17:52.428931+00:00",
+  "elapsed_seconds": 75.763506,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; official low-volume public route selected deliberately for one public-venue research task",
+    "web_search": "live",
+    "preparation_note": "Fresh access then business sessions. Same frozen venue task,model/effort/generic tools/limits. Execution25modelrequests,access300s/business600s;grading40requests/300s;32000outputtokens/request. Two provider runtimes may overlap on shared16CPU/31.34GiB host,each2GiB/1CPU;one serial stream per APIhost,4calls/phase max and15s spacing,cache same query. Truthful projectUA supplied, no targetanswer or callscript. Generic setup inspected between sessions; all business data cleared. Graders use actual captured execution request/response and independent official venue reference; no extra candidate APIcalls. Both services shareOSM, so agreement is not independent geographic truth. One publicvenue,place-level mapmarking only, no entrance navigation or general geocoding accuracy claim. PublicOSMF policy explicitly linked/explained; not a generic arbitrary-query platform or recurring bulk geocoder.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者对指定服务 photon（komoot 官方托管 demo）经指定入口 https://photon.komoot.io/api/ 完成 1 次真实正向地理编码查询，返回可识别公开地点 Eiffel Tower (Paris, FR) 与有效且标注正确的经纬度，来自 OpenStreetMap；答复与原始响应一致，持久配置已保存并报告路径且不含秘密，接入步骤与阻碍如实说明。免注册路径未强行注册，未付费，未换服务。",
+  "usage": {
+    "input_tokens": 248700,
+    "cached_input_tokens": 229248,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 4848,
+    "reasoning_output_tokens": 1911
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://photon.komoot.io/",
+      "https://github.com/komoot/photon"
+    ],
+    "note": "komoot 托管的官方公开 Photon demo，免注册、无 Key、无支付、无计费入口。",
+    "applicability": {
+      "rule": "官方 Terms of Use / README Demo server 声明可免费用于项目，仅要求请求量保持在合理范围（超量限流或封禁）；不需要账号、Key 或付款。",
+      "observed": "本次唯一请求为免认证公开地点查询（q=Eiffel Tower, limit=3），未携带账号/Key/支付信息，返回 HTTP 200；单次小查询属合理低量。",
+      "evidence": "execution/artifacts/headers_basic.txt; execution/artifacts/photon_query_eiffel.json; grading/artifacts/evidence/config-access-observation.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-reviewer",
+    "reviewed_at": "2026-10-08T15:29:14.638979+00:00",
+    "checks": [
+      {
+        "criterion": "经指定服务与入口完成一次真实地点查询（非健康检查/示例/配置）",
+        "passed": true,
+        "evidence": "execution/artifacts/headers_basic.txt 显示 GET https://photon.komoot.io/api/ 返回 HTTP 200；execution/artifacts/photon_query_eiffel.json 为真实 GeoJSON 结果（Eiffel Tower, Paris, FR）。"
+      },
+      {
+        "criterion": "真实响应含可识别公开地点且与答复一致",
+        "passed": true,
+        "evidence": "响应首要素 name=Eiffel Tower, city=Paris, country=France, countrycode=FR；execution/answer.md 报告同一地点。"
+      },
+      {
+        "criterion": "经纬度明确标注且正确（顺序与数值有效、与响应一致）",
+        "passed": true,
+        "evidence": "响应 coordinates=[2.2945006,48.8582599]；answer 标注经度 2.2945006 / 纬度 48.8582599，范围有效，顺序为 [经度,纬度] 与 Photon 格式一致。"
+      },
+      {
+        "criterion": "坐标来源注明，符合 OpenStreetMap 署名与许可要求",
+        "passed": true,
+        "evidence": "answer 与 photon_result.md 注明 OpenStreetMap 来源（osm_type=W, osm_id=5013364）及 https://www.openstreetmap.org/copyright。"
+      },
+      {
+        "criterion": "答复与真实响应一致，无编造/混淆",
+        "passed": true,
+        "evidence": "execution/answer.md 的查询串、HTTP 200、地点与坐标均可由 execution/artifacts/photon_query_eiffel.json 与 headers_basic.txt 还原。"
+      },
+      {
+        "criterion": "必要配置持久保存，路径已报告，可供后续会话复用且不泄露秘密",
+        "passed": true,
+        "evidence": "execution/retained-files.json 记为保留文件 service-config.json；answer 报告路径 /home/node/service-tools/service-config.json，内容仅连接/身份/缓存规则（auth=none、UA、限速/缓存、OSM 署名，noSecrets=true），无账号/Key/Cookie。"
+      },
+      {
+        "criterion": "真实接入步骤、账号来源及人工/申请门槛或阻碍已说明",
+        "passed": true,
+        "evidence": "answer 说明免注册、无 Key、无付费、无需安装依赖，并给出实际调用步骤与公平使用限制；未声称自行注册。"
+      },
+      {
+        "criterion": "遵守政策：真实客户端标识、低量单线程、阶段请求数上限、不轮换绕过、不付费",
+        "passed": true,
+        "evidence": "唯一 Photon API 调用使用规定 UA，业务阶段 1 次请求（≤4），无代理/UA 轮换与重试绕过；均为公开非敏感地点。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.026444364,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026444364,
+          "usage_sha256": "0e1589b038c67614651d65b9557b4081f04a89fd043dbd3d5ee83d1392877cd7"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/photon-geocoding-access-ds41-r1/execution/answer.md",
+      "sha256": "68a0ab139ca535774c36cce135bbe95d950b9391647fcba139c9362e1f447ff3",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/photon-geocoding-access-ds41-r1/public-review/verification.md",
+      "sha256": "b4e6b0bf3d8e33587230a9db1afcb3adacf00ea1d2f64fe70c32da5b932f92f7",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/geocoding-deepseek-overnight-20261008/photon-geocoding-access-ds41-r1",
+    "run_sha256": "e4d5a58aedba8e6ab98beec56b744099f6434751bac008c86e089cede6fba75e",
+    "events_sha256": "0fb723aab3f7636af8dcddd0bb1aea87ad22b9875b7523a7df2c78b3baf89e58",
+    "answer_sha256": "68a0ab139ca535774c36cce135bbe95d950b9391647fcba139c9362e1f447ff3",
+    "review_sha256": "9037c7cb99fd684f85214c9eb634d7552f887376037984c82624de55d3138be1",
+    "original_independent_review_sha256": "277ffaa13241ed692320ddbf950af5674104e389c69fccdd41aeb8b86a65f7f7",
+    "selected_independent_review_sha256": "277ffaa13241ed692320ddbf950af5674104e389c69fccdd41aeb8b86a65f7f7",
+    "publication_review_note": "Minimal originalanswer and independent evidence selection; long third-party quotes paraphrased, OSMattribution/license added. All independentstatus/reason/checks/fees preserved; publicnotice narrows unsupportedinferences without rewritinghistory."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7176,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 112,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8036,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 286,
+        "reasoning_output_tokens": 157
+      },
+      {
+        "input_tokens": 8814,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 63,
+        "reasoning_output_tokens": 7
+      },
+      {
+        "input_tokens": 9002,
+        "cached_input_tokens": 8832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 443,
+        "reasoning_output_tokens": 267
+      },
+      {
+        "input_tokens": 9629,
+        "cached_input_tokens": 9344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 118,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 15112,
+        "cached_input_tokens": 9728,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 95,
+        "reasoning_output_tokens": 24
+      },
+      {
+        "input_tokens": 15222,
+        "cached_input_tokens": 14976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 88,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19756,
+        "cached_input_tokens": 15232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 421,
+        "reasoning_output_tokens": 258
+      },
+      {
+        "input_tokens": 20302,
+        "cached_input_tokens": 20096,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 70,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 20799,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1186,
+        "reasoning_output_tokens": 1114
+      },
+      {
+        "input_tokens": 22064,
+        "cached_input_tokens": 21888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 433,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 22513,
+        "cached_input_tokens": 22272,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 200,
+        "reasoning_output_tokens": 51
+      },
+      {
+        "input_tokens": 22763,
+        "cached_input_tokens": 22528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 645,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 23424,
+        "cached_input_tokens": 23168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 272,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 24088,
+        "cached_input_tokens": 23680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 416,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "c42e28d494301e89440f3e88d7ab547f8c7ecf2e4ad9f6b9e16c051c8f88e75c",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 248700,
+      "cached_input_tokens": 229248,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4848,
+      "reasoning_output_tokens": 1911
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

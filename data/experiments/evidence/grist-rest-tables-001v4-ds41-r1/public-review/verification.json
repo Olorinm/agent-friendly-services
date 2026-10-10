@@ -1,0 +1,495 @@
+{
+  "notice": "Public selections from real controller GET receipts, independently graded. Metadata is reduced to resource identity; table lists, schema and unfiltered record values are retained. Private account/resource identifiers are redacted in publication. Each raw_sha256 identifies unchanged privately retained bytes; redacted_sha256 identifies the frozen grader body before this public selection, not this public JSON.",
+  "independent_assessment_sha256": "e0b31f8389ef21259ed0d39deed83c90ac37755f3f27433d54d0745d685a0698",
+  "independent_status": "completed",
+  "independent_reason": "本轮唯一执行入口为 Grist REST API，任务在总控预建并授权的工作区/文档内完成。总控在执行结束后（13:49:48 > 13:49:39）以只读 GET 独立重读，冻结回执完整（controller-verification/manifest.json，complete=true），Tasks 表恰有 3 条记录，字段、内容、日期、完成状态与期望一致；答复链接指向承载该表的文档（urlId [SERVICE_SECRET]），未完成清单为确认场地/林青/2026-09-15 与 制作海报/陈禾/2026-09-20，与远端一致。资源约束满足：1 个业务表、3 行、约 13 次业务调用（<40）、工作区仅 1 个文档，无分享/邀请/通知/付费。账号/密钥/空工作区由总控预建并授权（非本轮自主注册，已提供账号），执行阶段无人工介入。服务费用按 Grist Free(personalFree) 免费档确认免费（见 evidence/free-plan-usage.md）。",
+  "controller_manifest_sha256": "d0d7c8b3ea193b23ade469d8cc47f4c2a838ca00da531bbcea782aa94e99f885",
+  "execution_ended_at": "2026-10-08T13:49:39.481688+00:00",
+  "controller_started_at": "2026-10-08T13:49:48.067219+00:00",
+  "controller_ended_at": "2026-10-08T13:49:53.581638+00:00",
+  "complete": true,
+  "resource_binding": {
+    "workspace_id": "[SERVICE_SECRET]",
+    "docs": [
+      {
+        "doc_id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "url_id": "[SERVICE_SECRET]",
+        "tables": [
+          {
+            "table_id": "Table1",
+            "schema_complete": true,
+            "rows_complete": true,
+            "row_count": 0,
+            "row_ids": [],
+            "retrieval": "Unfiltered Grist records endpoint; no filters, limit, view, sorting or field exclusions; this endpoint returns the complete small table, without pagination."
+          },
+          {
+            "table_id": "Tasks",
+            "schema_complete": true,
+            "rows_complete": true,
+            "row_count": 3,
+            "row_ids": [
+              1,
+              2,
+              3
+            ],
+            "retrieval": "Unfiltered Grist records endpoint; no filters, limit, view, sorting or field exclusions; this endpoint returns the complete small table, without pagination."
+          }
+        ]
+      }
+    ],
+    "workspace_doc_count": 1
+  },
+  "verification_request_count": 7,
+  "requests_and_responses": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/workspaces/[SERVICE_SECRET]",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:48.072707+00:00",
+        "response_received_at": "2026-10-08T13:49:48.844662+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 803,
+        "raw_sha256": "a60e8e68392ab96e8fb0b5afd443bb43e0d8ca974e1cf064a10e1b9230eafa0e",
+        "body_file": "01-workspace.json",
+        "transformations": [
+          "Removed unrelated account metadata field owner",
+          "JSON formatting only; record values preserved",
+          "Registered service secret replaced"
+        ],
+        "body_before_secret_redaction_sha256": "2296f94b1328cfda15caa9ab2fe619128f522e3e6d6e72280d1acd5f6c93f36d",
+        "redacted_sha256": "4150184d41cfa269d89561e56d7d2703768d93d777db27c623e4f4093a417b8f"
+      },
+      "observed_response": {
+        "id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "docs": [
+          {
+            "name": "[SERVICE_SECRET]",
+            "createdAt": "2026-10-08T13:42:13.788Z",
+            "updatedAt": "2026-10-08T13:49:09.948Z",
+            "id": "[SERVICE_SECRET]",
+            "isPinned": false,
+            "urlId": "[SERVICE_SECRET]",
+            "trunkId": null,
+            "type": null,
+            "access": "owners"
+          }
+        ],
+        "access": "owners"
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:48.845388+00:00",
+        "response_received_at": "2026-10-08T13:49:49.644784+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 1775,
+        "raw_sha256": "dedecaf1034dbaab47b4c38d865105245983d50ff006c11ad38aad20ce2022a2",
+        "body_file": "02-doc-1.json",
+        "transformations": [
+          "Removed unrelated account metadata field owner",
+          "Removed unrelated account metadata field owner",
+          "Removed unrelated account metadata field billingAccount",
+          "JSON formatting only; record values preserved",
+          "Registered service secret replaced"
+        ],
+        "body_before_secret_redaction_sha256": "6f86c6918dd92bf4cce6b3d65b69a061cc5d6e9256d9431f5999d107f7cd37a0",
+        "redacted_sha256": "966298c72b2507bcef236220584d46cbc38ab220d4a9c8f0352de2ca29e09182"
+      },
+      "observed_response": {
+        "id": "[SERVICE_SECRET]",
+        "name": "[SERVICE_SECRET]",
+        "urlId": "[SERVICE_SECRET]",
+        "access": "owners",
+        "workspace": {
+          "id": "[SERVICE_SECRET]",
+          "name": "[SERVICE_SECRET]"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:49.646203+00:00",
+        "response_received_at": "2026-10-08T13:49:50.465624+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 309,
+        "raw_sha256": "c3af010ac55d87b491181a92f6763ffaaf49e827bc9c91762fb3de2c79970b8a",
+        "body_file": "03-tables-1.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "3ddcce7faa4ff732235c2c1ec188308ccda5a6eadcb5badb15ba6fb878b62f8b",
+        "redacted_sha256": "3ddcce7faa4ff732235c2c1ec188308ccda5a6eadcb5badb15ba6fb878b62f8b"
+      },
+      "observed_response": {
+        "tables": [
+          {
+            "id": "Table1",
+            "fields": {
+              "tableRef": 1,
+              "primaryViewId": 1,
+              "summarySourceTable": 0,
+              "onDemand": false,
+              "rawViewSectionRef": 2,
+              "recordCardViewSectionRef": 3
+            }
+          },
+          {
+            "id": "Tasks",
+            "fields": {
+              "tableRef": 2,
+              "primaryViewId": 2,
+              "summarySourceTable": 0,
+              "onDemand": false,
+              "rawViewSectionRef": 5,
+              "recordCardViewSectionRef": 6
+            }
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Table1/columns",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:50.467661+00:00",
+        "response_received_at": "2026-10-08T13:49:51.223357+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 886,
+        "raw_sha256": "5aeb78c1f91698c1b2d1e988b284e27a1ad29e6185648a1410fef18b514a8e33",
+        "body_file": "04-columns-3.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "8d37695b0f9ae037a040691d03905072c6f3d2e82242b3e5758265b99533b247",
+        "redacted_sha256": "8d37695b0f9ae037a040691d03905072c6f3d2e82242b3e5758265b99533b247"
+      },
+      "observed_response": {
+        "columns": [
+          {
+            "id": "A",
+            "fields": {
+              "colRef": 2,
+              "label": "A",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 2,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "B",
+            "fields": {
+              "colRef": 3,
+              "label": "B",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 3,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "C",
+            "fields": {
+              "colRef": 4,
+              "label": "C",
+              "isFormula": true,
+              "type": "Any",
+              "parentId": 1,
+              "parentPos": 4,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Table1/records",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:51.223781+00:00",
+        "response_received_at": "2026-10-08T13:49:52.014660+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 14,
+        "raw_sha256": "1b8b4c0b6f6ad1d32565952720bc004eeb1f188f62045e4d5525ae2af8c78432",
+        "body_file": "05-records-4.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "6c1db664439054b14cf5baade95beb5c1b194266ecf60003a2aab24c85fd8359",
+        "redacted_sha256": "6c1db664439054b14cf5baade95beb5c1b194266ecf60003a2aab24c85fd8359"
+      },
+      "observed_response": {
+        "records": []
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/columns",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:52.016491+00:00",
+        "response_received_at": "2026-10-08T13:49:52.815391+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 1279,
+        "raw_sha256": "601599500f9b6a7f5c2e6ab49c986577bffaed16a6a42b47bfe0855288f851ae",
+        "body_file": "06-columns-5.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "1f98ae01b3da921bd15339b96be60c03ad6653dd821c103ebef353fe10a07365",
+        "redacted_sha256": "1f98ae01b3da921bd15339b96be60c03ad6653dd821c103ebef353fe10a07365"
+      },
+      "observed_response": {
+        "columns": [
+          {
+            "id": "task",
+            "fields": {
+              "colRef": 6,
+              "label": "任务",
+              "isFormula": false,
+              "type": "Text",
+              "parentId": 2,
+              "parentPos": 6,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "owner",
+            "fields": {
+              "colRef": 7,
+              "label": "负责人",
+              "isFormula": false,
+              "type": "Text",
+              "parentId": 2,
+              "parentPos": 7,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "due",
+            "fields": {
+              "colRef": 8,
+              "label": "截止日期",
+              "isFormula": false,
+              "type": "Date",
+              "parentId": 2,
+              "parentPos": 8,
+              "widgetOptions": "",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          },
+          {
+            "id": "status",
+            "fields": {
+              "colRef": 9,
+              "label": "完成状态",
+              "isFormula": false,
+              "type": "Choice",
+              "parentId": 2,
+              "parentPos": 9,
+              "widgetOptions": "{\"choices\":[\"未完成\",\"已完成\"]}",
+              "formula": "",
+              "description": "",
+              "untieColIdFromLabel": false,
+              "summarySourceCol": 0,
+              "displayCol": 0,
+              "visibleCol": 0,
+              "rules": null,
+              "reverseCol": 0,
+              "recalcWhen": 0,
+              "recalcDeps": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]/tables/Tasks/records",
+        "query": {},
+        "request_started_at": "2026-10-08T13:49:52.817482+00:00",
+        "response_received_at": "2026-10-08T13:49:53.578344+00:00",
+        "status": 200,
+        "content_type": "application/json; charset=utf-8",
+        "raw_bytes": 304,
+        "raw_sha256": "5911a379eb87577a37be10c256478da5c0f6c828ccc5c5c78a09912cfe81c19d",
+        "body_file": "07-records-6.json",
+        "transformations": [
+          "JSON formatting only; record values preserved"
+        ],
+        "body_before_secret_redaction_sha256": "38d2f2c51245c80882cb523eec8e438028ca785593228de8d553aa0135191c09",
+        "redacted_sha256": "38d2f2c51245c80882cb523eec8e438028ca785593228de8d553aa0135191c09"
+      },
+      "observed_response": {
+        "records": [
+          {
+            "id": 1,
+            "fields": {
+              "task": "确认场地",
+              "owner": "林青",
+              "due": 1789430400,
+              "status": "未完成"
+            }
+          },
+          {
+            "id": 2,
+            "fields": {
+              "task": "整理书单",
+              "owner": "周舟",
+              "due": 1789516800,
+              "status": "已完成"
+            }
+          },
+          {
+            "id": 3,
+            "fields": {
+              "task": "制作海报",
+              "owner": "陈禾",
+              "due": 1789862400,
+              "status": "未完成"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "entitlement": {
+    "notice": "Controller factual supplement extracted from the original independently fetched document metadata. Main metadata copies removed billingAccount wholesale for privacy; only the following non-identifying entitlement fields are restored here. This is not a service-cost verdict; no request or business operation is repeated.",
+    "source_raw_file": "controller-verification/raw/02-doc-1.json",
+    "source_raw_sha256": "dedecaf1034dbaab47b4c38d865105245983d50ff006c11ad38aad20ce2022a2",
+    "source_request": {
+      "method": "GET",
+      "url": "https://docs.getgrist.com/api/docs/[SERVICE_SECRET]",
+      "query": {},
+      "request_started_at": "2026-10-08T13:49:48.845388+00:00",
+      "response_received_at": "2026-10-08T13:49:49.644784+00:00",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "raw_bytes": 1775,
+      "raw_sha256": "dedecaf1034dbaab47b4c38d865105245983d50ff006c11ad38aad20ce2022a2",
+      "body_file": "02-doc-1.json",
+      "transformations": [
+        "Removed unrelated account metadata field owner",
+        "Removed unrelated account metadata field owner",
+        "Removed unrelated account metadata field billingAccount",
+        "JSON formatting only; record values preserved",
+        "Registered service secret replaced"
+      ],
+      "body_before_secret_redaction_sha256": "6f86c6918dd92bf4cce6b3d65b69a061cc5d6e9256d9431f5999d107f7cd37a0",
+      "redacted_sha256": "966298c72b2507bcef236220584d46cbc38ab220d4a9c8f0352de2ca29e09182"
+    },
+    "observed_fields": {
+      "product_name": "personalFree",
+      "product_features": {
+        "workspaces": true,
+        "maxSharesPerWorkspace": 0,
+        "maxSharesPerDoc": 2,
+        "snapshotWindow": {
+          "count": 30,
+          "unit": "days"
+        },
+        "baseMaxRowsPerDocument": 5000,
+        "baseMaxDataSizePerDocument": 10240000,
+        "baseMaxAttachmentsBytesPerDocument": 1073741824,
+        "maxAttachmentsBytesPerOrg": 53687091200,
+        "maxApiCallsPerOrgMonth": 3000,
+        "gracePeriodDays": 14,
+        "baseMaxAssistantCalls": 100
+      },
+      "individual": true,
+      "inGoodStanding": true,
+      "stripePlanId_is_null": true
+    },
+    "remaining_monthly_usage": "unknown; no remaining-balance response collected",
+    "created_at": "2026-10-08T13:55:30.642917+00:00"
+  },
+  "limits": [
+    "One trial per route on one existing account; not a general reliability or protocol ranking.",
+    "Account/API key and empty parent workspace were supplied. Access still created and read its own new empty document; registration was not measured.",
+    "REST execution preceded MCP execution. Each service operation used its assigned route; controller verification used the same GET-only method for both.",
+    "The 40-call business limit refers to caller-visible REST operations or MCP tool calls; hidden backend calls are unknown. Independent controller reads are separate overhead.",
+    "The two independent graders received no peer-results group. Agent-reported human_interventions counts are retained; they differ in whether pre-provided account preparation is counted, so they are not a standalone onboarding comparison.",
+    "The actual Personal Free plan fields come from controller GET metadata. Remaining monthly usage is unknown; task instructions and lack of payment alone do not establish a free service.",
+    "The MCP business grader received a pre-freeze entitlement supplement. Other copies removed billingAccount for privacy; the same actual raw plan fields are shown here during publication review. No task verdict, fee amount or measured execution usage was changed."
+  ]
+}

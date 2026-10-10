@@ -9,11 +9,30 @@ const stable = (value: unknown): string => {
     Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, JSON.parse(stable(v))])));
   return JSON.stringify(value ?? null);
 };
+export const credentialPreparation = (r: Evaluation) => {
+  const value = String(r.environment.service_credentials ?? 'unknown').trim() || 'unknown';
+  return value.startsWith('provided:') ? 'provided' : value;
+};
+export const credentialLabel = (r: Evaluation, zh = false) => {
+  const value = credentialPreparation(r);
+  if (value === 'provided') return zh ? '已预供服务凭据' : 'Service credentials supplied';
+  if (value === 'none') return zh ? '未预供账号或密钥' : 'No account or key supplied';
+  if (value === 'unknown') return zh ? '账号或密钥准备情况未知' : 'Account/key preparation unknown';
+  return `${zh ? '接入准备' : 'Access preparation'}: ${value}`;
+};
 const configKey = (r: Evaluation, services: Map<string, string>) => stable({ model: r.model, effort: r.reasoning_effort,
   harness: r.harness, budget: r.budget_seconds, host: r.environment.host,
   isolation: r.environment.isolation, prompt_style: r.environment.prompt_style ?? 'legacy',
   input_delivery: r.environment.input_delivery ?? 'inline',
-  credentials: String(r.environment.service_credentials ?? 'none').startsWith('provided:') ? 'provided' : 'none',
+  credentials: credentialPreparation(r),
+  // Preparation notes record material conditions absent from the older schema,
+  // such as package mirrors and per-role request limits. Require exact equality:
+  // different or missing notes do not establish an equivalent environment.
+  preparation_note: r.environment.preparation_note,
+  ...(r.environment.trial_protocol ? { trial_protocol: r.environment.trial_protocol,
+    controller_limits: r.environment.controller_limits ? Object.fromEntries(
+      ['max_model_requests', 'closure_fraction'].map(k => [k, (r.environment.controller_limits as Record<string, unknown>)[k]])) : null,
+    runner_source_sha256: r.environment.runner_source_sha256, runtime_image_id: r.environment.runtime_image_id } : {}),
   web_search: r.environment.web_search,
   // Compare the available peer services, not per-task group IDs or round IDs.
   // An unrecorded member stays distinct until its service identity is available.
@@ -24,8 +43,8 @@ export const peerReviewLabel = (r: Evaluation, zh = false) => {
   if (!r.review?.peer_context) return '';
   if (!peerAnswers(r).some(id => id !== r.run_id)) return zh
     ? '独立验收（本轮无其他服务答案可参考）' : 'Independent review; no other service answer available this round';
-  return zh ? `独立验收可参考同期 ${peerAnswers(r).length} 家服务的答案`
-    : `Independent review with same-task answers from ${peerAnswers(r).length} services`;
+  return zh ? `独立验收可参考同期 ${peerAnswers(r).length} 份同题答案`
+    : `Independent review with ${peerAnswers(r).length} same-task answers`;
 };
 const mean = (values: (number | null)[]) => values.length && values.every(v => v !== null && Number.isFinite(v))
   ? values.reduce<number>((sum, v) => sum + v!, 0) / values.length : null;
@@ -65,7 +84,7 @@ export const interfaceLabel = (type: string | undefined, zh = false) => type ===
 
 /** Latest recorded protocol per service/route; compare only identical frozen task sets and settings. */
 export function buildBoards(records: Evaluation[]): Board[] {
-  const services = new Map(records.map(r => [r.run_id, r.service_id]));
+  const services = new Map(records.map(r => [r.run_id, `${r.service_id}/${r.route_id}`]));
   const byRoute = new Map<string, Evaluation[]>();
   for (const run of records) {
     const { classification, phase } = taskClassification(run.task);
@@ -136,8 +155,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const dates = [...new Set(runs.map(r => new Date(r.started_at).toISOString().slice(0, 10)))].sort();
   const date = dates.length === 1 ? dates[0] : `${dates[0]} – ${dates.at(-1)}`;
   const varyingTasks = new Set(entries.map(({ board }) => stable(board.tasks.map(taskKey).sort()))).size > 1;
-  const preparation = (r: Evaluation) => String(r.environment.service_credentials ?? 'none').startsWith('provided:')
-    ? label('已预供服务凭据', 'Service credentials supplied') : label('未预供账号或密钥', 'No account or key supplied');
+  const preparation = (r: Evaluation) => cell(credentialLabel(r, zh));
   const preparations = [...new Set(runs.map(preparation))];
   const varying = varyingTasks || configs.length > 1 || preparations.length > 1;
   const headers = [label('服务', 'Service'),
@@ -156,7 +174,7 @@ export function renderBoardDetails(boards: Board[], names: Map<string, string>, 
   const setup = `**${label('测试配置：', 'Test configuration:')}** ${configs.length === 1 ? `${cell(configs[0])} · ` : ''}${date}${label('（UTC）', ' (UTC)')}${preparations.length === 1 ? ` · ${preparations[0]}` : ''}`;
   const notes: string[] = [];
   if (runs.some(r => !r.environment.host || !r.harness.launcher_sha256)) notes.push(label(
-    '部分早期记录缺少环境信息，尚待统一复跑。', 'Some early records lack environment details and await a controlled rerun.'));
+    '部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。', 'Some records do not publish host details or a launcher hash; see the full records for their environment and limitations.'));
   const files = [...new Set(tasks.map(t => t.file))];
   const links = files.map((file, i) => `[${label('任务定义', 'Task definitions')}${files.length > 1 ? ` ${i + 1}` : ''}](${prefix}${zh ? file : 'generated/tasks.en.md#' + boards.find(b => b.task_file === file)!.tasks[0].id + '-' + boards.find(b => b.task_file === file)!.tasks[0].version})`).join(' · ')
     + ` · [${label('完整运行记录与证据', 'Full runs and evidence')}](${prefix}generated/evaluations.md)`;

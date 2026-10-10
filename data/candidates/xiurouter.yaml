@@ -25,9 +25,9 @@ catalog:
       kind: official_docs
     usage:
       url: https://docs.xiu.ai/en/router/models-pricing-usage/index.md
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
-      notes: The current Markdown source includes the benefit-group retirement notice and the distinction between displayed prices and account permissions.
+      notes: The Markdown source still contains the announced September 30 benefit-group deadline. That date has passed; this documentation check does not verify current account access. Displayed prices and account permissions remain distinct.
     pricing:
       url: https://router.xiu.ai/en/pricing
       checked_on: '2026-09-15'
@@ -114,9 +114,10 @@ catalog:
       token/cache usage and hosted tools. A reference discount is not a guaranteed saving or an actual charge.
       Free allowance, sandbox availability and minimum spend remain unknown; no zero-cost claim is made.
     - >-
-      The current usage documentation says the benefit group is closed to new selection and will cease
-      after September 30, 2026. Existing keys require migration to another available group; a public model
-      listing does not grant account access. This notice concerns one group, not retirement of XiuRouter.
+      The usage documentation announces that the benefit group is closed to new selection and that
+      existing access would stop after September 30, 2026. That deadline has passed, but actual account
+      availability has not been tested here. The notice instructs migration to another available group;
+      a public model listing does not grant account access. It concerns one group, not retirement of XiuRouter.
     - >-
       The privacy source says conversation content is not stored or used for training by XiuRouter, while
       usage and performance records are retained long term. Model developers apply their own retention

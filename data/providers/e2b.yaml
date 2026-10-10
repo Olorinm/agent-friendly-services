@@ -51,8 +51,8 @@ checks:
   free_tier_or_trial:
     status: supported
     evidence: https://e2b.dev/pricing
-    verified: "2026-07-07"
-    notes: Free hobby tier.
+    verified: "2026-10-08"
+    notes: Hobby has a one-time $100 usage credit without a credit card, not recurring free compute. Usage is metered; up to 20 concurrent sandboxes and a one-hour session limit.
 
   self_serve_paid_upgrade:
     status: supported
@@ -83,4 +83,55 @@ catalog:
       url: https://e2b.dev/docs/api-key
       checked_on: '2026-07-07'
       kind: official_docs
-  routes: []
+    quickstart:
+      url: https://docs.e2b.dev/quickstart
+      checked_on: '2026-10-08'
+      kind: official_docs
+    files:
+      url: https://docs.e2b.dev/quickstart/upload-download-files
+      checked_on: '2026-10-08'
+      kind: official_docs
+    lifecycle:
+      url: https://docs.e2b.dev/sandbox
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://e2b.dev/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://e2b.dev/terms
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: sandbox-sdk
+      interface: sdk
+      maintainer: official
+      entry_url: https://docs.e2b.dev/quickstart
+      docs: https://docs.e2b.dev/quickstart
+      evidence: [quickstart]
+      availability:
+        value: self_serve
+        evidence: [quickstart]
+      personal_access:
+        value: documented
+        evidence: [pricing, terms]
+        notes: Hobby signup is documented; reviewed terms describe a GitHub-linked account. Current email-only signup eligibility and acceptance of any particular email domain are unverified.
+      auth:
+        value: api_key
+        evidence: [quickstart]
+      requirements:
+        platform_account:
+          value: required
+          evidence: [quickstart]
+        payment_method:
+          value: not_required
+          evidence: [pricing]
+          notes: Initial Hobby credits only; this does not establish a perpetual free allowance or an account-level spending cap.
+      capabilities:
+        code.execute:
+          value: documented
+          evidence: [quickstart, files]
+      notes: Python and TypeScript code-interpreter SDKs create a hosted sandbox, execute code, and transfer files through files.write/read. Set a finite timeout and explicitly kill the sandbox after retrieving outputs. The free-credit offer does not establish this project's account balance or actual cash charge; runtime and allocated resources remain metered.
+  notes:
+    - The reviewed terms contain no express benchmark-publication ban. Prohibited Conduct item 9 requires prior written consent for developing third-party applications interacting with the Website or Services; items 3 and 10 concern competing services or competitive website use. Official quickstart separately instructs developers to write SDK clients. This review does not resolve the broad application's-consent clause for a new evaluation client and does not equate absence of a benchmark ban with permission. No hosted test was performed in this research pass.

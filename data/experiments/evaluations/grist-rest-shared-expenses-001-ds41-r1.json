@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "run_id": "grist-rest-shared-expenses-001-ds41-r1",
+  "service_id": "grist",
+  "route_id": "rest-api",
+  "entry_url": "https://docs.getgrist.com/api",
+  "task": {
+    "description": "我和室友按一人一半分摊共同支出。请把材料里的 10 月账目做成在线账本，保留每笔日期、用途、付款人和人民币金额，并在表里显示各自已付、应分摊金额，以及谁还需补给谁多少钱。以后追加账目或修正金额时，汇总要自动更新，不用再找 Agent 或运行本地脚本。给我私人表格链接、当前结算数和一句话说明在哪里继续记账；不要实际转账、邀请或通知任何人。",
+    "inputs": "两位合成人员是林青、周舟，所有列出的支出都由两人各承担 50%，本题尚无补差转账。记录如下（日期 / 用途 / 付款人 / 人民币元）：2026-10-01 / 房租 / 林青 / 1800.00；2026-10-02 / 超市采购（一） / 周舟 / 156.40；2026-10-03 / 电费 / 林青 / 92.60；2026-10-04 / 家居用品 / 周舟 / 48.00；2026-10-05 / 宽带 / 周舟 / 100.00；2026-10-07 / 超市采购（二） / 林青 / 203.00。每笔明细完整保留一次；金额及汇总以人民币元表示，精确到分。只做这两人本月的共同支出，不混入个人支出、退款、其他币种、已转账记录或其他月份，不需要第三人、按类别统计或银行连接。在线账本中的汇总要由明细持续计算：用户新增同类明细或修改现有金额后，各自已付、应分摊及补差方向与金额会相应更新，无需修改汇总值、再次运行本地程序或调用 Agent。字段名、表结构和计算实现可以自行选择。执行时只录入这六笔；交付后验收会在同一个本轮专用文档中模拟新增一笔这两人之间的本月共同支出，再修正一笔现有明细的金额，核对自动更新；不会改分摊比例、加入新人或引入上述范围外条件。验证后保留这些合成变更，并在测评记录中说明；你的当前结算答复仍按最初六笔核对。",
+    "expected_output": "一份真实可打开的私人在线账本链接，含六笔初始明细及会随明细变化自动更新的在线汇总；答复说明两人各自已付、应分摊和补差方向、金额，并简短指出继续添加或修改明细的位置。无需公开分享、邀请成员、实际支付、导出文件或交审计程序。",
+    "success": "通过指定服务入口在本轮新空容器建立真实在线账本，完整保留六笔初始明细；在线汇总及初次答复中的两人已付、应分摊和补差方向、金额与输入一致，链接指向该账本，继续记账说明可用。执行结束后，总控仅在该新文档按事前冻结的合成材料追加一笔明细、再修正一笔已有金额，不修改公式、结构或汇总值，不启动执行 Agent；各阶段的独立远端读取均证明明细和在线汇总正确相应变化。独立验收 Agent 核对初态、追加态、修正态原始回执与参考，不获得凭据或运行执行者自评代码。不要求特定字段名、公式语法、固定表数量或显示布局；按人民币分核对金额，允许正常原生数值表示误差。",
+    "failure": "没有真实在线账本、仅本地或聊天中计算、初始明细遗漏重复或内容改变、金额或补差方向错误、链接与目标不符、没有可继续记账的在线结果、汇总只是固定填值或不能随规定的普通明细变化自动更新、改用其他入口、越界访问或预算内未完成。限流、权限或免费额度阻碍如实记录；准备资源、受控验证或独立回执缺失时说明验收材料缺口，不直接归咎服务，也不凭执行者自报判完成。",
+    "resources": "使用已授权的 Grist 免费 Personal 账户；总控为两条路线分别提供新工作区中的一个独立空文档，身份、账号来源与私有配置位置见 ENVIRONMENT.md。空文档仅可带默认空占位表，不预置业务字段、记录、公式或调用脚本。只在交付的该文档中通过指定入口完成业务，不再创建文档或工作区；可复用已独立验收接入的通用安装与配置。最多三张业务表（另可保留默认空占位表，总表上限四张，不计服务内部元数据表）、30 条业务记录及40次服务调用；两入口采用相同模型与执行预算，具体时间和模型请求上限由 ENVIRONMENT.md 冻结。遇服务403、429或需要付费立即停止，不换账号、入口或出口绕过。只操作本轮确切新资源，不读取其他文档、不公开分享、邀请、通知、绑定支付方式或开启付费超额。仅用免费额度，可自行查官方文档、安装通用依赖并编写调用代码。总控在执行停止后做输入中告知的一次追加及一次金额修正并冻结前后回执；验收不持有执行凭据。所有账户、工作区、文档标识与私人链接只留私有材料，公开证据脱敏。",
+    "id": "collaborative-tables-shared-expenses-001",
+    "version": "v1",
+    "sha256": "416ee2572d59310bd2fde801fe5425949d9592facb4215c30a90635c3d90238d",
+    "file": "data/experiments/tasks/collaborative-tables-shared-expenses.md"
+  },
+  "prompt_sha256": "acdee65151c95c60f01a11d43ef22786e605681c3b2a117424e26bbd85a9fc84",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T20:44:03.248139+00:00",
+  "ended_at": "2026-10-08T20:47:00.462169+00:00",
+  "elapsed_seconds": 177.21403,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "provided: existing Grist Personal account; new empty parent workspace prepared by controller",
+    "web_search": "live",
+    "preparation_note": "Shared-expenses formula followup on same previously verified Grist REST/MCP runtimes and existing Personal account. Two new empty parent workspaces and empty documents prepared/read-verified by controller; no business schema/data/formulas/helper supplied, preparation overhead unmetered. Prior task resource pointers removed and archived root-only; generic retained auth/route setup only, no installed dependencies. Adapter archives previous home/workspace/tmp before new session. Retention audit SHA256 0c63da5f9d52d12497339feb10a14b81143a3fb34a15ed70ad232dea5afdc928. Same image/OpenCode1.18.35/DeepSeekV4.1Flash high,2GiB/1CPU/pids256; execution25modelrequests/600s, grading40/300s,32000outputcap. Maximum40 caller-visible service operations per route; stop at first403/429/402/paywall or2consecutive connection failures. These service stop rules are instructions, model request limit is enforced by proxy. REST then MCP serial on shared quota; remaining monthly quota unknown. After both executions collected, controller independently snapshots each document, then applies pre-frozen1append+1amountcorrection only to source ledger columns when mapping safely established; never formulas/schema/summary. Initial/append/correction snapshots and independent arithmetic reference supplied to separate graders without credentials or peer verdicts. Controller verification writes and reads are separate overhead, not part of executor cost. No peer-results group for same-provider routes. Final test state retained per input. Single synthetic two-person50/50 ledger per route, same Grist engine; not multiuser-concurrency/accounting-advice/general reliability or protocol ranking.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "not_completed",
+  "reason": "服务侧账本本身正确且可自动更新：执行者经指定 Grist REST 入口在总控提供的本轮空文档中建立了 Expenses/Settlement 两表并录入六笔明细，独立远端读回初态汇总（总支出 2400.00、每人应分摊 1200.00、林青已付 2095.60、周舟已付 304.40、周舟补给林青 895.60）与输入及冻结参考一致；总控在文档中追加一笔、修正一笔金额后，服务端汇总分别自动变为 2442.40/1221.20/2095.60/346.80/874.40 与 2422.40/1211.20/2075.60/346.80/864.40，与参考一致且公式未变。但执行者没有向用户交付要求的答复：最终产物 execution/answer.md 只有 8 行过程叙述，不含私人账本链接、不含各自已付/应分摊/补差方向与金额、也不含继续记账位置说明；执行回执 exit_code=1，会话最后事件为运行器返回的模型请求预算耗尽（403，25/25 次用尽），执行在“准备核对最终值”前中止。按冻结标准，真实在线账本与完整用户答复分别判定，本次服务计算正确但完整用户交付缺失。",
+  "usage": null,
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "controller-verification/initial.json",
+      "frozen-execution/ENVIRONMENT.md",
+      "https://support.getgrist.com/limits/",
+      "public-review/verification.json — unchanged actual personalFree entitlement from frozen controller initial read; remaining month quota unknown"
+    ],
+    "note": "仅使用授权 Grist Personal 免费账户；无付款回执。",
+    "applicability": {
+      "rule": "Grist Personal 免费计划（任务资源授权使用已授权的免费 Personal 账户；官方免费限制 https://support.getgrist.com/limits/）",
+      "observed": "服务端文档元数据 entitlement 显示 product.name=personalFree、individual=true、inGoodStanding=true、stripePlanId 为 null；本次执行与总控核对的 API 调用远低于该计划 maxApiCallsPerOrgMonth=3000",
+      "evidence": "controller-verification/initial.json 的 GET /docs/<redacted> observed_response.entitlement"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grading-agent",
+    "reviewed_at": "2026-10-08T20:54:58.817029+00:00",
+    "checks": [
+      {
+        "criterion": "经指定入口（Grist REST API）在总控提供的本轮空文档中建立真实在线账本（存在业务与结算表，文档为私人 owners 访问）",
+        "passed": true,
+        "evidence": "controller-verification/initial.json：GET /tables 返回 Table1(默认占位)、Expenses、Settlement；GET /docs/<redacted> 返回 access=owners；execution 工具记录显示建表/录入均走 https://docs.getgrist.com/api"
+      },
+      {
+        "criterion": "六笔初始明细（日期/用途/付款人/人民币金额）各完整保留一次，值与输入一致",
+        "passed": true,
+        "evidence": "grading/artifacts/evidence/ledger-verification.md；controller-verification/initial.json 的 Expenses 记录 id1-6 日期/用途/付款人/金额与 input.md 一致"
+      },
+      {
+        "criterion": "初态在线汇总正确：总支出 2400.00、每人应分摊 1200.00、林青已付 2095.60、周舟已付 304.40、周舟补给林青 895.60",
+        "passed": true,
+        "evidence": "controller-verification/initial.json Settlement 记录字段 Total=2400,Share=1200,PaidLin=2095.6,PaidZhou=304.4,Settle=周舟补给林青 895.60 元，与 reference.json baseline 一致"
+      },
+      {
+        "criterion": "追加一笔本月共同支出后在线汇总自动更新为 2442.40 / 1221.20 / 2095.60 / 346.80 / 周舟补给林青 874.40，且未修改公式/结构/汇总值",
+        "passed": true,
+        "evidence": "controller-verification/after-append.json：GET 汇总 Total=2442.4,Share=1221.2,PaidZhou=346.8,Settle=周舟补给林青 874.40 元；初态与修正态的 Settlement 字段/公式一致；追加态只读取记录，没有另取字段元数据，期间总控仅写原始明细且执行容器已停止，与 reference.json after_append 一致"
+      },
+      {
+        "criterion": "修正一笔现有明细金额后在线汇总自动更新为 2422.40 / 1211.20 / 2075.60 / 346.80 / 周舟补给林青 864.40，且未修改公式/结构/汇总值",
+        "passed": true,
+        "evidence": "controller-verification/after-correction.json：金额由 203.00 改为 183.00，GET 汇总 Total=2422.4,Share=1211.2,PaidLin=2075.6,Settle=周舟补给林青 864.40 元；公式文本与初态一致，与 reference.json after_amount_edit 一致"
+      },
+      {
+        "criterion": "执行者向用户交付要求的答复：私人在线账本链接、当前结算数（两人各自已付/应分摊/补差方向与金额）、一句话说明继续记账位置",
+        "passed": false,
+        "evidence": "execution/answer.md 仅 8 行过程叙述，无链接、无任何结算金额、无续记说明；execution/receipt.json exit_code=1；execution/events.jsonl 末事件为 error: 'Model request budget exhausted'（403，25/25 次用尽）"
+      },
+      {
+        "criterion": "仅操作本轮指定文档、不新建文档/工作区、不分享/邀请/通知/支付，业务表与行数在上限内",
+        "passed": true,
+        "evidence": "controller-verification/initial.json /tables 仅 Table1(默认占位)+Expenses+Settlement，初态 6 行、变更后 7 行，均在上限内；工具记录未见分享/邀请/支付/新建文档调用"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.03329994,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen standard API estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.03329994,
+          "usage_sha256": "e9fede6eb23a5d26fc3c472ebb392f22cb84176f05cb4217a2416b244eefb0e7"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/grist-rest-shared-expenses-001-ds41-r1/execution/answer.md",
+      "sha256": "b042e1de83d08e92b0a7b0edf5ca7cfdde2c40c08409d2a34588b854f466e972",
+      "note": "Actual initial final answer; private links/account/resource identifiers redacted."
+    },
+    {
+      "path": "data/experiments/evidence/grist-rest-shared-expenses-001-ds41-r1/public-review/verification.json",
+      "sha256": "ac0491ab6de2e35f107386a6d790ea2b2abaec13389630e602b211591b5f5b6a",
+      "note": "Independent initial, appended and corrected online state receipts, schema/formulas and synthetic row values; raw source hashes and protocol limits.",
+      "source_sha256": "c8832cbf1a5d6207c6ef03baf3a0fb8bbc1f5b98dec5b25558c1cd7849c4e4e6",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/grist-expenses-deepseek-overnight-20261009/grist-rest-shared-expenses-001-ds41-r1",
+    "run_sha256": "e50f0d25807b73a556b5a17ee638cd9e43393c7f4727e953a65620686f0e2635",
+    "events_sha256": "c5b850f3dca8cd8a641d5272ff2f3a84653ce5d8ba3adaa74373e4ae44eb36d9",
+    "answer_sha256": "b042e1de83d08e92b0a7b0edf5ca7cfdde2c40c08409d2a34588b854f466e972",
+    "review_sha256": "d53ed2d1a9f2e8dc79b5a903f2d479cf608aeb121cad711efc8b06966dce4e9d",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "cbea3f550034f28a5f52b771c24c2db3433101bd6eb34511881e8c7b55f3e4c1",
+    "publication_review_note": "Select minimal actual answer and frozen controller snapshots; publish own synthetic data and remove private account/resource IDs. All independent verdict/check pass-fail/fee kind and amount and measured usage preserved; appended public fee-source pointers to unchanged plan metadata and official limits. Corrected a formula-metadata evidence citation from append snapshot (records only) to initial/final schemas; original review retained, no judgment changed. MCP tool count corrected from approximate16 to observed17."
+  },
+  "request_usage": {
+    "status": "incomplete",
+    "method": "runner adapter",
+    "requests": [],
+    "source_sha256": "3f3ca2ac0e84aa4052d41ee9e432968c9da5af84755e7e039a15875892559d3f",
+    "reason": "Adapter usage is incomplete"
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

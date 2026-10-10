@@ -1,0 +1,62 @@
+{
+  "service": "crossref",
+  "phase": "access",
+  "independent_status": "completed",
+  "source_hashes": [
+    {
+      "path": "execution/artifacts/prompt.txt",
+      "sha256": "0a55ba854c91369be51d927ffc20aa4170ab9add2ba2bcea875874c2d135e93e"
+    },
+    {
+      "path": "execution/artifacts/cache/query1.json",
+      "sha256": "1ab591b3c7003f186659786a0491e99847ffb191a3ee838b15fae3351dc39be3"
+    },
+    {
+      "path": "execution/artifacts/cache/doi_verify.json",
+      "sha256": "3d094d4ae9c74abfa7d832cec6e99a9e2214f9f1c36763216b0757b22685502c"
+    },
+    {
+      "path": "execution/artifacts/cache/headers.txt",
+      "sha256": "10491d9d98f4574b6f5a824e87c59fa07cf8e1d01665b99fa2359fe74f2db507"
+    },
+    {
+      "path": "execution/artifacts/cache/headers3.txt",
+      "sha256": "d4a33a4951d892a833b08c659fb2513c51d5d5f81dc86b44362c3e8d32840cf3"
+    },
+    {
+      "path": "execution/artifacts/cache/headers2.txt",
+      "sha256": "8bab49f15eb2a9b911524923e259cd73e9c23ff70025a9ddefc9c5d6a03565f8"
+    },
+    {
+      "path": "execution/artifacts/cache/query2.json",
+      "sha256": "72d187791cb3f2715bca7fcd0709c957c40b91d76f45f726589c256ade67215c"
+    },
+    {
+      "path": "grading/artifacts/evidence/service-config.json",
+      "sha256": "b1ad7d480a4022897f0a466d8546309f1d49e8189cc3f772bb80e799c2e72990"
+    },
+    {
+      "path": "grading/artifacts/evidence/crossref-free-rule.md",
+      "sha256": "e8d2a885ab6739fac067fd6d9e1b8a7fcd7f2a8581a468b2d747860c5b408bdd"
+    }
+  ],
+  "service_api_requests": 3,
+  "cash_service_fee_usd": 0,
+  "observed_api_pools": [
+    "public-array",
+    "public-single"
+  ],
+  "identified_record": {
+    "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+    "doi": "https://doi.org/10.1038/sdata.2016.18"
+  },
+  "controller_publication_notes": [
+    "仅发布原答复、书目事实和核验说明；完整服务响应、摘要、出版社页面及原始会话私有保存。以下说明由总控复核添加，独立验收状态、检查项、原理由与费用判定均保留。",
+    "模型为DeepSeek V4.1 Flash/high，OpenCode1.18.35。两服务执行及验收分别使用独立容器/新会话；每阶段最多3次请求、单线程、请求开始间隔至少5秒是本轮约束，不是服务通用配额。官方默认包源未更改。",
+    "两家均使用匿名入口，无账号、邮箱、Key或付款；无需注册的入口没有强行注册。Crossref为标准public池，未传mailto；OpenAlex为无Key匿名免费额度，其共享范围不据单个响应猜测。",
+    "参考来自候选调用前冻结的Nature出版页及其书目元数据；原网页有cookie-support重定向，但实际取得200页面并核对citation标签与可见题名/作者。公开仅保留基本书目事实、官方URL和哈希，不转载正文或摘要。",
+    "仅一篇知名英文论文的已知条目查找，不能推出主题检索召回率、排名、全文可得性或整体学术检索质量。OpenAlex使用Crossref等上游数据，二者相同不等于两份独立真值；独立出版社参考决定核验。",
+    "接入要求保存必要连接配置，不要求交付SDK。实际跨题保留检查只发现service-config.json，没有调用客户端或已装依赖；接入答复里的旧缓存绝对路径经外部清理，历史原配置与答复不重写。",
+    "Crossref公共元数据API免费；实际列表/单条回执分别为public-array/public-single。列表1rps、单条5rps、并发1是本次头值，不将接入答复的列表1rps外推到全部端点。书目元数据来源Crossref/相应出版方，摘要与全文权利另论。"
+  ]
+}

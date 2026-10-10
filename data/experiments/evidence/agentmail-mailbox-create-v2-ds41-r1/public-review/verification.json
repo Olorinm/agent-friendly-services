@@ -1,0 +1,59 @@
+{
+  "scope": "Fresh mailbox provisioning, authenticated list access and short-term reuse only. No message sent or message body read; no delivery, sending, registration acceptance or long-term retention claim.",
+  "independent_status": "not_completed",
+  "sources": {
+    "execution/answer.md": "a9615e02809432fbbb105926050473947d1a33ab7e0c625b98be4eaed8942d31",
+    "execution/receipt.json": "4aa0e91762a743847a200166d74c02693bfaf85ddc1bb11c9c91368c6625e2f2",
+    "execution/usage.json": "baec55867ee158d514451b57a1f5d88692bd221546ea8feef24a11a64a289d15",
+    "execution/tool-records.json": "5cb4edd080295edc89cfa4a79182d60b5a188a16bc98f640ea0fdff71be71596",
+    "grading/assessment.json": "27a2b92a3422e88fdc89715b6c766ebb255d41157c2504362682322c0c3ee0a8",
+    "controller-resource-config.private.json": "ade12981cb092c6c93cf8a71519acf7fb4cb4ddc62595454086bc54afe322931",
+    "controller-verification/manifest.private.json": "226e6d2b61145b6c7aa4c436498836cb0537f40e08416680b91f65a0ce69ef1d"
+  },
+  "configuration": "OpenCode 1.18.35 / DeepSeek V4.1 Flash / high. Same v2 task, fresh isolated identities/containers, execution 25 model requests / 300 seconds, grading 40 / 300, 32000 output tokens per request. Two service streams, each 2 GiB / 1 CPU / pids256. Same base image and preconfigured TUNA pip index, empty initial package caches. No supplied service or human mailbox credentials.",
+  "preparation_disclosure": [
+    "Task v2 explicitly permits the minimum anonymous upstream identity needed for one mailbox. Old v1 and its model/harness remain unchanged.",
+    "No peer answer packet for these access runs. Each independent grader checks its own captured creation/read evidence plus controller receipts; no live credentials.",
+    "Controller GET readback is extra verification time/requests outside executor allowance. Source hashes retain private exact identities and responses.",
+    "A private container-name mapping mistake failed locally before SSH/worker start. Zero remote model/API calls verified; unused owned containers removed and correct fresh containers prepared before actual dispatch. No task input or prior service result was changed."
+  ],
+  "actual_result": "No successful mailbox creation, issued API key, authenticated list, or reusable state was observed. Saved credential file is empty. Candidate API host requests returned CloudFront403. Controller did not retry signup or construct missing state.",
+  "independent_diagnostics": [
+    {
+      "method": "GET",
+      "url": "https://api.agentmail.to/v0/auth/me",
+      "authorization": "none",
+      "started_at": "2026-10-08T17:58:42.366966+00:00",
+      "ended_at": "2026-10-08T17:58:42.575763+00:00",
+      "status": 403,
+      "body_sha256": "f9d2df0243e7b9307d240ab7f4e6efc8af9df5c4a9835f9007b72325989a49b3",
+      "location": "host",
+      "cloudfront_request_blocked": true,
+      "body_bytes": 919,
+      "server": "CloudFront"
+    },
+    {
+      "method": "GET",
+      "url": "https://api.agentmail.to/v0/auth/me",
+      "authorization": "none",
+      "started_at": "2026-10-08T17:58:42.878967+00:00",
+      "ended_at": "2026-10-08T17:58:43.092176+00:00",
+      "status": 403,
+      "body_sha256": "cb2fec949400dabfd59a13bdc3866d927827adc4de455107611364f6fcad01a2",
+      "location": "execution_container",
+      "cloudfront_request_blocked": true,
+      "body_bytes": 919,
+      "server": "CloudFront"
+    }
+  ],
+  "attribution": "Independent verdict is not_completed for this specific setup attempt: basic shell/runtime and general network functioned, but this server/container could not access the AgentMail API. This is not evidence of global service failure, permanent unavailability, or a confirmed geographic/IP policy. Root cause remains undetermined.",
+  "execution_limitations": [
+    "At least17 visible requests to AgentMail API hosts plus one MCP-root connectivity request exceed the12 API-request cap; calls10,11,12,13,14,15,16,19,22,23,24,25 in execution/tool-records.json. Repeated requests after403 conflict with the stop-after-repeated-failure guidance.",
+    "Four visible signup POSTs (threecurl plusonePython), whereas finalanswer saysoneattempt and savedconfig saysfive. Same attemptedusername; no valid key or success response captured. Do not adopt either reported count without examining actual records.",
+    "Execution variesbrowserheaders/source fields, testsfakeAuthorization/x-api-key and additionalregional/payment-relatedhosts; allvisibleattempts fail. No successful new identity or privilege change observed. Actualextraattempts/overhead remain recorded.",
+    "403CloudFront alone doesnot prove region/IPcause, serverglobaloutage, successfulmailboxcreation, or thatapplicationlayer wasneverreached. Assess attribution from actualevidence and frozenrules."
+  ],
+  "comparison_limit": "Instruction-level provider API limit12 was exceeded; at least17 API-host requests plus one MCP-root connectivity request are visible. Model request/time limits remained enforced. Do not present this as a compliant 12-call efficiency comparison. Four visible signup POSTs contradict one final-answer attempt and five in saved configuration.",
+  "cleanup": "No successfully created mailbox, organization or key was observed and no resource identity was available for targeted deletion. Controller made no DELETE guesses, repeat signup, human attachment or egress change.",
+  "service_fee": "Independent reviewer retained unknown: no successful account/free-entitlement evidence or billing receipt. No zero substituted."
+}

@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "run_id": "alpha-mcp-prices-mirror-001-ds41-r1",
+  "service_id": "alpha-vantage",
+  "route_id": "hosted-mcp",
+  "entry_url": "https://mcp.alphavantage.co/mcp",
+  "task": {
+    "description": "帮我画出苹果公司 2026 年 8 月的每日收盘价走势，使用不复权价格，并附上 CSV 和数据来源。",
+    "inputs": "苹果公司 Apple Inc.，纳斯达克 AAPL，美元计价；2026-08-01 至 2026-08-31；常规交易日的日收盘价，不含盘前盘后。",
+    "expected_output": "可打开的走势图和 CSV；每个交易日的日期与收盘价；可识别的数据来源与不复权口径。",
+    "success": "日期覆盖该月全部交易日且不含伪造的休市日；无重复、缺失或错误币种；价格与事前冻结的同口径参考序列一致，差异超过报价精度时逐项复核；图表与 CSV 数值一致；数据确实来自指定服务。",
+    "failure": "用实时快照或盘后价替代日收盘价；擅自使用复权数据；缺交易日；用演示数据、别的服务或模型记忆填补；CSV 或图表缺失；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；只读金融数据；可在工作目录安装依赖和生成文件。只用已确认免费的额度，不开付费超额，不调用交易或资金接口。",
+    "id": "financial-prices-001",
+    "version": "v1",
+    "sha256": "ba8caebafff7651bfa99c79d9f5db856e2061fd3e0399eeaf66fa95bfe4d2441",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "bed8c0b069c28859f37e5ffbdf0605f4b698e3b429c9188b4b5f876f42fd9344",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T15:36:50.209167+00:00",
+  "ended_at": "2026-10-08T15:37:52.507068+00:00",
+  "elapsed_seconds": 62.297901,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "controller-registered ordinary free API key; same existing account for REST and MCP",
+    "web_search": "live",
+    "preparation_note": "Existing ordinary free account and key, two fresh route-specific runtimes, no prewritten service calls or prior answers. Serial REST then MCP execution; same frozen task/model/effort/time limits. Access300s/business600s/grading300s;25execution/40grading modelrequests,32000outputtokens/request. Free account25/day planned as shared by both routes based on official forwarding implementation, not live billing-counter proof;13knownprior calls, per-route access1/business3 financial request caps. Original prices/CSV/chart remain private; public measurements omit reconstructable market data. Explicit new environment: defaultpipindex https://pypi.tuna.tsinghua.edu.cn/simple set in /etc/pip.conf for all4newcontainers; same baseimage and initially emptycache, no additionalpreinstalledlibrary or service/plotcode. Additionalresourcechanges versus priorbatch: providerfinancialrequestcaps reduced from3access/5business to1access/3business due sharedquota; independentgradingmodelcap40 instead25,executioncap25 unchanged. PreviousoriginalPyPIfailedruns retained, newcohortneverpooledwithold norusedascontrolledcausalevidence. Same-provider route comparison, one sample each; no peer-results snapshot, no general protocol ranking. Independent reference is Nasdaq official close with calendar/issuer corroboration, never another candidate answer. Actual /etc/pip.conf SHA256 d4bcb0da1ab0fea5b2203d6b00cd570cb7f8bf357af86763a7d44d108a3709c5. Effectivepipconfig verified undertheworkers sterileenvironment asuid1000; no task-data prefetch. Beforebusiness, each newaccess usedonefinancialcall, total15knowncalls; actualremainingunknown. Controller archivedandremoved accessverificationmetadata from genericconfig, without addinginstructions/code/data; originalaccessconfig+artifacts+grades retained. Retentionaudit SHA256 96d995e4faa94f590851ee2345ff56af8587ff23da4abf9593eb079d888d3bd3.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定服务 Alpha Vantage 官方 MCP（https://mcp.alphavantage.co/mcp）经 JSON-RPC tools/call 调用 TIME_SERIES_DAILY(symbol=AAPL, outputsize=compact, datatype=json) 获取不复权日线，产出可打开的走势图、CSV 与可识别来源。CSV 21 行日期与冻结参考的 21 个常规交易日完全一致，无周末/重复/缺失；21 个收盘价逐行与参考序列在 USD 0.01 精度下完全一致；图表与 CSV 数值一致；未使用 REST、其他服务或模型记忆。业务阶段仅 1 次金融数据请求，位于免费额度内。",
+  "usage": {
+    "input_tokens": 207881,
+    "cached_input_tokens": 195456,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 7051,
+    "reasoning_output_tokens": 2206
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.alphavantage.co/premium/",
+      "execution/artifacts/ENVIRONMENT.md"
+    ],
+    "note": "Alpha Vantage 官方 premium 页面声明多数端点可免费使用、标准免费额度为 25 请求/日；ENVIRONMENT.md 指明本轮使用预置的普通免费账号。本轮业务阶段仅 1 次 TIME_SERIES_DAILY 数据请求，未使用 premium 端点/参数，未付款，故本次服务费用为 0。",
+    "applicability": {
+      "rule": "Alpha Vantage 标准免费 API Key：多数端点免费，标准免费额度 25 请求/日；超出或 premium 端点才需付费。",
+      "observed": "本次使用预置免费账号，通过官方 MCP 仅发起 1 次 TIME_SERIES_DAILY 业务数据请求，未触及 premium 端点/参数，未启用付费超额，未产生账单。",
+      "evidence": "ENVIRONMENT.md 记录免费账号与 25 次/日额度；工具记录中仅 1 次 tools/call（TIME_SERIES_DAILY, symbol=AAPL）且调用返回 200 真实数据。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-verifier",
+    "reviewed_at": "2026-10-08T15:45:49.056272+00:00",
+    "checks": [
+      {
+        "criterion": "交付物齐全且可打开：走势图、CSV、可识别数据来源",
+        "passed": true,
+        "evidence": "execution/answer.md 列出 aapl_close_2026-08.png（另有 .svg）、aapl_daily_2026-08.csv、aapl_timeseries_daily_raw.json；aapl_close_2026-08.png 为有效 PNG（1800x930 RGBA），aapl_close_2026-08.svg 可解析为带日期轴/纵轴的折线图并含来源与口径文字。"
+      },
+      {
+        "criterion": "日期覆盖 2026-08 全部常规交易日，无伪造休市日、无重复或缺失",
+        "passed": true,
+        "evidence": "程序比对 CSV 日期集合与 reference.json 的 21 个参考日期完全相等（08-03..08-31 工作日）；无周六/周日行，21 行无重复。"
+      },
+      {
+        "criterion": "收盘价与事前冻结的同口径参考序列在报价精度（USD 0.01）内一致",
+        "passed": true,
+        "evidence": "逐行比对 CSV close 与 reference.json expected.rows，21/21 完全一致，差异数 0。"
+      },
+      {
+        "criterion": "为不复权常规交易日收盘价，币种 USD",
+        "passed": true,
+        "evidence": "调用端点为 TIME_SERIES_DAILY（原始未复权日线 OHLCV）；Meta Data 标注 “Daily Prices (open, high, low, close) and Volumes”、Time Zone US/Eastern；数值与官方 Nasdaq NOCP 参考一致，未使用复权或盘后价。"
+      },
+      {
+        "criterion": "图表与 CSV 数值一致",
+        "passed": true,
+        "evidence": "SVG 折线各点纵坐标与 CSV close 按绘图映射一一对应；标注 High [market value retained privately](08-28)、Low [market value retained privately](08-12)、close [market value retained privately](08-31) 与 CSV 一致；PNG 由同一 CSV 生成。"
+      },
+      {
+        "criterion": "数据确实来自指定服务及指定 MCP 调用方式，非 REST/其他服务/模型记忆",
+        "passed": true,
+        "evidence": "工具记录显示 curl POST https://mcp.alphavantage.co/mcp 执行 JSON-RPC tools/call → TIME_SERIES_DAILY，参数 symbol=AAPL, outputsize=compact, datatype=json，返回含 2026-08 各日的 Time Series (Daily)；全程无 alphavantage.co/query REST 调用。"
+      },
+      {
+        "criterion": "接入方式符合授权：复用预置免费账号，本次无自行注册、无人工介入",
+        "passed": true,
+        "evidence": "ENVIRONMENT.md 指明本轮复用总控事前通过授权邮箱注册的 Alpha Vantage 普通免费账号，密钥由 /home/node/service-tools/credentials.json 提供；本次 run 内无注册、无等待人工步骤。"
+      },
+      {
+        "criterion": "预算与免费额度合规：业务金融数据请求 ≤3 且未使用付费端点",
+        "passed": true,
+        "evidence": "工具记录中仅 1 次 tools/call 金融数据请求；未传入 premium/付费端点或参数；在免费 25 请求/日额度内。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.034648788,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separatefromexecutor; allattempts included; frozenstandardAPIestimate,notinvoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.034648788,
+          "usage_sha256": "82d1f0eeb0ac7482f58f5095f21b59728e60739dc4ab57222efd154a0821f371"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/alpha-mcp-prices-mirror-001-ds41-r1/public-review/verification.json",
+      "sha256": "586c8ae5a7245c46da5cfb156f0e4a99a075d403182dfc36939d14e3bed9092e",
+      "note": "Independent checks with market values withheld; actual artifact/answer hashes, timing, declared environment changes and fee uncertainty."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/prices-mirror-deepseek-overnight-20261008/alpha-mcp-prices-mirror-001-ds41-r1",
+    "run_sha256": "72f9f8ca587f0e47183c538e95c3ddade13072eba918f12718ce5a652531916c",
+    "events_sha256": "2f08e246f326edf50a206cdc385730b5a6e4fa25e1bc063926483b3889f1aa1e",
+    "answer_sha256": "3e5b867892f7b02d9d976a79fc2396a9b4042368893cc99d29ef9d58632cddeb",
+    "review_sha256": "ec27c204d9afdd70997864b87becca6035d1e537691cca1cf9c7086df7b09b1f",
+    "original_independent_review_sha256": "eaa9ad47dbb68ecbe3865370c5ef1fad621060ee44e89294bed6d9cb16508da0",
+    "publication_review_note": "Minimal measurements only; raw financial values removed from independent prose with originalhashes retained, verdict/checkbooleans unchanged. Independent service-cost judgment preserved; missing evidence is not priced at zero. Distinctmirrorcohort andallresourcechanges disclosed; priorfailures retained."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7177,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 122,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8070,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 356,
+        "reasoning_output_tokens": 166
+      },
+      {
+        "input_tokens": 9421,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 897,
+        "reasoning_output_tokens": 660
+      },
+      {
+        "input_tokens": 10783,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 482,
+        "reasoning_output_tokens": 51
+      },
+      {
+        "input_tokens": 11622,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 164,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 12234,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 569,
+        "reasoning_output_tokens": 271
+      },
+      {
+        "input_tokens": 13450,
+        "cached_input_tokens": 12800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 125,
+        "reasoning_output_tokens": 44
+      },
+      {
+        "input_tokens": 13653,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 625,
+        "reasoning_output_tokens": 206
+      },
+      {
+        "input_tokens": 15097,
+        "cached_input_tokens": 14208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1533,
+        "reasoning_output_tokens": 89
+      },
+      {
+        "input_tokens": 16693,
+        "cached_input_tokens": 16512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 211,
+        "reasoning_output_tokens": 141
+      },
+      {
+        "input_tokens": 16929,
+        "cached_input_tokens": 16768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 196,
+        "reasoning_output_tokens": 97
+      },
+      {
+        "input_tokens": 17226,
+        "cached_input_tokens": 17024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 273,
+        "reasoning_output_tokens": 157
+      },
+      {
+        "input_tokens": 17519,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 760,
+        "reasoning_output_tokens": 21
+      },
+      {
+        "input_tokens": 18560,
+        "cached_input_tokens": 18176,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 154,
+        "reasoning_output_tokens": 27
+      },
+      {
+        "input_tokens": 19447,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 584,
+        "reasoning_output_tokens": 234
+      }
+    ],
+    "source_sha256": "8c116ab592940c33777b6819ac362aa039cba8aedfc70c7d2b32192732f5b915",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 207881,
+      "cached_input_tokens": 195456,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7051,
+      "reasoning_output_tokens": 2206
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

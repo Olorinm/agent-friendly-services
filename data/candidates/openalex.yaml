@@ -1,0 +1,111 @@
+id: openalex
+name: OpenAlex
+category: web-search-data
+homepage: https://openalex.org/
+summary: Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.
+submitted_by: community
+tags:
+  - scholarly-metadata
+  - doi
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/scholarly-search
+  sources:
+    authentication:
+      url: https://help.openalex.org/api/authentication/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://help.openalex.org/access/pricing/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    costs:
+      url: https://help.openalex.org/access/example-costs/
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: Updated October 4, 2026; explicitly distinguishes the anonymous daily allowance from account usage.
+    search:
+      url: https://help.openalex.org/api/searching/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    work-fields:
+      url: https://help.openalex.org/data/works/attributes/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    authorships:
+      url: https://help.openalex.org/data/authorships/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    provenance:
+      url: https://help.openalex.org/data/how-its-built/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    terms:
+      url: https://openalex.org/OpenAlex_termsofservice.pdf
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: Terms revised October 2, 2026; service access, third-party publication rights and unreasonable-load restrictions remain separate from the metadata licence.
+  routes:
+    - id: public-rest-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.openalex.org/works
+      docs: https://help.openalex.org/api/authentication/
+      evidence: [authentication, search]
+      availability:
+        value: self_serve
+        evidence: [authentication, costs]
+      personal_access:
+        value: documented
+        evidence: [authentication, pricing, terms]
+        notes: Casual no-key queries are documented. Terms require legal capacity and applicable export-law compliance, not institutional affiliation.
+      auth:
+        value: none
+        evidence: [authentication]
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [authentication, costs]
+        payment_method:
+          value: not_required
+          evidence: [authentication, pricing]
+      capabilities:
+        scholarly.search:
+          value: documented
+          evidence: [search, work-fields, authorships]
+          notes: >-
+            Searches works using text or title-scoped queries and filters. Work records include title,
+            publication year, DOI where available, authorships and publication locations. Authors follow
+            the source byline, with raw names retained, but the list is capped at the first 100 authors.
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request within anonymous daily allowance
+          scope: Anonymous allowance is $0.10 of API usage per UTC day; this is not an unlimited free API.
+          evidence: [authentication, costs]
+      notes: >-
+        Current documentation allows basic no-key use. Its pricing overview lists search at $0.001 per call,
+        list/filter at $0.0001 and single-entity retrieval as free; reranking adds $0.001. These documented
+        categories are not a guarantee that every identifier-based request consumes zero allowance.
+        Thus the anonymous budget
+        covers about 100 plain searches if used for nothing else. Response headers and meta report
+        actual usage; the quota's anonymous sharing scope was not specified in the reviewed pages.
+        A free account raises the daily allowance to $1 with no payment method; that optional keyed
+        route has not been registered or tested here. More than 100 requests/second or budget exhaustion
+        triggers 429; use backoff. API pages return at most 100 results each.
+        Official metadata is released under CC0; abstracts and linked full texts can involve third-party
+        rights, and a paper's availability is not permission to republish it. Reviewed terms contain no
+        explicit public-benchmark ban; access abuse, bypassing restrictions and misleading trademark use
+        remain restricted. Crossref is one upstream source, so agreement with Crossref is not independent
+        confirmation. No business API query was made for this source review.
+  notes:
+    - >-
+      Published trial observation, separate from the official pricing overview: the business run
+      openalex-scholarly-reference-001-ds41-r1 recorded $0.001 of free usage allowance for search and
+      $0.0001 for its DOI lookup, total $0.0011. Cash service cost remained $0. In the same batch's access
+      run, lookup by OpenAlex W-ID recorded zero usage cost. These observations do not establish why
+      the identifier routes differed, and no extra API call was made to investigate. See the existing
+      [public verification](https://github.com/Olorinm/agent-friendly-services/blob/faa1238a8522296fc2c6c28ed607da74a572e876/data/experiments/evidence/openalex-scholarly-reference-001-ds41-r1/public-review/verification.json).

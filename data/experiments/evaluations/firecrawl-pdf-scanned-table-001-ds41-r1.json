@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "run_id": "firecrawl-pdf-scanned-table-001-ds41-r1",
+  "service_id": "firecrawl",
+  "route_id": "public-scrape-api",
+  "entry_url": "https://api.firecrawl.dev/v2/scrape",
+  "task": {
+    "description": "我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。",
+    "inputs": "官方 PDF：https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf 。使用 TTB Gauging Manual 的 TABLE NO. 4 / GALLONS PER POUND，原文件共 21 页。目标是物理第 2 页（印刷页码 532）左半表，Proof 从 1.0 到 2.0，含两端，共 11 行。CSV 使用 UTF-8，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound；按 Proof 升序，保留原表印出的全部数值精度，不换算单位、不重新计算或四舍五入。通过本轮指定的内容提取服务取得此 PDF 的目标表文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载后本地解析或 OCR、裁剪重传后的 PDF，或仅取得原 PDF 链接/二进制替代服务对原 URL 的正文提取。若指定 URL 返回的目标表实质不同，请说明差异，不拼接其他版本。",
+    "expected_output": "一个真实存在、可解析的 UTF-8 CSV，包含指定范围内的 11 行和三列数据，按 Proof 升序；答复给出文件位置与指定 TTB 官方 PDF 来源链接。",
+    "success": "指定服务实际返回原 URL 的目标表内容；CSV 三列、11 行的 Proof 与两种 gallons per pound 数值对应准确，保留原表数值精度，无漏行、重复、额外行或顺序混淆；文件可用，答复含文件位置与官方来源。允许不改变数值的前导零、尾零及无损空白、换行差异。不要求特定解析库、服务返回格式、OCR 模式、页码字段、缓存策略或审计日志。",
+    "failure": "未通过指定服务取得目标表文字、只取得链接/二进制/搜索摘要、绕过服务取原文或用其他来源补答案、缺文件、CSV 不可解析、字段或任一数值错误、漏行重复、混入范围外数据、顺序不符、缺来源或预算内未完成。源文件或目标表实质变化、材料失效及执行环境故障须先核实并单列；额度拒绝、截断或无法提取只说明本轮入口和条件下的具体阻碍，不据此断言普遍 OCR 能力。",
+    "resources": "只对指定公开官方 PDF 做本题所需的小型提取，可查指定服务官方文档、在隔离环境安装通用依赖并自行编写整理代码。只用本轮确认允许的免费匿名入口或额度；不注册新身份、不登录 TTB、不提交表单、不写远端数据、不购买或开启付费超额。可复用已验收接入环境的安装和必要配置，但须由总控归档并清理上题原文、答案、业务脚本与会话；执行从新工作目录和新会话开始。请求及时间上限在 ENVIRONMENT.md 冻结，限流或额度不足时说明阻碍；运行器采集请求、响应和用量，执行者无需另写验收程序或审计日志。",
+    "id": "web-extraction-scanned-table-001",
+    "version": "v1",
+    "sha256": "f6ef4d0c89772b4959cdc60e3a3637735bb20780876b62028312c5b69f01097e",
+    "file": "data/experiments/tasks/web-extraction-pdf.md"
+  },
+  "prompt_sha256": "c03c0eae409db628e1a15ac2450c07652f3a4e80d794817235b868f25ecc340d",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T20:14:49.046726+00:00",
+  "ended_at": "2026-10-08T20:15:46.102046+00:00",
+  "elapsed_seconds": 57.05532,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public extraction routes, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "New scanned/mixed PDF business follow-up after independently completed anonymous PDF access on the same two owned runtimes. Prior native-PDF runs and original access remain immutable; no new access sample. Exact same image,2GiB/1CPU/pids256,pipTUNA, execution25requests/600s, grading40/300s,32000outputtokens/request. Retained config byte-identical to prior audited generic setup; no installed dependencies or query material in retained paths. Owned runtimes resumed with only baseline sleep/inspection processes; adapter archives previous home/workspace/tmp before each fresh session. Retention audit SHA256 0ba61770d71e418cc9550b8c11e3d497cb89ae822a969cb5fe1f4faf77493213. Source PDF, page render, and visually transcribed numeric reference frozen by independent task-design role before queries; controller independently checked all selected values before dispatch. Text-only DeepSeek grader uses that frozen readable reference and actual candidate evidence; no claim that it visually read source images. Controller/reference preparation overhead unmetered. Maximum2 extraction calls per service (including retries), first403/429/402 stop,2consecutive connection failures stop; anonymous remaining quotas unknown. Same original URL and user request; no pre-cropped PDF or answer/helper delivered to executors. Business peers sealed before separate grading with no peer verdicts. Single small scanned-table sample, not general OCR reliability or regulatory advice.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定匿名入口 https://api.firecrawl.dev/v2/scrape 对原 TTB Table_4.pdf 实际返回目标表正文（HTTP 200, success=true, sourceURL 为原 URL, numPages 2/totalPages 21），执行者据此生成 UTF-8 CSV，11 行、三列列名符合 input.md，Proof 1.0–2.0 升序含两端，33 个数值与冻结独立参考逐值一致并保留原表精度；答复给出文件位置与官方来源链接。仅用 1 次抽取调用（限 2 次），未直连下载/本地解析/他源补齐。",
+  "usage": {
+    "input_tokens": 359102,
+    "cached_input_tokens": 337152,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6593,
+    "reasoning_output_tokens": 3129
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [
+      "https://docs.firecrawl.dev/rate-limits"
+    ],
+    "note": "Controller conservatively preserves unknown: original grader labeled confirmed_free but explicitly left service_cost_usd null and said the amount was unknown. Original independent assessment/hash retained; this publication does not infer zero.",
+    "applicability": {
+      "rule": "Official documentation describes anonymous requests as free within per-IP daily limits; account quotas do not automatically apply.",
+      "observed": "本次对 https://api.firecrawl.dev/v2/scrape 的请求仅发送 Content-Type，无 API Key/Authorization（fc_scrape.py 与 service-config.json auth.mode=anonymous），服务返回 HTTP 200、success=true、creditsUsed=2，未返回 402/403/429。",
+      "evidence": "Frozen official route documentation and actual anonymous request/response facts; original independent judgment SHA256 bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c."
+    },
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader-deepseek-flash",
+    "reviewed_at": "2026-10-08T20:25:34.501716+00:00",
+    "checks": [
+      {
+        "criterion": "指定服务实际返回原 URL 的目标表文字（非链接/二进制/搜索摘要/本地 OCR）",
+        "passed": true,
+        "evidence": "execution/artifacts/fc_response.json 的 data.markdown 与 data.blocks 含第 2 页 'GALLONS PER POUND' 表格及 Proof 1.0–2.0 数值；metadata.sourceURL=原 TTB PDF、statusCode=200、numPages=2/totalPages=21。执行记录仅一次匿名 POST，无 ttb.gov 直连下载、无 pdftotext 本地解析。"
+      },
+      {
+        "criterion": "CSV 存在、UTF-8 可解析，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound",
+        "passed": true,
+        "evidence": "execution/artifacts/table4_proof_1.0-2.0.csv 首行即三列指定列名，file/CSV 解析正常。"
+      },
+      {
+        "criterion": "11 行，Proof 1.0–2.0 含两端，升序，无漏行、重复或范围外数据",
+        "passed": true,
+        "evidence": "execution/artifacts/table4_proof_1.0-2.0.csv 共 11 数据行，1.0→2.0 连续升序含两端。"
+      },
+      {
+        "criterion": "三列 33 个数值与冻结独立参考一致且保留原表印出精度",
+        "passed": true,
+        "evidence": "grading/artifacts/evidence/service-response-summary.json 中返回左半表 11 行与 reference.json expected_rows 逐值相等（含 1.5/1.6 重复 0.12021、2.0=0.00241），尾零如 0.00120 原样保留。"
+      },
+      {
+        "criterion": "答复给出 CSV 文件位置与指定 TTB 官方 PDF 来源链接",
+        "passed": true,
+        "evidence": "execution/answer.md 给出文件路径与 https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf。"
+      },
+      {
+        "criterion": "在预算内并仅用指定免费匿名入口（≤2 次提取，本次 1 次）",
+        "passed": true,
+        "evidence": "工具记录仅一次 api.firecrawl.dev/v2/scrape 调用（fc_scrape.py，HTTP 200，creditsUsed=2），未换身份/付费/异步任务。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "pdf-scanned-table-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "b19ac52afc885e7ac554a49b243172fb21ced0d796eb32c8c5676f4650e24d15",
+      "run_ids": [
+        "firecrawl-pdf-scanned-table-001-ds41-r1",
+        "exa-pdf-scanned-table-001-ds41-r1"
+      ],
+      "available_run_ids": [
+        "firecrawl-pdf-scanned-table-001-ds41-r1",
+        "exa-pdf-scanned-table-001-ds41-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.031034232,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.031034232,
+          "usage_sha256": "f8ab2c8d50c23cc5038a5a6fa6c98744d0a9257c1e85b2f2c63eb4293b8aa483"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/firecrawl-pdf-scanned-table-001-ds41-r1/public-review/verification.json",
+      "sha256": "f651314601ca35cedf6a9476b219ab84cdaa23a23f01d332685af13e137654b2",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; full source documents and raw service responses remain private."
+    },
+    {
+      "path": "data/experiments/evidence/firecrawl-pdf-scanned-table-001-ds41-r1/execution/artifacts/table4_proof_1.0-2.0.csv",
+      "sha256": "914cb3338b5d9b0aa0dca593746889aa0766435cc7c2ba7bdfd3c87e6a6e42d8",
+      "note": "Actual executor CSV containing the selected eleven short numeric-table rows; official TTB source attribution in verification.json."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/pdf-ocr-deepseek-overnight-20261008/firecrawl-pdf-scanned-table-001-ds41-r1",
+    "run_sha256": "5654b24abd172fc89216412c8c64636845b247761f8712c8628d53ba704d09f1",
+    "events_sha256": "e3ad5fa333a5a8163b2e16d81a26dfec4bd6dbf1d8660745c22937692d88e0c4",
+    "answer_sha256": "00786becb22889806ba6d19af1aea96ef02eb7260a64e09a1a9d8c1900262149",
+    "review_sha256": "e4c101ce929dbde8a8c9beb75ac1ad628cdfb4eb932cd84a39931226c05bb691",
+    "original_independent_review_sha256": "bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c",
+    "selected_independent_review_sha256": "bc36835ab8d6733d78ee7eb591c67302811e441d861336484738d14ee876fc4c",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete PDF, raw responses and transcripts stay private. Independent verdict, reason and checks preserved. Original21-page scanned/mixed source, selected eleven-row scope, anonymous conditions, actual parsing/truncation limits and audited reuse of independently reviewed setup disclosed. Text-only grader uses pre-dispatch visual transcription and controller cross-check; original source layer incompleteness is not a candidate verdict. Firecrawl fee-kind/amount contradiction conservatively projected to unknown/null; original fee statement and hash retained. Official fee-rule wording paraphrased and source objects projected to their frozen official URL; original source wording preserved privately with hash."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7221,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 127,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8487,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 316,
+        "reasoning_output_tokens": 145
+      },
+      {
+        "input_tokens": 9492,
+        "cached_input_tokens": 8704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 368,
+        "reasoning_output_tokens": 122
+      },
+      {
+        "input_tokens": 10036,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 88,
+        "reasoning_output_tokens": 13
+      },
+      {
+        "input_tokens": 12644,
+        "cached_input_tokens": 10112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 782,
+        "reasoning_output_tokens": 484
+      },
+      {
+        "input_tokens": 14291,
+        "cached_input_tokens": 13312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 183,
+        "reasoning_output_tokens": 75
+      },
+      {
+        "input_tokens": 15171,
+        "cached_input_tokens": 14464,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 16277,
+        "cached_input_tokens": 15232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 121,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 17899,
+        "cached_input_tokens": 16384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 188,
+        "reasoning_output_tokens": 114
+      },
+      {
+        "input_tokens": 18170,
+        "cached_input_tokens": 17920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 622,
+        "reasoning_output_tokens": 480
+      },
+      {
+        "input_tokens": 18870,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_output_tokens": 22
+      },
+      {
+        "input_tokens": 19401,
+        "cached_input_tokens": 18944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 99,
+        "reasoning_output_tokens": 23
+      },
+      {
+        "input_tokens": 20313,
+        "cached_input_tokens": 19456,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 713,
+        "reasoning_output_tokens": 397
+      },
+      {
+        "input_tokens": 21042,
+        "cached_input_tokens": 20864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 154,
+        "reasoning_output_tokens": 70
+      },
+      {
+        "input_tokens": 21244,
+        "cached_input_tokens": 20992,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 218,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 21678,
+        "cached_input_tokens": 21376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 35
+      },
+      {
+        "input_tokens": 25610,
+        "cached_input_tokens": 21760,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 634,
+        "reasoning_output_tokens": 474
+      },
+      {
+        "input_tokens": 26298,
+        "cached_input_tokens": 26112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 188,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 27014,
+        "cached_input_tokens": 26368,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 705,
+        "reasoning_output_tokens": 190
+      },
+      {
+        "input_tokens": 27944,
+        "cached_input_tokens": 27648,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 709,
+        "reasoning_output_tokens": 408
+      }
+    ],
+    "source_sha256": "cbdead30f3d8928532aa97a31cd855c3e47e21a435e0ddc92d31ff84d4ba9cbc",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 359102,
+      "cached_input_tokens": 337152,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6593,
+      "reasoning_output_tokens": 3129
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

@@ -16,13 +16,21 @@ catalog:
   sources:
     docs:
       url: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
+      kind: official_docs
+    fair-access:
+      url: https://www.sec.gov/about/webmaster-frequently-asked-questions
+      checked_on: '2026-10-08'
+      kind: official_docs
+    access:
+      url: https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data
+      checked_on: '2026-10-08'
       kind: official_docs
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
+      entry_url: https://data.sec.gov/
       docs: https://www.sec.gov/search-filings/edgar-application-programming-interfaces
       evidence:
         - docs
@@ -45,5 +53,22 @@ catalog:
             - docs
           notes: Company filings and XBRL facts; reporting periods, units and amendments need interpretation.
       notes: >-
-        Reading APIs are separate from filer submission APIs. Automated-access policy applies. Facts need
-        fiscal-period, unit and amendment interpretation; CORS is not supported.
+        Public reading APIs require no account or key. Fair access requires an identifying User-Agent
+        with contact information and no more than 10 requests/second. Companyfacts and submissions
+        support financial facts and filing provenance. Frames align to calendar periods and do not
+        substitute for each company's fiscal year; units, duration, filing cutoff and amendments need
+        interpretation. CORS is not supported. Filer submission APIs are separate.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - docs
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Public EDGAR data access, subject to SEC fair-access policy.
+          evidence:
+            - access

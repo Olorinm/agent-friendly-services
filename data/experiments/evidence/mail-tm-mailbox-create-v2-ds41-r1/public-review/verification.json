@@ -1,0 +1,48 @@
+{
+  "scope": "Fresh mailbox provisioning, authenticated list access and short-term reuse only. No message sent or message body read; no delivery, sending, registration acceptance or long-term retention claim.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "272a1165a6e7afda91932e787d1560aa040024e748e7eaca376aa921d605c655",
+    "execution/receipt.json": "085f218da19defa2a90df45dca0d8a7ed319a6266a9101c02dd3336edeae15c8",
+    "execution/usage.json": "1c465f796c872d4b07df8095cdbf43e29f16ebf9d8878ded9fc89ac0896d9b0f",
+    "execution/tool-records.json": "57ae629af91925b1082ecf2ea83c5cb464e11c9064acff72419b23fab793e4fa",
+    "grading/assessment.json": "b56f9467603b72c10ce9051974751ee7ae926b08ce2236e5fc24bcebdd55e673",
+    "controller-resource-config.private.json": "aebaf6b2affb0c7388b96fa5186a2e853ce5a8c7dd24f2926ce59a7b9797304e",
+    "controller-verification/manifest.private.json": "0544785733279809629d6821115d14cf6f9c7e8318aa409130da1d334998ab98"
+  },
+  "configuration": "OpenCode 1.18.35 / DeepSeek V4.1 Flash / high. Same v2 task, fresh isolated identities/containers, execution 25 model requests / 300 seconds, grading 40 / 300, 32000 output tokens per request. Two service streams, each 2 GiB / 1 CPU / pids256. Same base image and preconfigured TUNA pip index, empty initial package caches. No supplied service or human mailbox credentials.",
+  "preparation_disclosure": [
+    "Task v2 explicitly permits the minimum anonymous upstream identity needed for one mailbox. Old v1 and its model/harness remain unchanged.",
+    "No peer answer packet for these access runs. Each independent grader checks its own captured creation/read evidence plus controller receipts; no live credentials.",
+    "Controller GET readback is extra verification time/requests outside executor allowance. Source hashes retain private exact identities and responses.",
+    "A private container-name mapping mistake failed locally before SSH/worker start. Zero remote model/API calls verified; unused owned containers removed and correct fresh containers prepared before actual dispatch. No task input or prior service result was changed."
+  ],
+  "actual_result": "A new provider-domain mailbox was created inside execution, authenticated list returned empty, password/token and identity were saved privately. Independent GET /me and GET /messages?page=1 returned HTTP200 with matching identity and empty JSON list using the saved token.",
+  "independent_read": {
+    "identity_matches": true,
+    "list_count": 0,
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://api.mail.tm/me",
+        "status": 200,
+        "raw_sha256": "6fb1a032115fd5b1721c1c68534e306c02fde44231f37d7756d7b9dbb05ed166",
+        "raw_bytes": 224,
+        "started_at": "2026-10-08T17:57:17.626615+00:00",
+        "ended_at": "2026-10-08T17:57:18.748748+00:00"
+      },
+      {
+        "method": "GET",
+        "url": "https://api.mail.tm/messages?page=1",
+        "status": 200,
+        "raw_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "raw_bytes": 2,
+        "started_at": "2026-10-08T17:57:19.755890+00:00",
+        "ended_at": "2026-10-08T17:57:20.882544+00:00"
+      }
+    ]
+  },
+  "interpretation_limit": "Controller requested application/json and received [], while executor had JSON-LD/Hydra metadata. The initial controller parser expected only Hydra; corrected before grading on the same immutable response, without another HTTP call. Different content negotiation is not service failure.",
+  "service_attribution": "Mail.tm https://mail.tm/ ; official API documentation https://docs.mail.tm/ . Free API applies to this low-volume anonymous mailbox. Mailbox and message retention differ; no permanent account-recovery claim.",
+  "cleanup": "Controller rechecked the exact newly created account with GET /me, then DELETE /accounts/{id} returned204. Subsequent old-token GET /me returned401. This confirms deletion acceptance and revoked access, not a separate public absence query. No other account touched."
+}

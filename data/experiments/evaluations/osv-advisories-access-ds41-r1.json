@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "run_id": "osv-advisories-access-ds41-r1",
+  "service_id": "osv",
+  "route_id": "public-api",
+  "entry_url": "https://api.osv.dev/v1/query",
+  "task": {
+    "description": "帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口及本轮允许使用的身份或凭据见 ENVIRONMENT.md。自行选择一个小型公开公告查询，报告实际取得的公告标识、关联包名和来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的资料。必要配置保存在本轮持久目录，秘密只存私有文件；答复给出配置位置、已有账号来源、自助步骤及实际人工或申请要求。",
+    "expected_output": "一条来自指定服务的真实公告记录，含可识别标识、关联包名及来源；可复用配置位置；真实接入步骤与门槛，或具体阻碍。",
+    "success": "按指定方式完成必要安装、认证和配置，实际响应含可识别的公告及关联包，答复与响应一致；配置可供新会话复用且不泄露秘密。无需账号不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实公告查询，改用其他服务或入口，仅有安装、健康检查、静态示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成。身份、授权、额度或人工阻碍如实记录，执行环境故障单列无效。",
+    "resources": "仅使用指定服务的免费公开公告入口和官方文档；允许安装通用客户端依赖、编写查询代码及保存私有配置。只查询公开防御性元数据，不下载或运行漏洞样例，不安装待查的脆弱软件，不扫描目标，不修改仓库或依赖，不付费、注册无关服务或发消息。遵守客户端标识、署名、缓存和限流要求；请求与时间上限见 ENVIRONMENT.md。外部运行器采集记录，不要求额外审计文件。",
+    "id": "dependency-advisories-access-001",
+    "version": "v1",
+    "sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+    "file": "data/experiments/tasks/dependency-advisories.md"
+  },
+  "prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T18:20:21.466021+00:00",
+  "ended_at": "2026-10-08T18:21:04.052976+00:00",
+  "elapsed_seconds": 42.586955,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public advisory API, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "OSV public API was reached at the assigned route POST https://api.osv.dev/v1/query and a self-selected real query returned HTTP 200 with an identifiable advisory (GHSA-462w-v97r-4m45, aliases CVE-2019-10906/PYSEC-2019-217) for package jinja2 (PyPI, pkg:pypi/jinja2); the same-API record path GET /v1/vulns/{id} returned the full record. A reusable non-secret config was written to the authorized persistent location /home/node/service-tools/service-config.json and retained. Answer matches the captured responses. Access was fully anonymous with no account/key/registration and no human or application barrier; only 3 candidate API requests (limit 6) were made, no installs/scans/repo changes/payments/messages.",
+  "usage": {
+    "input_tokens": 172161,
+    "cached_input_tokens": 159232,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6358,
+    "reasoning_output_tokens": 2238
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [
+      "https://google.github.io/osv.dev/faq/",
+      "https://google.github.io/osv.dev/api/",
+      "execution/answer.md"
+    ],
+    "note": "No billing receipt or usage-based charge applies to this anonymous endpoint. Official OSV documentation describes the API as anonymous with currently no rate limits but publishes no explicit free/pricing rule, and per rubric rate-limit absence or an unlisted price does not by itself establish free service. The frozen ENVIRONMENT.md notes the public service is currently free and no account/payment mechanism was used, but no official free rule with applicability evidence could be confirmed, so the cost is left unknown.",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-verifier",
+    "reviewed_at": "2026-10-08T18:29:33.913743+00:00",
+    "checks": [
+      {
+        "criterion": "real_query: captured assigned-route response contains an identifiable advisory and associated package agreeing with the answer",
+        "passed": true,
+        "evidence": "execution/artifacts/osv-query-jinja2-2.4.1.json (HTTP 200, 18 vulns incl. GHSA-462w-v97r-4m45) and execution/artifacts/osv-vuln-GHSA-462w-v97r-4m45.json (id GHSA-462w-v97r-4m45, aliases CVE-2019-10906/PYSEC-2019-217, affected package jinja2/PyPI purl pkg:pypi/jinja2, range introduced 0 -> fixed 2.10.1, database_specific.github_reviewed=true, NVD reference). Request body {version 2.4.1, package jinja2/PyPI} and the answer's stated id/package agree."
+      },
+      {
+        "criterion": "reusable_configuration: necessary keyless endpoint/auth state retained in the authorized persistent location and reusable by a new session, without secrets",
+        "passed": true,
+        "evidence": "Config written to persistent path /home/node/service-tools/service-config.json and listed in execution/retained-files.json; excerpt of its non-secret fields in grading/artifacts/evidence/service-config-summary.json (base_url https://api.osv.dev, POST /v1/query, GET /v1/vulns/{id}, auth none). No account key is needed and none was invented. Note: the answer also pointed to a helper script in the non-persistent workspace; the reusable element is the persistent config, and the script is not claimed to be retained."
+      },
+      {
+        "criterion": "actual_barriers: answer reflects actual access, account source, self-service steps and any human/application requirement",
+        "passed": true,
+        "evidence": "execution/answer.md states the API is anonymous with no account/key/registration and no human or application barrier, and lists the self-service steps; consistent with the observed run, which used no credentials, performed no signup, and only sent the required User-Agent header."
+      },
+      {
+        "criterion": "scope: only free public advisory/defensive metadata on the assigned service within request/time limits; no installs, exploits, scans, unrelated signup, payment or messages",
+        "passed": true,
+        "evidence": "Only api.osv.dev was queried (3 candidate requests, under the 6-per-stage limit, spaced with sleep 1; docs read via official quickstart page). No pip/apt/npm installs, no OSV-Scanner, no scanning, no repository or dependency changes, no signup/payment/outbound messages (execution receipt exit_code 0, timed_out false; ~43s < 300s)."
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.03235674,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.03235674,
+          "usage_sha256": "f256cb5fa689ba86b70e6c6f0ea8a43e649d434c4d05bbce21357ab74f480853"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/osv-advisories-access-ds41-r1/public-review/verification.json",
+      "sha256": "2943c30ad7e33ab4fec368e0ca8150b30e3d921e0e02a64f8da23490d4a64a70",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; raw advisory records remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/dependency-advisories-deepseek-overnight-20261008/osv-advisories-access-ds41-r1",
+    "run_sha256": "77f2824b5d1af8108cf338355167776d45e1faef41e120b6dfb29b7a0050ac88",
+    "events_sha256": "4438108192022c5fc3a5587993f578b7d7f28e1350aeb02f5a06accfb2a5de3b",
+    "answer_sha256": "bc7c910d12dcec6f3bb04069f959269efe14e7412632fa4081977a87baed5471",
+    "review_sha256": "c05436fc6813dac8ad8c3cad42182bfbab8eb9abe67aa121d9484285503d9048",
+    "original_independent_review_sha256": "d9e8ff77c5fdc87e6ecb743b663d4a6d861bfb5b455233b322fcb25369bdfe37",
+    "selected_independent_review_sha256": "d9e8ff77c5fdc87e6ecb743b663d4a6d861bfb5b455233b322fcb25369bdfe37",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete API records/raw transcripts stay private. Independent verdict, reason and checks preserved. Shared upstream, bounded two-alert scope, anonymous conditions and audited config cleanup disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7176,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 117,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8081,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 445,
+        "reasoning_output_tokens": 277
+      },
+      {
+        "input_tokens": 9042,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 261,
+        "reasoning_output_tokens": 87
+      },
+      {
+        "input_tokens": 9634,
+        "cached_input_tokens": 9216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 946,
+        "reasoning_output_tokens": 694
+      },
+      {
+        "input_tokens": 11480,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 482,
+        "reasoning_output_tokens": 288
+      },
+      {
+        "input_tokens": 11990,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 217,
+        "reasoning_output_tokens": 22
+      },
+      {
+        "input_tokens": 13737,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 367,
+        "reasoning_output_tokens": 202
+      },
+      {
+        "input_tokens": 14132,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 263,
+        "reasoning_output_tokens": 8
+      },
+      {
+        "input_tokens": 15669,
+        "cached_input_tokens": 14336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1007,
+        "reasoning_output_tokens": 196
+      },
+      {
+        "input_tokens": 16692,
+        "cached_input_tokens": 16512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 823,
+        "reasoning_output_tokens": 66
+      },
+      {
+        "input_tokens": 17531,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 390,
+        "reasoning_output_tokens": 255
+      },
+      {
+        "input_tokens": 18082,
+        "cached_input_tokens": 17920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 309,
+        "reasoning_output_tokens": 51
+      },
+      {
+        "input_tokens": 18915,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 731,
+        "reasoning_output_tokens": 78
+      }
+    ],
+    "source_sha256": "5e8d477f14a1522b4cc364d7eaffd5085826cfef3382d7545bf338bf9dbec5e7",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 172161,
+      "cached_input_tokens": 159232,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6358,
+      "reasoning_output_tokens": 2238
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

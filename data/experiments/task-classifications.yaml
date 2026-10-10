@@ -24,7 +24,23 @@ tasks:
     id: collaborative-tables-002
     classification: productivity-storage/collaborative-tables
     phase: business
+  - file: data/experiments/tasks/collaborative-tables-access.md
+    id: collaborative-tables-access-001
+    classification: productivity-storage/collaborative-tables
+    phase: setup
+  - file: data/experiments/tasks/collaborative-tables-v4.md
+    id: collaborative-tables-001
+    classification: productivity-storage/collaborative-tables
+    phase: business
   - file: data/experiments/tasks/databases.md
+    id: database-todos-001
+    classification: databases/hosted-relational
+    phase: business
+  - file: data/experiments/tasks/databases-v2.md
+    id: database-access-001
+    classification: databases/hosted-relational
+    phase: setup
+  - file: data/experiments/tasks/databases-v2.md
     id: database-todos-001
     classification: databases/hosted-relational
     phase: business
@@ -73,8 +89,36 @@ tasks:
     classification: travel/flights
     phase: business
   - file: data/experiments/tasks/web-search.md
+    id: web-search-access-001
+    classification: web-search-data/web-search
+    phase: setup
+  - file: data/experiments/tasks/web-search.md
     id: web-search-001
     classification: web-search-data/web-search
+    phase: business
+  - file: data/experiments/tasks/web-extraction.md
+    id: web-extraction-access-001
+    classification: web-search-data/web-extraction
+    phase: setup
+  - file: data/experiments/tasks/web-extraction.md
+    id: web-extraction-holidays-001
+    classification: web-search-data/web-extraction
+    phase: business
+  - file: data/experiments/tasks/web-extraction-pdf.md
+    id: web-extraction-pdf-hikes-001
+    classification: web-search-data/web-extraction
+    phase: business
+  - file: data/experiments/tasks/web-extraction-pdf.md
+    id: web-extraction-scanned-table-001
+    classification: web-search-data/web-extraction
+    phase: business
+  - file: data/experiments/tasks/route-planning.md
+    id: route-planning-access-001
+    classification: web-search-data/route-planning
+    phase: setup
+  - file: data/experiments/tasks/route-planning.md
+    id: route-planning-bridge-001
+    classification: web-search-data/route-planning
     phase: business
 
   - file: data/experiments/tasks/financial-data.md
@@ -90,4 +134,88 @@ tasks:
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-004
     classification: web-search-data/financial-data/disclosures
+    phase: business
+
+  - file: data/experiments/tasks/web-search-v2.md
+    id: web-search-001
+    classification: web-search-data/web-search
+    phase: business
+
+  - file: data/experiments/tasks/weather-data.md
+    id: weather-access-001
+    classification: web-search-data/weather-data
+    phase: setup
+
+  - file: data/experiments/tasks/weather-data.md
+    id: weather-outing-001
+    classification: web-search-data/weather-data
+    phase: business
+
+  - file: data/experiments/tasks/geocoding.md
+    id: geocoding-access-001
+    classification: web-search-data/geocoding
+    phase: setup
+
+  - file: data/experiments/tasks/geocoding.md
+    id: geocoding-venue-001
+    classification: web-search-data/geocoding
+    phase: business
+
+  - file: data/experiments/tasks/scholarly-search.md
+    id: scholarly-access-001
+    classification: web-search-data/scholarly-search
+    phase: setup
+
+  - file: data/experiments/tasks/scholarly-search.md
+    id: scholarly-reference-001
+    classification: web-search-data/scholarly-search
+    phase: business
+
+  - file: data/experiments/tasks/database-restore.md
+    id: database-restore-001
+    classification: databases/hosted-relational
+    phase: business
+
+  - file: data/experiments/tasks/public-holidays.md
+    id: public-holidays-access-001
+    classification: web-search-data/public-holidays
+    phase: setup
+
+  - file: data/experiments/tasks/public-holidays.md
+    id: public-holidays-berlin-001
+    classification: web-search-data/public-holidays
+    phase: business
+
+  - file: data/experiments/tasks/mailboxes-v2.md
+    id: mailboxes-create-001
+    classification: communication/mailboxes
+    phase: setup
+
+  - file: data/experiments/tasks/dependency-advisories.md
+    id: dependency-advisories-access-001
+    classification: developer-tools/dependency-advisories
+    phase: setup
+
+  - file: data/experiments/tasks/dependency-advisories.md
+    id: dependency-advisories-check-001
+    classification: developer-tools/dependency-advisories
+    phase: business
+
+  - file: data/experiments/tasks/qr-codes.md
+    id: qr-codes-access-001
+    classification: productivity-storage/qr-codes
+    phase: setup
+
+  - file: data/experiments/tasks/qr-codes.md
+    id: qr-codes-travel-link-001
+    classification: productivity-storage/qr-codes
+    phase: business
+  - file: data/experiments/tasks/collaborative-tables-shared-expenses.md
+    id: collaborative-tables-shared-expenses-001
+    classification: productivity-storage/collaborative-tables
+    phase: business
+
+  - file: data/experiments/tasks/database-atomic-import.md
+    id: database-atomic-import-001
+    classification: databases/hosted-relational
     phase: business

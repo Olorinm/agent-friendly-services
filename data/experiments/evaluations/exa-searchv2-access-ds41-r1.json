@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "run_id": "exa-searchv2-access-ds41-r1",
+  "service_id": "exa",
+  "route_id": "public-mcp",
+  "entry_url": "https://mcp.exa.ai/mcp",
+  "task": {
+    "description": "帮我接通这个搜索服务，通过指定方式做一次简单的真实网页搜索，确认能用，并保存后续搜索需要的本地配置；说明完成了哪些接入步骤，遇到阻碍也请说明。",
+    "inputs": "服务、指定入口、允许使用的账户或注册资料及其来源见 ENVIRONMENT.md。自行选择一个普通公开主题做小型搜索，给出查询内容和至少一条搜索结果的标题、网页链接。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。将必要连接配置保存在本轮指定的持久目录，秘密只保存在私有文件中，答复只给配置位置。说明已有账号来源、实际自助完成的步骤、人工介入或额外申请要求。",
+    "expected_output": "指定服务的一次真实网页搜索结果，含查询内容和至少一条结果标题、链接；可复用的本地配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体受阻原因。",
+    "success": "按指定方式完成必要注册、认证、安装与配置，真实搜索返回至少一条含标题和有效网页 URL 的结果，答复与响应一致；所需配置可供新会话复用且不泄露秘密。免注册入口不强行注册；已有账号不算本轮自助注册，人工步骤和额外申请如实记录。仅文档示例、健康检查、工具清单、安装成功或保存配置不足以证明接通搜索。",
+    "failure": "未取得真实搜索结果、改用其他服务或入口、仅返回教程或示例、结果与响应不符、配置不可复用、泄露凭据或预算内未完成；缺少身份资料、授权、人工操作或额度时记录具体接入阻碍，执行环境故障单列无效。",
+    "resources": "仅用本轮指定服务和已确认免费的额度；可查官方文档，在本轮隔离环境安装通用依赖和保存连接配置。不访问个人内容、不注册无关服务、不邀请或通知他人、不付费。仅做确认接通所需的小型搜索；具体请求、时间与资源上限按 ENVIRONMENT.md。不得读取本机其他账号、历史会话或其他任务材料。",
+    "id": "web-search-access-001",
+    "version": "v1",
+    "sha256": "18b6f2e9bbc4dfc0a9ad5f50e212e5932f1682b206df237d1c6ff34dbd44abff",
+    "file": "data/experiments/tasks/web-search.md"
+  },
+  "prompt_sha256": "6272ca3b99b49c1729f0413050736d11e70569fd59608725b4fb9bed2b0453dc",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T14:35:05.604712+00:00",
+  "ended_at": "2026-10-08T14:35:47.519354+00:00",
+  "elapsed_seconds": 41.914642,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; documented anonymous public route",
+    "web_search": "live",
+    "preparation_note": "Fresh access and business sessions. Same new v2 business request, model/effort/limits and generic tools; no prewritten calls, answer URLs or reference given to executor. Exa anonymous hosted MCP vs Firecrawl anonymous REST search; specific route comparison, one sample, not interface ranking. Two providers may execute concurrently on shared server/network (16 logical CPUs,31.34GiB RAM); per-runtime2GiB/1CPU. Anonymous IP quota remainder unknown; no paid fallback. Business600s/access300s/grading300s,25modelrequests/role,32000outputtokens/request. Priorv1 unchanged and excluded from v2 averages. Generic setup retention inspected before business. Independent source snapshots and peer execution answers frozen before isolated grading; peer grades never shared.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者按官方指定入口 https://mcp.exa.ai/mcp 以 keyless 方式完成 MCP 接入：initialize 握手 200（exa-search-server 3.2.1，协议 2025-06-18），tools/list 列出 web_search_exa/web_fetch_exa，并以 web_search_exa 做了一次真实搜索，返回含标题与有效 URL 的结果（Python 3.13.0 (final) released | Python Insider，https://blog.python.org/2024/10/python-3130-final-released/，已独立复核可访问）。连接配置写入持久目录 /home/node/service-tools/service-config.json 且不含秘密，答复与响应一致并如实说明免注册、自助步骤与一处 403 阻碍。无人类介入，服务按官方 keyless 免费限流规则使用。",
+  "usage": {
+    "input_tokens": 288909,
+    "cached_input_tokens": 270976,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5640,
+    "reasoning_output_tokens": 1481
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://exa.ai/docs/reference/exa-mcp",
+      "execution/artifacts/search-result.raw.json"
+    ],
+    "note": "本次仅使用 Exa 官方匿名 keyless 入口，未注册、未付费、未使用 API key。",
+    "applicability": {
+      "rule": "Exa 官方文档 Authentication 表：Keyless 模式为 'Free rate-limited usage without sign-in or API key'（入口 https://mcp.exa.ai/mcp）；Troubleshooting 亦述 'The connection is using Exa's free rate limits.'",
+      "observed": "本次使用该 keyless 入口且请求未带 Authorization/x-api-key 头，web_search_exa 调用返回 HTTP 200，未出现 429 限流。",
+      "evidence": "https://exa.ai/docs/reference/exa-mcp；execution/artifacts/search-result.raw.json；grading/artifacts/evidence/exa-access-verification.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grading-agent",
+    "reviewed_at": "2026-10-08T14:48:14.578727+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定服务与指定入口 exa 官方匿名远程 MCP（https://mcp.exa.ai/mcp），未改用其他服务或入口",
+        "passed": true,
+        "evidence": "execution/artifacts/exa_mcp_client.py 仅配置该 endpoint；工具记录中的外部调用仅有 mcp.exa.ai/mcp（29 次）与 exa.ai 官方文档，无其他搜索引擎或代理。"
+      },
+      {
+        "criterion": "按官方指定方式接入：完成 MCP initialize 握手与 tools/list，且为 keyless 无需注册/API key",
+        "passed": true,
+        "evidence": "工具记录 0008 initialize 返回 HTTP 200，serverInfo=exa-search-server 3.2.1，协议 2025-06-18；0009 tools/list 返回 web_search_exa、web_fetch_exa；请求未携带 Authorization/x-api-key 头。"
+      },
+      {
+        "criterion": "完成真实网页搜索，返回至少一条含标题与有效网页 URL 的结果，答复与响应一致",
+        "passed": true,
+        "evidence": "execution/artifacts/search-result.raw.json 为 web_search_exa 原始响应（query=official Python 3.13 release announcement blog post on python.org，numResults=5），execution/answer.md 引用标题与链接；独立复核该 URL 页面可访问且内容相符。"
+      },
+      {
+        "criterion": "连接配置保存于指定持久目录、可供新会话复用且不泄露秘密",
+        "passed": true,
+        "evidence": "工具记录 0011 写入 /home/node/service-tools/service-config.json，0018 JSON 校验通过；运行回执 retained-files 列出 service-config.json；内容只含 endpoint/transport/协议/工具列表，无 API key。"
+      },
+      {
+        "criterion": "如实说明账号来源、自助接入步骤、人工或额外申请门槛及阻碍，答复不泄露凭据",
+        "passed": true,
+        "evidence": "execution/answer.md 说明本轮无账号、keyless 免注册，列出全部自助步骤，并报告 urllib 默认 UA 被 Cloudflare 403、改用 curl UA 后正常；答复仅给出配置位置。"
+      },
+      {
+        "criterion": "遵守授权范围：未注册、未付费、未使用其他账号/接口，且无人工介入",
+        "passed": true,
+        "evidence": "工具记录无 sign-up、login、OAuth 或支付调用；全程单会话自动完成，无等待人工输入步骤。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.027324336,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.027324336,
+          "usage_sha256": "1d0482d1b37460355e3c43abe8fc296a15edd7df382dca4007ead68a151ea8d9"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/exa-searchv2-access-ds41-r1/execution/answer.md",
+      "sha256": "aa1e0b7b0239e423c025018ed8564dac2c6db5caeae34c35e3e71e00273bdb7b",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/exa-searchv2-access-ds41-r1/public-review/verification.md",
+      "sha256": "923473f8c7dd88e3dc355026ac0d8f046bbd4ebd9196e287deec0a9658829e48",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/search-v2-deepseek-overnight-20261008/exa-searchv2-access-ds41-r1",
+    "run_sha256": "69a13359c9098664d60acea372852b0560600bde3483a907cd6dabcb9ce84ff0",
+    "events_sha256": "69df9c6a190d01fe8bcc57313752d3f44c946d13adee453ee45824690a308980",
+    "answer_sha256": "aa1e0b7b0239e423c025018ed8564dac2c6db5caeae34c35e3e71e00273bdb7b",
+    "review_sha256": "866ed8a6b9b9fa6557658934b27c665655f08802e8a65e9078489580f2f69815",
+    "original_independent_review_sha256": "3e9d437bd0ce7b1522e4397854ec35fde2c7d6a25f78b6db8bfa880b9bf4969d",
+    "selected_independent_review_sha256": "3e9d437bd0ce7b1522e4397854ec35fde2c7d6a25f78b6db8bfa880b9bf4969d",
+    "publication_review_note": "Selected executor answer and short independent provenance summary; complete original search/page bodies remain private. Samev2 task and frozen peer snapshot; older v1 not pooled. Failed Firecrawl25request grader preserved; new50request/300s grader recovered without execution rerun, allattempt costs retained."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7175,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 110,
+        "reasoning_output_tokens": 7
+      },
+      {
+        "input_tokens": 7873,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 209,
+        "reasoning_output_tokens": 67
+      },
+      {
+        "input_tokens": 8328,
+        "cached_input_tokens": 8064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 7
+      },
+      {
+        "input_tokens": 13625,
+        "cached_input_tokens": 8320,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 535,
+        "reasoning_output_tokens": 335
+      },
+      {
+        "input_tokens": 14375,
+        "cached_input_tokens": 14080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 170,
+        "reasoning_output_tokens": 29
+      },
+      {
+        "input_tokens": 14913,
+        "cached_input_tokens": 14464,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 386,
+        "reasoning_output_tokens": 138
+      },
+      {
+        "input_tokens": 15903,
+        "cached_input_tokens": 15232,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 393,
+        "reasoning_output_tokens": 184
+      },
+      {
+        "input_tokens": 17936,
+        "cached_input_tokens": 16256,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 515,
+        "reasoning_output_tokens": 218
+      },
+      {
+        "input_tokens": 18467,
+        "cached_input_tokens": 18304,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1064,
+        "reasoning_output_tokens": 32
+      },
+      {
+        "input_tokens": 19547,
+        "cached_input_tokens": 19328,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 222,
+        "reasoning_output_tokens": 86
+      },
+      {
+        "input_tokens": 20229,
+        "cached_input_tokens": 19712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 236,
+        "reasoning_output_tokens": 71
+      },
+      {
+        "input_tokens": 20480,
+        "cached_input_tokens": 20224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 136,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 20640,
+        "cached_input_tokens": 20480,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 87,
+        "reasoning_output_tokens": 29
+      },
+      {
+        "input_tokens": 21512,
+        "cached_input_tokens": 20608,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 641,
+        "reasoning_output_tokens": 230
+      },
+      {
+        "input_tokens": 22169,
+        "cached_input_tokens": 22016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 128,
+        "reasoning_output_tokens": 26
+      },
+      {
+        "input_tokens": 22623,
+        "cached_input_tokens": 22272,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 268,
+        "reasoning_output_tokens": 22
+      },
+      {
+        "input_tokens": 23114,
+        "cached_input_tokens": 22784,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 437,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "ed3dfe2fe98f5df2f77e98018f5098456023689d85cc57861fd4210352c239b8",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 288909,
+      "cached_input_tokens": 270976,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5640,
+      "reasoning_output_tokens": 1481
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

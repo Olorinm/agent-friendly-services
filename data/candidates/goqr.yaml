@@ -1,0 +1,101 @@
+id: goqr
+name: goQR QR Code API
+category: productivity-storage
+homepage: https://goqr.me/api/
+summary: Foundata's hosted static QR image API at api.qrserver.com, with public no-account generation and downloadable raster or vector formats.
+submitted_by: community
+tags:
+  - qr-codes
+catalog:
+  version: 1
+  classifications:
+    - productivity-storage/qr-codes
+  sources:
+    api:
+      url: https://goqr.me/api/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    create:
+      url: https://goqr.me/api/doc/create-qr-code/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    homepage:
+      url: https://goqr.me/
+      checked_on: '2026-10-08'
+      kind: official_site
+    api-terms:
+      url: https://goqr.me/legal/tos-api.html
+      checked_on: '2026-10-08'
+      kind: official_site
+    api-privacy:
+      url: https://goqr.me/privacy-safety-security/
+      checked_on: '2026-10-08'
+      kind: official_site
+    privacy-de:
+      url: https://goqr.me/de/rechtliches/datenschutz-goqrme.html
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: public-qr-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.qrserver.com/v1/create-qr-code/
+      docs: https://goqr.me/api/doc/create-qr-code/
+      evidence: [api, create, api-privacy]
+      availability:
+        value: self_serve
+        evidence: [api, create]
+        notes: Public hosted API; documentation invites integration in users' own web applications.
+      personal_access:
+        value: documented
+        evidence: [homepage, api, create]
+        notes: Public static generation without registration; commercial and print use of the produced codes are allowed.
+      auth:
+        value: none
+        evidence: [api, create]
+        notes: Documented direct GET/POST endpoint has no API-key or account requirement.
+      capabilities:
+        qr.generate:
+          value: documented
+          evidence: [create]
+          notes: >-
+            Accepts URL-encoded data with GET or POST parameters; returns PNG by default, also GIF/JPEG/SVG/EPS.
+            Square raster size ranges from 10x10 to 1000x1000 pixels. qzone sets a quiet zone in modules
+            (default 0), while margin adds pixels (default 1) and is ignored for vector formats. ecc
+            supports L/M/Q/H with default L; foreground/background colors and UTF-8 are supported.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [api, create, homepage]
+        payment_method:
+          value: not_required
+          evidence: [api, create, homepage]
+      costs: []
+      notes: >-
+        The public website advertises free QR generation and free commercial/print use of generated
+        images. The API documentation and privacy page link this endpoint to that generator, but no
+        explicit API-specific fee rule was established and the linked API terms had no substantive
+        text in the reviewed response. API service cost therefore remains unknown; website claims,
+        no-account access and a successful image response are not sufficient to confirm a zero charge.
+        API documentation states no fixed request limit but reserves rejection of abusive or inappropriate
+        requests, including apparent DoS traffic. It asks services regularly exceeding 10000 requests/day
+        to make contact; this is not a guaranteed quota or a condition on a few personal requests.
+        The text recommends payloads up to roughly 900 characters in general, with actual capacity depending
+        on error correction and content. No uptime guarantee or numeric requests/second limit is stated.
+  notes:
+    - >-
+      Static API images encode the supplied content directly, without scan tracking or a provider redirect.
+      They are separate from paid QR-Server dynamic campaign management. The official privacy explanation
+      says image caching lasts about thirty seconds, content is not retained/logged, and the API uses no
+      cookies; request metadata such as IP, time, browser and referrer is logged. No precise metadata-log
+      retention duration was established in the reviewed pages. Saving a static image creates no account
+      resource to delete and does not guarantee its destination remains available.
+    - >-
+      The API terms link returned HTTP 200 on 2026-10-08 but its actual HTML contained only a title and
+      a February 2014 update date, without substantive terms. The readable API documentation supplies
+      anti-abuse rules and the site expressly permits free commercial/print use; no explicit public-test
+      disclosure ban or mandatory service attribution was found in those reviewed materials. This is not
+      a claim to have reviewed missing terms. Links/donations are requested as support, not stated as a
+      condition for ordinary generation. The discovery review preceding trials used documentation only;
+      independent access and task outcomes, including unresolved fee-rule applicability, are recorded in
+      evaluations separately from these official website claims and API documentation limits.

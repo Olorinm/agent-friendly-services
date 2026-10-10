@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "run_id": "met-norway-weather-access-ds41-r1",
+  "service_id": "met-norway",
+  "route_id": "locationforecast-api",
+  "entry_url": "https://api.met.no/weatherapi/locationforecast/2.0/compact",
+  "task": {
+    "description": "帮我接通这个天气服务，通过指定方式做一次真实天气查询，确认能用，并保存后续查询需要的本地配置；说明完成的接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个公开地点做小型查询，报告地点、天气数值与单位及其预报或观测时间。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+    "expected_output": "一次来自指定服务的真实天气查询结果，含地点、数值、单位及预报或观测时间；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证、安装和配置，真实响应含可识别地点、有效时间及至少一个天气数值，答复与响应一致且注明单位；配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实天气查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。",
+    "resources": "只用本轮指定服务和已确认免费的资源，可查官方文档、安装通用依赖及保存私有配置。仅查询公开地点天气，不访问个人内容、不注册无关服务、不邀请或通知他人、不付费。遵守服务的客户端标识、署名、缓存和限流要求；实际请求与时间上限见 ENVIRONMENT.md。运行记录由外部采集，不要求额外审计报告。",
+    "id": "weather-access-001",
+    "version": "v1",
+    "sha256": "b1fc3bf4ebe827017eca42384e7cf9fa19d422535e7a81d4eb8261a3a024da50",
+    "file": "data/experiments/tasks/weather-data.md"
+  },
+  "prompt_sha256": "0985c869342da5ef351a22b771a27dd62bc1afd084ae60ddcc8764d7abd81fba",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T14:51:19.491028+00:00",
+  "ended_at": "2026-10-08T14:51:50.820911+00:00",
+  "elapsed_seconds": 31.329883,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; official public read-only free noncommercial route",
+    "web_search": "live",
+    "preparation_note": "Fresh access then business sessions. Same frozen weather task,model/effort/generic tools and budgets for both routes. Execution25modelrequests,access300s/business600s;independent grading40modelrequests/300s after prior search grader exhausted25, no service execution budget increase.32000outputtokens/request. Two providers can run concurrently on shared16CPU/31.34GiB host;eachruntime2GiB/1CPU. ProjectUser-Agent/contact preprovided, no account/key or answer supplied.10weatherdatareads/phase maximum subject to officialcache/rate limits. Controller method/source snapshots and two private before-business publicGETreceipts are separate overhead and grader-only. Each actual query-time forecast is its own evidence; no cross-provider numerical truth, commonupstream possible, no forecastskill/reliabilityranking. Generic setup retention inspected, no business data carried over.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "执行者通过指定入口 MET Norway Locationforecast 2.0 compact 对公开地点 Oslo (59.9139N, 10.7522E) 完成了一次真实、无 Key 的天气查询，HTTP 200 返回 84 个时次数据；答案中的地点、时间、数值与单位（7.0 °C、81.8 %、6.5 m/s、9.0°、1003.3 hPa、updated_at 2026-10-08T14:29:23Z 等）与采集到的 forecast.json 逐项一致。通用连接配置已写入持久目录 /home/node/service-tools/service-config.json（auth: none，无秘密），运行器 retained-files 记录其被保留，可跨会话复用。入口免注册，执行者未强行注册，无人工介入或额外申请；客户端标识、四位坐标、gzip 与缓存/署名要求均符合服务条款。仅 1 次天气 API 读取，未 HEAD+GET，未换服务。",
+  "usage": {
+    "input_tokens": 109720,
+    "cached_input_tokens": 95360,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2778,
+    "reasoning_output_tokens": 1034
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://docs.api.met.no/doc/License.html",
+      "https://docs.api.met.no/doc/TermsOfService.html"
+    ],
+    "applicability": {
+      "rule": "MET Norway 官方 Licensing and Data Policy 声明其数据与产品在 NLOD 2.0 与 CC BY 4.0 开放许可下发布，Terms of Service 仅要求 User-Agent 标识、缓存与署名，未设账号、密钥或收费。",
+      "observed": "本次对指定 compact 入口发起无 Key/无账号/无支付的 GET，返回 HTTP/2 200 与真实 JSON 预报数据；全程无注册或计费步骤，配置 auth=none。",
+      "evidence": "grading/artifacts/evidence/service-free-rule.md"
+    },
+    "note": "服务为公开开放数据接口，本次使用落在免费范围内；无费用回执，故 service_cost_usd 保持 null。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "grading-agent",
+    "reviewed_at": "2026-10-08T14:58:02.881602+00:00",
+    "checks": [
+      {
+        "criterion": "通过本轮指定服务与指定入口（api.met.no/weatherapi/locationforecast/2.0/compact）完成真实天气查询",
+        "passed": true,
+        "evidence": "events.jsonl 中唯一一次天气数据请求（工具记录 0007）使用 curl 对该入口发起 GET 返回 HTTP 200；execution/artifacts/forecast.json 为采集到的真实响应体（35942 字节，84 个 timeseries 时次）。"
+      },
+      {
+        "criterion": "真实响应含可识别地点、有效预报/观测时间及至少一个带单位的天气数值",
+        "passed": true,
+        "evidence": "execution/artifacts/forecast.json：geometry.coordinates=[10.7522,59.9139,5]（Oslo），meta.units 给出各字段单位；timeseries[0] 时间 2026-10-08T14:00:00Z，air_temperature=7.0 celsius、relative_humidity=81.8 %、wind_speed=6.5 m/s、air_pressure_at_sea_level=1003.3 hPa、wind_from_direction=9.0 degrees、symbol_code=rain。"
+      },
+      {
+        "criterion": "最终答复与真实响应一致（地点、时间、数值、单位）",
+        "passed": true,
+        "evidence": "execution/answer.md 所列 Oslo、14:00Z/15:00Z/16:00Z 时次及 7.0/7.2/7.3 °C、81.8 %、6.5 m/s、9.0°、1003.3 hPa、updated_at、Expires 与 execution/artifacts/forecast.json 和 forecast.headers.txt 完全对应。"
+      },
+      {
+        "criterion": "后续查询所需配置已保存到本轮持久目录、可供新会话复用且不泄露秘密",
+        "passed": true,
+        "evidence": "配置写入 /home/node/service-tools/service-config.json（工具记录 0009，JSON 校验通过 0010，auth=none，无 Key/Cookie/账号）；execution/retained-files.json 记录保留 service-config.json；脱敏摘要见 grading/artifacts/evidence/config-persistence.md。"
+      },
+      {
+        "criterion": "免注册入口不强行注册；账号来源、自助步骤、人工介入或额外申请要求如实说明",
+        "passed": true,
+        "evidence": "ENVIRONMENT.md 明确未提供账号/Key，入口为无鉴权公共接口；execution/answer.md 说明\"无需注册或 Key\"、列出自行完成的步骤并报告\"实际阻碍：无\"。events.jsonl 无注册/登录/申请行为，本次运行无人工介入。"
+      },
+      {
+        "criterion": "遵守服务的客户端标识、四位坐标精度、缓存/署名与查询次数约束",
+        "passed": true,
+        "evidence": "请求使用真实 User-Agent \"agent-friendly-services/20261008 (+https://github.com/Olorinm/agent-friendly-services)\"、坐标为 4 位小数 (59.9139,10.7522)、curl --compressed 支持 gzip；仅 1 次 API 读取且未 HEAD+GET；execution/answer.md 与配置注明 Expires/If-Modified-Since 复用规则及 CC BY 4.0 署名。"
+      },
+      {
+        "criterion": "本次任务版本、模型、harness 与测评配置一致",
+        "passed": true,
+        "evidence": "execution/receipt.json：model=deepseek-flash、reasoning_effort=high、harness=OpenCode 1.18.35、input_verified=true、exit_code=0、未超时；与运行器配置一致。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.027115848,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.027115848,
+          "usage_sha256": "f29598d3d0d7a641dafd2b6a5c594417210852730ddbcd6ec95b49dfe46f45e4"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/met-norway-weather-access-ds41-r1/execution/answer.md",
+      "sha256": "29d2d0497962b1193c2ff5eeded99f93c99cf8fcf208ae4c57529d86417477e4",
+      "note": "本次执行者实际答复；原样保留引用限制，不作为额外正确性背书。"
+    },
+    {
+      "path": "data/experiments/evidence/met-norway-weather-access-ds41-r1/public-review/verification.md",
+      "sha256": "fb29632739a01c48d2ea3adbf3b1a7fce4c57401da9f5a76c49f16742077cced",
+      "note": "独立核验的最少业务字段与限制；源文件哈希可核对。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/weather-deepseek-overnight-20261008/met-norway-weather-access-ds41-r1",
+    "run_sha256": "67b6fb6087b3d729d5fde54759148a359027812151e7cc01826ac68ac6000853",
+    "events_sha256": "ea2c0e7f89f10d1c80322d78eb419e60186546ca4054301cfff55d442424cb7c",
+    "answer_sha256": "29d2d0497962b1193c2ff5eeded99f93c99cf8fcf208ae4c57529d86417477e4",
+    "review_sha256": "35abae66ec23f47196827ed5b134b86afccb3fdc4f1756f960ee5f2c49c26a40",
+    "original_independent_review_sha256": "5f39f5e97237baa937f74373bf7fb22bd24225306e44cf7994c64ef884eb9078",
+    "selected_independent_review_sha256": "5f39f5e97237baa937f74373bf7fb22bd24225306e44cf7994c64ef884eb9078",
+    "publication_review_note": "Minimal executor answer and independent task-field extraction, with attribution/license and field/time transformation notice. Full forecast responses remain private. Both services judged against actual query-time responses, not forecast agreement or future accuracy. Original verdict, checks, service fee and measured usage preserved."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7172,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 119,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 7987,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 322,
+        "reasoning_output_tokens": 156
+      },
+      {
+        "input_tokens": 11472,
+        "cached_input_tokens": 8192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 255,
+        "reasoning_output_tokens": 124
+      },
+      {
+        "input_tokens": 15313,
+        "cached_input_tokens": 11648,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 637,
+        "reasoning_output_tokens": 449
+      },
+      {
+        "input_tokens": 16206,
+        "cached_input_tokens": 15872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 324,
+        "reasoning_output_tokens": 42
+      },
+      {
+        "input_tokens": 16785,
+        "cached_input_tokens": 16512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 450,
+        "reasoning_output_tokens": 127
+      },
+      {
+        "input_tokens": 17251,
+        "cached_input_tokens": 17024,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 200,
+        "reasoning_output_tokens": 122
+      },
+      {
+        "input_tokens": 17534,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 471,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "69f1e2bdb6a2e0c115f3294dfc4d4880d8fd5e16eac2b2c6dab3d9ca4e36824c",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 109720,
+      "cached_input_tokens": 95360,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2778,
+      "reasoning_output_tokens": 1034
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

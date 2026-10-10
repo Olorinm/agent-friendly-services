@@ -56,7 +56,7 @@ def build(directory):
     reference = grade / 'reference.json'
     if reference.is_file():
         index['references'].append({**file_info(reference), 'record_path': 'grading/artifacts/reference.json'})
-    for name in ('receipt.json', 'measured.json', 'model-cost.json', 'retained-files.json'):
+    for name in ('receipt.json', 'measured.json', 'model-cost.json', 'retained-files.json', 'controller-limits.json', 'controller-stop.json'):
         path = output / name
         if path.is_file():
             index['execution'][name] = read(path)
@@ -95,6 +95,7 @@ def build(directory):
     # No passing verdict, billing fact, or evidence selection is prefilled.
     write(grade / 'assessment.template.json', {
         'status': None, 'reason': '', 'reviewer': '', 'checks': [], 'evidence': [],
+        'outcome': {'service_execution': None, 'user_delivery': None, 'blocking_factors': [], 'evidence': ''},
         'human_interventions': None, 'service_cost_usd': None,
         'service_cost': {'kind': 'unknown', 'sources': [], 'note': ''}})
     (grade / 'evidence').mkdir()

@@ -10,6 +10,7 @@ import re
 import shutil
 
 import pipeline as runs
+from grading_privacy import secrets_for, redact_tree
 
 
 def binding(directory):
@@ -52,9 +53,10 @@ def prepare(config_path, directory):
             cfg, state = runs.read(path / 'config.json'), runs.read(path / 'state.json')
             if cfg['phase'] != 'business' or state['phase'] != 'prepared' or binding(path).exists():
                 raise ValueError('Group members must be unstarted, ungrouped business runs')
-            if cfg['service'] in services:
-                raise ValueError('One run per service per comparison round')
-            services.add(cfg['service'])
+            identity = (cfg['service'], cfg['route'])
+            if identity in services:
+                raise ValueError('One run per service and route per comparison round')
+            services.add(identity)
             for role in ('execution', 'grading'):
                 if cfg[role]['runtime'] in runtimes:
                     raise ValueError('Group members need distinct execution and grading runtimes')
@@ -64,8 +66,9 @@ def prepare(config_path, directory):
                 'materials': runs.frozen_files(path / 'frozen/execution/materials'),
                 'execution_role': runs.digest(path / 'frozen/execution/AGENTS.md'),
                 'grading_role': runs.digest(path / 'frozen/grading/AGENTS.md'),
-                'execution': {k: cfg['execution'][k] for k in ('model', 'reasoning_effort', 'harness', 'seconds')},
-                'grading': {k: cfg['grading'][k] for k in ('model', 'reasoning_effort', 'harness', 'seconds')},
+                'protocol': cfg.get('trial_protocol'),
+                'execution': {k: cfg['execution'].get(k) for k in ('model', 'reasoning_effort', 'harness', 'seconds', 'closure_fraction', 'max_model_requests')},
+                'grading': {k: cfg['grading'].get(k) for k in ('model', 'reasoning_effort', 'harness', 'seconds', 'closure_fraction', 'max_model_requests')},
             })
             evidence = member.get('evidence', [])
             if not isinstance(evidence, list):
@@ -163,6 +166,10 @@ def seal(directory, manifest, state):
             entry['collection_note'] = status.get('stop_reason', 'No collected execution result; not a business verdict.')
         index['members'].append(entry)
     runs.write(snapshot / 'index.json', index)
+    secrets=[secret for member in manifest['members'] for secret in secrets_for(member['directory'])]
+    redactions=redact_tree(snapshot,secrets)
+    if redactions:
+        runs.write(snapshot/'privacy-redactions.json',{'notice':'Registered credentials removed before sealing peer evidence; original files remain private.','files':redactions})
     runs.write(directory / 'snapshot-hashes.json', runs.frozen_files(snapshot))
     state.update(phase='grading', snapshot_sha256=runs.digest(directory / 'snapshot-hashes.json'), sealed_at=runs.now())
     runs.write(directory / 'state.json', state)
@@ -206,9 +213,15 @@ def stop_member(path):
         if result.get('stopped') is not True:
             raise ValueError('Adapter did not confirm stopping group member')
         runs.write(path / 'state.json', {**runs.read(path / 'state.json'), 'stop_confirmed': True})
+        try:
+            runs.collect(path, role, cfg[role], request)
+        except Exception as error:
+            # Stop confirmation and partial cost survive failed artifact/receipt
+            # collection; never classify this infrastructure issue as service failure.
+            runs.write(path / 'state.json', {**runs.read(path / 'state.json'), 'collection_error': str(error)})
 
 
-def advance(directory, *, busy_runtimes=(), max_active=None):
+def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None):
     if max_active is not None and (type(max_active) is not int or max_active < 0):
         raise ValueError('Available group capacity must be a nonnegative integer')
     directory = Path(directory).resolve()
@@ -234,7 +247,7 @@ def advance(directory, *, busy_runtimes=(), max_active=None):
             if running >= capacity or runtime in busy_runtimes:
                 continue
         try:
-            runs.advance(path, group_directory=directory)
+            runs.advance(path, group_directory=directory, dispatch_guard=dispatch_guard)
         except Exception as exc:
             errors[run_id] = {'phase': runs.read(path / 'state.json')['phase'], 'error': str(exc)}
             # Never resubmit an uncertain start. Stop its owned runtime instead.
@@ -256,7 +269,10 @@ def advance(directory, *, busy_runtimes=(), max_active=None):
                 errors.setdefault(m['run_id'], {})['stop_error'] = str(exc)
         state['phase'] = 'needs_attention'
     elif state['phase'] == 'executing' and all(
-            s['phase'] in ('execution_collected', 'stopped') or key in errors for key, s in states.items()):
+            s['phase'] in ('execution_collected', 'stopped', 'preflight_blocked') or key in errors for key, s in states.items()):
+        if any(s['phase'] == 'preflight_blocked' for s in states.values()):
+            for key, s in states.items():
+                if s['phase'] == 'preflight_blocked': errors[key] = {'phase': 'preflight_blocked', 'error': 'No model dispatched; inspect environment'}
         seal(directory, manifest, state)
     elif state['phase'] == 'grading' and all(
             s['phase'] in ('reviewed', 'recorded', 'stopped') or key in errors for key, s in states.items()):

@@ -222,5 +222,613 @@
         "failure": "未从指定服务取得业务数据，使用其他聚合服务或模型记忆代替；缺项、错误或无法支持结论的来源；仅报告服务受限；预算内未完成。环境或材料故障单列无效。 任一主张误判、遗漏、更正无据或把合成说法当真实报道均不通过。"
       }
     ]
+  },
+  "web-search-access-001/v1": {
+    "description": "Set up this search service, perform one simple live web search through the specified interface to confirm it works, and save the local configuration needed for later searches. Explain the setup steps completed and any blockers.",
+    "inputs": "The service, required interface, authorized account or signup details, and their origin are specified in ENVIRONMENT.md. Choose an ordinary public topic for a small search and report the query and at least one result title and web URL. Use account-free access directly; use only the supplied identity details if signup or authorization is needed. Save necessary connection settings in the designated persistent directory, keep secrets in private files, and report only the configuration location. State the origin of any existing account, steps completed without assistance, human intervention, and additional application requirements.",
+    "expected_output": "One genuine web search result from the specified service, including the query and at least one result title and link; the location of reusable local configuration; actual setup steps, account origin, and human or application requirements, or a specific blocker.",
+    "success": "Complete necessary signup, authentication, installation and configuration through the specified interface. A real search returns at least one result with a title and valid web URL, and the answer matches the response. Required configuration is reusable in a fresh session without exposing secrets. Do not force signup for account-free access or present a supplied account as newly registered; record actual human and application steps. Documentation examples, health checks, tool listings, installation and saved configuration alone do not establish working search.",
+    "failure": "No real search result; another service or interface substituted; tutorials or examples only; answer inconsistent with the response; unusable configuration; credential exposure; or failure within the budget. Record missing identity details, authorization, human steps or quota as specific access barriers. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个搜索服务，通过指定方式做一次简单的真实网页搜索，确认能用，并保存后续搜索需要的本地配置；说明完成了哪些接入步骤，遇到阻碍也请说明。",
+        "inputs": "服务、指定入口、允许使用的账户或注册资料及其来源见 ENVIRONMENT.md。自行选择一个普通公开主题做小型搜索，给出查询内容和至少一条搜索结果的标题、网页链接。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。将必要连接配置保存在本轮指定的持久目录，秘密只保存在私有文件中，答复只给配置位置。说明已有账号来源、实际自助完成的步骤、人工介入或额外申请要求。",
+        "expected_output": "指定服务的一次真实网页搜索结果，含查询内容和至少一条结果标题、链接；可复用的本地配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体受阻原因。",
+        "success": "按指定方式完成必要注册、认证、安装与配置，真实搜索返回至少一条含标题和有效网页 URL 的结果，答复与响应一致；所需配置可供新会话复用且不泄露秘密。免注册入口不强行注册；已有账号不算本轮自助注册，人工步骤和额外申请如实记录。仅文档示例、健康检查、工具清单、安装成功或保存配置不足以证明接通搜索。",
+        "failure": "未取得真实搜索结果、改用其他服务或入口、仅返回教程或示例、结果与响应不符、配置不可复用、泄露凭据或预算内未完成；缺少身份资料、授权、人工操作或额度时记录具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "database-access-001/v1": {
+    "description": "Connect to this database service through the specified interface, prepare an empty remote test database dedicated to this trial, verify it with a query that writes no business data, and save the connection configuration. Explain the setup steps, human requirements, and free-tier or expiry limits.",
+    "inputs": "The service, interface, authorized account or signup identity and its origin are specified in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed; use account-free access directly. Create only this trial's separate test database and the minimum parent resources required, without accessing existing user databases. Confirm connectivity with a read-only database query; create no business tables or records. Save resource identifiers and connection configuration in the designated persistent directory. Keep secrets in private files and report only their configuration location. Accurately state existing-account origin, steps completed without assistance, human intervention, special applications and specific blockers.",
+    "expected_output": "A newly created remote database dedicated to this trial, accessible and containing no business data; a genuine read-only query result through the specified interface; reusable configuration location and resource identifiers; account origin, actual setup steps, human or application requirements, and known free-tier or expiry limits.",
+    "success": "Complete necessary access through the specified service and interface, create a separate empty test database and query it successfully. Installation and configuration are reusable in a fresh session without credential exposure. Do not count an existing account as newly registered or force signup for account-free access. Accurately explain the evidence for free-tier or expiry conditions and any unknowns. Installation, resource listings, creation receipts and health checks alone do not prove the database can be queried.",
+    "failure": "No usable dedicated remote database or genuine query; local simulation only; another service or interface substituted; business data written prematurely; unusable configuration; credential exposure; or failure within the budget. Missing identity, permissions, human steps or free quota are specific access barriers; execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。",
+        "inputs": "指定服务、入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；无需账号的入口直接使用。仅新建本轮独立测试数据库及必需的最小父资源，不访问既有用户数据库。用一次只读数据库查询确认能连接，不创建业务表或记录。将资源标识和必要连接配置保存在本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。已有账号来源、自助步骤、人工介入、特殊申请和具体阻碍如实说明。",
+        "expected_output": "一个本轮新建、可访问且无业务数据的远程测试数据库；指定方式的真实只读查询结果；可复用配置位置与资源标识；账号来源、实际接入步骤、人工或申请门槛，以及已知免费额度或到期限制。",
+        "success": "通过指定服务及入口完成必要接入，新建本轮独立空数据库并真实查询成功；所需安装和配置可供新会话复用且不泄露凭据；已有账号不算本轮自助注册，免账号入口不强行注册，免费或期限依据及未知项如实说明。仅有安装、资源列表、创建回执或健康检查不足以证明数据库可查询。",
+        "failure": "无可用的专用远程数据库或真实查询、仅本地模拟、改用其他服务或入口、提前写入业务数据、配置不可复用、泄露凭据或预算内未完成；缺身份、权限、人工步骤或免费额度记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "database-todos-001/v2": {
+    "description": "Prepare a separate remote database for my personal todo app and use the attached data to verify that inserts and updates persist. After the writing program exits, reconnect to the same database from a completely fresh program. Give me all todos ordered by id, the incomplete todos, and the total and completed counts, and explain the database's free-tier or expiry limits.",
+    "inputs": "Synthetic test data only: id=1,title=Buy milk,done=false; id=2,title=Read book,done=false; id=3,title=Walk dog,done=true. Insert all three, then set done=true for id=2, leaving other content unchanged. Use the separate empty remote test database newly created and explicitly handed over in this trial's access phase; ENVIRONMENT.md identifies the resource and private connection configuration. Installation and authentication may be reused, but not business tables, data, answers or calling scripts. Do not access or modify existing user projects.",
+    "expected_output": "All three todos sorted by id, the incomplete items, and total/completed counts; actual free-tier or expiry restrictions and their sources. Run records preserve verifiable non-sensitive requests or SQL, real remote responses, and evidence that a completely fresh process reads the same database after the writing process exits. Credentials must not appear in public evidence or the final answer.",
+    "success": "Insert three items into the specified service's remote database and update id=2. After the writing process ends, a completely fresh process reconnects to the same database and reads back all three items. Only id=1 is incomplete; there are three total and two completed, with titles and other original values unchanged. The final full list is sorted by id. Real requests, responses and process records substantiate remote persistence and independent reading. Correctly explain supported free-tier or expiry limits, marking unconfirmed details unknown. Credentials remain in private workspace files, not public evidence or the final answer. Temporary resources are acceptable only with their expiry disclosed, without claiming permanent availability.",
+    "failure": "Local-only or simulated storage; no real response from the specified service; no actual insert or update; reads in the writing process presented as a fresh process; a different database used; incorrect data, counts or final order; insufficient evidence; known expiry concealed; credential exposure; or failure within the budget. Missing authorized resources are access barriers; material or execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "为我的个人待办应用准备一个独立的远程数据库，用附件数据验证新增和修改后的保存情况。写入程序退出后，用一个全新的程序重新连接同一数据库读取；给我按 id 排列的全部待办、未完成待办，以及总数和完成数，并说明数据库的免费或到期限制。",
+        "inputs": "仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true，其他内容不变。使用本轮接入阶段新建并明确交付的独立空远程测试数据库，其标识和私有连接配置见 ENVIRONMENT.md；允许复用安装和认证，不继承业务表、数据、答案或调用脚本。不得访问或修改既有用户项目。",
+        "expected_output": "按 id 排序的全部三条待办、未完成项、总数与完成数；实际免费或到期限制及来源。运行记录保存可核对的非敏感请求或 SQL、远程真实响应，以及写入进程退出后由另一全新进程读取同一数据库的证据；凭据不进入公开证据或最终答案。",
+        "success": "实际在指定服务的远程数据库中新增三项并修改 id=2，随后写入进程结束，另一全新进程重新连接同一数据库读回三项；只有 id=1 未完成，总数 3、完成数 2，标题与其他原值不变；最终全部待办按 id 排序。真实请求、响应和进程记录支持远程保存与独立读取；正确说明有依据的免费或到期限制，无法确认的细项如实标未知。凭据只保存在工作目录私有文件，不进入公开证据或最终答案。限时资源可完成此题，但必须明确期限，不声称永久可用。",
+        "failure": "仅本地或模拟存储、无指定服务真实响应、未实际新增或修改、同一写入进程中读回冒充全新进程、连接了不同数据库、数据或计数不符、最终顺序不符、证据不足、隐瞒已知期限、泄露凭据或预算内未完成；缺少授权资源记接入阻碍，材料或执行环境故障单列无效。"
+      }
+    ]
+  },
+  "financial-statements-001/v1": {
+    "description": "Compare Apple and Microsoft's fiscal 2025 revenue, net income and operating cash flow in a table, with links to the original financial reports.",
+    "inputs": "Apple Inc. / AAPL and Microsoft / MSFT; each company's own fiscal 2025 full-year consolidated statements, using GAAP reports publicly available as of 2026-09-09. State each fiscal year-end date and express all amounts in billions of US dollars.",
+    "expected_output": "A comparison table covering two companies and three metrics, with fiscal year-end dates, currency and units, plus sources locating the original annual reports or regulatory filings.",
+    "success": "All six metrics match the companies' fiscal 2025 annual reports saved before execution, allowing rounding to the displayed units. Do not mix calendar years, individual quarters, trailing twelve months or adjusted earnings. Fiscal year-end dates and units are correct, the original disclosures substantiate the figures, and the core data comes from the specified service.",
+    "failure": "Missing metrics or sources; net income confused with earnings per share; incorrect period, company, accounting basis or units; citations that do not support the figures; a summary without the comparison table; or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "比较苹果和微软 2025 财年的营收、净利润和经营现金流，做成表格并附原始财报出处。",
+        "inputs": "Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合并报表；使用截至 2026-09-09 已公开的 GAAP 报告。注明各自财年结束日期，金额统一为十亿美元。",
+        "expected_output": "两家公司、三个指标的比较表；财年结束日期、币种和单位；可定位原始年报或监管披露的出处。",
+        "success": "六个指标与事前保存的各公司 2025 年报匹配，允许显示单位带来的舍入；不混用自然年、单季度、TTM 或调整后利润；财年结束日期和单位正确；原始披露能支持所列指标；核心数据来自指定服务。",
+        "failure": "缺指标或来源；把净利润与每股收益混淆；期间、公司、口径或单位错误；引用无法支持数值；只给摘要不提供比较表；预算内未完成。环境故障单列无效。"
+      }
+    ]
+  },
+  "financial-prices-001/v1": {
+    "description": "Plot Apple's daily closing prices for August 2026 using unadjusted prices, and include a CSV and the data source.",
+    "inputs": "Apple Inc., NASDAQ ticker AAPL, quoted in US dollars; 2026-08-01 through 2026-08-31. Use regular-session daily closing prices on trading days, excluding pre-market and after-hours prices.",
+    "expected_output": "An openable price chart and CSV with each trading date and closing price, an identifiable data source, and a clear statement that the prices are unadjusted.",
+    "success": "Dates cover every trading day in the month without invented rows for market closures, duplicates, omissions or an incorrect currency. Prices match the independently frozen reference series on the same basis; differences exceeding quote precision are checked individually. Chart and CSV values agree, and the data genuinely comes from the specified service.",
+    "failure": "Live snapshots or after-hours prices substituted for daily closes; adjusted prices used without authorization; trading days omitted; demo data, another service or model memory used to fill gaps; missing CSV or chart; or failure within the budget. Environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我画出苹果公司 2026 年 8 月的每日收盘价走势，使用不复权价格，并附上 CSV 和数据来源。",
+        "inputs": "苹果公司 Apple Inc.，纳斯达克 AAPL，美元计价；2026-08-01 至 2026-08-31；常规交易日的日收盘价，不含盘前盘后。",
+        "expected_output": "可打开的走势图和 CSV；每个交易日的日期与收盘价；可识别的数据来源与不复权口径。",
+        "success": "日期覆盖该月全部交易日且不含伪造的休市日；无重复、缺失或错误币种；价格与事前冻结的同口径参考序列一致，差异超过报价精度时逐项复核；图表与 CSV 数值一致；数据确实来自指定服务。",
+        "failure": "用实时快照或盘后价替代日收盘价；擅自使用复权数据；缺交易日；用演示数据、别的服务或模型记忆填补；CSV 或图表缺失；预算内未完成。环境故障单列无效。"
+      }
+    ]
+  },
+  "cloudflare-access-001/v1": {
+    "description": "Set up access to Cloudflare, confirm that the test KV namespace is accessible through the specified interface, and retain the local configuration needed for later use.",
+    "inputs": "ENVIRONMENT.md provides the account and test KV namespace identifiers, official entry point, authorized account or credentials, and their origin. Perform a read-only check of namespace identity or the key list; do not read configuration values. Keep secrets in private local configuration and report only whether access works and where the configuration is saved.",
+    "expected_output": "A genuine successful call through the specified interface, the correct KV namespace identity, and the location of reusable local configuration, or an explanation of the blocker.",
+    "success": "A genuine response establishes that the specified interface can access the correct remote KV namespace. Local configuration is reusable without exposing credentials. Grading separately records the origin of supplied accounts, steps completed without assistance, human intervention and special applications; previously obtained accounts or resources are not counted as created during this trial.",
+    "failure": "Installation or saved configuration without a successful call; local simulation or a different namespace used; another interface substituted; unusable configuration; or unfinished execution. Missing authorized resources and execution-environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我接通 Cloudflare，确认能够通过指定方式访问测试 KV 空间，保留后续使用需要的本地配置。",
+        "inputs": "账号与测试 KV 空间标识、官方入口、允许使用的账号或凭据及其来源在 ENVIRONMENT.md。只读验证空间身份或键列表即可，不读取配置值。秘密保存在本地私有配置中，答复只说明是否可用和配置位置。",
+        "expected_output": "指定方式真实调用成功、正确 KV 空间身份、后续可使用的本地配置位置；受阻时说明原因。",
+        "success": "真实响应证明指定方式可访问正确远端 KV 空间；本地配置可复用且不泄露凭据；验收分别记录已有账号来源、自助完成步骤、人工介入及特殊申请，不将预先取得的账号或资源算作本轮自助创建。",
+        "failure": "只安装或只保存配置，没有成功调用；误用本地模拟数据或其他空间；改走其他方式；配置不可复用；实际运行未完成。缺少授权资源或执行环境故障单列原因。"
+      }
+    ]
+  },
+  "cloudflare-kv-config-001/v1": {
+    "description": "Read the test application's current configuration, list its settings, and tell me whether maintenance mode is enabled.",
+    "inputs": "The configuration is a JSON object stored under app:config in the test KV namespace; maintenance_mode indicates maintenance mode. Account and namespace identifiers are in ENVIRONMENT.md. Read only; change nothing.",
+    "expected_output": "All app:config fields and values, and an explicit conclusion that maintenance mode is enabled or disabled.",
+    "success": "The specified interface genuinely reads app:config from the correct remote namespace. Output matches the independently frozen and reread JSON semantically, with all fields and values present, the correct maintenance-mode conclusion, and no remote data changes.",
+    "failure": "Listing keys without reading the value; missing or altered fields; incorrect maintenance-mode conclusion; local simulation, documentation examples or another namespace substituted; another interface used; or failure within the budget. Unready materials, data drift and environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我读一下测试应用的当前配置，列出配置内容，并告诉我维护模式开着吗。",
+        "inputs": "配置保存在测试 KV 空间的 app:config 键中，是 JSON 对象；maintenance_mode 表示维护模式。账号和空间标识在 ENVIRONMENT.md。只读，不更改任何内容。",
+        "expected_output": "app:config 的全部配置字段和值，以及维护模式开启或关闭的明确结论。",
+        "success": "指定方式真实读取正确远端空间的 app:config；输出与冻结并独立重读的 JSON 语义一致，字段和值完整；维护模式结论正确；没有修改远端数据。",
+        "failure": "只列出键名却没读取值；漏字段或改值；错误判断维护模式；使用本地模拟、文档示例或其他空间；改走其他入口；预算内未完成。材料未就绪、数据漂移或环境故障单列无效。"
+      }
+    ]
+  },
+  "github-access-001/v1": {
+    "description": "Set up the specified way of accessing GitHub, confirm that the test repository is accessible, and retain the local configuration needed for subsequent use.",
+    "inputs": "Access only this trial's test repository. ENVIRONMENT.md provides its identifier, official entry point, authorized account or credentials, and their origin. Verify repository identity with read-only access; do not compile an issue list. Keep secrets in private local configuration and report only whether access works and where the configuration is saved.",
+    "expected_output": "A genuine successful call through the specified interface, correct repository identity, and the location of reusable local configuration, or a specific explanation of the blocker.",
+    "success": "A genuine response establishes that the specified interface can access the correct repository. Required local configuration is reusable without exposing credentials. Grading separately records supplied-account origin, steps completed without assistance, human intervention and special applications; an existing account is not counted as registered during this trial.",
+    "failure": "Installation or saved configuration without a successful call; the wrong repository accessed; another interface substituted; unusable configuration; or unfinished execution. Missing authorized resources and execution-environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我接通 GitHub，确认能够通过指定方式访问测试仓库，保留后续使用需要的本地配置。",
+        "inputs": "仅访问本轮测试仓库；仓库标识、官方入口、允许使用的账号或凭据及其来源在 ENVIRONMENT.md。只读验证仓库身份即可，不整理 issue。秘密保存在本地私有配置中，答复只说明是否可用和配置位置。",
+        "expected_output": "指定方式真实调用成功、正确仓库身份、可供后续使用的本地配置位置；受阻时说明具体原因。",
+        "success": "真实响应证明指定方式能够访问正确仓库；所需本地配置可复用且不泄露凭据；验收分别记录已有账号来源、自助完成步骤、人工介入和特殊申请，不将已有账号算作本轮注册。",
+        "failure": "只安装或只保存配置，没有成功调用；访问错误仓库；用其他方式替代指定方式；配置不可复用；实际运行未完成。缺少授权资源或执行环境故障单列原因。"
+      }
+    ]
+  },
+  "github-open-bugs-001/v1": {
+    "description": "List all open issues labeled bug in the test repository, including each title and link.",
+    "inputs": "The test repository identifier is in ENVIRONMENT.md. Include issues only, not pull requests; modify nothing. Any list order is acceptable.",
+    "expected_output": "Titles and web links for every matching issue.",
+    "success": "Results match the repository state independently frozen and reread for this trial. Every open issue bearing the bug label is included with the correct title and link, without closed issues, issues lacking the required label, pull requests or duplicates. Genuine calls use the specified interface.",
+    "failure": "Missing or extra items; incorrect titles or links; tutorials or examples only; no actual read of the specified repository; another interface used; or failure within the budget. Material changes and environment failures are invalid runs; do not infer success without evidence.",
+    "source_variants": [
+      {
+        "description": "帮我列出测试仓库里所有尚未关闭、带 bug 标签的 issue，给出标题和链接。",
+        "inputs": "测试仓库标识在 ENVIRONMENT.md；只需 issue，不包括 pull request，不修改任何内容。列表顺序不限。",
+        "expected_output": "符合条件的全部 issue 标题及网页链接。",
+        "success": "与本轮冻结并独立重读的仓库状态一致；所有 open 且带 bug 标签的 issue 均列出，标题和链接正确，无已关闭项、无其他标签项、无 pull request 或重复项；真实调用通过指定方式完成。",
+        "failure": "漏项、多项、错误标题或链接、只返回教程或示例、未实际读取指定仓库、改走其他入口、预算内未完成；材料变化或环境故障单列无效，不猜测成功。"
+      }
+    ]
+  },
+  "collaborative-tables-001/v3": {
+    "description": "Turn the attached book-club meeting todos into an online task table with owners, deadlines and completion status. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "Book-club planning meeting notes, 2026-09-08: Lin Qing will confirm the venue by September 15; Zhou Zhou will compile the reading list by September 16; Chen He will design the poster, originally due September 18. None was completed at the meeting. Follow-up: Zhou Zhou says the reading list is now complete, and the poster deadline moves to September 20. Other arrangements remain unchanged.",
+    "expected_output": "A real online task-table link, and the two incomplete tasks with their owners and deadlines.",
+    "success": "The remote table contains exactly three tasks: confirm venue / Lin Qing / 2026-09-15 / incomplete; compile reading list / Zhou Zhou / 2026-09-16 / complete; design poster / Chen He / 2026-09-20 / incomplete. The answer links to that table and its incomplete-task list agrees with the remote state. An independent grading agent reads and verifies the table; field names and operation order are unrestricted.",
+    "failure": "No real online table; omitted or duplicate items; incorrect data or answer; wrong link; timeout; or violation of resource, free-use or no-notification constraints. Credential and environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "真实在线任务表链接；两项未完成事项及负责人、截止日期",
+        "success": "远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。评测 Agent 独立读取复核，字段命名与操作顺序自由",
+        "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列"
+      }
+    ]
+  },
+  "collaborative-tables-002/v2": {
+    "description": "The reading list in this book-club task table is complete, and the poster deadline has moved to September 20, 2026. Update those items and leave everything else unchanged. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "The environment identifies the existing online task table. Its three original rows are: confirm venue, Lin Qing, 2026-09-15, incomplete; compile reading list, Zhou Zhou, 2026-09-16, incomplete; design poster, Chen He, 2026-09-18, incomplete.",
+    "expected_output": "The link to the updated original table, and the two incomplete tasks with their owners and deadlines.",
+    "success": "Independent before-and-after reads of the same remote table show the reading list marked complete and the poster deadline changed to 2026-09-20. There are still three rows and all other original content is unchanged. The answer links to the original table and lists confirm venue / Lin Qing / 2026-09-15 and design poster / Chen He / 2026-09-20 as incomplete.",
+    "failure": "A replacement table created instead of updating the original; incorrect content; deletion, omission or duplication; unsupported changes to other content; incorrect answer; timeout; or violation of resource constraints. Credential and environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "这张读书会任务表里的书单已经完成，海报延期到2026年9月20日。帮我更新，其他内容保持不变。给我链接，并列出还没完成的事项、负责人和截止日期。",
+        "inputs": "已有在线任务表的资源标识由本轮环境提供。原表三项：确认场地，林青，2026-09-15，未完成；整理书单，周舟，2026-09-16，未完成；制作海报，陈禾，2026-09-18，未完成。",
+        "expected_output": "原任务表更新后的链接；两项未完成事项及负责人、截止日期",
+        "success": "独立读取前后同一远端表：书单改为已完成、海报日期改为2026-09-20；行数仍为三，其他原有内容不变；答复链接为原表，未完成清单为确认场地/林青/2026-09-15及制作海报/陈禾/2026-09-20",
+        "failure": "未修改原表而另建替代表、内容错误、删除/遗漏/重复、无依据改写其他内容、答复错误、超时或违反资源约束；凭据或环境故障单列"
+      }
+    ]
+  },
+  "payment-acceptance-002/v1": {
+    "description": "Check which of these three orders have been paid, how much was paid for each and in which currency. Clearly mark any unsuccessful payments too.",
+    "inputs": "Real resource identifiers for three test orders. The attachment supplies identifiers only, not answers. The orders are for the same test product, with one completed payment, one unpaid order and one failed payment.",
+    "expected_output": "The payment status of each of the three orders, with the amount actually received and currency for paid orders.",
+    "success": "Independent reads of server-side payment records confirm all three statuses and the correct amount and currency for the completed payment. Opening a page, an uncaptured authorization or a processing state is not treated as payment; failed or unpaid amounts are excluded from money received.",
+    "failure": "An order omitted; status guessed; order creation treated as payment success; incorrect amount or currency; timeout; or changes to an original order. Environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "帮我查一下这三笔订单哪些已经付了款，分别付了多少钱、什么币种；没付成功的也标清楚。",
+        "inputs": "三笔测试订单的真实资源标识；附件只提供标识，不提供答案。订单来自同一测试商品，状态分别为已完成付款、尚未付款、付款失败",
+        "expected_output": "三笔订单逐笔列明付款状态，已付款订单列出实收金额与币种",
+        "success": "独立读取服务端支付记录：三笔状态全部正确，已完成付款的金额与币种正确；不把打开页面、授权未捕获或处理中当作已付款，不将失败/未付金额计入已收款",
+        "failure": "漏单、猜测状态、把创建订单当成支付成功、金额或币种错误、超时或改动原订单；环境故障单列"
+      }
+    ]
+  },
+  "payment-acceptance-003/v1": {
+    "description": "My app needs a membership costing USD 12 per month, with no free trial or setup fee. Create the subscription page in the test environment first and give me its link.",
+    "inputs": "Membership name: “散步计划 Pro”. Price: USD 12 per month; quantity: 1. No trial period or one-time setup fee.",
+    "expected_output": "A test subscription-page link for the specified membership.",
+    "success": "The remote product and price match an accessible test checkout page: automatic monthly renewal, a listed price of USD 12, quantity 1, and no trial or setup fee. An independent grading agent verifies these details. A buyer need not complete the subscription or actually renew it.",
+    "failure": "A one-time payment presented as a subscription; incorrect interval, amount or name; an added trial or setup fee; no usable test page; timeout; or actions outside the test environment. Environment failures are recorded separately.",
+    "source_variants": [
+      {
+        "description": "我的应用要卖一个每月12美元的会员，没有免费试用，也没有开通费。先在测试环境做好订阅页面，把链接给我。",
+        "inputs": "会员名为“散步计划 Pro”，标价12 USD/月，数量1；无试用期、无一次性开通费",
+        "expected_output": "对应会员的测试订阅页面链接",
+        "success": "远端商品/价格与可打开的测试结账页面一致：每月自动续费、标价12 USD、数量1、无试用和开通费。评测 Agent 独立核验；不要求买家完成订阅或实际续费",
+        "failure": "一次性支付冒充订阅、周期/金额/名称错误、额外试用或开通费、无可用测试页面、超时或越过测试环境；环境故障单列"
+      }
+    ]
+  },
+  "web-extraction-access-001/v1": {
+    "description": "Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.",
+    "inputs": "Example page: https://example.com/ . The service, assigned interface, authorized account or signup identity and their origin are in ENVIRONMENT.md. Use account-free interfaces directly; use only the identity supplied for this trial if signup or authorization is needed. Retrieve this URL’s body through the assigned service, without substituting search snippets or fetching the origin directly. Save necessary configuration in the assigned persistent directory, keep secrets in private files, and report only its location. State the origin of any existing account, self-service steps, human intervention, extra applications and concrete blockers accurately.",
+    "expected_output": "The page title and a one-sentence summary based on real content returned by the assigned service; reusable configuration location; account origin, setup steps, human or application requirements, or a specific blocker.",
+    "success": "Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.",
+    "failure": "No page body returned by the assigned service, a different service or interface, only examples or search snippets, a title or summary inconsistent with the response, unusable configuration, exposed credentials, or failure to finish within budget. Record missing identity, authorization, human action or quota as concrete access barriers; execution environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个网页内容提取服务，通过指定方式读取附件里的示例网页，给我页面标题和一句内容概述，确认能用；保存后续调用所需配置，并说明接入步骤和遇到的门槛。",
+        "inputs": "示例网页：https://example.com/ 。服务、指定入口、允许使用的账户或注册身份及其来源见 ENVIRONMENT.md。无需账号的入口直接使用；需注册或授权时只使用本轮提供的身份资料。通过指定服务提取此 URL 的正文，不用搜索摘要或绕过服务直读网页代替。将必要配置保存在本轮指定的持久目录，秘密仅存私有文件，答复只给配置位置；如实说明已有账号来源、自助步骤、人工介入、额外申请及具体阻碍。",
+        "expected_output": "从指定服务真实取得的页面标题和一句内容概述；可复用配置位置；账号来源、接入步骤和人工或申请门槛，或具体受阻原因。",
+        "success": "通过指定入口完成必要注册、认证、安装与配置，真实提取指定网页且标题、概述与返回正文相符；必要配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册，实际人工和额外申请如实记录。仅安装、健康检查、工具清单或搜索结果不足以证明正文提取可用。",
+        "failure": "未取得指定服务返回的网页正文、改用其他服务或入口、仅给示例或搜索摘要、标题或概述与响应不符、配置不可复用、泄露凭据或预算内未完成；缺身份资料、授权、人工操作或额度时记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "web-extraction-holidays-001/v1": {
+    "description": "I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.",
+    "inputs": "Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.",
+    "expected_output": "A parseable UTF-8 CSV file containing every holiday in the specified table, with its date, English weekday and name, sorted by ascending date. The answer identifies the file location and official source link. The runner retains the assigned service’s real requests, responses and retrieval time for independent checking.",
+    "success": "The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.",
+    "failure": "The target content was not retrieved through the assigned service, only search snippets or links were obtained, other sources supplied the answer, the file is absent or unparseable, fields or any row are incorrect, rows are missing or duplicated, other years are mixed in, computed dates replace published dates, the source is absent, or the task exceeds its budget. Material changes to the source page, invalid materials and execution environment failures must be checked separately rather than automatically attributed to service capability.",
+    "source_variants": [
+      {
+        "description": "我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。",
+        "inputs": "官方页面：https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ 。只整理其中的“2027 Holiday Schedule”表，不混入其他年份或页面说明。CSV 使用 UTF-8，列名为 date、weekday、holiday；date 为 YYYY-MM-DD，weekday 为英文完整星期名，holiday 保留表中的英文名称，去掉脚注标记。日期按表中公布值记录，不自行换成节日的日历日期。通过本轮指定的网页内容提取服务取得此 URL 的内容，允许自行处理服务返回的 HTML、文本或结构化内容；不用其他网站、日历数据集、模型记忆、搜索摘要或绕过指定服务直读原网页代替。",
+        "expected_output": "一个可解析的 UTF-8 CSV 文件，含指定表全部假日的日期、英文星期与名称，按日期升序；答复提供文件位置和官方来源链接。运行器保留指定服务真实请求、响应及取得时间，供独立核对。",
+        "success": "指定服务真实取得该网页的目标表内容；CSV 三列与输入约定一致，全部假日逐项日期、星期、名称正确，无漏行、重复或其他年份，日期升序，脚注标记不混入字段；文件确实存在且可解析，答复含文件位置及来源链接。允许不改变含义的空白、换行和直弯撇号差异；不要求特定解析库、调用次数或服务原始返回格式。",
+        "failure": "未通过指定服务取得目标内容、仅有搜索摘要或链接、用其他来源补答案、缺文件、CSV 不可解析、字段或任何行的内容不符、漏行、重复、混入其他年份、把表中日期替换成自行计算的日期、无来源或预算内未完成；页面内容发生实质变化、材料失效或运行环境故障须单列核实，不直接归咎服务能力。"
+      }
+    ]
+  },
+  "collaborative-tables-access-001/v1": {
+    "description": "Connect this online table service through the assigned interface, create a new empty test space for this trial, read it to confirm access, and save the configuration needed to create a task table later. Give me the space link and explain the setup steps, human requirements and free-plan limits.",
+    "inputs": "The service, assigned interface, authorized account or signup identity and its origin are in ENVIRONMENT.md. Complete signup, authorization, installation and configuration as needed, and state the origin of any existing account. Create one separate empty container that can hold a future task table, such as a workspace, base or parent document, with the trial marker supplied by the environment in its name. Read its metadata again through the assigned interface to confirm access to that same remote resource. Do not organize meeting content or prebuild business fields or records during this phase. Save necessary installations, container identifiers and connection settings in the assigned persistent directory. Secrets stay in private files; report only the configuration location. Explain actual self-service steps, human intervention, extra applications and known free limits, or specific blockers if incomplete.",
+    "expected_output": "A valid link and identifier for the new empty trial container; a real metadata read through the assigned interface; reusable configuration location; account origin, setup steps, human or application requirements, and supported free limits or explicitly unknown details.",
+    "success": "Complete necessary access setup, create a separate empty trial container through the assigned service and interface, then read that same remote container’s metadata to confirm it is accessible. The link and identifier agree, required configuration is reusable in a fresh session without exposing secrets, and no business fields, records or answers are preloaded. Describe the account origin, self-service steps, human barriers and free limits accurately. Registration, installation, tool lists, a creation receipt or a local simulation alone do not prove usable access.",
+    "failure": "No new separate empty trial container, no genuine remote read-back, a link to the wrong resource, unusable configuration, a different service or interface, preloaded business data, exposed credentials, or failure to finish within budget. Record account, permission, quota, human and application restrictions as concrete access barriers; execution environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我通过指定方式接通这个在线表格服务，新建一个本轮专用的空测试空间，读取它确认可用，并保存后续创建任务表所需的配置；给我空间链接，说明接入步骤、人工门槛和免费限制。",
+        "inputs": "服务、指定入口、允许使用的账户或注册身份及来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；已有账号如实说明来源。新建一个可容纳后续任务表的独立空测试容器，例如工作区、base 或父文档，名称带本轮环境提供的标识。通过指定方式重新读取该容器的元数据，确认访问的是同一远端资源；本阶段不整理会议内容、不预建业务字段或记录。保存必要安装、容器标识和连接配置到本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。说明真实自助步骤、人工介入、额外申请和已知免费限制；无法完成时说明具体阻碍。",
+        "expected_output": "本轮新建空测试容器的有效链接与标识；指定接口真实读取其元数据的结果；可复用配置位置；账号来源、接入步骤、人工或申请门槛，以及有依据的免费限制或未知项。",
+        "success": "完成必要接入，通过指定服务及入口新建本轮独立空容器，并重新读取同一远端容器的元数据确认可访问；链接和标识一致，必要配置可供新会话复用且不泄露秘密。未预建业务字段、记录或答案；实际账号来源、自助步骤、人工门槛和免费限制如实说明。只有注册、安装、工具列表、创建回执或本地模拟不足以证明接通。",
+        "failure": "无本轮新建独立空容器、无真实远端读回、链接指错资源、配置不可复用、改用其他服务或入口、预填业务数据、泄露凭据或预算内未完成；账号、权限、额度、人工或申请限制记具体接入阻碍，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "collaborative-tables-001/v4": {
+    "description": "Turn the attached book-club meeting todos into an online task table with owners, deadlines and completion status. Give me the link and list the incomplete tasks with their owners and deadlines.",
+    "inputs": "Book-club planning meeting notes, 2026-09-08: Lin Qing will confirm the venue by September 15; Zhou Zhou will compile the reading list by September 16; Chen He will design the poster, originally due September 18. None was completed at the meeting. Follow-up: Zhou Zhou says the reading list is now complete, and the poster deadline moves to September 20. Other arrangements remain unchanged.",
+    "expected_output": "A real online task-table link, and the two incomplete tasks with their owners and deadlines.",
+    "success": "The remote table contains exactly three items: confirm venue / 林青 / 2026-09-15 / incomplete; prepare book list / 周舟 / 2026-09-16 / complete; make poster / 陈禾 / 2026-09-20 / incomplete. The answer links to that table and its incomplete list agrees with the remote state. After execution ends, the controller independently retrieves metadata, fields and all records from this new trial table through its own trusted read-only API requests, and freezes the raw receipts, read times, resource mapping and hashes. An independent grading Agent checks redacted receipts, the user answer and frozen reference without inheriting execution credentials or running the tested Agent’s code. Field names and operation order are unrestricted.",
+    "failure": "No real online table, missing or duplicate items, incorrect data or answer, a wrong link, timeout, or violation of resource, free-only or no-notification limits. Credential and environment failures are classified separately. If the controller cannot obtain the agreed independent read-only receipts, record a verification-material gap; neither declare completion from the executor’s own report nor automatically declare the service failed.",
+    "source_variants": [
+      {
+        "description": "把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。",
+        "inputs": "读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。",
+        "expected_output": "真实在线任务表链接；两项未完成事项及负责人、截止日期",
+        "success": "远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。总控在执行结束后，以自己的可信只读 API 请求重新取得本轮新表的元数据、字段和全部记录，冻结原始回执、读取时间、资源对应关系及哈希；独立验收 Agent 核对脱敏回执、用户答复和冻结参考，不继承执行凭据、不执行被测者的代码。字段命名与操作顺序自由。",
+        "failure": "无真实在线表、漏项或重复、数据或答复不符、链接错误、超时或违反运行资源/免费/不通知约束；凭据或环境故障单列。若总控未能取得约定的独立只读回执，记验收材料缺口，不凭执行者自报判完成，也不直接判服务失败。"
+      }
+    ]
+  },
+  "web-search-001/v2": {
+    "description": "I am upgrading a Python app to 3.13. Briefly explain in Chinese whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions. Include official page links supporting these conclusions.",
+    "inputs": "Target Python 3.13; official sources under python.org. Discover sources through the assigned search service. You may directly read search result pages and the official documentation they link to. The official evidence you cite must be traceable to those search results; do not answer from model memory or another search engine.",
+    "expected_output": "A concise answer in Chinese covering the default setting, how to enable free threading, and C-extension compatibility, with official page links sufficient to support all three conclusions. There is no fixed source count; one official page may support multiple conclusions.",
+    "success": "All three questions are answered correctly and supported by official Python 3.13 documentation. The final official links support the conclusions, and their real sources are traceable to the assigned service’s search results and linked official documentation. Directly reading these sources is allowed; another search engine must not replace the assigned service for discovery. Actual calls, responses and source content captured by the runner make the answer and source chain verifiable. The executor need not produce separate audit logs.",
+    "failure": "The assigned service was not called, another search engine replaced it, cited sources cannot be traced to sources it discovered, an answer or official support for any of the three questions is missing, Python versions are confused, the official links used are omitted, or the budget is exceeded. Evidence gaps caused by environment or collection failures are separately invalid; missing extra audit files alone does not mean service failure.",
+    "source_variants": [
+      {
+        "description": "我准备把 Python 应用升级到 3.13，请用中文简要查清楚自由线程是否默认启用、如何启用，以及现有 C 扩展有什么兼容性限制，并附上支持这些结论的官方页面链接。",
+        "inputs": "目标版本 Python 3.13；官方来源范围 python.org。使用本轮指定搜索服务发现来源；可直接读取搜索结果页面及其中指向的官方文档。所引用的官方依据应能追溯到这些搜索结果；不依赖模型记忆或其他搜索引擎提供答案。",
+        "expected_output": "中文简答覆盖默认状态、启用方式、C 扩展兼容性；给出足以支持三个结论的官方页面链接。来源数量不限；同一官方页面能支持多个结论时可复用。",
+        "success": "三个问题均有正确答案且由 Python 3.13 官方资料支持；最终提供的官方链接与结论对应，真实来源能追溯到指定服务的搜索结果及其官方文档链接。直接读取这些来源页面允许；其他搜索引擎不能替代指定服务发现来源。来源链与回答可通过运行器采集的实际调用、响应和所读内容核对；不要求执行者另外编写审计日志。",
+        "failure": "未调用指定搜索服务、用其他搜索替代、引用来源无法追溯到该服务发现的来源、缺少任一问题的答案或官方依据、版本混淆、未提供所用官方链接或预算内未完成；运行环境或采集故障导致证据不足时单列无效，不因缺少额外审计文件判服务失败。"
+      }
+    ]
+  },
+  "weather-access-001/v1": {
+    "description": "Connect this weather service, make one real weather query through the assigned route, and save the local configuration needed for later queries. Explain the setup steps completed and any actual blockers.",
+    "inputs": "The service, assigned route, authorized account or registration details and their origin are in ENVIRONMENT.md. Choose a public location for a small query and report its location, weather value with units and forecast or observation time. Use account-free routes directly; use only supplied identity information when registration or authorization is needed. Store necessary configuration in the assigned persistent directory and secrets only in private files. Report the configuration path, existing-account origin, self-service steps, human intervention and any extra application requirements.",
+    "expected_output": "One real weather result from the assigned service, including location, value, unit and forecast or observation time; a reusable configuration path; completed setup steps, account origin and human or application requirements, or concrete blockers.",
+    "success": "Complete the required registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable location, valid time and at least one weather value; the answer matches it and states units. Configuration is reusable by a new session without leaking secrets. Do not force registration for account-free routes or claim an existing account was registered during this run.",
+    "failure": "No real weather query, another service or route substituted, only a health check, installation, example or configuration, an answer inconsistent with the response, unusable configuration, leaked secrets or an exceeded budget. Record identity, authorization, human or quota blockers; environment failures are separately invalid.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个天气服务，通过指定方式做一次真实天气查询，确认能用，并保存后续查询需要的本地配置；说明完成的接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个公开地点做小型查询，报告地点、天气数值与单位及其预报或观测时间。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实天气查询结果，含地点、数值、单位及预报或观测时间；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置，真实响应含可识别地点、有效时间及至少一个天气数值，答复与响应一致且注明单位；配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实天气查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "weather-outing-001/v1": {
+    "description": "I will be walking in central London on the morning of October 10. In Chinese, make a small table of forecast temperature and precipitation for the three hours from 09:00 to 12:00 local time. State the units, data source and query time with its time zone, and briefly identify which periods have precipitation forecast.",
+    "inputs": "Date: 2026-10-10. Location: central London, using the supplied WGS84 coordinates, latitude 51.5074 and longitude -0.1278; no address lookup or geocoding is needed. Local time zone: Europe/London. Include three full hourly intervals: 09:00–10:00, 10:00–11:00 and 11:00–12:00. For each row, use near-surface air temperature at the start of the interval in degrees Celsius, and total precipitation accumulated during that hour in millimetres, including rain and snow as water equivalent. Use only the forecast available from the assigned service at query time. Report missing data honestly; do not replace it with zero or evenly divide a longer-period total into hourly values.",
+    "expected_output": "A concise Chinese table covering the three local hourly intervals, with temperature at each interval start (°C) and total precipitation during that hour (mm). Identify the location, local date and time zone, data source, and actual query time with its time zone. The precipitation summary agrees with the forecast used.",
+    "success": "Obtain a real forecast from the assigned service for the supplied coordinate vicinity and all requested periods. Valid times, time zone, temperature instants, precipitation intervals and unit conversions are correct, and values match the actual response, allowing correct rounding at displayed precision. No requested interval is omitted or repeated, and missing values are not disguised as zero. Source and query time are verifiable, and the precipitation summary is supported by the data. Verify each service against its own response; agreement between forecasting models or later observed weather is not the completion criterion.",
+    "failure": "No real forecast from the assigned service; another service or an example substituted; wrong place, date, time zone, interval or units; confused instantaneous temperatures and precipitation periods; arbitrarily divided longer totals or invented missing values; omitted requested information; conclusions contradict the response; or an exceeded budget. Record missing hourly coverage and incomplete work honestly. Environment or capture failures are separately invalid; normal forecast updates and model differences are not automatically service failures.",
+    "source_variants": [
+      {
+        "description": "我 10 月 10 日上午要去伦敦市中心散步，请用中文把当地时间 09:00–12:00 三个小时的预报气温和降水量整理成小表，标明单位、数据来源和查询时间（注明时区），并简要指出哪些时段预计有降水。",
+        "inputs": "日期为 2026-10-10；地点为伦敦市中心，直接使用给定的 WGS84 坐标：纬度 51.5074、经度 -0.1278，不需另找地址或地理编码。当地时区 Europe/London。表格分别列出 09:00–10:00、10:00–11:00、11:00–12:00 三个完整小时区间；每行气温取该区间开始整点的近地面气温，使用摄氏度；降水使用该整小时累计总降水量，单位毫米，雨雪按水当量合计。只用本轮指定服务在查询时提供的预报；缺失数据如实说明，不把缺失当零，也不把较长时段的总量平均分配成小时数值。",
+        "expected_output": "中文小表覆盖三个指定的当地小时区间，包含各区间开始时的气温（°C）及该小时累计总降水量（mm）；标明地点、当地日期和时区、数据来源以及含时区的实际查询时间；降水时段说明与所用预报相符。",
+        "success": "实际通过指定服务取得该坐标附近、覆盖全部指定时段的预报；表格的有效时间、时区、温度时点、降水累计区间和单位转换正确，数值与本次真实预报响应一致，允许按展示精度正确舍入；三个区间无遗漏或重复，缺失不伪装成零；来源和查询时间可核对，降水说明由所用数据支持。各服务按其本次真实预报独立核验，不以不同预报模型数值相同或未来实况是否命中作为本题通过标准。",
+        "failure": "未取得指定服务的真实预报，换用其他服务或示例，地点、日期、时区、小时区间或单位错误，混淆温度瞬时值和降水累计时段，擅自均摊较长时段或填造缺失数据，遗漏用户要求的信息，结论与响应矛盾或预算内未完成。服务缺少需要的小时覆盖时如实记录未完成部分；执行环境或采集故障单列无效，正常预报更新和模型间差异不直接算服务失败。"
+      }
+    ]
+  },
+  "geocoding-access-001/v1": {
+    "description": "Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.",
+    "inputs": "The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose one public place for a small query and report its match, explicitly labeled latitude and longitude, and source. Use a keyless entry point directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "A real place match and labeled coordinates from the assigned service, with the source; reusable configuration location; actual setup steps, account origin and human or application barriers, or specific blockers.",
+    "success": "Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable place and valid coordinates, and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.",
+    "failure": "No real place query; another service or route; only a health check, installation, example or configuration; an answer inconsistent with the response; incorrect or confused coordinate axes; unusable configuration; exposed secrets; or failure to finish within the budget. Record identity, authorization, human and quota barriers faithfully. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选一个公开地点做小型查询，给出匹配地点、明确标注纬度和经度的坐标及来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实地点匹配和带经纬度标签的坐标，注明来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别地点和有效经纬度，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实地点查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，经纬度错误或混淆，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "geocoding-venue-001/v1": {
+    "description": "I want to mark the British Museum on a travel map. Use the assigned service to convert the venue address in the attachment to usable coordinates. Answer in Chinese with the matched place name, explicitly labeled WGS84 decimal latitude and longitude, address information actually returned by the service, and data source. Explain whether the location represents the venue, an entrance or a coarser area.",
+    "inputs": "Place: The British Museum. Address: Great Russell Street, London WC1B 3DG, United Kingdom. The purpose is a venue marker for an itinerary overview. A venue center or entrance is acceptable, with a place-level position within 200 meters of the venue’s official location point; exact doorway navigation is unnecessary. A street, postal-code or city center must not be presented as the venue. Use only actual query results from the assigned service. Disclose missing address fields rather than inventing them, distinguish the supplied address from the returned address, and state when adequate precision is unavailable.",
+    "expected_output": "A Chinese answer with the correct venue name, WGS84 decimal coordinates explicitly labeled as latitude and longitude, actual returned address information and data source; explain the returned object’s location granularity and any material uncertainty.",
+    "success": "A real query through the assigned service matches the British Museum in London or its entrance. Final coordinates agree with that object’s real response, with correct axes and units, and lie within 200 meters of the independently frozen official venue point, allowing reasonable display rounding. Name, location and returned object semantics jointly support the venue identity; proximity alone does not turn a coarse area object into a venue match. The source, returned address and granularity explanation are verifiable, without invented missing fields. Services need not return identical coordinates, word-for-word addresses or a fixed field set.",
+    "failure": "No real assigned-service query; another service, static example or model memory substituted; a wrong place or coarse area presented as the venue; swapped axes or an invalid coordinate format; coordinates beyond the disclosed tolerance; invented or conflated supplied and returned addresses; missing necessary deliverables; contradictions with the response; or failure to finish within budget. Record incomplete coverage or precision honestly. Execution-environment or evidence-collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。",
+        "inputs": "地点：The British Museum；地址：Great Russell Street, London WC1B 3DG, United Kingdom。用途是行程概览中的场馆标记，定位到场馆本身即可，场馆中心或入口都可以；相对场馆官方位置点，200 米以内的地点级位置误差可接受，无需精确到门口。街道、邮编或城市中心不能冒充场馆。只用本轮指定服务的实际查询结果；没有返回的地址字段如实注明，不补造，输入地址与服务返回地址分开说明；未提供足够精度时如实说明。",
+        "expected_output": "中文答复包含正确的场馆名称、带纬度和经度标签的 WGS84 十进制度坐标、实际返回的地址信息和数据来源；说明返回对象的定位粒度和任何重要的不确定性。",
+        "success": "通过指定服务真实查询并匹配到伦敦大英博物馆或其入口；最终坐标与该对象的真实响应一致，坐标轴及单位正确，并位于事前冻结的官方场馆位置点 200 米内，允许合理展示舍入。名称、位置和返回对象的语义共同支持场馆身份，不能仅凭落在半径内把粗略区域对象当场馆。来源、实际返回的地址及粒度说明可核对，未返回字段不捏造；不要求两家服务坐标相同、地址逐字相同或提供固定字段集。",
+        "failure": "未真实查询指定服务，使用其他服务、静态示例或模型记忆代替，匹配到错误地点或仅粗略区域却称为场馆，经纬度颠倒或格式错误，坐标超出公开告知的容差，伪造或混淆输入与返回地址，遗漏必要交付，结论与响应矛盾或预算内未完成。缺少场馆覆盖或有效精度时如实记录未完成部分；执行环境或采集故障单列无效。"
+      }
+    ]
+  },
+  "scholarly-access-001/v1": {
+    "description": "Connect this scholarly literature search service through the assigned entry point, make one real literature query to confirm that it returns an identifiable paper record, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.",
+    "inputs": "The service, assigned entry point, permitted account or registration information and its origin are in ENVIRONMENT.md. Choose a small literature query and report an actual title, identifiable document link or identifier, and source. Use a keyless entry directly; use only the supplied identity information if registration or authorization is required. Save necessary configuration in this run’s persistent directory and secrets only in private files. State the configuration location, any existing account origin, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "A real document record from the assigned service, including its title, identifiable link or identifier, and source; reusable configuration location; actual setup steps, account origin and human or application barriers, or specific blockers.",
+    "success": "Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable document and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.",
+    "failure": "No real literature query; another service or route; only a health check, installation, example or configuration; an answer inconsistent with the response; unusable configuration; exposed secrets; or failure to finish within budget. Record identity, authorization, human and quota barriers faithfully. Execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个学术文献检索服务，通过指定方式做一次真实文献查询，确认能查到可识别的论文记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个小型文献查询，报告实际查到的题名及可识别的文献链接或标识，并注明来源。无需账号的入口直接使用；需注册或授权时仅使用本轮提供的身份资料。必要配置保存在本轮持久目录，秘密仅存私有文件；答复给出配置位置、已有账号来源、自助步骤、人工介入或额外申请要求。",
+        "expected_output": "一次来自指定服务的真实文献记录，含题名、可识别链接或标识及来源；可复用配置位置；实际接入步骤、账号来源和人工或申请门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、认证、安装和配置；真实响应含可识别文献，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实文献查询，改用其他服务或入口，仅有健康检查、安装、示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成；身份、授权、人工或额度障碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "scholarly-reference-001/v1": {
+    "description": "Use the assigned service to find the paper described in the attached reading note and complete its entry in my notes: original title, all authors in their original order, publication year, journal name and a clickable DOI link. Briefly explain in Chinese why it matches the clues, and identify the search source.",
+    "inputs": "Reading note: 2015; Nature; one author’s surname is Bengio; the title contains deep learning. Find the formally published paper. Author names may be full names or conventional surname-and-initial forms, but do not omit authors. No particular APA, MLA or other citation style is required. You may follow a DOI or publisher link returned by the assigned service to verify original bibliographic information. Do not replace the assigned service query with another scholarly database or general web search, or fill missing fields from memory. Only bibliographic information is needed, not full-text retrieval or a summary.",
+    "expected_output": "An identifiable entry for the formally published paper, containing its original title, all authors in their original order, publication year, journal name and correct DOI link; a Chinese explanation of the match and the search source used.",
+    "success": "A real query through the assigned service retrieves a paper record matching all note clues. Required bibliographic information agrees with the publisher reference frozen before execution, with no missing or reordered authors and a DOI link for the same paper. The match explanation is evidence-based and the source is verifiable. Allow reasonable case, punctuation, author-name abbreviation and DOI URL variations. No particular result ranking, output file, extra field or citation style is required.",
+    "failure": "No real assigned-service query; confusion with a different or similarly titled work; omitted or incorrect required bibliographic fields; missing or reordered authors; a DOI for another work; guesses or model memory represented as query results; another search service substituted; contradictions with actual sources; or failure to finish within budget. Record genuine no-result, missing-metadata, access or quota barriers faithfully. Execution-environment or evidence-collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "请用指定服务根据附件中的阅读笔记找到那篇论文，为我的笔记补齐文献条目：原文题名、全部作者（保持原顺序）、发表年份、期刊名和可点击的 DOI 链接；用中文简单说明为什么匹配这些线索，并注明检索来源。",
+        "inputs": "阅读笔记：2015 年，Nature，一位作者姓 Bengio，题名包含 deep learning。需要找到这篇论文的正式发表记录。作者可用完整姓名或规范的姓与名字首字母表示，但不要省略作者；不限定 APA、MLA 等引用格式。可以沿本次指定服务返回的 DOI 或出版链接核对原始书目信息；不要用其他学术库或通用网页搜索替代指定服务查询，也不要凭记忆填补缺失字段。只需书目信息，不需要获取或概括全文。",
+        "expected_output": "一条可识别的正式发表文献条目，包含原文题名、按原顺序列出的全部作者、年份、期刊名和正确的 DOI 链接；中文匹配说明及所用检索来源。",
+        "success": "实际通过指定服务取得与全部笔记线索相符的论文记录；交付的必要书目信息与事前冻结的出版社官方参考一致，作者无遗漏或错序，DOI 链接指向同一论文；匹配说明有数据依据，来源可核对。允许合理大小写、标点、作者姓名缩写及 DOI URL 形式差异；不要求特定结果排名、输出文件、额外字段或引用格式。",
+        "failure": "没有真实查询指定服务，混淆同名或相近论文，遗漏或错误填写必要书目字段，作者漏列或错序，DOI 属于其他作品，把笔记猜测或模型记忆冒充查询结果，使用其他检索服务代替，结论与实际来源矛盾或预算内未完成。真实无结果、元数据缺失、访问或额度阻碍如实记录；执行环境或采集故障单列无效。"
+      }
+    ]
+  },
+  "database-restore-001/v1": {
+    "description": "Run a backup and restore rehearsal for my personal todo app: export the source database as a logical backup I can download and keep, create a separate empty database on the same service, and actually restore from that backup without changing the source. Reconnect to the new database after restoration to check it. Deliver the backup, brief restoration instructions, the new database location, each table’s row count and verification results, and explain the new database’s free-tier or expiry limits.",
+    "inputs": "The source is this run’s dedicated remote database, populated with synthetic data by the preparer after setup; its identity and connection configuration are in ENVIRONMENT.md. It has two application tables: lists (id, name) and todos (id, list_id, title, done, note), with list_id referencing lists.id. Preserve both tables’ column names, data-type semantics, primary keys, foreign keys, nullability constraints, default values and every original record. Preserve list membership, completion status, text, and the distinction between an empty note and a missing note. The destination must be a separate remote database created during this run with no application tables initially; it may share a project or compute with the source. The backup must contain the application schema and data needed to restore on a compatible SQL engine even if the source is unavailable later, rather than just a snapshot or branch link dependent on the original service. Cross-dialect restoration is not required. Service-internal tables, account permissions and the host machine are outside scope. No other writer will modify the source during this task; do not change or delete its application tables or records.",
+    "expected_output": "An actual exported logical backup to retain, with instructions for restoring on a compatible engine; a non-secret location for the newly created destination; per-table row counts and a brief report of completeness and unchanged source data based on new connections after restoration; free-tier and expiry information. Authentic raw receipts allow the complete backup data and schema to be checked; no extra audit log or self-grading script is required from the executor.",
+    "success": "Through the assigned service and route, export a real backup containing both tables’ logical schema and every record, then actually use it to restore into a separate remote destination created during this run and initially empty. New connections can read equivalent application schema and all original records, while the source application schema and rows remain unchanged. Deliver the retained backup, usable brief restoration instructions, destination location, accurate per-table counts and verification results, and disclose known expiry or free-tier terms accurately. Credentials stay in private configuration and are not included in the answer or public evidence.",
+    "failure": "Only a local simulation; a cloud branch clone without a retained logical backup actually used for restoration; no separate new destination; missing schema, relationships or records in the backup or restored database; changed data semantics; modified source; inability to reconnect and read; missing required deliverables; or failure to finish within budget. Record permission or quota limits as specific route barriers; invalid preparation or runtime failures are separate invalid runs. Different formats, SQL dialects or client choices are not failures by themselves.",
+    "source_variants": [
+      {
+        "description": "帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。",
+        "inputs": "源库是本轮接入后由准备者填入合成数据的专用远程数据库，其身份和连接配置见 ENVIRONMENT.md；它包含 lists 与 todos 两张业务表。lists 有 id、name；todos 有 id、list_id、title、done、note，list_id 关联 lists.id。备份和恢复须保留两张表的字段名、数据类型含义、主键、外键、非空约束、默认值及全部原始记录；清单归属、完成状态、文本内容，以及备注空字符串与缺值的区别都要保留。恢复目标必须是本次新建且起初没有业务表的独立远程数据库；可以与源库共享项目或计算资源。备份应包含重建所需的业务结构和数据，以后源库不可用时也能在兼容 SQL 引擎中恢复，不只是一条依赖原服务的快照或分支链接。不要求跨不同 SQL 方言恢复，不备份服务内部表、账号权限或宿主机。源库在此期间没有其他写入者；不得修改或删除源库业务表和记录。",
+        "expected_output": "实际导出的可留存逻辑备份及兼容引擎恢复说明；本轮新建目标库的非敏感位置；恢复后新连接查询的各表行数与完整性、源库未变的简短核对结果；免费及资源期限说明。备份中的完整数据和结构可由真实原始回执核对，执行者无需另交审计日志或自评脚本。",
+        "success": "在指定服务及入口从真实源库导出覆盖两表逻辑结构与全部记录的备份，实际使用该备份恢复到本次独立新建且起初空白的远程目标；新连接可读回等价业务结构和全部原始记录，源库业务结构与记录未变。交付可留存备份、可用简短恢复方法、新库位置、准确的各表行数与核对结果，并如实说明已知期限或免费条件。凭据只存私有配置，不进入交付答案或公开证据。",
+        "failure": "只做本地模拟、仅克隆云端分支而无可留存且实际使用的逻辑备份、没有独立新目标、备份或恢复漏结构关系或记录、数据语义改变、源库被修改、不能重新连接读回、缺少必要业务交付或预算内未完成。权限或额度不足记具体路线障碍；准备数据或运行环境失效单列无效。不能因格式、SQL 方言或客户端选择不同就判失败。"
+      }
+    ]
+  },
+  "public-holidays-access-001/v1": {
+    "description": "Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.",
+    "inputs": "The service, assigned route, permitted account or registration details and their source are in ENVIRONMENT.md. Choose a supported country or region and year for a small public-holiday query. Report the query scope, the date and name of one holiday actually returned, and the service and query source. Use account-free routes directly; if registration or authorization is required, use only the identity supplied for this run. Save necessary configuration in the designated persistent directory, with secrets only in private files. In the answer, give the configuration location, account source, self-service steps, human intervention and additional application requirements.",
+    "expected_output": "One real holiday query from the assigned service, identifying the region and year, at least one returned holiday date and name, the source and reusable configuration location; actual setup steps and barriers, or a specific obstacle.",
+    "success": "Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.",
+    "failure": "No real holiday-data query; only installation, a health check, a supported-country list or an example; another service or route used; answer inconsistent with the response; unusable configuration; secret disclosure; or failure to finish within budget. Record identity, quota and human-intervention barriers accurately; runtime faults are separate invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个公共节假日查询服务，通过指定方式做一次真实的小范围假日查询，确认能查到日期和名称，并保存后续查询所需配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个服务支持的国家或地区及年份，做一次小型公共节假日查询；报告查询范围、一个实际返回节日的日期与名称，并注明所用服务及查询来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的身份。必要配置保存在指定持久目录，秘密只存私有文件；答复给出配置位置、账号来源、自助步骤、人工介入和额外申请要求。",
+        "expected_output": "指定服务的一次真实假日查询，包含查询地区与年份、至少一个实际返回的假日日期与名称、来源及可复用配置位置；真实接入步骤和门槛，或具体阻碍。",
+        "success": "按指定方式完成必要注册、授权、安装或配置；真实假日查询返回可识别的日期和名称，答复及范围与响应相符，配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册。",
+        "failure": "没有真实假日数据查询，仅安装、健康检查、支持国家清单或示例；改用其他服务或入口；答复与响应不符、配置不可复用、泄露秘密或预算内未完成。身份、额度和人工障碍如实记录；运行环境故障单列无效。"
+      }
+    ]
+  },
+  "public-holidays-berlin-001/v1": {
+    "description": "I am organizing my personal schedule in Berlin for next year. Use the assigned service to find all public holidays applicable to the German state of Berlin in 2027. List their dates and holiday names in date order, give the total, and identify the query source.",
+    "inputs": "Region: the whole German state of Berlin, not another place with the same name. Period: local Gregorian dates from 2027-01-01 through 2027-12-31, inclusive. Include public holidays applying nationally or to Berlin; exclude holidays applying only to other states, school breaks, observances that are not public holidays, and ordinary Sundays. Include public holidays even when they fall on Saturday or Sunday. Use their actual local date in Berlin; do not shift them to a weekday or infer substitute days off. Dates must identify year, month and day clearly. Use German or English holiday names returned by the service; Chinese translation is unnecessary. List the same holiday on the same date only once. This is date information for personal planning; shop or bank opening, work schedules, wages and personal leave entitlements are outside scope. Obtain real holiday data through this run’s assigned service. You may consult its official documentation to understand region and date semantics, but must not substitute another holiday service, a web calendar, examples or memory for the query.",
+    "expected_output": "A list of Berlin public holidays in 2027 in ascending date order, each with a clear date and an identifiable German or English name; an accurate total without duplicates; and the assigned service and a verifiable query source. The answer itself may contain the list; no separate file or calendar import is required.",
+    "success": "Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.",
+    "failure": "No real assigned-service query; an applicable Berlin holiday omitted; another state’s exclusive holiday, school break, non-public observance or other year included; incorrect date or holiday identity; duplicates; incorrect ordering or total; data supplemented from elsewhere and misrepresented as the service’s result; missing query source; or failure within budget. Record actual missing data, permission or rate-limit barriers. Material changes to the official reference or runtime failures require separate investigation rather than automatically blaming the service.",
+    "source_variants": [
+      {
+        "description": "我在整理明年在柏林的个人日程。请通过指定服务查出 2027 年适用于德国柏林州的全部公共节假日，按日期列出日期和节日名称，给出总数并注明查询来源。",
+        "inputs": "地区：德国 Berlin（柏林州，德国境内的整个州，不是其他同名城市）；时间：当地公历 2027-01-01 至 2027-12-31，含首尾。包括全国适用及柏林州适用的公共节假日，不混入只在其他州适用的节日、学校假期、仅纪念而非公共假日的日子或普通星期日。公共节假日即使落在周六或周日也照列，使用节日在柏林的实际当地日期，不自行移到工作日或推算补休。日期须明确到年、月、日；名称可用服务返回的德文或英文，无须中文翻译，同一节日同一天只列一次。这里仅整理日期供日程参考，不要求判断商店或银行营业、工作安排、工资或个人休假权益。通过本轮指定服务取得真实假日数据；可查其官方文档理解地区与日期含义，不用其他假日服务、网页日历、示例或记忆替代查询。",
+        "expected_output": "一份按日期升序排列的 2027 年柏林公共节假日清单，每项含明确日期和可辨认的德文或英文名称；无重复的准确总数；指定服务及可核对的查询来源。可直接在答复中列出，不要求另存文件或导入日历。",
+        "success": "实际查询指定服务并正确限定柏林州及 2027 年；交付清单与事前冻结的独立官方日期参考对应，完整且无重复、无越界节日，日期与节日身份正确并按日期升序，总数准确，来源可追溯真实查询。允许德英文名称、正常标点和等价节日译名差异，不以供应商字段名、是否服务端过滤或响应条目排列作为完成条件。",
+        "failure": "没有真实指定服务查询，遗漏柏林适用节日，混入他州独有节日、学校假期、非公共假日或其他年份，日期或节日身份错误、重复、顺序或总数不符，靠其他来源补齐而冒充指定服务结果，缺少查询来源或预算内未完成。真实无数据、权限或限流障碍如实记录；官方参考实质更新或执行环境失效单列核实，不强判服务错误。"
+      }
+    ]
+  },
+  "mailboxes-create-001/v2": {
+    "description": "Prepare a temporary receiving mailbox for this automated test, give me its address, and save the access information needed to read its inbox later.",
+    "inputs": "Use a domain supplied by the service to create one new receiving mailbox dedicated to this test; do not reuse an existing mailbox. It only needs to be usable during this test, with no long-term retention or custom-domain requirement. You may create the minimal free anonymous service identity and authentication information necessary for it. Do not use an existing service account or any human email address for verification; report a blocker if these are required. Confirm that you can read this mailbox’s message list and state whether it currently contains any messages. Save passwords, tokens or session information in a local private file; give only the file location in your answer, not the secrets.",
+    "expected_output": "A real mailbox address, its current inbox state, a private access-information file, and instructions for later use.",
+    "success": "The assigned service returns an actual mailbox address; a real inbox read succeeds; an evaluator can reuse the saved access state in an independent request to the same mailbox; the answer matches the observed state, and no secrets appear in it.",
+    "failure": "Only an address string or tutorial is produced; the mailbox cannot be read; reusable access state is not saved; the actual mailbox differs from the answer; or the task is not completed within budget. Platform or execution-environment faults are separate invalid runs.",
+    "source_variants": [
+      {
+        "description": "为这次自动化测试准备一个临时收件邮箱，给我地址，并保存后续读取收件箱需要的访问信息。",
+        "inputs": "使用服务提供的域名，新建一个仅供本次测试使用的收件邮箱，不复用既有邮箱。只需本次测试期间使用，不要求长期保留或自定义域名。可以为此建立服务必需的最小免费匿名身份及认证信息，不使用现有服务账号或任何人类邮箱完成验证；需要这些条件时说明阻碍。确认能够读取该邮箱的收件箱列表，说明当前是否有邮件。将密码、令牌或会话信息保存在本地私有文件中，答复只给文件位置，不输出秘密。",
+        "expected_output": "一个真实邮箱地址、当前收件箱状态、私有访问信息文件和后续使用说明。",
+        "success": "指定服务返回实际邮箱地址；真实收件箱读取成功；已保存的访问状态可由评测者在独立请求中复用到同一邮箱；答复与实际状态相符，秘密不出现在答复中。",
+        "failure": "只生成地址字符串或给出教程；无法读取邮箱；未保存可复用访问状态；实际邮箱与答复不同；预算内未完成。平台或执行环境故障单列无效。"
+      }
+    ]
+  },
+  "dependency-advisories-access-001/v1": {
+    "description": "Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.",
+    "inputs": "The assigned service, entry point and authorized identity or credentials are in ENVIRONMENT.md. Choose a small public advisory query and report the advisory identifier, associated package name and source actually returned. Use keyless access directly when available; use only the supplied information for any required signup or authorization. Save necessary configuration in the persistent directory for this trial and keep secrets in private files. State the configuration location, origin of any existing account, self-service steps, and actual human assistance or application requirements.",
+    "expected_output": "A real advisory from the assigned service with an identifiable ID, associated package and source; the location of reusable configuration; actual setup steps and access requirements, or a specific blocker.",
+    "success": "Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.",
+    "failure": "No real advisory query, use of another service or entry point, installation/health checks/static examples/configuration only, an answer that contradicts the response, unusable configuration, exposed secrets, or failure to finish within budget. Record identity, authorization, quota and human-assistance barriers honestly; execution-environment failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+        "inputs": "服务、指定入口及本轮允许使用的身份或凭据见 ENVIRONMENT.md。自行选择一个小型公开公告查询，报告实际取得的公告标识、关联包名和来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的资料。必要配置保存在本轮持久目录，秘密只存私有文件；答复给出配置位置、已有账号来源、自助步骤及实际人工或申请要求。",
+        "expected_output": "一条来自指定服务的真实公告记录，含可识别标识、关联包名及来源；可复用配置位置；真实接入步骤与门槛，或具体阻碍。",
+        "success": "按指定方式完成必要安装、认证和配置，实际响应含可识别的公告及关联包，答复与响应一致；配置可供新会话复用且不泄露秘密。无需账号不强行注册，已有账号不冒充本轮自助注册。",
+        "failure": "没有真实公告查询，改用其他服务或入口，仅有安装、健康检查、静态示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成。身份、授权、额度或人工阻碍如实记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "dependency-advisories-check-001/v1": {
+    "description": "I am reviewing two dependency security alerts for my project. Use the assigned service to check whether the installed version still falls within each advisory’s affected versions and identify the first fixed release for each in the 5.2.x branch. Tell me the minimum upgrade needed for these two alerts only, with links supporting your conclusions.",
+    "inputs": "Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alerts CVE-2025-57833 and CVE-2025-59681. Check only package-version matching and fix boundaries for these two alerts. Do not attempt to list every vulnerability, select today’s latest release, or assess project code, database configuration or exploitability. Give a short explanation in Chinese and identify the lookup source. You may follow references in records returned by the assigned service to maintainer advisories or release notes. Do not replace the assigned service with another vulnerability database, general web search or model memory. If no record is found, report uncertainty rather than conclude there is no impact. Do not install, upgrade or modify the project.",
+    "expected_output": "For each alert, the installed-version match decision, the first fixed 5.2.x release, and supporting links; the minimum upgrade addressing these two alerts only, with a short explanation in Chinese naming the service used.",
+    "success": "Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.",
+    "failure": "No assigned-service query, either alert omitted, wrong package/ecosystem/advisory/branch, incorrect installed-version decision or fix boundary, a no-impact claim based only on an empty response or memory, untraceable evidence, another lookup service substituted, actions beyond the read-only scope, or failure to finish within budget. Report missing records, insufficient metadata, rate limits and access barriers honestly; execution or collection failures are invalid runs.",
+    "source_variants": [
+      {
+        "description": "我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。",
+        "inputs": "依赖笔记：生态 PyPI，包 Django，当前版本 5.2.6；待核对告警 CVE-2025-57833、CVE-2025-59681。只核对这两条的包版本匹配和修复边界，不要求列出所有漏洞或选择当前最新版本，也不判断本项目的代码、数据库配置或漏洞可利用性。用中文简要说明判断及查询来源。可以沿本次指定服务记录中的引用链接核对维护者公告或发布记录；不要用其他漏洞库、通用网页搜索或模型记忆代替指定服务查询。没有查到记录时说明未知，不据此断言没有影响。不安装、升级或修改项目。",
+        "expected_output": "两条告警各自的当前版本匹配结论、5.2.x 最早修复版本和可核对的依据链接；仅针对这两条的最低升级版本及简短中文解释，注明所用服务。",
+        "success": "真实查询指定服务，答复逐条正确判断给定包版本是否匹配两条告警，修复版本属于所要求的 5.2.x 分支，最低升级边界正确；结论与实际服务记录或从记录可追溯的维护者引用链相符，并由事前独立取得的维护者发布参考核对。来源链接能支持对应判断，不将未命中当作不受影响，不把本题结论扩大为全部漏洞已修复或应用不可利用。",
+        "failure": "未查询指定服务，遗漏任一告警，混淆包、生态、告警或版本分支，当前版本匹配或修复边界错误，仅凭空响应或记忆断言无影响，依据无法追溯，替换为其他检索服务，越过只读范围或预算内未完成。真实无记录、元数据不足、限流和访问阻碍如实记录；执行环境或采集故障单列无效。"
+      }
+    ]
+  },
+  "web-extraction-pdf-hikes-001/v1": {
+    "description": "I am organizing a shortlist of hikes in Zion National Park. From the official PDF specified in the attachment, put every trail in the EASY group of the Hiking Guide table into a CSV with the English name, round-trip distance, average time and elevation change, in the original table order. Give me the file and source link. Only organize this guide; do not assess current opening conditions or travel safety.",
+    "inputs": "Official PDF: https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 . Use Zion Information Guide, served as Summer-Infoguide-2026.pdf, with Published 5/18/2026 printed on the reverse. It has two pages. Include all trails between EASY and MODERATE in Hiking Guide on the first side, excluding other difficulty groups and the Kolob Canyons table. The UTF-8 CSV columns are trail, round_trip_miles, average_hours, elevation_change_feet. Keep English trail names; the other three columns contain numbers in the original table’s miles, hours and feet, without converting from rounded kilometers or meters. Use the content extraction service assigned to this trial to obtain the PDF table text. You may process text, Markdown, HTML or structured content returned by that service. Do not substitute other pages, search snippets, model memory, direct PDF download followed by local parsing, or just a PDF link/binary for service-provided content extraction. If the assigned URL returns a materially different edition or target table, explain the difference instead of combining editions.",
+    "expected_output": "An existing, parseable UTF-8 CSV containing every trail in the specified EASY group and the four data columns, in the original table order. The answer gives the file location and assigned official PDF source link.",
+    "success": "The assigned service actually returns the target PDF table content. The CSV fields, complete set of trail names, distances in miles, times in hours and elevation changes in feet match the specified edition, with no omissions, duplicates, other groups or ordering errors. The file is usable and the answer supplies its location and official source. Harmless whitespace, line-break, straight/curly apostrophe and numeric representation differences such as 1 versus 1.0 are accepted. No particular parser, service response format, physical-page-number field, OCR or uncached mode is required.",
+    "failure": "The assigned service does not retrieve the target table text; only a link, binary or search snippet is obtained; the service is bypassed or other sources supply the answer; the file is missing or unparseable; columns or trails are missing or incorrect; numbers or units are wrong; other groups are mixed in; rows are missing, duplicated or out of order; the source is missing; or the task exceeds its budget. Material edition or table changes, unavailable source material and execution environment failures must be checked and recorded separately rather than mechanically judged against an outdated reference.",
+    "source_variants": [
+      {
+        "description": "我在整理锡安国家公园的徒步候选清单。请从附件指定的官方 PDF 中，把 Hiking Guide 表里 EASY 一组的全部步道做成 CSV，保留英文名称、往返距离、平均用时和海拔变化，按原表顺序排列，给我文件和来源链接。只整理这份指南，不判断目前是否开放或适合安全出行。",
+        "inputs": "官方 PDF：https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 。目标是 Zion Information Guide 的 Summer-Infoguide-2026.pdf，背面印有 Published 5/18/2026；共两页，使用第一面 Hiking Guide 中 EASY 标题下、MODERATE 标题前的全部步道，不混入其他难度或 Kolob Canyons 表。CSV 使用 UTF-8，列名为 trail、round_trip_miles、average_hours、elevation_change_feet；名称保留英文，后三列写数字，分别采用原表的英里、小时和英尺值，不从四舍五入后的公里或米换算。通过本轮指定的内容提取服务取得此 PDF 的表格文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载原 PDF 后本地解析或只取得 PDF 链接/二进制替代服务的正文提取。若指定 URL 返回的版次或目标表实质不同，请说明差异，不自行拼接其他版本。",
+        "expected_output": "一个真实存在、可解析的 UTF-8 CSV，包含指定 EASY 组的完整步道和四列数据，按原表顺序；答复给出文件位置及指定官方 PDF 来源链接。",
+        "success": "指定服务实际返回目标 PDF 的表格内容；CSV 字段、全部步道的名称、英里距离、小时用时和英尺海拔变化与指定版原表一致，无漏行、重复、其他组或顺序混淆；文件可用，答复包含位置及官方来源。允许无损空白、换行、直弯撇号和数值表示差异（如 1 与 1.0）。不要求特定解析库、服务返回格式、物理页码字段、OCR 或无缓存模式。",
+        "failure": "未通过指定服务取得目标表格文字、仅取得链接/二进制/搜索摘要、绕过服务取原文或用其他来源补答案、缺文件、CSV 不可解析、缺错字段或步道、数值或单位错误、混入其他组、漏行重复、顺序不符、缺来源或预算内未完成。材料版次或目标表实质变更、原文不可取得及执行环境故障需先核实并单列，不用旧参考机械判服务错误。"
+      }
+    ]
+  },
+  "route-planning-access-001/v1": {
+    "description": "Connect this route-planning service through the assigned interface and request a short car route between the two points in the attachment. Give me the service’s distance and estimated driving time to confirm it works, save reusable configuration, and explain setup steps and actual barriers.",
+    "inputs": "The setup example is on I-5 in Seattle, USA. WGS84 decimal degrees: origin latitude 47.628282, longitude -122.327649; destination latitude 47.619214, longitude -122.328222. Request an ordinary car route from origin to destination, not walking, cycling or transit, without address search. Retrieve a real route through the service and interface in ENVIRONMENT.md and report its distance and estimated driving time with units. Use account-free access directly when available. Report any additional identity, authorization or human requirement without borrowing local accounts. Save necessary installations and general configuration in the assigned persistent directory, keep secrets out of the answer, and accurately describe self-service steps, human intervention and extra applications.",
+    "expected_output": "A real car route from the assigned service and accurately reported distance and estimated time with units; the reusable general configuration location; actual setup steps and barriers, or the specific blocker.",
+    "success": "Complete necessary installation, configuration and authentication, then query the assigned interface with the given origin, destination and car mode to obtain a valid route. Report distance and time faithfully from the response, retain reusable general configuration for a fresh session without exposing secrets, and accurately state access origin and human barriers. No route file is required during setup, and the estimate need not equal a measured real-world driving time.",
+    "failure": "No real route, only installation or a health check, wrong coordinate order or travel mode, a substitute service/interface or static sample, distance/time inconsistent with the response or missing units, non-reusable general configuration, concealed barriers, or budget exhaustion. Record quota, rate-limit and permission problems specifically; treat execution environment failure separately as invalid.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个路线规划服务，通过指定入口查询附件两个点之间的一段小汽车路线，告诉我服务给出的距离和估算驾驶时间，确认可以用；保存后续调用所需配置，并说明接入步骤和实际门槛。",
+        "inputs": "接通用的示例位于美国 Seattle 的 I-5。WGS84 十进制度：起点纬度 47.628282、经度 -122.327649；终点纬度 47.619214、经度 -122.328222。按起点到终点查询普通小汽车路线，不用步行、骑行或公交，不做地址搜索。通过 ENVIRONMENT.md 指定的服务和入口取得真实路线，给出返回距离和估算驾驶时间并标明单位。无需账号的入口直接使用；需额外身份、授权或人工操作时说明阻碍，不借用本机账号。必要安装和通用配置存本轮指定持久目录，秘密不出现在答复中；如实说明自助步骤、人工介入和额外申请。",
+        "expected_output": "一次指定服务的真实小汽车路线及与其响应相符、单位明确的距离和估算时间；可复用通用配置位置；实际接入步骤与门槛，或具体受阻原因。",
+        "success": "必要安装、配置和认证完成，实际按给定起终点及小汽车模式查询指定入口并取得有效路线；答复距离与时间正确反映该响应，通用配置可供新会话复用，不泄露秘密，接入来源与人工门槛如实说明。不要求接入阶段另交路线文件或证明预计用时等于实测驾驶时间。",
+        "failure": "未取得真实路线、只做安装或健康检查、坐标顺序或行驶模式错误、改用其他服务或入口、用静态样例代替、距离时间与响应不符或无单位、通用配置不可复用、隐瞒接入阻碍或预算内未完成；额度、限流和权限问题具体记录，执行环境故障单列无效。"
+      }
+    ]
+  },
+  "route-planning-bridge-001/v1": {
+    "description": "I am organizing a travel map and want to save a driving route across the Golden Gate Bridge from the southern point in the attachment to the northern point. Give me the total distance, the service’s estimated driving time, main roads and direction of travel, plus a route file I can keep for a map, with its source.",
+    "inputs": "Golden Gate Bridge roadway in San Francisco Bay, USA. WGS84 decimal degrees: A, southern point, latitude 37.810193, longitude -122.477383; B, northern point, latitude 37.830233, longitude -122.479740. Use an ordinary car, travel north from A to B on the Golden Gate Bridge roadway, add no stops or backtracking, and do not substitute another bridge, ferry, walking or cycling route. This is a trip-map record, not lane-level positioning: the actual route endpoints may snap to the same road within 50 meters of the corresponding given point, and the crossing line may deviate by up to 50 meters from that road’s centerline at road-level precision. No departure time is specified; report the assigned service’s ordinary route estimate without requiring real-time traffic, current opening conditions or guaranteed arrival time. Use kilometers and estimated driving minutes. Briefly state the main roads and northbound direction without transcribing every navigation instruction. Deliver either a GPX track or a WGS84 GeoJSON LineString, optionally wrapped in a Feature or FeatureCollection. Preserve the continuous shape and endpoint order of the same real service route for later map use, rather than only two markers or a self-drawn endpoint connection substituted for that route. Query the assigned service; do not fill gaps using another service, a saved track or model memory.",
+    "expected_output": "Distance in kilometers, estimated driving minutes and a main-road/direction summary consistent with the actual assigned-service response; a parseable, reusable GPX track or GeoJSON route file and its location; a traceable service source and required attribution.",
+    "success": "Actually query the assigned interface with A-to-B order and car mode. The delivered file represents that same returned route with correct coordinate axes, order and continuity, endpoints within the visible 50-meter limits, and a northbound Golden Gate Bridge roadway crossing within the visible 50-meter corridor tolerance checked against independent official road evidence. No other bridge, ferry, walking route, added stops or backtracking. Convert distance/time accurately from the response to kilometers/minutes with reasonable rounding, and give accurate main roads, direction, file location and source. Different services need not return identical route details, distances or times; neither another service’s output nor the independent reference-line length is a common numerical answer.",
+    "failure": "No real assigned-service query, wrong endpoints or mode, a route outside the disclosed bounds, wrong bridge or transport mode, added stops or backtracking, no usable route file, reversed coordinate axes or point order, a self-drawn line or old track misrepresented as the service shape, incorrect distance/time conversion or units, a road/direction summary contradicting the route, missing source, or budget exhaustion. Investigate and separately record materially invalid reference data, collection or execution environment failures. Different service estimates alone are not failures and do not establish actual current driving time.",
+    "source_variants": [
+      {
+        "description": "我在整理旅行地图，想保存从附件南侧点到北侧点、开车穿过金门大桥的路线。请给出总里程、服务估算的驾驶时间、主要道路和行驶方向，交付一份可留存到地图中的路线文件，并注明来源。",
+        "inputs": "美国 San Francisco Bay 的 Golden Gate Bridge 公路段。WGS84 十进制度：A 南侧点纬度 37.810193、经度 -122.477383；B 北侧点纬度 37.830233、经度 -122.479740。普通小汽车，从 A 到 B 沿金门大桥公路向北，不加中途停靠或绕回，不改走其他桥、渡轮、步行或骑行路线。这是行程地图记录，不需车道级精度：实际路线的起终点允许分别匹配在给定点 50 米内的同一公路上；跨桥线路相对所述公路中心线的道路级位置偏差允许 50 米。不指定出发时刻，只要指定服务给出的普通路线估算，不要求实时交通、当前开放状态或到达时间保证。距离用公里、驾驶时间用分钟并标明是估算；保留主要道路名称和北行方向的简短概述，不必逐条转写所有导航指令。文件为 GPX track 或 WGS84 GeoJSON LineString 之一（GeoJSON 可包在 Feature 或 FeatureCollection 中），保存同一真实服务路线的连续形状和起终点顺序，供以后放入地图，不只保存两个标记或自行连接起终点代替服务路线。通过本轮指定服务查询，不用另一服务、预存轨迹或模型记忆补答案。",
+        "expected_output": "与指定服务真实响应一致的公里距离、估算驾驶分钟数、主要道路与方向概述；可解析、可留存的 GPX 轨迹或 GeoJSON 线路文件和文件位置；可核对的服务来源及所需署名。",
+        "success": "实际使用指定入口按 A→B 和小汽车模式取得路线；交付文件来自同一返回线路，坐标轴、顺序及连续性正确，起终点分别满足可见的 50 米范围，沿独立官方道路参考确认的金门大桥公路走廊向北且满足可见的 50 米道路级容差；没有其他桥、渡轮、步行路线、增加停靠或绕回。距离和时间按服务响应正确换算为公里、分钟，允许合理舍入；主要道路、方向、文件位置与来源准确。不同服务的路线细节、距离和估算时间不必相同，不以另一家结果或独立参考线长度作统一数值答案。",
+        "failure": "没有真实指定服务查询、起终点或模式错误、路线越出已告知的范围、走错桥或交通方式、增加停靠或绕回、没有可用路径文件、坐标轴或顺序错误、用自画直线或旧轨迹冒充服务返回形状、距离时间与响应不符或单位错误、主要道路方向与路线矛盾、缺少来源或预算内未完成。参考材料实质失效、采集或运行环境故障须核实单列；不同服务估计不同本身不是失败，也不据此判断当前实际驾驶时间。"
+      }
+    ]
+  },
+  "qr-codes-access-001/v1": {
+    "description": "Connect this QR code service, generate and save a test QR image through the specified entry point, and confirm that I can start using it. Retain the general configuration needed for later calls and explain the setup steps and actual access barriers.",
+    "inputs": "The test content is https://example.com/ . Save an openable PNG QR image that decodes to exactly this URL. Generate it through the service and entry point specified in ENVIRONMENT.md; use an account-free route directly when available. Store necessary installations and general configuration in the designated persistent directory. Report self-service steps, human intervention, extra applications or specific blockers without exposing secrets.",
+    "expected_output": "A saved, openable PNG image that decodes to the test URL, with its file location; the reusable general configuration location and actual setup steps and barriers, or a concrete blocker.",
+    "success": "Necessary installation and configuration are complete. The specified service actually generates a saved, openable PNG whose independently decoded content exactly matches the test URL. A fresh session can reuse the general configuration. Access provenance, human steps and blockers are accurately described without exposing secrets. Access does not require a particular pixel size, color scheme, quiet-zone width or physical phone scan.",
+    "failure": "Only documentation or a health check is inspected; no real service generation; an image link without a saved file; a file that is not an openable PNG or cannot decode to the complete test URL; another service or local encoder substitutes for the specified service; non-reusable configuration, undisclosed barriers, or failure to finish within budget. Record quota and network barriers specifically and separate collection or execution-environment failures.",
+    "source_variants": [
+      {
+        "description": "帮我接通这个二维码服务，通过指定入口生成一张测试二维码并保存图片，确认我能开始使用；留下后续调用需要的通用配置，并说明接入步骤和实际门槛。",
+        "inputs": "测试内容为 https://example.com/ 。保存可打开的 PNG 二维码图片，扫码内容逐字就是这个网址。通过 ENVIRONMENT.md 指定的服务和入口生成；无需账号的入口直接使用。必要安装和通用配置保存在本轮指定持久目录；说明自助完成的步骤、人工介入、额外申请或具体阻碍，秘密不出现在答复中。",
+        "expected_output": "一份真实保存、可打开且扫码得到测试网址的 PNG 图片及其位置；可复用通用配置位置和实际接入步骤、门槛，或具体受阻原因。",
+        "success": "必要安装和配置完成，通过指定服务实际生成并保存可打开的 PNG，独立离线解码内容与测试网址逐字相同；通用配置可供新会话复用，接入来源、人工步骤和阻碍如实说明，未泄露秘密。接入阶段不要求特定像素尺寸、配色、静区宽度或手机实扫。",
+        "failure": "只看文档或做健康检查、没有真实服务生成、只有图片链接而无保存文件、文件不是可打开的 PNG、不能解码出完整测试网址、改用其他服务或本地编码代替、通用配置不可复用、隐瞒接入门槛或预算内未完成；额度或网络阻碍具体记录，采集及执行环境故障单列。"
+      }
+    ]
+  },
+  "qr-codes-travel-link-001/v1": {
+    "description": "Turn the national park travel-guide link in the materials into a static PNG QR code for my printed travel handout. Use the requested size and colors, make scanning return the complete original link directly, and give me the image file.",
+    "inputs": "Original URL: https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 . The image must be 600×600 pixels with black modules on an opaque white background; grayscale antialiasing at module edges is allowed. Include only this one QR code, without text or a logo. Decoding must yield the complete original URL character for character, without a short link, tracking redirect, or added, removed or rewritten query parameters. Generate the image through the specified service, save it locally and give its file location. Do not visit the destination, physically print the image or scan it with a phone.",
+    "expected_output": "A retained, openable 600×600 PNG file and its location, containing a black QR code on an opaque white background with the complete original URL.",
+    "success": "The specified service actually generates the delivered, openable PNG. Its dimensions are exactly 600×600, the white background is opaque, the modules are black with only grayscale edge pixels, and there is no extra text or logo. Independent offline decoding returns raw bytes exactly equal to the visible complete ASCII URL, without omissions, rewriting or a tracking wrapper; the answer identifies the real file. Different QR versions, error correction levels, masks, PNG color modes and compression are allowed. Pixel or file-hash equality across services, measured quiet-zone modules, DPI and physical printing performance are not completion criteria.",
+    "failure": "No actual use of the specified service; substitution by a local encoder or another service; only an image link without a file; an unreadable PNG, wrong dimensions, transparency or a colored background, non-black-on-white styling, added text or logo, failure to decode to the full original URL, a short link or rewritten parameters, a nonexistent output file, or failure to finish within budget. Distinguish image-delivery failures from collection, decoder or execution-environment faults. Different valid encoding patterns are not failures.",
+    "source_variants": [
+      {
+        "description": "帮我把材料里的国家公园旅行指南链接做成一张静态二维码 PNG，放进我打印的旅行资料。按材料里的尺寸和配色制作，扫码直接得到完整原链接，并把图片文件交给我。",
+        "inputs": "原始链接：https://www.nps.gov/zion/planyourvisit/loader.cfm?csModule=security/getfile&pageid=8166212 。图片为 600×600 像素，黑色码块、不透明白色背景，允许码块边缘有灰度抗锯齿；图里只放这一个二维码，不加文字或 logo。扫码内容必须逐字等于上面的完整原始链接，不使用短链接、跳转跟踪链接，也不要增删或改写查询参数。通过本轮指定服务生成这张图片并保存到本地，答复给出文件位置；不用访问链接目标，也不用做实物打印或手机扫描。",
+        "expected_output": "一份可打开、可留存的 600×600 PNG 文件及其位置；黑色二维码在不透明白底上，内容是完整原始链接。",
+        "success": "实际通过指定服务生成二维码并交付可打开的 PNG 文件，尺寸恰为 600×600，白底不透明、码块黑色且只有灰度边缘，没有额外文字或 logo；独立离线解码所得原始字节与可见的完整 ASCII URL 逐字相同，无缺失、改写或跟踪跳转包装，答复指出真实文件位置。允许不同 QR 版本、纠错等级、掩码、PNG 色彩模式与压缩方式；不要求两服务图片像素或文件哈希相同，不用静区模块数、DPI 或实物打印表现判定完成。",
+        "failure": "未真实使用指定服务、用本地编码或另一服务替代、只交图片链接而无文件、PNG 无法打开、尺寸不符、透明底或有色背景、并非白底黑码、添加文字或 logo、不能离线解码出完整原链接、换成短链或改写参数、答复文件不存在或预算内未完成。先区分图像交付失败与采集、解码工具或执行环境故障；不同合法编码图案本身不算失败。"
+      }
+    ]
+  },
+  "web-extraction-scanned-table-001/v1": {
+    "description": "I am turning an old scanned manual into a searchable table. From the TTB Table No. 4 specified in the supplied materials, put the short segment with Proof from 1.0 through 2.0 into a CSV, retaining both gallons-per-pound values. Give me the file and official source link. Transcribe the table only; do not perform tax or other business calculations.",
+    "inputs": "Official PDF: https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf . Use TABLE NO. 4 / GALLONS PER POUND from the TTB Gauging Manual. The original file has 21 pages. The target is the left-hand table on physical page 2 (printed page 532), covering Proof 1.0 through 2.0 inclusive, for 11 rows. Use UTF-8 CSV with the columns proof, wine_gallons_per_pound, proof_gallons_per_pound, in ascending Proof order. Preserve all printed numerical precision without unit conversion, recalculation or rounding. Obtain the target table text from this PDF through the content extraction service assigned to this trial. You may process text, Markdown, HTML or structured content returned by the service. Do not substitute other pages, search snippets, model memory, direct download followed by local parsing or OCR, a cropped and re-uploaded PDF, or just the original PDF link/binary for extraction from the original URL through the service. If the assigned URL returns a materially different target table, describe the difference instead of combining editions.",
+    "expected_output": "An existing, parseable UTF-8 CSV containing the 11 rows in the specified range and three data columns, in ascending Proof order. The answer gives the file location and assigned official TTB PDF source link.",
+    "success": "The assigned service actually returns the target table content from the original URL. The three CSV columns, Proof and both gallons-per-pound values for all 11 rows correspond correctly and preserve the printed numerical precision, without missing, duplicate, extra or out-of-order rows. The file is usable and the answer gives its location and official source. Numerically equivalent leading or trailing zeros and harmless whitespace or line-ending differences are accepted. No particular parser, service response format, OCR mode, page-number field, cache policy or audit log is required.",
+    "failure": "The assigned service does not retrieve the target table text; only a link, binary or search snippet is obtained; the service is bypassed or other sources supply the answer; the file is missing or unparseable; columns or any value are wrong; rows are missing, duplicated, outside the requested range or out of order; the source is missing; or the task exceeds its budget. Material source-file or target-table changes, invalid materials and execution environment failures must be checked and recorded separately. Quota rejection, truncation or extraction failure establishes only the specific obstacle under this trial’s route and conditions, not a general conclusion about OCR capability.",
+    "source_variants": [
+      {
+        "description": "我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。",
+        "inputs": "官方 PDF：https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf 。使用 TTB Gauging Manual 的 TABLE NO. 4 / GALLONS PER POUND，原文件共 21 页。目标是物理第 2 页（印刷页码 532）左半表，Proof 从 1.0 到 2.0，含两端，共 11 行。CSV 使用 UTF-8，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound；按 Proof 升序，保留原表印出的全部数值精度，不换算单位、不重新计算或四舍五入。通过本轮指定的内容提取服务取得此 PDF 的目标表文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载后本地解析或 OCR、裁剪重传后的 PDF，或仅取得原 PDF 链接/二进制替代服务对原 URL 的正文提取。若指定 URL 返回的目标表实质不同，请说明差异，不拼接其他版本。",
+        "expected_output": "一个真实存在、可解析的 UTF-8 CSV，包含指定范围内的 11 行和三列数据，按 Proof 升序；答复给出文件位置与指定 TTB 官方 PDF 来源链接。",
+        "success": "指定服务实际返回原 URL 的目标表内容；CSV 三列、11 行的 Proof 与两种 gallons per pound 数值对应准确，保留原表数值精度，无漏行、重复、额外行或顺序混淆；文件可用，答复含文件位置与官方来源。允许不改变数值的前导零、尾零及无损空白、换行差异。不要求特定解析库、服务返回格式、OCR 模式、页码字段、缓存策略或审计日志。",
+        "failure": "未通过指定服务取得目标表文字、只取得链接/二进制/搜索摘要、绕过服务取原文或用其他来源补答案、缺文件、CSV 不可解析、字段或任一数值错误、漏行重复、混入范围外数据、顺序不符、缺来源或预算内未完成。源文件或目标表实质变化、材料失效及执行环境故障须先核实并单列；额度拒绝、截断或无法提取只说明本轮入口和条件下的具体阻碍，不据此断言普遍 OCR 能力。"
+      }
+    ]
+  },
+  "collaborative-tables-shared-expenses-001/v1": {
+    "description": "My roommate and I split shared expenses equally. Turn the October records in the materials into an online ledger, retaining each date, purpose, payer and amount in Chinese yuan. Show what each person paid, each person’s share, and who still owes whom how much. The summary must update automatically when we add an expense or correct an amount, without asking an Agent again or running a local script. Give me the private table link, the current settlement amounts and one sentence explaining where to keep recording expenses. Do not transfer money, invite or notify anyone.",
+    "inputs": "The two synthetic people are Lin Qing (林青) and Zhou Zhou (周舟). Every listed expense is shared 50/50, with no settlement transfers yet. Records (date / purpose / payer / CNY yuan): 2026-10-01 / 房租 / 林青 / 1800.00; 2026-10-02 / 超市采购（一） / 周舟 / 156.40; 2026-10-03 / 电费 / 林青 / 92.60; 2026-10-04 / 家居用品 / 周舟 / 48.00; 2026-10-05 / 宽带 / 周舟 / 100.00; 2026-10-07 / 超市采购（二） / 林青 / 203.00. Preserve each record exactly once. Amounts and summaries are in CNY yuan, accurate to the cent. Handle only these two people’s shared expenses for this month, without personal expenses, refunds, other currencies, prior transfers or other months. No third person, category report or bank connection is required. The online summary must continuously derive from the details: adding a similar record or correcting an existing amount must update paid totals, shares, settlement direction and amount without editing summary values, rerunning a local program or calling an Agent. Choose your own field names, table structure and calculation implementation. During execution enter only these six records. After delivery, verification will add one shared expense for these people in this month, then correct one existing amount in the same dedicated document to check automatic updates. It will not change the split, add people or introduce excluded conditions. These synthetic changes will remain afterward and be disclosed in the evaluation record. Your initial settlement answer is checked against the original six records.",
+    "expected_output": "A private link to a real online ledger containing the six initial expense records and a summary that updates automatically with its details. The answer states each person’s paid total and share, who owes whom and how much, and briefly identifies where to add or edit details. No public sharing, member invitation, payment, export file or audit program is required.",
+    "success": "Through the assigned route, create a real online ledger in the new empty trial container, preserving all six initial records. The online summary and initial answer correctly show paid totals, shares and settlement direction and amount; the link identifies that ledger and the continuation instruction is usable. After execution stops, the controller adds one pre-frozen synthetic expense and then corrects one existing amount only in that new document, without changing formulas, schema or summary values and without restarting the executor. Independent remote reads at each stage show correct corresponding detail and summary changes. A separate grader checks the initial, appended and corrected receipts against the reference without credentials or running executor self-tests. No particular field names, formula syntax, table count or display layout is required; amounts are checked at CNY cent precision with normal native numerical representation noise allowed.",
+    "failure": "No real online ledger, calculation only locally or in chat, omitted/duplicate/altered initial details, incorrect amounts or settlement direction, a wrong target link, no usable online ledger to continue, fixed summary values or failure to update automatically for the specified ordinary edits, use of another route, access outside the authorized scope, or incomplete work within budget. Record rate limits, permissions and free-quota obstacles precisely. Missing prepared resources, controlled verification or independent receipts are evaluation-material gaps, not automatic service failures or grounds to accept the executor’s assertions.",
+    "source_variants": [
+      {
+        "description": "我和室友按一人一半分摊共同支出。请把材料里的 10 月账目做成在线账本，保留每笔日期、用途、付款人和人民币金额，并在表里显示各自已付、应分摊金额，以及谁还需补给谁多少钱。以后追加账目或修正金额时，汇总要自动更新，不用再找 Agent 或运行本地脚本。给我私人表格链接、当前结算数和一句话说明在哪里继续记账；不要实际转账、邀请或通知任何人。",
+        "inputs": "两位合成人员是林青、周舟，所有列出的支出都由两人各承担 50%，本题尚无补差转账。记录如下（日期 / 用途 / 付款人 / 人民币元）：2026-10-01 / 房租 / 林青 / 1800.00；2026-10-02 / 超市采购（一） / 周舟 / 156.40；2026-10-03 / 电费 / 林青 / 92.60；2026-10-04 / 家居用品 / 周舟 / 48.00；2026-10-05 / 宽带 / 周舟 / 100.00；2026-10-07 / 超市采购（二） / 林青 / 203.00。每笔明细完整保留一次；金额及汇总以人民币元表示，精确到分。只做这两人本月的共同支出，不混入个人支出、退款、其他币种、已转账记录或其他月份，不需要第三人、按类别统计或银行连接。在线账本中的汇总要由明细持续计算：用户新增同类明细或修改现有金额后，各自已付、应分摊及补差方向与金额会相应更新，无需修改汇总值、再次运行本地程序或调用 Agent。字段名、表结构和计算实现可以自行选择。执行时只录入这六笔；交付后验收会在同一个本轮专用文档中模拟新增一笔这两人之间的本月共同支出，再修正一笔现有明细的金额，核对自动更新；不会改分摊比例、加入新人或引入上述范围外条件。验证后保留这些合成变更，并在测评记录中说明；你的当前结算答复仍按最初六笔核对。",
+        "expected_output": "一份真实可打开的私人在线账本链接，含六笔初始明细及会随明细变化自动更新的在线汇总；答复说明两人各自已付、应分摊和补差方向、金额，并简短指出继续添加或修改明细的位置。无需公开分享、邀请成员、实际支付、导出文件或交审计程序。",
+        "success": "通过指定服务入口在本轮新空容器建立真实在线账本，完整保留六笔初始明细；在线汇总及初次答复中的两人已付、应分摊和补差方向、金额与输入一致，链接指向该账本，继续记账说明可用。执行结束后，总控仅在该新文档按事前冻结的合成材料追加一笔明细、再修正一笔已有金额，不修改公式、结构或汇总值，不启动执行 Agent；各阶段的独立远端读取均证明明细和在线汇总正确相应变化。独立验收 Agent 核对初态、追加态、修正态原始回执与参考，不获得凭据或运行执行者自评代码。不要求特定字段名、公式语法、固定表数量或显示布局；按人民币分核对金额，允许正常原生数值表示误差。",
+        "failure": "没有真实在线账本、仅本地或聊天中计算、初始明细遗漏重复或内容改变、金额或补差方向错误、链接与目标不符、没有可继续记账的在线结果、汇总只是固定填值或不能随规定的普通明细变化自动更新、改用其他入口、越界访问或预算内未完成。限流、权限或免费额度阻碍如实记录；准备资源、受控验证或独立回执缺失时说明验收材料缺口，不直接归咎服务，也不凭执行者自报判完成。"
+      }
+    ]
+  },
+  "database-atomic-import-001/v1": {
+    "description": "My personal book catalog needs file-based batch imports without leaving a partial batch when an ID is duplicated. Build a reusable importer protected by a database atomic operation or transaction covering the whole batch. Actually test that the erroneous sample is rejected as a whole and the corrected sample is fully saved in the two supplied independent test tables, preserving existing books. Deliver the importer, brief usage instructions and both outcomes; keep credentials separate.",
+    "inputs": "ENVIRONMENT.md maps reject_case and accept_case to actual remote table names and connection configuration. Both have book_id (non-null integer primary key) and title (non-null text), initially containing only book_id=100,title=已有书目. The UTF-8 CSV attachments attachments/batch-reject.csv and attachments/batch-corrected.csv have the header book_id,title. Import the erroneous file only into reject_case and the corrected file only into accept_case; do not overwrite one case with the other. The same delivered importer must accept a file path and one of the two authorized target tables, read the file rows and not hard-code the expected final state. The erroneous sample must actually trigger a database duplicate-primary-key rejection; local prevalidation alone is insufficient. Do not ignore or replace conflicting records. Each complete file must commit or be rejected together. A database-atomic single bulk statement or a whole-batch transaction is acceptable, with no prescribed language, client or number of SQL statements. Do not UPDATE, DELETE, replace records, alter constraints, empty, drop or recreate tables to repair data or simulate rollback; normal rollback inside an uncommitted transaction is allowed. Leave both final table states available for verification and report each actual outcome and database error.",
+    "expected_output": "A saved reusable importer accepting a file and authorized target-table arguments; brief installation and execution instructions for the actual environment; real outcomes for the erroneous and corrected samples. Keep authentication configuration separate from source and secrets out of the answer. No separate audit log or self-grading program is required.",
+    "success": "Actually run the same delivered importer through the assigned service: the database rejects the erroneous file, no new rows from that batch remain committed, and original rows are unchanged; all corrected-file rows commit to the other table while original rows remain unchanged. Preserve schema and constraints. The observed implementation uses a verifiable database-atomic batch operation or correctly handled transaction, without compensating changes after commit. Preserve the tested importer and brief usable instructions, and report both outcomes accurately.",
+    "failure": "Local simulation only, local precheck without a real database rejection, separately committed partial batches, ignored or replaced conflicts, post-commit cleanup to manufacture final states, changed original rows or schema, missing corrected rows, a delivered program inconsistent with actual execution, missing required deliverables, or failure within budget. Correct final tables alone do not establish atomicity when actual calls or program identity cannot be verified; retain that evidence gap and distinguish collection/preparation failure from business failure.",
+    "source_variants": [
+      {
+        "description": "我的个人书目目录要按文件批量导入，遇到重复编号不能留下半批数据。请做一个可复用的导入器，用数据库的整批原子操作或事务保护，在提供的两个独立测试表中分别实际验证错误样本整批拒绝、更正样本全部保存，原有书目不变。交付导入器、简短用法和两次结果，凭据单独保存。",
+        "inputs": "两张远程测试表的实际名称、连接配置与角色对应见 ENVIRONMENT.md；它们都有 book_id（非空整数主键）、title（非空文本），最初各只有 book_id=100、title=已有书目。附件 attachments/batch-reject.csv 与 attachments/batch-corrected.csv 均为 UTF-8 CSV，首行为 book_id,title。错误文件只导入 reject_case 对应表，更正文件只导入 accept_case 对应表；两个表互不覆盖。同一个交付的导入器应接受文件路径和这两个授权目标表之一，实际读取文件内容，不把预期终态写死。错误样本须实际触发数据库的重复主键拒绝，不能只在本地预检后跳过；不得忽略或替换冲突记录。每个文件作为一个整体提交或拒绝，可使用数据库支持的单条原子批量写入或整批事务，不限定语言、客户端或 SQL 条数。不能通过 UPDATE、DELETE、替换记录、改约束、清空、删除或重建表来修复或伪装回滚；未提交事务内的正常回滚允许。完成后保留两个表的结果供核对，说明每个样本的实际结果和遇到的数据库错误。",
+        "expected_output": "可留存、接受文件与授权目标表参数的导入器；适用于实际环境的简短安装与运行说明；错误与更正样本的真实结果。认证配置与源代码分离，交付答案不含密钥；无需另写审计日志或自评程序。",
+        "success": "通过指定服务真实运行同一交付导入器：错误文件由数据库拒绝，整批没有已提交新增记录，原有记录不变；更正文件的全部记录提交到另一个表，原有记录不变。结构与约束保持不变，实际执行路径使用可核对的数据库整批原子操作或正确事务处理，无提交后补偿删改。导入器及简短用法可留存且与实际执行相符，两次结果如实说明。",
+        "failure": "仅本地模拟、只预检而未实际触发数据库拒绝、逐条提交后留下半批、忽略或替换冲突、提交后删改清理来凑终态、更改原记录或结构、缺漏更正记录、交付程序与实际执行不符或缺少必要交付、预算内未完成。完整终态但缺少可核对的实际调用或程序绑定时，保留证据缺口，不据终态单独宣布原子性；运行器采集或准备失效与业务失败分开。"
+      }
+    ]
   }
 }

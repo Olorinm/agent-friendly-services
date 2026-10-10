@@ -1,0 +1,90 @@
+id: locationiq
+name: LocationIQ
+category: web-search-data
+homepage: https://locationiq.com/
+summary: Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.
+submitted_by: community
+tags: [geocoding]
+catalog:
+  version: 1
+  classifications: [web-search-data/geocoding]
+  sources:
+    guide:
+      url: https://docs.locationiq.com/docs/search-forward-geocoding
+      checked_on: '2026-10-08'
+      kind: official_docs
+    api:
+      url: https://docs.locationiq.com/reference/search
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://locationiq.com/pricing
+      checked_on: '2026-10-08'
+      kind: official_site
+    signup:
+      url: https://my.locationiq.com/register
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://locationiq.com/tos
+      checked_on: '2026-10-08'
+      kind: official_site
+    attribution:
+      url: https://locationiq.com/attribution
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: geocoding-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://us1.locationiq.com/v1/search
+      docs: https://docs.locationiq.com/docs/search-forward-geocoding
+      evidence: [api, guide]
+      availability:
+        value: self_serve
+        evidence: [signup, guide]
+      personal_access:
+        value: unknown
+        evidence: [signup, pricing]
+        notes: Free self-service signup is advertised, but its form labels the email as Work email; personal-domain acceptance is untested.
+      auth:
+        value: api_key
+        evidence: [api, guide]
+      capabilities:
+        places.geocode:
+          value: documented
+          evidence: [api, guide]
+          notes: >-
+            Free-form q yields named latitude/longitude fields and available place/address details.
+            The API also offers a documented EU hostname, structured queries and language/country filters.
+            Default search combines public/proprietary data; source=nom restricts to its own Nominatim
+            cluster with possible post-processing, not the OSMF public server.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [signup, terms]
+        payment_method:
+          value: unknown
+          evidence: [signup, pricing]
+          notes: No card field is shown on the public signup form; later gates were not observed.
+      human_steps:
+        - stage: signup
+          step: Complete the official Free signup with accurate email, full name and use case; current identity/domain requirements need observation before claiming access.
+          evidence: [signup]
+      costs:
+        - kind: free_allowance
+          amount: 5000
+          unit: requests
+          per: day
+          scope: Free plan; also limited to 2 requests/second and 60 requests/minute, with one access token.
+          evidence: [pricing]
+      notes: >-
+        Free commercial use requires a prominent Search by LocationIQ link. Data-source attribution
+        includes OSM/ODbL and other sources listed on the attribution page; preserve the response licence.
+        Terms updated 2026-03-31 distinguish permanent storage of response data from request-response
+        pair collection, which is limited to temporary caching for 48 hours on Free accounts absent written
+        permission. Long-lived complete request/response evidence therefore needs separate consideration.
+        No explicit benchmark/performance-publication ban was found; restrictions on competitor access,
+        competing-system development and inaccurate/misleading statements should not be generalized into
+        such a ban. Registration, phone/card gates and task completion remain untested.

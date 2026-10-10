@@ -1,0 +1,20 @@
+{
+  "scope": "Controller-selected minimal actual evidence; original independent verdict/checks preserved. Same-source logical backup and restore, not cross-engine or general disaster recovery benchmark.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "63e2316a4cf291b80af56adfc151f01d8d6a5776e03f92fbcd39776c4531df26",
+    "execution/receipt.json": "85c9193faaff6a7d5d045fc4e413a846f784715947c83478ebf44e39240af182",
+    "execution/usage.json": "1a13b0db16c8eb1a1f2be80eda2b6846129c46400e1646bd1811ec4870c9770f",
+    "grading/assessment.json": "86d7b7622ae3c44fea309fb7566a5efdadbef1a209ba1bd784a558d1d18c5534"
+  },
+  "model_and_environment": "OpenCode1.18.35,DeepSeekV4.1Flash/high; samebaseimage2GiB/1CPU/pids256; commonTUNApipindexconfigured beforeaccess, initiallyemptycache. Access25requests/300s,business25/600s,grade40/300s;32000output/request;max2providerstreams.",
+  "controller_notes": [
+    "本批与默认PyPI原始接入分开记录。原批Neon超时结果不变；本批同时明确项目及默认库名无需定制，不是单变量因果实验。",
+    "Turso既有账户由总控提供；Neon本批匿名Claimable临时项目。账户来源和权限差异明确保留，不视为同等自主注册。"
+  ],
+  "actual_result": "Freshsourcecreated and realremote SQLread verified empty applicationcatalog; reusableprivatecredentials and genericconnectionconfiguration retained.",
+  "account": "ExistingauthorizedTursoaccount",
+  "client_setup": "No serviceclient installed",
+  "source_seed_boundary": "No fixtureorbusinessdata presentuntil thisaccess independentlypassed. Subsequentcontrollerseed is separatepreparation.",
+  "cleanup": "Afterfullcaptureandindependentreview,Tursoexactnewsource+target DELETE200andGET404; NeonexactnewprojectDELETE204accepted,credentialsfollowup401tokenrevoked,notseparateauthenticatedabsenceproof. Earlierprojects/database/groupuntouched. All4ownedruntimecontainersstopped."
+}

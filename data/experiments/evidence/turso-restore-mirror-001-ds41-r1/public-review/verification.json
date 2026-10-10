@@ -1,0 +1,654 @@
+{
+  "scope": "Controller-selected minimal actual evidence; original independent verdict/checks preserved. Same-source logical backup and restore, not cross-engine or general disaster recovery benchmark.",
+  "independent_status": "not_completed",
+  "sources": {
+    "execution/answer.md": "5f0875f63bf81acdc5eca8037e5de2c7052b67dc02d2ca01350c695897aacb17",
+    "execution/receipt.json": "0cff976e1c39def9ac091dba07b8424dfe14af69703d562e27a83d6c4bd8cde8",
+    "execution/usage.json": "3fcb3b518651ccd1f3f24caced48506bc43f2ccc050c150fa9e6ce55506dec02",
+    "grading/assessment.json": "4ed4468cf90424f265ba680a04858569292c04517a897ecc77cac5d06ab86b7f"
+  },
+  "model_and_environment": "OpenCode1.18.35,DeepSeekV4.1Flash/high; samebaseimage2GiB/1CPU/pids256; commonTUNApipindexconfigured beforeaccess, initiallyemptycache. Access25requests/300s,business25/600s,grade40/300s;32000output/request;max2providerstreams.",
+  "controller_notes": [
+    "本批与默认PyPI原始接入分开记录。原批Neon超时结果不变；本批同时明确项目及默认库名无需定制，不是单变量因果实验。",
+    "Turso既有账户由总控提供；Neon本批匿名Claimable临时项目。账户来源和权限差异明确保留，不视为同等自主注册。",
+    "业务源材料由总控在已通过接入的新空库内准备；实际两表、主外键、非空、默认值、7条合成记录全部在派发前读回核对。执行者只拿到实际源库，不拿fixture、参考答案或种库代码。准备/读回属总控额外开销。",
+    "两家共同允许官方API/SDK/CLI/兼容SQL客户端，自行选择。本次实际Turso为Platform API管理加SQL HTTP、Neon为Claimable项目内psycopg2/Postgres；不是严格API-only或协议性能排名。",
+    "Neon复用它在接入中自行安装的psycopg2-binary2.9.13虚拟环境；Turso无已装客户端。总控仅清理旧配置中空库描述并明确保留依赖，原配置已归档；不是无干预配置复用。",
+    "仅小型无并发写入的同引擎恢复，不证明跨SQL方言迁移、大数据性能、在线一致性、PITR或生产级灾难恢复。",
+    "备份首部PRAGMA foreign_keys=OFF用于导入，文件末尾没有显式恢复ON；本次schema声明和数据完整性已核验，不宣称所有后续客户端连接都会强制启用SQLite外键检查。"
+  ],
+  "actual_result": "Both source and restored target independentlyread: complete lists2/todos5 rows match frozen fixture; source applicationcatalog and rows unchanged. Actual backupfile and import linkage independentlyreviewed; newtargetdistinct and absentfrom preexecutionmetadata.",
+  "backup_original_bytes": 1220,
+  "backup_original_sha256": "a41e5e4f69a5cbb21dfe3815a0d4aa324d285f4767e753953bc27a540dfca0a0",
+  "before_receipt_sha256": "c6df302e829eef1960ac4e64505a68d38c3e0a85bbcfbe09abcb21409c818033",
+  "after_receipt_sha256": "41f28984feb8b43cac81faf25e25d336aa0e3cb587f91f05bc98ce865db0572c",
+  "source_unchanged": true,
+  "target_column_schema_exact": true,
+  "observed_complete_target_rows": {
+    "lists": [
+      {
+        "id": 1,
+        "name": "生活"
+      },
+      {
+        "id": 2,
+        "name": "学习"
+      }
+    ],
+    "todos": [
+      {
+        "id": 101,
+        "list_id": 1,
+        "title": "买牛奶",
+        "done": 0,
+        "note": null
+      },
+      {
+        "id": 102,
+        "list_id": 1,
+        "title": "预约自行车保养",
+        "done": 0,
+        "note": "周六上午"
+      },
+      {
+        "id": 103,
+        "list_id": 2,
+        "title": "Read \"Designing Data-Intensive Applications\"",
+        "done": 1,
+        "note": ""
+      },
+      {
+        "id": 104,
+        "list_id": 2,
+        "title": "复习 SQL 事务",
+        "done": 0,
+        "note": "先读笔记，再做练习"
+      },
+      {
+        "id": 105,
+        "list_id": 1,
+        "title": "给绿植浇水",
+        "done": 1,
+        "note": null
+      }
+    ]
+  },
+  "observed_target_catalog": [
+    {
+      "sql": "SELECT name,type,tbl_name,sql FROM sqlite_schema WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+      "rows": [
+        {
+          "name": "lists",
+          "type": "table",
+          "tbl_name": "lists",
+          "sql": "CREATE TABLE lists (id INTEGER NOT NULL PRIMARY KEY, name TEXT NOT NULL)"
+        },
+        {
+          "name": "todos",
+          "type": "table",
+          "tbl_name": "todos",
+          "sql": "CREATE TABLE todos (id INTEGER NOT NULL PRIMARY KEY, list_id INTEGER NOT NULL REFERENCES lists(id) ON UPDATE NO ACTION ON DELETE NO ACTION, title TEXT NOT NULL, done BOOLEAN NOT NULL DEFAULT false, note TEXT)"
+        }
+      ],
+      "raw": {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "name",
+                "decltype": "TEXT"
+              },
+              {
+                "name": "type",
+                "decltype": "TEXT"
+              },
+              {
+                "name": "tbl_name",
+                "decltype": "TEXT"
+              },
+              {
+                "name": "sql",
+                "decltype": "TEXT"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "type": "text",
+                  "value": "lists"
+                },
+                {
+                  "type": "text",
+                  "value": "table"
+                },
+                {
+                  "type": "text",
+                  "value": "lists"
+                },
+                {
+                  "type": "text",
+                  "value": "CREATE TABLE lists (id INTEGER NOT NULL PRIMARY KEY, name TEXT NOT NULL)"
+                }
+              ],
+              [
+                {
+                  "type": "text",
+                  "value": "todos"
+                },
+                {
+                  "type": "text",
+                  "value": "table"
+                },
+                {
+                  "type": "text",
+                  "value": "todos"
+                },
+                {
+                  "type": "text",
+                  "value": "CREATE TABLE todos (id INTEGER NOT NULL PRIMARY KEY, list_id INTEGER NOT NULL REFERENCES lists(id) ON UPDATE NO ACTION ON DELETE NO ACTION, title TEXT NOT NULL, done BOOLEAN NOT NULL DEFAULT false, note TEXT)"
+                }
+              ]
+            ],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 4,
+            "rows_written": 0,
+            "query_duration_ms": 0.072
+          }
+        }
+      }
+    },
+    {
+      "sql": "PRAGMA table_info(lists)",
+      "rows": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "raw": {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "cid",
+                "decltype": null
+              },
+              {
+                "name": "name",
+                "decltype": null
+              },
+              {
+                "name": "type",
+                "decltype": null
+              },
+              {
+                "name": "notnull",
+                "decltype": null
+              },
+              {
+                "name": "dflt_value",
+                "decltype": null
+              },
+              {
+                "name": "pk",
+                "decltype": null
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "type": "integer",
+                  "value": "0"
+                },
+                {
+                  "type": "text",
+                  "value": "id"
+                },
+                {
+                  "type": "text",
+                  "value": "INTEGER"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "text",
+                  "value": "name"
+                },
+                {
+                  "type": "text",
+                  "value": "TEXT"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ]
+            ],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 0,
+            "rows_written": 0,
+            "query_duration_ms": 0.031
+          }
+        }
+      }
+    },
+    {
+      "sql": "PRAGMA foreign_key_list(lists)",
+      "rows": [],
+      "raw": {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "id",
+                "decltype": null
+              },
+              {
+                "name": "seq",
+                "decltype": null
+              },
+              {
+                "name": "table",
+                "decltype": null
+              },
+              {
+                "name": "from",
+                "decltype": null
+              },
+              {
+                "name": "to",
+                "decltype": null
+              },
+              {
+                "name": "on_update",
+                "decltype": null
+              },
+              {
+                "name": "on_delete",
+                "decltype": null
+              },
+              {
+                "name": "match",
+                "decltype": null
+              }
+            ],
+            "rows": [],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 0,
+            "rows_written": 0,
+            "query_duration_ms": 0.016
+          }
+        }
+      }
+    },
+    {
+      "sql": "PRAGMA table_info(todos)",
+      "rows": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "list_id",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "done",
+          "type": "BOOLEAN",
+          "notnull": 1,
+          "dflt_value": "false",
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "note",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "raw": {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "cid",
+                "decltype": null
+              },
+              {
+                "name": "name",
+                "decltype": null
+              },
+              {
+                "name": "type",
+                "decltype": null
+              },
+              {
+                "name": "notnull",
+                "decltype": null
+              },
+              {
+                "name": "dflt_value",
+                "decltype": null
+              },
+              {
+                "name": "pk",
+                "decltype": null
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "type": "integer",
+                  "value": "0"
+                },
+                {
+                  "type": "text",
+                  "value": "id"
+                },
+                {
+                  "type": "text",
+                  "value": "INTEGER"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "text",
+                  "value": "list_id"
+                },
+                {
+                  "type": "text",
+                  "value": "INTEGER"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "2"
+                },
+                {
+                  "type": "text",
+                  "value": "title"
+                },
+                {
+                  "type": "text",
+                  "value": "TEXT"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "3"
+                },
+                {
+                  "type": "text",
+                  "value": "done"
+                },
+                {
+                  "type": "text",
+                  "value": "BOOLEAN"
+                },
+                {
+                  "type": "integer",
+                  "value": "1"
+                },
+                {
+                  "type": "text",
+                  "value": "false"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ],
+              [
+                {
+                  "type": "integer",
+                  "value": "4"
+                },
+                {
+                  "type": "text",
+                  "value": "note"
+                },
+                {
+                  "type": "text",
+                  "value": "TEXT"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                }
+              ]
+            ],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 0,
+            "rows_written": 0,
+            "query_duration_ms": 0.033
+          }
+        }
+      }
+    },
+    {
+      "sql": "PRAGMA foreign_key_list(todos)",
+      "rows": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "lists",
+          "from": "list_id",
+          "to": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "raw": {
+        "type": "ok",
+        "response": {
+          "type": "execute",
+          "result": {
+            "cols": [
+              {
+                "name": "id",
+                "decltype": null
+              },
+              {
+                "name": "seq",
+                "decltype": null
+              },
+              {
+                "name": "table",
+                "decltype": null
+              },
+              {
+                "name": "from",
+                "decltype": null
+              },
+              {
+                "name": "to",
+                "decltype": null
+              },
+              {
+                "name": "on_update",
+                "decltype": null
+              },
+              {
+                "name": "on_delete",
+                "decltype": null
+              },
+              {
+                "name": "match",
+                "decltype": null
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "type": "integer",
+                  "value": "0"
+                },
+                {
+                  "type": "integer",
+                  "value": "0"
+                },
+                {
+                  "type": "text",
+                  "value": "lists"
+                },
+                {
+                  "type": "text",
+                  "value": "list_id"
+                },
+                {
+                  "type": "text",
+                  "value": "id"
+                },
+                {
+                  "type": "text",
+                  "value": "NO ACTION"
+                },
+                {
+                  "type": "text",
+                  "value": "NO ACTION"
+                },
+                {
+                  "type": "text",
+                  "value": "NONE"
+                }
+              ]
+            ],
+            "affected_row_count": 0,
+            "last_insert_rowid": null,
+            "replication_index": null,
+            "rows_read": 0,
+            "rows_written": 0,
+            "query_duration_ms": 0.022
+          }
+        }
+      }
+    }
+  ],
+  "delivery_gap": "Remote operations and full state verified, but model25requestcap exhausted beforefinaldelivery. Originalanswer contains8intermediateparagraphs, nofinalbackuppath/restoremethode/targetlocation/rowcountsummary/free-expiryinstructiondocument. Independentnot_completed retained; notserviceorserverunavailable.",
+  "model_accounting": {
+    "original_adapter_complete": false,
+    "original_reason": "Normalizer treated guard-events.jsonl sidecar as request directory; Errno20. Original table modelcost staysunknown.",
+    "supplemental_reconciled_requests": 25,
+    "supplemental_peak_estimate_usd": 0.02300574,
+    "normalizer_sha256": "2d8d0dc3d724e7de35d78416a482b5c8c8337a086d67e0362778536513c8a9aa",
+    "reconciled_usage_sha256": "4a194bc7e50727f63b8aed6cc96cacf90084c3d2a732284d6538865bdb5bf14f",
+    "scope": "Postrun bookkeeping recoveredfromunchangedwirestreams and OpenCode totals. Localnextrequest403notforwarded. No modelrerun/no budgetextension/no taskdeliverysupplement."
+  },
+  "cleanup": "Afterfullcaptureandindependentreview,Tursoexactnewsource+target DELETE200andGET404; NeonexactnewprojectDELETE204accepted,credentialsfollowup401tokenrevoked,notseparateauthenticatedabsenceproof. Earlierprojects/database/groupuntouched. All4ownedruntimecontainersstopped."
+}

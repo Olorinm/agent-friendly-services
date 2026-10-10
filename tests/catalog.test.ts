@@ -202,7 +202,15 @@ test('generated data and the real MCP protocol preserve legacy behavior and expo
     assert.equal(finance.subcategories.length, 5);
     assert(finance.subcategories.every((c: any) => c.path && c.inclusion && c.exclusion));
     const extraction = await call('search_services', { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
-    assert(extraction.services.every((s: any) => s.route_tests === 'not_recorded'));
+    for (const service of extraction.services) {
+      const source = catalog.services.find((s: any) => s.id === service.id);
+      for (const route of service.routes) {
+        const expected = source.task_runs.filter((run: any) => run.route_id === route.id
+          && run.classification === 'web-search-data/web-extraction').map((run: any) => run.run_id).sort();
+        assert.deepEqual(route.task_runs.map((run: any) => run.run_id).sort(), expected);
+      }
+      assert.equal(service.route_tests, service.routes.some((r: any) => r.task_runs.length) ? 'recorded' : 'not_recorded');
+    }
 
   } finally {
     if (connected) await client.close();

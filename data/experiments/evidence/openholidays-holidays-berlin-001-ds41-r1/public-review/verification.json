@@ -1,0 +1,49 @@
+{
+  "scope": "Minimal non-commercial service verification, not a holiday calendar or portal; complete candidate holiday tables and final answers retained privately.",
+  "independent_status": "completed",
+  "sources": {
+    "execution/answer.md": "418078ece140a49621186bcc3d8102be64ad1a24689bc5d13cd06c42e5b05079",
+    "execution/receipt.json": "0f340f7d3911af1c6c126b5106fa12b91b5a38a48fc4fae6c8f1641bdfe66f26",
+    "execution/usage.json": "a67a1e8e4611759ce73ac60cd61ce1479e6c96c322f6e803a4a3e869588b25fc",
+    "grading/assessment.json": "db2f7b0cae6e5fee267f979d41c8bdde2cd982243b3c2e06ffc2ee636eafdc6a"
+  },
+  "configuration": "OpenCode1.18.35,DeepSeekV4.1Flash/high;exec25requests(300saccess/600sbusiness),grade40/300s,32000outputtokens/request;2GiB/1CPU/pids256;max2providerstreams;samebaseimage,pipTUNAconfigured beforeaccess,initialemptycache,nopreinstalledclients.",
+  "controller_notes": [
+    "匿名公共入口，无预提供账号/Key/邮箱/支付方式，无本轮注册或人工身份步骤。免费须匹配当前使用条件，API成功不单独证明免费。",
+    "只测试一个明确地区/年份的小型清单；不代表全球覆盖、未来法律变更、可用性、吞吐量、商店/银行营业或个人休假权益。",
+    "Nager免费限private/non-profit项目，商业用途需active sponsorship，不能运营holiday portal。完整候选表/答案私有，仅公开最少核对事实。",
+    "OpenHolidays API：https://www.openholidaysapi.org/en/；数据采用ODbL1.0：https://github.com/openpotato/openholidaysapi.data/blob/main/LICENSE 。此公开摘要不重发假日数据表；服务/软件许可不同。",
+    "总控归档接入配置并仅去除旧查询、示例结果及验证时间；只保留通用端点/头/规则，未添加过滤器、脚本或目标答案。两家无接入安装的依赖。此清理是额外准备，不冒称无干预配置复用。",
+    "参考在候选执行前取自柏林官方旅游页2027公共节日部分，并由Berlin内政部门节日范围核对；均HTTP200、原HTML/时间/hash留底。相邻学校假期表不参与本题，候选一致不代替真值。"
+  ],
+  "query_scope": "Germany,Berlin(DE-BE),2027calendar year; publicholidaysincludingweekends;excludeschoolvacations/observances/other-state-onlyentries.",
+  "source_response_entries": 10,
+  "applicable_entries": 10,
+  "expected_count": 10,
+  "complete_date_set_matches": true,
+  "identities_names_verified": "Independentgraderconfirmed10/10 holidayidentities; German/Englishnamesandnormaltranslationvariantsacceptedbyfrozenrequirement.",
+  "response_sha256": "8304a98489b282fff5288e8bbf46a3ce836e77128a2884e8ceb174b10299c044",
+  "independent_reference_sha256": "84e9666516cb4d5dfecf0d0521ed92ebdb4cf26de02143448d7af6e72b40fc6d",
+  "official_sources": [
+    {
+      "url": "https://www.berlin.de/en/tourism/travel-information/1887651-2862820-public-holidays-school-holidays.en.html",
+      "sha256": "29ee20a919594c67b01c6357a80f91c0cec1c74df644680598fd3cf8ea165327",
+      "kind": "official_html"
+    },
+    {
+      "url": "https://www.berlin.de/sen/inneres/buerger-und-staat/verfassungs-und-verwaltungsrecht/artikel.1435639.php",
+      "sha256": "a61c1288ae0844143bcbae239895135de01fe0321787790d0dd73580e0ddcd03",
+      "kind": "official_html"
+    },
+    {
+      "url": "https://www.berlin.de/en/tourism/travel-information/1887651-2862820-public-holidays-school-holidays.en.html",
+      "sha256": "be5fffe35f70693494cd9ca11c42e03b28ad1a68d57ea6f6003b467ca4c8bed9",
+      "kind": "controller_extracted_reference"
+    }
+  ],
+  "business_data_metadata_requests": 3,
+  "retention_audit_sha256": "e6dc61b41dc164298bdb2616d2075a07e6e3db348167c1f4a25a71deffc2d030",
+  "actual_interface_behavior": "Subdivisionmetadata200, state-filteredPublicHolidays200 and country-widecross-check200;10state-filteredentries. UnfilteredDE query cancontainother-stateentries; notallcountryresponseentriesareBerlinapplicable.",
+  "language": "Germanreturnednamesaccepted; noextraChinese/Englishtranslationrequired.",
+  "runtimes": "All4ownedcontainersstopped aftercollectionandindependentreview; no service resourcecreated or registrationto cleanup."
+}

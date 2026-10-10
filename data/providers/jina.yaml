@@ -69,7 +69,9 @@ checks:
 
   automation_permitted:
     status: unknown
-    notes: ToS not yet reviewed and recorded.
+    evidence: https://jina.ai/legal/#terms-and-conditions
+    verified: "2026-10-08"
+    notes: Terms section 4.3 leaves output use unrestricted unless otherwise agreed, subject to third-party rights. Section 4.5(iv) contains a broad automated-extraction restriction; read with the Reader product description. No benchmark-specific disclosure prohibition was found.
 
 catalog:
   version: 1
@@ -82,8 +84,12 @@ catalog:
       kind: official_site
     reader-docs:
       url: https://jina.ai/reader/
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
       kind: official_docs
+    terms:
+      url: https://jina.ai/legal/#terms-and-conditions
+      checked_on: '2026-10-08'
+      kind: official_site
   routes:
     - id: reader-api
       interface: api
@@ -92,15 +98,47 @@ catalog:
       docs: https://jina.ai/reader/
       evidence:
         - reader-docs
+        - terms
+      availability:
+        value: self_serve
+        evidence:
+          - reader-docs
+      personal_access:
+        value: documented
+        evidence:
+          - reader-docs
+      requirements:
+        platform_account:
+          value: not_required
+          evidence:
+            - reader-docs
+        payment_method:
+          value: not_required
+          evidence:
+            - reader-docs
       capabilities:
         web.fetch:
           value: documented
           evidence:
             - reader-docs
       notes: >-
-        Reader converts a supplied URL to text. Keyless basic usage is documented; keyed rate limits and
-        billing are separate. No broader search or embedding capability is inferred from this route.
+        Prefix a public URL with https://r.jina.ai/ for rendered Markdown; basic keyless usage is free at
+        20 requests/minute. Keyed token allowances and limits are separate. Default rendering supports
+        JavaScript; X-Engine: direct instead uses plain HTTP. A URL may be cached for five minutes;
+        X-No-Cache: true or X-Cache-Tolerance: 0 requests fresh content. X-Token-Budget rejects oversized
+        requests rather than silently truncating them. No universal page-byte limit or caller-country
+        eligibility list was established here. Target-site restrictions and content rights still apply;
+        this route does not document a blanket redistribution license or successful extraction trial.
       auth:
         value: none
         evidence:
           - reader-docs
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: request
+          scope: Basic keyless Reader at the documented rate limit; not a keyed token allowance.
+          evidence:
+            - reader-docs

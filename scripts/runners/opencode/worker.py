@@ -17,6 +17,7 @@ import sys
 import time
 import tarfile
 from normalize import normalize
+from providers import DEFAULT_PROVIDER, opencode_config, profile
 
 ROOT=Path('/run/afs')
 def dump(p,x): p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
@@ -97,30 +98,39 @@ def main():
         archive_service_artifacts(Path('/home/node/service-tools'),
             ROOT/'archive'/'service-tools'/run,retained,request.get('retained_children',{}))
     shutil.copytree(ROOT/'inputs'/run,workspace);home.mkdir()
-    cfg={'$schema':'https://opencode.ai/config.json','model':'zhipuai-coding-plan/'+request['model'],'small_model':'zhipuai-coding-plan/'+request['model'],
-         'share':'disabled','autoupdate':False,'agent':{'title':{'disable':True},'summary':{'disable':True}},
-         'permission':{'*':'allow','task':'deny','question':'deny'},
-         'provider':{'zhipuai-coding-plan':{'options':{'apiKey':'local-capture-proxy','baseURL':'http://127.0.0.1:18181/api/coding/paas/v4'},'models':{request['model']:{'variants':{'high':{'reasoningEffort':'high'}}}}}}}
+    provider=json.loads((ROOT/'provider.json').read_text())['provider']
+    if request.get('provider',DEFAULT_PROVIDER)!=provider:
+        raise ValueError('Dispatch provider differs from provisioned runtime')
+    route=profile(provider)
+    cfg=opencode_config(request,provider)
     (home/'.config/opencode').mkdir(parents=True)
     dump(home/'.config/opencode/opencode.json',cfg)
     for p in (workspace,home):
         subprocess.run(['chown','-R','1000:1000',str(p)],check=True)
-    proxy=subprocess.Popen(['python3',str(ROOT/'capture-proxy.py'),'--key',str(ROOT/'bigmodel.key'),'--output',str(out/'wire')],stdout=(private/'proxy.log').open('wb'),stderr=subprocess.STDOUT)
+    proxy_command=['python3',str(ROOT/'capture-proxy.py'),'--provider',provider,'--model',request['model'],'--key',str(ROOT/'model.key'),'--output',str(out/'wire')]
+    started_epoch=time.time()
+    deadline=min(started_epoch+max(0,request['seconds']-10),request.get('deadline_epoch',float('inf')))
+    proxy_command += ['--started-at',str(started_epoch),'--deadline',str(deadline),
+                      '--closure-fraction',str(request.get('closure_fraction',0.85))]
+    if 'max_model_requests' in request:proxy_command += ['--max-requests',str(request['max_model_requests'])]
+    proxy=subprocess.Popen(proxy_command,stdout=(private/'proxy.log').open('wb'),stderr=subprocess.STDOUT)
     env={'HOME':str(home),'PATH':'/usr/local/bin:/usr/bin:/bin','LANG':'C.UTF-8','OPENCODE_DISABLE_AUTOUPDATE':'true','OPENCODE_DISABLE_TERMINAL_TITLE':'true','OPENCODE_DISABLE_AUTOCOMPACT':'true'}
     started=now();timed_out=False
-    command=['opencode','run','--pure','--format','json','--model','zhipuai-coding-plan/'+request['model'],'--variant',request['reasoning_effort'],'--title',run]
+    command=['opencode','run','--pure','--format','json','--model',cfg['model'],'--variant',request['reasoning_effort'],'--title',run]
     prompt=(workspace/'prompt.txt').read_bytes()
     with (out/'events.jsonl').open('wb') as events,(out/'stderr.log').open('wb') as err:
         process=subprocess.Popen(command,cwd=workspace,env=env,stdin=subprocess.PIPE,stdout=events,stderr=err,preexec_fn=identity,start_new_session=True)
         dump(private/'process.json',{'pid':process.pid,'proxy_pid':proxy.pid,'started_at':started})
-        try: process.communicate(prompt,timeout=request['seconds']-10)
+        timeout=request['seconds']-10
+        if 'deadline_epoch' in request:timeout=min(timeout,max(0,request['deadline_epoch']-time.time()-5))
+        try: process.communicate(prompt,timeout=timeout)
         except subprocess.TimeoutExpired:
             timed_out=True;os.killpg(process.pid,signal.SIGTERM)
             try: process.communicate(timeout=3)
             except subprocess.TimeoutExpired: os.killpg(process.pid,signal.SIGKILL);process.communicate()
     ended=now();time.sleep(0.2);proxy.terminate();proxy.wait(timeout=5)
     rows=[]
-    for line in (out/'events.jsonl').read_text().splitlines():
+    for line in (out/'events.jsonl').read_text().split('\n'):
         try: rows.append(json.loads(line))
         except json.JSONDecodeError: pass
     session=next((r['sessionID'] for r in rows if r.get('sessionID')),None)
@@ -138,7 +148,14 @@ def main():
     role=(ROOT/'inputs'/run/'AGENTS.md').read_text().strip()
     # Confirm the actual outbound request contains the role plus frozen prompt.
     verified=bool(requests) and role in payload and all(line in payload for line in prompt.decode().splitlines() if line.strip()) and all(r.get('model')==request['model'] and r.get('reasoning_effort')==request['reasoning_effort'] for r in requests)
-    dump(out/'receipt.json',dict(session_id=session,workspace=str(workspace),model=request['model'],reasoning_effort=request['reasoning_effort'],harness=request['harness'],runtime=request['runtime'],started_at=started,ended_at=ended,exit_code=process.returncode,timed_out=timed_out,isolation='Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools',input_verified=verified))
+    dump(out/'receipt.json',dict(session_id=session,workspace=str(workspace),provider=provider,model_api='https://'+route['host']+route['base_path']+'/chat/completions',model=request['model'],reasoning_effort=request['reasoning_effort'],harness=request['harness'],runtime=request['runtime'],started_at=started,ended_at=ended,exit_code=process.returncode,timed_out=timed_out,isolation='Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools',input_verified=verified))
+    dump(out/'controller-limits.json',{**{key:request[key] for key in ('max_model_requests','deadline_epoch','closure_fraction') if key in request},
+                                      'effective_deadline_epoch':deadline,'started_epoch':started_epoch})
+    if 'runtime_code_preflight' in request:
+        receipt=json.loads((out/'receipt.json').read_text())
+        receipt['runtime_code_preflight']=request['runtime_code_preflight']
+        receipt['runtime_image_id']=request.get('runtime_image_id')
+        dump(out/'receipt.json',receipt)
     normalize(out,request['model'])
     # Persist actual process status and usage before collecting untrusted files.
     # Collection errors must not erase the already observed runtime receipt.

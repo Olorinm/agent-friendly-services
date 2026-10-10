@@ -26,7 +26,15 @@ catalog:
       kind: official_docs
     access:
       url: https://site.financialmodelingprep.com/developer/docs/pricing
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-08'
+      kind: official_docs
+    income-statements:
+      url: https://site.financialmodelingprep.com/developer/docs/stable/income-statement
+      checked_on: '2026-10-08'
+      kind: official_docs
+    cash-flow:
+      url: https://site.financialmodelingprep.com/developer/docs/stable/cashflow-statement
+      checked_on: '2026-10-08'
       kind: official_docs
     mcp:
       url: https://site.financialmodelingprep.com/developer/docs/mcp-server
@@ -40,7 +48,7 @@ catalog:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://site.financialmodelingprep.com/developer/docs
+      entry_url: https://financialmodelingprep.com/stable/
       docs: https://site.financialmodelingprep.com/developer/docs
       evidence:
         - docs
@@ -61,12 +69,26 @@ catalog:
           - docs
           - access
       notes: >-
-        Basic is free with 250 calls/day and end-of-day/profile/reference features. Annual
+        Basic is free with 250 calls/day, 500 MB trailing-30-day bandwidth, and end-of-day/profile/reference features. Annual
         fundamentals are listed under paid Starter; a free key does not establish access to the
-        fiscal-year comparison task. Displaying or redistributing FMP data requires a separate
+        AAPL and MSFT fiscal-year comparison task. Displaying or redistributing FMP data requires a separate
         licensing agreement according to its pricing page. The House Trades endpoint is documented,
         but Congress-specific free-plan entitlement is not confirmed.
+      costs:
+        - kind: free_allowance
+          amount: 250
+          unit: requests
+          per: day
+          scope: Basic-plan calls; this allowance does not establish paid-dataset entitlement.
+          evidence:
+            - access
       capabilities:
+        statements.read:
+          value: documented
+          evidence:
+            - income-statements
+            - cash-flow
+          notes: Income and cash-flow endpoints are documented; free access for the requested symbols and year remains unverified.
         disclosures.search:
           value: documented
           evidence:

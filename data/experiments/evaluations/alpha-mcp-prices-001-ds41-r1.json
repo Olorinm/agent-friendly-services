@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "run_id": "alpha-mcp-prices-001-ds41-r1",
+  "service_id": "alpha-vantage",
+  "route_id": "hosted-mcp",
+  "entry_url": "https://mcp.alphavantage.co/mcp",
+  "task": {
+    "description": "帮我画出苹果公司 2026 年 8 月的每日收盘价走势，使用不复权价格，并附上 CSV 和数据来源。",
+    "inputs": "苹果公司 Apple Inc.，纳斯达克 AAPL，美元计价；2026-08-01 至 2026-08-31；常规交易日的日收盘价，不含盘前盘后。",
+    "expected_output": "可打开的走势图和 CSV；每个交易日的日期与收盘价；可识别的数据来源与不复权口径。",
+    "success": "日期覆盖该月全部交易日且不含伪造的休市日；无重复、缺失或错误币种；价格与事前冻结的同口径参考序列一致，差异超过报价精度时逐项复核；图表与 CSV 数值一致；数据确实来自指定服务。",
+    "failure": "用实时快照或盘后价替代日收盘价；擅自使用复权数据；缺交易日；用演示数据、别的服务或模型记忆填补；CSV 或图表缺失；预算内未完成。环境故障单列无效。",
+    "resources": "本轮指定服务及其公开文档；只读金融数据；可在工作目录安装依赖和生成文件。只用已确认免费的额度，不开付费超额，不调用交易或资金接口。",
+    "id": "financial-prices-001",
+    "version": "v1",
+    "sha256": "ba8caebafff7651bfa99c79d9f5db856e2061fd3e0399eeaf66fa95bfe4d2441",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "bed8c0b069c28859f37e5ffbdf0605f4b698e3b429c9188b4b5f876f42fd9344",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T14:22:41.046437+00:00",
+  "ended_at": "2026-10-08T14:32:31.111554+00:00",
+  "elapsed_seconds": 590.065117,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "controller-registered ordinary free API key; same existing account for REST and MCP",
+    "web_search": "live",
+    "preparation_note": "Existing ordinary free account and key, two fresh route-specific runtimes, no prewritten service calls or prior answers. Serial REST then MCP execution; same frozen task/model/effort/time limits. Access300s/business600s/grading300s;25modelrequests/role,32000outputtokens/request. Free account25/day planned as shared by both routes based on official forwarding implementation, not live billing-counter proof;7knownprior calls, per-route access3/business5 financial request caps. Original prices/CSV/chart remain private; public measurements omit reconstructable market data. Same-provider route comparison, one sample each; no peer-results snapshot, no general protocol ranking. Independent reference is Nasdaq official close with calendar/issuer corroboration, never another candidate answer.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "not_completed",
+  "reason": "指定服务调用成功且口径正确：执行者经 Alpha Vantage 官方托管 MCP 的 TIME_SERIES_DAILY（compact，不复权）取回 AAPL 2026-08 全部 21 个常规交易日收盘价，序列与冻结参考在 0.01 精度逐项一致（取数约 36s 完成）。但用户要求的可打开走势图与 CSV 均未交付，execution/answer.md 为 0 字节，除取数中间文本外无任何图表或 CSV 产物。会话在约 590s 触达 600s 业务预算被超时终止；预算主要耗在反复安装 matplotlib（9.85MB wheel）而非出图。环境并未失效：指定 MCP 调用成功、网络可部分传输、且原题未要求 matplotlib，纯 Python/SVG/本地 HTML 出图与标准库写 CSV 的替代路径存在却未被尝试。执行后诊断显示依赖下载缓慢，但该诊断不能逐秒重建执行时网络，也不足以说明用户任务在本环境内不可完成。故判为执行策略/预算内未完成，非 invalid_run，也非服务失败。",
+  "usage": null,
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [],
+    "note": "复用总控事前提供的 Alpha Vantage 普通免费账号，本轮仅经指定 MCP 发出少量 TIME_SERIES_DAILY 调用；未采集官方免费费率文档或账单/用量回执，无法据本次证据确认计费或免费，保留 unknown。",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-reviewer",
+    "reviewed_at": "2026-10-08T14:45:45.490163+00:00",
+    "checks": [
+      {
+        "criterion": "数据确实由指定服务（Alpha Vantage 官方托管 MCP）实际调用获得，未用其他服务或记忆代替",
+        "passed": true,
+        "evidence": "execution/artifacts/raw_daily.json 记录经 mcp.alphavantage.co/mcp 的 TIME_SERIES_DAILY 调用（full 被拒后 compact 成功）；调用经 /home/node/service-tools/installed-tools/mcp_client.py。"
+      },
+      {
+        "criterion": "AAPL 2026-08 常规交易日收盘价完整、不复权、美元，且与事前冻结同口径参考一致",
+        "passed": true,
+        "evidence": "execution/artifacts/data_inner.json 含 21 个 8 月交易日，日期集合与 reference.json 一致，收盘价在 0.01 精度逐项吻合；无休市/重复/缺失行。"
+      },
+      {
+        "criterion": "交付可打开的走势图（图表与 CSV 数值一致）",
+        "passed": false,
+        "evidence": "execution/artifacts/ 内无任何图片/SVG/PDF/HTML 图表文件；execution/answer.md 为 0 字节。"
+      },
+      {
+        "criterion": "交付 CSV 文件",
+        "passed": false,
+        "evidence": "execution/artifacts/ 内无 .csv 交付文件；data_inner.json 仅为中间解析文本且含全区间约 100 行，非交付 CSV；execution/answer.md 为空。"
+      },
+      {
+        "criterion": "最终答复给出结果、可识别数据来源与不复权口径",
+        "passed": false,
+        "evidence": "execution/answer.md 内容为空（0 字节）。"
+      },
+      {
+        "criterion": "在给定业务预算内完成",
+        "passed": false,
+        "evidence": "取数约 36s 完成；其后至会话约 590s 被超时终止期间均用于 matplotlib 安装尝试（见 execution/artifacts/pip_install.log），未产出交付物。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.056807711999999996,
+      "kind": "estimated",
+      "scope": "All independent grading attempts, separate from executor usage; frozen standard API estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading-attempt2",
+          "amount_usd": 0.02941836,
+          "usage_sha256": "c85ce10ee2fda7ea5eca6a3e131c1c612b9acda4273f336a4b027dee7fa366c0"
+        },
+        {
+          "attempt": "grading",
+          "amount_usd": 0.027389352,
+          "usage_sha256": "e17a51f28b15a9c826cd2ac67f4368261629738392f13e957beb09ede5d6b88c"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/alpha-mcp-prices-001-ds41-r1/public-review/verification.md",
+      "sha256": "0ac64be040cf9fb40f4c4971ae06ccb30b466788d81e127c91d4b13c009e3caf",
+      "note": "Independent recheck: real data coverage, missing user deliverables, artifact hashes and explicit environment limitation."
+    },
+    {
+      "path": "data/experiments/evidence/alpha-mcp-prices-001-ds41-r1/public-review/verification.json",
+      "sha256": "974b58a3db29e66858e1b01c720348d27ec34cb239ab37660ffa6549f19c3958",
+      "note": "Actual run timing and delivery state, independent checks, original/selected judgment hashes and explicit limits; no price series."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/prices-deepseek-overnight-20261008/alpha-mcp-prices-001-ds41-r1",
+    "run_sha256": "21e5efb0d4ed1431a1595c276559f58dd4b579b09fad37792332d3f753fcab88",
+    "events_sha256": "6dde203da76f0fe89cbc918946fccebcb166da2d7c274a80fceae7291ddf566c",
+    "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "review_sha256": "10f8cd91200fe661a2994a2cdaeea7c58c0a2b4122f5c6bf8936b8ecc430e83e",
+    "original_independent_review_sha256": "3735a3661ce5e72e38da7e425d48de2e3e833162ca24e74a5a22145eaa9f1b70",
+    "selected_independent_review_sha256": "8aef7247a9c3855e295d87925e072858f3daf02f05a94ef2672c3e3732692186",
+    "publication_review_note": "Selected independent review unchanged in verdict/check booleans/fee, minimal evidence only. Quote values removed from access answer/check prose with original hashes preserved. Business uses separate independent environment-validity recheck; both verdicts upheld, fee now unknown. All grading attempts included; no business rerun."
+  },
+  "request_usage": {
+    "status": "incomplete",
+    "method": "runner adapter",
+    "requests": [],
+    "source_sha256": "499b2c24dd65c44549a5b6ce41cd8b4c32be090647c14b0685790d4570e9617b",
+    "reason": "Adapter usage is incomplete"
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

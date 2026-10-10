@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "run_id": "frankfurter-access-ds41-r1",
+  "service_id": "frankfurter",
+  "route_id": "data-api",
+  "entry_url": "https://api.frankfurter.dev/v2/",
+  "task": {
+    "description": "帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。",
+    "inputs": "服务、指定调用方式、提供的账户或注册资料见运行环境。无需账号的入口直接使用；需注册的入口仅使用本轮提供的身份资料。保存必要连接配置供后续任务使用。",
+    "expected_output": "一次来自指定服务的真实数据查询结果；可复用的必要配置；实际完成的接入步骤或具体阻碍。",
+    "success": "按指定方式完成必要注册、认证和配置，并成功查询一项真实金融数据；所需配置可用于新的会话。不需要账号时不强行注册；仅文档、健康检查或配置文件不足以证明可查询数据。",
+    "failure": "无真实数据调用、使用其他服务代替、只完成注册或安装、需要的凭据/人工步骤未完成，或预算内未完成；环境故障单列无效。",
+    "resources": "本轮指定入口与授权资料；仅已确认免费的资源，不付费，不进行交易或资金操作。需要人工或额外身份资料时说明阻碍。安装和配置在本轮持久目录内，不能读取其他任务和账号。",
+    "id": "financial-access-001",
+    "version": "v1",
+    "sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+    "file": "data/experiments/tasks/financial-data.md"
+  },
+  "prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T11:49:06.202214+00:00",
+  "ended_at": "2026-10-08T11:49:44.843749+00:00",
+  "elapsed_seconds": 38.641535,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none",
+    "web_search": "live",
+    "preparation_note": "Fresh runtime, no account, prewritten calling scripts or previous results. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 model requests per role, 32000 output tokens/request, execution and grading 300s. New budget conditions retained separately from older runs.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "指定入口 https://api.frankfurter.dev/v2/ 为免 Key 公开 REST API；执行者实际完成多项真实数据查询（含 GET /v2/rate/EUR/USD 返回 2026-10-08 rate=1.1221、多币种 /rates、历史区间、coverage、providers 与单 provider 查询），并将连接配置写入指定持久目录 /home/node/service-tools/service-config.json（JSON 校验通过）。无需注册/认证，未使用其他聚合服务，未付费或写远端。验收环境独立重放 /v2/rate/EUR/USD 得到相同结果。",
+  "usage": {
+    "input_tokens": 110298,
+    "cached_input_tokens": 97024,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2973,
+    "reasoning_output_tokens": 633
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://frankfurter.dev/",
+      "https://api.frankfurter.dev/v2/openapi.json"
+    ],
+    "note": "Frankfurter 公共 API 官方文档声明免费、开源、无需 API Key、无配额且可用于商业用途；OpenAPI 无 security 方案、license 为 MIT。本次仅匿名调用公开入口并取得 200 数据，无任何账号、Key 或付费。",
+    "applicability": {
+      "rule": "官方文档：Free, open-source exchange rates API；No API key required；FAQ 说明 free for commercial use 且 There are no quotas。",
+      "observed": "本次会话所有请求均为匿名 GET https://api.frankfurter.dev/v2/...，未发送 Authorization/Key、未注册、未付费，均返回 HTTP 200 数据；验收环境独立重放同端点亦为 200。",
+      "evidence": "grading/artifacts/evidence/frankfurter-query-and-free-rule.md"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode",
+    "reviewed_at": "2026-10-08T12:05:11.215630+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定入口 api.frankfurter.dev/v2 完成至少一项真实金融数据查询（非仅文档、健康检查或配置文件）",
+        "passed": true,
+        "evidence": "执行记录中 GET /v2/rate/EUR/USD 返回 HTTP 200 {\"date\":\"2026-10-08\",\"base\":\"EUR\",\"quote\":\"USD\",\"rate\":1.1221}，另有 /rates?base=USD&quotes=CNY,JPY,GBP 及历史区间 /rates?from=2026-10-01&to=2026-10-08 的真实记录；验收环境独立重放同端点返回相同 rate=1.1221。见 grading/artifacts/evidence/frankfurter-query-and-free-rule.md"
+      },
+      {
+        "criterion": "按指定方式接入：REST API、免 Key 公开入口，必要时完成注册/认证（本轮无需账号则不强行注册）",
+        "passed": true,
+        "evidence": "所有请求均直接 GET https://api.frankfurter.dev/v2/... 且无 Authorization/Key 头；ENVIRONMENT 未提供账号，执行者未注册、未申请 Key，符合免 Key 入口规则。openapi.json servers 指向该入口且无 security 定义。"
+      },
+      {
+        "criterion": "保存后续可复用的必要连接配置到指定持久目录",
+        "passed": true,
+        "evidence": "write 工具写入 /home/node/service-tools/service-config.json 返回 Wrote file successfully，随后 bash 校验 config JSON valid 且文件存在（2866 字节）；配置含 base_url、端点、查询参数、示例与本次实测记录，auth.type=none，retained-files.json 记录该文件。"
+      },
+      {
+        "criterion": "未使用其他聚合服务或模型记忆代替实际查询；未越权（不付费、不写远端、不发消息、不调用其他 Agent）",
+        "passed": true,
+        "evidence": "全部网络调用目标均为 api.frankfurter.dev，无第三方聚合服务；无付费、注册、写操作或消息类调用记录。"
+      },
+      {
+        "criterion": "服务费用可确认为免费且本次适用",
+        "passed": true,
+        "evidence": "官方文档 https://frankfurter.dev/ 明示 Free、No API key required、No quotas、free for commercial use；openapi license=MIT 且无 security。本次全程无 Key、无账号、无付费即获 200 数据，符合免费规则。见 grading/artifacts/evidence/frankfurter-query-and-free-rule.md"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/frankfurter-access-ds41-r1/execution/answer.md",
+      "sha256": "579ff8b52f6c5ccff154f5578977574b6f43488bbafa5ca21329763358eb041d",
+      "note": "本次执行者实际答复；附带表述不扩大冻结任务的验收范围。"
+    },
+    {
+      "path": "data/experiments/evidence/frankfurter-access-ds41-r1/public-review/verification.md",
+      "sha256": "26afd9bc1d6bda1a671ef8b4b1d22e1ecf188725e92019dd8186a73137ae21e3",
+      "note": "独立核验的必要摘录；源文件哈希和编辑范围留底。"
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/fx-deepseek-overnight-20261008/frankfurter-access-ds41-r1",
+    "run_sha256": "16737f13334cc4ac39a8ee228a4167c7b80c49701ccba3f37f74d3f9894c5b1b",
+    "events_sha256": "cd1a7ad9e035dbea7b7f994548fbb2857af6cac1363fde81ecb537eb59d9a435",
+    "answer_sha256": "579ff8b52f6c5ccff154f5578977574b6f43488bbafa5ca21329763358eb041d",
+    "review_sha256": "3213d6121e1c03a00e132c049e4962477cfccf1eb94318b45937c0152965c0f0",
+    "original_independent_review_sha256": "e16129b4a643b7a32876aca8d0fbb6ecc70e69c01bd49dd23f6cb051604ba18f",
+    "publication_review_note": "Controller selected minimal evidence; original independent verdict and checks unchanged. Omitted full OpenAPI copy and replaced redundant documentation quotations with a short sourced paraphrase."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7165,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 110,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 7659,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 208,
+        "reasoning_output_tokens": 84
+      },
+      {
+        "input_tokens": 8416,
+        "cached_input_tokens": 7808,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 185,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 10349,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 222,
+        "reasoning_output_tokens": 32
+      },
+      {
+        "input_tokens": 12975,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 375,
+        "reasoning_output_tokens": 131
+      },
+      {
+        "input_tokens": 14302,
+        "cached_input_tokens": 13312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 316,
+        "reasoning_output_tokens": 90
+      },
+      {
+        "input_tokens": 15597,
+        "cached_input_tokens": 14592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1207,
+        "reasoning_output_tokens": 215
+      },
+      {
+        "input_tokens": 16820,
+        "cached_input_tokens": 16640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 112,
+        "reasoning_output_tokens": 39
+      },
+      {
+        "input_tokens": 17015,
+        "cached_input_tokens": 16768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 238,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "d28faafd5d374d15d127c61de0f678052f76572ca042946d2a13f87ee217f522",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 110298,
+      "cached_input_tokens": 97024,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2973,
+      "reasoning_output_tokens": 633
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

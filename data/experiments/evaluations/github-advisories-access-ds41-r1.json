@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "run_id": "github-advisories-access-ds41-r1",
+  "service_id": "github",
+  "route_id": "public-advisories-api",
+  "entry_url": "https://api.github.com/advisories",
+  "task": {
+    "description": "帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口及本轮允许使用的身份或凭据见 ENVIRONMENT.md。自行选择一个小型公开公告查询，报告实际取得的公告标识、关联包名和来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的资料。必要配置保存在本轮持久目录，秘密只存私有文件；答复给出配置位置、已有账号来源、自助步骤及实际人工或申请要求。",
+    "expected_output": "一条来自指定服务的真实公告记录，含可识别标识、关联包名及来源；可复用配置位置；真实接入步骤与门槛，或具体阻碍。",
+    "success": "按指定方式完成必要安装、认证和配置，实际响应含可识别的公告及关联包，答复与响应一致；配置可供新会话复用且不泄露秘密。无需账号不强行注册，已有账号不冒充本轮自助注册。",
+    "failure": "没有真实公告查询，改用其他服务或入口，仅有安装、健康检查、静态示例或配置，答复与响应不符，配置不可复用，泄露秘密或预算内未完成。身份、授权、额度或人工阻碍如实记录，执行环境故障单列无效。",
+    "resources": "仅使用指定服务的免费公开公告入口和官方文档；允许安装通用客户端依赖、编写查询代码及保存私有配置。只查询公开防御性元数据，不下载或运行漏洞样例，不安装待查的脆弱软件，不扫描目标，不修改仓库或依赖，不付费、注册无关服务或发消息。遵守客户端标识、署名、缓存和限流要求；请求与时间上限见 ENVIRONMENT.md。外部运行器采集记录，不要求额外审计文件。",
+    "id": "dependency-advisories-access-001",
+    "version": "v1",
+    "sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+    "file": "data/experiments/tasks/dependency-advisories.md"
+  },
+  "prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "harness": {
+    "name": "OpenCode",
+    "version": "1.18.35",
+    "mode": "run --format json"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-08T18:20:21.466259+00:00",
+  "ended_at": "2026-10-08T18:20:57.592252+00:00",
+  "elapsed_seconds": 36.125993,
+  "budget_seconds": 300,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": "none; anonymous public advisory API, no account/email/token/payment supplied",
+    "web_search": "live",
+    "preparation_note": "Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": []
+  },
+  "status": "completed",
+  "reason": "Executor used the assigned anonymous route https://api.github.com/advisories with the required Accept, X-GitHub-Api-Version: 2026-03-10 and project User-Agent headers; captured HTTP 200 responses contain identifiable advisories (GHSA-q7m5-3jmv-vm48/praisonai, GHSA-77xj-x4rm-935c/datamodel-code-generator, GHSA-xpx6-x8c2-mw5w/praisonai) matching answer.md. A non-secret reusable config was written to the authorized persistent path /home/node/service-tools/service-config.json and recorded as retained. No account, token or human step was required; only the anonymous shared 60/hour rate-limit barrier is reported. No scope violations observed. Service fee: anonymous GitHub API showed no billing and only rate-limit headers, no official free-rule/pricing source was captured, so cost kept unknown.",
+  "usage": {
+    "input_tokens": 180078,
+    "cached_input_tokens": 166528,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5675,
+    "reasoning_output_tokens": 1225
+  },
+  "service_cost_usd": null,
+  "service_cost": {
+    "kind": "unknown",
+    "sources": [],
+    "note": "Anonymous GitHub global-advisories API; no payment, billing or fee was observed in the run. Only rate-limit (60/hour) and HTTP 200 headers were captured, and no official free-rule/pricing source was retained, so a free conclusion cannot be evidenced and cost is left unknown. This is the service fee only; model/token cost is out of scope.",
+    "amount_usd": null
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "grading-agent",
+    "reviewed_at": "2026-10-08T18:29:34.072487+00:00",
+    "checks": [
+      {
+        "criterion": "real_query: a real query through the assigned route returned an identifiable advisory with associated package and source, agreeing with the answer",
+        "passed": true,
+        "evidence": "execution/artifacts/advisories.headers (HTTP/2 200, x-github-api-version-selected 2026-03-10); execution/artifacts/advisories.page1.json holds 3 records (ghsa_id, cve_id, severity, package names, html_url); execution/artifacts/advisory-GHSA-77xj-x4rm-935c.json detail; execution/answer.md reports the same identifiers/packages/sources"
+      },
+      {
+        "criterion": "reusable_configuration: necessary endpoint/auth state retained in the authorized persistent location and reusable by a new session",
+        "passed": true,
+        "evidence": "execution/retained-files.json lists service-config.json; grading/artifacts/evidence/service-config.excerpt.json shows base_url, endpoints, api_version, headers, anonymous auth mode and query policy captured from the run's write; keyless route needs no invented credential"
+      },
+      {
+        "criterion": "actual_barriers: answer reflects actual access, account source, self-service steps and real human/application requirements",
+        "passed": true,
+        "evidence": "execution/answer.md states anonymous public API with no account/token/email/qualification/payment, no human or special application, and the only limit being the shared 60/hour anonymous quota (remaining 59->58->57); consistent with observed x-ratelimit headers"
+      },
+      {
+        "criterion": "scope: only free public defensive metadata; no target software install, exploit run, scan, signup, payment or repo/account change",
+        "passed": true,
+        "evidence": "Only GET /advisories reads performed (execution/artifacts/*); 3 requests within the 6/phase budget, no 403/429; pip index pre-config only; no secrets or credentials present in execution/artifacts or answer"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.018247884,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; all attempts included; frozen standard API price estimate, not provider invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.018247884,
+          "usage_sha256": "2a88be497e6cbce47e9dd86f492944b126b36eb2378af9969d46460495e750c8"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/github-advisories-access-ds41-r1/public-review/verification.json",
+      "sha256": "5e08e22bc311ac0d5f138b9f327038c98c6e202c5a1592949d7f2413f08c791f",
+      "note": "Minimal query/verification facts, original hashes, attribution and scope limits; raw advisory records remain private."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/dependency-advisories-deepseek-overnight-20261008/github-advisories-access-ds41-r1",
+    "run_sha256": "fa9b4cf9f78696f8020a9cb0b4b08b1e14d266d1665eb35f56725e471af8cadb",
+    "events_sha256": "a7bf486a5930e93d4184c8bfa38b8a786648925cd976237d8e4cefedfef7c928",
+    "answer_sha256": "f0626d6f377d3321bf4aba426d88a878e61f95e7b3acd03bc55d714f2bcfc9b5",
+    "review_sha256": "7e07bdc087aa123df860fbe1c407309a7010d802c38495e645900b3e4be849c0",
+    "original_independent_review_sha256": "8dad1dcfbe2d2c987c71d52510c5416271659569b41082fde767ef69ee51f1b2",
+    "selected_independent_review_sha256": "8dad1dcfbe2d2c987c71d52510c5416271659569b41082fde767ef69ee51f1b2",
+    "publication_review_note": "Minimal controller-reviewed factual evidence and source hashes selected; complete API records/raw transcripts stay private. Independent verdict, reason and checks preserved. Shared upstream, bounded two-alert scope, anonymous conditions and audited config cleanup disclosed."
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7176,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 110,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 7566,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 103,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 8507,
+        "cached_input_tokens": 7552,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 445,
+        "reasoning_output_tokens": 308
+      },
+      {
+        "input_tokens": 9318,
+        "cached_input_tokens": 8832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 338,
+        "reasoning_output_tokens": 45
+      },
+      {
+        "input_tokens": 13342,
+        "cached_input_tokens": 9600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 463,
+        "reasoning_output_tokens": 178
+      },
+      {
+        "input_tokens": 14461,
+        "cached_input_tokens": 13696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 219,
+        "reasoning_output_tokens": 36
+      },
+      {
+        "input_tokens": 14858,
+        "cached_input_tokens": 14592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 631,
+        "reasoning_output_tokens": 402
+      },
+      {
+        "input_tokens": 15697,
+        "cached_input_tokens": 15488,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 258,
+        "reasoning_output_tokens": 29
+      },
+      {
+        "input_tokens": 16184,
+        "cached_input_tokens": 15872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1090,
+        "reasoning_output_tokens": 103
+      },
+      {
+        "input_tokens": 17302,
+        "cached_input_tokens": 17152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 149,
+        "reasoning_output_tokens": 88
+      },
+      {
+        "input_tokens": 17607,
+        "cached_input_tokens": 17408,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1168,
+        "reasoning_output_tokens": 27
+      },
+      {
+        "input_tokens": 18791,
+        "cached_input_tokens": 18560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 228,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19269,
+        "cached_input_tokens": 18944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 473,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "ef43a0488c2b14387179646d6d2be995a4adcd92e3bc5aea2386717a1625ce49",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "totals": {
+      "input_tokens": 180078,
+      "cached_input_tokens": 166528,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5675,
+      "reasoning_output_tokens": 1225
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

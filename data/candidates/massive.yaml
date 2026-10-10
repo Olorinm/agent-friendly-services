@@ -15,17 +15,47 @@ catalog:
   sources:
     docs:
       url: https://massive.com/docs/rest/quickstart
-      checked_on: '2026-09-09'
+      checked_on: '2026-10-08'
       kind: official_docs
     access:
-      url: https://massive.com/pricing
-      checked_on: '2026-09-15'
+      url: https://www.massive.com/stocks
+      checked_on: '2026-10-08'
       kind: official_site
+    daily-open-close:
+      url: https://massive.com/docs/rest/stocks/aggregates/daily-ticker-summary
+      checked_on: '2026-10-08'
+      kind: official_docs
+      notes: >-
+        Plan Access explicitly includes all Stocks plans; the Basic panel states end-of-day recency
+        and two years of history. close and afterHours are separate response fields.
+    extended-hours:
+      url: https://massive.com/knowledge-base/article/market-data-outside-of-normal-hours
+      checked_on: '2026-10-08'
+      kind: official_docs
+    individual-terms:
+      url: https://massive.com/legal/individuals-terms-of-service
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Personal, non-business, non-commercial use; accurate registration information and US sanctions
+        restrictions apply. Section 5.1 also requires preserving confidentiality of the Services. No
+        specific public-performance-comparison prohibition was found in the reviewed individual terms.
+    market-data-terms:
+      url: https://massive.com/legal/market-data-terms-of-service
+      checked_on: '2026-10-08'
+      kind: official_site
+      notes: >-
+        Sections 1-3 limit use to personal non-business use by non-professionals, restrict Market Data
+        publication and make display-only use the default. Section 5(c) also restricts sharing research
+        and other works based on, referring to or derived from Market Data; 5(d) restricts non-display
+        use and derivative works. These are broader than a raw-price redistribution restriction, but
+        no explicit service-benchmark-publication ban was found. Self-measured runtime/cost metrics
+        and data-based accuracy conclusions should not be treated as the same disclosure.
   routes:
     - id: data-api
       interface: api
       maintainer: official
-      entry_url: https://massive.com/docs/rest/quickstart
+      entry_url: https://api.massive.com/
       docs: https://massive.com/docs/rest/quickstart
       evidence:
         - docs
@@ -46,9 +76,24 @@ catalog:
           - docs
           - access
       notes: >-
-        Stocks Basic: USD 0/month for individual use, 5 calls/minute, two years of historical end-of-day data.
-        A free stock plan does not establish free fundamentals or permission to redistribute data. Confirm
-        unadjusted daily aggregate settings and actual access in the trial.
+        Stocks Basic is USD 0/month for individual use, no payment card, 5 calls/minute and two years
+        of historical end-of-day data. The daily open-close endpoint is explicitly included in Basic;
+        adjusted=false requests prices without split adjustment. Its close is separate from afterHours
+        and preMarket. Do not assume every custom aggregate excludes extended hours: that API has
+        separate session-selection and trade-eligibility considerations. Signup supplies a dashboard
+        API key; actual account access is untested. Personal/non-professional eligibility and the
+        restrictions on Market Data, derived research and Services confidentiality are separate from
+        technical endpoint entitlement; their scope is not a blanket explicit benchmark ban.
+      capabilities:
+        prices.history:
+          value: documented
+          evidence:
+            - daily-open-close
+      requirements:
+        payment_method:
+          value: not_required
+          evidence:
+            - access
       costs:
         - kind: usage
           amount: 0

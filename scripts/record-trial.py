@@ -210,6 +210,13 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                        'answer_sha256': sha(run_dir / 'answer.md'), 'review_sha256': sha(review_path)},
     }
     peer_context = run_dir / 'peer-context.json'
+    if 'outcome' in review or meta.get('trial_protocol') == 'afs-20261010':
+        from outcome import validate as validate_outcome
+        result['outcome'] = validate_outcome(review.get('outcome'))
+        if status == 'completed' and result['outcome']['user_delivery'] != 'completed':
+            raise ValueError('Completed task requires completed user delivery')
+    for key in ('trial_protocol', 'controller_limits', 'runner_source_sha256', 'runtime_image_id'):
+        if meta.get(key) is not None: result['environment'][key] = meta[key]
     if peer_context.exists():
         result['review']['peer_context'] = json.loads(peer_context.read_text())
     if meta.get('usage_format') == 'adapter-v1':

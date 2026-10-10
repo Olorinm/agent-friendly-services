@@ -14,6 +14,7 @@ const categories = loadCategories();
 const providers = [...loadProviders(), ...loadCandidates()].map(record => record.data);
 const data = { categories, services: providers.map(p => catalogService(p, 'candidate', loadEvaluations())) };
 const finance = 'web-search-data/financial-data';
+const today = new Date().toISOString().slice(0, 10);
 const ids = (filters: Record<string, string>) => searchServices(data, filters).map(s => s.id);
 
 test('classification paths accept deeper branches, inherit only ancestor capabilities and require definitions', () => {
@@ -24,9 +25,9 @@ test('classification paths accept deeper branches, inherit only ancestor capabil
   p.catalog!.classifications = [`${finance}/fx/reference-rates`];
   const valid = new Ajv().compile(JSON.parse(fs.readFileSync(`${ROOT}/schema/catalog.schema.json`, 'utf8')));
   assert.equal(valid(p.catalog), true);
-  assert.deepEqual(catalogErrors(p, tree, '2026-09-15'), []);
+  assert.deepEqual(catalogErrors(p, tree, today), []);
   p.catalog!.routes[0].capabilities!['prices.latest'] = { value: 'documented', evidence: ['docs'] };
-  assert.match(catalogErrors(p, tree, '2026-09-15').join('\n'), /prices.latest does not belong/);
+  assert.match(catalogErrors(p, tree, today).join('\n'), /prices.latest does not belong/);
   assert(inClassification(p, finance));
   assert(!inClassification(p, `${finance}/fx/reference`));
   const researchScope = classificationCapabilities(tree, finance, true).map(c => c.id);
@@ -72,21 +73,25 @@ test('financial parent queries include all child types once, while prices and di
 test('search results cannot masquerade as specified-URL extraction or inherit a search trial', () => {
   const searchOnly = structuredClone(providers.find(p => p.id === 'exa')!);
   searchOnly.catalog!.classifications = ['web-search-data/web-search'];
-  assert.match(catalogErrors(searchOnly, categories, '2026-09-15').join('\n'), /web.fetch does not belong/);
-  const fetch = searchServices(data, { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
+  assert.match(catalogErrors(searchOnly, categories, today).join('\n'), /web.fetch does not belong/);
+  const searchEvaluations = loadEvaluations().filter(e => e.task.id === 'web-search-001');
+  const searchData = { categories, services: providers.map(p => catalogService(p, 'candidate', searchEvaluations)) };
+  const fetch = searchServices(searchData, { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
   const firecrawl = fetch.find(s => s.id === 'firecrawl')!;
-  assert.deepEqual(firecrawl.routes.map(r => r.id), ['public-scrape-api']);
+  assert(firecrawl.routes.some(r => r.id === 'public-scrape-api'));
+  assert(firecrawl.routes.some(r => r.id === 'account-scrape-api'));
   assert(fetch.find(s => s.id === 'tavily')!.routes.some(r => r.id === 'extract-api'));
   assert(fetch.find(s => s.id === 'jina')!.routes.some(r => r.id === 'reader-api'));
   assert(fetch.every(s => s.route_tests === 'not_recorded' && s.routes.every(r => !r.task_runs.length)));
-  const search = searchServices(data, { classification: 'web-search-data/web-search' });
+  const search = searchServices(searchData, { classification: 'web-search-data/web-search' });
   assert(search.find(s => s.id === 'exa')!.routes.some(r => r.task_runs.length));
 });
 
 test('shared finance setup is separated from FX business results in queries and comparison means', () => {
   const fx = searchServices(data, { classification: `${finance}/fx` }).find(s => s.id === 'ecb-data')!;
   const runs = fx.routes.flatMap(r => r.task_runs);
-  assert.deepEqual(runs.map(r => r.task.id), ['financial-fx-001']);
+  assert(runs.length > 0);
+  assert.deepEqual(new Set(runs.map(r => r.task.id)), new Set(['financial-fx-001']));
   assert(runs.every(r => r.phase === 'business'));
   const all = searchServices(data, { classification: finance }).find(s => s.id === 'ecb-data')!;
   assert(all.routes.flatMap(r => r.task_runs).some(r => r.phase === 'setup'));

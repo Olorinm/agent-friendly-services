@@ -1,0 +1,95 @@
+id: geocode-maps-co
+name: Geocode Maps.co
+category: web-search-data
+homepage: https://geocode.maps.co/
+summary: Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.
+submitted_by: community
+tags: [geocoding]
+catalog:
+  version: 1
+  classifications: [web-search-data/geocoding]
+  sources:
+    api:
+      url: https://geocode.maps.co/docs/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    endpoints:
+      url: https://geocode.maps.co/docs/endpoints/
+      checked_on: '2026-10-08'
+      kind: official_docs
+    pricing:
+      url: https://geocode.maps.co/plans/
+      checked_on: '2026-10-08'
+      kind: official_site
+    signup:
+      url: https://geocode.maps.co/join/
+      checked_on: '2026-10-08'
+      kind: official_site
+    terms:
+      url: https://geocode.maps.co/terms/
+      checked_on: '2026-10-08'
+      kind: official_site
+    osm-license:
+      url: https://www.openstreetmap.org/copyright
+      checked_on: '2026-10-08'
+      kind: official_site
+  routes:
+    - id: geocoding-api
+      interface: api
+      maintainer: official
+      upstream: openstreetmap
+      entry_url: https://geocode.maps.co/search
+      docs: https://geocode.maps.co/docs/
+      evidence: [api, endpoints]
+      availability:
+        value: self_serve
+        evidence: [api, signup]
+      personal_access:
+        value: documented
+        evidence: [signup, terms]
+      auth:
+        value: api_key
+        evidence: [api]
+        notes: The key can be passed in an Authorization Bearer header instead of the query string.
+      capabilities:
+        places.geocode:
+          value: documented
+          evidence: [api, endpoints]
+          notes: >-
+            GET /search accepts a free-form q or structured address/amenity fields. Results include
+            named latitude/longitude fields, display name and available OSM/address metadata; JSON is
+            the default, with GeoJSON and other formats available. Coordinates need not identify an entrance.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [signup]
+        payment_method:
+          value: unknown
+          evidence: [signup, pricing]
+          notes: The public Free signup form shows no payment-card field; the complete signup flow was not completed.
+      human_steps:
+        - stage: signup
+          step: Create a Free account with name, email and password, then confirm the email address; the signup page says the API key is emailed.
+          evidence: [signup]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: Free Demo API request
+          scope: Free Demo advertises 25000 requests at 5 requests/second, then 1 request/second; it does not promise a monthly reset of the 25000 faster requests.
+          evidence: [pricing]
+      notes: >-
+        This is My Maps Inc.'s hosted service using OSM data and Nominatim software, not the OSMF public
+        endpoint or a self-hosted installation. The signup form displays no phone/card fields; email-domain
+        acceptance remains unknown. On 429 reduce request rate and retry
+        later; excessive/repetitive requests can be blocked. Terms section 1 permits legal result use,
+        export and publication subject to applicable data licences; no explicit benchmark/performance
+        disclosure restriction was found. API resale and circumvention are prohibited. Preserve OSM
+        contributor attribution and ODbL information with published data. Shared OSM/Nominatim inputs
+        do not establish independent geographic truth. Controller preparation observation on 2026-10-09
+        (Asia/Shanghai), separate from official-source claims and any formal trial: the first normal signup
+        submission returned a requirement to complete Human Verification. A normal checkbox interaction did
+        not complete persistent Cloudflare verification; no successful account or API key was confirmed.
+        This is a preparation barrier, not email-domain rejection or a geocoding capability failure.
+        No business API was queried.
