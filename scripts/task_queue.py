@@ -13,6 +13,7 @@ import hashlib
 import json
 import math
 import os
+import signal
 from pathlib import Path
 import subprocess
 import time
@@ -21,6 +22,14 @@ import pipeline as runs
 import comparison_group as groups
 
 DONE = {'reviewed', 'recorded', 'needs_attention', 'stopped', 'preflight_blocked', 'blocked'}
+STOP_REQUESTED = False
+
+
+def request_stop(signum, frame):
+    # Finish the current adapter operation before collecting/stopping its worker.
+    # Raising inside start could lose the only durable startup response.
+    global STOP_REQUESTED
+    STOP_REQUESTED = True
 
 
 @contextmanager
@@ -62,6 +71,11 @@ def inputs(config):
         file = adapter_config(config[role])
         if file: files.append(file)
     if config.get('reference'): files.append(Path(config['reference']).resolve())
+    if config.get('grading_secrets_file'):
+        source = Path(config['grading_secrets_file'])
+        if not source.is_absolute() or source.is_symlink() or not source.is_file():
+            raise ValueError('Grading secrets need an absolute private file without symlinks')
+        files.append(source)
     if config.get('attachments'):
         files.extend(Path(config['attachments']).resolve().rglob('*'))
     if any(p.is_symlink() for p in files): raise ValueError('Handoff inputs cannot contain symlinks')
@@ -246,6 +260,7 @@ def prepare_jobs(directory, state, policy):
     grading = {runtime_identity(m['config']['grading']) for m in members}
     if execution.intersection(grading): raise ValueError('Pool cannot reuse an executor container for grading')
     for identity, job in state['jobs'].items():
+        if STOP_REQUESTED: break
         if job['prepared'] or job['phase'] in DONE: continue
         handoff = job['handoff'];deps = [state['jobs'].get(key) for key in handoff['depends_on']]
         if any(d and d['phase'] in DONE and d['phase'] != 'reviewed' for d in deps):
@@ -300,6 +315,7 @@ def _advance(directory):
             def hold(reason):
                 state['dispatch_holds'][key] = reason
                 return False
+            if STOP_REQUESTED: return hold('Controller shutdown requested')
             if time.time() + settings['seconds'] + 20 >= deadline: return hold('Insufficient remaining time for the full frozen budget')
             job = next(j for j in state['jobs'].values() if any(Path(m['directory']) == path for m in j['handoff']['members']))
             if role == 'grading' and job['handoff'].get('grading_gate'):
@@ -395,8 +411,34 @@ def halt(directory, reason):
             except Exception as error:
                 errors[str(path)] = str(error)
     state.update(phase='halted', halt_reason=reason, stop_errors=errors, updated_at=runs.now())
+    try:
+        reconcile(state)
+    except Exception as error:
+        # Preserve the halted state even when the accounting error caused it.
+        errors['accounting'] = str(error)
+    state['held_usd'] = held(state)
     runs.write(directory/'state.json', state)
     return state
+
+
+def run_loop(directory, once=False):
+    previous = None
+    while True:
+        if STOP_REQUESTED:
+            halt(directory, 'Controller received SIGTERM/SIGINT');return
+        try:
+            state = advance(directory)
+        except Exception as error:
+            halt(directory, str(error))
+            raise
+        compact = {'phase': state['phase'], 'held_usd': state['held_usd'],
+                   'jobs': {k: v['phase'] for k, v in state['jobs'].items()},
+                   'dispatch_holds': state.get('dispatch_holds', {})}
+        if compact != previous: print(json.dumps(compact), flush=True);previous = compact
+        if STOP_REQUESTED:
+            halt(directory, 'Controller received SIGTERM/SIGINT');return
+        if once or state['phase'] == 'expired': return
+        time.sleep(2)
 
 
 def main():
@@ -416,18 +458,9 @@ def main():
     pool = hashlib.sha256(runs.read(args.directory/'policy.json')['pool'].encode()).hexdigest()
     lock_root = Path.home()/'.cache/agent-friendly-services/pools';lock_root.mkdir(parents=True, exist_ok=True, mode=0o700)
     with lock(args.directory/'.controller.lock'), lock(lock_root/(pool+'.lock')):
-        previous = None
-        while True:
-            try:
-                state = advance(args.directory)
-            except Exception as error:
-                halt(args.directory, str(error))
-                raise
-            compact = {'phase': state['phase'], 'held_usd': state['held_usd'], 'jobs': {k: v['phase'] for k, v in state['jobs'].items()},
-                       'dispatch_holds': state.get('dispatch_holds', {})}
-            if compact != previous: print(json.dumps(compact), flush=True);previous = compact
-            if args.once or state['phase'] == 'expired': return
-            time.sleep(2)
+        signal.signal(signal.SIGTERM, request_stop)
+        signal.signal(signal.SIGINT, request_stop)
+        run_loop(args.directory, args.once)
 
 
 if __name__ == '__main__': main()

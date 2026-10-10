@@ -1,0 +1,130 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-github-business-r3",
+  "independent_assessment_sha256": "68f1fca68a50e8ba49cb1277da1e34ecca6f320e360bc7f89d1240d68ab54989",
+  "independent_status": "completed",
+  "independent_reason": "本次执行使用指定的 GitHub global-advisories 匿名 REST API（API 版本 2026-03-10）逐条查询两条告警，原始响应可证：CVE-2025-57833 5.2.x 范围为 >= 5.2a1, < 5.2.6（修复版 5.2.6），CVE-2025-59681 为 >= 5.2, < 5.2.7（修复版 5.2.7）；故当前 5.2.6 不在 57833 范围内、仍在 59681 范围内，仅这两条的最低升级版本为 5.2.7。答复中文说明并给出 API、公告与可追溯的 Django 维护者安全发布链接，与事前独立冻结的 reference.json 结论一致；未安装/升级/修改项目，未使用其他漏洞库或搜索。",
+  "checks": [
+    {
+      "criterion": "使用指定服务真实查询（GitHub global-advisories 匿名 REST API，官方 API 版本头），未由其他漏洞库/搜索/记忆替代",
+      "passed": true,
+      "evidence": "execution/events.jsonl 与 review-packet/tools/0003、0005 记录两次 curl 至 https://api.github.com/advisories?cve_id=...，带 X-GitHub-Api-Version: 2026-03-10 与 JSON Accept 头，均 HTTP/2 200；原始响应见 execution/artifacts/advisory-CVE-2025-57833.json、advisory-CVE-2025-59681.json。"
+    },
+    {
+      "criterion": "逐条正确判断当前版本 5.2.6 是否匹配受影响范围：57833 不匹配、59681 匹配",
+      "passed": true,
+      "evidence": "原始响应：57833 的 pip/Django 5.2 段 vulnerable_version_range=\">= 5.2a1, < 5.2.6\"（5.2.6 不在内）；59681 的 5.2 段=\">= 5.2, < 5.2.7\"（5.2.6 在内）。answer.md 结论列与此一致。"
+    },
+    {
+      "criterion": "给出 5.2.x 分支各自最早的修复版本（5.2.6 / 5.2.7）",
+      "passed": true,
+      "evidence": "原始响应 first_patched_version 分别为 5.2.6 与 5.2.7，属 5.2.x 分支；维护者公告亦确认 2025-09-03 发布 5.2.6、2025-10-01 发布 5.2.7。"
+    },
+    {
+      "criterion": "仅处理这两条时的最低升级版本正确（5.2.7），且不扩大为全部漏洞已修复/应用不可利用",
+      "passed": true,
+      "evidence": "answer.md 明确“仅处理这两条，5.2.x 分支至少需升级到 5.2.7”，并声明未评估可利用性、数据库配置或项目代码。"
+    },
+    {
+      "criterion": "提供可核对的依据链接、简短中文说明并注明所用服务",
+      "passed": true,
+      "evidence": "answer.md 注明数据源为 GitHub global-advisories REST API，并给出 API 查询、GHSA 公告页与 Django 维护者安全发布链接（sep/03 与 oct/01），同时被执行时读取的维护者页佐证（review-packet/tools/0007、0008）。"
+    },
+    {
+      "criterion": "结论与事前独立维护者参考一致，未将未命中当作不受影响",
+      "passed": true,
+      "evidence": "reference.json（frozen_before_candidate_execution）独立结论：57833 already fixed in 5.2.6、59681 affected、minimum 5.2.7，与本次答复逐项一致；答复还给出 5.2.6 的明确范围下限说明而非仅凭未命中。"
+    },
+    {
+      "criterion": "只读范围：未安装/升级/修改项目，未下载运行漏洞样例或扫描目标",
+      "passed": true,
+      "evidence": "events.jsonl 全部工具调用仅为 read、curl 只读查询、json.tool 解析、cp 保存响应与两次 webfetch 维护者页面；无安装、升级、写仓库或扫描操作。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 API 两次查询均成功（200，2026-03-10 版本头），答复逐条给出正确的匹配结论、5.2.6/5.2.7 修复边界、最低升级 5.2.7 及可追溯依据链接。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "53b97f3045e05931c66ea93b8ccfc91cf9e4f39c46785f4fd6045a435febf5fe",
+      "note": "执行者最终答复：两条告警的匹配结论、5.2.x 修复版本、最低升级版本 5.2.7 及依据链接。"
+    },
+    {
+      "private_source": "execution/artifacts/advisory-CVE-2025-57833.json",
+      "private_source_sha256": "9899d13131fbc52cd65b99f89b81e34e132fa30866dd065669ec82e355cfaead",
+      "note": "CVE-2025-57833 的 GitHub advisories API 原始响应，含 5.2.x 范围与 first_patched_version。"
+    },
+    {
+      "private_source": "execution/artifacts/advisory-CVE-2025-59681.json",
+      "private_source_sha256": "8c7c03cc08e66b3162f8b9a6bd78b0f489d832fafee94acb55f626957eca7e42",
+      "note": "CVE-2025-59681 的 GitHub advisories API 原始响应，含 5.2.x 范围与 first_patched_version。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "private_source_sha256": "c8cc3189383fe3a58bbff02e8a42f8fb74d8588fa3c9f463ac897ce830736434",
+      "note": "本次验收的简短核验摘要：匿名调用证据、提取的版本边界及维护者引用链。"
+    }
+  ],
+  "frozen_task_sha256": "6e9cfc85b927eadb9b77812a50fea6e1d8fb3140e74bb95e8120b5fdf158d815",
+  "frozen_prompt_sha256": "cc50cd4a750c3d022758944eec96e651ddb2a2318554d4335827705db2b22ff6",
+  "reference_sha256": "4081ad0272b90d7b63a94b24133521ff469f213517f530d6e7624b6d793d69a0",
+  "execution_answer_sha256": "53b97f3045e05931c66ea93b8ccfc91cf9e4f39c46785f4fd6045a435febf5fe",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/",
+          "https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/",
+          "https://docs.github.com/en/rest/security-advisories/global-advisories"
+        ],
+        "source_ids": [
+          "github-advisory-free-availability",
+          "github-rest-announcement",
+          "github-global-advisories-docs"
+        ],
+        "note": "补充官方免费提供与REST路径对应证据后，可确认本轮指定公告查询服务费用为0。原冻结环境免费要求、HTTP成功、匿名60次/小时限额、无付款信息均不能单独支持这个金额。",
+        "applicability": {
+          "rule": "GitHub官方明确免费提供Advisory Database数据并说明可编程访问；2023 REST发布说明对应免费列表，当前文档明确本轮global-advisories公开读取路径。适用于本轮公开公告REST元数据读取，不是GitHub所有API或所有产品免费。",
+          "observed": "run.json指定public-advisories-api与api.github.com/advisories、没有提供服务凭据；冻结ENVIRONMENT限定公开只读。所查最少响应含api.github.com/advisories的记录URL；有headers的轮次观察到HTTP 200、API版本2026-03-10及60的限额。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/run.json sha256=7832f48b0a712645861a2e2b6d793617546b9070c88e680db4538a05d0222a86; data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/frozen/execution/ENVIRONMENT.md sha256=b4128c99fa5debe54529967aafe9d6aa00d60b869e5d5edca67148df79d0c7de; data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/execution/artifacts/advisory-CVE-2025-57833.json sha256=9899d13131fbc52cd65b99f89b81e34e132fa30866dd065669ec82e355cfaead"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/run.json",
+          "sha256": "7832f48b0a712645861a2e2b6d793617546b9070c88e680db4538a05d0222a86"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/frozen/execution/ENVIRONMENT.md",
+          "sha256": "b4128c99fa5debe54529967aafe9d6aa00d60b869e5d5edca67148df79d0c7de"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/execution/artifacts/advisory-CVE-2025-57833.json",
+          "sha256": "9899d13131fbc52cd65b99f89b81e34e132fa30866dd065669ec82e355cfaead"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

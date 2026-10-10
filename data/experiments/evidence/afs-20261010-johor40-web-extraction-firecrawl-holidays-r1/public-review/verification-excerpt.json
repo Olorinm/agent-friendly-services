@@ -1,0 +1,97 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-firecrawl-holidays-r1",
+  "independent_assessment_sha256": "304bdbea97e23e2610517df9e7cb198884afbf4ceba3970bb5b8741dd7a7df5a",
+  "status": "completed",
+  "reason": "指定服务 Firecrawl 匿名 scrape 入口 (https://api.firecrawl.dev/v2/scrape) 真实抓取 OPM 官方页面，返回 HTTP 200/success=true，响应 markdown 含完整“2027 Holiday Schedule”表（11 行）；据此生成的 holidays_2027.csv 为可解析 UTF-8 CSV，三列 date/weekday/holiday，11 行逐项与冻结参考一致、按日期升序、脚注标记已去除、日期采用网页公布值；答复给出文件位置与官方来源链接。单次提取请求，无 403/429/付费，未直读原网页或使用其他来源。",
+  "checks": [
+    {
+      "criterion": "由指定服务 Firecrawl 真实取得该 URL 目标内容（非直读/搜索引擎摘要/其他来源）",
+      "passed": true,
+      "evidence": "工具记录仅有一次 curl POST https://api.firecrawl.dev/v2/scrape（无 Authorization，keyless），返回 HTTP:200；artifact execution/artifacts/firecrawl-response.json 的 success=true、data.metadata.statusCode=200，markdown 含 2027 目标表。无对 opm.gov 的直读请求。"
+    },
+    {
+      "criterion": "交付 CSV 文件存在且为可解析 UTF-8，列名为 date、weekday、holiday",
+      "passed": true,
+      "evidence": "execution/artifacts/holidays_2027.csv（sha256 74a4a81853971d3bc955952ac804b513bdbad5d7e16a029913ec0615431ac33e）以 UTF-8 无 BOM 读取，csv.DictReader 表头恰为 date,weekday,holiday。"
+    },
+    {
+      "criterion": "2027 表全部假日逐项 date/weekday/holiday 正确，无漏行、重复或其他年份",
+      "passed": true,
+      "evidence": "独立解析得 11 行，与 reference.json expected_rows 及 firecrawl 响应中 2027 表逐项一致（如 2027-06-18/Friday/Juneteenth、2027-07-05/Monday/Independence Day、2027-12-24/Friday/Christmas Day）；无 2026/2028 行。"
+    },
+    {
+      "criterion": "日期升序排列",
+      "passed": true,
+      "evidence": "CSV 行序 2027-01-01 → 2027-12-24 单调递增。"
+    },
+    {
+      "criterion": "脚注标记去除，未混入字段",
+      "passed": true,
+      "evidence": "CSV 中无 * / ** 字符；源表 2/15、6/18、7/05、12/24 行的脚注已被剥离。"
+    },
+    {
+      "criterion": "日期按网页公布值记录，未替换为节日日历日期",
+      "passed": true,
+      "evidence": "保留公布值 6/18、7/05、12/24，未改为 6/19、7/4、12/25。"
+    },
+    {
+      "criterion": "答复含文件位置与官方来源链接",
+      "passed": true,
+      "evidence": "execution/answer.md:4 给出 CSV 路径，:6 给出 https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ 及所用服务入口。"
+    },
+    {
+      "criterion": "遵守提取请求预算与免费范围（单线程、无 403/429/付费）",
+      "passed": true,
+      "evidence": "本次共 1 次提取请求（环境上限 6），无重试、无 403/429、无付费或授权拒绝；符合 ENVIRONMENT.md 冻结范围。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Firecrawl 匿名 scrape 单次请求 HTTP 200 返回含 2027 表的响应，据此产出符合约定的 CSV 并在答复中给出文件位置与来源链接。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "254ba706c2fb982362297a86eb40526c007bea235f99412cfd1a268d627d87ec",
+      "note": "执行者最终答复：CSV 文件路径、官方来源链接与内嵌 11 行内容。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/holidays_2027.csv",
+      "sha256": "74a4a81853971d3bc955952ac804b513bdbad5d7e16a029913ec0615431ac33e",
+      "note": "交付 CSV，UTF-8，三列 11 行，按日期升序，与冻结参考一致。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/firecrawl-2027-excerpt.md",
+      "sha256": "034ca3e3ce9ba2e431aaf8e541f262e5ea05fa356dd79dbf380da831ad802d45",
+      "note": "Firecrawl 抓取的服务、入口、请求方式（keyless 无 Authorization）、HTTP 200/缓存元数据及响应中 2027 目标表摘录（脱敏）。"
+    }
+  ],
+  "task_sha256": "e8bb748e83619e0ea3fa8ac832891235cabc365049eaa60dc5800f4ca9662bec",
+  "prompt_sha256": "a3e07802a2c51ae99bf6e8153c3dc2dbd6ff601fe4bafc8cfcd9d2210c2b8c0c",
+  "reference_sha256": "1bddb3d8496cb47df296c1e6c8deb56f410597d85f4b101c826a783ad4cf9803",
+  "answer_sha256": "254ba706c2fb982362297a86eb40526c007bea235f99412cfd1a268d627d87ec",
+  "limits": [
+    "One anonymous access per service followed by three predeclared samepage tasks, one reused physical container per service, newhome/session/taskdir each trial, only generic package/config state allowed to persist.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official OPM2027 table rechecked independently2026-10-10T12:09:16Z. Full original source is withheld from executor. Actual table requirements unchanged from taskv1.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. No OPM logo/endorsement claim.",
+  "actual_csv": {
+    "private_original_locator": "execution/artifacts/holidays_2027.csv",
+    "sha256": "74a4a81853971d3bc955952ac804b513bdbad5d7e16a029913ec0615431ac33e",
+    "row_count": 11,
+    "fields": [
+      "date",
+      "weekday",
+      "holiday"
+    ],
+    "all_rows_and_fields_match_current_reference_under_quote_normalization": true,
+    "ascending_dates": true,
+    "note": "Trusted reading of actual bytes after execution; no Agent code run or CSV repair."
+  }
+}

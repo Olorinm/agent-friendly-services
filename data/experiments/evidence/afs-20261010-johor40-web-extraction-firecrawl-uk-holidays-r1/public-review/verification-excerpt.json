@@ -1,0 +1,91 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1",
+  "independent_assessment_sha256": "8b7b1bf2210729862b133776f50d90749b3abebcded79376df43d672d50fcd9c",
+  "status": "completed",
+  "reason": "通过指定服务 Firecrawl 匿名 scrape 入口实际取得 https://www.gov.uk/bank-holidays（2 次 POST，均 HTTP 200/success），并从同一响应 rawHtml 中按 caption 'Upcoming bank holidays in England and Wales 2027' 与显式 datetime 提取 8 条该地区该年银行假日；交付 CSV 存在、可解析、UTF-8、表头 date,holiday、日期升序，逐项与官方 2027 England and Wales 表一致（含 substitute day 名称与公布日期），答复给出文件位置与官方来源链接。执行者正确识别并绕开 Firecrawl markdown 输出的年份标题整体错位问题，以 rawHtml 为准，未用算法推算或改动节日日历日期。",
+  "checks": [
+    {
+      "criterion": "真实通过指定服务取得目标网页内容（未改用 JSON/ICS、其他网页、直连原站或模型记忆）",
+      "passed": true,
+      "evidence": "tool-records 中仅 2 次网络请求，均为 POST https://api.firecrawl.dev/v2/scrape，body url=https://www.gov.uk/bank-holidays；两次 HTTP 200 且响应 success=true；firecrawl-response.json 的 metadata.url=https://www.gov.uk/bank-holidays；无对原站或 ICS 接口的直接请求。"
+    },
+    {
+      "criterion": "交付 CSV 必要日期与名称逐项与官方原文一致，仅限 England and Wales 2027，含全部条目、无重复、无其他地区/年份",
+      "passed": true,
+      "evidence": "execution/artifacts/england-wales-bank-holidays-2027.csv 共 8 行：2027-01-01 New Year’s Day；2027-03-26 Good Friday；2027-03-29 Easter Monday；2027-05-03 Early May bank holiday；2027-05-31 Spring bank holiday；2027-08-30 Summer bank holiday；2027-12-27 Christmas Day (substitute day)；2027-12-28 Boxing Day (substitute day)。与 reference.json expected_rows 完全相同；从服务返回 HTML 提取的 2027 England and Wales 表逐行一致。"
+    },
+    {
+      "criterion": "保留页面 substitute day 名称说明及页面公布的日期（未替换为节日原本日历日期、未算法推算）",
+      "passed": true,
+      "evidence": "圣诞节/节礼日使用页面公布日期 2027-12-27 与 2027-12-28 并保留 '(substitute day)' 后缀，与 rawHtml 中 time datetime=2027-12-27/2027-12-28 及名称单元格一致。"
+    },
+    {
+      "criterion": "CSV 实际存在、可解析、UTF-8、表头清楚、日期为 YYYY-MM-DD 且升序",
+      "passed": true,
+      "evidence": "execution/artifacts/england-wales-bank-holidays-2027.csv 可读，表头 'date,holiday'，8 条 ISO 日期升序，无 BOM，无多余字段。"
+    },
+    {
+      "criterion": "答复给出文件位置与 GOV.UK 官方来源链接",
+      "passed": true,
+      "evidence": "execution/answer.md 给出交付文件绝对路径及来源 https://www.gov.uk/bank-holidays。"
+    },
+    {
+      "criterion": "遵守环境请求保护（单线程、相邻开始至少 20 秒、每阶段最多 6 次、无 403/429 后换身份或付费）",
+      "passed": true,
+      "evidence": "两次 scrape 开始于 12:41:40 与 12:42:43（间隔约 63 秒），共 2 次 < 6 次上限；均 200，无 403/429、无授权/付费要求。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务 Firecrawl 两次匿名 scrape 均成功返回目标页并含 2027 England and Wales 表；交付 CSV 与答复齐备且与官方一致，无阻碍因素。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "b36e5bdea532abe728407cf276c8032179771f37bbcabb12d562b238f9b1bc44",
+      "note": "执行者最终答复：交付文件位置、CSV 内容、官方来源链接及对 markdown 年份错位的处理说明。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+      "sha256": "4c1ff18ef81e6a27cd4185bd5e6d04912e200ca8182e98bbe105de7edd459561",
+      "note": "交付的 UTF-8 CSV，8 行且日期升序。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/firecrawl-2027-ew-extract.md",
+      "sha256": "1f10936d16b315d396106d30f93bbbbe6407273f00b6467f96607999732619ef",
+      "note": "脱敏核验摘要：指定服务调用记录与从服务返回 rawHtml 提取的 2027 England and Wales 表，证明 CSV 来源与内容。"
+    }
+  ],
+  "task_sha256": "b3a6fd45ffd0b546a0188dd88268979ed1f6907ca6dd73c5336d1d710073cfa0",
+  "prompt_sha256": "a5ebcec863734593efc236cccf875a73c3d809d3f0ebbddde509cb0970213ded",
+  "reference_sha256": "cbba3dc1b31e40a080f0ab5c7b848b5258f2832cee4a8989351876a8648df1eb",
+  "answer_sha256": "b36e5bdea532abe728407cf276c8032179771f37bbcabb12d562b238f9b1bc44",
+  "limits": [
+    "Access and three OPM rounds completed before this separate UK task. Three UK pairs declared before first dispatch; existing physical runtime, new home/session/taskdir. Current Jina baseline empty; Firecrawl retained generic config only. No task data or source injected.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official GOV.UK England and Wales2027 table frozen independently2026-10-10T12:29:45Z. This second staticHTML template tests region/yearselection. No broad reliability or JS-only extraction claim. Full source and expected rows withheld from executor.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. Contains public sector information licensed under the Open Government Licence v3.0. Source: https://www.gov.uk/bank-holidays ; licence: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/ . No GOV.UK logo/endorsement claim.",
+  "actual_csv": {
+    "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+    "sha256": "4c1ff18ef81e6a27cd4185bd5e6d04912e200ca8182e98bbe105de7edd459561",
+    "row_count": 8,
+    "fields": [
+      "date",
+      "holiday"
+    ],
+    "required_field_mapping": {
+      "date": "date",
+      "holiday": "holiday"
+    },
+    "all_rows_and_fields_match_current_reference_under_quote_space_normalization": true,
+    "ascending_dates": true,
+    "mismatches": [],
+    "note": "Trusted reading of actual bytes after execution; no Agent code run, outcome repair or CSV repair."
+  }
+}

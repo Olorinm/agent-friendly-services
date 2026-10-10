@@ -1,0 +1,53 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-openholidays-access-r2",
+  "independent_assessment_sha256": "e939c46cdc14a86d12a98f1992d2f61afbb24e2d4a09803a9321e67cd42813a9",
+  "independent_status": "completed",
+  "independent_reason": "已用指定 OpenHolidays API 的 /PublicHolidays 入口完成一次真实小范围假日查询（德国 DE、英语 EN、2026 全年），HTTP 200 返回 20 条 Public 假日，并如实报告示例 2026-10-03 \"Day of German Unity\"；匿名入口无需账号或注册，通用连接配置已保存到指定持久目录，接入步骤与实际阻碍均有说明。",
+  "checks": [
+    {
+      "criterion": "对指定服务与入口做一次真实、小范围的假日查询，返回可识别的假日日期与名称，且答复范围与响应相符",
+      "passed": true,
+      "evidence": "采集的响应副本 execution/artifacts/raw_publicholidays_DE_2026.json 含 2026-10-03 \"Day of German Unity\"（type=Public），共 20 条；与 execution/answer.md 报告的范围（DE/EN/2026，20 条）和示例一致。"
+    },
+    {
+      "criterion": "保存后续可复用的非秘密配置并给出正确位置，且不泄露秘密",
+      "passed": true,
+      "evidence": "execution/retained-files.json 记录保留 /home/node/service-tools/service-config.json 与 installed-tools/package.json；配置写入操作见 review-packet/tools/0012.json，内容含 baseUrl、各端点、UA、限流与许可；answer.md 给出一致位置，未输出任何秘密。"
+    },
+    {
+      "criterion": "区分匿名入口与已提供账号/自助注册，报告实际人工介入、申请或额度阻碍，不泄露秘密",
+      "passed": true,
+      "evidence": "answer.md 明确为匿名公共入口，未注册、未付费、未绑定凭据；报告的实际阻碍为 API 不支持马来西亚（改选受支持的德国）、单次跨度上限 3 年、ODbL 1.0 署名/共享要求；全程 8 次请求均为 HTTP 200，无 403/429。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 /PublicHolidays 查询返回 HTTP 200 的 20 条德国 2026 公共假日（含 2026-10-03 Day of German Unity）；配置保留于指定持久目录；无网络、接入、预算或执行阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "1ad8a258223f22c4d9f46082c24146db028c6d3add402ecd49169c9f92bfbdfa",
+      "note": "执行者最终答复：查询范围、返回示例、接入步骤、配置位置、账号来源与实际阻碍。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/public-holidays-result.md",
+      "private_source_sha256": "7c762b289f4a9273f70878eb71095c70891f7cff868a29a3b6c79d398c05014a",
+      "note": "脱敏摘录：指定入口一次真实查询的范围与一个实际返回的假日日期/名称，及配置位置与匿名凭据情况。"
+    }
+  ],
+  "frozen_task_sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+  "frozen_prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "reference_sha256": "681b0bd65e10da8b0d1a6d1874cd9682f3f158e18a3aded88fcfa29f1f60473d",
+  "execution_answer_sha256": "1ad8a258223f22c4d9f46082c24146db028c6d3add402ecd49169c9f92bfbdfa",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "OpenHolidays API; ODbL, https://openholidaysapi.org/ . No full holiday database is distributed here."
+}

@@ -98,6 +98,31 @@ class PipelineTests(unittest.TestCase):
     def prepare(self):
         return pipeline.prepare(self.config_path, self.directory)
 
+    def test_prepared_secrets_are_registered_before_dispatch_and_never_input(self):
+        secret = 'fixture-private-key-12345'
+        source = self.root / 'secrets.json'
+        pipeline.write(source, [secret])
+        self.config['grading_secrets_file'] = str(source)
+        pipeline.write(self.config_path, self.config)
+        self.prepare()
+        self.assertEqual(pipeline.read(self.directory / 'private-secrets.json'), [secret])
+        for role in ('execution', 'grading'):
+            self.assertFalse(any(secret.encode() in p.read_bytes()
+                                 for p in (self.directory / 'frozen' / role).rglob('*') if p.is_file()))
+        pipeline.verify(self.directory)
+        pipeline.write(self.directory / 'private-secrets.json', [])
+        with self.assertRaisesRegex(ValueError, 'remain registered'):
+            pipeline.verify(self.directory)
+
+    def test_invalid_secret_source_cannot_prepare_or_dispatch(self):
+        source = self.root / 'secrets.json'
+        pipeline.write(source, ['short'])
+        self.config['grading_secrets_file'] = str(source)
+        pipeline.write(self.config_path, self.config)
+        with self.assertRaisesRegex(ValueError, 'eight characters'):
+            self.prepare()
+        self.assertFalse(self.directory.exists())
+
     def finish(self):
         self.prepare()
         for _ in range(4):
@@ -133,6 +158,26 @@ class PipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'reconciliation'):
             pipeline.advance(self.directory)
         self.assertFalse((self.directory / 'execution/started').exists())
+
+    def test_private_grade_does_not_publish_or_block_on_embedded_token(self):
+        # Public security advisories can contain reproduction tokens. They can
+        # support a private verdict without being safe selected public evidence.
+        token = 'eyJ' + 'A' * 20 + '.fixturepayload.fixturesignature'
+        adapter = self.root / 'adapter.py'
+        adapter.write_text(ADAPTER.replace(
+            "{'answer':'synthetic answer'}", repr({'answer': 'synthetic answer', 'example': token})))
+        self.finish()
+        self.assertEqual(pipeline.read(self.directory / 'state.json')['phase'], 'reviewed')
+        public_result = self.root / 'data/experiments/evaluations/run-001.json'
+        self.assertFalse(public_result.exists())
+        with self.assertRaisesRegex(ValueError, 'JWT-like'):
+            pipeline.record(self.directory)
+        self.assertFalse(public_result.exists())
+        recorder = pipeline.module('recorder', 'record-trial.py')
+        with self.assertRaisesRegex(ValueError, 'JWT-like'):
+            recorder.record(self.directory, self.directory / 'grading/assessment.json', dry_run=True)
+        with self.assertRaisesRegex(ValueError, 'cannot publish'):
+            recorder.record(self.directory, self.directory / 'grading/assessment.json', private_review=True)
 
     def test_duplicate_run_id_is_rejected_before_preparation_or_dispatch(self):
         conflicts = [

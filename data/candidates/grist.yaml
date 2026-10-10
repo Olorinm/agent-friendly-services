@@ -11,27 +11,27 @@ catalog:
   sources:
     api:
       url: https://support.getgrist.com/api/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     auth:
       url: https://support.getgrist.com/rest-api/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     pricing:
       url: https://www.getgrist.com/pricing/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     mcp:
       url: https://support.getgrist.com/mcp/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     formulas:
       url: https://support.getgrist.com/formulas/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     limits:
       url: https://support.getgrist.com/limits/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     signup:
       url: https://support.getgrist.com/getting-started/
@@ -39,7 +39,11 @@ catalog:
       kind: official_docs
     terms:
       url: https://www.getgrist.com/terms/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
+      kind: official_site
+    trademark:
+      url: https://www.getgrist.com/trademark/
+      checked_on: '2026-10-10'
       kind: official_site
   routes:
     - id: rest-api
@@ -79,9 +83,11 @@ catalog:
       notes: >-
         Hosted documents remain editable online; the API can create documents, tables and records rather
         than only store opaque data. The account key inherits the user's access. Personal documents use
-        docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site,
-        with up to 5 requests/second/document and 10 concurrent document requests. A new blank workspace
-        can be the test container without prebuilding business fields. Current signup gates still require
+        docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site
+        across documents; remaining account quota is not established by the published allowance. Free
+        plans may be rate-limited to 5 requests/second/document; the concurrent request limit is 10 per
+        document and request bodies are limited to 1 MB. New blank workspaces depend on the account's
+        plan: the older Free personal plan has no workspaces. Current signup gates still require
         observation; documented access is not a registration or task result.
       requirements:
         platform_account:
@@ -148,10 +154,14 @@ catalog:
           evidence: [mcp, formulas]
           notes: Hosted MCP can change column formulas and read and update records; calculations use the same Grist document engine as REST.
       notes: >-
-        Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. Documented tools
-        include create_doc, create_table, add_table_column and record updates, so an existing business
-        schema is not a documented prerequisite. Calls share the Free site's 3000-call monthly API pool;
-        no separate allowance is implied. Documents can subsequently be opened and edited in Grist.
+        Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. The single hosted
+        MCP URL serves both personal and team sites, subject to the authenticated user's permissions.
+        Documented tools include document and table creation, column formulas and record updates; actual
+        tool names use the grist_ prefix. An existing business schema is not a documented prerequisite.
+        Calls share the Free site's 3000-call monthly API pool; no separate allowance is implied. The MCP
+        FAQ currently states no extra MCP charge; external AI-provider fees remain separate. A client
+        tool-call count does not by itself establish backend quota consumption. Documents can
+        subsequently be opened and edited in Grist.
       requirements:
         platform_account:
           value: required
@@ -186,5 +196,6 @@ catalog:
         Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch
         returned 403 during public research, not a service failure.
   notes:
-    - Hosted Free includes unlimited documents, 5000 rows/document, 1 GB attachments/document, 30-day history and two guests/document. This records hosted limits, not unlimited self-hosted capacity.
+    - Current Hosted Free includes unlimited documents, 5000 rows and a 10 MB data limit per document, 1 GB internal attachments/document, 30-day history and two guests/document. The older Free personal plan differs, including a 10-document limit and no workspaces. Confirm the actual plan and remaining shared API allowance before applying current pricing to an existing account; these are hosted limits, not unlimited self-hosted capacity.
     - No benchmark-specific or performance-analysis disclosure prohibition was found in the reviewed EULA. Sections 3.2–3.5 restrict disruption, reverse engineering and software redistribution; section 4.4 makes users responsible for their own content. This is not a blanket publication license.
+    - The trademark policy permits truthful descriptive discussion without implying affiliation or endorsement. It asks technical articles to link the official website and acknowledge trademark ownership. Grist is a trademark of Grist Labs Inc.; see https://www.getgrist.com/ and the trademark source for the applicable scope.

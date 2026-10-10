@@ -21,6 +21,11 @@ def load(path):
     host = config['host']
     if not isinstance(host, str) or not re.fullmatch(r'[A-Za-z0-9_][A-Za-z0-9_.@-]*', host):
         raise ValueError('host must be an SSH alias or user@host; configure ports/keys in SSH config')
+    transport = config.get('transport', 'ssh')
+    if transport not in ('ssh', 'local'):
+        raise ValueError('transport must be ssh or local')
+    if transport == 'local' and host != 'localhost':
+        raise ValueError('Local transport requires host localhost on the Docker controller host')
     root = config['remote_root']
     if not isinstance(root, str) or not root.startswith('/') or '..' in PurePosixPath(root).parts or root == '/':
         raise ValueError('remote_root must be a dedicated absolute directory')
@@ -53,6 +58,11 @@ def load(path):
 
 
 def ssh(config, argv, data=None, check=True):
+    if config.get('transport', 'ssh') == 'local':
+        if config['host'] != 'localhost':
+            raise ValueError('Local transport requires host localhost')
+        return subprocess.run(list(argv), input=data, stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE, check=check)
     return subprocess.run(
         ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8', config['host'], shlex.join(argv)],
         input=data, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=check,

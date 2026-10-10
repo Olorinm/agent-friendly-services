@@ -1,0 +1,88 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-grist-rest-access-baseline-preflight2",
+  "independent_assessment_sha256": "ee8757423566d0e9d316783a3bfc33da7bb099fdbb10b38a24da82d1ef0b5e65",
+  "status": "completed",
+  "reason": "执行者使用指定 Grist rest-api 入口（https://docs.getgrist.com/api），在授权父工作区 [PRIVATE_WORKSPACE_ID] 内用 POST 新建独立空文档 [SERVICE_SECRET]（id [PRIVATE_DOC_ID]），随后 GET /docs/{id} 与 /tables 真实回读同一远端资源，返回 200 且标识一致、仅含 Grist 自带空白表 Table1；连接配置写入指定持久目录，答复给出链接、账号来源、自助步骤、人工门槛与免费限制。与 reference.json 核对一致。",
+  "checks": [
+    {
+      "criterion": "通过指定服务 Grist 的指定 rest-api 入口实际调用（https://docs.getgrist.com/api），未改用 MCP 或其他入口",
+      "passed": true,
+      "evidence": "execution/artifacts/grist_rest.py 的 BASE 常量为 https://docs.getgrist.com/api，以 Authorization Bearer 调用 /workspaces、/docs 等 REST 路径；execution/answer.md 步骤 2-4 与此一致；实测 HTTP 200。"
+    },
+    {
+      "criterion": "在授权父工作区（id [PRIVATE_WORKSPACE_ID]，名 [SERVICE_SECRET]）内新建本轮唯一独立空容器，名称含本轮标识",
+      "passed": true,
+      "evidence": "GET /workspaces/[PRIVATE_WORKSPACE_ID] 返回 docs:[]（创建前为空），POST /workspaces/[PRIVATE_WORKSPACE_ID]/docs {\"name\":\"[SERVICE_SECRET]\"} 返回 doc id [PRIVATE_DOC_ID]；见 evidence/grist-rest-readback-redacted.json。"
+    },
+    {
+      "criterion": "通过指定入口重新读取该容器的元数据，确认访问的是同一远端资源，链接与标识一致",
+      "passed": true,
+      "evidence": "GET /docs/[PRIVATE_DOC_ID] 返回 200，id=[PRIVATE_DOC_ID]、urlId=[PRIVATE_DOC_URL_ID]、workspace.id=[PRIVATE_WORKSPACE_ID]、access=owners，与新建返回的 id 及答复链接 [PRIVATE_DOC_URL] 一致。"
+    },
+    {
+      "criterion": "容器保持为空，未预建业务字段/记录，未访问其他工作区或旧文档",
+      "passed": true,
+      "evidence": "GET /docs/{id}/tables 仅返回默认空白表 Table1（无字段/记录）；操作仅针对新建文档与提供的父工作区 [PRIVATE_WORKSPACE_ID]，无其他资源读取记录。"
+    },
+    {
+      "criterion": "通用连接配置保存到本轮指定持久目录，可供新会话复用且不泄露密钥",
+      "passed": true,
+      "evidence": "写入 /home/node/service-tools/service-config.json（记录 base URL、org/workspace/container 标识与文档链接，chmod 600）；密钥仅留在已有私有 credentials.json，配置只引用其路径；答复仅给出配置位置，未输出秘密。"
+    },
+    {
+      "criterion": "答复说明容器链接/标识、实际账号来源、真实自助步骤、人工门槛与有依据的免费限制（未知项注明未知）",
+      "passed": true,
+      "evidence": "execution/answer.md 给出文档链接与 id、说明账号/API key 由总控提供非自助注册、列出 4 次服务操作步骤、说明无人工阻碍、并列出 personalFree/paid=false、3000 次/月 API 及各项限额，剩余额度记未知。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "新建 doc [PRIVATE_DOC_ID] 与回读元数据均 HTTP 200 且标识一致（见 evidence/grist-rest-readback-redacted.json）；答复含链接、配置位置、步骤与免费限制（execution/answer.md）。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "98b9d64cd8aaf4cfd2b52b624ce8ee227d309394bf4424f3aef71d155839546f",
+      "note": "执行者最终答复：容器链接与标识、接入步骤、账号来源、人工门槛与免费限制。"
+    },
+    {
+      "private_source": "execution/artifacts/grist_rest.py",
+      "sha256": "2e95bfb64c19ff184f8254f64b247e791ed528530548a62e7fc9ea6ee38f85e9",
+      "note": "实际调用脚本：指定 rest-api 入口与认证方式，无第三方客户端。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/grist-rest-readback-redacted.json",
+      "sha256": "f12ef0f6076b16ca9dd3a4ede886d7a6a37867ac4ca8297322006f09b2a350ca",
+      "note": "脱敏后的真实 HTTP 200 回读摘录：创建前空工作区、新建 doc 返回 id、同资源元数据回读、空表 Table1 与免费套餐字段。"
+    }
+  ],
+  "task_sha256": "b47643831c45380d86aee57a9641b2d1819ed19ad9618831cee221557319b3de",
+  "prompt_sha256": "c870fc52be8b5bb4a5f5a7201edb3e5814b0a2b47359f62f08c08dc43d6d932c",
+  "reference_sha256": "a9f4b29685de6e926f2863264ae3f20f32d5e771995df0cfe4b26e50ad963616",
+  "answer_sha256": "98b9d64cd8aaf4cfd2b52b624ce8ee227d309394bf4424f3aef71d155839546f",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate."
+  ],
+  "attribution": "Grist is a trademark of Grist Labs Inc. https://www.getgrist.com/ ; no endorsement. Synthetic expense data is original test material.",
+  "publication_identity_redaction": {
+    "private_source": "grist/baselines/rest/service-tools.private.tar::./service-config.json",
+    "archive_sha256": "1f94454731e5190e3d6c71552e6260d66eadf75c71850f7cc0ee4499bc658301",
+    "config_sha256": "3efd02570332b5abb8e78c04a8a3b1c3ef2fb5c9356bf29a3ee7579e2065e5e0",
+    "scope": "Actual child document pointer from the frozen baseline service config; concrete identifiers and links registered locally and redacted only in public copies. Frozen original registration subset and raw grading/hash files retained.",
+    "short_workspace_identity": {
+      "field": "workspace_id",
+      "value_length": 6,
+      "value_sha256": "3b6616f1390bbb4860de8a2c93d3af556326011ff096811f602ba4b27da315a1",
+      "resources_sha256": "bfcd20d05916e0cd9d1443064ffb2afc842de46682864504b8651781fa0b5c7f",
+      "config_sha256": "3efd02570332b5abb8e78c04a8a3b1c3ef2fb5c9356bf29a3ee7579e2065e5e0",
+      "policy": "Exact actual workspace ID replaced only at numeric/text token boundaries with a private workspace marker. Short IDs remain outside the >=8-character registration list; frozen sources unchanged."
+    }
+  },
+  "public_answer_sha256": "658ff633a6b77dfb9856815e791cf7dd4091a538744c6003d2c726e8b4c83310"
+}

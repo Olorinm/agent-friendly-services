@@ -1,0 +1,135 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-osv-business-r2",
+  "independent_assessment_sha256": "36ee7361f12288b012e9fb26ed40b27fbf4c0c112ce98c56e7e14271152e788a",
+  "independent_status": "completed",
+  "independent_reason": "本次执行通过指定 OSV 公共 REST API 真实查询两条告警并给出可核对结果。CVE-2025-57833 在 5.2 分支 fixed 5.2.6、受影响版本列表止于 5.2.5，故 5.2.6 不在受影响范围；CVE-2025-59681 fixed 5.2.7、受影响版本列表含 5.2.6，故仍受影响。5.2.x 最早修复版本分别为 5.2.6 与 5.2.7，仅处理这两条最低升级到 5.2.7。判断与事前独立冻结的维护者发布参考（reference.json）一致，来源链接可追溯，只读范围合规。",
+  "checks": [
+    {
+      "criterion": "assigned_service：真实查询本轮指定服务（OSV 公共 REST API），未用其他漏洞库/搜索/记忆替代",
+      "passed": true,
+      "evidence": "执行者编写 osv_client.py，调用 https://api.osv.dev 的 GET /v1/vulns/{id} 与 POST /v1/query（工具记录 SOURCE: live）；缓存 `execution/artifacts/cache/vuln_CVE-2025-57833.json`、`vuln_CVE-2025-59681.json` 为真实 OSV schema 记录（含 GIT 范围、aliases、modified 时间戳），未使用其他聚合库。"
+    },
+    {
+      "criterion": "two_match_decisions：逐条判断 PyPI Django 5.2.6 是否仍在受影响范围",
+      "passed": true,
+      "evidence": "CVE-2025-57833 记录范围为 introduced 5.2 / fixed 5.2.6，`affected.versions` 仅到 5.2.5，5.2.6 不在其中 → 已修复/不在范围；CVE-2025-59681 范围 introduced 5.2 / fixed 5.2.7，`affected.versions` 含 5.2.6 → 仍受影响。与 reference.json expected_alerts 一致。"
+    },
+    {
+      "criterion": "branch_specific_fixes：给出各告警 5.2.x 分支最早修复版本",
+      "passed": true,
+      "evidence": "CVE-2025-57833 → 5.2.6，CVE-2025-59681 → 5.2.7，均为 5.2.x 分支（非 4.2.x/5.1.x），与 reference.json first_fixed_in_5_2_x 一致。"
+    },
+    {
+      "criterion": "combined_minimum：仅处理这两条的最低升级版本",
+      "passed": true,
+      "evidence": "答复结论为最低升级到 5.2.7，与 reference.json minimum_version_for_only_these_two_alerts=5.2.7 一致；未扩大为全部漏洞已修复或应用不可利用。"
+    },
+    {
+      "criterion": "sources_explanation：可核对依据链接、中文简要说明及指定服务名称",
+      "passed": true,
+      "evidence": "`execution/answer.md` 及最终答复为中文，写明所用服务为 OSV 公共 REST API，并附 OSV 记录 URL（/v1/vulns/CVE-2025-57833、/v1/vulns/CVE-2025-59681）、/v1/query 请求体及记录内可追溯的维护者发布链接。"
+    },
+    {
+      "criterion": "read_only_scope：不安装/升级/修改项目，只查防御性元数据",
+      "passed": true,
+      "evidence": "执行仅进行 OSV 只读查询与本地缓存/笔记；无付费、注册、安装待查软件、下载脆弱包或修改仓库的行为（工具记录仅为 read/write 本地文件与 OSV 查询）。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "服务端：osv_client.py 对 api.osv.dev 发出 GET /v1/vulns/{id} 与 POST /v1/query（SOURCE: live），缓存响应可核；交付：execution/answer.md 给出两条匹配结论、5.2.6/5.2.7 修复边界、最低 5.2.7 与依据链接，与独立冻结参考一致。无阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "47d93451722fe5cf11e8d26d85facd6831376b256b968de24f11f258d4fec804",
+      "note": "执行者最终答复：两条告警匹配结论、5.2.x 修复版本、最低升级版本与依据链接（中文）"
+    },
+    {
+      "private_source": "execution/artifacts/cache/vuln_CVE-2025-57833.json",
+      "private_source_sha256": "d3b6050dd4f4c3a5246ea81e5af5eaa97b395f3639feb95697aa39c939e1fad9",
+      "note": "OSV 记录副本：5.2 分支 fixed 5.2.6，affected.versions 止于 5.2.5"
+    },
+    {
+      "private_source": "execution/artifacts/cache/vuln_CVE-2025-59681.json",
+      "private_source_sha256": "ef0c6010814a7f371d507ac64eacee86201e9a58fa80a18bf45ebf46506d634f",
+      "note": "OSV 记录副本：5.2 分支 fixed 5.2.7，affected.versions 含 5.2.6"
+    },
+    {
+      "private_source": "execution/artifacts/cache/query_Django_5.2.6.json",
+      "private_source_sha256": "88de5ead48506951c194cd69c50ed096e3c4a6bdc1ae4d1841096b4ec0945884",
+      "note": "POST /v1/query 结果：含 CVE-2025-59681，不含 CVE-2025-57833"
+    },
+    {
+      "private_source": "execution/artifacts/osv_client.py",
+      "private_source_sha256": "9b4c66d9cac2574061c6fd8828ad2e64e9343706f65907faaa8f727554121c7d",
+      "note": "指定服务调用脚本（api.osv.dev 的 query 与记录路径），含 >=2s 节流与本地缓存"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/osv-verification-summary.md",
+      "private_source_sha256": "1f3d64a548ec9deae7aa7b9b622deed14b658e66747d9bc8bd63fcb3392e432d",
+      "note": "本次核验的简短脱敏摘要，摘录记录中的修复边界与查询命中结果"
+    }
+  ],
+  "frozen_task_sha256": "6e9cfc85b927eadb9b77812a50fea6e1d8fb3140e74bb95e8120b5fdf158d815",
+  "frozen_prompt_sha256": "cc50cd4a750c3d022758944eec96e651ddb2a2318554d4335827705db2b22ff6",
+  "reference_sha256": "4081ad0272b90d7b63a94b24133521ff469f213517f530d6e7624b6d793d69a0",
+  "execution_answer_sha256": "47d93451722fe5cf11e8d26d85facd6831376b256b968de24f11f258d4fec804",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://osv.dev/blog/posts/announcing-osv-service-level-objectives/",
+          "https://google.github.io/osv.dev/quickstart/",
+          "https://google.github.io/osv.dev/api/"
+        ],
+        "source_ids": [
+          "osv-slo-announcement",
+          "osv-api-quickstart",
+          "osv-api-overview"
+        ],
+        "note": "新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。",
+        "applicability": {
+          "rule": "OSV Team官方将OSV.dev明确称为免费资源，同一服务说明同时涵盖网站与API；官方API文档将公共query及vulns记录读取映射到这项托管服务。适用于本轮公开REST元数据查询，不据数据开源或未列费率推定免费。",
+          "observed": "run.json指定public-api及https://api.osv.dev/v1/query，无预提供账号/凭据；冻结ENVIRONMENT限定query与记录路径。最少保留响应具OSV记录id/schema；access-r2响应封装含200和body。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/run.json sha256=21cd3da1bcd0cfdca280c534ecabe50ac3fcdbe0812b3c90fccec391eabd1736; data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/frozen/execution/ENVIRONMENT.md sha256=23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812; data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/execution/artifacts/cache/vuln_CVE-2025-57833.json sha256=d3b6050dd4f4c3a5246ea81e5af5eaa97b395f3639feb95697aa39c939e1fad9"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/run.json",
+          "sha256": "21cd3da1bcd0cfdca280c534ecabe50ac3fcdbe0812b3c90fccec391eabd1736"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/frozen/execution/ENVIRONMENT.md",
+          "sha256": "23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r2/execution/artifacts/cache/vuln_CVE-2025-57833.json",
+          "sha256": "d3b6050dd4f4c3a5246ea81e5af5eaa97b395f3639feb95697aa39c939e1fad9"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

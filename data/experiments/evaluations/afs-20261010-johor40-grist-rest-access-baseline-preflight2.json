@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-grist-rest-access-baseline-preflight2",
+  "service_id": "grist",
+  "route_id": "rest-api",
+  "entry_url": "https://docs.getgrist.com/api",
+  "task": {
+    "description": "帮我通过指定方式接通这个在线表格服务，新建一个本轮专用的空测试空间，读取它确认可用，并保存后续创建任务表所需的配置；给我空间链接，说明接入步骤、人工门槛和免费限制。",
+    "inputs": "服务、指定入口、允许使用的账户或注册身份及来源见 ENVIRONMENT.md。按需注册、授权、安装和配置；已有账号如实说明来源。新建一个可容纳后续任务表的独立空测试容器，例如工作区、base 或父文档，名称带本轮环境提供的标识。通过指定方式重新读取该容器的元数据，确认访问的是同一远端资源；本阶段不整理会议内容、不预建业务字段或记录。保存必要安装、容器标识和连接配置到本轮指定持久目录，秘密仅存私有文件，答复只给配置位置。说明真实自助步骤、人工介入、额外申请和已知免费限制；无法完成时说明具体阻碍。",
+    "expected_output": "本轮新建空测试容器的有效链接与标识；指定接口真实读取其元数据的结果；可复用配置位置；账号来源、接入步骤、人工或申请门槛，以及有依据的免费限制或未知项。",
+    "success": "完成必要接入，通过指定服务及入口新建本轮独立空容器，并重新读取同一远端容器的元数据确认可访问；链接和标识一致，必要配置可供新会话复用且不泄露秘密。未预建业务字段、记录或答案；实际账号来源、自助步骤、人工门槛和免费限制如实说明。只有注册、安装、工具列表、创建回执或本地模拟不足以证明接通。",
+    "failure": "无本轮新建独立空容器、无真实远端读回、链接指错资源、配置不可复用、改用其他服务或入口、预填业务数据、泄露凭据或预算内未完成；账号、权限、额度、人工或申请限制记具体接入阻碍，执行环境故障单列无效。",
+    "resources": "只用本轮授权身份及确认免费的托管服务资源；最多新建一个独立空测试容器及必需的最小父资源，不访问其他用户文档或表格。服务自动附带的空白占位表可保留，但不填业务字段、记录或示例数据，不预写业务调用脚本。不开启公开分享、不邀请或通知他人、不购买或开启超额计费；不修改或删除既有资源。仅可在隔离环境安装依赖、保存私有配置。实际入口、权限、请求和时间上限由 ENVIRONMENT.md 冻结；测试资源保留至业务与独立验收结束，再由总控按确切标识处理。",
+    "id": "collaborative-tables-access-001",
+    "version": "v1",
+    "sha256": "b47643831c45380d86aee57a9641b2d1819ed19ad9618831cee221557319b3de",
+    "file": "data/experiments/tasks/collaborative-tables-access.md"
+  },
+  "prompt_sha256": "c870fc52be8b5bb4a5f5a7201edb3e5814b0a2b47359f62f08c08dc43d6d932c",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:58:58.273194+00:00",
+  "ended_at": "2026-10-10T10:59:51.397131+00:00",
+  "elapsed_seconds": 53.123937,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "Existing authorized project Free account, supplied by controller; not registered by measured executor",
+      "provided": true
+    },
+    "web_search": "live",
+    "preparation_note": "New overseas access baseline. Existing current personalFree account key supplied and new empty parent workspace prepared by controller; no self-registration claim. Execution creates and reads its own blank child through assigned route. No old business state/script/answer; capture raw privately and redact registered key before separate grading. Free quota remaining unknown, first403/429/payment stops. Native model/harness40 requests600s/300s and fixed50USD deadline unchanged. Operator corrected a nonexistent profile transport probe before any model dispatch. Original REST404 hold retained; this target is official entry transport only, not authenticated capability.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791630528.273006,
+      "started_epoch": 1791629938.273006
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "执行者使用指定 Grist rest-api 入口（https://docs.getgrist.com/api），在授权父工作区 [PRIVATE_WORKSPACE_ID] 内用 POST 新建独立空文档 [SERVICE_SECRET]（id [PRIVATE_DOC_ID]），随后 GET /docs/{id} 与 /tables 真实回读同一远端资源，返回 200 且标识一致、仅含 Grist 自带空白表 Table1；连接配置写入指定持久目录，答复给出链接、账号来源、自助步骤、人工门槛与免费限制。与 reference.json 核对一致。",
+  "usage": {
+    "input_tokens": 269776,
+    "cached_input_tokens": 247936,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6671,
+    "reasoning_output_tokens": 3855
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://www.getgrist.com/pricing/",
+      "grading/artifacts/evidence/grist-rest-readback-redacted.json"
+    ],
+    "note": "Grist Free 计划 $0，API 访问包含在免费额度内；本次仅 4 次 REST 调用，未付款、未绑卡、未购订阅。",
+    "applicability": {
+      "rule": "Grist Free 计划定价为 $0，包含 REST/MCP API 访问（3k calls/month/team），无按次费用。",
+      "observed": "组织计费产品为 personalFree、paid=false、inGoodStanding=true，maxApiCallsPerOrgMonth=3000；本次运行仅 4 次成功服务操作，处于免费额度内。",
+      "evidence": "grading/artifacts/evidence/grist-rest-readback-redacted.json 的 free_entitlement_observed 字段；免费规则见 https://www.getgrist.com/pricing/ 的 Free 计划与 API access 3k calls/month/team。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-afs-grader",
+    "reviewed_at": "2026-10-10T12:10:35.588976+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定服务 Grist 的指定 rest-api 入口实际调用（https://docs.getgrist.com/api），未改用 MCP 或其他入口",
+        "passed": true,
+        "evidence": "execution/artifacts/grist_rest.py 的 BASE 常量为 https://docs.getgrist.com/api，以 Authorization Bearer 调用 /workspaces、/docs 等 REST 路径；execution/answer.md 步骤 2-4 与此一致；实测 HTTP 200。"
+      },
+      {
+        "criterion": "在授权父工作区（id [PRIVATE_WORKSPACE_ID]，名 [SERVICE_SECRET]）内新建本轮唯一独立空容器，名称含本轮标识",
+        "passed": true,
+        "evidence": "GET /workspaces/[PRIVATE_WORKSPACE_ID] 返回 docs:[]（创建前为空），POST /workspaces/[PRIVATE_WORKSPACE_ID]/docs {\"name\":\"[SERVICE_SECRET]\"} 返回 doc id [PRIVATE_DOC_ID]；见 evidence/grist-rest-readback-redacted.json。"
+      },
+      {
+        "criterion": "通过指定入口重新读取该容器的元数据，确认访问的是同一远端资源，链接与标识一致",
+        "passed": true,
+        "evidence": "GET /docs/[PRIVATE_DOC_ID] 返回 200，id=[PRIVATE_DOC_ID]、urlId=[PRIVATE_DOC_URL_ID]、workspace.id=[PRIVATE_WORKSPACE_ID]、access=owners，与新建返回的 id 及答复链接 [PRIVATE_DOC_URL] 一致。"
+      },
+      {
+        "criterion": "容器保持为空，未预建业务字段/记录，未访问其他工作区或旧文档",
+        "passed": true,
+        "evidence": "GET /docs/{id}/tables 仅返回默认空白表 Table1（无字段/记录）；操作仅针对新建文档与提供的父工作区 [PRIVATE_WORKSPACE_ID]，无其他资源读取记录。"
+      },
+      {
+        "criterion": "通用连接配置保存到本轮指定持久目录，可供新会话复用且不泄露密钥",
+        "passed": true,
+        "evidence": "写入 /home/node/service-tools/service-config.json（记录 base URL、org/workspace/container 标识与文档链接，chmod 600）；密钥仅留在已有私有 credentials.json，配置只引用其路径；答复仅给出配置位置，未输出秘密。"
+      },
+      {
+        "criterion": "答复说明容器链接/标识、实际账号来源、真实自助步骤、人工门槛与有依据的免费限制（未知项注明未知）",
+        "passed": true,
+        "evidence": "execution/answer.md 给出文档链接与 id、说明账号/API key 由总控提供非自助注册、列出 4 次服务操作步骤、说明无人工阻碍、并列出 personalFree/paid=false、3000 次/月 API 及各项限额，剩余额度记未知。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.026547768,
+      "kind": "estimated",
+      "scope": "Independent grader overhead, frozen estimate not invoice, separate from execution.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026547768,
+          "usage_sha256": "ab962a8883c3e6304d4197024fb5503c66e769a8ffcd4b0c0f8abaa340fda125"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-grist-rest-access-baseline-preflight2/execution/answer.md",
+      "sha256": "658ff633a6b77dfb9856815e791cf7dd4091a538744c6003d2c726e8b4c83310",
+      "note": "Original final/intermediate answer with registered private identities/links redacted; delivery verdict unchanged.",
+      "source_sha256": "98b9d64cd8aaf4cfd2b52b624ce8ee227d309394bf4424f3aef71d155839546f",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Actual private child document identifiers and links from the frozen baseline service config",
+        "Actual short private workspace ID at exact numeric/text token boundaries"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-grist-rest-access-baseline-preflight2/public-review/verification-excerpt.json",
+      "sha256": "513aa4a1309d2c16b770aad09dad0ddb41db18d096131bf2eb6cf04ad5d1864c",
+      "note": "Minimal independent grading excerpt, original source hashes and controlled synthetic readback observations; no raw logs or credentials.",
+      "source_sha256": "15cc085a2292ec82f757bb5f5b23141ae25c16e516312b5bb3f798cddece7614",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Actual private child document identifiers and links from the frozen baseline service config",
+        "Actual short private workspace ID at exact numeric/text token boundaries"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-grist-rest-access-baseline-preflight2",
+    "run_sha256": "3706a670db83f88ad9831c15e578d0849d2436e750ba897869fa2b08fd5314bf",
+    "events_sha256": "590c7291384fc24a30afd6a9e6cd302471ca7fd4ad2ef00201731c29e2066cac",
+    "answer_sha256": "98b9d64cd8aaf4cfd2b52b624ce8ee227d309394bf4424f3aef71d155839546f",
+    "review_sha256": "a8e18a4ca94da5b4e70e2d4cc6a2badb8635fc1d4000c17502f597ce3c18f847",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged. Actual child document identifiers, URL aliases, names and links from the frozen service config were registered locally and redacted where present.",
+    "original_independent_review_sha256": "ee8757423566d0e9d316783a3bfc33da7bb099fdbb10b38a24da82d1ef0b5e65",
+    "publication_review_note": "Minimal publication evidence and private identity redaction only; original task verdict, checks/outcome, measured usage and independent service-fee verdict unchanged.",
+    "publication_identity_redaction": {
+      "private_source": "grist/baselines/rest/service-tools.private.tar::./service-config.json",
+      "archive_sha256": "1f94454731e5190e3d6c71552e6260d66eadf75c71850f7cc0ee4499bc658301",
+      "config_sha256": "3efd02570332b5abb8e78c04a8a3b1c3ef2fb5c9356bf29a3ee7579e2065e5e0",
+      "scope": "Actual child document pointer from the frozen baseline service config; concrete identifiers and links registered locally and redacted only in public copies. Frozen original registration subset and raw grading/hash files retained.",
+      "short_workspace_identity": {
+        "field": "workspace_id",
+        "value_length": 6,
+        "value_sha256": "3b6616f1390bbb4860de8a2c93d3af556326011ff096811f602ba4b27da315a1",
+        "resources_sha256": "bfcd20d05916e0cd9d1443064ffb2afc842de46682864504b8651781fa0b5c7f",
+        "config_sha256": "3efd02570332b5abb8e78c04a8a3b1c3ef2fb5c9356bf29a3ee7579e2065e5e0",
+        "policy": "Exact actual workspace ID replaced only at numeric/text token boundaries with a private workspace marker. Short IDs remain outside the >=8-character registration list; frozen sources unchanged."
+      }
+    }
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "新建 doc [PRIVATE_DOC_ID] 与回读元数据均 HTTP 200 且标识一致（见 evidence/grist-rest-readback-redacted.json）；答复含链接、配置位置、步骤与免费限制（execution/answer.md）。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7200,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 130,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8431,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 289,
+        "reasoning_output_tokens": 207
+      },
+      {
+        "input_tokens": 8836,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 131,
+        "reasoning_output_tokens": 17
+      },
+      {
+        "input_tokens": 9173,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 72,
+        "reasoning_output_tokens": 7
+      },
+      {
+        "input_tokens": 9385,
+        "cached_input_tokens": 9216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 582,
+        "reasoning_output_tokens": 518
+      },
+      {
+        "input_tokens": 22146,
+        "cached_input_tokens": 9856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 774,
+        "reasoning_output_tokens": 559
+      },
+      {
+        "input_tokens": 23117,
+        "cached_input_tokens": 22912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 425,
+        "reasoning_output_tokens": 28
+      },
+      {
+        "input_tokens": 23558,
+        "cached_input_tokens": 23424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 172,
+        "reasoning_output_tokens": 81
+      },
+      {
+        "input_tokens": 23987,
+        "cached_input_tokens": 23680,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 565,
+        "reasoning_output_tokens": 428
+      },
+      {
+        "input_tokens": 24586,
+        "cached_input_tokens": 24448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 236,
+        "reasoning_output_tokens": 62
+      },
+      {
+        "input_tokens": 25584,
+        "cached_input_tokens": 24704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1569,
+        "reasoning_output_tokens": 1091
+      },
+      {
+        "input_tokens": 27169,
+        "cached_input_tokens": 27008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 848,
+        "reasoning_output_tokens": 788
+      },
+      {
+        "input_tokens": 28111,
+        "cached_input_tokens": 27904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 187,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 28493,
+        "cached_input_tokens": 28288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 691,
+        "reasoning_output_tokens": 60
+      }
+    ],
+    "source_sha256": "cb0358904ff0436c39d558b8d793d003ad32f5ea4d21a928c66a770aab649d19",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 269776,
+      "cached_input_tokens": 247936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6671,
+      "reasoning_output_tokens": 3855
+    },
+    "totals": {
+      "input_tokens": 269776,
+      "cached_input_tokens": 247936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6671,
+      "reasoning_output_tokens": 3855
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

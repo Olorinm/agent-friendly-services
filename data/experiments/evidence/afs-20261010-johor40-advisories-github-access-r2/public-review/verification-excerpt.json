@@ -1,0 +1,120 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-github-access-r2",
+  "independent_assessment_sha256": "cef10f6926d001246c768f91fdd20c7ce2b86bab719bedbf22513d615c89145a",
+  "independent_status": "completed",
+  "independent_reason": "匿名公共入口按指定方式完成真实查询：GET https://api.github.com/advisories（ecosystem=npm，per_page=3）返回 HTTP 200 且含 3 条可识别公告，单条 GET /advisories/GHSA-pwhx-cvv3-qj5c 亦返回 200；答复中的公告标识、关联包名与来源与原始响应一致，可复用连接配置保存在授权持久位置 /home/node/service-tools/service-config.json（retained-files.json 列明，匿名无秘密）。接入步骤、账号来源（匿名、无账号）与实际阻碍（60 次/小时限流）与响应头一致。",
+  "checks": [
+    {
+      "criterion": "real_query：做一次真实查询并取得可识别公告记录，报告公告标识、关联包名与来源",
+      "passed": true,
+      "evidence": "原始响应 execution/artifacts/results/list_npm.json 与 results/get_GHSA-pwhx-cvv3-qj5c.json 含 GHSA-pwhx-cvv3-qj5c/CVE-2026-108259（@tinacms/cli <=2.7.0）、GHSA-x34j-47hf-4xg7/CVE-2026-108261（tinacms, @tinacms/app）、GHSA-c42q-qvc3-j6vg/CVE-2026-108260（@tinacms/web-components），来源 html_url 一致；execution/answer.md 摘录与之一致。"
+    },
+    {
+      "criterion": "reusable_configuration：在授权持久位置保存后续查询所需配置并可复用，keyless 入口不虚构凭据",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列 service-config.json；配置内容为 base_url=https://api.github.com、/advisories 端点、规定请求头，auth.type=anonymous、credential_required=false，无可泄露秘密（见 review-packet/tools/0011、0015 中该文件内容）。"
+    },
+    {
+      "criterion": "actual_barriers：说明接入步骤、账号来源、自助步骤及实际人工或申请要求",
+      "passed": true,
+      "evidence": "execution/answer.md 说明匿名调用、无需注册/令牌、无人工或申请要求，并指出匿名核心配额 60/h 需退避；headers_list.txt 实测 x-ratelimit-limit=60、remaining=57，一致。"
+    },
+    {
+      "criterion": "scope：仅免费公开公告与防御性元数据，不修改仓库、不运行漏洞、不扫描、不注册/付费/发消息",
+      "passed": true,
+      "evidence": "工具记录仅为文档读取与对 /advisories 的只读 GET（curl/python urllib），无写入服务、无依赖安装、无扫描或漏洞运行；User-Agent 使用指定标识。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务匿名入口实际返回 HTTP 200 的真实公告（列表 3 条 + 单条详情），答复与响应一致；无网络/权限/预算阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "9f69a12a71a7d3776dc8d6f6601bdaf285a45f867ea790876c7b4db81931fbe6",
+      "note": "执行者最终答复：公告标识、包名、来源、配置位置、接入步骤与阻碍。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/response-summary.md",
+      "private_source_sha256": "fc69858d77024298b2d8d9a92e38ad52df6586ada98592a2e148ce627444e57a",
+      "note": "从原始响应摘录的脱敏业务字段与限流头对照摘要。"
+    },
+    {
+      "private_source": "execution/artifacts/results/get_headers.txt",
+      "private_source_sha256": "452148898c3b736c33fd4713ab2590b28b73d9ac46503f58fdc8c2aeaab06f49",
+      "note": "单条查询的实际限流响应头（60/h，remaining=56/used=4）。"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "持久位置保留的文件清单：service-config.json。"
+    }
+  ],
+  "frozen_task_sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+  "frozen_prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "reference_sha256": "e48f3bdee2177a32b42e49454316e9b8a95c6700ad26555e1cf1d94eed29b694",
+  "execution_answer_sha256": "9f69a12a71a7d3776dc8d6f6601bdaf285a45f867ea790876c7b4db81931fbe6",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/",
+          "https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/",
+          "https://docs.github.com/en/rest/security-advisories/global-advisories"
+        ],
+        "source_ids": [
+          "github-advisory-free-availability",
+          "github-rest-announcement",
+          "github-global-advisories-docs"
+        ],
+        "note": "与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。",
+        "applicability": {
+          "rule": "复用冻结GitHub官方免费提供声明、REST入口发布对应说明和当前global-advisories文档：免费数据库数据可经API读取，本轮GET /advisories及/advisories/{ghsa_id}公开元数据读取适用。开放许可与匿名成功不作为独立免费依据。",
+          "observed": "run.json指定public-advisories-api及https://api.github.com/advisories，phase=access且service_credentials.provided=false。保留headers含GitHub服务/JSON/API版本2026-03-10/60次限额；这些只支持入口适用性。 保留记录身份：GHSA-pwhx-cvv3-qj5c；URL=https://api.github.com/advisories/GHSA-pwhx-cvv3-qj5c。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/run.json sha256=51f497055509abba9f66fba291d7096c7fa9c41ef7176e204aa433df83d9c1ae; data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/headers_list.txt sha256=179a0012051100a99cf65b3016ed7aeb0ce18a5b98483cf28be40caaa678eb84; data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/results/get_headers.txt sha256=452148898c3b736c33fd4713ab2590b28b73d9ac46503f58fdc8c2aeaab06f49; data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/results/get_GHSA-pwhx-cvv3-qj5c.json sha256=108da54c43004b01a3e64203562f51c663b6447f9a77fecd9fcf56a3c68fbe9e"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/run.json",
+          "sha256": "51f497055509abba9f66fba291d7096c7fa9c41ef7176e204aa433df83d9c1ae"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/headers_list.txt",
+          "sha256": "179a0012051100a99cf65b3016ed7aeb0ce18a5b98483cf28be40caaa678eb84"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/results/get_headers.txt",
+          "sha256": "452148898c3b736c33fd4713ab2590b28b73d9ac46503f58fdc8c2aeaab06f49"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r2/execution/artifacts/results/get_GHSA-pwhx-cvv3-qj5c.json",
+          "sha256": "108da54c43004b01a3e64203562f51c663b6447f9a77fecd9fcf56a3c68fbe9e"
+        }
+      ],
+      "limits": [
+        "0由明确官方免费提供规则及实际入口适用链支持；匿名成功、未提供付款和60次限额本身不证明免费。",
+        "未查看正式账单/金额回执；本金额为confirmed_free，不是实付报告。",
+        "仅核对最少响应身份及入口事实，不重判status/checks/outcome、模型费用、用量、任务正确性或许可履行。",
+        "未读取请求Authorization头；无凭据是run.json中的配置事实。公开读取规则本身覆盖本轮公共记录，不据此另判接入自助程度。",
+        "results/get_headers.txt未含可识别的标准HTTP状态或相关响应头，本复核不将它当作独立成功或费用回执。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

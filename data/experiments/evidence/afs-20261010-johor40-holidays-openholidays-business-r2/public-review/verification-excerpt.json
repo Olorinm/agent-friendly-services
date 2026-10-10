@@ -1,0 +1,63 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-openholidays-business-r2",
+  "independent_assessment_sha256": "00c870608e27e07c8a5ad1e78f358aa4cbf17a79edfdf180a381a4b7b47ad9fe",
+  "independent_status": "completed",
+  "independent_reason": "指定 OpenHolidays API 真实查询成功（HTTP 200），按 DE-BE 与 2027 年返回 10 条 Public 节假日，与事前冻结的独立柏林官方参考逐项一致：日期、节日身份、顺序、总数均正确，未混入他州节日、学校假期或普通星期日，周末照列未补休，来源可追溯。",
+  "checks": [
+    {
+      "criterion": "通过指定服务完成真实查询并在答复中注明可追溯来源",
+      "passed": true,
+      "evidence": "工具记录显示对 https://openholidaysapi.org/PublicHolidays?countryIsoCode=DE&subdivisionCode=DE-BE&validFrom=2027-01-01&validTo=2027-12-31 的 curl 请求 HTTP 200，原始响应存于 execution/artifacts/publicholidays-de-be-2027.json（sha256 5cd2f951...）；answer.md 明确给出该 GET 与官方入口。"
+    },
+    {
+      "criterion": "2027 年柏林州公共节假日完整，且仅含柏林适用节日",
+      "passed": true,
+      "evidence": "响应 10 条 type=Public，与 reference.json 冻结的 10 个官方日期/身份完全对应；仅他州节日、学校假期、纪念日、普通星期日均未出现；妇女节条目 subdivisions=[DE-BE,DE-MV]，属柏林适用。"
+    },
+    {
+      "criterion": "日期明确到年月日，名称可为德文或英文",
+      "passed": true,
+      "evidence": "answer.md 每行 ISO 日期 2027-MM-DD 加 DE/EN 名称（如 2027-12-25 1. Weihnachtsfeiertag / Christmas Day），与参考语义一致。"
+    },
+    {
+      "criterion": "按日期升序并给出准确去重总数",
+      "passed": true,
+      "evidence": "answer.md 表格自 2027-01-01 至 2027-12-26 升序排列，声明总数 10，与响应条目数及参考 expected_count=10 相符，无重复。"
+    },
+    {
+      "criterion": "周末节日照列、不自行移至工作日、无补休或学校假期",
+      "passed": true,
+      "evidence": "05-01(周六)、10-03(周日)、12-25(周六)、12-26(周日) 均按实际当地日期列出，答复说明未做补休推算，响应中无替代假日条目。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 OpenHolidays PublicHolidays 请求返回 HTTP 200，合法限定 DE-BE 与 2027 年；用户收到按日期升序的 10 条清单、总数与来源，无阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "91b56f82644f26f5ba962d89b6f7ff7f01f1ed008d3acba2f5d3aabbd5c392ea",
+      "note": "执行者最终答复：10 条柏林业 2027 公共节假日及查询来源。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/openholidays-2027-verification.md",
+      "private_source_sha256": "9a7df22ceb09719a9558b541336cfc9a2576f42975db0a51b6e0e5c7ff4796a7",
+      "note": "本次核验摘要：请求与 HTTP 200、州代码核对、10 条结果与官方参考一致、官方免费规则。"
+    }
+  ],
+  "frozen_task_sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+  "frozen_prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "reference_sha256": "a38c7856cd3ffa6652114c2568a05cbbaecee50fb2decf9cab29130527652ce3",
+  "execution_answer_sha256": "91b56f82644f26f5ba962d89b6f7ff7f01f1ed008d3acba2f5d3aabbd5c392ea",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "OpenHolidays API; ODbL, https://openholidaysapi.org/ . No full holiday database is distributed here."
+}

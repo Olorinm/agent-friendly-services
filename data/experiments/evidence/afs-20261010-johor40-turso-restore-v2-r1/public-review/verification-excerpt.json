@@ -1,0 +1,98 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-turso-restore-v2-r1",
+  "independent_assessment_sha256": "87cb68c57a46f5040dc57d40c40642cec8ab2796ac79aa80ef0b7e96b3c263fd",
+  "status": "completed",
+  "reason": "执行者在指定 Turso 服务上从真实源库导出可留存逻辑备份（backup.sql/backup.json/manifest.json），在既有 group 内新建独立的空目标库（建库时业务表数=0），实际用该备份逐条恢复到目标库，并重新连接核对。独立控制器读回确认目标库与源库为不同逻辑资源、目标库完整 schema 与全部行同源库、源库前后完全未变。交付含备份路径、简短恢复方法、非敏感新库位置、各表行数与核对结果及免费/到期说明。",
+  "checks": [
+    {
+      "criterion": "可留存逻辑备份：从真实源库导出包含两表结构与全部记录的标准、可脱离原服务恢复的逻辑备份",
+      "passed": true,
+      "evidence": "execution/artifacts/backup/backup.sql 为 19 行标准 SQLite/libSQL dump：CREATE TABLE lists/todos 完整 DDL + 7 条 INSERT，note 的 NULL 与 '' 分别写出；execution/artifacts/backup/manifest.json 记录 sha256(38695c35…)/字节数/行数；DELIVERY.md 给出 sqlite3 target.db < backup.sql 恢复方法。非仅快照/分支链接。"
+    },
+    {
+      "criterion": "实际使用该备份恢复到本次新建、起初没有业务表的独立远程目标库",
+      "passed": true,
+      "evidence": "工具记录 line20 经 Platform API 在授权既有 group 建目标库 HTTP 200（返回新 DbId）；line65 目标库业务表数=0；line69 读取 backup/backup.sql 逐条 POST /v2/pipeline，12 条语句 HTTP 200 全部 ok；controller-verification.json target.distinct_logical_resource_verified=true 且 target-metadata 为 libsql logical 库。"
+    },
+    {
+      "criterion": "恢复后业务结构关系与数据完整：字段名/类型/PK/FK/NOT NULL/DEFAULT 与全部记录、清单归属、完成状态、文本及 NULL 与空串区别保留",
+      "passed": true,
+      "evidence": "controller-verification/target-after.json 与 source-before.json 的 sqlite_schema DDL、PRAGMA table_info、foreign_key_list 与全部行一致；id 103 note 为空串、101/105 为 NULL；controller target.schema_and_rows_match_source_under_exact_read_queries=true。"
+    },
+    {
+      "criterion": "源库业务表与记录保持不变（未修改/删除）",
+      "passed": true,
+      "evidence": "controller-verification/source-after.json 与 source-before.json 完全一致；controller-verification.json source.unchanged_complete_schema_and_rows=true。全部源库交互（make_backup、重读）仅 SELECT/PRAGMA，无源写操作。"
+    },
+    {
+      "criterion": "恢复结束后重新连接新库读取核对（持久化结果）",
+      "passed": true,
+      "evidence": "工具记录 line73/76 用目标库 token 重连 /v2/pipeline 读取 schema、rows、PRAGMA foreign_key_check（无违规）、integrity_check=ok 与行数 2/5；controller-verification/target-after.json 独立读回一致。"
+    },
+    {
+      "criterion": "可用交付：备份、简短恢复方法、非敏感新库位置、各表行数与核对结果、免费/到期说明",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/DELIVERY.md：行数 lists 2/2/2、todos 5/5/5；恢复方法 sqlite3 与 Turso /v2/pipeline；新库名称/db_id/host/group/region；Starter $0、overages=false、额度与单库自动到期未知；凭据仅存私有目录，未输出。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "导出、建空目标库、用备份恢复、重连核对四项指定服务操作均有真实 HTTP 200 回执（工具记录 line20/65/69/73/76）与控制器独立读回（target-after、source-after）印证；源库无写操作，全程无权限/限流/付费阻碍。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/artifacts/backup/backup.sql",
+      "sha256": "38695c3573e2abf7504e762563f1a25e34e1555a46a383a434af7dc913a16203",
+      "note": "可留存逻辑备份：标准 SQLite/libSQL DDL + 全部记录，NULL/空串区分保留"
+    },
+    {
+      "private_source": "execution/artifacts/backup/manifest.json",
+      "sha256": "fa9dc49507b5c229f36e6a38bc81a164d51369b6ae2097c7435dae348d812263",
+      "note": "备份文件 sha256/字节数与行数清单"
+    },
+    {
+      "private_source": "execution/artifacts/DELIVERY.md",
+      "sha256": "075ecfd71064b26a2957560717760e10dbd278b033bb86fab75cf79adadae638",
+      "note": "完整交付：备份说明、恢复方法、新库位置、行数核对、免费/期限"
+    },
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "03cb69025021d72bb8a54fa3fa56415826ad5ba30c210a8906e13c4f1b08732a",
+      "note": "执行者最终答复"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/target-after.json",
+      "sha256": "eb023db4f4ecc88b709f478f42bb161488d2e8bc32897db67c46d70fe882ee00",
+      "note": "独立读回目标库完整 schema 与全部行，同源库"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/source-after.json",
+      "sha256": "e0548d5c35f5fd0c5c60352d367665c8b6436ef54992f48c2726eb9aa8c4cca5",
+      "note": "独立读回源库前后不变"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/controller-verification.json",
+      "sha256": "4a07f9804fbf69f63d992f51444d4299284f3f0d12772f2c13f3586f61bb41d4",
+      "note": "独立核验标志：目标为不同逻辑资源、源库未变、账户 starter $0/overages=false"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/controller-readback-summary.md",
+      "sha256": "ce49c3685cd47bbdcaa07a215ecb955e23a915937b28f92f0ba3ec8c947895ff",
+      "note": "验收者摘录的脱敏业务证据摘要"
+    }
+  ],
+  "task_sha256": "532b8eb9cf7e67f5e173bb6ca0de0aec20161e34a54f673547565461688e8172",
+  "prompt_sha256": "689effdbc55797cc5e507012ac6bb0122e9f8fc0a9e5ca5f6cc8293c7d0ae60a",
+  "reference_sha256": "503d2c3b83ea8011fde8e9b5d866c8d670c69181c303d6d29f9c89544fec3186",
+  "answer_sha256": "03cb69025021d72bb8a54fa3fa56415826ad5ba30c210a8906e13c4f1b08732a",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate.",
+    "Turso v2 repeated restore with controller-created fresh verified source and executor-created target. Full schema/data readback does not by itself prove empty target origin or actual backup use; unchanged independent grading checks authentic operations and artifacts."
+  ]
+}

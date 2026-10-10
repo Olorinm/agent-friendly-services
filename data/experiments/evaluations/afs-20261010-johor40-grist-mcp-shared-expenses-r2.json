@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-grist-mcp-shared-expenses-r2",
+  "service_id": "grist",
+  "route_id": "hosted-mcp",
+  "entry_url": "https://docs.getgrist.com/api/mcp",
+  "task": {
+    "description": "我和室友按一人一半分摊共同支出。请把材料里的 10 月账目做成在线账本，保留每笔日期、用途、付款人和人民币金额，并在表里显示各自已付、应分摊金额，以及谁还需补给谁多少钱。以后追加账目或修正金额时，汇总要自动更新，不用再找 Agent 或运行本地脚本。给我私人表格链接、当前结算数和一句话说明在哪里继续记账；不要实际转账、邀请或通知任何人。",
+    "inputs": "两位合成人员是林青、周舟，所有列出的支出都由两人各承担 50%，本题尚无补差转账。记录如下（日期 / 用途 / 付款人 / 人民币元）：2026-10-01 / 房租 / 林青 / 1800.00；2026-10-02 / 超市采购（一） / 周舟 / 156.40；2026-10-03 / 电费 / 林青 / 92.60；2026-10-04 / 家居用品 / 周舟 / 48.00；2026-10-05 / 宽带 / 周舟 / 100.00；2026-10-07 / 超市采购（二） / 林青 / 203.00。每笔明细完整保留一次；金额及汇总以人民币元表示，精确到分。只做这两人本月的共同支出，不混入个人支出、退款、其他币种、已转账记录或其他月份，不需要第三人、按类别统计或银行连接。在线账本中的汇总要由明细持续计算：用户新增同类明细或修改现有金额后，各自已付、应分摊及补差方向与金额会相应更新，无需修改汇总值、再次运行本地程序或调用 Agent。字段名、表结构和计算实现可以自行选择。执行时只录入这六笔；交付后验收会在同一个本轮专用文档中模拟新增一笔这两人之间的本月共同支出，再修正一笔现有明细的金额，核对自动更新；不会改分摊比例、加入新人或引入上述范围外条件。验证后保留这些合成变更，并在测评记录中说明；你的当前结算答复仍按最初六笔核对。",
+    "expected_output": "一份真实可打开的私人在线账本链接，含六笔初始明细及会随明细变化自动更新的在线汇总；答复说明两人各自已付、应分摊和补差方向、金额，并简短指出继续添加或修改明细的位置。无需公开分享、邀请成员、实际支付、导出文件或交审计程序。",
+    "success": "通过指定服务入口在本轮新空容器建立真实在线账本，完整保留六笔初始明细；在线汇总及初次答复中的两人已付、应分摊和补差方向、金额与输入一致，链接指向该账本，继续记账说明可用。执行结束后，总控仅在该新文档按事前冻结的合成材料追加一笔明细、再修正一笔已有金额，不修改公式、结构或汇总值，不启动执行 Agent；各阶段的独立远端读取均证明明细和在线汇总正确相应变化。独立验收 Agent 核对初态、追加态、修正态原始回执与参考，不获得凭据或运行执行者自评代码。不要求特定字段名、公式语法、固定表数量或显示布局；按人民币分核对金额，允许正常原生数值表示误差。",
+    "failure": "没有真实在线账本、仅本地或聊天中计算、初始明细遗漏重复或内容改变、金额或补差方向错误、链接与目标不符、没有可继续记账的在线结果、汇总只是固定填值或不能随规定的普通明细变化自动更新、改用其他入口、越界访问或预算内未完成。限流、权限或免费额度阻碍如实记录；准备资源、受控验证或独立回执缺失时说明验收材料缺口，不直接归咎服务，也不凭执行者自报判完成。",
+    "resources": "使用已授权的 Grist 免费 Personal 账户；总控为两条路线分别提供新工作区中的一个独立空文档，身份、账号来源与私有配置位置见 ENVIRONMENT.md。空文档仅可带默认空占位表，不预置业务字段、记录、公式或调用脚本。只在交付的该文档中通过指定入口完成业务，不再创建文档或工作区；可复用已独立验收接入的通用安装与配置。最多三张业务表（另可保留默认空占位表，总表上限四张，不计服务内部元数据表）、30 条业务记录及40次服务调用；两入口采用相同模型与执行预算，具体时间和模型请求上限由 ENVIRONMENT.md 冻结。遇服务403、429或需要付费立即停止，不换账号、入口或出口绕过。只操作本轮确切新资源，不读取其他文档、不公开分享、邀请、通知、绑定支付方式或开启付费超额。仅用免费额度，可自行查官方文档、安装通用依赖并编写调用代码。总控在执行停止后做输入中告知的一次追加及一次金额修正并冻结前后回执；验收不持有执行凭据。所有账户、工作区、文档标识与私人链接只留私有材料，公开证据脱敏。",
+    "id": "collaborative-tables-shared-expenses-001",
+    "version": "v1",
+    "sha256": "416ee2572d59310bd2fde801fe5425949d9592facb4215c30a90635c3d90238d",
+    "file": "data/experiments/tasks/collaborative-tables-shared-expenses.md"
+  },
+  "prompt_sha256": "acdee65151c95c60f01a11d43ef22786e605681c3b2a117424e26bbd85a9fc84",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T11:29:50.807516+00:00",
+  "ended_at": "2026-10-10T11:32:52.320823+00:00",
+  "elapsed_seconds": 181.513307,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "Existing authorized project Free account, supplied by controller; not registered by measured executor",
+      "provided": true
+    },
+    "web_search": "live",
+    "preparation_note": "Predeclared3round same-service REST/MCP comparison with one existing Free account, serial shared-resource lock; orderREST/MCP,MCP/REST,REST/MCP. Fresh physical container each round cloned from independently passed overseas access generic baseline; stable logical runtime identity denotes that baseline, not same physical container. Only new blank resource pointers changed; no old task scripts/responses/formulas/answers or session/home copied. Defaultplaceholder empty verified by controller before dispatch. Preparation/verification overhead separate, remaining quota unknown. Model40/600s/300s/closure0.85 and fixed50USDdeadline unchanged.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791632380.8073463,
+      "started_epoch": 1791631790.8073463
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "指定 hosted-MCP 入口（https://docs.getgrist.com/api/mcp）在本轮新 Grist 文档真实建立在线账本：六笔初始明细完整保留一次，在线汇总（已付/应分摊/补差）与输入一致；执行者交付了可打开的私人链接、当前结算数与继续记账说明。总控暂停执行者后仅追加一笔明细、再修正一笔金额，独立远端读取回执显示在线汇总相应自动更新（追加态合计 2442.40、修正态合计 2422.40），公式/结构/汇总值均未被修改。资源、入口与范围均符合委托。",
+  "usage": {
+    "input_tokens": 877632,
+    "cached_input_tokens": 848000,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 16050,
+    "reasoning_output_tokens": 8786
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "frozen-execution/ENVIRONMENT.md：Grist 免费 Personal 账户；REST/MCP 共享 3000 calls/site/month；MCP 当前无额外服务费，模型费另计。",
+      "controller-verification/controller-verification.json：plan personalFree、paid=false、inGoodStanding=true。"
+    ],
+    "note": "服务费用按 Grist Personal Free 免费额度计，本次未产生需付费的服务费；模型费另计，不在此列。剩余共享额度未知。",
+    "applicability": {
+      "rule": "Grist Personal Free 计划内的 REST/MCP 调用不收费（共享 3000 calls/site/month 免费额度，MCP 无额外服务费）。",
+      "observed": "本轮文档位于 personalFree 且 paid=false、inGoodStanding=true；执行仅约 20+ 次 MCP 调用（含初始化/发现），远低于 3000/月免费额度，未触发 403/429 或付费要求。",
+      "evidence": "frozen-execution/ENVIRONMENT.md 免费规则；controller-verification/controller-verification.json 的 plan 字段；review-packet 工具记录中执行者的 MCP 调用次数。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "独立验收 Agent (afs-20261010-johor40-grist-mcp-shared-expenses-r2)",
+    "reviewed_at": "2026-10-10T12:10:35.324767+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定 hosted-MCP 入口在真实在线服务中建立账本（非本地/聊天计算）",
+        "passed": true,
+        "evidence": "执行者 mcp.py/gcall.py 调用 https://docs.getgrist.com/api/mcp，initialize 返回 Grist 服务；grist_create_table/add_records 返回真实表与记录 ID；controller-verification/initial/02-tables.json 经官方接口读回两张业务表。"
+      },
+      {
+        "criterion": "六笔初始明细完整保留一次，日期/用途/付款人/人民币金额与输入一致",
+        "passed": true,
+        "evidence": "controller-verification/initial/04-records-Expenses.json 与 execution/answer.md 核对：2026-10-01 房租 林青 1800.00、10-02 超市采购（一） 周舟 156.40、10-03 电费 林青 92.60、10-04 家居用品 周舟 48.00、10-05 宽带 周舟 100.00、10-07 超市采购（二） 林青 203.00，逐笔无遗漏/重复/变更。"
+      },
+      {
+        "criterion": "在线汇总与答复中两人已付/应分摊/补差方向与金额正确",
+        "passed": true,
+        "evidence": "controller-verification/initial/06-records-Settlement.json：林青 已付 2095.60/应分摊 1200.00/补差 +895.60；周舟 已付 304.40/应分摊 1200.00/补差 -895.60；合计 2400.00。与 execution/answer.md 结算（周舟补给林青 895.60）一致，与 reference.json baseline 相符。"
+      },
+      {
+        "criterion": "私人链接指向该账本且未被公开分享/邀请",
+        "passed": true,
+        "evidence": "answer.md 给出 https://docs.getgrist.com/doc/[SERVICE_SECRET]；controller-verification/initial/01-metadata.json 记录该文档 access=owners 且 identity_matches_bound_new_resource=true。"
+      },
+      {
+        "criterion": "汇总由明细持续计算：追加一笔、修正一笔金额后自动更新（未改公式/结构/汇总值）",
+        "passed": true,
+        "evidence": "总控停止执行者后仅两次普通写：after-append/01-mutation.json 新增 清洁用品 42.40(周舟)，after-append/03-records-Settlement.json 变为合计 2442.40、应分摊 1221.20、补差 ±874.40；after-correction/01-mutation.json 将 203→183，after-correction/05-records-Settlement.json 变为合计 2422.40、应分摊 1211.20、补差 ±864.40。均与 reference.json 追加态/修正态一致，Settlement 公式列（Paid/Share/Balance）保持不变。"
+      },
+      {
+        "criterion": "答复简短指出继续记账位置，且未实际转账/邀请/通知",
+        "passed": true,
+        "evidence": "execution/answer.md 第 8 行说明在页面「共同支出账本」的「共同支出明细」表新增行或改金额、上方结算汇总自动更新；文内声明未转账/邀请/通知，工具记录中无相关操作。"
+      },
+      {
+        "criterion": "资源与范围合规：仅用本轮新文档、≤3 业务表、≤30 记录、≤40 服务调用、指定入口",
+        "passed": true,
+        "evidence": "业务表 2 张（Expenses、Settlement），默认占位表已移除；初始 6 条记录；执行记录约为 20+ 次 MCP 调用（<40）；仅调用 hosted-mcp 入口，未创建其他文档/工作区。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "afs-20261010-johor40-grist-shared-expenses-comparison-r2",
+      "round": 2,
+      "snapshot_sha256": "b4621a6d7458d5c58ae603291d1059b3b283b427ad3d299d6fa17bcdc17af189",
+      "run_ids": [
+        "afs-20261010-johor40-grist-mcp-shared-expenses-r2",
+        "afs-20261010-johor40-grist-rest-shared-expenses-r2"
+      ],
+      "available_run_ids": [
+        "afs-20261010-johor40-grist-mcp-shared-expenses-r2",
+        "afs-20261010-johor40-grist-rest-shared-expenses-r2"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.036059244,
+      "kind": "estimated",
+      "scope": "Independent grader overhead, frozen estimate not invoice, separate from execution.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.036059244,
+          "usage_sha256": "2d486fafcfe5fbc08e874112b6794244ffaf689cec15c6c766266f4fde9cb2a0"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-grist-mcp-shared-expenses-r2/execution/answer.md",
+      "sha256": "f0cc7e1a8e2fd15b48d6dbe6e911ba3fe4bd9a8ff341c222fc149c929fc75505",
+      "note": "Original final/intermediate answer with registered private identities/links redacted; delivery verdict unchanged.",
+      "source_sha256": "0667763a4a1e31e95acfbcf94a9049325272d24b6a2c397c336d1d1d784f14df",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-grist-mcp-shared-expenses-r2/public-review/verification-excerpt.json",
+      "sha256": "4745c77df747fcf29e307cd1b1fd977dbe58053ded4696df047221ca0cc92b71",
+      "note": "Minimal independent grading excerpt, original source hashes and controlled synthetic readback observations; no raw logs or credentials.",
+      "source_sha256": "628e169b4baa7e6c1c59bfd9c69e86bc8196cd362fb872fc3ae664df1752ae30",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-grist-mcp-shared-expenses-r2",
+    "run_sha256": "2a9975e514206acb60439fc9038d8c4ea4d6123a7059f448fbbf91d98d751182",
+    "events_sha256": "72dab0d67e0fee80036fb17c4a3216dae7909cabc0dc54c12da8251cabae1f08",
+    "answer_sha256": "0667763a4a1e31e95acfbcf94a9049325272d24b6a2c397c336d1d1d784f14df",
+    "review_sha256": "dd14694f1ea677e6e8bd05f97858be50e7eeaeb19d565c835aecd320579db53a",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "31003ac283941440ed3782e0ac98994d81f300f513e055b7823cd06fe6b1c4a2",
+    "publication_review_note": "Minimal publication evidence and private identity redaction only; original task verdict, checks/outcome, measured usage and independent service-fee verdict unchanged."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "hosted-MCP 调用返回真实表/记录 ID，独立远端读回证明在线账本存在且六笔明细与公式汇总正确；追加与修正两态在线汇总自动更新且与参考一致；answer.md 交付了可用链接、结算数与继续记账说明。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7256,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 130,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8612,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 91,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 9435,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 260,
+        "reasoning_output_tokens": 171
+      },
+      {
+        "input_tokens": 10049,
+        "cached_input_tokens": 9600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 245,
+        "reasoning_output_tokens": 50
+      },
+      {
+        "input_tokens": 10504,
+        "cached_input_tokens": 10240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1024,
+        "reasoning_output_tokens": 72
+      },
+      {
+        "input_tokens": 11544,
+        "cached_input_tokens": 11392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 83,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11774,
+        "cached_input_tokens": 11520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 83,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 11933,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 179,
+        "reasoning_output_tokens": 82
+      },
+      {
+        "input_tokens": 12129,
+        "cached_input_tokens": 11904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 155,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 12511,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 211,
+        "reasoning_output_tokens": 31
+      },
+      {
+        "input_tokens": 12763,
+        "cached_input_tokens": 12544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 13321,
+        "cached_input_tokens": 12800,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 137,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 13833,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 176,
+        "reasoning_output_tokens": 32
+      },
+      {
+        "input_tokens": 17785,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3080,
+        "reasoning_output_tokens": 2831
+      },
+      {
+        "input_tokens": 29704,
+        "cached_input_tokens": 20864,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 403,
+        "reasoning_output_tokens": 70
+      },
+      {
+        "input_tokens": 30123,
+        "cached_input_tokens": 29952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 30519,
+        "cached_input_tokens": 30208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2800,
+        "reasoning_output_tokens": 2577
+      },
+      {
+        "input_tokens": 34274,
+        "cached_input_tokens": 33280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 338,
+        "reasoning_output_tokens": 57
+      },
+      {
+        "input_tokens": 35102,
+        "cached_input_tokens": 34560,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1213,
+        "reasoning_output_tokens": 713
+      },
+      {
+        "input_tokens": 37041,
+        "cached_input_tokens": 36224,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 313,
+        "reasoning_output_tokens": 35
+      },
+      {
+        "input_tokens": 37381,
+        "cached_input_tokens": 37120,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 129,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 37529,
+        "cached_input_tokens": 37376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 114,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 37806,
+        "cached_input_tokens": 37632,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 225,
+        "reasoning_output_tokens": 91
+      },
+      {
+        "input_tokens": 38068,
+        "cached_input_tokens": 37888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 137,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 38242,
+        "cached_input_tokens": 38016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 388,
+        "reasoning_output_tokens": 207
+      },
+      {
+        "input_tokens": 38726,
+        "cached_input_tokens": 38528,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 248,
+        "reasoning_output_tokens": 98
+      },
+      {
+        "input_tokens": 38996,
+        "cached_input_tokens": 38784,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 495,
+        "reasoning_output_tokens": 305
+      },
+      {
+        "input_tokens": 39739,
+        "cached_input_tokens": 39424,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 433,
+        "reasoning_output_tokens": 241
+      },
+      {
+        "input_tokens": 40346,
+        "cached_input_tokens": 40064,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 295,
+        "reasoning_output_tokens": 24
+      },
+      {
+        "input_tokens": 40984,
+        "cached_input_tokens": 40576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 907,
+        "reasoning_output_tokens": 641
+      },
+      {
+        "input_tokens": 42396,
+        "cached_input_tokens": 41856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 991,
+        "reasoning_output_tokens": 431
+      },
+      {
+        "input_tokens": 43403,
+        "cached_input_tokens": 43264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 193,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 43804,
+        "cached_input_tokens": 43520,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 255,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "784e914bec41743a14508b545e20aa44751b662ff123585295186fe0bc195de1",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 877632,
+      "cached_input_tokens": 848000,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 16050,
+      "reasoning_output_tokens": 8786
+    },
+    "totals": {
+      "input_tokens": 877632,
+      "cached_input_tokens": 848000,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 16050,
+      "reasoning_output_tokens": 8786
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

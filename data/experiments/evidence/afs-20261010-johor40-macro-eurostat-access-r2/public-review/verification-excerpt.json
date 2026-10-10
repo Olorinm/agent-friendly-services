@@ -1,0 +1,83 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-eurostat-access-r2",
+  "independent_assessment_sha256": "4504b3a0e9d64ef9a56cc44386e9f970bfa096be218aa0df930a0229c7ddf93b",
+  "independent_status": "completed",
+  "independent_reason": "用户委托已达成：执行者按指定 Eurostat Statistics API 入口（.../statistics/1.0/data/）完成两次真实只读数据查询，均返回 HTTP 200 的 JSON-stat 2.0 业务数据（含序列/时间/数值），并将后续调用所需的连接配置写入持久位置 /home/node/service-tools/service-config.json；答复准确说明该入口免费匿名、无需注册/Key，无阻碍。",
+  "checks": [
+    {
+      "criterion": "通过指定服务与入口完成至少一次真实数据查询，返回可解读的序列/时间/数值（文档、健康检查或仅元数据不算）",
+      "passed": true,
+      "evidence": "两次请求命中指定端点：nama_10_gdp?format=JSON&lang=EN&geo=EU27_2020&unit=CP_MEUR&na_item=B1GQ&time=2023 → HTTP 200，value 17294868.6（EU27 2023 年 GDP，当期价百万欧元）；第二次 geo=DE&geo=FR&lastTimePeriod=2 → HTTP 200，geo×time=2×2 四个数值。原始响应见 execution/artifacts/cache/nama_10_gdp_probe.json 与 execution/artifacts/cache/nama_10_gdp_multigeo.json，摘要见 grading/artifacts/evidence/query-results-summary.md。"
+    },
+    {
+      "criterion": "保存后续会话可复用的必要连接配置，且与本次实际调用一致",
+      "passed": true,
+      "evidence": "执行期间将配置写入持久目录 /home/node/service-tools/service-config.json（写入记录见工具调用），内容含端点、GET 方法、请求模板/参数、无认证、请求头 User-Agent 及两次 HTTP 200 验证记录，与实际查询一致；execution/retained-files.json 列出 service-config.json 为保留项。关键字段摘录见 grading/artifacts/evidence/service-config-summary.json。另工作目录保留复用脚本 execution/artifacts/eurostat_query.py。"
+    },
+    {
+      "criterion": "答复准确说明接入步骤与是否存在阻碍（不得声称自行注册或人工协助）",
+      "passed": true,
+      "evidence": "execution/answer.md 第 4-16 行说明 Eurostat API 为免费匿名入口、无需注册或 Key，罗列两次实测结果与已保存的配置文件/脚本位置，并注明署名与 2 秒限流约束；未声称任何注册或人工步骤。"
+    },
+    {
+      "criterion": "使用指定服务/入口，未以其他服务或统计 API 替代",
+      "passed": true,
+      "evidence": "两次调用 URL 均为 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/...，与 ENVIRONMENT.md 指定入口一致；未见指向其他统计 API 的调用。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Eurostat Statistics API 端点两次真实查询成功（HTTP 200 JSON-stat 2.0，见 cache 原始响应），必要配置已写入持久位置并保留，答复完整交付结果与配置。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "2a0e2946c8beb3a6ed2936fb6b477d3bdbce306508077f1179f05fb7599b72f5",
+      "note": "执行者最终答复：实测结果、配置位置与调用方式。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/nama_10_gdp_probe.json",
+      "private_source_sha256": "23348ee5329abb3fa7f7f1fa253b7ca7c5aec9d2287c3442db6d213b27063b95",
+      "note": "指定端点单值查询原始 JSON-stat 2.0 响应（HTTP 200，EU27 2023 GDP 17294868.6）。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/nama_10_gdp_multigeo.json",
+      "private_source_sha256": "13d2a2afe3d2f7757efd62114b747a896a97a4b554c3a218fee566a4cac346da",
+      "note": "指定端点多值/时间参数查询原始响应（DE/FR×2024/2025 四个数值，2×2 维度）。"
+    },
+    {
+      "private_source": "execution/artifacts/eurostat_query.py",
+      "private_source_sha256": "9327424cb3897a2502b5081196d713f3ba264365fedb2f36a8bf10eef4e8559b",
+      "note": "工作目录内复用查询脚本（读取配置、限流、按 URL 哈希缓存）。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/service-config-summary.json",
+      "private_source_sha256": "ceb1c4f9c190436c53395e1be197ef60f304ff2aeb526513bf71984ec890d159",
+      "note": "本次保留连接配置的关键字段脱敏摘录（无密钥，公开匿名入口）。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/query-results-summary.md",
+      "private_source_sha256": "d570303d4786db8c9ffa036cef8ea468eec4075e7535b08e5fca532404354cf7",
+      "note": "两次真实查询的端点、参数与结果摘要。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/eurostat-free-access.md",
+      "private_source_sha256": "6d6559abb83c6c56bea586c1705ab981ac18ebb5959f3efdda28578787f4a0b6",
+      "note": "官方免费规则来源与本次免 Key 访问的适用证据。"
+    }
+  ],
+  "frozen_task_sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+  "frozen_prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "reference_sha256": "dbc3b3fe05e1f4e3e717474fd31780f1c57e3ced5c87e775f62bb8bd87da1a42",
+  "execution_answer_sha256": "2a0e2946c8beb3a6ed2936fb6b477d3bdbce306508077f1179f05fb7599b72f5",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources."
+}

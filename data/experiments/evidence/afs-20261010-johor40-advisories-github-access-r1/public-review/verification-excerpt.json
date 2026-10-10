@@ -1,0 +1,114 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-github-access-r1",
+  "independent_assessment_sha256": "c133d131989d90fca9a40e78b62dcb3a9791e9a270ea3a210e73a4b41f6ec589",
+  "independent_status": "completed",
+  "independent_reason": "指定 GitHub global-advisories 匿名 REST 入口被真实调用：列表查询 GET /advisories?per_page=2&ecosystem=npm 与详情 GET /advisories/GHSA-pwhx-cvv3-qj5c 均返回 HTTP 200，响应含可识别公告标识 GHSA-pwhx-cvv3-qj5c / CVE-2026-108259、关联包 npm/@tinacms/cli（范围 <= 2.7.0）及来源 github.com/tinacms/tinacms，答复与响应一致。连接配置写入授权的持久位置，匿名入口无注册/授权/付款，未越出只读范围。",
+  "checks": [
+    {
+      "criterion": "real_query: 通过指定入口做真实查询，取得可识别公告记录，报告公告标识、关联包名与来源",
+      "passed": true,
+      "evidence": "execution/artifacts/cache/e8cf526a030f5524.json（详情响应：ghsa_id GHSA-pwhx-cvv3-qj5c、cve_id CVE-2026-108259、severity high、type reviewed、包 npm/@tinacms/cli 范围 <= 2.7.0、来源 https://github.com/tinacms/tinacms）；execution/artifacts/cache/list-npm-per_page2.json（列表含同批 GHSA-x34j-47hf-4xg7）；execution/answer.md 与之逐项一致。请求走指定端点 https://api.github.com/advisories，头 Accept: application/vnd.github+json、X-GitHub-Api-Version: 2026-03-10，匿名无 Authorization。"
+    },
+    {
+      "criterion": "reusable_configuration: 保存后续查询所需本地配置并给出位置，可供新会话复用",
+      "passed": true,
+      "evidence": "execution/artifacts 采集到写入记录：service-config.json 内容为匿名端点、base_url、API 版本、Accept 头、客户端标识与限流说明，写入授权持久位置 /home/node/service-tools/service-config.json；execution/retained-files.json 列出 service-config.json 保留。配套可复用脚本 execution/artifacts/query_advisories.py 读取该配置、缓存感知并 >=2s 节流。匿名路径无需账号或密钥，未虚构凭据。"
+    },
+    {
+      "criterion": "actual_barriers: 说明接入步骤、账号来源、自助步骤及实际人工/申请要求",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/result.md 说明：匿名公共只读入口，无需注册/授权/邮箱/付款，故无自助注册或人工申请步骤；唯一约束为共享出口 60 次/小时限流（响应头 x-ratelimit-limit: 60，两次查询后 remaining 由 59 降为 58），未触发 403/429。执行未使用任何既有账号。"
+    },
+    {
+      "criterion": "scope: 仅免费公开公告与防御性元数据，不安装待查软件、运行漏洞或扫描目标",
+      "passed": true,
+      "evidence": "tool 记录仅为文档读取、只读 GET 查询与脚本/配置写入；响应体为公告元数据与引用链，无仓库修改、依赖升级、漏洞运行、目标扫描、无关注册、付款或外发消息。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务经指定入口被真实调用并返回 HTTP 200 可识别公告（详情响应 execution/artifacts/cache/e8cf526a030f5524.json）；答复 execution/answer.md 给出公告标识、关联包、来源、配置位置与接入步骤，与响应一致；未观察到网络、接入、凭据或执行阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "grading/artifacts/evidence/github-advisory-access-evidence.md",
+      "private_source_sha256": "1d88f4334e0c6459e4100720a944182ca4350dafa4eee377619018ee4c4d3aa3",
+      "note": "核验摘要：摘录两次匿名请求的端点/头/HTTP 状态/限流字段、公告业务字段（GHSA/CVE/包/来源）与配置位置，无秘密或本机标识。"
+    },
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "278acdd9910195443819da2a2e214cb5677b59db68f8d63aa93534b356978a95",
+      "note": "执行者最终答复：公告标识、关联包、来源、接入步骤、配置位置与实际阻碍。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/e8cf526a030f5524.json",
+      "private_source_sha256": "c9a1a5af8c2f9f4078f47a211f8fe3de6964162f75464145c6e29f8a6e0eaecb",
+      "note": "指定入口的真实详情响应（公开防御性元数据），含可识别 GHSA 标识与关联包。"
+    }
+  ],
+  "frozen_task_sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+  "frozen_prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "reference_sha256": "e48f3bdee2177a32b42e49454316e9b8a95c6700ad26555e1cf1d94eed29b694",
+  "execution_answer_sha256": "278acdd9910195443819da2a2e214cb5677b59db68f8d63aa93534b356978a95",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/",
+          "https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/",
+          "https://docs.github.com/en/rest/security-advisories/global-advisories"
+        ],
+        "source_ids": [
+          "github-advisory-free-availability",
+          "github-rest-announcement",
+          "github-global-advisories-docs"
+        ],
+        "note": "与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。",
+        "applicability": {
+          "rule": "复用冻结GitHub官方免费提供声明、REST入口发布对应说明和当前global-advisories文档：免费数据库数据可经API读取，本轮GET /advisories及/advisories/{ghsa_id}公开元数据读取适用。开放许可与匿名成功不作为独立免费依据。",
+          "observed": "run.json指定public-advisories-api及https://api.github.com/advisories，phase=access且service_credentials.provided=false。保留meta对应 GET https://api.github.com/advisories/GHSA-pwhx-cvv3-qj5c，标status=200。 保留headers含GitHub服务/JSON/API版本2026-03-10/60次限额；这些只支持入口适用性。 保留记录身份：GHSA-pwhx-cvv3-qj5c；URL=https://api.github.com/advisories/GHSA-pwhx-cvv3-qj5c。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/run.json sha256=ff0c668e773a505dde53052f45ceca0c23cc01119ab33c960cb3469be5fa67b1; data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.meta.json sha256=862bf855b3c5688eb8b67e3683117b27505d637d3e89e7fab98b0f79f8c8acd7; data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.headers.txt sha256=08ee0037e5d34c96804d23fd38f76984b1c8f339a378df8760dcaa1acdaf78fe; data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.json sha256=c9a1a5af8c2f9f4078f47a211f8fe3de6964162f75464145c6e29f8a6e0eaecb"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/run.json",
+          "sha256": "ff0c668e773a505dde53052f45ceca0c23cc01119ab33c960cb3469be5fa67b1"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.meta.json",
+          "sha256": "862bf855b3c5688eb8b67e3683117b27505d637d3e89e7fab98b0f79f8c8acd7"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.headers.txt",
+          "sha256": "08ee0037e5d34c96804d23fd38f76984b1c8f339a378df8760dcaa1acdaf78fe"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r1/execution/artifacts/cache/e8cf526a030f5524.json",
+          "sha256": "c9a1a5af8c2f9f4078f47a211f8fe3de6964162f75464145c6e29f8a6e0eaecb"
+        }
+      ],
+      "limits": [
+        "0由明确官方免费提供规则及实际入口适用链支持；匿名成功、未提供付款和60次限额本身不证明免费。",
+        "未查看正式账单/金额回执；本金额为confirmed_free，不是实付报告。",
+        "仅核对最少响应身份及入口事实，不重判status/checks/outcome、模型费用、用量、任务正确性或许可履行。",
+        "未读取请求Authorization头；无凭据是run.json中的配置事实。公开读取规则本身覆盖本轮公共记录，不据此另判接入自助程度。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

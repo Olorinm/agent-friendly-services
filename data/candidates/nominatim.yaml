@@ -13,31 +13,43 @@ catalog:
   sources:
     search-docs:
       url: https://nominatim.org/release-docs/latest/api/Search/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     output-docs:
       url: https://nominatim.org/release-docs/latest/api/Output/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     faq:
       url: https://nominatim.org/release-docs/latest/api/Faq/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     usage-policy:
       url: https://operations.osmfoundation.org/policies/nominatim/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
+      notes: >-
+        Public-instance policy, including LLM-specific conditions, remains applicable. The one-request
+        per-second ceiling applies to aggregate application traffic. Small one-time scripted batches
+        must use one thread/machine and cache results; repeated identical queries can be blocked.
+    service-access:
+      url: https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ
+      checked_on: '2026-10-10'
+      kind: official_site
+      notes: >-
+        OSMF explicitly lists its Nominatim geocoding service among services supplied free of charge
+        to third parties, conditional on usage and privacy policies. This is service-price evidence,
+        distinct from the software/data licence or donation-funded hosting.
     terms:
       url: https://osmfoundation.org/wiki/Terms_of_Use
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     licence:
       url: https://www.openstreetmap.org/copyright
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     attribution:
       url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
   routes:
     - id: public-search-api
@@ -86,8 +98,8 @@ catalog:
           unit: money
           currency: USD
           per: eligible public API request
-          scope: Donated public-server access within its acceptable-use policy; no reserved capacity or SLA.
-          evidence: [usage-policy]
+          scope: OSMF explicitly free public service within its usage/privacy policies; no reserved capacity or SLA.
+          evidence: [service-access, usage-policy]
       notes: >-
         Public API policy: https://operations.osmfoundation.org/policies/nominatim/ . Maximum one
         request/second across the application. Small one-time bulk scripts must use one thread on one
@@ -98,4 +110,6 @@ catalog:
         OSM data use requires attribution and ODbL compliance; derived databases have share-alike
         obligations. No explicit public-benchmark prohibition was found in the reviewed terms.
         Postcodes may be interpolated and address components can come from nearby place nodes;
-        coverage or matching text alone does not prove a precise position. No live access is claimed.
+        coverage or matching text alone does not prove a precise position. Nominatim and Photon share
+        OSM data, so agreement between them is not independent geographic truth. The source review
+        made no live geocoding request; dated trials separately record network conditions and outcomes.

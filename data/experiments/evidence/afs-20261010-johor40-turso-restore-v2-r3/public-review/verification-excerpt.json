@@ -1,0 +1,83 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-turso-restore-v2-r3",
+  "independent_assessment_sha256": "a155004c0086fd96fc430790a8287c4398c7e8e253bea79bcff36cb7feeb0591",
+  "status": "completed",
+  "reason": "本次执行在指定 Turso 服务上完成了完整备份恢复演练：从本轮专用源库导出可留存的纯 SQL 逻辑备份（含两表 DDL 与全部 7 行），本轮新建独立空目标库（恢复前业务表计数实测 0）并实际用该备份文件恢复，重连目标库核对结构/行数/语义与源库一致，且源库前后未变；最终答复给出备份、恢复方法、新库非敏感位置、行数与核对结果、免费/到期说明。六项验收标准均有本次真实证据支持。",
+  "checks": [
+    {
+      "criterion": "real_portable_backup：导出可下载留存的逻辑备份，含重建所需业务结构与全部记录，并给出兼容引擎恢复方法，而非仅依赖原服务的快照/分支链接。",
+      "passed": true,
+      "evidence": "execution/artifacts/backup/[SERVICE_SECRET]_20261010.sql 为纯 SQL 逻辑备份，含 lists/todos 完整 CREATE TABLE（PK、FK、NOT NULL、DEFAULT 0）与全部 7 行 INSERT，SHA-256 4606f94ec460a9991f7e21f46b65e74b75e2e01de4041360e11c4c89ed4400cb（与 path-redactions.json 原文哈希一致）；execution/artifacts/backup/README_restore.md 与 execution/answer.md 给出 `sqlite3 new.db < 文件` 或在 /v2/pipeline 按序执行的方法。备份内容由 source_raw.json 原始响应逐行核对，可脱离原服务恢复。"
+    },
+    {
+      "criterion": "artifact_restore_to_new_database：恢复目标为本轮新建、起初没有业务表的独立远程库，且实际使用交付的备份恢复。",
+      "passed": true,
+      "evidence": "create_target.py 通过 Platform API 新建目标库（捕获 STATUS 200 新 DbId）；restore_raw.json 首条查询 pre_existing_business_tables=0 证明目标起初为空，随后 11 条 DDL/INSERT 语句逐条执行成功（last_insert_rowid 1,2,101..105），这些语句由 restore_target.py 逐行读取交付的备份文件生成，绑定备份文件与恢复操作；controller-verification/target-metadata.json 与 resource-identities.json 确认目标与源为不同逻辑资源。"
+    },
+    {
+      "criterion": "schema_relations_data：保留两张表字段名、主键、外键、非空约束、默认值及全部原始记录，并保留清单归属、完成状态、文本与空串/缺值区别。",
+      "passed": true,
+      "evidence": "execution/artifacts/work/target_verify_raw.json 与 source_raw.json 显示目标与源 schema DDL 完全一致（含 FK、NOT NULL、DEFAULT 0），行数 lists=2/todos=5；逐行一致，id=103 note 为空串、id=101/105 note 为 NULL 的区别正确保留；PRAGMA foreign_key_check 无违规。independent controller-verification/target-after.json 与 source-before.json、reference.json 的 expected_schema/rows 一致。"
+    },
+    {
+      "criterion": "source_unchanged：源库业务结构与记录未被修改或删除。",
+      "passed": true,
+      "evidence": "controller-verification/source-before.json（2026-10-10T11:51:52Z）与 source-after.json（12:17:12Z）的 schema、PRAGMA、两表全部行逐字段相等，均等于冻结参考 fixture；executor 侧 source_raw.json 与 source_post_raw.json 归一化比较亦一致（schema 文本相同）。源库仅被读取。"
+    },
+    {
+      "criterion": "persisted_result：恢复结束后重新连接新库并可读回等价结果。",
+      "passed": true,
+      "evidence": "execution/artifacts/work/target_verify_raw.json 为恢复后对目标库的新 pipeline 读取，返回结构与 7 行数据；independent controller-verification/target-after.json 通过独立读取确认远端持久化结果为完整等价结构/行集。"
+    },
+    {
+      "criterion": "usable_delivery：交付备份、简短恢复方法、新库非敏感位置、各表行数与核对结果，并如实说明免费/到期限制，凭据不外泄。",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/backup/README_restore.md 给出备份路径与 SHA-256、`sqlite3`/pipeline 恢复方法、目标库非敏感位置（org/group/db_id 已被副本脱敏为 [SERVICE_SECRET]）、行数表 lists 2/2、todos 5/5、逐行一致与空串/NULL 核对、以及 Starter $0/overages 关闭/月度额度与到期未知的如实陈述；凭据仅存私有路径 work/target_token.txt，未出现在答复中。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Turso 服务操作全部实际完成：源库读取导出→新建独立空目标→用交付备份恢复→重连目标核对→重连源库确认未变。restore_raw.json、target_verify_raw.json、source_raw/source_post_raw.json 及 controller 独立前后读回一致，最终答复含所需业务交付。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "e93c90a08ccd081394106e57a982c297bd0b9aacdb2af5918876fc72e552bd66",
+      "note": "执行者最终答复：备份、恢复方法、新库位置、行数与核对、免费/到期说明。"
+    },
+    {
+      "private_source": "grading/artifacts/execution/artifacts/backup/[SERVICE_SECRET]_20261010.sql",
+      "sha256": "7d9d1a6a5beb50247437a51c93d8a9cad4c90ea2ee483a742fcb810ccc6380ec",
+      "note": "可留存纯 SQL 逻辑备份，含两表 DDL 与全部 7 行；SHA-256 4606f94e...4400cb。"
+    },
+    {
+      "private_source": "execution/artifacts/backup/README_restore.md",
+      "sha256": "de1afaf38c5945f6ac9d481efe677ebb84bba102a3f5d1277c88aae4bbe7260d",
+      "note": "简短恢复方法与各表行数、核对结果说明。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "sha256": "70434fe8a17e781f2dd46cb9e11df14a5c73f5bf8cb40379a060ca6dfbcc2587",
+      "note": "独立核验摘要：源/目标结构、行数、空串与 NULL 区别、目标起初为空、源库未变。"
+    }
+  ],
+  "task_sha256": "532b8eb9cf7e67f5e173bb6ca0de0aec20161e34a54f673547565461688e8172",
+  "prompt_sha256": "689effdbc55797cc5e507012ac6bb0122e9f8fc0a9e5ca5f6cc8293c7d0ae60a",
+  "reference_sha256": "503d2c3b83ea8011fde8e9b5d866c8d670c69181c303d6d29f9c89544fec3186",
+  "answer_sha256": "e93c90a08ccd081394106e57a982c297bd0b9aacdb2af5918876fc72e552bd66",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate.",
+    "Turso v2 repeated restore with controller-created fresh verified source and executor-created target. Full schema/data readback does not by itself prove empty target origin or actual backup use; unchanged independent grading checks authentic operations and artifacts."
+  ],
+  "independent_fee_clarification": {
+    "sha256": "91e0e518d230eee425e7eda0488a0ccd6162525ab01d28342470abcc4d968f2f",
+    "original_assessment_sha256": "a155004c0086fd96fc430790a8287c4398c7e8e253bea79bcff36cb7feeb0591",
+    "scope": "Independent monetary rule/applicability clarification only. Original taskjudgment, modelusage and rawassessment unchanged; official applicableFree entitlement, not absenceofinvoice, establishes0. Exactlivemonthlyremainder/finalbill notasserted."
+  }
+}

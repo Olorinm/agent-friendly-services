@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-holidays-nager-date-access-r3",
+  "service_id": "nager-date",
+  "route_id": "community-api-v4",
+  "entry_url": "https://nagerholidays.com/api/v4/Holidays",
+  "task": {
+    "description": "帮我接通这个公共节假日查询服务，通过指定方式做一次真实的小范围假日查询，确认能查到日期和名称，并保存后续查询所需配置；说明接入步骤和实际阻碍。",
+    "inputs": "服务、指定入口、允许使用的账号或注册资料及其来源见 ENVIRONMENT.md。自行选择一个服务支持的国家或地区及年份，做一次小型公共节假日查询；报告查询范围、一个实际返回节日的日期与名称，并注明所用服务及查询来源。无需账号的入口直接使用；需要注册或授权时仅使用本轮提供的身份。必要配置保存在指定持久目录，秘密只存私有文件；答复给出配置位置、账号来源、自助步骤、人工介入和额外申请要求。",
+    "expected_output": "指定服务的一次真实假日查询，包含查询地区与年份、至少一个实际返回的假日日期与名称、来源及可复用配置位置；真实接入步骤和门槛，或具体阻碍。",
+    "success": "按指定方式完成必要注册、授权、安装或配置；真实假日查询返回可识别的日期和名称，答复及范围与响应相符，配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册。",
+    "failure": "没有真实假日数据查询，仅安装、健康检查、支持国家清单或示例；改用其他服务或入口；答复与响应不符、配置不可复用、泄露秘密或预算内未完成。身份、额度和人工障碍如实记录；运行环境故障单列无效。",
+    "resources": "仅用指定服务及已确认免费资源，允许查官方文档、安装通用依赖和保存私有配置。只做低量公开数据查询，遵守署名、缓存、用途和限流要求；不批量抓取、不购买或启用付费超额、不注册无关服务、不写入个人日历、不邀请或通知他人。具体入口及请求、时间上限见 ENVIRONMENT.md；原始记录由运行器采集，不要求额外审计报告。",
+    "id": "public-holidays-access-001",
+    "version": "v1",
+    "sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+    "file": "data/experiments/tasks/public-holidays.md"
+  },
+  "prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:17:05.494816+00:00",
+  "ended_at": "2026-10-10T10:18:17.890808+00:00",
+  "elapsed_seconds": 72.395992,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791628015.4945474,
+      "started_epoch": 1791627425.4945474
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "执行者通过指定 Community API v4 入口对新加坡(SG)2026完成一次真实查询，HTTP 200 返回 11 条真实假日（示例 2026-08-09 National Day），并将可复用配置写入 ENVIRONMENT 指定的持久路径 /home/node/service-tools/service-config.json；答复给出范围、示例节日、来源、配置位置、账号来源与阻碍，内容与响应一致且无秘密泄露。",
+  "usage": {
+    "input_tokens": 382457,
+    "cached_input_tokens": 362880,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 9611,
+    "reasoning_output_tokens": 4352
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://nagerholidays.com/legal/termsofservice",
+      "https://nagerholidays.com/api"
+    ],
+    "note": "Nager.Date Community Web API 对私人/非营利用途免费，无按量费率。",
+    "applicability": {
+      "rule": "官方 Terms of Service：\"The Web API can be used for private or non-profit projects.\"；官方 API 页标注 \"No Rate Limits / Unlimited queries\"。",
+      "observed": "本轮为低量匿名非商业研究查询，无账号/密钥/付款；单次 GET /api/v4/Holidays/SG/2026 返回 HTTP 200，未涉及任何计费、订阅或超额。",
+      "evidence": "grading/artifacts/evidence/verification-summary.md（引用官方条款与 API 页）；execution/artifacts/cache/v4_Holidays_SG_2026.json。"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-grader",
+    "reviewed_at": "2026-10-10T11:34:31.923747+00:00",
+    "checks": [
+      {
+        "criterion": "经指定服务与入口(/api/v4/Holidays)完成真实假日查询，返回可识别日期与名称，且与答复一致",
+        "passed": true,
+        "evidence": "execution/answer.md 报告 SG 2026 返回 11 条、示例 2026-08-09 National Day；execution/artifacts/cache/v4_Holidays_SG_2026.json 实际响应含该日期与名称；execution/artifacts/cache/sg2026.headers content-type=application/json、HTTP 200。"
+      },
+      {
+        "criterion": "使用指定的 Community v4，而非 v3/Pro、离线库或其他服务",
+        "passed": true,
+        "evidence": "所有业务请求均为 https://nagerholidays.com/api/v4/Holidays/{CC}/{Year}（见 cache/v4_Holidays_SG_2026.json 与 answer.md）；未出现 v3/Pro 或其他服务调用。"
+      },
+      {
+        "criterion": "后续查询所需配置保存在指定持久目录，可供新会话复用且不泄露秘密",
+        "passed": true,
+        "evidence": "配置写入 ENVIRONMENT 指定的 /home/node/service-tools/service-config.json（apiBase、端点模板、响应字段、请求策略、已知限制），execution/retained-files.json 记录保留 service-config.json；内容 type=none，无账号/密钥/令牌。"
+      },
+      {
+        "criterion": "账号来源、自助步骤、人工介入与额外申请/阻碍如实说明",
+        "passed": true,
+        "evidence": "execution/answer.md 说明匿名公共入口、无账号/密钥/付款，故无人工介入、无额外申请；并记录 MY 不受支持（/MY/2026 与 /MY/2025 204、/MY/2024 400）及 /api/v4/Countries 404 等实际阻碍。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.026435724,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.026435724,
+          "usage_sha256": "9202d1950a2cb0aa74d718d5b0e4ad61a00e3819f0409900fd7e381ec1f0cb83"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-holidays-nager-date-access-r3/public-review/verification-excerpt.json",
+      "sha256": "c1bcba8c4d83f5f5604125a703bcf2cff5e275fb6abb186c90ec48a6c58463a9",
+      "note": "Minimal independent-verification excerpt, original evidence hashes and cohort limits; full holiday tables/raw model logs omitted."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-holidays-nager-date-access-r3",
+    "run_sha256": "e3088b392dd5ace160e15640414e1a61a2d433a6b8eca7ebcb9e76df81e89ddd",
+    "events_sha256": "a62e01fdfc2f447e24c027951af4e81f8a18f2c8f59f3a8fd82d8696a2a1e6d5",
+    "answer_sha256": "49eaa38fe19e9568da0ce9caffb1d93b85bfe05a1539d9ec640c40de00b73e1a",
+    "review_sha256": "5d2e4cd6a8d685f1db1d01772f2b57235b3c7f5119047bc0439b9f1284bbe319",
+    "original_independent_review_sha256": "6964a53a9e0912abb4a519c890b30d966731487ca642cc05fff3bc63e6c1d514",
+    "publication_review_note": "Minimal evidence selection and identity redaction; task status/reason/checks/outcome/measured usage unchanged. Any fee-source correction is an explicitly linked anomaly-specific independent clarification."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务真实查询成功（SG 2026，HTTP 200，11 条），配置写入指定持久路径并已保留；答复完整说明结果、配置与阻碍。MY 不受支持属已如实记录并绕过的障碍，未阻止任务完成。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7192,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 133,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8190,
+        "cached_input_tokens": 7168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 471,
+        "reasoning_output_tokens": 178
+      },
+      {
+        "input_tokens": 9283,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 137,
+        "reasoning_output_tokens": 19
+      },
+      {
+        "input_tokens": 10452,
+        "cached_input_tokens": 9344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 467,
+        "reasoning_output_tokens": 402
+      },
+      {
+        "input_tokens": 10935,
+        "cached_input_tokens": 10752,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 541,
+        "reasoning_output_tokens": 372
+      },
+      {
+        "input_tokens": 11499,
+        "cached_input_tokens": 11264,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 75,
+        "reasoning_output_tokens": 8
+      },
+      {
+        "input_tokens": 12026,
+        "cached_input_tokens": 11392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 247,
+        "reasoning_output_tokens": 178
+      },
+      {
+        "input_tokens": 13153,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 452,
+        "reasoning_output_tokens": 251
+      },
+      {
+        "input_tokens": 13643,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 378,
+        "reasoning_output_tokens": 175
+      },
+      {
+        "input_tokens": 14155,
+        "cached_input_tokens": 13952,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 727,
+        "reasoning_output_tokens": 547
+      },
+      {
+        "input_tokens": 14920,
+        "cached_input_tokens": 14720,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 124,
+        "reasoning_output_tokens": 37
+      },
+      {
+        "input_tokens": 15330,
+        "cached_input_tokens": 14976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 664,
+        "reasoning_output_tokens": 523
+      },
+      {
+        "input_tokens": 16013,
+        "cached_input_tokens": 15872,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 173,
+        "reasoning_output_tokens": 16
+      },
+      {
+        "input_tokens": 16239,
+        "cached_input_tokens": 16000,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 124,
+        "reasoning_output_tokens": 79
+      },
+      {
+        "input_tokens": 16722,
+        "cached_input_tokens": 16256,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 235,
+        "reasoning_output_tokens": 51
+      },
+      {
+        "input_tokens": 17190,
+        "cached_input_tokens": 16896,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 420,
+        "reasoning_output_tokens": 351
+      },
+      {
+        "input_tokens": 22520,
+        "cached_input_tokens": 17536,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 772,
+        "reasoning_output_tokens": 536
+      },
+      {
+        "input_tokens": 23592,
+        "cached_input_tokens": 23168,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 273,
+        "reasoning_output_tokens": 92
+      },
+      {
+        "input_tokens": 24150,
+        "cached_input_tokens": 23808,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1022,
+        "reasoning_output_tokens": 217
+      },
+      {
+        "input_tokens": 25188,
+        "cached_input_tokens": 24960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 909,
+        "reasoning_output_tokens": 37
+      },
+      {
+        "input_tokens": 26113,
+        "cached_input_tokens": 25856,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 201,
+        "reasoning_output_tokens": 101
+      },
+      {
+        "input_tokens": 26711,
+        "cached_input_tokens": 26240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 345,
+        "reasoning_output_tokens": 168
+      },
+      {
+        "input_tokens": 27241,
+        "cached_input_tokens": 27008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 721,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "397bb36a435e5edf1972eed9c5365b1ab1aeee94e791cdeb5e7c58e279f81abd",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 382457,
+      "cached_input_tokens": 362880,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9611,
+      "reasoning_output_tokens": 4352
+    },
+    "totals": {
+      "input_tokens": 382457,
+      "cached_input_tokens": 362880,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9611,
+      "reasoning_output_tokens": 4352
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

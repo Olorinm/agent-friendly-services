@@ -1,0 +1,89 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-firecrawl-access-baseline",
+  "independent_assessment_sha256": "38acfa4416d6a9cb139e26bac2edcd97a2a6b734a9acb3fd2243a144be825895",
+  "status": "completed",
+  "reason": "执行者通过指定入口 POST https://api.firecrawl.dev/v2/scrape 匿名 keyless 真实提取 https://example.com/ 正文：HTTP 200、success:true、data.metadata.title=Example Domain，正文与独立参考含义相符；可复用配置写入持久目录 /home/node/service-tools/service-config.json 且不含秘密；账号来源、接入步骤与门槛如实说明。全部要求有本次采集证据支撑，故记完成。",
+  "checks": [
+    {
+      "criterion": "使用指定服务与指定入口（Firecrawl POST https://api.firecrawl.dev/v2/scrape），未改用其他服务或入口",
+      "passed": true,
+      "evidence": "工具记录中唯一提取调用为 curl POST https://api.firecrawl.dev/v2/scrape；evidence/scrape_example_com.response.json 的 sourceURL/url 均为 https://example.com/；无 jina 或其他入口调用。"
+    },
+    {
+      "criterion": "真实取得指定网页正文，非搜索摘要或直读网页替代",
+      "passed": true,
+      "evidence": "execution/artifacts/evidence/scrape_example_com.response.json：success:true，data.markdown 含 example.com 正文（documentation examples…not a service），data.metadata.sourceURL=https://example.com/；headers 显示 HTTP/2 200。"
+    },
+    {
+      "criterion": "页面标题与独立参考一致",
+      "passed": true,
+      "evidence": "reference.json expected_title=Example Domain；响应 data.metadata.title=Example Domain；答复标题一致。"
+    },
+    {
+      "criterion": "内容概述与返回正文相符",
+      "passed": true,
+      "evidence": "正文意为“文档示例专用域、无需授权、并非服务/不建议用于测试监控”；答复概述与之相符（reference.json content_meaning 同义）。"
+    },
+    {
+      "criterion": "必要配置保存于持久目录、可供新会话复用且不含秘密",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列出 service-config.json；写入路径 /home/node/service-tools/service-config.json，含 endpoint/method/auth{none,api_key:null}/headers/body/mapping/cache/limits/docs，无 Key；答复只给配置位置。"
+    },
+    {
+      "criterion": "账号来源、自助步骤与人工/申请门槛如实说明",
+      "passed": true,
+      "evidence": "答复说明官方 keyless 免费、未创建账号也无已有账号、限额数值与剩余量未知、保留默认 2 天缓存；与 ENVIRONMENT.md 的匿名免费入口设定一致。"
+    },
+    {
+      "criterion": "遵守授权与保护范围（单线程、真实 UA、未注册/付款、无超额）",
+      "passed": true,
+      "evidence": "仅 1 次提取请求（12:20:14Z），相邻调用间隔要求不适用；请求带实名 UA agent-friendly-services/20261010、无 Authorization；无注册/支付/超额行为。"
+    },
+    {
+      "criterion": "免费结论依据充分（keyless 免费规则 + 本次适用）",
+      "passed": true,
+      "evidence": "docs.firecrawl.dev/rate-limits 明确 keyless 使用免费（按 IP 每日请求/积分双上限，超限 429）；本次 keyless 请求返回 200、creditsUsed=1。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定入口 keyless 请求返回 200 且标题/正文可取；配置已落持久目录且无秘密；答复给出结果、配置位置、接入步骤与门槛。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "97c34754c48a147a3ed1564266bbae74f9c026e9871f7fb29ed76cc06db79565",
+      "note": "执行者最终答复：标题 Example Domain、概述、调用方式、配置位置、接入步骤与门槛。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/evidence/scrape_example_com.response.json",
+      "sha256": "0017e2be4321144b5a6365b2f2e100e1cb0dd1044f955277748c0c3d8b63c657",
+      "note": "Firecrawl 真实响应：success:true、title=Example Domain、markdown 正文、creditsUsed=1、cacheState=hit。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/evidence/scrape_example_com.headers.txt",
+      "sha256": "59def9cc2e4f6e5b465c1ef55fec07851ca2a9c9ec0ee099004e1693cc5f6b16",
+      "note": "响应头 HTTP/2 200 与 date，佐证提取成功。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/firecrawl-access-verification.md",
+      "sha256": "5d73a5e9bd04b33042f3b8d44757adfa7463d16c1a63249bc35f7b4b2b7ee5eb",
+      "note": "本次接入核验摘要（脱敏），记录入口、请求/响应关键字段、配置位置与免费规则。"
+    }
+  ],
+  "task_sha256": "9bda52da522a0fcc44d9253583277d31f4d0ce073dc8e229e958d632073a869c",
+  "prompt_sha256": "b042cad4cf15e92af31cd8611a2e0123116e0bf79bcb5b8eba384e13688504a6",
+  "reference_sha256": "a2930b9116afe49fa005dfc986ad698af1a0626eaba9fe572a5f365a593f812f",
+  "answer_sha256": "97c34754c48a147a3ed1564266bbae74f9c026e9871f7fb29ed76cc06db79565",
+  "limits": [
+    "One anonymous access per service followed by three predeclared samepage tasks, one reused physical container per service, newhome/session/taskdir each trial, only generic package/config state allowed to persist.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official OPM2027 table rechecked independently2026-10-10T12:09:16Z. Full original source is withheld from executor. Actual table requirements unchanged from taskv1.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. No OPM logo/endorsement claim."
+}
