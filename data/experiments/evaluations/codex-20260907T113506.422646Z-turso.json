@@ -102,11 +102,12 @@
     },
     {
       "path": "data/experiments/evidence/codex-20260907T113506.422646Z-turso/workspace/evidence/06-create-database.request.json",
-      "sha256": "32cf2496c5f39b73ddad189956b1056bfb8c347e6f3ee49b5c762acd292db21c",
+      "sha256": "8982286db5ee4b86e73a1ad7aaa72b06bab7c30ff21107727ef5c34dfbafcaa1",
       "note": "Observed API, SQL, plan or process evidence; account/resource identifiers and secrets redacted.",
       "source_sha256": "d45bed2746319b592e1814792951b5bc1f11b24237176a1d563d2f8be92cdaa4",
       "redactions": [
-        "local paths, Codex session identifiers or explicitly supplied service secrets"
+        "local paths, Codex session identifiers or explicitly supplied service secrets",
+        "Account avatar URL and internal user reference, or private database management group name"
       ]
     },
     {
@@ -200,6 +201,6 @@
     "events_sha256": "4fb21cbc9f3d2aa631f7c96a0b8610a9e658c6d210f574bc54ce91f6c69c904f",
     "answer_sha256": "4be18f9b33689e16f9645613657ccfaec1b6eb173cdd01bca213305a87cfd088",
     "review_sha256": "3859e981a89be94663a0fb927f8a16901c8ffe66ef1288d9e2677e9105fbe1a7",
-    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged."
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged. Additional privacy review removed account avatar URLs, internal user references and private database management group names from historical public copies; original source hashes, verdicts and measured usage remain unchanged."
   }
 }

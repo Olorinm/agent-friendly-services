@@ -4,7 +4,7 @@
   "query_parameters": {},
   "body": {
     "name": "[SERVICE_SECRET]",
-    "group": "todo-verification",
+    "group": "[SERVICE_SECRET]",
     "size_limit": "1mb"
   },
   "pid": 45706,
