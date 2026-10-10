@@ -1,0 +1,5 @@
+country,country_code,year,indicator,hicp_item_code,hicp_item,adjustment,series_key,unit,value
+Germany,DE,2023,HICP annual average rate of change (all items),000000,HICP - Total,N - neither seasonally nor working day adjusted,HICP.A.DE.N.000000.4D0.AVR,%,6.0
+Germany,DE,2024,HICP annual average rate of change (all items),000000,HICP - Total,N - neither seasonally nor working day adjusted,HICP.A.DE.N.000000.4D0.AVR,%,2.5
+France,FR,2023,HICP annual average rate of change (all items),000000,HICP - Total,N - neither seasonally nor working day adjusted,HICP.A.FR.N.000000.4D0.AVR,%,5.7
+France,FR,2024,HICP annual average rate of change (all items),000000,HICP - Total,N - neither seasonally nor working day adjusted,HICP.A.FR.N.000000.4D0.AVR,%,2.3

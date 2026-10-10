@@ -1,0 +1,134 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-osv-access-r2",
+  "independent_assessment_sha256": "1144a43173f46063f5c35b53bc5c93e28e04949c3f87b5917e214c728421fae4",
+  "independent_status": "completed",
+  "independent_reason": "指定 OSV 公共 REST API 已实际接通：经 api.osv.dev 的 POST /v1/query 对 npm minimist 1.2.0 发起真实查询并取得可识别公告（GHSA-vh95-rmgr-6w4m / GHSA-xvch-5gv4-984h，关联包 npm/minimist，来源 GitHub Advisory Database），并以 GET /v1/vulns/{id} 复核记录路径 200；可复用连接配置保存在授权持久位置 /home/node/service-tools/service-config.json（无秘密），答复给出配置位置、账号来源（无，匿名公共入口）、自助步骤及实际阻碍（无）。逐项核对原始采集响应与答复一致。",
+  "checks": [
+    {
+      "criterion": "通过指定方式（api.osv.dev POST /v1/query）完成真实公告查询，取得可识别公告标识与关联包名",
+      "passed": true,
+      "evidence": "execution/artifacts/query_minimist_1.2.0.json 为 source=live、status=200 的原始响应：vulns 含 GHSA-vh95-rmgr-6w4m（CVE-2020-7598）与 GHSA-xvch-5gv4-984h（CVE-2021-44906），affected[].package 为 npm/minimist，满足仅需一条可识别公告的最低要求。"
+    },
+    {
+      "criterion": "来源字段可识别，且记录路径 GET /v1/vulns/{id} 复核；答复与真实响应一致",
+      "passed": true,
+      "evidence": "execution/artifacts/record_GHSA-vh95-rmgr-6w4m.json 为 source=live、status=200 的 GET 记录，返回 id/aliases/published/modified；来源字段 affected[].database_specific.source 指向 github.com/github/advisory-database。execution/answer.md 所列 ID、包名、severity 与响应逐条一致。"
+    },
+    {
+      "criterion": "保存后续查询所需本地连接配置并给出位置，配置可供新会话复用且不含秘密",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列出 service-config.json 为保留的通用连接配置；execution/answer.md 给出位置 /home/node/service-tools/service-config.json（base_url、/v1/query 与 /v1/vulns/{id} 端点、客户端标识、限流/缓存纪律，auth=none，无秘密）。参见 grading/artifacts/evidence/osv-access-summary.md。"
+    },
+    {
+      "criterion": "说明接入步骤、已有账号来源、自助步骤及实际人工或申请要求/阻碍",
+      "passed": true,
+      "evidence": "execution/answer.md 明确：无账号来源（匿名公共入口，未注册）、无人工/特殊申请、无实际阻碍；两次实时请求均 200。与 response 一致。"
+    },
+    {
+      "criterion": "仅使用免费公开公告与防御性元数据；未安装待查软件、运行漏洞、扫描目标、修改仓库/依赖、付费或注册无关服务",
+      "passed": true,
+      "evidence": "execution/artifacts/osv_client.py 仅用 Python 标准库 urllib 做只读查询与磁盘缓存，发送指定 User-Agent 并单线程 ≥2s 间隔；无安装/扫描/漏洞利用/注册/付费迹象。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 OSV API 的 POST /v1/query 与 GET /v1/vulns/{id} 均真实返回 200（execution/artifacts/query_minimist_1.2.0.json、record_GHSA-vh95-rmgr-6w4m.json），可复用配置已保存（execution/retained-files.json），用户答复齐备（execution/answer.md）；无网络、权限、预算或执行阻碍迹象。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "fd5cb4562bb2b184b621d886d00f332ea5e4eb549017eecc869a4313a7417d78",
+      "note": "执行者最终答复：公告标识、关联包、来源、配置位置、账号/人工/阻碍说明。"
+    },
+    {
+      "private_source": "execution/artifacts/query_minimist_1.2.0.json",
+      "private_source_sha256": "ed6d8a4357a3506ccf68ad2551caa96f04c44141aa1da5b3fb6048b9f279cb65",
+      "note": "POST /v1/query 真实响应（source=live, status=200），含可识别公告与关联包。"
+    },
+    {
+      "private_source": "execution/artifacts/record_GHSA-vh95-rmgr-6w4m.json",
+      "private_source_sha256": "b39c467a306692fc0f79440a5deb9af0a77e4480069279673d8ea7be8b3cc5c6",
+      "note": "GET /v1/vulns/{id} 真实响应（source=live, status=200）。"
+    },
+    {
+      "private_source": "execution/artifacts/osv_client.py",
+      "private_source_sha256": "e01429f9d1379d2a60c976b869dfe63002fd174a483c188685147c98499bc1e3",
+      "note": "只读查询客户端：标准库、指定客户端标识、单线程限流与缓存。"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "保留的通用连接配置清单（service-config.json）。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/osv-access-summary.md",
+      "private_source_sha256": "000c03ffa8c824b5e0306ffb9da7e195cb9502a1bdfa01f13f3a2e6be5c294cd",
+      "note": "脱敏核验摘要：接入、真实查询、可复用配置与免费规则交叉核对。"
+    }
+  ],
+  "frozen_task_sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+  "frozen_prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "reference_sha256": "e48f3bdee2177a32b42e49454316e9b8a95c6700ad26555e1cf1d94eed29b694",
+  "execution_answer_sha256": "fd5cb4562bb2b184b621d886d00f332ea5e4eb549017eecc869a4313a7417d78",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://osv.dev/blog/posts/announcing-osv-service-level-objectives/",
+          "https://google.github.io/osv.dev/quickstart/",
+          "https://google.github.io/osv.dev/api/"
+        ],
+        "source_ids": [
+          "osv-slo-announcement",
+          "osv-api-quickstart",
+          "osv-api-overview"
+        ],
+        "note": "新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。",
+        "applicability": {
+          "rule": "OSV Team官方将OSV.dev明确称为免费资源，同一服务说明同时涵盖网站与API；官方API文档将公共query及vulns记录读取映射到这项托管服务。适用于本轮公开REST元数据查询，不据数据开源或未列费率推定免费。",
+          "observed": "run.json指定public-api及https://api.osv.dev/v1/query，无预提供账号/凭据；冻结ENVIRONMENT限定query与记录路径。最少保留响应具OSV记录id/schema；access-r2响应封装含200和body。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/run.json sha256=837fafef60cfebefbb93557cde100824b78ccafd6222d32ff3100fbd80917c71; data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/frozen/execution/ENVIRONMENT.md sha256=23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812; data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/execution/artifacts/query_minimist_1.2.0.json sha256=ed6d8a4357a3506ccf68ad2551caa96f04c44141aa1da5b3fb6048b9f279cb65; data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/execution/artifacts/record_GHSA-vh95-rmgr-6w4m.json sha256=b39c467a306692fc0f79440a5deb9af0a77e4480069279673d8ea7be8b3cc5c6"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/run.json",
+          "sha256": "837fafef60cfebefbb93557cde100824b78ccafd6222d32ff3100fbd80917c71"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/frozen/execution/ENVIRONMENT.md",
+          "sha256": "23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/execution/artifacts/query_minimist_1.2.0.json",
+          "sha256": "ed6d8a4357a3506ccf68ad2551caa96f04c44141aa1da5b3fb6048b9f279cb65"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-access-r2/execution/artifacts/record_GHSA-vh95-rmgr-6w4m.json",
+          "sha256": "b39c467a306692fc0f79440a5deb9af0a77e4480069279673d8ea7be8b3cc5c6"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

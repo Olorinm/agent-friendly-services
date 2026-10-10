@@ -31,16 +31,31 @@ def redact_tree(root, secrets):
         if path.is_symlink():raise ValueError('Grading copy must not contain symlinks')
         if any(v in str(path.relative_to(root)).encode() for v in variants):
             raise ValueError('Credential occurs in a grading filename; inspect before dispatch')
+    pending=[]
     for path in files:
         if not path.is_file():continue
         original=path.read_bytes();safe=original
         for value in variants:safe=safe.replace(value,b'[SERVICE_SECRET]')
         if safe==original:continue
-        if path.suffix=='.json':json.loads(safe)  # Fail closed on malformed redaction.
+        format_note=None
+        if path.suffix=='.json':
+            try:json.loads(original)
+            except (ValueError,UnicodeDecodeError):
+                # Captured artifacts may contain JSON followed by curl's HTTP
+                # status, or arbitrary text. Their suffix is not a format
+                # contract. Retain those bytes and their original provenance.
+                format_note='Original artifact is not a single JSON document; byte-preserving text/binary redaction.'
+            else:json.loads(safe)  # Valid JSON must remain valid after redaction.
+        pending.append((path,original,safe,format_note))
+    # Complete validation before any write, so a later rejection cannot leave
+    # partially redacted inputs without a complete provenance report.
+    for path,original,safe,format_note in pending:
         path.write_bytes(safe);path.chmod(0o600)
-        changed.append({'path':str(path.relative_to(root)),
-                        'original_sha256':hashlib.sha256(original).hexdigest(),
-                        'redacted_sha256':hashlib.sha256(safe).hexdigest()})
+        info={'path':str(path.relative_to(root)),
+              'original_sha256':hashlib.sha256(original).hexdigest(),
+              'redacted_sha256':hashlib.sha256(safe).hexdigest()}
+        if format_note:info['format_note']=format_note
+        changed.append(info)
     return changed
 
 

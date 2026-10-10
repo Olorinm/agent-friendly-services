@@ -51,8 +51,8 @@ checks:
   free_tier_or_trial:
     status: supported
     evidence: https://www.firecrawl.dev/pricing
-    verified: "2026-07-07"
-    notes: Free plan with monthly credits.
+    verified: "2026-10-10"
+    notes: Free accounts receive 1000 credits/month shared across endpoints, with no card required. Keyless Scrape has separate unpublished daily per-IP request and credit caps.
 
   self_serve_paid_upgrade:
     status: supported
@@ -72,7 +72,7 @@ checks:
   automation_permitted:
     status: unknown
     evidence: https://www.firecrawl.dev/terms-of-service
-    verified: "2026-10-08"
+    verified: "2026-10-10"
     notes: Terms require express authorization for commercial purposes and compliance with third-party rights; a free quota alone does not establish every permitted use.
 
 catalog:
@@ -91,15 +91,15 @@ catalog:
       kind: official_docs
     pricing:
       url: https://www.firecrawl.dev/pricing
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     scrape-docs:
       url: https://docs.firecrawl.dev/features/scrape
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     scrape-reference:
       url: https://docs.firecrawl.dev/api-reference/endpoint/scrape
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     document-parsing:
       url: https://docs.firecrawl.dev/features/document-parsing
@@ -115,15 +115,15 @@ catalog:
       kind: official_site
     billing:
       url: https://docs.firecrawl.dev/billing
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     rate-limits:
       url: https://docs.firecrawl.dev/rate-limits
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     terms:
       url: https://www.firecrawl.dev/terms-of-service
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
       notes: >-
         No explicit benchmark/comparison-publication ban was found in the reviewed terms.
@@ -307,6 +307,7 @@ catalog:
         - scrape-docs
         - pricing
         - rate-limits
+        - billing
         - terms
       availability:
         value: self_serve
@@ -345,8 +346,10 @@ catalog:
       notes: >-
         Free accounts receive 1000 credits/month without a card, 10 Scrape requests/minute and two concurrent
         browsers. Standard Scrape costs one credit/page, including cache hits; advanced options such as JSON
-        extraction can cost more. Failed requests without results are not charged, but returned 403/404 pages
-        can consume a credit. The public-scrape-api route records anonymous limits separately. Free access
+        extraction can cost more. Basic failures without a document are not charged, but returned 403/404
+        pages can consume a credit. Billing also lists chargeable work without a document, including
+        protection scans, prompt-injection checks, FIRE-1 work and lockdown cache misses; do not generalize
+        the basic failure rule to every option. The public-scrape-api route records anonymous limits separately. Free access
         does not override the commercial-use restriction or rights in the target page.
   notes:
     - Document Parsing and Parse describe public PDF URL parsing through /v2/scrape, separately from uploading bytes to /v2/parse. The default PDF parser uses auto mode (native text with OCR fallback); fast uses embedded text only, while ocr forces OCR. The documented pipeline detects tables and produces Markdown, but correct values and row/column relationships remain task-level checks. An empty parsers array returns base64 rather than extracted content and does not establish PDF extraction.

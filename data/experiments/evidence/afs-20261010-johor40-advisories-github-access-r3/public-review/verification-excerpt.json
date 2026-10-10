@@ -1,0 +1,125 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-github-access-r3",
+  "independent_assessment_sha256": "83d240af59e246c1415a7a1ae09a671f7876fa2b626a7f114c2147f0d65d5b68",
+  "independent_status": "completed",
+  "independent_reason": "指定服务 GitHub global-advisories 匿名 REST API 已被实际接通并完成一次真实查询：采集响应含可识别公告（GHSA 标识 + 关联包 code.vikunja.io/api + 来源 github.com/go-vikunja/vikunja），HTTP 200 且响应头确认 API 版本 2026-03-10，与答复一致；通用连接配置保存于授权持久位置并被保留，答复给出复用位置、自助步骤与真实门槛，无越界操作。",
+  "checks": [
+    {
+      "criterion": "real_query：通过指定匿名入口做一次真实查询，取得可识别公告标识、关联包名和来源，答复与响应一致。",
+      "passed": true,
+      "evidence": "execution/artifacts/cache/advisories-list.json 含 GHSA-m687-p538-r5hp 等 3 条，关联包 code.vikunja.io/api (go)，来源 https://github.com/go-vikunja/vikunja；execution/artifacts/cache/headers-list.txt 为 HTTP/2 200 且 x-github-api-version-selected: 2026-03-10；execution/artifacts/cache/advisory-detail.json 佐证详情；execution/answer.md 与之一致。"
+    },
+    {
+      "criterion": "reusable_configuration：必要连接/认证状态保存于授权持久位置，可供新会话复用，匿名入口不虚构账号。",
+      "passed": true,
+      "evidence": "工具记录显示写入 /home/node/service-tools/service-config.json（base_url、list/get 端点、anonymous、必需请求头、限流与缓存策略、CC BY 4.0 署名）；execution/retained-files.json 列出 service-config.json；execution/artifacts/query_advisories.py 读取该配置。"
+    },
+    {
+      "criterion": "actual_barriers：答复反映真实接入方式、账号来源、自助步骤与实际人工/申请/限流门槛。",
+      "passed": true,
+      "evidence": "execution/answer.md 说明无需注册/授权、匿名、无人工审核，无 403/429/连接失败，匿名配额 60/小时（响应头 used 6→9、remaining 51），并声明本轮无账号来源与秘密。"
+    },
+    {
+      "criterion": "scope：仅只读免费公开公告与防御性元数据；不安装待查软件、运行漏洞、扫描目标或越界操作。",
+      "passed": true,
+      "evidence": "全程仅对 api.github.com/advisories 发只读 GET；execution/artifacts/query_advisories.py 仅构造 GET 请求，无仓库修改、依赖变更、漏洞执行或对外发送。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定匿名入口 api.github.com/advisories 返回 HTTP 200 且响应头确认版本 2026-03-10，采集响应含可识别公告与关联包；无可证实阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "9201adc79234a9154d50738f163b1b12866c2d44fe0eaf0a0d5b5e0b333d595e",
+      "note": "执行者最终答复：公告记录、配置位置、接入步骤与实际阻碍。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/advisories-list.json",
+      "private_source_sha256": "6fbea0cc9195a82a13c1c44d95b9d5cf32d1d99decec9ec47e46e35c01117ae6",
+      "note": "采集到的真实列表响应，含 3 条可识别公告、关联包与来源。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/advisory-detail.json",
+      "private_source_sha256": "3c573453f1bbf9ea26f42bf74b24e53a942dfded8a194d1540dc046366838c5a",
+      "note": "单条公告详情响应，含受影响版本范围与 CWE。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/headers-list.txt",
+      "private_source_sha256": "f6bebb23a47ecc1d3e7482c8990eebc72cadd11a9ece60c2e9cd74c7457027c9",
+      "note": "响应头：HTTP 200、所选 API 版本 2026-03-10、匿名配额 60/小时。"
+    },
+    {
+      "private_source": "execution/artifacts/query_advisories.py",
+      "private_source_sha256": "63fbd227f95ef8065ad43bece1bb1919191275729e9b9aa3df915eb9701a3cf2",
+      "note": "复用查询脚本，读取持久配置并做单线程/缓存/限流控制。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-notes.md",
+      "private_source_sha256": "94fd65e8f23a58487ef16f55a0f9abc158603b4ffd1a3188aa44fdcbb043c4ab",
+      "note": "本次独立核验的简短脱敏摘要（业务结果与服务费用判断依据）。"
+    }
+  ],
+  "frozen_task_sha256": "cd4e254a2417833c3e30b3491040aa5b0d6879d139fd78e8b1ebabe160fba998",
+  "frozen_prompt_sha256": "c70bfb31aba94dcf45bb827c6b57fd29c68206da8aa2e69c8a790f4baf478a65",
+  "reference_sha256": "e48f3bdee2177a32b42e49454316e9b8a95c6700ad26555e1cf1d94eed29b694",
+  "execution_answer_sha256": "9201adc79234a9154d50738f163b1b12866c2d44fe0eaf0a0d5b5e0b333d595e",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/",
+          "https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/",
+          "https://docs.github.com/en/rest/security-advisories/global-advisories"
+        ],
+        "source_ids": [
+          "github-advisory-free-availability",
+          "github-rest-announcement",
+          "github-global-advisories-docs"
+        ],
+        "note": "与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。",
+        "applicability": {
+          "rule": "复用冻结GitHub官方免费提供声明、REST入口发布对应说明和当前global-advisories文档：免费数据库数据可经API读取，本轮GET /advisories及/advisories/{ghsa_id}公开元数据读取适用。开放许可与匿名成功不作为独立免费依据。",
+          "observed": "run.json指定public-advisories-api及https://api.github.com/advisories，phase=access且service_credentials.provided=false。保留headers含GitHub服务/JSON/API版本2026-03-10/60次限额；这些只支持入口适用性。 保留记录身份：GHSA-m687-p538-r5hp；URL=https://api.github.com/advisories/GHSA-m687-p538-r5hp。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/run.json sha256=7fe388676aa4640d9ec7bc6e43fef03901793b234049f932620723ca51cfb901; data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/execution/artifacts/cache/headers-detail.txt sha256=ae6ac6bd72353fab2f10c07da22d84ad0021878c2f19c0cff27bc1b565f2a0f0; data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/execution/artifacts/cache/advisory-detail.json sha256=3c573453f1bbf9ea26f42bf74b24e53a942dfded8a194d1540dc046366838c5a"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/run.json",
+          "sha256": "7fe388676aa4640d9ec7bc6e43fef03901793b234049f932620723ca51cfb901"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/execution/artifacts/cache/headers-detail.txt",
+          "sha256": "ae6ac6bd72353fab2f10c07da22d84ad0021878c2f19c0cff27bc1b565f2a0f0"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-github-access-r3/execution/artifacts/cache/advisory-detail.json",
+          "sha256": "3c573453f1bbf9ea26f42bf74b24e53a942dfded8a194d1540dc046366838c5a"
+        }
+      ],
+      "limits": [
+        "0由明确官方免费提供规则及实际入口适用链支持；匿名成功、未提供付款和60次限额本身不证明免费。",
+        "未查看正式账单/金额回执；本金额为confirmed_free，不是实付报告。",
+        "仅核对最少响应身份及入口事实，不重判status/checks/outcome、模型费用、用量、任务正确性或许可履行。",
+        "未读取请求Authorization头；无凭据是run.json中的配置事实。公开读取规则本身覆盖本轮公共记录，不据此另判接入自助程度。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

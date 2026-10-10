@@ -59,6 +59,15 @@ def run(config, action):
         if action == 'up' and name in existing and existing[name]['State']['Running']:
             raise ValueError('Container already running; stop the idle batch before provisioning: ' + name)
 
+    if action == 'stop':
+        # Docker stops independent containers together. A serial stop can spend
+        # its full grace period on every idle container in a large runner pool.
+        running = [name for name in config['containers'].values()
+                   if name in existing and existing[name]['State']['Running']]
+        if running: docker('stop', *running)
+        return {runtime: 'stopped' if name in existing else 'absent'
+                for runtime, name in config['containers'].items()}
+
     key = None
     if action == 'up':
         # Only read an operator-selected file; never accept a literal key argument.
@@ -74,11 +83,6 @@ def run(config, action):
     result = {}
     for runtime, name in config['containers'].items():
         current = existing.get(name)
-        if action == 'stop':
-            if current and current['State']['Running']:
-                docker('stop', name)
-            result[runtime] = 'stopped' if current else 'absent'
-            continue
         if not current:
             docker('create', '--name', name, '--label', LABEL + '=' + owner,
                    '--memory', str(config.get('memory', '2g')),

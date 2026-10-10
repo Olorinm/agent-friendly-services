@@ -1,0 +1,68 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-openholidays-access-r1",
+  "independent_assessment_sha256": "c74c0ba3fbfc5d5775b5f3169d5fd3751d86b0c4262fe890f5ad4ca8d6168a2f",
+  "independent_status": "completed",
+  "independent_reason": "指定 OpenHolidays API 的匿名公共入口（https://openholidaysapi.org/PublicHolidays）实际完成了一次真实小范围假日查询：DE / 2024-01-01..2024-03-31 返回 5 条公共节假日，HTTP 200，答复中给出的 2024-01-01 New Year's Day 与 2024-03-29 Good Friday 与采集到的响应一致。非秘密的持久连接配置已写入指定位置 /home/node/service-tools/service-config.json（receipt retained-files 收录），接入步骤与阻碍如实说明，无秘密泄露、无人工介入、无额外申请。",
+  "checks": [
+    {
+      "criterion": "通过指定服务与入口完成一次真实的小范围假日查询，返回可识别的日期与名称（非仅元数据/示例）",
+      "passed": true,
+      "evidence": "execution/artifacts/raw/publicholidays_DE_2024Q1.json（sha256 a62c68e9...，HTTP 200，5 条）含 2024-01-01 New Year's Day、2024-01-06 Epiphany、2024-03-08 International Women's Day、2024-03-29 Good Friday、2024-03-31 Easter Sunday；入口为题目指定的 openholidaysapi.org/PublicHolidays。"
+    },
+    {
+      "criterion": "答复与响应相符，注明查询范围、所用服务及来源",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/answers/result.md 报告范围 DE/2024-01-01..2024-03-31、服务 OpenHolidays API、来源与文档 URL，示例日期/名称与 raw 响应逐条一致。"
+    },
+    {
+      "criterion": "保存后续查询所需配置（非秘密、可复用）并给出正确配置位置",
+      "passed": true,
+      "evidence": "持久配置写至 /home/node/service-tools/service-config.json（含 baseUrl、各端点、请求头，credentials=null，无秘密）；execution/retained-files.json 收录该文件，write 工具记录确认写入成功，答复给出同一位置。"
+    },
+    {
+      "criterion": "说明账号来源与真实接入步骤/阻碍，匿名入口不强行注册，不泄露秘密",
+      "passed": true,
+      "evidence": "execution/answer.md 说明为匿名公共入口、无需账号/密钥、无注册与鉴权阻碍、4 次请求全 200；如实说明服务 36 国不含马来西亚故改选德国；未出现账号/密钥内容。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "匿名入口 /Countries、/Languages、/Subdivisions、/PublicHolidays 均 HTTP 200；指定 PublicHolidays 查询返回真实节日数据，配置已持久保存，答复完整，无 403/429、无人工介入。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "41ccc27c83d6971714702155c15ae5d29a80f7772d0c76823446174ffc0ec4e7",
+      "note": "执行者最终答复：服务、范围、示例节日、配置位置、步骤与阻碍。"
+    },
+    {
+      "private_source": "execution/artifacts/raw/publicholidays_DE_2024Q1.json",
+      "private_source_sha256": "a62c68e9fb1f1eb340c6029a8b1cc963bf41807ede4003d1d95d753019867be6",
+      "note": "指定入口的真实响应副本，含日期与名称，用于核对答复。"
+    },
+    {
+      "private_source": "execution/artifacts/answers/result.md",
+      "private_source_sha256": "61b0ce686b5131957589175d28a990af55c18996388aaf93dff4003a830bd7de",
+      "note": "完整结果记录，列出 5 条节日与配置/产物位置。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verify.md",
+      "private_source_sha256": "045fc95aeaa27d00ac9137020efc7f1e2677387598df05a2c4f9d0260ba510d4",
+      "note": "本次验收的简短脱敏摘要与官方免费规则来源。"
+    }
+  ],
+  "frozen_task_sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+  "frozen_prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "reference_sha256": "681b0bd65e10da8b0d1a6d1874cd9682f3f158e18a3aded88fcfa29f1f60473d",
+  "execution_answer_sha256": "41ccc27c83d6971714702155c15ae5d29a80f7772d0c76823446174ffc0ec4e7",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "OpenHolidays API; ODbL, https://openholidaysapi.org/ . No full holiday database is distributed here."
+}

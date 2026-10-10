@@ -1,0 +1,136 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-ecb-data-access-r3",
+  "independent_assessment_sha256": "ae3a25241c004fe67c19541908ee331bb198d5dafa2ffeebd2034571b30d5965",
+  "independent_status": "completed",
+  "independent_reason": "指定 ECB Data Portal 官方 API（https://data-api.ecb.europa.eu/service/）匿名接入成功：以指定方式完成真实数据查询（EXR/M.USD.EUR.SP00.A 返回 HTTP 200 与 2026-07~09 的 USD/EUR 参考汇率观测），保存了可复用连接配置（service-config.json）与客户端（ecb_query.py），并在答复中说明接入步骤与唯一非故障现象（不支持的 Accept: +json 返回 406）。未使用其他服务替代，无需注册或人工步骤。",
+  "checks": [
+    {
+      "criterion": "确认通过指定 ECB 官方 API 实际查询到真实金融数据（非文档/健康检查）",
+      "passed": true,
+      "evidence": "execution/artifacts/out/exr_basic.csv（series EXR.M.USD.EUR.SP00.A，OBS_VALUE 2026-07=1.1417478260869562、2026-08=1.1593095238095241、2026-09=1.1513227272727276）与 execution/artifacts/out/exr_headers.txt（HTTP/2 200，content-type text/csv）；默认 SDMX-ML 2.1 响应见 execution/artifacts/out/exr_basic.xml。均请求指定入口 data-api.ecb.europa.eu/service。"
+    },
+    {
+      "criterion": "保存新会话可复用的必要连接配置，且与实际调用一致",
+      "passed": true,
+      "evidence": "execution/retained-files.json 记录保留 service-config.json 与 ecb_query.py；配置含 base_url=https://data-api.ecb.europa.eu/service、auth none、端点模板、查询参数、格式、限流策略与署名，见 grading/artifacts/evidence/service-access-evidence.md；客户端 execution/artifacts/ecb_query.py 读取该配置。"
+    },
+    {
+      "criterion": "说明实际完成的接入步骤或阻碍，未虚报注册/人工介入",
+      "passed": true,
+      "evidence": "execution/answer.md 说明匿名免账号可用、各端点实测结果、持久位置，并指出仅 Accept: ...+json 返回 406（ECB 仅提供 XML/CSV，非故障）；未声称自行注册或人工协助。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 ECB 官方 API 匿名调用返回 HTTP 200 与真实汇率观测（execution/artifacts/out/exr_basic.csv、exr_headers.txt），配置与客户端已保存（execution/retained-files.json），答复交付完整（execution/answer.md）；无网络/权限/预算阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "3586b819d2fc9363e169675cfce6561f22ce466b4e12e1811dcad4b8b53e330d",
+      "note": "执行者最终答复：接入结论、实测端点、保存配置与阻碍说明"
+    },
+    {
+      "private_source": "execution/artifacts/out/exr_basic.csv",
+      "private_source_sha256": "057c81564ddc62213c4f4f4f7cc779f3f3fa8df9c72408e778c7d43b34357670",
+      "note": "指定入口返回的真实 USD/EUR 汇率观测（2026-07~09）"
+    },
+    {
+      "private_source": "execution/artifacts/out/exr_headers.txt",
+      "private_source_sha256": "3d4677517a38336882480c69ba73550aeefbd7918da68aa25d9d0d3660d101f5",
+      "note": "对应上次查询的 HTTP/2 200 响应头，content-type text/csv"
+    },
+    {
+      "private_source": "execution/artifacts/out/exr_basic.xml",
+      "private_source_sha256": "6935857b9d2973d0e7d430d167c95cee81b979602a009b5c36eef71f5da5a1d4",
+      "note": "默认 SDMX-ML 2.1 格式响应，含 ObsValue"
+    },
+    {
+      "private_source": "execution/artifacts/out/dataflow_EXR2.xml",
+      "private_source_sha256": "920aca138f6bddd42c8e5e795e7fb6b7244f54e3374d15b4981fa5c4d71cb704",
+      "note": "元数据 dataflow/ECB/EXR 的 SDMX 结构响应"
+    },
+    {
+      "private_source": "execution/artifacts/ecb_query.py",
+      "private_source_sha256": "170a92511ac2dcece9dc4a950602d05196c0f9aad0fa3dc4cd4c2e3655246c56",
+      "note": "保存的可复用标准库客户端"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "ef09800994f043aad1e59a31fd760bd7af962d13d33e7e594b05b735015bfa03",
+      "note": "保留文件清单：service-config.json 与 ecb_query.py"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/service-access-evidence.md",
+      "private_source_sha256": "95dc33616b011ce10413b38cff866337ffb0eebe381b29108d01e7f59af275ae",
+      "note": "本次验收新建的简短脱敏业务证据摘要（数据/端点/配置要点）"
+    }
+  ],
+  "frozen_task_sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+  "frozen_prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "reference_sha256": "dbc3b3fe05e1f4e3e717474fd31780f1c57e3ced5c87e775f62bb8bd87da1a42",
+  "execution_answer_sha256": "3586b819d2fc9363e169675cfce6561f22ce466b4e12e1811dcad4b8b53e330d",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources.",
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+          "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html",
+          "https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0",
+          "https://data.ecb.europa.eu/help/api/data-examples"
+        ],
+        "source_ids": [
+          "ecb-copyright",
+          "ecb-statistics-free-access-policy",
+          "ecb-data-api-overview",
+          "ecb-data-api-examples"
+        ],
+        "note": "本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。",
+        "applicability": {
+          "rule": "ECB copyright明确资料可经官网免费取得；Data Portal API帮助说明该REST服务提供门户统计数据和元数据的编程访问，并链接同一copyright。ESCB统计政策另明确免费访问。本轮公开EXR/HICP读取属于该免费取得入口，金额不依赖是否成功交付任务。",
+          "observed": "run.json指定ecb-data/data-api及https://data-api.ecb.europa.eu/service/，无预提供账号/Key；冻结ENVIRONMENT限定公开宏观数据。最少CSV包含公开EXR或HICP/ICP统计系列；接入r1响应meta指向data-api.ecb.europa.eu并标200，r2/r3接入headers为HTTP 200。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/run.json sha256=927eb466b350621966d35fae59e4dd9ae1b1e529392a5a9a750735131cbf51df; data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/frozen/execution/ENVIRONMENT.md sha256=10f097458b338214c022cee1cf6eff0a6368a3fc146d0b93b3caf9b33f3f3c25; data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/execution/artifacts/out/exr_headers.txt sha256=3d4677517a38336882480c69ba73550aeefbd7918da68aa25d9d0d3660d101f5; data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/execution/artifacts/out/exr_basic.csv sha256=057c81564ddc62213c4f4f4f7cc779f3f3fa8df9c72408e778c7d43b34357670"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/run.json",
+          "sha256": "927eb466b350621966d35fae59e4dd9ae1b1e529392a5a9a750735131cbf51df"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/frozen/execution/ENVIRONMENT.md",
+          "sha256": "10f097458b338214c022cee1cf6eff0a6368a3fc146d0b93b3caf9b33f3f3c25"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/execution/artifacts/out/exr_headers.txt",
+          "sha256": "3d4677517a38336882480c69ba73550aeefbd7918da68aa25d9d0d3660d101f5"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-access-r3/execution/artifacts/out/exr_basic.csv",
+          "sha256": "057c81564ddc62213c4f4f4f7cc779f3f3fa8df9c72408e778c7d43b34357670"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

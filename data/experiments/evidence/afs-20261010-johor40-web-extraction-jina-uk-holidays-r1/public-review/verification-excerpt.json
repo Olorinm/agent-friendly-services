@@ -1,0 +1,101 @@
+{
+  "notice": "Operator-selected minimal excerpt of unchanged independent task judgment. Original captured responses and full grading records remain private with their hashes. This selection does not repeat or complete the task.",
+  "run_id": "afs-20261010-johor40-web-extraction-jina-uk-holidays-r1",
+  "independent_assessment_sha256": "71f375893a2a6b740b08494e21cc85804549e53c3967e37e3a9d88ee799f29bb",
+  "status": "completed",
+  "reason": "本次执行真实通过指定服务 Jina Reader（r.jina.ai）匿名 GET https://www.gov.uk/bank-holidays，HTTP 200，单次成功且无 403/429；从返回原文提取 England and Wales 2027 表全部 8 条，日期与完整英文名称（含 substitute day）与独立官方参考逐项一致，日期升序、UTF-8 CSV 表头 date,holiday 可解析；答复给出文件名与 GOV.UK 官方来源。未使用本站 JSON/ICS 接口或直连原站替代所选服务。",
+  "checks": [
+    {
+      "criterion": "真实通过指定服务 Jina Reader (r.jina.ai) 取得 GOV.UK 目标页面内容，未改用原站 JSON/ICS、其他网页或直连原站替代",
+      "passed": true,
+      "evidence": "execution/artifacts/jina-bank-holidays.raw 为对 r.jina.ai/https://www.gov.uk/bank-holidays 的返回原文（Title: UK bank holidays，含目标 Markdown 表）；工具记录显示唯一一次提取请求为匿名 GET，HTTP 200；未出现对 .json/.ics 或原站的独立提取请求。"
+    },
+    {
+      "criterion": "交付 CSV 实际存在、UTF-8 可解析、表头清晰、日期按 YYYY-MM-DD 升序",
+      "passed": true,
+      "evidence": "execution/artifacts/england-wales-bank-holidays-2027.csv（266 字节），表头 date,holiday，8 行日期 2027-01-01…2027-12-28 升序。"
+    },
+    {
+      "criterion": "England and Wales 2027 全部条目日期与完整英文名称（含 substitute day 标注、公布日期）与官方原文逐项一致，无重复、无其他地区专属假日或其他年份混入",
+      "passed": true,
+      "evidence": "CSV 8 行与 execution/artifacts/jina-bank-holidays.raw 中 “Upcoming bank holidays in England and Wales 2027” 表逐行一致，也与独立参考 reference.json 的 expected_rows（8 条）完全一致；日期采用页面公布日期（如 12-27/12-28，未替换为名义日期）。"
+    },
+    {
+      "criterion": "最终答复含文件位置与 GOV.UK 官方来源链接",
+      "passed": true,
+      "evidence": "execution/answer.md 给出文件名 england-wales-bank-holidays-2027.csv 及来源 https://www.gov.uk/bank-holidays（England and Wales 2027 表）。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务侧：单次匿名 GET r.jina.ai/https://www.gov.uk/bank-holidays 返回 HTTP 200，成功取得目标内容。用户侧：CSV 文件存在且正确（8 条，含 substitute day，升序），答复给出文件位置与官方来源。无网络/访问/额度/执行阻碍证据。"
+  },
+  "source_hashes": [
+    {
+      "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+      "sha256": "2c74a0be229e2fddd6ec79c0b3790e781c0b7bb60d673dbc804db8452f2a80d1",
+      "note": "交付 CSV，UTF-8，表头 date,holiday，8 条 England and Wales 2027 银行假日，升序。"
+    },
+    {
+      "private_original_locator": "execution/artifacts/jina-bank-holidays.raw",
+      "sha256": "924ffe7d39fbf872fb0a7bccc7b58cc76ee54bffc0ecbdd26a83332407b0f004",
+      "note": "指定服务 Jina Reader 返回原文，含目标地区/年份表 8 行。"
+    },
+    {
+      "private_original_locator": "execution/answer.md",
+      "sha256": "17de871332fb965a56560eef45cbb14d31749b17e7febf50c09d49d723aa6bf7",
+      "note": "执行者最终答复，含文件位置与官方来源链接。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/reference.json",
+      "sha256": "cbba3dc1b31e40a080f0ab5c7b848b5258f2832cee4a8989351876a8648df1eb",
+      "note": "独立官方参考，expected_rows 8 条与交付逐项一致。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/jina-free-rule.md",
+      "sha256": "ae5a3770e29116900fef76faeafd00be733b674613a57f1aa523f7e0a485de07",
+      "note": "Jina Reader 官方免费规则及本次匿名引用适用证据。"
+    },
+    {
+      "private_original_locator": "grading/artifacts/evidence/extraction-summary.md",
+      "sha256": "e4970c571113cce904216433fbb2588dbbc8bc16acaa292e4c99ea6d748a4d8b",
+      "note": "本次指定服务请求/响应与提取行脱敏摘要。"
+    }
+  ],
+  "task_sha256": "b3a6fd45ffd0b546a0188dd88268979ed1f6907ca6dd73c5336d1d710073cfa0",
+  "prompt_sha256": "a5ebcec863734593efc236cccf875a73c3d809d3f0ebbddde509cb0970213ded",
+  "reference_sha256": "cbba3dc1b31e40a080f0ab5c7b848b5258f2832cee4a8989351876a8648df1eb",
+  "answer_sha256": "17de871332fb965a56560eef45cbb14d31749b17e7febf50c09d49d723aa6bf7",
+  "limits": [
+    "Access and three OPM rounds completed before this separate UK task. Three UK pairs declared before first dispatch; existing physical runtime, new home/session/taskdir. Current Jina baseline empty; Firecrawl retained generic config only. No task data or source injected.",
+    "Default provider caching preserved: Jina documented5min, Firecrawl2days; actual cache hits/age may be unknown. These are dependent repeats, not independent originfetch/coldcache performance/broad web reliability.",
+    "Official GOV.UK England and Wales2027 table frozen independently2026-10-10T12:29:45Z. This second staticHTML template tests region/yearselection. No broad reliability or JS-only extraction claim. Full source and expected rows withheld from executor.",
+    "Model40requests/600executionseconds/300gradingseconds and.85reminder under one shared50USD/four-hour window. Grading overhead separate; unknown values not zero.",
+    "Declared6candidateattempts/20s-spacing protective policy reviewed from collected tools; no hard HTTP interceptor. Guards are separate from user output requirements. Anonymous Firecrawl numerical daily caps and remaining quota unknown."
+  ],
+  "publication_scope": "Minimal structured task facts, original hashes and small user CSV; no full site Markdown/HTML, raw headers, modellogs or private infrastructure. Contains public sector information licensed under the Open Government Licence v3.0. Source: https://www.gov.uk/bank-holidays ; licence: https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/ . No GOV.UK logo/endorsement claim.",
+  "actual_csv": {
+    "private_original_locator": "execution/artifacts/england-wales-bank-holidays-2027.csv",
+    "sha256": "2c74a0be229e2fddd6ec79c0b3790e781c0b7bb60d673dbc804db8452f2a80d1",
+    "row_count": 8,
+    "fields": [
+      "date",
+      "holiday"
+    ],
+    "required_field_mapping": {
+      "date": "date",
+      "holiday": "holiday"
+    },
+    "all_rows_and_fields_match_current_reference_under_quote_space_normalization": true,
+    "ascending_dates": true,
+    "mismatches": [],
+    "note": "Trusted reading of actual bytes after execution; no Agent code run, outcome repair or CSV repair."
+  },
+  "independent_fee_clarification": {
+    "sha256": "768e0c551bcf12fcaf8106aa606db245f1756f1e2a94709810d1ab5b56ba0d05",
+    "original_assessment_sha256": "71f375893a2a6b740b08494e21cc85804549e53c3967e37e3a9d88ee799f29bb",
+    "scope": "Monetary note/applicability only; original task judgment and measured modelusage unchanged. Confirmedfree applies documented anonymous rule to actual captured request, not absence of invoice."
+  }
+}

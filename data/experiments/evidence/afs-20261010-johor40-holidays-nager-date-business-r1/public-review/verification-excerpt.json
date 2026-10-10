@@ -1,0 +1,78 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-nager-date-business-r1",
+  "independent_assessment_sha256": "9eaf785c23fb181563c3bd537538a49bc7b82ffdbf034e15700c95226c2da93e",
+  "independent_status": "completed",
+  "independent_reason": "指定服务 Nager.Date Community API v4 被真实调用（GET https://nagerholidays.com/api/v4/Holidays/DE/2027，HTTP 200），从采集的原始响应独立复算并对冻结官方参考，得到与 reference.json 完全一致的 10 个日期/节日；清单按日期升序、无重复、总数=10、保留周末实际日期、未混入他州节日，来源可追溯。",
+  "checks": [
+    {
+      "criterion": "通过指定服务查询并注明可核对来源（assigned_service）",
+      "passed": true,
+      "evidence": "execution/artifacts/headers_de.txt 显示来自 nagerholidays.com 的 HTTP/2 200 application/json；execution/artifacts/raw_DE_2027.json 为 GET /api/v4/Holidays/DE/2027 的原始响应；execution/answer.md 注明该 v4 端点及官方文档链接。"
+    },
+    {
+      "criterion": "完整且无越界：2027 柏林适用公共节假日与独立官方参考一致（complete_local_year）",
+      "passed": true,
+      "evidence": "对 raw_DE_2027.json 独立筛选（nationalHoliday=true 或 subdivisionCodes 含 DE-BE，holidayTypes 含 Public）得 10 项，与 reference.json 的 expected_rows/expected_count=10 完全吻合；Epiphany、Corpus Christi、Assumption Day、Reformation Day、All Saints' Day、Repentance Day、World Children's Day 及 DE-BB 专属 Easter Sunday/Pentecost 均正确排除。"
+    },
+    {
+      "criterion": "日期明确到年月日，节日身份语义正确（dates_and_names）",
+      "passed": true,
+      "evidence": "条目标注 2027 年 ISO 日期；名称与参考等价（如 St. Stephen's Day=Boxing Day、German Unity Day=Day of German Unity），均在可接受名称示例范围内。"
+    },
+    {
+      "criterion": "按日期升序并给出准确去重总数（ordered_total）",
+      "passed": true,
+      "evidence": "execution/answer.md 表格按 2027-01-01 至 2027-12-26 升序，总数声明为 10，去重后与实际条目一致。"
+    },
+    {
+      "criterion": "范围正确：周末照列、不自行顺延、不含学校假期/普通星期日（visible_scope）",
+      "passed": true,
+      "evidence": "2027-05-01（周六）、2027-10-03（周日）、2027-12-25（周六）、2027-12-26（周日）均按当地实际日期列出，无补休/顺延；响应中无学校假期或普通星期日条目。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "真实 v4 查询返回 HTTP 200 且原始响应可复算；最终答复含升序 10 项、准确总数与可追溯来源，与冻结官方参考一致。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "a5645804ceaa7f20a0e4a0f0f0a2f8a10f1fa842f963ca405477ae2fb36dcffd",
+      "note": "执行者最终答复：10 条柏林 2027 公共节假日、总数、指定服务与端点来源。"
+    },
+    {
+      "private_source": "execution/artifacts/raw_DE_2027.json",
+      "private_source_sha256": "9f25e3175ab3ee9d3e2741f6146f73be218d85c002325f7a79a53d4813f4efd5",
+      "note": "指定服务真实原始响应（DE 2027，19 条），用于独立复算。"
+    },
+    {
+      "private_source": "execution/artifacts/headers_de.txt",
+      "private_source_sha256": "c4d5cc2188a3513471e425437f31252b9ef2e4c1418e37042b5dedf291bd705b",
+      "note": "请求回执头：HTTP/2 200、application/json、server: cloudflare、date 2026-10-10。"
+    },
+    {
+      "private_source": "execution/artifacts/berlin_2027_holidays.json",
+      "private_source_sha256": "c331d5352de2f814959a8423a4757313eea1f59d14ba5868fea9d529b793f4be",
+      "note": "筛选后的柏林 2027 结果（count=10），与最终答复一致。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "private_source_sha256": "54671df9f3a6a56b26a94b5252b2ea4085abc42f86da247832e436e73bba568f",
+      "note": "独立复核摘要：原始记录数、筛选逻辑、10 项逐行对照官方参考、周末保留与免费规则适用性。"
+    }
+  ],
+  "frozen_task_sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+  "frozen_prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "reference_sha256": "a38c7856cd3ffa6652114c2568a05cbbaecee50fb2decf9cab29130527652ce3",
+  "execution_answer_sha256": "a5645804ceaa7f20a0e4a0f0f0a2f8a10f1fa842f963ca405477ae2fb36dcffd",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Nager.Date Community v4; low-volume noncommercial research. Not a holiday portal or redistributed list."
+}

@@ -99,11 +99,11 @@ catalog:
       kind: official_announcement
     claimable:
       url: https://neon.com/claimable-neon
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     claimable-docs:
       url: https://neon.com/docs/reference/claimable-neon
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
       notes: The same official document is available as /docs/reference/claimable-neon.md.
     claimable-auth:
@@ -116,21 +116,46 @@ catalog:
       kind: official_docs
     connection-pooling:
       url: https://neon.com/docs/connect/connection-pooling
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     platform-terms:
       url: https://neon.com/platform-terms
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
       notes: Updated August 5, 2026; incorporates the Databricks MCSA for Neon and replaces the former terms-of-service URL.
     mcsa:
       url: https://www.databricks.com/legal/mcsa
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     acceptable-use:
       url: https://www.databricks.com/legal/acceptable-use-policy
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
+    current-pricing:
+      url: https://neon.com/pricing
+      checked_on: '2026-10-10'
+      kind: official_site
+    free-storage-update:
+      url: https://neon.com/blog/neon-free-plan-1-gb-per-project
+      checked_on: '2026-10-10'
+      kind: official_announcement
+    logical-backup:
+      url: https://neon.com/docs/manage/backup-pg-dump
+      checked_on: '2026-10-10'
+      kind: official_docs
+    databases:
+      url: https://neon.com/docs/manage/databases
+      checked_on: '2026-10-10'
+      kind: official_docs
+    roles:
+      url: https://neon.com/docs/manage/roles
+      checked_on: '2026-10-10'
+      kind: official_docs
+    claimable-development-status:
+      url: https://github.com/neondatabase/claimable-neon/blob/main/docs/overview.md
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: Engineering status describes the hosted service as Beta-ready on 2026-08-26 and records public announcement separately. This is a status signal, not confirmation of current GA or contractual Beta status.
   routes:
     - id: ephemeral-api
       interface: api
@@ -188,32 +213,41 @@ catalog:
           value: documented
           evidence:
             - claimable-docs
-      costs:
-        - kind: free_allowance
-          amount: 100
-          unit: MB
-          per: project
-          scope: Unclaimed project storage, with 1 GB transfer and a 72-hour lifetime.
-          evidence:
-            - claimable
+      costs: []
       notes: >-
         Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works
         with standard Postgres clients; identity assertions, tokens and connection URLs are private.
         The 100 MB storage and 1 GB transfer allowances apply to the whole unclaimed project, not each
         logical database. Multiple databases within that project share these limits and the same
         project.expires_at; they are not separately provisioned free projects.
+        These limits and the no-payment-details signup condition do not provide a separate published
+        Claimable cash-price rule; the registered Free plan's $0 price must not be substituted for it.
         The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts
         15 minutes and is a different clock. Short-term persistence does not establish a permanent free
         account. Claiming rotates credentials and must not occur between write and independent read.
         The provisioned Postgres connection supports SQL transactions. Its pooler uses transaction mode;
         ordinary short transactions are compatible, while session state across separate transactions
         must not be assumed. Individually committed writes are not an atomic multi-step import.
+        Official backup guidance uses pg_dump/pg_restore over a direct, unpooled Postgres connection.
+        Creating a separate logical target requires the current role's database-creation rights;
+        documented neon_superuser privileges do not prove the permissions of an issued connection.
+        A new logical database shares the existing project's capacity and expiry. Claimable's
+        engineering Beta status signal and the AUP's publication exception require separate review
+        before a new public comparison; callable provisioning is not publication permission.
   notes:
+    - >-
+      Ordinary registered Free accounts currently include 100 projects, 100 CU-hours/month/project,
+      1 GB Postgres storage/project and 10 branches/project, with no credit card required. The storage
+      increase was announced on 2026-10-02. These ordinary Free limits do not replace the unclaimed
+      Claimable project's 100 MB, 1 GB transfer and 72-hour constraints. Neither plan's advertised
+      allowance establishes actual remaining resources or this run's service charges.
     - >-
       The current Neon Platform Schedule incorporates the Databricks MCSA and its Acceptable Use Policy.
       The AUP permits benchmarking and disclosure except for Beta Services, with disclosure of information
-      needed to reproduce the benchmark and reciprocal benchmarking rights. The reviewed Claimable
-      reference does not label the service Beta; absence of that label is not an independent determination
-      of contractual status. Customer-content rights and confidentiality obligations remain applicable.
+      needed to reproduce the benchmark and reciprocal benchmarking rights. The public Claimable reference
+      does not label the service Beta, but the official engineering overview describes its hosted endpoint
+      as Beta-ready on 2026-08-26. A current Claimable-specific GA confirmation was not established in this
+      review; do not infer unrestricted publication from the reference's missing label or from broader
+      Neon backend announcements. Customer-content rights and confidentiality obligations remain applicable.
       Small tests using synthetic records should preserve reproducible conditions and disclose only
       task-owned evidence; they do not establish general production reliability.

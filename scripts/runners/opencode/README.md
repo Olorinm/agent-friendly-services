@@ -269,6 +269,38 @@ deadline it stops paid workers, collects measured usage, saves state and exits.
 It does not extend an expired authorization. Interrupted/uncertain starts are
 never resent; a partial preparation or unconfirmed stop requires inspection.
 
+### Resident cloud controller
+
+The queue can run on the dedicated Docker host. Set `"transport": "local"` and
+`"host": "localhost"` in its private adapter config. Omitting `transport` retains
+the SSH behavior. Local operations execute literal argv without a shell and use
+the same isolated worker, source-hash check, collection and stop protocol. This
+does not let model containers access the controller's files or Docker socket.
+
+Install a reviewed, versioned repository release, Python 3.11+, Node and the
+locked npm dependencies on the controller host. Keep the release, private
+configuration, credentials, references and queue owned by the operator; private
+directories use mode 0700, files 0600. No HTTP queue endpoint is required. Resolve
+all handoff paths on that host, including the adapter command path, reference,
+materials and prerequisite run. Upload inputs to a new staging directory, verify
+their hashes, and only then run `task_queue.py submit` over authenticated SSH.
+The resulting `ready.json` is published last; merely copying a draft is not a
+submission. Producers can submit while the one resident controller is running.
+They cannot overwrite an existing job ID or its frozen handoff.
+
+Use [the service template](controller.service.example) with the operator's actual
+absolute paths. `Restart=no` is intentional: inspect saved run IDs, worker status,
+stop confirmation and ledger before restarting after a failure. SIGTERM/SIGINT
+prevents new dispatch, finishes the current adapter operation, then stops and
+collects owned sessions. A stopped queue stays halted; starting its process again
+does not grant a new authorization. The per-worker absolute deadline also stops
+model calls if the controller disappears. Keep one controller per Docker pool;
+do not start another Mac scheduler against the same containers.
+
+This decouples task production, execution and publication. It does not manufacture
+research tasks or approve evidence: the role sessions and controller still review
+each sourced handoff before admission, and review public copies after grading.
+
 Single-run handoff example (all paths private and absolute):
 
 ```json

@@ -1,0 +1,563 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-turso-restore-v2-r1",
+  "service_id": "turso",
+  "route_id": "platform-api",
+  "entry_url": "https://api.turso.tech/v1/",
+  "task": {
+    "description": "帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。",
+    "inputs": "源库是总控为本轮另行新建、独立确认空白后填入合成数据并核对的专用远程数据库，其身份和连接配置见 ENVIRONMENT.md；它包含 lists 与 todos 两张业务表。lists 有 id、name；todos 有 id、list_id、title、done、note，list_id 关联 lists.id。备份和恢复须保留两张表的字段名、数据类型含义、主键、外键、非空约束、默认值及全部原始记录；清单归属、完成状态、文本内容，以及备注空字符串与缺值的区别都要保留。恢复目标必须是本次新建且起初没有业务表的独立远程数据库；可以与源库共享项目或计算资源。备份应包含重建所需的业务结构和数据，以后源库不可用时也能在兼容 SQL 引擎中恢复，不只是一条依赖原服务的快照或分支链接。不要求跨不同 SQL 方言恢复，不备份服务内部表、账号权限或宿主机。源库在此期间没有其他写入者；不得修改或删除源库业务表和记录。",
+    "expected_output": "实际导出的可留存逻辑备份及兼容引擎恢复说明；本轮新建目标库的非敏感位置；恢复后新连接查询的各表行数与完整性、源库未变的简短核对结果；免费及资源期限说明。备份中的完整数据和结构可由真实原始回执核对，执行者无需另交审计日志或自评脚本。",
+    "success": "在指定服务及入口从真实源库导出覆盖两表逻辑结构与全部记录的备份，实际使用该备份恢复到本次独立新建且起初空白的远程目标；新连接可读回等价业务结构和全部原始记录，源库业务结构与记录未变。交付可留存备份、可用简短恢复方法、新库位置、准确的各表行数与核对结果，并如实说明已知期限或免费条件。凭据只存私有配置，不进入交付答案或公开证据。",
+    "failure": "只做本地模拟、仅克隆云端分支而无可留存且实际使用的逻辑备份、没有独立新目标、备份或恢复漏结构关系或记录、数据语义改变、源库被修改、不能重新连接读回、缺少必要业务交付或预算内未完成。权限或额度不足记具体路线障碍；准备数据或运行环境失效单列无效。不能因格式、SQL 方言或客户端选择不同就判失败。",
+    "resources": "使用总控为本轮单独准备并核对的源库，不复用接入测试库或前轮业务库。业务阶段最多另建一个独立空目标库及必需的最小父资源；仅操作本轮源库和目标库，可在 ENVIRONMENT.md 明确授权的既有父资源内创建和管理本轮数据库，不读取或修改其他数据库的业务结构和记录。不删除源库、不做故意破坏性测试；验收结束前保留两库及备份。仅用已确认免费资源，不绑定支付方式、购买、开启付费超额或邀请通知他人。允许自行查文档、安装依赖和编写调用代码，不提供预写导出或恢复脚本。预算、允许入口、私有配置位置、剩余额度与到期时间在 ENVIRONMENT.md 冻结。",
+    "id": "database-restore-001",
+    "version": "v2",
+    "sha256": "532b8eb9cf7e67f5e173bb6ca0de0aec20161e34a54f673547565461688e8172",
+    "file": "data/experiments/tasks/database-restore-v2.md"
+  },
+  "prompt_sha256": "689effdbc55797cc5e507012ac6bb0122e9f8fc0a9e5ca5f6cc8293c7d0ae60a",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T11:56:52.093416+00:00",
+  "ended_at": "2026-10-10T11:58:26.104878+00:00",
+  "elapsed_seconds": 94.011462,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "Existing authorized project Turso Starter account supplied; not self-registration",
+      "provided": true
+    },
+    "web_search": "live",
+    "preparation_note": "Three predeclared fresh v2 rounds on one existing Starter account; same independently passed HTTP baseline with credentials/config only, no dedicated library/task script/history/answer. Fresh physical container/home/session each round; stable logical runtime maps baseline, not same physical container. Controller creates distinct empty source then exact frozen2table7row synthetic schema/data; all complete before receipts privately verified. Executor has source [SERVICE_SECRET] SQL token plus broad policy-bound parent management key and must create one target and actually restore its own retained backup. Source and target hosted in existing [SERVICE_SECRET] group; execution Johor. Root preparation/readback separate, no peers/other grades, fixed50USDdeadline and40/600/300/.85. Older v1 experiments unchanged, no claim that duration alone caused past misses.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791634002.0932424,
+      "started_epoch": 1791633412.0932424
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "执行者在指定 Turso 服务上从真实源库导出可留存逻辑备份（backup.sql/backup.json/manifest.json），在既有 group 内新建独立的空目标库（建库时业务表数=0），实际用该备份逐条恢复到目标库，并重新连接核对。独立控制器读回确认目标库与源库为不同逻辑资源、目标库完整 schema 与全部行同源库、源库前后完全未变。交付含备份路径、简短恢复方法、非敏感新库位置、各表行数与核对结果及免费/到期说明。",
+  "usage": {
+    "input_tokens": 546854,
+    "cached_input_tokens": 530048,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 14292,
+    "reasoning_output_tokens": 4392
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "controller-verification/controller-verification.json",
+      "frozen-execution/ENVIRONMENT.md"
+    ],
+    "applicability": {
+      "rule": "Turso Starter 账户计划价格为 $0 且 overages=false，无法产生付费超额；本轮仅在既有免费额度内读取源库并新建 1 个逻辑目标库。",
+      "observed": "控制器独立读回账户计划为 name=starter、price_usd=0、overages=false；本 run 仅发生源库读取与一个目标库的小量写入，远低于 100 库/5GB/500m 读行/10m 写行月额度。",
+      "evidence": "controller-verification/controller-verification.json 中 plan 字段（price_usd 0、overages false）；frozen-execution/ENVIRONMENT.md 记载官方账号回执 Starter $0、overages=false。"
+    },
+    "note": "账户级 Starter $0 计划且未开启付费超额，本次调用量极小，无付费。精确剩余额度未知（remaining_exact=null），但不影响本次为免费。",
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode independent grader (deepseek-flash)",
+    "reviewed_at": "2026-10-10T12:11:39.185338+00:00",
+    "checks": [
+      {
+        "criterion": "可留存逻辑备份：从真实源库导出包含两表结构与全部记录的标准、可脱离原服务恢复的逻辑备份",
+        "passed": true,
+        "evidence": "execution/artifacts/backup/backup.sql 为 19 行标准 SQLite/libSQL dump：CREATE TABLE lists/todos 完整 DDL + 7 条 INSERT，note 的 NULL 与 '' 分别写出；execution/artifacts/backup/manifest.json 记录 sha256(38695c35…)/字节数/行数；DELIVERY.md 给出 sqlite3 target.db < backup.sql 恢复方法。非仅快照/分支链接。"
+      },
+      {
+        "criterion": "实际使用该备份恢复到本次新建、起初没有业务表的独立远程目标库",
+        "passed": true,
+        "evidence": "工具记录 line20 经 Platform API 在授权既有 group 建目标库 HTTP 200（返回新 DbId）；line65 目标库业务表数=0；line69 读取 backup/backup.sql 逐条 POST /v2/pipeline，12 条语句 HTTP 200 全部 ok；controller-verification.json target.distinct_logical_resource_verified=true 且 target-metadata 为 libsql logical 库。"
+      },
+      {
+        "criterion": "恢复后业务结构关系与数据完整：字段名/类型/PK/FK/NOT NULL/DEFAULT 与全部记录、清单归属、完成状态、文本及 NULL 与空串区别保留",
+        "passed": true,
+        "evidence": "controller-verification/target-after.json 与 source-before.json 的 sqlite_schema DDL、PRAGMA table_info、foreign_key_list 与全部行一致；id 103 note 为空串、101/105 为 NULL；controller target.schema_and_rows_match_source_under_exact_read_queries=true。"
+      },
+      {
+        "criterion": "源库业务表与记录保持不变（未修改/删除）",
+        "passed": true,
+        "evidence": "controller-verification/source-after.json 与 source-before.json 完全一致；controller-verification.json source.unchanged_complete_schema_and_rows=true。全部源库交互（make_backup、重读）仅 SELECT/PRAGMA，无源写操作。"
+      },
+      {
+        "criterion": "恢复结束后重新连接新库读取核对（持久化结果）",
+        "passed": true,
+        "evidence": "工具记录 line73/76 用目标库 token 重连 /v2/pipeline 读取 schema、rows、PRAGMA foreign_key_check（无违规）、integrity_check=ok 与行数 2/5；controller-verification/target-after.json 独立读回一致。"
+      },
+      {
+        "criterion": "可用交付：备份、简短恢复方法、非敏感新库位置、各表行数与核对结果、免费/到期说明",
+        "passed": true,
+        "evidence": "execution/answer.md 与 execution/artifacts/DELIVERY.md：行数 lists 2/2/2、todos 5/5/5；恢复方法 sqlite3 与 Turso /v2/pipeline；新库名称/db_id/host/group/region；Starter $0、overages=false、额度与单库自动到期未知；凭据仅存私有目录，未输出。"
+      }
+    ],
+    "grading_model_cost": {
+      "amount_usd": 0.039438576,
+      "kind": "estimated",
+      "scope": "Independent grader overhead, frozen estimate not invoice, separate from execution.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.039438576,
+          "usage_sha256": "d7daec1f97d76d57f865ad0d9c46810c3e8612e462df1f907d6fb2d2faa6b756"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-turso-restore-v2-r1/execution/answer.md",
+      "sha256": "946635e4c6f964f022e4b215e8f19a6f4380c734a9072118f86f3c124ce786e6",
+      "note": "Original final/intermediate answer with registered private identities/links redacted; delivery verdict unchanged.",
+      "source_sha256": "03cb69025021d72bb8a54fa3fa56415826ad5ba30c210a8906e13c4f1b08732a",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-turso-restore-v2-r1/public-review/verification-excerpt.json",
+      "sha256": "b856a0e3aca89ea71da02f6abe4f86e6c64f24d0bad2a08793a78700595d35a8",
+      "note": "Minimal independent grading excerpt, original source hashes and controlled synthetic readback observations; no raw logs or credentials."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-turso-restore-v2-r1",
+    "run_sha256": "307b8aca08727cfc73d04862015a4e6cc7e083880f810924fbb2ed265fcd142d",
+    "events_sha256": "842881cead97f48f79ce29949e85ff40c6e1646dc0a1e067ba8213555bfa4c14",
+    "answer_sha256": "03cb69025021d72bb8a54fa3fa56415826ad5ba30c210a8906e13c4f1b08732a",
+    "review_sha256": "fbd4df93a4975bed0058d1b92df10d9ac33bd5b607797501ae0d20c85a991b72",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "87cb68c57a46f5040dc57d40c40642cec8ab2796ac79aa80ef0b7e96b3c263fd",
+    "publication_review_note": "Minimal publication evidence and private identity redaction only; original task verdict, checks/outcome, measured usage and independent service-fee verdict unchanged."
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "导出、建空目标库、用备份恢复、重连核对四项指定服务操作均有真实 HTTP 200 回执（工具记录 line20/65/69/73/76）与控制器独立读回（target-after、source-after）印证；源库无写操作，全程无权限/限流/付费阻碍。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7230,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 139,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8772,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 261,
+        "reasoning_output_tokens": 139
+      },
+      {
+        "input_tokens": 9812,
+        "cached_input_tokens": 8960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 328,
+        "reasoning_output_tokens": 189
+      },
+      {
+        "input_tokens": 10414,
+        "cached_input_tokens": 10112,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 583,
+        "reasoning_output_tokens": 382
+      },
+      {
+        "input_tokens": 11213,
+        "cached_input_tokens": 10880,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 756,
+        "reasoning_output_tokens": 57
+      },
+      {
+        "input_tokens": 11985,
+        "cached_input_tokens": 11776,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 308,
+        "reasoning_output_tokens": 74
+      },
+      {
+        "input_tokens": 12391,
+        "cached_input_tokens": 12160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 274,
+        "reasoning_output_tokens": 122
+      },
+      {
+        "input_tokens": 12817,
+        "cached_input_tokens": 12544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 601,
+        "reasoning_output_tokens": 209
+      },
+      {
+        "input_tokens": 13433,
+        "cached_input_tokens": 13184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 239,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 13848,
+        "cached_input_tokens": 13568,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 432,
+        "reasoning_output_tokens": 211
+      },
+      {
+        "input_tokens": 15382,
+        "cached_input_tokens": 14208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1929,
+        "reasoning_output_tokens": 651
+      },
+      {
+        "input_tokens": 17327,
+        "cached_input_tokens": 17152,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 69,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 17514,
+        "cached_input_tokens": 17280,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 221,
+        "reasoning_output_tokens": 50
+      },
+      {
+        "input_tokens": 17853,
+        "cached_input_tokens": 17664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 175,
+        "reasoning_output_tokens": 15
+      },
+      {
+        "input_tokens": 18043,
+        "cached_input_tokens": 17792,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 219,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 18277,
+        "cached_input_tokens": 18048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 316,
+        "reasoning_output_tokens": 68
+      },
+      {
+        "input_tokens": 18608,
+        "cached_input_tokens": 18432,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 86,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 19859,
+        "cached_input_tokens": 18688,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 605,
+        "reasoning_output_tokens": 446
+      },
+      {
+        "input_tokens": 20607,
+        "cached_input_tokens": 20352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 542,
+        "reasoning_output_tokens": 323
+      },
+      {
+        "input_tokens": 21186,
+        "cached_input_tokens": 20992,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 269,
+        "reasoning_output_tokens": 30
+      },
+      {
+        "input_tokens": 21514,
+        "cached_input_tokens": 21376,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 689,
+        "reasoning_output_tokens": 398
+      },
+      {
+        "input_tokens": 22277,
+        "cached_input_tokens": 22016,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 458,
+        "reasoning_output_tokens": 105
+      },
+      {
+        "input_tokens": 22982,
+        "cached_input_tokens": 22656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 382,
+        "reasoning_output_tokens": 99
+      },
+      {
+        "input_tokens": 23799,
+        "cached_input_tokens": 23296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 490,
+        "reasoning_output_tokens": 91
+      },
+      {
+        "input_tokens": 24594,
+        "cached_input_tokens": 24192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 967,
+        "reasoning_output_tokens": 400
+      },
+      {
+        "input_tokens": 25577,
+        "cached_input_tokens": 25344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 575,
+        "reasoning_output_tokens": 69
+      },
+      {
+        "input_tokens": 26168,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 119,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26619,
+        "cached_input_tokens": 26240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1526,
+        "reasoning_output_tokens": 222
+      },
+      {
+        "input_tokens": 28161,
+        "cached_input_tokens": 27904,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 217,
+        "reasoning_output_tokens": 18
+      },
+      {
+        "input_tokens": 28592,
+        "cached_input_tokens": 28288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 517,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "c44bb6d9bd3f415b8cbedad26e000edc48765fda7064c5a714b65ab4f8dd68b9",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 546854,
+      "cached_input_tokens": 530048,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 14292,
+      "reasoning_output_tokens": 4392
+    },
+    "totals": {
+      "input_tokens": 546854,
+      "cached_input_tokens": 530048,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 14292,
+      "reasoning_output_tokens": 4392
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

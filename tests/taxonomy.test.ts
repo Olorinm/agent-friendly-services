@@ -88,17 +88,23 @@ test('search results cannot masquerade as specified-URL extraction or inherit a 
 });
 
 test('shared finance setup is separated from FX business results in queries and comparison means', () => {
-  const fx = searchServices(data, { classification: `${finance}/fx` }).find(s => s.id === 'ecb-data')!;
+  // Scope the historical fixture to these task families; new macro trials must
+  // not alter the setup/FX separation this regression exercises.
+  const fixtureEvaluations = loadEvaluations().filter(e => ['financial-fx-001', 'financial-access-001'].includes(e.task.id));
+  const fixtureData = { categories, services: providers.map(p => catalogService(p, 'candidate', fixtureEvaluations)) };
+  const fx = searchServices(fixtureData, { classification: `${finance}/fx` }).find(s => s.id === 'ecb-data')!;
   const runs = fx.routes.flatMap(r => r.task_runs);
   assert(runs.length > 0);
   assert.deepEqual(new Set(runs.map(r => r.task.id)), new Set(['financial-fx-001']));
   assert(runs.every(r => r.phase === 'business'));
-  const all = searchServices(data, { classification: finance }).find(s => s.id === 'ecb-data')!;
+  const all = searchServices(fixtureData, { classification: finance }).find(s => s.id === 'ecb-data')!;
   assert(all.routes.flatMap(r => r.task_runs).some(r => r.phase === 'setup'));
-  const boards = buildBoards(loadEvaluations()).filter(b => b.rows.some(r => r.service_id === 'ecb-data'));
+  const boards = buildBoards(fixtureEvaluations).filter(b => b.rows.some(r => r.service_id === 'ecb-data'));
   assert.deepEqual(new Set(boards.map(b => `${b.classification}:${b.phase}`)), new Set([`${finance}:setup`, `${finance}/fx:business`]));
-  assert(boards.every(b => b.tasks.length === 1 && b.rows.every(r => r.metrics.trials === 1)));
-  const macro = searchServices(data, { classification: `${finance}/macro` }).find(s => s.id === 'ecb-data')!;
+  assert(boards.every(b => b.tasks.length === 1));
+  assert(boards.filter(b => b.phase === 'business').every(b => b.rows.every(r => r.metrics.trials === 1)));
+  assert(boards.filter(b => b.phase === 'setup').every(b => b.tasks[0].id === 'financial-access-001'));
+  const macro = searchServices(fixtureData, { classification: `${finance}/macro` }).find(s => s.id === 'ecb-data')!;
   assert.equal(macro.route_tests, 'not_recorded');
 });
 

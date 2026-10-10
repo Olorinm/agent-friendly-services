@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-advisories-github-business-r3",
+  "service_id": "github",
+  "route_id": "public-advisories-api",
+  "entry_url": "https://api.github.com/advisories",
+  "task": {
+    "description": "我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。",
+    "inputs": "依赖笔记：生态 PyPI，包 Django，当前版本 5.2.6；待核对告警 CVE-2025-57833、CVE-2025-59681。只核对这两条的包版本匹配和修复边界，不要求列出所有漏洞或选择当前最新版本，也不判断本项目的代码、数据库配置或漏洞可利用性。用中文简要说明判断及查询来源。可以沿本次指定服务记录中的引用链接核对维护者公告或发布记录；不要用其他漏洞库、通用网页搜索或模型记忆代替指定服务查询。没有查到记录时说明未知，不据此断言没有影响。不安装、升级或修改项目。",
+    "expected_output": "两条告警各自的当前版本匹配结论、5.2.x 最早修复版本和可核对的依据链接；仅针对这两条的最低升级版本及简短中文解释，注明所用服务。",
+    "success": "真实查询指定服务，答复逐条正确判断给定包版本是否匹配两条告警，修复版本属于所要求的 5.2.x 分支，最低升级边界正确；结论与实际服务记录或从记录可追溯的维护者引用链相符，并由事前独立取得的维护者发布参考核对。来源链接能支持对应判断，不将未命中当作不受影响，不把本题结论扩大为全部漏洞已修复或应用不可利用。",
+    "failure": "未查询指定服务，遗漏任一告警，混淆包、生态、告警或版本分支，当前版本匹配或修复边界错误，仅凭空响应或记忆断言无影响，依据无法追溯，替换为其他检索服务，越过只读范围或预算内未完成。真实无记录、元数据不足、限流和访问阻碍如实记录；执行环境或采集故障单列无效。",
+    "resources": "使用本轮指定免费公开公告服务及官方文档；允许读取从本次公告记录可追溯到的维护者安全公告、官方发布记录及其必要链接，不以其他聚合库补答。只读少量防御性元数据，不下载或运行漏洞样例，不安装待查软件，不扫描任何目标，不修改仓库或依赖，不付费、注册无关服务或发消息。可在隔离环境安装通用客户端依赖和生成本地笔记。请求、时间和身份来源由 ENVIRONMENT.md 冻结，证据由外部采集，不要求执行者另写审计日志。",
+    "id": "dependency-advisories-check-001",
+    "version": "v1",
+    "sha256": "6e9cfc85b927eadb9b77812a50fea6e1d8fb3140e74bb95e8120b5fdf158d815",
+    "file": "data/experiments/tasks/dependency-advisories.md"
+  },
+  "prompt_sha256": "cc50cd4a750c3d022758944eec96e651ddb2a2318554d4335827705db2b22ff6",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T10:28:04.663462+00:00",
+  "ended_at": "2026-10-10T10:28:28.682529+00:00",
+  "elapsed_seconds": 24.019067,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791628674.6632874,
+      "started_epoch": 1791628084.6632874
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "本次执行使用指定的 GitHub global-advisories 匿名 REST API（API 版本 2026-03-10）逐条查询两条告警，原始响应可证：CVE-2025-57833 5.2.x 范围为 >= 5.2a1, < 5.2.6（修复版 5.2.6），CVE-2025-59681 为 >= 5.2, < 5.2.7（修复版 5.2.7）；故当前 5.2.6 不在 57833 范围内、仍在 59681 范围内，仅这两条的最低升级版本为 5.2.7。答复中文说明并给出 API、公告与可追溯的 Django 维护者安全发布链接，与事前独立冻结的 reference.json 结论一致；未安装/升级/修改项目，未使用其他漏洞库或搜索。",
+  "usage": {
+    "input_tokens": 80437,
+    "cached_input_tokens": 50688,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3117,
+    "reasoning_output_tokens": 1630
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/",
+      "https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/",
+      "https://docs.github.com/en/rest/security-advisories/global-advisories"
+    ],
+    "source_ids": [
+      "github-advisory-free-availability",
+      "github-rest-announcement",
+      "github-global-advisories-docs"
+    ],
+    "note": "补充官方免费提供与REST路径对应证据后，可确认本轮指定公告查询服务费用为0。原冻结环境免费要求、HTTP成功、匿名60次/小时限额、无付款信息均不能单独支持这个金额。",
+    "applicability": {
+      "rule": "GitHub官方明确免费提供Advisory Database数据并说明可编程访问；2023 REST发布说明对应免费列表，当前文档明确本轮global-advisories公开读取路径。适用于本轮公开公告REST元数据读取，不是GitHub所有API或所有产品免费。",
+      "observed": "run.json指定public-advisories-api与api.github.com/advisories、没有提供服务凭据；冻结ENVIRONMENT限定公开只读。所查最少响应含api.github.com/advisories的记录URL；有headers的轮次观察到HTTP 200、API版本2026-03-10及60的限额。",
+      "evidence": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/run.json sha256=7832f48b0a712645861a2e2b6d793617546b9070c88e680db4538a05d0222a86; data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/frozen/execution/ENVIRONMENT.md sha256=b4128c99fa5debe54529967aafe9d6aa00d60b869e5d5edca67148df79d0c7de; data/experiments/results/afs-20261010-johor40-advisories-github-business-r3/execution/artifacts/advisory-CVE-2025-57833.json sha256=9899d13131fbc52cd65b99f89b81e34e132fa30866dd065669ec82e355cfaead"
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "opencode-verifier",
+    "reviewed_at": "2026-10-10T11:34:31.099614+00:00",
+    "checks": [
+      {
+        "criterion": "使用指定服务真实查询（GitHub global-advisories 匿名 REST API，官方 API 版本头），未由其他漏洞库/搜索/记忆替代",
+        "passed": true,
+        "evidence": "execution/events.jsonl 与 review-packet/tools/0003、0005 记录两次 curl 至 https://api.github.com/advisories?cve_id=...，带 X-GitHub-Api-Version: 2026-03-10 与 JSON Accept 头，均 HTTP/2 200；原始响应见 execution/artifacts/advisory-CVE-2025-57833.json、advisory-CVE-2025-59681.json。"
+      },
+      {
+        "criterion": "逐条正确判断当前版本 5.2.6 是否匹配受影响范围：57833 不匹配、59681 匹配",
+        "passed": true,
+        "evidence": "原始响应：57833 的 pip/Django 5.2 段 vulnerable_version_range=\">= 5.2a1, < 5.2.6\"（5.2.6 不在内）；59681 的 5.2 段=\">= 5.2, < 5.2.7\"（5.2.6 在内）。answer.md 结论列与此一致。"
+      },
+      {
+        "criterion": "给出 5.2.x 分支各自最早的修复版本（5.2.6 / 5.2.7）",
+        "passed": true,
+        "evidence": "原始响应 first_patched_version 分别为 5.2.6 与 5.2.7，属 5.2.x 分支；维护者公告亦确认 2025-09-03 发布 5.2.6、2025-10-01 发布 5.2.7。"
+      },
+      {
+        "criterion": "仅处理这两条时的最低升级版本正确（5.2.7），且不扩大为全部漏洞已修复/应用不可利用",
+        "passed": true,
+        "evidence": "answer.md 明确“仅处理这两条，5.2.x 分支至少需升级到 5.2.7”，并声明未评估可利用性、数据库配置或项目代码。"
+      },
+      {
+        "criterion": "提供可核对的依据链接、简短中文说明并注明所用服务",
+        "passed": true,
+        "evidence": "answer.md 注明数据源为 GitHub global-advisories REST API，并给出 API 查询、GHSA 公告页与 Django 维护者安全发布链接（sep/03 与 oct/01），同时被执行时读取的维护者页佐证（review-packet/tools/0007、0008）。"
+      },
+      {
+        "criterion": "结论与事前独立维护者参考一致，未将未命中当作不受影响",
+        "passed": true,
+        "evidence": "reference.json（frozen_before_candidate_execution）独立结论：57833 already fixed in 5.2.6、59681 affected、minimum 5.2.7，与本次答复逐项一致；答复还给出 5.2.6 的明确范围下限说明而非仅凭未命中。"
+      },
+      {
+        "criterion": "只读范围：未安装/升级/修改项目，未下载运行漏洞样例或扫描目标",
+        "passed": true,
+        "evidence": "events.jsonl 全部工具调用仅为 read、curl 只读查询、json.tool 解析、cp 保存响应与两次 webfetch 维护者页面；无安装、升级、写仓库或扫描操作。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "afs-20261010-johor40-advisories-comparison-r3",
+      "round": 3,
+      "snapshot_sha256": "83ffd95421926e9156f3eb972c0bb95e2d9ce744f9e1647474f92ac0e6c6f34b",
+      "run_ids": [
+        "afs-20261010-johor40-advisories-osv-business-r3",
+        "afs-20261010-johor40-advisories-github-business-r3"
+      ],
+      "available_run_ids": [
+        "afs-20261010-johor40-advisories-osv-business-r3",
+        "afs-20261010-johor40-advisories-github-business-r3"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.021464052,
+      "kind": "estimated",
+      "scope": "Independent grading overhead, separate from executor usage; frozen API estimate, not invoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.021464052,
+          "usage_sha256": "0ae86cb59c821029fde2b758e021f42cf7da44feac1079b6fc9cde6638a6d685"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-advisories-github-business-r3/execution/answer.md",
+      "sha256": "53b97f3045e05931c66ea93b8ccfc91cf9e4f39c46785f4fd6045a435febf5fe",
+      "note": "Original captured user answer, private infrastructure and registered identities removed; not a raw model log."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-advisories-github-business-r3/public-review/verification-excerpt.json",
+      "sha256": "f1540d09d98594cb676413557439af08748848b83dc2415b6d041202c76b62c9",
+      "note": "Minimal independent-verification excerpt, original evidence hashes and cohort limits; full holiday tables/raw model logs omitted."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-advisories-github-business-r3",
+    "run_sha256": "7832f48b0a712645861a2e2b6d793617546b9070c88e680db4538a05d0222a86",
+    "events_sha256": "6e399e7b83b3703cd8730baaf1afdd4f02681d3105d17d200f0256863cac73e3",
+    "answer_sha256": "53b97f3045e05931c66ea93b8ccfc91cf9e4f39c46785f4fd6045a435febf5fe",
+    "review_sha256": "7ff923e649f35c56a8313f8e4815695d69c59bd888a7cc597cecf46424ca0fcd",
+    "original_independent_review_sha256": "68f1fca68a50e8ba49cb1277da1e34ecca6f320e360bc7f89d1240d68ab54989",
+    "publication_review_note": "Minimal evidence selection and identity redaction; task status/reason/checks/outcome/measured usage unchanged. Any fee-source correction is an explicitly linked anomaly-specific independent clarification.",
+    "fee_clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342"
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 API 两次查询均成功（200，2026-03-10 版本头），答复逐条给出正确的匹配结论、5.2.6/5.2.7 修复边界、最低升级 5.2.7 及可追溯依据链接。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7211,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 126,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 8266,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 369,
+        "reasoning_output_tokens": 211
+      },
+      {
+        "input_tokens": 9179,
+        "cached_input_tokens": 8576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 6
+      },
+      {
+        "input_tokens": 10403,
+        "cached_input_tokens": 9216,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 198,
+        "reasoning_output_tokens": 33
+      },
+      {
+        "input_tokens": 12210,
+        "cached_input_tokens": 10496,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1349,
+        "reasoning_output_tokens": 1034
+      },
+      {
+        "input_tokens": 33168,
+        "cached_input_tokens": 13440,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1017,
+        "reasoning_output_tokens": 337
+      }
+    ],
+    "source_sha256": "c6dc35f7be625401e8f515643275847192dfd8eda84e3ba33a22727535170703",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 80437,
+      "cached_input_tokens": 50688,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3117,
+      "reasoning_output_tokens": 1630
+    },
+    "totals": {
+      "input_tokens": 80437,
+      "cached_input_tokens": 50688,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3117,
+      "reasoning_output_tokens": 1630
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

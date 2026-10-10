@@ -104,6 +104,11 @@ tasks:
     id: web-extraction-holidays-001
     classification: web-search-data/web-extraction
     phase: business
+
+  - file: data/experiments/tasks/web-extraction-uk.md
+    id: web-extraction-uk-holidays-001
+    classification: web-search-data/web-extraction
+    phase: business
   - file: data/experiments/tasks/web-extraction-pdf.md
     id: web-extraction-pdf-hikes-001
     classification: web-search-data/web-extraction
@@ -176,6 +181,11 @@ tasks:
     classification: databases/hosted-relational
     phase: business
 
+  - file: data/experiments/tasks/database-restore-v2.md
+    id: database-restore-001
+    classification: databases/hosted-relational
+    phase: business
+
   - file: data/experiments/tasks/public-holidays.md
     id: public-holidays-access-001
     classification: web-search-data/public-holidays
@@ -218,4 +228,9 @@ tasks:
   - file: data/experiments/tasks/database-atomic-import.md
     id: database-atomic-import-001
     classification: databases/hosted-relational
+    phase: business
+
+  - file: data/experiments/tasks/financial-macro.md
+    id: financial-macro-hicp-001
+    classification: web-search-data/financial-data/macro
     phase: business

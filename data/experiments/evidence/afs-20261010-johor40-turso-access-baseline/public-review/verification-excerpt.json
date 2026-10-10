@@ -1,0 +1,154 @@
+{
+  "notice": "Minimal operator-selected task evidence from unchanged independent grading, with a separate independent fee-only exception clarification. Original task assessment hashes are retained; task status/checks/outcome and measured usage are unchanged. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-turso-access-baseline",
+  "independent_assessment_sha256": "e85e9a660b8a40d0c50be8ac32497bbb8d12046e62f93ff8f9fac697be84d473",
+  "status": "completed",
+  "reason": "指定入口 api.turso.tech/v1 新建了本轮唯一空 libSQL 库，经官方 libSQL SQL over HTTP /v2/pipeline 完成一次真实只读查询（HTTP 200，版本 3.47.0，user_tables=0，rows_read=1，rows_written=0），资源与连接配置保存到持久目录且答复只给位置未泄露秘密；账号来源、接入步骤、人工门槛与免费/到期条件均有依据陈述。",
+  "checks": [
+    {
+      "criterion": "本轮新建独立远程数据库，且为无业务表/记录的空库",
+      "passed": true,
+      "evidence": "create-db.json 显示 POST /v1/organizations/{org}/databases 返回 HTTP 200（Name/DbId 脱敏）；query-result.json 中 user_tables=0。"
+    },
+    {
+      "criterion": "通过指定方式完成真实只读查询，而非仅安装/列表/创建/健康检查",
+      "passed": true,
+      "evidence": "query-result.json：POST https://{host}/v2/pipeline 执行 SELECT sqlite_version(), count(*) FROM sqlite_master，HTTP 200，version=3.47.0、rows_read=1、rows_written=0、affected_row_count=0。"
+    },
+    {
+      "criterion": "可复用连接配置保存于私有持久位置，且答复不泄露凭据",
+      "passed": true,
+      "evidence": "answer.md 仅给出 /home/node/service-tools/credentials.json 与 service-config.json 位置；工具记录显示二者写入且权限 600；采集工作目录内 grep 未发现 JWT 明文。"
+    },
+    {
+      "criterion": "答复披露账号来源、实际接入步骤与人工/申请门槛",
+      "passed": true,
+      "evidence": "answer.md 说明账户/API token/group 由总控预置非自助注册，列出 GET 列表→POST 建库→POST 签发库 token→/v2/pipeline 查询的步骤，并说明无需注册/验证码/绑卡、过程中无人工介入。"
+    },
+    {
+      "criterion": "免费额度或到期限制如实说明，未知项保留",
+      "passed": true,
+      "evidence": "answer.md 写明 starter 价格 0、overages=false、用量与配额、token expiration=never、套餐可能变化及 50 美元窗口截止，与 controller-verification/entitlement.json 读回一致。"
+    },
+    {
+      "criterion": "未越权：仅新建 1 库、未读取既有业务库、未开启付费/overage",
+      "passed": true,
+      "evidence": "仅 1 次 POST 建库回执且使用指定 group；GET 列表显示既有库未被访问内容；entitlement.json 读回 overages=false、price 0。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "服务端：建库、签发库 token、/v2/pipeline 只读查询均 HTTP 200 成功（create-db.json、query-result.json）。交付：answer.md 给出资源标识、真实查询结果、配置位置、步骤与限制，秘密仅存私有文件。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "88f32b84b4e4b7a8ddf04811f6e9e68b3c58120ad533eb303d4e991c5c69cfe4",
+      "note": "执行者最终答复：资源标识、只读查询结果、配置位置、接入步骤、人工门槛与免费/到期说明（秘密已脱敏）。"
+    },
+    {
+      "private_source": "execution/artifacts/query-result.json",
+      "sha256": "7121fc68b88d5003ead7d907eab8b9285ce11451ea6315917989eb839f014392",
+      "note": "指定方式 /v2/pipeline 的真实只读查询响应（HTTP 200，version=3.47.0，user_tables=0，rows_read=1，rows_written=0）。"
+    },
+    {
+      "private_source": "execution/artifacts/create-db.json",
+      "sha256": "5c98d234a141f7e594cfb2abc0a045c04343d22a07f57a92bbe0cfce42703a8d",
+      "note": "本轮专用空库创建回执（HTTP 200，资源标识脱敏）。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/verification-summary.md",
+      "sha256": "65c32d7a0baecd020eb775cf323d024493a78a30b6a9d1da02e628a26427c763",
+      "note": "本次验收核验摘要（仅脱敏业务字段）。"
+    },
+    {
+      "private_source": "subscription-readback.private.json",
+      "sha256": "3367f8d4ca0e2bad26bcbb448211ef0dc095ce45c503c2b2d9ef673d281e3037",
+      "note": "总控执行前实际套餐/计费期/overages读回；只公开套餐与费用适用信息。"
+    },
+    {
+      "private_source": "plans-readback.private.json",
+      "sha256": "6b705b2f2b53508b912b8aa8c619cbab2908290c45a5f77fe2b3a11e0a9d21d4",
+      "note": "实际 Starter 套餐价格及免费额度；月费0，原件标识不公开。"
+    },
+    {
+      "private_source": "usage-readback.private.json",
+      "sha256": "cee4f6abca35ca8cdd1ce73d0dad216cba09607267d09773d6a7a0d4c304e763",
+      "note": "执行前汇总计费量；不是本轮精确期末用量。账号/数据库标识不公开。"
+    },
+    {
+      "private_source": "databases-readback.private.json",
+      "sha256": "5f0368b13e2f960da815a962f73d881733790b8f96008d287d3e0f508ee2356c",
+      "note": "执行前现有库数为1；不公开名称、数据库UUID或hostname。"
+    },
+    {
+      "private_source": "controller-verification/entitlement.json",
+      "sha256": "8e5e27a7ea8c2c6a6e49f5e3344660e0f9bd00ce471a4447fa2aae16648cac6a",
+      "note": "冻结费用适用包，其四类原回执来源hash与私有原件匹配。"
+    },
+    {
+      "private_source": "execution/artifacts/query-payload.json",
+      "sha256": "d0d51ca98e30ff6aad57457146c693b8f6ac072e24da7f823bb7d642923a14e6",
+      "note": "本轮只读元数据SQL请求，与已有响应计费读取1/写入0对应。"
+    },
+    {
+      "private_source": "turso-access-clarification.private.json",
+      "sha256": "007ec1e89fee60b6c94056d3c47cc5a824eb9b28da7ea7b9a41dca97066065d1",
+      "note": "独立费用异常复核；仅澄清服务免费规则与适用性，原任务评分和测量用量不改。"
+    }
+  ],
+  "task_sha256": "7ae679da9de8a65a31f2a5e24becc1e7a2c0875551e04b2696639d5d4fee892d",
+  "prompt_sha256": "c4c4fd6a2a2a69907178626c8337aa24c548d4b6d6ef62bc809160e120a571c1",
+  "reference_sha256": "5fbacb96a37be44efca60c0af949565c073580f3dabbf7caea7e46c8c0be5baf",
+  "answer_sha256": "88f32b84b4e4b7a8ddf04811f6e9e68b3c58120ad533eb303d4e991c5c69cfe4",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate.",
+    "Turso access only: new empty libSQL database and actual read-only SQLoverHTTP; no backup/restore conclusion. Existing group [SERVICE_SECRET], execution host Johor; broad management key policy-bound, not technical isolation."
+  ],
+  "service_cost_review": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "reviewed_at": "2026-10-10T12:12:22.518972+00:00",
+    "clarification_sha256": "007ec1e89fee60b6c94056d3c47cc5a824eb9b28da7ea7b9a41dca97066065d1",
+    "original_independent_assessment_sha256": "e85e9a660b8a40d0c50be8ac32497bbb8d12046e62f93ff8f9fac697be84d473",
+    "original_cost_field_inconsistency": {
+      "service_cost_usd": null,
+      "service_cost_kind": "confirmed_free",
+      "resolution": "The original no-payment-receipt rationale does not establish a free rule or require unknown after free entitlement is verified. Independent fee-only review confirms $0; the private original is retained."
+    },
+    "service_cost_usd": 0,
+    "kind": "confirmed_free",
+    "note": "独立费用异常复核确认本轮适用 Starter/Free 的零月费与免费额度，service_cost_usd=0、kind=confirmed_free。依据是实际套餐/配额读回、overages=false及本轮操作计费指标；匿名或成功响应、未付款和没有付费回执本身均不能证明免费。原私有验收保留，任务判定与测量用量未改。",
+    "applicability": {
+      "rule": "实际 Starter 套餐月费为0，官方定价包含100库、5GB存储、每月500000000行读取、10000000行写入及3GB同步额度；实际 subscription.overages=false。原套餐价格回执与冻结 entitlement 的来源哈希一致，官方资料把 starter 映射为 Free。本轮新建库和只读 SQL 适用该免费规则。",
+      "observed": "执行前实际套餐为 starter、monthly price=0、overages=false。本轮创建1个新库，执行前1库加该操作推算为2/100；所见只读元数据 SQL 响应 rows_read=1、rows_written=0。执行前月累计267读/59写，加该 SQL 为268/500000000读、59/10000000写；执行前存储49152/5000000000 bytes、同步0/3000000000 bytes。没有执行后账户全量读回，精确期末存储、locations和groups保持未知。"
+    },
+    "official_sources": [
+      {
+        "url": "https://turso.tech/pricing?frequency=monthly",
+        "retrieved_at_utc": "2026-10-10T12:08:11.761965+00:00",
+        "sha256": "6f00242c31643ab8f44887aa498eeaa62977e05764269de839c0957334b9d8c2",
+        "note": "官方免费档月费0，包含100库、5GB存储、每月500M读取/10M写入与3GB同步；超额计费需启用。"
+      },
+      {
+        "url": "https://turso.tech/blog/how-to-provision-turso-databases-using-the-stripe-cli",
+        "retrieved_at_utc": "2026-10-10T12:08:13.581008+00:00",
+        "sha256": "6874de05f13c9287732740f7b2028e4067ffcac85bed65457be78d4b09318b0e",
+        "note": "官方表格把内部starter名映射到免费档，额度与实际plans回执一致；不把本轮认定为Stripe注册流程。"
+      }
+    ],
+    "boundaries": {
+      "preparation": "Existing account, original database and prior cumulative usage are preparation conditions; historical preparation model costs were not re-estimated or assigned to this access run.",
+      "execution": "$0 is the Turso service charge for this access run; execution model usage and cost remain separately measured. Before-access storage is not an exact final-storage measurement.",
+      "grading": "Original grading model overhead remains separate. This fee clarification used retained facts and official static pricing material, without candidate service API calls or new DeepSeek calls."
+    },
+    "limitations": [
+      "No formal payment invoice was inspected; confirmed_free is a verified free-rule conclusion, not a reported invoice.",
+      "No complete post-execution account snapshot was available; exact final storage, locations, groups and unrelated account activity were not verified."
+    ]
+  }
+}

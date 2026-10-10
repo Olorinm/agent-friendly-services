@@ -1,0 +1,157 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-grist-mcp-shared-expenses-r2",
+  "independent_assessment_sha256": "31003ac283941440ed3782e0ac98994d81f300f513e055b7823cd06fe6b1c4a2",
+  "status": "completed",
+  "reason": "指定 hosted-MCP 入口（https://docs.getgrist.com/api/mcp）在本轮新 Grist 文档真实建立在线账本：六笔初始明细完整保留一次，在线汇总（已付/应分摊/补差）与输入一致；执行者交付了可打开的私人链接、当前结算数与继续记账说明。总控暂停执行者后仅追加一笔明细、再修正一笔金额，独立远端读取回执显示在线汇总相应自动更新（追加态合计 2442.40、修正态合计 2422.40），公式/结构/汇总值均未被修改。资源、入口与范围均符合委托。",
+  "checks": [
+    {
+      "criterion": "通过指定 hosted-MCP 入口在真实在线服务中建立账本（非本地/聊天计算）",
+      "passed": true,
+      "evidence": "执行者 mcp.py/gcall.py 调用 https://docs.getgrist.com/api/mcp，initialize 返回 Grist 服务；grist_create_table/add_records 返回真实表与记录 ID；controller-verification/initial/02-tables.json 经官方接口读回两张业务表。"
+    },
+    {
+      "criterion": "六笔初始明细完整保留一次，日期/用途/付款人/人民币金额与输入一致",
+      "passed": true,
+      "evidence": "controller-verification/initial/04-records-Expenses.json 与 execution/answer.md 核对：2026-10-01 房租 林青 1800.00、10-02 超市采购（一） 周舟 156.40、10-03 电费 林青 92.60、10-04 家居用品 周舟 48.00、10-05 宽带 周舟 100.00、10-07 超市采购（二） 林青 203.00，逐笔无遗漏/重复/变更。"
+    },
+    {
+      "criterion": "在线汇总与答复中两人已付/应分摊/补差方向与金额正确",
+      "passed": true,
+      "evidence": "controller-verification/initial/06-records-Settlement.json：林青 已付 2095.60/应分摊 1200.00/补差 +895.60；周舟 已付 304.40/应分摊 1200.00/补差 -895.60；合计 2400.00。与 execution/answer.md 结算（周舟补给林青 895.60）一致，与 reference.json baseline 相符。"
+    },
+    {
+      "criterion": "私人链接指向该账本且未被公开分享/邀请",
+      "passed": true,
+      "evidence": "answer.md 给出 https://docs.getgrist.com/doc/[SERVICE_SECRET]；controller-verification/initial/01-metadata.json 记录该文档 access=owners 且 identity_matches_bound_new_resource=true。"
+    },
+    {
+      "criterion": "汇总由明细持续计算：追加一笔、修正一笔金额后自动更新（未改公式/结构/汇总值）",
+      "passed": true,
+      "evidence": "总控停止执行者后仅两次普通写：after-append/01-mutation.json 新增 清洁用品 42.40(周舟)，after-append/03-records-Settlement.json 变为合计 2442.40、应分摊 1221.20、补差 ±874.40；after-correction/01-mutation.json 将 203→183，after-correction/05-records-Settlement.json 变为合计 2422.40、应分摊 1211.20、补差 ±864.40。均与 reference.json 追加态/修正态一致，Settlement 公式列（Paid/Share/Balance）保持不变。"
+    },
+    {
+      "criterion": "答复简短指出继续记账位置，且未实际转账/邀请/通知",
+      "passed": true,
+      "evidence": "execution/answer.md 第 8 行说明在页面「共同支出账本」的「共同支出明细」表新增行或改金额、上方结算汇总自动更新；文内声明未转账/邀请/通知，工具记录中无相关操作。"
+    },
+    {
+      "criterion": "资源与范围合规：仅用本轮新文档、≤3 业务表、≤30 记录、≤40 服务调用、指定入口",
+      "passed": true,
+      "evidence": "业务表 2 张（Expenses、Settlement），默认占位表已移除；初始 6 条记录；执行记录约为 20+ 次 MCP 调用（<40）；仅调用 hosted-mcp 入口，未创建其他文档/工作区。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "hosted-MCP 调用返回真实表/记录 ID，独立远端读回证明在线账本存在且六笔明细与公式汇总正确；追加与修正两态在线汇总自动更新且与参考一致；answer.md 交付了可用链接、结算数与继续记账说明。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "0667763a4a1e31e95acfbcf94a9049325272d24b6a2c397c336d1d1d784f14df",
+      "note": "执行者最终答复：私人链接、当前结算（周舟补给林青 895.60）、继续记账位置。"
+    },
+    {
+      "private_source": "execution/artifacts/RESULT.md",
+      "sha256": "744803e22a739d9844f166dc773d36c78bc11641e3478e43621a255a5c02c770",
+      "note": "交付说明：表结构、公式列与六笔结算、验证记录。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/ledger-verification-summary.md",
+      "sha256": "88601737abbcd392d98c0f35b8684a673b6a96433c4656f9088608e0bb6a1499",
+      "note": "本人整理的脱敏业务核验摘要：初态/追加态/修正态金额与结算。"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/initial/06-records-Settlement.json",
+      "sha256": "f3c777b52e7c971f9901ef99810de4640a76b476909d99a39da99a8a0e40105f",
+      "note": "独立远端读回初态在线汇总（已付/应分摊/补差）。"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/after-append/03-records-Settlement.json",
+      "sha256": "7b04973e5dd4828532b60449deb0edc60be4576b6dc374aa7ec31dc7fb10e9ee",
+      "note": "追加一笔后在线汇总自动更新读回。"
+    },
+    {
+      "private_source": "grading/artifacts/controller-verification/after-correction/05-records-Settlement.json",
+      "sha256": "deba2b2976826580524c0a7bb5bfbe94eb0fe9532040b2960b69000ab1658d1a",
+      "note": "修正一笔金额后在线汇总自动更新读回。"
+    }
+  ],
+  "task_sha256": "416ee2572d59310bd2fde801fe5425949d9592facb4215c30a90635c3d90238d",
+  "prompt_sha256": "acdee65151c95c60f01a11d43ef22786e605681c3b2a117424e26bbd85a9fc84",
+  "reference_sha256": "484b5da37efae0931fd99d454405a5847ecf8a83136f2b417f038f17aa7c1c3d",
+  "answer_sha256": "0667763a4a1e31e95acfbcf94a9049325272d24b6a2c397c336d1d1d784f14df",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate."
+  ],
+  "attribution": "Grist is a trademark of Grist Labs Inc. https://www.getgrist.com/ ; no endorsement. Synthetic expense data is original test material.",
+  "three_state_observations": [
+    {
+      "stage": "initial",
+      "original_manifest_sha256": "4b897493e03c3d4f86f7c096d1ec7df2efaff0d53de3ccc9dc057513b11ec987",
+      "original_summary_body_sha256": "e9aa22867effd4e327b3d474b59288f6e2c238a49a9ff22fedb73d78f075f061",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2095.60",
+          "share_cny": "1200.00",
+          "balance_cny": "895.60"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "304.40",
+          "share_cny": "1200.00",
+          "balance_cny": "-895.60"
+        }
+      ],
+      "controller_calls_so_far": 6
+    },
+    {
+      "stage": "after-append",
+      "original_manifest_sha256": "e54c7d538997d8947e8c2fb6f6256fa45108f190c233ff4c057fd2e38f0e1efa",
+      "original_summary_body_sha256": "041fec57928a079b42456150448dc609375bca23e551ab6f52d196f000dfd19f",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2095.60",
+          "share_cny": "1221.20",
+          "balance_cny": "874.40"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "346.80",
+          "share_cny": "1221.20",
+          "balance_cny": "-874.40"
+        }
+      ],
+      "controller_calls_so_far": 9
+    },
+    {
+      "stage": "after-correction",
+      "original_manifest_sha256": "425cca1e3e0c402d62e223c3eda1e41202e18a1033f92d9ddcbbb7c774cf3f7f",
+      "original_summary_body_sha256": "ae9eb611ceca4799bcd46f651645212931972bdf5459e5ba7f55b7bb43cb3883",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2075.60",
+          "share_cny": "1211.20",
+          "balance_cny": "864.40"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "346.80",
+          "share_cny": "1211.20",
+          "balance_cny": "-864.40"
+        }
+      ],
+      "controller_calls_so_far": 14
+    }
+  ],
+  "mutation_scope": "Both executors stopped before any controller readback/write. Exactly one ordinary detail addition42.40 and one original amount203→183 per document. No schema/formula/summary repair; full after schema matches original. Final synthetic changes retained, no restore.",
+  "limits": "Predeclared REST/MCP,MCP/REST,REST/MCP order, shared Free site quota3000/month, remaining unknown. A functioning model-request guard can block final delivery; separate outcome and costs retain that distinction."
+}

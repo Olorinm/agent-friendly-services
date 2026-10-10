@@ -1,0 +1,497 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-web-extraction-firecrawl-holidays-r2",
+  "service_id": "firecrawl",
+  "route_id": "public-scrape-api",
+  "entry_url": "https://api.firecrawl.dev/v2/scrape",
+  "task": {
+    "description": "我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。",
+    "inputs": "官方页面：https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ 。只整理其中的“2027 Holiday Schedule”表，不混入其他年份或页面说明。CSV 使用 UTF-8，列名为 date、weekday、holiday；date 为 YYYY-MM-DD，weekday 为英文完整星期名，holiday 保留表中的英文名称，去掉脚注标记。日期按表中公布值记录，不自行换成节日的日历日期。通过本轮指定的网页内容提取服务取得此 URL 的内容，允许自行处理服务返回的 HTML、文本或结构化内容；不用其他网站、日历数据集、模型记忆、搜索摘要或绕过指定服务直读原网页代替。",
+    "expected_output": "一个可解析的 UTF-8 CSV 文件，含指定表全部假日的日期、英文星期与名称，按日期升序；答复提供文件位置和官方来源链接。运行器保留指定服务真实请求、响应及取得时间，供独立核对。",
+    "success": "指定服务真实取得该网页的目标表内容；CSV 三列与输入约定一致，全部假日逐项日期、星期、名称正确，无漏行、重复或其他年份，日期升序，脚注标记不混入字段；文件确实存在且可解析，答复含文件位置及来源链接。允许不改变含义的空白、换行和直弯撇号差异；不要求特定解析库、调用次数或服务原始返回格式。",
+    "failure": "未通过指定服务取得目标内容、仅有搜索摘要或链接、用其他来源补答案、缺文件、CSV 不可解析、字段或任何行的内容不符、漏行、重复、混入其他年份、把表中日期替换成自行计算的日期、无来源或预算内未完成；页面内容发生实质变化、材料失效或运行环境故障须单列核实，不直接归咎服务能力。",
+    "resources": "只读取指定的公开官方网页，不提交表单、不登录该站点、不写远端数据、不批量抓站。仅用已确认免费额度，不购买或开启付费超额；可查服务官方接入文档、在隔离环境安装通用依赖和自行编写处理代码。接入阶段只复用必要安装与认证，不继承答案、页面快照或调用脚本。实际入口、账号来源、请求和时间预算由 ENVIRONMENT.md 冻结；运行器采集调用证据，执行者不需要另写验收程序或自评。",
+    "id": "web-extraction-holidays-001",
+    "version": "v1",
+    "sha256": "e8bb748e83619e0ea3fa8ac832891235cabc365049eaa60dc5800f4ca9662bec",
+    "file": "data/experiments/tasks/web-extraction.md"
+  },
+  "prompt_sha256": "a3e07802a2c51ae99bf6e8153c3dc2dbd6ff601fe4bafc8cfcd9d2210c2b8c0c",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T12:23:30.391910+00:00",
+  "ended_at": "2026-10-10T12:24:12.453410+00:00",
+  "elapsed_seconds": 42.0615,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791635600.39164,
+      "started_epoch": 1791635010.39164
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "指定 Firecrawl 匿名 Scrape 入口真实取得 OPM 官方页面内容（HTTP 200，metadata sourceURL 指向目标 URL），并仅从该响应解析 2027 Holiday Schedule 表；交付的 UTF-8 CSV 三列齐备、11 行与独立参考逐字段一致、日期升序、无漏行/重复/其他年份、脚注去除、日期取表公布值；答复给出文件位置与官方来源链接。",
+  "usage": {
+    "input_tokens": 449037,
+    "cached_input_tokens": 424064,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 6953,
+    "reasoning_output_tokens": 3520
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://docs.firecrawl.dev/rate-limits"
+    ],
+    "note": "Confirmed free for the observed anonymous request under the explicit official rule. A missing billing receipt does not make the applicable free-rule amount unknown. Live allowance remainder and a final provider bill are not asserted.",
+    "applicability": {
+      "rule": "Firecrawl explicitly makes keyless usage free, including Scrape; daily per-IP request or credit cap overruns are rejected with HTTP 429 rather than authorizing a paid account route.",
+      "observed": "The actual execution issued one direct Scrape POST through the official anonymous route. Credentials were not supplied, request authentication headers and curl authentication/config options were absent, and the fresh isolated execution retained the service response. No account-key or paid-route transition is present in this actual request.",
+      "evidence": "Original run credential metadata, narrow actual execution curl request metadata and retained HTTP/response artifacts, independently bound by SHA below."
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "independent-grader",
+    "reviewed_at": "2026-10-10T12:39:18.493605+00:00",
+    "checks": [
+      {
+        "criterion": "通过指定服务（Firecrawl /v2/scrape）真实取得目标网页内容，未用其他来源或直读替代",
+        "passed": true,
+        "evidence": "执行记录显示 1 次 POST https://api.firecrawl.dev/v2/scrape（无 API key），HTTP 200；execution/artifacts/firecrawl_response.json success=true，metadata.sourceURL=https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/，title=Federal Holidays，markdown 含完整 '# 2027' 表。"
+      },
+      {
+        "criterion": "存在可解析 UTF-8 CSV，列名为 date、weekday、holiday",
+        "passed": true,
+        "evidence": "execution/artifacts/opm_2027_holidays.csv（UTF-8 无 BOM，sha256 74a4a81853971d3bc955952ac804b513bdbad5d7e16a029913ec0615431ac33e），列头 date,weekday,holiday，11 行。"
+      },
+      {
+        "criterion": "全部假日逐项日期、英文星期、名称正确，无漏行、重复或其他年份，日期升序",
+        "passed": true,
+        "evidence": "独立解析 CSV 后与 reference.json.expected_rows 11 行逐字段完全一致；日期升序且唯一，年份仅 2027；星期与日期 datetime 交叉校验一致。"
+      },
+      {
+        "criterion": "日期按表公布值记录、脚注标记不混入字段",
+        "passed": true,
+        "evidence": "CSV 记录表公布值 Juneteenth=2027-06-18、Independence Day=2027-07-05、Christmas Day=2027-12-24；Washington's Birthday/Juneteenth/Independence Day/Christmas 行的 * 与 ** 已去除，holiday 字段无脚注。"
+      },
+      {
+        "criterion": "答复提供文件位置与官方来源链接",
+        "passed": true,
+        "evidence": "execution/answer.md 给出文件路径 opm_2027_holidays.csv 及来源 https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/。"
+      },
+      {
+        "criterion": "未用其他网站、日历数据集、模型记忆、搜索摘要或绕过指定服务直读原网页",
+        "passed": true,
+        "evidence": "解析脚本 build_csv.py 仅读取 firecrawl_response.json；提取阶段仅见 1 次指定入口调用，无其他站点取数。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "afs-20261010-johor40-web-extraction-holidays-comparison-r2",
+      "round": 2,
+      "snapshot_sha256": "0e51b7b0db4dc7f654c0092b3eee382dce084186624a0e261833ff57010b4769",
+      "run_ids": [
+        "afs-20261010-johor40-web-extraction-firecrawl-holidays-r2",
+        "afs-20261010-johor40-web-extraction-jina-holidays-r2"
+      ],
+      "available_run_ids": [
+        "afs-20261010-johor40-web-extraction-firecrawl-holidays-r2",
+        "afs-20261010-johor40-web-extraction-jina-holidays-r2"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.02829912,
+      "kind": "estimated",
+      "scope": "Independentgrader frozen price estimate, separate from execution and not actualinvoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.02829912,
+          "usage_sha256": "c08a57f3426eccac1c6fa47184ac08e1871be7a0a005a824dbb619dfd84b3165"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2/execution/answer.md",
+      "sha256": "bc8e681b04982bd017b20e76ef776282848f3dc73c3d756c552472988d3537bf",
+      "note": "Original final answer after private infrastructure redaction.",
+      "source_sha256": "000f9696f5dd003d7934dbc16cb1d6d664820fc6fa6b0c0daa77ea6ca18736f2",
+      "redactions": [
+        "local paths, Codex session identifiers or explicitly supplied service secrets"
+      ]
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2/public-review/verification-excerpt.json",
+      "sha256": "e6633123fe9b5dd4879d13b5d342c721f30e1c847b1df71553084d2f30d68693",
+      "note": "Minimal independent grading, actualCSV observation and original evidencehashes; original status/checks/outcome unchanged."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2/execution/artifacts/opm_2027_holidays.csv",
+      "sha256": "74a4a81853971d3bc955952ac804b513bdbad5d7e16a029913ec0615431ac33e",
+      "note": "Actual complete UTF8 CSV user deliverable from specified hosted extractor; immutable original bytes."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2",
+    "run_sha256": "ec3f7634fedf797a8027aa5e99788e912bac422f08d7d6a2cb49c73413e694e1",
+    "events_sha256": "5f56a3b78b1546911ffe83e5e5a7367b891f86a11c483ccfe157c00792513f14",
+    "answer_sha256": "000f9696f5dd003d7934dbc16cb1d6d664820fc6fa6b0c0daa77ea6ca18736f2",
+    "review_sha256": "78ab9d0a13f7d02b2bb1c00eba90993be238c99f5d3a467b43a5f089842509ba",
+    "privacy_note": "Public copies redact local paths, Codex session identifiers and explicitly supplied service secrets. Evidence sha256 hashes the public copy; source_sha256 and provenance hashes refer to unchanged local originals. Task results and usage are unchanged.",
+    "original_independent_review_sha256": "53d5caf60981311bdf14975e5535bf1e031be3bb528f49772ed2a05dd271b11b",
+    "publication_review_note": "Minimal publication and exact private identity redaction; original task outcome, timing, all execution model requests and grading overhead preserved.",
+    "independent_fee_clarification_sha256": "d3e316227186bedaf1907c74204c275a7624be446e06c7e30ba29e1f9fceee21"
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Firecrawl 匿名 /v2/scrape 返回 HTTP 200 且 sourceURL 与标题匹配目标页；CSV 与参考 11 行一致，答复含文件与来源链接。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7214,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 137,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8246,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 296,
+        "reasoning_output_tokens": 166
+      },
+      {
+        "input_tokens": 22219,
+        "cached_input_tokens": 8448,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 525,
+        "reasoning_output_tokens": 278
+      },
+      {
+        "input_tokens": 22825,
+        "cached_input_tokens": 22656,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 152,
+        "reasoning_output_tokens": 10
+      },
+      {
+        "input_tokens": 23264,
+        "cached_input_tokens": 22912,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 150,
+        "reasoning_output_tokens": 26
+      },
+      {
+        "input_tokens": 24003,
+        "cached_input_tokens": 23296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 238,
+        "reasoning_output_tokens": 73
+      },
+      {
+        "input_tokens": 24636,
+        "cached_input_tokens": 24192,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1499,
+        "reasoning_output_tokens": 1018
+      },
+      {
+        "input_tokens": 26151,
+        "cached_input_tokens": 25984,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 184,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 26590,
+        "cached_input_tokens": 26240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 237,
+        "reasoning_output_tokens": 41
+      },
+      {
+        "input_tokens": 26842,
+        "cached_input_tokens": 26624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 181,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 27276,
+        "cached_input_tokens": 27008,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 480,
+        "reasoning_output_tokens": 271
+      },
+      {
+        "input_tokens": 27949,
+        "cached_input_tokens": 27648,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 625,
+        "reasoning_output_tokens": 559
+      },
+      {
+        "input_tokens": 29144,
+        "cached_input_tokens": 28544,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 149,
+        "reasoning_output_tokens": 68
+      },
+      {
+        "input_tokens": 29320,
+        "cached_input_tokens": 29184,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 418,
+        "reasoning_output_tokens": 234
+      },
+      {
+        "input_tokens": 29938,
+        "cached_input_tokens": 29696,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 462,
+        "reasoning_output_tokens": 221
+      },
+      {
+        "input_tokens": 30610,
+        "cached_input_tokens": 30336,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 452,
+        "reasoning_output_tokens": 334
+      },
+      {
+        "input_tokens": 31124,
+        "cached_input_tokens": 30976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 242,
+        "reasoning_output_tokens": 58
+      },
+      {
+        "input_tokens": 31686,
+        "cached_input_tokens": 31360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 526,
+        "reasoning_output_tokens": 149
+      }
+    ],
+    "source_sha256": "c4638834dafd46fb6cb22ba025a19ec70decc3382e292894935a84100c7e68af",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 449037,
+      "cached_input_tokens": 424064,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6953,
+      "reasoning_output_tokens": 3520
+    },
+    "totals": {
+      "input_tokens": 449037,
+      "cached_input_tokens": 424064,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6953,
+      "reasoning_output_tokens": 3520
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

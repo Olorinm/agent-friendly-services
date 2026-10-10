@@ -1,0 +1,93 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-turso-restore-v2-r2",
+  "independent_assessment_sha256": "2521cfb02c9d684f8ddf762951f3fe3e5f3c0a8939b45c193c017b24c3612701",
+  "status": "completed",
+  "reason": "在指定 Turso/libSQL 服务上，执行者从真实源库导出可留存逻辑备份 source-backup.sql（两表 DDL + 全部记录），用该备份实际恢复到本轮新建、起初无业务表的独立目标库，并重新连接核对。总控独立读回证实：源库 before/after 业务结构与全部记录一致（未变），目标库 after 与源库语义完全等价（表结构、主键/外键/非空/默认值、逐行数据、NULL 与空串区分均保留）。用户所需备份、恢复方法、新库位置、各表行数与核对结果、免费/期限说明均已交付。",
+  "checks": [
+    {
+      "criterion": "可留存逻辑备份（含两表结构与全部记录，可在兼容 SQL 引擎重建）",
+      "passed": true,
+      "evidence": "execution/artifacts/source-backup.sql：含 CREATE TABLE lists/todos（主键、非空、DEFAULT 0、外键）与全部 INSERT（lists 2 行、todos 5 行），NULL 写为 NULL、空串写为 ''；为纯 SQL 逻辑备份而非分支/快照链接。"
+    },
+    {
+      "criterion": "在同一服务新建独立空库并用该备份实际恢复",
+      "passed": true,
+      "evidence": "execution/artifacts/restore.py 读取备份文件并 POST 到目标库 /v2/pipeline；本轮新建独立目标（controller-verification/resource-identities.json distinct=true），恢复前无业务表。交付备份与恢复所用文件同源。"
+    },
+    {
+      "criterion": "恢复后结构与数据完整、语义保留（含主外键/非空/默认值/NULL 与空串）",
+      "passed": true,
+      "evidence": "execution/artifacts/target-verify.json：目标库 lists=2、todos=5；两表 DDL 与源库一致；id=103 note 为空串 \"\"、id=101/105 note 为 null；外键 list_id→lists(id)。evidence/independent-readback-summary.md 记录总控独立读回目标==源库。"
+    },
+    {
+      "criterion": "源库业务表与记录未被修改或删除",
+      "passed": true,
+      "evidence": "evidence/independent-readback-summary.md：总控独立读回源库 before 与 after 的 schema、列定义、外键及全部行逐行一致（lists 2、todos 5），仅只读操作。"
+    },
+    {
+      "criterion": "恢复后重新连接新库核对（持久化结果）",
+      "passed": true,
+      "evidence": "execution/artifacts/target-verify.json 为对目标库的新连接读回（表名、DDL、COUNT、逐行数据、foreign_key_list）；总控 after 读回哈希一致（18a5cd6c…）。"
+    },
+    {
+      "criterion": "交付备份、简短恢复方法、新库位置、各表行数与核对结果及免费/期限说明",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/delivery.md：备份文件与恢复步骤（CREATE TABLE 后按 lists→todos 顺序 INSERT）、新库非敏感位置、行数表（lists 2 / todos 5）、核对结论、Starter $0 与额度及 token 6h/自动到期未知。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "导出、新建目标、恢复、重连核对四步服务端操作均有原始响应：备份含两表结构与全部记录；总控独立读回证实源库 before==after 且目标库 after==源库（行数、DDL、外键、NULL/空串语义一致）。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "f505302c5cd179eb1a31fcaef7d9a25c249b0f5a78e3a5423175a41bce6b0de8",
+      "note": "执行者最终答复：备份、恢复方法、新库、行数、核对与限制摘要。"
+    },
+    {
+      "private_source": "execution/artifacts/delivery.md",
+      "sha256": "7c82464010d2186bc2a85a4e8961712f541712bf39db7a6f4a2b45275dfc5246",
+      "note": "完整交付说明，含恢复方法与免费/期限说明。"
+    },
+    {
+      "private_source": "execution/artifacts/source-backup.sql",
+      "sha256": "d28758ee4c09e620fc34029f1862947772b67473a47dbc44231b8d86103eb421",
+      "note": "可留存逻辑备份：两表结构与全部记录。"
+    },
+    {
+      "private_source": "execution/artifacts/target-verify.json",
+      "sha256": "7ab45898aa85d45d14ef2899f577c727d6c66909ec0a813d265bd693ee38e1aa",
+      "note": "目标库新连接读回原始响应，证明恢复结果与 NULL/空串区分。"
+    },
+    {
+      "private_source": "execution/artifacts/restore.py",
+      "sha256": "32d982d057208f300fd0715d5ae28841a7972b2a737d0c3090e7b7c93486b328",
+      "note": "实际用备份文件恢复目标库的调用代码。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/independent-readback-summary.md",
+      "sha256": "5643227999355c3e5a723dfd2e91bc50463dc06433dc9b5b31c49db99654fa13",
+      "note": "总控独立读回比对摘要（源库未变、目标==源库），仅业务字段。"
+    }
+  ],
+  "task_sha256": "532b8eb9cf7e67f5e173bb6ca0de0aec20161e34a54f673547565461688e8172",
+  "prompt_sha256": "689effdbc55797cc5e507012ac6bb0122e9f8fc0a9e5ca5f6cc8293c7d0ae60a",
+  "reference_sha256": "503d2c3b83ea8011fde8e9b5d866c8d670c69181c303d6d29f9c89544fec3186",
+  "answer_sha256": "f505302c5cd179eb1a31fcaef7d9a25c249b0f5a78e3a5423175a41bce6b0de8",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate.",
+    "Turso v2 repeated restore with controller-created fresh verified source and executor-created target. Full schema/data readback does not by itself prove empty target origin or actual backup use; unchanged independent grading checks authentic operations and artifacts."
+  ],
+  "independent_fee_clarification": {
+    "sha256": "91e0e518d230eee425e7eda0488a0ccd6162525ab01d28342470abcc4d968f2f",
+    "original_assessment_sha256": "2521cfb02c9d684f8ddf762951f3fe3e5f3c0a8939b45c193c017b24c3612701",
+    "scope": "Independent monetary rule/applicability clarification only. Original taskjudgment, modelusage and rawassessment unchanged; official applicableFree entitlement, not absenceofinvoice, establishes0. Exactlivemonthlyremainder/finalbill notasserted."
+  }
+}

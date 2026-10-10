@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "run_id": "afs-20261010-johor40-web-extraction-jina-uk-holidays-r1",
+  "service_id": "jina",
+  "route_id": "reader-api",
+  "entry_url": "https://r.jina.ai/",
+  "task": {
+    "description": "我在整理 2027 年英格兰和威尔士的个人日程。请通过指定网页提取服务，从材料里的 GOV.UK 页面取得该地区该年的全部银行假日，做成按日期排序的 CSV，包含日期和网页上的完整英文假日名称，并给我文件和官方来源链接。",
+    "inputs": "官方页面：https://www.gov.uk/bank-holidays 。只整理 England and Wales 的 2027 年银行假日，日期范围为 2027-01-01 至 2027-12-31；不要混入 Scotland、Northern Ireland 或其他年份。日期使用页面该地区该年表中公布的日期，不用算法推算，也不改成节日原本的日历日期。英文名称保留页面文字，包括名称中的 substitute day 标注。CSV 使用 UTF-8 和清楚的表头来识别日期、假日名称（可用 date、holiday），日期写为 YYYY-MM-DD，按日期升序；无需星期、总数或其他字段。通过本轮指定服务取得此网页内容，可自行处理其返回的 HTML、Markdown、文本或结构化内容；不改用本站的 JSON/ICS 数据接口、其他网页或日历数据集，不用搜索摘要、模型记忆或绕过指定服务直接读取原网页代替。",
+    "expected_output": "实际存在且可解析的 UTF-8 CSV，包含 England and Wales 在 2027 年的全部公布日期及完整英文假日名称，日期升序；答复给出文件位置和 GOV.UK 官方来源链接。列名清楚即可，无特定文件名或额外审计、自评要求。",
+    "success": "实际通过指定服务取得目标网页的相应地区和年份内容；交付 CSV 的必要日期和名称逐项与官方原文一致，包含该地区该年全部条目，无重复、其他地区专属假日或其他年份，保留页面的 substitute day 名称说明及公布日期，日期升序；文件确实存在且可解析，答复含文件位置和官方来源。允许不改变含义的空白、直弯撇号及清楚的列名差异；不要求服务返回格式、特定解析库、强制绕过缓存、额外字段或执行者审计日志。",
+    "failure": "未真实通过指定服务取得目标内容，改用其他来源补答案，缺文件或不可解析，必要日期或名称错误、漏行、重复、混入地区或年份、丢失 substitute day 名称说明、替换成自行计算的日期、未按日期排序、缺来源或预算内未完成。目标原文发生实质变更或运行环境/采集失效须单列核实；访问、权限或额度障碍如实记录，不外推服务普遍不可用。",
+    "resources": "只读指定的公开 GOV.UK 页面，不登录原站、提交表单、写远端数据或抓取整站；只用本轮指定服务的已确认免费入口，不注册无关账号、付费、开启超额或通知他人。可查指定服务官方文档、安装通用依赖并自行编写处理代码。已独立验收的同入口接入基线仅保留必要安装和通用配置，每次业务使用新会话并清除前题内容，不继承答案、源快照、业务脚本或参考。实际模型、预算、服务请求保护与缓存披露由 ENVIRONMENT.md 冻结；运行器负责采集，不要求执行者另写验收程序。",
+    "id": "web-extraction-uk-holidays-001",
+    "version": "v1",
+    "sha256": "b3a6fd45ffd0b546a0188dd88268979ed1f6907ca6dd73c5336d1d710073cfa0",
+    "file": "data/experiments/tasks/web-extraction-uk.md"
+  },
+  "prompt_sha256": "a5ebcec863734593efc236cccf875a73c3d809d3f0ebbddde509cb0970213ded",
+  "harness": {
+    "name": "opencode",
+    "version": "1.18.35",
+    "mode": "noninteractive"
+  },
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "started_at": "2026-10-10T12:41:11.606040+00:00",
+  "ended_at": "2026-10-10T12:41:27.248569+00:00",
+  "elapsed_seconds": 15.642529,
+  "budget_seconds": 600,
+  "environment": {
+    "host": null,
+    "isolation": "Dedicated Docker container; uid 1000 executor; fresh home/session/workspace; controller-only raw model capture; retained service-tools",
+    "service_credentials": {
+      "source": "none; anonymous public route",
+      "provided": false
+    },
+    "web_search": "live",
+    "preparation_note": "Predeclared3pairs for a separate realregional-calendar task, second staticHTMLsite/regionyearselection only; not broadgeneralreliability. Same model/harness/40/600/300/.85, image/existingphysicalruntime/logicalaccessbaseline. Freshhome/session/taskworkspace; Jina retainedservice-tools empty, Firecrawl onegenericconnectionconfig and noqueryspecificdata/script,0additionalrootinstall/client; only those generic files maypersist. Currentbaselinearchives separatelyhashed. Providerdefaultcache5min/2days preserved, actualhits mayunknown; share onepublisher/multipledependent trials. No rootanswer/script/source/executionsnapshot toexecutor. Protective serviceinstruction6attempts/20s posthocreview; first403/429/paymentstop. Fixedoriginal50USDdeadline 2026-10-10T13:53:59.407282+00:00. OGL attribution published bycontroller.",
+    "prompt_style": "natural",
+    "evidence_collection": "executor receipts and external review",
+    "prompt_characters": null,
+    "input_delivery": "inline",
+    "context_files": [],
+    "trial_protocol": "afs-20261010",
+    "controller_limits": {
+      "max_model_requests": 40,
+      "deadline_epoch": 1791640439.407282,
+      "closure_fraction": 0.85,
+      "effective_deadline_epoch": 1791636661.6058626,
+      "started_epoch": 1791636071.6058626
+    },
+    "runner_source_sha256": {
+      "worker.py": "f90ec51c6e46f5823bc0a1dc256a3b63b31f0fa13dd567e4f45348b217963cb1",
+      "normalize.py": "4875817bd8ef8facd7cd3c8c5dd5a39713af4d8973d41d906315e8e434067130",
+      "capture-proxy.py": "488f0475ca8c63b43e2e2fa524968676a82bc3ca886c5ce85597323272588785",
+      "providers.py": "c7e495da21711c916e777d00e0c13c003d5b46234ab003b8e6594984a2998f01",
+      "request_limits.py": "c3fca9badad1f78a008292dd130d30e58ff6fba96e55cab11eef3269ea59b557"
+    },
+    "runtime_image_id": "sha256:b76f7c9144e6fd95236f6c4f2bcd8ca246fa03f719b0ebb667547e199c2f0c04"
+  },
+  "status": "completed",
+  "reason": "本次执行真实通过指定服务 Jina Reader（r.jina.ai）匿名 GET https://www.gov.uk/bank-holidays，HTTP 200，单次成功且无 403/429；从返回原文提取 England and Wales 2027 表全部 8 条，日期与完整英文名称（含 substitute day）与独立官方参考逐项一致，日期升序、UTF-8 CSV 表头 date,holiday 可解析；答复给出文件名与 GOV.UK 官方来源。未使用本站 JSON/ICS 接口或直连原站替代所选服务。",
+  "usage": {
+    "input_tokens": 100092,
+    "cached_input_tokens": 85632,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1892,
+    "reasoning_output_tokens": 516
+  },
+  "service_cost_usd": 0,
+  "service_cost": {
+    "kind": "confirmed_free",
+    "sources": [
+      "https://jina.ai/reader/"
+    ],
+    "note": "Confirmed free/$0 under the explicit official anonymous/keyless rule and independently checked actual applicability. Missing bill or receipt alone is not proof of free service and does not require null once the rule is verified. Live remaining allowance and final provider bill are not asserted.",
+    "applicability": {
+      "rule": "Jina official basic Reader usage without an API key is free; supplying an API key changes token billing. The unauthenticated Reader rate limit is 20 requests per minute.",
+      "observed": "The actual run issued 1 direct anonymous Reader GET request(s). No service credentials were supplied; each recorded request lacks authentication/cookie headers and curl authentication/config options. Retained service responses establish actual use of that route; no account-key or paid-route switch appears in those requests.",
+      "evidence": "Original credential metadata, frozen no-credential boundary, actual execution curl metadata and retained response/header artifacts, all SHA-bound below."
+    },
+    "amount_usd": 0
+  },
+  "human_interventions": 0,
+  "review": {
+    "method": "external_agent",
+    "reviewer": "grader-afs-20261010-johor40-jina-uk-holidays-r1",
+    "reviewed_at": "2026-10-10T12:57:19.998550+00:00",
+    "checks": [
+      {
+        "criterion": "真实通过指定服务 Jina Reader (r.jina.ai) 取得 GOV.UK 目标页面内容，未改用原站 JSON/ICS、其他网页或直连原站替代",
+        "passed": true,
+        "evidence": "execution/artifacts/jina-bank-holidays.raw 为对 r.jina.ai/https://www.gov.uk/bank-holidays 的返回原文（Title: UK bank holidays，含目标 Markdown 表）；工具记录显示唯一一次提取请求为匿名 GET，HTTP 200；未出现对 .json/.ics 或原站的独立提取请求。"
+      },
+      {
+        "criterion": "交付 CSV 实际存在、UTF-8 可解析、表头清晰、日期按 YYYY-MM-DD 升序",
+        "passed": true,
+        "evidence": "execution/artifacts/england-wales-bank-holidays-2027.csv（266 字节），表头 date,holiday，8 行日期 2027-01-01…2027-12-28 升序。"
+      },
+      {
+        "criterion": "England and Wales 2027 全部条目日期与完整英文名称（含 substitute day 标注、公布日期）与官方原文逐项一致，无重复、无其他地区专属假日或其他年份混入",
+        "passed": true,
+        "evidence": "CSV 8 行与 execution/artifacts/jina-bank-holidays.raw 中 “Upcoming bank holidays in England and Wales 2027” 表逐行一致，也与独立参考 reference.json 的 expected_rows（8 条）完全一致；日期采用页面公布日期（如 12-27/12-28，未替换为名义日期）。"
+      },
+      {
+        "criterion": "最终答复含文件位置与 GOV.UK 官方来源链接",
+        "passed": true,
+        "evidence": "execution/answer.md 给出文件名 england-wales-bank-holidays-2027.csv 及来源 https://www.gov.uk/bank-holidays（England and Wales 2027 表）。"
+      }
+    ],
+    "peer_context": {
+      "group_id": "afs-20261010-johor40-web-extraction-uk-holidays-comparison-r1",
+      "round": 1,
+      "snapshot_sha256": "b7ee3b6b05109119496595fcdf80adfeea495371c4a6e29378bd8709af5104f4",
+      "run_ids": [
+        "afs-20261010-johor40-web-extraction-jina-uk-holidays-r1",
+        "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1"
+      ],
+      "available_run_ids": [
+        "afs-20261010-johor40-web-extraction-jina-uk-holidays-r1",
+        "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1"
+      ]
+    },
+    "grading_model_cost": {
+      "amount_usd": 0.027524112,
+      "kind": "estimated",
+      "scope": "Independentgrader frozen price estimate, separate from execution and not actualinvoice.",
+      "attempts": [
+        {
+          "attempt": "grading",
+          "amount_usd": 0.027524112,
+          "usage_sha256": "6d889b4ae57f0e8e8f9868a7a94610a2fe1d8433495ee3e10fcf6ed4408e28de"
+        }
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1/execution/answer.md",
+      "sha256": "17de871332fb965a56560eef45cbb14d31749b17e7febf50c09d49d723aa6bf7",
+      "note": "Original final answer after private infrastructure redaction."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1/public-review/verification-excerpt.json",
+      "sha256": "1d3fb5037093871787f7ebeabaecb4b82449f7c9f115b7e0268658ac52465887",
+      "note": "Minimal independent grading, actualCSV observation and original evidencehashes; original status/checks/outcome unchanged."
+    },
+    {
+      "path": "data/experiments/evidence/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1/execution/artifacts/england-wales-bank-holidays-2027.csv",
+      "sha256": "2c74a0be229e2fddd6ec79c0b3790e781c0b7bb60d673dbc804db8452f2a80d1",
+      "note": "Actual UTF8 CSV user deliverable from specified hosted extractor; original bytes retained, including incorrect results."
+    }
+  ],
+  "provenance": {
+    "local_run_dir": "data/experiments/results/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1",
+    "run_sha256": "1584fe4e73d7d554564a1dd7259acbbb6498f04153ca3addf419e41dae3f329b",
+    "events_sha256": "a4e97fff204ca165112d9da688a2ea67bc920724c7dc4312b38170f4ef0a29a9",
+    "answer_sha256": "17de871332fb965a56560eef45cbb14d31749b17e7febf50c09d49d723aa6bf7",
+    "review_sha256": "0127e0ca28b34ca04e4d58ab8addee6a0a3c0cab8c16d4e26e9bf6e68e2b0aa1",
+    "original_independent_review_sha256": "71f375893a2a6b740b08494e21cc85804549e53c3967e37e3a9d88ee799f29bb",
+    "publication_review_note": "Minimal publication and exact private identity redaction; original task outcome, timing, all execution model requests and grading overhead preserved.",
+    "independent_fee_clarification_sha256": "768e0c551bcf12fcaf8106aa606db245f1756f1e2a94709810d1ab5b56ba0d05"
+  },
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务侧：单次匿名 GET r.jina.ai/https://www.gov.uk/bank-holidays 返回 HTTP 200，成功取得目标内容。用户侧：CSV 文件存在且正确（8 条，含 substitute day，升序），答复给出文件位置与官方来源。无网络/访问/额度/执行阻碍证据。"
+  },
+  "request_usage": {
+    "status": "complete",
+    "method": "runner adapter",
+    "requests": [
+      {
+        "input_tokens": 7220,
+        "cached_input_tokens": 1664,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 139,
+        "reasoning_output_tokens": 14
+      },
+      {
+        "input_tokens": 8355,
+        "cached_input_tokens": 7296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 454,
+        "reasoning_output_tokens": 248
+      },
+      {
+        "input_tokens": 9269,
+        "cached_input_tokens": 8704,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 184,
+        "reasoning_output_tokens": 41
+      },
+      {
+        "input_tokens": 9493,
+        "cached_input_tokens": 9344,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 88,
+        "reasoning_output_tokens": 15
+      },
+      {
+        "input_tokens": 15817,
+        "cached_input_tokens": 9472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 404,
+        "reasoning_output_tokens": 189
+      },
+      {
+        "input_tokens": 16237,
+        "cached_input_tokens": 16000,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 186,
+        "reasoning_output_tokens": 9
+      },
+      {
+        "input_tokens": 16695,
+        "cached_input_tokens": 16384,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 155,
+        "reasoning_output_tokens": 0
+      },
+      {
+        "input_tokens": 17006,
+        "cached_input_tokens": 16768,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 282,
+        "reasoning_output_tokens": 0
+      }
+    ],
+    "source_sha256": "db08e6b6a772ae5e32a2990d4bc7865745bf102817d9a10a5ce846ddbbf3e8a6",
+    "reason": "Adapter request counters reconcile with runtime totals; raw source hashes verified",
+    "requests_verified": true,
+    "lower_bound_usage": {
+      "input_tokens": 100092,
+      "cached_input_tokens": 85632,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1892,
+      "reasoning_output_tokens": 516
+    },
+    "totals": {
+      "input_tokens": 100092,
+      "cached_input_tokens": 85632,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1892,
+      "reasoning_output_tokens": 516
+    }
+  },
+  "pricing_snapshot": {
+    "source": "https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json",
+    "revision": "0e26edfdb95c8288a610cba4746af2bc1f2fe312",
+    "fetched_at": "2026-10-08T10:40:18.309Z",
+    "sha256": "2b3910c6d5b307b15ffe37bd5a75e58bc2bc14425ffb364a9fee9df95e22a1ea",
+    "models": {
+      "deepseek-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 6e-09,
+        "input_cost_per_token": 3e-07,
+        "input_cost_per_token_cache_hit": 6e-09,
+        "litellm_provider": "deepseek",
+        "max_input_tokens": 1000000,
+        "max_output_tokens": 393216,
+        "max_tokens": 393216,
+        "mode": "chat",
+        "off_peak_pricing": {
+          "cache_read_input_token_cost": 3e-09,
+          "input_cost_per_token": 1.5e-07,
+          "output_cost_per_token": 6e-07,
+          "windows": [
+            {
+              "hours_utc": [
+                "00:00-01:00",
+                "04:00-06:00",
+                "10:00-00:00"
+              ],
+              "weekdays": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            },
+            {
+              "hours_utc": "00:00-00:00",
+              "weekdays": [
+                6,
+                7
+              ]
+            }
+          ]
+        },
+        "output_cost_per_token": 1.2e-06,
+        "source": "https://api-docs.deepseek.com/quick_start/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions"
+        ],
+        "supports_assistant_prefill": true,
+        "supports_function_calling": true,
+        "supports_native_streaming": true,
+        "supports_parallel_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true
+      },
+      "zai/glm-5.3-flash": {
+        "cache_creation_input_token_cost": 0,
+        "cache_read_input_token_cost": 3e-08,
+        "input_cost_per_token": 1.5e-07,
+        "output_cost_per_token": 5e-07,
+        "litellm_provider": "zai",
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 128000,
+        "mode": "chat",
+        "supports_function_calling": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_tool_choice": true,
+        "source": "https://docs.z.ai/guides/overview/pricing",
+        "supports_vision": true
+      },
+      "gpt-6-astra": {
+        "cache_creation_input_token_cost": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens": 2.5e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_flex": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_priority": 5e-05,
+        "cache_creation_input_token_cost_flex": 6.25e-06,
+        "cache_creation_input_token_cost_priority": 2.5e-05,
+        "cache_read_input_token_cost": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens": 2e-06,
+        "cache_read_input_token_cost_above_272k_tokens_flex": 1e-06,
+        "cache_read_input_token_cost_above_272k_tokens_priority": 4e-06,
+        "cache_read_input_token_cost_batches": 5e-07,
+        "cache_read_input_token_cost_above_272k_tokens_batches": 1e-06,
+        "cache_creation_input_token_cost_batches": 6.25e-06,
+        "cache_creation_input_token_cost_above_272k_tokens_batches": 1.25e-05,
+        "cache_creation_input_token_cost_above_272k_tokens_ultrafast": 0.00015,
+        "cache_creation_input_token_cost_ultrafast": 7.5e-05,
+        "cache_read_input_token_cost_above_272k_tokens_ultrafast": 1.2e-05,
+        "cache_read_input_token_cost_flex": 5e-07,
+        "cache_read_input_token_cost_priority": 2e-06,
+        "cache_read_input_token_cost_ultrafast": 6e-06,
+        "input_cost_per_token": 1e-05,
+        "input_cost_per_token_above_272k_tokens": 2e-05,
+        "input_cost_per_token_above_272k_tokens_flex": 1e-05,
+        "input_cost_per_token_above_272k_tokens_priority": 4e-05,
+        "input_cost_per_token_batches": 5e-06,
+        "input_cost_per_token_above_272k_tokens_batches": 1e-05,
+        "input_cost_per_token_above_272k_tokens_ultrafast": 0.00012,
+        "input_cost_per_token_flex": 5e-06,
+        "input_cost_per_token_priority": 2e-05,
+        "input_cost_per_token_ultrafast": 6e-05,
+        "litellm_provider": "openai",
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "max_tokens": 128000,
+        "mode": "chat",
+        "output_cost_per_token": 5e-05,
+        "output_cost_per_token_above_272k_tokens": 7.5e-05,
+        "output_cost_per_token_above_272k_tokens_flex": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_priority": 0.00015,
+        "output_cost_per_token_batches": 2.5e-05,
+        "output_cost_per_token_above_272k_tokens_batches": 3.75e-05,
+        "output_cost_per_token_above_272k_tokens_ultrafast": 0.00045,
+        "output_cost_per_token_flex": 2.5e-05,
+        "output_cost_per_token_priority": 0.0001,
+        "output_cost_per_token_ultrafast": 0.0003,
+        "regional_processing_uplift_multiplier_eu": 1.1,
+        "regional_processing_uplift_multiplier_us": 1.1,
+        "search_context_cost_per_query": {
+          "search_context_size_high": 0.01,
+          "search_context_size_low": 0.01,
+          "search_context_size_medium": 0.01
+        },
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "supported_endpoints": [
+          "/v1/chat/completions",
+          "/v1/batch",
+          "/v1/responses"
+        ],
+        "supported_modalities": [
+          "text",
+          "image"
+        ],
+        "supported_output_modalities": [
+          "text"
+        ],
+        "supports_computer_use": true,
+        "supports_function_calling": true,
+        "supports_max_reasoning_effort": true,
+        "supports_minimal_reasoning_effort": false,
+        "supports_native_streaming": true,
+        "supports_none_reasoning_effort": false,
+        "supports_parallel_function_calling": true,
+        "supports_pdf_input": true,
+        "supports_prompt_cache_breakpoint": true,
+        "supports_prompt_caching": true,
+        "supports_reasoning": true,
+        "supports_response_schema": true,
+        "supports_system_messages": true,
+        "supports_tool_choice": true,
+        "supports_vision": true,
+        "supports_web_search": true,
+        "supports_xhigh_reasoning_effort": true
+      }
+    }
+  }
+}

@@ -29,7 +29,7 @@ checks:
     status: supported
     evidence: https://jina.ai/api-dashboard
     verified: "2026-07-08"
-    notes: Dashboard issues keys; a starter token quota works without registration for some endpoints (r.jina.ai).
+    notes: Dashboard issues keys. Reader also documents a separate keyless route; its free access is not a starter-token balance.
 
   oauth_support:
     status: unknown
@@ -42,13 +42,13 @@ checks:
 
   sandbox_or_test_mode:
     status: unknown
-    notes: Rate-limited keyless access to Reader serves as a de facto trial; needs the canonical docs link as evidence.
+    notes: Reader documents rate-limited keyless production access, not a distinct sandbox environment.
 
   free_tier_or_trial:
     status: supported
-    evidence: https://jina.ai/api-dashboard
-    verified: "2026-07-08"
-    notes: Free token allowance for new keys.
+    evidence: https://jina.ai/reader/
+    verified: "2026-10-10"
+    notes: Basic keyless Reader is explicitly free at 20 requests/minute. The separate 10M-token allowance for new API keys is not described as a recurring monthly allowance.
 
   self_serve_paid_upgrade:
     status: supported
@@ -70,7 +70,7 @@ checks:
   automation_permitted:
     status: unknown
     evidence: https://jina.ai/legal/#terms-and-conditions
-    verified: "2026-10-08"
+    verified: "2026-10-10"
     notes: Terms section 4.3 leaves output use unrestricted unless otherwise agreed, subject to third-party rights. Section 4.5(iv) contains a broad automated-extraction restriction; read with the Reader product description. No benchmark-specific disclosure prohibition was found.
 
 catalog:
@@ -84,12 +84,17 @@ catalog:
       kind: official_site
     reader-docs:
       url: https://jina.ai/reader/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     terms:
       url: https://jina.ai/legal/#terms-and-conditions
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
+      notes: >-
+        The legal page dated May 4, 2026 says data processing is now governed by the Elastic DPA
+        and privacy statement following the acquisition. Older Jina privacy text is not a current
+        standalone retention guarantee. The page still presents the Jina service terms; its
+        processing notice does not expressly replace every service-use clause.
   routes:
     - id: reader-api
       interface: api
@@ -127,8 +132,10 @@ catalog:
         JavaScript; X-Engine: direct instead uses plain HTTP. A URL may be cached for five minutes;
         X-No-Cache: true or X-Cache-Tolerance: 0 requests fresh content. X-Token-Budget rejects oversized
         requests rather than silently truncating them. No universal page-byte limit or caller-country
-        eligibility list was established here. Target-site restrictions and content rights still apply;
-        this route does not document a blanket redistribution license or successful extraction trial.
+        eligibility list was established here. Repeated requests may reuse cached content and are not
+        necessarily independent origin fetches. Target-site restrictions and content rights still apply;
+        the product documentation is not a blanket redistribution license. These are documentation
+        findings; completed or unsuccessful task-level use is recorded separately in evaluations.
       auth:
         value: none
         evidence:

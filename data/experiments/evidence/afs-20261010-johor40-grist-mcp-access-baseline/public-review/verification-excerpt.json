@@ -1,0 +1,115 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-grist-mcp-access-baseline",
+  "independent_assessment_sha256": "b10290e951842f7baadfe4d80485556a637ef8daaa0280581a6c73764e672435",
+  "status": "completed",
+  "reason": "执行者按 ENVIRONMENT.md 指定的 hosted-mcp 入口（https://docs.getgrist.com/api/mcp）用官方 MCP 协议（initialize -> notifications/initialized -> tools/list -> tools/call）实际接入 Grist；在总控提供的本轮新父工作区 [PRIVATE_WORKSPACE_ID] 内通过 grist_create_doc 新建独立空文档 [SERVICE_SECRET]，并在另一个全新 MCP 会话中用 grist_get_doc_info 重新读取元数据，返回的 id/workspace/url 与创建时完全一致，确认同一远端资源且文档为空（仅默认空白占位表）。可复用连接配置写入指定持久目录 /home/node/service-tools/service-config.json 且不含密钥；答复给出链接、容器标识、账号来源（总控提供，非自助注册）、自助步骤、人工门槛（本轮无需人工）与有官方依据的免费限制。全部要求有真实请求/响应证据支持。",
+  "checks": [
+    {
+      "criterion": "通过指定 hosted-mcp 入口并以官方 MCP initialize/discovery/tools 协议实际接入（非 REST 冒充）",
+      "passed": true,
+      "evidence": "execution/artifacts/logs/01_discovery.log 与 02_orgs.log 显示对 https://docs.getgrist.com/api/mcp 的 initialize（protocolVersion 2025-06-18，返回 Mcp-Session-Id）与 tools/list（51 个 grist_* 工具），后续均以 tools/call 执行；见 grading/artifacts/evidence/access-readback.md。"
+    },
+    {
+      "criterion": "在本轮授权父工作区内新建一个本轮独立空容器（新文档），名称带环境标记 [SERVICE_SECRET]",
+      "passed": true,
+      "evidence": "execution/artifacts/logs/04_create_doc.log: grist_create_doc {workspace_id:[PRIVATE_WORKSPACE_ID],name:\"[SERVICE_SECRET]\"} 返回新 doc id 68nGs...BW 与同名 name。"
+    },
+    {
+      "criterion": "通过指定方式真实重新读取该容器的元数据，确认访问的是同一远端资源（id/workspace/url 一致）",
+      "passed": true,
+      "evidence": "execution/artifacts/logs/05_reread_doc.log: 另一新会话 grist_get_doc_info 返回与创建相同的 doc id、workspace {id:[PRIVATE_WORKSPACE_ID]} 与同一 docs.getgrist.com 文档 URL，access=owners；脱敏对照见 grading/artifacts/evidence/access-readback.md。"
+    },
+    {
+      "criterion": "新建容器为空，未预建业务字段、记录或示例数据",
+      "passed": true,
+      "evidence": "execution/artifacts/logs/05_reread_doc.log: grist_get_tables 仅返回 [{\"id\":\"Table1\",\"name\":\"\"}]，为服务默认空白占位表，无业务列或记录。"
+    },
+    {
+      "criterion": "切为后续新会话可复用的连接配置已保存到指定持久目录，且不泄露密钥/凭据",
+      "passed": true,
+      "evidence": "execution/artifacts/grist_access_result.json（与 /home/node/service-tools/service-config.json 同哈希 e5ca2d4…）含入口、传输、认证方式、站点、资源指针与配额说明，auth.note 明确密钥不存于此；密钥仅留 /home/node/service-tools/credentials.json。execution/receipt.json 记录 retained-files 含 credentials.json 与 service-config.json。"
+    },
+    {
+      "criterion": "如实说明账号来源（既有账号由总控提供，非自助注册）",
+      "passed": true,
+      "evidence": "execution/answer.md 第 20 行：“账号与 API key 由总控提供，非我注册”；与 ENVIRONMENT.md / controller-verification/setup.json 的 account_source 一致。"
+    },
+    {
+      "criterion": "如实说明自助接入步骤、人工门槛与额外申请",
+      "passed": true,
+      "evidence": "execution/answer.md 第 19-27 行给出入口/协议序列/执行序列，并说明本轮无需人工介入、无验证码/资质审核/付款绑卡。"
+    },
+    {
+      "criterion": "免费限制有官方依据，且未知项如实标注",
+      "passed": true,
+      "evidence": "execution/answer.md 第 29-32 行所列额度与 https://support.getgrist.com/limits/ 一致（见 grading/artifacts/evidence/free-limits-excerpt.md）；剩余月额度官方未提供，标为未知。"
+    },
+    {
+      "criterion": "在服务操作上限内、未触发 403/429 或付费要求，未改换身份/入口",
+      "passed": true,
+      "evidence": "全部服务操作为对指定入口的 MCP 调用，约 14 次，远低于 40 次上限；日志与答复均无 403/429/付费记录，未使用其他入口或身份。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "service_execution：hosted-MCP initialize/tools/list/tools/call 均在 execution/artifacts/logs/04_create_doc.log、05_reread_doc.log 中有真实请求响应，create_doc 成功且独立会话读回一致。user_delivery：execution/answer.md 交付链接、标识、步骤、门槛、免费限制与配置位置，均与采集证据一致。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "ba2621e3374aebd82b5856c3b76b8ebe86cb6ead94f695cab84febe9e706f834",
+      "note": "执行者最终答复：空间链接与容器标识、接入步骤、人工门槛、免费限制、配置位置。"
+    },
+    {
+      "private_source": "execution/artifacts/grist_access_result.json",
+      "sha256": "e5ca2d4edf9e25f4d82e4d29dee0803903b73494d0a169ecd6943ca58e8386c3",
+      "note": "写入指定持久目录的可复用连接配置（入口/协议/认证方式/资源指针/配额），不含密钥。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/access-readback.md",
+      "sha256": "8fbf925118893e43f3d20b3a5352174f9fa8b18aa7ff85adcd921086bedbe722",
+      "note": "脱敏摘录：hosted-MCP 创建与独立会话重新读取的业务字段，证明同一容器且为空。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/free-limits-excerpt.md",
+      "sha256": "f8f99fdd6b245ffe83a675efb602a1d2a57e3f0c5e883fcb76e7b4a1df235957",
+      "note": "官方 limits/MCP 文档摘录与本次免费适用条件，支持免费限制结论。"
+    }
+  ],
+  "task_sha256": "b47643831c45380d86aee57a9641b2d1819ed19ad9618831cee221557319b3de",
+  "prompt_sha256": "c870fc52be8b5bb4a5f5a7201edb3e5814b0a2b47359f62f08c08dc43d6d932c",
+  "reference_sha256": "a9f4b29685de6e926f2863264ae3f20f32d5e771995df0cfe4b26e50ad963616",
+  "answer_sha256": "ba2621e3374aebd82b5856c3b76b8ebe86cb6ead94f695cab84febe9e706f834",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate."
+  ],
+  "attribution": "Grist is a trademark of Grist Labs Inc. https://www.getgrist.com/ ; no endorsement. Synthetic expense data is original test material.",
+  "publication_identity_redaction": {
+    "private_source": "grist/baselines/mcp/service-tools.private.tar::./service-config.json",
+    "archive_sha256": "3ee83233fae9e834a2188f970b83b717f8f99742c3bd56e55a6f995988812634",
+    "config_sha256": "e5ca2d4edf9e25f4d82e4d29dee0803903b73494d0a169ecd6943ca58e8386c3",
+    "scope": "Actual child document pointer from the frozen baseline service config; concrete identifiers and links registered locally and redacted only in public copies. Frozen original registration subset and raw grading/hash files retained.",
+    "short_workspace_identity": {
+      "field": "workspace_id",
+      "value_length": 6,
+      "value_sha256": "8aff3831abed322c9cb4f54f8ccff759655faa27f5a7e007d0074768329359a0",
+      "resources_sha256": "bfcd20d05916e0cd9d1443064ffb2afc842de46682864504b8651781fa0b5c7f",
+      "config_sha256": "e5ca2d4edf9e25f4d82e4d29dee0803903b73494d0a169ecd6943ca58e8386c3",
+      "policy": "Exact actual workspace ID replaced only at numeric/text token boundaries with a private workspace marker. Short IDs remain outside the >=8-character registration list; frozen sources unchanged."
+    },
+    "short_organization_identity": {
+      "field": "org_id",
+      "value_length": 6,
+      "value_sha256": "9605734d2ea3d3d8dd6bfbecafa2ec00993c8f211d13f93dbec6fc968a90eb0e",
+      "config_sha256": "e5ca2d4edf9e25f4d82e4d29dee0803903b73494d0a169ecd6943ca58e8386c3",
+      "policy": "Exact private organization ID in the answer replaced at numeric/text token boundaries; not registered in the >=8-character list. Other numbers and task facts retained."
+    }
+  },
+  "public_answer_sha256": "977adda7a38ff91938fa86342d7995abd818b38eee453b27ef4b1d967b6813e6"
+}

@@ -1,0 +1,21 @@
+[Unit]
+Description=Agent Friendly Services authorized queue
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_OPERATOR
+WorkingDirectory=/absolute/controller/release
+Environment=PATH=/absolute/controller/runtime/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 /absolute/controller/release/scripts/task_queue.py run /absolute/private/queue
+UMask=0077
+# SIGTERM closes owned sessions and collects usage before exiting.
+KillSignal=SIGTERM
+KillMode=mixed
+TimeoutStopSec=180
+# An uncertain/halted queue needs inspection, never a blind paid restart.
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
