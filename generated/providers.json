@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-10-12T05:06:05.522Z",
+  "generated_at": "2026-10-12T08:42:57.217Z",
   "counts": {
     "providers": 76,
     "categories": 15,
@@ -857,11 +857,11 @@
         {
           "id": "hotels",
           "name": "Hotels",
-          "description": "Hotel availability, room offers and reservations; tasks not defined yet.",
+          "description": "Hotel availability, room offers and reservations; candidate eligibility remains to be researched.",
           "capabilities": [],
           "name_zh": "酒店",
           "inclusion": "Returns room availability/offers or supports hotel reservations.",
-          "exclusion": "Hotel descriptions or reviews alone are insufficient. This branch has no researched candidate set or frozen task yet."
+          "exclusion": "Hotel descriptions or reviews alone are insufficient. Task definitions do not establish that a personally accessible candidate set or booking inventory has been verified."
         }
       ],
       "name_zh": "旅行",
