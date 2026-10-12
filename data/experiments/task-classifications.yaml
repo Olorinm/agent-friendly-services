@@ -234,3 +234,453 @@ tasks:
     id: financial-macro-hicp-001
     classification: financial-data/macro
     phase: business
+
+# New business task designs; prerequisites remain in each task table.
+  - file: data/experiments/tasks/agent-memory-business.md
+    id: memory-corrected-fact-001
+    classification: agent-tooling/memory
+    phase: business
+  - file: data/experiments/tasks/agent-memory-business.md
+    id: memory-forget-preference-001
+    classification: agent-tooling/memory
+    phase: business
+  - file: data/experiments/tasks/agent-memory-business.md
+    id: memory-profile-recall-001
+    classification: agent-tooling/memory
+    phase: business
+  - file: data/experiments/tasks/agent-tool-integrations-business.md
+    id: tool-integrations-calendar-window-001
+    classification: agent-tooling/tool-integrations
+    phase: business
+  - file: data/experiments/tasks/agent-tool-integrations-business.md
+    id: tool-integrations-email-draft-001
+    classification: agent-tooling/tool-integrations
+    phase: business
+  - file: data/experiments/tasks/agent-tool-integrations-business.md
+    id: tool-integrations-expense-append-001
+    classification: agent-tooling/tool-integrations
+    phase: business
+  - file: data/experiments/tasks/agent-workflow-automation-business.md
+    id: workflow-daily-order-digest-001
+    classification: agent-tooling/workflow-automation
+    phase: business
+  - file: data/experiments/tasks/agent-workflow-automation-business.md
+    id: workflow-form-deduplication-001
+    classification: agent-tooling/workflow-automation
+    phase: business
+  - file: data/experiments/tasks/agent-workflow-automation-business.md
+    id: workflow-overdue-review-001
+    classification: agent-tooling/workflow-automation
+    phase: business
+  - file: data/experiments/tasks/ai-image-generation-business.md
+    id: image-generation-catalog-illustration-001
+    classification: ai-models/image-generation
+    phase: business
+  - file: data/experiments/tasks/ai-image-generation-business.md
+    id: image-generation-event-poster-001
+    classification: ai-models/image-generation
+    phase: business
+  - file: data/experiments/tasks/ai-image-generation-business.md
+    id: image-generation-water-cycle-001
+    classification: ai-models/image-generation
+    phase: business
+  - file: data/experiments/tasks/ai-model-access-business.md
+    id: model-access-python-helper-001
+    classification: ai-models/model-access
+    phase: business
+  - file: data/experiments/tasks/ai-model-access-business.md
+    id: model-access-receipt-extraction-001
+    classification: ai-models/model-access
+    phase: business
+  - file: data/experiments/tasks/ai-model-access-business.md
+    id: model-access-support-handoff-001
+    classification: ai-models/model-access
+    phase: business
+  - file: data/experiments/tasks/ai-speech-recognition-business.md
+    id: speech-recognition-captions-001
+    classification: ai-models/speech-recognition
+    phase: business
+  - file: data/experiments/tasks/ai-speech-recognition-business.md
+    id: speech-recognition-meeting-001
+    classification: ai-models/speech-recognition
+    phase: business
+  - file: data/experiments/tasks/ai-speech-recognition-business.md
+    id: speech-recognition-voicemail-001
+    classification: ai-models/speech-recognition
+    phase: business
+  - file: data/experiments/tasks/ai-speech-synthesis-business.md
+    id: speech-synthesis-article-001
+    classification: ai-models/speech-synthesis
+    phase: business
+  - file: data/experiments/tasks/ai-speech-synthesis-business.md
+    id: speech-synthesis-bilingual-guide-001
+    classification: ai-models/speech-synthesis
+    phase: business
+  - file: data/experiments/tasks/ai-speech-synthesis-business.md
+    id: speech-synthesis-timed-voiceover-001
+    classification: ai-models/speech-synthesis
+    phase: business
+  - file: data/experiments/tasks/ai-video-generation-business.md
+    id: video-generation-calm-background-001
+    classification: ai-models/video-generation
+    phase: business
+  - file: data/experiments/tasks/ai-video-generation-business.md
+    id: video-generation-plant-action-001
+    classification: ai-models/video-generation
+    phase: business
+  - file: data/experiments/tasks/ai-video-generation-business.md
+    id: video-generation-product-shot-001
+    classification: ai-models/video-generation
+    phase: business
+  - file: data/experiments/tasks/cloud-app-hosting-business.md
+    id: app-hosting-club-page-001
+    classification: cloud-hosting/app-hosting
+    phase: business
+  - file: data/experiments/tasks/cloud-app-hosting-business.md
+    id: app-hosting-unit-converter-001
+    classification: cloud-hosting/app-hosting
+    phase: business
+  - file: data/experiments/tasks/cloud-app-hosting-business.md
+    id: app-hosting-update-notice-001
+    classification: cloud-hosting/app-hosting
+    phase: business
+  - file: data/experiments/tasks/cloud-browser-environments-business.md
+    id: browser-community-classes-001
+    classification: cloud-hosting/browser-environments
+    phase: business
+  - file: data/experiments/tasks/cloud-browser-environments-business.md
+    id: browser-membership-draft-001
+    classification: cloud-hosting/browser-environments
+    phase: business
+  - file: data/experiments/tasks/cloud-browser-environments-business.md
+    id: browser-report-download-001
+    classification: cloud-hosting/browser-environments
+    phase: business
+  - file: data/experiments/tasks/cloud-code-sandboxes-business.md
+    id: sandbox-csv-cleanup-001
+    classification: cloud-hosting/code-sandboxes
+    phase: business
+  - file: data/experiments/tasks/cloud-code-sandboxes-business.md
+    id: sandbox-expense-chart-001
+    classification: cloud-hosting/code-sandboxes
+    phase: business
+  - file: data/experiments/tasks/cloud-code-sandboxes-business.md
+    id: sandbox-photo-contact-sheet-001
+    classification: cloud-hosting/code-sandboxes
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-commerce.md
+    id: commerce-product-variants-001
+    classification: commerce-marketing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-commerce.md
+    id: commerce-promotion-eligibility-001
+    classification: commerce-marketing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-commerce.md
+    id: commerce-restock-reconcile-001
+    classification: commerce-marketing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: email-delivery-calendar-invite-001
+    classification: communication/email-delivery
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: email-delivery-order-receipt-001
+    classification: communication/email-delivery
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: email-delivery-trace-missing-001
+    classification: communication/email-delivery
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: mailboxes-download-attachment-001
+    classification: communication/mailboxes
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: mailboxes-thread-handoff-001
+    classification: communication/mailboxes
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: messaging-decision-recap-001
+    classification: communication/messaging
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: messaging-post-thread-update-001
+    classification: communication/messaging
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: messaging-rsvp-reactions-001
+    classification: communication/messaging
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: sms-appointment-reminder-001
+    classification: communication/sms
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: sms-subscription-filter-001
+    classification: communication/sms
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: sms-two-way-reschedule-001
+    classification: communication/sms
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-agents-book-appointment-001
+    classification: communication/voice-agents
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-agents-faq-dialogue-001
+    classification: communication/voice-agents
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-agents-human-handoff-001
+    classification: communication/voice-agents
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-calls-menu-routing-001
+    classification: communication/voice-calls
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-calls-spoken-reminder-001
+    classification: communication/voice-calls
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-communication.md
+    id: voice-calls-voicemail-capture-001
+    classification: communication/voice-calls
+    phase: business
+  - file: data/experiments/tasks/database-document-business.md
+    id: document-order-summary-001
+    classification: databases/document
+    phase: business
+  - file: data/experiments/tasks/database-document-business.md
+    id: document-product-variant-query-001
+    classification: databases/document
+    phase: business
+  - file: data/experiments/tasks/database-document-business.md
+    id: document-profile-field-update-001
+    classification: databases/document
+    phase: business
+  - file: data/experiments/tasks/database-key-value-business.md
+    id: key-value-cache-refresh-001
+    classification: databases/key-value
+    phase: business
+  - file: data/experiments/tasks/database-key-value-business.md
+    id: key-value-session-revoke-001
+    classification: databases/key-value
+    phase: business
+  - file: data/experiments/tasks/database-vector-business.md
+    id: vector-document-refresh-001
+    classification: databases/vector
+    phase: business
+  - file: data/experiments/tasks/database-vector-business.md
+    id: vector-notes-search-001
+    classification: databases/vector
+    phase: business
+  - file: data/experiments/tasks/database-vector-business.md
+    id: vector-public-filtered-search-001
+    classification: databases/vector
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: api-development-contract-regression-001
+    classification: developer-tools/api-development
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: api-development-frontend-mock-001
+    classification: developer-tools/api-development
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: api-development-reusable-workflow-001
+    classification: developer-tools/api-development
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: code-hosting-draft-release-001
+    classification: developer-tools/code-hosting
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: code-hosting-propose-fix-001
+    classification: developer-tools/code-hosting
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: code-hosting-review-change-001
+    classification: developer-tools/code-hosting
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: dependency-advisories-inventory-001
+    classification: developer-tools/dependency-advisories
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: dependency-advisories-upgrade-diff-001
+    classification: developer-tools/dependency-advisories
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: monitoring-error-triage-001
+    classification: developer-tools/monitoring
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: monitoring-release-regression-001
+    classification: developer-tools/monitoring
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: monitoring-slow-trace-001
+    classification: developer-tools/monitoring
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: qr-codes-guest-wifi-001
+    classification: developer-tools/qr-codes
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-developer.md
+    id: qr-codes-offline-contact-001
+    classification: developer-tools/qr-codes
+    phase: business
+  - file: data/experiments/tasks/coverage-data-platforms.md
+    id: financial-platforms-home-value-001
+    classification: financial-data/data-platforms
+    phase: business
+  - file: data/experiments/tasks/coverage-data-platforms.md
+    id: financial-platforms-pe-reading-001
+    classification: financial-data/data-platforms
+    phase: business
+  - file: data/experiments/tasks/coverage-data-platforms.md
+    id: financial-platforms-real-oil-001
+    classification: financial-data/data-platforms
+    phase: business
+  - file: data/experiments/tasks/coverage-data-fx.md
+    id: financial-fx-budget-range-001
+    classification: financial-data/fx
+    phase: business
+  - file: data/experiments/tasks/coverage-data-fx.md
+    id: financial-fx-charge-difference-001
+    classification: financial-data/fx
+    phase: business
+  - file: data/experiments/tasks/coverage-data-macro.md
+    id: financial-macro-real-wages-001
+    classification: financial-data/macro
+    phase: business
+  - file: data/experiments/tasks/coverage-data-macro.md
+    id: financial-macro-vintage-revisions-001
+    classification: financial-data/macro
+    phase: business
+  - file: data/experiments/tasks/coverage-data-prices.md
+    id: financial-prices-crypto-value-001
+    classification: financial-data/prices
+    phase: business
+  - file: data/experiments/tasks/coverage-data-prices.md
+    id: financial-prices-split-explanation-001
+    classification: financial-data/prices
+    phase: business
+  - file: data/experiments/tasks/coverage-data-statements.md
+    id: financial-statements-balance-bridge-001
+    classification: financial-data/statements
+    phase: business
+  - file: data/experiments/tasks/coverage-data-statements.md
+    id: financial-statements-quarter-cash-001
+    classification: financial-data/statements
+    phase: business
+  - file: data/experiments/tasks/coverage-data-geocoding.md
+    id: geocoding-disambiguation-001
+    classification: maps-geo/geocoding
+    phase: business
+  - file: data/experiments/tasks/coverage-data-geocoding.md
+    id: geocoding-photo-regions-001
+    classification: maps-geo/geocoding
+    phase: business
+  - file: data/experiments/tasks/coverage-data-route-planning.md
+    id: route-planning-fixed-stops-001
+    classification: maps-geo/route-planning
+    phase: business
+  - file: data/experiments/tasks/coverage-data-route-planning.md
+    id: route-planning-toll-tradeoff-001
+    classification: maps-geo/route-planning
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: document-collaboration-meeting-record-001
+    classification: productivity-storage/document-collaboration
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: document-collaboration-review-access-001
+    classification: productivity-storage/document-collaboration
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: document-collaboration-review-revision-001
+    classification: productivity-storage/document-collaboration
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: file-sharing-client-bundle-001
+    classification: productivity-storage/file-sharing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: file-sharing-restore-version-001
+    classification: productivity-storage/file-sharing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: file-sharing-revoke-temporary-link-001
+    classification: productivity-storage/file-sharing
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: project-management-meeting-actions-001
+    classification: productivity-storage/project-management
+    phase: business
+  - file: data/experiments/tasks/coverage-comm-productivity.md
+    id: project-management-release-blockers-001
+    classification: productivity-storage/project-management
+    phase: business
+  - file: data/experiments/tasks/coverage-data-scholarly.md
+    id: scholarly-bibliography-cleanup-001
+    classification: scholarly/scholarly-search
+    phase: business
+  - file: data/experiments/tasks/coverage-data-scholarly.md
+    id: scholarly-topic-starter-001
+    classification: scholarly/scholarly-search
+    phase: business
+  - file: data/experiments/tasks/coverage-data-web-search.md
+    id: web-search-family-visit-001
+    classification: search-scraping/web-search
+    phase: business
+  - file: data/experiments/tasks/coverage-data-web-search.md
+    id: web-search-library-options-001
+    classification: search-scraping/web-search
+    phase: business
+  - file: data/experiments/tasks/coverage-data-flights.md
+    id: flights-baggage-total-001
+    classification: travel/flights
+    phase: business
+  - file: data/experiments/tasks/coverage-data-rolling-revisions.md
+    id: flights-search-001
+    classification: travel/flights
+    phase: business
+  - file: data/experiments/tasks/coverage-data-flights.md
+    id: flights-weekend-options-001
+    classification: travel/flights
+    phase: business
+  - file: data/experiments/tasks/coverage-data-hotels.md
+    id: hotels-accessible-room-001
+    classification: travel/hotels
+    phase: business
+  - file: data/experiments/tasks/coverage-data-hotels.md
+    id: hotels-cancellation-budget-001
+    classification: travel/hotels
+    phase: business
+  - file: data/experiments/tasks/coverage-data-hotels.md
+    id: hotels-stay-offer-001
+    classification: travel/hotels
+    phase: business
+  - file: data/experiments/tasks/coverage-data-public-holidays.md
+    id: public-holidays-one-day-break-001
+    classification: weather-calendar/public-holidays
+    phase: business
+  - file: data/experiments/tasks/coverage-data-public-holidays.md
+    id: public-holidays-shared-days-001
+    classification: weather-calendar/public-holidays
+    phase: business
+  - file: data/experiments/tasks/coverage-data-weather.md
+    id: weather-activity-window-001
+    classification: weather-calendar/weather-data
+    phase: business
+  - file: data/experiments/tasks/coverage-data-weather.md
+    id: weather-historical-packing-001
+    classification: weather-calendar/weather-data
+    phase: business
+  - file: data/experiments/tasks/coverage-data-rolling-revisions.md
+    id: weather-outing-001
+    classification: weather-calendar/weather-data
+    phase: business
