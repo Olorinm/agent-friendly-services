@@ -1,7 +1,7 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-10-10T09:14:25.359Z",
-  "count": 118,
+  "generated_at": "2026-10-12T03:54:33.421Z",
+  "count": 119,
   "candidates": [
     {
       "id": "adyen",
@@ -373,6 +373,17 @@
       "category": "web-search-data",
       "homepage": "https://eodhd.com/",
       "summary": "Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.",
+      "submitted_by": "community",
+      "entrypoints": {},
+      "notes": [],
+      "m1": null
+    },
+    {
+      "id": "eurostat",
+      "name": "Eurostat Data API",
+      "category": "web-search-data",
+      "homepage": "https://ec.europa.eu/eurostat/",
+      "summary": "Official European economic and social statistics with public REST data and metadata access.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],

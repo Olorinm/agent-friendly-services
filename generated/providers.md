@@ -96,8 +96,8 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Apify](#apify) | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | 2026-07-07 |
 | [Brave Search API](#brave-search) | ✓ | — | — | — | — | ✓ | — | 2026-07-07 |
 | [Exa](#exa) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
-| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
-| [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
+| [Firecrawl](#firecrawl) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-10 |
+| [Jina AI](#jina) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-10 |
 | [Perplexity API](#perplexity) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-07 |
 | [SerpApi](#serpapi) | ✓ | ✓ | — | — | — | ✓ | — | 2026-07-08 |
 | [Tavily](#tavily) | ✓ | ✓ | — | — | — | ✓ | — | 2026-10-08 |
@@ -516,7 +516,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 **Links:** [Documentation](https://docs.jina.ai) · [API Reference](https://docs.jina.ai) · [llms.txt](https://docs.jina.ai/llms.txt) · [Status Page](https://status.jina.ai) · [Signup](https://jina.ai/api-dashboard) · [API Keys](https://jina.ai/api-dashboard) · [Official MCP](https://github.com/jina-ai/MCP)
 
-- **Supported:** [Self-serve signup](https://jina.ai/api-dashboard) · [Self-serve API keys](https://jina.ai/api-dashboard) · [Free tier / trial](https://jina.ai/api-dashboard) · [Self-serve upgrade](https://jina.ai/api-dashboard) · [Usage dashboard](https://jina.ai/api-dashboard)
+- **Supported:** [Self-serve signup](https://jina.ai/api-dashboard) · [Self-serve API keys](https://jina.ai/api-dashboard) · [Free tier / trial](https://jina.ai/reader/) · [Self-serve upgrade](https://jina.ai/api-dashboard) · [Usage dashboard](https://jina.ai/api-dashboard)
 - **Unknown (help wanted):** `oauth_support`, `scoped_tokens`, `token_revocation`, `sandbox_or_test_mode`, `idempotency`, `versioning_policy`, `automation_permitted`
 
 ### Lark <a id="lark"></a>

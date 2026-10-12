@@ -20,7 +20,7 @@ e2b,E2B,cloud-hosting,true,true,false,true,not_applicable,true,2026-10-08
 elevenlabs,ElevenLabs,ai-models,true,true,true,false,unknown,true,2026-07-07
 exa,Exa,web-search-data,true,true,false,false,unknown,true,2026-10-08
 fal,fal.ai,ai-models,false,true,false,true,unknown,true,2026-07-08
-firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-10-08
+firecrawl,Firecrawl,web-search-data,true,true,false,false,unknown,true,2026-10-10
 fireworks,Fireworks AI,ai-models,false,true,false,true,unknown,true,2026-07-08
 fly-io,Fly.io,cloud-hosting,true,true,true,true,unknown,true,2026-07-08
 gemini-api,Gemini API,ai-models,false,false,false,true,unknown,true,2026-07-07
@@ -29,7 +29,7 @@ gitlab,GitLab,developer-tools,true,true,true,true,unknown,true,2026-10-08
 grafana,Grafana (Grafana Cloud),developer-tools,true,true,false,false,supported,true,2026-07-08
 groq,Groq,ai-models,false,true,false,false,unknown,true,2026-07-07
 hugging-face,Hugging Face,ai-models,true,false,false,true,unknown,true,2026-07-07
-jina,Jina AI,web-search-data,true,true,false,false,unknown,true,2026-10-08
+jina,Jina AI,web-search-data,true,true,false,false,unknown,true,2026-10-10
 lark,Lark,communication,true,true,false,true,unknown,true,2026-07-07
 lemonsqueezy,Lemon Squeezy,payments-billing,false,false,false,false,supported,true,2026-07-08
 linear,Linear,productivity-storage,true,true,false,false,unknown,true,2026-07-07

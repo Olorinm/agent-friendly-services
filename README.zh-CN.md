@@ -10,7 +10,7 @@
 
 <a id="all-services"></a>
 
-## 服务目录（194）
+## 服务目录（195）
 
 Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
 
@@ -93,7 +93,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#neon">Neon</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7a86e94d64f8">100%</a></td><td align="right">167.2k</td><td align="right">$0.01</td><td align="right">—</td><td align="left"><a href="https://claimable.neon.tech/v1/agent/identity">API</a></td><td align="left"><a href="https://neon.com/docs/reference/claimable-neon">API</a> · <a href="https://neon.com/docs/reference/neon-cli">CLI</a> · <a href="https://github.com/neondatabase/mcp-server-neon">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7a86e94d64f8">100%</a></td><td align="right">232.6k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#turso">Turso</a></td><td align="right"><a href="./generated/evaluations.md#comparison-3e5e974d8b61">100%</a></td><td align="right">232.3k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 </tbody>
 </table>
 
@@ -106,7 +106,12 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：通过指定服务及入口完成必要接入，新建本轮独立空数据库并真实查询成功；所需安装和配置可供新会话复用且不泄露凭据；已有账号不算本轮自助注册，免账号入口不强行注册，免费或期限依据及未知项如实说明。仅有安装、资源列表、创建回执或健康检查不足以证明数据库可查询。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC） · 接入准备: Preprovided existing authorized parent identity; executor creates one fresh empty logical database
+| 服务 | 测试配置 | 起点 |
+| --- | --- | --- |
+| [Turso](./generated/evaluations.md#comparison-3e5e974d8b61) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
+| [Neon](./generated/evaluations.md#comparison-7a86e94d64f8) | 1.18.35 · deepseek-flash / high · 5 分钟 | 接入准备: Preprovided existing authorized parent identity; executor creates one fresh empty logical database |
+
+**测试配置：** 2026-10-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -126,6 +131,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#turso">Turso / platform-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-07edbec76825">100%</a></td><td align="right">767.6k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://docs.turso.tech/api-reference/introduction">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#turso">Turso / platform-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-3961c742b40e">0%</a></td><td align="right">—</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#turso">Turso / platform-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-785fde9d2ce4">100%</a></td><td align="right">276.6k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#turso">Turso / platform-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-848474bceab4">100%</a></td><td align="right">456.4k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#turso">Turso / platform-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-eb4cee33eee8">100%</a></td><td align="right">327.9k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.turso.tech/v1/">API</a></td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#aiven">Aiven</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://aiven.io/docs/tools/api">API</a> · <a href="https://aiven.io/docs/products/postgresql/howto/connect-python">SDK</a> · <a href="https://aiven.io/docs/tools/cli">CLI</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#cloudflare">Cloudflare</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://developers.cloudflare.com/api/resources/kv/subresources/namespaces/subresources/values/methods/get/">API</a> · <a href="https://developers.cloudflare.com/api/typescript/resources/kv/subresources/namespaces/subresources/values/methods/get/">SDK</a> · <a href="https://developers.cloudflare.com/d1/get-started/">CLI</a> · <a href="https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/">MCP</a></td></tr>
@@ -139,6 +145,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 | 任务及条件 | 完成标准 |
 | --- | --- |
+| 帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。<br>源库是总控为本轮另行新建、独立确认空白后填入合成数据并核对的专用远程数据库，其身份和连接配置见 ENVIRONMENT.md；它包含 lists 与 todos 两张业务表。lists 有 id、name；todos 有 id、list_id、title、done、note，list_id 关联 lists.id。备份和恢复须保留两张表的字段名、数据类型含义、主键、外键、非空约束、默认值及全部原始记录；清单归属、完成状态、文本内容，以及备注空字符串与缺值的区别都要保留。恢复目标必须是本次新建且起初没有业务表的独立远程数据库；可以与源库共享项目或计算资源。备份应包含重建所需的业务结构和数据，以后源库不可用时也能在兼容 SQL 引擎中恢复，不只是一条依赖原服务的快照或分支链接。不要求跨不同 SQL 方言恢复，不备份服务内部表、账号权限或宿主机。源库在此期间没有其他写入者；不得修改或删除源库业务表和记录。 | 在指定服务及入口从真实源库导出覆盖两表逻辑结构与全部记录的备份，实际使用该备份恢复到本次独立新建且起初空白的远程目标；新连接可读回等价业务结构和全部原始记录，源库业务结构与记录未变。交付可留存备份、可用简短恢复方法、新库位置、准确的各表行数与核对结果，并如实说明已知期限或免费条件。凭据只存私有配置，不进入交付答案或公开证据。 |
 | 我的个人书目目录要按文件批量导入，遇到重复编号不能留下半批数据。请做一个可复用的导入器，用数据库的整批原子操作或事务保护，在提供的两个独立测试表中分别实际验证错误样本整批拒绝、更正样本全部保存，原有书目不变。交付导入器、简短用法和两次结果，凭据单独保存。<br>两张远程测试表的实际名称、连接配置与角色对应见 ENVIRONMENT.md；它们都有 book_id（非空整数主键）、title（非空文本），最初各只有 book_id=100、title=已有书目。附件 attachments/batch-reject.csv 与 attachments/batch-corrected.csv 均为 UTF-8 CSV，首行为 book_id,title。错误文件只导入 reject_case 对应表，更正文件只导入 accept_case 对应表；两个表互不覆盖。同一个交付的导入器应接受文件路径和这两个授权目标表之一，实际读取文件内容，不把预期终态写死。错误样本须实际触发数据库的重复主键拒绝，不能只在本地预检后跳过；不得忽略或替换冲突记录。每个文件作为一个整体提交或拒绝，可使用数据库支持的单条原子批量写入或整批事务，不限定语言、客户端或 SQL 条数。不能通过 UPDATE、DELETE、替换记录、改约束、清空、删除或重建表来修复或伪装回滚；未提交事务内的正常回滚允许。完成后保留两个表的结果供核对，说明每个样本的实际结果和遇到的数据库错误。 | 通过指定服务真实运行同一交付导入器：错误文件由数据库拒绝，整批没有已提交新增记录，原有记录不变；更正文件的全部记录提交到另一个表，原有记录不变。结构与约束保持不变，实际执行路径使用可核对的数据库整批原子操作或正确事务处理，无提交后补偿删改。导入器及简短用法可留存且与实际执行相符，两次结果如实说明。 |
 | 帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。<br>源库是本轮接入后由准备者填入合成数据的专用远程数据库，其身份和连接配置见 ENVIRONMENT.md；它包含 lists 与 todos 两张业务表。lists 有 id、name；todos 有 id、list_id、title、done、note，list_id 关联 lists.id。备份和恢复须保留两张表的字段名、数据类型含义、主键、外键、非空约束、默认值及全部原始记录；清单归属、完成状态、文本内容，以及备注空字符串与缺值的区别都要保留。恢复目标必须是本次新建且起初没有业务表的独立远程数据库；可以与源库共享项目或计算资源。备份应包含重建所需的业务结构和数据，以后源库不可用时也能在兼容 SQL 引擎中恢复，不只是一条依赖原服务的快照或分支链接。不要求跨不同 SQL 方言恢复，不备份服务内部表、账号权限或宿主机。源库在此期间没有其他写入者；不得修改或删除源库业务表和记录。 | 在指定服务及入口从真实源库导出覆盖两表逻辑结构与全部记录的备份，实际使用该备份恢复到本次独立新建且起初空白的远程目标；新连接可读回等价业务结构和全部原始记录，源库业务结构与记录未变。交付可留存备份、可用简短恢复方法、新库位置、准确的各表行数与核对结果，并如实说明已知期限或免费条件。凭据只存私有配置，不进入交付答案或公开证据。 |
 | 为我的个人待办应用准备一个独立的远程数据库，用附件数据验证新增和修改后的保存情况。写入程序退出后，用一个全新的程序重新连接同一数据库读取；给我按 id 排列的全部待办、未完成待办，以及总数和完成数，并说明数据库的免费或到期限制。<br>仅合成测试数据：id=1,title=Buy milk,done=false；id=2,title=Read book,done=false；id=3,title=Walk dog,done=true。写入三项，再把 id=2 改为 done=true，其他内容不变。使用本轮接入阶段新建并明确交付的独立空远程测试数据库，其标识和私有连接配置见 ENVIRONMENT.md；允许复用安装和认证，不继承业务表、数据、答案或调用脚本。不得访问或修改既有用户项目。 | 实际在指定服务的远程数据库中新增三项并修改 id=2，随后写入进程结束，另一全新进程重新连接同一数据库读回三项；只有 id=1 未完成，总数 3、完成数 2，标题与其他原值不变；最终全部待办按 id 排序。真实请求、响应和进程记录支持远程保存与独立读取；正确说明有依据的免费或到期限制，无法确认的细项如实标未知。凭据只保存在工作目录私有文件，不进入公开证据或最终答案。限时资源可完成此题，但必须明确期限，不声称永久可用。 |
@@ -146,6 +153,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 | 服务 | 本次任务 | 测试配置 | 起点 |
 | --- | --- | --- | --- |
+| [Turso / API](./generated/evaluations.md#comparison-848474bceab4) | 帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。 | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
 | [Neon / API](./generated/evaluations.md#comparison-eb4cee33eee8) | 我的个人书目目录要按文件批量导入，遇到重复编号不能留下半批数据。请做一个可复用的导入器，用数据库的整批原子操作或事务保护，在提供的两个独立测试表中分别实际验证错误样本整批拒绝、更正样本全部保存，原有书目不变。交付导入器、简短用法和两次结果，凭据单独保存。 | 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 | 接入准备: Preprovided existing authorized parent identity; executor creates one fresh empty logical database |
 | [Turso / API](./generated/evaluations.md#comparison-eb4cee33eee8) | 我的个人书目目录要按文件批量导入，遇到重复编号不能留下半批数据。请做一个可复用的导入器，用数据库的整批原子操作或事务保护，在提供的两个独立测试表中分别实际验证错误样本整批拒绝、更正样本全部保存，原有书目不变。交付导入器、简短用法和两次结果，凭据单独保存。 | 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 | 接入准备: Preprovided existing authorized parent identity; executor creates one fresh empty logical database |
 | [Neon / API](./generated/evaluations.md#comparison-bfa31194c37d) | 帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。 | 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 | 接入准备: none initially; generated anonymous Claimable project credentials |
@@ -155,11 +163,11 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 | [Turso / API](./generated/evaluations.md#comparison-07edbec76825) | 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 | 已预供服务凭据 |
 | [Neon / API](./generated/evaluations.md#comparison-b514e81afd38) | 为我的个人待办应用准备一个独立的远程数据库，验证新增、修改和重新连接后读取待办事项 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 | 未预供账号或密钥 |
 
-**测试配置：** 2026-09-07 – 2026-10-08（UTC）
+**测试配置：** 2026-09-07 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
-[任务定义 1](./data/experiments/tasks/database-atomic-import.md) · [任务定义 2](./data/experiments/tasks/database-restore.md) · [任务定义 3](./data/experiments/tasks/databases-v2.md) · [任务定义 4](./data/experiments/tasks/databases.md) · [完整运行记录与证据](./generated/evaluations.md)
+[任务定义 1](./data/experiments/tasks/database-restore-v2.md) · [任务定义 2](./data/experiments/tasks/database-atomic-import.md) · [任务定义 3](./data/experiments/tasks/database-restore.md) · [任务定义 4](./data/experiments/tasks/databases-v2.md) · [任务定义 5](./data/experiments/tasks/databases.md) · [完整运行记录与证据](./generated/evaluations.md)
 
 </details>
 
@@ -206,7 +214,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-web-search-data"></a>
 
-### 搜索与数据获取 (58)
+### 搜索与数据获取 (59)
 
 以下服务暂按本层范围收录，细分缺口见服务详情。
 
@@ -362,8 +370,8 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#exa">Exa</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bde1a47b7eaa">100%</a></td><td align="right">165.8k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://mcp.exa.ai/mcp">MCP</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right"><a href="./generated/evaluations.md#comparison-bde1a47b7eaa">100%</a></td><td align="right">186.8k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://r.jina.ai/">API</a></td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ecce2722b24e">100%</a></td><td align="right">256.4k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ecce2722b24e">100%</a></td><td align="right">115.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://r.jina.ai/">API</a></td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -376,13 +384,13 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：通过指定入口完成必要注册、认证、安装与配置，真实提取指定网页且标题、概述与返回正文相符；必要配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册，实际人工和额外申请如实记录。仅安装、健康检查、工具清单或搜索结果不足以证明正文提取可用。
 
-| 服务 | 起点 |
-| --- | --- |
-| [Exa](./generated/evaluations.md#comparison-bde1a47b7eaa) | 接入准备: none; anonymous public extraction routes, no account/email/token/payment supplied |
-| [Firecrawl](./generated/evaluations.md#comparison-bde1a47b7eaa) | 接入准备: none; anonymous public extraction routes, no account/email/token/payment supplied |
-| [Jina AI](./generated/evaluations.md#comparison-4582424b2cd6) | 未预供账号或密钥 |
+| 服务 | 测试配置 | 起点 |
+| --- | --- | --- |
+| [Firecrawl](./generated/evaluations.md#comparison-ecce2722b24e) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
+| [Jina AI](./generated/evaluations.md#comparison-ecce2722b24e) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
+| [Exa](./generated/evaluations.md#comparison-bde1a47b7eaa) | 1.18.35 · deepseek-flash / high · 5 分钟 | 接入准备: none; anonymous public extraction routes, no account/email/token/payment supplied |
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC）
+**测试配置：** 2026-10-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -397,11 +405,13 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tbody>
 <tr><td align="left"><a href="./generated/services.md#exa">Exa / public-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-032f75889210">100%</a></td><td align="right">312.8k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://mcp.exa.ai/mcp">MCP</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#exa">Exa / public-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c49d8e01e18c">0%</a></td><td align="right">745.5k</td><td align="right">$0.06</td><td align="right">$0</td><td align="left"><a href="https://mcp.exa.ai/mcp">MCP</a></td><td align="left"><a href="https://docs.exa.ai/reference/getting-started">API</a> · <a href="https://docs.exa.ai/sdks/typescript-sdk-specification">SDK</a> · <a href="https://exa.ai/docs/get-started/exa-mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl / public-scrape-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-032f75889210">100%</a></td><td align="right">264.2k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl / public-scrape-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-5b2f0a0db9e7">33.3%</a></td><td align="right">209.2k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl / public-scrape-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b8dbd573c0af">100%</a></td><td align="right">261.9k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#firecrawl">Firecrawl / public-scrape-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c49d8e01e18c">100%</a></td><td align="right">365.7k</td><td align="right">$0.02</td><td align="right">—</td><td align="left"><a href="https://api.firecrawl.dev/v2/scrape">API</a></td><td align="left"><a href="https://docs.firecrawl.dev/api-reference/introduction">API</a> · <a href="https://docs.firecrawl.dev/sdks/overview">SDK</a> · <a href="https://docs.firecrawl.dev/mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#jina">Jina AI / reader-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-5b2f0a0db9e7">100%</a></td><td align="right">100.5k</td><td align="right">$0.0066</td><td align="right">$0</td><td align="left"><a href="https://r.jina.ai/">API</a></td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#jina">Jina AI / reader-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-b8dbd573c0af">100%</a></td><td align="right">90.1k</td><td align="right">$0.0063</td><td align="right">$0</td><td align="left"><a href="https://r.jina.ai/">API</a></td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#agentservices">AgentServices</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md">API</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md">SDK</a> · <a href="https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#apify">Apify</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.apify.com/api/v2">API</a> · <a href="https://docs.apify.com/sdk">SDK</a> · <a href="https://docs.apify.com/cli">CLI</a> · <a href="https://docs.apify.com/platform/integrations/mcp">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#jina">Jina AI</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://jina.ai/reader/">API</a> · <a href="https://github.com/jina-ai/MCP">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tavily">Tavily</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.tavily.com/documentation/quickstart">API</a> · <a href="https://docs.tavily.com/sdk">SDK</a> · <a href="https://docs.tavily.com/documentation/keyless">MCP</a></td></tr>
 </tbody>
 </table>
@@ -411,21 +421,25 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 | 任务及条件 | 完成标准 |
 | --- | --- |
-| 我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。<br>官方 PDF：https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf 。使用 TTB Gauging Manual 的 TABLE NO. 4 / GALLONS PER POUND，原文件共 21 页。目标是物理第 2 页（印刷页码 532）左半表，Proof 从 1.0 到 2.0，含两端，共 11 行。CSV 使用 UTF-8，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound；按 Proof 升序，保留原表印出的全部数值精度，不换算单位、不重新计算或四舍五入。通过本轮指定的内容提取服务取得此 PDF 的目标表文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载后本地解析或 OCR、裁剪重传后的 PDF，或仅取得原 PDF 链接/二进制替代服务对原 URL 的正文提取。若指定 URL 返回的目标表实质不同，请说明差异，不拼接其他版本。 | 指定服务实际返回原 URL 的目标表内容；CSV 三列、11 行的 Proof 与两种 gallons per pound 数值对应准确，保留原表数值精度，无漏行、重复、额外行或顺序混淆；文件可用，答复含文件位置与官方来源。允许不改变数值的前导零、尾零及无损空白、换行差异。不要求特定解析库、服务返回格式、OCR 模式、页码字段、缓存策略或审计日志。 |
+| 我在整理 2027 年英格兰和威尔士的个人日程。请通过指定网页提取服务，从材料里的 GOV.UK 页面取得该地区该年的全部银行假日，做成按日期排序的 CSV，包含日期和网页上的完整英文假日名称，并给我文件和官方来源链接。<br>官方页面：https://www.gov.uk/bank-holidays 。只整理 England and Wales 的 2027 年银行假日，日期范围为 2027-01-01 至 2027-12-31；不要混入 Scotland、Northern Ireland 或其他年份。日期使用页面该地区该年表中公布的日期，不用算法推算，也不改成节日原本的日历日期。英文名称保留页面文字，包括名称中的 substitute day 标注。CSV 使用 UTF-8 和清楚的表头来识别日期、假日名称（可用 date、holiday），日期写为 YYYY-MM-DD，按日期升序；无需星期、总数或其他字段。通过本轮指定服务取得此网页内容，可自行处理其返回的 HTML、Markdown、文本或结构化内容；不改用本站的 JSON/ICS 数据接口、其他网页或日历数据集，不用搜索摘要、模型记忆或绕过指定服务直接读取原网页代替。 | 实际通过指定服务取得目标网页的相应地区和年份内容；交付 CSV 的必要日期和名称逐项与官方原文一致，包含该地区该年全部条目，无重复、其他地区专属假日或其他年份，保留页面的 substitute day 名称说明及公布日期，日期升序；文件确实存在且可解析，答复含文件位置和官方来源。允许不改变含义的空白、直弯撇号及清楚的列名差异；不要求服务返回格式、特定解析库、强制绕过缓存、额外字段或执行者审计日志。 |
 | 我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。<br>官方页面：https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ 。只整理其中的“2027 Holiday Schedule”表，不混入其他年份或页面说明。CSV 使用 UTF-8，列名为 date、weekday、holiday；date 为 YYYY-MM-DD，weekday 为英文完整星期名，holiday 保留表中的英文名称，去掉脚注标记。日期按表中公布值记录，不自行换成节日的日历日期。通过本轮指定的网页内容提取服务取得此 URL 的内容，允许自行处理服务返回的 HTML、文本或结构化内容；不用其他网站、日历数据集、模型记忆、搜索摘要或绕过指定服务直读原网页代替。 | 指定服务真实取得该网页的目标表内容；CSV 三列与输入约定一致，全部假日逐项日期、星期、名称正确，无漏行、重复或其他年份，日期升序，脚注标记不混入字段；文件确实存在且可解析，答复含文件位置及来源链接。允许不改变含义的空白、换行和直弯撇号差异；不要求特定解析库、调用次数或服务原始返回格式。 |
+| 我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。<br>官方 PDF：https://www.ttb.gov/system/files/images/pdfs/foia_Gauging_Manual_Tables/Table_4.pdf 。使用 TTB Gauging Manual 的 TABLE NO. 4 / GALLONS PER POUND，原文件共 21 页。目标是物理第 2 页（印刷页码 532）左半表，Proof 从 1.0 到 2.0，含两端，共 11 行。CSV 使用 UTF-8，列名为 proof、wine_gallons_per_pound、proof_gallons_per_pound；按 Proof 升序，保留原表印出的全部数值精度，不换算单位、不重新计算或四舍五入。通过本轮指定的内容提取服务取得此 PDF 的目标表文字，可自行整理它返回的文本、Markdown、HTML 或结构化内容；不以其他网页、搜索摘要、模型记忆、直接下载后本地解析或 OCR、裁剪重传后的 PDF，或仅取得原 PDF 链接/二进制替代服务对原 URL 的正文提取。若指定 URL 返回的目标表实质不同，请说明差异，不拼接其他版本。 | 指定服务实际返回原 URL 的目标表内容；CSV 三列、11 行的 Proof 与两种 gallons per pound 数值对应准确，保留原表数值精度，无漏行、重复、额外行或顺序混淆；文件可用，答复含文件位置与官方来源。允许不改变数值的前导零、尾零及无损空白、换行差异。不要求特定解析库、服务返回格式、OCR 模式、页码字段、缓存策略或审计日志。 |
 
 | 服务 | 本次任务 | 起点 |
 | --- | --- | --- |
+| [Jina AI / API](./generated/evaluations.md#comparison-5b2f0a0db9e7) | 我在整理 2027 年英格兰和威尔士的个人日程。请通过指定网页提取服务，从材料里的 GOV.UK 页面取得该地区该年的全部银行假日，做成按日期排序的 CSV，包含日期和网页上的完整英文假日名称，并给我文件和官方来源链接。 | 接入准备: [object Object] |
+| [Firecrawl / API](./generated/evaluations.md#comparison-5b2f0a0db9e7) | 我在整理 2027 年英格兰和威尔士的个人日程。请通过指定网页提取服务，从材料里的 GOV.UK 页面取得该地区该年的全部银行假日，做成按日期排序的 CSV，包含日期和网页上的完整英文假日名称，并给我文件和官方来源链接。 | 接入准备: [object Object] |
+| [Firecrawl / API](./generated/evaluations.md#comparison-b8dbd573c0af) | 我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。 | 接入准备: [object Object] |
+| [Jina AI / API](./generated/evaluations.md#comparison-b8dbd573c0af) | 我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。 | 接入准备: [object Object] |
 | [Firecrawl / API](./generated/evaluations.md#comparison-c49d8e01e18c) | 我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。 | 接入准备: none; anonymous public extraction routes, no account/email/token/payment supplied |
 | [Exa / MCP](./generated/evaluations.md#comparison-c49d8e01e18c) | 我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。 | 接入准备: none; anonymous public extraction routes, no account/email/token/payment supplied |
 | [Exa / MCP](./generated/evaluations.md#comparison-032f75889210) | 我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。 | 未预供账号或密钥 |
-| [Firecrawl / API](./generated/evaluations.md#comparison-032f75889210) | 我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。 | 未预供账号或密钥 |
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-08（UTC）
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
-[任务定义 1](./data/experiments/tasks/web-extraction-pdf.md) · [任务定义 2](./data/experiments/tasks/web-extraction.md) · [完整运行记录与证据](./generated/evaluations.md)
+[任务定义 1](./data/experiments/tasks/web-extraction-uk.md) · [任务定义 2](./data/experiments/tasks/web-extraction.md) · [任务定义 3](./data/experiments/tasks/web-extraction-pdf.md) · [完整运行记录与证据](./generated/evaluations.md)
 
 </details>
 
@@ -439,7 +453,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#nominatim">Nominatim Public API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left"><a href="https://nominatim.openstreetmap.org/search">API</a></td><td align="left"><a href="https://nominatim.org/release-docs/latest/api/Search/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#nominatim">Nominatim Public API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-60adbd865cb5">100%</a></td><td align="right">191.0k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://nominatim.openstreetmap.org/search">API</a></td><td align="left"><a href="https://nominatim.org/release-docs/latest/api/Search/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#photon">Photon Public Demo API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-3bcbfb46bd35">100%</a></td><td align="right">253.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://photon.komoot.io/api/">API</a></td><td align="left"><a href="https://photon.komoot.io/">API</a></td></tr>
 </tbody>
 </table>
@@ -453,7 +467,12 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：按指定方式完成必要注册、认证、安装和配置；真实响应含可识别地点和有效经纬度，答复与响应一致，配置可供新会话复用且不泄露秘密。免注册入口不强行注册，已有账号不冒充本轮自助注册。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC） · 接入准备: none; official low-volume public route selected deliberately for one public-venue research task
+| 服务 | 测试配置 | 起点 |
+| --- | --- | --- |
+| [Nominatim Public API](./generated/evaluations.md#comparison-60adbd865cb5) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
+| [Photon Public Demo API](./generated/evaluations.md#comparison-3bcbfb46bd35) | 1.18.35 · deepseek-flash / high · 5 分钟 | 接入准备: none; official low-volume public route selected deliberately for one public-venue research task |
+
+**测试配置：** 2026-10-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -466,11 +485,11 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#nominatim">Nominatim Public API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7a7e044bd215">100%</a></td><td align="right">73.4k</td><td align="right">$0.0072</td><td align="right">$0</td><td align="left"><a href="https://nominatim.openstreetmap.org/search">API</a></td><td align="left"><a href="https://nominatim.org/release-docs/latest/api/Search/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#photon">Photon Public Demo API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c820e750045c">100%</a></td><td align="right">100.3k</td><td align="right">$0.0090</td><td align="right">$0</td><td align="left"><a href="https://photon.komoot.io/api/">API</a></td><td align="left"><a href="https://photon.komoot.io/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#geoapify">Geoapify</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://apidocs.geoapify.com/docs/geocoding/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#geocode-maps-co">Geocode Maps.co</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://geocode.maps.co/docs/">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#locationiq">LocationIQ</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://docs.locationiq.com/docs/search-forward-geocoding">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#nominatim">Nominatim Public API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://nominatim.org/release-docs/latest/api/Search/">API</a></td></tr>
 </tbody>
 </table>
 
@@ -483,7 +502,12 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：通过指定服务真实查询并匹配到伦敦大英博物馆或其入口；最终坐标与该对象的真实响应一致，坐标轴及单位正确，并位于事前冻结的官方场馆位置点 200 米内，允许合理展示舍入。名称、位置和返回对象的语义共同支持场馆身份，不能仅凭落在半径内把粗略区域对象当场馆。来源、实际返回的地址及粒度说明可核对，未返回字段不捏造；不要求两家服务坐标相同、地址逐字相同或提供固定字段集。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 2026-10-08（UTC） · 接入准备: none; official low-volume public route selected deliberately for one public-venue research task
+| 服务 | 起点 |
+| --- | --- |
+| [Nominatim Public API](./generated/evaluations.md#comparison-7a7e044bd215) | 接入准备: [object Object] |
+| [Photon Public Demo API](./generated/evaluations.md#comparison-c820e750045c) | 接入准备: none; official low-volume public route selected deliberately for one public-venue research task |
+
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 2026-10-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -560,8 +584,8 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#nager-date">Nager.Date</a></td><td align="right"><a href="./generated/evaluations.md#comparison-0ce2de00d325">100%</a></td><td align="right">63.8k</td><td align="right">$0.0064</td><td align="right">$0</td><td align="left"><a href="https://nagerholidays.com/api/v4/Holidays">API</a></td><td align="left"><a href="https://nagerholidays.com/api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#openholidays">OpenHolidays API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-0ce2de00d325">100%</a></td><td align="right">145.0k</td><td align="right">$0.0091</td><td align="right">$0</td><td align="left"><a href="https://openholidaysapi.org/PublicHolidays">API</a></td><td align="left"><a href="https://www.openholidaysapi.org/en/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#nager-date">Nager.Date</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ce7a914a844f">100%</a></td><td align="right">319.1k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://nagerholidays.com/api/v4/Holidays">API</a></td><td align="left"><a href="https://nagerholidays.com/api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#openholidays">OpenHolidays API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ce7a914a844f">100%</a></td><td align="right">158.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://openholidaysapi.org/PublicHolidays">API</a></td><td align="left"><a href="https://www.openholidaysapi.org/en/">API</a></td></tr>
 </tbody>
 </table>
 
@@ -574,7 +598,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：按指定方式完成必要注册、授权、安装或配置；真实假日查询返回可识别的日期和名称，答复及范围与响应相符，配置可供新会话复用且不泄露秘密。免账号入口不强行注册，已有账号不算本轮自助注册。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC） · 接入准备: none; anonymous publicAPI, no account/email/key/payment supplied
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 2026-10-10（UTC） · 接入准备: [object Object]
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -587,8 +611,8 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#nager-date">Nager.Date</a></td><td align="right"><a href="./generated/evaluations.md#comparison-39d86ae45d95">100%</a></td><td align="right">158.8k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://nagerholidays.com/api/v4/Holidays">API</a></td><td align="left"><a href="https://nagerholidays.com/api">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#openholidays">OpenHolidays API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-39d86ae45d95">100%</a></td><td align="right">174.3k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://openholidaysapi.org/PublicHolidays">API</a></td><td align="left"><a href="https://www.openholidaysapi.org/en/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#nager-date">Nager.Date</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c53ca46196b8">100%</a></td><td align="right">152.1k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://nagerholidays.com/api/v4/Holidays">API</a></td><td align="left"><a href="https://nagerholidays.com/api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#openholidays">OpenHolidays API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-c53ca46196b8">100%</a></td><td align="right">97.9k</td><td align="right">$0.0078</td><td align="right">$0</td><td align="left"><a href="https://openholidaysapi.org/PublicHolidays">API</a></td><td align="left"><a href="https://www.openholidaysapi.org/en/">API</a></td></tr>
 </tbody>
 </table>
 
@@ -601,7 +625,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成标准：实际查询指定服务并正确限定柏林州及 2027 年；交付清单与事前冻结的独立官方日期参考对应，完整且无重复、无越界节日，日期与节日身份正确并按日期升序，总数准确，来源可追溯真实查询。允许德英文名称、正常标点和等价节日译名差异，不以供应商字段名、是否服务端过滤或响应条目排列作为完成条件。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-08（UTC） · 接入准备: none; anonymous publicAPI, no account/email/key/payment supplied
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-10（UTC） · 接入准备: [object Object]
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -670,7 +694,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 <a id="services-web-search-data-financial-data"></a>
 
-#### 金融数据 (33)
+#### 金融数据 (34)
 
 <details>
 <summary>接入测试（单独记录）</summary>
@@ -681,7 +705,8 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 <tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right"><a href="./generated/evaluations.md#comparison-29077cd73ecd">100%</a></td><td align="right">564.6k</td><td align="right">$0.03</td><td align="right">—</td><td align="left"><a href="https://mcp.alphavantage.co/mcp">MCP</a></td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a> · <a href="https://mcp.alphavantage.co/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#bargo-congress">Bargo Congress Trades API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-a3477334d9b4">100%</a></td><td align="right">97.5k</td><td align="right">$0.0068</td><td align="right">$0</td><td align="left"><a href="https://www.bargo.ai/free-apis/congress/v1">API</a></td><td align="left"><a href="https://www.bargo.ai/free-apis/congress">API / MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#capitol-exposed">CapitolExposed</a></td><td align="right"><a href="./generated/evaluations.md#comparison-a3477334d9b4">0%</a></td><td align="right">300.5k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://www.capitolexposed.com/api/v1">API</a></td><td align="left"><a href="https://www.capitolexposed.com/api-docs">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8a11046c9744">100%</a></td><td align="right">123.3k</td><td align="right">$0.0086</td><td align="right">—</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-36e32b17588d">100%</a></td><td align="right">312.7k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eurostat">Eurostat Data API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-36e32b17588d">100%</a></td><td align="right">347.5k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/">API</a></td><td align="left"><a href="https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#frankfurter">Frankfurter</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8a11046c9744">100%</a></td><td align="right">113.3k</td><td align="right">$0.0081</td><td align="right">$0</td><td align="left"><a href="https://api.frankfurter.dev/v2/">API</a></td><td align="left"><a href="https://frankfurter.dev/">API</a> · <a href="https://frankfurter.dev/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#sec-edgar">SEC EDGAR Data APIs</a></td><td align="right"><a href="./generated/evaluations.md#comparison-33be83cbd5a7">100%</a></td><td align="right">111.5k</td><td align="right">$0.0100</td><td align="right">$0</td><td align="left"><a href="https://data.sec.gov/">API</a></td><td align="left"><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">API</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#tracefour">Tracefour</a></td><td align="right"><a href="./generated/evaluations.md#comparison-f170f4b6c34f">0%</a></td><td align="right">107.3k</td><td align="right">$0.0071</td><td align="right">$0</td><td align="left"><a href="https://tracefour.com/v1">API</a></td><td align="left"><a href="https://tracefour.com/api-docs">API</a> · <a href="https://tracefour.com/api-docs/mcp">MCP</a></td></tr>
@@ -699,15 +724,16 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 | 服务 | 测试配置 | 起点 |
 | --- | --- | --- |
+| [ECB Data Portal API](./generated/evaluations.md#comparison-36e32b17588d) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
+| [Eurostat Data API](./generated/evaluations.md#comparison-36e32b17588d) | 1.18.35 · deepseek-flash / high · 10 分钟 | 接入准备: [object Object] |
 | [Alpha Vantage](./generated/evaluations.md#comparison-29077cd73ecd) | 1.18.35 · deepseek-flash / high · 5 分钟 | 接入准备: controller-registered ordinary free API key; same existing account for REST and MCP |
 | [SEC EDGAR Data APIs](./generated/evaluations.md#comparison-33be83cbd5a7) | 1.18.35 · deepseek-flash / high · 5 分钟 | 接入准备: none; contact identity only |
-| [ECB Data Portal API](./generated/evaluations.md#comparison-8a11046c9744) | 1.18.35 · deepseek-flash / high · 5 分钟 | 未预供账号或密钥 |
 | [Frankfurter](./generated/evaluations.md#comparison-8a11046c9744) | 1.18.35 · deepseek-flash / high · 5 分钟 | 未预供账号或密钥 |
 | [Bargo Congress Trades API](./generated/evaluations.md#comparison-a3477334d9b4) | 1.18.35 · glm-5.3-flash / high · 15 分钟 | 未预供账号或密钥 |
 | [CapitolExposed](./generated/evaluations.md#comparison-a3477334d9b4) | 1.18.35 · glm-5.3-flash / high · 15 分钟 | 未预供账号或密钥 |
 | [Tracefour](./generated/evaluations.md#comparison-f170f4b6c34f) | 1.18.29 · glm-5.3-flash / high · 10 分钟 | 未预供账号或密钥 |
 
-**测试配置：** 2026-09-15 – 2026-10-08（UTC）
+**测试配置：** 2026-09-15 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -891,18 +917,36 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 
 <a id="services-web-search-data-financial-data-macro"></a>
 
-##### 宏观经济指标 (5)
+##### 宏观经济指标 (6)
 
 <table width="100%">
-<thead><tr><th width="26%" align="left">服务</th><th width="54%" align="left">用途</th><th width="20%" align="left">接入资料</th></tr></thead>
+<thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="left">Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a> · <a href="https://mcp.alphavantage.co/">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="left">European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.</td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="left">Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="left">Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a> · <a href="https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="left">Country-level economic and development indicators through the public Indicators API.</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#ecb-data">ECB Data Portal API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-70023b6902c1">100%</a></td><td align="right">505.5k</td><td align="right">$0.03</td><td align="right">$0</td><td align="left"><a href="https://data-api.ecb.europa.eu/service/">API</a></td><td align="left"><a href="https://data.ecb.europa.eu/help/api/data-examples">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eurostat">Eurostat Data API</a></td><td align="right"><a href="./generated/evaluations.md#comparison-70023b6902c1">100%</a></td><td align="right">255.6k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/">API</a></td><td align="left"><a href="https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#alpha-vantage">Alpha Vantage</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://www.alphavantage.co/documentation/">API</a> · <a href="https://mcp.alphavantage.co/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#eodhd">EODHD</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://eodhd.com/financial-apis/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#fred">FRED / ALFRED</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://fred.stlouisfed.org/docs/api/fred/">API</a> · <a href="https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#world-bank-data">World Bank Indicators API</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation">API</a></td></tr>
 </tbody>
 </table>
+
+<details>
+<summary>测了什么，怎么测的</summary>
+
+**任务：我在整理德国和法国的通胀对照表。请通过指定服务取得两国 2023 和 2024 年的全项目 HICP 年度平均涨幅，做成可继续分析的 CSV，并说明各国 2024 年比 2023 年回落了多少个百分点。附上可追溯的数据来源。**
+
+国家为德国和法国，年份为完整的 2023、2024 自然年；指标为全国全项目协调消费者价格指数 HICP 的年度平均变化率，未经季节或工作日调整，即该年全年平均指数相对上年全年平均指数的涨幅。不是各国本国 CPI、12 月同比、各月同比的简单平均或指数点位。使用查询时现行公布的数据，保留一位小数，率的单位为 %，两年率的差使用百分点。保存一份 CSV，清楚标注国家、年份、指标和单位；长表或宽表均可。简短答复列出各国的回落幅度，并给出所用数据的来源链接、可定位的指标或系列信息和查询日期；若所用系列附有影响这些数值的修订或口径差异，说明该差异。数据须实际通过本轮指定服务及入口取得，可自行查该服务官方文档；不得用另一服务、搜索结果或模型记忆代替数据查询。
+
+完成标准：真实指定服务响应的国家、年份、全项目范围、年度平均率口径和单位符合材料，四个率与事前冻结官方参考相符；CSV 可用且数值正确，两个百分点差计算及文字解释正确，来源可以定位实际所用数据。存在经官方资料证实的版本变化时按事前冻结的参考冲突办法处理，不把旧发布稿或另一候选的答案自动视为当前真值。
+
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-10（UTC） · 接入准备: [object Object]
+
+部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
+
+[任务定义](./data/experiments/tasks/financial-macro.md) · [完整运行记录与证据](./generated/evaluations.md)
+
+</details>
 
 <a id="services-productivity-storage"></a>
 
@@ -977,7 +1021,7 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#grist">Grist</a></td><td align="right"><a href="./generated/evaluations.md#comparison-5bcdeb33cbc4">100%</a></td><td align="right">357.7k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://docs.getgrist.com/api/mcp">MCP</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#grist">Grist</a></td><td align="right"><a href="./generated/evaluations.md#comparison-06b05d18818d">100%</a></td><td align="right">574.9k</td><td align="right">$0.03</td><td align="right">$0</td><td align="left"><a href="https://docs.getgrist.com/api/mcp">MCP</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
 </tbody>
 </table>
 
@@ -990,7 +1034,7 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 
 完成标准：完成必要接入，通过指定服务及入口新建本轮独立空容器，并重新读取同一远端容器的元数据确认可访问；链接和标识一致，必要配置可供新会话复用且不泄露秘密。未预建业务字段、记录或答案；实际账号来源、自助步骤、人工门槛和免费限制如实说明。只有注册、安装、工具列表、创建回执或本地模拟不足以证明接通。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC） · 已预供服务凭据
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 2026-10-10（UTC） · 接入准备: [object Object]
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -1003,8 +1047,8 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
+<tr><td align="left"><a href="./generated/services.md#grist">Grist / hosted-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-63bc5ae3ece1">100%</a></td><td align="right">1.16M</td><td align="right">$0.05</td><td align="right">$0</td><td align="left"><a href="https://docs.getgrist.com/api/mcp">MCP</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#grist">Grist / hosted-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-892c10c8ee63">100%</a></td><td align="right">200.6k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://docs.getgrist.com/api/mcp">MCP</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#grist">Grist / hosted-mcp</a></td><td align="right"><a href="./generated/evaluations.md#comparison-cb6f4b024594">100%</a></td><td align="right">769.0k</td><td align="right">$0.03</td><td align="right">$0</td><td align="left"><a href="https://docs.getgrist.com/api/mcp">MCP</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#grist">Grist / rest-api</a></td><td align="right"><a href="./generated/evaluations.md#comparison-ab4e4c0d9054">100%</a></td><td align="right">540.8k</td><td align="right">—</td><td align="right">$0</td><td align="left"><a href="https://support.getgrist.com/api/">API</a></td><td align="left"><a href="https://support.getgrist.com/api/">API</a> · <a href="https://support.getgrist.com/rest-api/">SDK</a> · <a href="https://support.getgrist.com/mcp/">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#notion">Notion</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8cc2ab7b2dcd">100%</a></td><td align="right">215.5k</td><td align="right">$0.75</td><td align="right">$0</td><td align="left"><a href="https://developers.notion.com/reference/intro">API</a></td><td align="left"><a href="https://developers.notion.com/guides/get-started/internal-connections">API</a> · <a href="https://github.com/makenotion/notion-sdk-js">SDK</a> · <a href="https://developers.notion.com/cli/get-started/overview">CLI</a> · <a href="https://developers.notion.com/guides/mcp/get-started-with-mcp">MCP</a></td></tr>
 <tr><td align="left"><a href="./generated/services.md#airtable">Airtable</a></td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="right">—</td><td align="left">—</td><td align="left"><a href="https://airtable.com/developers/web/api/introduction">API</a></td></tr>
@@ -1025,14 +1069,14 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 | 把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。<br>读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。 | 远端表恰好三项：确认场地/林青/2026-09-15/未完成、整理书单/周舟/2026-09-16/已完成、制作海报/陈禾/2026-09-20/未完成；答复的链接指向该表，未完成清单与远端一致。总控在执行结束后，以自己的可信只读 API 请求重新取得本轮新表的元数据、字段和全部记录，冻结原始回执、读取时间、资源对应关系及哈希；独立验收 Agent 核对脱敏回执、用户答复和冻结参考，不继承执行凭据、不执行被测者的代码。字段命名与操作顺序自由。 |
 | 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。<br>读书会筹备会记录（2026年9月8日）：林青负责确认场地，9月15日前搞定；周舟负责整理书单，9月16日前完成；陈禾负责制作海报，原定9月18日完成。这三件事开会时都还没做完。会后补充：周舟说书单已经整理好了，海报的截止时间改到9月20日，其他安排不变。 | 远端表中恰好包含三项行动、负责人和最终截止日期正确、书单已完成且另两项未完成；答复给出该表链接并正确列出两项未完成事项及日期；准备者通过服务API独立读取确认。允许自由选择字段与操作顺序，不要求先写入旧状态或输出证据文件 |
 
-| 服务 | 本次任务 | 测试配置 |
-| --- | --- | --- |
-| [Grist / MCP](./generated/evaluations.md#comparison-cb6f4b024594) | 我和室友按一人一半分摊共同支出。请把材料里的 10 月账目做成在线账本，保留每笔日期、用途、付款人和人民币金额，并在表里显示各自已付、应分摊金额，以及谁还需补给谁多少钱。以后追加账目或修正金额时，汇总要自动更新，不用再找 Agent 或运行本地脚本。给我私人表格链接、当前结算数和一句话说明在哪里继续记账；不要实际转账、邀请或通知任何人。 | 1.18.35 · deepseek-flash / high · 10 分钟 |
-| [Grist / MCP](./generated/evaluations.md#comparison-892c10c8ee63) | 把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。 | 1.18.35 · deepseek-flash / high · 10 分钟 |
-| [Notion](./generated/evaluations.md#comparison-8cc2ab7b2dcd) | 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 |
-| [Grist / API](./generated/evaluations.md#comparison-ab4e4c0d9054) | 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 |
+| 服务 | 本次任务 | 测试配置 | 起点 |
+| --- | --- | --- | --- |
+| [Grist / MCP](./generated/evaluations.md#comparison-63bc5ae3ece1) | 我和室友按一人一半分摊共同支出。请把材料里的 10 月账目做成在线账本，保留每笔日期、用途、付款人和人民币金额，并在表里显示各自已付、应分摊金额，以及谁还需补给谁多少钱。以后追加账目或修正金额时，汇总要自动更新，不用再找 Agent 或运行本地脚本。给我私人表格链接、当前结算数和一句话说明在哪里继续记账；不要实际转账、邀请或通知任何人。 | 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 | 接入准备: [object Object] |
+| [Grist / MCP](./generated/evaluations.md#comparison-892c10c8ee63) | 把附件里的读书会会议待办整理成在线任务表，包含负责人、截止日期和完成状态。给我链接，并列出未完成事项、负责人和截止日期。 | 1.18.35 · deepseek-flash / high · 10 分钟 | 已预供服务凭据 |
+| [Notion](./generated/evaluations.md#comparison-8cc2ab7b2dcd) | 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 | 已预供服务凭据 |
+| [Grist / API](./generated/evaluations.md#comparison-ab4e4c0d9054) | 帮我把这份读书会会议记录里的待办整理成在线任务表，给我链接，再告诉我还有哪些没完成、各自什么时候到期。 | codex-cli 0.153.4 · gpt-6-astra / xhigh · 10 分钟 | 已预供服务凭据 |
 
-**测试配置：** 2026-09-08 – 2026-10-08（UTC） · 已预供服务凭据
+**测试配置：** 2026-09-08 – 2026-10-10（UTC）
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -1226,8 +1270,8 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7a5fd0fd8e1a">100%</a></td><td align="right">185.8k</td><td align="right">$0.01</td><td align="right">—</td><td align="left"><a href="https://api.github.com/advisories">API</a></td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#osv">OSV.dev</a></td><td align="right"><a href="./generated/evaluations.md#comparison-7a5fd0fd8e1a">100%</a></td><td align="right">178.5k</td><td align="right">$0.01</td><td align="right">—</td><td align="left"><a href="https://api.osv.dev/v1/query">API</a></td><td align="left"><a href="https://google.github.io/osv.dev/quickstart/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="right"><a href="./generated/evaluations.md#comparison-1a93823643b5">100%</a></td><td align="right">213.7k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.github.com/advisories">API</a></td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#osv">OSV.dev</a></td><td align="right"><a href="./generated/evaluations.md#comparison-1a93823643b5">100%</a></td><td align="right">151.1k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.osv.dev/v1/query">API</a></td><td align="left"><a href="https://google.github.io/osv.dev/quickstart/">API</a></td></tr>
 </tbody>
 </table>
 
@@ -1240,7 +1284,7 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 
 完成标准：按指定方式完成必要安装、认证和配置，实际响应含可识别的公告及关联包，答复与响应一致；配置可供新会话复用且不泄露秘密。无需账号不强行注册，已有账号不冒充本轮自助注册。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 5 分钟 · 2026-10-08（UTC） · 接入准备: none; anonymous public advisory API, no account/email/token/payment supplied
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 2026-10-10（UTC） · 接入准备: [object Object]
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 
@@ -1253,8 +1297,8 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 <table width="100%">
 <thead><tr><th width="26%" align="left">服务</th><th width="12%" align="right">完成率</th><th width="11%" align="right">Token</th><th width="11%" align="right">模型费用</th><th width="11%" align="right">服务费用</th><th width="9%" align="left">测试方式</th><th width="20%" align="left">接入资料</th></tr></thead>
 <tbody>
-<tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="right"><a href="./generated/evaluations.md#comparison-644e634b8512">100%</a></td><td align="right">75.8k</td><td align="right">$0.0076</td><td align="right">$0</td><td align="left"><a href="https://api.github.com/advisories">API</a></td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
-<tr><td align="left"><a href="./generated/services.md#osv">OSV.dev</a></td><td align="right"><a href="./generated/evaluations.md#comparison-644e634b8512">100%</a></td><td align="right">201.0k</td><td align="right">$0.02</td><td align="right">$0</td><td align="left"><a href="https://api.osv.dev/v1/query">API</a></td><td align="left"><a href="https://google.github.io/osv.dev/quickstart/">API</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#github">GitHub</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8e6422c28f03">100%</a></td><td align="right">86.3k</td><td align="right">$0.0093</td><td align="right">$0</td><td align="left"><a href="https://api.github.com/advisories">API</a></td><td align="left"><a href="https://docs.github.com/en/rest/quickstart">API</a> · <a href="https://github.com/octokit">SDK</a> · <a href="https://cli.github.com">CLI</a> · <a href="https://github.com/github/github-mcp-server">MCP</a></td></tr>
+<tr><td align="left"><a href="./generated/services.md#osv">OSV.dev</a></td><td align="right"><a href="./generated/evaluations.md#comparison-8e6422c28f03">100%</a></td><td align="right">198.0k</td><td align="right">$0.01</td><td align="right">$0</td><td align="left"><a href="https://api.osv.dev/v1/query">API</a></td><td align="left"><a href="https://google.github.io/osv.dev/quickstart/">API</a></td></tr>
 </tbody>
 </table>
 
@@ -1267,7 +1311,7 @@ Apple Inc. / AAPL 与 Microsoft / MSFT；各公司自身的 2025 财年全年合
 
 完成标准：真实查询指定服务，答复逐条正确判断给定包版本是否匹配两条告警，修复版本属于所要求的 5.2.x 分支，最低升级边界正确；结论与实际服务记录或从记录可追溯的维护者引用链相符，并由事前独立取得的维护者发布参考核对。来源链接能支持对应判断，不将未命中当作不受影响，不把本题结论扩大为全部漏洞已修复或应用不可利用。
 
-**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-08（UTC） · 接入准备: none; anonymous public advisory API, no account/email/token/payment supplied
+**测试配置：** 1.18.35 · deepseek-flash / high · 10 分钟 · 独立验收可参考同期 2 份同题答案 · 2026-10-10（UTC） · 接入准备: [object Object]
 
 部分记录未公开主机信息或启动器哈希；具体环境与限制见完整记录。
 

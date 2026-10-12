@@ -7,9 +7,88 @@
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
 
+<a id="web-search-data-web-extraction"></a>
+
+## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction）
+
+### web-extraction-uk-holidays-001 / v1
+
+我在整理 2027 年英格兰和威尔士的个人日程。请通过指定网页提取服务，从材料里的 GOV.UK 页面取得该地区该年的全部银行假日，做成按日期排序的 CSV，包含日期和网页上的完整英文假日名称，并给我文件和官方来源链接。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | 2026-10-10T12:47:27.351738+00:00 | 1.18.35 / deepseek-flash / high | 128255 / 116352 / 4778 | 27.532195s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | 2026-10-10T12:47:05.623799+00:00 | 1.18.35 / deepseek-flash / high | 90328 / 79872 / 2223 | 17.517711s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json) | 2026-10-10T12:44:54.304564+00:00 | 1.18.35 / deepseek-flash / high | 104866 / 94464 / 2219 | 17.101687s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json) | 2026-10-10T12:44:28.508524+00:00 | 1.18.35 / deepseek-flash / high | 218922 / 188800 / 2704 | 22.163876s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json) | 2026-10-10T12:41:31.146106+00:00 | 1.18.35 / deepseek-flash / high | 260146 / 245376 / 12875 | 88.86881s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json) | 2026-10-10T12:41:11.606040+00:00 | 1.18.35 / deepseek-flash / high | 100092 / 85632 / 1892 | 15.642529s | 0 | 0 |
+
+### web-extraction-holidays-001 / v1
+
+我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json) | 2026-10-10T12:25:54.824382+00:00 | 1.18.35 / deepseek-flash / high | 121210 / 110720 / 3412 | 23.452465s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json) | 2026-10-10T12:25:33.901912+00:00 | 1.18.35 / deepseek-flash / high | 64592 / 55552 / 2197 | 16.747364s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json) | 2026-10-10T12:24:16.239042+00:00 | 1.18.35 / deepseek-flash / high | 73855 / 64896 / 1569 | 15.166945s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json) | 2026-10-10T12:23:30.391910+00:00 | 1.18.35 / deepseek-flash / high | 449037 / 424064 / 6953 | 42.0615s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json) | 2026-10-10T12:22:06.217303+00:00 | 1.18.35 / deepseek-flash / high | 200866 / 186880 / 4139 | 30.618211s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json) | 2026-10-10T12:21:37.822851+00:00 | 1.18.35 / deepseek-flash / high | 124620 / 113152 / 3531 | 23.938179s | 0 | 0 |
+| exa / public-mcp | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:48.131642+00:00 | 1.18.35 / deepseek-flash / high | 307477 / 290048 / 5337 | 38.131958s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/firecrawl-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:46.370512+00:00 | 1.18.35 / deepseek-flash / high | 260900 / 237312 / 3282 | 28.302448s | 0 | 0 |
+
+### web-extraction-scanned-table-001 / v1
+
+我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| exa / public-mcp | web-extraction-scanned-table-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [not_completed](../data/experiments/evaluations/exa-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08T20:14:50.718553+00:00 | 1.18.35 / deepseek-flash / high | 709413 / 682112 / 36074 | 192.427232s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-scanned-table-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08T20:14:49.046726+00:00 | 1.18.35 / deepseek-flash / high | 359102 / 337152 / 6593 | 57.05532s | unknown | 0 |
+
+### web-extraction-pdf-hikes-001 / v1
+
+我在整理锡安国家公园的徒步候选清单。请从附件指定的官方 PDF 中，把 Hiking Guide 表里 EASY 一组的全部步道做成 CSV，保留英文名称、往返距离、平均用时和海拔变化，按原表顺序排列，给我文件和来源链接。只整理这份指南，不判断目前是否开放或适合安全出行。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| exa / public-mcp | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:42.102239+00:00 | 1.18.35 / deepseek-flash / high | 245616 / 227072 / 13246 | 72.610281s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:40.401656+00:00 | 1.18.35 / deepseek-flash / high | 311181 / 285952 / 6369 | 44.747639s | 0 | 0 |
+
+<a id="web-search-data-web-extraction"></a>
+
+## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction） · 接入测试
+
+### web-extraction-access-001 / v1
+
+帮我接通这个网页内容提取服务，通过指定方式读取附件里的示例网页，给我页面标题和一句内容概述，确认能用；保存后续调用所需配置，并说明接入步骤和遇到的门槛。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 2026-10-10T12:19:44.589591+00:00 | 1.18.35 / deepseek-flash / high | 248941 / 220800 / 7432 | 43.066082s | 0 | 0 |
+| jina / reader-api | web-extraction-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 2026-10-10T12:19:15.921314+00:00 | 1.18.35 / deepseek-flash / high | 111655 / 91264 / 3809 | 24.489431s | 0 | 0 |
+| exa / public-mcp | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275433+00:00 | 1.18.35 / deepseek-flash / high | 161115 / 146048 / 4641 | 33.987788s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275071+00:00 | 1.18.35 / deepseek-flash / high | 183635 / 161408 / 3163 | 23.34858s | 0 | 0 |
+| jina / reader-api | web-extraction-access-001 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | 2026-10-08T13:09:26.421153+00:00 | 1.18.35 / deepseek-flash / high | 110620 / 102400 / 5106 | 202.576397s | unknown | 0 |
+| exa / public-mcp | web-extraction-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-extraction-access-ds41-r1.json) | 2026-10-08T13:02:53.059860+00:00 | 1.18.35 / deepseek-flash / high | 161201 / 151680 / 3629 | 30.026639s | 0 | 0 |
+| jina / reader-api | web-extraction-access-001 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/jina-access-ds41-r1.json) | 2026-10-08T13:02:53.059652+00:00 | 1.18.35 / deepseek-flash / high | unknown | 89.179861s | unknown | 0 |
+| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/firecrawl-access-ds41-r1.json) | 2026-10-08T13:02:53.059342+00:00 | 1.18.35 / deepseek-flash / high | 105719 / 84736 / 2019 | 22.199907s | 0 | 0 |
+
 <a id="databases-hosted-relational"></a>
 
 ## 数据库 / 托管关系型数据库（databases/hosted-relational）
+
+### database-restore-001 / v2
+
+帮我给个人待办应用做一次备份恢复演练：把源库导出成可下载留存的逻辑备份，在同一服务中新建一个独立空数据库，用这份备份实际恢复，保持源库不变。恢复结束后重新连接新库核对，交付备份、简短恢复方法、新库位置、各表行数和核对结果，并说明新库的免费或到期限制。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | 2026-10-10T12:11:20.208841+00:00 | 1.18.35 / deepseek-flash / high | 542981 / 526592 / 12859 | 78.668031s | 0 | 0 |
+| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json) | 2026-10-10T12:05:09.772016+00:00 | 1.18.35 / deepseek-flash / high | 242397 / 226560 / 9960 | 65.522535s | 0 | 0 |
+| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json) | 2026-10-10T11:56:52.093416+00:00 | 1.18.35 / deepseek-flash / high | 546854 / 530048 / 14292 | 94.011462s | 0 | 0 |
 
 ### database-atomic-import-001 / v1
 
@@ -51,29 +130,6 @@
 | turso / platform-api | database-todos-001 (v1) | provided: TURSO_API_TOKEN, TURSO_ORGANIZATION | legacy | [completed](../data/experiments/evaluations/codex-20260907T113506.422646Z-turso.json) | 2026-09-07T11:35:06.452325+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 755366 / 687616 / 12234 | 457.78s | 0 | 0 |
 | neon / ephemeral-api | database-todos-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T112258.549053Z-neon.json) | 2026-09-07T11:22:58.558715+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 452623 / 402560 / 12790 | 456.342s | 0 | 0 |
 
-<a id="databases-hosted-relational"></a>
-
-## 数据库 / 托管关系型数据库（databases/hosted-relational） · 接入测试
-
-### database-access-001 / v1
-
-帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| turso / platform-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665696+00:00 | 1.18.35 / deepseek-flash / high | 224623 / 211328 / 7991 | 50.403294s | 0 | 0 |
-| neon / claimable-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665333+00:00 | 1.18.35 / deepseek-flash / high | 161771 / 149632 / 5465 | 40.8719s | unknown | 0 |
-| turso / platform-api | database-access-001 (v1) | existing authorized Turso management account | natural | [completed](../data/experiments/evaluations/turso-restore-mirror-access-ds41-r1.json) | 2026-10-08T16:39:23.940242+00:00 | 1.18.35 / deepseek-flash / high | 431148 / 412928 / 10242 | 79.603005s | 0 | 0 |
-| neon / claimable-api | database-access-001 (v1) | none initially; generated anonymous Claimable project credentials | natural | [completed](../data/experiments/evaluations/neon-restore-mirror-access-ds41-r1.json) | 2026-10-08T16:39:23.940055+00:00 | 1.18.35 / deepseek-flash / high | 234599 / 219264 / 5665 | 51.414486s | 0 | 0 |
-| neon / claimable-api | database-access-001 (v1) | none initially; generated anonymous Claimable project credentials | natural | [not_completed](../data/experiments/evaluations/neon-restore-access-ds41-r1.json) | 2026-10-08T16:27:54.812617+00:00 | 1.18.35 / deepseek-flash / high | unknown | 290.065099s | 0 | 0 |
-| turso / platform-api | database-access-001 (v1) | existing authorized Turso management account | natural | [completed](../data/experiments/evaluations/turso-restore-access-ds41-r1.json) | 2026-10-08T16:27:54.812377+00:00 | 1.18.35 / deepseek-flash / high | 312145 / 296448 / 11557 | 83.658056s | 0 | 0 |
-| neon / claimable-api | database-access-001 (v1) | none initially; executor obtains anonymous scoped test credentials | natural | [completed](../data/experiments/evaluations/neon-access-ds41-r1.json) | 2026-10-08T12:36:09.493852+00:00 | 1.18.35 / deepseek-flash / high | 261313 / 247040 / 5486 | 197.823139s | 0 | 0 |
-| turso / platform-api | database-access-001 (v1) | pre-existing Turso management account | natural | [completed](../data/experiments/evaluations/turso-access-ds41-r1.json) | 2026-10-08T12:36:09.493565+00:00 | 1.18.35 / deepseek-flash / high | 234818 / 221056 / 7475 | 68.505025s | 0 | 0 |
-
-**主持复核补充说明（原判定不变）：**
-
-- [neon-restore-access-ds41-r1](../data/experiments/evaluations/neon-restore-access-ds41-r1.json)：主持复核补充，原独立验收判定不变：匿名身份和项目已创建，但数据库凭据获取、真实只读SQL查询及可复用配置保存均未完成，不能归为只缺最终答复。原300秒批次超时；后来镜像环境的成功属于另一批条件，不能补写本次结果，也不能把旧次未完成解释为Neon不支持数据库访问。
-
 <a id="productivity-storage-collaborative-tables"></a>
 
 ## 办公与协作 / 协作表格（productivity-storage/collaborative-tables）
@@ -84,6 +140,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | 2026-10-10T11:54:48.399813+00:00 | 1.18.35 / deepseek-flash / high | 857364 / 826496 / 16284 | 194.479349s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | 2026-10-10T11:52:53.351130+00:00 | 1.18.35 / deepseek-flash / high | 630785 / 600960 / 16553 | 111.86674s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json) | 2026-10-10T11:32:56.511304+00:00 | 1.18.35 / deepseek-flash / high | 731071 / 694272 / 20262 | 152.553492s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json) | 2026-10-10T11:29:50.807516+00:00 | 1.18.35 / deepseek-flash / high | 877632 / 848000 / 16050 | 181.513307s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json) | 2026-10-10T11:17:41.196600+00:00 | 1.18.35 / deepseek-flash / high | 1689222 / 1577472 / 28530 | 260.676554s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json) | 2026-10-10T11:14:19.267161+00:00 | 1.18.35 / deepseek-flash / high | 1167332 / 1105152 / 22064 | 198.389247s | 0 | 0 |
 | grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | 2026-10-08T20:47:10.577404+00:00 | 1.18.35 / deepseek-flash / high | 754675 / 721280 / 14319 | 86.478336s | 0 | 0 |
 | grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [not_completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | 2026-10-08T20:44:03.248139+00:00 | 1.18.35 / deepseek-flash / high | unknown | 177.21403s | 0 | 0 |
 
@@ -118,36 +180,200 @@
 | notion / rest-api | collaborative-tables-001 (v1) | provided: NOTION_API_TOKEN, NOTION_PARENT_PAGE_ID | legacy | [completed](../data/experiments/evaluations/codex-20260908T032850.330773Z-notion.json) | 2026-09-08T03:28:50.359616+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 471247 / 425344 / 12291 | 463.678s | 0 | 0 |
 | grist / rest-api | collaborative-tables-001 (v1) | provided: GRIST_API_KEY, GRIST_WORKSPACE_ID | legacy | [completed](../data/experiments/evaluations/codex-20260908T032113.556233Z-grist.json) | 2026-09-08T03:21:13.580494+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 769817 / 708608 / 11455 | 478.476s | 0 | 0 |
 
-<a id="web-search-data-web-extraction"></a>
+<a id="databases-hosted-relational"></a>
 
-## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction）
+## 数据库 / 托管关系型数据库（databases/hosted-relational） · 接入测试
 
-### web-extraction-scanned-table-001 / v1
+### database-access-001 / v1
 
-我在把一份旧扫描手册整理成可检索的表格。请从材料指定的 TTB Table No. 4 中，把 Proof 从 1.0 到 2.0 的这一小段转成 CSV，保留两种 gallons per pound 数值，给我文件和官方来源链接。只抄录原表，不做计税或其他业务计算。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| exa / public-mcp | web-extraction-scanned-table-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [not_completed](../data/experiments/evaluations/exa-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08T20:14:50.718553+00:00 | 1.18.35 / deepseek-flash / high | 709413 / 682112 / 36074 | 192.427232s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-scanned-table-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08T20:14:49.046726+00:00 | 1.18.35 / deepseek-flash / high | 359102 / 337152 / 6593 | 57.05532s | unknown | 0 |
-
-### web-extraction-pdf-hikes-001 / v1
-
-我在整理锡安国家公园的徒步候选清单。请从附件指定的官方 PDF 中，把 Hiking Guide 表里 EASY 一组的全部步道做成 CSV，保留英文名称、往返距离、平均用时和海拔变化，按原表顺序排列，给我文件和来源链接。只整理这份指南，不判断目前是否开放或适合安全出行。
+帮我通过指定方式接通这个数据库服务，准备一个本轮专用的空远程测试数据库，做一次不写入业务数据的查询确认可用，并保存后续连接配置；说明接入步骤、人工门槛和免费或到期限制。
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| exa / public-mcp | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:42.102239+00:00 | 1.18.35 / deepseek-flash / high | 245616 / 227072 / 13246 | 72.610281s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:40.401656+00:00 | 1.18.35 / deepseek-flash / high | 311181 / 285952 / 6369 | 44.747639s | 0 | 0 |
+| turso / platform-api | database-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 2026-10-10T11:31:14.699283+00:00 | 1.18.35 / deepseek-flash / high | 225237 / 211456 / 7088 | 55.989322s | 0 | 0 |
+| turso / platform-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665696+00:00 | 1.18.35 / deepseek-flash / high | 224623 / 211328 / 7991 | 50.403294s | 0 | 0 |
+| neon / claimable-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665333+00:00 | 1.18.35 / deepseek-flash / high | 161771 / 149632 / 5465 | 40.8719s | unknown | 0 |
+| turso / platform-api | database-access-001 (v1) | existing authorized Turso management account | natural | [completed](../data/experiments/evaluations/turso-restore-mirror-access-ds41-r1.json) | 2026-10-08T16:39:23.940242+00:00 | 1.18.35 / deepseek-flash / high | 431148 / 412928 / 10242 | 79.603005s | 0 | 0 |
+| neon / claimable-api | database-access-001 (v1) | none initially; generated anonymous Claimable project credentials | natural | [completed](../data/experiments/evaluations/neon-restore-mirror-access-ds41-r1.json) | 2026-10-08T16:39:23.940055+00:00 | 1.18.35 / deepseek-flash / high | 234599 / 219264 / 5665 | 51.414486s | 0 | 0 |
+| neon / claimable-api | database-access-001 (v1) | none initially; generated anonymous Claimable project credentials | natural | [not_completed](../data/experiments/evaluations/neon-restore-access-ds41-r1.json) | 2026-10-08T16:27:54.812617+00:00 | 1.18.35 / deepseek-flash / high | unknown | 290.065099s | 0 | 0 |
+| turso / platform-api | database-access-001 (v1) | existing authorized Turso management account | natural | [completed](../data/experiments/evaluations/turso-restore-access-ds41-r1.json) | 2026-10-08T16:27:54.812377+00:00 | 1.18.35 / deepseek-flash / high | 312145 / 296448 / 11557 | 83.658056s | 0 | 0 |
+| neon / claimable-api | database-access-001 (v1) | none initially; executor obtains anonymous scoped test credentials | natural | [completed](../data/experiments/evaluations/neon-access-ds41-r1.json) | 2026-10-08T12:36:09.493852+00:00 | 1.18.35 / deepseek-flash / high | 261313 / 247040 / 5486 | 197.823139s | 0 | 0 |
+| turso / platform-api | database-access-001 (v1) | pre-existing Turso management account | natural | [completed](../data/experiments/evaluations/turso-access-ds41-r1.json) | 2026-10-08T12:36:09.493565+00:00 | 1.18.35 / deepseek-flash / high | 234818 / 221056 / 7475 | 68.505025s | 0 | 0 |
 
-### web-extraction-holidays-001 / v1
+**主持复核补充说明（原判定不变）：**
 
-我想把官方假日表用于个人日历整理。请从附件给定的网页提取 2027 年假日安排，做成按日期排序的 CSV 文件，包含表中全部假日的日期、星期和英文名称；按网页列出的日期记录，并给我文件和来源链接。
+- [neon-restore-access-ds41-r1](../data/experiments/evaluations/neon-restore-access-ds41-r1.json)：主持复核补充，原独立验收判定不变：匿名身份和项目已创建，但数据库凭据获取、真实只读SQL查询及可复用配置保存均未完成，不能归为只缺最终答复。原300秒批次超时；后来镜像环境的成功属于另一批条件，不能补写本次结果，也不能把旧次未完成解释为Neon不支持数据库访问。
+
+<a id="productivity-storage-collaborative-tables"></a>
+
+## 办公与协作 / 协作表格（productivity-storage/collaborative-tables） · 接入测试
+
+### collaborative-tables-access-001 / v1
+
+帮我通过指定方式接通这个在线表格服务，新建一个本轮专用的空测试空间，读取它确认可用，并保存后续创建任务表所需的配置；给我空间链接，说明接入步骤、人工门槛和免费限制。
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| exa / public-mcp | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:48.131642+00:00 | 1.18.35 / deepseek-flash / high | 307477 / 290048 / 5337 | 38.131958s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/firecrawl-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:46.370512+00:00 | 1.18.35 / deepseek-flash / high | 260900 / 237312 / 3282 | 28.302448s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 2026-10-10T10:59:55.683547+00:00 | 1.18.35 / deepseek-flash / high | 564849 / 525824 / 10003 | 96.000939s | 0 | 0 |
+| grist / rest-api | collaborative-tables-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 2026-10-10T10:58:58.273194+00:00 | 1.18.35 / deepseek-flash / high | 269776 / 247936 / 6671 | 53.123937s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 2026-10-08T13:45:37.768748+00:00 | 1.18.35 / deepseek-flash / high | 350908 / 324352 / 6743 | 61.963463s | 0 | 1 |
+| grist / rest-api | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 2026-10-08T13:42:01.154679+00:00 | 1.18.35 / deepseek-flash / high | 106882 / 91904 / 4125 | 34.159175s | 0 | 0 |
+
+<a id="web-search-data-geocoding"></a>
+
+## 搜索与数据获取 / 地理编码（web-search-data/geocoding）
+
+### geocoding-venue-001 / v1
+
+我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| nominatim / public-search-api | geocoding-venue-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | 2026-10-10T10:34:46.885180+00:00 | 1.18.35 / deepseek-flash / high | 69909 / 60928 / 3467 | 42.606201s | 0 | 0 |
+| photon / public-search-api | geocoding-venue-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-venue-001-ds41-r1.json) | 2026-10-08T15:24:18.918504+00:00 | 1.18.35 / deepseek-flash / high | 95519 / 86400 / 4760 | 69.526803s | 0 | 0 |
+
+<a id="web-search-data-geocoding"></a>
+
+## 搜索与数据获取 / 地理编码（web-search-data/geocoding） · 接入测试
+
+### geocoding-access-001 / v1
+
+帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| nominatim / public-search-api | geocoding-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 2026-10-10T10:32:56.390237+00:00 | 1.18.35 / deepseek-flash / high | 184884 / 174336 / 6162 | 60.509774s | 0 | 0 |
+| nominatim / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665691+00:00 | 1.18.35 / deepseek-flash / high | unknown | 290.065141s | 0 | 0 |
+| photon / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665425+00:00 | 1.18.35 / deepseek-flash / high | 248700 / 229248 / 4848 | 75.763506s | 0 | 0 |
+
+<a id="web-search-data-financial-data-macro"></a>
+
+## 搜索与数据获取 / 金融数据 / 宏观经济指标（web-search-data/financial-data/macro）
+
+### financial-macro-hicp-001 / v1
+
+我在整理德国和法国的通胀对照表。请通过指定服务取得两国 2023 和 2024 年的全项目 HICP 年度平均涨幅，做成可继续分析的 CSV，并说明各国 2024 年比 2023 年回落了多少个百分点。附上可追溯的数据来源。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | 2026-10-10T10:30:21.234133+00:00 | 1.18.35 / deepseek-flash / high | 250654 / 220160 / 6503 | 50.601165s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | 2026-10-10T10:30:14.518172+00:00 | 1.18.35 / deepseek-flash / high | 549376 / 514816 / 12797 | 92.550835s | 0 | 0 |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json) | 2026-10-10T10:27:09.388860+00:00 | 1.18.35 / deepseek-flash / high | 178678 / 167168 / 7808 | 46.921937s | 0 | 0 |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json) | 2026-10-10T10:26:42.754766+00:00 | 1.18.35 / deepseek-flash / high | 311595 / 297984 / 11592 | 73.290951s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json) | 2026-10-10T10:26:22.171020+00:00 | 1.18.35 / deepseek-flash / high | 676994 / 640512 / 14863 | 95.270234s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json) | 2026-10-10T10:26:01.924316+00:00 | 1.18.35 / deepseek-flash / high | 255367 / 239744 / 7201 | 61.095484s | 0 | 0 |
+
+<a id="developer-tools-dependency-advisories"></a>
+
+## 开发工具 / 依赖漏洞公告（developer-tools/dependency-advisories）
+
+### dependency-advisories-check-001 / v1
+
+我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | 2026-10-10T10:28:04.663462+00:00 | 1.18.35 / deepseek-flash / high | 80437 / 50688 / 3117 | 24.019067s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | 2026-10-10T10:28:04.106404+00:00 | 1.18.35 / deepseek-flash / high | 179581 / 157952 / 4763 | 35.486855s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json) | 2026-10-10T10:15:25.740862+00:00 | 1.18.35 / deepseek-flash / high | 59746 / 48640 / 2155 | 18.298031s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json) | 2026-10-10T10:15:13.772322+00:00 | 1.18.35 / deepseek-flash / high | 178054 / 159104 / 5823 | 35.267913s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json) | 2026-10-10T10:13:50.534707+00:00 | 1.18.35 / deepseek-flash / high | 109505 / 98304 / 3872 | 25.745011s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json) | 2026-10-10T10:13:01.629904+00:00 | 1.18.35 / deepseek-flash / high | 220018 / 203648 / 5721 | 45.781731s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:46.008530+00:00 | 1.18.35 / deepseek-flash / high | 72242 / 62336 / 3531 | 22.98942s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:44.313467+00:00 | 1.18.35 / deepseek-flash / high | 193502 / 166272 / 7536 | 167.099132s | 0 | 0 |
+
+<a id="web-search-data-financial-data"></a>
+
+## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
+
+### financial-access-001 / v1
+
+帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 2026-10-10T10:24:55.156781+00:00 | 1.18.35 / deepseek-flash / high | 337475 / 312960 / 7080 | 45.417219s | 0 | 0 |
+| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json) | 2026-10-10T10:24:22.362835+00:00 | 1.18.35 / deepseek-flash / high | 277135 / 249856 / 5371 | 37.371404s | 0 | 0 |
+| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json) | 2026-10-10T10:23:51.049072+00:00 | 1.18.35 / deepseek-flash / high | 406499 / 378112 / 8791 | 67.8282s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 2026-10-10T10:22:04.537228+00:00 | 1.18.35 / deepseek-flash / high | 228054 / 213632 / 9746 | 65.683655s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json) | 2026-10-10T10:20:55.002829+00:00 | 1.18.35 / deepseek-flash / high | 448872 / 430592 / 11245 | 94.762886s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json) | 2026-10-10T10:19:38.265768+00:00 | 1.18.35 / deepseek-flash / high | 232379 / 216448 / 7682 | 75.039493s | 0 | 0 |
+| alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:29:43.509122+00:00 | 1.18.35 / deepseek-flash / high | 552500 / 525184 / 12067 | 184.674383s | unknown | 0 |
+| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-rest-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:28:08.583876+00:00 | 1.18.35 / deepseek-flash / high | 184198 / 168704 / 4121 | 32.632337s | 0 | 0 |
+| alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-access-ds41-r1.json) | 2026-10-08T14:09:26.927480+00:00 | 1.18.35 / deepseek-flash / high | 565383 / 536448 / 11092 | 118.680959s | 0 | 0 |
+| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-rest-prices-access-ds41-r1.json) | 2026-10-08T14:07:21.955843+00:00 | 1.18.35 / deepseek-flash / high | 105161 / 95616 / 4568 | 33.809312s | 0 | 0 |
+| sec-edgar / data-api | financial-access-001 (v1) | none; contact identity only | natural | [completed](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 2026-10-08T12:14:13.175775+00:00 | 1.18.35 / deepseek-flash / high | 105820 / 97152 / 5675 | 40.119431s | 0 | 0 |
+| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key | natural | [completed](../data/experiments/evaluations/alpha-vantage-access-ds41-r1.json) | 2026-10-08T12:14:13.175298+00:00 | 1.18.35 / deepseek-flash / high | 81815 / 74112 / 2516 | 24.074587s | 0 | 0 |
+| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 2026-10-08T11:49:06.202214+00:00 | 1.18.35 / deepseek-flash / high | 110298 / 97024 / 2973 | 38.641535s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 2026-10-08T11:49:06.201856+00:00 | 1.18.35 / deepseek-flash / high | 120041 / 106624 / 3254 | 29.506871s | unknown | 0 |
+| capitol-exposed / data-api-keyless | financial-access-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 2026-10-08T07:24:16.929807+00:00 | 1.18.35 / glm-5.3-flash / high | 295856 / 269184 / 4643 | 169.698703s | 0 | unknown |
+| bargo-congress / congress-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 2026-10-08T07:24:13.769678+00:00 | 1.18.35 / glm-5.3-flash / high | 94365 / 74816 / 3151 | 121.069769s | 0 | 0 |
+| capitol-exposed / data-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15T09:14:32.838922+00:00 | 1.18.29 / glm-5.3-flash / high | 189737 / 172864 / 2746 | 138.671707s | 0 | 0 |
+| bargo-congress / congress-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15T09:07:26.717325+00:00 | 1.18.29 / glm-5.3-flash / high | 92193 / 73920 / 3609 | 157.266045s | 0 | 0 |
+| tracefour / data-api-keyless | financial-access-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/tracefour-access.json) | 2026-09-15T09:07:26.569219+00:00 | 1.18.29 / glm-5.3-flash / high | 103555 / 86272 / 3755 | 153.41522s | 0 | 0 |
+| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15T07:06:04.074344+00:00 | 1.18.29 / glm-5.3-flash / high | 84240 / 72512 / 2596 | 115.282949s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15T07:06:04.069023+00:00 | 1.18.29 / glm-5.3-flash / high | 216483 / 199488 / 5383 | 216.897575s | 0 | 0 |
+
+**主持复核补充说明（原判定不变）：**
+
+- [capitol-access-oc11835-r1](../data/experiments/evaluations/capitol-access-oc11835-r1.json)：主持复核补充，原独立验收判定不变：接入功能已验证，真实数据查询及配置复用成功。未完成源于超出本轮接入阶段最多返回5条记录的测试约束：累计返回7条，且交付统计不完整。这不是服务只支持5条，也不是其免费额度耗尽。
+
+<a id="web-search-data-public-holidays"></a>
+
+## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays）
+
+### public-holidays-berlin-001 / v1
+
+我在整理明年在柏林的个人日程。请通过指定服务查出 2027 年适用于德国柏林州的全部公共节假日，按日期列出日期和节日名称，给出总数并注明查询来源。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | 2026-10-10T10:21:59.784583+00:00 | 1.18.35 / deepseek-flash / high | 118894 / 105728 / 4497 | 39.883669s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | 2026-10-10T10:21:25.448974+00:00 | 1.18.35 / deepseek-flash / high | 139483 / 123264 / 4070 | 26.040938s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json) | 2026-10-10T10:19:10.005470+00:00 | 1.18.35 / deepseek-flash / high | 81428 / 69376 / 2079 | 20.091858s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json) | 2026-10-10T10:19:08.884306+00:00 | 1.18.35 / deepseek-flash / high | 169886 / 152960 / 4219 | 30.019275s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json) | 2026-10-10T10:09:50.239562+00:00 | 1.18.35 / deepseek-flash / high | 84292 / 72064 / 2449 | 25.096388s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json) | 2026-10-10T10:09:49.164684+00:00 | 1.18.35 / deepseek-flash / high | 135236 / 119040 / 3386 | 31.191577s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:57.472194+00:00 | 1.18.35 / deepseek-flash / high | 171236 / 151680 / 3112 | 30.480165s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:55.765485+00:00 | 1.18.35 / deepseek-flash / high | 153596 / 142208 / 5195 | 41.507746s | 0 | 0 |
+
+<a id="web-search-data-public-holidays"></a>
+
+## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays） · 接入测试
+
+### public-holidays-access-001 / v1
+
+帮我接通这个公共节假日查询服务，通过指定方式做一次真实的小范围假日查询，确认能查到日期和名称，并保存后续查询所需配置；说明接入步骤和实际阻碍。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 2026-10-10T10:19:21.316812+00:00 | 1.18.35 / deepseek-flash / high | 153277 / 139264 / 5069 | 39.704667s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json) | 2026-10-10T10:17:36.583210+00:00 | 1.18.35 / deepseek-flash / high | 175004 / 160640 / 5248 | 38.025997s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 2026-10-10T10:17:05.494816+00:00 | 1.18.35 / deepseek-flash / high | 382457 / 362880 / 9611 | 72.395992s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json) | 2026-10-10T10:16:57.893519+00:00 | 1.18.35 / deepseek-flash / high | 227212 / 210688 / 7117 | 62.154503s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json) | 2026-10-10T10:08:10.378376+00:00 | 1.18.35 / deepseek-flash / high | 131318 / 119296 / 5547 | 41.688106s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json) | 2026-10-10T10:08:07.070436+00:00 | 1.18.35 / deepseek-flash / high | 324180 / 305408 / 6826 | 49.298446s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.723079+00:00 | 1.18.35 / deepseek-flash / high | 140980 / 129280 / 3990 | 29.527567s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.722814+00:00 | 1.18.35 / deepseek-flash / high | 60939 / 51840 / 2840 | 17.740838s | 0 | 0 |
+
+<a id="developer-tools-dependency-advisories"></a>
+
+## 开发工具 / 依赖漏洞公告（developer-tools/dependency-advisories） · 接入测试
+
+### dependency-advisories-access-001 / v1
+
+帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。
+
+| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
+| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 2026-10-10T10:15:52.090351+00:00 | 1.18.35 / deepseek-flash / high | 98749 / 87424 / 4884 | 29.984579s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 2026-10-10T10:12:57.488361+00:00 | 1.18.35 / deepseek-flash / high | 226603 / 211584 / 7632 | 46.598473s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json) | 2026-10-10T10:11:59.644453+00:00 | 1.18.35 / deepseek-flash / high | 153129 / 138880 / 6088 | 34.558481s | 0 | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json) | 2026-10-10T10:11:21.627798+00:00 | 1.18.35 / deepseek-flash / high | 178653 / 163328 / 6140 | 36.251539s | 0 | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json) | 2026-10-10T10:11:17.179648+00:00 | 1.18.35 / deepseek-flash / high | 158761 / 146944 / 5991 | 34.396285s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json) | 2026-10-10T10:10:45.960426+00:00 | 1.18.35 / deepseek-flash / high | 240729 / 225792 / 6901 | 41.764317s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466259+00:00 | 1.18.35 / deepseek-flash / high | 180078 / 166528 / 5675 | 36.125993s | unknown | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466021+00:00 | 1.18.35 / deepseek-flash / high | 172161 / 159232 / 6358 | 42.586955s | unknown | 0 |
 
 <a id="productivity-storage-qr-codes"></a>
 
@@ -201,49 +427,6 @@
 | valhalla / public-route-api | route-planning-access-001 (v1) | none; anonymous FOSSGIS public demos, no account/token/email/payment supplied | natural | [completed](../data/experiments/evaluations/valhalla-routing-access-ds41-r1.json) | 2026-10-08T19:17:01.066382+00:00 | 1.18.35 / deepseek-flash / high | 276819 / 255360 / 4440 | 30.104117s | unknown | 0 |
 | osrm / public-route-api | route-planning-access-001 (v1) | none; anonymous FOSSGIS public demos, no account/token/email/payment supplied | natural | [completed](../data/experiments/evaluations/osrm-routing-access-ds41-r1.json) | 2026-10-08T19:15:51.908424+00:00 | 1.18.35 / deepseek-flash / high | 55580 / 47488 / 2272 | 16.986749s | unknown | 0 |
 
-<a id="web-search-data-web-extraction"></a>
-
-## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction） · 接入测试
-
-### web-extraction-access-001 / v1
-
-帮我接通这个网页内容提取服务，通过指定方式读取附件里的示例网页，给我页面标题和一句内容概述，确认能用；保存后续调用所需配置，并说明接入步骤和遇到的门槛。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| exa / public-mcp | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275433+00:00 | 1.18.35 / deepseek-flash / high | 161115 / 146048 / 4641 | 33.987788s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275071+00:00 | 1.18.35 / deepseek-flash / high | 183635 / 161408 / 3163 | 23.34858s | 0 | 0 |
-| jina / reader-api | web-extraction-access-001 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | 2026-10-08T13:09:26.421153+00:00 | 1.18.35 / deepseek-flash / high | 110620 / 102400 / 5106 | 202.576397s | unknown | 0 |
-| exa / public-mcp | web-extraction-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-extraction-access-ds41-r1.json) | 2026-10-08T13:02:53.059860+00:00 | 1.18.35 / deepseek-flash / high | 161201 / 151680 / 3629 | 30.026639s | 0 | 0 |
-| jina / reader-api | web-extraction-access-001 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/jina-access-ds41-r1.json) | 2026-10-08T13:02:53.059652+00:00 | 1.18.35 / deepseek-flash / high | unknown | 89.179861s | unknown | 0 |
-| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/firecrawl-access-ds41-r1.json) | 2026-10-08T13:02:53.059342+00:00 | 1.18.35 / deepseek-flash / high | 105719 / 84736 / 2019 | 22.199907s | 0 | 0 |
-
-<a id="developer-tools-dependency-advisories"></a>
-
-## 开发工具 / 依赖漏洞公告（developer-tools/dependency-advisories）
-
-### dependency-advisories-check-001 / v1
-
-我在整理项目的两条依赖安全告警。请用指定服务逐条核对当前版本是否仍在公告的受影响版本范围内，给出 5.2.x 分支中各自最早的修复版本；告诉我仅处理这两条至少需要升级到哪个版本，并附上可核对的依据链接。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:46.008530+00:00 | 1.18.35 / deepseek-flash / high | 72242 / 62336 / 3531 | 22.98942s | 0 | 0 |
-| osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:44.313467+00:00 | 1.18.35 / deepseek-flash / high | 193502 / 166272 / 7536 | 167.099132s | 0 | 0 |
-
-<a id="developer-tools-dependency-advisories"></a>
-
-## 开发工具 / 依赖漏洞公告（developer-tools/dependency-advisories） · 接入测试
-
-### dependency-advisories-access-001 / v1
-
-帮我接通这个依赖漏洞公告服务，通过指定方式做一次真实查询，确认能取得可识别的公告记录，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466259+00:00 | 1.18.35 / deepseek-flash / high | 180078 / 166528 / 5675 | 36.125993s | unknown | 0 |
-| osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466021+00:00 | 1.18.35 / deepseek-flash / high | 172161 / 159232 / 6358 | 42.586955s | unknown | 0 |
-
 <a id="communication-mailboxes"></a>
 
 ## 通信 / 邮箱（communication/mailboxes） · 接入测试
@@ -260,32 +443,6 @@
 **主持复核补充说明（原判定不变）：**
 
 - [agentmail-mailbox-create-v2-ds41-r1](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json)：主持复核补充，原独立验收判定不变：本轮没有创建邮箱、读取收件箱或取得可复用凭据。测试服务器及容器访问API均收到CloudFront 403，说明该访问路径当时受阻，具体原因未确定，不能据此推断服务整体不可用。另有执行偏离：请求超过12次上限，4次注册POST与答复所称一次不符。
-
-<a id="web-search-data-public-holidays"></a>
-
-## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays）
-
-### public-holidays-berlin-001 / v1
-
-我在整理明年在柏林的个人日程。请通过指定服务查出 2027 年适用于德国柏林州的全部公共节假日，按日期列出日期和节日名称，给出总数并注明查询来源。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:57.472194+00:00 | 1.18.35 / deepseek-flash / high | 171236 / 151680 / 3112 | 30.480165s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:55.765485+00:00 | 1.18.35 / deepseek-flash / high | 153596 / 142208 / 5195 | 41.507746s | 0 | 0 |
-
-<a id="web-search-data-public-holidays"></a>
-
-## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays） · 接入测试
-
-### public-holidays-access-001 / v1
-
-帮我接通这个公共节假日查询服务，通过指定方式做一次真实的小范围假日查询，确认能查到日期和名称，并保存后续查询所需配置；说明接入步骤和实际阻碍。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.723079+00:00 | 1.18.35 / deepseek-flash / high | 140980 / 129280 / 3990 | 29.527567s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.722814+00:00 | 1.18.35 / deepseek-flash / high | 60939 / 51840 / 2840 | 17.740838s | 0 | 0 |
 
 <a id="web-search-data-scholarly-search"></a>
 
@@ -332,61 +489,6 @@
 
 - [alpha-mcp-prices-001-ds41-r1](../data/experiments/evaluations/alpha-mcp-prices-001-ds41-r1.json)：主持复核补充，原独立验收判定不变：官方MCP已返回正确的21个交易日数据，约36秒完成取数；但CSV、走势图和最终答复均未交付。其后依赖安装消耗了剩余时间预算。本轮验证了该入口取数，未完成完整用户任务；不应将其概括为MCP或服务不可用。
 - [alpha-rest-prices-001-ds41-r1](../data/experiments/evaluations/alpha-rest-prices-001-ds41-r1.json)：主持复核补充，原独立验收判定不变：指定服务取数及CSV已完成；用户要求的走势图和最终答复未交付。执行约590秒后超时，主要耗在缓慢的matplotlib下载与等待。原题不限定作图库，因此本次记录为执行策略与预算内交付失败，不代表Alpha Vantage无法提供行情。
-
-<a id="web-search-data-financial-data"></a>
-
-## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
-
-### financial-access-001 / v1
-
-帮我把这个金融数据服务接好，确认能用指定方式查询数据，并保存后续调用需要的配置；如果接不通，说明卡在哪里。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:29:43.509122+00:00 | 1.18.35 / deepseek-flash / high | 552500 / 525184 / 12067 | 184.674383s | unknown | 0 |
-| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-rest-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:28:08.583876+00:00 | 1.18.35 / deepseek-flash / high | 184198 / 168704 / 4121 | 32.632337s | 0 | 0 |
-| alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-access-ds41-r1.json) | 2026-10-08T14:09:26.927480+00:00 | 1.18.35 / deepseek-flash / high | 565383 / 536448 / 11092 | 118.680959s | 0 | 0 |
-| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-rest-prices-access-ds41-r1.json) | 2026-10-08T14:07:21.955843+00:00 | 1.18.35 / deepseek-flash / high | 105161 / 95616 / 4568 | 33.809312s | 0 | 0 |
-| sec-edgar / data-api | financial-access-001 (v1) | none; contact identity only | natural | [completed](../data/experiments/evaluations/sec-edgar-access-ds41-r1.json) | 2026-10-08T12:14:13.175775+00:00 | 1.18.35 / deepseek-flash / high | 105820 / 97152 / 5675 | 40.119431s | 0 | 0 |
-| alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key | natural | [completed](../data/experiments/evaluations/alpha-vantage-access-ds41-r1.json) | 2026-10-08T12:14:13.175298+00:00 | 1.18.35 / deepseek-flash / high | 81815 / 74112 / 2516 | 24.074587s | 0 | 0 |
-| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access-ds41-r1.json) | 2026-10-08T11:49:06.202214+00:00 | 1.18.35 / deepseek-flash / high | 110298 / 97024 / 2973 | 38.641535s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 2026-10-08T11:49:06.201856+00:00 | 1.18.35 / deepseek-flash / high | 120041 / 106624 / 3254 | 29.506871s | unknown | 0 |
-| capitol-exposed / data-api-keyless | financial-access-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/capitol-access-oc11835-r1.json) | 2026-10-08T07:24:16.929807+00:00 | 1.18.35 / glm-5.3-flash / high | 295856 / 269184 / 4643 | 169.698703s | 0 | unknown |
-| bargo-congress / congress-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-access-oc11835-r1.json) | 2026-10-08T07:24:13.769678+00:00 | 1.18.35 / glm-5.3-flash / high | 94365 / 74816 / 3151 | 121.069769s | 0 | 0 |
-| capitol-exposed / data-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/capitol-access.json) | 2026-09-15T09:14:32.838922+00:00 | 1.18.29 / glm-5.3-flash / high | 189737 / 172864 / 2746 | 138.671707s | 0 | 0 |
-| bargo-congress / congress-api-keyless | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/bargo-access.json) | 2026-09-15T09:07:26.717325+00:00 | 1.18.29 / glm-5.3-flash / high | 92193 / 73920 / 3609 | 157.266045s | 0 | 0 |
-| tracefour / data-api-keyless | financial-access-001 (v1) | none | natural | [not_completed](../data/experiments/evaluations/tracefour-access.json) | 2026-09-15T09:07:26.569219+00:00 | 1.18.29 / glm-5.3-flash / high | 103555 / 86272 / 3755 | 153.41522s | 0 | 0 |
-| frankfurter / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-access.json) | 2026-09-15T07:06:04.074344+00:00 | 1.18.29 / glm-5.3-flash / high | 84240 / 72512 / 2596 | 115.282949s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15T07:06:04.069023+00:00 | 1.18.29 / glm-5.3-flash / high | 216483 / 199488 / 5383 | 216.897575s | 0 | 0 |
-
-**主持复核补充说明（原判定不变）：**
-
-- [capitol-access-oc11835-r1](../data/experiments/evaluations/capitol-access-oc11835-r1.json)：主持复核补充，原独立验收判定不变：接入功能已验证，真实数据查询及配置复用成功。未完成源于超出本轮接入阶段最多返回5条记录的测试约束：累计返回7条，且交付统计不完整。这不是服务只支持5条，也不是其免费额度耗尽。
-
-<a id="web-search-data-geocoding"></a>
-
-## 搜索与数据获取 / 地理编码（web-search-data/geocoding）
-
-### geocoding-venue-001 / v1
-
-我想在旅行地图上标记大英博物馆。请用指定服务把附件中的场馆地址转成可用坐标，用中文给出匹配地点名称、明确标注纬度和经度的 WGS84 十进制度坐标、服务实际返回的地址信息和数据来源，并说明这是场馆、入口还是更粗略的定位。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| photon / public-search-api | geocoding-venue-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-venue-001-ds41-r1.json) | 2026-10-08T15:24:18.918504+00:00 | 1.18.35 / deepseek-flash / high | 95519 / 86400 / 4760 | 69.526803s | 0 | 0 |
-
-<a id="web-search-data-geocoding"></a>
-
-## 搜索与数据获取 / 地理编码（web-search-data/geocoding） · 接入测试
-
-### geocoding-access-001 / v1
-
-帮我接通这个地理编码服务，通过指定方式做一次真实地点查询，确认能把地点或地址转成坐标，并保存后续查询需要的本地配置；说明接入步骤和实际阻碍。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| nominatim / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665691+00:00 | 1.18.35 / deepseek-flash / high | unknown | 290.065141s | 0 | 0 |
-| photon / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665425+00:00 | 1.18.35 / deepseek-flash / high | 248700 / 229248 / 4848 | 75.763506s | 0 | 0 |
 
 <a id="web-search-data-weather-data"></a>
 
@@ -451,19 +553,6 @@
 | firecrawl / public-search-api | web-search-access-001 (v1) | none; documented anonymous public route | natural | [completed](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 2026-10-08T14:35:05.604890+00:00 | 1.18.35 / deepseek-flash / high | 104329 / 87040 / 2087 | 21.400023s | 0 | 0 |
 | exa / public-mcp | web-search-access-001 (v1) | none; documented anonymous public route | natural | [completed](../data/experiments/evaluations/exa-searchv2-access-ds41-r1.json) | 2026-10-08T14:35:05.604712+00:00 | 1.18.35 / deepseek-flash / high | 288909 / 270976 / 5640 | 41.914642s | 0 | 0 |
 | exa / public-mcp | web-search-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-access-ds41-r1.json) | 2026-10-08T12:01:59.543536+00:00 | 1.18.35 / deepseek-flash / high | 199173 / 183680 / 5236 | 38.345252s | 0 | 0 |
-
-<a id="productivity-storage-collaborative-tables"></a>
-
-## 办公与协作 / 协作表格（productivity-storage/collaborative-tables） · 接入测试
-
-### collaborative-tables-access-001 / v1
-
-帮我通过指定方式接通这个在线表格服务，新建一个本轮专用的空测试空间，读取它确认可用，并保存后续创建任务表所需的配置；给我空间链接，说明接入步骤、人工门槛和免费限制。
-
-| 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
-| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| grist / hosted-mcp | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 2026-10-08T13:45:37.768748+00:00 | 1.18.35 / deepseek-flash / high | 350908 / 324352 / 6743 | 61.963463s | 0 | 1 |
-| grist / rest-api | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 2026-10-08T13:42:01.154679+00:00 | 1.18.35 / deepseek-flash / high | 106882 / 91904 / 4125 | 34.159175s | 0 | 0 |
 
 <a id="web-search-data-financial-data-statements"></a>
 
@@ -602,6 +691,440 @@
 
 ## 汇总条件与费用依据
 
+<a id="comparison-5b2f0a0db9e7"></a>
+
+### web-extraction-uk-holidays-001 v1
+
+**jina / reader-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared3pairs for a separate realregional-calendar task, second staticHTMLsite/regionyearselection only; not broadgeneralreliability. Same model/harness/40/600/300/.85, image/existingphysicalruntime/logicalaccessbaseline. Freshhome/session/taskworkspace; Jina retainedservice-tools empty, Firecrawl onegenericconnectionconfig and noqueryspecificdata/script,0additionalrootinstall/client; only those generic files maypersist. Currentbaselinearchives separatelyhashed. Providerdefaultcache5min/2days preserved, actualhits mayunknown; share onepublisher/multipledependent trials. No rootanswer/script/source/executionsnapshot toexecutor. Protective serviceinstruction6attempts/20s posthocreview; first403/429/paymentstop. Fixedoriginal50USDdeadline 2026-10-10T13:53:59.407282+00:00. OGL attribution published bycontroller.
+
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json)：模型费用 $0.0063；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无服务回执或账单；依官方免费规则与本次匿名成功调用判为免费，未产生可观测费用。; https://jina.ai/reader/; execution/artifacts/ENVIRONMENT.md
+
+  结论与限制：本次执行通过指定服务 Jina Reader（https://r.jina.ai/）匿名调用 GOV.UK 页面一次（HTTP 200），仅取 'Upcoming bank holidays in England and Wales 2027' 表，交付 UTF-8 CSV 8 行，日期与完整英文名称（含 substitute day 与弯撇号）与独立参考逐项一致、日期升序，答复给出文件位置与官方来源链接。；服务操作 completed；用户交付 completed；阻碍 无；指定服务 Jina Reader 匿名调用返回 HTTP 200 并取得目标页面内容（见 evidence/jina_extraction_summary.md）；交付 CSV 存在于 execution/artifacts，8 行与参考逐项一致；答复含文件位置与官方链接。
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json)：模型费用 $0.0064；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free/$0 under the explicit official anonymous/keyless rule and independently checked actual applicability. Missing bill or receipt alone is not proof of free service and does not require null once the rule is verified. Live remaining allowance and final provider bill are not asserted.; https://jina.ai/reader/
+
+  结论与限制：本次执行真实通过指定服务 Jina Reader（https://r.jina.ai/）匿名提取 GOV.UK 银行假日页面，从返回 Markdown 的 “Upcoming bank holidays in England and Wales 2027” 表取得全部 8 条，交付 UTF-8 CSV（表头 date,holiday，日期升序，日期与名称含 substitute day、U+2019 撇号）在必要字段上与官方原文逐项一致，答复给出文件位置与官方来源链接。工具记录显示仅一次请求（HTTP 200），未用 JSON/ICS、其他网页或直连原站替代，也未混入 Scotland/Northern Ireland 或其他年份。；服务操作 completed；用户交付 completed；阻碍 无；Jina Reader 匿名单次请求 HTTP 200，返回目标页面 Markdown 含 England and Wales 2027 全表；CSV 与官方原文 8/8 一致并含文件与来源，交付完整。
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json)：模型费用 $0.0071；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free/$0 under the explicit official anonymous/keyless rule and independently checked actual applicability. Missing bill or receipt alone is not proof of free service and does not require null once the rule is verified. Live remaining allowance and final provider bill are not asserted.; https://jina.ai/reader/
+
+  结论与限制：本次执行真实通过指定服务 Jina Reader（r.jina.ai）匿名 GET https://www.gov.uk/bank-holidays，HTTP 200，单次成功且无 403/429；从返回原文提取 England and Wales 2027 表全部 8 条，日期与完整英文名称（含 substitute day）与独立官方参考逐项一致，日期升序、UTF-8 CSV 表头 date,holiday 可解析；答复给出文件名与 GOV.UK 官方来源。未使用本站 JSON/ICS 接口或直连原站替代所选服务。；服务操作 completed；用户交付 completed；阻碍 无；指定服务侧：单次匿名 GET r.jina.ai/https://www.gov.uk/bank-holidays 返回 HTTP 200，成功取得目标内容。用户侧：CSV 文件存在且正确（8 条，含 substitute day，升序），答复给出文件位置与官方来源。无网络/访问/额度/执行阻碍证据。
+
+**firecrawl / public-scrape-api** — 1 完成 / 2 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared3pairs for a separate realregional-calendar task, second staticHTMLsite/regionyearselection only; not broadgeneralreliability. Same model/harness/40/600/300/.85, image/existingphysicalruntime/logicalaccessbaseline. Freshhome/session/taskworkspace; Jina retainedservice-tools empty, Firecrawl onegenericconnectionconfig and noqueryspecificdata/script,0additionalrootinstall/client; only those generic files maypersist. Currentbaselinearchives separatelyhashed. Providerdefaultcache5min/2days preserved, actualhits mayunknown; share onepublisher/multipledependent trials. No rootanswer/script/source/executionsnapshot toexecutor. Protective serviceinstruction6attempts/20s posthocreview; first403/429/paymentstop. Fixedoriginal50USDdeadline 2026-10-10T13:53:59.407282+00:00. OGL attribution published bycontroller.
+
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free/$0 under the explicit official anonymous/keyless rule and independently checked actual applicability. Missing bill or receipt alone is not proof of free service and does not require null once the rule is verified. Live remaining allowance and final provider bill are not asserted.; https://docs.firecrawl.dev/rate-limits
+
+  结论与限制：指定服务 Firecrawl 匿名入口确实成功取得 GOV.UK 页面（HTTP 200, success:true），但执行者的解析脚本假定 Markdown 中表注年份在表格之前，而 Firecrawl 转出的 Markdown 里表注年份实际出现在表格之后，导致其取到的是紧跟 “...2027” 文本的 2028 年 England and Wales 表。交付 CSV 的 8 个日期全部与官方 2027 表不符（实为 2028 年该地区表），且 substitute day 标注错误，未满足任务对日期与名称逐项一致、且不混入其他年份的要求，故整体未完成。；服务操作 completed；用户交付 not_completed；阻碍 agent_execution；Firecrawl 匿名入口成功返回 HTTP 200、success:true 的 GOV.UK 页面内容，服务操作完成；但执行者解析脚本把 Markdown 中表注与表格的先后顺序判断相反（脚本 parse_holidays.py 在 “England and Wales 2027” 文本之后取表，而该表实为 2028 内容），交付 CSV 日期与 substitute 标注全部错误，用户未得到正确的 2027 CSV。
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 指定入口为匿名免费入口，本次单次调用成功且无计费回执；免费额度具体余量未知。; https://docs.firecrawl.dev/features/scrape; https://docs.firecrawl.dev/rate-limits
+
+  结论与限制：指定服务 Firecrawl 调用真实成功（匿名 POST https://api.firecrawl.dev/v2/scrape，HTTP 200，success:true），且其返回的 HTML 已含正确的 England and Wales 2027 表。但交付 CSV 的必要日期与名称与官方 2027 表逐项不一致：交付为 2027-01-03/04-14/04-17/05-01/05-29/08-28/12-25/12-26，实为服务返回 HTML 中 England and Wales 2028 表（2028-01-03…2028-12-26）改标年份，substitute day 标注也随之错位。执行者解析 markdown 字段时把排在表体之后的 2027 标题匹配到了随后的 2028 表。故用户所需 2027 数据未正确交付，任务未完成；服务本身返回内容正确，失败在执行的解析环节。；服务操作 completed；用户交付 not_completed；阻碍 agent_execution；Firecrawl 匿名 scrape 返回 HTTP 200 且内容含正确的 E&W 2027 表（服务操作完成）；但交付 CSV 取到 2028 表数据并改标为 2027，必要日期/名称错误，属执行解析错误（agent_execution）。
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务费用为免费额度内使用，无回执金额；匿名入口无账号可计费。剩余免费配额数值未披露，保留未知。; frozen-execution/ENVIRONMENT.md（Firecrawl 匿名 Scrape 免费，官方入口 https://api.firecrawl.dev/v2/scrape）; https://docs.firecrawl.dev/rate-limits; https://docs.firecrawl.dev/features/scrape
+
+  结论与限制：通过指定服务 Firecrawl 匿名 scrape 入口实际取得 https://www.gov.uk/bank-holidays（2 次 POST，均 HTTP 200/success），并从同一响应 rawHtml 中按 caption 'Upcoming bank holidays in England and Wales 2027' 与显式 datetime 提取 8 条该地区该年银行假日；交付 CSV 存在、可解析、UTF-8、表头 date,holiday、日期升序，逐项与官方 2027 England and Wales 表一致（含 substitute day 名称与公布日期），答复给出文件位置与官方来源链接。执行者正确识别并绕开 Firecrawl markdown 输出的年份标题整体错位问题，以 rawHtml 为准，未用算法推算或改动节日日历日期。；服务操作 completed；用户交付 completed；阻碍 无；指定服务 Firecrawl 两次匿名 scrape 均成功返回目标页并含 2027 England and Wales 表；交付 CSV 与答复齐备且与官方一致，无阻碍因素。
+
+<a id="comparison-b8dbd573c0af"></a>
+
+### web-extraction-holidays-001 v1
+
+**firecrawl / public-scrape-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
+
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json)：模型费用 $0.0079；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 仅通过指定匿名免费入口调用，无账号、无 API Key、无付款；无付费或超额行为。; https://docs.firecrawl.dev/rate-limits; execution/artifacts/firecrawl_opm_headers.txt; grading/artifacts/evidence/firecrawl_2027_response_excerpt.md
+
+  结论与限制：本次执行通过指定服务 Firecrawl 匿名入口真实抓取 OPM 官方页面（HTTP 200、success:true、sourceURL 为该官方 URL），并据其中“2027 Holiday Schedule”表生成 CSV，共 11 行，date/weekday/holiday 三列逐项与独立参考一致，日期升序、仅含 2027、脚注已去除、保留表中公布日期，答复给出文件位置与官方来源链接，全部要求均有当次证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定服务真实返回目标表（HTTP 200、success:true、sourceURL 正确、creditsUsed 1）；CSV 11 行逐项与独立参考一致并升序；答复含文件路径与官方来源。
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free for the observed anonymous request under the explicit official rule. A missing billing receipt does not make the applicable free-rule amount unknown. Live allowance remainder and a final provider bill are not asserted.; https://docs.firecrawl.dev/rate-limits
+
+  结论与限制：指定 Firecrawl 匿名 Scrape 入口真实取得 OPM 官方页面内容（HTTP 200，metadata sourceURL 指向目标 URL），并仅从该响应解析 2027 Holiday Schedule 表；交付的 UTF-8 CSV 三列齐备、11 行与独立参考逐字段一致、日期升序、无漏行/重复/其他年份、脚注去除、日期取表公布值；答复给出文件位置与官方来源链接。；服务操作 completed；用户交付 completed；阻碍 无；Firecrawl 匿名 /v2/scrape 返回 HTTP 200 且 sourceURL 与标题匹配目标页；CSV 与参考 11 行一致，答复含文件与来源链接。
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本次仅 1 次 keyless scrape，无 Authorization/账号/付费；按官方 free 规则判定为免费。; https://docs.firecrawl.dev/rate-limits; frozen-execution/ENVIRONMENT.md; frozen-execution/service-config.json
+
+  结论与限制：指定服务 Firecrawl 匿名 scrape 入口 (https://api.firecrawl.dev/v2/scrape) 真实抓取 OPM 官方页面，返回 HTTP 200/success=true，响应 markdown 含完整“2027 Holiday Schedule”表（11 行）；据此生成的 holidays_2027.csv 为可解析 UTF-8 CSV，三列 date/weekday/holiday，11 行逐项与冻结参考一致、按日期升序、脚注标记已去除、日期采用网页公布值；答复给出文件位置与官方来源链接。单次提取请求，无 403/429/付费，未直读原网页或使用其他来源。；服务操作 completed；用户交付 completed；阻碍 无；Firecrawl 匿名 scrape 单次请求 HTTP 200 返回含 2027 表的响应，据此产出符合约定的 CSV 并在答复中给出文件位置与来源链接。
+
+**jina / reader-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
+
+- [afs-20261010-johor40-web-extraction-jina-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json)：模型费用 $0.0057；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无计费回执；依据服务官方页面免费规则与本轮匿名调用观察判定为免费，非执行者自称。; https://jina.ai/reader/
+
+  结论与限制：指定服务 jina Reader（https://r.jina.ai/）匿名入口真实取得目标 OPM 页面，返回内容含完整 2027 Holiday Schedule 表；据此生成的 UTF-8 CSV 可解析，11 行逐项日期/星期/英文名称与冻结 reference.json 完全一致，日期升序、无重复、无其他年份、脚注标记已去除；最终答复给出文件位置与官方来源链接。全部验收项有本次证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定服务单次匿名请求成功返回目标表内容（28656 bytes，含 2027 表）；CSV 11 行与冻结参考逐项一致且可解析；答复含文件路径与官方链接。
+- [afs-20261010-johor40-web-extraction-jina-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json)：模型费用 $0.0050；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Jina Reader 基础用法免费；本次仅一次无 Key 匿名请求，无账号、无付款。; https://jina.ai/reader/
+
+  结论与限制：指定 Jina Reader 服务真实取回目标 OPM 页面（单次无 Key 请求，HTTP 200，响应存于 opm.md 且含 2027 Holiday Schedule 表）；交付 holidays_2027.csv 为可解析 UTF-8 CSV，date/weekday/holiday 三列，11 行与网页表逐项一致、日期升序、无重复或其他年份、脚注标记已去除，日期为公布值；答复给出文件位置与官方来源链接。；服务操作 completed；用户交付 completed；阻碍 无；Jina Reader 单次无 Key 请求 HTTP 200 返回目标页面且含 2027 表；holidays_2027.csv 存在、可解析且 11 行逐项正确；答复含文件位置与来源。无网络、权限、模型预算或执行阻碍。
+- [afs-20261010-johor40-web-extraction-jina-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json)：模型费用 $0.0084；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本次仅 1 次匿名、无 Key 的 r.jina.ai 请求，未注册/未付款，无计费回执。; execution/artifacts/ENVIRONMENT.md; https://jina.ai/reader/
+
+  结论与限制：指定服务 Jina Reader（r.jina.ai）真实抓取 OPM 官方页面（匿名 GET，HTTP 200，89418 字节，返回为 Jina Markdown 正文并含 2027 表），执行者据此解析并交付 UTF-8 CSV，11 条 2027 假日逐字段与独立参考一致，日期升序、脚注去除、采用表公布日期，最终答复含文件位置与官方来源链接。；服务操作 completed；用户交付 completed；阻碍 无；Jina Reader 单次匿名请求 HTTP 200 并返回含 2027 表的正文；交付 CSV 与 final 答复齐全。
+
+<a id="comparison-ecce2722b24e"></a>
+
+### web-extraction-access-001 v1
+
+**firecrawl / public-scrape-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
+
+- [afs-20261010-johor40-web-extraction-firecrawl-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本次仅使用 Firecrawl 匿名 keyless 入口，无账号/Key/付款；官方文档明确 keyless 使用免费。IP 每日请求/积分上限数值及剩余量未公开，保留未知。; https://docs.firecrawl.dev/rate-limits; execution/artifacts/evidence/scrape_example_com.response.json
+
+  结论与限制：执行者通过指定入口 POST https://api.firecrawl.dev/v2/scrape 匿名 keyless 真实提取 https://example.com/ 正文：HTTP 200、success:true、data.metadata.title=Example Domain，正文与独立参考含义相符；可复用配置写入持久目录 /home/node/service-tools/service-config.json 且不含秘密；账号来源、接入步骤与门槛如实说明。全部要求有本次采集证据支撑，故记完成。；服务操作 completed；用户交付 completed；阻碍 无；指定入口 keyless 请求返回 200 且标题/正文可取；配置已落持久目录且无秘密；答复给出结果、配置位置、接入步骤与门槛。
+
+**jina / reader-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
+
+- [afs-20261010-johor40-web-extraction-jina-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free for the observed anonymous request under the explicit official rule. A missing billing receipt does not make the applicable free-rule amount unknown. Live allowance remainder and a final provider bill are not asserted.; https://jina.ai/reader/
+
+  结论与限制：指定服务 Jina Reader 匿名入口真实接通：对 https://r.jina.ai/https://example.com/ 单次 GET 返回 HTTP 200，正文 Title 与 Content 可用于标题/概述，均与独立参考及响应正文相符；通用连接配置已写入持久位置 /workspace/service-config.json 且不含密钥；接入步骤与门槛（匿名免费 20 RPM、默认 5 分钟缓存、无注册/无人工介入）如实说明。全部冻结要求有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定服务匿名入口单次调用成功（HTTP 200，正文齐全），用户要求的标题/概述/配置位置/接入步骤均在 execution/answer.md 交付；无网络、权限、额度或人工阻碍证据。
+
+<a id="comparison-848474bceab4"></a>
+
+### database-restore-001 v2
+
+**turso / platform-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：Three predeclared fresh v2 rounds on one existing Starter account; same independently passed HTTP baseline with credentials/config only, no dedicated library/task script/history/answer. Fresh physical container/home/session each round; stable logical runtime maps baseline, not same physical container. Controller creates distinct empty source then exact frozen2table7row synthetic schema/data; all complete before receipts privately verified. Executor has source [SERVICE_SECRET] SQL token plus broad policy-bound parent management key and must create one target and actually restore its own retained backup. Source and target hosted in existing [SERVICE_SECRET] group; execution Johor. Root preparation/readback separate, no peers/other grades, fixed50USDdeadline and40/600/300/.85. Older v1 experiments unchanged, no claim that duration alone caused past misses.
+
+- [afs-20261010-johor40-turso-restore-v2-r3](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free/$0 for this scoped run under the explicit included Starter plan and disabled-overage rule. Original confirmed_free plus null reflected missing invoice evidence; absence of an invoice does not invalidate an independently verified free-rule amount. It also does not by itself prove free usage.; https://turso.tech/pricing?frequency=monthly; https://turso.tech/blog/how-to-provision-turso-databases-using-the-stripe-cli
+
+  结论与限制：本次执行在指定 Turso 服务上完成了完整备份恢复演练：从本轮专用源库导出可留存的纯 SQL 逻辑备份（含两表 DDL 与全部 7 行），本轮新建独立空目标库（恢复前业务表计数实测 0）并实际用该备份文件恢复，重连目标库核对结构/行数/语义与源库一致，且源库前后未变；最终答复给出备份、恢复方法、新库非敏感位置、行数与核对结果、免费/到期说明。六项验收标准均有本次真实证据支持。；服务操作 completed；用户交付 completed；阻碍 无；指定 Turso 服务操作全部实际完成：源库读取导出→新建独立空目标→用交付备份恢复→重连目标核对→重连源库确认未变。restore_raw.json、target_verify_raw.json、source_raw/source_post_raw.json 及 controller 独立前后读回一致，最终答复含所需业务交付。
+- [afs-20261010-johor40-turso-restore-v2-r2](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Confirmed free/$0 for this scoped run under the explicit included Starter plan and disabled-overage rule. Original confirmed_free plus null reflected missing invoice evidence; absence of an invoice does not invalidate an independently verified free-rule amount. It also does not by itself prove free usage.; https://turso.tech/pricing?frequency=monthly; https://turso.tech/blog/how-to-provision-turso-databases-using-the-stripe-cli
+
+  结论与限制：在指定 Turso/libSQL 服务上，执行者从真实源库导出可留存逻辑备份 source-backup.sql（两表 DDL + 全部记录），用该备份实际恢复到本轮新建、起初无业务表的独立目标库，并重新连接核对。总控独立读回证实：源库 before/after 业务结构与全部记录一致（未变），目标库 after 与源库语义完全等价（表结构、主键/外键/非空/默认值、逐行数据、NULL 与空串区分均保留）。用户所需备份、恢复方法、新库位置、各表行数与核对结果、免费/期限说明均已交付。；服务操作 completed；用户交付 completed；阻碍 无；导出、新建目标、恢复、重连核对四步服务端操作均有原始响应：备份含两表结构与全部记录；总控独立读回证实源库 before==after 且目标库 after==源库（行数、DDL、外键、NULL/空串语义一致）。
+- [afs-20261010-johor40-turso-restore-v2-r1](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 账户级 Starter $0 计划且未开启付费超额，本次调用量极小，无付费。精确剩余额度未知（remaining_exact=null），但不影响本次为免费。; controller-verification/controller-verification.json; frozen-execution/ENVIRONMENT.md
+
+  结论与限制：执行者在指定 Turso 服务上从真实源库导出可留存逻辑备份（backup.sql/backup.json/manifest.json），在既有 group 内新建独立的空目标库（建库时业务表数=0），实际用该备份逐条恢复到目标库，并重新连接核对。独立控制器读回确认目标库与源库为不同逻辑资源、目标库完整 schema 与全部行同源库、源库前后完全未变。交付含备份路径、简短恢复方法、非敏感新库位置、各表行数与核对结果及免费/到期说明。；服务操作 completed；用户交付 completed；阻碍 无；导出、建空目标库、用备份恢复、重连核对四项指定服务操作均有真实 HTTP 200 回执（工具记录 line20/65/69/73/76）与控制器独立读回（target-after、source-after）印证；源库无写操作，全程无权限/限流/付费阻碍。
+
+<a id="comparison-63bc5ae3ece1"></a>
+
+### collaborative-tables-shared-expenses-001 v1
+
+**grist / hosted-mcp** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared3round same-service REST/MCP comparison with one existing Free account, serial shared-resource lock; orderREST/MCP,MCP/REST,REST/MCP. Fresh physical container each round cloned from independently passed overseas access generic baseline; stable logical runtime identity denotes that baseline, not same physical container. Only new blank resource pointers changed; no old task scripts/responses/formulas/answers or session/home copied. Defaultplaceholder empty verified by controller before dispatch. Preparation/verification overhead separate, remaining quota unknown. Model40/600s/300s/closure0.85 and fixed50USDdeadline unchanged.
+
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r3](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Grist 免费 Personal 计划（personalFree，paid=false），指定 MCP hosted 入口当前无额外服务费；本次仅用免费额度，无任何付款回执。; frozen-execution/ENVIRONMENT.md; execution/artifacts/service-config.json; controller-verification/controller-verification.json
+
+  结论与限制：指定 hosted-mcp 入口在真实 Grist 服务上完成了该新文档的在线账本：六笔初始明细完整正确，初态在线汇总与答复结算数一致，且总控的两笔受控写入（追加一笔、修正一笔金额）后汇总/方向/金额均按公式正确自动重算，公式与结构未被改动。资源、入口、范围与政策均符合，调用在预算内且无 403/429/付费。；服务操作 completed；用户交付 completed；阻碍 无；指定 hosted-mcp 入口成功建立真实在线账本，六笔明细与初态汇总正确；总控两笔受控普通写入后，在线汇总与补差方向/金额按公式自动正确更新，公式结构未改；私人链接指向该文档且答复含结算数与继续记账说明。
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r2](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务费用按 Grist Personal Free 免费额度计，本次未产生需付费的服务费；模型费另计，不在此列。剩余共享额度未知。; frozen-execution/ENVIRONMENT.md：Grist 免费 Personal 账户；REST/MCP 共享 3000 calls/site/month；MCP 当前无额外服务费，模型费另计。; controller-verification/controller-verification.json：plan personalFree、paid=false、inGoodStanding=true。
+
+  结论与限制：指定 hosted-MCP 入口（https://docs.getgrist.com/api/mcp）在本轮新 Grist 文档真实建立在线账本：六笔初始明细完整保留一次，在线汇总（已付/应分摊/补差）与输入一致；执行者交付了可打开的私人链接、当前结算数与继续记账说明。总控暂停执行者后仅追加一笔明细、再修正一笔金额，独立远端读取回执显示在线汇总相应自动更新（追加态合计 2442.40、修正态合计 2422.40），公式/结构/汇总值均未被修改。资源、入口与范围均符合委托。；服务操作 completed；用户交付 completed；阻碍 无；hosted-MCP 调用返回真实表/记录 ID，独立远端读回证明在线账本存在且六笔明细与公式汇总正确；追加与修正两态在线汇总自动更新且与参考一致；answer.md 交付了可用链接、结算数与继续记账说明。
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r1](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json)：模型费用 $0.08；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮为 Grist hosted Personal（personalFree）免费额度内使用，hosted MCP 当前无额外服务费；无任何计费回执，故 service_cost_usd 记 null。; frozen-execution/ENVIRONMENT.md; evidence/verified-online-ledger-state.json
+
+  结论与限制：指定 hosted-MCP 入口在本轮唯一新空文档中建立了真实在线账本：独立远端回执显示初始 6 笔明细逐笔正确（日期/用途/付款人/人民币分），在线汇总（Grist summary 表，列与公式见回执）给出林青已付 2095.60、周舟已付 304.40、各自应分摊 1200.00、周舟需补给林青 ¥895.60，与冻结参考完全一致；初次答复给出的私人链接、结算数和继续记账位置与之一致。总控在执行停止后仅做一次追加（2026-10-08 清洁用品 周舟 42.40）和一次金额修正（2026-10-07 超市采购（二） 林青 203.00→183.00），两次独立回读证明汇总自动重算为 874.40 / 864.40，且明细表与汇总表的列定义（含公式）在修正前后字节一致，未改公式/结构/汇总值。经 /api/mcp JSON-RPC 实际调用（38 次 tools/call 全部 HTTP 200，无 403/429/付费提示），单文档、owner 权限、未共享/邀请/通知/付款，符合授权范围。；服务操作 completed；用户交付 completed；阻碍 无；指定 hosted-MCP 操作全部成功并在远端产生可继续记账的公式化在线账本；追加与修正两次受控写入均触发汇总自动重算，初态/追加态/修正态独立回读与冻结参考一致；最终答复含私人链接、结算数与继续记账位置。
+
+**grist / rest-api** — 2 完成 / 1 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：Predeclared3round same-service REST/MCP comparison with one existing Free account, serial shared-resource lock; orderREST/MCP,MCP/REST,REST/MCP. Fresh physical container each round cloned from independently passed overseas access generic baseline; stable logical runtime identity denotes that baseline, not same physical container. Only new blank resource pointers changed; no old task scripts/responses/formulas/answers or session/home copied. Defaultplaceholder empty verified by controller before dispatch. Preparation/verification overhead separate, remaining quota unknown. Model40/600s/300s/closure0.85 and fixed50USDdeadline unchanged.
+
+- [afs-20261010-johor40-grist-rest-shared-expenses-r3](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 使用本轮授权的 Grist Personal 免费账户开展 REST 业务，未绑定支付、未开启付费超额。; frozen-execution/ENVIRONMENT.md; controller-verification/controller-verification.json
+
+  结论与限制：本次执行在指定的唯一授权 Grist 文档（REST 入口 https://docs.getgrist.com/api）建立了真实在线账本，完整保留六笔明细，汇总为公式列；独立控制器在停止执行者后仅追加一笔、修正一笔金额，在线汇总与补差方向/金额均按人民币分自动正确更新。初次答复的六笔结算数与输入/参考一致并给出私有链接与继续记账位置。；服务操作 completed；用户交付 completed；阻碍 无；经指定 REST 入口在唯一授权文档实际建立并读取账本；三阶段独立回执与参考一致，答复交付链接与结算数。无网络/权限/预算/服务能力阻碍证据。
+- [afs-20261010-johor40-grist-rest-shared-expenses-r2](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json)：模型费用 $0.04；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 服务本身为免费计划，无计费回执；模型费与本次服务费无关，不计入。; https://www.getgrist.com/pricing/
+
+  结论与限制：通过指定 Grist REST 入口在本轮授权的空文档中建立了真实在线账本：6 笔明细完整保留一次，Summary/Settlement 为公式列并随明细自动重算。控制器独立读回初态、追加态、修正态三组原始回执，金额（人民币分）与 reference.json 完全一致，列公式字节在修正前后一致；答复含私人链接、当前结算与续记位置。仅用免费额度，未分享、邀请或付款。；服务操作 completed；用户交付 completed；阻碍 无；指定 REST 入口真实创建表/列/记录，公式列随明细自动重算（追加与修正态独立读回均匹配参考）；交付含链接、结算数与续记位置。
+- [afs-20261010-johor40-grist-rest-shared-expenses-r1](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json)：模型费用 $0.05；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮授权的 Grist 账户为免费 Personal（personalFree，paid=false，inGoodStanding=true），REST/MCP 共享每月 3000 次调用额度、无额外服务费；执行仅使用该免费额度内 REST 调用，未付款、未升级、未绑定付费方式。; frozen-execution/ENVIRONMENT.md; reference.json
+
+  结论与限制：服务端操作已完成：本轮新 Grist 文档中六笔明细与公式汇总均正确，且经总控追加一笔、修正一笔后线上汇总自动重算（独立回执 initial/after-append/after-correction 与 reference.json 基线一致，见 grading/artifacts/evidence/acceptance-evidence.md）。但执行者未向用户交付最终答复：40 次模型请求耗尽（403 Model request budget exhausted，exit_code=1），execution/answer.md 仅含 10 行中间过程叙述，缺少私人账本链接、当前结算数（林青/周舟已付、应分摊及 周舟需补给林青 895.60 元）和继续记账位置说明，用户交付未完成。；服务操作 completed；用户交付 not_completed；阻碍 model_budget；服务端：独立回执 initial/06,08 与 after-append/04、after-correction/07 证明六笔明细、汇总及自动重算均正确。用户交付：execution/answer.md 无链接/结算数/记账位置，40 次模型请求耗尽（403 Model request budget exhausted）。
+
+<a id="comparison-3e5e974d8b61"></a>
+
+### database-access-001 v1
+
+**turso / platform-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：One new overseas libSQL HTTP access baseline; existing Starter$0 account/overages=false actually verified before dispatch. Controller supplied only management credential and existinggroup pointer; executor creates one new empty DB and a separate SQL auth token, then performs true read-only query. No prewritten service helper, no [SERVICE_SECRET] fixture, no old resource contents; defaultpackageindex. Subsequent v2 repeats will clone only independently reviewed generic install/config with new resource pointers. New protocol/40/600/300/.85 fixed50USDdeadline; olddomestic300s and taskv1 remain separate. Policy limits on wideaccount credential do not imply technical scope restriction.
+
+- [afs-20261010-johor40-turso-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 独立费用异常复核确认本轮适用 Starter/Free 的零月费与免费额度，service_cost_usd=0、kind=confirmed_free。依据是实际套餐/配额读回、overages=false及本轮操作计费指标；匿名或成功响应、未付款和没有付费回执本身均不能证明免费。原私有验收保留，任务判定与测量用量未改。; data/experiments/evidence/afs-20261010-johor40-turso-access-baseline/public-review/verification-excerpt.json; https://turso.tech/pricing?frequency=monthly; https://turso.tech/blog/how-to-provision-turso-databases-using-the-stripe-cli
+
+  结论与限制：指定入口 api.turso.tech/v1 新建了本轮唯一空 libSQL 库，经官方 libSQL SQL over HTTP /v2/pipeline 完成一次真实只读查询（HTTP 200，版本 3.47.0，user_tables=0，rows_read=1，rows_written=0），资源与连接配置保存到持久目录且答复只给位置未泄露秘密；账号来源、接入步骤、人工门槛与免费/到期条件均有依据陈述。；服务操作 completed；用户交付 completed；阻碍 无；服务端：建库、签发库 token、/v2/pipeline 只读查询均 HTTP 200 成功（create-db.json、query-result.json）。交付：answer.md 给出资源标识、真实查询结果、配置位置、步骤与限制，秘密仅存私有文件。
+
+<a id="comparison-06b05d18818d"></a>
+
+### collaborative-tables-access-001 v1
+
+**grist / hosted-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas access baseline. Existing current personalFree account key supplied and new empty parent workspace prepared by controller; no self-registration claim. Execution creates and reads its own blank child through assigned route. No old business state/script/answer; capture raw privately and redact registered key before separate grading. Free quota remaining unknown, first403/429/payment stops. Native model/harness40 requests600s/300s and fixed50USD deadline unchanged. Operator corrected a nonexistent profile transport probe before any model dispatch. Original REST404 hold retained; this target is official entry transport only, not authenticated capability.
+
+- [afs-20261010-johor40-grist-mcp-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本次 Grist 服务在免费计划额度内使用，无服务端收费。剩余月 API 额度官方未提供，保留未知。模型费用不属于本项服务费用。; grading/artifacts/evidence/free-limits-excerpt.md; https://support.getgrist.com/limits/; reference.json
+
+  结论与限制：执行者按 ENVIRONMENT.md 指定的 hosted-mcp 入口（https://docs.getgrist.com/api/mcp）用官方 MCP 协议（initialize -> notifications/initialized -> tools/list -> tools/call）实际接入 Grist；在总控提供的本轮新父工作区 [PRIVATE_WORKSPACE_ID] 内通过 grist_create_doc 新建独立空文档 [SERVICE_SECRET]，并在另一个全新 MCP 会话中用 grist_get_doc_info 重新读取元数据，返回的 id/workspace/url 与创建时完全一致，确认同一远端资源且文档为空（仅默认空白占位表）。可复用连接配置写入指定持久目录 /home/node/service-tools/service-config.json 且不含密钥；答复给出链接、容器标识、账号来源（总控提供，非自助注册）、自助步骤、人工门槛（本轮无需人工）与有官方依据的免费限制。全部要求有真实请求/响应证据支持。；服务操作 completed；用户交付 completed；阻碍 无；service_execution：hosted-MCP initialize/tools/list/tools/call 均在 execution/artifacts/logs/04_create_doc.log、05_reread_doc.log 中有真实请求响应，create_doc 成功且独立会话读回一致。user_delivery：execution/answer.md 交付链接、标识、步骤、门槛、免费限制与配置位置，均与采集证据一致。
+
+**grist / rest-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas access baseline. Existing current personalFree account key supplied and new empty parent workspace prepared by controller; no self-registration claim. Execution creates and reads its own blank child through assigned route. No old business state/script/answer; capture raw privately and redact registered key before separate grading. Free quota remaining unknown, first403/429/payment stops. Native model/harness40 requests600s/300s and fixed50USD deadline unchanged. Operator corrected a nonexistent profile transport probe before any model dispatch. Original REST404 hold retained; this target is official entry transport only, not authenticated capability.
+
+- [afs-20261010-johor40-grist-rest-access-baseline-preflight2](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Grist Free 计划 $0，API 访问包含在免费额度内；本次仅 4 次 REST 调用，未付款、未绑卡、未购订阅。; https://www.getgrist.com/pricing/; grading/artifacts/evidence/grist-rest-readback-redacted.json
+
+  结论与限制：执行者使用指定 Grist rest-api 入口（https://docs.getgrist.com/api），在授权父工作区 [PRIVATE_WORKSPACE_ID] 内用 POST 新建独立空文档 [SERVICE_SECRET]（id [PRIVATE_DOC_ID]），随后 GET /docs/{id} 与 /tables 真实回读同一远端资源，返回 200 且标识一致、仅含 Grist 自带空白表 Table1；连接配置写入指定持久目录，答复给出链接、账号来源、自助步骤、人工门槛与免费限制。与 reference.json 核对一致。；服务操作 completed；用户交付 completed；阻碍 无；新建 doc [PRIVATE_DOC_ID] 与回读元数据均 HTTP 200 且标识一致（见 evidence/grist-rest-readback-redacted.json）；答复含链接、配置位置、步骤与免费限制（execution/answer.md）。
+
+<a id="comparison-7a7e044bd215"></a>
+
+### geocoding-venue-001 v1
+
+**nominatim / public-search-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：Single overseas Nominatim follow-up; existing v1 task unchanged. Fresh container, no service credentials or prewritten client. Config/dependencies and transport cache retained across access/business solely for public-instance policy. 40 model requests each, execution600s/grading300s; same fixed50USD window. Truthful project UA,20s pacing,4 API attempts/stage, first403/429 stop. Restrictions are guards, not hidden user output requirements. Photon held: current explicit free-price evidence insufficient. Prior domestic and old models unchanged. Prior HEAD-root preflight expected200 but observed the official302 redirect to same-host ui/search.html; no model/address query occurred. New logical run preserves that preparation hold, permits the verified redirect as transport reachability only. Actual location matching still requires execution evidence.
+
+- [afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json)：模型费用 $0.0072；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 匿名公共实例，无账号、无卡片、无付款；本次未产生计费回执。; https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ; https://operations.osmfoundation.org/policies/nominatim/
+
+  结论与限制：本次执行仅使用指定 Nominatim 公共 Search API 真实查询，命中大英博物馆场馆对象（relation/177044，category=tourism/type=museum），返回坐标 51.5193118, -0.1267051 与当次响应一致，距事前冻结官方位置点约 20.7 m（<=200 m）。中文答复包含场馆名称、带纬度/经度标签的 WGS84 十进制度坐标、服务实际返回的地址与 display_name、数据来源及 OSM 署名，并说明定位粒度为场馆多边形中心而非入口；同时如实披露第一次完整地址查询返回空结果、改用查询后命中。无未返回字段被捏造。全部验收项有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。
+
+<a id="comparison-60adbd865cb5"></a>
+
+### geocoding-access-001 v1
+
+**nominatim / public-search-api** — 1 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：Single overseas Nominatim follow-up; existing v1 task unchanged. Fresh container, no service credentials or prewritten client. Config/dependencies and transport cache retained across access/business solely for public-instance policy. 40 model requests each, execution600s/grading300s; same fixed50USD window. Truthful project UA,20s pacing,4 API attempts/stage, first403/429 stop. Restrictions are guards, not hidden user output requirements. Photon held: current explicit free-price evidence insufficient. Prior domestic and old models unchanged. Prior HEAD-root preflight expected200 but observed the official302 redirect to same-host ui/search.html; no model/address query occurred. New logical run preserves that preparation hold, permits the verified redirect as transport reachability only. Actual location matching still requires execution evidence.
+
+- [afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮指定路由为 Nominatim 公共匿名 Search API，OSM Foundation 官方 FAQ 明确将 Nominatim 列为免费提供的服务；本次未注册、无账号、无付款方式，仅 2 次低量只读请求且均 HTTP 200，符合免费适用范围，故数额为 0。; https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ; reference.json
+
+  结论与限制：本轮指定的 Nominatim 公共 Search API 匿名入口已实际接通：经 https://nominatim.openstreetmap.org/search 发起真实查询，HTTP 200 返回可识别公开地点 Johor Bahru, Johor, 80730, Malaysia，并给出标注纬度的 latitude=1.4581986、经度 longitude=103.7649059（node/254237831, place=city），答复与原始响应一致；可复用连接配置保存于 ENVIRONMENT 指定的持久位置 /home/node/service-tools/service-config.json，原始响应按完整 URL 缓存于 geocoding-cache/responses.json。该入口匿名免注册、无需付费或资质，全部步骤自助完成；首次查询因具体建筑未被 OSM 收录返回空结果（非服务故障），换用可解析公开地点后成功。；服务操作 completed；用户交付 completed；阻碍 无；指定 Nominatim Search 入口经一次真实 HTTP 200 查询返回可识别地点与有效经纬度；配置持久化且路径报告；答复与响应一致，无网络/权限/额度阻碍，故分项均完成。
+
+<a id="comparison-70023b6902c1"></a>
+
+### financial-macro-hicp-001 v1
+
+**ecb-data / data-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-macro-ecb-data-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：本次执行通过指定 ECB Data Portal 官方 SDMX API 匿名取得德法两国 2023/2024 全项目 HICP 年度平均变化率，四个观测值（DE 6.0/2.5，FR 5.7/2.3）与事前冻结官方参考一致，CSV 可读且标注完整，回落幅度（DE 3.5pp、FR 3.4pp）计算与文字正确，来源、系列键与查询日期可定位并附修订说明。全部要求有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定 ECB Data API 的 HICP 数据查询返回 HTTP 200 并给出四个所需观测（execution/artifacts/cache/avr_de_fr.csv）；交付 CSV 与最终答复齐全（execution/artifacts/hicp_de_fr_annual_avg_2023_2024.csv、execution/answer.md），无阻碍因素。
+- [afs-20261010-johor40-macro-ecb-data-business-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：执行经指定 ECB Data Portal 官方数据 API（data-api.ecb.europa.eu/service/）实际取得德国/法国 2023、2024 全项目 HICP 年度平均变化率（series HICP.A.DE.N.000000.4D0.AVR、HICP.A.FR.N.000000.4D0.AVR；HTTP 200）。四个率 6.0/2.5/5.7/2.3 %(PCCH, NSA, Total) 与事前冻结官方参考一致，两处回落 3.5/3.4 个百分点计算与说明正确，CSV 可用且标注国家/年份/指标/单位，来源、序列键、查询日期与修订说明可定位。；服务操作 completed；用户交付 completed；阻碍 无；指定 API 两次数据请求 HTTP 200 并返回四个观测，交付 CSV/说明齐全，数值与冻结参考一致，无阻碍。
+- [afs-20261010-johor40-macro-ecb-data-business-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：本次执行实际调用指定 ECB Data Portal 官方 API（入口 https://data-api.ecb.europa.eu/service/，路径 data/ICP/A.DE+FR.N.000000.4.AVR?format=csvdata），匿名免 Key，HTTP 200 返回德国、法国两年全项目 HICP 年度平均变化率（ADJUSTMENT=N、ICP_ITEM=000000、ICP_SUFFIX=AVR、UNIT=PCCH）。四个率 DE 2023=6.0 / 2024=2.5、FR 2023=5.7 / 2024=2.3 与事前冻结官方参考逐一相符；交付 CSV 可读且标注国家/年份/指标/单位，回落幅度 DE 3.5、FR 3.4 个百分点计算与文字解释正确，来源链接、系列键、查询日期及修订/口径说明齐备。全部可见要求均有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定 API 请求返回 HTTP 200 且含全部四个观测（见 grading/artifacts/evidence/ecb_api_query_summary.md 与原始响应留档）；CSV 与答复均已产出。
+
+**eurostat / statistics-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-macro-eurostat-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无计费回执；依据官方免费声明与本次匿名公开调用记为免费。; https://ec.europa.eu/eurostat/help/copyright-notice; frozen-execution/ENVIRONMENT.md; grading/artifacts/evidence/eurostat_hicp_verification.md
+
+  结论与限制：指定 Eurostat Statistics API 入口的实际匿名 GET 响应（prc_hicp_ainr，unit=RCH_A_AVG、coicop18=TOTAL、geo=DE/FR、time=2023/2024）给出全项目 HICP 年度平均率 DE 6.0/2.5、FR 5.7/2.3，与事前冻结 reference.json 的四个一位小数值一致；执行者缓存响应字节与冻结参考同源文件 sha256 相同。CSV 可用且标注国家/年份/指标/单位，回落说明（DE 3.5、FR 3.4 个百分点）计算与口径正确，来源（数据集、DOI、系列定位、请求 URL、查询日期 2026-10-10）可定位实际所用数据并说明旧 prc_hicp_aind 被 prc_hicp_ainr 取代的口径差异。；服务操作 completed；用户交付 completed；阻碍 无；Eurostat Statistics API 匿名查询成功返回 PRC_HICP_AINR 四观测值；CSV 与回落说明齐备且正确，来源可追溯，无调用/费用/环境阻碍。
+- [afs-20261010-johor40-macro-eurostat-business-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无回执金额；服务为公开免费接口，本次无付费，故 service_cost_usd 留空。; frozen-execution/ENVIRONMENT.md; https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction
+
+  结论与限制：指定 Eurostat Statistics API 公开匿名入口实际返回 HTTP 200，取得德国/法国 2023、2024 全项目 HICP 年度平均率（未季调）DE 6.0/2.5、FR 5.7/2.3，与冻结官方参考一致；CSV 长表可读且标注国家/年份/指标/单位/一位小数，回落 3.5 与 3.4 个百分点计算及说明正确，并给出可定位数据系列、查询日期与修订/口径说明。；服务操作 completed；用户交付 completed；阻碍 无；Eurostat 入口实际 HTTP 200 返回四个年度平均率，CSV 与文字交付齐全且与冻结参考相符。
+- [afs-20261010-johor40-macro-eurostat-business-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Eurostat 官方 API 为免费、免账号/Key 的公开只读入口；本次仅小范围只读查询，无付费或订阅。; https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction
+
+  结论与限制：本次执行通过指定服务 Eurostat Statistics API 实际查询，取得德国/法国 2023、2024 全项目 HICP 年度平均变化率，四个率与事前冻结官方参考完全一致（DE 6.0/2.5、FR 5.7/2.3）；交付了标注国家、年份、指标、单位的一位小数 CSV，正确算出回落 DE 3.5、FR 3.4 个百分点，并给出数据集代码、指标/系列、查询 URL 与查询日期及修订/口径说明。；服务操作 completed；用户交付 completed；阻碍 无；指定服务查询返回 HTTP 200 且原始响应可独立解码；CSV 与最终答复均落盘，四个率及两个百分点差与冻结参考一致。
+
+<a id="comparison-8e6422c28f03"></a>
+
+### dependency-advisories-check-001 v1
+
+**github / public-advisories-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-advisories-github-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 补充官方免费提供与REST路径对应证据后，可确认本轮指定公告查询服务费用为0。原冻结环境免费要求、HTTP成功、匿名60次/小时限额、无付款信息均不能单独支持这个金额。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：本次执行使用指定的 GitHub global-advisories 匿名 REST API（API 版本 2026-03-10）逐条查询两条告警，原始响应可证：CVE-2025-57833 5.2.x 范围为 >= 5.2a1, < 5.2.6（修复版 5.2.6），CVE-2025-59681 为 >= 5.2, < 5.2.7（修复版 5.2.7）；故当前 5.2.6 不在 57833 范围内、仍在 59681 范围内，仅这两条的最低升级版本为 5.2.7。答复中文说明并给出 API、公告与可追溯的 Django 维护者安全发布链接，与事前独立冻结的 reference.json 结论一致；未安装/升级/修改项目，未使用其他漏洞库或搜索。；服务操作 completed；用户交付 completed；阻碍 无；指定 API 两次查询均成功（200，2026-03-10 版本头），答复逐条给出正确的匹配结论、5.2.6/5.2.7 修复边界、最低升级 5.2.7 及可追溯依据链接。
+- [afs-20261010-johor40-advisories-github-business-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json)：模型费用 $0.0062；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 补充官方免费提供与REST路径对应证据后，可确认本轮指定公告查询服务费用为0。原冻结环境免费要求、HTTP成功、匿名60次/小时限额、无付款信息均不能单独支持这个金额。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：指定 GitHub global-advisories 匿名 REST API 被真实查询：两次 GET /advisories?cve_id= 均 HTTP 200，返回两条公告记录。答复对 CVE-2025-57833（5.2.x 受影响范围 >= 5.2a1,< 5.2.6，当前 5.2.6 已不在范围，最早修复 5.2.6）与 CVE-2025-59681（>= 5.2,< 5.2.7，当前 5.2.6 仍匹配，最早修复 5.2.7）的匹配结论、5.2.x 修复边界及仅这两条的最低升级版本 5.2.7 均与记录一致，且与事前独立取得的维护者参考相符；含中文说明与可追溯依据链接，全程只读。；服务操作 completed；用户交付 completed；阻碍 无；两次指定的 GitHub global-advisories 匿名 API 请求均成功（HTTP 200），答复正确区分两条告警的匹配状态、给出 5.2.x 修复版本 5.2.6/5.2.7 与最低升级 5.2.7 并附可追溯链接。
+- [afs-20261010-johor40-advisories-github-business-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json)：模型费用 $0.0086；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 补充官方免费提供与REST路径对应证据后，可确认本轮指定公告查询服务费用为0。原冻结环境免费要求、HTTP成功、匿名60次/小时限额、无付款信息均不能单独支持这个金额。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：执行者使用指定服务 GitHub Global Security Advisories 匿名 REST API（api.github.com/advisories，API 版本 2026-03-10，Accept: application/vnd.github+json，无凭据）逐条查询两条 CVE，返回 HTTP 200 的真实记录：CVE-2025-57833 的 5.2 分支范围为 >= 5.2a1,< 5.2.6、修复版 5.2.6，故 Django 5.2.6 已不在受影响范围；CVE-2025-59681 的 5.2 分支范围为 >= 5.2,< 5.2.7、修复版 5.2.7，故 5.2.6 仍受影响。两条合并的最低升级版本为 5.2.7。结论、5.2.x 修复边界与最低升级版本均与事前独立取得的 Django 维护者发布参考及同期同题交叉参考一致，来源链接可追溯，未越界。；服务操作 completed；用户交付 completed；阻碍 无；指定服务两次查询均返回 HTTP 200 真实记录，答复与交付物 execution/answer.md 完整覆盖两条告警的匹配结论、5.2.x 修复边界与最低升级版本，且与冻结维护者参考一致。
+
+**osv / public-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-advisories-osv-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：指定服务 OSV 公共 REST API 被真实调用：POST /v1/query 按 PyPI/Django/5.2.6 查询返回 HTTP 200，GET /v1/vulns/CVE-2025-57833 与 /CVE-2025-59681 各返回 HTTP 200。答复逐条正确：CVE-2025-57833 在 5.2 分支最早修复版本 5.2.6，当前 5.2.6 已不在受影响区间；CVE-2025-59681 在 5.2 分支最早修复版本 5.2.7，当前 5.2.6 仍受影响；仅处理这两条的最低升级版本为 5.2.7。结论与 OSV 记录 ranges 及事前冻结的维护者参考一致，依据链接可追溯，且未超出只读范围。；服务操作 completed；用户交付 completed；阻碍 无；OSV API 的 query 与 vulns 端点均返回 HTTP 200 并被实际用于结论；答复完整给出两条告警的匹配结论、5.2.x 最早修复版本（5.2.6 / 5.2.7）、最低升级版本 5.2.7 及可核对链接，无阻碍。
+- [afs-20261010-johor40-advisories-osv-business-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：本次执行通过指定 OSV 公共 REST API 真实查询两条告警并给出可核对结果。CVE-2025-57833 在 5.2 分支 fixed 5.2.6、受影响版本列表止于 5.2.5，故 5.2.6 不在受影响范围；CVE-2025-59681 fixed 5.2.7、受影响版本列表含 5.2.6，故仍受影响。5.2.x 最早修复版本分别为 5.2.6 与 5.2.7，仅处理这两条最低升级到 5.2.7。判断与事前独立冻结的维护者发布参考（reference.json）一致，来源链接可追溯，只读范围合规。；服务操作 completed；用户交付 completed；阻碍 无；服务端：osv_client.py 对 api.osv.dev 发出 GET /v1/vulns/{id} 与 POST /v1/query（SOURCE: live），缓存响应可核；交付：execution/answer.md 给出两条匹配结论、5.2.6/5.2.7 修复边界、最低 5.2.7 与依据链接，与独立冻结参考一致。无阻碍。
+- [afs-20261010-johor40-advisories-osv-business-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：本次执行实际查询了指定 OSV 公共 REST API（/v1/query 返回 HTTP 200；/v1/vulns/CVE-2025-57833、/v1/vulns/CVE-2025-59681 各返回 HTTP 200），并沿记录引用核对 Django 官方发布公告。逐条结论与冻结独立参考一致：CVE-2025-57833 当前 5.2.6 已修复、5.2.x 最早修复 5.2.6；CVE-2025-59681 仍匹配 5.2.6、5.2.x 最早修复 5.2.7；仅处理这两条最低升级到 5.2.7。中文说明、依据链接与所用服务均已给出，全程只读。；服务操作 completed；用户交付 completed；阻碍 无；OSV query 与两条 vulns 记录均 HTTP 200 且内容与冻结参考一致；维护者公告可追溯；最终答复完整包含两条匹配结论、修复版本、最低升级版本与依据链接。
+
+<a id="comparison-36e32b17588d"></a>
+
+### financial-access-001 v1
+
+**ecb-data / data-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-macro-ecb-data-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：指定 ECB Data Portal 官方 API（https://data-api.ecb.europa.eu/service/）匿名接入成功：以指定方式完成真实数据查询（EXR/M.USD.EUR.SP00.A 返回 HTTP 200 与 2026-07~09 的 USD/EUR 参考汇率观测），保存了可复用连接配置（service-config.json）与客户端（ecb_query.py），并在答复中说明接入步骤与唯一非故障现象（不支持的 Accept: +json 返回 406）。未使用其他服务替代，无需注册或人工步骤。；服务操作 completed；用户交付 completed；阻碍 无；指定 ECB 官方 API 匿名调用返回 HTTP 200 与真实汇率观测（execution/artifacts/out/exr_basic.csv、exr_headers.txt），配置与客户端已保存（execution/retained-files.json），答复交付完整（execution/answer.md）；无网络/权限/预算阻碍。
+- [afs-20261010-johor40-macro-ecb-data-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：执行者按指定入口 ECB Data Portal 官方 SDMX API 完成匿名接入：EXR、ICP 两项真实宏观数据查询均返回 HTTP 200 且含可解释的序列/时间/数值（如 EXR.M.USD.EUR.SP00.A 2026-09=1.1513，ICP HICP 2025-12=1.9），并保存了可复用的通用连接配置（runner 保留 service-config.json），答复准确说明免账号/Key 与实际接入方式。三项冻结要求均有当次真实证据，无未完成项。；服务操作 completed；用户交付 completed；阻碍 无；EXR、ICP 数据查询与元数据接口均实际执行并返回 200（execution/artifacts/responses/）；连接配置写入并由运行器保留（retained-files.json）；最终答复 execution/answer.md 完整交付。无网络/权限/预算等阻碍证据。
+- [afs-20261010-johor40-macro-ecb-data-access-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。; https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html; https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html; https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0; https://data.ecb.europa.eu/help/api/data-examples
+
+  结论与限制：指定 ECB Data Portal 官方 API（https://data-api.ecb.europa.eu/service/）接入成功：匿名免账号/Key，实测 EXR、HICP 等真实金融/宏观数据 HTTP 200，通用连接配置已保存到指定持久位置 /home/node/service-tools/service-config.json（retained-files.json 登记），答复准确说明接入方式且无阻碍。；服务操作 completed；用户交付 completed；阻碍 无；真实匿名 ECB API 调用返回 200 真实数据；配置保存于指定持久位置并由 retained-files.json 登记；答复与产物完整交付。
+
+**eurostat / statistics-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-macro-eurostat-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 外部服务为免费匿名公共 API，无回执金额，故 service_cost_usd 为空。; https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction; frozen-execution/ENVIRONMENT.md
+
+  结论与限制：Eurostat Statistics API 指定入口经真实匿名调用返回数据（HTTP 200）：EU27 2023 年 GDP=17294868.6 百万欧元（现价）与 EUR/USD 月均序列，均为可解释的 series/time/value；复用连接配置已写入指定持久位置并被 retained-files 记录，答案说明免账号无阻碍。；服务操作 completed；用户交付 completed；阻碍 无；指定 Eurostat 入口两次匿名 GET 均 HTTP 200 且返回真实观测值；配置已保存并被保留记录；答案完整交付，无阻碍。
+- [afs-20261010-johor40-macro-eurostat-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Eurostat Statistics API 官方文档声明免费且本次为匿名无 Key 访问，无账户、订阅或按量计费，故服务费用为 0。; https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction
+
+  结论与限制：用户委托已达成：执行者按指定 Eurostat Statistics API 入口（.../statistics/1.0/data/）完成两次真实只读数据查询，均返回 HTTP 200 的 JSON-stat 2.0 业务数据（含序列/时间/数值），并将后续调用所需的连接配置写入持久位置 /home/node/service-tools/service-config.json；答复准确说明该入口免费匿名、无需注册/Key，无阻碍。；服务操作 completed；用户交付 completed；阻碍 无；指定 Eurostat Statistics API 端点两次真实查询成功（HTTP 200 JSON-stat 2.0，见 cache 原始响应），必要配置已写入持久位置并保留，答复完整交付结果与配置。
+- [afs-20261010-johor40-macro-eurostat-access-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 公开且免费的匿名接口，本次无付费、无账单回执；服务费用按免费规则确认。; https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction; grading/artifacts/evidence/eurostat-free-rule.md
+
+  结论与限制：执行者使用指定 Eurostat Statistics API 入口（匿名、无 Key）完成一次真实金融数据查询（HTTP 200，JSON-stat 2.0，含 series/time/value），并保存了可复用的连接配置；答复准确说明免账号/免费与 format=JSON 约束，无注册或人工介入。；服务操作 completed；用户交付 completed；阻碍 无；指定入口匿名 GET 返回 HTTP 200 及真实金融观测（response_irt_lt.json）；连接配置写入 service-config.json 并保留；answer.md 交付结果与约束说明。无阻碍因素。
+
+<a id="comparison-c53ca46196b8"></a>
+
+### public-holidays-berlin-001 v1
+
+**nager-date / community-api-v4** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-holidays-nager-date-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无付费回执；依据官方服务条款 Web API 对私人/非营利项目免费，本次为私人非商业低量只读匿名调用，未计费，故无实付金额。; https://nagerholidays.com/legal/termsofservice
+
+  结论与限制：执行者通过指定服务 Nager.Date Community API v4 发起真实只读查询 GET https://nagerholidays.com/api/v4/Holidays/DE/2027（HTTP/2 200），对德国 2027 年 19 条公共假日记录按 Public 且 (nationalHoliday=true 或 subdivisionCodes 含 DE-BE) 筛选，得到与冻结独立官方参考一致的 10 个柏林州公共节假日，按日期升序列出并给出总数与可追溯来源，交付完整、无重复、无越界。；服务操作 completed；用户交付 completed；阻碍 无；指定服务真实查询成功（HTTP/2 200，原始响应 execution/artifacts/cache/DE_2027.json）；最终答复 execution/answer.md 交付 10 条柏林 2027 公共节假日，日期与名称正确、升序、总数准确、来源可追溯。
+- [afs-20261010-johor40-holidays-nager-date-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Hosted Community v4 Web API free for private/non-profit use per official terms; no charge reported for this run.; https://nagerholidays.com/legal/termsofservice; https://nagerholidays.com/api; grading/artifacts/evidence/free-rule-nager.md
+
+  结论与限制：Executor made a real anonymous call to the assigned Nager.Holidays Community v4 Web API (GET /api/v4/Holidays/DE/2027, HTTP 200) and delivered an ascending, deduplicated list of the 10 Berlin public holidays for 2027 with a traceable source. The list matches the frozen independent reference (expected_count=10, all dates and identities).；服务操作 completed；用户交付 completed；阻碍 无；Real HTTP 200 response from the assigned service stored at execution/artifacts/holidays_cache/DE_2027.json; delivered 10-holiday ascending list matches reference expected_count=10.
+- [afs-20261010-johor40-holidays-nager-date-business-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json)：模型费用 $0.0096；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Nager.Date 官方服务条款规定 Web API 可用于私人或非营利项目，商业用途需赞助；本次为匿名公共入口单次低量只读查询，无账号、密钥或付款，未观察到任何计费。; https://nagerholidays.com/legal/termsofservice
+
+  结论与限制：指定服务 Nager.Date Community API v4 被真实调用（GET https://nagerholidays.com/api/v4/Holidays/DE/2027，HTTP 200），从采集的原始响应独立复算并对冻结官方参考，得到与 reference.json 完全一致的 10 个日期/节日；清单按日期升序、无重复、总数=10、保留周末实际日期、未混入他州节日，来源可追溯。；服务操作 completed；用户交付 completed；阻碍 无；真实 v4 查询返回 HTTP 200 且原始响应可复算；最终答复含升序 10 项、准确总数与可追溯来源，与冻结官方参考一致。
+
+**openholidays / public-holidays-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-holidays-openholidays-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json)：模型费用 $0.0100；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方 FAQ 明确该 API 为 open data、free of charge 且允许商业使用；本次为匿名公共入口，无账号/key/付款，全部请求 HTTP 200，未产生任何费用。; https://www.openholidaysapi.org/en/faq/; ENVIRONMENT.md (controller-provided: 指定服务‘免费含商业’); execution/artifacts/ENVIRONMENT.md; service-config.json (auth: none; notes: no registration, no payment, no credentials)
+
+  结论与限制：本次执行通过指定服务 OpenHolidays API 真实查询并经 subdivisionCode=DE-BE 过滤，交付 2027 年柏林州公共节假日 10 个，按日期升序、无重复、无越界；与事前冻结的独立官方参考逐条一致，总数与来源均可追溯。；服务操作 completed；用户交付 completed；阻碍 无；OpenHolidays API 的 Subdivisions/Languages/Countries 及 DE-BE 2027 PublicHolidays 请求均 HTTP 200 并返回数据（execution/artifacts/raw_*.json）；最终答复 execution/answer.md 给出准确的 10 项柏林节日清单，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json)：模型费用 $0.0065；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无费用回执；依官方免费规则与本次匿名无凭据调用判定为免费，实付 0。; https://www.openholidaysapi.org/en/faq/
+
+  结论与限制：指定 OpenHolidays API 真实查询成功（HTTP 200），按 DE-BE 与 2027 年返回 10 条 Public 节假日，与事前冻结的独立柏林官方参考逐项一致：日期、节日身份、顺序、总数均正确，未混入他州节日、学校假期或普通星期日，周末照列未补休，来源可追溯。；服务操作 completed；用户交付 completed；阻碍 无；指定 OpenHolidays PublicHolidays 请求返回 HTTP 200，合法限定 DE-BE 与 2027 年；用户收到按日期升序的 10 条清单、总数与来源，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-business-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json)：模型费用 $0.0070；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: OpenHolidays API 为开放数据项目，官方 FAQ 明确免费使用且允许商业用途；本次仅访问匿名只读公共端点，无账号、无凭据、无付款。; https://www.openholidaysapi.org/en/faq/; review-packet/index.json#inputs/ENVIRONMENT.md
+
+  结论与限制：本次执行真实调用指定服务 OpenHolidays API 的匿名公共入口，正确限定 DE-BE（柏林州）与 2027-01-01~2027-12-31，返回并交付了与冻结独立官方参考完全一致的 10 条公共节假日，日期升序、无重复、无越界，来源可追溯。；服务操作 completed；用户交付 completed；阻碍 无；OpenHolidays API 三次真实只读请求均成功返回（Subdivisions、DE-BE PublicHolidays、DE 全国对照），最终答复列出 10 条正确节假日并注明来源；无网络、权限或预算障碍。
+
+<a id="comparison-ce7a914a844f"></a>
+
+### public-holidays-access-001 v1
+
+**nager-date / community-api-v4** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-holidays-nager-date-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Nager.Date Community Web API 对私人/非营利用途免费，无按量费率。; https://nagerholidays.com/legal/termsofservice; https://nagerholidays.com/api
+
+  结论与限制：执行者通过指定 Community API v4 入口对新加坡(SG)2026完成一次真实查询，HTTP 200 返回 11 条真实假日（示例 2026-08-09 National Day），并将可复用配置写入 ENVIRONMENT 指定的持久路径 /home/node/service-tools/service-config.json；答复给出范围、示例节日、来源、配置位置、账号来源与阻碍，内容与响应一致且无秘密泄露。；服务操作 completed；用户交付 completed；阻碍 无；指定服务真实查询成功（SG 2026，HTTP 200，11 条），配置写入指定持久路径并已保留；答复完整说明结果、配置与阻碍。MY 不受支持属已如实记录并绕过的障碍，未阻止任务完成。
+- [afs-20261010-johor40-holidays-nager-date-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 在线 Community v4 REST API 匿名使用，无账号/密钥/付款；许可证密钥要求仅针对离线 NuGet/Docker 变体。; https://nagerholidays.com/api; https://nagerholidays.com/legal/termsofservice; https://nagerholidays.com/integration/getstarted; grading/artifacts/evidence/nager-free-rule.md
+
+  结论与限制：执行者使用指定服务 Nager.Date Community v4 的指定入口 /api/v4/Holidays 完成了一次真实查询：匿名 GET https://nagerholidays.com/api/v4/Holidays/SG/2026 返回 HTTP 200 与 11 条公共假日（含 2026-08-09 National Day），答复中的地区/年份、来源、日期与名称与真实响应一致；非秘密连接配置已写入指定持久目录 /home/node/service-tools/service-config.json，retained-files 确认保留，查询脚本可复用；匿名入口无注册、无人工介入、无额外申请，并如实报告了实际阻碍（MY 不在覆盖范围）。全部要求有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定服务 v4 匿名入口真实查询成功（HTTP 200，SG/2026 共 11 条，含 2026-08-09 National Day），配置持久保存且可复用；MY 未覆盖属服务能力范围限制，执行者改用受支持地区后任务完成，未构成阻碍。
+- [afs-20261010-johor40-holidays-nager-date-access-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无付款回执，无按量计费；依官方条款在本轮非商业用途下免费，故记 confirmed_free。; https://nagerholidays.com/legal/termsofservice; https://nagerholidays.com/api; grading/artifacts/evidence/free-use-terms-excerpt.txt; execution/artifacts/headers-sg2026.txt
+
+  结论与限制：通过指定的 Nager.Date Community v4 匿名入口完成了一次真实小范围假日查询（新加坡 SG/2026，HTTP 200，返回 11 条公共假日，示例日期+名称与响应一致），并把连接配置保存到指定持久目录 /home/node/service-tools/service-config.json，答复给出配置位置、自助步骤与实际阻碍（MY 未被覆盖返回 204）。无账号、无付费、无人工介入，未见秘密泄露。；服务操作 completed；用户交付 completed；阻碍 无；指定 v4 入口返回真实假日数据（SG-2026.json），配置持久保存（retained-files.json），答复含日期+名称、来源、步骤与阻碍，无未满足的授权或环境阻碍。
+
+**openholidays / public-holidays-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-holidays-openholidays-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: OpenHolidays API 为开放数据，官方 FAQ 明确免费使用且允许商业用途。; https://www.openholidaysapi.org/en/faq/; grading/artifacts/evidence/service-free-check.md
+
+  结论与限制：指定 OpenHolidays API 匿名入口接通成功，完成一次真实的小范围假日查询：德国 DE、2026 全年（languageIsoCode=EN）返回 20 条公共假日，PublicHolidays 请求 HTTP 200，原始响应含 2026-01-01 New Year's Day 与 2026-10-03 Day of German Unity，答复与响应一致。非秘密连接配置保存在指定持久位置 /home/node/service-tools/service-config.json（运行器 retained-files 记录 service-config.json），答复给出配置位置、账号来源、自助步骤与阻碍。无账号/Key/付费，无需人工介入或额外申请；服务为免费公开数据（含商业用途）。；服务操作 completed；用户交付 completed；阻碍 无；PublicHolidays 等 4 个端点均 HTTP 200 返回真实数据，DE/2026 返回 20 条假日；答复含地区/年份、日期与名称、来源与可复用配置位置，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: OpenHolidays API 为免费公共 API，无账号、无付费、无计费；数据许可为 ODbL 1.0（署名与共享相同要求）。; https://www.openholidaysapi.org/en/faq/
+
+  结论与限制：已用指定 OpenHolidays API 的 /PublicHolidays 入口完成一次真实小范围假日查询（德国 DE、英语 EN、2026 全年），HTTP 200 返回 20 条 Public 假日，并如实报告示例 2026-10-03 "Day of German Unity"；匿名入口无需账号或注册，通用连接配置已保存到指定持久目录，接入步骤与实际阻碍均有说明。；服务操作 completed；用户交付 completed；阻碍 无；指定 /PublicHolidays 查询返回 HTTP 200 的 20 条德国 2026 公共假日（含 2026-10-03 Day of German Unity）；配置保留于指定持久目录；无网络、接入、预算或执行阻碍。
+- [afs-20261010-johor40-holidays-openholidays-access-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: OpenHolidays API 为开放数据项目，官方 FAQ 明确免费且允许商业使用；本轮仅使用匿名公共端点，未注册、未付款。; https://www.openholidaysapi.org/en/faq/; execution/artifacts/raw/publicholidays_DE_2024Q1.json
+
+  结论与限制：指定 OpenHolidays API 的匿名公共入口（https://openholidaysapi.org/PublicHolidays）实际完成了一次真实小范围假日查询：DE / 2024-01-01..2024-03-31 返回 5 条公共节假日，HTTP 200，答复中给出的 2024-01-01 New Year's Day 与 2024-03-29 Good Friday 与采集到的响应一致。非秘密的持久连接配置已写入指定位置 /home/node/service-tools/service-config.json（receipt retained-files 收录），接入步骤与阻碍如实说明，无秘密泄露、无人工介入、无额外申请。；服务操作 completed；用户交付 completed；阻碍 无；匿名入口 /Countries、/Languages、/Subdivisions、/PublicHolidays 均 HTTP 200；指定 PublicHolidays 查询返回真实节日数据，配置已持久保存，答复完整，无 403/429、无人工介入。
+
+<a id="comparison-1a93823643b5"></a>
+
+### dependency-advisories-access-001 v1
+
+**github / public-advisories-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-advisories-github-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：指定服务 GitHub global-advisories 匿名 REST API 已被实际接通并完成一次真实查询：采集响应含可识别公告（GHSA 标识 + 关联包 code.vikunja.io/api + 来源 github.com/go-vikunja/vikunja），HTTP 200 且响应头确认 API 版本 2026-03-10，与答复一致；通用连接配置保存于授权持久位置并被保留，答复给出复用位置、自助步骤与真实门槛，无越界操作。；服务操作 completed；用户交付 completed；阻碍 无；指定匿名入口 api.github.com/advisories 返回 HTTP 200 且响应头确认版本 2026-03-10，采集响应含可识别公告与关联包；无可证实阻碍。
+- [afs-20261010-johor40-advisories-github-access-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：匿名公共入口按指定方式完成真实查询：GET https://api.github.com/advisories（ecosystem=npm，per_page=3）返回 HTTP 200 且含 3 条可识别公告，单条 GET /advisories/GHSA-pwhx-cvv3-qj5c 亦返回 200；答复中的公告标识、关联包名与来源与原始响应一致，可复用连接配置保存在授权持久位置 /home/node/service-tools/service-config.json（retained-files.json 列明，匿名无秘密）。接入步骤、账号来源（匿名、无账号）与实际阻碍（60 次/小时限流）与响应头一致。；服务操作 completed；用户交付 completed；阻碍 无；指定服务匿名入口实际返回 HTTP 200 的真实公告（列表 3 条 + 单条详情），答复与响应一致；无网络/权限/预算阻碍。
+- [afs-20261010-johor40-advisories-github-access-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 与原14run采用同一费用规则。新增本接入run事实对应免费公共global-advisories入口，故service_cost_usd=0/confirmed_free；不复核其任务完成状态。; https://github.blog/news-insights/company-news/announcing-github-security-lab-securing-the-worlds-code-together/; https://github.blog/changelog/2023-07-28-get-global-security-advisories-via-rest-api/; https://docs.github.com/en/rest/security-advisories/global-advisories
+
+  结论与限制：指定 GitHub global-advisories 匿名 REST 入口被真实调用：列表查询 GET /advisories?per_page=2&ecosystem=npm 与详情 GET /advisories/GHSA-pwhx-cvv3-qj5c 均返回 HTTP 200，响应含可识别公告标识 GHSA-pwhx-cvv3-qj5c / CVE-2026-108259、关联包 npm/@tinacms/cli（范围 <= 2.7.0）及来源 github.com/tinacms/tinacms，答复与响应一致。连接配置写入授权的持久位置，匿名入口无注册/授权/付款，未越出只读范围。；服务操作 completed；用户交付 completed；阻碍 无；指定服务经指定入口被真实调用并返回 HTTP 200 可识别公告（详情响应 execution/artifacts/cache/e8cf526a030f5524.json）；答复 execution/answer.md 给出公告标识、关联包、来源、配置位置与接入步骤，与响应一致；未观察到网络、接入、凭据或执行阻碍。
+
+**osv / public-api** — 3 完成 / 0 未完成 / 0 环境无效。
+
+1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+
+准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
+
+- [afs-20261010-johor40-advisories-osv-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json)：模型费用 $0.0098；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：指定 OSV 公共 REST API（POST /v1/query 与 GET /v1/vulns/{id}）已实际调用并返回可识别公告与关联包，答复与原始响应一致；后续查询配置写入授权持久目录且无秘密；接入步骤与实际门槛（匿名、无注册/凭据/付费、未触发 403/429）如实说明，均在授权范围内完成。；服务操作 completed；用户交付 completed；阻碍 无；指定 OSV API 查询与记录路径均实测返回可识别公告（GHSA-29mw-wpgm-hmr9 等）；最终答复 execution/answer.md 含公告、关联包、复用配置位置与接入门槛，交付完整。
+- [afs-20261010-johor40-advisories-osv-access-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：指定 OSV 公共 REST API 已实际接通：经 api.osv.dev 的 POST /v1/query 对 npm minimist 1.2.0 发起真实查询并取得可识别公告（GHSA-vh95-rmgr-6w4m / GHSA-xvch-5gv4-984h，关联包 npm/minimist，来源 GitHub Advisory Database），并以 GET /v1/vulns/{id} 复核记录路径 200；可复用连接配置保存在授权持久位置 /home/node/service-tools/service-config.json（无秘密），答复给出配置位置、账号来源（无，匿名公共入口）、自助步骤及实际阻碍（无）。逐项核对原始采集响应与答复一致。；服务操作 completed；用户交付 completed；阻碍 无；指定 OSV API 的 POST /v1/query 与 GET /v1/vulns/{id} 均真实返回 200（execution/artifacts/query_minimist_1.2.0.json、record_GHSA-vh95-rmgr-6w4m.json），可复用配置已保存（execution/retained-files.json），用户答复齐备（execution/answer.md）；无网络、权限、预算或执行阻碍迹象。
+- [afs-20261010-johor40-advisories-osv-access-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 与原14run采用同一费用规则。新增本接入run的小meta分别映射到query及vulns公共API，故service_cost_usd=0/confirmed_free；API无限流、无认证样例或未付款并非独立费用依据。; https://osv.dev/blog/posts/announcing-osv-service-level-objectives/; https://google.github.io/osv.dev/quickstart/; https://google.github.io/osv.dev/api/
+
+  结论与限制：执行者按指定入口 POST https://api.osv.dev/v1/query 发起真实匿名查询（jinja2 2.4.1 / PyPI，HTTP 200，返回 18 条公告），并用 GET /v1/vulns/GHSA-462w-v97r-4m45 二次核对；答复给出的公告标识、别名、关联包、受影响范围与来源均与采集到的真实响应一致。连接配置写入授权持久位置 /home/node/service-tools/service-config.json（retained-files.json 已列出），匿名无凭据，可跨会话复用。范围合规：仅只读元数据，未安装/运行受影响包、未扫描、未付费、未越权。无账号、注册或人工介入。；服务操作 completed；用户交付 completed；阻碍 无；指定 OSV 匿名 API 真实查询成功（POST /v1/query status 200，命中 GHSA-462w-v97r-4m45，GET /v1/vulns 复核一致）；持久配置已保存位置明确；答复与响应一致。无网络、权限、额度、材料或服务能力阻碍；无人工介入。
+
 <a id="comparison-eb4cee33eee8"></a>
 
 ### database-atomic-import-001 v1
@@ -639,40 +1162,6 @@
 - [neon-atomic-access-ds41-r1](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: 无付费回执或账单；父项目与免费额度由总控预先提供，本次未捕获 Neon 的计价规则或用量计费证据。执行答复依据环境说明称免费，但材料未提供可独立核验的免费规则来源，故保留 unknown。已观察的限额为项目到期 2026-10-11T12:36:21.796Z、100MB 存储/1GB 传输/72h 由项目内全部逻辑库共享。
 
   结论与限制：已在总控预提供的 Neon 父项目内，用授权管理连接真实新建单一逻辑空库 [SERVICE_SECRET]，并通过标准 Postgres 驱动完成一次只读连通查询（返回新库与 [SERVICE_SECRET]，用户表数=0），未建业务表、未写业务行；配置保存到指定持久目录且答复只给路径、未泄露凭据；账号来源、接入步骤、人工门槛与到期/限额如实说明。费用无回执或可核计价规则，保留 unknown。
-
-**turso / platform-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · Preprovided existing authorized parent identity; executor creates one fresh empty logical database
-
-准备：Fresh containers, current injected runner source hashes, same image/OpenCode1.18.35 DeepSeekFlash/high, TUNA pip index and empty cache. Existing Turso personal starter management account and existing authorized Neon Claimable parent credentials provided; no registration measured. Agent creates and queries one new empty logical database; earlier user/test databases untouched. New Neondatabase shares existing parent100MB/1GB and2026-10-11T12:36:21.796Zexpiry; no new parent/identity. New cohort not pooled with anonymous-parent-creation access. Executor25modelrequests/300s andgrader40/300s,20serviceoperations instructed,first403/429stop,2parallelproviderstreams. Controller entitlement preflight and runtime preparation are external setup, costs not separately measured. Injected file hashes in private preparation and runtime receipts.
-
-- [turso-atomic-access-ds41-r1](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Turso 账户处于 Free/免费计划，$0/月且 overages=false，支付方式状态未单独核实；本轮仅新增 1 个空库并使用 1 次只读查询，用量远低于 Free 额度（100 库/5GB），未产生计费或超限。token 无到期、库无计划删除。; https://turso.tech/pricing (Free plan $0/month, 100 databases, 5GB storage; fetched 2026-10-08); frozen-execution/ENVIRONMENT.md (controller snapshot: starter plan price 0, overages=false, 1 existing DB, storage 36864 bytes, no blocked reads/writes)
-
-  结论与限制：本轮通过指定入口 Turso Platform API v1 接入已提供的 Turso 账号（非本轮注册），新建恰好一个空库 [SERVICE_SECRET]（HTTP 200，返回服务生成的 DbId/Host），并用官方 SQL HTTP /v2/pipeline 执行一次真实只读查询 SELECT 1/current_timestamp，HTTP 200、ok=1、rows_written=0。连接配置与库标识已写入指定持久目录 /home/node/service-tools/（credentials.json、service-config.json，权限 600），答复只给配置路径、未泄露凭据；未创建业务表/写业务数据、未访问既有库；预算管理请求 4 次 + SQL 提交 1 次（≤20）、新库 1 个（≤1），无 403/429。账号来源、人工门槛与免费/到期限制均已如实说明。费用为 Turso Free 计划 $0 且账户 overages=false，本次用量在免费额度内。
-
-<a id="comparison-cb6f4b024594"></a>
-
-### collaborative-tables-shared-expenses-001 v1
-
-**grist / hosted-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · provided: existing Grist Personal account; new empty parent workspace prepared by controller
-
-准备：Shared-expenses formula followup on same previously verified Grist REST/MCP runtimes and existing Personal account. Two new empty parent workspaces and empty documents prepared/read-verified by controller; no business schema/data/formulas/helper supplied, preparation overhead unmetered. Prior task resource pointers removed and archived root-only; generic retained auth/route setup only, no installed dependencies. Adapter archives previous home/workspace/tmp before new session. Retention audit SHA256 0c63da5f9d52d12497339feb10a14b81143a3fb34a15ed70ad232dea5afdc928. Same image/OpenCode1.18.35/DeepSeekV4.1Flash high,2GiB/1CPU/pids256; execution25modelrequests/600s, grading40/300s,32000outputcap. Maximum40 caller-visible service operations per route; stop at first403/429/402/paywall or2consecutive connection failures. These service stop rules are instructions, model request limit is enforced by proxy. REST then MCP serial on shared quota; remaining monthly quota unknown. After both executions collected, controller independently snapshots each document, then applies pre-frozen1append+1amountcorrection only to source ledger columns when mapping safely established; never formulas/schema/summary. Initial/append/correction snapshots and independent arithmetic reference supplied to separate graders without credentials or peer verdicts. Controller verification writes and reads are separate overhead, not part of executor cost. No peer-results group for same-provider routes. Final test state retained per input. Single synthetic two-person50/50 ledger per route, same Grist engine; not multiuser-concurrency/accounting-advice/general reliability or protocol ranking.
-
-- [grist-mcp-shared-expenses-001-ds41-r1](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Grist 免费 Personal 计划，本次仅用免费额度，未付费、未绑卡、未开启超额。; https://support.getgrist.com/limits/; https://support.getgrist.com/limits/; public-review/verification.json — unchanged actual personalFree entitlement from frozen controller initial read; remaining month quota unknown
-
-  结论与限制：执行者通过指定入口（Grist 官方托管 MCP）在本轮专属新文档建立了真实在线账本：独立初态回执确认六笔明细逐条与输入一致，服务端自动汇总（总支出2400.00、林青已付2095.60、周舟已付304.40、各应分摊1200.00、周舟需补给林青895.60）与初次答复及独立基准一致，答复给出私人链接并说明在“支出明细”表继续记账。执行者停止后，总控仅追加一笔、再修正一笔金额，服务端汇总分别自动重算为 2442.40/874.40 与 2422.40/864.40，公式与结构未变，证明汇总由明细持续计算。资源在免费 Personal 额度内，未新建文档、未分享/邀请/通知/支付/转账。
-
-**grist / rest-api** — 0 完成 / 1 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · provided: existing Grist Personal account; new empty parent workspace prepared by controller
-
-准备：Shared-expenses formula followup on same previously verified Grist REST/MCP runtimes and existing Personal account. Two new empty parent workspaces and empty documents prepared/read-verified by controller; no business schema/data/formulas/helper supplied, preparation overhead unmetered. Prior task resource pointers removed and archived root-only; generic retained auth/route setup only, no installed dependencies. Adapter archives previous home/workspace/tmp before new session. Retention audit SHA256 0c63da5f9d52d12497339feb10a14b81143a3fb34a15ed70ad232dea5afdc928. Same image/OpenCode1.18.35/DeepSeekV4.1Flash high,2GiB/1CPU/pids256; execution25modelrequests/600s, grading40/300s,32000outputcap. Maximum40 caller-visible service operations per route; stop at first403/429/402/paywall or2consecutive connection failures. These service stop rules are instructions, model request limit is enforced by proxy. REST then MCP serial on shared quota; remaining monthly quota unknown. After both executions collected, controller independently snapshots each document, then applies pre-frozen1append+1amountcorrection only to source ledger columns when mapping safely established; never formulas/schema/summary. Initial/append/correction snapshots and independent arithmetic reference supplied to separate graders without credentials or peer verdicts. Controller verification writes and reads are separate overhead, not part of executor cost. No peer-results group for same-provider routes. Final test state retained per input. Single synthetic two-person50/50 ledger per route, same Grist engine; not multiuser-concurrency/accounting-advice/general reliability or protocol ranking.
-
-- [grist-rest-shared-expenses-001-ds41-r1](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json)：模型费用 —；Per-request usage capture is incomplete. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard）。服务费用 $0；confirmed_free: 仅使用授权 Grist Personal 免费账户；无付款回执。; controller-verification/initial.json; frozen-execution/ENVIRONMENT.md; https://support.getgrist.com/limits/; public-review/verification.json — unchanged actual personalFree entitlement from frozen controller initial read; remaining month quota unknown
-
-  结论与限制：服务侧账本本身正确且可自动更新：执行者经指定 Grist REST 入口在总控提供的本轮空文档中建立了 Expenses/Settlement 两表并录入六笔明细，独立远端读回初态汇总（总支出 2400.00、每人应分摊 1200.00、林青已付 2095.60、周舟已付 304.40、周舟补给林青 895.60）与输入及冻结参考一致；总控在文档中追加一笔、修正一笔金额后，服务端汇总分别自动变为 2442.40/1221.20/2095.60/346.80/874.40 与 2422.40/1211.20/2075.60/346.80/864.40，与参考一致且公式未变。但执行者没有向用户交付要求的答复：最终产物 execution/answer.md 只有 8 行过程叙述，不含私人账本链接、不含各自已付/应分摊/补差方向与金额、也不含继续记账位置说明；执行回执 exit_code=1，会话最后事件为运行器返回的模型请求预算耗尽（403，25/25 次用尽），执行在“准备核对最终值”前中止。按冻结标准，真实在线账本与完整用户答复分别判定，本次服务计算正确但完整用户交付缺失。
 
 <a id="comparison-c49d8e01e18c"></a>
 
@@ -808,64 +1297,6 @@
 
   结论与限制：执行者通过指定官方匿名 hosted MCP 入口 https://mcp.exa.ai/mcp，用 web_fetch_exa 真实提取 https://example.com/ 正文，标题与概述与返回值及独立参考一致；非秘密复用配置已写入持久目录，接入步骤、keyless 免注册与门槛说明属实。未使用需 Key 的 REST /contents、未直读源站、未注册账号，1 次提取调用在 6 次预算内。
 
-**firecrawl / public-scrape-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; anonymous public extraction routes, no account/email/token/payment supplied
-
-准备：Same frozen task, model and budget. Firecrawl anonymous REST scrape versus Exa anonymous hosted MCP content fetch; a specific PDF and route trial, not a general service or interface ranking. No account/key/paid fallback. Fresh access before business; retain only audited generic config and genuinely installed dependencies. Restart each owned execution container after access to remove orphan processes while retaining file hashes, then fresh home/session/workspace. Same image,2GiB/1CPU/pids256,pipTUNA and initial empty cache. Execution25requests/access300s/business600s,grading40/300s,32000outputtokens/request. Candidate API6/stage and at least1s spacing are instructions; model/time caps enforced. Anonymous remaining quota unknown; do not apply keyed account allowance or price. Independent source PDF/reference and official anonymous route/cost documents frozen before candidate executions, supplied only to graders; business peers sealed before separate grading, no peer verdicts. Format, truncation and caching features differ by route; disclose actual behavior, no artificial common freshness claim.
-
-- [firecrawl-pdf-access-ds41-r1](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 匿名无 Key 属官方 keyless 免费档；本次调用符合其条件，未产生实付费用。匿名每日配额数值/余量未知，按回执 creditsUsed=1 记录但不计费。; official-route-sources/firecrawl-rate-limits.md; official-route-sources/firecrawl-billing.md; grading/artifacts/evidence/free-rule.md
-
-  结论与限制：执行者通过指定官方匿名入口 POST https://api.firecrawl.dev/v2/scrape（无 Authorization、无 API key）真实取得 https://example.com/ 正文：HTTP 200、success:true、metadata.title=Example Domain、statusCode=200，返回 markdown 首段与参考页面正文逐字一致；据此给出的标题与一句概述与返回正文相符。必要配置已写入指定持久目录 /home/node/service-tools/service-config.json 并为合法 JSON、无秘密，答复仅给出路径。账号来源、接入步骤与门槛（无注册/无人工/无额外申请；匿名配额余量未知、默认缓存）如实说明。仅 1 次提取调用、未换服务或身份、未付费，符合预算。匿名无 Key 属官方文档明示的免费档且本次调用符合其条件。
-
-<a id="comparison-644e634b8512"></a>
-
-### dependency-advisories-check-001 v1
-
-**github / public-advisories-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public advisory API, no account/email/token/payment supplied · 独立验收可参考同期 2 份同题答案
-
-准备：Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created. Retention audit SHA256 7b1887aa539fb9c744c89b63df042874d9756ca439422714010d852a9d0057e5.
-
-- [github-advisories-django-001-ds41-r1](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json)：模型费用 $0.0076；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 指定 GitHub global-advisories 为匿名免费公共 API；本次 2 次 GET 均 HTTP 200，未用凭据、未付款，core 限流 60/小时。; frozen-execution/ENVIRONMENT.md; https://docs.github.com/en/rest/security-advisories/global-advisories
-
-  结论与限制：执行者用指定 GitHub global-advisories 匿名 API 对 CVE-2025-57833、CVE-2025-59681 各发起 1 次 cve_id 查询，均 HTTP 200 并采集原始记录。逐条核对 PyPI Django 5.2.6：CVE-2025-57833 的 5.2 分支范围为 >=5.2a1,<5.2.6，5.2.6 不匹配（已修复，首个修复版 5.2.6）；CVE-2025-59681 的 5.2 分支范围为 >=5.2,<5.2.7，5.2.6 仍匹配（首个修复版 5.2.7）；仅这两条的最低升级版本 5.2.7。结论与事前冻结的 djangoproject.com 公告及 5.2.6/5.2.7 发布说明一致，来源链接可追溯，仅读范围无安装或修改。
-
-**osv / public-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public advisory API, no account/email/token/payment supplied · 独立验收可参考同期 2 份同题答案
-
-准备：Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created. Retention audit SHA256 7b1887aa539fb9c744c89b63df042874d9756ca439422714010d852a9d0057e5.
-
-- [osv-advisories-django-001-ds41-r1](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 被测服务为 OSV 公共公告 API。任务冻结材料将本轮指定服务描述为免费公开公告服务（task.json resources），ENVIRONMENT.md 载明“OSV公开服务当前免费”。本次全部候选查询均为匿名、无 Key/Token/鉴权头，且未发生任何付费流程，费用为 0。; frozen-execution/ENVIRONMENT.md; task.json
-
-  结论与限制：本次执行真实查询指定 OSV 公共 API（匿名 POST https://api.osv.dev/v1/query）并按 CVE 别名定位两条记录；答复逐条正确判断 PyPI Django 5.2.6 的匹配情况与 5.2.x 修复边界，与采集到的 API 原始响应及事前冻结的 Django 维护者公告一致，且未越权。
-
-<a id="comparison-7a5fd0fd8e1a"></a>
-
-### dependency-advisories-access-001 v1
-
-**github / public-advisories-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; anonymous public advisory API, no account/email/token/payment supplied
-
-准备：Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created.
-
-- [github-advisories-access-ds41-r1](../data/experiments/evaluations/github-advisories-access-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: Anonymous GitHub global-advisories API; no payment, billing or fee was observed in the run. Only rate-limit (60/hour) and HTTP 200 headers were captured, and no official free-rule/pricing source was retained, so a free conclusion cannot be evidenced and cost is left unknown. This is the service fee only; model/token cost is out of scope.
-
-  结论与限制：Executor used the assigned anonymous route https://api.github.com/advisories with the required Accept, X-GitHub-Api-Version: 2026-03-10 and project User-Agent headers; captured HTTP 200 responses contain identifiable advisories (GHSA-q7m5-3jmv-vm48/praisonai, GHSA-77xj-x4rm-935c/datamodel-code-generator, GHSA-xpx6-x8c2-mw5w/praisonai) matching answer.md. A non-secret reusable config was written to the authorized persistent path /home/node/service-tools/service-config.json and recorded as retained. No account, token or human step was required; only the anonymous shared 60/hour rate-limit barrier is reported. No scope violations observed. Service fee: anonymous GitHub API showed no billing and only rate-limit headers, no official free-rule/pricing source was captured, so cost kept unknown.
-
-**osv / public-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; anonymous public advisory API, no account/email/token/payment supplied
-
-准备：Same frozen task, model and budget; two anonymous provider streams. Fresh access before business; only generic configuration and genuinely installed dependencies may be retained after controller audit, no old query helper/cache/answer. Same image 2GiB/1CPU/pids256, pipTUNA/emptycache. Exec25 model requests (access300s/business600s), grade40/300s, output32000. Candidate API limit6/stage and ≥1s spacing are instructions, assessed against actual traces; model/time caps enforced. One GitHub anonymous rate_limit preflight returned core60/60 before prepare; actual API headers govern quota. Independent maintainer source snapshot before candidate queries; business peer outputs frozen together before separate graders. Shared OSV/GHSA upstream is disclosed: compare metadata task delivery and access, not independent vulnerability discovery, exhaustive coverage, deploy exploitability or universal safe upgrades. No account or mutable service resource created.
-
-- [osv-advisories-access-ds41-r1](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: No billing receipt or usage-based charge applies to this anonymous endpoint. Official OSV documentation describes the API as anonymous with currently no rate limits but publishes no explicit free/pricing rule, and per rubric rate-limit absence or an unlisted price does not by itself establish free service. The frozen ENVIRONMENT.md notes the public service is currently free and no account/payment mechanism was used, but no official free rule with applicability evidence could be confirmed, so the cost is left unknown.; https://google.github.io/osv.dev/faq/; https://google.github.io/osv.dev/api/; execution/answer.md
-
-  结论与限制：OSV public API was reached at the assigned route POST https://api.osv.dev/v1/query and a self-selected real query returned HTTP 200 with an identifiable advisory (GHSA-462w-v97r-4m45, aliases CVE-2019-10906/PYSEC-2019-217) for package jinja2 (PyPI, pkg:pypi/jinja2); the same-API record path GET /v1/vulns/{id} returned the full record. A reusable non-secret config was written to the authorized persistent location /home/node/service-tools/service-config.json and retained. Answer matches the captured responses. Access was fully anonymous with no account/key/registration and no human or application barrier; only 3 candidate API requests (limit 6) were made, no installs/scans/repo changes/payments/messages.
-
 <a id="comparison-183e17ccb640"></a>
 
 ### mailboxes-create-001 v2
@@ -889,54 +1320,6 @@
 - [agentmail-mailbox-create-v2-ds41-r1](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json)：模型费用 $0.03；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: 没有任何 AgentMail API 调用成功（全部在边缘 403），无计费回执或成功用量；未取得 Free 邮箱，官方免费规则未被本次实际适用，故费用保留 unknown。
 
   结论与限制：未达到交付：没有创建任何邮箱、没有真实收件箱读取、也没有可复用的访问状态。执行者按匿名 receive-only 路径向 https://api.agentmail.to/v0/agent/sign-up 发起创建，但对 api.agentmail.to 的全部请求（含无认证根路径与 /v0/inboxes）都被 CloudFront 边缘以 403 Request blocked 拦截，应用层未返回 api_key/inbox；保存的 credentials.json 为空 {}。总控独立诊断从 host 与执行容器同样得到 CloudFront 403，且未做独立复用（independent_reuse=not_performed）。该阻碍属网络/接入障碍（环境侧），执行者已如实说明，非服务能力或资质问题；因基础执行环境与工具（shell/curl/python/node、常规联网及同服务 docs/console）均正常，未记为 invalid_run。另有执行行为问题：对指定 API 主机的候选请求超过 12 次上限（总控核为 17 次以上），且答复称 sign-up“唯一一次”与实际 4 次 POST 不符。
-
-<a id="comparison-39d86ae45d95"></a>
-
-### public-holidays-berlin-001 v1
-
-**nager-date / community-api-v4** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous publicAPI, no account/email/key/payment supplied · 独立验收可参考同期 2 份同题答案
-
-准备：Freshanonymousaccess thenbusiness with separate sessions/workspaces. Samefrozen task,model,effort,25executionrequests (300saccess/600sbusiness),40gradingrequests/300s,32000outputtokens/request. Samebaseimage2GiB/1CPU/pids256;2providerstreams;all4runtimes preconfigureTUNApipindex,emptycache,noadditionalpackages. ≤6APIrequests/stage,1atatime,≥2sstartspacing,truthfulUA. CurrentNagerCommunityv4 fornoncommercial/private/nonprofit vsOpenHolidayspublicAPI/ODbL,termsdifferences disclosed. No lookupcode/queryanswer/reference supplied; independentofficialBerlinHTML/referencefrozenbeforecalls;peerresultssealedbeforegrading. Completecandidateholidaytables/answersretainedprivately;publiconlyminimalverification/hashfacts,notaholidayportal. ActualAPI docs/schema discovery and dependency setupcountinrun. OneBerlin/yearlookup,notglobalcoverage/futureaccuracy/uptime/closureorlegalentitlementranking. Retentionapproved: genericconfig/dependenciesonly; controlleraudit SHA256 e6dc61b41dc164298bdb2616d2075a07e6e3db348167c1f4a25a71deffc2d030.
-
-- [nager-date-holidays-berlin-001-ds41-r1](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Nager.Date Community v4 托管 Web API 无 Key、无计费入口。官方条款允许 private/non-profit 项目使用，商业用途需 active sponsorship（本次为非商业低量服务研究）。实际匿名无 Key 请求 HTTP 200，未使用支付或订阅，NuGet/Docker 离线包的 license key 不适用于本次使用的托管 Community API。; https://nagerholidays.com/legal/termsofservice; https://nagerholidays.com/api
-
-  结论与限制：指定服务 Nager.Date Community v4 被真实调用：采集的工具记录显示 GET https://nagerholidays.com/api/v4/Holidays/DE/2027 返回 HTTP 200，正文为德国 2027 年 19 条公共假日条目。执行者按 nationalHoliday=true 或 subdivisionCodes 含 DE-BE 且类型 Public 过滤，得到 10 条，与事前冻结的柏林官方独立参考（reference.json）在日期与节日身份上完全一致，计数 10=10，按日期升序、无重复、无越界他州节日、周末节日保留实际日期。来源可追溯，服务在官方条款允许的非商业范围内无 Key 免费使用。
-
-**openholidays / public-holidays-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous publicAPI, no account/email/key/payment supplied · 独立验收可参考同期 2 份同题答案
-
-准备：Freshanonymousaccess thenbusiness with separate sessions/workspaces. Samefrozen task,model,effort,25executionrequests (300saccess/600sbusiness),40gradingrequests/300s,32000outputtokens/request. Samebaseimage2GiB/1CPU/pids256;2providerstreams;all4runtimes preconfigureTUNApipindex,emptycache,noadditionalpackages. ≤6APIrequests/stage,1atatime,≥2sstartspacing,truthfulUA. CurrentNagerCommunityv4 fornoncommercial/private/nonprofit vsOpenHolidayspublicAPI/ODbL,termsdifferences disclosed. No lookupcode/queryanswer/reference supplied; independentofficialBerlinHTML/referencefrozenbeforecalls;peerresultssealedbeforegrading. Completecandidateholidaytables/answersretainedprivately;publiconlyminimalverification/hashfacts,notaholidayportal. ActualAPI docs/schema discovery and dependency setupcountinrun. OneBerlin/yearlookup,notglobalcoverage/futureaccuracy/uptime/closureorlegalentitlementranking. Retentionapproved: genericconfig/dependenciesonly; controlleraudit SHA256 e6dc61b41dc164298bdb2616d2075a07e6e3db348167c1f4a25a71deffc2d030.
-
-- [openholidays-holidays-berlin-001-ds41-r1](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无计费回执；按官方免费规则确认本次服务费用为免费，非按执行者自称未付款。; https://www.openholidaysapi.org/en/faq/
-
-  结论与限制：本次执行使用指定服务 OpenHolidays API 的真实匿名只读请求（HTTP 200），限定 countryIsoCode=DE、subdivisionCode=DE-BE 与 2027-01-01~2027-12-31，返回 10 条 type=Public 公共节假日；日期与节日身份与冻结的柏林官方独立参考 10/10 对应，无他州独有节日、学校假期或普通星期日，周末保留实际日期，升序无重复，总数 10，来源可追溯。指定服务费用依官方 FAQ 免费规则确认为免费。
-
-<a id="comparison-0ce2de00d325"></a>
-
-### public-holidays-access-001 v1
-
-**nager-date / community-api-v4** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; anonymous publicAPI, no account/email/key/payment supplied
-
-准备：Freshanonymousaccess thenbusiness with separate sessions/workspaces. Samefrozen task,model,effort,25executionrequests (300saccess/600sbusiness),40gradingrequests/300s,32000outputtokens/request. Samebaseimage2GiB/1CPU/pids256;2providerstreams;all4runtimes preconfigureTUNApipindex,emptycache,noadditionalpackages. ≤6APIrequests/stage,1atatime,≥2sstartspacing,truthfulUA. CurrentNagerCommunityv4 fornoncommercial/private/nonprofit vsOpenHolidayspublicAPI/ODbL,termsdifferences disclosed. No lookupcode/queryanswer/reference supplied; independentofficialBerlinHTML/referencefrozenbeforecalls;peerresultssealedbeforegrading. Completecandidateholidaytables/answersretainedprivately;publiconlyminimalverification/hashfacts,notaholidayportal. ActualAPI docs/schema discovery and dependency setupcountinrun. OneBerlin/yearlookup,notglobalcoverage/futureaccuracy/uptime/closureorlegalentitlementranking.
-
-- [nager-date-holidays-access-ds41-r1](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json)：模型费用 $0.0064；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 托管 Community v4 Web API 未列入需 license key 的产品（license key 仅针对离线 NuGet/Docker），Terms 允许 private/non-profit 使用；本次为匿名非商业低量调用。无服务商回执，费用按官方免费规则确认为 0。; https://nagerholidays.com/integration/getstarted; https://nagerholidays.com/legal/termsofservice
-
-  结论与限制：指定服务 Nager.Date Community v4 的真实假日查询已完成：匿名 GET https://nagerholidays.com/api/v4/Holidays/AT/2026 返回 HTTP 200 与 20 条 AT 2026 假日，答复中的范围与示例（2026-01-01 New Year's Day、2026-12-25 Christmas Day）与采集响应一致；必要配置写入指定持久目录 /home/node/service-tools/service-config.json 且无秘密；答复说明了匿名无账号、无人工介入与无额外申请。未换服务或离线库，API 调用 1 次。
-
-**openholidays / public-holidays-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; anonymous publicAPI, no account/email/key/payment supplied
-
-准备：Freshanonymousaccess thenbusiness with separate sessions/workspaces. Samefrozen task,model,effort,25executionrequests (300saccess/600sbusiness),40gradingrequests/300s,32000outputtokens/request. Samebaseimage2GiB/1CPU/pids256;2providerstreams;all4runtimes preconfigureTUNApipindex,emptycache,noadditionalpackages. ≤6APIrequests/stage,1atatime,≥2sstartspacing,truthfulUA. CurrentNagerCommunityv4 fornoncommercial/private/nonprofit vsOpenHolidayspublicAPI/ODbL,termsdifferences disclosed. No lookupcode/queryanswer/reference supplied; independentofficialBerlinHTML/referencefrozenbeforecalls;peerresultssealedbeforegrading. Completecandidateholidaytables/answersretainedprivately;publiconlyminimalverification/hashfacts,notaholidayportal. ActualAPI docs/schema discovery and dependency setupcountinrun. OneBerlin/yearlookup,notglobalcoverage/futureaccuracy/uptime/closureorlegalentitlementranking.
-
-- [openholidays-holidays-access-ds41-r1](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json)：模型费用 $0.0091；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 官方 FAQ 明确 OpenHolidays API 为开放数据、免费使用且允许商业项目；本次为其覆盖的非商业低量匿名使用，无任何计费回执。; https://www.openholidaysapi.org/en/faq/
-
-  结论与限制：指定 openholidays 的 PublicHolidays 入口被真实调用并返回可识别假日（DE 2025-01-01 New Year's Day 等），最终答复与响应一致；复用配置已写入 ENVIRONMENT.md 指定的持久位置且无秘密；账号来源（匿名公共路线，无注册/人工介入/额外申请）与调用约束如实说明；模型/harness 与测评配置一致。
 
 <a id="comparison-bfa31194c37d"></a>
 
@@ -1076,20 +1459,6 @@
 
   结论与限制：本次真实调用冻结指定服务 Photon（https://photon.komoot.io/api/）并命中伦敦大英博物馆场馆对象（R 177044, tourism=museum），答复给出的 WGS84 纬度 51.5193118 / 经度 -0.1267051 与响应一致、轴序正确，距冻结官方场馆点约 20.7 m（≤200 m），并完整披露返回地址、来源与场馆级粒度，未把街道对象冒充场馆。
 
-<a id="comparison-d21a9019050d"></a>
-
-### geocoding-access-001 v1
-
-**nominatim / public-search-api** — 0 完成 / 0 未完成 / 1 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none; official low-volume public route selected deliberately for one public-venue research task
-
-准备：Fresh access then business sessions. Same frozen venue task,model/effort/generic tools/limits. Execution25modelrequests,access300s/business600s;grading40requests/300s;32000outputtokens/request. Two provider runtimes may overlap on shared16CPU/31.34GiB host,each2GiB/1CPU;one serial stream per APIhost,4calls/phase max and15s spacing,cache same query. Truthful projectUA supplied, no targetanswer or callscript. Generic setup inspected between sessions; all business data cleared. Graders use actual captured execution request/response and independent official venue reference; no extra candidate APIcalls. Both services shareOSM, so agreement is not independent geographic truth. One publicvenue,place-level mapmarking only, no entrance navigation or general geocoding accuracy claim. PublicOSMF policy explicitly linked/explained; not a generic arbitrary-query platform or recurring bulk geocoder.
-
-- [nominatim-geocoding-access-ds41-r1](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json)：模型费用 —；Per-request usage capture is incomplete. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard）。服务费用 $0；confirmed_free: 公共 OSM Nominatim 为捐赠运行的免费公开服务，无账号/Key/付费机制；本次无计费回执。本次因环境网络失败未发出成功请求，故无实际用量金额。; https://operations.osmfoundation.org/policies/nominatim/
-
-  结论与限制：执行环境无法连通指定入口 https://nominatim.openstreetmap.org/search：DNS 把 nominatim.openstreetmap.org 解析为与 OSM 无关的轮换 IP（含 Facebook 段 2a03:2880:...:face:b00c...、31.13.84.2 等），urllib/curl/webfetch 对该入口的连接一律超时或 Network unreachable；同一容器内 example.com、api.github.com、nominatim.org、operations.osmfoundation.org 均 HTTP 200，而 www.openstreetmap.org、www.google.com 同为 HTTP 000，指向容器级 DNS/出口限制。工作目录未产生 result.json 或 cache，last_request.json 仅记录一次尝试；会话在约 290 秒时被超时终止（exit_code=-15, timed_out=true），answer.md 仅剩未完成片段。核心阻碍属于执行环境网络（DNS/出口）而非服务能力、接入门槛或执行者行为，故记 invalid_run；未做接入补测。
-
 <a id="comparison-3bcbfb46bd35"></a>
 
 ### geocoding-access-001 v1
@@ -1224,30 +1593,6 @@
 
   结论与限制：本轮唯一执行入口为 Grist REST API，任务在总控预建并授权的工作区/文档内完成。总控在执行结束后（13:49:48 > 13:49:39）以只读 GET 独立重读，冻结回执完整（controller-verification/manifest.json，complete=true），Tasks 表恰有 3 条记录，字段、内容、日期、完成状态与期望一致；答复链接指向承载该表的文档（urlId [SERVICE_SECRET]），未完成清单为确认场地/林青/2026-09-15 与 制作海报/陈禾/2026-09-20，与远端一致。资源约束满足：1 个业务表、3 行、约 13 次业务调用（<40）、工作区仅 1 个文档，无分享/邀请/通知/付费。账号/密钥/空工作区由总控预建并授权（非本轮自主注册，已提供账号），执行阶段无人工介入。服务费用按 Grist Free(personalFree) 免费档确认免费（见 evidence/free-plan-usage.md）。
 
-<a id="comparison-5bcdeb33cbc4"></a>
-
-### collaborative-tables-access-001 v1
-
-**grist / hosted-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · provided: existing Grist Personal account; new empty parent workspace prepared by controller
-
-准备：Same existing Personal account and API key, two distinct newly created empty parent workspaces, fresh route-specific containers. Account registration and controller parent provisioning precede measured access; executor must create and read its own empty document. Serial REST then MCP execution avoids shared-account quota interference. No prewritten calls or business data. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 requests per role, 32000 output-token cap per request, access300s/business600s/grading300s. One sample per route, no cross-service or general protocol ranking. No peer snapshot: same-provider routes use separate independent grading. Controller GET-only remote verification is separate overhead; backend API counts behind MCP are unknown.
-
-- [grist-mcp-access-ds41-r1](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json)：模型费用 $0.02；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 使用预提供的 Grist Personal 免费账号，仅在免费权限内新建一个空文档并做 MCP 读取，未购买/绑卡/开超额；无服务账单回执。controller-verification/manifest.json 记录 free-plan applicability 依据账号/准备证据确定且未从 HTTP 成功推断计费。故判为 confirmed_free，未产生需上报金额。 Publication review supplements the same fee conclusion with actual non-identifying plan fields from unchanged controller GET bytes; it is not inferred solely from the Personal name or a free-only instruction.; https://support.getgrist.com/limits/; frozen-execution/ENVIRONMENT.md; controller-verification/manifest.json; public-review/verification.json — actual controller GET metadata product.name=personalFree; remaining monthly usage unknown
-
-  结论与限制：执行者通过指定官方托管 MCP https://docs.getgrist.com/api/mcp（initialize 2025-06-18 -> notifications/initialized -> tools/call）在授权工作区 [SERVICE_SECRET] 内新建唯一空文档 [SERVICE_SECRET]（id [SERVICE_SECRET]），并用 grist_get_doc_info 重新读取到 id/name/workspace 一致的同一远端资源；独立 controller 读取（read_after_execution）确认该工作区仅此一个文档、仅含默认占位表 Table1（A/B/C）、0 条记录。连接配置保存在持久目录 /home/node/service-tools/service-config.json（无密钥，密钥仍在 credentials.json），答复只给配置位置并给出链接。账号为预提供的既有 Personal 免费账号，非本轮注册；免费限制与官方 limits 页面一致，剩余额度如实记为未知。未发现越权、预建业务数据、泄露凭据或改用 REST 代做的情况。
-
-**grist / rest-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · provided: existing Grist Personal account; new empty parent workspace prepared by controller
-
-准备：Same existing Personal account and API key, two distinct newly created empty parent workspaces, fresh route-specific containers. Account registration and controller parent provisioning precede measured access; executor must create and read its own empty document. Serial REST then MCP execution avoids shared-account quota interference. No prewritten calls or business data. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 requests per role, 32000 output-token cap per request, access300s/business600s/grading300s. One sample per route, no cross-service or general protocol ranking. No peer snapshot: same-provider routes use separate independent grading. Controller GET-only remote verification is separate overhead; backend API counts behind MCP are unknown.
-
-- [grist-rest-access-ds41-r1](../data/experiments/evaluations/grist-rest-access-ds41-r1.json)：模型费用 $0.0100；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 无付款回执，按免费计划字段与官方免费规则判定为免费；本轮实际剩余额度未知。 Publication review supplements the same fee conclusion with actual non-identifying plan fields from unchanged controller GET bytes; it is not inferred solely from the Personal name or a free-only instruction.; [official_doc] https://support.getgrist.com/limits/ — Free plans 限 3,000 API calls/month shared；免费计划各项限额; [api_response] grading/artifacts/evidence/service-plan.txt — 账号 API 响应显示 product.name=personalFree、stripePlanId=null、未绑卡; public-review/verification.json — actual controller GET metadata product.name=personalFree; remaining monthly usage unknown
-
-  结论与限制：执行者通过指定入口 Grist REST API（https://docs.getgrist.com/api）在授权工作区 [SERVICE_SECRET] 内新建了唯一空文档 [SERVICE_SECRET]（docId [SERVICE_SECRET]），并重新 GET 回读该同一远端资源确认可访问；独立采集的 controller-verification 读回与答复中的链接/标识一致，容器内无业务字段或记录（仅默认空白占位表 Table1，0 行）。非秘密配置已写入指定持久目录，密钥仅留私有文件，答复不含密钥；账号来源（总控预先提供、非自主注册）、自助步骤、人工门槛与免费限制如实说明，未列出的剩余额度记为未知。
-
 <a id="comparison-032f75889210"></a>
 
 ### web-extraction-holidays-001 v1
@@ -1261,30 +1606,6 @@
 - [exa-extraction-holidays-001-ds41-r1](../data/experiments/evaluations/exa-extraction-holidays-001-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: Exa 匿名 MCP 免 Key 限流额度内使用，无付费；$10 free credits/付费 API 未启用。; https://exa.ai/docs/get-started/exa-mcp; grading/artifacts/evidence/exa-mcp-2027-fetch.md
 
   结论与限制：目标 2027 Holiday Schedule 表由指定 Exa 匿名 MCP 的 web_fetch_exa 真实取得（keyless，无 Key），返回文本含逐行日期与假日；交付 CSV 为 UTF-8、列 date,weekday,holiday，11 行与官方表中公布值逐项一致、日期升序、无脚注/重复/其他年份，答复给出文件位置与官方来源链接。
-
-**firecrawl / public-scrape-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 600s · natural · none · 独立验收可参考同期 2 份同题答案
-
-准备：Passed independent access; fresh session/workspace keeps only connection configuration and dependencies. Same frozen task, DeepSeek Flash/high, OpenCode1.18.35, execution600s/grading300s and25 modelrequests/role for all services. Anonymous routes and provider cache/format defaults differ and must be reported. Reference values withheld from execution. Jina access retry recovered from controller interruption, not a service failure.
-
-- [firecrawl-extraction-holidays-001-ds41-r1](../data/experiments/evaluations/firecrawl-extraction-holidays-001-ds41-r1.json)：模型费用 $0.01；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 $0；confirmed_free: 本次仅有匿名免费调用，无付费回执或账户扣费，服务费用确认为 0；未观察到人工介入。 Controller source check adds the explicit free keyless rule; HTTP200/no-key alone is not the price proof.; https://docs.firecrawl.dev/features/scrape; grading/artifacts/evidence/firecrawl-request-and-2027-table.md; https://docs.firecrawl.dev/rate-limits
-
-  结论与限制：指定服务 Firecrawl 匿名 Public Scrape API 真实取得官方 OPM 页面（HTTP 200，sourceURL 为该页），从响应内的“2027 Holiday Schedule”表提取全部 11 个假日，生成可解析的 UTF-8 CSV（列 date,weekday,holiday，日期升序，脚注标记去除），与独立参考逐行一致；答复给出文件位置与官方来源链接。
-
-<a id="comparison-4582424b2cd6"></a>
-
-### web-extraction-access-001 v1
-
-**jina / reader-api** — 0 完成 / 0 未完成 / 1 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none
-
-准备：Fresh runtime, no account, prewritten calling scripts or previous results. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 model requests per role, 32000 output tokens/request, execution and grading 300s. New budget conditions retained separately from older runs. Original attempt was interrupted by a controller naming collision in another service; retained as an invalid/interrupt record separately. This is a fresh runtime with no inherited configuration or results.
-
-- [jina-extraction-access-ds41-r2](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json)：模型费用 $0.0092；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: 未产生任何成功的服务调用或计费回执；执行者未付款不等于免费，且本次无法读取官方文档核实免费规则，故保留 unknown。
-
-  结论与限制：指定服务入口 https://r.jina.ai/ 在测试网络内被域名级 DNS 污染与出网阻断（r.jina.ai、jina.ai 解析为无关/轮换地址并连接超时），而对照域名 example.com、github.com 等均返回 200，同期题面涉及的 firecrawl、exa 域名也可达，故无法通过指定入口取得 https://example.com/ 正文与标题。失败原因属执行环境网络限制而非服务能力、凭据或执行行为；执行者仅用指定入口、未切换其他服务、未绕过直读，并如实保存配置与阻碍。因环境无法访问指定服务，本次无法对 Jina Reader 的可接入性做有效评测，故记 invalid_run。
 
 <a id="comparison-2f500bd738e2"></a>
 
@@ -1397,16 +1718,6 @@
 <a id="comparison-8a11046c9744"></a>
 
 ### financial-access-001 v1
-
-**ecb-data / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
-
-1.18.35 / deepseek-flash / high · 300s · natural · none
-
-准备：Fresh runtime, no account, prewritten calling scripts or previous results. OpenCode 1.18.35 / DeepSeek V4.1 Flash high; 25 model requests per role, 32000 output tokens/request, execution and grading 300s. New budget conditions retained separately from older runs.
-
-- [ecb-data-access-ds41-r1](../data/experiments/evaluations/ecb-data-access-ds41-r1.json)：模型费用 $0.0086；Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees. [LiteLLM价格快照](https://raw.githubusercontent.com/BerriAI/litellm/0e26edfdb95c8288a610cba4746af2bc1f2fe312/model_prices_and_context_window.json)（2026-10-08T10:40:18.309Z，standard; context tier selected per request）。服务费用 —；unknown: Controller publication review: the original access grader cited the task environment and unauthenticated HTTP 200 responses, which do not independently prove a free-price rule. Preserve unknown for this access record; task-completion verdict and measured usage are unchanged. The later business run has its own separately verified fee evidence.
-
-  结论与限制：执行者通过指定入口 data-api.ecb.europa.eu/service 的 SDMX 2.1 REST API 完成了真实数据查询（JSON/CSV/元数据均 HTTP 200），无需账号或 Key，未强行注册；并把可复用连接配置写入持久目录 /home/node/service-tools/service-config.json。验收方在验收环境独立复现同一查询，均 HTTP 200 且数据一致。
 
 **frankfurter / data-api** — 1 完成 / 0 未完成 / 0 环境无效。
 

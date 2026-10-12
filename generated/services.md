@@ -530,7 +530,9 @@ Access preparation: controller-registered ordinary free API key · [Full configu
 
 ### Sources
 
-- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-10-08
+- [official_docs](https://www.alphavantage.co/documentation/) — checked 2026-10-10
+- [official_site](https://fred.stlouisfed.org/docs/api/terms_of_use.html) — checked 2026-10-10
+- [official_site](https://fred.stlouisfed.org/legal/) — checked 2026-10-10
 - [official_site](https://www.alphavantage.co/support/) — checked 2026-10-08
 - [official_site](https://www.alphavantage.co/terms_of_service/) — checked 2026-10-08
 - [official_docs](https://mcp.alphavantage.co/) — checked 2026-10-08
@@ -2150,23 +2152,27 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The query supports startPeriod/endPeriod, lastNObservations and format selection; narrow requests to the needed series. Direct documentation reads failed during the latest research pass; indexed official documentation was readable. |
+| [data-api (API)](https://data-api.ecb.europa.eu/service/) | [Docs](https://data.ecb.europa.eu/help/api/data-examples) | self serve / documented | Series dimensions, quote direction, observation frequency and date range must be selected correctly. Reference rates are not executable conversion prices. Reference-rate information is freely published under the ECB reuse policy; fees for a run still require observation of the actual route. The query supports startPeriod/endPeriod, lastNObservations, includeHistory and format selection; narrow requests to the needed series. Documentation-reader errors and later successful local HTTPS reads are separate from the real runtime's API connectivity. A numerical per-client request-rate limit was not established by the reviewed pages; do not assume unlimited usage. |
 
 ### Service pricing
 
-—
+- data-api: 0 EUR / public statistical information retrieval (usage; Published statistical information under ECB copyright policy; no service-level guarantee.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | [123.3k](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 29.506871s | 0 |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | [237.8k](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 65.683655s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-8a11046c9744) | [100%](./evaluations.md#comparison-8a11046c9744) | 123.3k | $0.0086 | — |
+| API | [3](./evaluations.md#comparison-36e32b17588d) | [100%](./evaluations.md#comparison-36e32b17588d) | 312.7k | $0.02 | $0 |
+
+- [afs-20261010-johor40-macro-ecb-data-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 ECB 官方 API 匿名调用返回 HTTP 200 与真实汇率观测（execution/artifacts/out/exr_basic.csv、exr_headers.txt），配置与客户端已保存（execution/retained-files.json），答复交付完整（execution/answer.md）；无网络/权限/预算阻碍。
+- [afs-20261010-johor40-macro-ecb-data-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json): Service operation completed; user delivery completed; blockers none. EXR、ICP 数据查询与元数据接口均实际执行并返回 200（execution/artifacts/responses/）；连接配置写入并由运行器保留（retained-files.json）；最终答复 execution/answer.md 完整交付。无网络/权限/预算等阻碍证据。
+- [afs-20261010-johor40-macro-ecb-data-access-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json): Service operation completed; user delivery completed; blockers none. 真实匿名 ECB API 调用返回 200 真实数据；配置保存于指定持久位置并由 retained-files.json 登记；答复与产物完整交付。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -2175,25 +2181,53 @@ The service, required interface, and any supplied account or signup information 
 
 **Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-8a11046c9744)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-36e32b17588d)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 2026-10-10 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json) | 2026-10-10 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json) | 2026-10-10 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-access-ds41-r1.json) | 2026-10-08 |
 | financial-access-001 v1 | API | [completed](../data/experiments/evaluations/ecb-access.json) | 2026-09-15 |
 
 </details>
 
 ### Task results
+
+#### I am preparing an inflation comparison for Germany and France. Use the assigned service to obtain their all-items HICP annual average inflation rates for 2023 and 2024, save a CSV I can analyse further, and explain how many percentage points inflation fell in each country from 2023 to 2024. Include traceable data sources.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [3](./evaluations.md#comparison-70023b6902c1) | [100%](./evaluations.md#comparison-70023b6902c1) | 505.5k | $0.03 | $0 |
+
+- [afs-20261010-johor40-macro-ecb-data-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定 ECB Data API 的 HICP 数据查询返回 HTTP 200 并给出四个所需观测（execution/artifacts/cache/avr_de_fr.csv）；交付 CSV 与最终答复齐全（execution/artifacts/hicp_de_fr_annual_avg_2023_2024.csv、execution/answer.md），无阻碍因素。
+- [afs-20261010-johor40-macro-ecb-data-business-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json): Service operation completed; user delivery completed; blockers none. 指定 API 两次数据请求 HTTP 200 并返回四个观测，交付 CSV/说明齐全，数值与冻结参考一致，无阻碍。
+- [afs-20261010-johor40-macro-ecb-data-business-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json): Service operation completed; user delivery completed; blockers none. 指定 API 请求返回 HTTP 200 且含全部四个观测（见 grading/artifacts/evidence/ecb_api_query_summary.md 与原始响应留档）；CSV 与答复均已产出。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Countries: Germany and France. Periods: the complete calendar years 2023 and 2024. Use the national all-items Harmonised Index of Consumer Prices (HICP), neither seasonally nor working-day adjusted, and its annual average rate of change: the change in the calendar-year average index from the previous calendar-year average. Do not substitute national CPI, December year-on-year inflation, a simple average of monthly year-on-year rates, or index levels. Use data currently published when queried, report one decimal place, express rates in percent and differences between rates in percentage points. Save a CSV with clear country, year, indicator and unit labels; either long or wide format is acceptable. Briefly report each country’s decline, with source links, enough indicator or series information to locate the data, and the query date. Explain any revision or scope difference attached to the selected series that affects these values. Obtain the data through the assigned service and route. Its official documentation may be consulted; another service, search results or model memory must not replace the data query.
+
+**Completion:** Real responses from the assigned service have the required countries, years, all-items coverage, annual-average measure and units. The four rates agree with the official reference frozen before execution. The CSV is usable and correct; both percentage-point differences and their explanation are correct; sources identify the data actually used. A version change supported by official evidence is handled under the pre-frozen reference-conflict procedure, rather than automatically treating an old release or another candidate’s answer as current truth.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-70023b6902c1)
+
+[Task definition](./tasks.en.md#financial-macro-hicp-001-v1)
+
+</details>
 
 #### Convert these three USD expenses into EUR using the European Central Bank reference rate for each expense date. List each converted amount and the total, and cite the exchange-rate source.
 
@@ -2217,10 +2251,13 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | 2026-10-10 |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json) | 2026-10-10 |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json) | 2026-10-10 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-data-fx-001-ds41-r1.json) | 2026-10-08 |
 | financial-fx-001 v1 | API | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15 |
 
@@ -2229,11 +2266,14 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 ### Sources
 
 - [official_docs](https://data.ecb.europa.eu/help/api/data-examples) — checked 2026-09-09
-- [official_docs](https://data.ecb.europa.eu/help/api/data) — checked 2026-10-08
+- [official_docs](https://data.ecb.europa.eu/help/api/data) — checked 2026-10-10
 - [official_site](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html) — checked 2026-09-15
-- [official_site](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html) — checked 2026-09-15
+- [official_site](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html) — checked 2026-10-10
 - [official_docs](https://data.ecb.europa.eu/help/api/schemas) — checked 2026-09-15
 - [official_docs](https://www.ecb.europa.eu/stats/accessing-our-data/html/index.en.html) — checked 2026-09-15
+- [official_docs](https://data.ecb.europa.eu/data/datasets/hicp/data-information) — checked 2026-10-10
+- [official_docs](https://data.ecb.europa.eu/data/data-categories/macroeconomic-and-sectoral-statistics/inflation-and-consumer-prices/total?layerType=DL&showDatasetModal=false) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/documents/272892/11336726/HICP%2Bimprovements%2B-%2BQuestions%2Band%2BAnswers-2026-EN.pdf) — checked 2026-10-10
 
 <a id="elevenlabs"></a>
 
@@ -2301,6 +2341,116 @@ Historical market prices, fundamentals, economic datasets and congressional trad
 - [official_docs](https://eodhd.com/financial-apis/commercial-vs-personal-license-use) — checked 2026-10-08
 - [official_docs](https://eodhd.com/financial-apis/congressional-trades-api) — checked 2026-09-15
 - [official_announcement](https://eodhd.com/financial-apis-blog/introducing-the-congressional-trades-api) — checked 2026-09-15
+
+<a id="eurostat"></a>
+
+## Eurostat Data API
+
+Official European economic and social statistics with public REST data and metadata access.
+
+**Classification:** Search & Data Access / Financial Data / Economic Indicators
+
+[Website](https://ec.europa.eu/eurostat/) · [Source record](../data/candidates/eurostat.yaml) · [Back to directory](../README.md#all-services)
+
+### Documentation and access <a id="eurostat-access"></a>
+
+| Route | Docs | Personal access | Requirements and human steps |
+| --- | --- | --- | --- |
+| [statistics-api (API)](https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/) | [Docs](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api) | self serve / documented | No registration or key is described for this public route. Query only the required subset; anonymous access does not mean unlimited request rate or guaranteed availability. JSON-stat dimension order, missing values and observation flags need interpretation. Preserve retrieval time, exact dataset/filters and response evidence because current data can be revised. This source review made no data API call; independent evaluations record dated network and task results. |
+
+### Service pricing
+
+- statistics-api: 0 EUR / public Statistics API request (usage; Officially free programmatic access to statistical data and metadata.)
+
+### Setup observations
+
+| Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
+| --- | --- | --- | --- | --- |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | [344.6k](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 45.417219s | 0 |
+
+#### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [3](./evaluations.md#comparison-36e32b17588d) | [100%](./evaluations.md#comparison-36e32b17588d) | 347.5k | $0.02 | $0 |
+
+- [afs-20261010-johor40-macro-eurostat-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 Eurostat 入口两次匿名 GET 均 HTTP 200 且返回真实观测值；配置已保存并被保留记录；答案完整交付，无阻碍。
+- [afs-20261010-johor40-macro-eurostat-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 Eurostat Statistics API 端点两次真实查询成功（HTTP 200 JSON-stat 2.0，见 cache 原始响应），必要配置已写入持久位置并保留，答复完整交付结果与配置。
+- [afs-20261010-johor40-macro-eurostat-access-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json): Service operation completed; user delivery completed; blockers none. 指定入口匿名 GET 返回 HTTP 200 及真实金融观测（response_irt_lt.json）；连接配置写入 service-config.json 并保留；answer.md 交付结果与约束说明。无阻碍因素。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The service, required interface, and any supplied account or signup information are specified in the environment. Use account-free access directly when available. For signup, use only the identity information supplied for this trial. Retain the necessary connection configuration for later tasks.
+
+**Completion:** Complete the required signup, authentication and configuration for the specified interface, and query real financial data. Necessary configuration works in a fresh session. Do not force registration for account-free routes. Documentation, a health check or a configuration file alone does not establish data access.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-36e32b17588d)
+
+[Task definition](./tasks.en.md#financial-access-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (3)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 2026-10-10 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json) | 2026-10-10 |
+| financial-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json) | 2026-10-10 |
+
+</details>
+
+### Task results
+
+#### I am preparing an inflation comparison for Germany and France. Use the assigned service to obtain their all-items HICP annual average inflation rates for 2023 and 2024, save a CSV I can analyse further, and explain how many percentage points inflation fell in each country from 2023 to 2024. Include traceable data sources.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [3](./evaluations.md#comparison-70023b6902c1) | [100%](./evaluations.md#comparison-70023b6902c1) | 255.6k | $0.02 | $0 |
+
+- [afs-20261010-johor40-macro-eurostat-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json): Service operation completed; user delivery completed; blockers none. Eurostat Statistics API 匿名查询成功返回 PRC_HICP_AINR 四观测值；CSV 与回落说明齐备且正确，来源可追溯，无调用/费用/环境阻碍。
+- [afs-20261010-johor40-macro-eurostat-business-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json): Service operation completed; user delivery completed; blockers none. Eurostat 入口实际 HTTP 200 返回四个年度平均率，CSV 与文字交付齐全且与冻结参考相符。
+- [afs-20261010-johor40-macro-eurostat-business-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json): Service operation completed; user delivery completed; blockers none. 指定服务查询返回 HTTP 200 且原始响应可独立解码；CSV 与最终答复均落盘，四个率及两个百分点差与冻结参考一致。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Countries: Germany and France. Periods: the complete calendar years 2023 and 2024. Use the national all-items Harmonised Index of Consumer Prices (HICP), neither seasonally nor working-day adjusted, and its annual average rate of change: the change in the calendar-year average index from the previous calendar-year average. Do not substitute national CPI, December year-on-year inflation, a simple average of monthly year-on-year rates, or index levels. Use data currently published when queried, report one decimal place, express rates in percent and differences between rates in percentage points. Save a CSV with clear country, year, indicator and unit labels; either long or wide format is acceptable. Briefly report each country’s decline, with source links, enough indicator or series information to locate the data, and the query date. Explain any revision or scope difference attached to the selected series that affects these values. Obtain the data through the assigned service and route. Its official documentation may be consulted; another service, search results or model memory must not replace the data query.
+
+**Completion:** Real responses from the assigned service have the required countries, years, all-items coverage, annual-average measure and units. The four rates agree with the official reference frozen before execution. The CSV is usable and correct; both percentage-point differences and their explanation are correct; sources identify the data actually used. A version change supported by official evidence is handled under the pre-frozen reference-conflict procedure, rather than automatically treating an old release or another candidate’s answer as current truth.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-70023b6902c1)
+
+[Task definition](./tasks.en.md#financial-macro-hicp-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (3)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | 2026-10-10 |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json) | 2026-10-10 |
+| financial-macro-hicp-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json) | 2026-10-10 |
+
+</details>
+
+### Sources
+
+- [official_docs](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-faq) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/web/hicp/information-data) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/databrowser/product/view/TEC00118) — checked 2026-10-10
+- [official_docs](https://ec.europa.eu/eurostat/documents/272892/11336726/HICP%2Bimprovements%2B-%2BQuestions%2Band%2BAnswers-2026-EN.pdf) — checked 2026-10-10
+- [official_site](https://ec.europa.eu/eurostat/help/copyright-notice) — checked 2026-10-10
 
 <a id="exa"></a>
 
@@ -2791,7 +2941,7 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 | [public-search-api (API)](https://api.firecrawl.dev/v2/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | POST a query (up to 500 characters) for titles, descriptions and URLs; limit is 1-100 results per source type. Keyless access is explicitly documented. Anonymous usage is free but capped per IP per day by both request count and credits; numerical ceilings are unpublished and either limit can produce 429. Account Free credits and its per-minute limits do not quantify this route. Optional scrapeOptions fetches result content at additional credit cost; plain search discovery does not require that option and is separate from specified-URL extraction. |
 | [account-search-api (API)](https://api.firecrawl.dev/v2/search) | [Docs](https://docs.firecrawl.dev/features/search) | self serve / documented | Requires: platform_account; Account Search uses a Bearer API key. Basic web search costs 2 credits per 10 results, rounded up; optional scraping adds its own cost. Free accounts receive 1000 credits/month shared across endpoints, with 10 Search requests/minute per team. Search-result location controls are not a guarantee of caller-country eligibility. Registration and available account balance are separate from the documented keyless route. |
 | [public-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | self serve / documented | POST one URL with formats such as markdown. Free keyless access has separate daily per-IP request and credit limits, with no published numerical ceilings; either limit can return 429. Keyless access excludes batch scrape and the separate Extract endpoint. Scrape renders JavaScript, defaults to a two-day cache (maxAge: 172800000), and accepts maxAge: 0 for a fresh fetch. Timeout is 1–300 seconds, default 60. Fetch location defaults to the US; this is not a caller-country eligibility guarantee. The same Scrape endpoint detects public PDF inputs by extension or content type and parses content; no .pdf URL suffix is required. PDF pages consume anonymous credit allowance, whose numerical cap is unpublished. Registered account quotas and paid PDF rates do not quantify anonymous access. A returned 403/404 page is not evidence of useful extraction. Terms restrict commercial use without express authorization. No task success or content redistribution permission is inferred. |
-| [account-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | self serve / documented | Requires: platform_account; Free accounts receive 1000 credits/month without a card, 10 Scrape requests/minute and two concurrent browsers. Standard Scrape costs one credit/page, including cache hits; advanced options such as JSON extraction can cost more. Failed requests without results are not charged, but returned 403/404 pages can consume a credit. The public-scrape-api route records anonymous limits separately. Free access does not override the commercial-use restriction or rights in the target page. |
+| [account-scrape-api (API)](https://api.firecrawl.dev/v2/scrape) | [Docs](https://docs.firecrawl.dev/features/scrape) | self serve / documented | Requires: platform_account; Free accounts receive 1000 credits/month without a card, 10 Scrape requests/minute and two concurrent browsers. Standard Scrape costs one credit/page, including cache hits; advanced options such as JSON extraction can cost more. Basic failures without a document are not charged, but returned 403/404 pages can consume a credit. Billing also lists chargeable work without a document, including protection scans, prompt-injection checks, FIRE-1 work and lockdown cache misses; do not generalize the basic failure rule to every option. The public-scrape-api route records anonymous limits separately. Free access does not override the commercial-use restriction or rights in the target page. |
 
 ### Service pricing
 
@@ -2811,17 +2961,19 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 | --- | --- | --- | --- | --- |
 | API (public-search-api) | [Access preparation: none; documented anonymous public route](../data/experiments/evaluations/firecrawl-search-001v2-ds41-r1.json) | [106.4k](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 21.400023s | 0 |
 | API (account-search-api) | — | — | — | — |
-| API (public-scrape-api) | [Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | [186.8k](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 23.34858s | 0 |
+| API (public-scrape-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | [256.4k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 43.066082s | 0 |
 | API (account-scrape-api) | — | — | — | — |
 
 #### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-scrape-api) | [1](./evaluations.md#comparison-bde1a47b7eaa) | [100%](./evaluations.md#comparison-bde1a47b7eaa) | 186.8k | $0.01 | $0 |
+| API (public-scrape-api) | [1](./evaluations.md#comparison-ecce2722b24e) | [100%](./evaluations.md#comparison-ecce2722b24e) | 256.4k | $0.02 | $0 |
 | API (public-search-api) | — | — | — | — | — |
 | API (account-search-api) | — | — | — | — | — |
 | API (account-scrape-api) | — | — | — | — | — |
+
+- [afs-20261010-johor40-web-extraction-firecrawl-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json): Service operation completed; user delivery completed; blockers none. 指定入口 keyless 请求返回 200 且标题/正文可取；配置已落持久目录且无秘密；答复给出结果、配置位置、接入步骤与门槛。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -2830,9 +2982,9 @@ Example page: https://example.com/ . The service, assigned interface, authorized
 
 **Completion:** Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous public extraction routes, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-bde1a47b7eaa)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ecce2722b24e)
 
 [Task definition](./tasks.en.md#web-extraction-access-001-v1)
 
@@ -2863,10 +3015,11 @@ Access preparation: none; documented anonymous public route · [Full configurati
 </details>
 
 <details>
-<summary>Run history (3)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| web-extraction-access-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 2026-10-10 |
 | web-extraction-access-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 2026-10-08 |
 | web-search-access-001 v1 | API (public-search-api) | [completed](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 2026-10-08 |
 | web-extraction-access-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-access-ds41-r1.json) | 2026-10-08 |
@@ -2874,6 +3027,65 @@ Access preparation: none; documented anonymous public route · [Full configurati
 </details>
 
 ### Task results
+
+#### I am organizing my personal schedule for England and Wales in 2027. Use the assigned webpage extraction service to obtain every bank holiday for that region and year from the GOV.UK page in the materials. Create a CSV sorted by date, containing the dates and complete English holiday names shown on the page, and give me the file and official source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-scrape-api) | [3](./evaluations.md#comparison-5b2f0a0db9e7) | [33.3%](./evaluations.md#comparison-5b2f0a0db9e7) | 209.2k | $0.01 | $0 |
+| API (public-search-api) | — | — | — | — | — |
+| API (account-search-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json): Service operation completed; user delivery not_completed; blockers agent_execution. Firecrawl 匿名入口成功返回 HTTP 200、success:true 的 GOV.UK 页面内容，服务操作完成；但执行者解析脚本把 Markdown 中表注与表格的先后顺序判断相反（脚本 parse_holidays.py 在 “England and Wales 2027” 文本之后取表，而该表实为 2028 内容），交付 CSV 日期与 substitute 标注全部错误，用户未得到正确的 2027 CSV。
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json): Service operation completed; user delivery not_completed; blockers agent_execution. Firecrawl 匿名 scrape 返回 HTTP 200 且内容含正确的 E&W 2027 表（服务操作完成）；但交付 CSV 取到 2028 表数据并改标为 2027，必要日期/名称错误，属执行解析错误（agent_execution）。
+- [afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json): Service operation completed; user delivery completed; blockers none. 指定服务 Firecrawl 两次匿名 scrape 均成功返回目标页并含 2027 England and Wales 表；交付 CSV 与答复齐备且与官方一致，无阻碍因素。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.gov.uk/bank-holidays . Include only England and Wales bank holidays in 2027, from 2027-01-01 through 2027-12-31. Do not mix in Scotland, Northern Ireland or other years. Use dates published in the page’s table for that region and year, without calculating them or replacing them with the holidays’ original calendar dates. Preserve the English names shown on the page, including substitute day annotations within names. Use UTF-8 CSV with clear headers identifying date and holiday name (date and holiday are suitable); dates use YYYY-MM-DD and ascending order. Weekdays, totals and other fields are not required. Obtain this webpage through this run’s assigned service; you may process its returned HTML, Markdown, text or structured content. Do not substitute the site’s JSON/ICS data endpoints, other webpages or calendar datasets, search summaries, memory, or a direct origin fetch bypassing the assigned service.
+
+**Completion:** Actually obtain the specified webpage’s relevant region/year content through the assigned service. All required dates and names in the delivered CSV match the official source, with every applicable row, no duplicates, exclusive holidays from other regions or other years, retained substitute day annotations and published dates, and ascending date order. The file exists and parses, and the answer gives its location and official source. Allow harmless whitespace, straight/curly apostrophes and clear header variants; do not require a service response format, parser library, forced cache bypass, extra fields or executor audit logs.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-5b2f0a0db9e7)
+
+[Task definition](./tasks.en.md#web-extraction-uk-holidays-001-v1)
+
+- API (public-scrape-api): [Not completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) — 指定服务 Firecrawl 匿名入口确实成功取得 GOV.UK 页面（HTTP 200, success:true），但执行者的解析脚本假定 Markdown 中表注年份在表格之前，而 Firecrawl 转出的 Markdown 里表注年份实际出现在表格之后，导致其取到的是紧跟 “...2027” 文本的 2028 年 England and Wales 表。交付 CSV 的 8 个日期全部与官方 2027 表不符（实为 2028 年该地区表），且 substitute day 标注错误，未满足任务对日期与名称逐项一致、且不混入其他年份的要求，故整体未完成。
+- API (public-scrape-api): [Not completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json) — 指定服务 Firecrawl 调用真实成功（匿名 POST https://api.firecrawl.dev/v2/scrape，HTTP 200，success:true），且其返回的 HTML 已含正确的 England and Wales 2027 表。但交付 CSV 的必要日期与名称与官方 2027 表逐项不一致：交付为 2027-01-03/04-14/04-17/05-01/05-29/08-28/12-25/12-26，实为服务返回 HTML 中 England and Wales 2028 表（2028-01-03…2028-12-26）改标年份，substitute day 标注也随之错位。执行者解析 markdown 字段时把排在表体之后的 2027 标题匹配到了随后的 2028 表。故用户所需 2027 数据未正确交付，任务未完成；服务本身返回内容正确，失败在执行的解析环节。
+
+</details>
+
+#### I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (public-scrape-api) | [3](./evaluations.md#comparison-b8dbd573c0af) | [100%](./evaluations.md#comparison-b8dbd573c0af) | 261.9k | $0.01 | $0 |
+| API (public-search-api) | — | — | — | — | — |
+| API (account-search-api) | — | — | — | — | — |
+| API (account-scrape-api) | — | — | — | — | — |
+
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务真实返回目标表（HTTP 200、success:true、sourceURL 正确、creditsUsed 1）；CSV 11 行逐项与独立参考一致并升序；答复含文件路径与官方来源。
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json): Service operation completed; user delivery completed; blockers none. Firecrawl 匿名 /v2/scrape 返回 HTTP 200 且 sourceURL 与标题匹配目标页；CSV 与参考 11 行一致，答复含文件与来源链接。
+- [afs-20261010-johor40-web-extraction-firecrawl-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json): Service operation completed; user delivery completed; blockers none. Firecrawl 匿名 scrape 单次请求 HTTP 200 返回含 2027 表的响应，据此产出符合约定的 CSV 并在答复中给出文件位置与来源链接。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.
+
+**Completion:** The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-b8dbd573c0af)
+
+[Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
+
+</details>
 
 #### I am turning an old scanned manual into a searchable table. From the TTB Table No. 4 specified in the supplied materials, put the short segment with Proof from 1.0 through 2.0 into a CSV, retaining both gallons-per-pound values. Give me the file and official source link. Transcribe the table only; do not perform tax or other business calculations.
 
@@ -2923,30 +3135,6 @@ Access preparation: none; documented anonymous public route · [Full configurati
 
 </details>
 
-#### I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.
-
-| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
-| --- | --- | --- | --- | --- | --- |
-| API (public-scrape-api) | [1](./evaluations.md#comparison-032f75889210) | [100%](./evaluations.md#comparison-032f75889210) | 264.2k | $0.01 | $0 |
-| API (public-search-api) | — | — | — | — | — |
-| API (account-search-api) | — | — | — | — | — |
-| API (account-scrape-api) | — | — | — | — | — |
-
-<details>
-<summary>Task, conditions and evidence</summary>
-
-Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.
-
-**Completion:** The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.
-
-1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
-
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-032f75889210)
-
-[Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
-
-</details>
-
 #### I am upgrading a Python app to 3.13. Find out whether free threading is enabled by default, how to enable it, and what compatibility limits apply to existing C extensions, with official sources
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
@@ -2972,10 +3160,16 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 </details>
 
 <details>
-<summary>Run history (5)</summary>
+<summary>Run history (11)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| web-extraction-uk-holidays-001 v1 | API (public-scrape-api) | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | 2026-10-10 |
+| web-extraction-uk-holidays-001 v1 | API (public-scrape-api) | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json) | 2026-10-10 |
+| web-extraction-uk-holidays-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json) | 2026-10-10 |
 | web-extraction-scanned-table-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-scanned-table-001-ds41-r1.json) | 2026-10-08 |
 | web-extraction-pdf-hikes-001 v1 | API (public-scrape-api) | [completed](../data/experiments/evaluations/firecrawl-pdf-hikes-001-ds41-r1.json) | 2026-10-08 |
 | web-search-001 v2 | API (public-search-api) | [completed](../data/experiments/evaluations/firecrawl-search-001v2-ds41-r1.json) | 2026-10-08 |
@@ -2994,15 +3188,15 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 - [official_docs](https://docs.firecrawl.dev/features/search) — checked 2026-10-08
 - [official_docs](https://docs.firecrawl.dev/api-reference/endpoint/search) — checked 2026-10-08
-- [official_site](https://www.firecrawl.dev/pricing) — checked 2026-10-08
-- [official_docs](https://docs.firecrawl.dev/features/scrape) — checked 2026-10-08
-- [official_docs](https://docs.firecrawl.dev/api-reference/endpoint/scrape) — checked 2026-10-08
+- [official_site](https://www.firecrawl.dev/pricing) — checked 2026-10-10
+- [official_docs](https://docs.firecrawl.dev/features/scrape) — checked 2026-10-10
+- [official_docs](https://docs.firecrawl.dev/api-reference/endpoint/scrape) — checked 2026-10-10
 - [official_docs](https://docs.firecrawl.dev/features/document-parsing) — checked 2026-10-08
 - [official_docs](https://docs.firecrawl.dev/features/parse) — checked 2026-10-08
 - [official_site](https://www.firecrawl.dev/blog/fire-pdf-launch) — checked 2026-10-08
-- [official_docs](https://docs.firecrawl.dev/billing) — checked 2026-10-08
-- [official_docs](https://docs.firecrawl.dev/rate-limits) — checked 2026-10-08
-- [official_site](https://www.firecrawl.dev/terms-of-service) — checked 2026-10-08
+- [official_docs](https://docs.firecrawl.dev/billing) — checked 2026-10-10
+- [official_docs](https://docs.firecrawl.dev/rate-limits) — checked 2026-10-10
+- [official_site](https://www.firecrawl.dev/terms-of-service) — checked 2026-10-10
 
 <a id="fireworks"></a>
 
@@ -3390,14 +3584,18 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API (rest-api) | — | — | — | — |
-| API (public-advisories-api) | [Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | [185.8k](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 36.125993s | 0 |
+| API (public-advisories-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | [234.2k](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 46.598473s | 0 |
 
 #### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-advisories-api) | [1](./evaluations.md#comparison-7a5fd0fd8e1a) | [100%](./evaluations.md#comparison-7a5fd0fd8e1a) | 185.8k | $0.01 | — |
+| API (public-advisories-api) | [3](./evaluations.md#comparison-1a93823643b5) | [100%](./evaluations.md#comparison-1a93823643b5) | 213.7k | $0.01 | $0 |
 | API (rest-api) | — | — | — | — | — |
+
+- [afs-20261010-johor40-advisories-github-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定匿名入口 api.github.com/advisories 返回 HTTP 200 且响应头确认版本 2026-03-10，采集响应含可识别公告与关联包；无可证实阻碍。
+- [afs-20261010-johor40-advisories-github-access-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定服务匿名入口实际返回 HTTP 200 的真实公告（列表 3 条 + 单条详情），答复与响应一致；无网络/权限/预算阻碍。
+- [afs-20261010-johor40-advisories-github-access-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json): Service operation completed; user delivery completed; blockers none. 指定服务经指定入口被真实调用并返回 HTTP 200 可识别公告（详情响应 execution/artifacts/cache/e8cf526a030f5524.json）；答复 execution/answer.md 给出公告标识、关联包、来源、配置位置与接入步骤，与响应一致；未观察到网络、接入、凭据或执行阻碍。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3406,19 +3604,22 @@ The assigned service, entry point and authorized identity or credentials are in 
 
 **Completion:** Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-7a5fd0fd8e1a)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-1a93823643b5)
 
 [Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| dependency-advisories-access-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 2026-10-10 |
+| dependency-advisories-access-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json) | 2026-10-10 |
+| dependency-advisories-access-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json) | 2026-10-10 |
 | dependency-advisories-access-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -3429,8 +3630,12 @@ Access preparation: none; anonymous public advisory API, no account/email/token/
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-advisories-api) | [1](./evaluations.md#comparison-644e634b8512) | [100%](./evaluations.md#comparison-644e634b8512) | 75.8k | $0.0076 | $0 |
+| API (public-advisories-api) | [3](./evaluations.md#comparison-8e6422c28f03) | [100%](./evaluations.md#comparison-8e6422c28f03) | 86.3k | $0.0093 | $0 |
 | API (rest-api) | — | — | — | — | — |
+
+- [afs-20261010-johor40-advisories-github-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定 API 两次查询均成功（200，2026-03-10 版本头），答复逐条给出正确的匹配结论、5.2.6/5.2.7 修复边界、最低升级 5.2.7 及可追溯依据链接。
+- [afs-20261010-johor40-advisories-github-business-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json): Service operation completed; user delivery completed; blockers none. 两次指定的 GitHub global-advisories 匿名 API 请求均成功（HTTP 200），答复正确区分两条告警的匹配状态、给出 5.2.x 修复版本 5.2.6/5.2.7 与最低升级 5.2.7 并附可追溯链接。
+- [afs-20261010-johor40-advisories-github-business-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json): Service operation completed; user delivery completed; blockers none. 指定服务两次查询均返回 HTTP 200 真实记录，答复与交付物 execution/answer.md 完整覆盖两条告警的匹配结论、5.2.x 修复边界与最低升级版本，且与冻结维护者参考一致。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3439,19 +3644,22 @@ Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alert
 
 **Completion:** Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-644e634b8512)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-8e6422c28f03)
 
 [Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| dependency-advisories-check-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | 2026-10-10 |
+| dependency-advisories-check-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json) | 2026-10-10 |
+| dependency-advisories-check-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json) | 2026-10-10 |
 | dependency-advisories-check-001 v1 | API (public-advisories-api) | [completed](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -3714,8 +3922,8 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [rest-api (API)](https://docs.getgrist.com/api) | [Docs](https://support.getgrist.com/api/) | self serve / documented | Requires: platform_account; Create a Grist account at docs.getgrist.com and use its free personal site; email or Google sign-in is documented.; Sign in and generate an API key in account settings.; Hosted documents remain editable online; the API can create documents, tables and records rather than only store opaque data. The account key inherits the user's access. Personal documents use docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site, with up to 5 requests/second/document and 10 concurrent document requests. A new blank workspace can be the test container without prebuilding business fields. Current signup gates still require observation; documented access is not a registration or task result. |
-| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | [Docs](https://support.getgrist.com/mcp/) | self serve / documented | Requires: platform_account; Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. Documented tools include create_doc, create_table, add_table_column and record updates, so an existing business schema is not a documented prerequisite. Calls share the Free site's 3000-call monthly API pool; no separate allowance is implied. Documents can subsequently be opened and edited in Grist. |
+| [rest-api (API)](https://docs.getgrist.com/api) | [Docs](https://support.getgrist.com/api/) | self serve / documented | Requires: platform_account; Create a Grist account at docs.getgrist.com and use its free personal site; email or Google sign-in is documented.; Sign in and generate an API key in account settings.; Hosted documents remain editable online; the API can create documents, tables and records rather than only store opaque data. The account key inherits the user's access. Personal documents use docs.getgrist.com; team sites use their own host. Free REST and MCP calls share 3000 calls/month/site across documents; remaining account quota is not established by the published allowance. Free plans may be rate-limited to 5 requests/second/document; the concurrent request limit is 10 per document and request bodies are limited to 1 MB. New blank workspaces depend on the account's plan: the older Free personal plan has no workspaces. Current signup gates still require observation; documented access is not a registration or task result. |
+| [hosted-mcp (MCP)](https://docs.getgrist.com/api/mcp) | [Docs](https://support.getgrist.com/mcp/) | self serve / documented | Requires: platform_account; Hosted MCP is enabled on all plans and accepts API keys or interactive OAuth. The single hosted MCP URL serves both personal and team sites, subject to the authenticated user's permissions. Documented tools include document and table creation, column formulas and record updates; actual tool names use the grist_ prefix. An existing business schema is not a documented prerequisite. Calls share the Free site's 3000-call monthly API pool; no separate allowance is implied. The MCP FAQ currently states no extra MCP charge; external AI-provider fees remain separate. A client tool-call count does not by itself establish backend quota consumption. Documents can subsequently be opened and edited in Grist. |
 | [python-sdk (SDK)](https://pypi.org/project/grist-api/) | [Docs](https://support.getgrist.com/rest-api/) | — | Official Python client linked by Grist REST API guide; SDK installation does not remove account permission requirements. |
 | [javascript-sdk (SDK)](https://www.npmjs.com/package/grist-api) | [Docs](https://support.getgrist.com/rest-api/) | — | Official JavaScript/TypeScript client linked by Grist REST API guide; npm page fetch returned 403 during public research, not a service failure. |
 
@@ -3729,8 +3937,8 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Service credentials supplied](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | [111.0k](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 34.159175s | 0 |
-| MCP | [Service credentials supplied](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | [357.7k](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 61.963463s | 1 |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | [276.4k](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 53.123937s | 0 |
+| MCP | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | [574.9k](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 96.000939s | 0 |
 | SDK (python-sdk) | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — |
 
@@ -3738,10 +3946,13 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-5bcdeb33cbc4) | [100%](./evaluations.md#comparison-5bcdeb33cbc4) | 357.7k | $0.02 | $0 |
-| API | [1](./evaluations.md#comparison-5bcdeb33cbc4) | [100%](./evaluations.md#comparison-5bcdeb33cbc4) | 111.0k | $0.0100 | $0 |
+| MCP | [1](./evaluations.md#comparison-06b05d18818d) | [100%](./evaluations.md#comparison-06b05d18818d) | 574.9k | $0.03 | $0 |
+| API | [1](./evaluations.md#comparison-06b05d18818d) | [100%](./evaluations.md#comparison-06b05d18818d) | 276.4k | $0.02 | $0 |
 | SDK (python-sdk) | — | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — | — |
+
+- [afs-20261010-johor40-grist-mcp-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json): Service operation completed; user delivery completed; blockers none. service_execution：hosted-MCP initialize/tools/list/tools/call 均在 execution/artifacts/logs/04_create_doc.log、05_reread_doc.log 中有真实请求响应，create_doc 成功且独立会话读回一致。user_delivery：execution/answer.md 交付链接、标识、步骤、门槛、免费限制与配置位置，均与采集证据一致。
+- [afs-20261010-johor40-grist-rest-access-baseline-preflight2](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json): Service operation completed; user delivery completed; blockers none. 新建 doc [PRIVATE_DOC_ID] 与回读元数据均 HTTP 200 且标识一致（见 evidence/grist-rest-readback-redacted.json）；答复含链接、配置位置、步骤与免费限制（execution/answer.md）。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3750,19 +3961,21 @@ The service, assigned interface, authorized account or signup identity and its o
 
 **Completion:** Complete necessary access setup, create a separate empty trial container through the assigned service and interface, then read that same remote container’s metadata to confirm it is accessible. The link and identifier agree, required configuration is reusable in a fresh session without exposing secrets, and no business fields, records or answers are preloaded. Describe the account origin, self-service steps, human barriers and free limits accurately. Registration, installation, tool lists, a creation receipt or a local simulation alone do not prove usable access.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-5bcdeb33cbc4)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-06b05d18818d)
 
 [Task definition](./tasks.en.md#collaborative-tables-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| collaborative-tables-access-001 v1 | MCP | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 2026-10-10 |
+| collaborative-tables-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 2026-10-10 |
 | collaborative-tables-access-001 v1 | MCP | [completed](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 2026-10-08 |
 | collaborative-tables-access-001 v1 | API | [completed](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 2026-10-08 |
 
@@ -3774,14 +3987,17 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-cb6f4b024594) | [100%](./evaluations.md#comparison-cb6f4b024594) | 769.0k | $0.03 | $0 |
-| API | [1](./evaluations.md#comparison-cb6f4b024594) | [0%](./evaluations.md#comparison-cb6f4b024594) | — | — | $0 |
+| MCP | [3](./evaluations.md#comparison-63bc5ae3ece1) | [100%](./evaluations.md#comparison-63bc5ae3ece1) | 1.16M | $0.05 | $0 |
+| API | [3](./evaluations.md#comparison-63bc5ae3ece1) | [66.7%](./evaluations.md#comparison-63bc5ae3ece1) | 862.7k | $0.04 | $0 |
 | SDK (python-sdk) | — | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — | — |
 
-**Additional context from controller review; original verdict unchanged:**
-
-- [grist-rest-shared-expenses-001-ds41-r1](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json): Controller clarification; the original independent verdict is unchanged. The online ledger and automatic recalculation after an addition and correction were independently verified. After exhausting 25 model requests in about 177 seconds, the executor omitted the private link, settlement figures and continuation instructions. The service-side result was correct, but the required user delivery was incomplete; time remained within the 600-second limit.
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r3](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json): Service operation completed; user delivery completed; blockers none. 指定 hosted-mcp 入口成功建立真实在线账本，六笔明细与初态汇总正确；总控两笔受控普通写入后，在线汇总与补差方向/金额按公式自动正确更新，公式结构未改；私人链接指向该文档且答复含结算数与继续记账说明。
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r2](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json): Service operation completed; user delivery completed; blockers none. hosted-MCP 调用返回真实表/记录 ID，独立远端读回证明在线账本存在且六笔明细与公式汇总正确；追加与修正两态在线汇总自动更新且与参考一致；answer.md 交付了可用链接、结算数与继续记账说明。
+- [afs-20261010-johor40-grist-mcp-shared-expenses-r1](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json): Service operation completed; user delivery completed; blockers none. 指定 hosted-MCP 操作全部成功并在远端产生可继续记账的公式化在线账本；追加与修正两次受控写入均触发汇总自动重算，初态/追加态/修正态独立回读与冻结参考一致；最终答复含私人链接、结算数与继续记账位置。
+- [afs-20261010-johor40-grist-rest-shared-expenses-r3](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json): Service operation completed; user delivery completed; blockers none. 经指定 REST 入口在唯一授权文档实际建立并读取账本；三阶段独立回执与参考一致，答复交付链接与结算数。无网络/权限/预算/服务能力阻碍证据。
+- [afs-20261010-johor40-grist-rest-shared-expenses-r2](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json): Service operation completed; user delivery completed; blockers none. 指定 REST 入口真实创建表/列/记录，公式列随明细自动重算（追加与修正态独立读回均匹配参考）；交付含链接、结算数与续记位置。
+- [afs-20261010-johor40-grist-rest-shared-expenses-r1](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json): Service operation completed; user delivery not_completed; blockers model_budget. 服务端：独立回执 initial/06,08 与 after-append/04、after-correction/07 证明六笔明细、汇总及自动重算均正确。用户交付：execution/answer.md 无链接/结算数/记账位置，40 次模型请求耗尽（403 Model request budget exhausted）。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -3790,13 +4006,13 @@ The two synthetic people are Lin Qing (林青) and Zhou Zhou (周舟). Every lis
 
 **Completion:** Through the assigned route, create a real online ledger in the new empty trial container, preserving all six initial records. The online summary and initial answer correctly show paid totals, shares and settlement direction and amount; the link identifies that ledger and the continuation instruction is usable. After execution stops, the controller adds one pre-frozen synthetic expense and then corrects one existing amount only in that new document, without changing formulas, schema or summary values and without restarting the executor. Independent remote reads at each stage show correct corresponding detail and summary changes. A separate grader checks the initial, appended and corrected receipts against the reference without credentials or running executor self-tests. No particular field names, formula syntax, table count or display layout is required; amounts are checked at CNY cent precision with normal native numerical representation noise allowed.
 
-1.18.35 · deepseek-flash / high · 600s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-cb6f4b024594)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-63bc5ae3ece1)
 
 [Task definition](./tasks.en.md#collaborative-tables-shared-expenses-001-v1)
 
-- API: [Not completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) — 服务侧账本本身正确且可自动更新：执行者经指定 Grist REST 入口在总控提供的本轮空文档中建立了 Expenses/Settlement 两表并录入六笔明细，独立远端读回初态汇总（总支出 2400.00、每人应分摊 1200.00、林青已付 2095.60、周舟已付 304.40、周舟补给林青 895.60）与输入及冻结参考一致；总控在文档中追加一笔、修正一笔金额后，服务端汇总分别自动变为 2442.40/1221.20/2095.60/346.80/874.40 与 2422.40/1211.20/2075.60/346.80/864.40，与参考一致且公式未变。但执行者没有向用户交付要求的答复：最终产物 execution/answer.md 只有 8 行过程叙述，不含私人账本链接、不含各自已付/应分摊/补差方向与金额、也不含继续记账位置说明；执行回执 exit_code=1，会话最后事件为运行器返回的模型请求预算耗尽（403，25/25 次用尽），执行在“准备核对最终值”前中止。按冻结标准，真实在线账本与完整用户答复分别判定，本次服务计算正确但完整用户交付缺失。
+- API: [Not completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json) — 服务端操作已完成：本轮新 Grist 文档中六笔明细与公式汇总均正确，且经总控追加一笔、修正一笔后线上汇总自动重算（独立回执 initial/after-append/after-correction 与 reference.json 基线一致，见 grading/artifacts/evidence/acceptance-evidence.md）。但执行者未向用户交付最终答复：40 次模型请求耗尽（403 Model request budget exhausted，exit_code=1），execution/answer.md 仅含 10 行中间过程叙述，缺少私人账本链接、当前结算数（林青/周舟已付、应分摊及 周舟需补给林青 895.60 元）和继续记账位置说明，用户交付未完成。
 
 </details>
 
@@ -3849,10 +4065,16 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 </details>
 
 <details>
-<summary>Run history (6)</summary>
+<summary>Run history (12)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| collaborative-tables-shared-expenses-001 v1 | MCP | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | 2026-10-10 |
+| collaborative-tables-shared-expenses-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | 2026-10-10 |
+| collaborative-tables-shared-expenses-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json) | 2026-10-10 |
+| collaborative-tables-shared-expenses-001 v1 | MCP | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json) | 2026-10-10 |
+| collaborative-tables-shared-expenses-001 v1 | MCP | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json) | 2026-10-10 |
+| collaborative-tables-shared-expenses-001 v1 | API | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json) | 2026-10-10 |
 | collaborative-tables-shared-expenses-001 v1 | MCP | [completed](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | 2026-10-08 |
 | collaborative-tables-shared-expenses-001 v1 | API | [not_completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | 2026-10-08 |
 | collaborative-tables-001 v4 | MCP | [completed](../data/experiments/evaluations/grist-mcp-tables-001v4-ds41-r1.json) | 2026-10-08 |
@@ -3864,19 +4086,21 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 ### Notes
 
-- Hosted Free includes unlimited documents, 5000 rows/document, 1 GB attachments/document, 30-day history and two guests/document. This records hosted limits, not unlimited self-hosted capacity.
+- Current Hosted Free includes unlimited documents, 5000 rows and a 10 MB data limit per document, 1 GB internal attachments/document, 30-day history and two guests/document. The older Free personal plan differs, including a 10-document limit and no workspaces. Confirm the actual plan and remaining shared API allowance before applying current pricing to an existing account; these are hosted limits, not unlimited self-hosted capacity.
 - No benchmark-specific or performance-analysis disclosure prohibition was found in the reviewed EULA. Sections 3.2–3.5 restrict disruption, reverse engineering and software redistribution; section 4.4 makes users responsible for their own content. This is not a blanket publication license.
+- The trademark policy permits truthful descriptive discussion without implying affiliation or endorsement. It asks technical articles to link the official website and acknowledge trademark ownership. Grist is a trademark of Grist Labs Inc.; see https://www.getgrist.com/ and the trademark source for the applicable scope.
 
 ### Sources
 
-- [official_docs](https://support.getgrist.com/api/) — checked 2026-10-08
-- [official_docs](https://support.getgrist.com/rest-api/) — checked 2026-10-08
-- [official_site](https://www.getgrist.com/pricing/) — checked 2026-10-08
-- [official_docs](https://support.getgrist.com/mcp/) — checked 2026-10-08
-- [official_docs](https://support.getgrist.com/formulas/) — checked 2026-10-08
-- [official_docs](https://support.getgrist.com/limits/) — checked 2026-10-08
+- [official_docs](https://support.getgrist.com/api/) — checked 2026-10-10
+- [official_docs](https://support.getgrist.com/rest-api/) — checked 2026-10-10
+- [official_site](https://www.getgrist.com/pricing/) — checked 2026-10-10
+- [official_docs](https://support.getgrist.com/mcp/) — checked 2026-10-10
+- [official_docs](https://support.getgrist.com/formulas/) — checked 2026-10-10
+- [official_docs](https://support.getgrist.com/limits/) — checked 2026-10-10
 - [official_docs](https://support.getgrist.com/getting-started/) — checked 2026-10-08
-- [official_site](https://www.getgrist.com/terms/) — checked 2026-10-08
+- [official_site](https://www.getgrist.com/terms/) — checked 2026-10-10
+- [official_site](https://www.getgrist.com/trademark/) — checked 2026-10-10
 
 <a id="groq"></a>
 
@@ -4122,7 +4346,7 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [reader-api (API)](https://r.jina.ai/) | [Docs](https://jina.ai/reader/) | self serve / documented | Prefix a public URL with https://r.jina.ai/ for rendered Markdown; basic keyless usage is free at 20 requests/minute. Keyed token allowances and limits are separate. Default rendering supports JavaScript; X-Engine: direct instead uses plain HTTP. A URL may be cached for five minutes; X-No-Cache: true or X-Cache-Tolerance: 0 requests fresh content. X-Token-Budget rejects oversized requests rather than silently truncating them. No universal page-byte limit or caller-country eligibility list was established here. Target-site restrictions and content rights still apply; this route does not document a blanket redistribution license or successful extraction trial. |
+| [reader-api (API)](https://r.jina.ai/) | [Docs](https://jina.ai/reader/) | self serve / documented | Prefix a public URL with https://r.jina.ai/ for rendered Markdown; basic keyless usage is free at 20 requests/minute. Keyed token allowances and limits are separate. Default rendering supports JavaScript; X-Engine: direct instead uses plain HTTP. A URL may be cached for five minutes; X-No-Cache: true or X-Cache-Tolerance: 0 requests fresh content. X-Token-Budget rejects oversized requests rather than silently truncating them. No universal page-byte limit or caller-country eligibility list was established here. Repeated requests may reuse cached content and are not necessarily independent origin fetches. Target-site restrictions and content rights still apply; the product documentation is not a blanket redistribution license. These are documentation findings; completed or unsuccessful task-level use is recorded separately in evaluations. |
 
 ### Service pricing
 
@@ -4132,13 +4356,15 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [No account or key supplied](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | — | — | — |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | [115.5k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 24.489431s | 0 |
 
 #### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [0](./evaluations.md#comparison-4582424b2cd6) | — | — | — | — |
+| API | [1](./evaluations.md#comparison-ecce2722b24e) | [100%](./evaluations.md#comparison-ecce2722b24e) | 115.5k | $0.01 | $0 |
+
+- [afs-20261010-johor40-web-extraction-jina-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json): Service operation completed; user delivery completed; blockers none. 指定服务匿名入口单次调用成功（HTTP 200，正文齐全），用户要求的标题/概述/配置位置/接入步骤均在 execution/answer.md 交付；无网络、权限、额度或人工阻碍证据。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -4147,23 +4373,20 @@ Example page: https://example.com/ . The service, assigned interface, authorized
 
 **Completion:** Complete any necessary signup, authentication, installation and configuration through the assigned interface, and actually extract the given page. The title and summary agree with the returned body. Required configuration is reusable in a new session without revealing secrets. Do not force signup for account-free interfaces or claim an existing account was registered in this trial; record actual human steps and extra applications. Installation, health checks, tool lists or search results alone do not establish usable body extraction.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-No account or key supplied · [Full configuration and evidence](./evaluations.md#comparison-4582424b2cd6)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ecce2722b24e)
 
 [Task definition](./tasks.en.md#web-extraction-access-001-v1)
-
-Invalid runs: 1
-
-- API: [Invalid run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) — 指定服务入口 https://r.jina.ai/ 在测试网络内被域名级 DNS 污染与出网阻断（r.jina.ai、jina.ai 解析为无关/轮换地址并连接超时），而对照域名 example.com、github.com 等均返回 200，同期题面涉及的 firecrawl、exa 域名也可达，故无法通过指定入口取得 https://example.com/ 正文与标题。失败原因属执行环境网络限制而非服务能力、凭据或执行行为；执行者仅用指定入口、未切换其他服务、未绕过直读，并如实保存配置与阻碍。因环境无法访问指定服务，本次无法对 Jina Reader 的可接入性做有效评测，故记 invalid_run。
 
 </details>
 
 <details>
-<summary>Run history (2)</summary>
+<summary>Run history (3)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| web-extraction-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 2026-10-10 |
 | web-extraction-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | 2026-10-08 |
 | web-extraction-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/jina-access-ds41-r1.json) | 2026-10-08 |
 
@@ -4171,13 +4394,75 @@ Invalid runs: 1
 
 ### Task results
 
-—
+#### I am organizing my personal schedule for England and Wales in 2027. Use the assigned webpage extraction service to obtain every bank holiday for that region and year from the GOV.UK page in the materials. Create a CSV sorted by date, containing the dates and complete English holiday names shown on the page, and give me the file and official source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [3](./evaluations.md#comparison-5b2f0a0db9e7) | [100%](./evaluations.md#comparison-5b2f0a0db9e7) | 100.5k | $0.0066 | $0 |
+
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务 Jina Reader 匿名调用返回 HTTP 200 并取得目标页面内容（见 evidence/jina_extraction_summary.md）；交付 CSV 存在于 execution/artifacts，8 行与参考逐项一致；答复含文件位置与官方链接。
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json): Service operation completed; user delivery completed; blockers none. Jina Reader 匿名单次请求 HTTP 200，返回目标页面 Markdown 含 England and Wales 2027 全表；CSV 与官方原文 8/8 一致并含文件与来源，交付完整。
+- [afs-20261010-johor40-web-extraction-jina-uk-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json): Service operation completed; user delivery completed; blockers none. 指定服务侧：单次匿名 GET r.jina.ai/https://www.gov.uk/bank-holidays 返回 HTTP 200，成功取得目标内容。用户侧：CSV 文件存在且正确（8 条，含 substitute day，升序），答复给出文件位置与官方来源。无网络/访问/额度/执行阻碍证据。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.gov.uk/bank-holidays . Include only England and Wales bank holidays in 2027, from 2027-01-01 through 2027-12-31. Do not mix in Scotland, Northern Ireland or other years. Use dates published in the page’s table for that region and year, without calculating them or replacing them with the holidays’ original calendar dates. Preserve the English names shown on the page, including substitute day annotations within names. Use UTF-8 CSV with clear headers identifying date and holiday name (date and holiday are suitable); dates use YYYY-MM-DD and ascending order. Weekdays, totals and other fields are not required. Obtain this webpage through this run’s assigned service; you may process its returned HTML, Markdown, text or structured content. Do not substitute the site’s JSON/ICS data endpoints, other webpages or calendar datasets, search summaries, memory, or a direct origin fetch bypassing the assigned service.
+
+**Completion:** Actually obtain the specified webpage’s relevant region/year content through the assigned service. All required dates and names in the delivered CSV match the official source, with every applicable row, no duplicates, exclusive holidays from other regions or other years, retained substitute day annotations and published dates, and ascending date order. The file exists and parses, and the answer gives its location and official source. Allow harmless whitespace, straight/curly apostrophes and clear header variants; do not require a service response format, parser library, forced cache bypass, extra fields or executor audit logs.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-5b2f0a0db9e7)
+
+[Task definition](./tasks.en.md#web-extraction-uk-holidays-001-v1)
+
+</details>
+
+#### I want to use the official holiday table to organize my personal calendar. Extract the 2027 holiday schedule from the page in the attachment into a CSV file sorted by date, including every listed holiday’s date, weekday and English name. Use the dates published in the table and give me the file and source link.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [3](./evaluations.md#comparison-b8dbd573c0af) | [100%](./evaluations.md#comparison-b8dbd573c0af) | 90.1k | $0.0063 | $0 |
+
+- [afs-20261010-johor40-web-extraction-jina-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务单次匿名请求成功返回目标表内容（28656 bytes，含 2027 表）；CSV 11 行与冻结参考逐项一致且可解析；答复含文件路径与官方链接。
+- [afs-20261010-johor40-web-extraction-jina-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json): Service operation completed; user delivery completed; blockers none. Jina Reader 单次无 Key 请求 HTTP 200 返回目标页面且含 2027 表；holidays_2027.csv 存在、可解析且 11 行逐项正确；答复含文件位置与来源。无网络、权限、模型预算或执行阻碍。
+- [afs-20261010-johor40-web-extraction-jina-holidays-r1](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json): Service operation completed; user delivery completed; blockers none. Jina Reader 单次匿名请求 HTTP 200 并返回含 2027 表的正文；交付 CSV 与 final 答复齐全。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/ . Use only its “2027 Holiday Schedule” table, without other years or explanatory page text. The CSV must use UTF-8 and the columns date, weekday, holiday. Use YYYY-MM-DD dates, full English weekday names and the table’s English holiday names without footnote markers. Keep the dates published in the table instead of replacing them with calendar holiday dates. Retrieve this URL through the web content extraction service assigned to this trial; processing HTML, text or structured content it returns is allowed. Do not substitute other websites, calendar datasets, model memory, search snippets or direct origin fetching that bypasses the assigned service.
+
+**Completion:** The assigned service actually retrieves the target table from the page. The CSV has the three specified columns, every holiday’s correct date, weekday and name, no missing or duplicate rows or other years, ascending dates and no footnote markers in fields. The file exists and is parseable, and the answer gives its location and source link. Harmless whitespace, line-ending and straight/curly apostrophe differences are accepted. No specific parser, number of calls or raw service response format is required.
+
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-b8dbd573c0af)
+
+[Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
+
+</details>
+
+<details>
+<summary>Run history (6)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| web-extraction-uk-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | 2026-10-10 |
+| web-extraction-uk-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json) | 2026-10-10 |
+| web-extraction-uk-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json) | 2026-10-10 |
+| web-extraction-holidays-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json) | 2026-10-10 |
+
+</details>
 
 ### Sources
 
 - [official_site](https://jina.ai/api-dashboard) — checked 2026-07-08
-- [official_docs](https://jina.ai/reader/) — checked 2026-10-08
-- [official_site](https://jina.ai/legal/#terms-and-conditions) — checked 2026-10-08
+- [official_docs](https://jina.ai/reader/) — checked 2026-10-10
+- [official_site](https://jina.ai/legal/#terms-and-conditions) — checked 2026-10-10
 
 <a id="joinquant-data"></a>
 
@@ -5200,13 +5485,17 @@ Hosted public holiday API with country and first-level subdivision coverage for 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | [63.8k](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 17.740838s | 0 |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | [392.1k](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 72.395992s | 0 |
 
 #### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-0ce2de00d325) | [100%](./evaluations.md#comparison-0ce2de00d325) | 63.8k | $0.0064 | $0 |
+| API | [3](./evaluations.md#comparison-ce7a914a844f) | [100%](./evaluations.md#comparison-ce7a914a844f) | 319.1k | $0.02 | $0 |
+
+- [afs-20261010-johor40-holidays-nager-date-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务真实查询成功（SG 2026，HTTP 200，11 条），配置写入指定持久路径并已保留；答复完整说明结果、配置与阻碍。MY 不受支持属已如实记录并绕过的障碍，未阻止任务完成。
+- [afs-20261010-johor40-holidays-nager-date-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定服务 v4 匿名入口真实查询成功（HTTP 200，SG/2026 共 11 条，含 2026-08-09 National Day），配置持久保存且可复用；MY 未覆盖属服务能力范围限制，执行者改用受支持地区后任务完成，未构成阻碍。
+- [afs-20261010-johor40-holidays-nager-date-access-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json): Service operation completed; user delivery completed; blockers none. 指定 v4 入口返回真实假日数据（SG-2026.json），配置持久保存（retained-files.json），答复含日期+名称、来源、步骤与阻碍，无未满足的授权或环境阻碍。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -5215,19 +5504,22 @@ The service, assigned route, permitted account or registration details and their
 
 **Completion:** Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0ce2de00d325)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ce7a914a844f)
 
 [Task definition](./tasks.en.md#public-holidays-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 2026-10-10 |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json) | 2026-10-10 |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json) | 2026-10-10 |
 | public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -5238,7 +5530,11 @@ Access preparation: none; anonymous publicAPI, no account/email/key/payment supp
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-39d86ae45d95) | [100%](./evaluations.md#comparison-39d86ae45d95) | 158.8k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-c53ca46196b8) | [100%](./evaluations.md#comparison-c53ca46196b8) | 152.1k | $0.01 | $0 |
+
+- [afs-20261010-johor40-holidays-nager-date-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务真实查询成功（HTTP/2 200，原始响应 execution/artifacts/cache/DE_2027.json）；最终答复 execution/answer.md 交付 10 条柏林 2027 公共节假日，日期与名称正确、升序、总数准确、来源可追溯。
+- [afs-20261010-johor40-holidays-nager-date-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json): Service operation completed; user delivery completed; blockers none. Real HTTP 200 response from the assigned service stored at execution/artifacts/holidays_cache/DE_2027.json; delivered 10-holiday ascending list matches reference expected_count=10.
+- [afs-20261010-johor40-holidays-nager-date-business-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json): Service operation completed; user delivery completed; blockers none. 真实 v4 查询返回 HTTP 200 且原始响应可复算；最终答复含升序 10 项、准确总数与可追溯来源，与冻结官方参考一致。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -5247,19 +5543,22 @@ Region: the whole German state of Berlin, not another place with the same name. 
 
 **Completion:** Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-39d86ae45d95)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-c53ca46196b8)
 
 [Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | 2026-10-10 |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json) | 2026-10-10 |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json) | 2026-10-10 |
 | public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -5324,13 +5623,11 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [ephemeral-api (API)](https://neon.new/) | — | documented | No-account, 72-hour ephemeral hosted Postgres. Tests can establish short-term persistence only; this is not a permanent free production database. Connection strings and claim URLs are private credentials. |
-| [claimable-api (API)](https://claimable.neon.tech/v1/agent/identity) | [Docs](https://neon.com/docs/reference/claimable-neon) | self serve / documented | Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works with standard Postgres clients; identity assertions, tokens and connection URLs are private. The 100 MB storage and 1 GB transfer allowances apply to the whole unclaimed project, not each logical database. Multiple databases within that project share these limits and the same project.expires_at; they are not separately provisioned free projects. The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts 15 minutes and is a different clock. Short-term persistence does not establish a permanent free account. Claiming rotates credentials and must not occur between write and independent read. The provisioned Postgres connection supports SQL transactions. Its pooler uses transaction mode; ordinary short transactions are compatible, while session state across separate transactions must not be assumed. Individually committed writes are not an atomic multi-step import. |
+| [claimable-api (API)](https://claimable.neon.tech/v1/agent/identity) | [Docs](https://neon.com/docs/reference/claimable-neon) | self serve / documented | Anonymous provisioning creates a real hosted Postgres project. Its returned database URL works with standard Postgres clients; identity assertions, tokens and connection URLs are private. The 100 MB storage and 1 GB transfer allowances apply to the whole unclaimed project, not each logical database. Multiple databases within that project share these limits and the same project.expires_at; they are not separately provisioned free projects. These limits and the no-payment-details signup condition do not provide a separate published Claimable cash-price rule; the registered Free plan's $0 price must not be substituted for it. The project expires after 72 hours unless claimed into a Neon organization. A claim code lasts 15 minutes and is a different clock. Short-term persistence does not establish a permanent free account. Claiming rotates credentials and must not occur between write and independent read. The provisioned Postgres connection supports SQL transactions. Its pooler uses transaction mode; ordinary short transactions are compatible, while session state across separate transactions must not be assumed. Individually committed writes are not an atomic multi-step import. Official backup guidance uses pg_dump/pg_restore over a direct, unpooled Postgres connection. Creating a separate logical target requires the current role's database-creation rights; documented neon_superuser privileges do not prove the permissions of an issued connection. A new logical database shares the existing project's capacity and expiry. Claimable's engineering Beta status signal and the AUP's publication exception require separate review before a new public comparison; callable provisioning is not publication permission. |
 
 ### Service pricing
 
 [Official pricing](https://neon.com/pricing)
-
-- claimable-api: 100 MB / project (free_allowance; Unclaimed project storage, with 1 GB transfer and a 72-hour lifetime.)
 
 ### Setup observations
 
@@ -5477,20 +5774,27 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 ### Notes
 
-- The current Neon Platform Schedule incorporates the Databricks MCSA and its Acceptable Use Policy. The AUP permits benchmarking and disclosure except for Beta Services, with disclosure of information needed to reproduce the benchmark and reciprocal benchmarking rights. The reviewed Claimable reference does not label the service Beta; absence of that label is not an independent determination of contractual status. Customer-content rights and confidentiality obligations remain applicable. Small tests using synthetic records should preserve reproducible conditions and disclose only task-owned evidence; they do not establish general production reliability.
+- Ordinary registered Free accounts currently include 100 projects, 100 CU-hours/month/project, 1 GB Postgres storage/project and 10 branches/project, with no credit card required. The storage increase was announced on 2026-10-02. These ordinary Free limits do not replace the unclaimed Claimable project's 100 MB, 1 GB transfer and 72-hour constraints. Neither plan's advertised allowance establishes actual remaining resources or this run's service charges.
+- The current Neon Platform Schedule incorporates the Databricks MCSA and its Acceptable Use Policy. The AUP permits benchmarking and disclosure except for Beta Services, with disclosure of information needed to reproduce the benchmark and reciprocal benchmarking rights. The public Claimable reference does not label the service Beta, but the official engineering overview describes its hosted endpoint as Beta-ready on 2026-08-26. A current Claimable-specific GA confirmation was not established in this review; do not infer unrestricted publication from the reference's missing label or from broader Neon backend announcements. Customer-content rights and confidentiality obligations remain applicable. Small tests using synthetic records should preserve reproducible conditions and disclose only task-owned evidence; they do not establish general production reliability.
 
 ### Sources
 
 - [official_site](https://neon.new/) — checked 2026-10-08
 - [official_announcement](https://neon.com/blog/neon-launchpad) — checked 2026-09-07
-- [official_site](https://neon.com/claimable-neon) — checked 2026-10-08
-- [official_docs](https://neon.com/docs/reference/claimable-neon) — checked 2026-10-08
+- [official_site](https://neon.com/claimable-neon) — checked 2026-10-10
+- [official_docs](https://neon.com/docs/reference/claimable-neon) — checked 2026-10-10
 - [official_docs](https://neon.com/auth.md) — checked 2026-10-08
 - [official_docs](https://www.postgresql.org/docs/18/tutorial-transactions.html) — checked 2026-10-08
-- [official_docs](https://neon.com/docs/connect/connection-pooling) — checked 2026-10-08
-- [official_site](https://neon.com/platform-terms) — checked 2026-10-08
-- [official_site](https://www.databricks.com/legal/mcsa) — checked 2026-10-08
-- [official_site](https://www.databricks.com/legal/acceptable-use-policy) — checked 2026-10-08
+- [official_docs](https://neon.com/docs/connect/connection-pooling) — checked 2026-10-10
+- [official_site](https://neon.com/platform-terms) — checked 2026-10-10
+- [official_site](https://www.databricks.com/legal/mcsa) — checked 2026-10-10
+- [official_site](https://www.databricks.com/legal/acceptable-use-policy) — checked 2026-10-10
+- [official_site](https://neon.com/pricing) — checked 2026-10-10
+- [official_announcement](https://neon.com/blog/neon-free-plan-1-gb-per-project) — checked 2026-10-10
+- [official_docs](https://neon.com/docs/manage/backup-pg-dump) — checked 2026-10-10
+- [official_docs](https://neon.com/docs/manage/databases) — checked 2026-10-10
+- [official_docs](https://neon.com/docs/manage/roles) — checked 2026-10-10
+- [official_docs](https://github.com/neondatabase/claimable-neon/blob/main/docs/overview.md) — checked 2026-10-10
 
 <a id="netlify"></a>
 
@@ -5534,23 +5838,25 @@ OSMF-hosted place and address lookup for deliberately selected, low-volume uses 
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-search-api (API)](https://nominatim.openstreetmap.org/search) | [Docs](https://nominatim.org/release-docs/latest/api/Search/) | self serve / documented | Public API policy: https://operations.osmfoundation.org/policies/nominatim/ . Maximum one request/second across the application. Small one-time bulk scripts must use one thread on one machine and cache results; regular or longer-than-one-day scripts are limited to four requests/minute. Autocomplete, systematic harvesting, automated details-page scraping and geocoding-result resale are prohibited. Apps must be able to switch service on request. Do not submit personal/confidential data. OSMF terms include age and UK sanctions eligibility conditions. OSM data use requires attribution and ODbL compliance; derived databases have share-alike obligations. No explicit public-benchmark prohibition was found in the reviewed terms. Postcodes may be interpolated and address components can come from nearby place nodes; coverage or matching text alone does not prove a precise position. No live access is claimed. |
+| [public-search-api (API)](https://nominatim.openstreetmap.org/search) | [Docs](https://nominatim.org/release-docs/latest/api/Search/) | self serve / documented | Public API policy: https://operations.osmfoundation.org/policies/nominatim/ . Maximum one request/second across the application. Small one-time bulk scripts must use one thread on one machine and cache results; regular or longer-than-one-day scripts are limited to four requests/minute. Autocomplete, systematic harvesting, automated details-page scraping and geocoding-result resale are prohibited. Apps must be able to switch service on request. Do not submit personal/confidential data. OSMF terms include age and UK sanctions eligibility conditions. OSM data use requires attribution and ODbL compliance; derived databases have share-alike obligations. No explicit public-benchmark prohibition was found in the reviewed terms. Postcodes may be interpolated and address components can come from nearby place nodes; coverage or matching text alone does not prove a precise position. Nominatim and Photon share OSM data, so agreement between them is not independent geographic truth. The source review made no live geocoding request; dated trials separately record network conditions and outcomes. |
 
 ### Service pricing
 
-- public-search-api: 0 USD / eligible public API request (usage; Donated public-server access within its acceptable-use policy; no reserved capacity or SLA.)
+- public-search-api: 0 USD / eligible public API request (usage; OSMF explicitly free public service within its usage/privacy policies; no reserved capacity or SLA.)
 
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: none; official low-volume public route selected deliberately for one public-venue research task](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | — | — | — |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | [191.0k](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 60.509774s | 0 |
 
 #### Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [0](./evaluations.md#comparison-d21a9019050d) | — | — | — | — |
+| API | [1](./evaluations.md#comparison-60adbd865cb5) | [100%](./evaluations.md#comparison-60adbd865cb5) | 191.0k | $0.01 | $0 |
+
+- [afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json): Service operation completed; user delivery completed; blockers none. 指定 Nominatim Search 入口经一次真实 HTTP 200 查询返回可识别地点与有效经纬度；配置持久化且路径报告；答复与响应一致，无网络/权限/额度阻碍，故分项均完成。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -5559,15 +5865,46 @@ The service, assigned entry point, permitted account or registration information
 
 **Completion:** Complete necessary registration, authentication, installation and configuration through the assigned route. A real response contains an identifiable place and valid coordinates, and the answer agrees with it. Configuration is reusable in a new session without exposing secrets. Do not force registration for a keyless route or describe a pre-existing account as newly self-registered.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; official low-volume public route selected deliberately for one public-venue research task · [Full configuration and evidence](./evaluations.md#comparison-d21a9019050d)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-60adbd865cb5)
 
 [Task definition](./tasks.en.md#geocoding-access-001-v1)
 
-Invalid runs: 1
+</details>
 
-- API: [Invalid run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) — 执行环境无法连通指定入口 https://nominatim.openstreetmap.org/search：DNS 把 nominatim.openstreetmap.org 解析为与 OSM 无关的轮换 IP（含 Facebook 段 2a03:2880:...:face:b00c...、31.13.84.2 等），urllib/curl/webfetch 对该入口的连接一律超时或 Network unreachable；同一容器内 example.com、api.github.com、nominatim.org、operations.osmfoundation.org 均 HTTP 200，而 www.openstreetmap.org、www.google.com 同为 HTTP 000，指向容器级 DNS/出口限制。工作目录未产生 result.json 或 cache，last_request.json 仅记录一次尝试；会话在约 290 秒时被超时终止（exit_code=-15, timed_out=true），answer.md 仅剩未完成片段。核心阻碍属于执行环境网络（DNS/出口）而非服务能力、接入门槛或执行者行为，故记 invalid_run；未做接入补测。
+<details>
+<summary>Run history (2)</summary>
+
+| Task | Route | Result | Date (UTC) |
+| --- | --- | --- | --- |
+| geocoding-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 2026-10-10 |
+| geocoding-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08 |
+
+</details>
+
+### Task results
+
+#### I want to mark the British Museum on a travel map. Use the assigned service to convert the venue address in the attachment to usable coordinates. Answer in Chinese with the matched place name, explicitly labeled WGS84 decimal latitude and longitude, address information actually returned by the service, and data source. Explain whether the location represents the venue, an entrance or a coarser area.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API | [1](./evaluations.md#comparison-7a7e044bd215) | [100%](./evaluations.md#comparison-7a7e044bd215) | 73.4k | $0.0072 | $0 |
+
+- [afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json): Service operation completed; user delivery completed; blockers none. 指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+Place: The British Museum. Address: Great Russell Street, London WC1B 3DG, United Kingdom. The purpose is a venue marker for an itinerary overview. A venue center or entrance is acceptable, with a place-level position within 200 meters of the venue’s official location point; exact doorway navigation is unnecessary. A street, postal-code or city center must not be presented as the venue. Use only actual query results from the assigned service. Disclose missing address fields rather than inventing them, distinguish the supplied address from the returned address, and state when adequate precision is unavailable.
+
+**Completion:** A real query through the assigned service matches the British Museum in London or its entrance. Final coordinates agree with that object’s real response, with correct axes and units, and lie within 200 meters of the independently frozen official venue point, allowing reasonable display rounding. Name, location and returned object semantics jointly support the venue identity; proximity alone does not turn a coarse area object into a venue match. The source, returned address and granularity explanation are verifiable, without invented missing fields. Services need not return identical coordinates, word-for-word addresses or a fixed field set.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-7a7e044bd215)
+
+[Task definition](./tasks.en.md#geocoding-venue-001-v1)
 
 </details>
 
@@ -5576,23 +5913,20 @@ Invalid runs: 1
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| geocoding-access-001 v1 | API | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08 |
+| geocoding-venue-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | 2026-10-10 |
 
 </details>
 
-### Task results
-
-—
-
 ### Sources
 
-- [official_docs](https://nominatim.org/release-docs/latest/api/Search/) — checked 2026-10-08
-- [official_docs](https://nominatim.org/release-docs/latest/api/Output/) — checked 2026-10-08
-- [official_docs](https://nominatim.org/release-docs/latest/api/Faq/) — checked 2026-10-08
-- [official_docs](https://operations.osmfoundation.org/policies/nominatim/) — checked 2026-10-08
-- [official_site](https://osmfoundation.org/wiki/Terms_of_Use) — checked 2026-10-08
-- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
-- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-08
+- [official_docs](https://nominatim.org/release-docs/latest/api/Search/) — checked 2026-10-10
+- [official_docs](https://nominatim.org/release-docs/latest/api/Output/) — checked 2026-10-10
+- [official_docs](https://nominatim.org/release-docs/latest/api/Faq/) — checked 2026-10-10
+- [official_docs](https://operations.osmfoundation.org/policies/nominatim/) — checked 2026-10-10
+- [official_site](https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ) — checked 2026-10-10
+- [official_site](https://osmfoundation.org/wiki/Terms_of_Use) — checked 2026-10-10
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-10
+- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-10
 
 <a id="notion"></a>
 
@@ -5974,13 +6308,17 @@ Free hosted public and school holiday data API with regional filters and an open
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | [145.0k](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 29.527567s | 0 |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | [158.3k](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 39.704667s | 0 |
 
 #### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-0ce2de00d325) | [100%](./evaluations.md#comparison-0ce2de00d325) | 145.0k | $0.0091 | $0 |
+| API | [3](./evaluations.md#comparison-ce7a914a844f) | [100%](./evaluations.md#comparison-ce7a914a844f) | 158.5k | $0.01 | $0 |
+
+- [afs-20261010-johor40-holidays-openholidays-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json): Service operation completed; user delivery completed; blockers none. PublicHolidays 等 4 个端点均 HTTP 200 返回真实数据，DE/2026 返回 20 条假日；答复含地区/年份、日期与名称、来源与可复用配置位置，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 /PublicHolidays 查询返回 HTTP 200 的 20 条德国 2026 公共假日（含 2026-10-03 Day of German Unity）；配置保留于指定持久目录；无网络、接入、预算或执行阻碍。
+- [afs-20261010-johor40-holidays-openholidays-access-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json): Service operation completed; user delivery completed; blockers none. 匿名入口 /Countries、/Languages、/Subdivisions、/PublicHolidays 均 HTTP 200；指定 PublicHolidays 查询返回真实节日数据，配置已持久保存，答复完整，无 403/429、无人工介入。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -5989,19 +6327,22 @@ The service, assigned route, permitted account or registration details and their
 
 **Completion:** Complete any needed registration, authorization, installation or configuration through the assigned route. A real holiday query returns an identifiable date and name; the answer and scope match the response, and configuration is reusable in a new session without exposing secrets. Do not force registration for an account-free route or count a pre-existing account as registration completed in this run.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-0ce2de00d325)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ce7a914a844f)
 
 [Task definition](./tasks.en.md#public-holidays-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 2026-10-10 |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json) | 2026-10-10 |
+| public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json) | 2026-10-10 |
 | public-holidays-access-001 v1 | API | [completed](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -6012,7 +6353,11 @@ Access preparation: none; anonymous publicAPI, no account/email/key/payment supp
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-39d86ae45d95) | [100%](./evaluations.md#comparison-39d86ae45d95) | 174.3k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-c53ca46196b8) | [100%](./evaluations.md#comparison-c53ca46196b8) | 97.9k | $0.0078 | $0 |
+
+- [afs-20261010-johor40-holidays-openholidays-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json): Service operation completed; user delivery completed; blockers none. OpenHolidays API 的 Subdivisions/Languages/Countries 及 DE-BE 2027 PublicHolidays 请求均 HTTP 200 并返回数据（execution/artifacts/raw_*.json）；最终答复 execution/answer.md 给出准确的 10 项柏林节日清单，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json): Service operation completed; user delivery completed; blockers none. 指定 OpenHolidays PublicHolidays 请求返回 HTTP 200，合法限定 DE-BE 与 2027 年；用户收到按日期升序的 10 条清单、总数与来源，无阻碍。
+- [afs-20261010-johor40-holidays-openholidays-business-r1](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json): Service operation completed; user delivery completed; blockers none. OpenHolidays API 三次真实只读请求均成功返回（Subdivisions、DE-BE PublicHolidays、DE 全国对照），最终答复列出 10 条正确节假日并注明来源；无网络、权限或预算障碍。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6021,19 +6366,22 @@ Region: the whole German state of Berlin, not another place with the same name. 
 
 **Completion:** Actually query the assigned service and correctly limit the result to Berlin and 2027. The delivered list matches the independently frozen official reference: complete, without duplicates or out-of-scope holidays, with correct dates and holiday identities in ascending date order, an accurate total and a source traceable to the real query. Allow German or English names, normal punctuation and equivalent holiday names. Provider field names, server-side versus client-side filtering, and original response order are not completion criteria.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous publicAPI, no account/email/key/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-39d86ae45d95)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-c53ca46196b8)
 
 [Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | 2026-10-10 |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json) | 2026-10-10 |
+| public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json) | 2026-10-10 |
 | public-holidays-berlin-001 v1 | API | [completed](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -6204,13 +6552,17 @@ Public vulnerability metadata aggregated across open-source ecosystems, queryabl
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | [178.5k](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 42.586955s | 0 |
+| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | [103.6k](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 29.984579s | 0 |
 
 #### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-7a5fd0fd8e1a) | [100%](./evaluations.md#comparison-7a5fd0fd8e1a) | 178.5k | $0.01 | — |
+| API | [3](./evaluations.md#comparison-1a93823643b5) | [100%](./evaluations.md#comparison-1a93823643b5) | 151.1k | $0.01 | $0 |
+
+- [afs-20261010-johor40-advisories-osv-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 OSV API 查询与记录路径均实测返回可识别公告（GHSA-29mw-wpgm-hmr9 等）；最终答复 execution/answer.md 含公告、关联包、复用配置位置与接入门槛，交付完整。
+- [afs-20261010-johor40-advisories-osv-access-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 OSV API 的 POST /v1/query 与 GET /v1/vulns/{id} 均真实返回 200（execution/artifacts/query_minimist_1.2.0.json、record_GHSA-vh95-rmgr-6w4m.json），可复用配置已保存（execution/retained-files.json），用户答复齐备（execution/answer.md）；无网络、权限、预算或执行阻碍迹象。
+- [afs-20261010-johor40-advisories-osv-access-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json): Service operation completed; user delivery completed; blockers none. 指定 OSV 匿名 API 真实查询成功（POST /v1/query status 200，命中 GHSA-462w-v97r-4m45，GET /v1/vulns 复核一致）；持久配置已保存位置明确；答复与响应一致。无网络、权限、额度、材料或服务能力阻碍；无人工介入。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6219,19 +6571,22 @@ The assigned service, entry point and authorized identity or credentials are in 
 
 **Completion:** Complete the necessary installation, authentication and configuration through the assigned entry point. A real response contains an identifiable advisory and associated package, and the answer agrees with it. Configuration is reusable in a new session and secrets are not exposed. Do not require signup for keyless access or describe an existing account as newly registered.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-7a5fd0fd8e1a)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-1a93823643b5)
 
 [Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| dependency-advisories-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 2026-10-10 |
+| dependency-advisories-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json) | 2026-10-10 |
+| dependency-advisories-access-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json) | 2026-10-10 |
 | dependency-advisories-access-001 v1 | API | [completed](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -6242,7 +6597,11 @@ Access preparation: none; anonymous public advisory API, no account/email/token/
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-644e634b8512) | [100%](./evaluations.md#comparison-644e634b8512) | 201.0k | $0.02 | $0 |
+| API | [3](./evaluations.md#comparison-8e6422c28f03) | [100%](./evaluations.md#comparison-8e6422c28f03) | 198.0k | $0.01 | $0 |
+
+- [afs-20261010-johor40-advisories-osv-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json): Service operation completed; user delivery completed; blockers none. OSV API 的 query 与 vulns 端点均返回 HTTP 200 并被实际用于结论；答复完整给出两条告警的匹配结论、5.2.x 最早修复版本（5.2.6 / 5.2.7）、最低升级版本 5.2.7 及可核对链接，无阻碍。
+- [afs-20261010-johor40-advisories-osv-business-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json): Service operation completed; user delivery completed; blockers none. 服务端：osv_client.py 对 api.osv.dev 发出 GET /v1/vulns/{id} 与 POST /v1/query（SOURCE: live），缓存响应可核；交付：execution/answer.md 给出两条匹配结论、5.2.6/5.2.7 修复边界、最低 5.2.7 与依据链接，与独立冻结参考一致。无阻碍。
+- [afs-20261010-johor40-advisories-osv-business-r1](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json): Service operation completed; user delivery completed; blockers none. OSV query 与两条 vulns 记录均 HTTP 200 且内容与冻结参考一致；维护者公告可追溯；最终答复完整包含两条匹配结论、修复版本、最低升级版本与依据链接。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6251,19 +6610,22 @@ Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alert
 
 **Completion:** Actually query the assigned service and correctly determine whether the specified package version matches each alert. Identify the correct first fixed releases in the requested 5.2.x branch and the correct combined minimum upgrade. Conclusions agree with real service records or traceable maintainer references from those records and are checked against independently obtained, frozen maintainer release sources. Links support the corresponding decisions. Do not equate a missing hit with no impact or extend the result to all vulnerabilities or application exploitability.
 
-1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: none; anonymous public advisory API, no account/email/token/payment supplied · [Full configuration and evidence](./evaluations.md#comparison-644e634b8512)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-8e6422c28f03)
 
 [Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (1)</summary>
+<summary>Run history (4)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| dependency-advisories-check-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | 2026-10-10 |
+| dependency-advisories-check-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json) | 2026-10-10 |
+| dependency-advisories-check-001 v1 | API | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json) | 2026-10-10 |
 | dependency-advisories-check-001 v1 | API | [completed](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | 2026-10-08 |
 
 </details>
@@ -6539,11 +6901,11 @@ Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMa
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [public-search-api (API)](https://photon.komoot.io/api/) | [Docs](https://photon.komoot.io/) | self serve / documented | This is the actual komoot-hosted demo, separate from installing the open-source package. Extensive use can be throttled or banned; no fixed request/second or daily limit is published. A maintainer confirmed in April 2026 that generic User-Agent/Referer combinations can trigger abuse protection, including false positives. Identify the application honestly from the first request; do not rotate identities or IPs to bypass a denial. Low-volume caching is prudent, but a mandatory cache interval was not documented in the reviewed demo policy. Latest repository features are not automatically proven deployed on the demo. OSM data licensing and attribution are separate from Photon's Apache 2.0 software licence. No explicit public-benchmark prohibition was found in the reviewed demo terms. Both Photon and Nominatim use OSM, so their agreement is not independent evidence of geographic truth. Availability remains untested. |
+| [public-search-api (API)](https://photon.komoot.io/api/) | [Docs](https://photon.komoot.io/) | self serve / documented | This is the actual komoot-hosted demo, separate from installing the open-source package. Extensive use can be throttled or banned; no fixed request/second or daily limit is published. A maintainer confirmed in April 2026 that generic User-Agent/Referer combinations can trigger abuse protection, including false positives. Identify the application honestly from the first request; do not rotate identities or IPs to bypass a denial. Low-volume caching is prudent, but a mandatory cache interval was not documented in the reviewed demo policy. Latest repository features are not automatically proven deployed on the demo. OSM data licensing and attribution are separate from Photon's Apache 2.0 software licence. No explicit public-benchmark prohibition was found in the reviewed demo terms. Both Photon and Nominatim use OSM, so their agreement is not independent evidence of geographic truth. Current homepage/repository terms permit public project use but do not explicitly quantify service fees; no account or payment step is described. The price remains unknown here rather than inferring zero from anonymous access or a questioner's historical description. This documentation review made no geocoding request; dated independent trials separately record actual access and task results. |
 
 ### Service pricing
 
-- public-search-api: 0 USD / public demo API request (usage; Public project use within reasonable limits; no numeric quota or reserved service capacity is promised.)
+—
 
 ### Setup observations
 
@@ -6615,13 +6977,14 @@ Access preparation: none; official low-volume public route selected deliberately
 
 ### Sources
 
-- [official_docs](https://photon.komoot.io/) — checked 2026-10-08
-- [official_docs](https://github.com/komoot/photon) — checked 2026-10-08
-- [official_docs](https://github.com/komoot/photon/blob/master/docs/api-v1.md) — checked 2026-10-08
-- [official_site](https://github.com/komoot/photon/discussions/1044) — checked 2026-10-08
-- [official_site](https://github.com/komoot/photon/discussions/598) — checked 2026-10-08
-- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-08
-- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-08
+- [official_docs](https://photon.komoot.io/) — checked 2026-10-10
+- [official_docs](https://github.com/komoot/photon) — checked 2026-10-10
+- [official_docs](https://github.com/komoot/photon/blob/master/docs/api-v1.md) — checked 2026-10-10
+- [official_site](https://github.com/komoot/photon/discussions/1044) — checked 2026-10-10
+- [official_site](https://github.com/komoot/photon/discussions/598) — checked 2026-10-10
+- [official_site](https://github.com/komoot/photon/discussions/848) — checked 2026-10-10
+- [official_site](https://www.openstreetmap.org/copyright) — checked 2026-10-10
+- [official_docs](https://osmfoundation.org/wiki/Licence/Attribution_Guidelines) — checked 2026-10-10
 
 <a id="pinecone"></a>
 
@@ -8101,7 +8464,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
-| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/quickstart) | self serve / documented | Requires: platform_account; Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month. Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine: --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not establish remote persistence. Paid overages are separate from the free allowance. |
+| [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/quickstart) | self serve / documented | Requires: platform_account; Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month. Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine: --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not establish remote persistence. Published allowances do not establish remaining account quota; paid overages are separate and must not be assumed disabled. The shell reference documents a logical .dump that can rebuild a database without libSQL/SQLite internal tables, and loading that dump into a new database. This CLI capability is not a built-in HTTP dump endpoint. |
 | [platform-api (API)](https://api.turso.tech/v1/) | [Docs](https://docs.turso.tech/api-reference/quickstart) | self serve | Account/organization management uses a Bearer Platform API token, which can be organization-scoped. This provisions databases; SQL uses a separate database token and endpoint. The quickstart obtains the platform token through an authenticated CLI account. Existing account access and new database provisioning are distinct steps. |
 | [sql-http-api (API)](https://docs.turso.tech/sdk/http/quickstart) | [Docs](https://docs.turso.tech/sdk/http/quickstart) | self serve / documented | SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer token. The endpoint is specific to each database, so the setup guide is retained as the entry clue. It supports both cloud engines. Provisioning and account authorization are separate. A list of pipeline requests is not itself an atomic transaction. The HTTP guide documents connection reuse for explicit transactions and states a 5-second transaction window and 10-second idle-connection timeout. |
 | [cloud-sdk (SDK)](https://docs.turso.tech/sdk/ts/quickstart) | [Docs](https://docs.turso.tech/sdk/ts/quickstart) | self serve / documented | For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local SDK modes and cached replicas do not by themselves prove a fresh remote read. For libSQL, the official reference documents atomic client.batch transactions: all statements commit on success and any failure rolls back the batch. Interactive transactions require appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT conflict handling only reverses the failing statement, not prior statements in the transaction. |
@@ -8115,7 +8478,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | CLI | — | — | — | — |
-| API (platform-api) | [Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database](../data/experiments/evaluations/turso-atomic-import-001-ds41-r1.json) | [232.6k](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 50.403294s | 0 |
+| API (platform-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | [232.3k](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 55.989322s | 0 |
 | API (sql-http-api) | — | — | — | — |
 | SDK | — | — | — | — |
 
@@ -8123,10 +8486,12 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (platform-api) | [1](./evaluations.md#comparison-7a86e94d64f8) | [100%](./evaluations.md#comparison-7a86e94d64f8) | 232.6k | $0.01 | $0 |
+| API (platform-api) | [1](./evaluations.md#comparison-3e5e974d8b61) | [100%](./evaluations.md#comparison-3e5e974d8b61) | 232.3k | $0.01 | $0 |
 | CLI | — | — | — | — | — |
 | API (sql-http-api) | — | — | — | — | — |
 | SDK | — | — | — | — | — |
+
+- [afs-20261010-johor40-turso-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json): Service operation completed; user delivery completed; blockers none. 服务端：建库、签发库 token、/v2/pipeline 只读查询均 HTTP 200 成功（create-db.json、query-result.json）。交付：answer.md 给出资源标识、真实查询结果、配置位置、步骤与限制，秘密仅存私有文件。
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -8135,19 +8500,20 @@ The service, interface, authorized account or signup identity and its origin are
 
 **Completion:** Complete necessary access through the specified service and interface, create a separate empty test database and query it successfully. Installation and configuration are reusable in a fresh session without credential exposure. Do not count an existing account as newly registered or force signup for account-free access. Accurately explain the evidence for free-tier or expiry conditions and any unknowns. Installation, resource listings, creation receipts and health checks alone do not prove the database can be queried.
 
-1.18.35 · deepseek-flash / high · 300s · 2026-10-08 (UTC)
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: Preprovided existing authorized parent identity; executor creates one fresh empty logical database · [Full configuration and evidence](./evaluations.md#comparison-7a86e94d64f8)
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-3e5e974d8b61)
 
 [Task definition](./tasks.en.md#database-access-001-v1)
 
 </details>
 
 <details>
-<summary>Run history (4)</summary>
+<summary>Run history (5)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 2026-10-10 |
 | database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 2026-10-08 |
 | database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-restore-mirror-access-ds41-r1.json) | 2026-10-08 |
 | database-access-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-restore-access-ds41-r1.json) | 2026-10-08 |
@@ -8156,6 +8522,34 @@ Access preparation: Preprovided existing authorized parent identity; executor cr
 </details>
 
 ### Task results
+
+#### Run a backup and restore rehearsal for my personal todo app: export the source database as a logical backup I can download and keep, create a separate empty database on the same service, and actually restore from that backup without changing the source. Reconnect to the new database after restoration to check it. Deliver the backup, brief restoration instructions, the new database location, each table’s row count and verification results, and explain the new database’s free-tier or expiry limits.
+
+| Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
+| --- | --- | --- | --- | --- | --- |
+| API (platform-api) | [3](./evaluations.md#comparison-848474bceab4) | [100%](./evaluations.md#comparison-848474bceab4) | 456.4k | $0.02 | $0 |
+| CLI | — | — | — | — | — |
+| API (sql-http-api) | — | — | — | — | — |
+| SDK | — | — | — | — | — |
+
+- [afs-20261010-johor40-turso-restore-v2-r3](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json): Service operation completed; user delivery completed; blockers none. 指定 Turso 服务操作全部实际完成：源库读取导出→新建独立空目标→用交付备份恢复→重连目标核对→重连源库确认未变。restore_raw.json、target_verify_raw.json、source_raw/source_post_raw.json 及 controller 独立前后读回一致，最终答复含所需业务交付。
+- [afs-20261010-johor40-turso-restore-v2-r2](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json): Service operation completed; user delivery completed; blockers none. 导出、新建目标、恢复、重连核对四步服务端操作均有原始响应：备份含两表结构与全部记录；总控独立读回证实源库 before==after 且目标库 after==源库（行数、DDL、外键、NULL/空串语义一致）。
+- [afs-20261010-johor40-turso-restore-v2-r1](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json): Service operation completed; user delivery completed; blockers none. 导出、建空目标库、用备份恢复、重连核对四项指定服务操作均有真实 HTTP 200 回执（工具记录 line20/65/69/73/76）与控制器独立读回（target-after、source-after）印证；源库无写操作，全程无权限/限流/付费阻碍。
+
+<details>
+<summary>Task, conditions and evidence</summary>
+
+The source is a dedicated remote database created separately by the controller for this run, independently confirmed empty, then populated with synthetic data and checked; its identity and connection configuration are in ENVIRONMENT.md. It has two application tables: lists (id, name) and todos (id, list_id, title, done, note), with list_id referencing lists.id. Preserve both tables’ column names, data-type semantics, primary keys, foreign keys, nullability constraints, default values and every original record. Preserve list membership, completion status, text, and the distinction between an empty note and a missing note. The destination must be a separate remote database created during this run with no application tables initially; it may share a project or compute with the source. The backup must contain the application schema and data needed to restore on a compatible SQL engine even if the source is unavailable later, rather than just a snapshot or branch link dependent on the original service. Cross-dialect restoration is not required. Service-internal tables, account permissions and the host machine are outside scope. No other writer will modify the source during this task; do not change or delete its application tables or records.
+
+**Completion:** Through the assigned service and route, export a real backup containing both tables’ logical schema and every record, then actually use it to restore into a separate remote destination created during this run and initially empty. New connections can read equivalent application schema and all original records, while the source application schema and rows remain unchanged. Deliver the retained backup, usable brief restoration instructions, destination location, accurate per-table counts and verification results, and disclose known expiry or free-tier terms accurately. Credentials stay in private configuration and are not included in the answer or public evidence.
+
+1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
+
+Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-848474bceab4)
+
+[Task definition](./tasks.en.md#database-restore-001-v2)
+
+</details>
 
 #### My personal book catalog needs file-based batch imports without leaving a partial batch when an ID is duplicated. Build a reusable importer protected by a database atomic operation or transaction covering the whole batch. Actually test that the erroneous sample is rejected as a whole and the corrected sample is fully saved in the two supplied independent test tables, preserving existing books. Deliver the importer, brief usage instructions and both outcomes; keep credentials separate.
 
@@ -8260,10 +8654,13 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 </details>
 
 <details>
-<summary>Run history (4)</summary>
+<summary>Run history (7)</summary>
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
+| database-restore-001 v2 | API (platform-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | 2026-10-10 |
+| database-restore-001 v2 | API (platform-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json) | 2026-10-10 |
+| database-restore-001 v2 | API (platform-api) | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json) | 2026-10-10 |
 | database-atomic-import-001 v1 | API (platform-api) | [completed](../data/experiments/evaluations/turso-atomic-import-001-ds41-r1.json) | 2026-10-08 |
 | database-restore-001 v1 | API (platform-api) | [not_completed](../data/experiments/evaluations/turso-restore-mirror-001-ds41-r1.json) | 2026-10-08 |
 | database-todos-001 v2 | API (platform-api) | [completed](../data/experiments/evaluations/turso-todos-001v2-ds41-r1.json) | 2026-10-08 |
@@ -8273,23 +8670,29 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 ### Notes
 
+- Logical backup and snapshot export are different paths. The shell and database-create references document SQL dump export/import. The db export reference instead warns that its SQLite snapshot may omit recent changes until synchronized with an SDK. A successful export alone therefore does not establish a complete current backup; retain and verify the actual schema and records. Restore/branch features do not by themselves supply an independently usable logical backup.
+- A restore needs capacity for both source and target, including any retained test databases. Reads are scanned rows rather than just returned rows, and writes may consume quota even when a transaction is aborted. Account usage, engine, overage setting and actual charges must be checked separately; a small output or a successful request does not prove zero service cost.
 - Reviewed terms contain no specific public-benchmark disclosure ban. They limit use to the customer's "own internal business, personal, non-commercial use", exclude use on behalf of or for the benefit of third parties, protect content and credentials, and prohibit disruptive use. This is not permission to redistribute another user's data or offer an unrestricted third-party database service. Small functional tests with the customer's own synthetic records do not establish concurrency, latency or production durability guarantees.
 
 ### Sources
 
 - [official_docs](https://docs.turso.tech/cli/introduction) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/api-reference/quickstart) — checked 2026-10-08
-- [official_site](https://turso.tech/pricing) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/api-reference/quickstart) — checked 2026-10-10
+- [official_site](https://turso.tech/pricing) — checked 2026-10-10
+- [official_docs](https://docs.turso.tech/quickstart) — checked 2026-10-10
 - [official_docs](https://docs.turso.tech/cli/authentication) — checked 2026-10-08
-- [official_docs](https://docs.turso.tech/sdk/http/quickstart) — checked 2026-10-08
+- [official_docs](https://docs.turso.tech/sdk/http/quickstart) — checked 2026-10-10
 - [official_docs](https://docs.turso.tech/sdk/introduction) — checked 2026-10-08
 - [official_docs](https://docs.turso.tech/sdk/authentication) — checked 2026-10-08
 - [official_docs](https://docs.turso.tech/sdk/ts/quickstart) — checked 2026-10-08
 - [official_docs](https://docs.turso.tech/sdk/ts/reference) — checked 2026-10-08
 - [official_docs](https://docs.turso.tech/sdk/http/reference) — checked 2026-10-08
 - [official_docs](https://www.sqlite.org/lang_conflict.html) — checked 2026-10-08
-- [official_site](https://turso.tech/terms-of-use) — checked 2026-10-08
+- [official_site](https://turso.tech/terms-of-use) — checked 2026-10-10
+- [official_docs](https://docs.turso.tech/cli/db/shell) — checked 2026-10-10
+- [official_docs](https://docs.turso.tech/cli/db/create) — checked 2026-10-10
+- [official_docs](https://docs.turso.tech/cli/db/export) — checked 2026-10-10
+- [official_docs](https://docs.turso.tech/help/usage-and-billing) — checked 2026-10-10
 
 <a id="tushare"></a>
 

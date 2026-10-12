@@ -12,7 +12,7 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-10-10T09:14:25.357Z",
+  "generated_at": "2026-10-12T03:54:33.418Z",
   "counts": {
     "providers": 76,
     "categories": 11,
@@ -3097,8 +3097,8 @@
         "free_tier_or_trial": {
           "status": "supported",
           "evidence": "https://www.firecrawl.dev/pricing",
-          "verified": "2026-07-07",
-          "notes": "Free plan with monthly credits."
+          "verified": "2026-10-10",
+          "notes": "Free accounts receive 1000 credits/month shared across endpoints, with no card required. Keyless Scrape has separate unpublished daily per-IP request and credit caps."
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -3118,7 +3118,7 @@
         "automation_permitted": {
           "status": "unknown",
           "evidence": "https://www.firecrawl.dev/terms-of-service",
-          "verified": "2026-10-08",
+          "verified": "2026-10-10",
           "notes": "Terms require express authorization for commercial purposes and compliance with third-party rights; a free quota alone does not establish every permitted use."
         }
       },
@@ -3129,7 +3129,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-10-08",
+        "last_verified": "2026-10-10",
         "unknown_checks": [
           "scoped_tokens",
           "token_revocation",
@@ -3982,7 +3982,7 @@
           "status": "supported",
           "evidence": "https://jina.ai/api-dashboard",
           "verified": "2026-07-08",
-          "notes": "Dashboard issues keys; a starter token quota works without registration for some endpoints (r.jina.ai)."
+          "notes": "Dashboard issues keys. Reader also documents a separate keyless route; its free access is not a starter-token balance."
         },
         "oauth_support": {
           "status": "unknown"
@@ -3995,13 +3995,13 @@
         },
         "sandbox_or_test_mode": {
           "status": "unknown",
-          "notes": "Rate-limited keyless access to Reader serves as a de facto trial; needs the canonical docs link as evidence."
+          "notes": "Reader documents rate-limited keyless production access, not a distinct sandbox environment."
         },
         "free_tier_or_trial": {
           "status": "supported",
-          "evidence": "https://jina.ai/api-dashboard",
-          "verified": "2026-07-08",
-          "notes": "Free token allowance for new keys."
+          "evidence": "https://jina.ai/reader/",
+          "verified": "2026-10-10",
+          "notes": "Basic keyless Reader is explicitly free at 20 requests/minute. The separate 10M-token allowance for new API keys is not described as a recurring monthly allowance."
         },
         "self_serve_paid_upgrade": {
           "status": "supported",
@@ -4023,7 +4023,7 @@
         "automation_permitted": {
           "status": "unknown",
           "evidence": "https://jina.ai/legal/#terms-and-conditions",
-          "verified": "2026-10-08",
+          "verified": "2026-10-10",
           "notes": "Terms section 4.3 leaves output use unrestricted unless otherwise agreed, subject to third-party rights. Section 4.5(iv) contains a broad automated-extraction restriction; read with the Reader product description. No benchmark-specific disclosure prohibition was found."
         }
       },
@@ -4034,7 +4034,7 @@
           "Self-serve"
         ],
         "stale": false,
-        "last_verified": "2026-10-08",
+        "last_verified": "2026-10-10",
         "unknown_checks": [
           "oauth_support",
           "scoped_tokens",
