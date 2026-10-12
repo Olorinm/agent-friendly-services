@@ -64,6 +64,20 @@ test('lost runtime duration remains unknown only for an invalid run', () => {
   }
 });
 
+test('grader identity is recorded separately from the execution model', () => {
+  const providers = [...loadProviders(), ...loadCandidates()].map(p => p.data);
+  const value = structuredClone(loadEvaluations()[0]);
+  const executionModel = value.model;
+  value.review.runtime = { model: 'gpt-6.1-sol', reasoning_effort: 'high',
+    harness: { name: 'codex', version: '0.162.0', mode: 'noninteractive' },
+    started_at: '2026-10-12T00:00:00Z', ended_at: '2026-10-12T00:01:00Z',
+    billing_mode: 'chatgpt', billing_note: 'Actual credits and allocated subscription cost unknown' };
+  assert.deepEqual(evaluationErrors(value, providers), []);
+  assert.equal(value.model, executionModel);
+  value.review.runtime.ended_at = '2026-10-11T00:00:00Z';
+  assert(evaluationErrors(value, providers).some(s => s.includes('review.runtime')));
+});
+
 test('a public-playground pass never becomes a customer API or MCP pass', () => {
   const ignav = loadCandidates().find(p => p.data.id === 'ignav')!.data;
   const data = { services: [catalogService(ignav, 'candidate', loadEvaluations())] };

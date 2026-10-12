@@ -216,6 +216,15 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
                        'answer_sha256': sha(run_dir / 'answer.md'), 'review_sha256': sha(review_path)},
     }
     peer_context = run_dir / 'peer-context.json'
+    grading_receipt = run_dir / 'grading/receipt.json'
+    if grading_receipt.is_file():
+        observed_grader = json.loads(grading_receipt.read_text())
+        result['review']['runtime'] = {key: observed_grader[key] for key in
+            ('model', 'reasoning_effort', 'harness', 'started_at', 'ended_at', 'billing_mode', 'billing_note')
+            if key in observed_grader}
+        if 'harness' in result['review']['runtime']:
+            result['review']['runtime']['harness'] = {key: observed_grader['harness'][key] for key in
+                ('name', 'version', 'mode') if key in observed_grader['harness']}
     if 'outcome' in review or meta.get('trial_protocol') == 'afs-20261010':
         from outcome import validate as validate_outcome
         result['outcome'] = validate_outcome(review.get('outcome'))

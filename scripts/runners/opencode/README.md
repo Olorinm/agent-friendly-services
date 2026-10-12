@@ -323,7 +323,7 @@ without inventing separate service IDs. Every execution and grader still needs
 a distinct runtime. Three repeats are three predeclared rounds, not reruns until
 three successes. See [the first repeat protocol](../../../data/experiments/tasks/resource-guards-and-repeats.md).
 
-Queued roles require `max_model_requests` and the bounded OpenCode/DeepSeek
+Queued OpenCode/DeepSeek roles require `max_model_requests` and the bounded
 adapter. The ledger reserves a whole session ceiling before dispatch: every
 request at the saved worst context/cache rate, 1,048,576 input tokens (or a larger
 saved model limit) and the enforced 32,000 output cap. Known reconciled costs
@@ -332,6 +332,11 @@ lower bound alongside it. These are estimates at frozen standard API rates,
 not a provider bill; service fees and server fees remain separate. The queue
 shows holds for insufficient budget, time or occupied shared resources. It
 requires enough time for the full frozen role budget before starting it.
+
+Independent grading can instead use [cloud Codex Sol/high](../codex/README.md)
+through the selected ChatGPT login. Its account usage is tracked separately;
+it does not reserve DeepSeek API dollars or pretend that account usage is free.
+Execution settings, queue concurrency and isolation remain explicit per role.
 
 Optional `execution.resource_locks`, such as `["grist-account-a"]`, serialize
 sessions sharing an account across distinct containers. They do not calculate a

@@ -32,6 +32,8 @@ export interface Evaluation {
     sources: string[]; note: string; items?: { quantity: number; unit: string; usd_per_unit: number }[] };
   service_cost_usd: number | null; human_interventions: number | null;
   review: { method: string; reviewer: string; reviewed_at: string;
+    runtime?: { model: string; reasoning_effort: string; harness: Evaluation['harness'];
+      started_at: string; ended_at: string; billing_mode?: string; billing_note?: string };
     peer_context?: { group_id: string; round: number; snapshot_sha256: string; run_ids: string[]; available_run_ids?: string[] };
     checks: { criterion: string; passed: boolean; evidence: string }[] };
   evidence: { path: string; sha256: string; note: string; source_sha256?: string; redactions?: string[] }[];
@@ -133,6 +135,14 @@ export function evaluationErrors(v: any, providers: Provider[], root = ROOT): st
   }
   if (v?.status === 'completed' && (!Array.isArray(checks) || !checks.length || checks.some((c: any) => c.passed !== true) || !hash(v?.provenance?.answer_sha256))) errors.push('completed requires passing checks and final-answer provenance');
   const peers = v?.review?.peer_context;
+  const grader = v?.review?.runtime;
+  if (grader !== undefined && (!text(grader?.model) || !text(grader?.reasoning_effort)
+      || ['name', 'version', 'mode'].some(k => !text(grader?.harness?.[k]))
+      || !timestamp(grader?.started_at) || !timestamp(grader?.ended_at)
+      || Date.parse(grader.ended_at) < Date.parse(grader.started_at)
+      || (grader.billing_mode === 'chatgpt' && !text(grader.billing_note)))) {
+    errors.push('review.runtime needs observed grader model, harness, effort and ordered timestamps');
+  }
   if (peers !== undefined && (typeof peers?.group_id !== 'string' || !/^[a-zA-Z0-9._-]+$/.test(peers.group_id)
       || !Number.isInteger(peers?.round) || peers.round < 1 || !hash(peers?.snapshot_sha256)
       || !Array.isArray(peers?.run_ids) || peers.run_ids.length < 2
