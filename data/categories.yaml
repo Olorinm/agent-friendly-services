@@ -629,13 +629,13 @@ categories:
           separately documented.
       - id: hotels
         name: Hotels
-        description: Hotel availability, room offers and reservations; tasks not defined yet.
+        description: Hotel availability, room offers and reservations; candidate eligibility remains to be researched.
         capabilities: []
         name_zh: 酒店
         inclusion: Returns room availability/offers or supports hotel reservations.
         exclusion: >-
-          Hotel descriptions or reviews alone are insufficient. This branch has no researched candidate set or
-          frozen task yet.
+          Hotel descriptions or reviews alone are insufficient. Task definitions do not establish that a
+          personally accessible candidate set or booking inventory has been verified.
     name_zh: 旅行
     inclusion: Finds or arranges travel inventory for individual travelers.
     exclusion: Generic map, weather or payment services alone do not qualify.
