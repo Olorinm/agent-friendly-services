@@ -12,7 +12,7 @@ import { generateResearch } from './research.ts';
 import { loadPrices, estimateModelCost } from './model-costs.ts';
 import { readmeTable } from './readme-table.ts';
 import { taskDisplay } from './task-display.ts';
-import { taskClassification } from './task-classifications.ts';
+import { taskClassification, taskLabel } from './task-classifications.ts';
 import { serviceAccess } from './service-access.ts';
 import { renderServiceResults, renderSetup } from './service-results.ts';
 import { buildBoards, selectServiceBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
@@ -557,6 +557,24 @@ function serviceList(zh: boolean): string {
     const details = renderBoardDetails(selected, names, zh, './', interfaces);
     return `${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
   };
+  const renderOptions = (members: typeof listedServices) => readmeTable(
+    `${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${members.map(p =>
+      `| [${cell(p.name)}](${profileUrl(p.id)}) | ${cell(p.summary)} | ${accessLinks(p, zh)} |`).join('\n')}`, false);
+  const renderTaskGroups = (groupBoards: typeof boards, members: typeof listedServices) => {
+    const selected = selectServiceBoards(groupBoards);
+    const families = [...new Set(selected.map(b => b.task_file))];
+    if (families.length <= 1) return renderResults(selected, members);
+    const sections = families.map(file => {
+      const family = selected.filter(b => b.task_file === file);
+      const tasks = [...new Map(family.flatMap(b => b.tasks).map(t => [t.id, t])).values()];
+      const title = tasks.map(t => taskLabel(t, zh) ?? taskDisplay(t, zh).description).join(zh ? '；' : '; ');
+      return `**${zh ? '任务：' : 'Task: '}${cell(title)}**\n\n${renderResults(family, [])}`;
+    });
+    const measured = new Set(selected.flatMap(b => b.rows.map(r => r.service_id)));
+    const pending = members.filter(p => !measured.has(p.id));
+    if (pending.length) sections.push(`**${zh ? '更多服务' : 'More services'}**\n\n${renderOptions(pending)}`);
+    return sections.join('\n\n');
+  };
   const renderNode = (node: typeof categories[number], id: string, depth: number): string => {
     const members = listedServices.filter(p => inClassification(p, id));
     const scopedBoards = boards.filter(b => b.classification === id);
@@ -567,12 +585,10 @@ function serviceList(zh: boolean): string {
     const business = scopedBoards.filter(b => b.phase === 'business');
     const setup = scopedBoards.filter(b => b.phase === 'setup');
     const content: string[] = [];
-    if (setup.length) content.push(`<details>\n<summary>${zh ? '接入测试（单独记录）' : 'Setup tests (recorded separately)'}</summary>\n\n${renderResults(setup, [])}\n\n</details>`);
+    if (setup.length) content.push(`<details>\n<summary>${zh ? '接入测试（单独记录）' : 'Setup tests (recorded separately)'}</summary>\n\n${renderTaskGroups(setup, [])}\n\n</details>`);
     if (direct.length || business.length) {
       if (children.length && direct.length) content.push(zh ? '以下服务暂按本层范围收录，细分缺口见服务详情。' : 'These services remain at this scope; see their profiles for unresolved classification details.');
-      content.push(business.length ? renderResults(business, direct) : readmeTable(
-        `${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${direct.map(p =>
-          `| [${cell(p.name)}](${profileUrl(p.id)}) | ${cell(p.summary)} | ${accessLinks(p, zh)} |`).join('\n')}`, false));
+      content.push(business.length ? renderTaskGroups(business, direct) : renderOptions(direct));
     }
     content.push(...children.map(child => renderNode(child, `${id}/${child.id}`, depth + 1)));
     return `<a id="services-${id.replaceAll('/', '-')}"></a>\n\n${'#'.repeat(Math.min(depth + 3, 6))} ${zh ? node.name_zh ?? node.name : node.name} (${members.length})\n\n${content.join('\n\n')}`;
@@ -598,7 +614,7 @@ Tokens and costs are means per valid trial, including successes and failures; in
 
 Resolution rates describe complete task delivery by the tested Agent under the recorded conditions, not service availability. Read incomplete runs alongside their blockers and any verified service-side results. A single completed trial displays 100%. Open the [full results](./generated/evaluations.md) for counts, tasks and conditions; these limited observations do not establish long-term reliability.
 
-Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.
+Different task families and versions have separate, labeled tables. Within each table, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.
 
 ${serviceList(false)}
 
@@ -636,7 +652,7 @@ Token 和费用按有效试跑取平均，包含成功与失败；环境无效�
 
 完成率描述 Agent 在记录的环境及约束下是否交付完整任务，不等于服务可用率；未完成须结合具体阻碍及已验证的服务能力阅读。只测一次且完成，也会显示 100%。次数、任务与条件见[完整结果](./generated/evaluations.md)；有限观察不能证明长期可靠性。
 
-每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。
+不同任务组和版本分表展示，并标明任务名称。每张表内各服务只显示最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。
 
 ${serviceList(true)}
 

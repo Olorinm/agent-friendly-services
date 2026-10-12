@@ -1,9 +1,12 @@
 import test from 'node:test';
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { ROOT } from '../scripts/lib.ts';
 import assert from 'node:assert/strict';
 import { estimateModelCost, type PriceSnapshot } from '../scripts/model-costs.ts';
-import { buildBoards, selectServiceBoards, summarize, renderBoardRows, renderBoardDetails, moneyLabel } from '../scripts/leaderboard.ts';
+import { buildBoards, selectServiceBoards, summarize, renderBoardRows, renderBoardDetails, moneyLabel, credentialPreparation, credentialLabel } from '../scripts/leaderboard.ts';
 import type { Evaluation } from '../scripts/evaluations.ts';
 
 const prices = (extra = {}): PriceSnapshot => ({ source: 'https://example.com/prices', revision: 'test', fetched_at: '2026-09-08', sha256: 'test',
@@ -107,6 +110,53 @@ test('missing public host details do not imply an old run or a required rerun', 
     const details = renderBoardDetails(buildBoards([run()]), new Map(), zh);
     assert.doesNotMatch(details, /早期|复跑|early records|controlled rerun/);
     assert.match(details, zh ? /未公开主机信息/ : /do not publish host details/);
+  }
+});
+
+test('structured starting credentials remain readable and separate supplied from anonymous access', () => {
+  const supplied = run({ environment: { service_credentials: { source: 'existing account', provided: true } } });
+  const anonymous = run({ service_id: 'b', environment: { service_credentials: { source: 'public route', provided: false } } });
+  assert.equal(credentialPreparation(supplied), 'provided');
+  assert.equal(credentialPreparation(anonymous), 'none');
+  assert.equal(credentialLabel(supplied), 'Service credentials supplied');
+  assert.equal(credentialLabel(anonymous, true), '未预供账号或密钥');
+  assert.equal(credentialPreparation(run({ environment: { service_credentials: { source: 'unspecified' } } })), 'unknown');
+  assert.equal(buildBoards([supplied, anonymous]).length, 2);
+  assert.doesNotMatch(renderBoardDetails(buildBoards([supplied, anonymous]), new Map(), false), /\[object Object\]/);
+});
+
+test('homepages separate extraction tasks instead of repeating services in an unlabeled table', () => {
+  const output = fs.mkdtempSync(path.join(os.tmpdir(), 'afs-task-groups-'));
+  try {
+    execFileSync(process.execPath, ['--import', 'tsx', 'scripts/generate.ts'], {
+      cwd: ROOT, env: { ...process.env, AFS_OUTPUT_DIR: output }, stdio: 'pipe',
+    });
+    for (const zh of [false, true]) {
+      const page = fs.readFileSync(path.join(output, zh ? 'README.zh-CN.md' : 'README.md'), 'utf8');
+      const section = page.split('<a id="services-web-search-data-web-extraction"></a>')[1]
+        .split(/<a id="services-[^"]+"><\/a>/)[0];
+      const labels = zh ? ['美国 2027 年联邦假日表转 CSV', '英格兰和威尔士 2027 年银行假日表转 CSV', '扫描 PDF 表格转 CSV']
+        : ['US federal holidays (2027) to CSV', 'England and Wales bank holidays (2027) to CSV', 'Scanned PDF table to CSV'];
+      const tables = labels.map(label => {
+        const marker = `**${zh ? '任务：' : 'Task: '}${label}**`;
+        assert.equal(section.split(marker).length - 1, 1);
+        const table = section.split(marker)[1].match(/<table [\s\S]*?<\/table>/)![0];
+        const services = [...table.matchAll(/href="\.\/generated\/services\.md#([^"]+)"/g)].map(m => m[1]);
+        assert.equal(new Set(services).size, services.length, `${label}: service shown twice`);
+        return table;
+      });
+      assert.match(tables[0], /Exa<\/a>.*100%/);
+      assert.match(tables[1], /Firecrawl<\/a>.*33\.3%/);
+      assert.match(tables[2], /Exa<\/a>.*0%/);
+      assert.match(tables[2], /Firecrawl<\/a>.*100%.*—/);
+      assert.doesNotMatch(page, /\[object Object\]/);
+      if (!zh) assert.doesNotMatch(section.replace(/\]\([^)]+\)/g, ']'), /\p{Script=Han}/u);
+    }
+    for (const name of ['generated/services.md', 'generated/evaluations.md']) {
+      assert.doesNotMatch(fs.readFileSync(path.join(output, name), 'utf8'), /\[object Object\]/);
+    }
+  } finally {
+    fs.rmSync(output, { recursive: true, force: true });
   }
 });
 

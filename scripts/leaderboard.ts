@@ -10,7 +10,12 @@ const stable = (value: unknown): string => {
   return JSON.stringify(value ?? null);
 };
 export const credentialPreparation = (r: Evaluation) => {
-  const value = String(r.environment.service_credentials ?? 'unknown').trim() || 'unknown';
+  const recorded = r.environment.service_credentials;
+  if (recorded && typeof recorded === 'object') {
+    const state = recorded as { provided?: boolean };
+    return state.provided === true ? 'provided' : state.provided === false ? 'none' : 'unknown';
+  }
+  const value = String(recorded ?? 'unknown').trim() || 'unknown';
   return value.startsWith('provided:') ? 'provided' : value;
 };
 export const credentialLabel = (r: Evaluation, zh = false) => {

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { ROOT, loadCategories, type Provider } from './lib.ts';
 import type { ModelCost, PriceSnapshot } from './model-costs.ts';
 import { modelCostLabel } from './model-costs.ts';
-import { buildBoards, selectServiceBoards, moneyLabel, peerReviewLabel } from './leaderboard.ts';
+import { buildBoards, selectServiceBoards, moneyLabel, peerReviewLabel, credentialLabel } from './leaderboard.ts';
 import { taskClassification } from './task-classifications.ts';
 import { classificationLabel } from './taxonomy.mjs';
 import { resultNotesFor } from './result-notes.ts';
@@ -181,7 +181,7 @@ export function generateEvaluations(records: Evaluation[], outputRoot: string) {
   }, null, 2) + '\n');
   const row = (r: Evaluation) => {
     const link = `../data/experiments/evaluations/${r.run_id}.json`;
-    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(r.environment.service_credentials)} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds === null ? '—' : `${r.elapsed_seconds}s`} | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
+    return `| ${cell(r.service_id)} / ${cell(r.route_id)} | ${cell(r.task.id)} (${cell(r.task.version ?? r.task.sha256.slice(0, 8))}) | ${cell(credentialLabel(r, true))} | ${cell(r.environment.prompt_style ?? 'legacy')} | [${r.status}](${link}) | ${cell(r.started_at)} | ${cell(r.harness.version)} / ${cell(r.model)} / ${cell(r.reasoning_effort)} | ${r.usage ? `${r.usage.input_tokens} / ${r.usage.cached_input_tokens} / ${r.usage.output_tokens}` : 'unknown'} | ${r.elapsed_seconds === null ? '—' : `${r.elapsed_seconds}s`} | ${cell(r.service_cost_usd)} | ${cell(r.human_interventions)} |`;
   };
   // Classify the task, not the provider: one provider may serve several domains.
   // This is a current display label, not a rewrite of frozen historical evidence.
@@ -218,7 +218,7 @@ ${sections}
 
 ${buildBoards(records).map(board => `<a id="${board.id}"></a>\n\n### ${board.tasks.map(t => `${cell(t.id)} ${cell(t.version)}`).join(', ')}\n\n` + board.rows.map(row => {
   const first = row.runs[0];
-  return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(first.environment.service_credentials)}${peerReviewLabel(first, true) ? ` · ${peerReviewLabel(first, true)}` : ''}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
+  return `**${cell(row.service_id)} / ${cell(row.route_id)}** — ${row.metrics.passed} 完成 / ${row.metrics.failed} 未完成 / ${row.metrics.invalid} 环境无效。\n\n${cell(first.harness.version)} / ${cell(first.model)} / ${cell(first.reasoning_effort)} · ${first.budget_seconds}s · ${cell(first.environment.prompt_style ?? 'legacy')} · ${cell(credentialLabel(first, true))}${peerReviewLabel(first, true) ? ` · ${peerReviewLabel(first, true)}` : ''}\n\n准备：${cell(first.environment.preparation_note)}\n\n` + row.runs.map(r => {
     const price = r.model_cost;
     return `- [${r.run_id}](../data/experiments/evaluations/${r.run_id}.json)：模型费用 ${modelCostLabel(price, moneyLabel, true)}；${cell(price?.reason)}${price?.pricing ? ` [LiteLLM价格快照](${price.pricing.source})（${price.pricing.fetched_at}，${price.pricing.tier}）` : ''}。服务费用 ${moneyLabel(r.service_cost_usd)}；${cell(r.service_cost ? [`${r.service_cost.kind}: ${r.service_cost.note}`, ...r.service_cost.sources].join('; ') : '旧记录新增实付金额；沿用原复核，不补造回执或估算依据。')}\n\n  结论与限制：${cell(r.reason)}${r.outcome ? `；服务操作 ${r.outcome.service_execution}；用户交付 ${r.outcome.user_delivery}；阻碍 ${r.outcome.blocking_factors.join(', ') || '无'}；${cell(r.outcome.evidence)}` : ''}`;
   }).join('\n');

@@ -20,10 +20,12 @@ tasks:
     id: collaborative-tables-001
     classification: productivity-storage/collaborative-tables
     phase: business
+    label: {"en": "Reading-group task table (earlier task)", "zh": "读书会在线任务表（原版任务）"}
   - file: data/experiments/tasks/collaborative-tables.md
     id: collaborative-tables-002
     classification: productivity-storage/collaborative-tables
     phase: business
+    label: {"en": "Reading-group task updates", "zh": "读书会在线任务表更新"}
   - file: data/experiments/tasks/collaborative-tables-access.md
     id: collaborative-tables-access-001
     classification: productivity-storage/collaborative-tables
@@ -32,10 +34,12 @@ tasks:
     id: collaborative-tables-001
     classification: productivity-storage/collaborative-tables
     phase: business
+    label: {"en": "Reading-group task table (v4)", "zh": "读书会在线任务表（v4）"}
   - file: data/experiments/tasks/databases.md
     id: database-todos-001
     classification: databases/hosted-relational
     phase: business
+    label: {"en": "To-do database writes and reconnect (v1)", "zh": "待办数据库写入与重新连接（v1）"}
   - file: data/experiments/tasks/databases-v2.md
     id: database-access-001
     classification: databases/hosted-relational
@@ -44,6 +48,7 @@ tasks:
     id: database-todos-001
     classification: databases/hosted-relational
     phase: business
+    label: {"en": "To-do database writes and reconnect (v2)", "zh": "待办数据库写入与重新连接（v2）"}
   - file: data/experiments/tasks/financial-data.md
     id: financial-access-001
     classification: web-search-data/financial-data
@@ -96,6 +101,7 @@ tasks:
     id: web-search-001
     classification: web-search-data/web-search
     phase: business
+    label: {"en": "Python 3.13 upgrade research (v1)", "zh": "Python 3.13 升级资料查询（v1）"}
   - file: data/experiments/tasks/web-extraction.md
     id: web-extraction-access-001
     classification: web-search-data/web-extraction
@@ -104,19 +110,23 @@ tasks:
     id: web-extraction-holidays-001
     classification: web-search-data/web-extraction
     phase: business
+    label: {"en": "US federal holidays (2027) to CSV", "zh": "美国 2027 年联邦假日表转 CSV"}
 
   - file: data/experiments/tasks/web-extraction-uk.md
     id: web-extraction-uk-holidays-001
     classification: web-search-data/web-extraction
     phase: business
+    label: {"en": "England and Wales bank holidays (2027) to CSV", "zh": "英格兰和威尔士 2027 年银行假日表转 CSV"}
   - file: data/experiments/tasks/web-extraction-pdf.md
     id: web-extraction-pdf-hikes-001
     classification: web-search-data/web-extraction
     phase: business
+    label: {"en": "PDF hiking table to CSV", "zh": "PDF 徒步路线表转 CSV"}
   - file: data/experiments/tasks/web-extraction-pdf.md
     id: web-extraction-scanned-table-001
     classification: web-search-data/web-extraction
     phase: business
+    label: {"en": "Scanned PDF table to CSV", "zh": "扫描 PDF 表格转 CSV"}
   - file: data/experiments/tasks/route-planning.md
     id: route-planning-access-001
     classification: web-search-data/route-planning
@@ -145,6 +155,7 @@ tasks:
     id: web-search-001
     classification: web-search-data/web-search
     phase: business
+    label: {"en": "Python 3.13 upgrade research (v2)", "zh": "Python 3.13 升级资料查询（v2）"}
 
   - file: data/experiments/tasks/weather-data.md
     id: weather-access-001
@@ -180,11 +191,13 @@ tasks:
     id: database-restore-001
     classification: databases/hosted-relational
     phase: business
+    label: {"en": "Database backup and restore (v1)", "zh": "数据库备份与恢复（v1）"}
 
   - file: data/experiments/tasks/database-restore-v2.md
     id: database-restore-001
     classification: databases/hosted-relational
     phase: business
+    label: {"en": "Database backup and restore (v2)", "zh": "数据库备份与恢复（v2）"}
 
   - file: data/experiments/tasks/public-holidays.md
     id: public-holidays-access-001
@@ -224,11 +237,13 @@ tasks:
     id: collaborative-tables-shared-expenses-001
     classification: productivity-storage/collaborative-tables
     phase: business
+    label: {"en": "Shared expenses with automatic settlement totals", "zh": "自动更新结算汇总的共同支出账本"}
 
   - file: data/experiments/tasks/database-atomic-import.md
     id: database-atomic-import-001
     classification: databases/hosted-relational
     phase: business
+    label: {"en": "Atomic bibliography import", "zh": "书目数据整批原子导入"}
 
   - file: data/experiments/tasks/financial-macro.md
     id: financial-macro-hicp-001

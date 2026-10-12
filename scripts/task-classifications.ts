@@ -8,6 +8,7 @@ export interface TaskClassification {
   id: string;
   classification: string;
   phase: 'setup' | 'business';
+  label?: { en: string; zh: string };
 }
 
 export function loadTaskClassifications(root = ROOT): TaskClassification[] {
@@ -16,6 +17,10 @@ export function loadTaskClassifications(root = ROOT): TaskClassification[] {
 }
 
 const registered = loadTaskClassifications();
+
+export function taskLabel(task: { file: string; id: string }, zh: boolean): string | undefined {
+  return registered.find(row => row.file === task.file && row.id === task.id)?.label?.[zh ? 'zh' : 'en'];
+}
 
 /** Display metadata is separate from immutable task prompts and hashes. */
 export function taskClassification(task: { file: string; id: string }): Pick<TaskClassification, 'classification' | 'phase'> {
@@ -38,6 +43,8 @@ export function taskClassificationErrors(entries = loadTaskClassifications(), ca
     seen.add(key);
     if (!paths.has(entry.classification)) errors.push(`Unknown task classification: ${entry.classification}`);
     if (!['setup', 'business'].includes(entry.phase)) errors.push(`Invalid task phase: ${key}`);
+    if (entry.label !== undefined && (!entry.label || typeof entry.label.en !== 'string' || !entry.label.en.trim()
+      || typeof entry.label.zh !== 'string' || !entry.label.zh.trim())) errors.push(`Task label needs both languages: ${key}`);
     const file = path.resolve(root, entry.file);
     if (!file.startsWith(path.resolve(root, 'data/experiments/tasks') + path.sep) || !fs.existsSync(file)) {
       errors.push(`Missing or unsafe task file: ${entry.file}`);
