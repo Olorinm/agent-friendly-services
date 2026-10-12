@@ -83,6 +83,18 @@ class QueueTests(unittest.TestCase):
         file.write_text(file.read_text().replace('fixture input', 'changed input'))
         with self.assertRaisesRegex(ValueError, 'handoff changed'): self.advance()
 
+    def test_private_secret_source_is_frozen_by_handoff(self):
+        self.init()
+        source = self.root / 'secrets.json'
+        runs.write(source, ['fixture-private-key-12345'])
+        self.config['grading_secrets_file'] = str(source)
+        path = self.submit('secret-binding')
+        runs.write(source, ['different-private-key-67890'])
+        state = self.advance()
+        self.assertEqual(state['jobs']['secret-binding']['phase'], 'blocked')
+        self.assertIn('inputs changed', state['jobs']['secret-binding']['reason'])
+        self.assertFalse(path.exists())
+
     def test_deadline_stops_collects_and_forbids_another_paid_dispatch(self):
         self.init();path = self.submit('deadline')
         self.advance()
@@ -119,6 +131,27 @@ class QueueTests(unittest.TestCase):
         self.assertTrue(runs.read(path/'state.json')['stop_confirmed'])
         self.assertTrue((path/'execution/model-cost.json').exists())
         with self.assertRaisesRegex(ValueError,'halted'):self.advance()
+
+    def test_shutdown_during_poll_stops_collects_without_next_dispatch(self):
+        self.init();path=self.submit('owned');self.advance()
+        with patch.object(queue, 'advance') as step, patch.object(queue, 'STOP_REQUESTED', False):
+            def poll(directory):
+                queue.request_stop(15, None)
+                return runs.read(directory/'state.json')
+            step.side_effect=poll
+            queue.run_loop(self.queue)
+        step.assert_called_once()
+        state=runs.read(self.queue/'state.json')
+        self.assertEqual(state['phase'], 'halted')
+        self.assertTrue(runs.read(path/'state.json')['stop_confirmed'])
+        self.assertTrue((path/'execution/model-cost.json').exists())
+        self.assertFalse((path/'grading/started').exists())
+        self.assertAlmostEqual(state['held_usd'], 0.0000328)
+
+    def test_shutdown_flag_forbids_paid_start(self):
+        self.init();path=self.submit('pending')
+        with patch.object(queue, 'STOP_REQUESTED', True): self.advance()
+        self.assertFalse(path.exists())
 
     def test_independent_readback_gate_blocks_grading_until_frozen_release(self):
         self.init();path=self.submit('write-task',grading_gate=True)

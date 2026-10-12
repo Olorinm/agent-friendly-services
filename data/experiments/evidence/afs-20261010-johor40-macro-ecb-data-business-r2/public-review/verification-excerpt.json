@@ -1,0 +1,129 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-ecb-data-business-r2",
+  "independent_assessment_sha256": "20e76bbb4cc1b610c1a2fb0614151a590b1b59dfe07b6175ef42821146593fd1",
+  "independent_status": "completed",
+  "independent_reason": "本次执行实际调用指定 ECB Data Portal 官方 API（入口 https://data-api.ecb.europa.eu/service/，路径 data/ICP/A.DE+FR.N.000000.4.AVR?format=csvdata），匿名免 Key，HTTP 200 返回德国、法国两年全项目 HICP 年度平均变化率（ADJUSTMENT=N、ICP_ITEM=000000、ICP_SUFFIX=AVR、UNIT=PCCH）。四个率 DE 2023=6.0 / 2024=2.5、FR 2023=5.7 / 2024=2.3 与事前冻结官方参考逐一相符；交付 CSV 可读且标注国家/年份/指标/单位，回落幅度 DE 3.5、FR 3.4 个百分点计算与文字解释正确，来源链接、系列键、查询日期及修订/口径说明齐备。全部可见要求均有证据满足。",
+  "checks": [
+    {
+      "criterion": "数据实际经本轮指定 ECB Data Portal 官方 API 入口取得",
+      "passed": true,
+      "evidence": "tool trace 中 curl 'https://data-api.ecb.europa.eu/service/data/ICP/A.DE+FR.N.000000.4.AVR?format=csvdata&startPeriod=2022&endPeriod=2024' 返回 HTTP 200 并输出 CSV 数据行；原始响应留档 execution/artifacts/data/ecb_icp_raw_DEFR_2022-2024.csv；见 grading/artifacts/evidence/ecb_api_query_summary.md。"
+    },
+    {
+      "criterion": "覆盖德国、法国 2023 与 2024，口径为全国全项目 HICP 年度平均变化率（未季调/未工作日调整）",
+      "passed": true,
+      "evidence": "响应 REF_AREA=DE/FR、FREQ=A、ICP_ITEM=000000（Overall index）、ADJUSTMENT=N、ICP_SUFFIX=AVR；TITLE_COMPL 为 'Annual average rate of change, Eurostat, Neither seasonally nor working day adjusted'。"
+    },
+    {
+      "criterion": "四个率与事前冻结官方参考逐一相符",
+      "passed": true,
+      "evidence": "交付 execution/artifacts/hicp_de_fr_annual_average_2023_2024.csv 值 DE 2023=6.0/2024=2.5、FR 2023=5.7/2024=2.3；与 reference.json expected.observations 完全一致。"
+    },
+    {
+      "criterion": "CSV 可继续分析且清楚标注国家、年份、指标、单位",
+      "passed": true,
+      "evidence": "execution/artifacts/hicp_de_fr_annual_average_2023_2024.csv 为带表头长表，含 country/country_code/year/indicator/unit/value 等列，四行观测明确。"
+    },
+    {
+      "criterion": "各国 2024 较 2023 回落幅度以百分点正确表述",
+      "passed": true,
+      "evidence": "CSV drop_vs_prev_year_pp 列 DE=3.5、FR=3.4；execution/answer.md 表列德国 3.5、法国 3.4 个百分点，等于 6.0-2.5 与 5.7-2.3，与 reference 冻结差值一致。"
+    },
+    {
+      "criterion": "给出可定位来源/系列、查询日期及修订或口径差异说明",
+      "passed": true,
+      "evidence": "execution/answer.md 列出 API 调用 URL、数据集 ICP、系列键 ICP.A.<DE|FR>.N.000000.4.AVR 及维度含义、PCCH 单位、查询日期 2026-10-10，并说明 AVR 口径非 12 月同比、BREAKS 为空及日后可能修订。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 API 请求返回 HTTP 200 且含全部四个观测（见 grading/artifacts/evidence/ecb_api_query_summary.md 与原始响应留档）；CSV 与答复均已产出。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "26087c55b6f0cfb405e8679e3cda2404f71cd60ba9e8d7b4ab8924f9c429ab12",
+      "note": "执行者最终答复：四率、回落百分点、来源链接、系列键、查询日期与修订口径说明。"
+    },
+    {
+      "private_source": "execution/artifacts/hicp_de_fr_annual_average_2023_2024.csv",
+      "private_source_sha256": "9fdae036821142ad314d00531c1013a39ae1cb0d7bf89425dc472f92738f2dba",
+      "note": "交付 CSV，四行国家/年份 HICP 年度平均率与回落百分点。"
+    },
+    {
+      "private_source": "execution/artifacts/data/ecb_icp_raw_DEFR_2022-2024.csv",
+      "private_source_sha256": "8bc332f04d637e7bbb4dd9917dc89503c0490ab58ae7cb6d426a0e2905532b31",
+      "note": "ECB Data Portal API 原始返回留档，含 2022-2024 观测与维度元数据。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/ecb_api_query_summary.md",
+      "private_source_sha256": "3bcbf1cbae35f0fd480fb8d4d367f43e84214c3b525dbfa5b45532507bcb2ac1",
+      "note": "新摘录的简短脱敏证据：API 请求 URL、HTTP 200、返回的四个观测业务字段。"
+    }
+  ],
+  "frozen_task_sha256": "bee10c57dc749fccf5df5ca0f5e0cc4c892429c455db8b297ffa996e2dcf6cb4",
+  "frozen_prompt_sha256": "3f6dd72c04bd0c13e52a78e41d55da85efb2fb2b54b88baa7b89883503a150a4",
+  "reference_sha256": "277348bbe804a07be80df22f9ad94b8162f55906df8cac7619ad47e98af4a604",
+  "execution_answer_sha256": "26087c55b6f0cfb405e8679e3cda2404f71cd60ba9e8d7b4ab8924f9c429ab12",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources.",
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+          "https://www.ecb.europa.eu/stats/ecb_statistics/governance_and_quality_framework/html/usage_policy.en.html",
+          "https://data.ecb.europa.eu/help/getting-data-web-services-sdmx-0",
+          "https://data.ecb.europa.eu/help/api/data-examples"
+        ],
+        "source_ids": [
+          "ecb-copyright",
+          "ecb-statistics-free-access-policy",
+          "ecb-data-api-overview",
+          "ecb-data-api-examples"
+        ],
+        "note": "本轮公开Data Portal API取得费用可按官方copyright免费信息取得声明及API适用链确认0。ESCB再用政策对第三方数据有许可例外，不用它证明HICP再发布许可；署名/修改说明和任务交付是否满足不在本费用复核范围。",
+        "applicability": {
+          "rule": "ECB copyright明确资料可经官网免费取得；Data Portal API帮助说明该REST服务提供门户统计数据和元数据的编程访问，并链接同一copyright。ESCB统计政策另明确免费访问。本轮公开EXR/HICP读取属于该免费取得入口，金额不依赖是否成功交付任务。",
+          "observed": "run.json指定ecb-data/data-api及https://data-api.ecb.europa.eu/service/，无预提供账号/Key；冻结ENVIRONMENT限定公开宏观数据。最少CSV包含公开EXR或HICP/ICP统计系列；接入r1响应meta指向data-api.ecb.europa.eu并标200，r2/r3接入headers为HTTP 200。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/run.json sha256=047e667252a774dbfc6cc1f0b38851af2acb191b4108bb597183ffaa4c6a5895; data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/frozen/execution/ENVIRONMENT.md sha256=10f097458b338214c022cee1cf6eff0a6368a3fc146d0b93b3caf9b33f3f3c25; data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/execution/artifacts/data/ecb_icp_raw_DEFR_2022-2024.csv sha256=8bc332f04d637e7bbb4dd9917dc89503c0490ab58ae7cb6d426a0e2905532b31"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/run.json",
+          "sha256": "047e667252a774dbfc6cc1f0b38851af2acb191b4108bb597183ffaa4c6a5895"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/frozen/execution/ENVIRONMENT.md",
+          "sha256": "10f097458b338214c022cee1cf6eff0a6368a3fc146d0b93b3caf9b33f3f3c25"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-macro-ecb-data-business-r2/execution/artifacts/data/ecb_icp_raw_DEFR_2022-2024.csv",
+          "sha256": "8bc332f04d637e7bbb4dd9917dc89503c0490ab58ae7cb6d426a0e2905532b31"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。",
+        "HICP/ICP首行注明Eurostat来源；未把ESCB统计再用政策的免费再用权泛化到第三方数据。这里只确认经ECB公开接口免费取得的服务费用。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}

@@ -25,11 +25,12 @@ catalog:
         read does not establish API failure. Indexed official examples remain discoverable.
     api-query:
       url: https://data.ecb.europa.eu/help/api/data
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
       notes: >-
-        Official indexed documentation reviewed; the direct page reader failed. Defines dataflow and series
-        keys, date filtering, observation limits and CSV/JSON/SDMX formats. This is not an API trial.
+        Defines dataflow and series keys, date filtering, observation limits, includeHistory and
+        CSV/JSON/SDMX formats. The web reader failed, but a normal HTTPS documentation fetch returned
+        HTTP 200 on 2026-10-10. This is not a data-API trial or a remote-server connectivity check.
     reference-rates:
       url: >-
         https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html
@@ -37,11 +38,12 @@ catalog:
       kind: official_site
     reuse-policy:
       url: https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html
-      checked_on: '2026-09-15'
+      checked_on: '2026-10-10'
       kind: official_site
       notes: >-
         Website information may be obtained free of charge; accurate reproduction and ECB attribution
-        required. Applies to the published reference-rate information.
+        required. Modified information, including calculated growth rates, must be identified as such.
+        Applies to published statistical information; authored publications have separate exceptions.
     api-schema:
       url: https://data.ecb.europa.eu/help/api/schemas
       checked_on: '2026-09-15'
@@ -56,6 +58,31 @@ catalog:
       notes: >-
         ECB Data Portal includes named economic indicators. This classification does not assert a particular
         indicator is available on every route.
+    hicp-metadata:
+      url: https://data.ecb.europa.eu/data/datasets/hicp/data-information
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Official metadata states that HICP replaced ICP on 4 February 2026, uses ECOICOP v2,
+        reference year 2025=100 and DSD ECB_ICP3. Eurostat supplies the underlying statistics; ECB
+        seasonally adjusted series are separate calculations. A normal HTTPS documentation fetch
+        returned HTTP 200 on 2026-10-10 after web-reader errors; no data API was queried.
+    hicp-series:
+      url: https://data.ecb.europa.eu/data/data-categories/macroeconomic-and-sectoral-statistics/inflation-and-consumer-prices/total?layerType=DL&showDatasetModal=false
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Official Total metadata lists annual total HICP average-rate series for Germany and
+        France: HICP.A.DE.N.000000.4D0.AVR and HICP.A.FR.N.000000.4D0.AVR. AVR is annual average
+        rate of change; monthly ANR is a different measure. Provider 4D0 is Eurostat, N is unadjusted.
+    hicp-revisions:
+      url: https://ec.europa.eu/eurostat/documents/272892/11336726/HICP%2Bimprovements%2B-%2BQuestions%2Band%2BAnswers-2026-EN.pdf
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Upstream HICP Q&A explains the 2026 classification/reference-year change and archived
+        old datasets. Historical all-items rates can change slightly through re-referencing/rounding;
+        fix the dataset version and retrieval date rather than assuming original-release values persist.
   routes:
     - id: data-api
       interface: api
@@ -93,12 +120,29 @@ catalog:
           notes: ECB reference-rate series; published rates are not executable conversion prices.
         macro.series:
           value: documented
-          evidence: [api-query, macro-classification]
-          notes: Named economic series require the corresponding dataflow, dimensions and frequency.
+          evidence: [api-query, macro-classification, hicp-metadata, hicp-series, hicp-revisions]
+          notes: >-
+            Named economic series require the corresponding dataflow, dimensions and frequency. HICP
+            includes annual average inflation rates as well as monthly year-on-year rates and indices;
+            these measures are not interchangeable. HICP via ECB and via Eurostat shares a statistical
+            upstream, so matching values are not independent confirmation of economic truth.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [docs, api-query]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: EUR
+          per: public statistical information retrieval
+          scope: Published statistical information under ECB copyright policy; no service-level guarantee.
+          evidence: [reuse-policy]
       notes: >-
         Series dimensions, quote direction, observation frequency and date range must be selected correctly.
         Reference rates are not executable conversion prices. Reference-rate information is freely published
         under the ECB reuse policy; fees for a run still require observation of the actual route. The
-        query supports startPeriod/endPeriod, lastNObservations and format selection; narrow requests to the
-        needed series. Direct documentation reads failed during the latest research pass; indexed official
-        documentation was readable.
+        query supports startPeriod/endPeriod, lastNObservations, includeHistory and format selection;
+        narrow requests to the needed series. Documentation-reader errors and later successful local
+        HTTPS reads are separate from the real runtime's API connectivity. A numerical per-client
+        request-rate limit was not established by the reviewed pages; do not assume unlimited usage.

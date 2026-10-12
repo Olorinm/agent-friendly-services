@@ -1,0 +1,88 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-eurostat-access-r1",
+  "independent_assessment_sha256": "c2b2db7f61b9e69d281790ad4bbb101e9b844c5537a050f8ef91680785a2fbe4",
+  "independent_status": "completed",
+  "independent_reason": "执行者使用指定 Eurostat Statistics API 入口（匿名、无 Key）完成一次真实金融数据查询（HTTP 200，JSON-stat 2.0，含 series/time/value），并保存了可复用的连接配置；答复准确说明免账号/免费与 format=JSON 约束，无注册或人工介入。",
+  "checks": [
+    {
+      "criterion": "使用指定的 Eurostat Statistics API 入口与调用方式，未改用其他统计 API",
+      "passed": true,
+      "evidence": "实测 URL 为 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/{datasetId}?format=JSON&lang=EN&... ，与 ENVIRONMENT.md 指定入口完全一致；全程仅访问该端点（见 execution/artifacts/response_irt_lt.json 与 answer.md）。"
+    },
+    {
+      "criterion": "完成至少一次真实的金融数据查询（非仅文档/健康检查）",
+      "passed": true,
+      "evidence": "execution/artifacts/response_irt_lt.json：irt_lt_mcby_m，int_rt=MCBY（EMU convergence criterion bond yields，长期利率），geo=EA，time=2026-08，value=3.60263，HTTP 200；另有 response_hicp.json 的 HICP 观测。"
+    },
+    {
+      "criterion": "保存后续会话可复用的必要连接配置",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列出 service-config.json（执行时写于 /home/node/service-tools/service-config.json，3712 字节且经 JSON 解析校验），包含指定 base_url、auth=none、format=JSON 约束、UA 与限流等；摘录见 grading/artifacts/evidence/eurostat-live-result.md。"
+    },
+    {
+      "criterion": "答复准确说明接入步骤与阻碍，无虚假注册/人工声明",
+      "passed": true,
+      "evidence": "execution/answer.md 明确说明免账号/Key、免费、无需注册，并给出实测值与 format=CSV 返回 400 的约束；未声称自签账号或人工协助。"
+    },
+    {
+      "criterion": "不需要账号时不强行注册，未超授权范围",
+      "passed": true,
+      "evidence": "入口为匿名公共资源；执行记录中无注册、绑定支付或邮件操作，answer.md 声明未创建任何账号。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定入口匿名 GET 返回 HTTP 200 及真实金融观测（response_irt_lt.json）；连接配置写入 service-config.json 并保留；answer.md 交付结果与约束说明。无阻碍因素。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/artifacts/response_irt_lt.json",
+      "private_source_sha256": "8766c144185c9b5a44fe787e0e61d24786b3005079f34d9ab982b4547cb3164a",
+      "note": "指定入口的真实金融数据响应：欧元区长期利率 3.60263（2026-08），ESTAT/JSON-stat 2.0。"
+    },
+    {
+      "private_source": "execution/artifacts/response_hicp.json",
+      "private_source_sha256": "abaae473761c7b710bc9014deb6aa0b03a5394dcd5e535bd8fb00c7016a64bcc",
+      "note": "同入口 HICP 年度变化率观测（2.5/2.4/2.3，2025-10~12），佐证可查询真实数据。"
+    },
+    {
+      "private_source": "execution/artifacts/response_hicp.csv",
+      "private_source_sha256": "2e017995a932cb066395e674899283db0c1fcfc62988ed6f44892f5bbfac7d06",
+      "note": "format=CSV 返回 HTTP 400 Invalid value for 'wsOutputFormat'，佐证该端点仅 JSON-stat。"
+    },
+    {
+      "private_source": "execution/retained-files.json",
+      "private_source_sha256": "d1cc96d9ec6679df3558a3f3423cb4f6cc03c17914ba74153066c7cd11e47399",
+      "note": "记录通用连接配置 service-config.json 被保留。"
+    },
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "5119bdd6149f374040dca4c21be298ad183a21694ee0f9627a58bbf25668e0cc",
+      "note": "执行者最终答复：结果、约束、交付物与免注册说明。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/eurostat-live-result.md",
+      "private_source_sha256": "07f9897d67d60d58c1729ba01030ca73409eb2c4cecaf56d0f5d012dbf4f58cd",
+      "note": "本次真实请求/响应关键业务字段的简短摘录。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/eurostat-free-rule.md",
+      "private_source_sha256": "f22e2173184a4fbdaa2773bd3b173ad1f62a0756dd6052e045902685459e65a1",
+      "note": "官方免费规则来源与本次匿名、免 Key、HTTP 200 的适用证据。"
+    }
+  ],
+  "frozen_task_sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+  "frozen_prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "reference_sha256": "dbc3b3fe05e1f4e3e717474fd31780f1c57e3ced5c87e775f62bb8bd87da1a42",
+  "execution_answer_sha256": "5119bdd6149f374040dca4c21be298ad183a21694ee0f9627a58bbf25668e0cc",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources."
+}

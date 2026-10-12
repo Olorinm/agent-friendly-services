@@ -1,0 +1,137 @@
+{
+  "notice": "Minimal operator-selected evidence from unchanged independent grading. Raw original hashes retained; this is publication selection, not a replacement verdict. Private links/resource identities and auth values are removed.",
+  "run_id": "afs-20261010-johor40-grist-rest-shared-expenses-r3",
+  "independent_assessment_sha256": "e663c353fe1fb30111e1a5a5c529245e1288d68d67cd7b765a860d0ce63756de",
+  "status": "completed",
+  "reason": "本次执行在指定的唯一授权 Grist 文档（REST 入口 https://docs.getgrist.com/api）建立了真实在线账本，完整保留六笔明细，汇总为公式列；独立控制器在停止执行者后仅追加一笔、修正一笔金额，在线汇总与补差方向/金额均按人民币分自动正确更新。初次答复的六笔结算数与输入/参考一致并给出私有链接与继续记账位置。",
+  "checks": [
+    {
+      "criterion": "通过指定 REST 入口在本轮唯一授权空文档建立真实在线账本（含默认空占位表 Table1 与业务表 Expenses、Settlement），未创建其他文档/工作区。",
+      "passed": true,
+      "evidence": "初始回执列出 Table1(默认空)、Expenses、Settlement 三表；执行调用仅针对凭据中的 GRIST_DOCUMENT_ID 的 /docs/{id}/tables|records|sql，未见 createDoc/createWorkspace。见 controller-verification/initial/02-tables.json 与执行工具记录。"
+    },
+    {
+      "criterion": "六笔初始明细完整保留一次，日期/用途/付款人/人民币金额与输入逐条一致，无遗漏或重复。",
+      "passed": true,
+      "evidence": "controller-verification/initial/06-records-Expenses.json 六条与 input.md 六行逐条一致（房租1800/林青、超市采购（一）156.40/周舟、电费92.60/林青、家居用品48/周舟、宽带100/周舟、超市采购（二）203/林青）。"
+    },
+    {
+      "criterion": "在线汇总初态由明细计算：各自已付、应分摊、补差方向与金额与参考一致（已付 2095.60/304.40，应分摊各 1200.00，周舟补付林青 895.60）。",
+      "passed": true,
+      "evidence": "controller-verification/initial/08-records-Settlement.json：Paid 2095.6/304.4、Share 1200/1200、Action '周舟 需补付给 林青 ¥895.60'；与 reference.json baseline 一致。"
+    },
+    {
+      "criterion": "汇总由公式列持续计算且不依赖固定填值：控制器仅追加一笔、修正一笔金额即自动更新，且公式/结构/汇总值未被改写。",
+      "passed": true,
+      "evidence": "Settlement 的 Paid/Share/Net/Other/Action 均 isFormula=true（initial/07-columns-Settlement.json）；追加一笔后 after-append/04 显示总计 2442.40/应分摊 1221.20/补付 874.40，修正后 after-correction/07 显示 2422.40/1211.20/补付 864.40，均与 reference 一致；两阶段 columns 哈希与初始相同。"
+    },
+    {
+      "criterion": "答复给出私人账本链接、当前结算数与继续记账位置，且链接指向该账本。",
+      "passed": true,
+      "evidence": "execution/answer.md 给出文档根及 /p/2（账目）、/p/3（结算）链接、六笔结算数（总 2400.00、各 1200.00、已付 2095.60/304.40、周舟补付林青 895.60）与在「账目」页按日期/用途/付款人/金额追加或修改的说明；文档 ID 与凭据 GRIST_DOCUMENT_ID 一致。"
+    },
+    {
+      "criterion": "范围与预算合规：仅操作本轮文档，未公开分享/邀请/通知/转账/付款，表与记录数及服务调用在限内。",
+      "passed": true,
+      "evidence": "仅 3 张表（含默认空 Table1）、7 条记录、约 13 次业务 REST 调用，均在题目上限（4 表/30 记录/40 调用）内；答复声明未做转账、邀请或通知；控制器核对未发现越界资源。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "经指定 REST 入口在唯一授权文档实际建立并读取账本；三阶段独立回执与参考一致，答复交付链接与结算数。无网络/权限/预算/服务能力阻碍证据。"
+  },
+  "source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "sha256": "be85714a749e5f4bafc2748060bdb3999c199ed0cd9ff337d198f6b735a2d646",
+      "note": "执行者最终答复：私有账本链接、六笔当前结算数与继续记账位置。"
+    },
+    {
+      "private_source": "grading/artifacts/reference.json",
+      "sha256": "484b5da37efae0931fd99d454405a5847ecf8a83136f2b417f038f17aa7c1c3d",
+      "note": "项目独立数值参考：初态/追加态/修正态的已付、应分摊与补差方向金额。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/ledger-verification.json",
+      "sha256": "1b20494102c0d738020a8bb328372de0c45fe1e708af1933eba5401c4fc0ea54",
+      "note": "本次脱敏核验摘要：三阶段明细与在线汇总数值、公式列属性、公式未变；不含文档标识或密钥。"
+    }
+  ],
+  "task_sha256": "416ee2572d59310bd2fde801fe5425949d9592facb4215c30a90635c3d90238d",
+  "prompt_sha256": "acdee65151c95c60f01a11d43ef22786e605681c3b2a117424e26bbd85a9fc84",
+  "reference_sha256": "484b5da37efae0931fd99d454405a5847ecf8a83136f2b417f038f17aa7c1c3d",
+  "answer_sha256": "be85714a749e5f4bafc2748060bdb3999c199ed0cd9ff337d198f6b735a2d646",
+  "scope": [
+    "One existing authorized account supplied; registration was not tested.",
+    "OpenCode1.18.35/deepseek-flash/high, shared fixed$50 four-hour window, execution600s/grading300s and40model requests/.85closure; original hardware/image/limits and costs retained.",
+    "Fresh physical per-round containers clone only independently passed generic access config; source preparation/controller verification and grading are separate overhead.",
+    "Task outcome describes delivery by the specified Agent under these constraints, not unconditional service capability. Small fixed-input repeats are correlated; old protocol/task versions remain separate."
+  ],
+  "attribution": "Grist is a trademark of Grist Labs Inc. https://www.getgrist.com/ ; no endorsement. Synthetic expense data is original test material.",
+  "three_state_observations": [
+    {
+      "stage": "initial",
+      "original_manifest_sha256": "a416036592aff1ff093c7012a7c7fd650721077ba8672b28e6632e538acbc9cb",
+      "original_summary_body_sha256": "9bdbaa4a2e7212de8d8f5c73fb2e3bb9d4ad33c43fbdaf3aadf6f7dd590949fd",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2095.60",
+          "share_cny": "1200.00",
+          "balance_cny": "895.60"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "304.40",
+          "share_cny": "1200.00",
+          "balance_cny": "-895.60"
+        }
+      ],
+      "controller_calls_so_far": 8
+    },
+    {
+      "stage": "after-append",
+      "original_manifest_sha256": "bcea9b53f562fb3480714ebc9e74b848902194f4a1f043f87a76b229ef1674f3",
+      "original_summary_body_sha256": "98a662e550d03e0d62a65c13919a4fe8dd417672c9390e10b9892e93a29a7c5e",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2095.60",
+          "share_cny": "1221.20",
+          "balance_cny": "874.40"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "346.80",
+          "share_cny": "1221.20",
+          "balance_cny": "-874.40"
+        }
+      ],
+      "controller_calls_so_far": 12
+    },
+    {
+      "stage": "after-correction",
+      "original_manifest_sha256": "9ed57ce61d8d82d90aaa728a527bafedc339088752ac5ba4bd5a0e1227df5aa9",
+      "original_summary_body_sha256": "d80b4cbb800b47f885da28c5a327f9870ad33effb8dae8ead5e6b024a274adc1",
+      "facts": [
+        {
+          "person": "林青",
+          "paid_cny": "2075.60",
+          "share_cny": "1211.20",
+          "balance_cny": "864.40"
+        },
+        {
+          "person": "周舟",
+          "paid_cny": "346.80",
+          "share_cny": "1211.20",
+          "balance_cny": "-864.40"
+        }
+      ],
+      "controller_calls_so_far": 19
+    }
+  ],
+  "mutation_scope": "Both executors stopped before any controller readback/write. Exactly one ordinary detail addition42.40 and one original amount203→183 per document. No schema/formula/summary repair; full after schema matches original. Final synthetic changes retained, no restore.",
+  "limits": "Predeclared REST/MCP,MCP/REST,REST/MCP order, shared Free site quota3000/month, remaining unknown. A functioning model-request guard can block final delivery; separate outcome and costs retain that distinction."
+}

@@ -1,0 +1,78 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-eurostat-business-r2",
+  "independent_assessment_sha256": "8e02c88a0c1486ccb5dfac52460433e34fd041c2eecf31c182ae0e53e9ab300b",
+  "independent_status": "completed",
+  "independent_reason": "指定 Eurostat Statistics API 公开匿名入口实际返回 HTTP 200，取得德国/法国 2023、2024 全项目 HICP 年度平均率（未季调）DE 6.0/2.5、FR 5.7/2.3，与冻结官方参考一致；CSV 长表可读且标注国家/年份/指标/单位/一位小数，回落 3.5 与 3.4 个百分点计算及说明正确，并给出可定位数据系列、查询日期与修订/口径说明。",
+  "checks": [
+    {
+      "criterion": "通过本轮指定 Eurostat Statistics API 入口实际查询并取回数据（非其他服务、搜索或记忆）",
+      "passed": true,
+      "evidence": "工具记录中 curl 到 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_ainr 与 prc_hicp_aind 均 HTTP 200，响应含 ESTAT 来源、value 与维度；query_hicp.py 使用同一入口。见 evidence/eurostat_api_evidence.md。"
+    },
+    {
+      "criterion": "国家、年份、全项目范围、年度平均率口径与单位符合题目要求",
+      "passed": true,
+      "evidence": "查询维度 freq=A、unit=RCH_A_AVG（Annual average rate of change）、coicop18=TOTAL（all-items）、geo=DE/FR、time=2022-2024；响应元数据标注为 Neither seasonally nor working-day adjusted；CSV 单位列为 %。"
+    },
+    {
+      "criterion": "四个年度平均率与事前冻结官方参考相符（DE 6.0/2.5，FR 5.7/2.3）",
+      "passed": true,
+      "evidence": "执行答案与 hicp_de_fr_2023_2024.csv 四行值为 DE 2023=6.0、2024=2.5、FR 2023=5.7、2024=2.3，与 reference.json expected 完全一致；同业 ECB 执行结果亦相同（交叉参考，非判据）。"
+    },
+    {
+      "criterion": "CSV 可用于继续分析，清楚标注国家、年份、指标与单位，保留一位小数",
+      "passed": true,
+      "evidence": "execution/artifacts/hicp_de_fr_2023_2024.csv 为长表，表头 country_iso,country,year,indicator,coicop,adjustment,unit,value,dataset_code,source_updated,query_date，四行数据值均为一位小数。"
+    },
+    {
+      "criterion": "两国 2024 相对 2023 的回落百分点计算与文字说明正确",
+      "passed": true,
+      "evidence": "德国 6.0-2.5=3.5 个百分点、法国 5.7-2.3=3.4 个百分点，答案以 -3.5/-3.4 个百分点表述，与 reference 的 signed_change 一致。"
+    },
+    {
+      "criterion": "来源可定位到实际所用数据，并给出系列/指标信息、查询日期与修订/口径说明",
+      "passed": true,
+      "evidence": "答案给出数据集 prc_hicp_ainr、查询入口 URL、数据集页面、更新时间 2026-09-17、查询日期 2026-10-10、Eurostat 署名，并说明 RCH_A_AVG 定义及 prc_hicp_aind 已停用/重定基不影响率值。"
+    },
+    {
+      "criterion": "接入门槛符合授权（公开只读、免注册/免 Key，不付费、不改远端）",
+      "passed": true,
+      "evidence": "全部请求无账号/Key/付款方式，仅带任务要求 UA；无写操作、无付费签名操作。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Eurostat 入口实际 HTTP 200 返回四个年度平均率，CSV 与文字交付齐全且与冻结参考相符。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "65f3827a2d3d9aa45874f0272dc1f2c58cc68def3cb820c53320cccfb4cbbf19",
+      "note": "执行者最终答复：两国两年四个率、回落百分点、来源与口径说明。"
+    },
+    {
+      "private_source": "execution/artifacts/hicp_de_fr_2023_2024.csv",
+      "private_source_sha256": "343f23bd9c717d5e1317edca7071dcb60b1235e4a4859407475a2f496e77bb7d",
+      "note": "交付的长表 CSV，含四行观测与单位/口径标注。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/eurostat_api_evidence.md",
+      "private_source_sha256": "5fb839db1e797685c0d571f51d1c198c191ac8468fdd59593648108768d0363f",
+      "note": "从私有工具记录摘录的指定入口请求与取值、免费免密适用性观察，已去敏。"
+    }
+  ],
+  "frozen_task_sha256": "bee10c57dc749fccf5df5ca0f5e0cc4c892429c455db8b297ffa996e2dcf6cb4",
+  "frozen_prompt_sha256": "3f6dd72c04bd0c13e52a78e41d55da85efb2fb2b54b88baa7b89883503a150a4",
+  "reference_sha256": "277348bbe804a07be80df22f9ad94b8162f55906df8cac7619ad47e98af4a604",
+  "execution_answer_sha256": "65f3827a2d3d9aa45874f0272dc1f2c58cc68def3cb820c53320cccfb4cbbf19",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources."
+}

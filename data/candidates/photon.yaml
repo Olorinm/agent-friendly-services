@@ -13,31 +13,43 @@ catalog:
   sources:
     public-api:
       url: https://photon.komoot.io/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     repository:
       url: https://github.com/komoot/photon
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     api-docs:
       url: https://github.com/komoot/photon/blob/master/docs/api-v1.md
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
     abuse-protection:
       url: https://github.com/komoot/photon/discussions/1044
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     demo-limits:
       url: https://github.com/komoot/photon/discussions/598
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
+      notes: >-
+        The maintainer confirms discretionary throttling and no uptime guarantee. The statement that
+        the homepage offered free-of-charge access is in the questioner's text, not the maintainer's
+        answer; it is insufficient by itself to establish a current service price.
+    personal-demo-use:
+      url: https://github.com/komoot/photon/discussions/848
+      checked_on: '2026-10-10'
+      kind: official_site
+      notes: >-
+        A maintainer's reply to a private enthusiast explains that public free services are unlikely
+        to support loads already throttled by the Komoot demo. Personal/non-commercial intent does
+        not exempt high-volume use from limits; this discussion is not a quantitative price schedule.
     licence:
       url: https://www.openstreetmap.org/copyright
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_site
     attribution:
       url: https://osmfoundation.org/wiki/Licence/Attribution_Guidelines
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
   routes:
     - id: public-search-api
@@ -75,14 +87,7 @@ catalog:
         payment_method:
           value: not_required
           evidence: [public-api, repository]
-      costs:
-        - kind: usage
-          amount: 0
-          unit: money
-          currency: USD
-          per: public demo API request
-          scope: Public project use within reasonable limits; no numeric quota or reserved service capacity is promised.
-          evidence: [public-api, repository, demo-limits]
+      costs: []
       notes: >-
         This is the actual komoot-hosted demo, separate from installing the open-source package.
         Extensive use can be throttled or banned; no fixed request/second or daily limit is published.
@@ -93,4 +98,8 @@ catalog:
         features are not automatically proven deployed on the demo. OSM data licensing and attribution
         are separate from Photon's Apache 2.0 software licence. No explicit public-benchmark prohibition
         was found in the reviewed demo terms. Both Photon and Nominatim use OSM, so their agreement is
-        not independent evidence of geographic truth. Availability remains untested.
+        not independent evidence of geographic truth. Current homepage/repository terms permit public
+        project use but do not explicitly quantify service fees; no account or payment step is described.
+        The price remains unknown here rather than inferring zero from anonymous access or a questioner's
+        historical description. This documentation review made no geocoding request; dated independent
+        trials separately record actual access and task results.

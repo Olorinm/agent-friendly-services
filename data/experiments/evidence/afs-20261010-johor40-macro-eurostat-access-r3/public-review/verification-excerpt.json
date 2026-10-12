@@ -1,0 +1,78 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-macro-eurostat-access-r3",
+  "independent_assessment_sha256": "3a876afd748230f11b16e1c4d9c17bd6a08bd85c091a78e0d6b009823f4fb4dc",
+  "independent_status": "completed",
+  "independent_reason": "Eurostat Statistics API 指定入口经真实匿名调用返回数据（HTTP 200）：EU27 2023 年 GDP=17294868.6 百万欧元（现价）与 EUR/USD 月均序列，均为可解释的 series/time/value；复用连接配置已写入指定持久位置并被 retained-files 记录，答案说明免账号无阻碍。",
+  "checks": [
+    {
+      "criterion": "按指定服务与入口完成一次真实金融数据查询（非仅文档/健康检查/配置）",
+      "passed": true,
+      "evidence": "execution/artifacts/test_gdp.json：source=ESTAT、id=NAMA_10_GDP、value 17294868.6，geo=EU27_2020、time=2023、na_item=B1GQ、unit=CP_MEUR；execution/artifacts/cache/11714a0606e853d9.json：ERT_BIL_EUR_M EUR/USD 月均值 2026-09=1.1513。请求指向指定入口 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/，HTTP 200。"
+    },
+    {
+      "criterion": "保存可供新会话使用的必要连接配置",
+      "passed": true,
+      "evidence": "execution/retained-files.json 记录保留 service-config.json；写入位置 /home/node/service-tools/service-config.json（receipt.retained-files 亦列出）。内容含 data_base 端点、request_pattern、auth=none、默认 format/lang、DIM=VALUE 过滤与 transport 头，可直接复用。"
+    },
+    {
+      "criterion": "答案准确说明接入步骤或实际阻碍（不得虚称注册/人工协助）",
+      "passed": true,
+      "evidence": "execution/answer.md 与 execution/artifacts/result.md 均陈述匿名免 Key、HTTP 200 实测值、已存配置与脚本，并标注无阻碍；未声称注册或人工介入。"
+    },
+    {
+      "criterion": "使用指定调用方式与要求的客户端标识，未改用其他服务替代",
+      "passed": true,
+      "evidence": "eurostat_client.py 与 curl 均以 User-Agent agent-friendly-services/20261010 请求指定 dissemination/statistics/1.0 入口，响应 agencyId/source=ESTAT，未见其他统计 API。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Eurostat 入口两次匿名 GET 均 HTTP 200 且返回真实观测值；配置已保存并被保留记录；答案完整交付，无阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "bc82f93eead1bb91815ed31fe3e4897d1bbca739578c8b1638f174be6fd439cf",
+      "note": "执行者最终答复：结论、实测值与交付物说明。"
+    },
+    {
+      "private_source": "execution/artifacts/result.md",
+      "private_source_sha256": "1df0438c9769cf5a1e8cc9363366212ba3186e99da6a13ddeafee59d05f2fb25",
+      "note": "结果摘要，含 GDP 与 EUR/USD 取值及配置/脚本位置。"
+    },
+    {
+      "private_source": "execution/artifacts/test_gdp.json",
+      "private_source_sha256": "23348ee5329abb3fa7f7f1fa253b7ca7c5aec9d2287c3442db6d213b27063b95",
+      "note": "Eurostat 原始响应：EU27 2023 GDP=17294868.6（CP_MEUR，ESTAT）。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/11714a0606e853d9.json",
+      "private_source_sha256": "885b98b45e51363e2d64c28a9e4a7e31b46b06daf3e93e8dc37402906d71d11c",
+      "note": "Eurostat EUR/USD 月均/期末汇率序列原始响应。"
+    },
+    {
+      "private_source": "execution/artifacts/eurostat_client.py",
+      "private_source_sha256": "b53fc3bd982c3102dbe27bc543dd2698fecf70ba602c314edfcdf8e1a4f89dc3",
+      "note": "可复用查询客户端（2s 限流+本地缓存）。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/summary.md",
+      "private_source_sha256": "b2fe0a763dd8ea22fe04aecb5c85b9675b4e1aa933d8b07357c79964713637ce",
+      "note": "本次验收核验摘要（脱敏，含免费规则引用）。"
+    }
+  ],
+  "frozen_task_sha256": "64e4faded968bce385a81a2515291937c6823b008dff82424b94c564fec6dfe1",
+  "frozen_prompt_sha256": "158874971727063f502d2ec7e0838449d0eaa0d2917bbe087705c6f42630a2ef",
+  "reference_sha256": "dbc3b3fe05e1f4e3e717474fd31780f1c57e3ced5c87e775f62bb8bd87da1a42",
+  "execution_answer_sha256": "bc82f93eead1bb91815ed31fe3e4897d1bbca739578c8b1638f174be6fd439cf",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Eurostat / European Central Bank Data Portal; ECB HICP series also redistributes Eurostat observations, so the two routes are not independent data sources."
+}

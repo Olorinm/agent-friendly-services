@@ -1,0 +1,5 @@
+country_iso,country,year,indicator,coicop,adjustment,unit,value,dataset_code,source_updated,query_date
+DE,Germany,2023,Annual average rate of change of all-items HICP (annual average index vs previous year),Total (all items),Neither seasonally nor working-day adjusted,%,6.0,prc_hicp_ainr,2026-09-17T11:00:00+0200,2026-10-10
+DE,Germany,2024,Annual average rate of change of all-items HICP (annual average index vs previous year),Total (all items),Neither seasonally nor working-day adjusted,%,2.5,prc_hicp_ainr,2026-09-17T11:00:00+0200,2026-10-10
+FR,France,2023,Annual average rate of change of all-items HICP (annual average index vs previous year),Total (all items),Neither seasonally nor working-day adjusted,%,5.7,prc_hicp_ainr,2026-09-17T11:00:00+0200,2026-10-10
+FR,France,2024,Annual average rate of change of all-items HICP (annual average index vs previous year),Total (all items),Neither seasonally nor working-day adjusted,%,2.3,prc_hicp_ainr,2026-09-17T11:00:00+0200,2026-10-10

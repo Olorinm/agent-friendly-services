@@ -1,0 +1,76 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2",
+  "independent_assessment_sha256": "78d59f32cfc54e4a2dbfc95acf6cf729856d1cd45a857ec5c9f125186cd8c320",
+  "independent_status": "completed",
+  "independent_reason": "本次执行仅使用指定 Nominatim 公共 Search API 真实查询，命中大英博物馆场馆对象（relation/177044，category=tourism/type=museum），返回坐标 51.5193118, -0.1267051 与当次响应一致，距事前冻结官方位置点约 20.7 m（<=200 m）。中文答复包含场馆名称、带纬度/经度标签的 WGS84 十进制度坐标、服务实际返回的地址与 display_name、数据来源及 OSM 署名，并说明定位粒度为场馆多边形中心而非入口；同时如实披露第一次完整地址查询返回空结果、改用查询后命中。无未返回字段被捏造。全部验收项有证据满足。",
+  "checks": [
+    {
+      "criterion": "使用本轮指定的 Nominatim 公共 Search API 真实查询（非其他服务/静态示例/记忆）",
+      "passed": true,
+      "evidence": "两次请求均指向 https://nominatim.openstreetmap.org/search（jsonv2, addressdetails=1, limit=1），UA 为项目标识；见 evidence/geocoding-result.md 与 execution/artifacts/geocode_query.py。"
+    },
+    {
+      "criterion": "匹配到伦敦大英博物馆场馆对象，而非街道/邮编/城市中心",
+      "passed": true,
+      "evidence": "响应 name=British Museum、category=tourism、type=museum、osm_type=relation/osm_id=177044，display_name 含 Great Russell Street、WC1B 3DG。"
+    },
+    {
+      "criterion": "最终坐标与本次实际响应一致，坐标轴及单位正确（WGS84 十进制度，纬度/经度标签）",
+      "passed": true,
+      "evidence": "答复纬度 51.5193118、经度 -0.1267051，与响应 lat/lon 逐位一致；纬度位于伦敦纬度区间，轴序正确。"
+    },
+    {
+      "criterion": "坐标位于事前冻结官方场馆位置点 200 m 内",
+      "passed": true,
+      "evidence": "官方点 51.519413319978,-0.12695659999997；Haversine ≈ 20.7 m，远小于 200 m（见 evidence/geocoding-result.md）。"
+    },
+    {
+      "criterion": "答复含服务实际返回的地址信息，输入地址与服务返回地址分开说明，未返回字段不捏造",
+      "passed": true,
+      "evidence": "答复列出 display_name、address（road/neighbourhood/suburb/city_district/city/state/postcode/country/country_code）与 boundingbox，并注明结构性字段由服务补全、输入地址另列。"
+    },
+    {
+      "criterion": "说明数据来源与署名/许可",
+      "passed": true,
+      "evidence": "答复给出 OpenStreetMap contributors、Nominatim、ODbL 1.0 及 https://www.openstreetmap.org/copyright；响应 licence 字段一致。"
+    },
+    {
+      "criterion": "说明定位粒度（场馆/入口/更粗略）及不确定性",
+      "passed": true,
+      "evidence": "答复明确为场馆本身（relation 多边形中心，place_rank=30），声明非入口、非街道/邮编/城市中心。"
+    },
+    {
+      "criterion": "遵守接入协议：单线程、相邻请求间隔>=20s、失败/空结果如实披露",
+      "passed": true,
+      "evidence": "两次请求 fetched_at 10:35:00 与 10:35:23（间隔约 23s）；答复如实记录首次完整地址查询返回 [] 及第二次查询。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "5a7ae14df8f34a5272a48c4e66c6bdefa89a291228f21ecd836c1d8dbcbae06c",
+      "note": "执行者最终中文答复，含名称、坐标、返回地址、来源与粒度说明。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/geocoding-result.md",
+      "private_source_sha256": "40f5c7efda71ec7281b4cffb2cd8b72f80aaafc8f5a0c7076b970316330ea5c1",
+      "note": "脱敏摘录：两次 Nominatim 请求的 status/时间、命中对象业务字段及与官方点距离计算。"
+    }
+  ],
+  "frozen_task_sha256": "e59e438be349d25a955dbd839142bbf9d067d97e4c7a1f8e5d35d11150d12165",
+  "frozen_prompt_sha256": "b2cfbb8d4bdf69b54a3950ddadeebad46ccb2b60d2f6a054edaaee03ffc32dbe",
+  "reference_sha256": "270c7c1c8b8755964b31758bede80e448d5d1a1bf530a6a845f1667b27376cd6",
+  "execution_answer_sha256": "5a7ae14df8f34a5272a48c4e66c6bdefa89a291228f21ecd836c1d8dbcbae06c",
+  "limits": [
+    "One access and one venue trial; full-address query returned no match, revised wording matched. Not a mainland/overseas causal comparison or general coverage guarantee.",
+    "Single-threaded public-instance query, cache and identified User-Agent; observed venue queries23 seconds apart. No bulk or systematic geocoding."
+  ],
+  "attribution": "Data © OpenStreetMap contributors, ODbL; https://www.openstreetmap.org/copyright . Venue polygon centroid, not entrance."
+}

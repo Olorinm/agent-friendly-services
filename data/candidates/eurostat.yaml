@@ -1,0 +1,116 @@
+id: eurostat
+name: Eurostat Data API
+category: web-search-data
+homepage: https://ec.europa.eu/eurostat/
+summary: Official European economic and social statistics with public REST data and metadata access.
+submitted_by: community
+tags:
+  - macro
+  - official-statistics
+catalog:
+  version: 1
+  classifications:
+    - web-search-data/financial-data/macro
+  sources:
+    api-introduction:
+      url: https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Explicitly free programmatic data/metadata access for automation; Statistics API is open for
+        public use. Dataset updates are published twice daily when new data or structures are available.
+        The database retains the latest version, not a history of data vintages.
+    statistics-api:
+      url: https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Public GET endpoint with dataset code, dimension/time filters and JSON-stat 2.0 responses.
+        Examples require no account or API key; language labels support English, French and German.
+    api-faq:
+      url: https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-faq
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Structural artefacts are versioned but observations have no history. Invalid dimension codes,
+        overly long URLs and excessive extractions can fail; use narrow requests and preserve flags.
+        No numerical per-client request-rate allowance was established by the reviewed API pages.
+    hicp-information:
+      url: https://ec.europa.eu/eurostat/web/hicp/information-data
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        HICP is designed for international inflation comparisons. The 2026 change introduced ECOICOP
+        v2 and reference year 2025=100 with complete historical series; old-classification datasets are
+        archived. Annual average rates differ from monthly year-on-year rates and index levels.
+    hicp-annual:
+      url: https://ec.europa.eu/eurostat/databrowser/product/view/TEC00118
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        Official indexed metadata identifies current source dataset prc_hicp_ainr, annual frequency,
+        unit RCH_A_AVG (annual average rate of change) and coicop18 TOTAL. This is metadata research,
+        not a business-data API trial. Country/year availability must be checked in the actual response.
+    hicp-2026-changes:
+      url: https://ec.europa.eu/eurostat/documents/272892/11336726/HICP%2Bimprovements%2B-%2BQuestions%2Band%2BAnswers-2026-EN.pdf
+      checked_on: '2026-10-10'
+      kind: official_docs
+      notes: >-
+        The official Q&A cautions that some historical all-items rates may change slightly due to
+        rounding after re-referencing. A current extraction is not automatically the original release.
+    reuse-policy:
+      url: https://ec.europa.eu/eurostat/help/copyright-notice
+      checked_on: '2026-10-10'
+      kind: official_site
+      notes: >-
+        Statistical data/metadata reuse is authorised with attribution for commercial and non-commercial
+        purposes, subject to item-specific and third-party exceptions. Modified data/text must be marked
+        and carry a Eurostat non-responsibility disclaimer. Certain non-EU/EFTA/candidate-country data
+        and trade datasets have commercial-reuse exceptions. Cite dataset/DOI and access date. No
+        explicit public-comparison restriction was found in this reviewed policy; this is not a promise
+        that every dataset or use has identical terms.
+  routes:
+    - id: statistics-api
+      interface: api
+      maintainer: official
+      entry_url: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/
+      docs: https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api
+      evidence: [api-introduction, statistics-api]
+      availability:
+        value: self_serve
+        evidence: [api-introduction, statistics-api]
+      personal_access:
+        value: documented
+        evidence: [api-introduction, reuse-policy]
+      auth:
+        value: none
+        evidence: [statistics-api]
+      capabilities:
+        macro.series:
+          value: documented
+          evidence: [api-introduction, statistics-api, hicp-information, hicp-annual]
+          notes: >-
+            Country/economy series by dataset, dimensions and reporting period. Supports HICP annual
+            average inflation rates, with units and classification selected explicitly. Eurostat also
+            supplies ECB HICP series; the two access services are not independent statistical sources.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [statistics-api]
+        payment_method:
+          value: not_required
+          evidence: [api-introduction, statistics-api]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: EUR
+          per: public Statistics API request
+          scope: Officially free programmatic access to statistical data and metadata.
+          evidence: [api-introduction]
+      notes: >-
+        No registration or key is described for this public route. Query only the required subset;
+        anonymous access does not mean unlimited request rate or guaranteed availability. JSON-stat
+        dimension order, missing values and observation flags need interpretation. Preserve retrieval
+        time, exact dataset/filters and response evidence because current data can be revised. This
+        source review made no data API call; independent evaluations record dated network and task results.

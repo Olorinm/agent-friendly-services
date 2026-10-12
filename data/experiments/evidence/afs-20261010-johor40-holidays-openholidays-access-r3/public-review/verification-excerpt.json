@@ -1,0 +1,73 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-openholidays-access-r3",
+  "independent_assessment_sha256": "2d105a994db4ad4dc643e569e71971465d913dd25252b2489c3fb644dd4d013c",
+  "independent_status": "completed",
+  "independent_reason": "指定 OpenHolidays API 匿名入口接通成功，完成一次真实的小范围假日查询：德国 DE、2026 全年（languageIsoCode=EN）返回 20 条公共假日，PublicHolidays 请求 HTTP 200，原始响应含 2026-01-01 New Year's Day 与 2026-10-03 Day of German Unity，答复与响应一致。非秘密连接配置保存在指定持久位置 /home/node/service-tools/service-config.json（运行器 retained-files 记录 service-config.json），答复给出配置位置、账号来源、自助步骤与阻碍。无账号/Key/付费，无需人工介入或额外申请；服务为免费公开数据（含商业用途）。",
+  "checks": [
+    {
+      "criterion": "做一次真实小范围假日查询，返回可识别的假日日期与名称",
+      "passed": true,
+      "evidence": "execution/artifacts/cache/PublicHolidays__countryIsoCode=DE&languageIsoCode=EN&validFrom=2026-01-01&validTo=2026-12-31.json 与 execution/artifacts/public-holidays.json 含 2026-01-01 / New Year's Day(type=Public) 与 2026-10-03 / Day of German Unity；execution/artifacts/cache/requests.log 显示 PublicHolidays 请求 status 200（本次网络实取，非仅元数据）；execution/answer.md 第7-8行示例与响应一致"
+    },
+    {
+      "criterion": "保存后续查询所需配置且位置正确",
+      "passed": true,
+      "evidence": "execution/retained-files.json 列出 service-config.json；索引工具记录 0006 显示写入 /home/node/service-tools/service-config.json，含 baseUrl、端点和客户端标识，JSON 校验通过；execution/answer.md 第15行给出该配置位置；无秘密"
+    },
+    {
+      "criterion": "区分匿名入口与账号/自助注册，并报告实际阻碍",
+      "passed": true,
+      "evidence": "execution/answer.md 第5、13行说明匿名公共入口、无需账号/Key/付费、无 403/429/验证码、无人工介入与额外申请；ENVIRONMENT.md 本轮未提供账号，故无自助注册步骤"
+    },
+    {
+      "criterion": "仅使用指定服务与入口，未用 SchoolHolidays 或其他服务替代",
+      "passed": true,
+      "evidence": "execution/artifacts/cache/requests.log 4 条请求均为 openholidaysapi.org 的 Countries/Languages/Subdivisions/PublicHolidays；未出现 SchoolHolidays 或第三方服务"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "PublicHolidays 等 4 个端点均 HTTP 200 返回真实数据，DE/2026 返回 20 条假日；答复含地区/年份、日期与名称、来源与可复用配置位置，无阻碍。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "8cb30ed6c68dfa7fd22cf6d0da27cc1cf365e5ffda8a915a61ffd8e41ca8b480",
+      "note": "执行者最终答复：查询范围、实际返回假日日期与名称、配置位置、接入步骤与阻碍"
+    },
+    {
+      "private_source": "execution/artifacts/public-holidays.json",
+      "private_source_sha256": "e59588eec272bdcdf24fb2beafb1aecd1e5403c0cb72b0fbc58a377d6124e12f",
+      "note": "PublicHolidays 原始响应副本，含 2026-01-01 New Year's Day 等 20 条"
+    },
+    {
+      "private_source": "execution/artifacts/result-summary.json",
+      "private_source_sha256": "32fbaf0e84ebc3fcfb4d49a666f40af9ee66b4d45a6fe1870ab3cdc718409d2e",
+      "note": "查询汇总：DE/2026、holidayCount=20、query 参数与数据来源"
+    },
+    {
+      "private_source": "execution/artifacts/cache/requests.log",
+      "private_source_sha256": "0240974807d43ca2c230161447abbf5f6534af3edbf48a2cc443b1d352bf6d8a",
+      "note": "本次 4 次只读请求均为 200 并落缓存，证明为真实网络查询"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/service-free-check.md",
+      "private_source_sha256": "cf6310673595d0fcfe476f76eeec5cadc256d164567c8caddf85a7d55c3148f3",
+      "note": "免费规则官方来源与本次适用性核验摘要"
+    }
+  ],
+  "frozen_task_sha256": "bfbc5e9644096f2d267d8ff34cbb2930682c8e13525190d90cd7001519eb3521",
+  "frozen_prompt_sha256": "5be2f21c01971bcea5ad9702bec604cc8c0eee97269798de98e3a475f8f894aa",
+  "reference_sha256": "681b0bd65e10da8b0d1a6d1874cd9682f3f158e18a3aded88fcfa29f1f60473d",
+  "execution_answer_sha256": "8cb30ed6c68dfa7fd22cf6d0da27cc1cf365e5ffda8a915a61ffd8e41ca8b480",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "OpenHolidays API; ODbL, https://openholidaysapi.org/ . No full holiday database is distributed here."
+}

@@ -24,8 +24,26 @@ catalog:
   sources:
     docs:
       url: https://www.alphavantage.co/documentation/
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-10'
       kind: official_docs
+      notes: >-
+        CPI documents monthly/semiannual US consumer-price index data sourced from BLS via FRED
+        and links FRED API terms. The reviewed CPI description does not identify a precise FRED
+        series code or explicitly state seasonal adjustment. INFLATION is a separate annual series.
+    fred-linked-terms:
+      url: https://fred.stlouisfed.org/docs/api/terms_of_use.html
+      checked_on: '2026-10-10'
+      kind: official_site
+      notes: The CPI documentation links this FRED API terms page as a condition of using that data feed.
+    fred-current-terms:
+      url: https://fred.stlouisfed.org/legal/
+      checked_on: '2026-10-10'
+      kind: official_site
+      notes: >-
+        Current FRED API additional terms include restrictions on storing, caching or archiving
+        FRED content (Prohibitions l). This differs from the older API terms URL still linked by
+        Alpha Vantage. Compatibility of retained CPI CSV/results with the incorporated terms needs
+        resolution; this finding does not concern the provider's non-FRED market-data endpoints.
     access:
       url: https://www.alphavantage.co/support/
       checked_on: '2026-10-08'
@@ -131,9 +149,13 @@ catalog:
           value: documented
           evidence:
             - docs
+            - fred-linked-terms
+            - fred-current-terms
           notes: >-
             Named economic series including GDP, CPI and unemployment; frequency and revision
-            treatment require task-specific checks.
+            treatment require task-specific checks. Do not assume CPI is seasonally adjusted or
+            assign a FRED series code from its label alone. Its documented upstream terms must also
+            be checked for intended retention and reuse; the general free-key quota is not a data licence.
       notes: >-
         Free key: 25 requests/day, excluding premium endpoints. Unadjusted daily compact output
         (latest 100 observations) is available to free keys; full history and intraday are premium.

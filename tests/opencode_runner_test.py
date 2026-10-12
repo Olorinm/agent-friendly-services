@@ -365,6 +365,24 @@ class ProvisionTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.provision.load(config)
 
+    def test_explicit_local_transport_preserves_literal_argv_and_stdin(self):
+        from unittest.mock import patch
+        settings = self.settings();settings.update(transport='local', host='localhost')
+        with tempfile.TemporaryDirectory() as d:
+            file = Path(d)/'config.json';file.write_text(json.dumps(settings))
+            settings = self.provision.load(file)
+            module = __import__('config')
+            argv = ['python3', '-c', 'print("literal $(echo nope)")']
+            with patch.object(module.subprocess, 'run') as run:
+                module.ssh(settings, argv, data=b'private stdin', check=False)
+            self.assertEqual(run.call_args.args[0], argv)
+            self.assertEqual(run.call_args.kwargs['input'], b'private stdin')
+            self.assertFalse(run.call_args.kwargs['check'])
+            self.assertNotIn('shell', run.call_args.kwargs)
+            for change in ({'host': 'remote-runner'}, {'transport': 'unknown'}):
+                file.write_text(json.dumps({**settings, **change}))
+                with self.assertRaises(ValueError): self.provision.load(file)
+
     def test_refuses_unrelated_containers_before_mutations(self):
         import subprocess
         from unittest.mock import patch
@@ -376,6 +394,22 @@ class ProvisionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'unrelated'):
                 self.provision.run(self.settings(), 'up')
         self.assertEqual(remote.call_count, 2)
+
+    def test_stop_batches_only_the_owned_configured_running_containers(self):
+        import hashlib
+        import subprocess
+        from unittest.mock import patch
+        cfg=self.settings();owner=hashlib.sha256(cfg['remote_root'].encode()).hexdigest()[:16]
+        objects=[{'Name':'/'+name,'Config':{'Labels':{self.provision.LABEL:owner}},'State':{'Running':True}}
+                 for name in cfg['containers'].values()]
+        objects.append({'Name':'/unrelated','Config':{'Labels':{}},'State':{'Running':True}})
+        replies=[subprocess.CompletedProcess([],0,b'one two other',b''),
+                 subprocess.CompletedProcess([],0,json.dumps(objects).encode(),b''),
+                 subprocess.CompletedProcess([],0,b'',b'')]
+        with patch.object(self.provision,'ssh',side_effect=replies) as remote:
+            result=self.provision.run(cfg,'stop')
+        self.assertEqual(remote.call_args.args[1],['sudo','-n','docker','stop','test-executor','test-grader'])
+        self.assertEqual(result,{'execution':'stopped','grading':'stopped'})
 
     def test_setup_has_no_mounts_ports_or_key_in_arguments(self):
         import io

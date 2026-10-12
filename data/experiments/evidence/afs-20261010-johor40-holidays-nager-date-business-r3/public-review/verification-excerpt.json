@@ -1,0 +1,68 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-nager-date-business-r3",
+  "independent_assessment_sha256": "d63e5c91e761723fb6f6ada82b9c15b8607bdb472cc4bd83d1a8ce397da5df7a",
+  "independent_status": "completed",
+  "independent_reason": "执行者通过指定服务 Nager.Date Community API v4 发起真实只读查询 GET https://nagerholidays.com/api/v4/Holidays/DE/2027（HTTP/2 200），对德国 2027 年 19 条公共假日记录按 Public 且 (nationalHoliday=true 或 subdivisionCodes 含 DE-BE) 筛选，得到与冻结独立官方参考一致的 10 个柏林州公共节假日，按日期升序列出并给出总数与可追溯来源，交付完整、无重复、无越界。",
+  "checks": [
+    {
+      "criterion": "assigned_service：通过指定服务查出并注明可追溯查询来源",
+      "passed": true,
+      "evidence": "execution/artifacts/cache/DE_2027.json 为 GET https://nagerholidays.com/api/v4/Holidays/DE/2027 的原始响应；execution/artifacts/out/headers_DE_2027.txt 显示 HTTP/2 200、content-type application/json；execution/answer.md 注明 Nager.Date Community API v4 及请求 URL。"
+    },
+    {
+      "criterion": "complete_local_year：2027 年柏林州全部公共节假日，含全国及柏林州、排除他州独有",
+      "passed": true,
+      "evidence": "筛选得 10 条：9 条 nationalHoliday=true 加唯一 DE-BE 独有 International Women's Day(2027-03-08)；与 reference.json expected_count=10 及 expected_rows 逐一对应。他州独有项（Epiphany、Corpus Christi、Reformation Day、All Saints' Day、Assumption Day、World Children's Day、Repentance and Prayer Day）及仅 DE-BB 的 Easter Sunday/Pentecost 未纳入。见 evidence/service_query_verification.md。"
+    },
+    {
+      "criterion": "dates_and_names：日期明确到年月日，德/英文名称可辨认且节日身份正确",
+      "passed": true,
+      "evidence": "execution/answer.md 各行日期为 ISO 2027-MM-DD，名称为服务返回英文（New Year's Day、Good Friday、Easter Monday、Labour Day、Ascension Day、Whit Monday、German Unity Day、Christmas Day、St. Stephen's Day、International Women's Day），与参考 expected_rows 语义一致。"
+    },
+    {
+      "criterion": "ordered_total：按日期升序列出并给出正确去重总数",
+      "passed": true,
+      "evidence": "execution/answer.md 10 行按 2027-01-01→2027-12-26 升序，明确写“总数：10 个”；execution/artifacts/out/berlin_2027_holidays.json 的 totalCount=10 与 holidays 数组一致，无重复。"
+    },
+    {
+      "criterion": "visible_scope：周末照列、不补休、排除学校假期与普通星期日",
+      "passed": true,
+      "evidence": "落在周末的 2027-05-01(六)、2027-10-03(日)、2027-12-25(六)、2027-12-26(日) 保留实际当地日期，未移至工作日；未加入学校假期或补休日；Easter Sunday/Pentecost 等星期日未计。日期直接取自服务 date 字符串，未作 UTC 位移。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "指定服务真实查询成功（HTTP/2 200，原始响应 execution/artifacts/cache/DE_2027.json）；最终答复 execution/answer.md 交付 10 条柏林 2027 公共节假日，日期与名称正确、升序、总数准确、来源可追溯。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "cb7643bcd2378caced2fa5e261ac2f0d896fc6fe0ef017e7fdbb1605059f798f",
+      "note": "执行者最终答复：列出 10 项柏林 2027 公共节假日，按日期升序，给出总数 10，并注明来源 Nager.Date Community API v4 与请求 URL。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/service_query_verification.md",
+      "private_source_sha256": "a52fd0b15c68496b9beb4371d52d582f3956d0b7acb5e14358058f3b327fb3d2",
+      "note": "验收独立摘要：指定入口、真实 HTTP 200、原始响应 sha256、柏林筛选规则、10 条匹配与排除项、与冻结参考一致。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/free_terms.md",
+      "private_source_sha256": "30cca0880d08afcd23e58198b8c194f6112b8631fc852f800956ec11dfd5fbf6",
+      "note": "免费依据：Nager.Date 服务条款（Web API 私人/非营利免费）与本次私人非商业低量调用适用观察。"
+    }
+  ],
+  "frozen_task_sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+  "frozen_prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "reference_sha256": "a38c7856cd3ffa6652114c2568a05cbbaecee50fb2decf9cab29130527652ce3",
+  "execution_answer_sha256": "cb7643bcd2378caced2fa5e261ac2f0d896fc6fe0ef017e7fdbb1605059f798f",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Nager.Date Community v4; low-volume noncommercial research. Not a holiday portal or redistributed list."
+}

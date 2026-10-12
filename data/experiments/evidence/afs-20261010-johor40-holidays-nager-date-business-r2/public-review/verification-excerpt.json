@@ -1,0 +1,73 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-holidays-nager-date-business-r2",
+  "independent_assessment_sha256": "43b985e04bfa512df7fa00ce8bd4546c1e9a525029c9c2df3694c36d8e92c2e6",
+  "independent_status": "completed",
+  "independent_reason": "Executor made a real anonymous call to the assigned Nager.Holidays Community v4 Web API (GET /api/v4/Holidays/DE/2027, HTTP 200) and delivered an ascending, deduplicated list of the 10 Berlin public holidays for 2027 with a traceable source. The list matches the frozen independent reference (expected_count=10, all dates and identities).",
+  "checks": [
+    {
+      "criterion": "assigned_service: real query to the specified holiday service with traceable source",
+      "passed": true,
+      "evidence": "Tool record 0010: curl https://nagerholidays.com/api/v4/Holidays/DE/2027 -> HTTP 200, 2853 bytes. Raw response kept at execution/artifacts/holidays_cache/DE_2027.json (sha256 9f25e3175ab3ee9d3e2741f6146f73be218d85c002325f7a79a53d4813f4efd5). execution/answer.md cites Nager.Holidays Community v4 API and the endpoint. Anonymous entry, no key (service-config.json auth=none)."
+    },
+    {
+      "criterion": "complete_local_year: full Berlin-applicable 2027 set, no other-state/other-kind holidays",
+      "passed": true,
+      "evidence": "Two independent sources agree on 10: service response filtered by holidayTypes=Public and (nationalHoliday=true or subdivisionCodes includes DE-BE); frozen reference.json expected_count=10. Matches exactly."
+    },
+    {
+      "criterion": "dates_and_names: unambiguous 2027 dates and recognizable German/English names",
+      "passed": true,
+      "evidence": "ISO-8601 dates (2027-MM-DD) and provider English names, e.g. 2027-03-08 International Women's Day, 2027-12-26 St. Stephen's Day. Names accepted by reference name lists."
+    },
+    {
+      "criterion": "ordered_total: ascending date order and correct deduplicated total",
+      "passed": true,
+      "evidence": "List is ascending by date with no duplicates and states total 10 (execution/answer.md line 4; artifacts/answer.md '总数：10 天')."
+    },
+    {
+      "criterion": "visible_scope: weekend/public holidays kept at actual dates, no substitutes, no school/observance entries",
+      "passed": true,
+      "evidence": "Weekend holidays retained at real dates (2027-05-01 Sat, 2027-10-03 Sun, 2027-12-25 Sat, 2027-12-26 Sun); no observance/school entries included; only assigned service data used."
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "Real HTTP 200 response from the assigned service stored at execution/artifacts/holidays_cache/DE_2027.json; delivered 10-holiday ascending list matches reference expected_count=10."
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "ca628e38ae2a8fd9b2d16865fca768d8cdf20935f1b2af0f1dc186aa0ec54a0f",
+      "note": "Executor's final delivered answer: 2027 Berlin public holidays, 10 items, ascending, source cited."
+    },
+    {
+      "private_source": "execution/artifacts/holidays_cache/DE_2027.json",
+      "private_source_sha256": "9f25e3175ab3ee9d3e2741f6146f73be218d85c002325f7a79a53d4813f4efd5",
+      "note": "Raw cached response of GET /api/v4/Holidays/DE/2027 (HTTP 200), 19 DE/2027 Public entries; basis for the Berlin filter."
+    },
+    {
+      "private_source": "grading/artifacts/evidence/result-check.md",
+      "private_source_sha256": "938607a30f47bf6ee90d835645131c322ca29a9eff006100cd8e70433236a6c7",
+      "note": "Independent comparison of delivered list vs frozen reference and cross-check with peer run."
+    },
+    {
+      "private_source": "grading/artifacts/evidence/free-rule-nager.md",
+      "private_source_sha256": "02860a2a46f405109c9b1a260d5bde928925bfa7db8c1c355b7ec1db1cb05bd1",
+      "note": "Official free-use rule for the hosted Nager.Holidays Web API and its applicability to this run."
+    }
+  ],
+  "frozen_task_sha256": "8bbd9d2a6de4d0dceb9142634f33d478a63e18164ef166934f158efbf876dd0e",
+  "frozen_prompt_sha256": "1719ebefc35ed8f90d784a29226136e96b361f3499c45fedc4ecd3f4a765cefc",
+  "reference_sha256": "a38c7856cd3ffa6652114c2568a05cbbaecee50fb2decf9cab29130527652ce3",
+  "execution_answer_sha256": "ca628e38ae2a8fd9b2d16865fca768d8cdf20935f1b2af0f1dc186aa0ec54a0f",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "attribution": "Nager.Date Community v4; low-volume noncommercial research. Not a holiday portal or redistributed list."
+}

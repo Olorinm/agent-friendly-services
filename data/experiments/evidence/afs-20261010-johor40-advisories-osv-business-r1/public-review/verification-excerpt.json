@@ -1,0 +1,130 @@
+{
+  "notice": "Operator-selected minimal publication excerpt from the unchanged independent assessment. Full original responses, user outputs and review sources remain private with hashes. This is evidence selection, not a second task verdict. Holiday lists are not redistributed as a data feed. Model costs are measured request estimates, not provider invoices.",
+  "run_id": "afs-20261010-johor40-advisories-osv-business-r1",
+  "independent_assessment_sha256": "e3501937ca817004a7d79fa6a153b69c706048d54b5f1e367a2bdef639964457",
+  "independent_status": "completed",
+  "independent_reason": "本次执行实际查询了指定 OSV 公共 REST API（/v1/query 返回 HTTP 200；/v1/vulns/CVE-2025-57833、/v1/vulns/CVE-2025-59681 各返回 HTTP 200），并沿记录引用核对 Django 官方发布公告。逐条结论与冻结独立参考一致：CVE-2025-57833 当前 5.2.6 已修复、5.2.x 最早修复 5.2.6；CVE-2025-59681 仍匹配 5.2.6、5.2.x 最早修复 5.2.7；仅处理这两条最低升级到 5.2.7。中文说明、依据链接与所用服务均已给出，全程只读。",
+  "checks": [
+    {
+      "criterion": "assigned_service: 真实查询指定的 OSV 公共 API，未用其他漏洞库/搜索/记忆替代",
+      "passed": true,
+      "evidence": "工具记录 0005 POST https://api.osv.dev/v1/query 返回 HTTP 200（Django/PyPI 5.2.6，64 条）；0008/0009 GET /v1/vulns/CVE-2025-57833 与 /v1/vulns/CVE-2025-59681 各返回 HTTP 200。仅后续沿记录内 references 追至 djangoproject.com 维护者公告。"
+    },
+    {
+      "criterion": "two_match_decisions: 逐条核对 5.2.6 是否仍在受影响范围",
+      "passed": true,
+      "evidence": "vuln_CVE-2025-57833.json affected versions 为 5.2~5.2.5（不含 5.2.6），判为已修复；vuln_CVE-2025-59681.json affected versions 含 5.2.6，判为受影响。query 结果含 59681、不含 57833，与之一致。"
+    },
+    {
+      "criterion": "branch_specific_fixes: 5.2.x 各自最早修复版本正确",
+      "passed": true,
+      "evidence": "两条记录范围事件分别为 introduced 5.2/fixed 5.2.6（57833）与 introduced 5.2/fixed 5.2.7（59681），答复给出 5.2.6 与 5.2.7。"
+    },
+    {
+      "criterion": "combined_minimum: 仅处理这两条的最低升级版本",
+      "passed": true,
+      "evidence": "答复明确为 5.2.7（57833 已修复，59681 需 5.2.7），未扩大为最新版本或全量漏洞结论。"
+    },
+    {
+      "criterion": "sources_explanation: 依据链接、中文说明及查询来源",
+      "passed": true,
+      "evidence": "answer.md 注明来源为指定 OSV 公共 REST API，逐条给出 api.osv.dev/v1/vulns 链接与 djangoproject.com weblog 2025-09-03 / 2025-10-01 公告链接，并附中文判断。"
+    },
+    {
+      "criterion": "read_only_scope: 只读防御性元数据，不安装/升级/修改项目",
+      "passed": true,
+      "evidence": "16 次工具调用仅含 read、mkdir cache、curl 只读查询（OSV 与 djangoproject.com 页面）及本地 python 解析、写入答案；无安装、写仓库、付费或消息行为。"
+    }
+  ],
+  "outcome": {
+    "service_execution": "completed",
+    "user_delivery": "completed",
+    "blocking_factors": [],
+    "evidence": "OSV query 与两条 vulns 记录均 HTTP 200 且内容与冻结参考一致；维护者公告可追溯；最终答复完整包含两条匹配结论、修复版本、最低升级版本与依据链接。"
+  },
+  "selected_source_hashes": [
+    {
+      "private_source": "execution/answer.md",
+      "private_source_sha256": "299803da3c2d0c75ee3a49d74d93e29fcf972849b44757a4d27ee0645cbbc445",
+      "note": "执行者最终答复（中文）：逐条匹配结论、5.2.x 最早修复版本、依据链接及最低升级版本 5.2.7。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/vuln_CVE-2025-57833.json",
+      "private_source_sha256": "306b178a6431ba43151e75acd28ef8d9008d4286921b6dd3ae0a8c219044af6b",
+      "note": "OSV 记录：affected versions 5.2~5.2.5，范围 fixed 5.2.6。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/vuln_CVE-2025-59681.json",
+      "private_source_sha256": "66918bab99475922a2d0fd11f95deea6c2136ef60a47915a844c6db060a916f6",
+      "note": "OSV 记录：affected versions 含 5.2.6，范围 fixed 5.2.7。"
+    },
+    {
+      "private_source": "execution/artifacts/cache/query_django_5.2.6.json",
+      "private_source_sha256": "fb9ae02a6ca16121c3b8056e7b31152f17c167d70c62df5b3eaeea59ffc19553",
+      "note": "OSV query（Django/PyPI 5.2.6）返回 64 条，含 CVE-2025-59681，不含 CVE-2025-57833。"
+    },
+    {
+      "private_source": "grading/artifacts/evidence/dependency_advisory_verification.md",
+      "private_source_sha256": "2ac85105d794f052a796e90950efeeac1cf546fb7fe3448e31509fedad49adf9",
+      "note": "验收独立核验摘要（脱敏，摘录必要业务字段）。"
+    }
+  ],
+  "frozen_task_sha256": "6e9cfc85b927eadb9b77812a50fea6e1d8fb3140e74bb95e8120b5fdf158d815",
+  "frozen_prompt_sha256": "cc50cd4a750c3d022758944eec96e651ddb2a2318554d4335827705db2b22ff6",
+  "reference_sha256": "4081ad0272b90d7b63a94b24133521ff469f213517f530d6e7624b6d793d69a0",
+  "execution_answer_sha256": "299803da3c2d0c75ee3a49d74d93e29fcf972849b44757a4d27ee0645cbbc445",
+  "limits": [
+    "Same synthetic input, three predeclared repeats per original six routes; correlated repetitions do not establish general reliability.",
+    "Fresh containers per service/route/repeat and a common overseas host; common 600s execution/300s grading/40 model-request limits, plus disclosed shared-service throttling.",
+    "All same-round peer executions were sealed before independent graders; peer grading conclusions were not provided.",
+    "Private response metadata and repeated full service lists are omitted from publication; files identified as private_source are provenance, not public download paths."
+  ],
+  "independent_fee_clarification": {
+    "reviewer": "codex-independent-publication-cost-review-20261010",
+    "clarification_sha256": "e34501d77f7beb72bf3f908fc143be37731b6f635ab381158377ba2693771342",
+    "supplemental_access_sha256": "e104039bec8eaea3d00928d3e63043701aab1a0bfbcbf939c96a6102f3a93868",
+    "review": {
+      "service_cost_usd": 0,
+      "service_cost": {
+        "kind": "confirmed_free",
+        "sources": [
+          "https://osv.dev/blog/posts/announcing-osv-service-level-objectives/",
+          "https://google.github.io/osv.dev/quickstart/",
+          "https://google.github.io/osv.dev/api/"
+        ],
+        "source_ids": [
+          "osv-slo-announcement",
+          "osv-api-quickstart",
+          "osv-api-overview"
+        ],
+        "note": "新增官方托管资源免费声明及API路径证据足以确认本轮OSV公共查询服务费用为0。匿名成功、无账号/付款、文档无限流不是单独依据；上游数据转载许可与托管查询费用分开。",
+        "applicability": {
+          "rule": "OSV Team官方将OSV.dev明确称为免费资源，同一服务说明同时涵盖网站与API；官方API文档将公共query及vulns记录读取映射到这项托管服务。适用于本轮公开REST元数据查询，不据数据开源或未列费率推定免费。",
+          "observed": "run.json指定public-api及https://api.osv.dev/v1/query，无预提供账号/凭据；冻结ENVIRONMENT限定query与记录路径。最少保留响应具OSV记录id/schema；access-r2响应封装含200和body。",
+          "evidence": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/run.json sha256=91ccefb17b0ae022824b77a6b93199673c5d9ac2c7ffce06b4b889eeee576a4e; data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/frozen/execution/ENVIRONMENT.md sha256=23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812; data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/execution/artifacts/cache/vuln_CVE-2025-57833.json sha256=306b178a6431ba43151e75acd28ef8d9008d4286921b6dd3ae0a8c219044af6b"
+        }
+      },
+      "original_fact_hashes": [
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/run.json",
+          "sha256": "91ccefb17b0ae022824b77a6b93199673c5d9ac2c7ffce06b4b889eeee576a4e"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/frozen/execution/ENVIRONMENT.md",
+          "sha256": "23fc013f5943fde461cacd302b8fccdfb4aee142a3dae802b2583481ff8ae812"
+        },
+        {
+          "source": "data/experiments/results/afs-20261010-johor40-advisories-osv-business-r1/execution/artifacts/cache/vuln_CVE-2025-57833.json",
+          "sha256": "306b178a6431ba43151e75acd28ef8d9008d4286921b6dd3ae0a8c219044af6b"
+        }
+      ],
+      "limits": [
+        "未见金额回执或账单；0是官方免费规则适用结论，不是实付回执。",
+        "冻结环境中的免费/不付费文字和未提供付款方式只说明授权边界，不独立证明服务免费。",
+        "本复核不审计全量请求、模型费用、计量用量、署名/转载条件履行或任务完成。",
+        "所选最少证据没有独立保留HTTP响应头；响应身份及冻结入口仅用于免费规则适用性，不额外判定调用或任务成功。"
+      ]
+    },
+    "scope": "Anomaly-specific service-fee source review only; original task verdict/checks/outcome/usage remain unchanged."
+  }
+}
