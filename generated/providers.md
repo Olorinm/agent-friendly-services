@@ -89,7 +89,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 | [Upstash](#upstash) | ✓ | ✓ | — | ✓ | — | ✓ | — | 2026-07-07 |
 | [Weaviate](#weaviate) | ✓ | ✓ | — | ✓ | ✓ | ✓ | — | 2026-07-08 |
 
-### Search & Data Access
+### Search & Web Scraping
 
 | Provider | MCP | llms.txt | OpenAPI | CLI | Sandbox | Self-serve | Agent | Checked |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -168,7 +168,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `OpenAPI` `CLI` `Self-serve`
 
 **Links:** [Documentation](https://docs.apify.com) · [API Reference](https://docs.apify.com/api/v2) · [OpenAPI](https://docs.apify.com/api/openapi.json) · [llms.txt](https://docs.apify.com/llms.txt) · [Changelog](https://apify.com/change-log) · [Status Page](https://status.apify.com) · [Pricing](https://apify.com/pricing) · [Signup](https://console.apify.com/sign-up) · [API Keys](https://docs.apify.com/platform/integrations/api) · [CLI](https://docs.apify.com/cli) · [SDKs](https://docs.apify.com/sdk) · [Official MCP](https://docs.apify.com/platform/integrations/mcp) · [Webhooks](https://docs.apify.com/platform/integrations/webhooks)
 
@@ -193,7 +193,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Independent web search index with a developer API, self-serve registration, and a free plan.
 
-**Category:** Search & Data Access · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Official MCP` `Self-serve`
+**Category:** Search & Web Scraping · **Scope:** Brave Search API (Data for Search / Data for AI plans); the consumer search engine is not assessed. · `Official MCP` `Self-serve`
 
 **Links:** [Documentation](https://api-dashboard.search.brave.com/app/documentation) · [Pricing](https://brave.com/search/api/) · [Signup](https://api-dashboard.search.brave.com/register) · [Official MCP](https://github.com/brave/brave-search-mcp-server)
 
@@ -374,7 +374,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.exa.ai) · [API Reference](https://docs.exa.ai/reference/getting-started) · [llms.txt](https://docs.exa.ai/llms.txt) · [Changelog](https://docs.exa.ai/changelog) · [Pricing](https://exa.ai/pricing) · [Signup](https://dashboard.exa.ai) · [API Keys](https://docs.exa.ai/reference/getting-started) · [SDKs](https://docs.exa.ai/sdks/typescript-sdk-specification) · [Official MCP](https://github.com/exa-labs/exa-mcp-server) · [Rate Limits](https://docs.exa.ai/reference/rate-limits)
 
@@ -397,7 +397,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.firecrawl.dev) · [API Reference](https://docs.firecrawl.dev/api-reference/introduction) · [llms.txt](https://docs.firecrawl.dev/llms.txt) · [Pricing](https://www.firecrawl.dev/pricing) · [Signup](https://www.firecrawl.dev/signin/signup) · [API Keys](https://docs.firecrawl.dev/introduction) · [SDKs](https://docs.firecrawl.dev/sdks/overview) · [Official MCP](https://docs.firecrawl.dev/mcp-server) · [Rate Limits](https://docs.firecrawl.dev/rate-limits)
 
@@ -512,7 +512,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.jina.ai) · [API Reference](https://docs.jina.ai) · [llms.txt](https://docs.jina.ai/llms.txt) · [Status Page](https://status.jina.ai) · [Signup](https://jina.ai/api-dashboard) · [API Keys](https://jina.ai/api-dashboard) · [Official MCP](https://github.com/jina-ai/MCP)
 
@@ -720,7 +720,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
 
-**Category:** Search & Data Access · **Scope:** Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed. · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · **Scope:** Sonar API platform (docs.perplexity.ai); the consumer Perplexity app is not assessed. · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.perplexity.ai) · [llms.txt](https://docs.perplexity.ai/llms.txt) · [Changelog](https://docs.perplexity.ai/changelog) · [Status Page](https://status.perplexity.com) · [Pricing](https://docs.perplexity.ai/getting-started/pricing) · [API Keys](https://docs.perplexity.ai/getting-started/quickstart) · [Official MCP](https://github.com/ppl-ai/modelcontextprotocol) · [Rate Limits](https://docs.perplexity.ai/guides/rate-limits)
 
@@ -845,7 +845,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://serpapi.com/search-api) · [API Reference](https://serpapi.com/search-api) · [llms.txt](https://serpapi.com/llms.txt) · [Status Page](https://serpapi.com/status) · [Pricing](https://serpapi.com/pricing) · [Signup](https://serpapi.com/users/sign_up) · [API Keys](https://serpapi.com/manage-api-key) · [Official MCP](https://github.com/serpapi/serpapi-mcp)
 
@@ -915,7 +915,7 @@ Links are probed weekly ([link-health.json](./link-health.json)); machine-readab
 
 > Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 
-**Category:** Search & Data Access · `Official MCP` `llms.txt` `Self-serve`
+**Category:** Search & Web Scraping · `Official MCP` `llms.txt` `Self-serve`
 
 **Links:** [Documentation](https://docs.tavily.com) · [API Reference](https://docs.tavily.com/documentation/api-reference/introduction) · [llms.txt](https://docs.tavily.com/llms.txt) · [Status Page](https://status.tavily.com) · [Pricing](https://www.tavily.com/pricing) · [Signup](https://app.tavily.com) · [API Keys](https://docs.tavily.com/documentation/quickstart) · [SDKs](https://docs.tavily.com/sdk) · [Official MCP](https://docs.tavily.com/documentation/mcp) · [Rate Limits](https://docs.tavily.com/documentation/rate-limits)
 

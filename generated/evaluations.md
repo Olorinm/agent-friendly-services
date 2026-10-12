@@ -7,9 +7,9 @@
 
 输入方式 legacy 是带明确测试要求的初期试跑，Agent 的开销包含证据保存与整理；natural 只提供用户任务、资料及运行环境，使用自动会话日志与外部远端复核。不同方式分别记录；单次测量都不代表典型开销，跨版本差异也可能来自业务要求、执行路径和缓存变化。
 
-<a id="web-search-data-web-extraction"></a>
+<a id="search-scraping-web-extraction"></a>
 
-## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction）
+## 搜索与网页抓取 / 网页内容提取（search-scraping/web-extraction）
 
 ### web-extraction-uk-holidays-001 / v1
 
@@ -17,12 +17,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | 2026-10-10T12:47:27.351738+00:00 | 1.18.35 / deepseek-flash / high | 128255 / 116352 / 4778 | 27.532195s | 0 | 0 |
-| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | 2026-10-10T12:47:05.623799+00:00 | 1.18.35 / deepseek-flash / high | 90328 / 79872 / 2223 | 17.517711s | 0 | 0 |
-| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json) | 2026-10-10T12:44:54.304564+00:00 | 1.18.35 / deepseek-flash / high | 104866 / 94464 / 2219 | 17.101687s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json) | 2026-10-10T12:44:28.508524+00:00 | 1.18.35 / deepseek-flash / high | 218922 / 188800 / 2704 | 22.163876s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json) | 2026-10-10T12:41:31.146106+00:00 | 1.18.35 / deepseek-flash / high | 260146 / 245376 / 12875 | 88.86881s | 0 | 0 |
-| jina / reader-api | web-extraction-uk-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json) | 2026-10-10T12:41:11.606040+00:00 | 1.18.35 / deepseek-flash / high | 100092 / 85632 / 1892 | 15.642529s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | 2026-10-10T12:47:27.351738+00:00 | 1.18.35 / deepseek-flash / high | 128255 / 116352 / 4778 | 27.532195s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | 2026-10-10T12:47:05.623799+00:00 | 1.18.35 / deepseek-flash / high | 90328 / 79872 / 2223 | 17.517711s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json) | 2026-10-10T12:44:54.304564+00:00 | 1.18.35 / deepseek-flash / high | 104866 / 94464 / 2219 | 17.101687s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2.json) | 2026-10-10T12:44:28.508524+00:00 | 1.18.35 / deepseek-flash / high | 218922 / 188800 / 2704 | 22.163876s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1.json) | 2026-10-10T12:41:31.146106+00:00 | 1.18.35 / deepseek-flash / high | 260146 / 245376 / 12875 | 88.86881s | 0 | 0 |
+| jina / reader-api | web-extraction-uk-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r1.json) | 2026-10-10T12:41:11.606040+00:00 | 1.18.35 / deepseek-flash / high | 100092 / 85632 / 1892 | 15.642529s | 0 | 0 |
 
 ### web-extraction-holidays-001 / v1
 
@@ -30,12 +30,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json) | 2026-10-10T12:25:54.824382+00:00 | 1.18.35 / deepseek-flash / high | 121210 / 110720 / 3412 | 23.452465s | 0 | 0 |
-| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json) | 2026-10-10T12:25:33.901912+00:00 | 1.18.35 / deepseek-flash / high | 64592 / 55552 / 2197 | 16.747364s | 0 | 0 |
-| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json) | 2026-10-10T12:24:16.239042+00:00 | 1.18.35 / deepseek-flash / high | 73855 / 64896 / 1569 | 15.166945s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json) | 2026-10-10T12:23:30.391910+00:00 | 1.18.35 / deepseek-flash / high | 449037 / 424064 / 6953 | 42.0615s | 0 | 0 |
-| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json) | 2026-10-10T12:22:06.217303+00:00 | 1.18.35 / deepseek-flash / high | 200866 / 186880 / 4139 | 30.618211s | 0 | 0 |
-| jina / reader-api | web-extraction-holidays-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json) | 2026-10-10T12:21:37.822851+00:00 | 1.18.35 / deepseek-flash / high | 124620 / 113152 / 3531 | 23.938179s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r3.json) | 2026-10-10T12:25:54.824382+00:00 | 1.18.35 / deepseek-flash / high | 121210 / 110720 / 3412 | 23.452465s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json) | 2026-10-10T12:25:33.901912+00:00 | 1.18.35 / deepseek-flash / high | 64592 / 55552 / 2197 | 16.747364s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json) | 2026-10-10T12:24:16.239042+00:00 | 1.18.35 / deepseek-flash / high | 73855 / 64896 / 1569 | 15.166945s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r2.json) | 2026-10-10T12:23:30.391910+00:00 | 1.18.35 / deepseek-flash / high | 449037 / 424064 / 6953 | 42.0615s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-holidays-r1.json) | 2026-10-10T12:22:06.217303+00:00 | 1.18.35 / deepseek-flash / high | 200866 / 186880 / 4139 | 30.618211s | 0 | 0 |
+| jina / reader-api | web-extraction-holidays-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r1.json) | 2026-10-10T12:21:37.822851+00:00 | 1.18.35 / deepseek-flash / high | 124620 / 113152 / 3531 | 23.938179s | 0 | 0 |
 | exa / public-mcp | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:48.131642+00:00 | 1.18.35 / deepseek-flash / high | 307477 / 290048 / 5337 | 38.131958s | 0 | 0 |
 | firecrawl / public-scrape-api | web-extraction-holidays-001 (v1) | none | natural | [completed](../data/experiments/evaluations/firecrawl-extraction-holidays-001-ds41-r1.json) | 2026-10-08T13:16:46.370512+00:00 | 1.18.35 / deepseek-flash / high | 260900 / 237312 / 3282 | 28.302448s | 0 | 0 |
 
@@ -57,9 +57,9 @@
 | exa / public-mcp | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:42.102239+00:00 | 1.18.35 / deepseek-flash / high | 245616 / 227072 / 13246 | 72.610281s | 0 | 0 |
 | firecrawl / public-scrape-api | web-extraction-pdf-hikes-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-hikes-001-ds41-r1.json) | 2026-10-08T18:54:40.401656+00:00 | 1.18.35 / deepseek-flash / high | 311181 / 285952 / 6369 | 44.747639s | 0 | 0 |
 
-<a id="web-search-data-web-extraction"></a>
+<a id="search-scraping-web-extraction"></a>
 
-## 搜索与数据获取 / 网页内容提取（web-search-data/web-extraction） · 接入测试
+## 搜索与网页抓取 / 网页内容提取（search-scraping/web-extraction） · 接入测试
 
 ### web-extraction-access-001 / v1
 
@@ -67,8 +67,8 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 2026-10-10T12:19:44.589591+00:00 | 1.18.35 / deepseek-flash / high | 248941 / 220800 / 7432 | 43.066082s | 0 | 0 |
-| jina / reader-api | web-extraction-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 2026-10-10T12:19:15.921314+00:00 | 1.18.35 / deepseek-flash / high | 111655 / 91264 / 3809 | 24.489431s | 0 | 0 |
+| firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 2026-10-10T12:19:44.589591+00:00 | 1.18.35 / deepseek-flash / high | 248941 / 220800 / 7432 | 43.066082s | 0 | 0 |
+| jina / reader-api | web-extraction-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 2026-10-10T12:19:15.921314+00:00 | 1.18.35 / deepseek-flash / high | 111655 / 91264 / 3809 | 24.489431s | 0 | 0 |
 | exa / public-mcp | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/exa-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275433+00:00 | 1.18.35 / deepseek-flash / high | 161115 / 146048 / 4641 | 33.987788s | 0 | 0 |
 | firecrawl / public-scrape-api | web-extraction-access-001 (v1) | none; anonymous public extraction routes, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/firecrawl-pdf-access-ds41-r1.json) | 2026-10-08T18:47:05.275071+00:00 | 1.18.35 / deepseek-flash / high | 183635 / 161408 / 3163 | 23.34858s | 0 | 0 |
 | jina / reader-api | web-extraction-access-001 (v1) | none | natural | [invalid_run](../data/experiments/evaluations/jina-extraction-access-ds41-r2.json) | 2026-10-08T13:09:26.421153+00:00 | 1.18.35 / deepseek-flash / high | 110620 / 102400 / 5106 | 202.576397s | unknown | 0 |
@@ -86,9 +86,9 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | 2026-10-10T12:11:20.208841+00:00 | 1.18.35 / deepseek-flash / high | 542981 / 526592 / 12859 | 78.668031s | 0 | 0 |
-| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json) | 2026-10-10T12:05:09.772016+00:00 | 1.18.35 / deepseek-flash / high | 242397 / 226560 / 9960 | 65.522535s | 0 | 0 |
-| turso / platform-api | database-restore-001 (v2) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json) | 2026-10-10T11:56:52.093416+00:00 | 1.18.35 / deepseek-flash / high | 546854 / 530048 / 14292 | 94.011462s | 0 | 0 |
+| turso / platform-api | database-restore-001 (v2) | provided: Existing authorized project Turso Starter account supplied; not self-registration | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | 2026-10-10T12:11:20.208841+00:00 | 1.18.35 / deepseek-flash / high | 542981 / 526592 / 12859 | 78.668031s | 0 | 0 |
+| turso / platform-api | database-restore-001 (v2) | provided: Existing authorized project Turso Starter account supplied; not self-registration | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r2.json) | 2026-10-10T12:05:09.772016+00:00 | 1.18.35 / deepseek-flash / high | 242397 / 226560 / 9960 | 65.522535s | 0 | 0 |
+| turso / platform-api | database-restore-001 (v2) | provided: Existing authorized project Turso Starter account supplied; not self-registration | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r1.json) | 2026-10-10T11:56:52.093416+00:00 | 1.18.35 / deepseek-flash / high | 546854 / 530048 / 14292 | 94.011462s | 0 | 0 |
 
 ### database-atomic-import-001 / v1
 
@@ -140,12 +140,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | 2026-10-10T11:54:48.399813+00:00 | 1.18.35 / deepseek-flash / high | 857364 / 826496 / 16284 | 194.479349s | 0 | 0 |
-| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | 2026-10-10T11:52:53.351130+00:00 | 1.18.35 / deepseek-flash / high | 630785 / 600960 / 16553 | 111.86674s | 0 | 0 |
-| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json) | 2026-10-10T11:32:56.511304+00:00 | 1.18.35 / deepseek-flash / high | 731071 / 694272 / 20262 | 152.553492s | 0 | 0 |
-| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json) | 2026-10-10T11:29:50.807516+00:00 | 1.18.35 / deepseek-flash / high | 877632 / 848000 / 16050 | 181.513307s | 0 | 0 |
-| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json) | 2026-10-10T11:17:41.196600+00:00 | 1.18.35 / deepseek-flash / high | 1689222 / 1577472 / 28530 | 260.676554s | 0 | 0 |
-| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | [object Object] | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json) | 2026-10-10T11:14:19.267161+00:00 | 1.18.35 / deepseek-flash / high | 1167332 / 1105152 / 22064 | 198.389247s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | 2026-10-10T11:54:48.399813+00:00 | 1.18.35 / deepseek-flash / high | 857364 / 826496 / 16284 | 194.479349s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | 2026-10-10T11:52:53.351130+00:00 | 1.18.35 / deepseek-flash / high | 630785 / 600960 / 16553 | 111.86674s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r2.json) | 2026-10-10T11:32:56.511304+00:00 | 1.18.35 / deepseek-flash / high | 731071 / 694272 / 20262 | 152.553492s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r2.json) | 2026-10-10T11:29:50.807516+00:00 | 1.18.35 / deepseek-flash / high | 877632 / 848000 / 16050 | 181.513307s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r1.json) | 2026-10-10T11:17:41.196600+00:00 | 1.18.35 / deepseek-flash / high | 1689222 / 1577472 / 28530 | 260.676554s | 0 | 0 |
+| grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [not_completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json) | 2026-10-10T11:14:19.267161+00:00 | 1.18.35 / deepseek-flash / high | 1167332 / 1105152 / 22064 | 198.389247s | 0 | 0 |
 | grist / hosted-mcp | collaborative-tables-shared-expenses-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-mcp-shared-expenses-001-ds41-r1.json) | 2026-10-08T20:47:10.577404+00:00 | 1.18.35 / deepseek-flash / high | 754675 / 721280 / 14319 | 86.478336s | 0 | 0 |
 | grist / rest-api | collaborative-tables-shared-expenses-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [not_completed](../data/experiments/evaluations/grist-rest-shared-expenses-001-ds41-r1.json) | 2026-10-08T20:44:03.248139+00:00 | 1.18.35 / deepseek-flash / high | unknown | 177.21403s | 0 | 0 |
 
@@ -190,7 +190,7 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| turso / platform-api | database-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 2026-10-10T11:31:14.699283+00:00 | 1.18.35 / deepseek-flash / high | 225237 / 211456 / 7088 | 55.989322s | 0 | 0 |
+| turso / platform-api | database-access-001 (v1) | provided: Existing authorized project Turso Starter account supplied; not self-registration | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 2026-10-10T11:31:14.699283+00:00 | 1.18.35 / deepseek-flash / high | 225237 / 211456 / 7088 | 55.989322s | 0 | 0 |
 | turso / platform-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/turso-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665696+00:00 | 1.18.35 / deepseek-flash / high | 224623 / 211328 / 7991 | 50.403294s | 0 | 0 |
 | neon / claimable-api | database-access-001 (v1) | Preprovided existing authorized parent identity; executor creates one fresh empty logical database | natural | [completed](../data/experiments/evaluations/neon-atomic-access-ds41-r1.json) | 2026-10-08T21:36:57.665333+00:00 | 1.18.35 / deepseek-flash / high | 161771 / 149632 / 5465 | 40.8719s | unknown | 0 |
 | turso / platform-api | database-access-001 (v1) | existing authorized Turso management account | natural | [completed](../data/experiments/evaluations/turso-restore-mirror-access-ds41-r1.json) | 2026-10-08T16:39:23.940242+00:00 | 1.18.35 / deepseek-flash / high | 431148 / 412928 / 10242 | 79.603005s | 0 | 0 |
@@ -214,14 +214,14 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| grist / hosted-mcp | collaborative-tables-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 2026-10-10T10:59:55.683547+00:00 | 1.18.35 / deepseek-flash / high | 564849 / 525824 / 10003 | 96.000939s | 0 | 0 |
-| grist / rest-api | collaborative-tables-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 2026-10-10T10:58:58.273194+00:00 | 1.18.35 / deepseek-flash / high | 269776 / 247936 / 6671 | 53.123937s | 0 | 0 |
+| grist / hosted-mcp | collaborative-tables-access-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 2026-10-10T10:59:55.683547+00:00 | 1.18.35 / deepseek-flash / high | 564849 / 525824 / 10003 | 96.000939s | 0 | 0 |
+| grist / rest-api | collaborative-tables-access-001 (v1) | provided: Existing authorized project Free account, supplied by controller; not registered by measured executor | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 2026-10-10T10:58:58.273194+00:00 | 1.18.35 / deepseek-flash / high | 269776 / 247936 / 6671 | 53.123937s | 0 | 0 |
 | grist / hosted-mcp | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-mcp-access-ds41-r1.json) | 2026-10-08T13:45:37.768748+00:00 | 1.18.35 / deepseek-flash / high | 350908 / 324352 / 6743 | 61.963463s | 0 | 1 |
 | grist / rest-api | collaborative-tables-access-001 (v1) | provided: existing Grist Personal account; new empty parent workspace prepared by controller | natural | [completed](../data/experiments/evaluations/grist-rest-access-ds41-r1.json) | 2026-10-08T13:42:01.154679+00:00 | 1.18.35 / deepseek-flash / high | 106882 / 91904 / 4125 | 34.159175s | 0 | 0 |
 
-<a id="web-search-data-geocoding"></a>
+<a id="maps-geo-geocoding"></a>
 
-## 搜索与数据获取 / 地理编码（web-search-data/geocoding）
+## 地图与地理 / 地理编码（maps-geo/geocoding）
 
 ### geocoding-venue-001 / v1
 
@@ -229,12 +229,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| nominatim / public-search-api | geocoding-venue-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | 2026-10-10T10:34:46.885180+00:00 | 1.18.35 / deepseek-flash / high | 69909 / 60928 / 3467 | 42.606201s | 0 | 0 |
+| nominatim / public-search-api | geocoding-venue-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | 2026-10-10T10:34:46.885180+00:00 | 1.18.35 / deepseek-flash / high | 69909 / 60928 / 3467 | 42.606201s | 0 | 0 |
 | photon / public-search-api | geocoding-venue-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-venue-001-ds41-r1.json) | 2026-10-08T15:24:18.918504+00:00 | 1.18.35 / deepseek-flash / high | 95519 / 86400 / 4760 | 69.526803s | 0 | 0 |
 
-<a id="web-search-data-geocoding"></a>
+<a id="maps-geo-geocoding"></a>
 
-## 搜索与数据获取 / 地理编码（web-search-data/geocoding） · 接入测试
+## 地图与地理 / 地理编码（maps-geo/geocoding） · 接入测试
 
 ### geocoding-access-001 / v1
 
@@ -242,13 +242,13 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| nominatim / public-search-api | geocoding-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 2026-10-10T10:32:56.390237+00:00 | 1.18.35 / deepseek-flash / high | 184884 / 174336 / 6162 | 60.509774s | 0 | 0 |
+| nominatim / public-search-api | geocoding-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 2026-10-10T10:32:56.390237+00:00 | 1.18.35 / deepseek-flash / high | 184884 / 174336 / 6162 | 60.509774s | 0 | 0 |
 | nominatim / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [invalid_run](../data/experiments/evaluations/nominatim-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665691+00:00 | 1.18.35 / deepseek-flash / high | unknown | 290.065141s | 0 | 0 |
 | photon / public-search-api | geocoding-access-001 (v1) | none; official low-volume public route selected deliberately for one public-venue research task | natural | [completed](../data/experiments/evaluations/photon-geocoding-access-ds41-r1.json) | 2026-10-08T15:16:36.665425+00:00 | 1.18.35 / deepseek-flash / high | 248700 / 229248 / 4848 | 75.763506s | 0 | 0 |
 
-<a id="web-search-data-financial-data-macro"></a>
+<a id="financial-data-macro"></a>
 
-## 搜索与数据获取 / 金融数据 / 宏观经济指标（web-search-data/financial-data/macro）
+## 金融数据 / 宏观经济指标（financial-data/macro）
 
 ### financial-macro-hicp-001 / v1
 
@@ -256,12 +256,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | 2026-10-10T10:30:21.234133+00:00 | 1.18.35 / deepseek-flash / high | 250654 / 220160 / 6503 | 50.601165s | 0 | 0 |
-| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | 2026-10-10T10:30:14.518172+00:00 | 1.18.35 / deepseek-flash / high | 549376 / 514816 / 12797 | 92.550835s | 0 | 0 |
-| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json) | 2026-10-10T10:27:09.388860+00:00 | 1.18.35 / deepseek-flash / high | 178678 / 167168 / 7808 | 46.921937s | 0 | 0 |
-| eurostat / statistics-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json) | 2026-10-10T10:26:42.754766+00:00 | 1.18.35 / deepseek-flash / high | 311595 / 297984 / 11592 | 73.290951s | 0 | 0 |
-| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json) | 2026-10-10T10:26:22.171020+00:00 | 1.18.35 / deepseek-flash / high | 676994 / 640512 / 14863 | 95.270234s | 0 | 0 |
-| ecb-data / data-api | financial-macro-hicp-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json) | 2026-10-10T10:26:01.924316+00:00 | 1.18.35 / deepseek-flash / high | 255367 / 239744 / 7201 | 61.095484s | 0 | 0 |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | 2026-10-10T10:30:21.234133+00:00 | 1.18.35 / deepseek-flash / high | 250654 / 220160 / 6503 | 50.601165s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | 2026-10-10T10:30:14.518172+00:00 | 1.18.35 / deepseek-flash / high | 549376 / 514816 / 12797 | 92.550835s | 0 | 0 |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json) | 2026-10-10T10:27:09.388860+00:00 | 1.18.35 / deepseek-flash / high | 178678 / 167168 / 7808 | 46.921937s | 0 | 0 |
+| eurostat / statistics-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r1.json) | 2026-10-10T10:26:42.754766+00:00 | 1.18.35 / deepseek-flash / high | 311595 / 297984 / 11592 | 73.290951s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json) | 2026-10-10T10:26:22.171020+00:00 | 1.18.35 / deepseek-flash / high | 676994 / 640512 / 14863 | 95.270234s | 0 | 0 |
+| ecb-data / data-api | financial-macro-hicp-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r2.json) | 2026-10-10T10:26:01.924316+00:00 | 1.18.35 / deepseek-flash / high | 255367 / 239744 / 7201 | 61.095484s | 0 | 0 |
 
 <a id="developer-tools-dependency-advisories"></a>
 
@@ -273,18 +273,18 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | 2026-10-10T10:28:04.663462+00:00 | 1.18.35 / deepseek-flash / high | 80437 / 50688 / 3117 | 24.019067s | 0 | 0 |
-| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | 2026-10-10T10:28:04.106404+00:00 | 1.18.35 / deepseek-flash / high | 179581 / 157952 / 4763 | 35.486855s | 0 | 0 |
-| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json) | 2026-10-10T10:15:25.740862+00:00 | 1.18.35 / deepseek-flash / high | 59746 / 48640 / 2155 | 18.298031s | 0 | 0 |
-| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json) | 2026-10-10T10:15:13.772322+00:00 | 1.18.35 / deepseek-flash / high | 178054 / 159104 / 5823 | 35.267913s | 0 | 0 |
-| github / public-advisories-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json) | 2026-10-10T10:13:50.534707+00:00 | 1.18.35 / deepseek-flash / high | 109505 / 98304 / 3872 | 25.745011s | 0 | 0 |
-| osv / public-api | dependency-advisories-check-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json) | 2026-10-10T10:13:01.629904+00:00 | 1.18.35 / deepseek-flash / high | 220018 / 203648 / 5721 | 45.781731s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | 2026-10-10T10:28:04.663462+00:00 | 1.18.35 / deepseek-flash / high | 80437 / 50688 / 3117 | 24.019067s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | 2026-10-10T10:28:04.106404+00:00 | 1.18.35 / deepseek-flash / high | 179581 / 157952 / 4763 | 35.486855s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r2.json) | 2026-10-10T10:15:25.740862+00:00 | 1.18.35 / deepseek-flash / high | 59746 / 48640 / 2155 | 18.298031s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json) | 2026-10-10T10:15:13.772322+00:00 | 1.18.35 / deepseek-flash / high | 178054 / 159104 / 5823 | 35.267913s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r1.json) | 2026-10-10T10:13:50.534707+00:00 | 1.18.35 / deepseek-flash / high | 109505 / 98304 / 3872 | 25.745011s | 0 | 0 |
+| osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r1.json) | 2026-10-10T10:13:01.629904+00:00 | 1.18.35 / deepseek-flash / high | 220018 / 203648 / 5721 | 45.781731s | 0 | 0 |
 | github / public-advisories-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:46.008530+00:00 | 1.18.35 / deepseek-flash / high | 72242 / 62336 / 3531 | 22.98942s | 0 | 0 |
 | osv / public-api | dependency-advisories-check-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-django-001-ds41-r1.json) | 2026-10-08T18:23:44.313467+00:00 | 1.18.35 / deepseek-flash / high | 193502 / 166272 / 7536 | 167.099132s | 0 | 0 |
 
-<a id="web-search-data-financial-data"></a>
+<a id="financial-data"></a>
 
-## 搜索与数据获取 / 金融数据（web-search-data/financial-data） · 接入测试
+## 金融数据（financial-data） · 接入测试
 
 ### financial-access-001 / v1
 
@@ -292,12 +292,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 2026-10-10T10:24:55.156781+00:00 | 1.18.35 / deepseek-flash / high | 337475 / 312960 / 7080 | 45.417219s | 0 | 0 |
-| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json) | 2026-10-10T10:24:22.362835+00:00 | 1.18.35 / deepseek-flash / high | 277135 / 249856 / 5371 | 37.371404s | 0 | 0 |
-| eurostat / statistics-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json) | 2026-10-10T10:23:51.049072+00:00 | 1.18.35 / deepseek-flash / high | 406499 / 378112 / 8791 | 67.8282s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 2026-10-10T10:22:04.537228+00:00 | 1.18.35 / deepseek-flash / high | 228054 / 213632 / 9746 | 65.683655s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json) | 2026-10-10T10:20:55.002829+00:00 | 1.18.35 / deepseek-flash / high | 448872 / 430592 / 11245 | 94.762886s | 0 | 0 |
-| ecb-data / data-api | financial-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json) | 2026-10-10T10:19:38.265768+00:00 | 1.18.35 / deepseek-flash / high | 232379 / 216448 / 7682 | 75.039493s | 0 | 0 |
+| eurostat / statistics-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 2026-10-10T10:24:55.156781+00:00 | 1.18.35 / deepseek-flash / high | 337475 / 312960 / 7080 | 45.417219s | 0 | 0 |
+| eurostat / statistics-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json) | 2026-10-10T10:24:22.362835+00:00 | 1.18.35 / deepseek-flash / high | 277135 / 249856 / 5371 | 37.371404s | 0 | 0 |
+| eurostat / statistics-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r1.json) | 2026-10-10T10:23:51.049072+00:00 | 1.18.35 / deepseek-flash / high | 406499 / 378112 / 8791 | 67.8282s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 2026-10-10T10:22:04.537228+00:00 | 1.18.35 / deepseek-flash / high | 228054 / 213632 / 9746 | 65.683655s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json) | 2026-10-10T10:20:55.002829+00:00 | 1.18.35 / deepseek-flash / high | 448872 / 430592 / 11245 | 94.762886s | 0 | 0 |
+| ecb-data / data-api | financial-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r1.json) | 2026-10-10T10:19:38.265768+00:00 | 1.18.35 / deepseek-flash / high | 232379 / 216448 / 7682 | 75.039493s | 0 | 0 |
 | alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:29:43.509122+00:00 | 1.18.35 / deepseek-flash / high | 552500 / 525184 / 12067 | 184.674383s | unknown | 0 |
 | alpha-vantage / data-api | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-rest-prices-mirror-access-ds41-r1.json) | 2026-10-08T15:28:08.583876+00:00 | 1.18.35 / deepseek-flash / high | 184198 / 168704 / 4121 | 32.632337s | 0 | 0 |
 | alpha-vantage / hosted-mcp | financial-access-001 (v1) | controller-registered ordinary free API key; same existing account for REST and MCP | natural | [completed](../data/experiments/evaluations/alpha-mcp-prices-access-ds41-r1.json) | 2026-10-08T14:09:26.927480+00:00 | 1.18.35 / deepseek-flash / high | 565383 / 536448 / 11092 | 118.680959s | 0 | 0 |
@@ -318,9 +318,9 @@
 
 - [capitol-access-oc11835-r1](../data/experiments/evaluations/capitol-access-oc11835-r1.json)：主持复核补充，原独立验收判定不变：接入功能已验证，真实数据查询及配置复用成功。未完成源于超出本轮接入阶段最多返回5条记录的测试约束：累计返回7条，且交付统计不完整。这不是服务只支持5条，也不是其免费额度耗尽。
 
-<a id="web-search-data-public-holidays"></a>
+<a id="weather-calendar-public-holidays"></a>
 
-## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays）
+## 天气与日历 / 公共节假日（weather-calendar/public-holidays）
 
 ### public-holidays-berlin-001 / v1
 
@@ -328,18 +328,18 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | 2026-10-10T10:21:59.784583+00:00 | 1.18.35 / deepseek-flash / high | 118894 / 105728 / 4497 | 39.883669s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | 2026-10-10T10:21:25.448974+00:00 | 1.18.35 / deepseek-flash / high | 139483 / 123264 / 4070 | 26.040938s | 0 | 0 |
-| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json) | 2026-10-10T10:19:10.005470+00:00 | 1.18.35 / deepseek-flash / high | 81428 / 69376 / 2079 | 20.091858s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json) | 2026-10-10T10:19:08.884306+00:00 | 1.18.35 / deepseek-flash / high | 169886 / 152960 / 4219 | 30.019275s | 0 | 0 |
-| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json) | 2026-10-10T10:09:50.239562+00:00 | 1.18.35 / deepseek-flash / high | 84292 / 72064 / 2449 | 25.096388s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json) | 2026-10-10T10:09:49.164684+00:00 | 1.18.35 / deepseek-flash / high | 135236 / 119040 / 3386 | 31.191577s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | 2026-10-10T10:21:59.784583+00:00 | 1.18.35 / deepseek-flash / high | 118894 / 105728 / 4497 | 39.883669s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | 2026-10-10T10:21:25.448974+00:00 | 1.18.35 / deepseek-flash / high | 139483 / 123264 / 4070 | 26.040938s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json) | 2026-10-10T10:19:10.005470+00:00 | 1.18.35 / deepseek-flash / high | 81428 / 69376 / 2079 | 20.091858s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json) | 2026-10-10T10:19:08.884306+00:00 | 1.18.35 / deepseek-flash / high | 169886 / 152960 / 4219 | 30.019275s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r1.json) | 2026-10-10T10:09:50.239562+00:00 | 1.18.35 / deepseek-flash / high | 84292 / 72064 / 2449 | 25.096388s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r1.json) | 2026-10-10T10:09:49.164684+00:00 | 1.18.35 / deepseek-flash / high | 135236 / 119040 / 3386 | 31.191577s | 0 | 0 |
 | openholidays / public-holidays-api | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:57.472194+00:00 | 1.18.35 / deepseek-flash / high | 171236 / 151680 / 3112 | 30.480165s | 0 | 0 |
 | nager-date / community-api-v4 | public-holidays-berlin-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-berlin-001-ds41-r1.json) | 2026-10-08T17:28:55.765485+00:00 | 1.18.35 / deepseek-flash / high | 153596 / 142208 / 5195 | 41.507746s | 0 | 0 |
 
-<a id="web-search-data-public-holidays"></a>
+<a id="weather-calendar-public-holidays"></a>
 
-## 搜索与数据获取 / 公共节假日（web-search-data/public-holidays） · 接入测试
+## 天气与日历 / 公共节假日（weather-calendar/public-holidays） · 接入测试
 
 ### public-holidays-access-001 / v1
 
@@ -347,12 +347,12 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 2026-10-10T10:19:21.316812+00:00 | 1.18.35 / deepseek-flash / high | 153277 / 139264 / 5069 | 39.704667s | 0 | 0 |
-| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json) | 2026-10-10T10:17:36.583210+00:00 | 1.18.35 / deepseek-flash / high | 175004 / 160640 / 5248 | 38.025997s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 2026-10-10T10:17:05.494816+00:00 | 1.18.35 / deepseek-flash / high | 382457 / 362880 / 9611 | 72.395992s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json) | 2026-10-10T10:16:57.893519+00:00 | 1.18.35 / deepseek-flash / high | 227212 / 210688 / 7117 | 62.154503s | 0 | 0 |
-| openholidays / public-holidays-api | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json) | 2026-10-10T10:08:10.378376+00:00 | 1.18.35 / deepseek-flash / high | 131318 / 119296 / 5547 | 41.688106s | 0 | 0 |
-| nager-date / community-api-v4 | public-holidays-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json) | 2026-10-10T10:08:07.070436+00:00 | 1.18.35 / deepseek-flash / high | 324180 / 305408 / 6826 | 49.298446s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 2026-10-10T10:19:21.316812+00:00 | 1.18.35 / deepseek-flash / high | 153277 / 139264 / 5069 | 39.704667s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json) | 2026-10-10T10:17:36.583210+00:00 | 1.18.35 / deepseek-flash / high | 175004 / 160640 / 5248 | 38.025997s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 2026-10-10T10:17:05.494816+00:00 | 1.18.35 / deepseek-flash / high | 382457 / 362880 / 9611 | 72.395992s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json) | 2026-10-10T10:16:57.893519+00:00 | 1.18.35 / deepseek-flash / high | 227212 / 210688 / 7117 | 62.154503s | 0 | 0 |
+| openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r1.json) | 2026-10-10T10:08:10.378376+00:00 | 1.18.35 / deepseek-flash / high | 131318 / 119296 / 5547 | 41.688106s | 0 | 0 |
+| nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r1.json) | 2026-10-10T10:08:07.070436+00:00 | 1.18.35 / deepseek-flash / high | 324180 / 305408 / 6826 | 49.298446s | 0 | 0 |
 | openholidays / public-holidays-api | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/openholidays-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.723079+00:00 | 1.18.35 / deepseek-flash / high | 140980 / 129280 / 3990 | 29.527567s | 0 | 0 |
 | nager-date / community-api-v4 | public-holidays-access-001 (v1) | none; anonymous publicAPI, no account/email/key/payment supplied | natural | [completed](../data/experiments/evaluations/nager-date-holidays-access-ds41-r1.json) | 2026-10-08T17:26:34.722814+00:00 | 1.18.35 / deepseek-flash / high | 60939 / 51840 / 2840 | 17.740838s | 0 | 0 |
 
@@ -366,18 +366,18 @@
 
 | 服务 / 入口 | 任务 / 版本 | 预供服务凭据 | 输入方式 | 结果与证据 | 测试起始时间（含时区） | Harness / 模型 / 思考等级 | 输入 / 其中缓存 / 输出token | 耗时 | 服务调用费用（USD） | 执行中人工介入 |
 | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 2026-10-10T10:15:52.090351+00:00 | 1.18.35 / deepseek-flash / high | 98749 / 87424 / 4884 | 29.984579s | 0 | 0 |
-| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 2026-10-10T10:12:57.488361+00:00 | 1.18.35 / deepseek-flash / high | 226603 / 211584 / 7632 | 46.598473s | 0 | 0 |
-| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json) | 2026-10-10T10:11:59.644453+00:00 | 1.18.35 / deepseek-flash / high | 153129 / 138880 / 6088 | 34.558481s | 0 | 0 |
-| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json) | 2026-10-10T10:11:21.627798+00:00 | 1.18.35 / deepseek-flash / high | 178653 / 163328 / 6140 | 36.251539s | 0 | 0 |
-| osv / public-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json) | 2026-10-10T10:11:17.179648+00:00 | 1.18.35 / deepseek-flash / high | 158761 / 146944 / 5991 | 34.396285s | 0 | 0 |
-| github / public-advisories-api | dependency-advisories-access-001 (v1) | [object Object] | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json) | 2026-10-10T10:10:45.960426+00:00 | 1.18.35 / deepseek-flash / high | 240729 / 225792 / 6901 | 41.764317s | 0 | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 2026-10-10T10:15:52.090351+00:00 | 1.18.35 / deepseek-flash / high | 98749 / 87424 / 4884 | 29.984579s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 2026-10-10T10:12:57.488361+00:00 | 1.18.35 / deepseek-flash / high | 226603 / 211584 / 7632 | 46.598473s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r2.json) | 2026-10-10T10:11:59.644453+00:00 | 1.18.35 / deepseek-flash / high | 153129 / 138880 / 6088 | 34.558481s | 0 | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json) | 2026-10-10T10:11:21.627798+00:00 | 1.18.35 / deepseek-flash / high | 178653 / 163328 / 6140 | 36.251539s | 0 | 0 |
+| osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r1.json) | 2026-10-10T10:11:17.179648+00:00 | 1.18.35 / deepseek-flash / high | 158761 / 146944 / 5991 | 34.396285s | 0 | 0 |
+| github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public route | natural | [completed](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r1.json) | 2026-10-10T10:10:45.960426+00:00 | 1.18.35 / deepseek-flash / high | 240729 / 225792 / 6901 | 41.764317s | 0 | 0 |
 | github / public-advisories-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/github-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466259+00:00 | 1.18.35 / deepseek-flash / high | 180078 / 166528 / 5675 | 36.125993s | unknown | 0 |
 | osv / public-api | dependency-advisories-access-001 (v1) | none; anonymous public advisory API, no account/email/token/payment supplied | natural | [completed](../data/experiments/evaluations/osv-advisories-access-ds41-r1.json) | 2026-10-08T18:20:21.466021+00:00 | 1.18.35 / deepseek-flash / high | 172161 / 159232 / 6358 | 42.586955s | unknown | 0 |
 
-<a id="productivity-storage-qr-codes"></a>
+<a id="developer-tools-qr-codes"></a>
 
-## 办公与协作 / 二维码图片（productivity-storage/qr-codes）
+## 开发工具 / 二维码图片（developer-tools/qr-codes）
 
 ### qr-codes-travel-link-001 / v1
 
@@ -388,9 +388,9 @@
 | goqr / public-qr-api | qr-codes-travel-link-001 (v1) | none; public static QR APIs, no account/key/email/payment supplied | natural | [completed](../data/experiments/evaluations/goqr-qr-travel-link-001-ds41-r1.json) | 2026-10-08T19:47:45.550068+00:00 | 1.18.35 / deepseek-flash / high | 57077 / 45440 / 1781 | 15.063508s | 0 | 0 |
 | quickchart / public-qr-api | qr-codes-travel-link-001 (v1) | none; public static QR APIs, no account/key/email/payment supplied | natural | [completed](../data/experiments/evaluations/quickchart-qr-travel-link-001-ds41-r1.json) | 2026-10-08T19:47:43.811739+00:00 | 1.18.35 / deepseek-flash / high | 142552 / 130176 / 3258 | 29.713184s | 0 | 0 |
 
-<a id="productivity-storage-qr-codes"></a>
+<a id="developer-tools-qr-codes"></a>
 
-## 办公与协作 / 二维码图片（productivity-storage/qr-codes） · 接入测试
+## 开发工具 / 二维码图片（developer-tools/qr-codes） · 接入测试
 
 ### qr-codes-access-001 / v1
 
@@ -401,9 +401,9 @@
 | goqr / public-qr-api | qr-codes-access-001 (v1) | none; public static QR APIs, no account/key/email/payment supplied | natural | [completed](../data/experiments/evaluations/goqr-qr-access-ds41-r1.json) | 2026-10-08T19:42:40.980388+00:00 | 1.18.35 / deepseek-flash / high | 110859 / 99328 / 3081 | 58.588541s | unknown | 0 |
 | quickchart / public-qr-api | qr-codes-access-001 (v1) | none; public static QR APIs, no account/key/email/payment supplied | natural | [completed](../data/experiments/evaluations/quickchart-qr-access-ds41-r1.json) | 2026-10-08T19:42:40.980149+00:00 | 1.18.35 / deepseek-flash / high | 124001 / 112128 / 3327 | 58.362095s | 0 | 0 |
 
-<a id="web-search-data-route-planning"></a>
+<a id="maps-geo-route-planning"></a>
 
-## 搜索与数据获取 / 路线规划（web-search-data/route-planning）
+## 地图与地理 / 路线规划（maps-geo/route-planning）
 
 ### route-planning-bridge-001 / v1
 
@@ -414,9 +414,9 @@
 | valhalla / public-route-api | route-planning-bridge-001 (v1) | none; anonymous FOSSGIS public demos, no account/token/email/payment supplied | natural | [completed](../data/experiments/evaluations/valhalla-routing-bridge-001-ds41-r1.json) | 2026-10-08T19:20:57.252254+00:00 | 1.18.35 / deepseek-flash / high | 178879 / 157440 / 3233 | 24.691011s | unknown | 0 |
 | osrm / public-route-api | route-planning-bridge-001 (v1) | none; anonymous FOSSGIS public demos, no account/token/email/payment supplied | natural | [completed](../data/experiments/evaluations/osrm-routing-bridge-001-ds41-r1.json) | 2026-10-08T19:20:18.636362+00:00 | 1.18.35 / deepseek-flash / high | 160961 / 141184 / 5374 | 33.370304s | unknown | 0 |
 
-<a id="web-search-data-route-planning"></a>
+<a id="maps-geo-route-planning"></a>
 
-## 搜索与数据获取 / 路线规划（web-search-data/route-planning） · 接入测试
+## 地图与地理 / 路线规划（maps-geo/route-planning） · 接入测试
 
 ### route-planning-access-001 / v1
 
@@ -444,9 +444,9 @@
 
 - [agentmail-mailbox-create-v2-ds41-r1](../data/experiments/evaluations/agentmail-mailbox-create-v2-ds41-r1.json)：主持复核补充，原独立验收判定不变：本轮没有创建邮箱、读取收件箱或取得可复用凭据。测试服务器及容器访问API均收到CloudFront 403，说明该访问路径当时受阻，具体原因未确定，不能据此推断服务整体不可用。另有执行偏离：请求超过12次上限，4次注册POST与答复所称一次不符。
 
-<a id="web-search-data-scholarly-search"></a>
+<a id="scholarly-scholarly-search"></a>
 
-## 搜索与数据获取 / 学术文献检索（web-search-data/scholarly-search）
+## 学术与知识 / 学术文献检索（scholarly/scholarly-search）
 
 ### scholarly-reference-001 / v1
 
@@ -457,9 +457,9 @@
 | openalex / public-rest-api | scholarly-reference-001 (v1) | none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only | natural | [completed](../data/experiments/evaluations/openalex-scholarly-reference-001-ds41-r1.json) | 2026-10-08T16:00:56.871697+00:00 | 1.18.35 / deepseek-flash / high | 100732 / 89984 / 3765 | 34.478856s | 0 | 0 |
 | crossref / public-rest-api | scholarly-reference-001 (v1) | none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only | natural | [completed](../data/experiments/evaluations/crossref-scholarly-reference-001-ds41-r1.json) | 2026-10-08T16:00:55.130066+00:00 | 1.18.35 / deepseek-flash / high | 70253 / 60928 / 2661 | 28.382116s | 0 | 0 |
 
-<a id="web-search-data-scholarly-search"></a>
+<a id="scholarly-scholarly-search"></a>
 
-## 搜索与数据获取 / 学术文献检索（web-search-data/scholarly-search） · 接入测试
+## 学术与知识 / 学术文献检索（scholarly/scholarly-search） · 接入测试
 
 ### scholarly-access-001 / v1
 
@@ -470,9 +470,9 @@
 | crossref / public-rest-api | scholarly-access-001 (v1) | none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only | natural | [completed](../data/experiments/evaluations/crossref-scholarly-access-ds41-r1.json) | 2026-10-08T15:55:05.176032+00:00 | 1.18.35 / deepseek-flash / high | 215612 / 197376 / 5275 | 59.090171s | 0 | 0 |
 | openalex / public-rest-api | scholarly-access-001 (v1) | none; currentofficialkeylesspublicroute, no account/email/payment supplied; lowvolumebibliographicmetadata only | natural | [completed](../data/experiments/evaluations/openalex-scholarly-access-ds41-r1.json) | 2026-10-08T15:55:05.175832+00:00 | 1.18.35 / deepseek-flash / high | 162189 / 150912 / 6032 | 43.797491s | 0 | 0 |
 
-<a id="web-search-data-financial-data-prices"></a>
+<a id="financial-data-prices"></a>
 
-## 搜索与数据获取 / 金融数据 / 资产行情（web-search-data/financial-data/prices）
+## 金融数据 / 资产行情（financial-data/prices）
 
 ### financial-prices-001 / v1
 
@@ -490,9 +490,9 @@
 - [alpha-mcp-prices-001-ds41-r1](../data/experiments/evaluations/alpha-mcp-prices-001-ds41-r1.json)：主持复核补充，原独立验收判定不变：官方MCP已返回正确的21个交易日数据，约36秒完成取数；但CSV、走势图和最终答复均未交付。其后依赖安装消耗了剩余时间预算。本轮验证了该入口取数，未完成完整用户任务；不应将其概括为MCP或服务不可用。
 - [alpha-rest-prices-001-ds41-r1](../data/experiments/evaluations/alpha-rest-prices-001-ds41-r1.json)：主持复核补充，原独立验收判定不变：指定服务取数及CSV已完成；用户要求的走势图和最终答复未交付。执行约590秒后超时，主要耗在缓慢的matplotlib下载与等待。原题不限定作图库，因此本次记录为执行策略与预算内交付失败，不代表Alpha Vantage无法提供行情。
 
-<a id="web-search-data-weather-data"></a>
+<a id="weather-calendar-weather-data"></a>
 
-## 搜索与数据获取 / 天气数据（web-search-data/weather-data）
+## 天气与日历 / 天气数据（weather-calendar/weather-data）
 
 ### weather-outing-001 / v1
 
@@ -503,9 +503,9 @@
 | met-norway / locationforecast-api | weather-outing-001 (v1) | none; official public read-only free noncommercial route | natural | [completed](../data/experiments/evaluations/met-norway-weather-outing-001-ds41-r1.json) | 2026-10-08T14:54:24.335797+00:00 | 1.18.35 / deepseek-flash / high | 111073 / 100096 / 4091 | 29.366903s | 0 | 0 |
 | open-meteo / forecast-api | weather-outing-001 (v1) | none; official public read-only free noncommercial route | natural | [completed](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | 2026-10-08T14:54:22.604013+00:00 | 1.18.35 / deepseek-flash / high | 34038 / 26496 / 1464 | 13.786233s | 0 | 0 |
 
-<a id="web-search-data-weather-data"></a>
+<a id="weather-calendar-weather-data"></a>
 
-## 搜索与数据获取 / 天气数据（web-search-data/weather-data） · 接入测试
+## 天气与日历 / 天气数据（weather-calendar/weather-data） · 接入测试
 
 ### weather-access-001 / v1
 
@@ -516,9 +516,9 @@
 | met-norway / locationforecast-api | weather-access-001 (v1) | none; official public read-only free noncommercial route | natural | [completed](../data/experiments/evaluations/met-norway-weather-access-ds41-r1.json) | 2026-10-08T14:51:19.491028+00:00 | 1.18.35 / deepseek-flash / high | 109720 / 95360 / 2778 | 31.329883s | 0 | 0 |
 | open-meteo / forecast-api | weather-access-001 (v1) | none; official public read-only free noncommercial route | natural | [completed](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 2026-10-08T14:51:19.490808+00:00 | 1.18.35 / deepseek-flash / high | 231327 / 213504 / 7130 | 44.047586s | 0 | 0 |
 
-<a id="web-search-data-web-search"></a>
+<a id="search-scraping-web-search"></a>
 
-## 搜索与数据获取 / 网页搜索（web-search-data/web-search）
+## 搜索与网页抓取 / 网页搜索（search-scraping/web-search）
 
 ### web-search-001 / v2
 
@@ -540,9 +540,9 @@
 | firecrawl / public-search-api | web-search-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T112951.715536Z-firecrawl.json) | 2026-09-07T11:29:51.792723+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 338090 / 295552 / 8728 | 362.944s | 0 | 0 |
 | exa / public-mcp | web-search-001 (v1) | none | legacy | [completed](../data/experiments/evaluations/codex-20260907T112257.401366Z-exa.json) | 2026-09-07T11:22:57.413717+00:00 | codex-cli 0.153.4 / gpt-6-astra / xhigh | 917915 / 847104 / 13629 | 522.486s | 0 | 0 |
 
-<a id="web-search-data-web-search"></a>
+<a id="search-scraping-web-search"></a>
 
-## 搜索与数据获取 / 网页搜索（web-search-data/web-search） · 接入测试
+## 搜索与网页抓取 / 网页搜索（search-scraping/web-search） · 接入测试
 
 ### web-search-access-001 / v1
 
@@ -554,9 +554,9 @@
 | exa / public-mcp | web-search-access-001 (v1) | none; documented anonymous public route | natural | [completed](../data/experiments/evaluations/exa-searchv2-access-ds41-r1.json) | 2026-10-08T14:35:05.604712+00:00 | 1.18.35 / deepseek-flash / high | 288909 / 270976 / 5640 | 41.914642s | 0 | 0 |
 | exa / public-mcp | web-search-access-001 (v1) | none | natural | [completed](../data/experiments/evaluations/exa-access-ds41-r1.json) | 2026-10-08T12:01:59.543536+00:00 | 1.18.35 / deepseek-flash / high | 199173 / 183680 / 5236 | 38.345252s | 0 | 0 |
 
-<a id="web-search-data-financial-data-statements"></a>
+<a id="financial-data-statements"></a>
 
-## 搜索与数据获取 / 金融数据 / 公司财务数据（web-search-data/financial-data/statements）
+## 金融数据 / 公司财务数据（financial-data/statements）
 
 ### financial-statements-001 / v1
 
@@ -567,9 +567,9 @@
 | alpha-vantage / data-api | financial-statements-001 (v1) | controller-registered ordinary free API key | natural | [completed](../data/experiments/evaluations/alpha-vantage-statements-001-ds41-r1.json) | 2026-10-08T12:25:33.613786+00:00 | 1.18.35 / deepseek-flash / high | 179589 / 168192 / 9052 | 77.721987s | 0 | 1 |
 | sec-edgar / data-api | financial-statements-001 (v1) | none; contact identity only | natural | [completed](../data/experiments/evaluations/sec-edgar-statements-001-ds41-r1.json) | 2026-10-08T12:25:31.794208+00:00 | 1.18.35 / deepseek-flash / high | 92106 / 82560 / 4177 | 34.919235s | 0 | 0 |
 
-<a id="web-search-data-financial-data-fx"></a>
+<a id="financial-data-fx"></a>
 
-## 搜索与数据获取 / 金融数据 / 汇率数据（web-search-data/financial-data/fx）
+## 金融数据 / 汇率数据（financial-data/fx）
 
 ### financial-fx-001 / v1
 
@@ -582,9 +582,9 @@
 | ecb-data / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/ecb-business.json) | 2026-09-15T07:15:18.031345+00:00 | 1.18.29 / glm-5.3-flash / high | 60837 / 56064 / 1994 | 81.215126s | 0 | 0 |
 | frankfurter / data-api | financial-fx-001 (v1) | none | natural | [completed](../data/experiments/evaluations/frankfurter-business.json) | 2026-09-15T07:11:48.392690+00:00 | 1.18.29 / glm-5.3-flash / high | 51862 / 42880 / 2384 | 88.202808s | 0 | 0 |
 
-<a id="web-search-data-financial-data-disclosures"></a>
+<a id="financial-data-disclosures"></a>
 
-## 搜索与数据获取 / 金融数据 / 交易披露（web-search-data/financial-data/disclosures）
+## 金融数据 / 交易披露（financial-data/disclosures）
 
 ### financial-disclosures-004 / v1
 
@@ -691,13 +691,13 @@
 
 ## 汇总条件与费用依据
 
-<a id="comparison-5b2f0a0db9e7"></a>
+<a id="comparison-bbb58383092b"></a>
 
 ### web-extraction-uk-holidays-001 v1
 
 **jina / reader-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared3pairs for a separate realregional-calendar task, second staticHTMLsite/regionyearselection only; not broadgeneralreliability. Same model/harness/40/600/300/.85, image/existingphysicalruntime/logicalaccessbaseline. Freshhome/session/taskworkspace; Jina retainedservice-tools empty, Firecrawl onegenericconnectionconfig and noqueryspecificdata/script,0additionalrootinstall/client; only those generic files maypersist. Currentbaselinearchives separatelyhashed. Providerdefaultcache5min/2days preserved, actualhits mayunknown; share onepublisher/multipledependent trials. No rootanswer/script/source/executionsnapshot toexecutor. Protective serviceinstruction6attempts/20s posthocreview; first403/429/paymentstop. Fixedoriginal50USDdeadline 2026-10-10T13:53:59.407282+00:00. OGL attribution published bycontroller.
 
@@ -713,7 +713,7 @@
 
 **firecrawl / public-scrape-api** — 1 完成 / 2 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared3pairs for a separate realregional-calendar task, second staticHTMLsite/regionyearselection only; not broadgeneralreliability. Same model/harness/40/600/300/.85, image/existingphysicalruntime/logicalaccessbaseline. Freshhome/session/taskworkspace; Jina retainedservice-tools empty, Firecrawl onegenericconnectionconfig and noqueryspecificdata/script,0additionalrootinstall/client; only those generic files maypersist. Currentbaselinearchives separatelyhashed. Providerdefaultcache5min/2days preserved, actualhits mayunknown; share onepublisher/multipledependent trials. No rootanswer/script/source/executionsnapshot toexecutor. Protective serviceinstruction6attempts/20s posthocreview; first403/429/paymentstop. Fixedoriginal50USDdeadline 2026-10-10T13:53:59.407282+00:00. OGL attribution published bycontroller.
 
@@ -727,13 +727,13 @@
 
   结论与限制：通过指定服务 Firecrawl 匿名 scrape 入口实际取得 https://www.gov.uk/bank-holidays（2 次 POST，均 HTTP 200/success），并从同一响应 rawHtml 中按 caption 'Upcoming bank holidays in England and Wales 2027' 与显式 datetime 提取 8 条该地区该年银行假日；交付 CSV 存在、可解析、UTF-8、表头 date,holiday、日期升序，逐项与官方 2027 England and Wales 表一致（含 substitute day 名称与公布日期），答复给出文件位置与官方来源链接。执行者正确识别并绕开 Firecrawl markdown 输出的年份标题整体错位问题，以 rawHtml 为准，未用算法推算或改动节日日历日期。；服务操作 completed；用户交付 completed；阻碍 无；指定服务 Firecrawl 两次匿名 scrape 均成功返回目标页并含 2027 England and Wales 表；交付 CSV 与答复齐备且与官方一致，无阻碍因素。
 
-<a id="comparison-b8dbd573c0af"></a>
+<a id="comparison-241d0c1dcf03"></a>
 
 ### web-extraction-holidays-001 v1
 
 **firecrawl / public-scrape-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
 
@@ -749,7 +749,7 @@
 
 **jina / reader-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
 
@@ -763,13 +763,13 @@
 
   结论与限制：指定服务 Jina Reader（r.jina.ai）真实抓取 OPM 官方页面（匿名 GET，HTTP 200，89418 字节，返回为 Jina Markdown 正文并含 2027 表），执行者据此解析并交付 UTF-8 CSV，11 条 2027 假日逐字段与独立参考一致，日期升序、脚注去除、采用表公布日期，最终答复含文件位置与官方来源链接。；服务操作 completed；用户交付 completed；阻碍 无；Jina Reader 单次匿名请求 HTTP 200 并返回含 2027 表的正文；交付 CSV 与 final 答复齐全。
 
-<a id="comparison-ecce2722b24e"></a>
+<a id="comparison-8620cd093994"></a>
 
 ### web-extraction-access-001 v1
 
 **firecrawl / public-scrape-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
 
@@ -779,7 +779,7 @@
 
 **jina / reader-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：Predeclared one access plus3same-page business repeats, route orderJina/Firecrawl,Firecrawl/Jina,Jina/Firecrawl. Anonymous documented free routes, no root business client or source/solution supplied. Same physical per-service container, each run newhome/session/taskdir and strict retained generic config/packages only; package state may accumulate and is disclosed. Default provider caches preserved5min/2days; repeated samepage dependent, not independent originfetch or broad-site reliability. Explicit6attempt/20s protective policy checked posthoc, not a hidden row cap/hard interceptor. Fixed50USDdeadline includes all prior runs. GET root/method-invalid preflight confirms transport only; basic operation tested by access. Original reference and controller protocol withheld from execution.
 
@@ -787,13 +787,13 @@
 
   结论与限制：指定服务 Jina Reader 匿名入口真实接通：对 https://r.jina.ai/https://example.com/ 单次 GET 返回 HTTP 200，正文 Title 与 Content 可用于标题/概述，均与独立参考及响应正文相符；通用连接配置已写入持久位置 /workspace/service-config.json 且不含密钥；接入步骤与门槛（匿名免费 20 RPM、默认 5 分钟缓存、无注册/无人工介入）如实说明。全部冻结要求有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定服务匿名入口单次调用成功（HTTP 200，正文齐全），用户要求的标题/概述/配置位置/接入步骤均在 execution/answer.md 交付；无网络、权限、额度或人工阻碍证据。
 
-<a id="comparison-848474bceab4"></a>
+<a id="comparison-7dece7b7dd54"></a>
 
 ### database-restore-001 v2
 
 **turso / platform-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Turso Starter account supplied; not self-registration
 
 准备：Three predeclared fresh v2 rounds on one existing Starter account; same independently passed HTTP baseline with credentials/config only, no dedicated library/task script/history/answer. Fresh physical container/home/session each round; stable logical runtime maps baseline, not same physical container. Controller creates distinct empty source then exact frozen2table7row synthetic schema/data; all complete before receipts privately verified. Executor has source [SERVICE_SECRET] SQL token plus broad policy-bound parent management key and must create one target and actually restore its own retained backup. Source and target hosted in existing [SERVICE_SECRET] group; execution Johor. Root preparation/readback separate, no peers/other grades, fixed50USDdeadline and40/600/300/.85. Older v1 experiments unchanged, no claim that duration alone caused past misses.
 
@@ -807,13 +807,13 @@
 
   结论与限制：执行者在指定 Turso 服务上从真实源库导出可留存逻辑备份（backup.sql/backup.json/manifest.json），在既有 group 内新建独立的空目标库（建库时业务表数=0），实际用该备份逐条恢复到目标库，并重新连接核对。独立控制器读回确认目标库与源库为不同逻辑资源、目标库完整 schema 与全部行同源库、源库前后完全未变。交付含备份路径、简短恢复方法、非敏感新库位置、各表行数与核对结果及免费/到期说明。；服务操作 completed；用户交付 completed；阻碍 无；导出、建空目标库、用备份恢复、重连核对四项指定服务操作均有真实 HTTP 200 回执（工具记录 line20/65/69/73/76）与控制器独立读回（target-after、source-after）印证；源库无写操作，全程无权限/限流/付费阻碍。
 
-<a id="comparison-63bc5ae3ece1"></a>
+<a id="comparison-35bd5c6ff083"></a>
 
 ### collaborative-tables-shared-expenses-001 v1
 
 **grist / hosted-mcp** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Free account, supplied by controller; not registered by measured executor · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared3round same-service REST/MCP comparison with one existing Free account, serial shared-resource lock; orderREST/MCP,MCP/REST,REST/MCP. Fresh physical container each round cloned from independently passed overseas access generic baseline; stable logical runtime identity denotes that baseline, not same physical container. Only new blank resource pointers changed; no old task scripts/responses/formulas/answers or session/home copied. Defaultplaceholder empty verified by controller before dispatch. Preparation/verification overhead separate, remaining quota unknown. Model40/600s/300s/closure0.85 and fixed50USDdeadline unchanged.
 
@@ -829,7 +829,7 @@
 
 **grist / rest-api** — 2 完成 / 1 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Free account, supplied by controller; not registered by measured executor · 独立验收可参考同期 2 份同题答案
 
 准备：Predeclared3round same-service REST/MCP comparison with one existing Free account, serial shared-resource lock; orderREST/MCP,MCP/REST,REST/MCP. Fresh physical container each round cloned from independently passed overseas access generic baseline; stable logical runtime identity denotes that baseline, not same physical container. Only new blank resource pointers changed; no old task scripts/responses/formulas/answers or session/home copied. Defaultplaceholder empty verified by controller before dispatch. Preparation/verification overhead separate, remaining quota unknown. Model40/600s/300s/closure0.85 and fixed50USDdeadline unchanged.
 
@@ -843,13 +843,13 @@
 
   结论与限制：服务端操作已完成：本轮新 Grist 文档中六笔明细与公式汇总均正确，且经总控追加一笔、修正一笔后线上汇总自动重算（独立回执 initial/after-append/after-correction 与 reference.json 基线一致，见 grading/artifacts/evidence/acceptance-evidence.md）。但执行者未向用户交付最终答复：40 次模型请求耗尽（403 Model request budget exhausted，exit_code=1），execution/answer.md 仅含 10 行中间过程叙述，缺少私人账本链接、当前结算数（林青/周舟已付、应分摊及 周舟需补给林青 895.60 元）和继续记账位置说明，用户交付未完成。；服务操作 completed；用户交付 not_completed；阻碍 model_budget；服务端：独立回执 initial/06,08 与 after-append/04、after-correction/07 证明六笔明细、汇总及自动重算均正确。用户交付：execution/answer.md 无链接/结算数/记账位置，40 次模型请求耗尽（403 Model request budget exhausted）。
 
-<a id="comparison-3e5e974d8b61"></a>
+<a id="comparison-dbc4d2ba8407"></a>
 
 ### database-access-001 v1
 
 **turso / platform-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Turso Starter account supplied; not self-registration
 
 准备：One new overseas libSQL HTTP access baseline; existing Starter$0 account/overages=false actually verified before dispatch. Controller supplied only management credential and existinggroup pointer; executor creates one new empty DB and a separate SQL auth token, then performs true read-only query. No prewritten service helper, no [SERVICE_SECRET] fixture, no old resource contents; defaultpackageindex. Subsequent v2 repeats will clone only independently reviewed generic install/config with new resource pointers. New protocol/40/600/300/.85 fixed50USDdeadline; olddomestic300s and taskv1 remain separate. Policy limits on wideaccount credential do not imply technical scope restriction.
 
@@ -857,13 +857,13 @@
 
   结论与限制：指定入口 api.turso.tech/v1 新建了本轮唯一空 libSQL 库，经官方 libSQL SQL over HTTP /v2/pipeline 完成一次真实只读查询（HTTP 200，版本 3.47.0，user_tables=0，rows_read=1，rows_written=0），资源与连接配置保存到持久目录且答复只给位置未泄露秘密；账号来源、接入步骤、人工门槛与免费/到期条件均有依据陈述。；服务操作 completed；用户交付 completed；阻碍 无；服务端：建库、签发库 token、/v2/pipeline 只读查询均 HTTP 200 成功（create-db.json、query-result.json）。交付：answer.md 给出资源标识、真实查询结果、配置位置、步骤与限制，秘密仅存私有文件。
 
-<a id="comparison-06b05d18818d"></a>
+<a id="comparison-ef3ae7a2ca5a"></a>
 
 ### collaborative-tables-access-001 v1
 
 **grist / hosted-mcp** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Free account, supplied by controller; not registered by measured executor
 
 准备：New overseas access baseline. Existing current personalFree account key supplied and new empty parent workspace prepared by controller; no self-registration claim. Execution creates and reads its own blank child through assigned route. No old business state/script/answer; capture raw privately and redact registered key before separate grading. Free quota remaining unknown, first403/429/payment stops. Native model/harness40 requests600s/300s and fixed50USD deadline unchanged. Operator corrected a nonexistent profile transport probe before any model dispatch. Original REST404 hold retained; this target is official entry transport only, not authenticated capability.
 
@@ -873,7 +873,7 @@
 
 **grist / rest-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · provided: Existing authorized project Free account, supplied by controller; not registered by measured executor
 
 准备：New overseas access baseline. Existing current personalFree account key supplied and new empty parent workspace prepared by controller; no self-registration claim. Execution creates and reads its own blank child through assigned route. No old business state/script/answer; capture raw privately and redact registered key before separate grading. Free quota remaining unknown, first403/429/payment stops. Native model/harness40 requests600s/300s and fixed50USD deadline unchanged. Operator corrected a nonexistent profile transport probe before any model dispatch. Original REST404 hold retained; this target is official entry transport only, not authenticated capability.
 
@@ -881,13 +881,13 @@
 
   结论与限制：执行者使用指定 Grist rest-api 入口（https://docs.getgrist.com/api），在授权父工作区 [PRIVATE_WORKSPACE_ID] 内用 POST 新建独立空文档 [SERVICE_SECRET]（id [PRIVATE_DOC_ID]），随后 GET /docs/{id} 与 /tables 真实回读同一远端资源，返回 200 且标识一致、仅含 Grist 自带空白表 Table1；连接配置写入指定持久目录，答复给出链接、账号来源、自助步骤、人工门槛与免费限制。与 reference.json 核对一致。；服务操作 completed；用户交付 completed；阻碍 无；新建 doc [PRIVATE_DOC_ID] 与回读元数据均 HTTP 200 且标识一致（见 evidence/grist-rest-readback-redacted.json）；答复含链接、配置位置、步骤与免费限制（execution/answer.md）。
 
-<a id="comparison-7a7e044bd215"></a>
+<a id="comparison-89d974d3f8b8"></a>
 
 ### geocoding-venue-001 v1
 
 **nominatim / public-search-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：Single overseas Nominatim follow-up; existing v1 task unchanged. Fresh container, no service credentials or prewritten client. Config/dependencies and transport cache retained across access/business solely for public-instance policy. 40 model requests each, execution600s/grading300s; same fixed50USD window. Truthful project UA,20s pacing,4 API attempts/stage, first403/429 stop. Restrictions are guards, not hidden user output requirements. Photon held: current explicit free-price evidence insufficient. Prior domestic and old models unchanged. Prior HEAD-root preflight expected200 but observed the official302 redirect to same-host ui/search.html; no model/address query occurred. New logical run preserves that preparation hold, permits the verified redirect as transport reachability only. Actual location matching still requires execution evidence.
 
@@ -895,13 +895,13 @@
 
   结论与限制：本次执行仅使用指定 Nominatim 公共 Search API 真实查询，命中大英博物馆场馆对象（relation/177044，category=tourism/type=museum），返回坐标 51.5193118, -0.1267051 与当次响应一致，距事前冻结官方位置点约 20.7 m（<=200 m）。中文答复包含场馆名称、带纬度/经度标签的 WGS84 十进制度坐标、服务实际返回的地址与 display_name、数据来源及 OSM 署名，并说明定位粒度为场馆多边形中心而非入口；同时如实披露第一次完整地址查询返回空结果、改用查询后命中。无未返回字段被捏造。全部验收项有证据满足。；服务操作 completed；用户交付 completed；阻碍 无；指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。
 
-<a id="comparison-60adbd865cb5"></a>
+<a id="comparison-a29775463366"></a>
 
 ### geocoding-access-001 v1
 
 **nominatim / public-search-api** — 1 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：Single overseas Nominatim follow-up; existing v1 task unchanged. Fresh container, no service credentials or prewritten client. Config/dependencies and transport cache retained across access/business solely for public-instance policy. 40 model requests each, execution600s/grading300s; same fixed50USD window. Truthful project UA,20s pacing,4 API attempts/stage, first403/429 stop. Restrictions are guards, not hidden user output requirements. Photon held: current explicit free-price evidence insufficient. Prior domestic and old models unchanged. Prior HEAD-root preflight expected200 but observed the official302 redirect to same-host ui/search.html; no model/address query occurred. New logical run preserves that preparation hold, permits the verified redirect as transport reachability only. Actual location matching still requires execution evidence.
 
@@ -909,13 +909,13 @@
 
   结论与限制：本轮指定的 Nominatim 公共 Search API 匿名入口已实际接通：经 https://nominatim.openstreetmap.org/search 发起真实查询，HTTP 200 返回可识别公开地点 Johor Bahru, Johor, 80730, Malaysia，并给出标注纬度的 latitude=1.4581986、经度 longitude=103.7649059（node/254237831, place=city），答复与原始响应一致；可复用连接配置保存于 ENVIRONMENT 指定的持久位置 /home/node/service-tools/service-config.json，原始响应按完整 URL 缓存于 geocoding-cache/responses.json。该入口匿名免注册、无需付费或资质，全部步骤自助完成；首次查询因具体建筑未被 OSM 收录返回空结果（非服务故障），换用可解析公开地点后成功。；服务操作 completed；用户交付 completed；阻碍 无；指定 Nominatim Search 入口经一次真实 HTTP 200 查询返回可识别地点与有效经纬度；配置持久化且路径报告；答复与响应一致，无网络/权限/额度阻碍，故分项均完成。
 
-<a id="comparison-70023b6902c1"></a>
+<a id="comparison-e2c50ca437a8"></a>
 
 ### financial-macro-hicp-001 v1
 
 **ecb-data / data-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -931,7 +931,7 @@
 
 **eurostat / statistics-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -945,13 +945,13 @@
 
   结论与限制：本次执行通过指定服务 Eurostat Statistics API 实际查询，取得德国/法国 2023、2024 全项目 HICP 年度平均变化率，四个率与事前冻结官方参考完全一致（DE 6.0/2.5、FR 5.7/2.3）；交付了标注国家、年份、指标、单位的一位小数 CSV，正确算出回落 DE 3.5、FR 3.4 个百分点，并给出数据集代码、指标/系列、查询 URL 与查询日期及修订/口径说明。；服务操作 completed；用户交付 completed；阻碍 无；指定服务查询返回 HTTP 200 且原始响应可独立解码；CSV 与最终答复均落盘，四个率及两个百分点差与冻结参考一致。
 
-<a id="comparison-8e6422c28f03"></a>
+<a id="comparison-6b6a0b74a08e"></a>
 
 ### dependency-advisories-check-001 v1
 
 **github / public-advisories-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -967,7 +967,7 @@
 
 **osv / public-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -981,13 +981,13 @@
 
   结论与限制：本次执行实际查询了指定 OSV 公共 REST API（/v1/query 返回 HTTP 200；/v1/vulns/CVE-2025-57833、/v1/vulns/CVE-2025-59681 各返回 HTTP 200），并沿记录引用核对 Django 官方发布公告。逐条结论与冻结独立参考一致：CVE-2025-57833 当前 5.2.6 已修复、5.2.x 最早修复 5.2.6；CVE-2025-59681 仍匹配 5.2.6、5.2.x 最早修复 5.2.7；仅处理这两条最低升级到 5.2.7。中文说明、依据链接与所用服务均已给出，全程只读。；服务操作 completed；用户交付 completed；阻碍 无；OSV query 与两条 vulns 记录均 HTTP 200 且内容与冻结参考一致；维护者公告可追溯；最终答复完整包含两条匹配结论、修复版本、最低升级版本与依据链接。
 
-<a id="comparison-36e32b17588d"></a>
+<a id="comparison-463143c72255"></a>
 
 ### financial-access-001 v1
 
 **ecb-data / data-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1003,7 +1003,7 @@
 
 **eurostat / statistics-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1017,13 +1017,13 @@
 
   结论与限制：执行者使用指定 Eurostat Statistics API 入口（匿名、无 Key）完成一次真实金融数据查询（HTTP 200，JSON-stat 2.0，含 series/time/value），并保存了可复用的连接配置；答复准确说明免账号/免费与 format=JSON 约束，无注册或人工介入。；服务操作 completed；用户交付 completed；阻碍 无；指定入口匿名 GET 返回 HTTP 200 及真实金融观测（response_irt_lt.json）；连接配置写入 service-config.json 并保留；answer.md 交付结果与约束说明。无阻碍因素。
 
-<a id="comparison-c53ca46196b8"></a>
+<a id="comparison-d9a19cb24943"></a>
 
 ### public-holidays-berlin-001 v1
 
 **nager-date / community-api-v4** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1039,7 +1039,7 @@
 
 **openholidays / public-holidays-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object] · 独立验收可参考同期 2 份同题答案
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route · 独立验收可参考同期 2 份同题答案
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1053,13 +1053,13 @@
 
   结论与限制：本次执行真实调用指定服务 OpenHolidays API 的匿名公共入口，正确限定 DE-BE（柏林州）与 2027-01-01~2027-12-31，返回并交付了与冻结独立官方参考完全一致的 10 条公共节假日，日期升序、无重复、无越界，来源可追溯。；服务操作 completed；用户交付 completed；阻碍 无；OpenHolidays API 三次真实只读请求均成功返回（Subdivisions、DE-BE PublicHolidays、DE 全国对照），最终答复列出 10 条正确节假日并注明来源；无网络、权限或预算障碍。
 
-<a id="comparison-ce7a914a844f"></a>
+<a id="comparison-f49782e60ce5"></a>
 
 ### public-holidays-access-001 v1
 
 **nager-date / community-api-v4** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1075,7 +1075,7 @@
 
 **openholidays / public-holidays-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1089,13 +1089,13 @@
 
   结论与限制：指定 OpenHolidays API 的匿名公共入口（https://openholidaysapi.org/PublicHolidays）实际完成了一次真实小范围假日查询：DE / 2024-01-01..2024-03-31 返回 5 条公共节假日，HTTP 200，答复中给出的 2024-01-01 New Year's Day 与 2024-03-29 Good Friday 与采集到的响应一致。非秘密的持久连接配置已写入指定位置 /home/node/service-tools/service-config.json（receipt retained-files 收录），接入步骤与阻碍如实说明，无秘密泄露、无人工介入、无额外申请。；服务操作 completed；用户交付 completed；阻碍 无；匿名入口 /Countries、/Languages、/Subdivisions、/PublicHolidays 均 HTTP 200；指定 PublicHolidays 查询返回真实节日数据，配置已持久保存，答复完整，无 403/429、无人工介入。
 
-<a id="comparison-1a93823643b5"></a>
+<a id="comparison-f1229f7220dc"></a>
 
 ### dependency-advisories-access-001 v1
 
 **github / public-advisories-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 
@@ -1111,7 +1111,7 @@
 
 **osv / public-api** — 3 完成 / 0 未完成 / 0 环境无效。
 
-1.18.35 / deepseek-flash / high · 600s · natural · [object Object]
+1.18.35 / deepseek-flash / high · 600s · natural · none; anonymous public route
 
 准备：New overseas cohort: fresh container per service/route/round, anonymous public API, no manual account or service-specific installation; default official package indexes. Execution/grading 40 model requests each, 600/300 seconds, closure reminder 0.85; old mainland/other budgets remain separate. No entry or data result inferred from preparation. Original response private; public release independently reviewed. Separate from 15-request pilot; no old trial replaced. Same fixed $50/four-hour authorization includes pilot spend. Grader has no separately authorized live candidate API readback resources; checks original collected responses and retained-file/tool evidence, may read official documentation for cost.
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T03:54:33.442Z",
+  "generated_at": "2026-10-12T05:06:05.539Z",
   "description": "Service discovery, access_links for integration documentation, documented access routes and separately reviewed task_runs. Documentation links are not executable endpoints. Source claims do not imply task success. Each run applies only to its route, task, configuration and date; invalid_run is not a service failure. Missing fields mean unknown, never zero cost or no requirements.",
   "persona": "Ordinary individual without a company, store, industry credentials, public website, audience or supplier contract. Country/payment eligibility must be checked separately.",
   "categories": [
@@ -197,9 +197,23 @@
               "description": "Run an API request collection and report the results."
             }
           ]
+        },
+        {
+          "id": "qr-codes",
+          "name": "QR Code Images",
+          "name_zh": "二维码图片",
+          "description": "Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.",
+          "inclusion": "A hosted service accepts an explicit payload and returns a downloadable QR image with documented format and sizing controls. The stored payload can be checked by an independent decoder; local-only encoding libraries are not hosted service alternatives.",
+          "exclusion": "Payment processing, scanner-only services, dynamic redirect or scan-tracking management and general AI image generation are separate. An image that looks like a QR code without correctly decoding the requested payload is insufficient; decoding does not prove its destination is safe, reachable or permanent, or that every phone and print condition can scan it.",
+          "capabilities": [
+            {
+              "id": "qr.generate",
+              "description": "Produce a downloadable static QR image encoding the supplied payload."
+            }
+          ]
         }
       ],
-      "inclusion": "Supports software development, repository collaboration, API development or operational diagnosis.",
+      "inclusion": "Supports software development, repository collaboration, API development, operational diagnosis or developer utilities such as QR image generation.",
       "exclusion": "Hosting runtime and application storage are classified separately."
     },
     {
@@ -329,24 +343,11 @@
       "exclusion": "User-facing work tables belong under workplace collaboration; third-party datasets belong under data access."
     },
     {
-      "id": "web-search-data",
-      "name": "Search & Data Access",
-      "description": "Search APIs, crawling and scraping, data providers.",
+      "id": "search-scraping",
+      "name": "Search & Web Scraping",
+      "name_zh": "搜索与网页抓取",
+      "description": "Find public web sources and retrieve page or platform content.",
       "subcategories": [
-        {
-          "id": "scholarly-search",
-          "name": "Scholarly Literature Search",
-          "name_zh": "学术文献检索",
-          "description": "Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.",
-          "inclusion": "Searches an identifiable scholarly corpus and returns work identities with citation metadata such as title, authors, publication venue, year and persistent identifiers where available.",
-          "exclusion": "General web-page search, guaranteed full-text access, literature-review synthesis and research-quality rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement between indexes do not independently establish a paper's identity, quality or completeness.",
-          "capabilities": [
-            {
-              "id": "scholarly.search",
-              "description": "Find scholarly works with enough bibliographic metadata to identify and cite them."
-            }
-          ]
-        },
         {
           "id": "web-search",
           "name": "Web Search",
@@ -374,7 +375,17 @@
           ],
           "inclusion": "Accepts identified web URLs or a specified site and returns its content as usable text or structured data.",
           "exclusion": "Query-only result lists/snippets are web search; browser control is a runtime, not extraction itself."
-        },
+        }
+      ],
+      "inclusion": "Discovers public web information or returns specified web or platform content as usable text or data.",
+      "exclusion": "Map, weather, calendar, financial and scholarly datasets have their own categories; browser control is a runtime."
+    },
+    {
+      "id": "maps-geo",
+      "name": "Maps & Geography",
+      "name_zh": "地图与地理",
+      "description": "Resolve places to coordinates and plan routes over transport networks.",
+      "subcategories": [
         {
           "id": "geocoding",
           "name": "Geocoding",
@@ -402,21 +413,17 @@
               "description": "Return a network route with distance, estimated duration and path information for a travel mode."
             }
           ]
-        },
-        {
-          "id": "public-holidays",
-          "name": "Public Holidays",
-          "name_zh": "公共节假日",
-          "description": "Retrieve dated public holidays applicable to an identified country or region for personal planning.",
-          "inclusion": "Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context to determine the requested regional scope; supported years and subdivisions must be stated.",
-          "exclusion": "Personal calendar editing, school vacations alone, general web search and extraction from a supplied page are separate. Holiday data does not establish shop opening hours, individual employment or pay entitlements, bank operations or travel availability; observances and substitute dates must not be silently treated as applicable public holidays.",
-          "capabilities": [
-            {
-              "id": "holidays.lookup",
-              "description": "Retrieve public holiday dates and names for a specified jurisdiction and period."
-            }
-          ]
-        },
+        }
+      ],
+      "inclusion": "Supplies geographic positions or network routes for identified places.",
+      "exclusion": "Weather at a location and travel booking are separate; map display alone is insufficient."
+    },
+    {
+      "id": "weather-calendar",
+      "name": "Weather & Calendar",
+      "name_zh": "天气与日历",
+      "description": "Weather forecasts and observations, and dated public holidays, for personal planning.",
+      "subcategories": [
         {
           "id": "weather-data",
           "name": "Weather Data",
@@ -432,98 +439,143 @@
           ]
         },
         {
-          "id": "financial-data",
-          "name": "Financial Data",
-          "name_zh": "金融数据",
-          "description": "Access identifiable financial or economic datasets; select a data type, then match coverage and task conditions.",
-          "capabilities": [],
-          "inclusion": "Supplies financial/economic observations or original filings; unresolved dataset scope can remain at this parent with an explanation.",
-          "exclusion": "News, trading execution or a generic search API alone does not establish a financial dataset service.",
-          "subcategories": [
+          "id": "public-holidays",
+          "name": "Public Holidays",
+          "name_zh": "公共节假日",
+          "description": "Retrieve dated public holidays applicable to an identified country or region for personal planning.",
+          "inclusion": "Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context to determine the requested regional scope; supported years and subdivisions must be stated.",
+          "exclusion": "Personal calendar editing, school vacations alone, general web search and extraction from a supplied page are separate. Holiday data does not establish shop opening hours, individual employment or pay entitlements, bank operations or travel availability; observances and substitute dates must not be silently treated as applicable public holidays.",
+          "capabilities": [
             {
-              "id": "fx",
-              "name": "Exchange Rates",
-              "name_zh": "汇率数据",
-              "description": "Retrieve currency-pair exchange rates.",
-              "inclusion": "Rates identify the currency pair, direction and observation date.",
-              "exclusion": "A payment conversion fee or asset valuation alone is insufficient; reference rates do not imply executable exchange quotes.",
-              "capabilities": [
-                {
-                  "id": "fx.latest",
-                  "description": "Retrieve the latest published rate for a currency pair."
-                },
-                {
-                  "id": "fx.history",
-                  "description": "Retrieve exchange rates for specified historical dates."
-                }
-              ]
-            },
-            {
-              "id": "prices",
-              "name": "Asset Prices",
-              "name_zh": "资产行情",
-              "description": "Retrieve asset price snapshots or historical series.",
-              "inclusion": "Provides prices for identifiable assets and observation times.",
-              "exclusion": "Valuations inside transaction disclosures or news articles alone are insufficient; assets, adjustments and entitlements must match.",
-              "capabilities": [
-                {
-                  "id": "prices.latest",
-                  "description": "Retrieve a recent price snapshot for an identified asset."
-                },
-                {
-                  "id": "prices.history",
-                  "description": "Retrieve a price series for an identified asset and period."
-                }
-              ]
-            },
-            {
-              "id": "statements",
-              "name": "Company Financials",
-              "name_zh": "公司财务数据",
-              "description": "Retrieve company financial statements or reported financial facts.",
-              "inclusion": "Financial values identify the company, reporting period and units, or link to the original statement.",
-              "exclusion": "Company profiles, market prices or valuation ratios alone are insufficient.",
-              "capabilities": [
-                {
-                  "id": "statements.read",
-                  "description": "Retrieve company financial values with reporting periods, units and source context."
-                }
-              ]
-            },
-            {
-              "id": "disclosures",
-              "name": "Transaction Disclosures",
-              "name_zh": "交易披露",
-              "description": "Retrieve publicly reported transactions.",
-              "inclusion": "Records identify the reporting party and distinguish disclosure from transaction timing where available.",
-              "exclusion": "Company annual reports alone are not transaction disclosures; congressional and insider filings are different populations.",
-              "capabilities": [
-                {
-                  "id": "disclosures.search",
-                  "description": "Retrieve public transaction disclosures matching a person, asset or period."
-                }
-              ]
-            },
-            {
-              "id": "macro",
-              "name": "Economic Indicators",
-              "name_zh": "宏观经济指标",
-              "description": "Retrieve named economic indicator series.",
-              "inclusion": "Observations identify the series, periods and units.",
-              "exclusion": "Market asset prices alone are not macro indicators; frequency, seasonality and revisions must match.",
-              "capabilities": [
-                {
-                  "id": "macro.series",
-                  "description": "Retrieve economic observations for a named series and period."
-                }
-              ]
+              "id": "holidays.lookup",
+              "description": "Retrieve public holiday dates and names for a specified jurisdiction and period."
             }
           ]
         }
       ],
-      "name_zh": "搜索与数据获取",
-      "inclusion": "Discovers external information or supplies usable source content or datasets.",
-      "exclusion": "Storage of user-supplied application data is a database; a general model API alone is not a data source."
+      "inclusion": "Supplies weather variables or public-holiday dates for an identified place and period.",
+      "exclusion": "Personal calendar editing and general web search are separate."
+    },
+    {
+      "id": "financial-data",
+      "name": "Financial Data",
+      "name_zh": "金融数据",
+      "description": "Identifiable financial or economic datasets; select a data type, then match coverage and task conditions.",
+      "subcategories": [
+        {
+          "id": "fx",
+          "name": "Exchange Rates",
+          "name_zh": "汇率数据",
+          "description": "Retrieve currency-pair exchange rates.",
+          "inclusion": "Rates identify the currency pair, direction and observation date.",
+          "exclusion": "A payment conversion fee or asset valuation alone is insufficient; reference rates do not imply executable exchange quotes.",
+          "capabilities": [
+            {
+              "id": "fx.latest",
+              "description": "Retrieve the latest published rate for a currency pair."
+            },
+            {
+              "id": "fx.history",
+              "description": "Retrieve exchange rates for specified historical dates."
+            }
+          ]
+        },
+        {
+          "id": "prices",
+          "name": "Asset Prices",
+          "name_zh": "资产行情",
+          "description": "Retrieve asset price snapshots or historical series.",
+          "inclusion": "Provides prices for identifiable assets and observation times.",
+          "exclusion": "Valuations inside transaction disclosures or news articles alone are insufficient; assets, adjustments and entitlements must match.",
+          "capabilities": [
+            {
+              "id": "prices.latest",
+              "description": "Retrieve a recent price snapshot for an identified asset."
+            },
+            {
+              "id": "prices.history",
+              "description": "Retrieve a price series for an identified asset and period."
+            }
+          ]
+        },
+        {
+          "id": "statements",
+          "name": "Company Financials",
+          "name_zh": "公司财务数据",
+          "description": "Retrieve company financial statements or reported financial facts.",
+          "inclusion": "Financial values identify the company, reporting period and units, or link to the original statement.",
+          "exclusion": "Company profiles, market prices or valuation ratios alone are insufficient.",
+          "capabilities": [
+            {
+              "id": "statements.read",
+              "description": "Retrieve company financial values with reporting periods, units and source context."
+            }
+          ]
+        },
+        {
+          "id": "disclosures",
+          "name": "Transaction Disclosures",
+          "name_zh": "交易披露",
+          "description": "Retrieve publicly reported transactions.",
+          "inclusion": "Records identify the reporting party and distinguish disclosure from transaction timing where available.",
+          "exclusion": "Company annual reports alone are not transaction disclosures; congressional and insider filings are different populations.",
+          "capabilities": [
+            {
+              "id": "disclosures.search",
+              "description": "Retrieve public transaction disclosures matching a person, asset or period."
+            }
+          ]
+        },
+        {
+          "id": "macro",
+          "name": "Economic Indicators",
+          "name_zh": "宏观经济指标",
+          "description": "Retrieve named economic indicator series.",
+          "inclusion": "Observations identify the series, periods and units.",
+          "exclusion": "Market asset prices alone are not macro indicators; frequency, seasonality and revisions must match.",
+          "capabilities": [
+            {
+              "id": "macro.series",
+              "description": "Retrieve economic observations for a named series and period."
+            }
+          ]
+        },
+        {
+          "id": "data-platforms",
+          "name": "Multi-dataset Financial Platforms",
+          "name_zh": "综合金融数据平台",
+          "description": "Platforms or marketplaces offering many financial and economic dataset types through one account or interface; compare individual datasets in their specific subcategory.",
+          "inclusion": "Provides several distinct financial or economic dataset types whose individual scope, licences and personal access remain to be resolved.",
+          "exclusion": "A service with one established dataset type belongs in that subcategory; listing a platform does not establish access to any particular dataset.",
+          "capabilities": []
+        }
+      ],
+      "inclusion": "Supplies financial/economic observations or original filings.",
+      "exclusion": "News, trading execution or a generic search API alone does not establish a financial dataset service."
+    },
+    {
+      "id": "scholarly",
+      "name": "Scholarly & Reference",
+      "name_zh": "学术与知识",
+      "description": "Identify scholarly works and their bibliographic records.",
+      "subcategories": [
+        {
+          "id": "scholarly-search",
+          "name": "Scholarly Literature Search",
+          "name_zh": "学术文献检索",
+          "description": "Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.",
+          "inclusion": "Searches an identifiable scholarly corpus and returns work identities with citation metadata such as title, authors, publication venue, year and persistent identifiers where available.",
+          "exclusion": "General web-page search, guaranteed full-text access, literature-review synthesis and research-quality rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement between indexes do not independently establish a paper's identity, quality or completeness.",
+          "capabilities": [
+            {
+              "id": "scholarly.search",
+              "description": "Find scholarly works with enough bibliographic metadata to identify and cite them."
+            }
+          ]
+        }
+      ],
+      "inclusion": "Searches an identifiable scholarly corpus and returns citable work records.",
+      "exclusion": "General web search and full-text hosting alone are separate."
     },
     {
       "id": "payments-billing",
@@ -664,20 +716,6 @@
       "name": "Productivity & Collaboration",
       "description": "Documents, collaborative tables, project management, file sharing and preparing information materials for people to share; application object storage belongs under cloud services.",
       "subcategories": [
-        {
-          "id": "qr-codes",
-          "name": "QR Code Images",
-          "name_zh": "二维码图片",
-          "description": "Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.",
-          "inclusion": "A hosted service accepts an explicit payload and returns a downloadable QR image with documented format and sizing controls. The stored payload can be checked by an independent decoder; local-only encoding libraries are not hosted service alternatives.",
-          "exclusion": "Payment processing, scanner-only services, dynamic redirect or scan-tracking management and general AI image generation are separate. An image that looks like a QR code without correctly decoding the requested payload is insufficient; decoding does not prove its destination is safe, reachable or permanent, or that every phone and print condition can scan it.",
-          "capabilities": [
-            {
-              "id": "qr.generate",
-              "description": "Produce a downloadable static QR image encoding the supplied payload."
-            }
-          ]
-        },
         {
           "id": "collaborative-tables",
           "name": "Collaborative Tables",
@@ -1609,7 +1647,7 @@
     {
       "id": "agentservices",
       "name": "AgentServices",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://agentservices.to/",
       "access_links": [
         {
@@ -1644,10 +1682,10 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-search",
-          "web-search-data/web-extraction",
+          "search-scraping/web-search",
+          "search-scraping/web-extraction",
           "ai-models/model-access",
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "vendor-pr": {
@@ -2516,7 +2554,7 @@
     {
       "id": "alpaca-market-data",
       "name": "Alpaca Market Data",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://alpaca.markets/",
       "access_links": [
         {
@@ -2540,7 +2578,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -2616,7 +2654,7 @@
     {
       "id": "alpha-vantage",
       "name": "Alpha Vantage",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.alphavantage.co/",
       "access_links": [
         {
@@ -2958,7 +2996,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/prices",
+          "classification": "financial-data/prices",
           "phase": "business"
         },
         {
@@ -3431,7 +3469,7 @@
             "request_count": 20,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -3872,7 +3910,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/prices",
+          "classification": "financial-data/prices",
           "phase": "business"
         },
         {
@@ -4337,7 +4375,7 @@
             "request_count": 21,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -4656,7 +4694,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/prices",
+          "classification": "financial-data/prices",
           "phase": "business"
         },
         {
@@ -5058,7 +5096,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -5525,7 +5563,7 @@
             "request_count": 18,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/prices",
+          "classification": "financial-data/prices",
           "phase": "business"
         },
         {
@@ -5941,7 +5979,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -6335,7 +6373,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -6784,7 +6822,7 @@
             "request_count": 14,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/statements",
+          "classification": "financial-data/statements",
           "phase": "business"
         }
       ],
@@ -6805,11 +6843,11 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/fx",
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements",
-          "web-search-data/financial-data/disclosures",
-          "web-search-data/financial-data/macro"
+          "financial-data/fx",
+          "financial-data/prices",
+          "financial-data/statements",
+          "financial-data/disclosures",
+          "financial-data/macro"
         ],
         "sources": {
           "docs": {
@@ -7149,7 +7187,7 @@
     {
       "id": "apify",
       "name": "Apify",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://apify.com",
       "access_links": [
         {
@@ -7191,7 +7229,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-extraction"
+          "search-scraping/web-extraction"
         ],
         "sources": {
           "existing-docs": {
@@ -7496,7 +7534,7 @@
     {
       "id": "bargo-congress",
       "name": "Bargo Congress Trades API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.bargo.ai/free-apis/congress",
       "access_links": [
         {
@@ -7823,7 +7861,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -8150,7 +8188,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -8620,7 +8658,7 @@
             "request_count": 30,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -9108,7 +9146,7 @@
             "request_count": 35,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -9350,7 +9388,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -9573,7 +9611,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -9810,7 +9848,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -10280,7 +10318,7 @@
             "request_count": 33,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -10733,7 +10771,7 @@
             "request_count": 28,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -10956,7 +10994,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -11197,7 +11235,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         }
       ],
@@ -11205,7 +11243,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -11772,7 +11810,7 @@
     {
       "id": "bloomberg-data-license",
       "name": "Bloomberg Data License",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://professional.bloomberg.com/products/data/data-license/",
       "access_links": [],
       "summary": "Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.",
@@ -11793,7 +11831,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -11811,7 +11849,7 @@
     {
       "id": "brave-search",
       "name": "Brave Search API",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://brave.com/search/api/",
       "access_links": [
         {
@@ -11837,7 +11875,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-search"
+          "search-scraping/web-search"
         ],
         "sources": {
           "docs": {
@@ -12030,7 +12068,7 @@
     {
       "id": "capitol-exposed",
       "name": "CapitolExposed",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.capitolexposed.com/",
       "access_links": [
         {
@@ -12401,7 +12439,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -12749,7 +12787,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -13126,7 +13164,7 @@
             "request_count": 18,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -13471,7 +13509,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -13834,7 +13872,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -14211,7 +14249,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -14774,7 +14812,7 @@
             "request_count": 43,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -15118,7 +15156,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -15490,7 +15528,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -15849,7 +15887,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         },
         {
@@ -16228,7 +16266,7 @@
             "request_count": 14,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/disclosures",
+          "classification": "financial-data/disclosures",
           "phase": "business"
         }
       ],
@@ -16243,7 +16281,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -16328,7 +16366,7 @@
     {
       "id": "capitol-trades",
       "name": "Capitol Trades",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.capitoltrades.com/",
       "access_links": [],
       "summary": "Public congressional trading website by 2iQ; no self-serve API is established in this record.",
@@ -16346,7 +16384,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "about": {
@@ -17416,7 +17454,7 @@
     {
       "id": "coingecko",
       "name": "CoinGecko",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.coingecko.com/",
       "access_links": [
         {
@@ -17444,7 +17482,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -17578,7 +17616,7 @@
     {
       "id": "coinmarketcap",
       "name": "CoinMarketCap",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://coinmarketcap.com/",
       "access_links": [],
       "summary": "Crypto market data with selected keyless endpoints and a free authenticated Basic plan.",
@@ -17595,7 +17633,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -17697,7 +17735,7 @@
     {
       "id": "congress-stock-tracker",
       "name": "Congress Stock Tracker",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.congressstock.com/",
       "access_links": [
         {
@@ -17721,7 +17759,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -17879,7 +17917,7 @@
     {
       "id": "crossref",
       "name": "Crossref",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://www.crossref.org/",
       "access_links": [
         {
@@ -18329,7 +18367,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/scholarly-search",
+          "classification": "scholarly/scholarly-search",
           "phase": "setup"
         },
         {
@@ -18728,7 +18766,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/scholarly-search",
+          "classification": "scholarly/scholarly-search",
           "phase": "business"
         }
       ],
@@ -18736,7 +18774,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/scholarly-search"
+          "scholarly/scholarly-search"
         ],
         "sources": {
           "rest-api": {
@@ -19754,7 +19792,7 @@
     {
       "id": "ecb-data",
       "name": "ECB Data Portal API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.ecb.europa.eu/",
       "access_links": [
         {
@@ -20254,7 +20292,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -20776,7 +20814,7 @@
             "request_count": 22,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -21244,7 +21282,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -21828,7 +21866,7 @@
             "request_count": 24,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         },
         {
@@ -22336,7 +22374,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         },
         {
@@ -22874,7 +22912,7 @@
             "request_count": 21,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         },
         {
@@ -23240,7 +23278,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -23559,7 +23597,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/fx",
+          "classification": "financial-data/fx",
           "phase": "business"
         },
         {
@@ -23928,7 +23966,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -24313,7 +24351,7 @@
             "request_count": 6,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/fx",
+          "classification": "financial-data/fx",
           "phase": "business"
         }
       ],
@@ -24321,8 +24359,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/fx",
-          "web-search-data/financial-data/macro"
+          "financial-data/fx",
+          "financial-data/macro"
         ],
         "sources": {
           "docs": {
@@ -24530,7 +24568,7 @@
     {
       "id": "eodhd",
       "name": "EODHD",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://eodhd.com/",
       "access_links": [
         {
@@ -24558,10 +24596,10 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements",
-          "web-search-data/financial-data/macro",
-          "web-search-data/financial-data/disclosures"
+          "financial-data/prices",
+          "financial-data/statements",
+          "financial-data/macro",
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -24731,7 +24769,7 @@
     {
       "id": "eurostat",
       "name": "Eurostat Data API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://ec.europa.eu/eurostat/",
       "access_links": [
         {
@@ -25224,7 +25262,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -25661,7 +25699,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -26120,7 +26158,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -26641,7 +26679,7 @@
             "request_count": 20,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         },
         {
@@ -27119,7 +27157,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         },
         {
@@ -27598,7 +27636,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/macro",
+          "classification": "financial-data/macro",
           "phase": "business"
         }
       ],
@@ -27606,7 +27644,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/macro"
+          "financial-data/macro"
         ],
         "sources": {
           "api-introduction": {
@@ -27739,7 +27777,7 @@
     {
       "id": "exa",
       "name": "Exa",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://exa.ai",
       "access_links": [
         {
@@ -27888,7 +27926,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -27993,7 +28031,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -28411,7 +28449,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "setup"
         },
         {
@@ -28829,7 +28867,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -29299,7 +29337,7 @@
             "request_count": 18,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -29704,7 +29742,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -30145,7 +30183,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -30684,7 +30722,7 @@
             "request_count": 25,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -31121,7 +31159,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -31570,7 +31608,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -32021,7 +32059,7 @@
             "request_count": 17,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "setup"
         }
       ],
@@ -32029,8 +32067,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-extraction",
-          "web-search-data/web-search"
+          "search-scraping/web-extraction",
+          "search-scraping/web-search"
         ],
         "sources": {
           "mcp": {
@@ -32342,7 +32380,7 @@
     {
       "id": "factset-data",
       "name": "FactSet Data APIs",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.factset.com/",
       "access_links": [],
       "summary": "Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.",
@@ -32361,7 +32399,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data"
+          "financial-data/data-platforms"
         ],
         "sources": {
           "docs": {
@@ -32741,7 +32779,7 @@
     {
       "id": "financial-datasets",
       "name": "Financial Datasets",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://financialdatasets.ai/",
       "access_links": [
         {
@@ -32771,9 +32809,9 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements",
-          "web-search-data/financial-data/disclosures"
+          "financial-data/prices",
+          "financial-data/statements",
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -32933,7 +32971,7 @@
     {
       "id": "finnhub",
       "name": "Finnhub",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://finnhub.io/",
       "access_links": [
         {
@@ -32957,7 +32995,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -33003,7 +33041,7 @@
     {
       "id": "firecrawl",
       "name": "Firecrawl",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.firecrawl.dev",
       "access_links": [
         {
@@ -33489,7 +33527,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -33999,7 +34037,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -34512,7 +34550,7 @@
             "request_count": 18,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -34977,7 +35015,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -35477,7 +35515,7 @@
             "request_count": 16,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -35919,7 +35957,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -36390,7 +36428,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -36511,7 +36549,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -36901,7 +36939,7 @@
             "request_count": 6,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -37335,7 +37373,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -37726,7 +37764,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -38197,7 +38235,7 @@
             "request_count": 18,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -38681,7 +38719,7 @@
             "request_count": 20,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -39100,7 +39138,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "business"
         },
         {
@@ -39476,7 +39514,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-search",
+          "classification": "search-scraping/web-search",
           "phase": "setup"
         }
       ],
@@ -39484,8 +39522,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-extraction",
-          "web-search-data/web-search"
+          "search-scraping/web-extraction",
+          "search-scraping/web-search"
         ],
         "sources": {
           "docs": {
@@ -40342,7 +40380,7 @@
     {
       "id": "fmp",
       "name": "Financial Modeling Prep (FMP)",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://financialmodelingprep.com/",
       "access_links": [
         {
@@ -40374,10 +40412,10 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements",
-          "web-search-data/financial-data/fx",
-          "web-search-data/financial-data/disclosures"
+          "financial-data/prices",
+          "financial-data/statements",
+          "financial-data/fx",
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -40511,7 +40549,7 @@
     {
       "id": "frankfurter",
       "name": "Frankfurter",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://frankfurter.dev/",
       "access_links": [
         {
@@ -40909,7 +40947,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -41223,7 +41261,7 @@
             "request_count": 8,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -41517,7 +41555,7 @@
             "request_count": 6,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/fx",
+          "classification": "financial-data/fx",
           "phase": "business"
         },
         {
@@ -41889,7 +41927,7 @@
             "request_count": 5,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/fx",
+          "classification": "financial-data/fx",
           "phase": "business"
         }
       ],
@@ -41897,7 +41935,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/fx"
+          "financial-data/fx"
         ],
         "sources": {
           "docs": {
@@ -42049,7 +42087,7 @@
     {
       "id": "fred",
       "name": "FRED / ALFRED",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://fred.stlouisfed.org/",
       "access_links": [
         {
@@ -42078,7 +42116,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/macro"
+          "financial-data/macro"
         ],
         "sources": {
           "docs": {
@@ -42308,7 +42346,7 @@
     {
       "id": "geoapify",
       "name": "Geoapify",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.geoapify.com/",
       "access_links": [
         {
@@ -42331,7 +42369,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/geocoding"
+          "maps-geo/geocoding"
         ],
         "sources": {
           "api": {
@@ -42458,7 +42496,7 @@
     {
       "id": "geocode-maps-co",
       "name": "Geocode Maps.co",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://geocode.maps.co/",
       "access_links": [
         {
@@ -42481,7 +42519,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/geocoding"
+          "maps-geo/geocoding"
         ],
         "sources": {
           "api": {
@@ -46544,7 +46582,7 @@
     {
       "id": "goqr",
       "name": "goQR QR Code API",
-      "category": "productivity-storage",
+      "category": "developer-tools",
       "homepage": "https://goqr.me/api/",
       "access_links": [
         {
@@ -46935,7 +46973,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "productivity-storage/qr-codes",
+          "classification": "developer-tools/qr-codes",
           "phase": "setup"
         },
         {
@@ -47315,7 +47353,7 @@
             "request_count": 5,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "productivity-storage/qr-codes",
+          "classification": "developer-tools/qr-codes",
           "phase": "business"
         }
       ],
@@ -47323,7 +47361,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "productivity-storage/qr-codes"
+          "developer-tools/qr-codes"
         ],
         "sources": {
           "api": {
@@ -56238,7 +56276,7 @@
     {
       "id": "insynet",
       "name": "Insynet",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://insynet.se/",
       "access_links": [
         {
@@ -56262,7 +56300,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -56340,7 +56378,7 @@
     {
       "id": "jina",
       "name": "Jina AI",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://jina.ai",
       "access_links": [
         {
@@ -56790,7 +56828,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -57249,7 +57287,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -57681,7 +57719,7 @@
             "request_count": 8,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -58106,7 +58144,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -58534,7 +58572,7 @@
             "request_count": 8,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -58991,7 +59029,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -59441,7 +59479,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "business"
         },
         {
@@ -59744,7 +59782,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         },
         {
@@ -60154,7 +60192,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/web-extraction",
+          "classification": "search-scraping/web-extraction",
           "phase": "setup"
         }
       ],
@@ -60162,7 +60200,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-extraction"
+          "search-scraping/web-extraction"
         ],
         "sources": {
           "existing-docs": {
@@ -60265,7 +60303,7 @@
     {
       "id": "joinquant-data",
       "name": "JoinQuant JQData",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.joinquant.com/",
       "access_links": [],
       "summary": "Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.",
@@ -60285,7 +60323,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data"
+          "financial-data/data-platforms"
         ],
         "sources": {
           "docs": {
@@ -61518,7 +61556,7 @@
     {
       "id": "locationiq",
       "name": "LocationIQ",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://locationiq.com/",
       "access_links": [
         {
@@ -61541,7 +61579,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/geocoding"
+          "maps-geo/geocoding"
         ],
         "sources": {
           "guide": {
@@ -61666,7 +61704,7 @@
     {
       "id": "lseg-data",
       "name": "LSEG Data Platform",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.lseg.com/en/data-analytics",
       "access_links": [
         {
@@ -61689,7 +61727,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data"
+          "financial-data/data-platforms"
         ],
         "sources": {
           "docs": {
@@ -63101,7 +63139,7 @@
     {
       "id": "massive",
       "name": "Massive (formerly Polygon.io)",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://massive.com/",
       "access_links": [
         {
@@ -63124,7 +63162,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices"
+          "financial-data/prices"
         ],
         "sources": {
           "docs": {
@@ -63278,7 +63316,7 @@
     {
       "id": "met-norway",
       "name": "MET Norway Locationforecast",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://api.met.no/",
       "access_links": [
         {
@@ -63687,7 +63725,7 @@
             "request_count": 8,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/weather-data",
+          "classification": "weather-calendar/weather-data",
           "phase": "setup"
         },
         {
@@ -64112,7 +64150,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/weather-data",
+          "classification": "weather-calendar/weather-data",
           "phase": "business"
         }
       ],
@@ -64120,7 +64158,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/weather-data"
+          "weather-calendar/weather-data"
         ],
         "sources": {
           "docs": {
@@ -64718,7 +64756,7 @@
     {
       "id": "nager-date",
       "name": "Nager.Date",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://nagerholidays.com/",
       "access_links": [
         {
@@ -65228,7 +65266,7 @@
             "request_count": 19,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -65689,7 +65727,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -66199,7 +66237,7 @@
             "request_count": 23,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -66642,7 +66680,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -67087,7 +67125,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -67523,7 +67561,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -67892,7 +67930,7 @@
             "request_count": 6,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -68311,7 +68349,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         }
       ],
@@ -68319,7 +68357,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/public-holidays"
+          "weather-calendar/public-holidays"
         ],
         "sources": {
           "api-docs": {
@@ -68458,7 +68496,7 @@
     {
       "id": "nasdaq-data-link",
       "name": "Nasdaq Data Link",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.nasdaq.com/",
       "access_links": [
         {
@@ -68483,7 +68521,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data"
+          "financial-data/data-platforms"
         ],
         "sources": {
           "docs": {
@@ -72096,7 +72134,7 @@
     {
       "id": "nominatim",
       "name": "Nominatim Public API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://nominatim.org/",
       "access_links": [
         {
@@ -72581,7 +72619,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/geocoding",
+          "classification": "maps-geo/geocoding",
           "phase": "setup"
         },
         {
@@ -73004,7 +73042,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/geocoding",
+          "classification": "maps-geo/geocoding",
           "phase": "business"
         },
         {
@@ -73325,7 +73363,7 @@
               "tier": "standard"
             }
           },
-          "classification": "web-search-data/geocoding",
+          "classification": "maps-geo/geocoding",
           "phase": "setup"
         }
       ],
@@ -73333,7 +73371,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/geocoding"
+          "maps-geo/geocoding"
         ],
         "sources": {
           "search-docs": {
@@ -74128,7 +74166,7 @@
     {
       "id": "open-exchange-rates",
       "name": "Open Exchange Rates",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://openexchangerates.org/",
       "access_links": [
         {
@@ -74151,7 +74189,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/fx"
+          "financial-data/fx"
         ],
         "sources": {
           "docs": {
@@ -74202,7 +74240,7 @@
     {
       "id": "open-meteo",
       "name": "Open-Meteo",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://open-meteo.com/",
       "access_links": [
         {
@@ -74646,7 +74684,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/weather-data",
+          "classification": "weather-calendar/weather-data",
           "phase": "setup"
         },
         {
@@ -75030,7 +75068,7 @@
             "request_count": 4,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/weather-data",
+          "classification": "weather-calendar/weather-data",
           "phase": "business"
         }
       ],
@@ -75038,7 +75076,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/weather-data"
+          "weather-calendar/weather-data"
         ],
         "sources": {
           "homepage": {
@@ -75193,7 +75231,7 @@
     {
       "id": "openalex",
       "name": "OpenAlex",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://openalex.org/",
       "access_links": [
         {
@@ -75629,7 +75667,7 @@
             "request_count": 13,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/scholarly-search",
+          "classification": "scholarly/scholarly-search",
           "phase": "setup"
         },
         {
@@ -76044,7 +76082,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/scholarly-search",
+          "classification": "scholarly/scholarly-search",
           "phase": "business"
         }
       ],
@@ -76052,7 +76090,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/scholarly-search"
+          "scholarly/scholarly-search"
         ],
         "sources": {
           "authentication": {
@@ -76187,7 +76225,7 @@
     {
       "id": "openholidays",
       "name": "OpenHolidays API",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://www.openholidaysapi.org/en/",
       "access_links": [
         {
@@ -76622,7 +76660,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -77049,7 +77087,7 @@
             "request_count": 12,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -77475,7 +77513,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -77891,7 +77929,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -78306,7 +78344,7 @@
             "request_count": 7,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -78738,7 +78776,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         },
         {
@@ -79136,7 +79174,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "setup"
         },
         {
@@ -79547,7 +79585,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/public-holidays",
+          "classification": "weather-calendar/public-holidays",
           "phase": "business"
         }
       ],
@@ -79555,7 +79593,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/public-holidays"
+          "weather-calendar/public-holidays"
         ],
         "sources": {
           "quickstart": {
@@ -79732,7 +79770,7 @@
     {
       "id": "osrm",
       "name": "OSRM Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://project-osrm.org/",
       "access_links": [
         {
@@ -80107,7 +80145,7 @@
             "request_count": 6,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/route-planning",
+          "classification": "maps-geo/route-planning",
           "phase": "setup"
         },
         {
@@ -80501,7 +80539,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/route-planning",
+          "classification": "maps-geo/route-planning",
           "phase": "business"
         }
       ],
@@ -80509,7 +80547,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/route-planning"
+          "maps-geo/route-planning"
         ],
         "sources": {
           "demo": {
@@ -85417,7 +85455,7 @@
     {
       "id": "perplexity",
       "name": "Perplexity API",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.perplexity.ai",
       "access_links": [
         {
@@ -85442,7 +85480,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-search"
+          "search-scraping/web-search"
         ],
         "sources": {
           "classification-docs": {
@@ -85460,7 +85498,7 @@
     {
       "id": "photon",
       "name": "Photon Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://photon.komoot.io/",
       "access_links": [
         {
@@ -85923,7 +85961,7 @@
             "request_count": 15,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/geocoding",
+          "classification": "maps-geo/geocoding",
           "phase": "setup"
         },
         {
@@ -86333,7 +86371,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/geocoding",
+          "classification": "maps-geo/geocoding",
           "phase": "business"
         }
       ],
@@ -86341,7 +86379,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/geocoding"
+          "maps-geo/geocoding"
         ],
         "sources": {
           "public-api": {
@@ -86942,7 +86980,7 @@
     {
       "id": "quickchart",
       "name": "QuickChart",
-      "category": "productivity-storage",
+      "category": "developer-tools",
       "homepage": "https://quickchart.io/qr-code-api/",
       "access_links": [
         {
@@ -87346,7 +87384,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "productivity-storage/qr-codes",
+          "classification": "developer-tools/qr-codes",
           "phase": "setup"
         },
         {
@@ -87768,7 +87806,7 @@
             "request_count": 11,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "productivity-storage/qr-codes",
+          "classification": "developer-tools/qr-codes",
           "phase": "business"
         }
       ],
@@ -87776,7 +87814,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "productivity-storage/qr-codes"
+          "developer-tools/qr-codes"
         ],
         "sources": {
           "qr-api": {
@@ -87912,7 +87950,7 @@
     {
       "id": "quiver-quantitative",
       "name": "Quiver Quantitative",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.quiverquant.com/",
       "access_links": [
         {
@@ -87941,7 +87979,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -88660,7 +88698,7 @@
         "version": 1,
         "classifications": [
           "travel/flights",
-          "web-search-data/web-search"
+          "search-scraping/web-search"
         ],
         "sources": {
           "google-search": {
@@ -88866,7 +88904,7 @@
     {
       "id": "sec-edgar",
       "name": "SEC EDGAR Data APIs",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.sec.gov/",
       "access_links": [
         {
@@ -89295,7 +89333,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         },
         {
@@ -89713,7 +89751,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data/statements",
+          "classification": "financial-data/statements",
           "phase": "business"
         }
       ],
@@ -89721,7 +89759,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/statements"
+          "financial-data/statements"
         ],
         "sources": {
           "docs": {
@@ -89810,7 +89848,7 @@
     {
       "id": "semantic-scholar",
       "name": "Semantic Scholar",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://www.semanticscholar.org/",
       "access_links": [
         {
@@ -89834,7 +89872,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/scholarly-search"
+          "scholarly/scholarly-search"
         ],
         "sources": {
           "overview": {
@@ -90001,7 +90039,7 @@
     {
       "id": "serpapi",
       "name": "SerpApi",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://serpapi.com",
       "access_links": [
         {
@@ -90031,7 +90069,7 @@
         "version": 1,
         "classifications": [
           "travel/flights",
-          "web-search-data/web-search"
+          "search-scraping/web-search"
         ],
         "sources": {
           "flights": {
@@ -90159,7 +90197,7 @@
     {
       "id": "serper",
       "name": "Serper",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://serper.dev/",
       "access_links": [
         {
@@ -90180,7 +90218,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-search"
+          "search-scraping/web-search"
         ],
         "sources": {
           "docs": {
@@ -90326,7 +90364,7 @@
     {
       "id": "simfin",
       "name": "SimFin",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.simfin.com/",
       "access_links": [
         {
@@ -90352,8 +90390,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements"
+          "financial-data/prices",
+          "financial-data/statements"
         ],
         "sources": {
           "docs": {
@@ -91230,7 +91268,7 @@
     {
       "id": "tavily",
       "name": "Tavily",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.tavily.com",
       "access_links": [
         {
@@ -91265,8 +91303,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/web-extraction",
-          "web-search-data/web-search"
+          "search-scraping/web-extraction",
+          "search-scraping/web-search"
         ],
         "sources": {
           "docs": {
@@ -91830,7 +91868,7 @@
     {
       "id": "tiingo",
       "name": "Tiingo",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.tiingo.com/",
       "access_links": [
         {
@@ -91855,8 +91893,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/fx"
+          "financial-data/prices",
+          "financial-data/fx"
         ],
         "sources": {
           "docs": {
@@ -91983,7 +92021,7 @@
     {
       "id": "tracefour",
       "name": "Tracefour",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://tracefour.com/",
       "access_links": [
         {
@@ -92333,7 +92371,7 @@
             "request_count": 10,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/financial-data",
+          "classification": "financial-data",
           "phase": "setup"
         }
       ],
@@ -92341,7 +92379,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "docs": {
@@ -98487,7 +98525,7 @@
     {
       "id": "tushare",
       "name": "Tushare Pro",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://tushare.pro/",
       "access_links": [
         {
@@ -98511,8 +98549,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/statements"
+          "financial-data/prices",
+          "financial-data/statements"
         ],
         "sources": {
           "docs": {
@@ -98605,7 +98643,7 @@
     {
       "id": "twelve-data",
       "name": "Twelve Data",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://twelvedata.com/",
       "access_links": [
         {
@@ -98635,8 +98673,8 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/prices",
-          "web-search-data/financial-data/fx"
+          "financial-data/prices",
+          "financial-data/fx"
         ],
         "sources": {
           "docs": {
@@ -98943,7 +98981,7 @@
     {
       "id": "us-house-disclosures",
       "name": "U.S. House Financial Disclosures",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://disclosures-clerk.house.gov/FinancialDisclosure",
       "access_links": [],
       "summary": "Original House financial disclosure filings and searchable annual indexes, published by the Clerk.",
@@ -98961,7 +98999,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/disclosures"
+          "financial-data/disclosures"
         ],
         "sources": {
           "overview": {
@@ -99024,7 +99062,7 @@
     {
       "id": "valhalla",
       "name": "Valhalla Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://valhalla.github.io/valhalla/",
       "access_links": [
         {
@@ -99460,7 +99498,7 @@
             "request_count": 14,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/route-planning",
+          "classification": "maps-geo/route-planning",
           "phase": "setup"
         },
         {
@@ -99869,7 +99907,7 @@
             "request_count": 9,
             "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
           },
-          "classification": "web-search-data/route-planning",
+          "classification": "maps-geo/route-planning",
           "phase": "business"
         }
       ],
@@ -99877,7 +99915,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/route-planning"
+          "maps-geo/route-planning"
         ],
         "sources": {
           "demo": {
@@ -100282,7 +100320,7 @@
     {
       "id": "world-bank-data",
       "name": "World Bank Indicators API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.worldbank.org/",
       "access_links": [
         {
@@ -100305,7 +100343,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data/financial-data/macro"
+          "financial-data/macro"
         ],
         "sources": {
           "docs": {
@@ -100602,7 +100640,7 @@
     {
       "id": "xquik",
       "name": "Xquik",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://xquik.com",
       "access_links": [
         {
@@ -100639,7 +100677,7 @@
       "catalog": {
         "version": 1,
         "classifications": [
-          "web-search-data"
+          "search-scraping"
         ],
         "sources": {
           "classification-docs": {

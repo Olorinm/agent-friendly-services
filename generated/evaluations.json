@@ -469,7 +469,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -919,7 +919,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -1376,7 +1376,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -1818,7 +1818,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -2318,7 +2318,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -2746,7 +2746,7 @@
         "request_count": 8,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -3211,7 +3211,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -3636,7 +3636,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -4068,7 +4068,7 @@
         "request_count": 8,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -4581,7 +4581,7 @@
         "request_count": 18,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -5091,7 +5091,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -5550,7 +5550,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -6008,7 +6008,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -6435,7 +6435,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -13581,7 +13581,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business"
     },
     {
@@ -14050,7 +14050,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup"
     },
     {
@@ -14529,7 +14529,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -15067,7 +15067,7 @@
         "request_count": 21,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -16444,7 +16444,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -16965,7 +16965,7 @@
         "request_count": 20,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -17549,7 +17549,7 @@
         "request_count": 24,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -18057,7 +18057,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business"
     },
     {
@@ -18516,7 +18516,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -18953,7 +18953,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -19429,7 +19429,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -19897,7 +19897,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -20329,7 +20329,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -20765,7 +20765,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -21287,7 +21287,7 @@
         "request_count": 22,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -21770,7 +21770,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -22196,7 +22196,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -22611,7 +22611,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -23056,7 +23056,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -23483,7 +23483,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -23993,7 +23993,7 @@
         "request_count": 23,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -24454,7 +24454,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -29422,7 +29422,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -29865,7 +29865,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -30284,7 +30284,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -30778,7 +30778,7 @@
         "request_count": 19,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -33985,7 +33985,7 @@
         "request_count": 25,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -34469,7 +34469,7 @@
         "request_count": 20,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -34849,7 +34849,7 @@
         "request_count": 5,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "business"
     },
     {
@@ -35271,7 +35271,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "business"
     },
     {
@@ -35646,7 +35646,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "setup"
     },
     {
@@ -36034,7 +36034,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "setup"
     },
     {
@@ -36443,7 +36443,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "business"
     },
     {
@@ -36837,7 +36837,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "business"
     },
     {
@@ -37257,7 +37257,7 @@
         "request_count": 14,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "setup"
     },
     {
@@ -37616,7 +37616,7 @@
         "request_count": 6,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "setup"
     },
     {
@@ -38057,7 +38057,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -38528,7 +38528,7 @@
         "request_count": 18,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -38933,7 +38933,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -39324,7 +39324,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -42237,7 +42237,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -42656,7 +42656,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business"
     },
     {
@@ -43054,7 +43054,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -43423,7 +43423,7 @@
         "request_count": 6,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup"
     },
     {
@@ -46410,7 +46410,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "business"
     },
     {
@@ -46809,7 +46809,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "business"
     },
     {
@@ -47242,7 +47242,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "setup"
     },
     {
@@ -47661,7 +47661,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "setup"
     },
     {
@@ -48102,7 +48102,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business"
     },
     {
@@ -48569,7 +48569,7 @@
         "request_count": 18,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business"
     },
     {
@@ -49034,7 +49034,7 @@
         "request_count": 21,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -49450,7 +49450,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -49860,7 +49860,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business"
     },
     {
@@ -50181,7 +50181,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup"
     },
     {
@@ -50628,7 +50628,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup"
     },
     {
@@ -51053,7 +51053,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "business"
     },
     {
@@ -51437,7 +51437,7 @@
         "request_count": 4,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "business"
     },
     {
@@ -51830,7 +51830,7 @@
         "request_count": 8,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "setup"
     },
     {
@@ -52258,7 +52258,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "setup"
     },
     {
@@ -52677,7 +52677,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -53126,7 +53126,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -53502,7 +53502,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup"
     },
     {
@@ -53953,7 +53953,7 @@
         "request_count": 17,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup"
     },
     {
@@ -54267,7 +54267,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business"
     },
     {
@@ -54586,7 +54586,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business"
     },
     {
@@ -55059,7 +55059,7 @@
         "request_count": 20,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -55461,7 +55461,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -57730,7 +57730,7 @@
         "request_count": 18,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -58164,7 +58164,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business"
     },
     {
@@ -58574,7 +58574,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -58992,7 +58992,7 @@
         "request_count": 11,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -59295,7 +59295,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -59685,7 +59685,7 @@
         "request_count": 6,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup"
     },
     {
@@ -62024,7 +62024,7 @@
         "request_count": 14,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business"
     },
     {
@@ -62442,7 +62442,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business"
     },
     {
@@ -62854,7 +62854,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -63248,7 +63248,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -63685,7 +63685,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -64103,7 +64103,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup"
     },
     {
@@ -64475,7 +64475,7 @@
         "request_count": 5,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business"
     },
     {
@@ -64860,7 +64860,7 @@
         "request_count": 6,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business"
     },
     {
@@ -65237,7 +65237,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -65606,7 +65606,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -65829,7 +65829,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -66299,7 +66299,7 @@
         "request_count": 33,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -66522,7 +66522,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -67010,7 +67010,7 @@
         "request_count": 35,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -67364,7 +67364,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -67670,7 +67670,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -68029,7 +68029,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -68373,7 +68373,7 @@
         "request_count": 12,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -68750,7 +68750,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -69095,7 +69095,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -69474,7 +69474,7 @@
         "request_count": 14,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -69715,7 +69715,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -70087,7 +70087,7 @@
         "request_count": 15,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -70540,7 +70540,7 @@
         "request_count": 28,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -71103,7 +71103,7 @@
         "request_count": 43,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -71340,7 +71340,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -71703,7 +71703,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -71945,7 +71945,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -72322,7 +72322,7 @@
         "request_count": 18,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -72792,7 +72792,7 @@
         "request_count": 30,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business"
     },
     {
@@ -73140,7 +73140,7 @@
         "request_count": 13,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -73467,7 +73467,7 @@
         "request_count": 9,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -73795,7 +73795,7 @@
         "request_count": 10,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -74114,7 +74114,7 @@
         "request_count": 7,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business"
     },
     {
@@ -74408,7 +74408,7 @@
         "request_count": 6,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business"
     },
     {
@@ -74722,7 +74722,7 @@
         "request_count": 8,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -75088,7 +75088,7 @@
         "request_count": 16,
         "reason": "Each recorded request × saved LiteLLM standard API rates for its input length, then summed. Estimate, not an account charge; excludes non-token tool fees."
       },
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup"
     },
     {
@@ -77425,7 +77425,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -77546,7 +77546,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -77845,7 +77845,7 @@
           "tier": "standard"
         }
       },
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business"
     },
     {
@@ -78496,7 +78496,7 @@
         "afs-20261010-johor40-advisories-github-business-r2",
         "afs-20261010-johor40-advisories-github-business-r1"
       ],
-      "comparison_id": "comparison-8e6422c28f03",
+      "comparison_id": "comparison-6b6a0b74a08e",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -78520,7 +78520,7 @@
         "afs-20261010-johor40-advisories-osv-business-r2",
         "afs-20261010-johor40-advisories-osv-business-r1"
       ],
-      "comparison_id": "comparison-8e6422c28f03",
+      "comparison_id": "comparison-6b6a0b74a08e",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -78544,7 +78544,7 @@
         "afs-20261010-johor40-advisories-github-access-r2",
         "afs-20261010-johor40-advisories-github-access-r1"
       ],
-      "comparison_id": "comparison-1a93823643b5",
+      "comparison_id": "comparison-f1229f7220dc",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -78568,12 +78568,12 @@
         "afs-20261010-johor40-advisories-osv-access-r2",
         "afs-20261010-johor40-advisories-osv-access-r1"
       ],
-      "comparison_id": "comparison-1a93823643b5",
+      "comparison_id": "comparison-f1229f7220dc",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business",
       "service_id": "nominatim",
       "route_id": "public-search-api",
@@ -78590,12 +78590,12 @@
       "run_ids": [
         "afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2"
       ],
-      "comparison_id": "comparison-7a7e044bd215",
+      "comparison_id": "comparison-89d974d3f8b8",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup",
       "service_id": "nominatim",
       "route_id": "public-search-api",
@@ -78612,12 +78612,12 @@
       "run_ids": [
         "afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2"
       ],
-      "comparison_id": "comparison-60adbd865cb5",
+      "comparison_id": "comparison-a29775463366",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business",
       "service_id": "photon",
       "route_id": "public-search-api",
@@ -78639,7 +78639,7 @@
     },
     {
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup",
       "service_id": "photon",
       "route_id": "public-search-api",
@@ -78678,7 +78678,7 @@
       "run_ids": [
         "afs-20261010-johor40-grist-mcp-access-baseline"
       ],
-      "comparison_id": "comparison-06b05d18818d",
+      "comparison_id": "comparison-ef3ae7a2ca5a",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -78702,12 +78702,12 @@
         "afs-20261010-johor40-grist-mcp-shared-expenses-r2",
         "afs-20261010-johor40-grist-mcp-shared-expenses-r1"
       ],
-      "comparison_id": "comparison-63bc5ae3ece1",
+      "comparison_id": "comparison-35bd5c6ff083",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business",
       "service_id": "nager-date",
       "route_id": "community-api-v4",
@@ -78726,12 +78726,12 @@
         "afs-20261010-johor40-holidays-nager-date-business-r2",
         "afs-20261010-johor40-holidays-nager-date-business-r1"
       ],
-      "comparison_id": "comparison-c53ca46196b8",
+      "comparison_id": "comparison-d9a19cb24943",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business",
       "service_id": "openholidays",
       "route_id": "public-holidays-api",
@@ -78750,12 +78750,12 @@
         "afs-20261010-johor40-holidays-openholidays-business-r2",
         "afs-20261010-johor40-holidays-openholidays-business-r1"
       ],
-      "comparison_id": "comparison-c53ca46196b8",
+      "comparison_id": "comparison-d9a19cb24943",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup",
       "service_id": "nager-date",
       "route_id": "community-api-v4",
@@ -78774,12 +78774,12 @@
         "afs-20261010-johor40-holidays-nager-date-access-r2",
         "afs-20261010-johor40-holidays-nager-date-access-r1"
       ],
-      "comparison_id": "comparison-ce7a914a844f",
+      "comparison_id": "comparison-f49782e60ce5",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup",
       "service_id": "openholidays",
       "route_id": "public-holidays-api",
@@ -78798,12 +78798,12 @@
         "afs-20261010-johor40-holidays-openholidays-access-r2",
         "afs-20261010-johor40-holidays-openholidays-access-r1"
       ],
-      "comparison_id": "comparison-ce7a914a844f",
+      "comparison_id": "comparison-f49782e60ce5",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "ecb-data",
       "route_id": "data-api",
@@ -78822,12 +78822,12 @@
         "afs-20261010-johor40-macro-ecb-data-access-r2",
         "afs-20261010-johor40-macro-ecb-data-access-r1"
       ],
-      "comparison_id": "comparison-36e32b17588d",
+      "comparison_id": "comparison-463143c72255",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "eurostat",
       "route_id": "statistics-api",
@@ -78846,12 +78846,12 @@
         "afs-20261010-johor40-macro-eurostat-access-r2",
         "afs-20261010-johor40-macro-eurostat-access-r1"
       ],
-      "comparison_id": "comparison-36e32b17588d",
+      "comparison_id": "comparison-463143c72255",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business",
       "service_id": "alpha-vantage",
       "route_id": "hosted-mcp",
@@ -78873,7 +78873,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "alpha-vantage",
       "route_id": "hosted-mcp",
@@ -78895,7 +78895,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business",
       "service_id": "alpha-vantage",
       "route_id": "data-api",
@@ -78917,7 +78917,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business",
       "service_id": "sec-edgar",
       "route_id": "data-api",
@@ -78939,7 +78939,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "sec-edgar",
       "route_id": "data-api",
@@ -78961,7 +78961,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business",
       "service_id": "ecb-data",
       "route_id": "data-api",
@@ -78983,7 +78983,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business",
       "service_id": "frankfurter",
       "route_id": "data-api",
@@ -79005,7 +79005,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "frankfurter",
       "route_id": "data-api",
@@ -79027,7 +79027,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business",
       "service_id": "bargo-congress",
       "route_id": "congress-api-keyless",
@@ -79052,7 +79052,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "bargo-congress",
       "route_id": "congress-api-keyless",
@@ -79074,7 +79074,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "capitol-exposed",
       "route_id": "data-api-keyless",
@@ -79096,7 +79096,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business",
       "service_id": "capitol-exposed",
       "route_id": "data-api-keyless",
@@ -79121,7 +79121,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "service_id": "tracefour",
       "route_id": "data-api-keyless",
@@ -79143,7 +79143,7 @@
     },
     {
       "task_file": "data/experiments/tasks/financial-macro.md",
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business",
       "service_id": "ecb-data",
       "route_id": "data-api",
@@ -79162,12 +79162,12 @@
         "afs-20261010-johor40-macro-ecb-data-business-r1",
         "afs-20261010-johor40-macro-ecb-data-business-r2"
       ],
-      "comparison_id": "comparison-70023b6902c1",
+      "comparison_id": "comparison-e2c50ca437a8",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/financial-macro.md",
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business",
       "service_id": "eurostat",
       "route_id": "statistics-api",
@@ -79186,7 +79186,7 @@
         "afs-20261010-johor40-macro-eurostat-business-r2",
         "afs-20261010-johor40-macro-eurostat-business-r1"
       ],
-      "comparison_id": "comparison-70023b6902c1",
+      "comparison_id": "comparison-e2c50ca437a8",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -79208,7 +79208,7 @@
       "run_ids": [
         "afs-20261010-johor40-turso-access-baseline"
       ],
-      "comparison_id": "comparison-3e5e974d8b61",
+      "comparison_id": "comparison-dbc4d2ba8407",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -79298,12 +79298,12 @@
         "afs-20261010-johor40-turso-restore-v2-r2",
         "afs-20261010-johor40-turso-restore-v2-r1"
       ],
-      "comparison_id": "comparison-848474bceab4",
+      "comparison_id": "comparison-7dece7b7dd54",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "firecrawl",
       "route_id": "public-scrape-api",
@@ -79322,12 +79322,12 @@
         "afs-20261010-johor40-web-extraction-firecrawl-holidays-r2",
         "afs-20261010-johor40-web-extraction-firecrawl-holidays-r1"
       ],
-      "comparison_id": "comparison-b8dbd573c0af",
+      "comparison_id": "comparison-241d0c1dcf03",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "jina",
       "route_id": "reader-api",
@@ -79346,12 +79346,12 @@
         "afs-20261010-johor40-web-extraction-jina-holidays-r2",
         "afs-20261010-johor40-web-extraction-jina-holidays-r1"
       ],
-      "comparison_id": "comparison-b8dbd573c0af",
+      "comparison_id": "comparison-241d0c1dcf03",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup",
       "service_id": "firecrawl",
       "route_id": "public-scrape-api",
@@ -79368,12 +79368,12 @@
       "run_ids": [
         "afs-20261010-johor40-web-extraction-firecrawl-access-baseline"
       ],
-      "comparison_id": "comparison-ecce2722b24e",
+      "comparison_id": "comparison-8620cd093994",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup",
       "service_id": "jina",
       "route_id": "reader-api",
@@ -79390,12 +79390,12 @@
       "run_ids": [
         "afs-20261010-johor40-web-extraction-jina-access-baseline"
       ],
-      "comparison_id": "comparison-ecce2722b24e",
+      "comparison_id": "comparison-8620cd093994",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79417,7 +79417,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79439,7 +79439,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-extraction-uk.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "jina",
       "route_id": "reader-api",
@@ -79458,12 +79458,12 @@
         "afs-20261010-johor40-web-extraction-jina-uk-holidays-r2",
         "afs-20261010-johor40-web-extraction-jina-uk-holidays-r1"
       ],
-      "comparison_id": "comparison-5b2f0a0db9e7",
+      "comparison_id": "comparison-bbb58383092b",
       "selection": "most_recent_valid_route_protocol"
     },
     {
       "task_file": "data/experiments/tasks/web-extraction-uk.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "firecrawl",
       "route_id": "public-scrape-api",
@@ -79482,7 +79482,7 @@
         "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r2",
         "afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r1"
       ],
-      "comparison_id": "comparison-5b2f0a0db9e7",
+      "comparison_id": "comparison-bbb58383092b",
       "selection": "most_recent_valid_route_protocol"
     },
     {
@@ -79575,7 +79575,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79597,7 +79597,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup",
       "service_id": "firecrawl",
       "route_id": "public-search-api",
@@ -79619,7 +79619,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79641,7 +79641,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "service_id": "firecrawl",
       "route_id": "public-search-api",
@@ -79839,7 +79839,7 @@
     },
     {
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "business",
       "service_id": "crossref",
       "route_id": "public-rest-api",
@@ -79861,7 +79861,7 @@
     },
     {
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "business",
       "service_id": "openalex",
       "route_id": "public-rest-api",
@@ -79883,7 +79883,7 @@
     },
     {
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "setup",
       "service_id": "crossref",
       "route_id": "public-rest-api",
@@ -79905,7 +79905,7 @@
     },
     {
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "setup",
       "service_id": "openalex",
       "route_id": "public-rest-api",
@@ -79927,7 +79927,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-extraction-pdf.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "firecrawl",
       "route_id": "public-scrape-api",
@@ -79949,7 +79949,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-extraction-pdf.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79971,7 +79971,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search-v2.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "service_id": "exa",
       "route_id": "public-mcp",
@@ -79993,7 +79993,7 @@
     },
     {
       "task_file": "data/experiments/tasks/web-search-v2.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "service_id": "firecrawl",
       "route_id": "public-search-api",
@@ -80015,7 +80015,7 @@
     },
     {
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "business",
       "service_id": "goqr",
       "route_id": "public-qr-api",
@@ -80037,7 +80037,7 @@
     },
     {
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "business",
       "service_id": "quickchart",
       "route_id": "public-qr-api",
@@ -80059,7 +80059,7 @@
     },
     {
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "setup",
       "service_id": "goqr",
       "route_id": "public-qr-api",
@@ -80081,7 +80081,7 @@
     },
     {
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "setup",
       "service_id": "quickchart",
       "route_id": "public-qr-api",
@@ -80125,7 +80125,7 @@
     },
     {
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "business",
       "service_id": "met-norway",
       "route_id": "locationforecast-api",
@@ -80147,7 +80147,7 @@
     },
     {
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "business",
       "service_id": "open-meteo",
       "route_id": "forecast-api",
@@ -80169,7 +80169,7 @@
     },
     {
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "setup",
       "service_id": "met-norway",
       "route_id": "locationforecast-api",
@@ -80191,7 +80191,7 @@
     },
     {
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "setup",
       "service_id": "open-meteo",
       "route_id": "forecast-api",
@@ -80301,7 +80301,7 @@
     },
     {
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "business",
       "service_id": "osrm",
       "route_id": "public-route-api",
@@ -80323,7 +80323,7 @@
     },
     {
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "business",
       "service_id": "valhalla",
       "route_id": "public-route-api",
@@ -80345,7 +80345,7 @@
     },
     {
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "setup",
       "service_id": "osrm",
       "route_id": "public-route-api",
@@ -80367,7 +80367,7 @@
     },
     {
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "setup",
       "service_id": "valhalla",
       "route_id": "public-route-api",
@@ -80434,9 +80434,9 @@
   },
   "comparisons": [
     {
-      "id": "comparison-5b2f0a0db9e7",
+      "id": "comparison-bbb58383092b",
       "task_file": "data/experiments/tasks/web-extraction-uk.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "tasks": [
         {
@@ -80495,9 +80495,9 @@
       "latest": "2026-10-10T12:47:27.351738+00:00"
     },
     {
-      "id": "comparison-b8dbd573c0af",
+      "id": "comparison-241d0c1dcf03",
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "tasks": [
         {
@@ -80556,9 +80556,9 @@
       "latest": "2026-10-10T12:25:54.824382+00:00"
     },
     {
-      "id": "comparison-ecce2722b24e",
+      "id": "comparison-8620cd093994",
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup",
       "tasks": [
         {
@@ -80613,7 +80613,7 @@
       "latest": "2026-10-10T12:19:44.589591+00:00"
     },
     {
-      "id": "comparison-848474bceab4",
+      "id": "comparison-7dece7b7dd54",
       "task_file": "data/experiments/tasks/database-restore-v2.md",
       "classification": "databases/hosted-relational",
       "phase": "business",
@@ -80655,7 +80655,7 @@
       "latest": "2026-10-10T12:11:20.208841+00:00"
     },
     {
-      "id": "comparison-63bc5ae3ece1",
+      "id": "comparison-35bd5c6ff083",
       "task_file": "data/experiments/tasks/collaborative-tables-shared-expenses.md",
       "classification": "productivity-storage/collaborative-tables",
       "phase": "business",
@@ -80716,7 +80716,7 @@
       "latest": "2026-10-10T11:54:48.399813+00:00"
     },
     {
-      "id": "comparison-3e5e974d8b61",
+      "id": "comparison-dbc4d2ba8407",
       "task_file": "data/experiments/tasks/databases-v2.md",
       "classification": "databases/hosted-relational",
       "phase": "setup",
@@ -80756,7 +80756,7 @@
       "latest": "2026-10-10T11:31:14.699283+00:00"
     },
     {
-      "id": "comparison-06b05d18818d",
+      "id": "comparison-ef3ae7a2ca5a",
       "task_file": "data/experiments/tasks/collaborative-tables-access.md",
       "classification": "productivity-storage/collaborative-tables",
       "phase": "setup",
@@ -80813,9 +80813,9 @@
       "latest": "2026-10-10T10:59:55.683547+00:00"
     },
     {
-      "id": "comparison-7a7e044bd215",
+      "id": "comparison-89d974d3f8b8",
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business",
       "tasks": [
         {
@@ -80853,9 +80853,9 @@
       "latest": "2026-10-10T10:34:46.885180+00:00"
     },
     {
-      "id": "comparison-60adbd865cb5",
+      "id": "comparison-a29775463366",
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup",
       "tasks": [
         {
@@ -80893,9 +80893,9 @@
       "latest": "2026-10-10T10:32:56.390237+00:00"
     },
     {
-      "id": "comparison-70023b6902c1",
+      "id": "comparison-e2c50ca437a8",
       "task_file": "data/experiments/tasks/financial-macro.md",
-      "classification": "web-search-data/financial-data/macro",
+      "classification": "financial-data/macro",
       "phase": "business",
       "tasks": [
         {
@@ -80954,7 +80954,7 @@
       "latest": "2026-10-10T10:30:21.234133+00:00"
     },
     {
-      "id": "comparison-8e6422c28f03",
+      "id": "comparison-6b6a0b74a08e",
       "task_file": "data/experiments/tasks/dependency-advisories.md",
       "classification": "developer-tools/dependency-advisories",
       "phase": "business",
@@ -81015,9 +81015,9 @@
       "latest": "2026-10-10T10:28:04.663462+00:00"
     },
     {
-      "id": "comparison-36e32b17588d",
+      "id": "comparison-463143c72255",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -81076,9 +81076,9 @@
       "latest": "2026-10-10T10:24:55.156781+00:00"
     },
     {
-      "id": "comparison-c53ca46196b8",
+      "id": "comparison-d9a19cb24943",
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "business",
       "tasks": [
         {
@@ -81137,9 +81137,9 @@
       "latest": "2026-10-10T10:21:59.784583+00:00"
     },
     {
-      "id": "comparison-ce7a914a844f",
+      "id": "comparison-f49782e60ce5",
       "task_file": "data/experiments/tasks/public-holidays.md",
-      "classification": "web-search-data/public-holidays",
+      "classification": "weather-calendar/public-holidays",
       "phase": "setup",
       "tasks": [
         {
@@ -81198,7 +81198,7 @@
       "latest": "2026-10-10T10:19:21.316812+00:00"
     },
     {
-      "id": "comparison-1a93823643b5",
+      "id": "comparison-f1229f7220dc",
       "task_file": "data/experiments/tasks/dependency-advisories.md",
       "classification": "developer-tools/dependency-advisories",
       "phase": "setup",
@@ -81358,7 +81358,7 @@
     {
       "id": "comparison-c49d8e01e18c",
       "task_file": "data/experiments/tasks/web-extraction-pdf.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "tasks": [
         {
@@ -81415,7 +81415,7 @@
     {
       "id": "comparison-0f505e0eb8fb",
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "business",
       "tasks": [
         {
@@ -81472,7 +81472,7 @@
     {
       "id": "comparison-1c64f31025f0",
       "task_file": "data/experiments/tasks/qr-codes.md",
-      "classification": "productivity-storage/qr-codes",
+      "classification": "developer-tools/qr-codes",
       "phase": "setup",
       "tasks": [
         {
@@ -81529,7 +81529,7 @@
     {
       "id": "comparison-f0300fd67f1a",
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "business",
       "tasks": [
         {
@@ -81586,7 +81586,7 @@
     {
       "id": "comparison-6d420b99e4b1",
       "task_file": "data/experiments/tasks/route-planning.md",
-      "classification": "web-search-data/route-planning",
+      "classification": "maps-geo/route-planning",
       "phase": "setup",
       "tasks": [
         {
@@ -81643,7 +81643,7 @@
     {
       "id": "comparison-bde1a47b7eaa",
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "setup",
       "tasks": [
         {
@@ -81820,7 +81820,7 @@
     {
       "id": "comparison-b5f2b1f41c23",
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "business",
       "tasks": [
         {
@@ -81877,7 +81877,7 @@
     {
       "id": "comparison-e571efbd864f",
       "task_file": "data/experiments/tasks/scholarly-search.md",
-      "classification": "web-search-data/scholarly-search",
+      "classification": "scholarly/scholarly-search",
       "phase": "setup",
       "tasks": [
         {
@@ -81934,7 +81934,7 @@
     {
       "id": "comparison-965a5e31dfe6",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/prices",
+      "classification": "financial-data/prices",
       "phase": "business",
       "tasks": [
         {
@@ -81991,7 +81991,7 @@
     {
       "id": "comparison-29077cd73ecd",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -82048,7 +82048,7 @@
     {
       "id": "comparison-c820e750045c",
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "business",
       "tasks": [
         {
@@ -82088,7 +82088,7 @@
     {
       "id": "comparison-3bcbfb46bd35",
       "task_file": "data/experiments/tasks/geocoding.md",
-      "classification": "web-search-data/geocoding",
+      "classification": "maps-geo/geocoding",
       "phase": "setup",
       "tasks": [
         {
@@ -82128,7 +82128,7 @@
     {
       "id": "comparison-728ca7b6aa38",
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "business",
       "tasks": [
         {
@@ -82185,7 +82185,7 @@
     {
       "id": "comparison-7e7df525d550",
       "task_file": "data/experiments/tasks/weather-data.md",
-      "classification": "web-search-data/weather-data",
+      "classification": "weather-calendar/weather-data",
       "phase": "setup",
       "tasks": [
         {
@@ -82242,7 +82242,7 @@
     {
       "id": "comparison-f351c20d0bf2",
       "task_file": "data/experiments/tasks/web-search-v2.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "tasks": [
         {
@@ -82299,7 +82299,7 @@
     {
       "id": "comparison-5244b7150d7c",
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "setup",
       "tasks": [
         {
@@ -82413,7 +82413,7 @@
     {
       "id": "comparison-032f75889210",
       "task_file": "data/experiments/tasks/web-extraction.md",
-      "classification": "web-search-data/web-extraction",
+      "classification": "search-scraping/web-extraction",
       "phase": "business",
       "tasks": [
         {
@@ -82533,7 +82533,7 @@
     {
       "id": "comparison-85831928a49a",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business",
       "tasks": [
         {
@@ -82573,7 +82573,7 @@
     {
       "id": "comparison-01f9c83debc7",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/statements",
+      "classification": "financial-data/statements",
       "phase": "business",
       "tasks": [
         {
@@ -82613,7 +82613,7 @@
     {
       "id": "comparison-33be83cbd5a7",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -82653,7 +82653,7 @@
     {
       "id": "comparison-db274edc24f6",
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "tasks": [
         {
@@ -82692,7 +82692,7 @@
     {
       "id": "comparison-8c4b61fb41be",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/fx",
+      "classification": "financial-data/fx",
       "phase": "business",
       "tasks": [
         {
@@ -82749,7 +82749,7 @@
     {
       "id": "comparison-8a11046c9744",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -82789,7 +82789,7 @@
     {
       "id": "comparison-1d87fed8bbbd",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business",
       "tasks": [
         {
@@ -82868,7 +82868,7 @@
     {
       "id": "comparison-a3477334d9b4",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -82925,7 +82925,7 @@
     {
       "id": "comparison-60de41521941",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data/disclosures",
+      "classification": "financial-data/disclosures",
       "phase": "business",
       "tasks": [
         {
@@ -83004,7 +83004,7 @@
     {
       "id": "comparison-f170f4b6c34f",
       "task_file": "data/experiments/tasks/financial-data.md",
-      "classification": "web-search-data/financial-data",
+      "classification": "financial-data",
       "phase": "setup",
       "tasks": [
         {
@@ -83298,7 +83298,7 @@
     {
       "id": "comparison-53b484528301",
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "tasks": [
         {
@@ -83337,7 +83337,7 @@
     {
       "id": "comparison-3f655dc71038",
       "task_file": "data/experiments/tasks/web-search.md",
-      "classification": "web-search-data/web-search",
+      "classification": "search-scraping/web-search",
       "phase": "business",
       "tasks": [
         {

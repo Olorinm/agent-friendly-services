@@ -1,6 +1,6 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-10-12T03:54:33.421Z",
+  "generated_at": "2026-10-12T05:06:05.524Z",
   "count": 119,
   "candidates": [
     {
@@ -30,7 +30,7 @@
     {
       "id": "agentservices",
       "name": "AgentServices",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://agentservices.to/",
       "summary": "Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.",
       "submitted_by": "vendor",
@@ -87,7 +87,7 @@
     {
       "id": "alpaca-market-data",
       "name": "Alpaca Market Data",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://alpaca.markets/",
       "summary": "Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.",
       "submitted_by": "community",
@@ -98,7 +98,7 @@
     {
       "id": "alpha-vantage",
       "name": "Alpha Vantage",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.alphavantage.co/",
       "summary": "Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.",
       "submitted_by": "community",
@@ -144,7 +144,7 @@
     {
       "id": "bargo-congress",
       "name": "Bargo Congress Trades API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.bargo.ai/free-apis/congress",
       "summary": "Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.",
       "submitted_by": "vendor",
@@ -170,7 +170,7 @@
     {
       "id": "bloomberg-data-license",
       "name": "Bloomberg Data License",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://professional.bloomberg.com/products/data/data-license/",
       "summary": "Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.",
       "submitted_by": "community",
@@ -194,7 +194,7 @@
     {
       "id": "capitol-exposed",
       "name": "CapitolExposed",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.capitolexposed.com/",
       "summary": "Congressional disclosures and related public records, with a keyless read API and separate paid features.",
       "submitted_by": "community",
@@ -205,7 +205,7 @@
     {
       "id": "capitol-trades",
       "name": "Capitol Trades",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.capitoltrades.com/",
       "summary": "Public congressional trading website by 2iQ; no self-serve API is established in this record.",
       "submitted_by": "community",
@@ -251,7 +251,7 @@
     {
       "id": "coingecko",
       "name": "CoinGecko",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.coingecko.com/",
       "summary": "Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.",
       "submitted_by": "community",
@@ -262,7 +262,7 @@
     {
       "id": "coinmarketcap",
       "name": "CoinMarketCap",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://coinmarketcap.com/",
       "summary": "Crypto market data with selected keyless endpoints and a free authenticated Basic plan.",
       "submitted_by": "community",
@@ -273,7 +273,7 @@
     {
       "id": "congress-stock-tracker",
       "name": "Congress Stock Tracker",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.congressstock.com/",
       "summary": "Licensed congressional transaction datasets with source links and amendment history; pricing is negotiated.",
       "submitted_by": "community",
@@ -300,7 +300,7 @@
     {
       "id": "crossref",
       "name": "Crossref",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://www.crossref.org/",
       "summary": "Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.",
       "submitted_by": "community",
@@ -359,7 +359,7 @@
     {
       "id": "ecb-data",
       "name": "ECB Data Portal API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.ecb.europa.eu/",
       "summary": "European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.",
       "submitted_by": "community",
@@ -370,7 +370,7 @@
     {
       "id": "eodhd",
       "name": "EODHD",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://eodhd.com/",
       "summary": "Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.",
       "submitted_by": "community",
@@ -381,7 +381,7 @@
     {
       "id": "eurostat",
       "name": "Eurostat Data API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://ec.europa.eu/eurostat/",
       "summary": "Official European economic and social statistics with public REST data and metadata access.",
       "submitted_by": "community",
@@ -403,7 +403,7 @@
     {
       "id": "factset-data",
       "name": "FactSet Data APIs",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.factset.com/",
       "summary": "Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.",
       "submitted_by": "community",
@@ -451,7 +451,7 @@
     {
       "id": "financial-datasets",
       "name": "Financial Datasets",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://financialdatasets.ai/",
       "summary": "US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.",
       "submitted_by": "community",
@@ -462,7 +462,7 @@
     {
       "id": "finnhub",
       "name": "Finnhub",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://finnhub.io/",
       "summary": "Stock quotes, historical candles and fundamentals; stock candles are documented as premium.",
       "submitted_by": "community",
@@ -506,7 +506,7 @@
     {
       "id": "fmp",
       "name": "Financial Modeling Prep (FMP)",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://financialmodelingprep.com/",
       "summary": "Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.",
       "submitted_by": "community",
@@ -517,7 +517,7 @@
     {
       "id": "frankfurter",
       "name": "Frankfurter",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://frankfurter.dev/",
       "summary": "Public exchange-rate API and official MCP using central-bank reference data, with no API key.",
       "submitted_by": "community",
@@ -528,7 +528,7 @@
     {
       "id": "fred",
       "name": "FRED / ALFRED",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://fred.stlouisfed.org/",
       "summary": "Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.",
       "submitted_by": "community",
@@ -539,7 +539,7 @@
     {
       "id": "geoapify",
       "name": "Geoapify",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.geoapify.com/",
       "summary": "Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.",
       "submitted_by": "community",
@@ -550,7 +550,7 @@
     {
       "id": "geocode-maps-co",
       "name": "Geocode Maps.co",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://geocode.maps.co/",
       "summary": "Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.",
       "submitted_by": "community",
@@ -583,7 +583,7 @@
     {
       "id": "goqr",
       "name": "goQR QR Code API",
-      "category": "productivity-storage",
+      "category": "developer-tools",
       "homepage": "https://goqr.me/api/",
       "summary": "Foundata's hosted static QR image API at api.qrserver.com, with public no-account generation and downloadable raster or vector formats.",
       "submitted_by": "community",
@@ -627,7 +627,7 @@
     {
       "id": "insynet",
       "name": "Insynet",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://insynet.se/",
       "summary": "Congress purchase disclosures and insider filings through an API; free keys require an email request.",
       "submitted_by": "community",
@@ -638,7 +638,7 @@
     {
       "id": "joinquant-data",
       "name": "JoinQuant JQData",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.joinquant.com/",
       "summary": "Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.",
       "submitted_by": "community",
@@ -684,7 +684,7 @@
     {
       "id": "locationiq",
       "name": "LocationIQ",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://locationiq.com/",
       "summary": "Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.",
       "submitted_by": "community",
@@ -695,7 +695,7 @@
     {
       "id": "lseg-data",
       "name": "LSEG Data Platform",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.lseg.com/en/data-analytics",
       "summary": "Financial-data platform and Python library with licensed desktop and cloud access paths.",
       "submitted_by": "community",
@@ -772,7 +772,7 @@
     {
       "id": "massive",
       "name": "Massive (formerly Polygon.io)",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://massive.com/",
       "summary": "Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.",
       "submitted_by": "community",
@@ -783,7 +783,7 @@
     {
       "id": "met-norway",
       "name": "MET Norway Locationforecast",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://api.met.no/",
       "summary": "Public global point forecasts from MET Norway, with no API key and mandatory client identification.",
       "submitted_by": "community",
@@ -807,7 +807,7 @@
     {
       "id": "nager-date",
       "name": "Nager.Date",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://nagerholidays.com/",
       "summary": "Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.",
       "submitted_by": "community",
@@ -818,7 +818,7 @@
     {
       "id": "nasdaq-data-link",
       "name": "Nasdaq Data Link",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.nasdaq.com/",
       "summary": "Marketplace for financial and economic datasets with free and separately subscribed products.",
       "submitted_by": "community",
@@ -829,7 +829,7 @@
     {
       "id": "nominatim",
       "name": "Nominatim Public API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://nominatim.org/",
       "summary": "OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.",
       "submitted_by": "community",
@@ -840,7 +840,7 @@
     {
       "id": "open-exchange-rates",
       "name": "Open Exchange Rates",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://openexchangerates.org/",
       "summary": "Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.",
       "submitted_by": "community",
@@ -851,7 +851,7 @@
     {
       "id": "open-meteo",
       "name": "Open-Meteo",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://open-meteo.com/",
       "summary": "Global weather forecast API with a keyless non-commercial free tier and attributed open data.",
       "submitted_by": "community",
@@ -862,7 +862,7 @@
     {
       "id": "openalex",
       "name": "OpenAlex",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://openalex.org/",
       "summary": "Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.",
       "submitted_by": "community",
@@ -873,7 +873,7 @@
     {
       "id": "openholidays",
       "name": "OpenHolidays API",
-      "category": "web-search-data",
+      "category": "weather-calendar",
       "homepage": "https://www.openholidaysapi.org/en/",
       "summary": "Free hosted public and school holiday data API with regional filters and an openly licensed data collection.",
       "submitted_by": "community",
@@ -884,7 +884,7 @@
     {
       "id": "osrm",
       "name": "OSRM Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://project-osrm.org/",
       "summary": "FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.",
       "submitted_by": "community",
@@ -962,7 +962,7 @@
     {
       "id": "photon",
       "name": "Photon Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://photon.komoot.io/",
       "summary": "Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.",
       "submitted_by": "community",
@@ -1013,7 +1013,7 @@
     {
       "id": "quickchart",
       "name": "QuickChart",
-      "category": "productivity-storage",
+      "category": "developer-tools",
       "homepage": "https://quickchart.io/qr-code-api/",
       "summary": "Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.",
       "submitted_by": "community",
@@ -1024,7 +1024,7 @@
     {
       "id": "quiver-quantitative",
       "name": "Quiver Quantitative",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.quiverquant.com/",
       "summary": "Congressional and insider transactions, institutional activity and other alternative financial datasets.",
       "submitted_by": "community",
@@ -1092,7 +1092,7 @@
     {
       "id": "sec-edgar",
       "name": "SEC EDGAR Data APIs",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.sec.gov/",
       "summary": "Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.",
       "submitted_by": "community",
@@ -1103,7 +1103,7 @@
     {
       "id": "semantic-scholar",
       "name": "Semantic Scholar",
-      "category": "web-search-data",
+      "category": "scholarly",
       "homepage": "https://www.semanticscholar.org/",
       "summary": "Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.",
       "submitted_by": "community",
@@ -1114,7 +1114,7 @@
     {
       "id": "serper",
       "name": "Serper",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://serper.dev/",
       "summary": "Google results API with initial free queries. Its terms describe a B2B service rather than consumer access; personal eligibility and authenticated setup remain unverified.",
       "submitted_by": "community",
@@ -1125,7 +1125,7 @@
     {
       "id": "simfin",
       "name": "SimFin",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.simfin.com/",
       "summary": "Company fundamentals and price data with API and CSV access advertised across free and paid plans.",
       "submitted_by": "community",
@@ -1206,7 +1206,7 @@
     {
       "id": "tiingo",
       "name": "Tiingo",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://www.tiingo.com/",
       "summary": "Market data covering end-of-day prices and other feeds, with an account-issued authentication token.",
       "submitted_by": "community",
@@ -1228,7 +1228,7 @@
     {
       "id": "tracefour",
       "name": "Tracefour",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://tracefour.com/",
       "summary": "Public trading disclosures through keyless REST and MCP, with attribution and original-filing links.",
       "submitted_by": "community",
@@ -1272,7 +1272,7 @@
     {
       "id": "tushare",
       "name": "Tushare Pro",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://tushare.pro/",
       "summary": "Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.",
       "submitted_by": "community",
@@ -1283,7 +1283,7 @@
     {
       "id": "twelve-data",
       "name": "Twelve Data",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://twelvedata.com/",
       "summary": "Global stock, FX and crypto time series with API, Python SDK and CLI access.",
       "submitted_by": "community",
@@ -1294,7 +1294,7 @@
     {
       "id": "us-house-disclosures",
       "name": "U.S. House Financial Disclosures",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://disclosures-clerk.house.gov/FinancialDisclosure",
       "summary": "Original House financial disclosure filings and searchable annual indexes, published by the Clerk.",
       "submitted_by": "community",
@@ -1305,7 +1305,7 @@
     {
       "id": "valhalla",
       "name": "Valhalla Public Demo API",
-      "category": "web-search-data",
+      "category": "maps-geo",
       "homepage": "https://valhalla.github.io/valhalla/",
       "summary": "FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.",
       "submitted_by": "community",
@@ -1342,7 +1342,7 @@
     {
       "id": "world-bank-data",
       "name": "World Bank Indicators API",
-      "category": "web-search-data",
+      "category": "financial-data",
       "homepage": "https://data.worldbank.org/",
       "summary": "Country-level economic and development indicators through the public Indicators API.",
       "submitted_by": "community",
@@ -1364,7 +1364,7 @@
     {
       "id": "xquik",
       "name": "Xquik",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://xquik.com",
       "summary": "Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.",
       "submitted_by": "vendor",

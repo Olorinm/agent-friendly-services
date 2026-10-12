@@ -11,7 +11,7 @@ Payment processing with hosted Pay by Link checkout; test merchant accounts and 
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.adyen.com/) · [Source record](../data/candidates/adyen.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.adyen.com/) · [Source record](../data/candidates/adyen.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="adyen-access"></a>
 
@@ -41,7 +41,7 @@ Dedicated agent inboxes with sending, receiving, threads and API, SDK, CLI and M
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.agentmail.to/) · [Source record](../data/candidates/agentmail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.agentmail.to/) · [Source record](../data/candidates/agentmail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="agentmail-access"></a>
 
@@ -135,9 +135,9 @@ Access preparation: none initially; one fresh anonymous mailbox and necessary id
 
 Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK; selected free tools, x402 payments on REST, and a documented OAuth/prepaid-credit MCP path.
 
-**Classification:** Search & Data Access / Web Search; Search & Data Access / Web Content Extraction; AI Services / Model Access; Search & Data Access / Financial Data / Asset Prices
+**Classification:** Search & Web Scraping / Web Search; Search & Web Scraping / Web Content Extraction; AI Services / Model Access; Financial Data / Asset Prices
 
-[Website](https://agentservices.to/) · [Source record](../data/candidates/agentservices.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://agentservices.to/) · [Source record](../data/candidates/agentservices.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="agentservices-access"></a>
 
@@ -179,7 +179,7 @@ Air distribution API with sandbox keys, production certification and an agency a
 
 **Classification:** Travel / Flights
 
-[Website](https://airgateway.com/) · [Source record](../data/candidates/airgateway.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://airgateway.com/) · [Source record](../data/candidates/airgateway.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="airgateway-access"></a>
 
@@ -208,7 +208,7 @@ Spreadsheet-database hybrid with a REST API, scoped personal access tokens, OAut
 
 **Classification:** Productivity & Collaboration / Collaborative Tables
 
-[Website](https://www.airtable.com) · [Source record](../data/providers/airtable.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.airtable.com) · [Source record](../data/providers/airtable.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="airtable-access"></a>
 
@@ -255,7 +255,7 @@ Hosted payment links with fixed or customer-selected amounts and payment status 
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.airwallex.com/) · [Source record](../data/candidates/airwallex.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.airwallex.com/) · [Source record](../data/candidates/airwallex.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="airwallex-access"></a>
 
@@ -286,7 +286,7 @@ Managed PostgreSQL with a no-card free single-node plan, account-based CLI/API p
 
 **Classification:** Databases / Hosted Relational Databases
 
-[Website](https://aiven.io/) · [Source record](../data/candidates/aiven.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://aiven.io/) · [Source record](../data/candidates/aiven.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="aiven-access"></a>
 
@@ -322,7 +322,7 @@ Qwen model family via Alibaba Cloud Model Studio's OpenAI-compatible API, with a
 
 **Classification:** AI Services / Model Access
 
-[Website](https://www.alibabacloud.com/en/product/modelstudio) · [Source record](../data/providers/qwen.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.alibabacloud.com/en/product/modelstudio) · [Source record](../data/providers/qwen.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="qwen-access"></a>
 
@@ -350,7 +350,7 @@ Online merchant payment integrations for websites and apps through Alipay APIs a
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://open.alipay.com/) · [Source record](../data/candidates/alipay.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://open.alipay.com/) · [Source record](../data/candidates/alipay.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="alipay-access"></a>
 
@@ -377,9 +377,9 @@ Online merchant payment integrations for websites and apps through Alipay APIs a
 
 Read-only equities, options and crypto market data, separate from trading operations; Basic access is included with paper accounts.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://alpaca.markets/) · [Source record](../data/candidates/alpaca-market-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://alpaca.markets/) · [Source record](../data/candidates/alpaca-market-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="alpaca-market-data-access"></a>
 
@@ -406,9 +406,9 @@ Read-only equities, options and crypto market data, separate from trading operat
 
 Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily quota; premium endpoints are separate.
 
-**Classification:** Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures; Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Financial Data / Exchange Rates; Financial Data / Asset Prices; Financial Data / Company Financials; Financial Data / Transaction Disclosures; Financial Data / Economic Indicators
 
-[Website](https://www.alphavantage.co/) · [Source record](../data/candidates/alpha-vantage.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.alphavantage.co/) · [Source record](../data/candidates/alpha-vantage.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="alpha-vantage-access"></a>
 
@@ -546,7 +546,7 @@ Historical Self-Service flight API and the current Enterprise portal; individual
 
 **Classification:** Travel / Flights
 
-[Website](https://developers.amadeus.com/) · [Source record](../data/candidates/amadeus-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://developers.amadeus.com/) · [Source record](../data/candidates/amadeus-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="amadeus-flights-access"></a>
 
@@ -576,7 +576,7 @@ Claude model APIs with agent-focused documentation, llms.txt, and the company be
 
 **Classification:** AI Services / Model Access
 
-[Website](https://www.anthropic.com) · [Source record](../data/providers/anthropic.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.anthropic.com) · [Source record](../data/providers/anthropic.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="anthropic-access"></a>
 
@@ -607,9 +607,9 @@ Claude model APIs with agent-focused documentation, llms.txt, and the company be
 
 Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 
-**Classification:** Search & Data Access / Web Content Extraction
+**Classification:** Search & Web Scraping / Web Content Extraction
 
-[Website](https://apify.com) · [Source record](../data/providers/apify.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://apify.com) · [Source record](../data/providers/apify.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="apify-access"></a>
 
@@ -643,7 +643,7 @@ An apiheya flight-data product distributed through RapidAPI; distinct from the o
 
 **Classification:** Travel / Flights
 
-[Website](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) · [Source record](../data/candidates/apiheya-air-scraper.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://rapidapi.com/apiheya/api/sky-scrapper/pricing) · [Source record](../data/candidates/apiheya-air-scraper.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="apiheya-air-scraper-access"></a>
 
@@ -672,7 +672,7 @@ Jira, Confluence and the Atlassian Cloud platform — REST APIs, an official rem
 
 **Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management; Productivity & Collaboration / Document Collaboration
 
-[Website](https://www.atlassian.com) · [Source record](../data/providers/atlassian.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.atlassian.com) · [Source record](../data/providers/atlassian.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="atlassian-access"></a>
 
@@ -704,7 +704,7 @@ Travelpayouts-distributed live flight search and a separately accessible histori
 
 **Classification:** Travel / Flights
 
-[Website](https://www.aviasales.com/) · [Source record](../data/candidates/aviasales.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.aviasales.com/) · [Source record](../data/candidates/aviasales.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="aviasales-access"></a>
 
@@ -733,9 +733,9 @@ Travelpayouts-distributed live flight search and a separately accessible histori
 
 Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers only the Congress product.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://www.bargo.ai/free-apis/congress) · [Source record](../data/candidates/bargo-congress.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.bargo.ai/free-apis/congress) · [Source record](../data/candidates/bargo-congress.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="bargo-congress-access"></a>
 
@@ -936,7 +936,7 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 
 **Classification:** Productivity & Collaboration / Collaborative Tables
 
-[Website](https://baserow.io/) · [Source record](../data/candidates/baserow.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://baserow.io/) · [Source record](../data/candidates/baserow.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="baserow-access"></a>
 
@@ -977,9 +977,9 @@ Hosted collaborative tables; free workspace and scoped row-access tokens. Schema
 
 Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP or cloud.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://professional.bloomberg.com/products/data/data-license/) · [Source record](../data/candidates/bloomberg-data-license.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://professional.bloomberg.com/products/data/data-license/) · [Source record](../data/candidates/bloomberg-data-license.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="bloomberg-data-license-access"></a>
 
@@ -1008,9 +1008,9 @@ Enterprise pricing, fundamentals, reference and other financial datasets deliver
 
 Independent web search index with a developer API, self-serve registration, and a free plan.
 
-**Classification:** Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Search
 
-[Website](https://brave.com/search/api/) · [Source record](../data/providers/brave-search.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://brave.com/search/api/) · [Source record](../data/providers/brave-search.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="brave-search-access"></a>
 
@@ -1044,7 +1044,7 @@ SERP API with a documented Google Flights request; structured fare extraction an
 
 **Classification:** Travel / Flights
 
-[Website](https://brightdata.com/) · [Source record](../data/candidates/bright-data-serp.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://brightdata.com/) · [Source record](../data/candidates/bright-data-serp.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="bright-data-serp-access"></a>
 
@@ -1074,7 +1074,7 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 
 **Classification:** Cloud Computing & Hosting / Browser Environments
 
-[Website](https://www.browserbase.com) · [Source record](../data/providers/browserbase.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.browserbase.com) · [Source record](../data/providers/browserbase.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="browserbase-access"></a>
 
@@ -1104,9 +1104,9 @@ Headless browser infrastructure for AI agents and automation, with session APIs 
 
 Public congressional trading website by 2iQ; no self-serve API is established in this record.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://www.capitoltrades.com/) · [Source record](../data/candidates/capitol-trades.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.capitoltrades.com/) · [Source record](../data/candidates/capitol-trades.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="capitol-trades-access"></a>
 
@@ -1133,9 +1133,9 @@ Public congressional trading website by 2iQ; no self-serve API is established in
 
 Congressional disclosures and related public records, with a keyless read API and separate paid features.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://www.capitolexposed.com/) · [Source record](../data/candidates/capitol-exposed.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.capitolexposed.com/) · [Source record](../data/candidates/capitol-exposed.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="capitol-exposed-access"></a>
 
@@ -1306,7 +1306,7 @@ Low-latency voice models (Sonic TTS, Ink STT) with a documented API, official MC
 
 **Classification:** AI Services / Speech Synthesis; AI Services / Speech Recognition; Communication / Voice Agents
 
-[Website](https://cartesia.ai) · [Source record](../data/providers/cartesia.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://cartesia.ai) · [Source record](../data/providers/cartesia.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="cartesia-access"></a>
 
@@ -1338,7 +1338,7 @@ Wafer-scale inference for open models at very high tokens/sec, OpenAI-compatible
 
 **Classification:** AI Services / Model Access
 
-[Website](https://cloud.cerebras.ai) · [Source record](../data/providers/cerebras.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://cloud.cerebras.ai) · [Source record](../data/providers/cerebras.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="cerebras-access"></a>
 
@@ -1366,7 +1366,7 @@ Payment Links API for hosted checkout, with separate sandbox and production API 
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.checkout.com/) · [Source record](../data/candidates/checkout-com.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.checkout.com/) · [Source record](../data/candidates/checkout-com.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="checkout-com-access"></a>
 
@@ -1394,7 +1394,7 @@ Open-source embedding database with a hosted Chroma Cloud, official CLI, officia
 
 **Classification:** Databases / Vector Databases
 
-[Website](https://www.trychroma.com) · [Source record](../data/providers/chroma.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.trychroma.com) · [Source record](../data/providers/chroma.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="chroma-access"></a>
 
@@ -1426,7 +1426,7 @@ Edge network, Workers serverless platform, storage, and AI services with agent-f
 
 **Classification:** Cloud Computing & Hosting / Application Hosting; Databases / Hosted Relational Databases; Databases / Key-value Databases
 
-[Website](https://www.cloudflare.com) · [Source record](../data/providers/cloudflare.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.cloudflare.com) · [Source record](../data/providers/cloudflare.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="cloudflare-access"></a>
 
@@ -1468,7 +1468,7 @@ Docs and tables with a free REST API; current API page is branded Superhuman Doc
 
 **Classification:** Productivity & Collaboration / Collaborative Tables; Productivity & Collaboration / Document Collaboration
 
-[Website](https://coda.io/) · [Source record](../data/candidates/coda.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://coda.io/) · [Source record](../data/candidates/coda.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="coda-access"></a>
 
@@ -1509,7 +1509,7 @@ Hosted marketplace for agents to discover counterparties, negotiate capability e
 
 **Classification:** Agent Infrastructure & Automation
 
-[Website](https://cogdepot.com/) · [Source record](../data/candidates/cog-depot.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://cogdepot.com/) · [Source record](../data/candidates/cog-depot.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="cog-depot-access"></a>
 
@@ -1560,7 +1560,7 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 
 **Classification:** AI Services / Model Access
 
-[Website](https://cohere.com) · [Source record](../data/providers/cohere.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://cohere.com) · [Source record](../data/providers/cohere.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="cohere-access"></a>
 
@@ -1586,9 +1586,9 @@ Enterprise LLM platform (command, embed, rerank) with llms.txt, documented API v
 
 Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP servers.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://www.coingecko.com/) · [Source record](../data/candidates/coingecko.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.coingecko.com/) · [Source record](../data/candidates/coingecko.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="coingecko-access"></a>
 
@@ -1619,9 +1619,9 @@ Crypto prices and market data with a free Demo API plan and official keyless or 
 
 Crypto market data with selected keyless endpoints and a free authenticated Basic plan.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://coinmarketcap.com/) · [Source record](../data/candidates/coinmarketcap.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://coinmarketcap.com/) · [Source record](../data/candidates/coinmarketcap.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="coinmarketcap-access"></a>
 
@@ -1649,7 +1649,7 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 
 **Classification:** Agent Infrastructure & Automation / Tool Connections
 
-[Website](https://composio.dev) · [Source record](../data/providers/composio.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://composio.dev) · [Source record](../data/providers/composio.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="composio-access"></a>
 
@@ -1680,9 +1680,9 @@ Tool and integration layer for AI agents (hundreds of app connectors with manage
 
 Licensed congressional transaction datasets with source links and amendment history; pricing is negotiated.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://www.congressstock.com/) · [Source record](../data/candidates/congress-stock-tracker.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.congressstock.com/) · [Source record](../data/candidates/congress-stock-tracker.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="congress-stock-tracker-access"></a>
 
@@ -1710,7 +1710,7 @@ Digital-product checkout and billing APIs with separate test mode and reviewed m
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.creem.io/) · [Source record](../data/candidates/creem.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.creem.io/) · [Source record](../data/candidates/creem.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="creem-access"></a>
 
@@ -1742,9 +1742,9 @@ Digital-product checkout and billing APIs with separate test mode and reviewed m
 
 Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.
 
-**Classification:** Search & Data Access / Scholarly Literature Search
+**Classification:** Scholarly & Reference / Scholarly Literature Search
 
-[Website](https://www.crossref.org/) · [Source record](../data/candidates/crossref.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.crossref.org/) · [Source record](../data/candidates/crossref.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="crossref-access"></a>
 
@@ -1840,7 +1840,7 @@ Observability platform with a full REST API, llms.txt, documented OAuth for inte
 
 **Classification:** Developer Tools / Monitoring & Troubleshooting
 
-[Website](https://www.datadoghq.com) · [Source record](../data/providers/datadog.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.datadoghq.com) · [Source record](../data/providers/datadog.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="datadog-access"></a>
 
@@ -1868,7 +1868,7 @@ Hosted sandboxes with SDK, CLI and API access for code execution and file transf
 
 **Classification:** Cloud Computing & Hosting / Code Sandboxes
 
-[Website](https://www.daytona.io/) · [Source record](../data/candidates/daytona.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.daytona.io/) · [Source record](../data/candidates/daytona.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="daytona-access"></a>
 
@@ -1912,7 +1912,7 @@ Speech-to-text and voice AI API with a public OpenAPI spec, llms.txt, scoped API
 
 **Classification:** AI Services / Speech Recognition; AI Services / Speech Synthesis; Communication / Voice Agents
 
-[Website](https://deepgram.com) · [Source record](../data/providers/deepgram.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://deepgram.com) · [Source record](../data/providers/deepgram.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="deepgram-access"></a>
 
@@ -1944,7 +1944,7 @@ OpenAI-compatible LLM API (DeepSeek-V3/R1) with transparent per-token pricing, a
 
 **Classification:** AI Services / Model Access
 
-[Website](https://www.deepseek.com) · [Source record](../data/providers/deepseek.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.deepseek.com) · [Source record](../data/providers/deepseek.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="deepseek-access"></a>
 
@@ -1972,7 +1972,7 @@ Chat platform with a versioned bot/OAuth2 API, official OpenAPI spec (preview), 
 
 **Classification:** Communication / Messaging
 
-[Website](https://discord.com) · [Source record](../data/providers/discord.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://discord.com) · [Source record](../data/providers/discord.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="discord-access"></a>
 
@@ -2005,7 +2005,7 @@ Merchant-of-record checkout for one-time and subscription sales, with test mode,
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://dodopayments.com/) · [Source record](../data/candidates/dodo-payments.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://dodopayments.com/) · [Source record](../data/candidates/dodo-payments.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="dodo-payments-access"></a>
 
@@ -2045,7 +2045,7 @@ File storage and sync with a scoped-OAuth HTTP API, self-serve app creation, and
 
 **Classification:** Productivity & Collaboration / File Sharing
 
-[Website](https://www.dropbox.com) · [Source record](../data/providers/dropbox.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.dropbox.com) · [Source record](../data/providers/dropbox.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="dropbox-access"></a>
 
@@ -2077,7 +2077,7 @@ Flight API whose self-serve test environment must be distinguished from live acc
 
 **Classification:** Travel / Flights
 
-[Website](https://duffel.com/) · [Source record](../data/candidates/duffel-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://duffel.com/) · [Source record](../data/candidates/duffel-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="duffel-flights-access"></a>
 
@@ -2107,7 +2107,7 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 **Classification:** Cloud Computing & Hosting / Code Sandboxes
 
-[Website](https://e2b.dev) · [Source record](../data/providers/e2b.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://e2b.dev) · [Source record](../data/providers/e2b.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="e2b-access"></a>
 
@@ -2144,9 +2144,9 @@ Isolated cloud sandboxes for running AI-generated code, with llms.txt, an offici
 
 European Central Bank statistical data, including historical reference exchange rates, through SDMX REST.
 
-**Classification:** Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Financial Data / Exchange Rates; Financial Data / Economic Indicators
 
-[Website](https://data.ecb.europa.eu/) · [Source record](../data/candidates/ecb-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://data.ecb.europa.eu/) · [Source record](../data/candidates/ecb-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="ecb-data-access"></a>
 
@@ -2162,13 +2162,13 @@ European Central Bank statistical data, including historical reference exchange 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | [237.8k](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 65.683655s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json) | [237.8k](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json) | 65.683655s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-36e32b17588d) | [100%](./evaluations.md#comparison-36e32b17588d) | 312.7k | $0.02 | $0 |
+| API | [3](./evaluations.md#comparison-463143c72255) | [100%](./evaluations.md#comparison-463143c72255) | 312.7k | $0.02 | $0 |
 
 - [afs-20261010-johor40-macro-ecb-data-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 ECB 官方 API 匿名调用返回 HTTP 200 与真实汇率观测（execution/artifacts/out/exr_basic.csv、exr_headers.txt），配置与客户端已保存（execution/retained-files.json），答复交付完整（execution/answer.md）；无网络/权限/预算阻碍。
 - [afs-20261010-johor40-macro-ecb-data-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-access-r2.json): Service operation completed; user delivery completed; blockers none. EXR、ICP 数据查询与元数据接口均实际执行并返回 200（execution/artifacts/responses/）；连接配置写入并由运行器保留（retained-files.json）；最终答复 execution/answer.md 完整交付。无网络/权限/预算等阻碍证据。
@@ -2183,7 +2183,7 @@ The service, required interface, and any supplied account or signup information 
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-36e32b17588d)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-463143c72255)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
@@ -2208,7 +2208,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-70023b6902c1) | [100%](./evaluations.md#comparison-70023b6902c1) | 505.5k | $0.03 | $0 |
+| API | [3](./evaluations.md#comparison-e2c50ca437a8) | [100%](./evaluations.md#comparison-e2c50ca437a8) | 505.5k | $0.03 | $0 |
 
 - [afs-20261010-johor40-macro-ecb-data-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定 ECB Data API 的 HICP 数据查询返回 HTTP 200 并给出四个所需观测（execution/artifacts/cache/avr_de_fr.csv）；交付 CSV 与最终答复齐全（execution/artifacts/hicp_de_fr_annual_avg_2023_2024.csv、execution/answer.md），无阻碍因素。
 - [afs-20261010-johor40-macro-ecb-data-business-r1](../data/experiments/evaluations/afs-20261010-johor40-macro-ecb-data-business-r1.json): Service operation completed; user delivery completed; blockers none. 指定 API 两次数据请求 HTTP 200 并返回四个观测，交付 CSV/说明齐全，数值与冻结参考一致，无阻碍。
@@ -2223,7 +2223,7 @@ Countries: Germany and France. Periods: the complete calendar years 2023 and 202
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-70023b6902c1)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-e2c50ca437a8)
 
 [Task definition](./tasks.en.md#financial-macro-hicp-001-v1)
 
@@ -2283,7 +2283,7 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 
 **Classification:** AI Services / Speech Synthesis; AI Services / Speech Recognition; Communication / Voice Agents
 
-[Website](https://elevenlabs.io) · [Source record](../data/providers/elevenlabs.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://elevenlabs.io) · [Source record](../data/providers/elevenlabs.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="elevenlabs-access"></a>
 
@@ -2313,9 +2313,9 @@ Voice AI (TTS, STT, agents) with a public OpenAPI spec, llms.txt, an official MC
 
 Historical market prices, fundamentals, economic datasets and congressional trades, with dataset-specific plan entitlements.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Economic Indicators; Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Asset Prices; Financial Data / Company Financials; Financial Data / Economic Indicators; Financial Data / Transaction Disclosures
 
-[Website](https://eodhd.com/) · [Source record](../data/candidates/eodhd.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://eodhd.com/) · [Source record](../data/candidates/eodhd.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="eodhd-access"></a>
 
@@ -2348,9 +2348,9 @@ Historical market prices, fundamentals, economic datasets and congressional trad
 
 Official European economic and social statistics with public REST data and metadata access.
 
-**Classification:** Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Financial Data / Economic Indicators
 
-[Website](https://ec.europa.eu/eurostat/) · [Source record](../data/candidates/eurostat.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://ec.europa.eu/eurostat/) · [Source record](../data/candidates/eurostat.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="eurostat-access"></a>
 
@@ -2366,13 +2366,13 @@ Official European economic and social statistics with public REST data and metad
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | [344.6k](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 45.417219s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json) | [344.6k](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json) | 45.417219s | 0 |
 
 #### Set up this financial-data service, confirm that it can query data through the specified interface, and save the configuration needed for later use. If access is blocked, explain where.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-36e32b17588d) | [100%](./evaluations.md#comparison-36e32b17588d) | 347.5k | $0.02 | $0 |
+| API | [3](./evaluations.md#comparison-463143c72255) | [100%](./evaluations.md#comparison-463143c72255) | 347.5k | $0.02 | $0 |
 
 - [afs-20261010-johor40-macro-eurostat-access-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 Eurostat 入口两次匿名 GET 均 HTTP 200 且返回真实观测值；配置已保存并被保留记录；答案完整交付，无阻碍。
 - [afs-20261010-johor40-macro-eurostat-access-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 Eurostat Statistics API 端点两次真实查询成功（HTTP 200 JSON-stat 2.0，见 cache 原始响应），必要配置已写入持久位置并保留，答复完整交付结果与配置。
@@ -2387,7 +2387,7 @@ The service, required interface, and any supplied account or signup information 
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-36e32b17588d)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-463143c72255)
 
 [Task definition](./tasks.en.md#financial-access-001-v1)
 
@@ -2410,7 +2410,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-70023b6902c1) | [100%](./evaluations.md#comparison-70023b6902c1) | 255.6k | $0.02 | $0 |
+| API | [3](./evaluations.md#comparison-e2c50ca437a8) | [100%](./evaluations.md#comparison-e2c50ca437a8) | 255.6k | $0.02 | $0 |
 
 - [afs-20261010-johor40-macro-eurostat-business-r3](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r3.json): Service operation completed; user delivery completed; blockers none. Eurostat Statistics API 匿名查询成功返回 PRC_HICP_AINR 四观测值；CSV 与回落说明齐备且正确，来源可追溯，无调用/费用/环境阻碍。
 - [afs-20261010-johor40-macro-eurostat-business-r2](../data/experiments/evaluations/afs-20261010-johor40-macro-eurostat-business-r2.json): Service operation completed; user delivery completed; blockers none. Eurostat 入口实际 HTTP 200 返回四个年度平均率，CSV 与文字交付齐全且与冻结参考相符。
@@ -2425,7 +2425,7 @@ Countries: Germany and France. Periods: the complete calendar years 2023 and 202
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-70023b6902c1)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-e2c50ca437a8)
 
 [Task definition](./tasks.en.md#financial-macro-hicp-001-v1)
 
@@ -2458,9 +2458,9 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
 
-**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Content Extraction; Search & Web Scraping / Web Search
 
-[Website](https://exa.ai) · [Source record](../data/providers/exa.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://exa.ai) · [Source record](../data/providers/exa.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="exa-access"></a>
 
@@ -2683,7 +2683,7 @@ Travel Redirect/XAP flight listings product whose new API applications are curre
 
 **Classification:** Travel / Flights
 
-[Website](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) · [Source record](../data/candidates/expedia-xap-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://developers.expediagroup.com/xap-apis/api/start-guide/getting-started) · [Source record](../data/candidates/expedia-xap-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="expedia-xap-flights-access"></a>
 
@@ -2710,9 +2710,9 @@ Travel Redirect/XAP flight listings product whose new API applications are curre
 
 Financial-data API catalog; retained as an institutional candidate while product-specific access is researched.
 
-**Classification:** Search & Data Access / Financial Data
+**Classification:** Financial Data / Multi-dataset Financial Platforms
 
-[Website](https://www.factset.com/) · [Source record](../data/candidates/factset-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.factset.com/) · [Source record](../data/candidates/factset-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="factset-data-access"></a>
 
@@ -2743,7 +2743,7 @@ Generative media platform (image, video, audio models) with queue/streaming APIs
 
 **Classification:** AI Services / Model Access; AI Services / Image Generation; AI Services / Video Generation
 
-[Website](https://fal.ai) · [Source record](../data/providers/fal.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://fal.ai) · [Source record](../data/providers/fal.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fal-access"></a>
 
@@ -2775,7 +2775,7 @@ Persistent email with JMAP API tokens, OAuth and standard mail protocols.
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.fastmail.com/) · [Source record](../data/candidates/fastmail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.fastmail.com/) · [Source record](../data/candidates/fastmail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fastmail-access"></a>
 
@@ -2803,7 +2803,7 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://fastspring.com/) · [Source record](../data/candidates/fastspring.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://fastspring.com/) · [Source record](../data/candidates/fastspring.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fastspring-access"></a>
 
@@ -2829,9 +2829,9 @@ Checkout and subscription platform with API, JavaScript checkout libraries and o
 
 US company financial statements, historical prices, filings and insider trades, with API and an official MCP integration; automated onboarding requires prepaid data credits.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Asset Prices; Financial Data / Company Financials; Financial Data / Transaction Disclosures
 
-[Website](https://financialdatasets.ai/) · [Source record](../data/candidates/financial-datasets.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://financialdatasets.ai/) · [Source record](../data/candidates/financial-datasets.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="financial-datasets-access"></a>
 
@@ -2862,9 +2862,9 @@ US company financial statements, historical prices, filings and insider trades, 
 
 Stock prices, financial statements, FX, crypto and congressional disclosures through a keyed API and official MCP.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials; Search & Data Access / Financial Data / Exchange Rates; Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Asset Prices; Financial Data / Company Financials; Financial Data / Exchange Rates; Financial Data / Transaction Disclosures
 
-[Website](https://financialmodelingprep.com/) · [Source record](../data/candidates/fmp.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://financialmodelingprep.com/) · [Source record](../data/candidates/fmp.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fmp-access"></a>
 
@@ -2896,9 +2896,9 @@ Stock prices, financial statements, FX, crypto and congressional disclosures thr
 
 Stock quotes, historical candles and fundamentals; stock candles are documented as premium.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://finnhub.io/) · [Source record](../data/candidates/finnhub.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://finnhub.io/) · [Source record](../data/candidates/finnhub.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="finnhub-access"></a>
 
@@ -2928,9 +2928,9 @@ Stock quotes, historical candles and fundamentals; stock candles are documented 
 
 Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
 
-**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Content Extraction; Search & Web Scraping / Web Search
 
-[Website](https://www.firecrawl.dev) · [Source record](../data/providers/firecrawl.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.firecrawl.dev) · [Source record](../data/providers/firecrawl.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="firecrawl-access"></a>
 
@@ -2961,14 +2961,14 @@ Web scraping and crawling API that turns websites into LLM-ready markdown, with 
 | --- | --- | --- | --- | --- |
 | API (public-search-api) | [Access preparation: none; documented anonymous public route](../data/experiments/evaluations/firecrawl-search-001v2-ds41-r1.json) | [106.4k](../data/experiments/evaluations/firecrawl-searchv2-access-ds41-r1.json) | 21.400023s | 0 |
 | API (account-search-api) | — | — | — | — |
-| API (public-scrape-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | [256.4k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 43.066082s | 0 |
+| API (public-scrape-api) | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json) | [256.4k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-access-baseline.json) | 43.066082s | 0 |
 | API (account-scrape-api) | — | — | — | — |
 
 #### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-scrape-api) | [1](./evaluations.md#comparison-ecce2722b24e) | [100%](./evaluations.md#comparison-ecce2722b24e) | 256.4k | $0.02 | $0 |
+| API (public-scrape-api) | [1](./evaluations.md#comparison-8620cd093994) | [100%](./evaluations.md#comparison-8620cd093994) | 256.4k | $0.02 | $0 |
 | API (public-search-api) | — | — | — | — | — |
 | API (account-search-api) | — | — | — | — | — |
 | API (account-scrape-api) | — | — | — | — | — |
@@ -2984,7 +2984,7 @@ Example page: https://example.com/ . The service, assigned interface, authorized
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ecce2722b24e)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-8620cd093994)
 
 [Task definition](./tasks.en.md#web-extraction-access-001-v1)
 
@@ -3032,7 +3032,7 @@ Access preparation: none; documented anonymous public route · [Full configurati
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-scrape-api) | [3](./evaluations.md#comparison-5b2f0a0db9e7) | [33.3%](./evaluations.md#comparison-5b2f0a0db9e7) | 209.2k | $0.01 | $0 |
+| API (public-scrape-api) | [3](./evaluations.md#comparison-bbb58383092b) | [33.3%](./evaluations.md#comparison-bbb58383092b) | 209.2k | $0.01 | $0 |
 | API (public-search-api) | — | — | — | — | — |
 | API (account-search-api) | — | — | — | — | — |
 | API (account-scrape-api) | — | — | — | — | — |
@@ -3050,7 +3050,7 @@ Official page: https://www.gov.uk/bank-holidays . Include only England and Wales
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-5b2f0a0db9e7)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-bbb58383092b)
 
 [Task definition](./tasks.en.md#web-extraction-uk-holidays-001-v1)
 
@@ -3063,7 +3063,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-scrape-api) | [3](./evaluations.md#comparison-b8dbd573c0af) | [100%](./evaluations.md#comparison-b8dbd573c0af) | 261.9k | $0.01 | $0 |
+| API (public-scrape-api) | [3](./evaluations.md#comparison-241d0c1dcf03) | [100%](./evaluations.md#comparison-241d0c1dcf03) | 261.9k | $0.01 | $0 |
 | API (public-search-api) | — | — | — | — | — |
 | API (account-search-api) | — | — | — | — | — |
 | API (account-scrape-api) | — | — | — | — | — |
@@ -3081,7 +3081,7 @@ Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holid
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-b8dbd573c0af)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-241d0c1dcf03)
 
 [Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
 
@@ -3206,7 +3206,7 @@ Fast open-model inference and fine-tuning with an OpenAI-compatible API, officia
 
 **Classification:** AI Services / Model Access
 
-[Website](https://fireworks.ai) · [Source record](../data/providers/fireworks.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://fireworks.ai) · [Source record](../data/providers/fireworks.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fireworks-access"></a>
 
@@ -3234,7 +3234,7 @@ Authenticated flight lookup and a separate, restricted public cache exposed thro
 
 **Classification:** Travel / Flights
 
-[Website](https://flight-mcp.com/) · [Source record](../data/candidates/flight-mcp.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://flight-mcp.com/) · [Source record](../data/candidates/flight-mcp.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="flight-mcp-access"></a>
 
@@ -3268,7 +3268,7 @@ Flight-price search for one-way, round-trip and multi-city itineraries, with cre
 
 **Classification:** Travel / Flights
 
-[Website](https://www.flightapi.io/) · [Source record](../data/candidates/flightapi-io.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.flightapi.io/) · [Source record](../data/candidates/flightapi-io.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="flightapi-io-access"></a>
 
@@ -3300,7 +3300,7 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 **Classification:** Cloud Computing & Hosting / Application Hosting
 
-[Website](https://fly.io) · [Source record](../data/providers/fly-io.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://fly.io) · [Source record](../data/providers/fly-io.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fly-io-access"></a>
 
@@ -3330,9 +3330,9 @@ Run full-stack apps and machines close to users, with a spec'd Machines API, sco
 
 Public exchange-rate API and official MCP using central-bank reference data, with no API key.
 
-**Classification:** Search & Data Access / Financial Data / Exchange Rates
+**Classification:** Financial Data / Exchange Rates
 
-[Website](https://frankfurter.dev/) · [Source record](../data/candidates/frankfurter.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://frankfurter.dev/) · [Source record](../data/candidates/frankfurter.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="frankfurter-access"></a>
 
@@ -3429,9 +3429,9 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.
 
-**Classification:** Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Financial Data / Economic Indicators
 
-[Website](https://fred.stlouisfed.org/) · [Source record](../data/candidates/fred.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://fred.stlouisfed.org/) · [Source record](../data/candidates/fred.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fred-access"></a>
 
@@ -3467,7 +3467,7 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 **Classification:** AI Services / Model Access
 
-[Website](https://ai.google.dev) · [Source record](../data/providers/gemini-api.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://ai.google.dev) · [Source record](../data/providers/gemini-api.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="gemini-api-access"></a>
 
@@ -3493,9 +3493,9 @@ Google's Gemini model APIs via AI Studio, with generous free tier and documented
 
 Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.
 
-**Classification:** Search & Data Access / Geocoding
+**Classification:** Maps & Geography / Geocoding
 
-[Website](https://www.geoapify.com/) · [Source record](../data/candidates/geoapify.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.geoapify.com/) · [Source record](../data/candidates/geoapify.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="geoapify-access"></a>
 
@@ -3527,9 +3527,9 @@ Hosted forward geocoding for addresses and named places, with a personal Free pl
 
 Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.
 
-**Classification:** Search & Data Access / Geocoding
+**Classification:** Maps & Geography / Geocoding
 
-[Website](https://geocode.maps.co/) · [Source record](../data/candidates/geocode-maps-co.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://geocode.maps.co/) · [Source record](../data/candidates/geocode-maps-co.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="geocode-maps-co-access"></a>
 
@@ -3562,7 +3562,7 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 
 **Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management; Developer Tools / Dependency Security Advisories
 
-[Website](https://github.com) · [Source record](../data/providers/github.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://github.com) · [Source record](../data/providers/github.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="github-access"></a>
 
@@ -3584,13 +3584,13 @@ Code hosting, collaboration, and automation with REST and GraphQL APIs, an offic
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | API (rest-api) | — | — | — | — |
-| API (public-advisories-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | [234.2k](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 46.598473s | 0 |
+| API (public-advisories-api) | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json) | [234.2k](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json) | 46.598473s | 0 |
 
 #### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-advisories-api) | [3](./evaluations.md#comparison-1a93823643b5) | [100%](./evaluations.md#comparison-1a93823643b5) | 213.7k | $0.01 | $0 |
+| API (public-advisories-api) | [3](./evaluations.md#comparison-f1229f7220dc) | [100%](./evaluations.md#comparison-f1229f7220dc) | 213.7k | $0.01 | $0 |
 | API (rest-api) | — | — | — | — | — |
 
 - [afs-20261010-johor40-advisories-github-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定匿名入口 api.github.com/advisories 返回 HTTP 200 且响应头确认版本 2026-03-10，采集响应含可识别公告与关联包；无可证实阻碍。
@@ -3606,7 +3606,7 @@ The assigned service, entry point and authorized identity or credentials are in 
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-1a93823643b5)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f1229f7220dc)
 
 [Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
 
@@ -3630,7 +3630,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (public-advisories-api) | [3](./evaluations.md#comparison-8e6422c28f03) | [100%](./evaluations.md#comparison-8e6422c28f03) | 86.3k | $0.0093 | $0 |
+| API (public-advisories-api) | [3](./evaluations.md#comparison-6b6a0b74a08e) | [100%](./evaluations.md#comparison-6b6a0b74a08e) | 86.3k | $0.0093 | $0 |
 | API (rest-api) | — | — | — | — | — |
 
 - [afs-20261010-johor40-advisories-github-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-github-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定 API 两次查询均成功（200，2026-03-10 版本头），答复逐条给出正确的匹配结论、5.2.6/5.2.7 修复边界、最低升级 5.2.7 及可追溯依据链接。
@@ -3646,7 +3646,7 @@ Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alert
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-8e6422c28f03)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-6b6a0b74a08e)
 
 [Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
 
@@ -3690,7 +3690,7 @@ DevOps platform with REST and GraphQL APIs, scoped tokens, llms.txt, and an offi
 
 **Classification:** Developer Tools / Code Hosting & Review; Productivity & Collaboration / Project & Task Management
 
-[Website](https://gitlab.com) · [Source record](../data/providers/gitlab.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://gitlab.com) · [Source record](../data/providers/gitlab.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="gitlab-access"></a>
 
@@ -3729,7 +3729,7 @@ Persistent Google mailboxes accessible through the Gmail API after account and O
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://mail.google.com/) · [Source record](../data/candidates/gmail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mail.google.com/) · [Source record](../data/candidates/gmail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="gmail-access"></a>
 
@@ -3757,7 +3757,7 @@ Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup
 
 **Classification:** Productivity & Collaboration / Collaborative Tables
 
-[Website](https://workspace.google.com/products/sheets/) · [Source record](../data/candidates/google-sheets.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://workspace.google.com/products/sheets/) · [Source record](../data/candidates/google-sheets.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="google-sheets-access"></a>
 
@@ -3784,9 +3784,9 @@ Online spreadsheets with a no-additional-cost API; Cloud project and OAuth setup
 
 Foundata's hosted static QR image API at api.qrserver.com, with public no-account generation and downloadable raster or vector formats.
 
-**Classification:** Productivity & Collaboration / QR Code Images
+**Classification:** Developer Tools / QR Code Images
 
-[Website](https://goqr.me/api/) · [Source record](../data/candidates/goqr.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://goqr.me/api/) · [Source record](../data/candidates/goqr.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="goqr-access"></a>
 
@@ -3888,7 +3888,7 @@ Observability platform (dashboards, metrics, logs, traces) with a documented HTT
 
 **Classification:** Developer Tools / Monitoring & Troubleshooting
 
-[Website](https://grafana.com) · [Source record](../data/providers/grafana.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://grafana.com) · [Source record](../data/providers/grafana.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="grafana-access"></a>
 
@@ -3916,7 +3916,7 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 **Classification:** Productivity & Collaboration / Collaborative Tables
 
-[Website](https://www.getgrist.com/) · [Source record](../data/candidates/grist.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.getgrist.com/) · [Source record](../data/candidates/grist.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="grist-access"></a>
 
@@ -3937,8 +3937,8 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | [276.4k](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 53.123937s | 0 |
-| MCP | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | [574.9k](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 96.000939s | 0 |
+| API | [Service credentials supplied](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r3.json) | [276.4k](../data/experiments/evaluations/afs-20261010-johor40-grist-rest-access-baseline-preflight2.json) | 53.123937s | 0 |
+| MCP | [Service credentials supplied](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-shared-expenses-r3.json) | [574.9k](../data/experiments/evaluations/afs-20261010-johor40-grist-mcp-access-baseline.json) | 96.000939s | 0 |
 | SDK (python-sdk) | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — |
 
@@ -3946,8 +3946,8 @@ Hosted relational spreadsheets with a free personal site, REST API and official 
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| MCP | [1](./evaluations.md#comparison-06b05d18818d) | [100%](./evaluations.md#comparison-06b05d18818d) | 574.9k | $0.03 | $0 |
-| API | [1](./evaluations.md#comparison-06b05d18818d) | [100%](./evaluations.md#comparison-06b05d18818d) | 276.4k | $0.02 | $0 |
+| MCP | [1](./evaluations.md#comparison-ef3ae7a2ca5a) | [100%](./evaluations.md#comparison-ef3ae7a2ca5a) | 574.9k | $0.03 | $0 |
+| API | [1](./evaluations.md#comparison-ef3ae7a2ca5a) | [100%](./evaluations.md#comparison-ef3ae7a2ca5a) | 276.4k | $0.02 | $0 |
 | SDK (python-sdk) | — | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — | — |
 
@@ -3963,7 +3963,7 @@ The service, assigned interface, authorized account or signup identity and its o
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-06b05d18818d)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-ef3ae7a2ca5a)
 
 [Task definition](./tasks.en.md#collaborative-tables-access-001-v1)
 
@@ -3987,8 +3987,8 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| MCP | [3](./evaluations.md#comparison-63bc5ae3ece1) | [100%](./evaluations.md#comparison-63bc5ae3ece1) | 1.16M | $0.05 | $0 |
-| API | [3](./evaluations.md#comparison-63bc5ae3ece1) | [66.7%](./evaluations.md#comparison-63bc5ae3ece1) | 862.7k | $0.04 | $0 |
+| MCP | [3](./evaluations.md#comparison-35bd5c6ff083) | [100%](./evaluations.md#comparison-35bd5c6ff083) | 1.16M | $0.05 | $0 |
+| API | [3](./evaluations.md#comparison-35bd5c6ff083) | [66.7%](./evaluations.md#comparison-35bd5c6ff083) | 862.7k | $0.04 | $0 |
 | SDK (python-sdk) | — | — | — | — | — |
 | SDK (javascript-sdk) | — | — | — | — | — |
 
@@ -4008,7 +4008,7 @@ The two synthetic people are Lin Qing (林青) and Zhou Zhou (周舟). Every lis
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-63bc5ae3ece1)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-35bd5c6ff083)
 
 [Task definition](./tasks.en.md#collaborative-tables-shared-expenses-001-v1)
 
@@ -4110,7 +4110,7 @@ Ultra-low-latency LLM inference with an OpenAI-compatible API, llms.txt, and sel
 
 **Classification:** AI Services / Model Access
 
-[Website](https://groq.com) · [Source record](../data/providers/groq.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://groq.com) · [Source record](../data/providers/groq.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="groq-access"></a>
 
@@ -4138,7 +4138,7 @@ Temporary email addresses and message retrieval through a public session-based A
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.guerrillamail.com/) · [Source record](../data/candidates/guerrilla-mail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.guerrillamail.com/) · [Source record](../data/candidates/guerrilla-mail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="guerrilla-mail-access"></a>
 
@@ -4203,7 +4203,7 @@ Model hub and inference platform with fine-grained tokens, OAuth, an official MC
 
 **Classification:** AI Services / Model Access
 
-[Website](https://huggingface.co) · [Source record](../data/providers/hugging-face.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://huggingface.co) · [Source record](../data/providers/hugging-face.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="hugging-face-access"></a>
 
@@ -4235,7 +4235,7 @@ Flight search and purchase-link API with email signup and an official MCP; indiv
 
 **Classification:** Travel / Flights
 
-[Website](https://ignav.com/) · [Source record](../data/candidates/ignav.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://ignav.com/) · [Source record](../data/candidates/ignav.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="ignav-access"></a>
 
@@ -4308,9 +4308,9 @@ No account or key supplied · [Full configuration and evidence](./evaluations.md
 
 Congress purchase disclosures and insider filings through an API; free keys require an email request.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://insynet.se/) · [Source record](../data/candidates/insynet.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://insynet.se/) · [Source record](../data/candidates/insynet.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="insynet-access"></a>
 
@@ -4336,9 +4336,9 @@ Congress purchase disclosures and insider filings through an API; free keys requ
 
 Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
 
-**Classification:** Search & Data Access / Web Content Extraction
+**Classification:** Search & Web Scraping / Web Content Extraction
 
-[Website](https://jina.ai) · [Source record](../data/providers/jina.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://jina.ai) · [Source record](../data/providers/jina.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="jina-access"></a>
 
@@ -4356,13 +4356,13 @@ Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep s
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | [115.5k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 24.489431s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json) | [115.5k](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json) | 24.489431s | 0 |
 
 #### Connect this web content extraction service through the assigned interface and read the example page in the attachment. Give me its title and a one-sentence summary to confirm it works, save the configuration needed for later calls, and explain the setup steps and any barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-ecce2722b24e) | [100%](./evaluations.md#comparison-ecce2722b24e) | 115.5k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-8620cd093994) | [100%](./evaluations.md#comparison-8620cd093994) | 115.5k | $0.01 | $0 |
 
 - [afs-20261010-johor40-web-extraction-jina-access-baseline](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-access-baseline.json): Service operation completed; user delivery completed; blockers none. 指定服务匿名入口单次调用成功（HTTP 200，正文齐全），用户要求的标题/概述/配置位置/接入步骤均在 execution/answer.md 交付；无网络、权限、额度或人工阻碍证据。
 
@@ -4375,7 +4375,7 @@ Example page: https://example.com/ . The service, assigned interface, authorized
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ecce2722b24e)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-8620cd093994)
 
 [Task definition](./tasks.en.md#web-extraction-access-001-v1)
 
@@ -4398,7 +4398,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-5b2f0a0db9e7) | [100%](./evaluations.md#comparison-5b2f0a0db9e7) | 100.5k | $0.0066 | $0 |
+| API | [3](./evaluations.md#comparison-bbb58383092b) | [100%](./evaluations.md#comparison-bbb58383092b) | 100.5k | $0.0066 | $0 |
 
 - [afs-20261010-johor40-web-extraction-jina-uk-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务 Jina Reader 匿名调用返回 HTTP 200 并取得目标页面内容（见 evidence/jina_extraction_summary.md）；交付 CSV 存在于 execution/artifacts，8 行与参考逐项一致；答复含文件位置与官方链接。
 - [afs-20261010-johor40-web-extraction-jina-uk-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-uk-holidays-r2.json): Service operation completed; user delivery completed; blockers none. Jina Reader 匿名单次请求 HTTP 200，返回目标页面 Markdown 含 England and Wales 2027 全表；CSV 与官方原文 8/8 一致并含文件与来源，交付完整。
@@ -4413,7 +4413,7 @@ Official page: https://www.gov.uk/bank-holidays . Include only England and Wales
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-5b2f0a0db9e7)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-bbb58383092b)
 
 [Task definition](./tasks.en.md#web-extraction-uk-holidays-001-v1)
 
@@ -4423,7 +4423,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-b8dbd573c0af) | [100%](./evaluations.md#comparison-b8dbd573c0af) | 90.1k | $0.0063 | $0 |
+| API | [3](./evaluations.md#comparison-241d0c1dcf03) | [100%](./evaluations.md#comparison-241d0c1dcf03) | 90.1k | $0.0063 | $0 |
 
 - [afs-20261010-johor40-web-extraction-jina-holidays-r3](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务单次匿名请求成功返回目标表内容（28656 bytes，含 2027 表）；CSV 11 行与冻结参考逐项一致且可解析；答复含文件路径与官方链接。
 - [afs-20261010-johor40-web-extraction-jina-holidays-r2](../data/experiments/evaluations/afs-20261010-johor40-web-extraction-jina-holidays-r2.json): Service operation completed; user delivery completed; blockers none. Jina Reader 单次无 Key 请求 HTTP 200 返回目标页面且含 2027 表；holidays_2027.csv 存在、可解析且 11 行逐项正确；答复含文件位置与来源。无网络、权限、模型预算或执行阻碍。
@@ -4438,7 +4438,7 @@ Official page: https://www.opm.gov/policy-data-oversight/pay-leave/federal-holid
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-b8dbd573c0af)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-241d0c1dcf03)
 
 [Task definition](./tasks.en.md#web-extraction-holidays-001-v1)
 
@@ -4470,9 +4470,9 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 Chinese-market data candidate. The official documentation returned a non-Mainland-China region restriction during research.
 
-**Classification:** Search & Data Access / Financial Data
+**Classification:** Financial Data / Multi-dataset Financial Platforms
 
-[Website](https://www.joinquant.com/) · [Source record](../data/candidates/joinquant-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.joinquant.com/) · [Source record](../data/candidates/joinquant-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="joinquant-data-access"></a>
 
@@ -4503,7 +4503,7 @@ Affiliate flight APIs with a business application and an optional requested sand
 
 **Classification:** Travel / Flights
 
-[Website](https://affiliates.kayak.com/) · [Source record](../data/candidates/kayak-affiliate.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://affiliates.kayak.com/) · [Source record](../data/candidates/kayak-affiliate.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="kayak-affiliate-access"></a>
 
@@ -4532,7 +4532,7 @@ Flight search through a publicized MCP path and the separately gated Tequila par
 
 **Classification:** Travel / Flights
 
-[Website](https://www.kiwi.com/) · [Source record](../data/candidates/kiwi.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.kiwi.com/) · [Source record](../data/candidates/kiwi.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="kiwi-access"></a>
 
@@ -4600,7 +4600,7 @@ Collaboration suite (messaging, docs, calendar) with an open platform, llms.txt,
 
 **Classification:** Productivity & Collaboration / Collaborative Tables; Communication / Messaging; Productivity & Collaboration / Document Collaboration
 
-[Website](https://www.larksuite.com) · [Source record](../data/providers/lark.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.larksuite.com) · [Source record](../data/providers/lark.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="lark-access"></a>
 
@@ -4643,7 +4643,7 @@ Merchant-of-record payments for digital products/SaaS with a JSON:API REST API, 
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.lemonsqueezy.com) · [Source record](../data/providers/lemonsqueezy.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.lemonsqueezy.com) · [Source record](../data/providers/lemonsqueezy.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="lemonsqueezy-access"></a>
 
@@ -4674,7 +4674,7 @@ Personal flight search through MCP, CLI and SDKs, with a human payment-method au
 
 **Classification:** Travel / Flights
 
-[Website](https://letsfg.co/) · [Source record](../data/candidates/letsfg.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://letsfg.co/) · [Source record](../data/candidates/letsfg.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="letsfg-access"></a>
 
@@ -4709,7 +4709,7 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 
 **Classification:** Productivity & Collaboration / Project & Task Management
 
-[Website](https://linear.app) · [Source record](../data/providers/linear.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://linear.app) · [Source record](../data/providers/linear.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="linear-access"></a>
 
@@ -4739,9 +4739,9 @@ Issue tracking and product planning with a GraphQL API, llms.txt, an official MC
 
 Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.
 
-**Classification:** Search & Data Access / Geocoding
+**Classification:** Maps & Geography / Geocoding
 
-[Website](https://locationiq.com/) · [Source record](../data/candidates/locationiq.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://locationiq.com/) · [Source record](../data/candidates/locationiq.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="locationiq-access"></a>
 
@@ -4772,9 +4772,9 @@ Hosted address and place geocoding with a Free API tier, attribution requirement
 
 Financial-data platform and Python library with licensed desktop and cloud access paths.
 
-**Classification:** Search & Data Access / Financial Data
+**Classification:** Financial Data / Multi-dataset Financial Platforms
 
-[Website](https://www.lseg.com/en/data-analytics) · [Source record](../data/candidates/lseg-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.lseg.com/en/data-analytics) · [Source record](../data/candidates/lseg-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="lseg-data-access"></a>
 
@@ -4806,7 +4806,7 @@ Lufthansa fare methods are partner-scoped; the developer portal currently pauses
 
 **Classification:** Travel / Flights
 
-[Website](https://developer.lufthansa.com/page) · [Source record](../data/candidates/lufthansa-partner.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://developer.lufthansa.com/page) · [Source record](../data/candidates/lufthansa-partner.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="lufthansa-partner-access"></a>
 
@@ -4837,7 +4837,7 @@ Dream Machine video and image generation via the Luma API, with llms.txt and pub
 
 **Classification:** AI Services / Image Generation; AI Services / Video Generation
 
-[Website](https://lumalabs.ai) · [Source record](../data/providers/luma.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://lumalabs.ai) · [Source record](../data/providers/luma.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="luma-access"></a>
 
@@ -4869,7 +4869,7 @@ Temporary receive-only mailboxes with an account/password and authenticated REST
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://mail.tm/) · [Source record](../data/candidates/mail-tm.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mail.tm/) · [Source record](../data/candidates/mail-tm.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mail-tm-access"></a>
 
@@ -4971,7 +4971,7 @@ Public disposable inboxes and a paid private email-testing platform with API acc
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.mailinator.com/) · [Source record](../data/candidates/mailinator.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.mailinator.com/) · [Source record](../data/candidates/mailinator.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mailinator-access"></a>
 
@@ -4999,7 +4999,7 @@ Email receiving and testing APIs with public and private mailbox options.
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://mailsac.com/) · [Source record](../data/candidates/mailsac.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mailsac.com/) · [Source record](../data/candidates/mailsac.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mailsac-access"></a>
 
@@ -5027,7 +5027,7 @@ Temporary inbox API and MCP with message, verification-code and verification-lin
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://mailsink.dev/) · [Source record](../data/candidates/mailsink.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mailsink.dev/) · [Source record](../data/candidates/mailsink.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mailsink-access"></a>
 
@@ -5057,7 +5057,7 @@ Programmable mailboxes for email automation and testing, including message waiti
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.mailslurp.com/) · [Source record](../data/candidates/mailslurp.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.mailslurp.com/) · [Source record](../data/candidates/mailslurp.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mailslurp-access"></a>
 
@@ -5086,9 +5086,9 @@ Programmable mailboxes for email automation and testing, including message waiti
 
 Market-data APIs with stock history and separate data products. Stocks Basic is listed at USD 0/month.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices
+**Classification:** Financial Data / Asset Prices
 
-[Website](https://massive.com/) · [Source record](../data/candidates/massive.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://massive.com/) · [Source record](../data/candidates/massive.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="massive-access"></a>
 
@@ -5121,7 +5121,7 @@ Memory layer for AI agents (hosted platform + open-source), with REST API, llms.
 
 **Classification:** Agent Infrastructure & Automation / Agent Memory
 
-[Website](https://mem0.ai) · [Source record](../data/providers/mem0.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mem0.ai) · [Source record](../data/providers/mem0.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mem0-access"></a>
 
@@ -5151,9 +5151,9 @@ Memory layer for AI agents (hosted platform + open-source), with REST API, llms.
 
 Public global point forecasts from MET Norway, with no API key and mandatory client identification.
 
-**Classification:** Search & Data Access / Weather Data
+**Classification:** Weather & Calendar / Weather Data
 
-[Website](https://api.met.no/) · [Source record](../data/candidates/met-norway.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://api.met.no/) · [Source record](../data/candidates/met-norway.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="met-norway-access"></a>
 
@@ -5251,7 +5251,7 @@ MiniMax text, speech, video and music models via the international platform API,
 
 **Classification:** AI Services / Model Access
 
-[Website](https://platform.minimax.io) · [Source record](../data/providers/minimax.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://platform.minimax.io) · [Source record](../data/providers/minimax.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="minimax-access"></a>
 
@@ -5279,7 +5279,7 @@ European LLM provider (La Plateforme) with llms.txt, an open OpenAPI-based docs 
 
 **Classification:** AI Services / Model Access
 
-[Website](https://mistral.ai) · [Source record](../data/providers/mistral.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://mistral.ai) · [Source record](../data/providers/mistral.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mistral-access"></a>
 
@@ -5307,7 +5307,7 @@ Serverless compute for Python with first-class Sandboxes for agent code executio
 
 **Classification:** Cloud Computing & Hosting / Code Sandboxes
 
-[Website](https://modal.com) · [Source record](../data/providers/modal.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://modal.com) · [Source record](../data/providers/modal.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="modal-access"></a>
 
@@ -5347,7 +5347,7 @@ Payment links and payment APIs with isolated test mode and a simulated checkout 
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.mollie.com/) · [Source record](../data/candidates/mollie.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.mollie.com/) · [Source record](../data/candidates/mollie.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mollie-access"></a>
 
@@ -5377,7 +5377,7 @@ Managed MongoDB with a versioned Admin API, published OpenAPI spec, llms.txt, of
 
 **Classification:** Databases / Document Databases
 
-[Website](https://www.mongodb.com/products/platform/atlas-database) · [Source record](../data/providers/mongodb-atlas.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.mongodb.com/products/platform/atlas-database) · [Source record](../data/providers/mongodb-atlas.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="mongodb-atlas-access"></a>
 
@@ -5409,7 +5409,7 @@ Kimi models (K2 line) via an OpenAI-compatible API on the international Kimi pla
 
 **Classification:** AI Services / Model Access
 
-[Website](https://platform.kimi.ai) · [Source record](../data/providers/moonshot.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://platform.kimi.ai) · [Source record](../data/providers/moonshot.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="moonshot-access"></a>
 
@@ -5437,7 +5437,7 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 **Classification:** Agent Infrastructure & Automation / Workflow Automation
 
-[Website](https://n8n.io) · [Source record](../data/providers/n8n.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://n8n.io) · [Source record](../data/providers/n8n.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="n8n-access"></a>
 
@@ -5467,9 +5467,9 @@ Workflow automation platform with native AI/agent nodes, a public REST API, offi
 
 Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.
 
-**Classification:** Search & Data Access / Public Holidays
+**Classification:** Weather & Calendar / Public Holidays
 
-[Website](https://nagerholidays.com/) · [Source record](../data/candidates/nager-date.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://nagerholidays.com/) · [Source record](../data/candidates/nager-date.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="nager-date-access"></a>
 
@@ -5485,13 +5485,13 @@ Hosted public holiday API with country and first-level subdivision coverage for 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | [392.1k](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 72.395992s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json) | [392.1k](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json) | 72.395992s | 0 |
 
 #### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-ce7a914a844f) | [100%](./evaluations.md#comparison-ce7a914a844f) | 319.1k | $0.02 | $0 |
+| API | [3](./evaluations.md#comparison-f49782e60ce5) | [100%](./evaluations.md#comparison-f49782e60ce5) | 319.1k | $0.02 | $0 |
 
 - [afs-20261010-johor40-holidays-nager-date-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务真实查询成功（SG 2026，HTTP 200，11 条），配置写入指定持久路径并已保留；答复完整说明结果、配置与阻碍。MY 不受支持属已如实记录并绕过的障碍，未阻止任务完成。
 - [afs-20261010-johor40-holidays-nager-date-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定服务 v4 匿名入口真实查询成功（HTTP 200，SG/2026 共 11 条，含 2026-08-09 National Day），配置持久保存且可复用；MY 未覆盖属服务能力范围限制，执行者改用受支持地区后任务完成，未构成阻碍。
@@ -5506,7 +5506,7 @@ The service, assigned route, permitted account or registration details and their
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ce7a914a844f)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f49782e60ce5)
 
 [Task definition](./tasks.en.md#public-holidays-access-001-v1)
 
@@ -5530,7 +5530,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-c53ca46196b8) | [100%](./evaluations.md#comparison-c53ca46196b8) | 152.1k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-d9a19cb24943) | [100%](./evaluations.md#comparison-d9a19cb24943) | 152.1k | $0.01 | $0 |
 
 - [afs-20261010-johor40-holidays-nager-date-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r3.json): Service operation completed; user delivery completed; blockers none. 指定服务真实查询成功（HTTP/2 200，原始响应 execution/artifacts/cache/DE_2027.json）；最终答复 execution/answer.md 交付 10 条柏林 2027 公共节假日，日期与名称正确、升序、总数准确、来源可追溯。
 - [afs-20261010-johor40-holidays-nager-date-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-nager-date-business-r2.json): Service operation completed; user delivery completed; blockers none. Real HTTP 200 response from the assigned service stored at execution/artifacts/holidays_cache/DE_2027.json; delivered 10-holiday ascending list matches reference expected_count=10.
@@ -5545,7 +5545,7 @@ Region: the whole German state of Berlin, not another place with the same name. 
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-c53ca46196b8)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-d9a19cb24943)
 
 [Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
 
@@ -5580,9 +5580,9 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 Marketplace for financial and economic datasets with free and separately subscribed products.
 
-**Classification:** Search & Data Access / Financial Data
+**Classification:** Financial Data / Multi-dataset Financial Platforms
 
-[Website](https://data.nasdaq.com/) · [Source record](../data/candidates/nasdaq-data-link.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://data.nasdaq.com/) · [Source record](../data/candidates/nasdaq-data-link.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="nasdaq-data-link-access"></a>
 
@@ -5614,7 +5614,7 @@ Serverless Postgres with instant branching, a full management API, official MCP 
 
 **Classification:** Databases / Hosted Relational Databases
 
-[Website](https://neon.com) · [Source record](../data/providers/neon.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://neon.com) · [Source record](../data/providers/neon.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="neon-access"></a>
 
@@ -5804,7 +5804,7 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 **Classification:** Cloud Computing & Hosting / Application Hosting
 
-[Website](https://www.netlify.com) · [Source record](../data/providers/netlify.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.netlify.com) · [Source record](../data/providers/netlify.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="netlify-access"></a>
 
@@ -5830,9 +5830,9 @@ Web platform for deploying sites and functions, with an OpenAPI-specified API, l
 
 OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.
 
-**Classification:** Search & Data Access / Geocoding
+**Classification:** Maps & Geography / Geocoding
 
-[Website](https://nominatim.org/) · [Source record](../data/candidates/nominatim.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://nominatim.org/) · [Source record](../data/candidates/nominatim.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="nominatim-access"></a>
 
@@ -5848,13 +5848,13 @@ OSMF-hosted place and address lookup for deliberately selected, low-volume uses 
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | [191.0k](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 60.509774s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json) | [191.0k](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json) | 60.509774s | 0 |
 
 #### Connect this geocoding service through the assigned entry point, make one real place query to confirm it can convert a place or address to coordinates, and save the local configuration needed for later queries. Explain the setup steps and any actual blockers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-60adbd865cb5) | [100%](./evaluations.md#comparison-60adbd865cb5) | 191.0k | $0.01 | $0 |
+| API | [1](./evaluations.md#comparison-a29775463366) | [100%](./evaluations.md#comparison-a29775463366) | 191.0k | $0.01 | $0 |
 
 - [afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-access-r1-preflight2.json): Service operation completed; user delivery completed; blockers none. 指定 Nominatim Search 入口经一次真实 HTTP 200 查询返回可识别地点与有效经纬度；配置持久化且路径报告；答复与响应一致，无网络/权限/额度阻碍，故分项均完成。
 
@@ -5867,7 +5867,7 @@ The service, assigned entry point, permitted account or registration information
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-60adbd865cb5)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-a29775463366)
 
 [Task definition](./tasks.en.md#geocoding-access-001-v1)
 
@@ -5889,7 +5889,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-7a7e044bd215) | [100%](./evaluations.md#comparison-7a7e044bd215) | 73.4k | $0.0072 | $0 |
+| API | [1](./evaluations.md#comparison-89d974d3f8b8) | [100%](./evaluations.md#comparison-89d974d3f8b8) | 73.4k | $0.0072 | $0 |
 
 - [afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2](../data/experiments/evaluations/afs-20261010-johor40-geocoding-nominatim-business-r1-preflight2.json): Service operation completed; user delivery completed; blockers none. 指定 Nominatim Search API 两次查询均 HTTP 200；命中场馆对象并交付完整中文答复（execution/answer.md），坐标与响应一致且在 200 m 容差内。
 
@@ -5902,7 +5902,7 @@ Place: The British Museum. Address: Great Russell Street, London WC1B 3DG, Unite
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-7a7e044bd215)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-89d974d3f8b8)
 
 [Task definition](./tasks.en.md#geocoding-venue-001-v1)
 
@@ -5936,7 +5936,7 @@ Connected workspace with a versioned REST API, capability-scoped integrations, l
 
 **Classification:** Productivity & Collaboration / Collaborative Tables; Productivity & Collaboration / Document Collaboration
 
-[Website](https://www.notion.com) · [Source record](../data/providers/notion.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.notion.com) · [Source record](../data/providers/notion.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="notion-access"></a>
 
@@ -6034,9 +6034,9 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 Currency reference rates via a keyed API with a free signup plan; base-currency and historical access depend on the plan.
 
-**Classification:** Search & Data Access / Financial Data / Exchange Rates
+**Classification:** Financial Data / Exchange Rates
 
-[Website](https://openexchangerates.org/) · [Source record](../data/candidates/open-exchange-rates.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://openexchangerates.org/) · [Source record](../data/candidates/open-exchange-rates.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="open-exchange-rates-access"></a>
 
@@ -6063,9 +6063,9 @@ Currency reference rates via a keyed API with a free signup plan; base-currency 
 
 Global weather forecast API with a keyless non-commercial free tier and attributed open data.
 
-**Classification:** Search & Data Access / Weather Data
+**Classification:** Weather & Calendar / Weather Data
 
-[Website](https://open-meteo.com/) · [Source record](../data/candidates/open-meteo.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://open-meteo.com/) · [Source record](../data/candidates/open-meteo.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="open-meteo-access"></a>
 
@@ -6161,7 +6161,7 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 
 **Classification:** AI Services / Model Access
 
-[Website](https://openai.com) · [Source record](../data/providers/openai.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://openai.com) · [Source record](../data/providers/openai.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="openai-access"></a>
 
@@ -6187,9 +6187,9 @@ GPT model APIs with an official OpenAPI spec, agents guides, and a large SDK eco
 
 Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.
 
-**Classification:** Search & Data Access / Scholarly Literature Search
+**Classification:** Scholarly & Reference / Scholarly Literature Search
 
-[Website](https://openalex.org/) · [Source record](../data/candidates/openalex.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://openalex.org/) · [Source record](../data/candidates/openalex.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="openalex-access"></a>
 
@@ -6290,9 +6290,9 @@ Access preparation: none; currentofficialkeylesspublicroute, no account/email/pa
 
 Free hosted public and school holiday data API with regional filters and an openly licensed data collection.
 
-**Classification:** Search & Data Access / Public Holidays
+**Classification:** Weather & Calendar / Public Holidays
 
-[Website](https://www.openholidaysapi.org/en/) · [Source record](../data/candidates/openholidays.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.openholidaysapi.org/en/) · [Source record](../data/candidates/openholidays.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="openholidays-access"></a>
 
@@ -6308,13 +6308,13 @@ Free hosted public and school holiday data API with regional filters and an open
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | [158.3k](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 39.704667s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json) | [158.3k](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json) | 39.704667s | 0 |
 
 #### Connect me to this public-holiday lookup service. Make a real small-scope holiday query through the assigned route to confirm that it returns dates and names, and save the configuration needed for later queries. Explain the setup steps and actual obstacles.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-ce7a914a844f) | [100%](./evaluations.md#comparison-ce7a914a844f) | 158.5k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-f49782e60ce5) | [100%](./evaluations.md#comparison-f49782e60ce5) | 158.5k | $0.01 | $0 |
 
 - [afs-20261010-johor40-holidays-openholidays-access-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r3.json): Service operation completed; user delivery completed; blockers none. PublicHolidays 等 4 个端点均 HTTP 200 返回真实数据，DE/2026 返回 20 条假日；答复含地区/年份、日期与名称、来源与可复用配置位置，无阻碍。
 - [afs-20261010-johor40-holidays-openholidays-access-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 /PublicHolidays 查询返回 HTTP 200 的 20 条德国 2026 公共假日（含 2026-10-03 Day of German Unity）；配置保留于指定持久目录；无网络、接入、预算或执行阻碍。
@@ -6329,7 +6329,7 @@ The service, assigned route, permitted account or registration details and their
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-ce7a914a844f)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f49782e60ce5)
 
 [Task definition](./tasks.en.md#public-holidays-access-001-v1)
 
@@ -6353,7 +6353,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-c53ca46196b8) | [100%](./evaluations.md#comparison-c53ca46196b8) | 97.9k | $0.0078 | $0 |
+| API | [3](./evaluations.md#comparison-d9a19cb24943) | [100%](./evaluations.md#comparison-d9a19cb24943) | 97.9k | $0.0078 | $0 |
 
 - [afs-20261010-johor40-holidays-openholidays-business-r3](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r3.json): Service operation completed; user delivery completed; blockers none. OpenHolidays API 的 Subdivisions/Languages/Countries 及 DE-BE 2027 PublicHolidays 请求均 HTTP 200 并返回数据（execution/artifacts/raw_*.json）；最终答复 execution/answer.md 给出准确的 10 项柏林节日清单，无阻碍。
 - [afs-20261010-johor40-holidays-openholidays-business-r2](../data/experiments/evaluations/afs-20261010-johor40-holidays-openholidays-business-r2.json): Service operation completed; user delivery completed; blockers none. 指定 OpenHolidays PublicHolidays 请求返回 HTTP 200，合法限定 DE-BE 与 2027 年；用户收到按日期升序的 10 条清单、总数与来源，无阻碍。
@@ -6368,7 +6368,7 @@ Region: the whole German state of Berlin, not another place with the same name. 
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-c53ca46196b8)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-d9a19cb24943)
 
 [Task definition](./tasks.en.md#public-holidays-berlin-001-v1)
 
@@ -6405,7 +6405,7 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 
 **Classification:** AI Services / Model Access
 
-[Website](https://openrouter.ai) · [Source record](../data/providers/openrouter.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://openrouter.ai) · [Source record](../data/providers/openrouter.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="openrouter-access"></a>
 
@@ -6431,9 +6431,9 @@ Unified OpenAI-compatible API over hundreds of models from many labs, with one k
 
 FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.
 
-**Classification:** Search & Data Access / Route Planning
+**Classification:** Maps & Geography / Route Planning
 
-[Website](https://project-osrm.org/) · [Source record](../data/candidates/osrm.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://project-osrm.org/) · [Source record](../data/candidates/osrm.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="osrm-access"></a>
 
@@ -6536,7 +6536,7 @@ Public vulnerability metadata aggregated across open-source ecosystems, queryabl
 
 **Classification:** Developer Tools / Dependency Security Advisories
 
-[Website](https://osv.dev/) · [Source record](../data/candidates/osv.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://osv.dev/) · [Source record](../data/candidates/osv.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="osv-access"></a>
 
@@ -6552,13 +6552,13 @@ Public vulnerability metadata aggregated across open-source ecosystems, queryabl
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | [103.6k](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 29.984579s | 0 |
+| API | [Access preparation: none; anonymous public route](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json) | [103.6k](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json) | 29.984579s | 0 |
 
 #### Connect this dependency advisory service through the specified entry point, make a real query that returns an identifiable advisory, and save the local configuration needed for later queries. Explain the setup steps and any actual barriers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-1a93823643b5) | [100%](./evaluations.md#comparison-1a93823643b5) | 151.1k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-f1229f7220dc) | [100%](./evaluations.md#comparison-f1229f7220dc) | 151.1k | $0.01 | $0 |
 
 - [afs-20261010-johor40-advisories-osv-access-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r3.json): Service operation completed; user delivery completed; blockers none. 指定 OSV API 查询与记录路径均实测返回可识别公告（GHSA-29mw-wpgm-hmr9 等）；最终答复 execution/answer.md 含公告、关联包、复用配置位置与接入门槛，交付完整。
 - [afs-20261010-johor40-advisories-osv-access-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-access-r2.json): Service operation completed; user delivery completed; blockers none. 指定 OSV API 的 POST /v1/query 与 GET /v1/vulns/{id} 均真实返回 200（execution/artifacts/query_minimist_1.2.0.json、record_GHSA-vh95-rmgr-6w4m.json），可复用配置已保存（execution/retained-files.json），用户答复齐备（execution/answer.md）；无网络、权限、预算或执行阻碍迹象。
@@ -6573,7 +6573,7 @@ The assigned service, entry point and authorized identity or credentials are in 
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-1a93823643b5)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-f1229f7220dc)
 
 [Task definition](./tasks.en.md#dependency-advisories-access-001-v1)
 
@@ -6597,7 +6597,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [3](./evaluations.md#comparison-8e6422c28f03) | [100%](./evaluations.md#comparison-8e6422c28f03) | 198.0k | $0.01 | $0 |
+| API | [3](./evaluations.md#comparison-6b6a0b74a08e) | [100%](./evaluations.md#comparison-6b6a0b74a08e) | 198.0k | $0.01 | $0 |
 
 - [afs-20261010-johor40-advisories-osv-business-r3](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r3.json): Service operation completed; user delivery completed; blockers none. OSV API 的 query 与 vulns 端点均返回 HTTP 200 并被实际用于结论；答复完整给出两条告警的匹配结论、5.2.x 最早修复版本（5.2.6 / 5.2.7）、最低升级版本 5.2.7 及可核对链接，无阻碍。
 - [afs-20261010-johor40-advisories-osv-business-r2](../data/experiments/evaluations/afs-20261010-johor40-advisories-osv-business-r2.json): Service operation completed; user delivery completed; blockers none. 服务端：osv_client.py 对 api.osv.dev 发出 GET /v1/vulns/{id} 与 POST /v1/query（SOURCE: live），缓存响应可核；交付：execution/answer.md 给出两条匹配结论、5.2.6/5.2.7 修复边界、最低 5.2.7 与依据链接，与独立冻结参考一致。无阻碍。
@@ -6612,7 +6612,7 @@ Dependency notes: PyPI ecosystem, package Django, installed version 5.2.6; alert
 
 1.18.35 · deepseek-flash / high · 600s · Independent review with 2 same-task answers · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-8e6422c28f03)
+Access preparation: none; anonymous public route · [Full configuration and evidence](./evaluations.md#comparison-6b6a0b74a08e)
 
 [Task definition](./tasks.en.md#dependency-advisories-check-001-v1)
 
@@ -6655,7 +6655,7 @@ Persistent Microsoft mailboxes with mail retrieval and management through Micros
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://outlook.live.com/) · [Source record](../data/candidates/outlook-mail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://outlook.live.com/) · [Source record](../data/candidates/outlook-mail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="outlook-mail-access"></a>
 
@@ -6683,7 +6683,7 @@ Agent-native payment facilitator (the AI-builder product of UniPaaS, FCA-authori
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://paas.build) · [Source record](../data/candidates/paas-build.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://paas.build) · [Source record](../data/candidates/paas-build.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="paas-build-access"></a>
 
@@ -6764,7 +6764,7 @@ Merchant-of-record billing platform with a versioned API, full sandbox, llms.txt
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.paddle.com) · [Source record](../data/providers/paddle.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.paddle.com) · [Source record](../data/providers/paddle.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="paddle-access"></a>
 
@@ -6831,7 +6831,7 @@ Online payment acceptance through Orders API and buyer approval checkout; separa
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.paypal.com/) · [Source record](../data/candidates/paypal.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.paypal.com/) · [Source record](../data/candidates/paypal.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="paypal-access"></a>
 
@@ -6861,9 +6861,9 @@ Online payment acceptance through Orders API and buyer approval checkout; separa
 
 Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
 
-**Classification:** Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Search
 
-[Website](https://www.perplexity.ai) · [Source record](../data/providers/perplexity.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.perplexity.ai) · [Source record](../data/providers/perplexity.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="perplexity-access"></a>
 
@@ -6893,9 +6893,9 @@ Sonar API for web-grounded answers and search, with llms.txt, an official MCP se
 
 Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.
 
-**Classification:** Search & Data Access / Geocoding
+**Classification:** Maps & Geography / Geocoding
 
-[Website](https://photon.komoot.io/) · [Source record](../data/candidates/photon.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://photon.komoot.io/) · [Source record](../data/candidates/photon.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="photon-access"></a>
 
@@ -6994,7 +6994,7 @@ Managed vector database for search and RAG, with llms.txt, an official MCP serve
 
 **Classification:** Databases / Vector Databases
 
-[Website](https://www.pinecone.io) · [Source record](../data/providers/pinecone.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.pinecone.io) · [Source record](../data/providers/pinecone.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="pinecone-access"></a>
 
@@ -7026,7 +7026,7 @@ Unified payment integration across payment channels, with API keys, a web SDK an
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://www.pingxx.com/) · [Source record](../data/candidates/pingxx.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.pingxx.com/) · [Source record](../data/candidates/pingxx.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="pingxx-access"></a>
 
@@ -7057,7 +7057,7 @@ PostgreSQL single-node plans start at USD 5/month. No free writable database all
 
 **Classification:** Databases / Hosted Relational Databases
 
-[Website](https://planetscale.com/) · [Source record](../data/candidates/planetscale.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://planetscale.com/) · [Source record](../data/candidates/planetscale.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="planetscale-access"></a>
 
@@ -7086,7 +7086,7 @@ Merchant-of-record service for digital products, with checkout APIs and a separa
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://polar.sh/) · [Source record](../data/candidates/polar.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://polar.sh/) · [Source record](../data/candidates/polar.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="polar-access"></a>
 
@@ -7121,7 +7121,7 @@ API development platform with a public Postman API, llms.txt, official CLI, and 
 
 **Classification:** Developer Tools / API Development & Testing
 
-[Website](https://www.postman.com) · [Source record](../data/providers/postman.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.postman.com) · [Source record](../data/providers/postman.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="postman-access"></a>
 
@@ -7153,7 +7153,7 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 
 **Classification:** Databases / Vector Databases
 
-[Website](https://qdrant.tech) · [Source record](../data/providers/qdrant.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://qdrant.tech) · [Source record](../data/providers/qdrant.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="qdrant-access"></a>
 
@@ -7183,9 +7183,9 @@ Open-source vector database with a managed cloud, llms.txt, an official MCP serv
 
 Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.
 
-**Classification:** Productivity & Collaboration / QR Code Images
+**Classification:** Developer Tools / QR Code Images
 
-[Website](https://quickchart.io/qr-code-api/) · [Source record](../data/candidates/quickchart.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://quickchart.io/qr-code-api/) · [Source record](../data/candidates/quickchart.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="quickchart-access"></a>
 
@@ -7287,9 +7287,9 @@ Access preparation: none; public static QR APIs, no account/key/email/payment su
 
 Congressional and insider transactions, institutional activity and other alternative financial datasets.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://www.quiverquant.com/) · [Source record](../data/candidates/quiver-quantitative.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.quiverquant.com/) · [Source record](../data/candidates/quiver-quantitative.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="quiver-quantitative-access"></a>
 
@@ -7320,7 +7320,7 @@ App/database hosting with a public GraphQL API, official CLI, llms.txt, and usag
 
 **Classification:** Cloud Computing & Hosting / Application Hosting
 
-[Website](https://railway.com) · [Source record](../data/providers/railway.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://railway.com) · [Source record](../data/providers/railway.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="railway-access"></a>
 
@@ -7348,7 +7348,7 @@ Payment Links API for collecting specified amounts through hosted checkout, incl
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://razorpay.com/) · [Source record](../data/candidates/razorpay.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://razorpay.com/) · [Source record](../data/candidates/razorpay.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="razorpay-access"></a>
 
@@ -7376,7 +7376,7 @@ In-memory data platform for caching, vector search and real-time apps; Redis Clo
 
 **Classification:** Databases / Key-value Databases; Databases / Vector Databases; Databases / Document Databases
 
-[Website](https://redis.io) · [Source record](../data/providers/redis.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://redis.io) · [Source record](../data/providers/redis.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="redis-access"></a>
 
@@ -7408,7 +7408,7 @@ Cloud hosting for web services, static sites and databases with a REST API, offi
 
 **Classification:** Cloud Computing & Hosting / Application Hosting
 
-[Website](https://render.com) · [Source record](../data/providers/render.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://render.com) · [Source record](../data/providers/render.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="render-access"></a>
 
@@ -7440,7 +7440,7 @@ Run and fine-tune open-source models via a simple predictions API, with llms.txt
 
 **Classification:** AI Services / Model Access
 
-[Website](https://replicate.com) · [Source record](../data/providers/replicate.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://replicate.com) · [Source record](../data/providers/replicate.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="replicate-access"></a>
 
@@ -7468,7 +7468,7 @@ Email API for developers with test mode, scoped API keys, idempotency support, a
 
 **Classification:** Communication / Email Delivery
 
-[Website](https://resend.com) · [Source record](../data/providers/resend.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://resend.com) · [Source record](../data/providers/resend.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="resend-access"></a>
 
@@ -7500,7 +7500,7 @@ Air API workflows with assigned credentials, plus a separately researched Agenti
 
 **Classification:** Travel / Flights
 
-[Website](https://developer.sabre.com/) · [Source record](../data/candidates/sabre-air.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://developer.sabre.com/) · [Source record](../data/candidates/sabre-air.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="sabre-air-access"></a>
 
@@ -7530,7 +7530,7 @@ Google Flights extraction endpoint charged in platform credits rather than one c
 
 **Classification:** Travel / Flights
 
-[Website](https://www.scrapingdog.com/) · [Source record](../data/candidates/scrapingdog-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.scrapingdog.com/) · [Source record](../data/candidates/scrapingdog-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="scrapingdog-flights-access"></a>
 
@@ -7557,9 +7557,9 @@ Google Flights extraction endpoint charged in platform credits rather than one c
 
 Google web-search and flight-results APIs, plus a hosted MCP integration; free signup requires a human account owner.
 
-**Classification:** Travel / Flights; Search & Data Access / Web Search
+**Classification:** Travel / Flights; Search & Web Scraping / Web Search
 
-[Website](https://www.searchapi.io/) · [Source record](../data/candidates/searchapi.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.searchapi.io/) · [Source record](../data/candidates/searchapi.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="searchapi-access"></a>
 
@@ -7596,9 +7596,9 @@ Google web-search and flight-results APIs, plus a hosted MCP integration; free s
 
 Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no account or key.
 
-**Classification:** Search & Data Access / Financial Data / Company Financials
+**Classification:** Financial Data / Company Financials
 
-[Website](https://www.sec.gov/) · [Source record](../data/candidates/sec-edgar.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.sec.gov/) · [Source record](../data/candidates/sec-edgar.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="sec-edgar-access"></a>
 
@@ -7690,9 +7690,9 @@ Access preparation: none; contact identity only · [Full configuration and evide
 
 Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.
 
-**Classification:** Search & Data Access / Scholarly Literature Search
+**Classification:** Scholarly & Reference / Scholarly Literature Search
 
-[Website](https://www.semanticscholar.org/) · [Source record](../data/candidates/semantic-scholar.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.semanticscholar.org/) · [Source record](../data/candidates/semantic-scholar.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="semantic-scholar-access"></a>
 
@@ -7724,7 +7724,7 @@ Error monitoring and performance tracing with llms.txt, an official MCP server, 
 
 **Classification:** Developer Tools / Monitoring & Troubleshooting
 
-[Website](https://sentry.io) · [Source record](../data/providers/sentry.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://sentry.io) · [Source record](../data/providers/sentry.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="sentry-access"></a>
 
@@ -7750,9 +7750,9 @@ Error monitoring and performance tracing with llms.txt, an official MCP server, 
 
 Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
 
-**Classification:** Travel / Flights; Search & Data Access / Web Search
+**Classification:** Travel / Flights; Search & Web Scraping / Web Search
 
-[Website](https://serpapi.com) · [Source record](../data/providers/serpapi.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://serpapi.com) · [Source record](../data/providers/serpapi.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="serpapi-access"></a>
 
@@ -7786,9 +7786,9 @@ Real-time JSON API for Google and other search engines' results, with an officia
 
 Google results API with initial free queries. Its terms describe a B2B service rather than consumer access; personal eligibility and authenticated setup remain unverified.
 
-**Classification:** Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Search
 
-[Website](https://serper.dev/) · [Source record](../data/candidates/serper.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://serper.dev/) · [Source record](../data/candidates/serper.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="serper-access"></a>
 
@@ -7818,7 +7818,7 @@ Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, acce
 
 **Classification:** E-commerce
 
-[Website](https://www.shopify.com) · [Source record](../data/providers/shopify.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.shopify.com) · [Source record](../data/providers/shopify.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="shopify-access"></a>
 
@@ -7848,9 +7848,9 @@ Commerce platform with versioned GraphQL APIs, llms.txt, official MCP docs, acce
 
 Company fundamentals and price data with API and CSV access advertised across free and paid plans.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials
+**Classification:** Financial Data / Asset Prices; Financial Data / Company Financials
 
-[Website](https://www.simfin.com/) · [Source record](../data/candidates/simfin.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.simfin.com/) · [Source record](../data/candidates/simfin.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="simfin-access"></a>
 
@@ -7885,7 +7885,7 @@ A Skootle-published flight-scraping Actor hosted on Apify, billed by startup and
 
 **Classification:** Travel / Flights
 
-[Website](https://apify.com/skootle/google-flights-scraper) · [Source record](../data/candidates/skootle-google-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://apify.com/skootle/google-flights-scraper) · [Source record](../data/candidates/skootle-google-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="skootle-google-flights-access"></a>
 
@@ -7913,7 +7913,7 @@ Private-jet empty-leg search, indicative charter estimates and booking links thr
 
 **Classification:** Travel / Flights
 
-[Website](https://skyaccess.com/) · [Source record](../data/candidates/skyaccess.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://skyaccess.com/) · [Source record](../data/candidates/skyaccess.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="skyaccess-access"></a>
 
@@ -7944,7 +7944,7 @@ Partner flight APIs and an official MCP, with independently documented business-
 
 **Classification:** Travel / Flights
 
-[Website](https://www.skyscanner.net/) · [Source record](../data/candidates/skyscanner.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.skyscanner.net/) · [Source record](../data/candidates/skyscanner.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="skyscanner-access"></a>
 
@@ -7974,7 +7974,7 @@ Workspace messaging platform with a mature Web API, granular OAuth scopes, an Op
 
 **Classification:** Communication / Messaging
 
-[Website](https://slack.com) · [Source record](../data/providers/slack.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://slack.com) · [Source record](../data/providers/slack.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="slack-access"></a>
 
@@ -8006,7 +8006,7 @@ Hosted payment links and payment APIs with a free developer sandbox; merchant av
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://squareup.com/) · [Source record](../data/candidates/square.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://squareup.com/) · [Source record](../data/candidates/square.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="square-access"></a>
 
@@ -8035,7 +8035,7 @@ Cloud browser API for AI agents (sessions, CDP, anti-bot) — open-source and se
 
 **Classification:** Cloud Computing & Hosting / Browser Environments
 
-[Website](https://steel.dev) · [Source record](../data/providers/steel.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://steel.dev) · [Source record](../data/providers/steel.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="steel-access"></a>
 
@@ -8063,7 +8063,7 @@ Payments, billing, subscriptions, and financial infrastructure with a famously c
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://stripe.com) · [Source record](../data/providers/stripe.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://stripe.com) · [Source record](../data/providers/stripe.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="stripe-access"></a>
 
@@ -8099,7 +8099,7 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 **Classification:** Databases / Hosted Relational Databases
 
-[Website](https://supabase.com) · [Source record](../data/providers/supabase.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://supabase.com) · [Source record](../data/providers/supabase.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="supabase-access"></a>
 
@@ -8130,9 +8130,9 @@ Postgres platform with auth, storage, edge functions, a management API, official
 
 Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 
-**Classification:** Search & Data Access / Web Content Extraction; Search & Data Access / Web Search
+**Classification:** Search & Web Scraping / Web Content Extraction; Search & Web Scraping / Web Search
 
-[Website](https://www.tavily.com) · [Source record](../data/providers/tavily.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.tavily.com) · [Source record](../data/providers/tavily.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tavily-access"></a>
 
@@ -8179,7 +8179,7 @@ Free bot platform with instant token issuance via BotFather, webhooks, a documen
 
 **Classification:** Communication / Messaging
 
-[Website](https://telegram.org) · [Source record](../data/providers/telegram.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://telegram.org) · [Source record](../data/providers/telegram.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="telegram-access"></a>
 
@@ -8211,7 +8211,7 @@ Disposable email receiving service with a developer API for automated email work
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://temp-mail.org/) · [Source record](../data/candidates/temp-mail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://temp-mail.org/) · [Source record](../data/candidates/temp-mail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="temp-mail-access"></a>
 
@@ -8239,7 +8239,7 @@ Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for re
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://agent.qq.com/) · [Source record](../data/candidates/tencent-agently-mail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://agent.qq.com/) · [Source record](../data/candidates/tencent-agently-mail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tencent-agently-mail-access"></a>
 
@@ -8271,9 +8271,9 @@ Dedicated Agent mailbox from Tencent's QQ Mail team, with an official CLI for re
 
 Market data covering end-of-day prices and other feeds, with an account-issued authentication token.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Exchange Rates
+**Classification:** Financial Data / Asset Prices; Financial Data / Exchange Rates
 
-[Website](https://www.tiingo.com/) · [Source record](../data/candidates/tiingo.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.tiingo.com/) · [Source record](../data/candidates/tiingo.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tiingo-access"></a>
 
@@ -8302,7 +8302,7 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 
 **Classification:** AI Services / Model Access
 
-[Website](https://www.together.ai) · [Source record](../data/providers/together-ai.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.together.ai) · [Source record](../data/providers/together-ai.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="together-ai-access"></a>
 
@@ -8328,9 +8328,9 @@ Inference and fine-tuning platform for open-source models with an OpenAI-compati
 
 Public trading disclosures through keyless REST and MCP, with attribution and original-filing links.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://tracefour.com/) · [Source record](../data/candidates/tracefour.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://tracefour.com/) · [Source record](../data/candidates/tracefour.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tracefour-access"></a>
 
@@ -8401,7 +8401,7 @@ Travel distribution API requiring trial requests and provider-provisioned produc
 
 **Classification:** Travel / Flights
 
-[Website](https://developer.travelport.com/) · [Source record](../data/candidates/travelport-tripservices.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://developer.travelport.com/) · [Source record](../data/candidates/travelport-tripservices.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="travelport-tripservices-access"></a>
 
@@ -8430,7 +8430,7 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 **Classification:** Travel / Flights
 
-[Website](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) · [Source record](../data/candidates/trip-com-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://tradeplatformmanual.trip.com/international-shared-platform-api-guide-20260701/international-shared-platform-api-guide.html) · [Source record](../data/candidates/trip-com-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="trip-com-flights-access"></a>
 
@@ -8458,7 +8458,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 **Classification:** Databases / Hosted Relational Databases
 
-[Website](https://turso.tech/) · [Source record](../data/candidates/turso.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://turso.tech/) · [Source record](../data/candidates/turso.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="turso-access"></a>
 
@@ -8478,7 +8478,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
 | CLI | — | — | — | — |
-| API (platform-api) | [Access preparation: [object Object]](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | [232.3k](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 55.989322s | 0 |
+| API (platform-api) | [Service credentials supplied](../data/experiments/evaluations/afs-20261010-johor40-turso-restore-v2-r3.json) | [232.3k](../data/experiments/evaluations/afs-20261010-johor40-turso-access-baseline.json) | 55.989322s | 0 |
 | API (sql-http-api) | — | — | — | — |
 | SDK | — | — | — | — |
 
@@ -8486,7 +8486,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (platform-api) | [1](./evaluations.md#comparison-3e5e974d8b61) | [100%](./evaluations.md#comparison-3e5e974d8b61) | 232.3k | $0.01 | $0 |
+| API (platform-api) | [1](./evaluations.md#comparison-dbc4d2ba8407) | [100%](./evaluations.md#comparison-dbc4d2ba8407) | 232.3k | $0.01 | $0 |
 | CLI | — | — | — | — | — |
 | API (sql-http-api) | — | — | — | — | — |
 | SDK | — | — | — | — | — |
@@ -8502,7 +8502,7 @@ The service, interface, authorized account or signup identity and its origin are
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-3e5e974d8b61)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-dbc4d2ba8407)
 
 [Task definition](./tasks.en.md#database-access-001-v1)
 
@@ -8527,7 +8527,7 @@ Access preparation: [object Object] · [Full configuration and evidence](./evalu
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API (platform-api) | [3](./evaluations.md#comparison-848474bceab4) | [100%](./evaluations.md#comparison-848474bceab4) | 456.4k | $0.02 | $0 |
+| API (platform-api) | [3](./evaluations.md#comparison-7dece7b7dd54) | [100%](./evaluations.md#comparison-7dece7b7dd54) | 456.4k | $0.02 | $0 |
 | CLI | — | — | — | — | — |
 | API (sql-http-api) | — | — | — | — | — |
 | SDK | — | — | — | — | — |
@@ -8545,7 +8545,7 @@ The source is a dedicated remote database created separately by the controller f
 
 1.18.35 · deepseek-flash / high · 600s · 2026-10-10 (UTC)
 
-Access preparation: [object Object] · [Full configuration and evidence](./evaluations.md#comparison-848474bceab4)
+Service credentials supplied · [Full configuration and evidence](./evaluations.md#comparison-7dece7b7dd54)
 
 [Task definition](./tasks.en.md#database-restore-001-v2)
 
@@ -8700,9 +8700,9 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 
 Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Company Financials
+**Classification:** Financial Data / Asset Prices; Financial Data / Company Financials
 
-[Website](https://tushare.pro/) · [Source record](../data/candidates/tushare.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://tushare.pro/) · [Source record](../data/candidates/tushare.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tushare-access"></a>
 
@@ -8731,9 +8731,9 @@ Chinese-market prices and financial statements through a token-based HTTP API an
 
 Global stock, FX and crypto time series with API, Python SDK and CLI access.
 
-**Classification:** Search & Data Access / Financial Data / Asset Prices; Search & Data Access / Financial Data / Exchange Rates
+**Classification:** Financial Data / Asset Prices; Financial Data / Exchange Rates
 
-[Website](https://twelvedata.com/) · [Source record](../data/candidates/twelve-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://twelvedata.com/) · [Source record](../data/candidates/twelve-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="twelve-data-access"></a>
 
@@ -8773,7 +8773,7 @@ Programmable messaging and voice APIs with test credentials, an OpenAPI spec, ll
 
 **Classification:** Communication / SMS Delivery; Communication / Voice Calls
 
-[Website](https://www.twilio.com) · [Source record](../data/providers/twilio.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.twilio.com) · [Source record](../data/providers/twilio.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="twilio-access"></a>
 
@@ -8803,9 +8803,9 @@ Programmable messaging and voice APIs with test credentials, an OpenAPI spec, ll
 
 Original House financial disclosure filings and searchable annual indexes, published by the Clerk.
 
-**Classification:** Search & Data Access / Financial Data / Transaction Disclosures
+**Classification:** Financial Data / Transaction Disclosures
 
-[Website](https://disclosures-clerk.house.gov/FinancialDisclosure) · [Source record](../data/candidates/us-house-disclosures.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://disclosures-clerk.house.gov/FinancialDisclosure) · [Source record](../data/candidates/us-house-disclosures.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="us-house-disclosures-access"></a>
 
@@ -8834,7 +8834,7 @@ Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llm
 
 **Classification:** Databases / Key-value Databases; Databases / Vector Databases
 
-[Website](https://upstash.com) · [Source record](../data/providers/upstash.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://upstash.com) · [Source record](../data/providers/upstash.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="upstash-access"></a>
 
@@ -8864,9 +8864,9 @@ Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llm
 
 FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.
 
-**Classification:** Search & Data Access / Route Planning
+**Classification:** Maps & Geography / Route Planning
 
-[Website](https://valhalla.github.io/valhalla/) · [Source record](../data/candidates/valhalla.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://valhalla.github.io/valhalla/) · [Source record](../data/candidates/valhalla.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="valhalla-access"></a>
 
@@ -8971,7 +8971,7 @@ Voice-agent orchestration API (calls, turn-taking, tool use over phone/web) with
 
 **Classification:** Communication / Voice Agents; Communication / Voice Calls
 
-[Website](https://vapi.ai) · [Source record](../data/providers/vapi.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://vapi.ai) · [Source record](../data/providers/vapi.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="vapi-access"></a>
 
@@ -9003,7 +9003,7 @@ Frontend cloud for deploying web apps, with a REST API, CLI, official MCP server
 
 **Classification:** Cloud Computing & Hosting / Application Hosting
 
-[Website](https://vercel.com) · [Source record](../data/providers/vercel.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://vercel.com) · [Source record](../data/providers/vercel.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="vercel-access"></a>
 
@@ -9031,7 +9031,7 @@ Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free san
 
 **Classification:** Databases / Vector Databases
 
-[Website](https://weaviate.io) · [Source record](../data/providers/weaviate.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://weaviate.io) · [Source record](../data/providers/weaviate.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="weaviate-access"></a>
 
@@ -9063,7 +9063,7 @@ Merchant payment APIs including Native QR checkout; merchant credentials and cha
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://pay.weixin.qq.com/) · [Source record](../data/candidates/wechat-pay.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://pay.weixin.qq.com/) · [Source record](../data/candidates/wechat-pay.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="wechat-pay-access"></a>
 
@@ -9091,7 +9091,7 @@ Payment APIs and checkout integration for existing apps, with TypeScript, Python
 
 **Classification:** Payments / Billing / Payment Acceptance
 
-[Website](https://whop.com/) · [Source record](../data/candidates/whop.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://whop.com/) · [Source record](../data/candidates/whop.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="whop-access"></a>
 
@@ -9117,9 +9117,9 @@ Payment APIs and checkout integration for existing apps, with TypeScript, Python
 
 Country-level economic and development indicators through the public Indicators API.
 
-**Classification:** Search & Data Access / Financial Data / Economic Indicators
+**Classification:** Financial Data / Economic Indicators
 
-[Website](https://data.worldbank.org/) · [Source record](../data/candidates/world-bank-data.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://data.worldbank.org/) · [Source record](../data/candidates/world-bank-data.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="world-bank-data-access"></a>
 
@@ -9149,7 +9149,7 @@ xAI's Grok models via an OpenAI-compatible REST API, with an llms.txt and self-s
 
 **Classification:** AI Services / Model Access
 
-[Website](https://x.ai) · [Source record](../data/providers/xai.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://x.ai) · [Source record](../data/providers/xai.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="xai-access"></a>
 
@@ -9177,7 +9177,7 @@ Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols,
 
 **Classification:** AI Services / Model Access
 
-[Website](https://router.xiu.ai/) · [Source record](../data/candidates/xiurouter.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://router.xiu.ai/) · [Source record](../data/candidates/xiurouter.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="xiurouter-access"></a>
 
@@ -9218,9 +9218,9 @@ Hosted model gateway with documented OpenAI, Anthropic and Gemini API protocols,
 
 Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.
 
-**Classification:** Search & Data Access
+**Classification:** Search & Web Scraping
 
-[Website](https://xquik.com) · [Source record](../data/candidates/xquik.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://xquik.com) · [Source record](../data/candidates/xquik.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="xquik-access"></a>
 
@@ -9253,7 +9253,7 @@ GLM models via Z.ai's OpenAI-compatible international API, with llms.txt, publis
 
 **Classification:** AI Services / Model Access
 
-[Website](https://z.ai) · [Source record](../data/providers/zai.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://z.ai) · [Source record](../data/providers/zai.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="zai-access"></a>
 
@@ -9281,7 +9281,7 @@ Automation platform bridging 7000+ apps, with llms.txt and an official MCP endpo
 
 **Classification:** Agent Infrastructure & Automation / Tool Connections; Agent Infrastructure & Automation / Workflow Automation
 
-[Website](https://zapier.com) · [Source record](../data/providers/zapier.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://zapier.com) · [Source record](../data/providers/zapier.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="zapier-access"></a>
 
@@ -9314,7 +9314,7 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 **Classification:** Communication / Mailboxes
 
-[Website](https://www.zoho.com/mail/) · [Source record](../data/candidates/zoho-mail.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.zoho.com/mail/) · [Source record](../data/candidates/zoho-mail.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="zoho-mail-access"></a>
 
@@ -9342,7 +9342,7 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 **Classification:** Travel / Flights
 
-[Website](https://www.qunar.com/site/zh/Cooperate_4.shtml) · [Source record](../data/candidates/qunar-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.qunar.com/site/zh/Cooperate_4.shtml) · [Source record](../data/candidates/qunar-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="qunar-flights-access"></a>
 
@@ -9372,7 +9372,7 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 **Classification:** Travel / Flights
 
-[Website](https://www.ly.com/public/about17u/contactus) · [Source record](../data/candidates/tongcheng-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.ly.com/public/about17u/contactus) · [Source record](../data/candidates/tongcheng-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="tongcheng-flights-access"></a>
 
@@ -9403,7 +9403,7 @@ Persistent personal and organizational mailboxes with scoped OAuth mail APIs.
 
 **Classification:** Travel / Flights
 
-[Website](https://pages.ctrip.com/public/dlhz.htm) · [Source record](../data/candidates/ctrip-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://pages.ctrip.com/public/dlhz.htm) · [Source record](../data/candidates/ctrip-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="ctrip-flights-access"></a>
 
@@ -9434,7 +9434,7 @@ China-region Feishu workspace and Base APIs; separate account/tenant from intern
 
 **Classification:** Productivity & Collaboration / Collaborative Tables
 
-[Website](https://www.feishu.cn/) · [Source record](../data/candidates/feishu.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://www.feishu.cn/) · [Source record](../data/candidates/feishu.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="feishu-access"></a>
 
@@ -9471,7 +9471,7 @@ China-region Feishu workspace and Base APIs; separate account/tenant from intern
 
 **Classification:** Travel / Flights
 
-[Website](https://open.alitrip.com/businessDetail.htm?tagId=85) · [Source record](../data/candidates/fliggy-domestic-flights.yaml) · [Back to directory](../README.md#all-services)
+[Website](https://open.alitrip.com/businessDetail.htm?tagId=85) · [Source record](../data/candidates/fliggy-domestic-flights.yaml) · [Back to directory](./directory.md)
 
 ### Documentation and access <a id="fliggy-domestic-flights-access"></a>
 

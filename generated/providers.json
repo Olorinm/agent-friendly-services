@@ -12,10 +12,10 @@
     "entrypoint_semantics": "A missing entrypoint means \"no known URL\", not \"confirmed absent\".",
     "stale_after_days": 180
   },
-  "generated_at": "2026-10-12T03:54:33.418Z",
+  "generated_at": "2026-10-12T05:06:05.522Z",
   "counts": {
     "providers": 76,
-    "categories": 11,
+    "categories": 15,
     "entrypoint_urls": 719,
     "checks_answered": 431
   },
@@ -213,9 +213,23 @@
               "description": "Run an API request collection and report the results."
             }
           ]
+        },
+        {
+          "id": "qr-codes",
+          "name": "QR Code Images",
+          "name_zh": "二维码图片",
+          "description": "Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.",
+          "inclusion": "A hosted service accepts an explicit payload and returns a downloadable QR image with documented format and sizing controls. The stored payload can be checked by an independent decoder; local-only encoding libraries are not hosted service alternatives.",
+          "exclusion": "Payment processing, scanner-only services, dynamic redirect or scan-tracking management and general AI image generation are separate. An image that looks like a QR code without correctly decoding the requested payload is insufficient; decoding does not prove its destination is safe, reachable or permanent, or that every phone and print condition can scan it.",
+          "capabilities": [
+            {
+              "id": "qr.generate",
+              "description": "Produce a downloadable static QR image encoding the supplied payload."
+            }
+          ]
         }
       ],
-      "inclusion": "Supports software development, repository collaboration, API development or operational diagnosis.",
+      "inclusion": "Supports software development, repository collaboration, API development, operational diagnosis or developer utilities such as QR image generation.",
       "exclusion": "Hosting runtime and application storage are classified separately."
     },
     {
@@ -345,24 +359,11 @@
       "exclusion": "User-facing work tables belong under workplace collaboration; third-party datasets belong under data access."
     },
     {
-      "id": "web-search-data",
-      "name": "Search & Data Access",
-      "description": "Search APIs, crawling and scraping, data providers.",
+      "id": "search-scraping",
+      "name": "Search & Web Scraping",
+      "name_zh": "搜索与网页抓取",
+      "description": "Find public web sources and retrieve page or platform content.",
       "subcategories": [
-        {
-          "id": "scholarly-search",
-          "name": "Scholarly Literature Search",
-          "name_zh": "学术文献检索",
-          "description": "Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.",
-          "inclusion": "Searches an identifiable scholarly corpus and returns work identities with citation metadata such as title, authors, publication venue, year and persistent identifiers where available.",
-          "exclusion": "General web-page search, guaranteed full-text access, literature-review synthesis and research-quality rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement between indexes do not independently establish a paper's identity, quality or completeness.",
-          "capabilities": [
-            {
-              "id": "scholarly.search",
-              "description": "Find scholarly works with enough bibliographic metadata to identify and cite them."
-            }
-          ]
-        },
         {
           "id": "web-search",
           "name": "Web Search",
@@ -390,7 +391,17 @@
           ],
           "inclusion": "Accepts identified web URLs or a specified site and returns its content as usable text or structured data.",
           "exclusion": "Query-only result lists/snippets are web search; browser control is a runtime, not extraction itself."
-        },
+        }
+      ],
+      "inclusion": "Discovers public web information or returns specified web or platform content as usable text or data.",
+      "exclusion": "Map, weather, calendar, financial and scholarly datasets have their own categories; browser control is a runtime."
+    },
+    {
+      "id": "maps-geo",
+      "name": "Maps & Geography",
+      "name_zh": "地图与地理",
+      "description": "Resolve places to coordinates and plan routes over transport networks.",
+      "subcategories": [
         {
           "id": "geocoding",
           "name": "Geocoding",
@@ -418,21 +429,17 @@
               "description": "Return a network route with distance, estimated duration and path information for a travel mode."
             }
           ]
-        },
-        {
-          "id": "public-holidays",
-          "name": "Public Holidays",
-          "name_zh": "公共节假日",
-          "description": "Retrieve dated public holidays applicable to an identified country or region for personal planning.",
-          "inclusion": "Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context to determine the requested regional scope; supported years and subdivisions must be stated.",
-          "exclusion": "Personal calendar editing, school vacations alone, general web search and extraction from a supplied page are separate. Holiday data does not establish shop opening hours, individual employment or pay entitlements, bank operations or travel availability; observances and substitute dates must not be silently treated as applicable public holidays.",
-          "capabilities": [
-            {
-              "id": "holidays.lookup",
-              "description": "Retrieve public holiday dates and names for a specified jurisdiction and period."
-            }
-          ]
-        },
+        }
+      ],
+      "inclusion": "Supplies geographic positions or network routes for identified places.",
+      "exclusion": "Weather at a location and travel booking are separate; map display alone is insufficient."
+    },
+    {
+      "id": "weather-calendar",
+      "name": "Weather & Calendar",
+      "name_zh": "天气与日历",
+      "description": "Weather forecasts and observations, and dated public holidays, for personal planning.",
+      "subcategories": [
         {
           "id": "weather-data",
           "name": "Weather Data",
@@ -448,98 +455,143 @@
           ]
         },
         {
-          "id": "financial-data",
-          "name": "Financial Data",
-          "name_zh": "金融数据",
-          "description": "Access identifiable financial or economic datasets; select a data type, then match coverage and task conditions.",
-          "capabilities": [],
-          "inclusion": "Supplies financial/economic observations or original filings; unresolved dataset scope can remain at this parent with an explanation.",
-          "exclusion": "News, trading execution or a generic search API alone does not establish a financial dataset service.",
-          "subcategories": [
+          "id": "public-holidays",
+          "name": "Public Holidays",
+          "name_zh": "公共节假日",
+          "description": "Retrieve dated public holidays applicable to an identified country or region for personal planning.",
+          "inclusion": "Returns identifiable holiday dates and names with enough jurisdiction and holiday-type context to determine the requested regional scope; supported years and subdivisions must be stated.",
+          "exclusion": "Personal calendar editing, school vacations alone, general web search and extraction from a supplied page are separate. Holiday data does not establish shop opening hours, individual employment or pay entitlements, bank operations or travel availability; observances and substitute dates must not be silently treated as applicable public holidays.",
+          "capabilities": [
             {
-              "id": "fx",
-              "name": "Exchange Rates",
-              "name_zh": "汇率数据",
-              "description": "Retrieve currency-pair exchange rates.",
-              "inclusion": "Rates identify the currency pair, direction and observation date.",
-              "exclusion": "A payment conversion fee or asset valuation alone is insufficient; reference rates do not imply executable exchange quotes.",
-              "capabilities": [
-                {
-                  "id": "fx.latest",
-                  "description": "Retrieve the latest published rate for a currency pair."
-                },
-                {
-                  "id": "fx.history",
-                  "description": "Retrieve exchange rates for specified historical dates."
-                }
-              ]
-            },
-            {
-              "id": "prices",
-              "name": "Asset Prices",
-              "name_zh": "资产行情",
-              "description": "Retrieve asset price snapshots or historical series.",
-              "inclusion": "Provides prices for identifiable assets and observation times.",
-              "exclusion": "Valuations inside transaction disclosures or news articles alone are insufficient; assets, adjustments and entitlements must match.",
-              "capabilities": [
-                {
-                  "id": "prices.latest",
-                  "description": "Retrieve a recent price snapshot for an identified asset."
-                },
-                {
-                  "id": "prices.history",
-                  "description": "Retrieve a price series for an identified asset and period."
-                }
-              ]
-            },
-            {
-              "id": "statements",
-              "name": "Company Financials",
-              "name_zh": "公司财务数据",
-              "description": "Retrieve company financial statements or reported financial facts.",
-              "inclusion": "Financial values identify the company, reporting period and units, or link to the original statement.",
-              "exclusion": "Company profiles, market prices or valuation ratios alone are insufficient.",
-              "capabilities": [
-                {
-                  "id": "statements.read",
-                  "description": "Retrieve company financial values with reporting periods, units and source context."
-                }
-              ]
-            },
-            {
-              "id": "disclosures",
-              "name": "Transaction Disclosures",
-              "name_zh": "交易披露",
-              "description": "Retrieve publicly reported transactions.",
-              "inclusion": "Records identify the reporting party and distinguish disclosure from transaction timing where available.",
-              "exclusion": "Company annual reports alone are not transaction disclosures; congressional and insider filings are different populations.",
-              "capabilities": [
-                {
-                  "id": "disclosures.search",
-                  "description": "Retrieve public transaction disclosures matching a person, asset or period."
-                }
-              ]
-            },
-            {
-              "id": "macro",
-              "name": "Economic Indicators",
-              "name_zh": "宏观经济指标",
-              "description": "Retrieve named economic indicator series.",
-              "inclusion": "Observations identify the series, periods and units.",
-              "exclusion": "Market asset prices alone are not macro indicators; frequency, seasonality and revisions must match.",
-              "capabilities": [
-                {
-                  "id": "macro.series",
-                  "description": "Retrieve economic observations for a named series and period."
-                }
-              ]
+              "id": "holidays.lookup",
+              "description": "Retrieve public holiday dates and names for a specified jurisdiction and period."
             }
           ]
         }
       ],
-      "name_zh": "搜索与数据获取",
-      "inclusion": "Discovers external information or supplies usable source content or datasets.",
-      "exclusion": "Storage of user-supplied application data is a database; a general model API alone is not a data source."
+      "inclusion": "Supplies weather variables or public-holiday dates for an identified place and period.",
+      "exclusion": "Personal calendar editing and general web search are separate."
+    },
+    {
+      "id": "financial-data",
+      "name": "Financial Data",
+      "name_zh": "金融数据",
+      "description": "Identifiable financial or economic datasets; select a data type, then match coverage and task conditions.",
+      "subcategories": [
+        {
+          "id": "fx",
+          "name": "Exchange Rates",
+          "name_zh": "汇率数据",
+          "description": "Retrieve currency-pair exchange rates.",
+          "inclusion": "Rates identify the currency pair, direction and observation date.",
+          "exclusion": "A payment conversion fee or asset valuation alone is insufficient; reference rates do not imply executable exchange quotes.",
+          "capabilities": [
+            {
+              "id": "fx.latest",
+              "description": "Retrieve the latest published rate for a currency pair."
+            },
+            {
+              "id": "fx.history",
+              "description": "Retrieve exchange rates for specified historical dates."
+            }
+          ]
+        },
+        {
+          "id": "prices",
+          "name": "Asset Prices",
+          "name_zh": "资产行情",
+          "description": "Retrieve asset price snapshots or historical series.",
+          "inclusion": "Provides prices for identifiable assets and observation times.",
+          "exclusion": "Valuations inside transaction disclosures or news articles alone are insufficient; assets, adjustments and entitlements must match.",
+          "capabilities": [
+            {
+              "id": "prices.latest",
+              "description": "Retrieve a recent price snapshot for an identified asset."
+            },
+            {
+              "id": "prices.history",
+              "description": "Retrieve a price series for an identified asset and period."
+            }
+          ]
+        },
+        {
+          "id": "statements",
+          "name": "Company Financials",
+          "name_zh": "公司财务数据",
+          "description": "Retrieve company financial statements or reported financial facts.",
+          "inclusion": "Financial values identify the company, reporting period and units, or link to the original statement.",
+          "exclusion": "Company profiles, market prices or valuation ratios alone are insufficient.",
+          "capabilities": [
+            {
+              "id": "statements.read",
+              "description": "Retrieve company financial values with reporting periods, units and source context."
+            }
+          ]
+        },
+        {
+          "id": "disclosures",
+          "name": "Transaction Disclosures",
+          "name_zh": "交易披露",
+          "description": "Retrieve publicly reported transactions.",
+          "inclusion": "Records identify the reporting party and distinguish disclosure from transaction timing where available.",
+          "exclusion": "Company annual reports alone are not transaction disclosures; congressional and insider filings are different populations.",
+          "capabilities": [
+            {
+              "id": "disclosures.search",
+              "description": "Retrieve public transaction disclosures matching a person, asset or period."
+            }
+          ]
+        },
+        {
+          "id": "macro",
+          "name": "Economic Indicators",
+          "name_zh": "宏观经济指标",
+          "description": "Retrieve named economic indicator series.",
+          "inclusion": "Observations identify the series, periods and units.",
+          "exclusion": "Market asset prices alone are not macro indicators; frequency, seasonality and revisions must match.",
+          "capabilities": [
+            {
+              "id": "macro.series",
+              "description": "Retrieve economic observations for a named series and period."
+            }
+          ]
+        },
+        {
+          "id": "data-platforms",
+          "name": "Multi-dataset Financial Platforms",
+          "name_zh": "综合金融数据平台",
+          "description": "Platforms or marketplaces offering many financial and economic dataset types through one account or interface; compare individual datasets in their specific subcategory.",
+          "inclusion": "Provides several distinct financial or economic dataset types whose individual scope, licences and personal access remain to be resolved.",
+          "exclusion": "A service with one established dataset type belongs in that subcategory; listing a platform does not establish access to any particular dataset.",
+          "capabilities": []
+        }
+      ],
+      "inclusion": "Supplies financial/economic observations or original filings.",
+      "exclusion": "News, trading execution or a generic search API alone does not establish a financial dataset service."
+    },
+    {
+      "id": "scholarly",
+      "name": "Scholarly & Reference",
+      "name_zh": "学术与知识",
+      "description": "Identify scholarly works and their bibliographic records.",
+      "subcategories": [
+        {
+          "id": "scholarly-search",
+          "name": "Scholarly Literature Search",
+          "name_zh": "学术文献检索",
+          "description": "Find identifiable scholarly works and their bibliographic metadata from publication clues or research queries.",
+          "inclusion": "Searches an identifiable scholarly corpus and returns work identities with citation metadata such as title, authors, publication venue, year and persistent identifiers where available.",
+          "exclusion": "General web-page search, guaranteed full-text access, literature-review synthesis and research-quality rankings are separate. Corpus coverage and identifier availability vary; citation counts or agreement between indexes do not independently establish a paper's identity, quality or completeness.",
+          "capabilities": [
+            {
+              "id": "scholarly.search",
+              "description": "Find scholarly works with enough bibliographic metadata to identify and cite them."
+            }
+          ]
+        }
+      ],
+      "inclusion": "Searches an identifiable scholarly corpus and returns citable work records.",
+      "exclusion": "General web search and full-text hosting alone are separate."
     },
     {
       "id": "payments-billing",
@@ -680,20 +732,6 @@
       "name": "Productivity & Collaboration",
       "description": "Documents, collaborative tables, project management, file sharing and preparing information materials for people to share; application object storage belongs under cloud services.",
       "subcategories": [
-        {
-          "id": "qr-codes",
-          "name": "QR Code Images",
-          "name_zh": "二维码图片",
-          "description": "Create a reusable static QR code image that encodes supplied text or a link for sharing or printing.",
-          "inclusion": "A hosted service accepts an explicit payload and returns a downloadable QR image with documented format and sizing controls. The stored payload can be checked by an independent decoder; local-only encoding libraries are not hosted service alternatives.",
-          "exclusion": "Payment processing, scanner-only services, dynamic redirect or scan-tracking management and general AI image generation are separate. An image that looks like a QR code without correctly decoding the requested payload is insufficient; decoding does not prove its destination is safe, reachable or permanent, or that every phone and print condition can scan it.",
-          "capabilities": [
-            {
-              "id": "qr.generate",
-              "description": "Produce a downloadable static QR image encoding the supplied payload."
-            }
-          ]
-        },
         {
           "id": "collaborative-tables",
           "name": "Collaborative Tables",
@@ -1205,7 +1243,7 @@
     {
       "id": "apify",
       "name": "Apify",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://apify.com",
       "summary": "Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.",
       "submitted_by": "community",
@@ -1410,7 +1448,7 @@
     {
       "id": "brave-search",
       "name": "Brave Search API",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://brave.com/search/api/",
       "summary": "Independent web search index with a developer API, self-serve registration, and a free plan.",
       "submitted_by": "community",
@@ -2857,7 +2895,7 @@
     {
       "id": "exa",
       "name": "Exa",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://exa.ai",
       "summary": "Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.",
       "submitted_by": "community",
@@ -3047,7 +3085,7 @@
     {
       "id": "firecrawl",
       "name": "Firecrawl",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.firecrawl.dev",
       "summary": "Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.",
       "submitted_by": "community",
@@ -3954,7 +3992,7 @@
     {
       "id": "jina",
       "name": "Jina AI",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://jina.ai",
       "summary": "Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.",
       "submitted_by": "community",
@@ -5698,7 +5736,7 @@
     {
       "id": "perplexity",
       "name": "Perplexity API",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.perplexity.ai",
       "summary": "Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.",
       "submitted_by": "community",
@@ -6777,7 +6815,7 @@
     {
       "id": "serpapi",
       "name": "SerpApi",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://serpapi.com",
       "summary": "Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.",
       "submitted_by": "community",
@@ -7392,7 +7430,7 @@
     {
       "id": "tavily",
       "name": "Tavily",
-      "category": "web-search-data",
+      "category": "search-scraping",
       "homepage": "https://www.tavily.com",
       "summary": "Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.",
       "submitted_by": "community",
