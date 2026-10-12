@@ -30,6 +30,32 @@ access. Synthetic materials are identified as such. Actual filenames, hashes,
 dates and resource identities are frozen before a comparison starts, with the
 same inputs for each applicable service in that task and round.
 
+The terminal classification defines the candidate pool. Retain every candidate
+in its service/task preparation matrix, including documented feature limitations,
+unknown support and account or environment blockers. Qualification determines
+how to prepare and interpret a pair; it must not silently remove difficult
+candidates. A documented limitation is not an observed failed trial, and an
+unrun pair has no empirical completion rate. Incorrect category assignments
+should be corrected with evidence rather than stretched to fit a task.
+
+Prefer synthetic raw inputs for records, messages, documents and media when
+they satisfy the task's stated conditions. Disclose their origin and freeze the
+same bytes for each comparison. Actual service responses, inventory, quotes,
+delivery and persisted state must be obtained from the real service. Changing
+human recordings to synthetic speech changes the task conditions; see the
+[synthetic speech-recognition v2 designs](ai-speech-recognition-synthetic-v2.md),
+which retain the original v1 definitions and independent listening prerequisites.
+
+For services that need registration, the controller uses a dedicated authorized
+mailbox and reuses a legitimate test account for that service. Keep registration
+mail access and account management keys with the controller; provide workers
+only the service credentials and test resources needed for their assigned task.
+Reset or recreate those resources between repetitions, respecting service limits.
+An existing credential file is not proof that an account or resource is still
+usable; confirm expiry, authentication and the authorized resource before dispatch.
+Record this preparation as a provided-account condition, separately from access
+trials, with its actual cost evidence or unknowns.
+
 The pipeline uses the trial configuration's `environment` text for the actual
 `ENVIRONMENT.md`. Include the table's resource and authorization conditions in
 that configuration and inspect the frozen execution packet; listing them in a
@@ -65,7 +91,7 @@ and classification remain defined in the mapping file.
 
 | 分类 | 任务表 |
 | --- | --- |
-| AI 服务 | [模型接入：让个人应用完成三种工作](./ai-model-access-business.md) · [语音合成：可听的文章、配音和公共导览](./ai-speech-synthesis-business.md) · [语音识别：留言、会议与字幕](./ai-speech-recognition-business.md) · [图像生成：活动海报、商品插图与教学图](./ai-image-generation-business.md) · [视频生成：商品镜头、教学动作与背景片段](./ai-video-generation-business.md) |
+| AI 服务 | [模型接入：让个人应用完成三种工作](./ai-model-access-business.md) · [语音合成：可听的文章、配音和公共导览](./ai-speech-synthesis-business.md) · [语音识别：系统合成音频 v2](./ai-speech-recognition-synthetic-v2.md) · [语音识别：原有人声设计 v1](./ai-speech-recognition-business.md) · [图像生成：活动海报、商品插图与教学图](./ai-image-generation-business.md) · [视频生成：商品镜头、教学动作与背景片段](./ai-video-generation-business.md) |
 | Agent 基础设施与自动化 | [记忆服务：跨会话偏好、更正与遗忘](./agent-memory-business.md) · [工具集成：日历、表格和邮箱的真实工作](./agent-tool-integrations-business.md) · [流程自动化：表单去重、逾期待办与日报](./agent-workflow-automation-business.md) |
 | 开发工具 | [依赖漏洞公告：核对已有告警与修复版本](./dependency-advisories.md) · [开发工具：业务任务补齐（2026-10-12）](./coverage-comm-developer.md) · [静态二维码：任务表](./qr-codes.md) |
 | 云计算与托管 | [代码沙箱：支出分析、图片整理与表格清洗](./cloud-code-sandboxes-business.md) · [云端浏览器：页面查询、文件导出与表单草稿](./cloud-browser-environments-business.md) · [应用托管：活动页面、小工具与更新发布](./cloud-app-hosting-business.md) |

@@ -684,3 +684,16 @@ tasks:
     id: weather-outing-001
     classification: weather-calendar/weather-data
     phase: business
+  # Synthetic audio changes the input conditions; retain the original human-voice designs.
+  - file: data/experiments/tasks/ai-speech-recognition-synthetic-v2.md
+    id: speech-recognition-voicemail-001
+    classification: ai-models/speech-recognition
+    phase: business
+  - file: data/experiments/tasks/ai-speech-recognition-synthetic-v2.md
+    id: speech-recognition-meeting-001
+    classification: ai-models/speech-recognition
+    phase: business
+  - file: data/experiments/tasks/ai-speech-recognition-synthetic-v2.md
+    id: speech-recognition-captions-001
+    classification: ai-models/speech-recognition
+    phase: business
