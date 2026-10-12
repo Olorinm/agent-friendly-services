@@ -53,6 +53,12 @@
 
 ### 结果分项（afs-20261010 起）
 
+先区分用户成果要求与测评控制。`checks` 只填写用户委托、原始材料中的成果要求和实际授权边界。运行器安排的临时缓存位置、统一等待间隔、请求或费用保护、日志与采集格式等，不自动成为用户成果要求；即使写在 ENVIRONMENT.md，也应在 `outcome`、`reason` 中单独记录 `test_constraint`，不能仅因违反这些安排把已完成的真实查询和交付判为 `not_completed`。实际服务条款、权限和真实共享限流仍须遵守，违规事实不能隐藏或解释为服务能力不足。
+
+例如，查询响应暂存于本次隔离容器的 `/tmp`，而运行器会在下一题前归档清理，不能单凭临时文件位置判接入失败。必要连接配置实际可用、真实查询及用户交付符合委托时，核对这些成果本身。若证据表明旧答案残留并被下一题读取、不同候选相互泄漏或越权访问，则属于比较隔离失效，报告具体事实并交总控处理，不能用服务失败掩盖环境问题。
+
+保护触发后若确实缺少用户要求的最终答复或文件，整体仍未完成，单列其保护或预算原因；上述区分不豁免错误、编造、缺失成果或不满足用户约束。接入时成功调用不等于后续业务能力已获证明。
+
 填写 `outcome`，每项都有本次证据，不根据控制器预期猜测。`service_execution` 用 `completed`、`not_completed`、`not_observed` 或 `unknown` 表示指定服务操作的实际完成情况；`user_delivery` 用 `completed`、`not_completed` 或 `unknown` 表示用户收到的最终答复及交付物；`blocking_factors` 从 `network`、`access`、`model_budget`、`agent_execution`、`test_constraint`、`materials`、`service_capability`、`unknown` 中列出有证据的阻碍，`evidence` 写具体依据。分项不能代替整项用户任务的完成结论。
 
 服务端操作已成功但交付缺失，可以记 service_execution=completed、user_delivery=not_completed，整体仍未完成。控制器的调用量/费用保护触发，单列 model_budget 或 test_constraint；用户委托本身未要求的调用数不能变成隐藏的用户验收条件。网络障碍有证据且导致本次比较失效时判 invalid_run；HTTP 403 本身不能确定是网络、权限还是服务政策，证据不足时保留未知。不得为提高成绩把真实失败统一归到环境。
