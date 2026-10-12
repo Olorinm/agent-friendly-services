@@ -1,6 +1,6 @@
 id: osrm
 name: OSRM Public Demo API
-category: web-search-data
+category: maps-geo
 homepage: https://project-osrm.org/
 summary: FOSSGIS-hosted OSRM demo for low-volume, non-commercial route planning with OpenStreetMap data.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/route-planning
+    - maps-geo/route-planning
   sources:
     demo:
       url: https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server

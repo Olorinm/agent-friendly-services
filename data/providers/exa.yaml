@@ -1,6 +1,6 @@
 id: exa
 name: Exa
-category: web-search-data
+category: search-scraping
 homepage: https://exa.ai
 summary: Search API built for AI — semantic web search, content retrieval, and research endpoints with an official MCP server.
 submitted_by: community
@@ -81,8 +81,8 @@ checks:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-extraction
-    - web-search-data/web-search
+    - search-scraping/web-extraction
+    - search-scraping/web-search
   sources:
     mcp:
       url: https://exa.ai/docs/get-started/exa-mcp

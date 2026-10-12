@@ -1,0 +1,21 @@
+# Hand-written homepage findings. Each item must restate published results and
+# link to them; generated tables remain the source of measurements.
+highlights:
+  - date: 2026-10-10
+    zh: "**网页抽取（GOV.UK 假日表）：Jina 3/3，Firecrawl 1/3。** Firecrawl 每次都成功取回页面且 HTML 正确，但其 Markdown 中年份标注位于表格之后，Agent 两次据此取到了错误年份的表。"
+    en: >-
+      **Web extraction (GOV.UK holiday table): Jina 3/3, Firecrawl 1/3.** Firecrawl fetched the page every time
+      and its HTML was correct, but its Markdown placed year captions after the tables; the Agent twice read the wrong year.
+    link: data/experiments/evaluations/afs-20261010-johor40-web-extraction-firecrawl-uk-holidays-r3.json
+  - date: 2026-10-10
+    zh: "**测试地点会改变结论。** Jina Reader 在国内服务器上因 DNS 污染无法访问，记为环境无效；换到海外服务器后接入与两项抽取任务全部完成。"
+    en: >-
+      **Test location changes outcomes.** Jina Reader was unreachable from a mainland China server because of DNS
+      interference and was recorded as an invalid run; from an overseas server, setup and both extraction tasks completed.
+    link: data/experiments/evaluations/jina-extraction-access-ds41-r2.json
+  - date: 2026-10-10
+    zh: "**Grist 共享账本：MCP 3/3，REST 2/3。** REST 的失败一次中，服务端表格与公式已全部正确，但 Agent 在请求上限内没写出最终答复——服务能做到，交付没完成。"
+    en: >-
+      **Grist shared expenses: MCP 3/3, REST 2/3.** In the REST failure the ledger and formulas were already correct
+      on the service, but the Agent ran out of requests before its final answer: the service worked, the delivery did not.
+    link: data/experiments/evaluations/afs-20261010-johor40-grist-rest-shared-expenses-r1.json

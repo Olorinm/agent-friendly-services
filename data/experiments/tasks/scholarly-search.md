@@ -1,6 +1,6 @@
 # 学术文献检索：从阅读笔记找回引用
 
-分类：搜索与数据获取 / 学术文献检索（web-search-data/scholarly-search）
+分类：学术与知识 / 学术文献检索（scholarly/scholarly-search）
 
 ## 需求与范围
 

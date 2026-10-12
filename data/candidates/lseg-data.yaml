@@ -1,6 +1,6 @@
 id: lseg-data
 name: LSEG Data Platform
-category: web-search-data
+category: financial-data
 homepage: https://www.lseg.com/en/data-analytics
 summary: Financial-data platform and Python library with licensed desktop and cloud access paths.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - financial-data/data-platforms
   sources:
     docs:
       url: >-

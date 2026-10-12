@@ -1,6 +1,6 @@
 id: open-exchange-rates
 name: Open Exchange Rates
-category: web-search-data
+category: financial-data
 homepage: https://openexchangerates.org/
 summary: >-
   Currency reference rates via a keyed API with a free signup plan; base-currency and historical access
@@ -11,7 +11,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/fx
+    - financial-data/fx
   sources:
     docs:
       url: https://docs.openexchangerates.org/reference/api-introduction

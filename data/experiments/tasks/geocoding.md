@@ -1,6 +1,6 @@
 # 地理编码：给旅行地图标记场馆
 
-分类：搜索与数据获取 / 地理编码（web-search-data/geocoding）
+分类：地图与地理 / 地理编码（maps-geo/geocoding）
 
 ## 需求与范围
 

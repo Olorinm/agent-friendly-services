@@ -8,7 +8,7 @@ catalog:
   version: 1
   classifications:
     - travel/flights
-    - web-search-data/web-search
+    - search-scraping/web-search
   sources:
     google-search:
       url: https://www.searchapi.io/docs/google

@@ -119,7 +119,7 @@ test('URL probing includes sources and routes but never labels them task-tested'
 
 test('route filters cannot combine one route’s access with another route’s capability', () => {
   const p = withRoute();
-  p.category = 'web-search-data';
+  p.category = 'search-scraping';
   p.catalog!.routes[0].capabilities = { 'flights.search': { value: 'documented', evidence: ['docs'] } };
   p.catalog!.routes[0].personal_access = { value: 'restricted', evidence: ['docs'], notes: 'Invitation required.' };
   p.catalog!.routes.push({ id: 'mcp', interface: 'mcp', maintainer: 'official', entry_url: 'https://example.com/mcp', evidence: ['docs'], personal_access: { value: 'documented', evidence: ['docs'] } });
@@ -189,24 +189,24 @@ test('generated data and the real MCP protocol preserve legacy behavior and expo
     assert.equal((await call('get_provider', { id: 'serpapi' })).provider.id, 'serpapi');
     assert((await call('search_services', { subcategory: 'travel/typo' })).error);
     assert((await call('get_service', { id: 'missing' })).error);
-    const financial = await call('search_services', { classification: 'web-search-data/financial-data' });
+    const financial = await call('search_services', { classification: 'financial-data' });
     assert.equal(financial.count, new Set(financial.services.map((s: any) => s.id)).size);
-    const fx = await call('search_services', { classification: 'web-search-data/financial-data/fx', capability: 'fx.history' });
+    const fx = await call('search_services', { classification: 'financial-data/fx', capability: 'fx.history' });
     assert(fx.services.some((s: any) => s.id === 'frankfurter'));
     assert(fx.services.every((s: any) => s.routes.every((r: any) => r.task_runs.every((run: any) => run.phase === 'business' && run.classification.endsWith('/fx')))));
-    assert.equal((await call('search_services', { subcategory: 'web-search-data/financial-data/fx', capability: 'fx.history' })).count, fx.count);
-    assert((await call('search_services', { classification: 'web-search-data/financial-data/fx', subcategory: 'travel/flights' })).error);
+    assert.equal((await call('search_services', { subcategory: 'financial-data/fx', capability: 'fx.history' })).count, fx.count);
+    assert((await call('search_services', { classification: 'financial-data/fx', subcategory: 'travel/flights' })).error);
     const tree = (await call('list_categories')).categories;
-    const finance = tree.find((c: any) => c.id === 'web-search-data').subcategories.find((c: any) => c.id === 'financial-data');
+    const finance = tree.find((c: any) => c.id === 'financial-data');
     assert.equal(finance.services, financial.count);
-    assert.equal(finance.subcategories.length, 5);
+    assert.equal(finance.subcategories.length, 6);
     assert(finance.subcategories.every((c: any) => c.path && c.inclusion && c.exclusion));
-    const extraction = await call('search_services', { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
+    const extraction = await call('search_services', { classification: 'search-scraping/web-extraction', capability: 'web.fetch' });
     for (const service of extraction.services) {
       const source = catalog.services.find((s: any) => s.id === service.id);
       for (const route of service.routes) {
         const expected = source.task_runs.filter((run: any) => run.route_id === route.id
-          && run.classification === 'web-search-data/web-extraction').map((run: any) => run.run_id).sort();
+          && run.classification === 'search-scraping/web-extraction').map((run: any) => run.run_id).sort();
         assert.deepEqual(route.task_runs.map((run: any) => run.run_id).sort(), expected);
       }
       assert.equal(service.route_tests, service.routes.some((r: any) => r.task_runs.length) ? 'recorded' : 'not_recorded');

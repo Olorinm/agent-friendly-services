@@ -1,6 +1,6 @@
 id: nager-date
 name: Nager.Date
-category: web-search-data
+category: weather-calendar
 homepage: https://nagerholidays.com/
 summary: Hosted public holiday API with country and first-level subdivision coverage for private or non-profit projects.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/public-holidays
+    - weather-calendar/public-holidays
   sources:
     api-docs:
       url: https://nagerholidays.com/api

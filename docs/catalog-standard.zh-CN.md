@@ -10,13 +10,15 @@
 
 一份 YAML 对应一个明确的服务产品，文件名等于稳定 `id`。同一个服务的多种入口写在 `catalog.routes`。第三方发布者在市场上销售的独立产品可以单列，例如 Skootle 的 Actor；Apify 是托管平台，不是该机票产品的发布者。
 
-分类从 [categories.yaml](../data/categories.yaml) 选择，例如 `travel/flights`、`web-search-data/financial-data/fx`。`category` 保留一个主要大类以兼容旧索引；`catalog.classifications` 可以有多个任意深度的分类路径。只写有依据的最具体归属，查询父类自动包含后代，无需重复填写祖先。例如 SerpApi 主类仍为 `web-search-data`，同时归入 `travel/flights`。证据只能支持宽范围时保留在该层，并说明细分缺口；现代目录以 `catalog.classifications` 为准，不把兼容用的 `category` 自动添回分类。
+分类从 [categories.yaml](../data/categories.yaml) 选择，例如 `travel/flights`、`financial-data/fx`。`category` 保留一个主要大类以兼容旧索引；`catalog.classifications` 可以有多个任意深度的分类路径。只写有依据的最具体归属，查询父类自动包含后代，无需重复填写祖先。例如 SerpApi 主类为 `search-scraping`，同时归入 `travel/flights`。证据只能支持宽范围时保留在该层，并说明细分缺口；现代目录以 `catalog.classifications` 为准，不把兼容用的 `category` 自动添回分类。
 
 分类表示“这是什么类型的服务”，能力表示“具体能交付什么结果”：机票搜索、重新核价、返回购买链接、出票。搜索到报价不等于重新核价成功，返回购买链接不等于出票。能力词典随子类维护，不按接口名、协议或机械的 CRUD 清单建立能力。只有能独立回答筛选需求的结果才登记，例如历史汇率、当前价格、读取财报。
 
 ### 分类维护规则
 
 2026-09-15 参考 [G2 分类方法](https://research.g2.com/methodology/categorization)：采用明确的功能定义、准入条件和多分类归属。G2 是商业软件目录，其方法不是国际统一标准。本项目继续服务普通个人，保留官方原始数据服务、未知和受限候选，以实际任务检验 Agent 的使用效果。
+
+2026-10-12 拆分原「搜索与数据获取」：数据类大类参照 [public-apis](https://github.com/public-apis/public-apis) 的用途分类（Weather、Calendar、Geocoding、Currency Exchange、Finance 等），分为搜索与网页抓取、地图与地理、天气与日历、金融数据、学术与知识；二维码图片按其 Development 归类移入开发工具。public-apis 基本不收数据库、云托管、支付等基础设施，这些大类沿用本项目分类。子类仍以「能否互相替代完成同类任务」为准，因为首页同一张表只比较同一子类。天气与节假日各只有少量候选，暂合为一个大类。
 
 | 对象 | 维护内容 | 判断依据 |
 | --- | --- | --- |
@@ -33,7 +35,7 @@
 
 路径支持任意深度，现阶段金融使用“大类 / 金融数据 / 数据类型”，其他分支按需要展开。父类查询包含后代，返回的同一服务只计一次。API、SDK、CLI、MCP 属于入口属性，不是分类或业务能力；资产、地区、历史深度、档位和许可写在来源或入口备注中，不用没有约束的标签代替事实。
 
-任务展示归属统一在 [`task-classifications.yaml`](../data/experiments/task-classifications.yaml) 按任务文件和稳定 ID 映射；`phase: setup` 表示接入测试，`business` 表示业务任务。任务本身改变仍需升级版本，分类调整不会修改历史 prompt、哈希或结果。共用接入记录保留在父类，不复制为每个细类的成绩。当前汇率试跑归在 `web-search-data/financial-data/fx`；它不能证明行情、财报或交易披露任务已完成。
+任务展示归属统一在 [`task-classifications.yaml`](../data/experiments/task-classifications.yaml) 按任务文件和稳定 ID 映射；`phase: setup` 表示接入测试，`business` 表示业务任务。任务本身改变仍需升级版本，分类调整不会修改历史 prompt、哈希或结果。共用接入记录保留在父类，不复制为每个细类的成绩。当前汇率试跑归在 `financial-data/fx`；它不能证明行情、财报或交易披露任务已完成。
 
 金融的任务适用范围见[金融数据任务表](../data/experiments/tasks/financial-data.md#能力边界与归类依据)，搜索与提取的任务边界见[网页搜索任务表](../data/experiments/tasks/web-search.md#搜索与提取的边界)。
 

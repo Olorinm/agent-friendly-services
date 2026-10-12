@@ -1,6 +1,6 @@
 id: nasdaq-data-link
 name: Nasdaq Data Link
-category: web-search-data
+category: financial-data
 homepage: https://data.nasdaq.com/
 summary: Marketplace for financial and economic datasets with free and separately subscribed products.
 submitted_by: community
@@ -11,7 +11,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - financial-data/data-platforms
   sources:
     docs:
       url: https://docs.data.nasdaq.com/docs/getting-started

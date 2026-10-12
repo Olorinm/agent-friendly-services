@@ -1,6 +1,6 @@
 id: openholidays
 name: OpenHolidays API
-category: web-search-data
+category: weather-calendar
 homepage: https://www.openholidaysapi.org/en/
 summary: Free hosted public and school holiday data API with regional filters and an openly licensed data collection.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/public-holidays
+    - weather-calendar/public-holidays
   sources:
     quickstart:
       url: https://www.openholidaysapi.org/en/

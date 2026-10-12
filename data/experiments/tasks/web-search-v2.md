@@ -1,6 +1,6 @@
 # 网页搜索：Python 升级查询 v2
 
-分类：搜索与数据获取 / 网页搜索（web-search-data/web-search）
+分类：搜索与网页抓取 / 网页搜索（search-scraping/web-search）
 
 沿用 [原搜索任务](web-search.md) 的需求依据与三个业务问题：为 Python 3.13 升级查询可靠官方资料。公开需求支持“答案与可核对出处”，不据此声称这道版本问题是最高频查询；本轮不按服务商功能反向改题。
 

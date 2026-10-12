@@ -1,6 +1,6 @@
 id: financial-datasets
 name: Financial Datasets
-category: web-search-data
+category: financial-data
 homepage: https://financialdatasets.ai/
 summary: >-
   US company financial statements, historical prices, filings and insider trades, with API and an
@@ -13,9 +13,9 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/statements
-    - web-search-data/financial-data/disclosures
+    - financial-data/prices
+    - financial-data/statements
+    - financial-data/disclosures
   sources:
     docs:
       url: https://docs.financialdatasets.ai/quickstart

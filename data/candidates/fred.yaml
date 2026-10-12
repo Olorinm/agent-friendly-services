@@ -1,6 +1,6 @@
 id: fred
 name: FRED / ALFRED
-category: web-search-data
+category: financial-data
 homepage: https://fred.stlouisfed.org/
 summary: Economic time series through a keyed API or an official account-authorized MCP; API and MCP registration are separate.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/macro
+    - financial-data/macro
   sources:
     docs:
       url: https://fred.stlouisfed.org/docs/api/fred/

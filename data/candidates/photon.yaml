@@ -1,6 +1,6 @@
 id: photon
 name: Photon Public Demo API
-category: web-search-data
+category: maps-geo
 homepage: https://photon.komoot.io/
 summary: Komoot-hosted public Photon geocoder for low-volume projects, using OpenStreetMap data without an API key.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/geocoding
+    - maps-geo/geocoding
   sources:
     public-api:
       url: https://photon.komoot.io/

@@ -1,6 +1,6 @@
 id: open-meteo
 name: Open-Meteo
-category: web-search-data
+category: weather-calendar
 homepage: https://open-meteo.com/
 summary: Global weather forecast API with a keyless non-commercial free tier and attributed open data.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/weather-data
+    - weather-calendar/weather-data
   sources:
     homepage:
       url: https://open-meteo.com/

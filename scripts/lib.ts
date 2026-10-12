@@ -179,5 +179,7 @@ export function legacyTaskCategory(provider: Provider): string {
   // New multi-purpose services must select a task explicitly in the current workflow.
   if (['e2b', 'modal', 'browserbase', 'steel'].includes(provider.id)) return 'code-execution';
   if (['datadog', 'grafana', 'sentry'].includes(provider.id)) return 'observability-security';
+  // Former Search & Data Access services keep its original task ladder file.
+  if (['search-scraping', 'maps-geo', 'weather-calendar', 'financial-data', 'scholarly'].includes(provider.category)) return 'web-search-data';
   return provider.category;
 }

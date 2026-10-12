@@ -1,6 +1,6 @@
 id: semantic-scholar
 name: Semantic Scholar
-category: web-search-data
+category: scholarly
 homepage: https://www.semanticscholar.org/
 summary: Academic Graph API for paper discovery and citation metadata, with public unauthenticated endpoints subject to shared throttling.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/scholarly-search
+    - scholarly/scholarly-search
   sources:
     overview:
       url: https://www.semanticscholar.org/product/api

@@ -1,13 +1,13 @@
 id: geoapify
 name: Geoapify
-category: web-search-data
+category: search-scraping
 homepage: https://www.geoapify.com/
 summary: Hosted forward geocoding for addresses and named places, with a personal Free plan and attribution requirements.
 submitted_by: community
 tags: [geocoding]
 catalog:
   version: 1
-  classifications: [web-search-data/geocoding]
+  classifications: [maps-geo/geocoding]
   sources:
     api:
       url: https://apidocs.geoapify.com/docs/geocoding/

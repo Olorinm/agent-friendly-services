@@ -1,6 +1,6 @@
 id: openalex
 name: OpenAlex
-category: web-search-data
+category: scholarly
 homepage: https://openalex.org/
 summary: Scholarly index with a public REST API for work search and citation metadata, a small anonymous budget and larger free account allowance.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/scholarly-search
+    - scholarly/scholarly-search
   sources:
     authentication:
       url: https://help.openalex.org/api/authentication/

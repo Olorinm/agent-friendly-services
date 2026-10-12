@@ -1,6 +1,6 @@
 id: serper
 name: Serper
-category: web-search-data
+category: search-scraping
 homepage: https://serper.dev/
 summary: >-
   Google results API with initial free queries. Its terms describe a B2B service rather than
@@ -10,7 +10,7 @@ submitted_by: community
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-search
+    - search-scraping/web-search
   sources:
     docs:
       url: https://serper.dev/

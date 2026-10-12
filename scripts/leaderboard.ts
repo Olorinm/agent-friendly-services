@@ -9,8 +9,17 @@ const stable = (value: unknown): string => {
     Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, JSON.parse(stable(v))])));
   return JSON.stringify(value ?? null);
 };
+/** Older records store a string; newer ones store { provided, source }. */
+export const credentialText = (r: Evaluation) => {
+  const raw = r.environment.service_credentials as unknown;
+  if (raw && typeof raw === 'object') {
+    const { provided, source } = raw as { provided?: boolean; source?: string };
+    return provided ? `provided: ${source ?? 'unspecified'}` : String(source ?? 'none');
+  }
+  return String(raw ?? 'unknown').trim() || 'unknown';
+};
 export const credentialPreparation = (r: Evaluation) => {
-  const value = String(r.environment.service_credentials ?? 'unknown').trim() || 'unknown';
+  const value = credentialText(r);
   return value.startsWith('provided:') ? 'provided' : value;
 };
 export const credentialLabel = (r: Evaluation, zh = false) => {

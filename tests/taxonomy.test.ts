@@ -13,13 +13,13 @@ import { loadTaskClassifications, taskClassificationErrors } from '../scripts/ta
 const categories = loadCategories();
 const providers = [...loadProviders(), ...loadCandidates()].map(record => record.data);
 const data = { categories, services: providers.map(p => catalogService(p, 'candidate', loadEvaluations())) };
-const finance = 'web-search-data/financial-data';
+const finance = 'financial-data';
 const today = new Date().toISOString().slice(0, 10);
 const ids = (filters: Record<string, string>) => searchServices(data, filters).map(s => s.id);
 
 test('classification paths accept deeper branches, inherit only ancestor capabilities and require definitions', () => {
   const tree = structuredClone(categories);
-  const fx = tree.find(c => c.id === 'web-search-data')!.subcategories!.find(c => c.id === 'financial-data')!.subcategories!.find(c => c.id === 'fx')!;
+  const fx = tree.find(c => c.id === 'financial-data')!.subcategories!.find(c => c.id === 'fx')!;
   fx.subcategories = [{ ...fx, id: 'reference-rates', capabilities: [] }];
   const p = structuredClone(providers.find(p => p.id === 'frankfurter')!);
   p.catalog!.classifications = [`${finance}/fx/reference-rates`];
@@ -44,10 +44,10 @@ test('all legacy identities have a sourced classification, while narrow evidence
   assert(ids({ classification: 'databases/vector' }).includes('chroma'));
   assert(ids({ classification: 'communication/voice-agents' }).includes('vapi'));
   assert(ids({ classification: 'productivity-storage/document-collaboration' }).includes('notion'));
-  assert(!ids({ classification: 'web-search-data/web-search' }).includes('xquik'));
+  assert(!ids({ classification: 'search-scraping/web-search' }).includes('xquik'));
   for (const id of ['factset-data', 'joinquant-data', 'lseg-data', 'nasdaq-data-link']) {
     const p = providers.find(p => p.id === id)!;
-    assert.deepEqual(p.catalog!.classifications, [finance]);
+    assert.deepEqual(p.catalog!.classifications, [`${finance}/data-platforms`]);
     assert(p.catalog!.notes?.length);
   }
   const modern = { category: 'communication', catalog: { classifications: ['productivity-storage/collaborative-tables'] } };
@@ -72,18 +72,18 @@ test('financial parent queries include all child types once, while prices and di
 
 test('search results cannot masquerade as specified-URL extraction or inherit a search trial', () => {
   const searchOnly = structuredClone(providers.find(p => p.id === 'exa')!);
-  searchOnly.catalog!.classifications = ['web-search-data/web-search'];
+  searchOnly.catalog!.classifications = ['search-scraping/web-search'];
   assert.match(catalogErrors(searchOnly, categories, today).join('\n'), /web.fetch does not belong/);
   const searchEvaluations = loadEvaluations().filter(e => e.task.id === 'web-search-001');
   const searchData = { categories, services: providers.map(p => catalogService(p, 'candidate', searchEvaluations)) };
-  const fetch = searchServices(searchData, { classification: 'web-search-data/web-extraction', capability: 'web.fetch' });
+  const fetch = searchServices(searchData, { classification: 'search-scraping/web-extraction', capability: 'web.fetch' });
   const firecrawl = fetch.find(s => s.id === 'firecrawl')!;
   assert(firecrawl.routes.some(r => r.id === 'public-scrape-api'));
   assert(firecrawl.routes.some(r => r.id === 'account-scrape-api'));
   assert(fetch.find(s => s.id === 'tavily')!.routes.some(r => r.id === 'extract-api'));
   assert(fetch.find(s => s.id === 'jina')!.routes.some(r => r.id === 'reader-api'));
   assert(fetch.every(s => s.route_tests === 'not_recorded' && s.routes.every(r => !r.task_runs.length)));
-  const search = searchServices(searchData, { classification: 'web-search-data/web-search' });
+  const search = searchServices(searchData, { classification: 'search-scraping/web-search' });
   assert(search.find(s => s.id === 'exa')!.routes.some(r => r.task_runs.length));
 });
 

@@ -1,6 +1,6 @@
 id: tavily
 name: Tavily
-category: web-search-data
+category: search-scraping
 homepage: https://www.tavily.com
 summary: Search and extraction for AI agents, with free rate-limited keyless API/MCP access and a separate keyed account allowance.
 submitted_by: community
@@ -78,8 +78,8 @@ checks:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-extraction
-    - web-search-data/web-search
+    - search-scraping/web-extraction
+    - search-scraping/web-search
   sources:
     docs:
       url: https://docs.tavily.com/documentation/quickstart

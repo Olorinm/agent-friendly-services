@@ -1,6 +1,6 @@
 id: eurostat
 name: Eurostat Data API
-category: web-search-data
+category: financial-data
 homepage: https://ec.europa.eu/eurostat/
 summary: Official European economic and social statistics with public REST data and metadata access.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/macro
+    - financial-data/macro
   sources:
     api-introduction:
       url: https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction

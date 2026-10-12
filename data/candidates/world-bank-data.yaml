@@ -1,6 +1,6 @@
 id: world-bank-data
 name: World Bank Indicators API
-category: web-search-data
+category: financial-data
 homepage: https://data.worldbank.org/
 summary: Country-level economic and development indicators through the public Indicators API.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/macro
+    - financial-data/macro
   sources:
     docs:
       url: >-

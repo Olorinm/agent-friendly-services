@@ -1,6 +1,6 @@
 id: twelve-data
 name: Twelve Data
-category: web-search-data
+category: financial-data
 homepage: https://twelvedata.com/
 summary: Global stock, FX and crypto time series with API, Python SDK and CLI access.
 submitted_by: community
@@ -11,8 +11,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/fx
+    - financial-data/prices
+    - financial-data/fx
   sources:
     docs:
       url: https://twelvedata.com/docs/introduction/quickstart

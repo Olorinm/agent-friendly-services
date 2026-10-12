@@ -189,8 +189,8 @@ test('one display can contain separate comparison groups without combining their
 });
 
 
-test('both homepages show one flights table with measured and untested services, and one disclosure', () => {
-  for (const file of ['README.md', 'README.zh-CN.md']) {
+test('both directories show one flights table with measured and untested services, and one disclosure', () => {
+  for (const file of ['generated/directory.md', 'generated/directory.zh-CN.md']) {
     const page = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
     const anchors = [...page.matchAll(/<a id="([^"]+)"/g)].map(m => m[1]);
     assert.equal(new Set(anchors).size, anchors.length);
@@ -249,8 +249,30 @@ test('homepage chooses one complete route protocol without cherry-picking tasks 
   assert.equal(selectServiceBoards(buildBoards([bad]))[0].rows[0].metrics.resolution_rate, null);
 });
 
-test('homepages use compact empty cells, aligned widths and separate tested routes from access links', () => {
+test('homepages lead with one aligned leaderboard per tested subcategory, grouped by category', () => {
   for (const file of ['README.md', 'README.zh-CN.md']) {
+    const zh = file.includes('zh-CN');
+    const page = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
+    const anchors = [...page.matchAll(/<a id="([^"]+)"/g)].map(m => m[1]);
+    assert.equal(new Set(anchors).size, anchors.length);
+    assert(!/object Object|undefined/.test(page));
+    const travel = page.split('<a id="results-travel"></a>')[1].split('<a id="results-')[0];
+    assert(travel.includes(zh ? '## 旅行' : '## Travel'));
+    assert.match(travel, /### [^\n]+ \[→\]\(\.\/generated\/directory(\.zh-CN)?\.md#services-travel-flights\)/);
+    assert.equal((travel.match(/^\| :--- \|/gm) ?? []).length, 1);
+    for (const service of ['Kiwi.com', 'Ignav Flights']) assert(travel.includes(`[${service}]`));
+    assert(!travel.includes('Amadeus')); // untested services stay in the directory
+    const headers = [...page.matchAll(/^\| (服务|Service)(&nbsp;)*.*$/gm)].map(m => m[0]);
+    assert(headers.length > 5 && new Set(headers).size === 1, 'every leaderboard shares one padded header');
+    const rows = page.split('\n').filter(l => l.startsWith('| [') && /\| (✅|❌|—) \|$/.test(l));
+    assert(rows.length > 10 && rows.every(r => r.split(' | ').length === 5));
+    assert(rows.every(r => /(\d+%|环境无效|invalid run)/.test(r)));
+  }
+});
+
+
+test('directories use compact empty cells, aligned widths and separate tested routes from access links', () => {
+  for (const file of ['generated/directory.md', 'generated/directory.zh-CN.md']) {
     const text = fs.readFileSync(`${ROOT}/${file}`, 'utf8');
     assert(!/Not yet task-tested|待实测|尚未实测|undefined%/.test(text));
     assert(!/>Trials<|>试跑次数</.test(text));

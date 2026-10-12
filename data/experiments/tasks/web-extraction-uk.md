@@ -1,6 +1,6 @@
 # 网页内容提取：英国地区假日日历
 
-分类：搜索与数据获取 / 网页内容提取（web-search-data/web-extraction）
+分类：搜索与网页抓取 / 网页内容提取（search-scraping/web-extraction）
 
 ## 需求与新增范围
 

@@ -1,6 +1,6 @@
 # 天气数据：出门前的短期天气查询
 
-分类：搜索与数据获取 / 天气数据（web-search-data/weather-data）
+分类：天气与日历 / 天气数据（weather-calendar/weather-data）
 
 ## 需求与范围
 

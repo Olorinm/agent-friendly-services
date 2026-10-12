@@ -1,6 +1,6 @@
 id: frankfurter
 name: Frankfurter
-category: web-search-data
+category: financial-data
 homepage: https://frankfurter.dev/
 summary: Public exchange-rate API and official MCP using central-bank reference data, with no API key.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/fx
+    - financial-data/fx
   sources:
     docs:
       url: https://frankfurter.dev/

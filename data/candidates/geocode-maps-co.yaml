@@ -1,13 +1,13 @@
 id: geocode-maps-co
 name: Geocode Maps.co
-category: web-search-data
+category: search-scraping
 homepage: https://geocode.maps.co/
 summary: Hosted OSM/Nominatim geocoding with a free account, API key and documented result-export rights subject to data licences.
 submitted_by: community
 tags: [geocoding]
 catalog:
   version: 1
-  classifications: [web-search-data/geocoding]
+  classifications: [maps-geo/geocoding]
   sources:
     api:
       url: https://geocode.maps.co/docs/

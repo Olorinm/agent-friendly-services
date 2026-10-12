@@ -1,6 +1,6 @@
 id: factset-data
 name: FactSet Data APIs
-category: web-search-data
+category: financial-data
 homepage: https://www.factset.com/
 summary: >-
   Financial-data API catalog; retained as an institutional candidate while product-specific access is
@@ -15,7 +15,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - financial-data/data-platforms
   sources:
     docs:
       url: https://developer.factset.com/

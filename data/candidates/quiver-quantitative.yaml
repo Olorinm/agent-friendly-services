@@ -1,6 +1,6 @@
 id: quiver-quantitative
 name: Quiver Quantitative
-category: web-search-data
+category: financial-data
 homepage: https://www.quiverquant.com/
 summary: >-
   Congressional and insider transactions, institutional activity and other alternative financial
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://www.quiverquant.com/api-setup/

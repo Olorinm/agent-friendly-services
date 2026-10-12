@@ -1,13 +1,13 @@
 id: locationiq
 name: LocationIQ
-category: web-search-data
+category: search-scraping
 homepage: https://locationiq.com/
 summary: Hosted address and place geocoding with a Free API tier, attribution requirements and separate response versus request-response retention rules.
 submitted_by: community
 tags: [geocoding]
 catalog:
   version: 1
-  classifications: [web-search-data/geocoding]
+  classifications: [maps-geo/geocoding]
   sources:
     guide:
       url: https://docs.locationiq.com/docs/search-forward-geocoding

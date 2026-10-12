@@ -1,6 +1,6 @@
 id: joinquant-data
 name: JoinQuant JQData
-category: web-search-data
+category: financial-data
 homepage: https://www.joinquant.com/
 summary: >-
   Chinese-market data candidate. The official documentation returned a non-Mainland-China region
@@ -16,7 +16,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data
+    - financial-data/data-platforms
   sources:
     docs:
       url: https://www.joinquant.com/help/api/help?name=JQData

@@ -1,6 +1,6 @@
 id: xquik
 name: Xquik
-category: web-search-data
+category: search-scraping
 homepage: https://xquik.com
 summary: Hosted X data and account automation service with a REST API, official MCP server, OpenAPI, SDKs, HMAC webhooks, and OAuth 2.1.
 submitted_by: vendor
@@ -86,7 +86,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data
+    - search-scraping
   sources:
     classification-docs:
       url: https://docs.xquik.com/api-reference/overview

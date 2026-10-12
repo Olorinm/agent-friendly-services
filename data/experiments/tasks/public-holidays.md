@@ -1,6 +1,6 @@
 # 公共节假日数据：按地区整理个人日程
 
-分类：搜索与数据获取 / 公共节假日（web-search-data/public-holidays）
+分类：天气与日历 / 公共节假日（weather-calendar/public-holidays）
 
 ## 需求与范围
 

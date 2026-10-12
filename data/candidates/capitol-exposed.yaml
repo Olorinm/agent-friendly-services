@@ -1,6 +1,6 @@
 id: capitol-exposed
 name: CapitolExposed
-category: web-search-data
+category: financial-data
 homepage: https://www.capitolexposed.com/
 summary: >-
   Congressional disclosures and related public records, with a keyless read API and separate paid
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://www.capitolexposed.com/api-docs

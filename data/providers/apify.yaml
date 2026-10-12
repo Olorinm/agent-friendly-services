@@ -1,6 +1,6 @@
 id: apify
 name: Apify
-category: web-search-data
+category: search-scraping
 homepage: https://apify.com
 summary: Web scraping and automation platform with thousands of ready-made actors, a versioned API, llms.txt, and an official MCP server.
 submitted_by: community
@@ -85,7 +85,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-extraction
+    - search-scraping/web-extraction
   sources:
     existing-docs:
       url: https://docs.apify.com/platform/integrations/api

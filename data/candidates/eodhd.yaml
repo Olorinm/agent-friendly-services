@@ -1,6 +1,6 @@
 id: eodhd
 name: EODHD
-category: web-search-data
+category: financial-data
 homepage: https://eodhd.com/
 summary: >-
   Historical market prices, fundamentals, economic datasets and congressional trades, with
@@ -16,10 +16,10 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/statements
-    - web-search-data/financial-data/macro
-    - web-search-data/financial-data/disclosures
+    - financial-data/prices
+    - financial-data/statements
+    - financial-data/macro
+    - financial-data/disclosures
   sources:
     docs:
       url: https://eodhd.com/financial-apis/

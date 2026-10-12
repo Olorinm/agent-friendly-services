@@ -1,6 +1,6 @@
 id: bloomberg-data-license
 name: Bloomberg Data License
-category: web-search-data
+category: financial-data
 homepage: https://professional.bloomberg.com/products/data/data-license/
 summary: >-
   Enterprise pricing, fundamentals, reference and other financial datasets delivered through REST, SFTP
@@ -17,7 +17,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     docs:
       url: https://professional.bloomberg.com/products/data/data-license/

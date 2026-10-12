@@ -1,8 +1,8 @@
 # 金融数据：需求与任务表
 
-分类：搜索与数据获取 / 金融数据（web-search-data/financial-data）
+分类：金融数据（financial-data）
 
-2026-09-09 完成首轮公开资料发现：26 个候选，记录在[候选表](../../../generated/catalog.md#web-search-data-financial-data)。覆盖行情、财报、披露、汇率、宏观和加密资产，也保留付费、机构准入及地区受限的服务。候选来自广泛搜索、数据提供方/原始发布机构和社区讨论；Bargo 的 PR 是其中一条线索，不决定任务。
+2026-09-09 完成首轮公开资料发现：26 个候选，记录在[候选表](../../../generated/catalog.md#financial-data)。覆盖行情、财报、披露、汇率、宏观和加密资产，也保留付费、机构准入及地区受限的服务。候选来自广泛搜索、数据提供方/原始发布机构和社区讨论；Bargo 的 PR 是其中一条线索，不决定任务。
 
 ## 哪些需求值得测
 
@@ -23,7 +23,7 @@
 
 2026-09-15 将金融数据落实为五个细类。分类定义、准入条件和相邻边界以 [`categories.yaml`](../../categories.yaml) 为准；以下维护与任务有关的口径，借鉴分类方法，不复制 G2 类目。共用接入任务 `financial-access-001/v1` 仍归金融父类，单列接入结果。当前展示映射见 [`task-classifications.yaml`](../task-classifications.yaml)，历史 prompt、版本和结果不变。
 
-下列路径均以 `web-search-data/financial-data/` 开头。
+下列路径均以 `financial-data/` 开头。
 
 | 细类 | 具体能力 | 任务筛选条件与进度 |
 | --- | --- | --- |

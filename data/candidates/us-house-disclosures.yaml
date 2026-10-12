@@ -1,6 +1,6 @@
 id: us-house-disclosures
 name: U.S. House Financial Disclosures
-category: web-search-data
+category: financial-data
 homepage: https://disclosures-clerk.house.gov/FinancialDisclosure
 summary: Original House financial disclosure filings and searchable annual indexes, published by the Clerk.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     overview:
       url: https://disclosures-clerk.house.gov/FinancialDisclosure/ViewReport

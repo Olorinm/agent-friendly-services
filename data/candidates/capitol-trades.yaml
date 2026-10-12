@@ -1,6 +1,6 @@
 id: capitol-trades
 name: Capitol Trades
-category: web-search-data
+category: financial-data
 homepage: https://www.capitoltrades.com/
 summary: Public congressional trading website by 2iQ; no self-serve API is established in this record.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     about:
       url: https://www.capitoltrades.com/about-us

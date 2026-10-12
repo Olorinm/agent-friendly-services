@@ -1,6 +1,6 @@
 id: brave-search
 name: Brave Search API
-category: web-search-data
+category: search-scraping
 homepage: https://brave.com/search/api/
 summary: Independent web search index with a developer API, self-serve registration, and a free plan.
 submitted_by: community
@@ -74,7 +74,7 @@ notes:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-search
+    - search-scraping/web-search
   sources:
     docs:
       url: https://brave.com/search/api/

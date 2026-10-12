@@ -15,8 +15,8 @@ import { taskDisplay } from './task-display.ts';
 import { taskClassification } from './task-classifications.ts';
 import { serviceAccess } from './service-access.ts';
 import { renderServiceResults, renderSetup } from './service-results.ts';
-import { buildBoards, selectServiceBoards, renderBoardRows, renderBoardDetails, boardHeader } from './leaderboard.ts';
-import { loadEvaluations, evaluationErrors, generateEvaluations } from './evaluations.ts';
+import { buildBoards, selectServiceBoards, renderBoardRows, renderBoardDetails, boardHeader, credentialText, interfaceLabel, moneyLabel, type Board, type BoardRow } from './leaderboard.ts';
+import { loadEvaluations, evaluationErrors, generateEvaluations, type Evaluation } from './evaluations.ts';
 
 // Isolated preview/CI generation, without changing checked-in build outputs.
 const OUTPUT_ROOT = process.env.AFS_OUTPUT_DIR ? path.resolve(process.env.AFS_OUTPUT_DIR) : ROOT;
@@ -503,11 +503,11 @@ fs.writeFileSync(path.join(GENERATED_DIR, 'agent-runs.md'), agentRunsMd);
 // README is the entry point; detailed catalogs and historical experiments have their own pages.
 // Show services in their recorded categories; cross-category services share one source record.
 const listedServices = [...providers, ...candidates].sort((a, b) => a.name.localeCompare(b.name));
-const priority = ['travel', 'databases', 'web-search-data', 'productivity-storage'];
+const priority = ['travel', 'databases', 'search-scraping', 'maps-geo', 'weather-calendar', 'financial-data', 'scholarly', 'productivity-storage'];
 const listedCategories = categories.filter(c => listedServices.some(p => inClassification(p, c.id)))
   .sort((a, b) => (priority.includes(a.id) ? priority.indexOf(a.id) : 99) - (priority.includes(b.id) ? priority.indexOf(b.id) : 99));
 const accessLinks = (p: Provider, zh: boolean) => serviceAccess(p, zh).map(([name, url]) => `[${name}](${url})`).join(' · ') || '—';
-const profileUrl = (id: string) => `./generated/services.md#${id}`;
+const profileUrl = (id: string, prefix = './') => `${prefix}generated/services.md#${id}`;
 
 // One readable profile per service, generated from the same records as the tables.
 const taskTranslations = [...new Map(evaluations.map(r => [`${r.task.id}/${r.task.version}`, r.task])).values()].map(task => {
@@ -539,22 +539,23 @@ const profiles = listedServices.map(p => {
   const setupResults = renderServiceResults(p, boards.filter(b => b.phase === 'setup'), setupRecords);
   const scopeNotes = [...(p.catalog?.notes ?? []), ...(p.notes ?? [])];
   const sources = Object.values(p.catalog?.sources ?? {}).map(x => `- [${cell(x.kind)}](${x.url}) — checked ${x.checked_on}`).join('\n');
-  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n**Classification:** ${serviceClassifications(p).map(id => classificationLabel(categories, id)).join('; ')}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](../README.md#all-services)\n\n### Documentation and access <a id="${p.id}-access"></a>\n\n${extraLinks ? `${extraLinks}\n\n` : ''}${access}\n\n### Service pricing\n\n${pricing}\n\n${recorded.length ? `### Setup observations\n\n${renderSetup(p, recorded)}${setupRecords.length ? `\n\n${setupResults}` : ''}\n\n` : ''}### Task results\n\n${results}\n\n${scopeNotes.length ? `### Notes\n\n${scopeNotes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || '—'}`;
+  return `<a id="${p.id}"></a>\n\n## ${p.name}\n\n${p.summary}\n\n**Classification:** ${serviceClassifications(p).map(id => classificationLabel(categories, id)).join('; ')}\n\n[Website](${p.homepage}) · [Source record](${source}) · [Back to directory](./directory.md)\n\n### Documentation and access <a id="${p.id}-access"></a>\n\n${extraLinks ? `${extraLinks}\n\n` : ''}${access}\n\n### Service pricing\n\n${pricing}\n\n${recorded.length ? `### Setup observations\n\n${renderSetup(p, recorded)}${setupRecords.length ? `\n\n${setupResults}` : ''}\n\n` : ''}### Task results\n\n${results}\n\n${scopeNotes.length ? `### Notes\n\n${scopeNotes.map(note => `- ${note}`).join('\n')}\n\n` : ''}### Sources\n\n${sources || '—'}`;
 });
 fs.writeFileSync(path.join(GENERATED_DIR, 'services.md'), `<!-- GENERATED — edit source records; run npm run generate. -->\n# Service profiles\n\nToken and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use saved LiteLLM prices; ~ marks estimated service charges. — means no data. Setup costs are separate from business task costs. Access and pricing are source claims; a listed route does not establish task support. Compare only matching tasks and conditions.\n\n${profiles.join('\n\n')}\n`);
-function serviceList(zh: boolean): string {
+// prefix: path from the rendering file to the repo root.
+function serviceList(zh: boolean, prefix = './'): string {
   const navigation = listedCategories.map(c => `[${zh ? c.name_zh ?? c.name : c.name}](#services-${c.id})`).join(' · ');
   const names = new Map(listedServices.map(p => [p.id, p.name]));
   const interfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
-  const links = new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id), access: accessLinks(p, zh) }]));
+  const links = new Map(listedServices.map(p => [p.id, { profile: profileUrl(p.id, prefix), access: accessLinks(p, zh) }]));
   const renderResults = (groupBoards: typeof boards, members: typeof listedServices) => {
     const selected = selectServiceBoards(groupBoards);
     const measured = new Set(selected.flatMap(b => b.rows.map(r => r.service_id)));
     const pending = members.filter(p => !measured.has(p.id));
-    const measuredRows = renderBoardRows(selected, names, './', links, interfaces, zh);
+    const measuredRows = renderBoardRows(selected, names, prefix, links, interfaces, zh);
     const table = readmeTable(`${boardHeader(zh, true)}\n${[measuredRows, ...pending.map(p =>
-      `| [${cell(p.name)}](${profileUrl(p.id)}) | — | — | — | — | — | ${accessLinks(p, zh)} |`)].filter(Boolean).join('\n')}`, true);
-    const details = renderBoardDetails(selected, names, zh, './', interfaces);
+      `| [${cell(p.name)}](${profileUrl(p.id, prefix)}) | — | — | — | — | — | ${accessLinks(p, zh)} |`)].filter(Boolean).join('\n')}`, true);
+    const details = renderBoardDetails(selected, names, zh, prefix, interfaces);
     return `${table}${details ? `\n\n<details>\n<summary>${zh ? '测了什么，怎么测的' : 'What we tested and how'}</summary>\n\n${details}\n\n</details>` : ''}`;
   };
   const renderNode = (node: typeof categories[number], id: string, depth: number): string => {
@@ -572,7 +573,7 @@ function serviceList(zh: boolean): string {
       if (children.length && direct.length) content.push(zh ? '以下服务暂按本层范围收录，细分缺口见服务详情。' : 'These services remain at this scope; see their profiles for unresolved classification details.');
       content.push(business.length ? renderResults(business, direct) : readmeTable(
         `${zh ? '| 服务 | 用途 | 接入资料 |' : '| Service | Purpose | Access links |'}\n| --- | --- | --- |\n${direct.map(p =>
-          `| [${cell(p.name)}](${profileUrl(p.id)}) | ${cell(p.summary)} | ${accessLinks(p, zh)} |`).join('\n')}`, false));
+          `| [${cell(p.name)}](${profileUrl(p.id, prefix)}) | ${cell(p.summary)} | ${accessLinks(p, zh)} |`).join('\n')}`, false));
     }
     content.push(...children.map(child => renderNode(child, `${id}/${child.id}`, depth + 1)));
     return `<a id="services-${id.replaceAll('/', '-')}"></a>\n\n${'#'.repeat(Math.min(depth + 3, 6))} ${zh ? node.name_zh ?? node.name : node.name} (${members.length})\n\n${content.join('\n\n')}`;
@@ -580,80 +581,186 @@ function serviceList(zh: boolean): string {
   return `${navigation}\n\n${listedCategories.map(c => renderNode(c, c.id, 0)).join('\n\n')}`;
 }
 
-const readme = `<!-- GENERATED — edit scripts/generate.ts; run npm run generate. -->
+// Full directory: every listed service with its test details. The homepage links here.
+const directoryPage = (zh: boolean) => `<!-- ${zh ? '生成文件 — 修改 scripts/generate.ts，再运行 npm run generate。' : 'GENERATED — edit scripts/generate.ts; run npm run generate.'} -->
+
+# ${zh ? `完整服务目录（${listedServices.length}）` : `Service directory (${listedServices.length})`}
+
+${zh ? '[← 返回首页](../README.zh-CN.md) · [English](./directory.md)' : '[← Back to overview](../README.md) · [简体中文](./directory.zh-CN.md)'}
+
+${zh ? `Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
+
+完成率描述 Agent 在记录的环境及约束下是否交付完整任务，不等于服务可用率；未完成须结合具体阻碍及已验证的服务能力阅读。只测一次且完成，也会显示 100%。次数、任务与条件见[完整结果](./evaluations.md)；有限观察不能证明长期可靠性。
+
+每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。` : `Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
+
+Resolution rates describe complete task delivery by the tested Agent under the recorded conditions, not service availability. Read incomplete runs alongside their blockers and any verified service-side results. A single completed trial displays 100%. Open the [full results](./evaluations.md) for counts, tasks and conditions; these limited observations do not establish long-term reliability.
+
+Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.`}
+
+${serviceList(zh, '../')}
+`;
+fs.writeFileSync(path.join(GENERATED_DIR, 'directory.md'), directoryPage(false));
+fs.writeFileSync(path.join(GENERATED_DIR, 'directory.zh-CN.md'), directoryPage(true));
+
+// Homepage: what is measured, curated findings, then only the tested classifications.
+const highlights = (yaml.load(fs.readFileSync(path.join(ROOT, 'data/highlights.yaml'), 'utf8')) as
+  { highlights: { date: string; zh: string; en: string; link: string }[] }).highlights;
+const serviceNames = new Map(listedServices.map(p => [p.id, p.name]));
+const routeInterfaces = new Map(listedServices.flatMap(p => (p.catalog?.routes ?? []).map(r => [`${p.id}/${r.id}`, r.interface] as [string, string])));
+const validRuns = evaluations.filter(r => r.status !== 'invalid_run');
+const testedIds = new Set(validRuns.map(r => r.service_id));
+const lastRun = validRuns.map(r => r.started_at).sort().at(-1)?.slice(0, 10) ?? '—';
+const directoryUrl = (zh: boolean, id?: string) => `./generated/directory${zh ? '.zh-CN' : ''}.md${id ? `#services-${id.replaceAll('/', '-')}` : ''}`;
+
+// Starting point recorded for the run, never inferred from the task outcome.
+type AccessKind = 'anonymous' | 'self-serve' | 'supplied' | 'unknown';
+function accessKind(r: Evaluation): AccessKind {
+  const value = credentialText(r).toLowerCase();
+  if (/created inside measured execution|generated anonymous/.test(value)) return 'self-serve';
+  if (value.startsWith('provided') || /existing|registered|preprovided/.test(value)) return 'supplied';
+  if (value.startsWith('none')) return 'anonymous';
+  return 'unknown';
+}
+// Whether a person must register before the Agent starts, from the least demanding
+// recorded starting point. Identities the Agent creates during the run need no prior signup.
+const SIGNUP: Record<Exclude<AccessKind, 'unknown'>, [string, string]> = {
+  anonymous: ['✅', '✅'],
+  'self-serve': ['✅', '✅'],
+  supplied: ['❌', '❌'],
+};
+const signupLabel = (runs: Evaluation[], zh: boolean) => {
+  const kinds = new Set(runs.map(accessKind));
+  const kind = (['anonymous', 'self-serve', 'supplied'] as const).find(k => kinds.has(k));
+  return kind ? SIGNUP[kind][zh ? 0 : 1] : '—';
+};
+
+// One leaderboard per classification: one row per service and interface, pooling every
+// valid trial recorded for that classification (setup tasks of an ancestor included).
+function leaderboard(zh: boolean, id: string): { id: string; cells: string[][] } | null {
+  const recorded = (r: Evaluation) => taskClassification(r.task).classification;
+  // A run recorded at a parent (a shared setup task) belongs with the service's own subcategory
+  // when the service has no deeper results to share it with.
+  const own = (r: Evaluation) => {
+    const c = recorded(r);
+    if (evaluations.some(x => x.service_id === r.service_id && recorded(x).startsWith(`${c}/`))) return c;
+    const service = listedServices.find(p => p.id === r.service_id);
+    return (service && serviceClassifications(service).find(x => x.startsWith(`${c}/`))) ?? c;
+  };
+  const here = evaluations.filter(r => own(r) === id);
+  const deeper = new Set(evaluations.filter(r => own(r).startsWith(`${id}/`)).map(r => r.service_id));
+  const services = new Set(here.map(r => r.service_id).filter(s => !deeper.has(s) || here.some(r => r.service_id === s && taskClassification(r.task).phase === 'business')));
+  // Ancestor-level setup runs count toward the closest classification where the service has results.
+  const ancestors = evaluations.filter(r => id.startsWith(`${own(r)}/`) && services.has(r.service_id));
+  const routes = new Map<string, Evaluation[]>();
+  for (const run of [...here.filter(r => services.has(r.service_id)), ...ancestors]) {
+    // Route IDs also distinguish entry URL revisions; users compare by interface.
+    const key = `${run.service_id}/${interfaceLabel(routeInterfaces.get(`${run.service_id}/${run.route_id}`), zh)}`;
+    routes.set(key, [...(routes.get(key) ?? []), run]);
+  }
+  const rows = [...routes.entries()].map(([key, runs]) => {
+    const valid = runs.filter(r => r.status !== 'invalid_run');
+    const passed = valid.filter(r => r.status === 'completed').length;
+    const costs = valid.map(r => r.model_cost?.amount_usd == null ? null : r.model_cost.amount_usd + (r.service_cost_usd ?? 0)).filter((v): v is number => v !== null);
+    return { key, runs, valid, passed, rate: valid.length ? passed / valid.length : null,
+      cost: costs.length ? costs.reduce((a, b) => a + b, 0) / costs.length : null };
+  }).filter(row => row.runs.length);
+  if (!rows.length) return null;
+  rows.sort((a, b) => (b.rate ?? -1) - (a.rate ?? -1) || b.valid.length - a.valid.length || (a.cost ?? Infinity) - (b.cost ?? Infinity));
+  const cells = rows.map(row => {
+    const [service, via] = row.key.split('/');
+    const latest = [...row.runs].sort((a, b) => b.started_at.localeCompare(a.started_at))[0];
+    const rate = row.rate === null ? (zh ? '环境无效' : 'invalid run') : `**${Math.round(100 * row.rate)}%**（${row.passed}/${row.valid.length}）`;
+    return [`[${cell(serviceNames.get(service) ?? service)}](${profileUrl(service)})`, zh ? rate : rate.replace('（', ' (').replace('）', ')'),
+      moneyLabel(row.cost), `[${via}](${latest.entry_url})`, signupLabel(row.valid.length ? row.valid : row.runs, zh)];
+  });
+  return { id, cells };
+}
+
+// GitHub sizes each table to its content and ignores width attributes. Padding every
+// header past the widest cell in its column gives all leaderboards identical columns.
+const textWidth = (markdown: string) => [...markdown.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replaceAll('**', '')]
+  .reduce((sum, ch) => sum + (/[\u2E80-\uFFEF]|\p{Extended_Pictographic}/u.test(ch) ? 1 : .6), 0);
+function leaderboardTables(zh: boolean, boards: { id: string; cells: string[][] }[]): string[] {
+  const headers = zh ? ['服务', '通过率', '平均费用', '方式', '免注册'] : ['Service', 'Pass rate', 'Avg. cost', 'Via', 'No signup'];
+  const NBSP_EM = .28;
+  const padded = headers.map((header, i) => {
+    const widest = Math.max(textWidth(header), ...boards.flatMap(b => b.cells.map(row => textWidth(row[i]))));
+    const pad = Math.max(0, Math.ceil((widest + 1 - textWidth(header)) / NBSP_EM));
+    // Centre short headers over centred columns; otherwise pad after the text.
+    return i === 4 ? `${'&nbsp;'.repeat(Math.floor(pad / 2))}${header}${'&nbsp;'.repeat(Math.ceil(pad / 2))}` : `${header}${'&nbsp;'.repeat(pad)}`;
+  });
+  // Top-level categories become sections; tables are titled relative to their category.
+  const title = (id: string) => classificationLabel(categories, id, zh).split(' / ').slice(id.includes('/') ? 1 : 0).join(' · ');
+  return boards.map(board => `### ${title(board.id)} [→](${directoryUrl(zh, board.id)})\n\n| ${padded.join(' | ')} |\n| :--- | ---: | ---: | :--- | :---: |\n${board.cells.map(row => `| ${row.join(' | ')} |`).join('\n')}`);
+}
+
+function homepage(zh: boolean): string {
+  const label = (cn: string, en: string) => zh ? cn : en;
+  const nodes = listedCategories.flatMap(c => flattenCategories([c]).map(n => n.path));
+  const measured = nodes.map(id => leaderboard(zh, id)).filter(b => b !== null);
+  // Pad against every table on the page so columns line up across sections too.
+  const tables = leaderboardTables(zh, measured);
+  const rendered = new Map(measured.map((board, i) => [board.id, tables[i]]));
+  const shown = listedCategories.filter(c => measured.some(b => withinClassification(b.id, c.id)));
+  const sections = shown.map(c => `<a id="results-${c.id}"></a>\n\n## ${zh ? c.name_zh ?? c.name : c.name}\n\n${measured
+    .filter(b => withinClassification(b.id, c.id)).map(b => rendered.get(b.id)).join('\n\n')}`);
+  const navigation = shown.map(c => `[${zh ? c.name_zh ?? c.name : c.name}](#results-${c.id})`).join(' · ');
+  const directory = listedCategories.map(c => {
+    const members = listedServices.filter(p => inClassification(p, c.id));
+    const tested = members.filter(p => testedIds.has(p.id)).length;
+    return `- [${zh ? c.name_zh ?? c.name : c.name}](${directoryUrl(zh, c.id)}) — ${zh ? `${members.length} 个服务，已实测 ${tested}` : `${members.length} services, ${tested} tested`}`;
+  });
+  return `<!-- ${label('生成文件 — 修改 scripts/generate.ts，再运行 npm run generate。', 'GENERATED — edit scripts/generate.ts; run npm run generate.')} -->
 
 # Agent-Friendly Services
 
-English | [简体中文](./README.zh-CN.md)
+${zh ? '[English](./README.md) | 简体中文' : 'English | [简体中文](./README.zh-CN.md)'}
 
-**Find services that let your Agent complete tasks, and use real tests to compare reliability, setup effort and cost.**
+**${label('哪些服务能让 AI Agent 真正把事办成？我们让 Agent 用真实任务去试，记录通过率、费用和接入门槛。',
+  'Which services let an AI Agent actually get the job done? We have Agents try real tasks and record pass rate, cost and access requirements.')}**
 
-We collect options for ordinary personal users and test them on real tasks. Browse the services below, open a name for its access requirements and sources, or follow a documentation link to get started.
+${label(`**${listedServices.length}** 个服务 · **${testedIds.size}** 个已实测 · **${validRuns.length}** 次有效试跑 · 最近一次 ${lastRun}`,
+  `**${listedServices.length}** services · **${testedIds.size}** tested · **${validRuns.length}** valid trials · latest ${lastRun}`)}
 
-<a id="all-services"></a>
+${label(
+  '**通过率**：该子类所有任务（含接入任务）中通过独立验收的试跑比例，括号内为通过数 / 有效试跑数。**平均费用**：每次试跑的模型费用（按 LiteLLM 价表估算）加有记录的服务费，取平均。**免注册**：✅ 不用事先注册即可使用 · ❌ 需要事先准备账号或密钥。环境故障导致的无效试跑不计入。点子类标题旁的 → 查看各任务明细。',
+  '**Pass rate**: share of valid trials, across all tasks in the subcategory including setup, that passed independent review (passed / valid trials). **Avg. cost**: mean per trial of estimated model cost (LiteLLM rates) plus recorded service charges. **No signup**: ✅ usable without registering first · ❌ an account or key must be prepared first. Runs invalidated by environment faults are excluded. Use → beside a subcategory for per-task results.')}
 
-## Services (${listedServices.length})
+${navigation}
 
-Tokens and costs are means per valid trial, including successes and failures; invalid runs are excluded. Model costs use LiteLLM prices; ~ marks estimated service charges. — means no data.
+${sections.join('\n\n')}
 
-Resolution rates describe complete task delivery by the tested Agent under the recorded conditions, not service availability. Read incomplete runs alongside their blockers and any verified service-side results. A single completed trial displays 100%. Open the [full results](./generated/evaluations.md) for counts, tasks and conditions; these limited observations do not establish long-term reliability.
+## ${label('怎么测的', 'How we test')}
 
-Within each classification and task family, each service shows its most recently tested route with valid results; other routes and setup are in the service details. These are observations, not a ranking: compare only matching tasks and conditions. Different preparation notes are kept separate, including changes to package sources or request limits; all earlier trials remain in the full records.
+${label(
+  '每次试跑都是全新会话和隔离容器，被测 Agent 只拿到用户任务和服务入口，看不到答案或其他服务的结果；另起一个会话按事先冻结的标准验收。用量取自运行器抓包，证据带哈希，可复查、可复跑。样本还少，结果是观察，不是长期可靠性的证明。',
+  'Each trial runs in a fresh session and isolated container. The tested Agent gets only the user task and service entry point, never answers or other services\' results; a separate session reviews it against frozen criteria. Usage comes from runner capture and evidence carries hashes, so results can be checked and rerun. Samples are still small: these are observations, not proof of long-term reliability.')} [${label('方法', 'Method')}](./AGENTS.md)
 
-${serviceList(false)}
+## ${label('最新发现', 'Latest findings')}
 
-## For your Agent
+${highlights.map(h => `- ${zh ? h.zh : h.en} [${label('证据', 'Evidence')}](./${h.link})`).join('\n')}
 
-[Query guide](./llms.txt) · [Catalog JSON](./generated/catalog.json) · [Results JSON](./generated/evaluations.json) · [MCP setup](./mcp/README.md)
+## ${label('完整目录', 'Full directory')}
 
-Use \`search_services\` to find candidates, then \`get_service\` to check access requirements and test evidence. The same data is available directly as JSON.
+${label('所有收录的服务（包括还没测的），以及每个任务的原文、配置和逐次结果：', 'Every listed service, including untested ones, with each task\'s text, configuration and per-trial results:')}
 
-## Methods and contributions
+${directory.join('\n')}
 
-Know a service we missed, have a task you would like tested, or found something that has changed? A lead or correction is welcome.
+${label('想测某个服务或任务？欢迎', 'Want a service or task tested? ')}[${label('提 Issue', 'Open an issue')}](https://github.com/${REPO}/issues)${label('。', '.')}
 
-[Principles](./AGENTS.md) · [Inclusion standards](./docs/catalog-standard.zh-CN.md) · [Flight findings](./docs/flights.zh-CN.md) · [Task design](./data/experiments/tasks/AGENTS.md) · [Execution and review](./data/experiments/AGENTS.md) · [All results and evidence](./generated/evaluations.md) · [Contributing](./docs/contributing.md) · [Issues](https://github.com/${REPO}/issues)
+## ${label('给 Agent 的入口', 'For your Agent')}
 
-Code: [MIT](./LICENSE) · Data: [CC BY 4.0](./LICENSE-DATA).
+[${label('查询指引', 'Query guide')}](./llms.txt) · [${label('服务 JSON', 'Catalog JSON')}](./generated/catalog.json) · [${label('实测 JSON', 'Results JSON')}](./generated/evaluations.json) · [${label('MCP 配置', 'MCP setup')}](./mcp/README.md)
+
+## ${label('方法与贡献', 'Methods and contributions')}
+
+[${label('核心理念', 'Principles')}](./AGENTS.md) · [${label('收录标准', 'Inclusion standards')}](./docs/catalog-standard.zh-CN.md) · [${label('机票阶段结论', 'Flight findings')}](./docs/flights.zh-CN.md) · [${label('任务设计', 'Task design')}](./data/experiments/tasks/AGENTS.md) · [${label('执行与验收', 'Execution and review')}](./data/experiments/AGENTS.md) · [${label('全部实测与证据', 'All results and evidence')}](./generated/evaluations.md) · [${label('参与贡献', 'Contributing')}](./docs/contributing.md)
+
+${label('代码：', 'Code: ')}[MIT](./LICENSE) · ${label('数据：', 'Data: ')}[CC BY 4.0](./LICENSE-DATA)
 `;
-fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.md'), readme);
-
-const readmeZh = `<!-- 生成文件 — 修改 scripts/generate.ts，再运行 npm run generate。 -->
-
-# Agent-Friendly Services
-
-[English](./README.md) | 简体中文
-
-**帮你找到能让 Agent 完成任务的服务，并用实测比较哪个更可靠、更省事、更有性价比。**
-
-我们关注普通个人能用上的服务，收集候选，再用真实任务逐步验证。你可以按分类浏览，点服务名查看接入条件和资料，也可以直接打开文档开始使用。
-
-<a id="all-services"></a>
-
-## 服务目录（${listedServices.length}）
-
-Token 和费用按有效试跑取平均，包含成功与失败；环境无效不计入。模型费用按 LiteLLM 估算，服务费用估算额标 ~。— 表示暂无数据。
-
-完成率描述 Agent 在记录的环境及约束下是否交付完整任务，不等于服务可用率；未完成须结合具体阻碍及已验证的服务能力阅读。只测一次且完成，也会显示 100%。次数、任务与条件见[完整结果](./generated/evaluations.md)；有限观察不能证明长期可靠性。
-
-每个分类内按任务组展示服务最近取得有效结果的测试方式，接入测试单独展示，其他方式见服务详情。当前不排名，仅在任务与条件一致时比较。准备说明不同的记录分别统计，包括包下载源或请求上限的变化；历次试跑均保留在完整记录中。
-
-${serviceList(true)}
-
-## 给 Agent 的入口
-
-[查询指引](./llms.txt) · [服务 JSON](./generated/catalog.json) · [实测 JSON](./generated/evaluations.json) · [MCP 配置](./mcp/README.md)
-
-通过 \`search_services\` 查找候选，再用 \`get_service\` 查看接入条件和实测依据。同一份数据也可以直接读取 JSON。
-
-## 方法与贡献
-
-如果你知道我们漏掉的服务、有想测的真实任务，或发现资料已经过时，欢迎提供线索或纠错。
-
-[核心理念](./AGENTS.md) · [收录标准](./docs/catalog-standard.zh-CN.md) · [机票阶段结论](./docs/flights.zh-CN.md) · [任务设计](./data/experiments/tasks/AGENTS.md) · [执行与验收](./data/experiments/AGENTS.md) · [全部实测与证据](./generated/evaluations.md) · [参与贡献](./docs/contributing.md) · [提出问题](https://github.com/${REPO}/issues)
-
-代码：[MIT](./LICENSE) · 数据：[CC BY 4.0](./LICENSE-DATA)。
-`;
-fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.zh-CN.md'), readmeZh);
+}
+fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.md'), homepage(false));
+fs.writeFileSync(path.join(OUTPUT_ROOT, 'README.zh-CN.md'), homepage(true));
 
 console.log(`✓ Generated homepages, service profiles, catalogs and evaluations (${listedServices.length} services).`);

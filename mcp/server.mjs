@@ -131,7 +131,7 @@ server.registerTool('search_services', {
   inputSchema: {
     query: z.string().optional(),
     category: z.string().optional().describe('Top-level category, e.g. travel.'),
-    classification: z.string().optional().describe('Classification path at any depth, including descendants; e.g. web-search-data/financial-data/fx.'),
+    classification: z.string().optional().describe('Classification path at any depth, including descendants; e.g. financial-data/fx.'),
     subcategory: z.string().optional().describe('Compatibility alias for classification; accepts any path depth.'),
     interface: z.enum(['api', 'sdk', 'cli', 'mcp', 'web', 'mobile']).optional(),
     capability: z.string().optional().describe('Documented outcome, e.g. flights.search; not a measured pass.'),
@@ -181,7 +181,7 @@ server.registerTool(
       category: z
         .string()
         .optional()
-        .describe('Category id to filter by, e.g. "databases" or "web-search-data". Use list_categories for valid ids.'),
+        .describe('Category id to filter by, e.g. "databases" or "financial-data". Use list_categories for valid ids.'),
       require: z
         .array(z.enum(REQUIREMENT_KEYS))
         .optional()

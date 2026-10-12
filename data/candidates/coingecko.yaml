@@ -1,6 +1,6 @@
 id: coingecko
 name: CoinGecko
-category: web-search-data
+category: financial-data
 homepage: https://www.coingecko.com/
 summary: >-
   Crypto prices and market data with a free Demo API plan and official keyless or authenticated MCP
@@ -11,7 +11,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     docs:
       url: https://docs.coingecko.com/docs/setting-up-your-api-key

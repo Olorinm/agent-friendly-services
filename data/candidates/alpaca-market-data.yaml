@@ -1,6 +1,6 @@
 id: alpaca-market-data
 name: Alpaca Market Data
-category: web-search-data
+category: financial-data
 homepage: https://alpaca.markets/
 summary: >-
   Read-only equities, options and crypto market data, separate from trading operations; Basic access is
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     docs:
       url: https://docs.alpaca.markets/us/docs/about-market-data-api

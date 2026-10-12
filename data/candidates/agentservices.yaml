@@ -1,6 +1,6 @@
 id: agentservices
 name: AgentServices
-category: web-search-data
+category: search-scraping
 homepage: https://agentservices.to/
 summary: >-
   Market data, web search and extraction, and model access through REST, MCP and a JavaScript SDK;
@@ -18,10 +18,10 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-search
-    - web-search-data/web-extraction
+    - search-scraping/web-search
+    - search-scraping/web-extraction
     - ai-models/model-access
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     vendor-pr:
       url: https://github.com/Olorinm/agent-friendly-services/pull/4

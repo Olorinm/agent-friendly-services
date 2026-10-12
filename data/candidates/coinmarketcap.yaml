@@ -1,6 +1,6 @@
 id: coinmarketcap
 name: CoinMarketCap
-category: web-search-data
+category: financial-data
 homepage: https://coinmarketcap.com/
 summary: Crypto market data with selected keyless endpoints and a free authenticated Basic plan.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     docs:
       url: https://coinmarketcap.com/api/

@@ -1,6 +1,6 @@
 id: alpha-vantage
 name: Alpha Vantage
-category: web-search-data
+category: financial-data
 homepage: https://www.alphavantage.co/
 summary: >-
   Stock prices, company financials, FX, crypto and economic indicators. Free keys have a daily
@@ -16,11 +16,11 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/fx
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/statements
-    - web-search-data/financial-data/disclosures
-    - web-search-data/financial-data/macro
+    - financial-data/fx
+    - financial-data/prices
+    - financial-data/statements
+    - financial-data/disclosures
+    - financial-data/macro
   sources:
     docs:
       url: https://www.alphavantage.co/documentation/

@@ -1,6 +1,6 @@
 id: crossref
 name: Crossref
-category: web-search-data
+category: scholarly
 homepage: https://www.crossref.org/
 summary: Free public REST access to publisher-deposited scholarly metadata for finding works and completing references.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/scholarly-search
+    - scholarly/scholarly-search
   sources:
     rest-api:
       url: https://www.crossref.org/documentation/retrieve-metadata/rest-api/

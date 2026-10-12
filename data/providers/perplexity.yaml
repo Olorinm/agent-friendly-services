@@ -1,6 +1,6 @@
 id: perplexity
 name: Perplexity API
-category: web-search-data
+category: search-scraping
 homepage: https://www.perplexity.ai
 summary: Sonar API for web-grounded answers and search, with llms.txt, an official MCP server, and documented usage tiers.
 submitted_by: community
@@ -74,7 +74,7 @@ checks:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-search
+    - search-scraping/web-search
   sources:
     classification-docs:
       url: https://docs.perplexity.ai/docs/getting-started/overview

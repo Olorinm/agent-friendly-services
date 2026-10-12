@@ -1,6 +1,6 @@
 id: ecb-data
 name: ECB Data Portal API
-category: web-search-data
+category: financial-data
 homepage: https://data.ecb.europa.eu/
 summary: >-
   European Central Bank statistical data, including historical reference exchange rates, through
@@ -12,8 +12,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/fx
-    - web-search-data/financial-data/macro
+    - financial-data/fx
+    - financial-data/macro
   sources:
     docs:
       url: https://data.ecb.europa.eu/help/api/data-examples

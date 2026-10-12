@@ -46,23 +46,23 @@ tasks:
     phase: business
   - file: data/experiments/tasks/financial-data.md
     id: financial-access-001
-    classification: web-search-data/financial-data
+    classification: financial-data
     phase: setup
   - file: data/experiments/tasks/financial-data.md
     id: financial-prices-001
-    classification: web-search-data/financial-data/prices
+    classification: financial-data/prices
     phase: business
   - file: data/experiments/tasks/financial-data.md
     id: financial-statements-001
-    classification: web-search-data/financial-data/statements
+    classification: financial-data/statements
     phase: business
   - file: data/experiments/tasks/financial-data.md
     id: financial-fx-001
-    classification: web-search-data/financial-data/fx
+    classification: financial-data/fx
     phase: business
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-001
-    classification: web-search-data/financial-data/disclosures
+    classification: financial-data/disclosures
     phase: business
   - file: data/experiments/tasks/mailboxes.md
     id: mailboxes-create-001
@@ -90,90 +90,90 @@ tasks:
     phase: business
   - file: data/experiments/tasks/web-search.md
     id: web-search-access-001
-    classification: web-search-data/web-search
+    classification: search-scraping/web-search
     phase: setup
   - file: data/experiments/tasks/web-search.md
     id: web-search-001
-    classification: web-search-data/web-search
+    classification: search-scraping/web-search
     phase: business
   - file: data/experiments/tasks/web-extraction.md
     id: web-extraction-access-001
-    classification: web-search-data/web-extraction
+    classification: search-scraping/web-extraction
     phase: setup
   - file: data/experiments/tasks/web-extraction.md
     id: web-extraction-holidays-001
-    classification: web-search-data/web-extraction
+    classification: search-scraping/web-extraction
     phase: business
 
   - file: data/experiments/tasks/web-extraction-uk.md
     id: web-extraction-uk-holidays-001
-    classification: web-search-data/web-extraction
+    classification: search-scraping/web-extraction
     phase: business
   - file: data/experiments/tasks/web-extraction-pdf.md
     id: web-extraction-pdf-hikes-001
-    classification: web-search-data/web-extraction
+    classification: search-scraping/web-extraction
     phase: business
   - file: data/experiments/tasks/web-extraction-pdf.md
     id: web-extraction-scanned-table-001
-    classification: web-search-data/web-extraction
+    classification: search-scraping/web-extraction
     phase: business
   - file: data/experiments/tasks/route-planning.md
     id: route-planning-access-001
-    classification: web-search-data/route-planning
+    classification: maps-geo/route-planning
     phase: setup
   - file: data/experiments/tasks/route-planning.md
     id: route-planning-bridge-001
-    classification: web-search-data/route-planning
+    classification: maps-geo/route-planning
     phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-002
-    classification: web-search-data/financial-data/disclosures
+    classification: financial-data/disclosures
     phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-003
-    classification: web-search-data/financial-data/disclosures
+    classification: financial-data/disclosures
     phase: business
 
   - file: data/experiments/tasks/financial-data.md
     id: financial-disclosures-004
-    classification: web-search-data/financial-data/disclosures
+    classification: financial-data/disclosures
     phase: business
 
   - file: data/experiments/tasks/web-search-v2.md
     id: web-search-001
-    classification: web-search-data/web-search
+    classification: search-scraping/web-search
     phase: business
 
   - file: data/experiments/tasks/weather-data.md
     id: weather-access-001
-    classification: web-search-data/weather-data
+    classification: weather-calendar/weather-data
     phase: setup
 
   - file: data/experiments/tasks/weather-data.md
     id: weather-outing-001
-    classification: web-search-data/weather-data
+    classification: weather-calendar/weather-data
     phase: business
 
   - file: data/experiments/tasks/geocoding.md
     id: geocoding-access-001
-    classification: web-search-data/geocoding
+    classification: maps-geo/geocoding
     phase: setup
 
   - file: data/experiments/tasks/geocoding.md
     id: geocoding-venue-001
-    classification: web-search-data/geocoding
+    classification: maps-geo/geocoding
     phase: business
 
   - file: data/experiments/tasks/scholarly-search.md
     id: scholarly-access-001
-    classification: web-search-data/scholarly-search
+    classification: scholarly/scholarly-search
     phase: setup
 
   - file: data/experiments/tasks/scholarly-search.md
     id: scholarly-reference-001
-    classification: web-search-data/scholarly-search
+    classification: scholarly/scholarly-search
     phase: business
 
   - file: data/experiments/tasks/database-restore.md
@@ -188,12 +188,12 @@ tasks:
 
   - file: data/experiments/tasks/public-holidays.md
     id: public-holidays-access-001
-    classification: web-search-data/public-holidays
+    classification: weather-calendar/public-holidays
     phase: setup
 
   - file: data/experiments/tasks/public-holidays.md
     id: public-holidays-berlin-001
-    classification: web-search-data/public-holidays
+    classification: weather-calendar/public-holidays
     phase: business
 
   - file: data/experiments/tasks/mailboxes-v2.md
@@ -213,12 +213,12 @@ tasks:
 
   - file: data/experiments/tasks/qr-codes.md
     id: qr-codes-access-001
-    classification: productivity-storage/qr-codes
+    classification: developer-tools/qr-codes
     phase: setup
 
   - file: data/experiments/tasks/qr-codes.md
     id: qr-codes-travel-link-001
-    classification: productivity-storage/qr-codes
+    classification: developer-tools/qr-codes
     phase: business
   - file: data/experiments/tasks/collaborative-tables-shared-expenses.md
     id: collaborative-tables-shared-expenses-001
@@ -232,5 +232,5 @@ tasks:
 
   - file: data/experiments/tasks/financial-macro.md
     id: financial-macro-hicp-001
-    classification: web-search-data/financial-data/macro
+    classification: financial-data/macro
     phase: business

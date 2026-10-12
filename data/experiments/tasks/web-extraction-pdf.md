@@ -1,6 +1,6 @@
 # PDF 表格提取：任务表
 
-分类：搜索与数据获取 / 网页内容提取（web-search-data/web-extraction）
+分类：搜索与网页抓取 / 网页内容提取（search-scraping/web-extraction）
 
 给定公开 PDF，把其中一组表格数据整理成个人可以继续使用的文件。接入复用 `web-extraction.md` 的 `web-extraction-access-001/v1`；示例 HTML 接通只说明入口可用，不预先证明 PDF 提取能力。
 

@@ -1,6 +1,6 @@
 id: met-norway
 name: MET Norway Locationforecast
-category: web-search-data
+category: weather-calendar
 homepage: https://api.met.no/
 summary: Public global point forecasts from MET Norway, with no API key and mandatory client identification.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/weather-data
+    - weather-calendar/weather-data
   sources:
     docs:
       url: https://api.met.no/weatherapi/locationforecast/2.0/documentation

@@ -1,6 +1,6 @@
 id: jina
 name: Jina AI
-category: web-search-data
+category: search-scraping
 homepage: https://jina.ai
 summary: Search-foundation APIs (Reader for URL-to-markdown, embeddings, reranker, deep search) with an official remote MCP server, an agent-targeted llms.txt, and a keyless trial path.
 submitted_by: community
@@ -76,7 +76,7 @@ checks:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-extraction
+    - search-scraping/web-extraction
   sources:
     existing-docs:
       url: https://jina.ai/api-dashboard

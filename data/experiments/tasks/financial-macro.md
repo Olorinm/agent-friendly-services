@@ -1,6 +1,6 @@
 # 宏观数据：可复用的跨国通胀对照表
 
-分类：网页搜索与数据访问 / 金融数据 / 宏观经济数据（web-search-data/financial-data/macro）；能力：macro.series。
+分类：金融数据 / 宏观经济数据（financial-data/macro）；能力：macro.series。
 
 ## 需求与范围
 

@@ -1,6 +1,6 @@
 id: tracefour
 name: Tracefour
-category: web-search-data
+category: financial-data
 homepage: https://tracefour.com/
 summary: >-
   Public trading disclosures through keyless REST and MCP, with attribution and original-filing
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://tracefour.com/api-docs

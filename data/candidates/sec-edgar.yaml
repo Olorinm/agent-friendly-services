@@ -1,6 +1,6 @@
 id: sec-edgar
 name: SEC EDGAR Data APIs
-category: web-search-data
+category: financial-data
 homepage: https://www.sec.gov/
 summary: >-
   Official public company filings and XBRL financial facts; data.sec.gov reading APIs require no
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/statements
+    - financial-data/statements
   sources:
     docs:
       url: https://www.sec.gov/search-filings/edgar-application-programming-interfaces

@@ -1,6 +1,6 @@
 id: congress-stock-tracker
 name: Congress Stock Tracker
-category: web-search-data
+category: financial-data
 homepage: https://www.congressstock.com/
 summary: >-
   Licensed congressional transaction datasets with source links and amendment history; pricing is
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://www.congressstock.com/congress-trading-api

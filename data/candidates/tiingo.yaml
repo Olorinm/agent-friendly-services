@@ -1,6 +1,6 @@
 id: tiingo
 name: Tiingo
-category: web-search-data
+category: financial-data
 homepage: https://www.tiingo.com/
 summary: Market data covering end-of-day prices and other feeds, with an account-issued authentication token.
 submitted_by: community
@@ -11,8 +11,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/fx
+    - financial-data/prices
+    - financial-data/fx
   sources:
     docs:
       url: https://www.tiingo.com/documentation/general/overview

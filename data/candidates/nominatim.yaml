@@ -1,6 +1,6 @@
 id: nominatim
 name: Nominatim Public API
-category: web-search-data
+category: maps-geo
 homepage: https://nominatim.org/
 summary: OSMF-hosted place and address lookup for deliberately selected, low-volume uses under its public API policy.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/geocoding
+    - maps-geo/geocoding
   sources:
     search-docs:
       url: https://nominatim.org/release-docs/latest/api/Search/

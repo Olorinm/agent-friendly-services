@@ -1,6 +1,6 @@
 id: tushare
 name: Tushare Pro
-category: web-search-data
+category: financial-data
 homepage: https://tushare.pro/
 summary: Chinese-market prices and financial statements through a token-based HTTP API and Python SDK.
 submitted_by: community
@@ -10,8 +10,8 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
-    - web-search-data/financial-data/statements
+    - financial-data/prices
+    - financial-data/statements
   sources:
     docs:
       url: https://tushare.pro/document/1?doc_id=40

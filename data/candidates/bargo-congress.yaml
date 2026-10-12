@@ -1,6 +1,6 @@
 id: bargo-congress
 name: Bargo Congress Trades API
-category: web-search-data
+category: financial-data
 homepage: https://www.bargo.ai/free-apis/congress
 summary: >-
   Read-only US congressional trade disclosures through a free REST API and keyed MCP; this entry covers
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://www.bargo.ai/free-apis/congress

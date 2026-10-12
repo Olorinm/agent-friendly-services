@@ -1,6 +1,6 @@
 id: insynet
 name: Insynet
-category: web-search-data
+category: financial-data
 homepage: https://insynet.se/
 summary: >-
   Congress purchase disclosures and insider filings through an API; free keys require an email
@@ -12,7 +12,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/disclosures
+    - financial-data/disclosures
   sources:
     docs:
       url: https://insynet.se/developers

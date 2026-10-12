@@ -1,6 +1,6 @@
 id: firecrawl
 name: Firecrawl
-category: web-search-data
+category: search-scraping
 homepage: https://www.firecrawl.dev
 summary: Web scraping and crawling API that turns websites into LLM-ready markdown, with an official MCP server.
 submitted_by: community
@@ -78,8 +78,8 @@ checks:
 catalog:
   version: 1
   classifications:
-    - web-search-data/web-extraction
-    - web-search-data/web-search
+    - search-scraping/web-extraction
+    - search-scraping/web-search
   sources:
     docs:
       url: https://docs.firecrawl.dev/features/search

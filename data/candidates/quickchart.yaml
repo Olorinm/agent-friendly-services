@@ -1,6 +1,6 @@
 id: quickchart
 name: QuickChart
-category: productivity-storage
+category: developer-tools
 homepage: https://quickchart.io/qr-code-api/
 summary: Hosted static QR image API with a no-account Community tier, downloadable images and documented size and quiet-zone controls.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - productivity-storage/qr-codes
+    - developer-tools/qr-codes
   sources:
     qr-api:
       url: https://quickchart.io/documentation/qr-codes/

@@ -1,6 +1,6 @@
 id: valhalla
 name: Valhalla Public Demo API
-category: web-search-data
+category: maps-geo
 homepage: https://valhalla.github.io/valhalla/
 summary: FOSSGIS-hosted Valhalla demo for low-volume route planning with a public worldwide OpenStreetMap graph.
 submitted_by: community
@@ -9,7 +9,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/route-planning
+    - maps-geo/route-planning
   sources:
     demo:
       url: https://valhalla.github.io/valhalla/

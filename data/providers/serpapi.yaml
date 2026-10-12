@@ -1,6 +1,6 @@
 id: serpapi
 name: SerpApi
-category: web-search-data
+category: search-scraping
 homepage: https://serpapi.com
 summary: Real-time JSON API for Google and other search engines' results, with an official MCP server, llms.txt, and a free monthly quota.
 submitted_by: community
@@ -72,7 +72,7 @@ catalog:
   version: 1
   classifications:
     - travel/flights
-    - web-search-data/web-search
+    - search-scraping/web-search
   sources:
     flights:
       url: https://serpapi.com/google-flights-api

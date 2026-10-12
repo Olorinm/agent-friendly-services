@@ -1,6 +1,6 @@
 id: finnhub
 name: Finnhub
-category: web-search-data
+category: financial-data
 homepage: https://finnhub.io/
 summary: Stock quotes, historical candles and fundamentals; stock candles are documented as premium.
 submitted_by: community
@@ -10,7 +10,7 @@ tags:
 catalog:
   version: 1
   classifications:
-    - web-search-data/financial-data/prices
+    - financial-data/prices
   sources:
     docs:
       url: https://finnhub.io/docs/api/quote
