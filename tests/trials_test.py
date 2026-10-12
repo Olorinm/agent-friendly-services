@@ -114,6 +114,23 @@ class Trials(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'raw session'):
             recorder.record(self.run, self.review)
 
+    def test_grader_metadata_omits_private_receipt_fields_and_execution_model_is_unchanged(self):
+        self.save()
+        (self.run/'grading').mkdir()
+        (self.run/'grading/receipt.json').write_text(json.dumps({
+            'model': 'gpt-6.1-sol', 'reasoning_effort': 'high',
+            'harness': {'name': 'codex', 'version': '0.162.0', 'mode': 'noninteractive',
+                        'launcher': '/private/GRADER_PRIVATE_CANARY'},
+            'started_at': '2026-09-07T01:00:03Z', 'ended_at': '2026-09-07T01:01:00Z',
+            'billing_mode': 'chatgpt', 'billing_note': 'Account cost unknown',
+            'session_id': 'GRADER_PRIVATE_CANARY', 'workspace': '/private/GRADER_PRIVATE_CANARY',
+            'auth': 'GRADER_PRIVATE_CANARY'}))
+        output = recorder.record(self.run, self.review).read_text()
+        record = json.loads(output)
+        self.assertEqual(record['model'], self.meta['model'])
+        self.assertEqual(record['review']['runtime']['model'], 'gpt-6.1-sol')
+        self.assertNotIn('GRADER_PRIVATE_CANARY', output)
+
     def test_runner_persists_and_collects_session_after_process_exit(self):
         # A fake CLI exercises the actual launcher/subprocess/collector without API calls.
         auth = self.root / 'codex-home'

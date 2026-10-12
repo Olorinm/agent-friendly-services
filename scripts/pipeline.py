@@ -207,7 +207,7 @@ def stage_request(directory, role, settings):
             'input': str(directory / ('frozen/execution' if role == 'execution' else 'grading-input')),
             'output': str(directory / ('execution' if role == 'execution' else 'grading')),
             'fresh_session': True,
-            **{k: settings[k] for k in ('closure_fraction', 'max_model_requests', 'deadline_epoch') if k in settings}}
+            **{k: settings[k] for k in ('closure_fraction', 'max_model_requests', 'deadline_epoch', 'billing_mode') if k in settings}}
 
 
 def collect(directory, role, settings, request):

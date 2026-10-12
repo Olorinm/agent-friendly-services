@@ -84,11 +84,23 @@ def inputs(config):
 
 def adapter_config(settings):
     argv = settings['commands']['start']
-    adapter = str((runs.ROOT/'scripts/runners/opencode/adapter.py').resolve())
-    if not any(str(Path(arg).resolve()) == adapter for arg in argv if not arg.startswith('-')):
+    adapters = {str((runs.ROOT/'scripts/runners'/name/'adapter.py').resolve()) for name in ('opencode', 'codex')}
+    if not any(str(Path(arg).resolve()) in adapters for arg in argv if not arg.startswith('-')):
         return None  # Offline fixture adapters are never accepted by ceiling().
-    if '--config' not in argv: raise ValueError('OpenCode adapter needs an explicit private config')
+    if '--config' not in argv: raise ValueError('Runner adapter needs an explicit private config')
     return Path(argv[argv.index('--config')+1]).resolve()
+
+
+def chatgpt_grader(settings):
+    if settings.get('billing_mode') != 'chatgpt': return False
+    adapter = str((runs.ROOT/'scripts/runners/codex/adapter.py').resolve())
+    if (settings.get('model') != 'gpt-6.1-sol' or settings.get('reasoning_effort') != 'high'
+            or settings.get('harness', {}).get('name') != 'codex'
+            or not any(str(Path(arg).resolve()) == adapter for arg in settings['commands']['start'] if not arg.startswith('-'))):
+        raise ValueError('ChatGPT billing requires the independent Codex Sol/high adapter')
+    config = runs.read(adapter_config(settings))
+    if config.get('billing_mode') != 'chatgpt': raise ValueError('Adapter account billing differs from frozen role')
+    return True
 
 
 def runtime_identity(settings):
@@ -114,6 +126,9 @@ def submit(directory, spec_path):
     for member in members:
         config = runs.read(Path(member['config']).resolve())
         for role in ('execution', 'grading'):
+            if chatgpt_grader(config[role]):
+                if role != 'grading': raise ValueError('ChatGPT Codex adapter is grading-only')
+                continue
             if type(config[role].get('max_model_requests')) is not int or config[role]['max_model_requests'] < 1:
                 raise ValueError('Queued roles need frozen max_model_requests for budget reservations')
         if not config.get('preflight'):
@@ -184,6 +199,12 @@ Only the DeepSeek proxy currently enforces the 32000 output cap. A future
 adapter needs its own bound before it can enter the automatic paid queue.
 """
     config = runs.read(directory/'config.json');settings = config[role]
+    if chatgpt_grader(settings):
+        if role != 'grading': raise ValueError('ChatGPT Codex adapter is grading-only')
+        # This is an API-dollar dispatch reservation, not a model-cost estimate.
+        # Account credits/subscription allocation remain unknown and are separate
+        # from the DeepSeek API budget; concurrency and deadlines still apply.
+        return 0
     adapter = str((runs.ROOT/'scripts/runners/opencode/adapter.py').resolve())
     if not any(str(Path(arg).resolve()) == adapter for arg in settings['commands']['start'] if not arg.startswith('-')):
         raise ValueError('Queue requires the controller-owned bounded OpenCode adapter')
@@ -226,11 +247,16 @@ def held(state):
 
 
 def reconcile(state):
-    for _, path, _, phase in entries(state):
+    for _, path, config, phase in entries(state):
         for role in ('execution', 'grading'):
             key = str(path)+':'+role
             row = state['ledger'].get(key)
             if not row: continue
+            if row.get('billing_mode') == 'chatgpt':
+                row.update(account_cost_usd=None, account_credits=None)
+                if (path/role/'model-cost.json').exists():
+                    row['model_api_rate_estimate'] = runs.read(path/role/'model-cost.json')
+                continue
             cost_file = path/role/'model-cost.json'
             if cost_file.exists():
                 cost = runs.read(cost_file);amount = cost.get('amount_usd')
@@ -345,6 +371,9 @@ def _advance(directory):
                 amount = ceiling(path, role)
                 if held(state) + amount > policy['budget_usd']: return hold('Session ceiling exceeds remaining budget after in-flight/unknown reservations')
                 state['ledger'][key] = {'ceiling_usd': amount, 'held_usd': amount, 'reserved_at': runs.now()}
+                if chatgpt_grader(settings):
+                    state['ledger'][key].update(billing_mode='chatgpt', account_cost_usd=None, account_credits=None,
+                        reservation_scope='API dollars only; account usage is not free and remains separately unknown')
                 # Durable reservation precedes an irreversible paid dispatch.
                 runs.write(directory/'state.json', state)
             return {'deadline_epoch': min(deadline, settings.get('deadline_epoch', deadline))}

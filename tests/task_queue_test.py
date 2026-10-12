@@ -198,5 +198,41 @@ class QueueTests(unittest.TestCase):
         runs.write(path/'frozen/pricing.json',prices)
         with self.assertRaisesRegex(ValueError,'Frozen pricing'):queue.ceiling(path,'execution')
 
+    def test_codex_account_usage_has_no_deepseek_api_reservation_and_no_free_cost_claim(self):
+        path = self.root/'account-reservation';path.mkdir()
+        adapter_config = self.root/'codex.adapter.json'
+        runs.write(adapter_config, {'billing_mode': 'chatgpt'})
+        cfg = copy.deepcopy(self.config)
+        cfg['grading'].update(model='gpt-6.1-sol', reasoning_effort='high', billing_mode='chatgpt',
+            harness={'name': 'codex', 'version': '0.162.0', 'mode': 'noninteractive'})
+        cfg['grading']['commands']['start'] = ['python3', str(self.root/'scripts/runners/codex/adapter.py'),
+            '--config', str(adapter_config), 'start', '{request}']
+        runs.write(path/'config.json',cfg)
+        self.assertEqual(queue.ceiling(path,'grading'),0)
+        runs.write(path/'state.json',{'phase':'reviewed'})
+        runs.write(path/'grading/model-cost.json', {'amount_usd': 4, 'basis':'API rate estimate, not account payment'})
+        key = str(path)+':grading'
+        state = {'jobs': {'account': {'prepared': True, 'handoff': {'members': [{'directory':str(path)}]}}},
+                 'ledger': {key: {'billing_mode': 'chatgpt', 'held_usd': 0, 'ceiling_usd': 0}}}
+        queue.reconcile(state)
+        self.assertEqual(queue.held(state),0)
+        self.assertIsNone(state['ledger'][key]['account_cost_usd'])
+        self.assertIsNone(state['ledger'][key]['account_credits'])
+        self.assertEqual(state['ledger'][key]['model_api_rate_estimate']['amount_usd'],4)
+
+    def test_chatgpt_reservation_cannot_be_used_by_execution_or_other_adapter(self):
+        path = self.root/'bad-account-reservation';path.mkdir()
+        file = self.root/'codex.adapter.json';runs.write(file,{'billing_mode':'chatgpt'})
+        cfg = copy.deepcopy(self.config)
+        cfg['execution'].update(model='gpt-6.1-sol', reasoning_effort='high', billing_mode='chatgpt',
+            harness={'name':'codex','version':'0.162.0','mode':'noninteractive'})
+        cfg['execution']['commands']['start']=['python3',str(self.root/'scripts/runners/codex/adapter.py'),
+            '--config',str(file),'start','{request}']
+        runs.write(path/'config.json',cfg)
+        with self.assertRaisesRegex(ValueError,'grading-only'):queue.ceiling(path,'execution')
+        cfg['execution']['commands']['start'][1]='/untrusted/adapter.py'
+        runs.write(path/'config.json',cfg)
+        with self.assertRaisesRegex(ValueError,'independent Codex'):queue.ceiling(path,'execution')
+
 
 if __name__ == '__main__': unittest.main()
