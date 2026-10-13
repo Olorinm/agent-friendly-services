@@ -35,7 +35,11 @@ def archive(roots, stream, limits=None):
             root = Path(value)
             if root.is_symlink():
                 manifest['omitted'].append({'original_path': str(root), 'reason': 'Root is a link'});continue
-            for parent, dirs, files in os.walk(root, followlinks=False):
+            if not root.is_dir():
+                manifest['omitted'].append({'original_path':str(root),'reason':'Missing or inaccessible capture root'});continue
+            def walk_error(error):
+                manifest['omitted'].append({'original_path':str(error.filename),'reason':'Directory cannot be read'})
+            for parent, dirs, files in os.walk(root, followlinks=False, onerror=walk_error):
                 dirs.sort();files.sort()
                 for name in list(dirs):
                     path = Path(parent)/name

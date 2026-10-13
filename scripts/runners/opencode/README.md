@@ -120,7 +120,7 @@ the image avoids reinstalling OpenCode next time.
 
 ### Answer-free state reuse (afs-20261013)
 
-New batches explicitly set `trial_protocol: "afs-20261013"`; existing frozen
+New configurations default to `trial_protocol: "afs-20261013"`; explicitly declare it in batch handoffs. Existing frozen
 configurations keep their previous behavior and results. After `provision.py up`
 on a fresh, unused container, the controller prepares and reviews only generic
 dependencies, connection settings and authorized credentials under

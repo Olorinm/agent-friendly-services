@@ -81,6 +81,21 @@ def collect_artifacts(workspace,private,out):
     dump(out/'artifact-omissions.json',omitted)
 
 
+def collect_task_files(home, private, out):
+    roots={'tmp':'/tmp','var-tmp':'/var/tmp','home':str(home)}
+    archive=private/'task-files.tar'
+    try:
+        with archive.open('wb') as target:
+            subprocess.run(['python3','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
+        unpack_task_files(archive,out)
+    except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as error:
+        # Collection gaps cannot erase the finished execution or its usage.
+        dump(out/'task-files-manifest.json',{'schema_version':1,'scope':'Current task temp/home files; failed or partial collection',
+             'complete_for_declared_file_scope':False,'files':[],
+             'omitted':[{'reason':'Private file capture failed: '+type(error).__name__}],
+             'notice':'Do not infer unsaved files, service failure or complete HTTP evidence. Inspect preserved partial copies and original archive.'})
+
+
 def main():
     os.umask(0o077)
     # One service/route container retains state: never let two tasks clear it
@@ -169,11 +184,7 @@ def main():
     # Collection errors must not erase the already observed runtime receipt.
     collect_artifacts(workspace,private,out)
     if request.get('trial_protocol') == 'afs-20261013':
-        roots={'tmp':'/tmp','var-tmp':'/var/tmp','home':str(home)}
-        archive=private/'task-files.tar'
-        with archive.open('wb') as target:
-            subprocess.run(['python3','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
-        unpack_task_files(archive,out)
+        collect_task_files(home,private,out)
     # Preserve state for inspection without exposing it to the next task or copying service keys to grading.
     dump(out/'retained-files.json',[str(p.relative_to('/home/node/service-tools')) for p in Path('/home/node/service-tools').rglob('*') if p.is_file()])
     if (out/'artifacts/assessment.json').is_file():

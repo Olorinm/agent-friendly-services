@@ -61,7 +61,7 @@ def frozen_files(directory):
 
 def prepare(config_path, directory):
     config = read(config_path)
-    config.setdefault('trial_protocol', 'afs-20261010')
+    config.setdefault('trial_protocol', HANDOFF_PROTOCOL)
     directory = Path(directory).resolve()
     if not directory.is_relative_to((ROOT / 'data/experiments/results').resolve()):
         raise ValueError('Run directory must be in data/experiments/results')
@@ -116,7 +116,7 @@ def prepare(config_path, directory):
             raise ValueError('Grading secrets must be explicit strings of at least eight characters')
     if config['phase'] == 'business':
         previous = Path(config['depends_on']).resolve()
-        prev_config, prev_state = read(previous / 'config.json'), read(previous / 'state.json')
+        prev_config = read(previous / 'config.json')
         ready, reason = access_decision(previous, config['trial_protocol'])
         if not ready:
             raise ValueError('Prerequisite not ready: ' + reason)

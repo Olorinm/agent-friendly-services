@@ -72,6 +72,8 @@ class CodexGraderTests(unittest.TestCase):
         self.assertEqual(source['grading']['model'], 'deepseek-flash')
         self.assertEqual(result['grading']['model'], 'gpt-6.1-sol')
         self.assertEqual(result['grading']['billing_mode'], 'chatgpt')
+        self.assertEqual(result['trial_protocol'],'afs-20261013')
+        self.assertEqual(source['trial_protocol'],'old-protocol')
         self.assertNotIn('max_model_requests', result['grading'])
         with self.assertRaises(ValueError): configurer.configure(source, '/private/adapter.json', 'deepseek-exec')
 

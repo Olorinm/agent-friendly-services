@@ -9,6 +9,8 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
@@ -48,6 +50,12 @@ class AdmissionTests(unittest.TestCase):
         review['access_readiness']['reusable_state']['status']="""+repr(facet)+"""
         write('assessment.json',review)
     print(json.dumps({'collected':True}))"""))
+
+    def test_new_unversioned_configuration_defaults_to_fixed_protocol(self):
+        self.config.pop('trial_protocol')
+        pipeline.write(self.config_path,self.config)
+        pipeline.prepare(self.config_path,self.directory)
+        self.assertEqual(pipeline.read(self.directory/'config.json')['trial_protocol'],access_readiness.PROTOCOL)
 
     def finish_access(self):
         self.init();path=self.submit('access-first')
@@ -173,6 +181,21 @@ class FileBoundaryTests(unittest.TestCase):
         self.assertNotIn(secret,(grade/'execution/task-files/tmp/response.json').read_text())
         self.assertIn(secret,(output/'task-files/tmp/response.json').read_text())
         self.assertTrue((grade/'privacy-redactions.json').exists())
+
+    def test_file_capture_timeout_preserves_receipt_and_explicit_gap(self):
+        directory=ROOT/'scripts/runners/opencode'
+        sys.path.insert(0,str(directory))
+        try:worker=runner_module('worker')
+        finally:sys.path.remove(str(directory))
+        private=self.root/'private';private.mkdir();out=private/'output';out.mkdir()
+        (out/'receipt.json').write_text('{"observed":"finished execution"}')
+        (self.root/'capture_files.py').write_text((directory/'capture_files.py').read_text())
+        with patch.object(worker,'ROOT',self.root),patch.object(worker.subprocess,'run',side_effect=subprocess.TimeoutExpired('fixture',25)):
+            worker.collect_task_files(self.root/'home',private,out)
+        self.assertEqual(json.loads((out/'receipt.json').read_text()),{'observed':'finished execution'})
+        manifest=json.loads((out/'task-files-manifest.json').read_text())
+        self.assertFalse(manifest['complete_for_declared_file_scope'])
+        self.assertIn('TimeoutExpired',manifest['omitted'][0]['reason'])
 
 
 if __name__ == '__main__':unittest.main()

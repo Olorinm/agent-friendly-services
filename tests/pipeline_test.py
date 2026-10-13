@@ -88,7 +88,7 @@ class PipelineTests(unittest.TestCase):
         adapter = self.root / 'adapter.py';adapter.write_text(ADAPTER)
         settings = {'model':'fixture-model','reasoning_effort':'high','harness':{'name':'fixture','version':'1','mode':'noninteractive'},'seconds':60,
                     'commands':{op:[sys.executable,str(adapter),op,'{request}'] for op in ('start','status','collect','stop')}}
-        self.config = {'service':'fixture','route':'api','task_file':'tasks.md','task':'access','phase':'access','environment_id':'fixture-route',
+        self.config = {'trial_protocol':'afs-20261010','service':'fixture','route':'api','task_file':'tasks.md','task':'access','phase':'access','environment_id':'fixture-route',
                        'environment':'Synthetic test, no network or service access.',
                        'execution':{**settings,'runtime':'fixture-execution'},'grading':{**settings,'runtime':'fixture-grading'}}
         self.config_path = self.root / 'config.json'

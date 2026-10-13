@@ -6,7 +6,6 @@ from pathlib import Path
 import shutil
 import stat
 import sys
-import time
 
 
 def sha(path):

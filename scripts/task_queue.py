@@ -125,6 +125,8 @@ def submit(directory, spec_path):
     sealed = []
     for member in members:
         config = runs.read(Path(member['config']).resolve())
+        from access_readiness import PROTOCOL
+        config.setdefault('trial_protocol', PROTOCOL)
         for role in ('execution', 'grading'):
             if chatgpt_grader(config[role]):
                 if role != 'grading': raise ValueError('ChatGPT Codex adapter is grading-only')
