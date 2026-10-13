@@ -360,6 +360,115 @@ print(json.dumps({'type':'turn.completed','usage':usage}))
         with self.assertRaisesRegex(ValueError, 'private adapter'):
             recorder.record(self.run, self.review, dry_run=True)
 
+    def test_selected_business_csv_is_not_private_merely_because_it_was_captured(self):
+        payload = b'date,holiday\n2027-01-01,New Year\n'
+        artifact = self.run / 'execution/artifacts/uk_bank_holidays_2027_england_wales.csv'
+        artifact.parent.mkdir(parents=True)
+        artifact.write_bytes(payload)
+        for directory in ('execution/task-files', 'grading-input/execution/task-files',
+                          'grading/artifacts/execution/task-files'):
+            copy = self.run / directory / 'tmp/opencode/uk_holidays_2027_ew.csv'
+            copy.parent.mkdir(parents=True)
+            copy.write_bytes(payload)
+        unknown = self.run / 'execution/task-files/tmp/opencode/unreviewed.txt'
+        unknown.write_text('UNREVIEWED PRIVATE INPUT')
+        summary = self.run / 'grading/artifacts/evidence/verification.txt'
+        summary.parent.mkdir(parents=True)
+        summary.write_text('Verified the public holiday table against the official source.')
+        self.assessment['evidence'] = [{'path': str(artifact.relative_to(self.run))},
+                                       {'path': str(summary.relative_to(self.run))}]
+        self.save()
+        for private_review in (False, True):
+            result = recorder.record(self.run, self.review, dry_run=True, private_review=private_review)
+            self.assertEqual(len(result['evidence']), 2)
+        result = json.loads(recorder.record(self.run, self.review).read_text())
+        self.assertEqual((self.root / result['evidence'][0]['path']).read_bytes(), payload)
+        self.assertEqual(len(list((self.root / 'data/experiments/evidence/run-1').rglob('*.*'))), 2)
+        self.assertEqual(unknown.read_text(), 'UNREVIEWED PRIVATE INPUT')
+
+    def test_unclassified_task_capture_paths_are_still_private(self):
+        for directory in ('execution/task-files', 'grading-input/execution/task-files',
+                          'grading/artifacts/execution/task-files'):
+            with self.subTest(directory=directory):
+                source = self.run / directory / 'tmp/unknown.csv'
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text('unclassified material\n')
+                self.assessment['evidence'] = [{'path': str(source.relative_to(self.run))}]
+                self.save()
+                with self.assertRaisesRegex(ValueError, 'private adapter'):
+                    recorder.record(self.run, self.review, dry_run=True)
+        self.assertFalse((self.root / 'data/experiments/evidence').exists())
+
+    def test_private_logs_and_configurations_remain_private_after_renaming(self):
+        sources = (
+            'session.raw.jsonl', 'execution/session.json',
+            'execution/wire/request-1/request.json',
+            'grading/artifacts/execution/wire/request-1/response.body',
+            'execution/private_session/arbitrary.bin',
+            'execution/task-files/home/.local/share/opencode/storage/message/opaque',
+            'grading-input/execution/task-files/home/.config/opencode/opencode.json',
+            'grading/artifacts/execution/task-files/tmp/private_session/opaque',
+            'execution/task-files/home/.codex/auth.json',
+            'execution/task-files/tmp/.env',
+            'execution/task-files/tmp/controller.log',
+        )
+        copy = self.run / 'execution/artifacts/renamed-business.csv'
+        copy.parent.mkdir(parents=True)
+        for number, name in enumerate(sources):
+            with self.subTest(source=name):
+                source = self.run / name
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text(json.dumps({'PRIVATE_LOG_OR_CONFIG': number}))
+                copy.write_bytes(source.read_bytes())
+                for selected in (source, copy):
+                    self.assessment['evidence'] = [{'path': str(selected.relative_to(self.run))}]
+                    self.save()
+                    for private_review in (False, True):
+                        with self.assertRaisesRegex(ValueError, 'private adapter|raw session'):
+                            recorder.record(self.run, self.review, dry_run=True, private_review=private_review)
+        self.assertFalse((self.root / 'data/experiments/evidence').exists())
+
+    def test_private_previews_and_capture_metadata_copies_remain_forbidden(self):
+        sources = (
+            'execution/tool-records.json', 'grading-input/review-packet/tools/0001.json',
+            'grading/artifacts/review-packet/index.json',
+            'execution/task-files-manifest.json', 'grading-input/execution/retention-state.json',
+            'grading/artifacts/execution/retained-files.json', 'config.json',
+        )
+        copy = self.run / 'grading/artifacts/evidence/renamed.txt'
+        copy.parent.mkdir(parents=True)
+        for number, name in enumerate(sources):
+            with self.subTest(source=name):
+                source = self.run / name
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text(json.dumps({'PRIVATE_PREVIEW_OR_METADATA': number}))
+                copy.write_bytes(source.read_bytes())
+                for selected in (source, copy):
+                    self.assessment['evidence'] = [{'path': str(selected.relative_to(self.run))}]
+                    self.save()
+                    with self.assertRaisesRegex(ValueError, 'private adapter'):
+                        recorder.record(self.run, self.review, dry_run=True)
+        self.assertFalse((self.root / 'data/experiments/evidence').exists())
+
+    def test_business_capture_alias_still_requires_secret_redaction(self):
+        payload = b'id,value\n241383,test-secret-123456\n'
+        source = self.run / 'execution/artifacts/result.csv'
+        captured = self.run / 'execution/task-files/tmp/result.csv'
+        for path in (source, captured):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(payload)
+        (self.run / 'private-secrets.json').write_text(json.dumps(['241383', 'test-secret-123456']))
+        self.assessment['evidence'] = [{'path': str(source.relative_to(self.run))}]
+        self.save()
+        result = json.loads(recorder.record(self.run, self.review).read_text())
+        public = (self.root / result['evidence'][0]['path']).read_bytes()
+        self.assertNotIn(b'241383', public)
+        self.assertNotIn(b'test-secret-123456', public)
+        self.assertIn(b'[SERVICE_SECRET]', public)
+        self.assertEqual(source.read_bytes(), payload)
+        self.assertEqual(captured.read_bytes(), payload)
+        self.assertEqual(result['usage'], self.meta['usage'])
+
     def test_route_relabel_and_evidence_escape_rejected(self):
         self.save()
         with self.assertRaisesRegex(ValueError, 'relabel'):

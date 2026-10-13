@@ -141,13 +141,38 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         for source in json.loads((run_dir / 'usage.json').read_text()).get('sources', []):
             private_usage_files.add((run_dir / source['path']).resolve())
     private_usage_hashes = {sha(path) for path in private_usage_files if path.is_file()}
-    # Indexed tool records can contain commands, credentials, and private inputs.
-    # Protect their copies as well as the original raw-session sources.
-    private_packet_files = [run_dir / 'execution/tool-records.json']
-    private_packet_files += list((run_dir / 'grading-input/review-packet').rglob('*.json'))
-    private_packet_files += list((run_dir / 'execution/task-files').rglob('*'))
-    private_packet_files += list((run_dir / 'grading-input/execution/task-files').rglob('*'))
-    private_packet_files += [run_dir/'execution/task-files-manifest.json', run_dir/'execution/retention-state.json']
+    # The capture directories themselves are private, but capture location alone
+    # does not make a business artifact's identical bytes private everywhere.
+    # Only known logs/configuration/indexed material taint copies by their hash;
+    # other evidence still requires explicit external selection and redaction.
+    task_file_dirs = [run_dir / name for name in (
+        'execution/task-files', 'grading-input/execution/task-files',
+        'grading/artifacts/execution/task-files')]
+    packet_dirs = [run_dir / name for name in (
+        'grading-input/review-packet', 'grading/artifacts/review-packet')]
+    private_dirs = list(packet_dirs)
+    private_packet_files = []
+    for base in (run_dir, run_dir / 'execution', run_dir / 'grading',
+                 run_dir / 'grading-input/execution', run_dir / 'grading/artifacts',
+                 run_dir / 'grading/artifacts/execution'):
+        private_dirs += [base / 'wire', base / 'private_session']
+        private_packet_files += [base / name for name in (
+            'events.jsonl', 'session.json', 'session.raw.jsonl', 'stderr.log', 'export.stderr',
+            'usage.json', 'tool-records.json', 'task-files-manifest.json',
+            'retained-files.json', 'retention-state.json', 'config.json')]
+    for directory in private_dirs:
+        private_packet_files += list(directory.rglob('*'))
+    for directory in task_file_dirs:
+        for path in directory.rglob('*'):
+            parts = path.relative_to(directory).parts
+            if (any(part in ('.config', '.codex', '.private', 'private_session', 'wire') for part in parts)
+                    or any(parts[i:i+3] == ('.local', 'share', 'opencode') for i in range(len(parts)))
+                    or any(parts[i:i+2] == ('.cache', 'opencode') for i in range(len(parts)))
+                    or path.name in ('events.jsonl', 'session.json', 'session.raw.jsonl',
+                                     'usage.json', 'auth.json', 'credentials.json', 'config.json',
+                                     'opencode.json', '.env', 'browser.json')
+                    or path.name.startswith('private_') or path.suffix in ('.log', '.key', '.pem')):
+                private_packet_files.append(path)
     private_usage_hashes.update(sha(path) for path in private_packet_files if path.is_file())
     peer_dir = run_dir / 'grading-input/peer-results'
     private_peer_hashes = {sha(path) for path in peer_dir.rglob('*') if path.is_file()}
@@ -168,7 +193,9 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
             raise ValueError('Evidence path must be a file inside the run directory')
         if source == (run_dir / 'session.raw.jsonl').resolve():
             raise ValueError('Do not publish the raw session as evidence')
-        if source in private_usage_files or sha(source) in private_usage_hashes or source.name in ('events.jsonl', 'session.json'):
+        if (source in private_usage_files or sha(source) in private_usage_hashes
+                or source.name in ('events.jsonl', 'session.json')
+                or any(source.is_relative_to(directory.resolve()) for directory in task_file_dirs + private_dirs)):
             raise ValueError('Do not publish private adapter logs/usage sources or copies as evidence')
         if sha(source) in private_peer_hashes:
             # The target may independently produce the same answer as a peer.
