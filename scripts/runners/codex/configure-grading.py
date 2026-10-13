@@ -16,7 +16,7 @@ def configure(source, adapter, runtime, seconds=600):
         'seconds': seconds, 'billing_mode': 'chatgpt',
         'commands': {op: ['python3', path, '--config', str(Path(adapter).resolve()), op, '{request}']
                      for op in ('start', 'status', 'collect', 'stop')}}
-    config['trial_protocol'] = 'afs-20261012-codex-grading'
+    config['trial_protocol'] = 'afs-20261013'
     return config
 
 

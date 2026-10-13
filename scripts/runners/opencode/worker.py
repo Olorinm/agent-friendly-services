@@ -18,6 +18,8 @@ import time
 import tarfile
 from normalize import normalize
 from providers import DEFAULT_PROVIDER, opencode_config, profile
+from retained_state import restore as restore_baseline
+from capture_files import unpack as unpack_task_files
 
 ROOT=Path('/run/afs')
 def dump(p,x): p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
@@ -79,6 +81,21 @@ def collect_artifacts(workspace,private,out):
     dump(out/'artifact-omissions.json',omitted)
 
 
+def collect_task_files(home, private, out):
+    roots={'tmp':'/tmp','var-tmp':'/var/tmp','home':str(home)}
+    archive=private/'task-files.tar'
+    try:
+        with archive.open('wb') as target:
+            subprocess.run(['python3','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
+        unpack_task_files(archive,out)
+    except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as error:
+        # Collection gaps cannot erase the finished execution or its usage.
+        dump(out/'task-files-manifest.json',{'schema_version':1,'scope':'Current task temp/home files; failed or partial collection',
+             'complete_for_declared_file_scope':False,'files':[],
+             'omitted':[{'reason':'Private file capture failed: '+type(error).__name__}],
+             'notice':'Do not infer unsaved files, service failure or complete HTTP evidence. Inspect preserved partial copies and original archive.'})
+
+
 def main():
     os.umask(0o077)
     # One service/route container retains state: never let two tasks clear it
@@ -94,7 +111,13 @@ def main():
     archive_session_artifacts((Path('/workspace'),Path('/home/node'),Path('/tmp'),Path('/var/tmp')),
                               ROOT/'archive',Path('/home/node/service-tools'))
     retained=request.get('retained_paths')
-    if retained is not None:
+    if request.get('trial_protocol') == 'afs-20261013':
+        if request.get('retention_policy') != 'sealed-baseline':
+            raise ValueError('New protocol requires sealed retention')
+        retention=restore_baseline(Path('/home/node/service-tools'), ROOT/'retained-baseline',
+                                  ROOT/'archive'/'service-tools'/run, request['retention_baseline_sha256'], owner=(1000,1000))
+        dump(out/'retention-state.json',retention)
+    elif retained is not None:
         archive_service_artifacts(Path('/home/node/service-tools'),
             ROOT/'archive'/'service-tools'/run,retained,request.get('retained_children',{}))
     shutil.copytree(ROOT/'inputs'/run,workspace);home.mkdir()
@@ -160,6 +183,8 @@ def main():
     # Persist actual process status and usage before collecting untrusted files.
     # Collection errors must not erase the already observed runtime receipt.
     collect_artifacts(workspace,private,out)
+    if request.get('trial_protocol') == 'afs-20261013':
+        collect_task_files(home,private,out)
     # Preserve state for inspection without exposing it to the next task or copying service keys to grading.
     dump(out/'retained-files.json',[str(p.relative_to('/home/node/service-tools')) for p in Path('/home/node/service-tools').rglob('*') if p.is_file()])
     if (out/'artifacts/assessment.json').is_file():

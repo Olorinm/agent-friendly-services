@@ -118,6 +118,53 @@ downloads must not survive through a shared temporary directory. An installation
 continues in the same service container. Stop containers after the batch; keeping
 the image avoids reinstalling OpenCode next time.
 
+### Answer-free state reuse (afs-20261013)
+
+New configurations default to `trial_protocol: "afs-20261013"`; explicitly declare it in batch handoffs. Existing frozen
+configurations keep their previous behavior and results. After `provision.py up`
+on a fresh, unused container, the controller prepares and reviews only generic
+dependencies, connection settings and authorized credentials under
+`/home/node/service-tools`, then runs `provision.py --config <private.json> seal-state`.
+Sealing is refused once any model request file has been allocated. An empty
+reviewed baseline is valid for anonymous services. New preparation requires a
+fresh container, never sealing the output of a previous task.
+
+The root-only baseline is hashed before dispatch. Before every new task the
+worker archives the entire mutable service-tools directory and restores exactly
+the sealed bytes. A model-written `verified_examples`, answer, script or
+credential cannot survive merely by being stored in an allowed config filename.
+Only the sealed dependency installation is reused; installations or identities
+created during a task are not silently promoted into the baseline. Disclose
+preprovided preparation; if a new account is necessary, prepare and authorize it
+separately before a new cohort. Baseline bytes and credentials are not sent to
+the grader; its private retention receipt contains hashes and file names only.
+
+Access grading separately records `access_readiness` for actual service call,
+authorization, reusable state and isolation, each with evidence. Business tasks
+can proceed after a validated new-protocol access review has all four facets
+ready, even when its final explanatory report was inaccurate. The original
+`not_completed` verdict stays unchanged. Invalid runs, unknown facets,
+unreusable credentials, unfinished grading or modified assessments never grant
+admission. Legacy cohorts still require a completed access verdict; do not
+relabel historical reviews to unlock them.
+
+After execution, the worker privately collects remaining regular files from
+the current `/tmp`, `/var/tmp` and task home as executor uid 1000, with original
+paths, byte hashes and explicit omissions. Links and special files are omitted;
+files beyond 16 MiB, a 64 MiB total or 1024 files are omitted, never silently
+truncated. Collection has a 25-second bound. The grading packet indexes these
+copies under `execution/task-files/`. This is filesystem evidence, not a promise
+that every HTTP response was saved: deleted files or responses only streamed
+through a filter may still be unavailable. Preserve that gap. A collection gap
+which prevents judging accuracy, without proven user-result error, is an
+invalid run with `materials`, not a demonstrated service failure. Raw copies
+and manifests cannot be published directly; review a minimal redacted extract.
+
+Private queue `api_cost_summary` excludes preflight-only entries with no model
+dispatch, separates incomplete captures from uncertain starts, and keeps
+verified partial bounds distinct from complete estimates and held reservations.
+ChatGPT grading-account consumption remains outside API spending summaries.
+
 Use these command arrays for each pipeline role, replacing the operation:
 
 ```json
@@ -256,7 +303,7 @@ model-cost cap and total session concurrency:
 
 ```sh
 python3 scripts/task_queue.py init /absolute/private/queue \
-  --pool afs-johor --max-concurrency 8 \
+  --pool afs-test-pool --max-concurrency 8 \
   --budget-usd AMOUNT --expires-at TIMESTAMP_WITH_TIMEZONE
 python3 scripts/task_queue.py submit /absolute/private/queue --spec /absolute/private/job.json
 python3 scripts/task_queue.py run /absolute/private/queue

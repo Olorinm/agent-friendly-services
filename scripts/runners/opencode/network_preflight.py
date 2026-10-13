@@ -40,7 +40,7 @@ def check(plan, resolve=socket.getaddrinfo, connect=http.client.HTTPSConnection)
             row['addresses'] = sorted({a[4][0] for a in resolve(url.hostname, url.port or 443, type=socket.SOCK_STREAM)})
             conn = connect(url.hostname, url.port or 443, timeout=5, context=ssl.create_default_context())
             conn.request(row['method'], (url.path or '/') + ('?' + url.query if url.query else ''),
-                         headers={'User-Agent': 'agent-friendly-services-preflight/1'})
+                         headers={'User-Agent': 'agent-friendly-services-preflight/1 (+https://github.com/Olorinm/agent-friendly-services)'})
             response = conn.getresponse()
             row.update(http_status=response.status, passed=response.status in target.get('accepted_statuses', [200]))
             if not row['passed']:

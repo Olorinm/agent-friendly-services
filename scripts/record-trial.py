@@ -145,6 +145,9 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
     # Protect their copies as well as the original raw-session sources.
     private_packet_files = [run_dir / 'execution/tool-records.json']
     private_packet_files += list((run_dir / 'grading-input/review-packet').rglob('*.json'))
+    private_packet_files += list((run_dir / 'execution/task-files').rglob('*'))
+    private_packet_files += list((run_dir / 'grading-input/execution/task-files').rglob('*'))
+    private_packet_files += [run_dir/'execution/task-files-manifest.json', run_dir/'execution/retention-state.json']
     private_usage_hashes.update(sha(path) for path in private_packet_files if path.is_file())
     peer_dir = run_dir / 'grading-input/peer-results'
     private_peer_hashes = {sha(path) for path in peer_dir.rglob('*') if path.is_file()}
@@ -225,11 +228,14 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         if 'harness' in result['review']['runtime']:
             result['review']['runtime']['harness'] = {key: observed_grader['harness'][key] for key in
                 ('name', 'version', 'mode') if key in observed_grader['harness']}
-    if 'outcome' in review or meta.get('trial_protocol') == 'afs-20261010':
+    if 'outcome' in review or meta.get('trial_protocol') in ('afs-20261010', 'afs-20261013'):
         from outcome import validate as validate_outcome
         result['outcome'] = validate_outcome(review.get('outcome'))
         if status == 'completed' and result['outcome']['user_delivery'] != 'completed':
             raise ValueError('Completed task requires completed user delivery')
+    if meta.get('phase') == 'access' and meta.get('trial_protocol') == 'afs-20261013':
+        from access_readiness import validate as validate_readiness
+        validate_readiness(review.get('access_readiness'))
     for key in ('trial_protocol', 'controller_limits', 'runner_source_sha256', 'runtime_image_id'):
         if meta.get(key) is not None: result['environment'][key] = meta[key]
     if peer_context.exists():

@@ -56,7 +56,7 @@ def build(directory):
     reference = grade / 'reference.json'
     if reference.is_file():
         index['references'].append({**file_info(reference), 'record_path': 'grading/artifacts/reference.json'})
-    for name in ('receipt.json', 'measured.json', 'model-cost.json', 'retained-files.json', 'controller-limits.json', 'controller-stop.json'):
+    for name in ('receipt.json', 'measured.json', 'model-cost.json', 'retained-files.json', 'controller-limits.json', 'controller-stop.json', 'retention-state.json', 'task-files-manifest.json'):
         path = output / name
         if path.is_file():
             index['execution'][name] = read(path)
@@ -71,6 +71,14 @@ def build(directory):
         if path.is_file():
             index['artifacts'].append({**file_info(path, directory),
                                        'record_path': str(path.relative_to(directory))})
+    index['task_files'] = []
+    for path in sorted((output / 'task-files').rglob('*')):
+        if path.is_symlink():
+            raise ValueError('Collected task files must not contain symlinks')
+        if path.is_file():
+            index['task_files'].append({**file_info(path, directory), 'record_path': str(path.relative_to(directory))})
+    index['task_file_capture_notice'] = ('临时目录和本题 home 的文件副本在 execution/task-files/；原路径映射及遗漏在 task-files-manifest.json。'
+                                        '这只是文件采集范围，不保证覆盖所有 HTTP 响应。不得把已打印摘要当作完整原响应。')
     records = output / 'tool-records.json'
     if records.is_file():
         value = read(records)
@@ -93,11 +101,18 @@ def build(directory):
                                    'output': preview(state.get('output', state.get('error')), 1800)})
     write(packet / 'index.json', index)
     # No passing verdict, billing fact, or evidence selection is prefilled.
-    write(grade / 'assessment.template.json', {
+    template = {
         'status': None, 'reason': '', 'reviewer': '', 'checks': [], 'evidence': [],
         'outcome': {'service_execution': None, 'user_delivery': None, 'blocking_factors': [], 'evidence': ''},
         'human_interventions': None, 'service_cost_usd': None,
-        'service_cost': {'kind': 'unknown', 'sources': [], 'note': ''}})
+        'service_cost': {'kind': 'unknown', 'sources': [], 'note': ''}}
+    config_path = directory/'config.json'
+    if config_path.exists():
+        config = read(config_path)
+        if config.get('phase') == 'access' and config.get('trial_protocol') == 'afs-20261013':
+            from access_readiness import FACETS
+            template['access_readiness'] = {name: {'status': None, 'evidence': ''} for name in FACETS}
+    write(grade / 'assessment.template.json', template)
     (grade / 'evidence').mkdir()
     return index
 
