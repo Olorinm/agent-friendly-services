@@ -20,6 +20,7 @@ import time
 
 import pipeline as runs
 import comparison_group as groups
+import route_cooldown as cooldowns
 
 DONE = {'reviewed', 'recorded', 'needs_attention', 'stopped', 'preflight_blocked', 'blocked'}
 STOP_REQUESTED = False
@@ -79,7 +80,8 @@ def inputs(config):
     if config.get('attachments'):
         files.extend(Path(config['attachments']).resolve().rglob('*'))
     if any(p.is_symlink() for p in files): raise ValueError('Handoff inputs cannot contain symlinks')
-    return {'task': task, 'route': route, 'files': {str(p): runs.digest(p) for p in files if p.is_file()}}
+    return {'task': task, 'route': route, 'files': {str(p): runs.digest(p) for p in files if p.is_file()},
+            'quota_binding': cooldowns.binding(config, route)}
 
 
 def adapter_config(settings):
@@ -354,6 +356,39 @@ def advance(directory):
         return _advance(directory)
 
 
+def cooldown_members(state):
+    result = []
+    for job, path, config, phase in entries(state):
+        member = next(m for m in job['handoff']['members'] if Path(m['directory']) == path)
+        result.append((path, config, member['inputs']['route'], phase))
+    return result
+
+
+def controller_cooldown(directory, proof_path=None, *, observation_id=None, source_sha256=None, reason=None):
+    """Explicit private controller import/release; never read executor answers."""
+    directory = Path(directory).resolve()
+    with lock(directory/'.gate.lock', blocking=True):
+        state = runs.read(directory/'state.json')
+        if proof_path is not None:
+            file = Path(proof_path)
+            if file.is_symlink() or file.stat().st_mode & 0o077:
+                raise ValueError('Controller observation must be a private non-symlink file')
+            proof = runs.read(file); path = Path(proof['run']).resolve()
+            matches = [(cfg, route, phase) for p, cfg, route, phase in cooldown_members(state) if p == path]
+            if len(matches) != 1: raise ValueError('Observation run must be a prepared member owned by this queue')
+            config, route, phase = matches[0]
+            if phase['phase'] in ('prepared', 'execution_starting', 'execution_running', 'execution_collecting'):
+                raise ValueError('Controller import requires a collected execution, not a live actor statement')
+            runs.verify(path)
+            item = cooldowns.import_verified(state, path, config, route, proof)
+            result = item['observation_id']
+        else:
+            cooldowns.release(state, observation_id, source_sha256, reason, runs.now())
+            result = observation_id
+        runs.write(directory/'state.json', state)
+        return result
+
+
 def _advance(directory):
     directory = Path(directory).resolve();policy = runs.read(directory/'policy.json');state = runs.read(directory/'state.json')
     if state['phase'] == 'halted': raise ValueError('Queue halted; reconcile saved state before resuming')
@@ -363,6 +398,20 @@ def _advance(directory):
     with groups.locks([*paths, *group_paths]):
         reconcile(state)
         state['dispatch_holds'] = {}
+        def quota_hold(path):
+            # Collected sources are cached by immutable file fingerprint. This
+            # also sees a member collected earlier in the same group advance.
+            cooldowns.refresh(state, cooldown_members(state))
+            job, _, cfg, _ = next(item for item in entries(state) if item[1] == path)
+            member = next(m for m in job['handoff']['members'] if Path(m['directory']) == path)
+            return cooldowns.hold(state, cooldowns.binding(cfg, member['inputs']['route']), time.time())
+        def execution_defer(path):
+            observation = quota_hold(path)
+            if not observation: return None
+            seconds = runs.read(path/'config.json')['execution']['seconds']
+            if observation['until'] is None or observation['until'] + seconds + 20 >= stamp(policy['expires_at']):
+                return observation
+            return None
         def active():
             current = entries(state)
             if any(s['phase'] == 'stopped' and s.get('stopped_role') and not s.get('stop_confirmed') for _, _, _, s in current):
@@ -378,6 +427,13 @@ def _advance(directory):
                 return False
             if STOP_REQUESTED: return hold('Controller shutdown requested')
             if time.time() + settings['seconds'] + 20 >= deadline: return hold('Insufficient remaining time for the full frozen budget')
+            if role == 'execution':
+                observation = quota_hold(path)
+                if observation:
+                    # Persist the private observation before refusing the new
+                    # dispatch; grading and collection never consult this gate.
+                    runs.write(directory/'state.json', state)
+                    return hold(observation['reason'])
             job = next(j for j in state['jobs'].values() if any(Path(m['directory']) == path for m in j['handoff']['members']))
             if role == 'grading' and job['handoff'].get('grading_gate'):
                 gate_file = directory/'inbox'/job['handoff']['id']/'grading-ready.json'
@@ -432,7 +488,8 @@ def _advance(directory):
                     # The guard checks physical identity. Group's existing runtime
                     # check still protects repeated logical IDs inside the group.
                     result = groups.advance(Path(job['handoff']['directory']),
-                                            max_active=policy['max_concurrency']-len(outside), dispatch_guard=guard)
+                                            max_active=policy['max_concurrency']-len(outside), dispatch_guard=guard,
+                                            execution_defer=execution_defer)
                     job['phase'] = result['phase']
                 else:
                     path = next(iter(own));s = runs.read(path/'state.json');cfg = runs.read(path/'config.json')
@@ -508,15 +565,25 @@ def run_loop(directory, once=False):
 def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('init', 'submit', 'release-grading', 'run', 'status'))
+    parser.add_argument('action', choices=('init', 'submit', 'release-grading', 'observe-cooldown', 'release-cooldown', 'run', 'status'))
     parser.add_argument('directory', type=Path)
     parser.add_argument('--spec', type=Path);parser.add_argument('--max-concurrency', type=int)
     parser.add_argument('--budget-usd', type=float);parser.add_argument('--expires-at');parser.add_argument('--pool')
     parser.add_argument('--job');parser.add_argument('--proofs', type=Path)
+    parser.add_argument('--observation', type=Path);parser.add_argument('--observation-id')
+    parser.add_argument('--source-sha256');parser.add_argument('--reason')
     parser.add_argument('--once', action='store_true');args = parser.parse_args()
     if args.action == 'init': print(init(args.directory, max_concurrency=args.max_concurrency, budget_usd=args.budget_usd, expires_at=args.expires_at, pool=args.pool));return
     if args.action == 'submit': print(submit(args.directory, args.spec));return
     if args.action == 'release-grading': print(json.dumps(release_grading(args.directory, args.job, args.proofs)));return
+    if args.action == 'observe-cooldown':
+        if args.observation is None: parser.error('--observation is required')
+        print(controller_cooldown(args.directory, args.observation));return
+    if args.action == 'release-cooldown':
+        if not all((args.observation_id, args.source_sha256, args.reason)):
+            parser.error('--observation-id, --source-sha256 and --reason are required')
+        print(controller_cooldown(args.directory, observation_id=args.observation_id,
+              source_sha256=args.source_sha256, reason=args.reason));return
     if args.action == 'status': print(json.dumps(runs.read(args.directory/'state.json')));return
     # All queues for this operator's host use the same pool lock location.
     pool = hashlib.sha256(runs.read(args.directory/'policy.json')['pool'].encode()).hexdigest()
