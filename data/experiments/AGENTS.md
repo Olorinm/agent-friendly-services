@@ -164,7 +164,7 @@ python3 scripts/pipeline.py stop-group data/experiments/results/<group-id>
 | `phase` | `access` 或 `business` |
 | `environment_id` | 本批次服务 × 方式的持久容器标识 |
 | `environment` | 明确的可用工具、指定方式、授权、凭据位置、预算及资源边界；直接生成 ENVIRONMENT.md |
-| `depends_on` | 业务任务依赖的上一运行绝对目录；必须已验收通过，服务、方式和环境标识一致 |
+| `depends_on` | 业务任务依赖的接入运行绝对目录；旧协议要求整体验收通过；`afs-20261013` 要求独立验收的调用、授权、可复用基线和隔离均 ready，服务、方式和环境标识一致 |
 | `attachments`、`reference` | 可选：原始附件来源目录、私有验收参考 JSON 文件的绝对路径；分开传递。附件内容复制到执行目录 `materials/`，参考只进入验收目录 |
 | `preparation_note` | 已提供账号等准备条件，不能冒充 Agent 注册成果 |
 | `execution`、`grading` | 各自的模型、思考等级、执行器版本、运行环境、预算和适配命令 |

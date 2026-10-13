@@ -3,7 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 
-WORKER_FILES = ('worker.py', 'normalize.py', 'capture-proxy.py', 'providers.py', 'request_limits.py')
+WORKER_FILES = ('worker.py', 'normalize.py', 'capture-proxy.py', 'providers.py', 'request_limits.py', 'retained_state.py', 'capture_files.py')
 
 # Read only the named support files, never model.key or service credentials.
 PROBE = '''import hashlib,json,sys

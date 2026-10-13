@@ -56,6 +56,10 @@ elif a.operation=='start':
     if 'deadline_epoch' in c and c['deadline_epoch'] < __import__('time').time()+r['seconds']:
         raise ValueError('Adapter deadline cannot accommodate the frozen role budget; no run allocated')
     r['runtime_image_id']=docker('inspect','--format','{{.Image}}',container).stdout.decode().strip()
+    if r.get('trial_protocol') == 'afs-20261013':
+        baseline=json.loads(exec_root('python3','/run/afs/retained_state.py','verify').stdout)
+        r['retention_policy']='sealed-baseline'
+        r['retention_baseline_sha256']=baseline['baseline_sha256']
     for key in ('max_model_requests','deadline_epoch'):
         if key in c:r[key]=min(r.get(key,c[key]),c[key])
     r['retained_paths']=c['retained_paths'][r['runtime']]

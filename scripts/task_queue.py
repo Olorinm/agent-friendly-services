@@ -246,6 +246,28 @@ def held(state):
     return sum(row['held_usd'] for row in state['ledger'].values())
 
 
+def cost_summary(state):
+    summary = {'complete_capture_estimate_usd': 0, 'partial_capture_lower_bound_usd': 0,
+               'incomplete_captures': 0, 'unresolved_starts': 0, 'preflight_no_model': 0,
+               'notice': 'Frozen API rate estimates, not payment. Reservations are not spending; partial bounds are not complete averages.'}
+    for key, row in state['ledger'].items():
+        if row.get('billing_mode') == 'chatgpt': continue
+        name, role = key.rsplit(':', 1);path = Path(name)
+        receipt = (path/role/'receipt.json').is_file()
+        if role == 'execution' and not receipt and (path/'state.json').is_file() and runs.read(path/'state.json')['phase'] == 'preflight_blocked':
+            summary['preflight_no_model'] += 1;continue
+        cost = row.get('measured_cost') or {}
+        amount = cost.get('amount_usd')
+        if type(amount) in (int, float) and math.isfinite(amount) and amount >= 0:
+            summary['complete_capture_estimate_usd'] += amount
+        else:
+            bound = cost.get('lower_bound_usd')
+            if type(bound) in (int, float) and math.isfinite(bound) and bound >= 0:
+                summary['partial_capture_lower_bound_usd'] += bound
+            summary['incomplete_captures' if receipt else 'unresolved_starts'] += 1
+    return summary
+
+
 def reconcile(state):
     for _, path, config, phase in entries(state):
         for role in ('execution', 'grading'):
@@ -289,9 +311,20 @@ def prepare_jobs(directory, state, policy):
         if STOP_REQUESTED: break
         if job['prepared'] or job['phase'] in DONE: continue
         handoff = job['handoff'];deps = [state['jobs'].get(key) for key in handoff['depends_on']]
-        if any(d and d['phase'] in DONE and d['phase'] != 'reviewed' for d in deps):
+        def dependency_ready(dependency):
+            if dependency['phase'] not in DONE:
+                return None
+            from access_readiness import PROTOCOL, decision
+            if all(m['config'].get('trial_protocol') == PROTOCOL for m in handoff['members']):
+                try:
+                    return all(decision(m['directory'], PROTOCOL)[0] for m in dependency['handoff']['members'])
+                except (OSError, ValueError, KeyError):
+                    return False  # Hold these children, not unrelated jobs.
+            return dependency['phase'] == 'reviewed'
+        readiness = [dependency_ready(d) if d else None for d in deps]
+        if any(ok is False for ok in readiness):
             job.update(phase='blocked', reason='Prerequisite did not pass; no service failure inferred');continue
-        if any(not d or d['phase'] != 'reviewed' for d in deps): continue
+        if any(ok is None for ok in readiness): continue
         if time.time() >= stamp(policy['expires_at']): continue
         # Persist before preparation: a crash leaves a concrete inspection point,
         # never permission to overwrite a partially prepared run.
@@ -417,7 +450,7 @@ def _advance(directory):
         reconcile(state)
     state.update(phase='expired' if time.time() >= stamp(policy['expires_at']) else
                  ('running' if any(j['phase'] not in DONE for j in state['jobs'].values()) else 'idle'),
-                 held_usd=held(state), updated_at=runs.now())
+                 held_usd=held(state), api_cost_summary=cost_summary(state), updated_at=runs.now())
     runs.write(directory/'state.json', state)
     return state
 

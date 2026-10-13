@@ -18,6 +18,8 @@ import time
 import tarfile
 from normalize import normalize
 from providers import DEFAULT_PROVIDER, opencode_config, profile
+from retained_state import restore as restore_baseline
+from capture_files import unpack as unpack_task_files
 
 ROOT=Path('/run/afs')
 def dump(p,x): p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
@@ -94,7 +96,13 @@ def main():
     archive_session_artifacts((Path('/workspace'),Path('/home/node'),Path('/tmp'),Path('/var/tmp')),
                               ROOT/'archive',Path('/home/node/service-tools'))
     retained=request.get('retained_paths')
-    if retained is not None:
+    if request.get('trial_protocol') == 'afs-20261013':
+        if request.get('retention_policy') != 'sealed-baseline':
+            raise ValueError('New protocol requires sealed retention')
+        retention=restore_baseline(Path('/home/node/service-tools'), ROOT/'retained-baseline',
+                                  ROOT/'archive'/'service-tools'/run, request['retention_baseline_sha256'], owner=(1000,1000))
+        dump(out/'retention-state.json',retention)
+    elif retained is not None:
         archive_service_artifacts(Path('/home/node/service-tools'),
             ROOT/'archive'/'service-tools'/run,retained,request.get('retained_children',{}))
     shutil.copytree(ROOT/'inputs'/run,workspace);home.mkdir()
@@ -160,6 +168,12 @@ def main():
     # Persist actual process status and usage before collecting untrusted files.
     # Collection errors must not erase the already observed runtime receipt.
     collect_artifacts(workspace,private,out)
+    if request.get('trial_protocol') == 'afs-20261013':
+        roots={'tmp':'/tmp','var-tmp':'/var/tmp','home':str(home)}
+        archive=private/'task-files.tar'
+        with archive.open('wb') as target:
+            subprocess.run(['python3','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
+        unpack_task_files(archive,out)
     # Preserve state for inspection without exposing it to the next task or copying service keys to grading.
     dump(out/'retained-files.json',[str(p.relative_to('/home/node/service-tools')) for p in Path('/home/node/service-tools').rglob('*') if p.is_file()])
     if (out/'artifacts/assessment.json').is_file():

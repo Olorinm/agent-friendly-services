@@ -21,6 +21,7 @@ from adapter_usage import read_usage
 from service_cost import service_charge
 from grading_packet import build as build_grading_packet, resolve_evidence_paths
 from grading_privacy import protect_grading
+from access_readiness import PROTOCOL as HANDOFF_PROTOCOL, decision as access_decision
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -116,8 +117,9 @@ def prepare(config_path, directory):
     if config['phase'] == 'business':
         previous = Path(config['depends_on']).resolve()
         prev_config, prev_state = read(previous / 'config.json'), read(previous / 'state.json')
-        if prev_state['phase'] not in ('reviewed', 'recorded') or read(previous / 'grading/assessment.json')['status'] != 'completed':
-            raise ValueError('Prerequisite must have passed independent grading')
+        ready, reason = access_decision(previous, config['trial_protocol'])
+        if not ready:
+            raise ValueError('Prerequisite not ready: ' + reason)
         if (any(prev_config[k] != config[k] for k in ('service', 'route', 'environment_id'))
                 or prev_config['execution']['runtime'] != config['execution']['runtime']):
             raise ValueError('Business task must reuse prerequisite service, route and environment')
@@ -133,6 +135,10 @@ def prepare(config_path, directory):
     context['ENVIRONMENT.md'] = config['environment'] + '\n指定入口：' + route['entry_url'] + '\n'
     context['ENVIRONMENT.md'] += ('测试协议：' + config['trial_protocol'] + '。接近时间或模型请求额度的末段时，运行器会提醒保存交付物并收尾；'
                                  '提醒不增加用户任务要求。预算、费用保护与用户完成要求分开记录。\n')
+    if config['trial_protocol'] == HANDOFF_PROTOCOL:
+        context['ENVIRONMENT.md'] += ('每题开始前，运行器恢复控制器事前封存的通用依赖、认证与配置基线。'
+                                     '本题写入的配置、验证示例和答案均不会自动带入下一题；新认证需要总控另行复核和准备。'
+                                     '临时文件会按实际采集范围留存私有副本，采集缺口由验收单独记录。\n')
     for name, content in context.items():
         (inputs / name).write_text(content)
     shutil.copyfile(ROOT / 'scripts/roles/execution/AGENTS.md', inputs / 'AGENTS.md')
@@ -201,12 +207,14 @@ def invoke(directory, role, operation, settings, request):
 
 
 def stage_request(directory, role, settings):
+    config = read(directory/'config.json')
     return {'run_id': directory.name, 'role': role, 'model': settings['model'],
             'reasoning_effort': settings['reasoning_effort'], 'harness': settings['harness'],
             'seconds': settings['seconds'], 'runtime': settings['runtime'],
             'input': str(directory / ('frozen/execution' if role == 'execution' else 'grading-input')),
             'output': str(directory / ('execution' if role == 'execution' else 'grading')),
             'fresh_session': True,
+            'trial_protocol': config.get('trial_protocol'),
             **{k: settings[k] for k in ('closure_fraction', 'max_model_requests', 'deadline_epoch', 'billing_mode') if k in settings}}
 
 
@@ -295,7 +303,7 @@ def finish_execution(directory, config, receipt, elapsed):
                                     '你新建的简短脱敏证据请放当前目录 evidence/，条目路径使用 grading/artifacts/evidence/文件名。\n'
                                     '禁止将 events.jsonl、session.json、wire/ 或任何原始会话与模型用量源文件选为公开证据。'
                                     '引用最少业务结果即可；如使用日志，摘录必要业务字段到简短证据文件，删除账号、资源标识和密钥。\n'
-                                    'review-packet/、peer-results/ 和 tool-records.json 是私有辅助材料，不能作为公开证据；必要时另写简短核验摘要。\n'
+                                    'review-packet/、peer-results/、tool-records.json、task-files/ 及采集和配置清单是私有辅助材料，不能作为公开证据；必要时另写简短核验摘要。\n'
                                     'confirmed_free 必须给出真实免费规则来源与本次适用证据；执行者自称没有付款不证明免费。无法确认则 unknown。\n')
 
 

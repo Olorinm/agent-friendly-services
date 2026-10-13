@@ -68,6 +68,11 @@ def run(config, action):
         return {runtime: 'stopped' if name in existing else 'absent'
                 for runtime, name in config['containers'].items()}
 
+    if action == 'seal-state':
+        # Explicit operator review, before ANY model task has used this runtime.
+        return {runtime: json.loads(docker('exec','-u','0',name,'python3','/run/afs/retained_state.py','seal').stdout)
+                for runtime,name in config['containers'].items()}
+
     key = None
     if action == 'up':
         # Only read an operator-selected file; never accept a literal key argument.
@@ -108,7 +113,7 @@ def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, required=True)
-    parser.add_argument('action', choices=('build', 'up', 'stop'))
+    parser.add_argument('action', choices=('build', 'up', 'stop', 'seal-state'))
     args = parser.parse_args()
     try:
         result = run(load(args.config), args.action)
