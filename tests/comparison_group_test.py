@@ -115,6 +115,37 @@ class ComparisonGroupTests(unittest.TestCase):
         self.assertEqual([(m['service'],m['route']) for m in manifest['members'][:2]], [('fixture-a','api'),('fixture-a','cli')])
         self.assertEqual(self.finish_group()['phase'],'reviewed')
 
+    def test_quota_deferred_slot_does_not_block_other_independent_reviews(self):
+        self.prepare_group()
+        held = self.members[0]
+        original_hashes = pipeline.read(held / 'frozen-hashes.json')
+        def defer(path):
+            return {'reason': 'Observed quota cooldown exceeds this authorized window',
+                    'observation_ids': ['synthetic-quota-observation']} if path == held else None
+        for _ in range(16):
+            state = groups.advance(self.group, execution_defer=defer)
+            if state['phase'] == 'needs_attention':
+                break
+        self.assertEqual(state['phase'], 'needs_attention')
+        self.assertEqual(state['errors'], {})
+        self.assertTrue(state['deferred'][held.name]['not_dispatched'])
+        self.assertEqual(pipeline.read(held / 'state.json')['phase'], 'prepared')
+        self.assertFalse((held / 'execution/started').exists())
+        self.assertFalse((held / 'grading/started').exists())
+        self.assertEqual(pipeline.read(held / 'frozen-hashes.json'), original_hashes)
+        for path in self.members[1:]:
+            self.assertEqual(pipeline.read(path / 'state.json')['phase'], 'reviewed')
+            peers = pipeline.read(path / 'grading/seen-peers.json')
+            withheld = next(m for m in peers['members'] if m['run_id'] == held.name)
+            self.assertTrue(withheld['operational_hold']['not_dispatched'])
+            self.assertEqual(withheld['files'], [])
+            self.assertNotIn('assessment', json.dumps(peers))
+        hashes = pipeline.frozen_files(self.group / 'peer-results')
+        # A late cooldown release cannot insert another answer into old peers.
+        groups.advance(self.group, execution_defer=lambda path: None)
+        self.assertFalse((held / 'execution/started').exists())
+        self.assertEqual(pipeline.frozen_files(self.group / 'peer-results'), hashes)
+
     def test_preflight_block_is_not_graded_as_a_service_failure(self):
         self.prepare_group(blocked='fixture-a')
         self.assertEqual(self.finish_group()['phase'],'needs_attention')

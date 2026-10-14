@@ -145,7 +145,11 @@ def seal(directory, manifest, state):
         status = runs.read(path / 'state.json')
         entry = {k: member[k] for k in ('run_id', 'service', 'route')}
         entry.update(controller_phase=status['phase'], files=[], missing_evidence=[])
-        if member['run_id'] in state['errors']:
+        if member['run_id'] in state.get('deferred', {}):
+            entry['operational_hold'] = {'not_dispatched': True,
+                                         'reason': state['deferred'][member['run_id']]['reason']}
+            entry['collection_note'] = 'Quota observation held this unstarted slot; no execution or business verdict. A later cohort cannot change this frozen peer snapshot.'
+        elif member['run_id'] in state['errors']:
             entry['collection_note'] = 'Controller could not complete this run; no peer answer supplied.'
         elif status['phase'] == 'execution_collected':
             meta = runs.read(path / 'run.json')
@@ -221,7 +225,7 @@ def stop_member(path):
             runs.write(path / 'state.json', {**runs.read(path / 'state.json'), 'collection_error': str(error)})
 
 
-def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None):
+def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None, execution_defer=None):
     if max_active is not None and (type(max_active) is not int or max_active < 0):
         raise ValueError('Available group capacity must be a nonnegative integer')
     directory = Path(directory).resolve()
@@ -231,6 +235,7 @@ def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None
     if state['phase'] == 'grading':
         verify_snapshot(directory, state)
     errors = state['errors']
+    deferred = state.setdefault('deferred', {})
     role = 'execution' if state['phase'] == 'executing' else 'grading'
     ready = 'prepared' if role == 'execution' else 'execution_collected'
     # Poll existing sessions before starting more; stages within this group never overlap.
@@ -239,6 +244,18 @@ def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None
     for member in members:
         path, run_id = Path(member['directory']), member['run_id']
         current = runs.read(path / 'state.json')
+        if run_id in deferred:
+            if current['phase'] != 'prepared':
+                raise ValueError('Deferred comparison slot changed; inspect before resuming')
+            continue
+        if role == 'execution' and current['phase'] == 'prepared' and execution_defer is not None:
+            reason = execution_defer(path)
+            if reason is not None:
+                if not isinstance(reason, dict) or not isinstance(reason.get('reason'), str) or not reason['reason'].strip():
+                    raise ValueError('Execution deferral needs an explicit controller hold reason')
+                deferred[run_id] = {**reason, 'at': runs.now(), 'not_dispatched': True}
+                runs.write(directory / 'state.json', state)
+                continue
         if run_id in errors or current['phase'] not in (ready, role + '_running', role + '_collecting', role + '_starting'):
             continue
         running = sum(active(runs.read(Path(m['directory']) / 'state.json')) for m in members)
@@ -269,14 +286,14 @@ def advance(directory, *, busy_runtimes=(), max_active=None, dispatch_guard=None
                 errors.setdefault(m['run_id'], {})['stop_error'] = str(exc)
         state['phase'] = 'needs_attention'
     elif state['phase'] == 'executing' and all(
-            s['phase'] in ('execution_collected', 'stopped', 'preflight_blocked') or key in errors for key, s in states.items()):
+            s['phase'] in ('execution_collected', 'stopped', 'preflight_blocked') or key in errors or key in deferred for key, s in states.items()):
         if any(s['phase'] == 'preflight_blocked' for s in states.values()):
             for key, s in states.items():
                 if s['phase'] == 'preflight_blocked': errors[key] = {'phase': 'preflight_blocked', 'error': 'No model dispatched; inspect environment'}
         seal(directory, manifest, state)
     elif state['phase'] == 'grading' and all(
-            s['phase'] in ('reviewed', 'recorded', 'stopped') or key in errors for key, s in states.items()):
-        state['phase'] = 'needs_attention' if errors or any(s['phase'] == 'stopped' for s in states.values()) else 'reviewed'
+            s['phase'] in ('reviewed', 'recorded', 'stopped') or key in errors or key in deferred for key, s in states.items()):
+        state['phase'] = 'needs_attention' if errors or deferred or any(s['phase'] == 'stopped' for s in states.values()) else 'reviewed'
     state['members'] = {m['run_id']: runs.read(Path(m['directory']) / 'state.json')['phase'] for m in members}
     runs.write(directory / 'state.json', state)
     return state

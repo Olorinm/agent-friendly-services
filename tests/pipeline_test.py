@@ -91,6 +91,13 @@ class PipelineTests(unittest.TestCase):
         self.config = {'trial_protocol':'afs-20261010','service':'fixture','route':'api','task_file':'tasks.md','task':'access','phase':'access','environment_id':'fixture-route',
                        'environment':'Synthetic test, no network or service access.',
                        'execution':{**settings,'runtime':'fixture-execution'},'grading':{**settings,'runtime':'fixture-grading'}}
+        reference = self.root / 'fixture-qualification.json'
+        pipeline.write(reference, {'service_fee_qualification': {
+            name: {'service_fee': {'status': 'documented_free_within_scope',
+                                  'scope': 'Synthetic offline fixture only',
+                                  'source_urls': ['https://example.com/pricing'], 'amount': 0}}
+            for name in ('fixture', 'fixture-a', 'fixture-b', 'fixture-c')}})
+        self.config['reference'] = str(reference)
         self.config_path = self.root / 'config.json'
         self.config_path.write_text(json.dumps(self.config))
         self.directory = self.root / 'data/experiments/results/run-001'

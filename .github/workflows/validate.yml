@@ -24,6 +24,9 @@ jobs:
 
       - run: npm test
 
+      - name: Check private runtime orchestration with offline fixtures
+        run: python3 -m unittest discover -s tests -p '*_test.py'
+
       - name: Block manual edits to generated files
         run: |
           git fetch origin "$GITHUB_BASE_REF" --depth=1

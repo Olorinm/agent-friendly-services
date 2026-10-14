@@ -294,9 +294,118 @@ an explicit readiness decision, not an automatic check of research quality.
 The queue freezes the selected task/route, reference, materials, role files and
 price snapshot. Unrelated catalog additions do not replace a submitted task.
 It prepares business jobs only after their access dependencies pass independent
-grading. Independent jobs overlap; each comparison still freezes all member
-answers before launching its separate graders. Publication remains a separate
+grading. Independent jobs overlap; each comparison freezes its available member
+answers and explicitly deferred, unstarted slots before launching its separate graders. Publication remains a separate
 reviewed `pipeline.py record` operation and does not block the execution queue.
+
+### Resource admission before freezing
+
+New `pipeline.py prepare` calls check preparation evidence before creating a run
+or starting a model. Under the execution role's confirmed-free boundary, the
+assigned service needs `documented_free_within_scope`, a nonempty applicable
+scope and source URLs. Supply these facts in the assigned service's
+`reference.service_fee_qualification`, or in the private run config:
+
+```json
+{
+  "resource_authorization": {
+    "service": "example-service",
+    "route": "example-route",
+    "fee_policy": "confirmed_free_only",
+    "service_fee": {
+      "status": "documented_free_within_scope",
+      "scope": "Replace with the verified free rule and this task's applicable scope",
+      "source_urls": ["https://api.example.com/pricing"],
+      "amount": null
+    }
+  }
+}
+```
+
+Preparation must verify that the source is official and the rule actually
+applies to this route, account, quota and task. URL syntax alone does not prove
+that. Missing qualification, explicit unknown price, contradictory free amount
+or an exact `reference.cohort_disclosure.held_routes["service/route"]` entry holds
+preparation. Another service's hold or narrative wording is not a matching hold.
+The queue records a preparation block, with no business failure or model dispatch.
+
+The private `frozen/admission.json` binds task, execution-role and reference
+hashes; it is not given to the actor or grader. Qualification is not an observed
+charge and does not set the actual fee to zero. Existing frozen runs retain
+their inputs and assessments. Explicit `admission_mode: "legacy_unchecked"` is
+only available for older protocols, records that admission was not confirmed,
+and cannot override a known unknown fee or held route; the current protocol
+cannot use it to bypass missing qualification.
+
+### Quota cooldown before dispatch
+
+The queue pauses new executions after a collected, source-bound quota signal.
+Collection and independent grading continue. This is an operational hold, not a
+service failure or a change to an assessment. A numeric or HTTP-date
+`Retry-After` is anchored to the captured call's end time; scanning the same
+source again does not extend it. A quota response without a usable deadline
+stays held until the controller investigates and explicitly releases it.
+
+Declare the applicable account and HTTP endpoints in private execution settings:
+
+```json
+{
+  "execution": {
+    "credential_scope": "example-account-scope",
+    "quota_endpoints": ["https://api.example.com/v2/search"]
+  }
+}
+```
+
+The scope identifier is a label, never a key. Matching uses the assigned service,
+route and scope, plus exact HTTPS origin/path; query values are omitted from
+endpoint matching. Without an explicit scope, the environment ID is used.
+Alternatively, `quota_resource_locks` can name a subset of declared execution
+`resource_locks` for the same scope. Grader locks cannot supply this binding.
+Without explicit endpoints, only the route's exact `entry_url` is watched.
+Different routes are not assumed to share a quota bucket. Account and endpoint
+bindings are recorded in the preparation handoff; changing them requires a new
+handoff, rather than altering a frozen run.
+
+Automatic detection deliberately supports a small command subset: a literal
+single-target `curl` with response headers in stdout, or controller-collected
+header/body files bound to their original paths and hashes. It rejects redirects,
+loops, shell substitutions, proxy/Host overrides and fabricated status summaries.
+Response-file paths must be unique to that captured call; an end-of-run snapshot
+cannot establish the earlier bytes or time of an overwritten file. A failed curl
+can still supply actual captured headers and a fixed call time; an error message
+alone cannot. SDK calls and more complex scripts require controller inspection.
+Existing commands combining `curl` with `echo`/`wc`, loops, or reused files are
+not all automatically recognized; use the verified private import below after
+examining their sources. Captured tool
+output is not an independent network tap, so these signals remain private
+operational observations awaiting verification. They never become public facts
+merely because the queue parsed them.
+
+For a verified observation from an unsupported command, prepare a mode-0600
+private JSON proof and import it with:
+
+```sh
+python3 scripts/task_queue.py observe-cooldown /absolute/private/queue \
+  --observation /absolute/private/verified-observation.json
+python3 scripts/task_queue.py release-cooldown /absolute/private/queue \
+  --observation-id OBSERVATION_ID --source-sha256 CAPTURE_SHA256 \
+  --reason "Verified reason for releasing this exact observation"
+```
+
+The proof must bind the queue-owned collected run, frozen binding hash, exact
+captured call number and event locator, original source hash and observation
+time, endpoint and quota signal, and the original capture manifest with the
+evidence file/hash. See `route_cooldown.import_verified` for the checked fields.
+An executor's answer or an unbound summary cannot supply this proof. A release
+names the exact observation and source hash, with a retained controller reason.
+
+A short cooldown waits within the original authorized window. If an unknown or
+long cooldown cannot fit the remaining frozen execution budget, a comparison
+group seals that unstarted slot as deferred and grades the available answers.
+The deferred slot has no execution, grade or business-failure result. Its group
+finishes with `needs_attention`; a later release cannot insert an answer into
+that sealed peer snapshot. A later attempt needs a newly declared cohort.
 
 Initialize a **new authorized window**, with an explicit pool identity, deadline,
 model-cost cap and total session concurrency:

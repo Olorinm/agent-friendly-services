@@ -22,6 +22,7 @@ from service_cost import service_charge
 from grading_packet import build as build_grading_packet, resolve_evidence_paths
 from grading_privacy import protect_grading
 from access_readiness import PROTOCOL as HANDOFF_PROTOCOL, decision as access_decision
+from admission import plan as admission_plan
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -126,6 +127,11 @@ def prepare(config_path, directory):
     parser = module('task_inputs', 'codex-service-trial.py')
     task, _ = parser.select_task((ROOT / config['task_file']).resolve(), config['task'])
     route = parser.select_route(read(ROOT / 'generated/catalog.json'), config['service'], config['route'])
+    reference_bytes = Path(config['reference']).read_bytes() if config.get('reference') else None
+    reference = json.loads(reference_bytes) if reference_bytes is not None else None
+    role_bytes = (ROOT / 'scripts/roles/execution/AGENTS.md').read_bytes()
+    admission = admission_plan(
+        config, task, reference, reference_bytes, role_bytes, HANDOFF_PROTOCOL)
     directory.mkdir(parents=True, exist_ok=False)
     directory.chmod(0o700)
     frozen = directory / 'frozen'
@@ -141,7 +147,7 @@ def prepare(config_path, directory):
                                      '临时文件会按实际采集范围留存私有副本，采集缺口由验收单独记录。\n')
     for name, content in context.items():
         (inputs / name).write_text(content)
-    shutil.copyfile(ROOT / 'scripts/roles/execution/AGENTS.md', inputs / 'AGENTS.md')
+    (inputs / 'AGENTS.md').write_bytes(role_bytes)
     (inputs / 'prompt.txt').write_text(parser.natural_prompt(task, route['entry_url'], [], config['execution']['seconds']))
     # Attachments are execution inputs only. Reference answers use a separate source.
     if config.get('attachments'):
@@ -155,8 +161,10 @@ def prepare(config_path, directory):
     grade.mkdir()
     shutil.copyfile(ROOT / 'scripts/roles/grading/AGENTS.md', grade / 'AGENTS.md')
     write(grade / 'task.json', task)
-    if config.get('reference'):
-        shutil.copyfile(config['reference'], grade / 'reference.json')
+    if reference_bytes is not None:
+        (grade / 'reference.json').write_bytes(reference_bytes)
+    # These preparation records stay outside both independent role inputs.
+    write(frozen / 'admission.json', admission)
     shutil.copyfile(ROOT / 'data/pricing/litellm.json', frozen / 'pricing.json')
     if secret_bytes is not None:
         # Neither file belongs to the executor or grader input directories.
