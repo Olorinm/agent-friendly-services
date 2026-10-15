@@ -97,6 +97,13 @@ The collector runs with isolated Python imports as uid 1000; a grader-writable
 file cannot supply its baseline. The index and its byte-identical copies must
 not be selected as public evidence.
 
+Input transfer materializes host hard links as independent regular files. After
+Docker imports them, the controller validates the whole tree, sets its owner to
+root, removes special permission bits and group/other write permission, and
+checks that file bytes did not change. This happens before the worker starts;
+links, special files or failed normalization prevent model allocation. Imported
+host ownership is never accepted as the collector's trusted baseline.
+
 ChatGPT account credits and allocated subscription cost are **unknown, not $0**.
 This adapter's queue reservation is zero *DeepSeek API dollars* because it uses
 the selected ChatGPT login. That is not a claim that grading is free. Account
