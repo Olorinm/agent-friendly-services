@@ -2,7 +2,7 @@ id: open-meteo
 name: Open-Meteo
 category: weather-calendar
 homepage: https://open-meteo.com/
-summary: Global weather forecast API with a keyless non-commercial free tier and attributed open data.
+summary: Global weather forecasts and historical reanalysis through keyless non-commercial free APIs with attributed open data.
 submitted_by: community
 tags:
   - weather
@@ -19,9 +19,13 @@ catalog:
       url: https://open-meteo.com/en/docs
       checked_on: '2026-10-08'
       kind: official_docs
+    archive-docs:
+      url: https://open-meteo.com/en/docs/historical-weather-api
+      checked_on: '2026-10-15'
+      kind: official_docs
     pricing:
       url: https://open-meteo.com/en/pricing
-      checked_on: '2026-10-08'
+      checked_on: '2026-10-15'
       kind: official_site
     terms:
       url: https://open-meteo.com/en/terms
@@ -83,3 +87,54 @@ catalog:
         measured observations. Default model selection can share upstream models with other services,
         including MET Norway and ECMWF; service alternatives are not necessarily independent forecasts.
         Free service has no uptime guarantee. Sources establish documentation only, not tested access.
+    - id: archive-api
+      interface: api
+      maintainer: official
+      entry_url: https://archive-api.open-meteo.com/v1/archive
+      docs: https://open-meteo.com/en/docs/historical-weather-api
+      evidence: [archive-docs, pricing]
+      availability:
+        value: self_serve
+        evidence: [archive-docs, pricing]
+      personal_access:
+        value: documented
+        evidence: [archive-docs, pricing]
+        notes: Free open-access Historical Weather API for non-commercial use, including evaluation and prototyping.
+      auth:
+        value: none
+        evidence: [archive-docs, pricing]
+        notes: The public archive endpoint does not require a key; commercial customer endpoints and plans are separate.
+      requirements:
+        platform_account:
+          value: not_required
+          evidence: [archive-docs, pricing]
+        payment_method:
+          value: not_required
+          evidence: [archive-docs, pricing]
+      costs:
+        - kind: usage
+          amount: 0
+          unit: money
+          currency: USD
+          per: eligible free historical API call
+          scope: >-
+            Non-commercial open-access endpoint within 600 calls/minute, 5000/hour,
+            10000/day and 300000/month. More than ten variables or more than two weeks
+            for one location may count as multiple fractional API calls. Historical
+            Weather API is included in Free/Open-Access; paid commercial historical
+            access requires the Professional plan or higher.
+          evidence: [pricing]
+      notes: >-
+        Documented HTTP GET historical data by WGS84 location, start/end dates, variables
+        and timezone. ERA5 covers 1940 onward, ERA5-Land 1950 onward, and ECMWF IFS 2017
+        onward, with dataset-specific availability and delays. Daily fields include
+        temperature_2m_max, temperature_2m_min and precipitation_sum with selectable units;
+        precipitation availability varies by model. These are gridded reanalysis or
+        historical model products, not direct weather-station observations or a promise
+        of a future forecast. Record the selected dataset and returned units/timezone.
+        Data attribution, licence link and change disclosure are required under CC BY 4.0;
+        that data licence does not grant commercial use of the free hosted API. Shared
+        limits and no-uptime-guarantee conditions apply; do not switch to a paid customer
+        endpoint to bypass them. Documentation establishes this route's scope, not live
+        access, task completion, or the remaining quota. Forecast-route results do not
+        establish archive-route readiness.
