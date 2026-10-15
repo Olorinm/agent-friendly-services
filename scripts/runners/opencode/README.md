@@ -489,6 +489,20 @@ not a provider bill; service fees and server fees remain separate. The queue
 shows holds for insufficient budget, time or occupied shared resources. It
 requires enough time for the full frozen role budget before starting it.
 
+When the user explicitly authorizes a new queue without an API-dollar cap, use
+`init ... --no-budget-cap` instead of `--budget-usd`. These flags are mutually
+exclusive. The new private policy records `"budget_mode": "unbounded"` and
+`"budget_usd": null`; a legacy policy with no mode still requires its original
+positive cap, and a bare null never grants unbounded authorization. This flag
+only creates a new queue; it does not upgrade an existing queue's authorization.
+
+Unbounded mode removes only the queue's aggregate dollar dispatch gate. It still
+records per-session reservations, actual estimates and partial usage bounds;
+unknown costs remain unknown. The explicit absolute deadline, concurrency,
+isolation, service cooldowns and each task's frozen time/request limits remain
+in force. No subscriptions, infrastructure expansion or service purchases are
+authorized by this flag.
+
 Independent grading can instead use [cloud Codex Sol/high](../codex/README.md)
 through the selected ChatGPT login. Its account usage is tracked separately;
 it does not reserve DeepSeek API dollars or pretend that account usage is free.

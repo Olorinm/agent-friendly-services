@@ -48,15 +48,29 @@ def stamp(value):
     return result.timestamp()
 
 
-def init(directory, *, max_concurrency, budget_usd, expires_at, pool):
+def budget_cap(policy):
+    """Null is unbounded only with an explicit policy mode; old caps stay caps."""
+    mode = policy.get('budget_mode', 'capped')
+    amount = policy.get('budget_usd')
+    if mode == 'unbounded':
+        if 'budget_usd' not in policy or amount is not None: raise ValueError('Unbounded budget must use budget_usd:null')
+        return None
+    if mode != 'capped' or type(amount) not in (int, float) or not math.isfinite(amount) or amount <= 0:
+        raise ValueError('Explicit positive model budget or explicit unbounded mode required')
+    return amount
+
+
+def init(directory, *, max_concurrency, budget_usd=None, expires_at, pool, no_budget_cap=False):
     if type(max_concurrency) is not int or max_concurrency < 1: raise ValueError('Positive concurrency required')
-    if type(budget_usd) not in (int, float) or not math.isfinite(budget_usd) or budget_usd <= 0:
-        raise ValueError('Explicit positive model budget required')
+    if type(no_budget_cap) is not bool or no_budget_cap and budget_usd is not None:
+        raise ValueError('Choose a model budget or no_budget_cap, not both')
+    policy = {'max_concurrency': max_concurrency, 'budget_usd': budget_usd,
+              'budget_mode': 'unbounded' if no_budget_cap else 'capped', 'expires_at': expires_at, 'pool': pool}
+    budget_cap(policy)
     stamp(expires_at)
     if not isinstance(pool, str) or not pool.strip(): raise ValueError('Explicit pool identity required')
     directory = Path(directory).resolve();directory.mkdir(mode=0o700, parents=True, exist_ok=False)
-    runs.write(directory/'policy.json', {'max_concurrency': max_concurrency, 'budget_usd': budget_usd,
-                                       'expires_at': expires_at, 'pool': pool})
+    runs.write(directory/'policy.json', policy)
     runs.write(directory/'state.json', {'phase': 'idle', 'jobs': {}, 'ledger': {}, 'created_at': runs.now()})
     (directory/'inbox').mkdir(mode=0o700)
     return directory
@@ -391,6 +405,7 @@ def controller_cooldown(directory, proof_path=None, *, observation_id=None, sour
 
 def _advance(directory):
     directory = Path(directory).resolve();policy = runs.read(directory/'policy.json');state = runs.read(directory/'state.json')
+    cap = budget_cap(policy)
     if state['phase'] == 'halted': raise ValueError('Queue halted; reconcile saved state before resuming')
     prepare_jobs(directory, state, policy)
     paths = [p for _, p, _, _ in entries(state)]
@@ -460,7 +475,7 @@ def _advance(directory):
                         return hold('Shared account/resource occupied')
             if key not in state['ledger']:
                 amount = ceiling(path, role)
-                if held(state) + amount > policy['budget_usd']: return hold('Session ceiling exceeds remaining budget after in-flight/unknown reservations')
+                if cap is not None and held(state) + amount > cap: return hold('Session ceiling exceeds remaining budget after in-flight/unknown reservations')
                 state['ledger'][key] = {'ceiling_usd': amount, 'held_usd': amount, 'reserved_at': runs.now()}
                 if chatgpt_grader(settings):
                     state['ledger'][key].update(billing_mode='chatgpt', account_cost_usd=None, account_credits=None,
@@ -568,12 +583,17 @@ def main():
     parser.add_argument('action', choices=('init', 'submit', 'release-grading', 'observe-cooldown', 'release-cooldown', 'run', 'status'))
     parser.add_argument('directory', type=Path)
     parser.add_argument('--spec', type=Path);parser.add_argument('--max-concurrency', type=int)
-    parser.add_argument('--budget-usd', type=float);parser.add_argument('--expires-at');parser.add_argument('--pool')
+    budget = parser.add_mutually_exclusive_group()
+    budget.add_argument('--budget-usd', type=float)
+    budget.add_argument('--no-budget-cap', action='store_true', help='Explicitly authorize no queue API-dollar cap; deadline and per-run limits still apply')
+    parser.add_argument('--expires-at');parser.add_argument('--pool')
     parser.add_argument('--job');parser.add_argument('--proofs', type=Path)
     parser.add_argument('--observation', type=Path);parser.add_argument('--observation-id')
     parser.add_argument('--source-sha256');parser.add_argument('--reason')
     parser.add_argument('--once', action='store_true');args = parser.parse_args()
-    if args.action == 'init': print(init(args.directory, max_concurrency=args.max_concurrency, budget_usd=args.budget_usd, expires_at=args.expires_at, pool=args.pool));return
+    if args.no_budget_cap and args.action != 'init': parser.error('--no-budget-cap only applies when creating a new queue')
+    if args.action == 'init': print(init(args.directory, max_concurrency=args.max_concurrency, budget_usd=args.budget_usd,
+        no_budget_cap=args.no_budget_cap, expires_at=args.expires_at, pool=args.pool));return
     if args.action == 'submit': print(submit(args.directory, args.spec));return
     if args.action == 'release-grading': print(json.dumps(release_grading(args.directory, args.job, args.proofs)));return
     if args.action == 'observe-cooldown':
