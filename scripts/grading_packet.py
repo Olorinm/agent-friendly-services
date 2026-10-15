@@ -48,7 +48,9 @@ def build(directory):
                           'new_evidence_directory': 'evidence/',
                           'new_evidence_record_prefix': 'grading/artifacts/evidence/',
                           'answer_record_path': 'execution/answer.md',
-                          'private_only': ['review-packet/', 'peer-results/', 'execution/tool-records.json', 'execution/events.jsonl', 'execution/session.json', 'execution/wire/']}}
+                          'private_only': ['review-packet/', 'peer-results/', 'credential-facts.json',
+                                           'privacy-redactions.json', 'artifact-input-index.json',
+                                           'execution/tool-records.json', 'execution/events.jsonl', 'execution/session.json', 'execution/wire/']}}
     for name in ('input.md', 'ENVIRONMENT.md', 'prompt.txt'):
         path = grade / 'frozen-execution' / name
         if path.is_file():

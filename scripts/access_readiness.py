@@ -33,6 +33,11 @@ def decision(directory, protocol):
     expected = state.get('record_hashes', {}).get('grading/assessment.json')
     if expected != hashlib.sha256(review_path.read_bytes()).hexdigest():
         return False, 'Validated access assessment changed or has no review hash'
+    if review.get('status') == 'invalid_run':
+        # A separate, hash-bound independent review may repair a material gap;
+        # it never rewrites the original task verdict or accepts operator prose.
+        from supplemental_access_review import decision as supplemental_decision
+        return supplemental_decision(directory)
     if review.get('status') not in ('completed', 'not_completed'):
         return False, 'Invalid or unknown access run cannot authorize business tasks'
     readiness = validate(review.get('access_readiness'))

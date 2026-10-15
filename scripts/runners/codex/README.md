@@ -86,6 +86,17 @@ bound. Ambiguous or adjusted counters do not establish that bound. Artifact and
 rollout reads use the model user's privileges; collection never follows artifact
 links into controller credentials.
 
+Artifact collection compares each workspace file's bytes and mode with the
+controller-owned original input snapshot. Only new or changed files are copied
+back; unchanged inputs remain in their original private packet. The private
+`artifact-input-index.json` records source hashes, retained originals, changes,
+deletions, links and omissions. Modified inputs and newly written evidence remain
+captured, and events, usage and the raw rollout are collected separately.
+This is a delta capture with an explicit index, not another full input copy.
+The collector runs with isolated Python imports as uid 1000; a grader-writable
+file cannot supply its baseline. The index and its byte-identical copies must
+not be selected as public evidence.
+
 ChatGPT account credits and allocated subscription cost are **unknown, not $0**.
 This adapter's queue reservation is zero *DeepSeek API dollars* because it uses
 the selected ChatGPT login. That is not a claim that grading is free. Account

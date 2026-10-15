@@ -3,6 +3,7 @@ from pathlib import Path
 import subprocess
 import sys
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import pipeline_test as fixtures
@@ -76,6 +77,24 @@ class QueueTests(unittest.TestCase):
         runs.write(self.queue/'policy.json', policy); state = self.advance()
         self.assertEqual(state['phase'], 'expired'); self.assertTrue(runs.read(path/'state.json')['stop_confirmed'])
         self.assertTrue((path/'execution/model-cost.json').exists()); self.assertFalse((path/'grading/started').exists())
+
+    def test_low_storage_pauses_new_work_without_charging_or_failing_service(self):
+        self.init(cap=None,no_budget_cap=True);path=self.submit('storage-held')
+        with patch.object(queue.shutil,'disk_usage',return_value=SimpleNamespace(free=0)):
+            state=self.advance()
+        self.assertFalse(path.exists());self.assertEqual(state['ledger'],{})
+        self.assertEqual(state['jobs']['storage-held']['phase'],'waiting')
+        self.assertIn('controller_storage',state['dispatch_holds'])
+        self.advance();self.assertTrue((path/'execution/started').exists())
+
+    def test_low_storage_does_not_block_collection_of_active_session(self):
+        self.init();path=self.submit('storage-collect');self.advance()
+        with patch.object(queue.shutil,'disk_usage',return_value=SimpleNamespace(free=0)):
+            self.advance();state=self.advance()
+        self.assertTrue((path/'execution/receipt.json').exists())
+        self.assertFalse((path/'grading/started').exists())
+        self.assertEqual(state['jobs']['storage-collect']['phase'],'execution_collected')
+        self.advance();self.assertTrue((path/'grading/started').exists())
 
     def test_cli_unbounded_init_and_mutually_exclusive_budget_flags(self):
         target = self.root/'cli-unbounded'

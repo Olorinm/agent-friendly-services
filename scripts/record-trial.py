@@ -150,7 +150,7 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         'grading/artifacts/execution/task-files')]
     packet_dirs = [run_dir / name for name in (
         'grading-input/review-packet', 'grading/artifacts/review-packet')]
-    private_dirs = list(packet_dirs)
+    private_dirs = [*packet_dirs, run_dir/'supplemental-access']
     private_packet_files = []
     for base in (run_dir, run_dir / 'execution', run_dir / 'grading',
                  run_dir / 'grading-input/execution', run_dir / 'grading/artifacts',
@@ -159,7 +159,10 @@ def record(run_dir, review_path, route_id=None, task_file=None, task_version=Non
         private_packet_files += [base / name for name in (
             'events.jsonl', 'session.json', 'session.raw.jsonl', 'stderr.log', 'export.stderr',
             'usage.json', 'tool-records.json', 'task-files-manifest.json',
-            'retained-files.json', 'retention-state.json', 'config.json')]
+            'retained-files.json', 'retention-state.json', 'config.json',
+            'credential-facts.json', 'privacy-redactions.json', 'artifact-input-index.json')]
+    private_packet_files += [run_dir/'grading-input/credential-facts.json',
+                             run_dir/'grading-input/privacy-redactions.json']
     for directory in private_dirs:
         private_packet_files += list(directory.rglob('*'))
     for directory in task_file_dirs:

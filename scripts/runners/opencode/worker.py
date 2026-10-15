@@ -86,7 +86,7 @@ def collect_task_files(home, private, out):
     archive=private/'task-files.tar'
     try:
         with archive.open('wb') as target:
-            subprocess.run(['python3','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
+            subprocess.run(['python3','-I','-c',(ROOT/'capture_files.py').read_text(),json.dumps(roots)],stdout=target,preexec_fn=identity,check=True,timeout=25)
         unpack_task_files(archive,out)
     except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as error:
         # Collection gaps cannot erase the finished execution or its usage.

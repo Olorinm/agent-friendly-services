@@ -434,6 +434,9 @@ print(json.dumps({'type':'turn.completed','usage':usage}))
             'grading/artifacts/review-packet/index.json',
             'execution/task-files-manifest.json', 'grading-input/execution/retention-state.json',
             'grading/artifacts/execution/retained-files.json', 'config.json',
+            'grading-input/credential-facts.json', 'grading-input/privacy-redactions.json',
+            'grading/artifacts/credential-facts.json', 'grading/artifact-input-index.json',
+            'supplemental-access/active.json', 'supplemental-access/reviews/fixture/accepted.json',
         )
         copy = self.run / 'grading/artifacts/evidence/renamed.txt'
         copy.parent.mkdir(parents=True)
