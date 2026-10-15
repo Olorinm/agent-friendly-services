@@ -1,6 +1,9 @@
 import copy
 from pathlib import Path
+import subprocess
+import sys
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import pipeline_test as fixtures
@@ -11,10 +14,10 @@ import task_queue as queue
 class QueueTests(unittest.TestCase):
     setUp = fixtures.PipelineTests.setUp
 
-    def init(self, cap=10, concurrency=2):
+    def init(self, cap=10, concurrency=2, no_budget_cap=False):
         self.queue = self.root/'queue'
         queue.init(self.queue, max_concurrency=concurrency, budget_usd=cap,
-                   expires_at='2099-01-01T00:00:00Z', pool='fixture-no-network')
+                   expires_at='2099-01-01T00:00:00Z', pool='fixture-no-network', no_budget_cap=no_budget_cap)
 
     def submit(self, identity, deps=(), business=False, preflight_ready=True, grading_gate=False):
         cfg = copy.deepcopy(self.config)
@@ -39,6 +42,68 @@ class QueueTests(unittest.TestCase):
     def advance(self):
         with patch.object(queue, 'ceiling', return_value=1):
             return queue.advance(self.queue)
+
+    def test_unbounded_budget_is_explicit_and_legacy_null_is_not_authorization(self):
+        self.init(cap=None, no_budget_cap=True)
+        policy = runs.read(self.queue/'policy.json')
+        self.assertEqual(policy['budget_mode'], 'unbounded'); self.assertIsNone(policy['budget_usd'])
+        self.assertIsNone(queue.budget_cap(policy))
+        self.assertEqual(queue.budget_cap({'budget_usd': 1.5}), 1.5)
+        for invalid in ({'budget_usd': None}, {'budget_mode': 'unbounded'}, {'budget_mode': 'unbounded', 'budget_usd': 100}, {'budget_usd': 0}):
+            with self.subTest(policy=invalid), self.assertRaises(ValueError): queue.budget_cap(invalid)
+        with self.assertRaises(ValueError):
+            queue.init(self.root/'ambiguous', max_concurrency=2, budget_usd=100, no_budget_cap=True,
+                       expires_at='2099-01-01T00:00:00Z', pool='fixture-no-network')
+        self.assertFalse((self.root/'ambiguous').exists())
+
+    def test_unbounded_dispatch_keeps_unknown_cost_and_in_flight_accounting(self):
+        self.init(cap=None, no_budget_cap=True, concurrency=1)
+        first = self.submit('partial-unbounded')
+        adapter = self.root/'adapter.py'; adapter.write_text(adapter.read_text().replace("'complete':True", "'complete':False"))
+        self.advance()
+        self.config['execution']['runtime'] = 'second-execution'; self.config['grading']['runtime'] = 'second-grading'
+        second = self.submit('next-unbounded')
+        for _ in range(8): state = self.advance()
+        self.assertTrue((first/'grading/started').exists()); self.assertTrue((second/'execution/started').exists())
+        row = state['ledger'][str(first)+':execution']
+        self.assertEqual(row['held_usd'], 1); self.assertIsNone(row['measured_cost']['amount_usd'])
+        self.assertGreater(row['measured_cost']['lower_bound_usd'], 0)
+        self.assertGreater(state['api_cost_summary']['incomplete_captures'], 0)
+        self.assertEqual(runs.read(first/'config.json')['execution']['max_model_requests'], 25)
+
+    def test_unbounded_queue_still_enforces_absolute_deadline(self):
+        self.init(cap=None, no_budget_cap=True); path = self.submit('unbounded-deadline'); self.advance()
+        policy = runs.read(self.queue/'policy.json'); policy['expires_at'] = '2000-01-01T00:00:00Z'
+        runs.write(self.queue/'policy.json', policy); state = self.advance()
+        self.assertEqual(state['phase'], 'expired'); self.assertTrue(runs.read(path/'state.json')['stop_confirmed'])
+        self.assertTrue((path/'execution/model-cost.json').exists()); self.assertFalse((path/'grading/started').exists())
+
+    def test_low_storage_pauses_new_work_without_charging_or_failing_service(self):
+        self.init(cap=None,no_budget_cap=True);path=self.submit('storage-held')
+        with patch.object(queue.shutil,'disk_usage',return_value=SimpleNamespace(free=0)):
+            state=self.advance()
+        self.assertFalse(path.exists());self.assertEqual(state['ledger'],{})
+        self.assertEqual(state['jobs']['storage-held']['phase'],'waiting')
+        self.assertIn('controller_storage',state['dispatch_holds'])
+        self.advance();self.assertTrue((path/'execution/started').exists())
+
+    def test_low_storage_does_not_block_collection_of_active_session(self):
+        self.init();path=self.submit('storage-collect');self.advance()
+        with patch.object(queue.shutil,'disk_usage',return_value=SimpleNamespace(free=0)):
+            self.advance();state=self.advance()
+        self.assertTrue((path/'execution/receipt.json').exists())
+        self.assertFalse((path/'grading/started').exists())
+        self.assertEqual(state['jobs']['storage-collect']['phase'],'execution_collected')
+        self.advance();self.assertTrue((path/'grading/started').exists())
+
+    def test_cli_unbounded_init_and_mutually_exclusive_budget_flags(self):
+        target = self.root/'cli-unbounded'
+        argv = [sys.executable, str(fixtures.ROOT/'scripts/task_queue.py'), 'init', str(target), '--max-concurrency', '2',
+                '--no-budget-cap', '--expires-at', '2099-01-01T00:00:00Z', '--pool', 'fixture-no-network']
+        subprocess.run(argv, check=True, capture_output=True, text=True)
+        self.assertEqual(runs.read(target/'policy.json')['budget_mode'], 'unbounded')
+        result = subprocess.run([*argv, '--budget-usd', '100'], capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0); self.assertIn('not allowed', result.stderr)
 
     def test_dynamic_admission_dependencies_and_recoverable_no_duplicate_dispatch(self):
         self.init(concurrency=1)

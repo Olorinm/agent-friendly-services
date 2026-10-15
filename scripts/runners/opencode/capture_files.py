@@ -9,6 +9,10 @@ import sys
 import tarfile
 
 DEFAULT_LIMITS = {'file_bytes': 16*1024*1024, 'total_bytes': 64*1024*1024, 'files': 1024}
+# Reserved harness/package cache locations only. Do not exclude similarly named
+# task files in /tmp, user-installed dependencies, configuration or session data.
+HOME_CACHE_DIRECTORIES = {('.config', 'opencode', 'node_modules'), ('.npm', '_cacache')}
+HOME_CACHE_FILES = {('.cache', 'opencode', 'models.json')}
 
 
 def open_regular(root, parts):
@@ -28,7 +32,8 @@ def open_regular(root, parts):
 def archive(roots, stream, limits=None):
     limits = limits or DEFAULT_LIMITS
     manifest = {'schema_version': 1, 'scope': 'Regular files remaining in the current task temp/home directories, not a full HTTP capture',
-                'files': [], 'omitted': [], 'limits': limits}
+                'files': [], 'omitted': [], 'limits': limits,
+                'cache_policy': 'Reserved harness caches in the home root are omitted; configuration, installation logs and session data remain in scope.'}
     total = 0
     with tarfile.open(fileobj=stream, mode='w|') as tar:
         for label, value in roots.items():
@@ -45,8 +50,13 @@ def archive(roots, stream, limits=None):
                     path = Path(parent)/name
                     if path.is_symlink():
                         dirs.remove(name);manifest['omitted'].append({'original_path': str(path), 'reason': 'Directory link omitted'})
+                    elif label == 'home' and path.relative_to(root).parts in HOME_CACHE_DIRECTORIES:
+                        dirs.remove(name);manifest['omitted'].append({'original_path': str(path), 'reason': 'Reserved harness/package cache directory omitted; contents not enumerated'})
                 for name in files:
                     path = Path(parent)/name
+                    if label == 'home' and path.relative_to(root).parts in HOME_CACHE_FILES:
+                        manifest['omitted'].append({'original_path': str(path), 'reason': 'Reserved harness/package cache file omitted'})
+                        continue
                     try:
                         fd = open_regular(root, path.relative_to(root).parts)
                         with os.fdopen(fd, 'rb') as source:

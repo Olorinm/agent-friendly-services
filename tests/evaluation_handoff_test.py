@@ -99,6 +99,35 @@ class AdmissionTests(unittest.TestCase):
         self.fixture();path=self.finish_access()
         self.assertFalse(access_readiness.decision(path,'afs-20261010')[0])
 
+    def test_explicit_dependency_retry_does_not_dispatch_or_rewrite_handoff(self):
+        self.fixture('unknown');access=self.finish_access()
+        child=self.submit('held-child',['access-first'],business=True)
+        self.advance()
+        frozen=(self.queue/'inbox/held-child/handoff.json').read_bytes()
+        original=(access/'grading/assessment.json').read_bytes()
+        with self.assertRaisesRegex(ValueError,'remains held'):
+            task_queue.retry_dependency(self.queue,'held-child')
+        # The separate supplemental-admission tests validate the independent
+        # review. This fixture isolates queue bookkeeping, not a real verdict.
+        with patch.object(access_readiness,'decision',return_value=(True,'fixture independent admission')):
+            result=task_queue.retry_dependency(self.queue,'held-child')
+        self.assertEqual(result['phase'],'waiting')
+        self.assertEqual(len(result['dependency_retries']),1)
+        self.assertFalse(child.exists())
+        self.assertEqual((self.queue/'inbox/held-child/handoff.json').read_bytes(),frozen)
+        self.assertEqual((access/'grading/assessment.json').read_bytes(),original)
+
+    def test_dependency_retry_rejects_supersession_and_partial_preparation(self):
+        self.fixture('unknown');self.finish_access()
+        child=self.submit('held-child',['access-first'],business=True);self.advance()
+        state=pipeline.read(self.queue/'state.json');job=state['jobs']['held-child']
+        job['superseded_by']='different-slot';pipeline.write(self.queue/'state.json',state)
+        with self.assertRaisesRegex(ValueError,'unsuperseded'):
+            task_queue.retry_dependency(self.queue,'held-child')
+        job.pop('superseded_by');pipeline.write(self.queue/'state.json',state);child.mkdir()
+        with self.assertRaisesRegex(ValueError,'partially prepared'):
+            task_queue.retry_dependency(self.queue,'held-child')
+
     def test_cost_report_separates_undispatched_preflight_from_missing_usage(self):
         root=self.root/'costs';root.mkdir()
         blocked=root/'blocked';blocked.mkdir();pipeline.write(blocked/'state.json',{'phase':'preflight_blocked'})
@@ -190,8 +219,9 @@ class FileBoundaryTests(unittest.TestCase):
         private=self.root/'private';private.mkdir();out=private/'output';out.mkdir()
         (out/'receipt.json').write_text('{"observed":"finished execution"}')
         (self.root/'capture_files.py').write_text((directory/'capture_files.py').read_text())
-        with patch.object(worker,'ROOT',self.root),patch.object(worker.subprocess,'run',side_effect=subprocess.TimeoutExpired('fixture',25)):
+        with patch.object(worker,'ROOT',self.root),patch.object(worker.subprocess,'run',side_effect=subprocess.TimeoutExpired('fixture',25)) as run:
             worker.collect_task_files(self.root/'home',private,out)
+        self.assertEqual(run.call_args.args[0][:3], ['python3', '-I', '-c'])
         self.assertEqual(json.loads((out/'receipt.json').read_text()),{'observed':'finished execution'})
         manifest=json.loads((out/'task-files-manifest.json').read_text())
         self.assertFalse(manifest['complete_for_declared_file_scope'])

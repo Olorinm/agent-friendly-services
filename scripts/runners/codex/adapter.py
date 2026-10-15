@@ -18,14 +18,83 @@ from assessment import normalize as normalize_assessment
 
 FILES = ('worker.py', 'normalize.py', 'artifact_capture.py', 'session_usage.py')
 
+# Controller-only preparation, before any uid 1000 worker can read the import.
+# Materialized input bytes are unchanged; imported owners/modes are not trusted.
+PREPARE_INPUT_TREE = r'''
+import hashlib,json,os,stat,sys
+from pathlib import Path
+root=Path('/run/afs'); tree=Path(sys.argv[1])
+if os.geteuid()!=0 or tree.parent!=root/'inputs' or tree.name in ('','.','..'):
+    raise ValueError('Dedicated controller input tree required')
+for parent in (root, tree.parent):
+    s=parent.lstat()
+    if not stat.S_ISDIR(s.st_mode) or s.st_uid!=0 or s.st_mode & 0o022:
+        raise ValueError('Input parent must be protected and root-owned')
+if root.stat().st_mode & 0o077:
+    raise ValueError('Controller root must be private')
+entries=[]; hashes={}
+def walk_error(error): raise error
+for parent,dirs,files in os.walk(tree,followlinks=False,onerror=walk_error):
+    for path in [Path(parent),*[Path(parent)/name for name in files]]:
+        s=path.lstat()
+        if not (stat.S_ISDIR(s.st_mode) or stat.S_ISREG(s.st_mode)):
+            raise ValueError('Input links and special files forbidden')
+        if stat.S_ISREG(s.st_mode) and s.st_nlink!=1:
+            raise ValueError('Input hard links must be materialized before import')
+        entries.append((path,s))
+    # os.walk does not descend into directory links; reject them explicitly.
+    for name in dirs:
+        if not stat.S_ISDIR((Path(parent)/name).lstat().st_mode):
+            raise ValueError('Input directory links forbidden')
+if not entries or tree.is_symlink():
+    raise ValueError('Missing or linked input tree')
+def digest(fd):
+    h=hashlib.sha256();os.lseek(fd,0,os.SEEK_SET)
+    with os.fdopen(os.dup(fd),'rb') as f:
+        while chunk:=f.read(1024*1024):h.update(chunk)
+    return h.hexdigest()
+# Validate the entire tree before changing any ownership or permissions.
+for path,s in entries:
+    if stat.S_ISREG(s.st_mode):
+        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+        try:hashes[str(path.relative_to(tree))]=digest(fd)
+        finally:os.close(fd)
+for path,s in entries:
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|(os.O_DIRECTORY if stat.S_ISDIR(s.st_mode) else 0))
+    try:
+        current=os.fstat(fd)
+        if (current.st_dev,current.st_ino,current.st_size)!=(s.st_dev,s.st_ino,s.st_size):
+            raise ValueError('Input changed during preparation')
+        os.fchown(fd,0,0)
+        os.fchmod(fd,stat.S_IMODE(s.st_mode)&0o777&~0o022)
+        after=os.fstat(fd)
+        if after.st_uid!=0 or after.st_gid!=0 or after.st_mode & 0o7022:
+            raise ValueError('Input ownership/mode normalization failed')
+        if stat.S_ISREG(s.st_mode) and digest(fd)!=hashes[str(path.relative_to(tree))]:
+            raise ValueError('Input bytes changed during preparation')
+    finally:os.close(fd)
+print(json.dumps({'policy':'root-owned-data-input-v1','root':str(tree),'files':len(hashes),
+    'content_sha256':hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest(),
+    'content_unchanged':True,'uid':0,'gid':0,'group_other_write_and_special_bits_removed':True}))
+'''
+
 
 def archive(directory):
     stream = io.BytesIO()
-    with tarfile.open(fileobj=stream, mode='w') as tar:
-        for file in Path(directory).rglob('*'):
+    root = Path(directory)
+    if root.is_symlink() or not root.is_dir(): raise ValueError('Real input directory required')
+    # A tar hard-link member can retain the original host uid after Docker cp.
+    # Materialize every regular member; never change or unlink the source alias.
+    with tarfile.open(fileobj=stream, mode='w', dereference=True) as tar:
+        for file in root.rglob('*'):
             if file.is_symlink(): raise ValueError('Input links forbidden')
+            if not (file.is_dir() or file.is_file()): raise ValueError('Input special files forbidden')
             if file.is_file(): tar.add(file, arcname=str(file.relative_to(directory)), recursive=False)
     return stream.getvalue()
+
+
+def prepare_inputs(exec_root, directory):
+    return json.loads(exec_root('python3', '-I', '-c', PREPARE_INPUT_TREE, directory).stdout)
 
 
 def sources():
@@ -62,6 +131,7 @@ def main():
         ssh(['tar', '-xf', '-', '-C', remote], archive(request['input']))
         root('mkdir', '-p', '/run/afs/inputs/'+run)
         docker('cp', remote+'/.', container+':/run/afs/inputs/'+run)
+        request['input_preparation'] = prepare_inputs(root, '/run/afs/inputs/'+run)
         ssh(['tee', remote+'.request.json'], json.dumps(request).encode())
         docker('cp', remote+'.request.json', container+':/run/afs/'+run+'.request.json')
         command = 'exec python3 /run/afs/worker.py '+shlex.quote('/run/afs/'+run+'.request.json')+' > /run/afs/'+run+'.worker.log 2>&1'

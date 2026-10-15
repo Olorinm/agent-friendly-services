@@ -143,14 +143,42 @@ Access grading separately records `access_readiness` for actual service call,
 authorization, reusable state and isolation, each with evidence. Business tasks
 can proceed after a validated new-protocol access review has all four facets
 ready, even when its final explanatory report was inaccurate. The original
-`not_completed` verdict stays unchanged. Invalid runs, unknown facets,
-unreusable credentials, unfinished grading or modified assessments never grant
-admission. Legacy cohorts still require a completed access verdict; do not
-relabel historical reviews to unlock them.
+`not_completed` verdict stays unchanged. Invalid runs do not automatically grant
+admission. For a controller-caused evidence gap, an explicit supplemental access
+review can freeze additional facts and obtain a new independent Sol/high session
+without repeating execution or changing the original assessment. Its private
+admission is separate from the original user-delivery verdict; unknown facets,
+hard holds, stale evidence, reused sessions or missing model activity remain
+blocked. Legacy cohorts still require a completed access verdict.
+
+Use `scripts/supplemental_access_review.py prepare <access-run> <facts-directory>
+<access-run>/supplemental-access/reviews/<review-id> --review-id <review-id>
+--reviewer-config <private-settings.json>` to freeze that packet. Coordinate its
+official adapter start/status/collect/stop through the same runner-pool owner;
+the helper itself never starts models or reserves capacity. After collection,
+`accept <access-run> <review-directory>` validates the frozen facts, original
+evidence, native new-session output and collection provenance before publishing
+a private admission pointer. `status <access-run>` verifies that pointer again.
+Then `task_queue.py retry-dependency <queue> --job <job-id>` can reconsider only
+an unprepared, unsuperseded prerequisite hold. It neither replays an execution nor
+changes the queue's authorization/deadline or a stopped controller.
+
+Before new grading inputs are frozen, registered JWT credentials can contribute
+private `credential-facts.json`: bounded integer dates and an explicitly
+unverified permission-format hint. Credential hashes link to the original and
+redacted source-file hashes in `privacy-redactions.json`. No credential, subject,
+audience, issuer, resource identifier or arbitrary claims are exposed. Registration
+or decoding alone proves neither actual use, a valid signature, current access,
+transport nor free service. These files and supplemental reviews are private,
+including renamed byte-identical copies; raw sources and old grades stay intact.
 
 After execution, the worker privately collects remaining regular files from
 the current `/tmp`, `/var/tmp` and task home as executor uid 1000, with original
 paths, byte hashes and explicit omissions. Links and special files are omitted;
+known OpenCode dependency/model-index and npm content caches under the task home
+are omitted explicitly, before consuming the file budget. User responses,
+ordinary task dependency directories, installation logs and raw sessions are not
+excluded merely by extension or a matching name elsewhere.
 files beyond 16 MiB, a 64 MiB total or 1024 files are omitted, never silently
 truncated. Collection has a 25-second bound. The grading packet indexes these
 copies under `execution/task-files/`. This is filesystem evidence, not a promise
@@ -488,6 +516,28 @@ lower bound alongside it. These are estimates at frozen standard API rates,
 not a provider bill; service fees and server fees remain separate. The queue
 shows holds for insufficient budget, time or occupied shared resources. It
 requires enough time for the full frozen role budget before starting it.
+
+When the user explicitly authorizes a new queue without an API-dollar cap, use
+`init ... --no-budget-cap` instead of `--budget-usd`. These flags are mutually
+exclusive. The new private policy records `"budget_mode": "unbounded"` and
+`"budget_usd": null`; a legacy policy with no mode still requires its original
+positive cap, and a bare null never grants unbounded authorization. This flag
+only creates a new queue; it does not upgrade an existing queue's authorization.
+
+Unbounded mode removes only the queue's aggregate dollar dispatch gate. It still
+records per-session reservations, actual estimates and partial usage bounds;
+unknown costs remain unknown. The explicit absolute deadline, concurrency,
+isolation, service cooldowns and each task's frozen time/request limits remain
+in force. No subscriptions, infrastructure expansion or service purchases are
+authorized by this flag.
+
+New queues also record `storage_floor_bytes` (default 1 GiB, configurable with
+`--storage-floor-bytes`). Low controller disk space pauses new preparation and
+model dispatch with an environment hold; collection and confirmed stopping of
+active sessions continue. It does not turn a storage shortage into a service
+failure or authorize deleting evidence. Existing policies keep their saved
+behavior. This floor is an emergency guard, not a prediction of output size;
+provision and monitor enough storage for the declared workload.
 
 Independent grading can instead use [cloud Codex Sol/high](../codex/README.md)
 through the selected ChatGPT login. Its account usage is tracked separately;

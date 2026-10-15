@@ -14,6 +14,7 @@ import json
 import math
 import os
 import signal
+import shutil
 from pathlib import Path
 import subprocess
 import time
@@ -48,18 +49,45 @@ def stamp(value):
     return result.timestamp()
 
 
-def init(directory, *, max_concurrency, budget_usd, expires_at, pool):
+def budget_cap(policy):
+    """Null is unbounded only with an explicit policy mode; old caps stay caps."""
+    mode = policy.get('budget_mode', 'capped')
+    amount = policy.get('budget_usd')
+    if mode == 'unbounded':
+        if 'budget_usd' not in policy or amount is not None: raise ValueError('Unbounded budget must use budget_usd:null')
+        return None
+    if mode != 'capped' or type(amount) not in (int, float) or not math.isfinite(amount) or amount <= 0:
+        raise ValueError('Explicit positive model budget or explicit unbounded mode required')
+    return amount
+
+
+def init(directory, *, max_concurrency, budget_usd=None, expires_at, pool, no_budget_cap=False,
+         storage_floor_bytes=1024**3):
     if type(max_concurrency) is not int or max_concurrency < 1: raise ValueError('Positive concurrency required')
-    if type(budget_usd) not in (int, float) or not math.isfinite(budget_usd) or budget_usd <= 0:
-        raise ValueError('Explicit positive model budget required')
+    if type(no_budget_cap) is not bool or no_budget_cap and budget_usd is not None:
+        raise ValueError('Choose a model budget or no_budget_cap, not both')
+    if type(storage_floor_bytes) is not int or storage_floor_bytes < 0:
+        raise ValueError('Storage floor must be a nonnegative integer')
+    policy = {'max_concurrency': max_concurrency, 'budget_usd': budget_usd,
+              'storage_floor_bytes': storage_floor_bytes,
+              'budget_mode': 'unbounded' if no_budget_cap else 'capped', 'expires_at': expires_at, 'pool': pool}
+    budget_cap(policy)
     stamp(expires_at)
     if not isinstance(pool, str) or not pool.strip(): raise ValueError('Explicit pool identity required')
     directory = Path(directory).resolve();directory.mkdir(mode=0o700, parents=True, exist_ok=False)
-    runs.write(directory/'policy.json', {'max_concurrency': max_concurrency, 'budget_usd': budget_usd,
-                                       'expires_at': expires_at, 'pool': pool})
+    runs.write(directory/'policy.json', policy)
     runs.write(directory/'state.json', {'phase': 'idle', 'jobs': {}, 'ledger': {}, 'created_at': runs.now()})
     (directory/'inbox').mkdir(mode=0o700)
     return directory
+
+
+def storage_hold(directory, policy):
+    # Old policies keep their saved behavior. Only new preparation/dispatch is
+    # paused; active sessions must still be collected or stopped normally.
+    floor=policy.get('storage_floor_bytes',0)
+    if type(floor) is not int or floor < 0:raise ValueError('Invalid storage floor')
+    free=shutil.disk_usage(directory).free
+    return f'Controller storage low: {free} free bytes; {floor} required; no service failure inferred' if free < floor else None
 
 
 def inputs(config):
@@ -329,7 +357,7 @@ def prepare_jobs(directory, state, policy):
         if any(ok is False for ok in readiness):
             job.update(phase='blocked', reason='Prerequisite did not pass; no service failure inferred');continue
         if any(ok is None for ok in readiness): continue
-        if time.time() >= stamp(policy['expires_at']): continue
+        if time.time() >= stamp(policy['expires_at']) or storage_hold(directory,policy): continue
         # Persist before preparation: a crash leaves a concrete inspection point,
         # never permission to overwrite a partially prepared run.
         job['phase'] = 'preparing';runs.write(directory/'state.json', state)
@@ -354,6 +382,43 @@ def prepare_jobs(directory, state, policy):
 def advance(directory):
     with lock(Path(directory)/'.gate.lock', blocking=True):
         return _advance(directory)
+
+
+def retry_dependency(directory, identity):
+    """Explicitly reconsider a zero-execution dependency hold, never replay a run."""
+    from access_readiness import PROTOCOL, decision
+    directory=Path(directory).resolve()
+    with lock(directory/'.gate.lock', blocking=True):
+        state=runs.read(directory/'state.json');job=state['jobs'][identity]
+        if (job.get('phase')!='blocked' or job.get('prepared') or job.get('superseded_by')
+                or job.get('reason')!='Prerequisite did not pass; no service failure inferred'):
+            raise ValueError('Only an unprepared, unsuperseded prerequisite hold can be reconsidered')
+        submitted=directory/'inbox'/identity
+        if (runs.digest(submitted/'handoff.json')!=runs.read(submitted/'ready.json')['sha256']
+                or runs.read(submitted/'handoff.json')!=job['handoff']):
+            raise ValueError('Original submitted handoff changed')
+        members=job['handoff']['members']
+        if any(Path(m['directory']).exists() for m in members):
+            raise ValueError('An existing or partially prepared run must not be replayed')
+        if not job['handoff']['depends_on'] or any(m['config'].get('trial_protocol')!=PROTOCOL for m in members):
+            raise ValueError('Explicit current-protocol access dependencies required')
+        verified=[]
+        for key in job['handoff']['depends_on']:
+            dependency=state['jobs'].get(key)
+            if not dependency or dependency['phase'] not in DONE:
+                raise ValueError('Access dependency has not finished')
+            for member in dependency['handoff']['members']:
+                path=Path(member['directory']);ready,reason=decision(path,PROTOCOL)
+                if not ready:raise ValueError('Access dependency remains held: '+reason)
+                # Preserve which independent admission authorized this retry.
+                proof=path/'supplemental-access/active.json'
+                verified.append({'run':str(path),'assessment_sha256':runs.digest(path/'grading/assessment.json'),
+                                 'supplemental_admission_sha256':runs.digest(proof) if proof.exists() else None})
+        job.setdefault('dependency_retries',[]).append({'at':runs.now(),'previous_reason':job['reason'],
+                                                       'verified_dependencies':verified})
+        job.update(phase='waiting');job.pop('reason',None)
+        runs.write(directory/'state.json',state)
+        return job
 
 
 def cooldown_members(state):
@@ -391,6 +456,7 @@ def controller_cooldown(directory, proof_path=None, *, observation_id=None, sour
 
 def _advance(directory):
     directory = Path(directory).resolve();policy = runs.read(directory/'policy.json');state = runs.read(directory/'state.json')
+    cap = budget_cap(policy)
     if state['phase'] == 'halted': raise ValueError('Queue halted; reconcile saved state before resuming')
     prepare_jobs(directory, state, policy)
     paths = [p for _, p, _, _ in entries(state)]
@@ -398,6 +464,8 @@ def _advance(directory):
     with groups.locks([*paths, *group_paths]):
         reconcile(state)
         state['dispatch_holds'] = {}
+        low_storage=storage_hold(directory,policy)
+        if low_storage:state['dispatch_holds']['controller_storage']=low_storage
         def quota_hold(path):
             # Collected sources are cached by immutable file fingerprint. This
             # also sees a member collected earlier in the same group advance.
@@ -427,6 +495,8 @@ def _advance(directory):
                 return False
             if STOP_REQUESTED: return hold('Controller shutdown requested')
             if time.time() + settings['seconds'] + 20 >= deadline: return hold('Insufficient remaining time for the full frozen budget')
+            low_storage=storage_hold(directory,policy)
+            if low_storage:return hold(low_storage)
             if role == 'execution':
                 observation = quota_hold(path)
                 if observation:
@@ -460,7 +530,7 @@ def _advance(directory):
                         return hold('Shared account/resource occupied')
             if key not in state['ledger']:
                 amount = ceiling(path, role)
-                if held(state) + amount > policy['budget_usd']: return hold('Session ceiling exceeds remaining budget after in-flight/unknown reservations')
+                if cap is not None and held(state) + amount > cap: return hold('Session ceiling exceeds remaining budget after in-flight/unknown reservations')
                 state['ledger'][key] = {'ceiling_usd': amount, 'held_usd': amount, 'reserved_at': runs.now()}
                 if chatgpt_grader(settings):
                     state['ledger'][key].update(billing_mode='chatgpt', account_cost_usd=None, account_credits=None,
@@ -565,16 +635,26 @@ def run_loop(directory, once=False):
 def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('init', 'submit', 'release-grading', 'observe-cooldown', 'release-cooldown', 'run', 'status'))
+    parser.add_argument('action', choices=('init', 'submit', 'retry-dependency', 'release-grading', 'observe-cooldown', 'release-cooldown', 'run', 'status'))
     parser.add_argument('directory', type=Path)
     parser.add_argument('--spec', type=Path);parser.add_argument('--max-concurrency', type=int)
-    parser.add_argument('--budget-usd', type=float);parser.add_argument('--expires-at');parser.add_argument('--pool')
+    budget = parser.add_mutually_exclusive_group()
+    budget.add_argument('--budget-usd', type=float)
+    budget.add_argument('--no-budget-cap', action='store_true', help='Explicitly authorize no queue API-dollar cap; deadline and per-run limits still apply')
+    parser.add_argument('--expires-at');parser.add_argument('--pool')
+    parser.add_argument('--storage-floor-bytes',type=int,default=1024**3)
     parser.add_argument('--job');parser.add_argument('--proofs', type=Path)
     parser.add_argument('--observation', type=Path);parser.add_argument('--observation-id')
     parser.add_argument('--source-sha256');parser.add_argument('--reason')
     parser.add_argument('--once', action='store_true');args = parser.parse_args()
-    if args.action == 'init': print(init(args.directory, max_concurrency=args.max_concurrency, budget_usd=args.budget_usd, expires_at=args.expires_at, pool=args.pool));return
+    if args.no_budget_cap and args.action != 'init': parser.error('--no-budget-cap only applies when creating a new queue')
+    if args.action == 'init': print(init(args.directory, max_concurrency=args.max_concurrency, budget_usd=args.budget_usd,
+        no_budget_cap=args.no_budget_cap, expires_at=args.expires_at, pool=args.pool,
+        storage_floor_bytes=args.storage_floor_bytes));return
     if args.action == 'submit': print(submit(args.directory, args.spec));return
+    if args.action == 'retry-dependency':
+        if not args.job:parser.error('--job is required')
+        print(json.dumps(retry_dependency(args.directory,args.job)));return
     if args.action == 'release-grading': print(json.dumps(release_grading(args.directory, args.job, args.proofs)));return
     if args.action == 'observe-cooldown':
         if args.observation is None: parser.error('--observation is required')

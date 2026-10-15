@@ -11,6 +11,7 @@ catalog:
   version: 1
   classifications:
     - databases/hosted-relational
+    - databases/vector
   sources:
     docs:
       url: https://docs.turso.tech/cli/introduction
@@ -79,6 +80,14 @@ catalog:
     usage:
       url: https://docs.turso.tech/help/usage-and-billing
       checked_on: '2026-10-10'
+      kind: official_docs
+    native-vector:
+      url: https://turso.tech/vector
+      checked_on: '2026-10-15'
+      kind: official_docs
+    ai-embeddings:
+      url: https://docs.turso.tech/features/ai-and-embeddings
+      checked_on: '2026-10-15'
       kind: official_docs
   routes:
     - id: cloud-cli
@@ -218,6 +227,12 @@ catalog:
           evidence:
             - ts-sdk
             - sql-http
+        vectors.search:
+          value: documented
+          evidence:
+            - native-vector
+            - ai-embeddings
+            - ts-sdk
       notes: >-
         For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or
         @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local
@@ -226,6 +241,12 @@ catalog:
         commit on success and any failure rolls back the batch. Interactive transactions require
         appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT
         conflict handling only reverses the failing statement, not prior statements in the transaction.
+        Hosted libSQL supports stored vectors and native cosine-distance search, including exact
+        search for small collections; SQL metadata predicates or isolated collections can restrict
+        returned records. No embedding service is required for supplied vectors. This capability
+        does not establish vector support for every engine/version, remaining free quota, query
+        correctness or a tested result. Verify the assigned hosted engine and resource separately;
+        local-file vector examples alone do not prove a remote SDK operation.
   notes:
     - >-
       Logical backup and snapshot export are different paths. The shell and database-create references
