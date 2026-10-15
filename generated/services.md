@@ -6061,7 +6061,7 @@ Currency reference rates via a keyed API with a free signup plan; base-currency 
 
 ## Open-Meteo
 
-Global weather forecast API with a keyless non-commercial free tier and attributed open data.
+Global weather forecasts and historical reanalysis through keyless non-commercial free APIs with attributed open data.
 
 **Classification:** Weather & Calendar / Weather Data
 
@@ -6072,22 +6072,27 @@ Global weather forecast API with a keyless non-commercial free tier and attribut
 | Route | Docs | Personal access | Requirements and human steps |
 | --- | --- | --- | --- |
 | [forecast-api (API)](https://api.open-meteo.com/v1/forecast) | [Docs](https://open-meteo.com/en/docs) | self serve / documented | No signup, API key or credit card is needed for the non-commercial free route. Commercial hosted usage requires a paid customer endpoint; the CC BY 4.0 data licence does not remove that API-use restriction. Data may be shared/adapted with attribution, a licence link and change disclosure; display a source link beside Open-Meteo data. Reviewed public terms contain no explicit prohibition on publishing benchmark summaries. Forecasts are model output, not measured observations. Default model selection can share upstream models with other services, including MET Norway and ECMWF; service alternatives are not necessarily independent forecasts. Free service has no uptime guarantee. Sources establish documentation only, not tested access. |
+| [archive-api (API)](https://archive-api.open-meteo.com/v1/archive) | [Docs](https://open-meteo.com/en/docs/historical-weather-api) | self serve / documented | Documented HTTP GET historical data by WGS84 location, start/end dates, variables and timezone. ERA5 covers 1940 onward, ERA5-Land 1950 onward, and ECMWF IFS 2017 onward, with dataset-specific availability and delays. Daily fields include temperature_2m_max, temperature_2m_min and precipitation_sum with selectable units; precipitation availability varies by model. These are gridded reanalysis or historical model products, not direct weather-station observations or a promise of a future forecast. Record the selected dataset and returned units/timezone. Data attribution, licence link and change disclosure are required under CC BY 4.0; that data licence does not grant commercial use of the free hosted API. Shared limits and no-uptime-guarantee conditions apply; do not switch to a paid customer endpoint to bypass them. Documentation establishes this route's scope, not live access, task completion, or the remaining quota. Forecast-route results do not establish archive-route readiness. |
 
 ### Service pricing
 
 - forecast-api: 0 USD / eligible free API call (usage; Non-commercial free endpoint within published limits: 600 calls/minute, 5000/hour, 10000/day and 300000/month. Large variable/time requests may count as multiple calls.)
 
+- archive-api: 0 USD / eligible free historical API call (usage; Non-commercial open-access endpoint within 600 calls/minute, 5000/hour, 10000/day and 300000/month. More than ten variables or more than two weeks for one location may count as multiple fractional API calls. Historical Weather API is included in Free/Open-Access; paid commercial historical access requires the Professional plan or higher.)
+
 ### Setup observations
 
 | Route | Starting resources | Latest setup tokens | Latest setup time | Latest setup human involvement |
 | --- | --- | --- | --- | --- |
-| API | [Access preparation: none; official public read-only free noncommercial route](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | [238.5k](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 44.047586s | 0 |
+| API (forecast-api) | [Access preparation: none; official public read-only free noncommercial route](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | [238.5k](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 44.047586s | 0 |
+| API (archive-api) | — | — | — | — |
 
 #### Connect this weather service, make one real weather query through the assigned route, and save the local configuration needed for later queries. Explain the setup steps completed and any actual blockers.
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-7e7df525d550) | [100%](./evaluations.md#comparison-7e7df525d550) | 238.5k | $0.02 | $0 |
+| API (forecast-api) | [1](./evaluations.md#comparison-7e7df525d550) | [100%](./evaluations.md#comparison-7e7df525d550) | 238.5k | $0.02 | $0 |
+| API (archive-api) | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6109,7 +6114,7 @@ Access preparation: none; official public read-only free noncommercial route · 
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| weather-access-001 v1 | API | [completed](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 2026-10-08 |
+| weather-access-001 v1 | API (forecast-api) | [completed](../data/experiments/evaluations/open-meteo-weather-access-ds41-r1.json) | 2026-10-08 |
 
 </details>
 
@@ -6119,7 +6124,8 @@ Access preparation: none; official public read-only free noncommercial route · 
 
 | Route | Trials | Resolution rate | Tokens | Model cost | Service cost |
 | --- | --- | --- | --- | --- | --- |
-| API | [1](./evaluations.md#comparison-728ca7b6aa38) | [100%](./evaluations.md#comparison-728ca7b6aa38) | 35.5k | $0.0042 | $0 |
+| API (forecast-api) | [1](./evaluations.md#comparison-728ca7b6aa38) | [100%](./evaluations.md#comparison-728ca7b6aa38) | 35.5k | $0.0042 | $0 |
+| API (archive-api) | — | — | — | — | — |
 
 <details>
 <summary>Task, conditions and evidence</summary>
@@ -6141,7 +6147,7 @@ Access preparation: none; official public read-only free noncommercial route · 
 
 | Task | Route | Result | Date (UTC) |
 | --- | --- | --- | --- |
-| weather-outing-001 v1 | API | [completed](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | 2026-10-08 |
+| weather-outing-001 v1 | API (forecast-api) | [completed](../data/experiments/evaluations/open-meteo-weather-outing-001-ds41-r1.json) | 2026-10-08 |
 
 </details>
 
@@ -6149,7 +6155,8 @@ Access preparation: none; official public read-only free noncommercial route · 
 
 - [official_site](https://open-meteo.com/) — checked 2026-10-08
 - [official_docs](https://open-meteo.com/en/docs) — checked 2026-10-08
-- [official_site](https://open-meteo.com/en/pricing) — checked 2026-10-08
+- [official_docs](https://open-meteo.com/en/docs/historical-weather-api) — checked 2026-10-15
+- [official_site](https://open-meteo.com/en/pricing) — checked 2026-10-15
 - [official_site](https://open-meteo.com/en/terms) — checked 2026-10-08
 - [official_site](https://open-meteo.com/en/licence) — checked 2026-10-08
 
@@ -8456,7 +8463,7 @@ Trip.com supplier fare-maintenance API lead; a consumer flight-search access pat
 
 Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.
 
-**Classification:** Databases / Hosted Relational Databases
+**Classification:** Databases / Hosted Relational Databases; Databases / Vector Databases
 
 [Website](https://turso.tech/) · [Source record](../data/candidates/turso.yaml) · [Back to directory](./directory.md)
 
@@ -8467,7 +8474,7 @@ Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud p
 | [cloud-cli (CLI)](https://docs.turso.tech/cli/introduction) | [Docs](https://docs.turso.tech/quickstart) | self serve / documented | Requires: platform_account; Free cloud account: 100 databases, 5 GB, 500 million rows read/month and 10 million rows written/month. Cloud signup/login is required; the CLI authentication guide documents browser-based GitHub login, a headless option, and weekly CLI reauthentication. Choose and record the cloud engine: --tursodb creates a Turso database; omitting it creates libSQL. A local engine alone does not establish remote persistence. Published allowances do not establish remaining account quota; paid overages are separate and must not be assumed disabled. The shell reference documents a logical .dump that can rebuild a database without libSQL/SQLite internal tables, and loading that dump into a new database. This CLI capability is not a built-in HTTP dump endpoint. |
 | [platform-api (API)](https://api.turso.tech/v1/) | [Docs](https://docs.turso.tech/api-reference/quickstart) | self serve | Account/organization management uses a Bearer Platform API token, which can be organization-scoped. This provisions databases; SQL uses a separate database token and endpoint. The quickstart obtains the platform token through an authenticated CLI account. Existing account access and new database provisioning are distinct steps. |
 | [sql-http-api (API)](https://docs.turso.tech/sdk/http/quickstart) | [Docs](https://docs.turso.tech/sdk/http/quickstart) | self serve / documented | SQL requests use the provisioned database's HTTPS URL with /v2/pipeline and a database Bearer token. The endpoint is specific to each database, so the setup guide is retained as the entry clue. It supports both cloud engines. Provisioning and account authorization are separate. A list of pipeline requests is not itself an atomic transaction. The HTTP guide documents connection reuse for explicit transactions and states a 5-second transaction window and 10-second idle-connection timeout. |
-| [cloud-sdk (SDK)](https://docs.turso.tech/sdk/ts/quickstart) | [Docs](https://docs.turso.tech/sdk/ts/quickstart) | self serve / documented | For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local SDK modes and cached replicas do not by themselves prove a fresh remote read. For libSQL, the official reference documents atomic client.batch transactions: all statements commit on success and any failure rolls back the batch. Interactive transactions require appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT conflict handling only reverses the failing statement, not prior statements in the transaction. |
+| [cloud-sdk (SDK)](https://docs.turso.tech/sdk/ts/quickstart) | [Docs](https://docs.turso.tech/sdk/ts/quickstart) | self serve / documented | For network-only TypeScript access use @tursodatabase/serverless with the Turso engine or @libsql/client with libSQL. A database URL and database auth token are required. Embedded/local SDK modes and cached replicas do not by themselves prove a fresh remote read. For libSQL, the official reference documents atomic client.batch transactions: all statements commit on success and any failure rolls back the batch. Interactive transactions require appropriate commit/rollback handling and have a 5-second timeout. SQLite's default ABORT conflict handling only reverses the failing statement, not prior statements in the transaction. Hosted libSQL supports stored vectors and native cosine-distance search, including exact search for small collections; SQL metadata predicates or isolated collections can restrict returned records. No embedding service is required for supplied vectors. This capability does not establish vector support for every engine/version, remaining free quota, query correctness or a tested result. Verify the assigned hosted engine and resource separately; local-file vector examples alone do not prove a remote SDK operation. |
 
 ### Service pricing
 
@@ -8693,6 +8700,8 @@ Service credentials supplied · [Full configuration and evidence](./evaluations.
 - [official_docs](https://docs.turso.tech/cli/db/create) — checked 2026-10-10
 - [official_docs](https://docs.turso.tech/cli/db/export) — checked 2026-10-10
 - [official_docs](https://docs.turso.tech/help/usage-and-billing) — checked 2026-10-10
+- [official_docs](https://turso.tech/vector) — checked 2026-10-15
+- [official_docs](https://docs.turso.tech/features/ai-and-embeddings) — checked 2026-10-15
 
 <a id="tushare"></a>
 

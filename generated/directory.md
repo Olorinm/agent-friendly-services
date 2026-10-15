@@ -165,7 +165,7 @@ Some records do not publish host details or a launcher hash; see the full record
 
 <a id="services-databases-vector"></a>
 
-#### Vector Databases (6)
+#### Vector Databases (7)
 
 <table width="100%">
 <thead><tr><th width="26%" align="left">Service</th><th width="54%" align="left">Purpose</th><th width="20%" align="left">Access links</th></tr></thead>
@@ -174,6 +174,7 @@ Some records do not publish host details or a launcher hash; see the full record
 <tr><td align="left"><a href="../generated/services.md#pinecone">Pinecone</a></td><td align="left">Managed vector database for search and RAG, with llms.txt, an official MCP server, and self-serve keys.</td><td align="left"><a href="https://docs.pinecone.io/reference/api/introduction">API</a> · <a href="https://github.com/pinecone-io/cli">CLI</a> · <a href="https://docs.pinecone.io/guides/operations/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="../generated/services.md#qdrant">Qdrant</a></td><td align="left">Open-source vector database with a managed cloud, llms.txt, an official MCP server, and a free cluster tier.</td><td align="left"><a href="https://api.qdrant.tech">API</a> · <a href="https://qdrant.tech/documentation/interfaces">SDK</a> · <a href="https://github.com/qdrant/mcp-server-qdrant">MCP</a></td></tr>
 <tr><td align="left"><a href="../generated/services.md#redis">Redis (Redis Cloud)</a></td><td align="left">In-memory data platform for caching, vector search and real-time apps; Redis Cloud has a REST management API, official MCP server, redis-cli, and llms.txt.</td><td align="left"><a href="https://redis.io/docs/latest/operate/rc/api/">API</a> · <a href="https://redis.io/docs/latest/develop/tools/cli/">CLI</a> · <a href="https://github.com/redis/mcp-redis">MCP</a></td></tr>
+<tr><td align="left"><a href="../generated/services.md#turso">Turso</a></td><td align="left">Hosted SQLite-compatible Turso and libSQL databases, with a no-card free cloud plan, management CLI/API, remote SQL over HTTP and language SDKs.</td><td align="left"><a href="https://docs.turso.tech/api-reference/quickstart">API</a> · <a href="https://docs.turso.tech/sdk/ts/quickstart">SDK</a> · <a href="https://docs.turso.tech/quickstart">CLI</a></td></tr>
 <tr><td align="left"><a href="../generated/services.md#upstash">Upstash</a></td><td align="left">Serverless Redis, Kafka-successor queues, and vector storage with REST APIs, llms.txt, an official MCP server, and a free tier.</td><td align="left"><a href="https://upstash.com/docs/devops/developer-api/introduction">API</a> · <a href="https://github.com/upstash/cli">CLI</a> · <a href="https://github.com/upstash/mcp-server">MCP</a></td></tr>
 <tr><td align="left"><a href="../generated/services.md#weaviate">Weaviate</a></td><td align="left">Open-source vector database with REST/GraphQL/gRPC APIs, Weaviate Cloud free sandboxes, an official CLI, MCP server, and llms.txt.</td><td align="left"><a href="https://docs.weaviate.io/weaviate/api/rest">API</a> · <a href="https://github.com/weaviate/weaviate-cli">CLI</a> · <a href="https://github.com/weaviate/mcp-server-weaviate">MCP</a></td></tr>
 </tbody>

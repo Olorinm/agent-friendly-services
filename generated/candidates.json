@@ -1,6 +1,6 @@
 {
   "description": "Candidate pool: submitted, not yet verified. Entry and promotion rules: docs/candidate-pool.md.",
-  "generated_at": "2026-10-12T08:42:57.239Z",
+  "generated_at": "2026-10-15T08:05:33.243Z",
   "count": 119,
   "candidates": [
     {
@@ -853,7 +853,7 @@
       "name": "Open-Meteo",
       "category": "weather-calendar",
       "homepage": "https://open-meteo.com/",
-      "summary": "Global weather forecast API with a keyless non-commercial free tier and attributed open data.",
+      "summary": "Global weather forecasts and historical reanalysis through keyless non-commercial free APIs with attributed open data.",
       "submitted_by": "community",
       "entrypoints": {},
       "notes": [],
