@@ -40,6 +40,10 @@ tasks:
     id: database-access-001
     classification: databases/hosted-relational
     phase: setup
+  - file: data/experiments/tasks/database-access-preprovided-v2.md
+    id: database-access-001
+    classification: databases/hosted-relational
+    phase: setup
   - file: data/experiments/tasks/databases-v2.md
     id: database-todos-001
     classification: databases/hosted-relational
