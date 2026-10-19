@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-09-14T11:59:28.521Z",
-  "total": 1154,
-  "ok": 1114,
-  "inconclusive": 37,
-  "broken": 3,
+  "checked_at": "2026-10-19T11:41:24.976Z",
+  "total": 1605,
+  "ok": 1496,
+  "inconclusive": 80,
+  "broken": 29,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -29,6 +29,16 @@
       ]
     },
     {
+      "url": "https://about.gitlab.com/terms/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:catalog.sources.terms-index.url"
+      ]
+    },
+    {
       "url": "https://affiliates.kayak.com/",
       "class": "ok",
       "status": 200,
@@ -37,6 +47,56 @@
       "sources": [
         "kayak-affiliate:homepage",
         "kayak-affiliate:catalog.sources.apply.url"
+      ]
+    },
+    {
+      "url": "https://agent.qq.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tencent-agently-mail:homepage"
+      ]
+    },
+    {
+      "url": "https://agentservices.to/",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:homepage"
+      ]
+    },
+    {
+      "url": "https://agentservices.to/.well-known/x402",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://agentservices.to/mcp",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "agentservices:catalog.routes.official-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://agentservices.to/openapi.json",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.openapi.url"
       ]
     },
     {
@@ -175,9 +235,9 @@
     },
     {
       "url": "https://airtable.com/create/tokens",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "airtable:entrypoints.api_keys"
@@ -211,7 +271,6 @@
       "accept": "*/*",
       "sources": [
         "airtable:entrypoints.api_reference",
-        "airtable:catalog.routes.web-api.entry_url",
         "airtable:catalog.routes.web-api.docs"
       ]
     },
@@ -272,9 +331,9 @@
     },
     {
       "url": "https://airtable.com/signup",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "airtable:entrypoints.signup",
@@ -300,6 +359,59 @@
       "accept": "*/*",
       "sources": [
         "aiven:homepage"
+      ]
+    },
+    {
+      "url": "https://aiven.io/docs/platform/howto/create_authentication_token",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.sources.personal-token.url"
+      ]
+    },
+    {
+      "url": "https://aiven.io/docs/products/postgresql/concepts/pg-free-tier",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.sources.free-tier.url"
+      ]
+    },
+    {
+      "url": "https://aiven.io/docs/products/postgresql/get-started",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.sources.postgres-quickstart.url"
+      ]
+    },
+    {
+      "url": "https://aiven.io/docs/products/postgresql/howto/connect-python",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.sources.python-client.url",
+        "aiven:catalog.routes.postgres-python.entry_url",
+        "aiven:catalog.routes.postgres-python.docs"
+      ]
+    },
+    {
+      "url": "https://aiven.io/docs/tools/api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.sources.api.url",
+        "aiven:catalog.routes.platform-api.docs"
       ]
     },
     {
@@ -422,6 +534,57 @@
       ]
     },
     {
+      "url": "https://api.agentmail.to/v0/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.routes.mail-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.agentservices.to/",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.routes.rest-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.airtable.com/v0",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "airtable:catalog.routes.web-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.aiven.io/v1/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "aiven:catalog.routes.platform-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.baserow.io/api",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "baserow:catalog.routes.database-api.entry_url",
+        "baserow:catalog.routes.backend-jwt-api.entry_url"
+      ]
+    },
+    {
       "url": "https://api.cloudflare.com/client/v4/",
       "class": "inconclusive",
       "status": 400,
@@ -432,13 +595,105 @@
       ]
     },
     {
+      "url": "https://api.cogdepot.com",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.routes.marketplace-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.cogdepot.com/a2a",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.routes.marketplace-a2a.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.crossref.org/works",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.routes.public-rest-api.entry_url"
+      ]
+    },
+    {
       "url": "https://api.elevenlabs.io/openapi.json",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "elevenlabs:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://api.exa.ai/search",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "exa:catalog.routes.search-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.financialdatasets.ai/",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "elevenlabs:entrypoints.openapi"
+        "financial-datasets:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.firecrawl.dev/v2/scrape",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.routes.public-scrape-api.entry_url",
+        "firecrawl:catalog.routes.account-scrape-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.firecrawl.dev/v2/search",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.routes.public-search-api.entry_url",
+        "firecrawl:catalog.routes.account-search-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.frankfurter.dev/v2/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "frankfurter:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.geoapify.com/v1/geocode/search",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.routes.geocoding-api.entry_url"
       ]
     },
     {
@@ -452,6 +707,106 @@
       ]
     },
     {
+      "url": "https://api.github.com/advisories",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.routes.public-advisories-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.mail.tm",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mail-tm:catalog.routes.mail-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.massive.com/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "massive:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.met.no/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:homepage"
+      ]
+    },
+    {
+      "url": "https://api.met.no/weatherapi/locationforecast/2.0/compact",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.routes.locationforecast-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.met.no/weatherapi/locationforecast/2.0/documentation",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.docs.url"
+      ]
+    },
+    {
+      "url": "https://api.notion.com/v1",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.routes.rest-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.open-meteo.com/v1/forecast",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.routes.forecast-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.openalex.org/works",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.routes.public-rest-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.osv.dev/v1/query",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.routes.public-api.entry_url"
+      ]
+    },
+    {
       "url": "https://api.qdrant.tech",
       "class": "ok",
       "status": 200,
@@ -462,6 +817,16 @@
       ]
     },
     {
+      "url": "https://api.qrserver.com/v1/create-qr-code/",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.routes.public-qr-api.entry_url"
+      ]
+    },
+    {
       "url": "https://api.quiverquant.com/",
       "class": "ok",
       "status": 200,
@@ -469,6 +834,48 @@
       "accept": "*/*",
       "sources": [
         "quiver-quantitative:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://api.quiverquant.com/mcp-server/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quiver-quantitative:catalog.sources.mcp.url",
+        "quiver-quantitative:catalog.routes.data-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://api.semanticscholar.org/api-docs/graph",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.sources.graph-docs.url",
+        "semantic-scholar:catalog.routes.public-graph-api.docs"
+      ]
+    },
+    {
+      "url": "https://api.semanticscholar.org/graph/v1",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.routes.public-graph-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.semanticscholar.org/graph/v1/swagger.json",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.sources.graph-schema.url"
       ]
     },
     {
@@ -545,6 +952,16 @@
       ]
     },
     {
+      "url": "https://api.stlouisfed.org/fred/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "fred:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
       "url": "https://api.supabase.com/api/v1-json",
       "class": "ok",
       "status": 200,
@@ -552,6 +969,28 @@
       "accept": "*/*",
       "sources": [
         "supabase:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://api.tavily.com/extract",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tavily:catalog.routes.keyless-extract-api.entry_url",
+        "tavily:catalog.routes.extract-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.tavily.com/search",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tavily:catalog.routes.keyless-search-api.entry_url",
+        "tavily:catalog.routes.search-api.entry_url"
       ]
     },
     {
@@ -566,6 +1005,47 @@
       ]
     },
     {
+      "url": "https://api.turso.tech/v1/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.routes.platform-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.twelvedata.com/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "twelve-data:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://api.worldbank.org/v2/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "world-bank-data:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://apidocs.geoapify.com/docs/geocoding/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.api.url",
+        "geoapify:catalog.routes.geocoding-api.docs"
+      ]
+    },
+    {
       "url": "https://apify.com",
       "class": "ok",
       "status": 200,
@@ -573,6 +1053,16 @@
       "accept": "*/*",
       "sources": [
         "apify:homepage"
+      ]
+    },
+    {
+      "url": "https://apify.com/apify/website-content-crawler",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "apify:catalog.sources.extraction-scope.url"
       ]
     },
     {
@@ -618,6 +1108,16 @@
       "sources": [
         "composio:entrypoints.signup",
         "composio:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://app.daytona.io/api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.routes.sandbox-sdk.entry_url"
       ]
     },
     {
@@ -711,6 +1211,16 @@
       ]
     },
     {
+      "url": "https://archive-api.open-meteo.com/v1/archive",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.routes.archive-api.entry_url"
+      ]
+    },
+    {
       "url": "https://baserow.io/",
       "class": "ok",
       "status": 200,
@@ -728,7 +1238,6 @@
       "accept": "*/*",
       "sources": [
         "baserow:catalog.sources.api.url",
-        "baserow:catalog.routes.database-api.entry_url",
         "baserow:catalog.routes.database-api.docs"
       ]
     },
@@ -740,6 +1249,26 @@
       "accept": "*/*",
       "sources": [
         "baserow:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://baserow.io/signup",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "baserow:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://baserow.io/terms-and-conditions",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "baserow:catalog.sources.terms.url"
       ]
     },
     {
@@ -761,7 +1290,18 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "baserow:catalog.sources.auth.url"
+        "baserow:catalog.sources.auth.url",
+        "baserow:catalog.routes.backend-jwt-api.docs"
+      ]
+    },
+    {
+      "url": "https://baserow.io/user-docs/set-up-baserow",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "baserow:catalog.sources.cloud-setup.url"
       ]
     },
     {
@@ -797,6 +1337,16 @@
       "accept": "*/*",
       "sources": [
         "cartesia:homepage"
+      ]
+    },
+    {
+      "url": "https://claimable.neon.tech/v1/agent/identity",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.routes.claimable-api.entry_url"
       ]
     },
     {
@@ -854,6 +1404,16 @@
       ]
     },
     {
+      "url": "https://coda.io/apis/v1",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "coda:catalog.routes.rest-api.entry_url"
+      ]
+    },
+    {
       "url": "https://coda.io/developers/apis/v1",
       "class": "ok",
       "status": 200,
@@ -861,8 +1421,80 @@
       "accept": "*/*",
       "sources": [
         "coda:catalog.sources.api.url",
-        "coda:catalog.routes.rest-api.entry_url",
+        "coda:catalog.sources.collaboration-scope.url",
         "coda:catalog.routes.rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:homepage"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/auth/signup",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/docs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.api-docs.url",
+        "cog-depot:catalog.routes.marketplace-api.docs"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/docs/full-flow",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.onboarding.url"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/docs/machine-discovery",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.discovery.url",
+        "cog-depot:catalog.routes.marketplace-a2a.docs"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://cogdepot.com/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.sources.terms.url"
       ]
     },
     {
@@ -905,6 +1537,16 @@
       "sources": [
         "coinmarketcap:catalog.sources.docs.url",
         "coinmarketcap:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://community.crossref.org/t/refining-rest-api-limits-for-improved-stability-and-reliability/16137",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.sources.rate-update.url"
       ]
     },
     {
@@ -1119,7 +1761,8 @@
       "accept": "*/*",
       "sources": [
         "telegram:entrypoints.api_reference",
-        "telegram:checks.free_tier_or_trial.evidence"
+        "telegram:checks.free_tier_or_trial.evidence",
+        "telegram:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -1246,6 +1889,16 @@
       ]
     },
     {
+      "url": "https://data-api.ecb.europa.eu/service/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
       "url": "https://data.ecb.europa.eu/",
       "class": "ok",
       "status": 200,
@@ -1256,6 +1909,36 @@
       ]
     },
     {
+      "url": "https://data.ecb.europa.eu/data/data-categories/macroeconomic-and-sectoral-statistics/inflation-and-consumer-prices/total?layerType=DL&showDatasetModal=false",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.hicp-series.url"
+      ]
+    },
+    {
+      "url": "https://data.ecb.europa.eu/data/datasets/hicp/data-information",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.hicp-metadata.url"
+      ]
+    },
+    {
+      "url": "https://data.ecb.europa.eu/help/api/data",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.api-query.url"
+      ]
+    },
+    {
       "url": "https://data.ecb.europa.eu/help/api/data-examples",
       "class": "ok",
       "status": 200,
@@ -1263,8 +1946,17 @@
       "accept": "*/*",
       "sources": [
         "ecb-data:catalog.sources.docs.url",
-        "ecb-data:catalog.routes.data-api.entry_url",
         "ecb-data:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://data.ecb.europa.eu/help/api/schemas",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.api-schema.url"
       ]
     },
     {
@@ -1275,6 +1967,16 @@
       "accept": "*/*",
       "sources": [
         "nasdaq-data-link:homepage"
+      ]
+    },
+    {
+      "url": "https://data.sec.gov/",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "sec-edgar:catalog.routes.data-api.entry_url"
       ]
     },
     {
@@ -1295,8 +1997,17 @@
       "accept": "*/*",
       "sources": [
         "world-bank-data:catalog.sources.docs.url",
-        "world-bank-data:catalog.routes.data-api.entry_url",
         "world-bank-data:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "world-bank-data:catalog.sources.query.url"
       ]
     },
     {
@@ -1339,6 +2050,16 @@
       "accept": "*/*",
       "sources": [
         "atlassian:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://developer.atlassian.com/cloud/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "atlassian:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -1794,6 +2515,16 @@
       ]
     },
     {
+      "url": "https://developers.cloudflare.com/kv/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cloudflare:catalog.sources.kv-classification.url"
+      ]
+    },
+    {
       "url": "https://developers.cloudflare.com/kv/reference/kv-commands/",
       "class": "ok",
       "status": 200,
@@ -1856,6 +2587,16 @@
       "accept": "*/*",
       "sources": [
         "deepgram:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://developers.deepgram.com/home",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "deepgram:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -2018,10 +2759,7 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "notion:entrypoints.api_keys",
-        "notion:checks.api_key_self_serve.evidence",
-        "notion:checks.oauth_support.evidence",
-        "notion:checks.scoped_tokens.evidence"
+        "notion:checks.oauth_support.evidence"
       ]
     },
     {
@@ -2035,13 +2773,56 @@
       ]
     },
     {
+      "url": "https://developers.notion.com/guides/data-apis/create-pages-in-a-data-source",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.create-row.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/guides/data-apis/working-with-databases",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.database-model.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/guides/data-apis/working-with-page-content",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.collaboration-scope.url"
+      ]
+    },
+    {
       "url": "https://developers.notion.com/guides/get-started/authorization",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
+        "notion:entrypoints.api_keys",
         "notion:catalog.sources.auth.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/guides/get-started/internal-connections",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:checks.api_key_self_serve.evidence",
+        "notion:catalog.sources.internal-connections.url",
+        "notion:catalog.routes.rest-api.docs"
       ]
     },
     {
@@ -2076,6 +2857,27 @@
       ]
     },
     {
+      "url": "https://developers.notion.com/reference/capabilities",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:checks.scoped_tokens.evidence",
+        "notion:catalog.sources.capabilities.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/create-database",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.create-database.url"
+      ]
+    },
+    {
       "url": "https://developers.notion.com/reference/intro",
       "class": "ok",
       "status": 200,
@@ -2083,9 +2885,27 @@
       "accept": "*/*",
       "sources": [
         "notion:entrypoints.api_reference",
-        "notion:catalog.sources.api.url",
-        "notion:catalog.routes.rest-api.entry_url",
-        "notion:catalog.routes.rest-api.docs"
+        "notion:catalog.sources.api.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/patch-page",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.update-row.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/query-a-data-source",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.query-rows.url"
       ]
     },
     {
@@ -2095,7 +2915,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "notion:entrypoints.rate_limits"
+        "notion:entrypoints.rate_limits",
+        "notion:catalog.sources.request-limits.url"
       ]
     },
     {
@@ -2115,7 +2936,18 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "notion:checks.versioning_policy.evidence"
+        "notion:checks.versioning_policy.evidence",
+        "notion:catalog.sources.versioning.url"
+      ]
+    },
+    {
+      "url": "https://developers.notion.com/reference/workspace-block-limits",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.workspace-block-limits.url"
       ]
     },
     {
@@ -2150,6 +2982,37 @@
         "skyscanner:catalog.sources.mcp.url",
         "skyscanner:catalog.routes.partner-mcp.entry_url",
         "skyscanner:catalog.routes.partner-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://disclosures-clerk.house.gov/FinancialDisclosure",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "us-house-disclosures:homepage",
+        "us-house-disclosures:catalog.routes.filing-website.entry_url"
+      ]
+    },
+    {
+      "url": "https://disclosures-clerk.house.gov/FinancialDisclosure/ViewReport",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "us-house-disclosures:catalog.sources.overview.url"
+      ]
+    },
+    {
+      "url": "https://disclosures-clerk.house.gov/FinancialDisclosure/ViewSearch",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "us-house-disclosures:catalog.sources.search.url"
       ]
     },
     {
@@ -2310,7 +3173,89 @@
       "accept": "*/*",
       "sources": [
         "agentmail:catalog.sources.onboarding.url",
+        "agentmail:catalog.routes.mail-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/api-reference/agent/sign-up",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/api-reference/api-keys/delete",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.delete-key.url"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/api-reference/inboxes/delete",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.delete-inbox.url"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/api-reference/inboxes/messages/list",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.messages.url"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/integrations/cli",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.cli.url",
+        "agentmail:catalog.routes.mail-cli.docs"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/integrations/mcp",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.mcp.url",
         "agentmail:catalog.routes.mail-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/message-expiry",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.expiry.url"
+      ]
+    },
+    {
+      "url": "https://docs.agentmail.to/permissions",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.permissions.url"
       ]
     },
     {
@@ -2321,12 +3266,9 @@
       "accept": "*/*",
       "sources": [
         "agentmail:catalog.sources.docs.url",
-        "agentmail:catalog.routes.mail-api.entry_url",
-        "agentmail:catalog.routes.mail-api.docs",
         "agentmail:catalog.routes.mail-sdk.entry_url",
         "agentmail:catalog.routes.mail-sdk.docs",
-        "agentmail:catalog.routes.mail-cli.entry_url",
-        "agentmail:catalog.routes.mail-cli.docs"
+        "agentmail:catalog.routes.mail-cli.entry_url"
       ]
     },
     {
@@ -2455,6 +3397,67 @@
       "accept": "*/*",
       "sources": [
         "anthropic:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/FAQ",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.faq.url"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/ForecastJSON.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.forecast-format.url"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/GettingStarted.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.getting-started.url",
+        "met-norway:catalog.routes.locationforecast-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/License",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.licence.url"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/locationforecast/datamodel.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.datamodel.url"
+      ]
+    },
+    {
+      "url": "https://docs.api.met.no/doc/TermsOfService",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "met-norway:catalog.sources.terms.url"
       ]
     },
     {
@@ -2652,7 +3655,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "cartesia:checks.api_key_self_serve.evidence"
+        "cartesia:checks.api_key_self_serve.evidence",
+        "cartesia:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -2774,6 +3778,16 @@
       ]
     },
     {
+      "url": "https://docs.coingecko.com/reference/simple-price",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "coingecko:catalog.sources.simple-price.url"
+      ]
+    },
+    {
       "url": "https://docs.composio.dev",
       "class": "ok",
       "status": 200,
@@ -2782,6 +3796,16 @@
       "sources": [
         "composio:entrypoints.docs",
         "composio:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://docs.composio.dev/docs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "composio:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -2934,6 +3958,16 @@
       ]
     },
     {
+      "url": "https://docs.discord.com/developers/intro",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "discord:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://docs.dodopayments.com/developer-resources/mcp-server",
       "class": "ok",
       "status": 200,
@@ -2987,6 +4021,38 @@
       "accept": "*/*",
       "sources": [
         "dodo-payments:catalog.sources.eligibility.url"
+      ]
+    },
+    {
+      "url": "https://docs.e2b.dev/quickstart",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "e2b:catalog.sources.quickstart.url",
+        "e2b:catalog.routes.sandbox-sdk.entry_url",
+        "e2b:catalog.routes.sandbox-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://docs.e2b.dev/quickstart/upload-download-files",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "e2b:catalog.sources.files.url"
+      ]
+    },
+    {
+      "url": "https://docs.e2b.dev/sandbox",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "e2b:catalog.sources.lifecycle.url"
       ]
     },
     {
@@ -3052,13 +4118,35 @@
       ]
     },
     {
-      "url": "https://docs.financialdatasets.ai/llms.txt",
+      "url": "https://docs.financialdatasets.ai/agents",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "financial-datasets:catalog.sources.mcp-discovery.url"
+        "financial-datasets:catalog.sources.agent-onboarding.url"
+      ]
+    },
+    {
+      "url": "https://docs.financialdatasets.ai/data-provenance",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "financial-datasets:catalog.sources.provenance.url"
+      ]
+    },
+    {
+      "url": "https://docs.financialdatasets.ai/mcp-server",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "financial-datasets:catalog.sources.mcp.url",
+        "financial-datasets:catalog.routes.data-mcp.docs",
+        "financial-datasets:catalog.routes.data-mcp-keyed.docs"
       ]
     },
     {
@@ -3069,7 +4157,6 @@
       "accept": "*/*",
       "sources": [
         "financial-datasets:catalog.sources.docs.url",
-        "financial-datasets:catalog.routes.data-api.entry_url",
         "financial-datasets:catalog.routes.data-api.docs"
       ]
     },
@@ -3084,6 +4171,26 @@
       ]
     },
     {
+      "url": "https://docs.firecrawl.dev/api-reference/endpoint/scrape",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.scrape-reference.url"
+      ]
+    },
+    {
+      "url": "https://docs.firecrawl.dev/api-reference/endpoint/search",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.search-reference.url"
+      ]
+    },
+    {
       "url": "https://docs.firecrawl.dev/api-reference/introduction",
       "class": "ok",
       "status": 200,
@@ -3094,6 +4201,48 @@
       ]
     },
     {
+      "url": "https://docs.firecrawl.dev/billing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.billing.url"
+      ]
+    },
+    {
+      "url": "https://docs.firecrawl.dev/features/document-parsing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.document-parsing.url"
+      ]
+    },
+    {
+      "url": "https://docs.firecrawl.dev/features/parse",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.pdf-options.url"
+      ]
+    },
+    {
+      "url": "https://docs.firecrawl.dev/features/scrape",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.scrape-docs.url",
+        "firecrawl:catalog.routes.public-scrape-api.docs",
+        "firecrawl:catalog.routes.account-scrape-api.docs"
+      ]
+    },
+    {
       "url": "https://docs.firecrawl.dev/features/search",
       "class": "ok",
       "status": 200,
@@ -3101,9 +4250,7 @@
       "accept": "*/*",
       "sources": [
         "firecrawl:catalog.sources.docs.url",
-        "firecrawl:catalog.routes.public-search-api.entry_url",
         "firecrawl:catalog.routes.public-search-api.docs",
-        "firecrawl:catalog.routes.account-search-api.entry_url",
         "firecrawl:catalog.routes.account-search-api.docs"
       ]
     },
@@ -3135,7 +4282,8 @@
       "method": "HEAD",
       "accept": "application/json, text/event-stream",
       "sources": [
-        "firecrawl:entrypoints.mcp_official"
+        "firecrawl:entrypoints.mcp_official",
+        "firecrawl:checks.oauth_support.evidence"
       ]
     },
     {
@@ -3145,7 +4293,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "firecrawl:entrypoints.rate_limits"
+        "firecrawl:entrypoints.rate_limits",
+        "firecrawl:catalog.sources.rate-limits.url"
       ]
     },
     {
@@ -3210,6 +4359,16 @@
       ]
     },
     {
+      "url": "https://docs.getgrist.com/api",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.routes.rest-api.entry_url"
+      ]
+    },
+    {
       "url": "https://docs.getgrist.com/api/mcp",
       "class": "inconclusive",
       "status": 401,
@@ -3263,6 +4422,16 @@
       ]
     },
     {
+      "url": "https://docs.github.com/en/rest",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://docs.github.com/en/rest/quickstart",
       "class": "ok",
       "status": 200,
@@ -3271,6 +4440,57 @@
       "sources": [
         "github:catalog.sources.quickstart.url",
         "github:catalog.routes.rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/rest/security-advisories/global-advisories",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.global-advisories.url",
+        "github:catalog.routes.public-advisories-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.advisory-rate-limits.url"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.acceptable-use.url"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.advisory-terms.url"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.service-terms.url"
       ]
     },
     {
@@ -3384,6 +4604,16 @@
       ]
     },
     {
+      "url": "https://docs.gitlab.com/api/repository_files/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:catalog.sources.repository-files.url"
+      ]
+    },
+    {
       "url": "https://docs.gitlab.com/api/rest/",
       "class": "ok",
       "status": 200,
@@ -3412,6 +4642,16 @@
       "accept": "*/*",
       "sources": [
         "gitlab:entrypoints.rate_limits"
+      ]
+    },
+    {
+      "url": "https://docs.gitlab.com/user/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -3523,6 +4763,27 @@
       ]
     },
     {
+      "url": "https://docs.locationiq.com/docs/search-forward-geocoding",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.guide.url",
+        "locationiq:catalog.routes.geocoding-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.locationiq.com/reference/search",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.api.url"
+      ]
+    },
+    {
       "url": "https://docs.lumalabs.ai",
       "class": "ok",
       "status": 200,
@@ -3539,7 +4800,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "luma:checks.api_key_self_serve.evidence"
+        "luma:checks.api_key_self_serve.evidence",
+        "luma:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -3580,8 +4842,37 @@
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.docs.url",
-        "mail-tm:catalog.routes.mail-api.entry_url",
         "mail-tm:catalog.routes.mail-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.mail.tm/api/accounts",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mail-tm:catalog.sources.accounts.url"
+      ]
+    },
+    {
+      "url": "https://docs.mail.tm/api/messages",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mail-tm:catalog.sources.messages.url"
+      ]
+    },
+    {
+      "url": "https://docs.mail.tm/getting-started/authentication",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mail-tm:catalog.sources.authentication.url"
       ]
     },
     {
@@ -3614,6 +4905,16 @@
       "accept": "*/*",
       "sources": [
         "mem0:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.mem0.ai/introduction",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mem0:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -3749,6 +5050,16 @@
       "accept": "*/*",
       "sources": [
         "n8n:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.n8n.io/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "n8n:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -3889,7 +5200,7 @@
       "url": "https://docs.netlify.com/welcome/build-with-ai/netlify-mcp-server/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
         "netlify:entrypoints.mcp_official"
@@ -3925,6 +5236,16 @@
       "accept": "*/*",
       "sources": [
         "perplexity:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://docs.perplexity.ai/docs/getting-started/overview",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "perplexity:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -3979,6 +5300,16 @@
       "accept": "*/*",
       "sources": [
         "pinecone:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://docs.pinecone.io/guides/get-started/overview",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "pinecone:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -4200,6 +5531,16 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "sentry:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://docs.slack.dev/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "slack:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -4480,6 +5821,17 @@
       ]
     },
     {
+      "url": "https://docs.tavily.com/documentation/api-reference/endpoint/extract",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tavily:catalog.sources.extract-docs.url",
+        "tavily:catalog.routes.extract-api.docs"
+      ]
+    },
+    {
       "url": "https://docs.tavily.com/documentation/api-reference/introduction",
       "class": "ok",
       "status": 200,
@@ -4487,6 +5839,19 @@
       "accept": "*/*",
       "sources": [
         "tavily:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://docs.tavily.com/documentation/keyless",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tavily:catalog.sources.keyless.url",
+        "tavily:catalog.routes.keyless-search-api.docs",
+        "tavily:catalog.routes.public-mcp.docs",
+        "tavily:catalog.routes.keyless-extract-api.docs"
       ]
     },
     {
@@ -4509,7 +5874,6 @@
         "tavily:entrypoints.api_keys",
         "tavily:checks.api_key_self_serve.evidence",
         "tavily:catalog.sources.docs.url",
-        "tavily:catalog.routes.search-api.entry_url",
         "tavily:catalog.routes.search-api.docs"
       ]
     },
@@ -4520,7 +5884,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "tavily:entrypoints.rate_limits"
+        "tavily:entrypoints.rate_limits",
+        "tavily:catalog.sources.rate-limits.url"
       ]
     },
     {
@@ -4644,7 +6009,8 @@
       "accept": "*/*",
       "sources": [
         "chroma:entrypoints.api_reference",
-        "chroma:checks.sandbox_or_test_mode.evidence"
+        "chroma:checks.sandbox_or_test_mode.evidence",
+        "chroma:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -4658,15 +6024,54 @@
       ]
     },
     {
-      "url": "https://docs.turso.tech/api-reference/introduction",
+      "url": "https://docs.turso.tech/api-reference/quickstart",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "turso:catalog.sources.api.url",
-        "turso:catalog.routes.platform-api.entry_url",
         "turso:catalog.routes.platform-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/cli/authentication",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.cli-auth.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/cli/db/create",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.create-database.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/cli/db/export",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.snapshot-export.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/cli/db/shell",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.logical-backup.url"
       ]
     },
     {
@@ -4677,8 +6082,102 @@
       "accept": "*/*",
       "sources": [
         "turso:catalog.sources.docs.url",
-        "turso:catalog.routes.cloud-cli.entry_url",
+        "turso:catalog.routes.cloud-cli.entry_url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/features/ai-and-embeddings",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.ai-embeddings.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/help/usage-and-billing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.usage.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/quickstart",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.cloud-quickstart.url",
         "turso:catalog.routes.cloud-cli.docs"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/authentication",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.sdk-auth.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/http/quickstart",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.sql-http.url",
+        "turso:catalog.routes.sql-http-api.entry_url",
+        "turso:catalog.routes.sql-http-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/http/reference",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.http-reference.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/introduction",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.sdk.url"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/ts/quickstart",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.ts-sdk.url",
+        "turso:catalog.routes.cloud-sdk.entry_url",
+        "turso:catalog.routes.cloud-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://docs.turso.tech/sdk/ts/reference",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.ts-reference.url"
       ]
     },
     {
@@ -4718,7 +6217,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "vapi:checks.api_key_self_serve.evidence"
+        "vapi:checks.api_key_self_serve.evidence",
+        "vapi:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -4749,6 +6249,16 @@
       "accept": "*/*",
       "sources": [
         "weaviate:entrypoints.llms_txt"
+      ]
+    },
+    {
+      "url": "https://docs.weaviate.io/weaviate",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "weaviate:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -4816,6 +6326,68 @@
       ]
     },
     {
+      "url": "https://docs.xiu.ai/en/router/api-compatibility/index.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.compatibility.url"
+      ]
+    },
+    {
+      "url": "https://docs.xiu.ai/en/router/models-pricing-usage/index.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.usage.url"
+      ]
+    },
+    {
+      "url": "https://docs.xiu.ai/en/router/quickstart/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.routes.model-api.docs"
+      ]
+    },
+    {
+      "url": "https://docs.xiu.ai/en/router/quickstart/index.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.quickstart.url"
+      ]
+    },
+    {
+      "url": "https://docs.xiu.ai/router/integrations/opencode/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.opencode.url"
+      ]
+    },
+    {
+      "url": "https://docs.xiu.ai/router/integrations/vercel-ai-sdk/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.vercel-ai-sdk.url",
+        "xiurouter:catalog.routes.vercel-ai-sdk.entry_url",
+        "xiurouter:catalog.routes.vercel-ai-sdk.docs"
+      ]
+    },
+    {
       "url": "https://docs.xquik.com",
       "class": "ok",
       "status": 200,
@@ -4863,7 +6435,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "xquik:entrypoints.api_reference"
+        "xquik:entrypoints.api_reference",
+        "xquik:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -5031,6 +6604,16 @@
       ]
     },
     {
+      "url": "https://docs.zapier.com/integrations",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "zapier:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://docs.zapier.com/llms.txt",
       "class": "ok",
       "status": 200,
@@ -5168,7 +6751,110 @@
       "sources": [
         "e2b:entrypoints.pricing",
         "e2b:checks.free_tier_or_trial.evidence",
-        "e2b:checks.self_serve_paid_upgrade.evidence"
+        "e2b:checks.self_serve_paid_upgrade.evidence",
+        "e2b:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://e2b.dev/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "e2b:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:homepage"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.routes.statistics-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/databrowser/product/view/TEC00118",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.hicp-annual.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/documents/272892/11336726/HICP%2Bimprovements%2B-%2BQuestions%2Band%2BAnswers-2026-EN.pdf",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.hicp-revisions.url",
+        "eurostat:catalog.sources.hicp-2026-changes.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/help/copyright-notice",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.reuse-policy.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/web/hicp/information-data",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.hicp-information.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-faq",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.api-faq.url"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.statistics-api.url",
+        "eurostat:catalog.routes.statistics-api.docs"
+      ]
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-introduction",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eurostat:catalog.sources.api-introduction.url"
       ]
     },
     {
@@ -5244,6 +6930,16 @@
       ]
     },
     {
+      "url": "https://elevenlabs.io/docs/overview/intro",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "elevenlabs:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://elevenlabs.io/pricing",
       "class": "ok",
       "status": 200,
@@ -5266,6 +6962,36 @@
       ]
     },
     {
+      "url": "https://eodhd.com/api/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/api/eod/",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.routes.public-demo-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/financial-apis-blog/introducing-the-congressional-trades-api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.sources.congress-plan.url"
+      ]
+    },
+    {
       "url": "https://eodhd.com/financial-apis/",
       "class": "ok",
       "status": 200,
@@ -5273,8 +6999,48 @@
       "accept": "*/*",
       "sources": [
         "eodhd:catalog.sources.docs.url",
-        "eodhd:catalog.routes.data-api.entry_url",
         "eodhd:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/financial-apis/api-for-historical-data-and-volumes",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.sources.eod-history.url",
+        "eodhd:catalog.routes.public-demo-api.docs"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/financial-apis/commercial-vs-personal-license-use",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.sources.license-scope.url"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/financial-apis/congressional-trades-api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.sources.congress.url"
+      ]
+    },
+    {
+      "url": "https://eodhd.com/financial-apis/terms-conditions",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "eodhd:catalog.sources.terms.url"
       ]
     },
     {
@@ -5298,14 +7064,46 @@
       ]
     },
     {
-      "url": "https://exa.ai/docs/reference/exa-mcp",
+      "url": "https://exa.ai/docs/admin/pricing",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
+        "exa:catalog.sources.contents-pricing.url"
+      ]
+    },
+    {
+      "url": "https://exa.ai/docs/contents/quickstart",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:catalog.sources.contents-guide.url"
+      ]
+    },
+    {
+      "url": "https://exa.ai/docs/get-started/exa-mcp",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:checks.oauth_support.evidence",
         "exa:catalog.sources.mcp.url",
+        "exa:catalog.sources.fetch-docs.url",
         "exa:catalog.routes.public-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://exa.ai/docs/reference/get-contents",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:catalog.sources.contents-reference.url"
       ]
     },
     {
@@ -5316,7 +7114,6 @@
       "accept": "*/*",
       "sources": [
         "exa:catalog.sources.docs.url",
-        "exa:catalog.routes.search-api.entry_url",
         "exa:catalog.routes.search-api.docs"
       ]
     },
@@ -5331,6 +7128,17 @@
         "exa:checks.free_tier_or_trial.evidence",
         "exa:checks.self_serve_paid_upgrade.evidence",
         "exa:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://exa.ai/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:checks.automation_permitted.evidence",
+        "exa:catalog.sources.terms.url"
       ]
     },
     {
@@ -5364,6 +7172,16 @@
       "accept": "*/*",
       "sources": [
         "fal:entrypoints.docs"
+      ]
+    },
+    {
+      "url": "https://fal.ai/docs/documentation/model-apis/overview",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "fal:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -5439,9 +7257,19 @@
       ]
     },
     {
+      "url": "https://financialmodelingprep.com/stable/",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "fmp:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
       "url": "https://finnhub.io/",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -5464,7 +7292,7 @@
       "url": "https://fireworks.ai",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "fireworks:homepage"
@@ -5646,7 +7474,6 @@
       "sources": [
         "frankfurter:homepage",
         "frankfurter:catalog.sources.docs.url",
-        "frankfurter:catalog.routes.data-api.entry_url",
         "frankfurter:catalog.routes.data-api.docs"
       ]
     },
@@ -5655,10 +7482,9 @@
       "class": "ok",
       "status": 200,
       "method": "HEAD",
-      "accept": "application/json, text/event-stream",
+      "accept": "*/*",
       "sources": [
         "frankfurter:catalog.sources.mcp.url",
-        "frankfurter:catalog.routes.rates-mcp.entry_url",
         "frankfurter:catalog.routes.rates-mcp.docs"
       ]
     },
@@ -5690,8 +7516,120 @@
       "accept": "*/*",
       "sources": [
         "fred:catalog.sources.docs.url",
-        "fred:catalog.routes.data-api.entry_url",
         "fred:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/docs/api/terms_of_use.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.sources.fred-linked-terms.url"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/help/account/fred-account-features/register",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "fred:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/help/data/connecting-fred-to-ai-services/FRED-MCP-Connector",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "fred:catalog.sources.mcp.url",
+        "fred:catalog.routes.data-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/legal/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.sources.fred-current-terms.url",
+        "fred:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:homepage"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/docs/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.sources.api.url",
+        "geocode-maps-co:catalog.routes.geocoding-api.docs"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/docs/endpoints/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.sources.endpoints.url"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/join/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/plans/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/search",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.routes.geocoding-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://geocode.maps.co/terms/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geocode-maps-co:catalog.sources.terms.url"
       ]
     },
     {
@@ -5712,6 +7650,16 @@
       "accept": "*/*",
       "sources": [
         "github:homepage"
+      ]
+    },
+    {
+      "url": "https://github.com/alphavantage/alpha_vantage_mcp/tree/3ed9b05db06d16476d326a12441d68ad071b261a",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.sources.mcp-source.url"
       ]
     },
     {
@@ -5782,6 +7730,37 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "cloudflare:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/cogdepot/mcp-server",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "cog-depot:catalog.sources.mcp-repo.url",
+        "cog-depot:catalog.routes.marketplace-mcp-local.entry_url"
+      ]
+    },
+    {
+      "url": "https://github.com/cogdepot/mcp-server#install",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.routes.marketplace-mcp-local.docs"
+      ]
+    },
+    {
+      "url": "https://github.com/cogdepot/mcp-server#remote-hosted-oauth",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "cog-depot:catalog.routes.marketplace-mcp-remote.docs"
       ]
     },
     {
@@ -5863,7 +7842,28 @@
       "method": "HEAD",
       "accept": "application/json, text/event-stream",
       "sources": [
-        "exa:entrypoints.mcp_official"
+        "exa:entrypoints.mcp_official",
+        "exa:catalog.sources.mcp-repo.url"
+      ]
+    },
+    {
+      "url": "https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/config.ts",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:catalog.sources.mcp-fetch-config.url"
+      ]
+    },
+    {
+      "url": "https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/webFetch.ts",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "exa:catalog.sources.mcp-web-fetch.url"
       ]
     },
     {
@@ -5877,6 +7877,17 @@
       ]
     },
     {
+      "url": "https://github.com/fossgis/openstreetmap.de/blob/main/content/nutzen/dienste-osm-de.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.sources.operator-services.url",
+        "valhalla:catalog.sources.operator-services.url"
+      ]
+    },
+    {
       "url": "https://github.com/getsentry/sentry-api-schema",
       "class": "ok",
       "status": 200,
@@ -5884,6 +7895,16 @@
       "accept": "*/*",
       "sources": [
         "sentry:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/github/advisory-database",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "github:catalog.sources.advisory-data.url"
       ]
     },
     {
@@ -5934,6 +7955,56 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "jina:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/komoot/photon",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.sources.repository.url"
+      ]
+    },
+    {
+      "url": "https://github.com/komoot/photon/blob/master/docs/api-v1.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.sources.api-docs.url"
+      ]
+    },
+    {
+      "url": "https://github.com/komoot/photon/discussions/1044",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.sources.abuse-protection.url"
+      ]
+    },
+    {
+      "url": "https://github.com/komoot/photon/discussions/598",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.sources.demo-limits.url"
+      ]
+    },
+    {
+      "url": "https://github.com/komoot/photon/discussions/848",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.sources.personal-demo-use.url"
       ]
     },
     {
@@ -6055,6 +8126,56 @@
       ]
     },
     {
+      "url": "https://github.com/nager/Nager.Date",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.project.url"
+      ]
+    },
+    {
+      "url": "https://github.com/nager/Nager.Date/blob/main/src/Nager.Date/HolidayProviders/GermanyHolidayProvider.cs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.germany-coverage.url"
+      ]
+    },
+    {
+      "url": "https://github.com/nager/Nager.Date/issues/986",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.version-announcement.url"
+      ]
+    },
+    {
+      "url": "https://github.com/nager/Nager.Date/issues/986#issuecomment-5031919449",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.free-community.url"
+      ]
+    },
+    {
+      "url": "https://github.com/neondatabase/claimable-neon/blob/main/docs/overview.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.claimable-development-status.url"
+      ]
+    },
+    {
       "url": "https://github.com/neondatabase/mcp-server-neon",
       "class": "ok",
       "status": 200,
@@ -6085,6 +8206,26 @@
       ]
     },
     {
+      "url": "https://github.com/Olorinm/agent-friendly-services/pull/13",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "skyaccess:catalog.sources.vendor-pr.url"
+      ]
+    },
+    {
+      "url": "https://github.com/Olorinm/agent-friendly-services/pull/4",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.vendor-pr.url"
+      ]
+    },
+    {
       "url": "https://github.com/openai/openai-openapi",
       "class": "ok",
       "status": 200,
@@ -6092,6 +8233,46 @@
       "accept": "*/*",
       "sources": [
         "openai:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/openpotato/openholidaysapi.data/blob/main/LICENSE",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.data-licence.url"
+      ]
+    },
+    {
+      "url": "https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/holidays/holidays.public.csv",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.german-coverage.url"
+      ]
+    },
+    {
+      "url": "https://github.com/openpotato/openholidaysapi.data/blob/main/src/de/subdivisions.csv",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.german-subdivisions.url"
+      ]
+    },
+    {
+      "url": "https://github.com/openpotato/openholidaysapi/blob/main/src/webservice/Controllers/HolidaysController.cs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.filter-implementation.url"
       ]
     },
     {
@@ -6144,6 +8325,26 @@
         "github:entrypoints.pricing",
         "github:checks.free_tier_or_trial.evidence",
         "github:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://github.com/Project-OSRM/osrm-backend/wiki/Api-usage-policy",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.sources.policy-scope.url"
+      ]
+    },
+    {
+      "url": "https://github.com/Project-OSRM/osrm-backend/wiki/Demo-server",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.sources.demo.url"
       ]
     },
     {
@@ -6273,6 +8474,38 @@
       ]
     },
     {
+      "url": "https://github.com/SimFin/simfin",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "simfin:catalog.sources.python-sdk.url",
+        "simfin:catalog.routes.data-sdk.entry_url"
+      ]
+    },
+    {
+      "url": "https://github.com/SimFin/simfin#readme",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "simfin:catalog.routes.data-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://github.com/sky-access/skyaccess-mcp",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "skyaccess:catalog.sources.repo.url",
+        "skyaccess:catalog.routes.remote-mcp.docs"
+      ]
+    },
+    {
       "url": "https://github.com/slackapi/slack-api-specs",
       "class": "ok",
       "status": 200,
@@ -6300,6 +8533,28 @@
       "accept": "*/*",
       "sources": [
         "stripe:entrypoints.openapi"
+      ]
+    },
+    {
+      "url": "https://github.com/Tencent/AgentlyMail",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tencent-agently-mail:catalog.sources.repo.url",
+        "tencent-agently-mail:catalog.routes.mail-cli.entry_url"
+      ]
+    },
+    {
+      "url": "https://github.com/Tencent/AgentlyMail/blob/main/skills/SKILL.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tencent-agently-mail:catalog.sources.cli-guide.url",
+        "tencent-agently-mail:catalog.routes.mail-cli.docs"
       ]
     },
     {
@@ -6355,6 +8610,36 @@
       ]
     },
     {
+      "url": "https://github.com/valhalla/valhalla/blob/master/docs/docs/api/openapi.yaml",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.sources.openapi.url"
+      ]
+    },
+    {
+      "url": "https://github.com/valhalla/valhalla/blob/master/src/tyr/route_serializer_valhalla.cc",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.sources.response-format.url"
+      ]
+    },
+    {
+      "url": "https://github.com/valhalla/valhalla/discussions/3373",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.sources.demo-limits.url"
+      ]
+    },
+    {
       "url": "https://github.com/VapiAI/mcp-server",
       "class": "ok",
       "status": 200,
@@ -6362,6 +8647,86 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "vapi:entrypoints.mcp_official"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/docs/buyer-quickstart.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.buyer-guide.url"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/README.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.readme.url"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/index.js",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.sdk-source.url"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/a9a5fd8aa7ecb9910e4a291b4718aa659ea41fbe/sdk/README.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.sources.sdk-docs.url"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/main/docs/buyer-quickstart.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.routes.rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/main/README.md#using-as-mcp-server-claude-desktop-cursor-etc",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.routes.official-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/blob/main/sdk/README.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.routes.javascript-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://github.com/vbkotecha/agentservices-api/tree/main/sdk",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentservices:catalog.routes.javascript-sdk.entry_url"
       ]
     },
     {
@@ -6412,6 +8777,129 @@
       "accept": "*/*",
       "sources": [
         "gitlab:entrypoints.cli"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.api.url"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/data/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.sources.url"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/faq/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.faq.url"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/get-v1-vulns/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.record.url"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/post-v1-query/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.query.url"
+      ]
+    },
+    {
+      "url": "https://google.github.io/osv.dev/quickstart/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.quickstart.url",
+        "osv:catalog.routes.public-api.docs"
+      ]
+    },
+    {
+      "url": "https://goqr.me/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.sources.homepage.url"
+      ]
+    },
+    {
+      "url": "https://goqr.me/api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:homepage",
+        "goqr:catalog.sources.api.url"
+      ]
+    },
+    {
+      "url": "https://goqr.me/api/doc/create-qr-code/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.sources.create.url",
+        "goqr:catalog.routes.public-qr-api.docs"
+      ]
+    },
+    {
+      "url": "https://goqr.me/de/rechtliches/datenschutz-goqrme.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.sources.privacy-de.url"
+      ]
+    },
+    {
+      "url": "https://goqr.me/legal/tos-api.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.sources.api-terms.url"
+      ]
+    },
+    {
+      "url": "https://goqr.me/privacy-safety-security/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "goqr:catalog.sources.api-privacy.url"
       ]
     },
     {
@@ -6534,6 +9022,57 @@
       ]
     },
     {
+      "url": "https://handbook.gitlab.com/handbook/legal/acceptable-use-policy/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:catalog.sources.acceptable-use.url"
+      ]
+    },
+    {
+      "url": "https://handbook.gitlab.com/handbook/legal/api-terms/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:checks.automation_permitted.evidence",
+        "gitlab:catalog.sources.api-terms.url"
+      ]
+    },
+    {
+      "url": "https://handbook.gitlab.com/handbook/legal/subscription-agreement/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "gitlab:catalog.sources.subscription-agreement.url"
+      ]
+    },
+    {
+      "url": "https://help.coda.io/hc/en-us/articles/39555798022797-Doc-limits-on-Free-plan",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "coda:catalog.sources.free-plan.url"
+      ]
+    },
+    {
+      "url": "https://help.coda.io/hc/en-us/articles/39555865037581-Sign-in-and-out-of-Coda",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "coda:catalog.sources.signup.url"
+      ]
+    },
+    {
       "url": "https://help.coda.io/hc/en-us/articles/44722661982989-Connect-to-the-Coda-MCP",
       "class": "inconclusive",
       "status": 403,
@@ -6542,6 +9081,87 @@
       "sources": [
         "coda:catalog.sources.mcp.url",
         "coda:catalog.routes.hosted-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/access/example-costs/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.costs.url"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/access/pricing/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/api/authentication/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.authentication.url",
+        "openalex:catalog.routes.public-rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/api/searching/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.search.url"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/data/authorships/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.authorships.url"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/data/how-its-built/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.provenance.url"
+      ]
+    },
+    {
+      "url": "https://help.openalex.org/data/works/attributes/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.work-fields.url"
+      ]
+    },
+    {
+      "url": "https://help.superhuman.com/hc/en-us/articles/46210102879629-Using-the-Superhuman-Docs-MCP",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "coda:catalog.sources.mcp-tools.url"
       ]
     },
     {
@@ -6823,6 +9443,27 @@
       ]
     },
     {
+      "url": "https://insynet.se/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "insynet:homepage"
+      ]
+    },
+    {
+      "url": "https://insynet.se/developers",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "insynet:catalog.sources.docs.url",
+        "insynet:catalog.routes.data-api.docs"
+      ]
+    },
+    {
       "url": "https://jina.ai",
       "class": "ok",
       "status": 200,
@@ -6843,10 +9484,32 @@
         "jina:entrypoints.api_keys",
         "jina:checks.self_serve_signup.evidence",
         "jina:checks.api_key_self_serve.evidence",
-        "jina:checks.free_tier_or_trial.evidence",
         "jina:checks.self_serve_paid_upgrade.evidence",
         "jina:checks.usage_dashboard.evidence",
         "jina:catalog.sources.existing-docs.url"
+      ]
+    },
+    {
+      "url": "https://jina.ai/legal/#terms-and-conditions",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "jina:checks.automation_permitted.evidence",
+        "jina:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://jina.ai/reader/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "jina:checks.free_tier_or_trial.evidence",
+        "jina:catalog.sources.reader-docs.url",
+        "jina:catalog.routes.reader-api.docs"
       ]
     },
     {
@@ -6890,6 +9553,16 @@
       "accept": "*/*",
       "sources": [
         "postman:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://learning.postman.com/docs/getting-started/overview/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "postman:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -6962,7 +9635,8 @@
       "accept": "*/*",
       "sources": [
         "linear:entrypoints.docs",
-        "linear:checks.oauth_support.evidence"
+        "linear:checks.oauth_support.evidence",
+        "linear:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -7051,6 +9725,46 @@
       ]
     },
     {
+      "url": "https://locationiq.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:homepage"
+      ]
+    },
+    {
+      "url": "https://locationiq.com/attribution",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.attribution.url"
+      ]
+    },
+    {
+      "url": "https://locationiq.com/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://locationiq.com/tos",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://lumalabs.ai",
       "class": "ok",
       "status": 200,
@@ -7101,6 +9815,16 @@
       "accept": "*/*",
       "sources": [
         "mail-tm:homepage"
+      ]
+    },
+    {
+      "url": "https://mail.tm/en/faq/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "mail-tm:catalog.sources.faq.url"
       ]
     },
     {
@@ -7156,18 +9880,47 @@
       "accept": "*/*",
       "sources": [
         "massive:catalog.sources.docs.url",
-        "massive:catalog.routes.data-api.entry_url",
         "massive:catalog.routes.data-api.docs"
       ]
     },
     {
-      "url": "https://massive.com/pricing",
+      "url": "https://massive.com/docs/rest/stocks/aggregates/daily-ticker-summary",
       "class": "ok",
       "status": 200,
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "massive:catalog.sources.access.url"
+        "massive:catalog.sources.daily-open-close.url"
+      ]
+    },
+    {
+      "url": "https://massive.com/knowledge-base/article/market-data-outside-of-normal-hours",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "massive:catalog.sources.extended-hours.url"
+      ]
+    },
+    {
+      "url": "https://massive.com/legal/individuals-terms-of-service",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "massive:catalog.sources.individual-terms.url"
+      ]
+    },
+    {
+      "url": "https://massive.com/legal/market-data-terms-of-service",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "massive:catalog.sources.market-data-terms.url"
       ]
     },
     {
@@ -7181,9 +9934,30 @@
       ]
     },
     {
+      "url": "https://mcp.alphavantage.co/",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.sources.mcp.url",
+        "alpha-vantage:catalog.routes.hosted-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://mcp.alphavantage.co/mcp",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "alpha-vantage:catalog.routes.hosted-mcp.entry_url"
+      ]
+    },
+    {
       "url": "https://mcp.api.coingecko.com/mcp",
-      "class": "broken",
-      "status": 404,
+      "class": "inconclusive",
+      "status": 405,
       "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
@@ -7198,6 +9972,16 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "cloudflare:catalog.routes.api-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.cogdepot.com",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "cog-depot:catalog.routes.marketplace-mcp-remote.entry_url"
       ]
     },
     {
@@ -7231,6 +10015,36 @@
       ]
     },
     {
+      "url": "https://mcp.financialdatasets.ai/",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "financial-datasets:catalog.routes.data-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.financialdatasets.ai/api",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "financial-datasets:catalog.routes.data-mcp-keyed.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.frankfurter.dev/",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "frankfurter:catalog.routes.rates-mcp.entry_url"
+      ]
+    },
+    {
       "url": "https://mcp.kiwi.com",
       "class": "inconclusive",
       "status": 405,
@@ -7258,6 +10072,56 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "coingecko:catalog.routes.keyed-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.quiverquant.com/",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "quiver-quantitative:catalog.routes.data-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.skyaccess.com/mcp",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "skyaccess:catalog.routes.remote-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.stlouisfed.org",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "fred:catalog.routes.data-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://mcp.stlouisfed.org/.well-known/oauth-protected-resource",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "fred:catalog.sources.mcp-auth.url"
+      ]
+    },
+    {
+      "url": "https://mcp.tavily.com/mcp/",
+      "class": "inconclusive",
+      "status": 405,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "tavily:catalog.routes.public-mcp.entry_url"
       ]
     },
     {
@@ -7338,6 +10202,16 @@
       ]
     },
     {
+      "url": "https://modal.com/docs/guide/billing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "modal:catalog.sources.billing.url"
+      ]
+    },
+    {
       "url": "https://modal.com/docs/guide/sandbox",
       "class": "ok",
       "status": 200,
@@ -7347,6 +10221,18 @@
         "modal:entrypoints.agent_docs",
         "modal:checks.sandbox_or_test_mode.evidence",
         "modal:checks.automation_permitted.evidence"
+      ]
+    },
+    {
+      "url": "https://modal.com/docs/guide/sandboxes",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "modal:catalog.sources.sandboxes.url",
+        "modal:catalog.routes.sandbox-sdk.entry_url",
+        "modal:catalog.routes.sandbox-sdk.docs"
       ]
     },
     {
@@ -7383,6 +10269,16 @@
       ]
     },
     {
+      "url": "https://modal.com/legal/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "modal:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://modal.com/llms.txt",
       "class": "ok",
       "status": 200,
@@ -7401,7 +10297,8 @@
       "sources": [
         "modal:entrypoints.pricing",
         "modal:checks.free_tier_or_trial.evidence",
-        "modal:checks.self_serve_paid_upgrade.evidence"
+        "modal:checks.self_serve_paid_upgrade.evidence",
+        "modal:catalog.sources.pricing.url"
       ]
     },
     {
@@ -7412,7 +10309,8 @@
       "accept": "*/*",
       "sources": [
         "modal:entrypoints.signup",
-        "modal:checks.self_serve_signup.evidence"
+        "modal:checks.self_serve_signup.evidence",
+        "modal:catalog.sources.signup.url"
       ]
     },
     {
@@ -7423,6 +10321,16 @@
       "accept": "*/*",
       "sources": [
         "qwen:entrypoints.signup"
+      ]
+    },
+    {
+      "url": "https://my.locationiq.com/register",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.sources.signup.url"
       ]
     },
     {
@@ -7450,6 +10358,67 @@
       ]
     },
     {
+      "url": "https://nagerholidays.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:homepage"
+      ]
+    },
+    {
+      "url": "https://nagerholidays.com/api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.api-docs.url",
+        "nager-date:catalog.routes.community-api-v4.docs"
+      ]
+    },
+    {
+      "url": "https://nagerholidays.com/api/v4/Holidays",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.routes.community-api-v4.entry_url"
+      ]
+    },
+    {
+      "url": "https://nagerholidays.com/integration/getstarted",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.integration.url"
+      ]
+    },
+    {
+      "url": "https://nagerholidays.com/legal/termsofservice",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://nagerholidays.com/scalar/#community-api-v4",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nager-date:catalog.sources.reference.url"
+      ]
+    },
+    {
       "url": "https://neon.com",
       "class": "ok",
       "status": 200,
@@ -7460,6 +10429,26 @@
       ]
     },
     {
+      "url": "https://neon.com/auth.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.claimable-auth.url"
+      ]
+    },
+    {
+      "url": "https://neon.com/blog/neon-free-plan-1-gb-per-project",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.free-storage-update.url"
+      ]
+    },
+    {
       "url": "https://neon.com/blog/neon-launchpad",
       "class": "ok",
       "status": 200,
@@ -7467,6 +10456,16 @@
       "accept": "*/*",
       "sources": [
         "neon:catalog.sources.launchpad-guide.url"
+      ]
+    },
+    {
+      "url": "https://neon.com/claimable-neon",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.claimable.url"
       ]
     },
     {
@@ -7497,6 +10496,16 @@
       "accept": "*/*",
       "sources": [
         "neon:entrypoints.changelog"
+      ]
+    },
+    {
+      "url": "https://neon.com/docs/connect/connection-pooling",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.connection-pooling.url"
       ]
     },
     {
@@ -7543,6 +10552,48 @@
       ]
     },
     {
+      "url": "https://neon.com/docs/manage/backup-pg-dump",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.logical-backup.url"
+      ]
+    },
+    {
+      "url": "https://neon.com/docs/manage/databases",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.databases.url"
+      ]
+    },
+    {
+      "url": "https://neon.com/docs/manage/roles",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.roles.url"
+      ]
+    },
+    {
+      "url": "https://neon.com/docs/reference/claimable-neon",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:checks.automation_permitted.evidence",
+        "neon:catalog.sources.claimable-docs.url",
+        "neon:catalog.routes.claimable-api.docs"
+      ]
+    },
+    {
       "url": "https://neon.com/docs/reference/neon-cli",
       "class": "ok",
       "status": 200,
@@ -7563,6 +10614,16 @@
       ]
     },
     {
+      "url": "https://neon.com/platform-terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.platform-terms.url"
+      ]
+    },
+    {
       "url": "https://neon.com/pricing",
       "class": "ok",
       "status": 200,
@@ -7571,7 +10632,8 @@
       "sources": [
         "neon:entrypoints.pricing",
         "neon:checks.free_tier_or_trial.evidence",
-        "neon:checks.self_serve_paid_upgrade.evidence"
+        "neon:checks.self_serve_paid_upgrade.evidence",
+        "neon:catalog.sources.current-pricing.url"
       ]
     },
     {
@@ -7606,6 +10668,78 @@
       ]
     },
     {
+      "url": "https://nominatim.openstreetmap.org/search",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.routes.public-search-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://nominatim.org/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:homepage"
+      ]
+    },
+    {
+      "url": "https://nominatim.org/release-docs/latest/api/Faq/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.faq.url"
+      ]
+    },
+    {
+      "url": "https://nominatim.org/release-docs/latest/api/Output/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.output-docs.url"
+      ]
+    },
+    {
+      "url": "https://nominatim.org/release-docs/latest/api/Search/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.search-docs.url",
+        "nominatim:catalog.routes.public-search-api.docs"
+      ]
+    },
+    {
+      "url": "https://notion.notion.site/Personal-Use-Terms-of-Service-00e4e5d0f2b9411cbee6493f15779500",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.personal-terms.url"
+      ]
+    },
+    {
+      "url": "https://notion.notion.site/Terms-Conditions-4e1c5dd3e3de45dfa4a8ed60f1a43da0",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:checks.automation_permitted.evidence",
+        "notion:catalog.sources.msa.url"
+      ]
+    },
+    {
       "url": "https://open-api.netlify.com",
       "class": "ok",
       "status": 200,
@@ -7613,6 +10747,69 @@
       "accept": "*/*",
       "sources": [
         "netlify:entrypoints.api_reference"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:homepage",
+        "open-meteo:catalog.sources.homepage.url"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/en/docs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.sources.forecast-docs.url",
+        "open-meteo:catalog.routes.forecast-api.docs"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/en/docs/historical-weather-api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.sources.archive-docs.url",
+        "open-meteo:catalog.routes.archive-api.docs"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/en/licence",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.sources.licence.url"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/en/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://open-meteo.com/en/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "open-meteo:catalog.sources.terms.url"
       ]
     },
     {
@@ -7804,6 +11001,26 @@
       ]
     },
     {
+      "url": "https://openalex.org/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:homepage"
+      ]
+    },
+    {
+      "url": "https://openalex.org/OpenAlex_termsofservice.pdf",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openalex:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://openapi.vercel.sh",
       "class": "ok",
       "status": 200,
@@ -7831,6 +11048,26 @@
       "accept": "*/*",
       "sources": [
         "open-exchange-rates:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://openholidaysapi.org/PublicHolidays",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.routes.public-holidays-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://openholidaysapi.org/swagger/v1/swagger.json",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.openapi.url"
       ]
     },
     {
@@ -7925,6 +11162,78 @@
       "accept": "*/*",
       "sources": [
         "openrouter:entrypoints.api_keys"
+      ]
+    },
+    {
+      "url": "https://operations.osmfoundation.org/policies/nominatim/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.usage-policy.url"
+      ]
+    },
+    {
+      "url": "https://osmfoundation.org/wiki/Licence/Attribution_Guidelines",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.attribution.url",
+        "osrm:catalog.sources.attribution.url",
+        "photon:catalog.sources.attribution.url"
+      ]
+    },
+    {
+      "url": "https://osmfoundation.org/wiki/Services_and_tile_users_privacy_FAQ",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.service-access.url"
+      ]
+    },
+    {
+      "url": "https://osmfoundation.org/wiki/Terms_of_Use",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "nominatim:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://ossf.github.io/osv-schema/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.schema.url"
+      ]
+    },
+    {
+      "url": "https://osv.dev/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:homepage"
+      ]
+    },
+    {
+      "url": "https://osv.dev/blog/posts/announcing-osv-service-level-objectives/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osv:catalog.sources.free-service.url"
       ]
     },
     {
@@ -8085,6 +11394,28 @@
       "accept": "*/*",
       "sources": [
         "wechat-pay:homepage"
+      ]
+    },
+    {
+      "url": "https://photon.komoot.io/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:homepage",
+        "photon:catalog.sources.public-api.url",
+        "photon:catalog.routes.public-search-api.docs"
+      ]
+    },
+    {
+      "url": "https://photon.komoot.io/api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "photon:catalog.routes.public-search-api.entry_url"
       ]
     },
     {
@@ -8393,6 +11724,27 @@
       ]
     },
     {
+      "url": "https://project-osrm.org/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:homepage"
+      ]
+    },
+    {
+      "url": "https://project-osrm.org/docs/v26.5.0/http",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.sources.api.url",
+        "osrm:catalog.routes.public-route-api.docs"
+      ]
+    },
+    {
       "url": "https://pypi.org/project/grist-api/",
       "class": "ok",
       "status": 200,
@@ -8444,6 +11796,16 @@
       ]
     },
     {
+      "url": "https://qdrant.tech/documentation/overview/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "qdrant:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://qdrant.tech/llms.txt",
       "class": "ok",
       "status": 200,
@@ -8463,6 +11825,88 @@
         "qdrant:entrypoints.pricing",
         "qdrant:checks.free_tier_or_trial.evidence",
         "qdrant:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/documentation/qr-codes/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.sources.qr-api.url",
+        "quickchart:catalog.routes.public-qr-api.docs"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/pricing/qr/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.sources.qr-pricing.url"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/privacy/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.sources.privacy.url"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/qr",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.routes.public-qr-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/qr-code-api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:homepage",
+        "quickchart:catalog.sources.qr-overview.url"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/security/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.sources.security.url"
+      ]
+    },
+    {
+      "url": "https://quickchart.io/terms/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "quickchart:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://r.jina.ai/",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "jina:catalog.routes.reader-api.entry_url"
       ]
     },
     {
@@ -8564,6 +12008,16 @@
       ]
     },
     {
+      "url": "https://redis.io/docs/latest/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "redis:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://redis.io/docs/latest/develop/tools/cli/",
       "class": "ok",
       "status": 200,
@@ -8635,6 +12089,16 @@
       "sources": [
         "redis:entrypoints.signup",
         "redis:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://registry.modelcontextprotocol.io/v0/servers?search=com.skyaccess",
+      "class": "broken",
+      "status": null,
+      "detail": "This operation was aborted",
+      "accept": "*/*",
+      "sources": [
+        "skyaccess:catalog.sources.registry.url"
       ]
     },
     {
@@ -8902,6 +12366,16 @@
       ]
     },
     {
+      "url": "https://resend.com/docs/introduction",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "resend:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://resend.com/docs/sdks",
       "class": "ok",
       "status": 200,
@@ -8942,6 +12416,67 @@
       "sources": [
         "resend:entrypoints.signup",
         "resend:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://router-api.xiu.ai",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.routes.model-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://router.project-osrm.org/route/v1/driving",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.routes.public-route-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://router.xiu.ai/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:homepage"
+      ]
+    },
+    {
+      "url": "https://router.xiu.ai/en/data-privacy",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.privacy.url"
+      ]
+    },
+    {
+      "url": "https://router.xiu.ai/en/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "xiurouter:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://routing.openstreetmap.de/about.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "osrm:catalog.sources.operator.url",
+        "valhalla:catalog.sources.operator-policy-summary.url"
       ]
     },
     {
@@ -9100,7 +12635,28 @@
       "sources": [
         "serper:homepage",
         "serper:catalog.sources.docs.url",
-        "serper:catalog.routes.search-api.entry_url"
+        "serper:catalog.routes.search-api.entry_url",
+        "serper:catalog.routes.search-api.docs"
+      ]
+    },
+    {
+      "url": "https://serper.dev/signup",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "serper:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://serper.dev/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "serper:catalog.sources.terms.url"
       ]
     },
     {
@@ -9130,7 +12686,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "shopify:entrypoints.api_reference"
+        "shopify:entrypoints.api_reference",
+        "shopify:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -9233,7 +12790,6 @@
       "accept": "*/*",
       "sources": [
         "fmp:catalog.sources.docs.url",
-        "fmp:catalog.routes.data-api.entry_url",
         "fmp:catalog.routes.data-api.docs"
       ]
     },
@@ -9256,6 +12812,56 @@
       "accept": "*/*",
       "sources": [
         "fmp:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://site.financialmodelingprep.com/developer/docs/stable/cashflow-statement",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "fmp:catalog.sources.cash-flow.url"
+      ]
+    },
+    {
+      "url": "https://site.financialmodelingprep.com/developer/docs/stable/house-trading",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "fmp:catalog.sources.house-trades.url"
+      ]
+    },
+    {
+      "url": "https://site.financialmodelingprep.com/developer/docs/stable/income-statement",
+      "class": "inconclusive",
+      "status": 403,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "fmp:catalog.sources.income-statements.url"
+      ]
+    },
+    {
+      "url": "https://skyaccess.com/",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "skyaccess:homepage"
+      ]
+    },
+    {
+      "url": "https://skyaccess.com/privacy#connector",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "skyaccess:catalog.sources.privacy.url"
       ]
     },
     {
@@ -9985,6 +13591,16 @@
       ]
     },
     {
+      "url": "https://superhuman.com/legal/terms/developer",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "coda:catalog.sources.developer-terms.url"
+      ]
+    },
+    {
       "url": "https://support.airgateway.com/en-US/kb/article/4/introduction-to-airgateway-platform-api",
       "class": "ok",
       "status": 200,
@@ -10004,6 +13620,16 @@
       "accept": "*/*",
       "sources": [
         "airtable:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://support.airtable.com/articles/2675548758-creating-canceling-and-deleting-your-airtable-account",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "airtable:catalog.sources.signup.url"
       ]
     },
     {
@@ -10027,6 +13653,26 @@
       ]
     },
     {
+      "url": "https://support.airtable.com/articles/8468540431-Airtable-account-email-verification",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "airtable:catalog.sources.email-verification.url"
+      ]
+    },
+    {
+      "url": "https://support.airtable.com/articles/9934989703-creating-personal-access-tokens",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "airtable:catalog.sources.auth-help.url"
+      ]
+    },
+    {
       "url": "https://support.atlassian.com/organization-administration/docs/manage-product-sandboxes/",
       "class": "ok",
       "status": 200,
@@ -10044,8 +13690,37 @@
       "accept": "*/*",
       "sources": [
         "grist:catalog.sources.api.url",
-        "grist:catalog.routes.rest-api.entry_url",
         "grist:catalog.routes.rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://support.getgrist.com/formulas/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.sources.formulas.url"
+      ]
+    },
+    {
+      "url": "https://support.getgrist.com/getting-started/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://support.getgrist.com/limits/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.sources.limits.url"
       ]
     },
     {
@@ -10148,6 +13823,16 @@
       ]
     },
     {
+      "url": "https://tlyddvcmpcbhotxhbiao.supabase.co/functions/v1/api-v1",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "insynet:catalog.routes.data-api.entry_url"
+      ]
+    },
+    {
       "url": "https://tools.slack.dev",
       "class": "ok",
       "status": 200,
@@ -10155,6 +13840,68 @@
       "accept": "*/*",
       "sources": [
         "slack:entrypoints.sdks"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tracefour:homepage"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/api-docs",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tracefour:catalog.sources.docs.url",
+        "tracefour:catalog.routes.data-api-keyless.docs"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/api-docs/congress-trading-api",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tracefour:catalog.sources.congress.url"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/api-docs/mcp",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tracefour:catalog.sources.mcp.url",
+        "tracefour:catalog.routes.data-mcp.docs"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/v1",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "tracefour:catalog.routes.data-api-keyless.entry_url"
+      ]
+    },
+    {
+      "url": "https://tracefour.com/v1/mcp",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "application/json, text/event-stream",
+      "sources": [
+        "tracefour:catalog.routes.data-mcp.entry_url"
       ]
     },
     {
@@ -10188,6 +13935,26 @@
       "accept": "*/*",
       "sources": [
         "turso:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://turso.tech/terms-of-use",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://turso.tech/vector",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.native-vector.url"
       ]
     },
     {
@@ -10253,10 +14020,19 @@
       "sources": [
         "twelve-data:catalog.sources.docs.url",
         "twelve-data:catalog.sources.sdk.url",
-        "twelve-data:catalog.routes.data-api.entry_url",
         "twelve-data:catalog.routes.data-api.docs",
         "twelve-data:catalog.routes.python-sdk.entry_url",
         "twelve-data:catalog.routes.python-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://twelvedata.com/docs/llms/market-data/time-series.md",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "twelve-data:catalog.sources.time-series.url"
       ]
     },
     {
@@ -10267,6 +14043,26 @@
       "accept": "*/*",
       "sources": [
         "twelve-data:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://twelvedata.com/stocks/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "twelve-data:catalog.sources.stocks-access.url"
+      ]
+    },
+    {
+      "url": "https://twelvedata.com/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "twelve-data:catalog.sources.terms.url"
       ]
     },
     {
@@ -10302,6 +14098,16 @@
       ]
     },
     {
+      "url": "https://upstash.com/docs/introduction",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "upstash:catalog.sources.classification-docs.url"
+      ]
+    },
+    {
       "url": "https://upstash.com/docs/llms.txt",
       "class": "ok",
       "status": 200,
@@ -10321,6 +14127,58 @@
         "upstash:entrypoints.pricing",
         "upstash:checks.free_tier_or_trial.evidence",
         "upstash:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://us1.locationiq.com/v1/search",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "locationiq:catalog.routes.geocoding-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://valhalla.github.io/valhalla/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:homepage",
+        "valhalla:catalog.sources.demo.url"
+      ]
+    },
+    {
+      "url": "https://valhalla.github.io/valhalla/api/route/api-reference/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.sources.api.url",
+        "valhalla:catalog.routes.public-route-api.docs"
+      ]
+    },
+    {
+      "url": "https://valhalla.github.io/valhalla/contributing/data/attribution/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.sources.attribution.url"
+      ]
+    },
+    {
+      "url": "https://valhalla1.openstreetmap.de/route",
+      "class": "inconclusive",
+      "status": 400,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "valhalla:catalog.routes.public-route-api.entry_url"
       ]
     },
     {
@@ -10597,6 +14455,16 @@
       ]
     },
     {
+      "url": "https://www.agentmail.to/legal/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "agentmail:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://www.agentmail.to/pricing",
       "class": "ok",
       "status": 200,
@@ -10614,6 +14482,27 @@
       "accept": "*/*",
       "sources": [
         "airtable:homepage"
+      ]
+    },
+    {
+      "url": "https://www.airtable.com/company/developer-terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "airtable:checks.automation_permitted.evidence",
+        "airtable:catalog.sources.developer-terms.url"
+      ]
+    },
+    {
+      "url": "https://www.airtable.com/company/tos",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "airtable:catalog.sources.terms.url"
       ]
     },
     {
@@ -10720,8 +14609,17 @@
       "accept": "*/*",
       "sources": [
         "alpha-vantage:catalog.sources.docs.url",
-        "alpha-vantage:catalog.routes.data-api.entry_url",
         "alpha-vantage:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://www.alphavantage.co/query",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.routes.data-api.entry_url"
       ]
     },
     {
@@ -10731,8 +14629,17 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "alpha-vantage:catalog.sources.access.url",
-        "alpha-vantage:catalog.sources.mcp-discovery.url"
+        "alpha-vantage:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://www.alphavantage.co/terms_of_service/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "alpha-vantage:catalog.sources.terms.url"
       ]
     },
     {
@@ -10797,7 +14704,6 @@
       "sources": [
         "bargo-congress:homepage",
         "bargo-congress:catalog.sources.docs.url",
-        "bargo-congress:catalog.routes.congress-api-keyless.entry_url",
         "bargo-congress:catalog.routes.congress-api-keyless.docs",
         "bargo-congress:catalog.routes.congress-api-keyed.docs",
         "bargo-congress:catalog.routes.congress-mcp.docs"
@@ -10814,13 +14720,44 @@
       ]
     },
     {
+      "url": "https://www.bargo.ai/free-apis/congress/openapi.json",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "bargo-congress:catalog.sources.openapi.url"
+      ]
+    },
+    {
       "url": "https://www.bargo.ai/free-apis/congress/v1",
       "class": "broken",
       "status": 404,
       "method": "GET",
       "accept": "*/*",
       "sources": [
+        "bargo-congress:catalog.routes.congress-api-keyless.entry_url",
         "bargo-congress:catalog.routes.congress-api-keyed.entry_url"
+      ]
+    },
+    {
+      "url": "https://www.bargo.ai/free-apis/dash",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "bargo-congress:catalog.sources.key-dashboard.url"
+      ]
+    },
+    {
+      "url": "https://www.bargo.ai/free-apis/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "bargo-congress:catalog.sources.free-api-terms.url"
       ]
     },
     {
@@ -10855,6 +14792,87 @@
       "sources": [
         "browserbase:entrypoints.signup",
         "browserbase:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://www.capitolexposed.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "capitol-exposed:homepage"
+      ]
+    },
+    {
+      "url": "https://www.capitolexposed.com/api-docs",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "capitol-exposed:catalog.sources.docs.url",
+        "capitol-exposed:catalog.routes.data-api-keyless.docs"
+      ]
+    },
+    {
+      "url": "https://www.capitolexposed.com/api/v1",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "capitol-exposed:catalog.routes.data-api-keyless.entry_url"
+      ]
+    },
+    {
+      "url": "https://www.capitolexposed.com/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "capitol-exposed:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://www.capitoltrades.com/",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "capitol-trades:homepage"
+      ]
+    },
+    {
+      "url": "https://www.capitoltrades.com/about-us",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "capitol-trades:catalog.sources.about.url"
+      ]
+    },
+    {
+      "url": "https://www.capitoltrades.com/index",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "capitol-trades:catalog.sources.site.url"
+      ]
+    },
+    {
+      "url": "https://www.capitoltrades.com/trades",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "capitol-trades:catalog.routes.trades-website.entry_url"
       ]
     },
     {
@@ -10934,6 +14952,28 @@
       ]
     },
     {
+      "url": "https://www.congressstock.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "congress-stock-tracker:homepage"
+      ]
+    },
+    {
+      "url": "https://www.congressstock.com/congress-trading-api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "congress-stock-tracker:catalog.sources.docs.url",
+        "congress-stock-tracker:catalog.routes.licensed-api.entry_url",
+        "congress-stock-tracker:catalog.routes.licensed-api.docs"
+      ]
+    },
+    {
       "url": "https://www.creem.io/",
       "class": "ok",
       "status": 200,
@@ -10941,6 +14981,77 @@
       "accept": "*/*",
       "sources": [
         "creem:homepage"
+      ]
+    },
+    {
+      "url": "https://www.crossref.org/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:homepage"
+      ]
+    },
+    {
+      "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.sources.rest-api.url",
+        "crossref:catalog.routes.public-rest-api.docs"
+      ]
+    },
+    {
+      "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/tips-for-using-the-crossref-rest-api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.sources.tips.url"
+      ]
+    },
+    {
+      "url": "https://www.crossref.org/services/metadata-retrieval/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "crossref:catalog.sources.retrieval.url"
+      ]
+    },
+    {
+      "url": "https://www.databricks.com/legal/acceptable-use-policy",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.acceptable-use.url"
+      ]
+    },
+    {
+      "url": "https://www.databricks.com/legal/mcsa",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.mcsa.url"
       ]
     },
     {
@@ -10974,6 +15085,107 @@
         "datadog:entrypoints.pricing",
         "datadog:checks.free_tier_or_trial.evidence",
         "datadog:checks.self_serve_paid_upgrade.evidence"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:homepage"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.docs.url",
+        "daytona:catalog.routes.sandbox-sdk.docs"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/api-keys",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.authentication.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/billing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.billing.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/file-system-operations",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.files.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/limits",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.limits.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/process-code-execution",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.execution.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/docs/en/sandboxes",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.sandboxes.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://www.daytona.io/terms-of-service",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "daytona:catalog.sources.terms.url"
       ]
     },
     {
@@ -11014,7 +15226,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "dropbox:entrypoints.docs"
+        "dropbox:entrypoints.docs",
+        "dropbox:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -11068,6 +15281,36 @@
       "sources": [
         "dropbox:entrypoints.signup",
         "dropbox:checks.self_serve_signup.evidence"
+      ]
+    },
+    {
+      "url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.reuse-policy.url"
+      ]
+    },
+    {
+      "url": "https://www.ecb.europa.eu/stats/accessing-our-data/html/index.en.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.macro-classification.url"
+      ]
+    },
+    {
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "ecb-data:catalog.sources.reference-rates.url"
       ]
     },
     {
@@ -11133,6 +15376,16 @@
       ]
     },
     {
+      "url": "https://www.firecrawl.dev/blog/fire-pdf-launch",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:catalog.sources.pdf-engine.url"
+      ]
+    },
+    {
       "url": "https://www.firecrawl.dev/pricing",
       "class": "ok",
       "status": 200,
@@ -11154,6 +15407,17 @@
       "accept": "*/*",
       "sources": [
         "firecrawl:entrypoints.signup"
+      ]
+    },
+    {
+      "url": "https://www.firecrawl.dev/terms-of-service",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "firecrawl:checks.automation_permitted.evidence",
+        "firecrawl:catalog.sources.terms.url"
       ]
     },
     {
@@ -11190,6 +15454,66 @@
       ]
     },
     {
+      "url": "https://www.geoapify.com/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:homepage"
+      ]
+    },
+    {
+      "url": "https://www.geoapify.com/geocoding-api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.storage.url"
+      ]
+    },
+    {
+      "url": "https://www.geoapify.com/get-started-with-maps-api/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.signup.url"
+      ]
+    },
+    {
+      "url": "https://www.geoapify.com/pricing/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://www.geoapify.com/python-geospatial-data-analysis/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.coordinates.url"
+      ]
+    },
+    {
+      "url": "https://www.geoapify.com/terms-and-conditions/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://www.getgrist.com/",
       "class": "ok",
       "status": 200,
@@ -11207,6 +15531,26 @@
       "accept": "*/*",
       "sources": [
         "grist:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://www.getgrist.com/terms/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.sources.terms.url"
+      ]
+    },
+    {
+      "url": "https://www.getgrist.com/trademark/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "grist:catalog.sources.trademark.url"
       ]
     },
     {
@@ -11292,6 +15636,16 @@
         "lark:entrypoints.signup",
         "lark:checks.self_serve_signup.evidence",
         "lark:homepage"
+      ]
+    },
+    {
+      "url": "https://www.larksuite.com/en_us/paid/collaboration",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "lark:catalog.sources.collaboration-scope.url"
       ]
     },
     {
@@ -11404,6 +15758,16 @@
       ]
     },
     {
+      "url": "https://www.massive.com/stocks",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "massive:catalog.sources.access.url"
+      ]
+    },
+    {
       "url": "https://www.mollie.com/",
       "class": "ok",
       "status": 200,
@@ -11431,7 +15795,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "mongodb-atlas:entrypoints.docs"
+        "mongodb-atlas:entrypoints.docs",
+        "mongodb-atlas:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -11598,6 +15963,16 @@
       ]
     },
     {
+      "url": "https://www.notion.so/Developer-Terms-ba4131408d0844e08330da2cbb225c20",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "notion:catalog.sources.developer-terms.url"
+      ]
+    },
+    {
       "url": "https://www.npmjs.com/package/grist-api",
       "class": "inconclusive",
       "status": 403,
@@ -11605,6 +15980,53 @@
       "accept": "*/*",
       "sources": [
         "grist:catalog.routes.javascript-sdk.entry_url"
+      ]
+    },
+    {
+      "url": "https://www.openholidaysapi.org/en/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:homepage",
+        "openholidays:catalog.sources.quickstart.url",
+        "openholidays:catalog.routes.public-holidays-api.docs"
+      ]
+    },
+    {
+      "url": "https://www.openholidaysapi.org/en/faq/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.faq.url"
+      ]
+    },
+    {
+      "url": "https://www.openholidaysapi.org/en/sources-europe/#germany",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "openholidays:catalog.sources.regional-sources.url"
+      ]
+    },
+    {
+      "url": "https://www.openstreetmap.org/copyright",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "geoapify:catalog.sources.osm-license.url",
+        "geocode-maps-co:catalog.sources.osm-license.url",
+        "nominatim:catalog.sources.licence.url",
+        "osrm:catalog.sources.licence.url",
+        "photon:catalog.sources.licence.url",
+        "valhalla:catalog.sources.licence.url"
       ]
     },
     {
@@ -11641,9 +16063,9 @@
     },
     {
       "url": "https://www.perplexity.ai",
-      "class": "inconclusive",
-      "status": 403,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "perplexity:homepage"
@@ -11714,6 +16136,16 @@
       "accept": "*/*",
       "sources": [
         "pingxx:catalog.sources.channels.url"
+      ]
+    },
+    {
+      "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "neon:catalog.sources.postgres-transactions.url"
       ]
     },
     {
@@ -11810,7 +16242,29 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "searchapi:homepage"
+        "searchapi:homepage",
+        "searchapi:catalog.sources.search-trial.url"
+      ]
+    },
+    {
+      "url": "https://www.searchapi.io/api/v1/search",
+      "class": "inconclusive",
+      "status": 401,
+      "method": "GET",
+      "accept": "*/*",
+      "sources": [
+        "searchapi:catalog.routes.google-search-api.entry_url"
+      ]
+    },
+    {
+      "url": "https://www.searchapi.io/docs/google",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "searchapi:catalog.sources.google-search.url",
+        "searchapi:catalog.routes.google-search-api.docs"
       ]
     },
     {
@@ -11847,6 +16301,16 @@
       ]
     },
     {
+      "url": "https://www.searchapi.io/legal/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "searchapi:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://www.searchapi.io/mcp",
       "class": "inconclusive",
       "status": 401,
@@ -11854,6 +16318,26 @@
       "accept": "application/json, text/event-stream",
       "sources": [
         "searchapi:catalog.routes.hosted-mcp.entry_url"
+      ]
+    },
+    {
+      "url": "https://www.searchapi.io/pricing",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "searchapi:catalog.sources.pricing.url"
+      ]
+    },
+    {
+      "url": "https://www.searchapi.io/users/sign_up",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "searchapi:catalog.sources.signup.url"
       ]
     },
     {
@@ -11867,6 +16351,16 @@
       ]
     },
     {
+      "url": "https://www.sec.gov/about/webmaster-frequently-asked-questions",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "sec-edgar:catalog.sources.fair-access.url"
+      ]
+    },
+    {
       "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
       "class": "ok",
       "status": 200,
@@ -11874,8 +16368,57 @@
       "accept": "*/*",
       "sources": [
         "sec-edgar:catalog.sources.docs.url",
-        "sec-edgar:catalog.routes.data-api.entry_url",
         "sec-edgar:catalog.routes.data-api.docs"
+      ]
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "sec-edgar:catalog.sources.access.url"
+      ]
+    },
+    {
+      "url": "https://www.semanticscholar.org/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:homepage"
+      ]
+    },
+    {
+      "url": "https://www.semanticscholar.org/product/api",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.sources.overview.url"
+      ]
+    },
+    {
+      "url": "https://www.semanticscholar.org/product/api/license",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.sources.api-license.url"
+      ]
+    },
+    {
+      "url": "https://www.semanticscholar.org/product/api/tutorial",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "semantic-scholar:catalog.sources.tutorial.url"
       ]
     },
     {
@@ -11942,6 +16485,16 @@
       ]
     },
     {
+      "url": "https://www.simfin.com/en/fundamental-data-download/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "simfin:catalog.sources.fundamentals.url"
+      ]
+    },
+    {
       "url": "https://www.simfin.com/en/prices/",
       "class": "ok",
       "status": 200,
@@ -11952,6 +16505,16 @@
       ]
     },
     {
+      "url": "https://www.simfin.com/en/technical-updates-to-api-v3-and-bulk-download/",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "simfin:catalog.sources.api-version.url"
+      ]
+    },
+    {
       "url": "https://www.skyscanner.net/",
       "class": "ok",
       "status": 200,
@@ -11959,6 +16522,16 @@
       "accept": "*/*",
       "sources": [
         "skyscanner:homepage"
+      ]
+    },
+    {
+      "url": "https://www.sqlite.org/lang_conflict.html",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "turso:catalog.sources.sqlite-conflict.url"
       ]
     },
     {
@@ -11984,6 +16557,17 @@
       ]
     },
     {
+      "url": "https://www.tavily.com/terms",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tavily:checks.automation_permitted.evidence",
+        "tavily:catalog.sources.terms.url"
+      ]
+    },
+    {
       "url": "https://www.tiingo.com/",
       "class": "ok",
       "status": 200,
@@ -11991,6 +16575,16 @@
       "accept": "*/*",
       "sources": [
         "tiingo:homepage"
+      ]
+    },
+    {
+      "url": "https://www.tiingo.com/documentation/forex",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "tiingo:catalog.sources.fx-classification.url"
       ]
     },
     {
@@ -12065,7 +16659,8 @@
       "method": "HEAD",
       "accept": "*/*",
       "sources": [
-        "twilio:entrypoints.docs"
+        "twilio:entrypoints.docs",
+        "twilio:catalog.sources.classification-docs.url"
       ]
     },
     {
@@ -12173,6 +16768,16 @@
       "accept": "*/*",
       "sources": [
         "vercel:entrypoints.status_page"
+      ]
+    },
+    {
+      "url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
+      "accept": "*/*",
+      "sources": [
+        "world-bank-data:catalog.sources.dataset-terms.url"
       ]
     },
     {
