@@ -61,6 +61,51 @@ class WorkPackageTests(unittest.TestCase):
         self.assertFalse(Path(spec['directory']).exists())
         self.assertTrue(config['task_file'].startswith('data/experiments/results/work-packages/'))
 
+    def test_task_scope_overshoot_rejects_before_writing_or_submitting(self):
+        self.fixture();self.policy['max_tasks']=1
+        second=deepcopy(self.designer['tasks'][0]);second['id']='second-expenses'
+        self.designer['tasks'].append(second)
+        self.preparer['assignments'].append({**self.preparer['assignments'][0],'task_id':second['id']})
+        runs.write(self.design_path,self.designer)
+        self.preparer['designer_sha256']=packages.digest(self.design_path)
+        runs.write(self.prep_path,self.preparer);runs.write(self.policy_path,self.policy)
+        with patch.object(packages.queue,'submit') as submit:
+            with self.assertRaisesRegex(ValueError,'exceeds controller max_tasks'):self.submit()
+            submit.assert_not_called()
+        self.assertFalse(self.output.exists())
+        self.assertFalse((runs.ROOT/'data/experiments/results/work-packages/fixture-package/tasks.md').exists())
+        self.assertEqual(list((self.queue/'inbox').iterdir()),[])
+
+    def test_max_tasks_requires_a_positive_integer(self):
+        self.fixture()
+        for value in (True,False,0,-1,1.0,'1',None,[],{}):
+            with self.subTest(value=value):
+                self.policy['max_tasks']=value
+                with self.assertRaisesRegex(ValueError,'max_tasks must be a positive integer'):self.validate()
+
+    def test_task_count_at_cap_is_allowed(self):
+        self.fixture();self.policy['max_tasks']=1
+        self.assertEqual(len(self.validate()['tasks']),1)
+
+    def test_absent_max_tasks_preserves_multiple_task_submission(self):
+        self.fixture()
+        second=deepcopy(self.designer['tasks'][0]);second['id']='second-expenses'
+        self.designer['tasks'].append(second)
+        self.preparer['assignments'].append({**self.preparer['assignments'][0],'task_id':second['id']})
+        runs.write(self.design_path,self.designer)
+        self.preparer['designer_sha256']=packages.digest(self.design_path)
+        runs.write(self.prep_path,self.preparer)
+        manifest=self.submit()
+        self.assertEqual(len(manifest['jobs']),2)
+        self.assertEqual(len(list((self.queue/'inbox').iterdir())),2)
+
+    def test_max_tasks_preserves_empty_held_design(self):
+        self.fixture();self.policy['max_tasks']=1
+        self.designer.update(status='held',blockers=['Design remains blocked'],tasks=[])
+        self.preparer.update(status='held',blockers=['Design held'],assignments=[])
+        plan=self.validate()
+        self.assertTrue(plan['held']);self.assertEqual(plan['tasks'],{})
+
     def test_tampered_designer_binding_and_compiled_bytes_reject(self):
         self.fixture();self.preparer['designer_sha256']='0'*64
         with self.assertRaisesRegex(ValueError,'bind this designer'):self.validate()

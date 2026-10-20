@@ -241,6 +241,13 @@ def validate(designer, preparer, policy, designer_sha256):
         raise ValueError('Preparer output does not bind this designer handoff')
     status(designer)
     status(preparer)
+    if 'max_tasks' in policy:
+        if type(policy['max_tasks']) is not int or policy['max_tasks'] <= 0:
+            raise ValueError('Controller max_tasks must be a positive integer')
+    if not isinstance(designer['tasks'], list) or (not designer['tasks'] and not any(x['status'] == 'held' for x in (designer, preparer))):
+        raise ValueError('Designer must declare tasks')
+    if 'max_tasks' in policy and len(designer['tasks']) > policy['max_tasks']:
+        raise ValueError('Designer task count exceeds controller max_tasks')
     tasks = {}
     targets = policy['targets']
     rounds = policy.get('rounds')
@@ -259,8 +266,6 @@ def validate(designer, preparer, policy, designer_sha256):
         if name in required_ids or not rule or item['format'] != rule['format'] or item['synthetic'] is not True:
             raise ValueError('Undeclared or duplicate synthetic material requirement')
         required_ids.add(name)
-    if not isinstance(designer['tasks'], list) or (not designer['tasks'] and not any(x['status'] == 'held' for x in (designer, preparer))):
-        raise ValueError('Designer must declare tasks')
     for task in designer['tasks']:
         keys(task, TASK_FIELDS | {'demand_sources', 'applicability'}, TASK_FIELDS)
         name = identity(task['id'])

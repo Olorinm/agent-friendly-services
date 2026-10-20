@@ -9,6 +9,7 @@ The designer declares `tasks` with `id`, `version`, `description`, `inputs`, `ex
 The controller supplies a separate private policy:
 
 - `rounds`: distinct positive trial numbers.
+- `max_tasks`: optional positive integer limiting the number of designer task entries in one package. Booleans, zero and other types are rejected. Exceeding the cap is rejected before task files are written or queue submission begins. Omit it to retain the existing uncapped behavior; an empty explicitly held design remains allowed. A one-business-task pilot sets `max_tasks: 1`; approved `targets` and `rounds` separately bound services and repetitions.
 - `targets`: approved target IDs mapped to complete controller-owned `config` templates, optional queue `depends_on` IDs and `grading_gate`.
 - `materials`: optional previously approved raw-data IDs with absolute controller paths, nonempty SHA256, `kind: raw_data` and a fixed `audience`.
 - `generated_materials`: allowed material IDs with exact relative `file`, `format`, size/row bounds and record `columns`. String fields require an explicit pattern; TXT requires a data-line pattern. The model cannot add executable formats or answer columns.
