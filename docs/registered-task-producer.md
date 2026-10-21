@@ -1,0 +1,63 @@
+# Preparing existing registry tasks continuously
+
+`scripts/registered_task_producer.py` consumes controller-approved existing tasks without running a task designer. It calls the existing native `role_handoff` material-preparation role, validates its actual receipt, model, input, native turn and usage proof, then submits original task files/IDs to one existing queue. It does not change the registry, grading rules, frozen runs, worker source, credentials or publication status.
+
+The producer can run from a new controller release with `--base-source-root` pointing at the unchanged release used by the active queue. Its private provenance records the new producer hash separately from all imported base-source hashes. The imported modules must actually come from that base directory; a mixed Python module process is rejected.
+
+A private plan has this shape. Settings and paths are supplied by the controller, never the preparation model:
+
+```json
+{
+  "schema_version": 1,
+  "queue": "/private/queue",
+  "deadline_epoch": 1900000000,
+  "max_total_concurrency": 12,
+  "max_preparation_concurrency": 2,
+  "preparation_settings": ["/private/prep-01.json", "/private/prep-02.json"],
+  "grading_settings": ["/private/grade-01.json", "/private/grade-02.json"],
+  "backlog": ["/private/item-001.json"],
+  "backlog_inbox": "/private/new-items"
+}
+```
+
+Both preparation settings bind distinct physical Codex/Sol medium runtimes. The existing queue ceiling must be at most 10, leaving two preparation slots within the total of 12; deadline equality is mandatory. Preparation cannot share an executor or grader, including any existing frozen queue member. A queue-level owner record rejects a second producer directory. Each native preparation run gets a globally distinct basename, including when a worker is reused. Runtime source and policy drift block new allocation while collection and confirmed stopping remain available.
+
+Each backlog JSON describes one original task and any approved routes/rounds:
+
+```json
+{
+  "id": "registered-example-001",
+  "task_file": "data/experiments/tasks/web-extraction.md",
+  "task_id": "web-extraction-access-001",
+  "task_sha256": "<exact select_task SHA256>",
+  "rounds": [1, 2, 3],
+  "targets": {
+    "approved-route": {"config": "<full controller-owned config object>", "depends_on": []}
+  },
+  "material_ids": [],
+  "materials": {},
+  "generated_materials": {},
+  "peer_policy": "posthoc_audit"
+}
+```
+
+The `config` value above must be an object, with the original task file/ID, current `afs-20261013` access-readiness protocol, explicit roles/adapters, resource authorization, preflight and applicable access dependency. An optional `preparation_context` uses the existing `file`/`sha256` controller-context contract. Only its explicitly selected source facts enter the preparation packet; old assessments and solutions must not be selected. Normal raw materials use the existing `{path, sha256, audience, kind: "raw_data"}` registry, and generated raw schemas use the existing work-package CSV/JSON/TXT rules.
+
+The preparer sees `task-design.json` explicitly labelled `source_kind: registered_task` and `role: registered_task`. It is a controller projection with the original task SHA and resources, **not** a native designer result or a designer collection proof. The existing preparation output contract keeps the field name `designer_sha256`, bound to these projection bytes. No design session is fabricated.
+
+When only approved original material IDs are needed, the preparer is told to emit `materials: []`; the controller reattaches those exact original bytes. A schema-valid echoed original ID is also accepted only when its captured file/hash/size match the approved execution material. It cannot replace controller origin metadata, change bytes, promote a grading-only reference, or override an explicit nonsynthetic classification. New generated materials must use approved IDs, paths and record schemas. Renamed exact copies of private role/context/control inputs are rejected. Hash checks do not detect semantic rewriting; content review and role isolation remain necessary.
+
+A collected preparation immediately releases its worker. Waiting for access never occupies a preparation slot. Original free-only qualification and exact reference holds remain binding; a model-written `ready` or descriptive reference cannot clear them. A target whose access is still running remains `waiting_access`; an actually ready target can proceed independently. The default `posthoc_audit` submits each slot as a standalone run, selects a physical idle/least-pending grader from the approved pool just before submission, and freezes that selection. Same task/round grouping remains in private dispatch metadata for later independent source/disagreement audit; no other grades enter a grader packet. Optional `comparison_barrier` retains the existing all-executions-first comparison behavior and its possible throughput delay.
+
+Approved execution lanes and their account/write locks are preserved. This first version rejects `execution_pool`; it does **not** solve serialization within one execution lane, automatically add containers or remove quota/account locks.
+
+```sh
+python3 /new-release/scripts/registered_task_producer.py init /private/producer \
+  --plan /private/plan.json --base-source-root /unchanged-base-release
+python3 /new-release/scripts/registered_task_producer.py run /private/producer --once
+python3 /new-release/scripts/registered_task_producer.py run /private/producer
+python3 /new-release/scripts/registered_task_producer.py status /private/producer
+python3 /new-release/scripts/registered_task_producer.py halt /private/producer
+```
+
+Use `enqueue DIRECTORY --entry FILE` or atomically append a new controller JSON file to `backlog_inbox` while the daemon runs. Invalid intake is recorded privately. Exhausted or access-blocked backlog reports `no_ready_work` with individual item states instead of claiming model activity. The daemon continues polling until halted or the absolute deadline. Unknown starts are stopped using their durable predicted handle, never blindly resent; an unconfirmed stop keeps its preparation slot reserved. Halting preserves already-submitted work and does not halt the independent service queue. Deployment needs an external supervisor/finalizer to stop both controllers and verify owned model processes. Offline adapter fixtures do not establish a successful live cloud deployment.
