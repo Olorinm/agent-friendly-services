@@ -448,6 +448,19 @@ def submit_ready(directory, identity, row, plan):
                     compilation = r.read(record)
                     for path, sha in compilation['files'].items():
                         if r.digest(path) != sha: raise ValueError('Frozen dispatch bytes changed')
+                    if not (Path(plan['queue'])/'inbox'/dispatch_id).exists():
+                        # Recovery after compile-before-submit must recheck the
+                        # SAME frozen lane; it is not a reservation in the queue
+                        # yet. Already submitted jobs bypass this self-check.
+                        frozen_busy = False
+                        for selected in compilation.get('execution_lanes', []):
+                            approved = item['targets'][selected['target']]
+                            if 'execution_pool' not in approved: continue
+                            lane = next(value for value in target_lanes(approved) if value['id'] == selected['lane_id'])
+                            if choose_lane(approved, [lane], plan) is None:
+                                deferred.append({'target': selected['target'], 'round': number, 'reason': 'Previously frozen execution lane is not idle or shared cap/cooldown prevents submission'})
+                                frozen_busy = True
+                        if frozen_busy: continue
                 else:
                     selected = []
                     for key, target in batch:

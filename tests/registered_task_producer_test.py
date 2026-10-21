@@ -329,3 +329,23 @@ class RegisteredProducerTests(unittest.TestCase):
         handoff=self.pool_handoffs()[0];path=Path(handoff['members'][0]['directory']);runs.write(path/'state.json',{'phase':'stopped','stop_confirmed':False})
         occupied,_,_=producer.execution_load(self.registered_plan)
         self.assertIn(queue.runtime_identity(handoff['members'][0]['config']['execution']),occupied)
+
+    def test_crash_before_submit_waits_for_same_frozen_lane_and_cap_without_rebinding(self):
+        path,item,_=self.fixture_execution_pool(rounds=(1,),maximum=1);self.init_registered();self.advance_registered()
+        with patch.object(producer,'ensure_submit',side_effect=SystemExit('synthetic process death before queue write')):
+            with self.assertRaises(SystemExit):self.advance_registered()
+        record=self.registered_dir/'backlog/package-1/compiled/package-1-approved-api-r1.dispatch.json'
+        compilation=runs.read(record);spec=runs.read(compilation['spec']);original_config=Path(spec['config']);original_hash=runs.digest(original_config)
+        self.assertEqual(compilation['execution_lanes'][0]['lane_id'],'lane-a')
+        self.assertFalse((self.queue/'inbox/package-1-approved-api-r1').exists())
+        cfg=deepcopy(item['targets']['approved-api']['execution_pool'][1]['config']);cfg['grading']=runs.read(self.registered_plan['grading_settings'][0])
+        config=self.root/'other-reservation.json';runs.write(config,cfg);other=self.root/'other.spec.json';other_run=self.root/'data/experiments/results/other-reservation'
+        runs.write(other,{'id':'other-reservation','kind':'run','ready':True,'config':str(config),'directory':str(other_run),'depends_on':[],'round':1});queue.submit(self.queue,other)
+        state=self.advance_registered();self.assertEqual(state['items']['package-1']['phase'],'waiting_runtime')
+        self.assertFalse((self.queue/'inbox/package-1-approved-api-r1').exists())
+        self.assertEqual(runs.digest(original_config),original_hash);self.assertEqual(runs.read(record),compilation)
+        runs.write(other_run/'state.json',{'phase':'execution_collected'})
+        self.advance_registered();handoff=runs.read(self.queue/'inbox/package-1-approved-api-r1/handoff.json')
+        self.assertEqual(handoff['members'][0]['config']['execution']['runtime'],'lane-a')
+        self.assertEqual(runs.digest(original_config),original_hash)
+        self.assertEqual(len([x for x in self.operations if x[0]=='package-1' and x[2]=='start']),1)
