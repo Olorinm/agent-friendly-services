@@ -17,11 +17,10 @@ from datetime import date
 
 import task_queue as queue
 from adapter_usage import read_usage
+import role_contract
 
 ID = r'[a-z0-9][a-z0-9-]{0,95}'
 SHA = r'[0-9a-f]{64}'
-TASK_FIELDS = {'id', 'version', 'description', 'inputs', 'expected_output', 'success', 'failure',
-               'material_ids', 'applicable_target_ids'}
 
 
 def read(path):
@@ -99,6 +98,9 @@ def collection(policy, role='material_preparation', result_path=None):
         raise ValueError('Material preparation lacks a verified independent role receipt')
     import role_handoff
     manifest = role_handoff.verify(root.parent)
+    private_inputs = role_handoff.private_input_sources(manifest)
+    if proof.get('private_input_files', private_inputs) != private_inputs:
+        raise ValueError('Role private input classification differs from frozen sources')
     name = role_handoff.ROLES[role]
     if (manifest['role'] != role or proof.get('native_turn_completed') is not True
             or proof.get('session_id') != receipt.get('session_id')
@@ -136,6 +138,24 @@ def collection(policy, role='material_preparation', result_path=None):
     if actual.get('requests') != usage['requests']:
         raise ValueError('Role model requests differ from collected native usage')
     return root
+
+
+def private_material_hashes(policy, prepared_output):
+    """Reject renamed byte copies of explicitly private role/control sources.
+
+    Collections and their manifests have already been verified. Do not classify
+    an entire input/artifact directory as private: legitimate original CSV/JSON
+    inputs may occur in both execution and capture copies.
+    """
+    import role_handoff
+    protected = set()
+    for role in ('task_design', 'material_preparation'):
+        root = prepared_output if role == 'material_preparation' else collection(policy, role)
+        manifest = read(root.parent/'manifest.json')
+        protected.update(role_handoff.private_input_sources(manifest).values())
+        for name in (role_handoff.ROLES[role], 'receipt.json', 'role-collection-proof.json', 'artifact-input-index.json'):
+            protected.add(digest(regular_file(root, name)))
+    return protected
 
 
 def raw_data(path, rule):
@@ -197,9 +217,9 @@ def register_materials(preparer, policy):
     if not isinstance(declarations, list):
         raise ValueError('Preparer materials must be a manifest list')
     collected = collection(policy) if declarations else None
+    private_hashes = private_material_hashes(policy, collected) if declarations else set()
     approved = policy.get('generated_materials', {})
-    for row in declarations:
-        keys(row, ('id', 'file', 'sha256', 'bytes', 'synthetic', 'source', 'validation'), ('id', 'file', 'sha256'))
+    for index, row in enumerate(declarations):
         name = identity(row['id'])
         if name in result or name not in approved:
             raise ValueError('Duplicate or unsupported generated material')
@@ -209,6 +229,8 @@ def register_materials(preparer, policy):
         path = regular_file(collected / 'artifacts', row['file'])
         if not re.fullmatch(SHA, row['sha256']) or digest(path) != row['sha256']:
             raise ValueError('Generated material hash is absent or changed')
+        if row['sha256'] in private_hashes:
+            raise ValueError(f'$.materials[{index}].sha256: Generated material is a renamed copy of private preparation/control evidence')
         if 'bytes' in row and row['bytes'] != path.stat().st_size:
             raise ValueError('Generated material byte count differs from collection')
         if row.get('synthetic', True) is not True:
@@ -228,10 +250,8 @@ def register_materials(preparer, policy):
 
 
 def validate(designer, preparer, policy, designer_sha256):
-    keys(designer, ('schema_version', 'role', 'status', 'blockers', 'package_id', 'tasks', 'material_requirements', 'demand_sources', 'applicability'),
-         ('schema_version', 'status', 'blockers', 'package_id', 'tasks'))
-    keys(preparer, ('schema_version', 'role', 'status', 'blockers', 'package_id', 'designer_sha256', 'assignments', 'materials', 'references', 'resource_prerequisites', 'frozen_dates'),
-         ('schema_version', 'status', 'blockers', 'package_id', 'designer_sha256', 'assignments'))
+    role_contract.validate('task_design', designer)
+    role_contract.validate('material_preparation', preparer)
     if designer['schema_version'] != 1 or preparer['schema_version'] != 1:
         raise ValueError('Unsupported work-package schema')
     if designer.get('role', 'task_design') != 'task_design' or preparer.get('role', 'material_preparation') != 'material_preparation':
@@ -260,14 +280,12 @@ def validate(designer, preparer, policy, designer_sha256):
         raise ValueError('Material requirements must be a list')
     required_ids = set()
     for item in requirements:
-        keys(item, ('id', 'format', 'description', 'synthetic'), ('id', 'format', 'description', 'synthetic'))
         name = identity(item['id'])
         rule = policy.get('generated_materials', {}).get(name)
         if name in required_ids or not rule or item['format'] != rule['format'] or item['synthetic'] is not True:
             raise ValueError('Undeclared or duplicate synthetic material requirement')
         required_ids.add(name)
     for task in designer['tasks']:
-        keys(task, TASK_FIELDS | {'demand_sources', 'applicability'}, TASK_FIELDS)
         name = identity(task['id'])
         if name in tasks:
             raise ValueError('Duplicate task identity')
@@ -284,7 +302,6 @@ def validate(designer, preparer, policy, designer_sha256):
         tasks[name] = task
     declared = set()
     for row in preparer['assignments']:
-        keys(row, ('task_id', 'target_id', 'round', 'status', 'blockers'), ('task_id', 'target_id', 'round', 'status', 'blockers'))
         status(row)
         if row['task_id'] not in tasks or row['target_id'] not in tasks[row['task_id']]['applicable_target_ids']:
             raise ValueError('Undeclared or unsupported task/service assignment')
@@ -330,7 +347,6 @@ def submit_package(queue_dir, designer_path, preparer_path, policy_path, output_
         raise ValueError('Role handoff or controller policy changed during validation')
     references = []
     for item in preparer.get('references', []):
-        keys(item, ('path', 'sha256', 'bytes', 'source', 'purpose'), ('path', 'sha256', 'bytes', 'source', 'purpose'))
         if not item['path'].startswith('references/'):
             raise ValueError('Independent references must stay outside execution materials')
         source = regular_file(prepared_output / 'artifacts', item['path'])

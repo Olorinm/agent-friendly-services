@@ -19,9 +19,19 @@ import pipeline as runs
 from adapter_usage import read_usage
 from session_usage import extract_usage
 from task_queue import lock
+import role_contract
 
 HERE = Path(__file__).resolve().parent
 ROLES = {'task_design': 'task-design.json', 'material_preparation': 'material-preparation.json'}
+PRIVATE_ROLE_INPUTS = {'AGENTS.md', 'prompt.txt', 'output-schema.json', 'task-design.json',
+                       'material-preparation.json', 'controller-context.json', 'service-brief.json'}
+
+
+def private_input_sources(manifest):
+    """Known role/control inputs only; ordinary original data is not tainted."""
+    return {name: sha for name, sha in manifest['input_files'].items()
+            if name in PRIVATE_ROLE_INPUTS or name.startswith('controller-context/')
+            or '/' not in name and name.endswith('-boundary.json')}
 
 
 def tree(path):
@@ -81,6 +91,12 @@ def prepare(directory, role, input_dir, settings_path):
         raise ValueError('Explicit frozen role and prompt required')
     directory.mkdir(mode=0o700, parents=True, exist_ok=False)
     shutil.copytree(input_dir, directory / 'input')
+    contract = directory / 'input/output-schema.json'
+    expected = role_contract.schema(role)
+    if contract.exists() and runs.read(contract) != expected:
+        raise ValueError('Supplied output-schema.json differs from the consumer contract')
+    runs.write(contract, expected)
+    files = tree(directory / 'input')
     request = {'run_id': directory.name, 'role': role, 'fresh_session': True,
                'input': str(directory / 'input'), 'output': str(directory / 'output'),
                **{key: settings[key] for key in ('model', 'reasoning_effort', 'harness',
@@ -185,6 +201,7 @@ def validate_collection(directory, manifest):
              'session_id': session, 'manifest_sha256': runs.digest(directory / 'manifest.json'),
              'receipt_sha256': runs.digest(output / 'receipt.json'), 'result_sha256': runs.digest(result_file),
              'input_files': manifest['input_files'], 'native_turn_completed': True,
+             'private_input_files': private_input_sources(manifest),
              'source_sha256': {name: runs.digest(output / name) for name in ('events.jsonl', 'session.raw.jsonl', 'usage.json')},
              'account_usage': {'billing_mode': 'chatgpt', 'tokens': totals, 'cost_usd': None,
                                'notice': 'Account usage, unknown dollar amount; not free or DeepSeek API cost'}}

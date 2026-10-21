@@ -11,6 +11,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import role_handoff as roles
+import role_contract
 
 
 class RoleHandoffTests(unittest.TestCase):
@@ -32,6 +33,14 @@ class RoleHandoffTests(unittest.TestCase):
 
     def prepare(self):
         return roles.prepare(self.directory, 'task_design', self.input, self.settings_path)
+
+    def test_output_schema_is_the_consumer_contract_and_part_of_frozen_input(self):
+        self.prepare(); manifest = roles.verify(self.directory)
+        file = self.directory/'input/output-schema.json'
+        self.assertEqual(roles.runs.read(file), role_contract.schema('task_design'))
+        self.assertEqual(manifest['input_files']['output-schema.json'], roles.runs.digest(file))
+        file.write_text('{}')
+        with self.assertRaisesRegex(ValueError, 'input changed'): roles.verify(self.directory)
 
     def completed(self):
         manifest = roles.verify(self.directory); output = self.directory / 'output'; output.mkdir()

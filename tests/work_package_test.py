@@ -24,6 +24,10 @@ class WorkPackageTests(unittest.TestCase):
             runs.write(self.root/role/'receipt.json',{'session_id':role+'-session'})
         self.collection_patch=patch.object(packages,'collection',side_effect=lambda policy,role='material_preparation',result_path=None:self.root/role)
         self.collection_patch.start();self.addCleanup(self.collection_patch.stop)
+        # These consumer-unit fixtures stub native collection. Real private-copy
+        # protection is exercised through full collection/producer integration.
+        protection=patch.object(packages,'private_material_hashes',return_value=set())
+        protection.start();self.addCleanup(protection.stop)
         material=self.root/'ledger.csv';material.write_text('currency,amount\nEUR,12.5\n')
         self.designer={'schema_version':1,'status':'ready','blockers':[],'package_id':'fixture-package','tasks':[
             {'id':'expenses','version':'v1','description':'Convert reimbursement amounts.', 'inputs':'Read ledger.csv as original expense data.',
@@ -169,6 +173,20 @@ class WorkPackageTests(unittest.TestCase):
             self.assertEqual(self.validate()['materials']['ledger']['audience'],'execution')
             file.write_text('currency,amount,answer\nEUR,42,solution\n');self.preparer['materials'][0]['sha256']=packages.digest(file);self.preparer['materials'][0]['bytes']=file.stat().st_size
             with self.assertRaisesRegex(ValueError,'columns differ'):self.validate()
+
+    def test_structured_material_validation_is_accepted_but_extra_dispatch_fields_are_rejected(self):
+        self.fixture();collection=self.root/'collected';(collection/'artifacts/materials').mkdir(parents=True)
+        file=collection/'artifacts/materials/ledger.csv';file.write_text('currency,amount\nEUR,42\n')
+        self.preparer['materials']=[{'id':'ledger','file':'materials/ledger.csv','sha256':packages.digest(file),
+            'bytes':file.stat().st_size,'synthetic':True,'source':{'kind':'synthetic'},
+            'validation':{'csv_parsed':True,'rows':1,'availability':None}}]
+        self.policy['materials']={};self.policy['generated_materials']={'ledger':{'file':'materials/ledger.csv','format':'csv',
+            'columns':{'currency':{'type':'string','pattern':'[A-Z]{3}'},'amount':{'type':'number'}}}}
+        with patch.object(packages,'collection',return_value=collection):
+            self.assertEqual(self.validate()['materials']['ledger']['audience'],'execution')
+            self.preparer['assignments'][0]['task_version']='v1'
+            with self.assertRaisesRegex(ValueError,r'\$\.assignments\[0\]\.task_version'):self.validate()
+        self.assertEqual(self.preparer['status'],'ready')
 
     def test_ready_generated_data_cannot_contain_a_service_call_or_answer_column(self):
         self.fixture();data=self.root/'generated.json'

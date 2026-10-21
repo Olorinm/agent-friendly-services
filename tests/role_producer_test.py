@@ -325,5 +325,179 @@ class RoleProducerTests(unittest.TestCase):
         self.tick()
         self.assertEqual(self.operations.count(('package-1', 'task_design', 'start')), 1)
 
+    def add_context(self):
+        item = self.plan['packages'][0]
+        source = self.root/'context'; source.mkdir()
+        evidence = source/'official.txt'; evidence.write_text('Synthetic local fixture documenting anonymous access; no service query or answer.')
+        (source/'unselected-assessment.json').write_text('{"old_score":"NEVER-COPY-OLD-REVIEW"}')
+        context = {'schema_version': 1, 'targets': {'approved-api': {'service': 'fixture', 'route': 'api',
+            'observations': [{'topic': 'resource scope', 'status': 'confirmed',
+                'statement': 'Anonymous read-only scope was reviewed by the controller.', 'evidence_ids': ['official-doc']},
+                {'topic': 'current runtime availability', 'status': 'unknown',
+                 'statement': 'Not established by documentation.', 'evidence_ids': ['official-doc']}]}},
+            'evidence': [{'id': 'official-doc', 'file': 'official.txt', 'sha256': runs.digest(evidence),
+                'source': {'kind': 'synthetic', 'note': 'Local synthetic fixture, not a real service observation'},
+                'purpose': 'Independent preparation scope review', 'kind': 'synthetic_description'}]}
+        file = source/'context.json'; runs.write(file, context)
+        item['preparation_context'] = {'file': str(file), 'sha256': runs.digest(file)}
+        return file, evidence, context
+
+    def test_preparer_receives_only_scoped_admission_and_explicit_context_not_private_config(self):
+        self.fixture(packages=1); file, evidence, context = self.add_context()
+        item = self.plan['packages'][0]; policy = runs.read(item['policy']); config = policy['targets']['approved-api']['config']
+        config['resource_authorization'] = {'service': 'fixture', 'route': 'api', 'fee_policy': 'confirmed_free_only',
+            'service_fee': {'status': 'documented_free_within_scope', 'scope': 'Anonymous fixture only',
+                'source_urls': ['https://example.com/docs'], 'amount': None, 'private_debug': 'NEVER-COPY-CREDENTIAL'}}
+        reference = runs.read(config['reference'])
+        reference.update(assessment={'status': 'completed', 'reason': 'NEVER-COPY-OLD-REVIEW'},
+                         answer='NEVER-COPY-ANSWER', cohort_disclosure={'held_routes': {'fixture/api': 'NEVER-COPY-PRIOR-VERDICT'}})
+        reference['service_fee_qualification']['unrelated'] = {'service_fee': {'scope': 'NEVER-COPY-OTHER-SERVICE'}}
+        runs.write(config['reference'], reference); runs.write(item['policy'], policy)
+        self.init(); self.tick(); self.tick()
+        packet = self.directory/'package-1/preparation/input'
+        boundary = runs.read(packet/'preparation-boundary.json'); target = boundary['targets']['approved-api']
+        self.assertEqual(target['entry_url'], 'https://example.com')
+        self.assertEqual(target['service_fee_qualification']['status'], 'documented_free_within_scope')
+        self.assertEqual(target['resource_authorization']['service_fee']['amount'], None)
+        exposed = runs.read(packet/'controller-context.json')
+        self.assertEqual(exposed['targets'], context['targets'])
+        self.assertEqual((packet/exposed['evidence'][0]['file']).read_bytes(), evidence.read_bytes())
+        self.assertEqual(exposed['targets']['approved-api']['observations'][1]['status'], 'unknown')
+        raw = b'\n'.join(p.read_bytes() for p in packet.rglob('*') if p.is_file())
+        for sentinel in ('NEVER-COPY-CREDENTIAL', 'NEVER-COPY-OLD-REVIEW', 'NEVER-COPY-ANSWER', 'NEVER-COPY-PRIOR-VERDICT', 'NEVER-COPY-OTHER-SERVICE'):
+            self.assertNotIn(sentinel.encode(), raw)
+        for _ in range(4): result = self.tick()
+        self.assertEqual(result['packages']['package-1']['phase'], 'submitted')
+        job = next((self.queue/'inbox').iterdir()); frozen = runs.read(job/'handoff.json')['members'][0]['config']
+        attached = Path(frozen['attachments'])
+        self.assertEqual([p.name for p in attached.iterdir()], ['ledger.csv'])
+        self.assertFalse((attached/'controller-context.json').exists())
+
+    def test_selected_preparation_evidence_drift_halts_before_any_role_start(self):
+        self.fixture(packages=1); _, evidence, _ = self.add_context(); self.init()
+        evidence.write_text('changed after freeze')
+        state = self.tick()
+        self.assertEqual(state['phase'], 'stopped'); self.assertEqual(self.operations, [])
+        self.assertIn('frozen_source_error', state)
+
+    def test_context_binding_and_unapproved_target_fail_before_init(self):
+        self.fixture(packages=1); file, evidence, context = self.add_context()
+        item = self.plan['packages'][0]
+        item['preparation_context']['sha256'] = '0'*64
+        with self.assertRaisesRegex(ValueError, 'source hash'): self.init()
+        context['targets']['unapproved'] = context['targets'].pop('approved-api'); runs.write(file, context)
+        item['preparation_context']['sha256'] = runs.digest(file)
+        with self.assertRaisesRegex(ValueError, 'unapproved target'): self.init()
+        self.assertFalse(self.directory.exists())
+
+    def test_reference_qualification_bytes_are_frozen_before_design(self):
+        self.fixture(packages=1); self.init()
+        policy = runs.read(self.plan['packages'][0]['policy'])
+        reference = Path(policy['targets']['approved-api']['config']['reference']); reference.write_text('{}')
+        state = self.tick()
+        self.assertEqual(state['phase'], 'stopped'); self.assertEqual(self.operations, [])
+
+    def test_context_rejects_traversal_links_and_unlisted_authority_fields(self):
+        self.fixture(packages=1); file, evidence, context = self.add_context()
+        item = self.plan['packages'][0]; outside = self.root/'outside.txt'; outside.write_text('synthetic canary')
+        for mode in ('traversal', 'link', 'commands'):
+            value = deepcopy(context)
+            if mode == 'traversal':
+                value['evidence'][0].update(file='../outside.txt', sha256=runs.digest(outside))
+            elif mode == 'link':
+                evidence.unlink(); evidence.symlink_to(outside)
+                value['evidence'][0]['sha256'] = runs.digest(outside)
+            else: value['targets']['approved-api']['commands'] = ['do-not-execute']
+            runs.write(file, value); item['preparation_context']['sha256'] = runs.digest(file)
+            with self.subTest(mode=mode), self.assertRaises(ValueError): self.init()
+            self.assertFalse(self.directory.exists())
+            if mode == 'link':
+                evidence.unlink(); evidence.write_text('Synthetic local fixture documenting anonymous access; no service query or answer.')
+
+    def test_context_binding_under_a_symlinked_ancestor_is_rejected(self):
+        self.fixture(packages=1); file, _, _ = self.add_context()
+        alias = self.root/'linked-context'; alias.symlink_to(file.parent, target_is_directory=True)
+        self.plan['packages'][0]['preparation_context']['file'] = str(alias/file.name)
+        with self.assertRaisesRegex(ValueError, 'regular absolute source'): self.init()
+        self.assertFalse(self.directory.exists())
+
+    def private_copy(self, source_kind):
+        """Use real native collection proofs and actual package compilation."""
+        self.fixture(packages=1); item = self.plan['packages'][0]
+        source_key = 'controller-context/official-doc.txt'
+        if source_kind == 'context':
+            file, evidence, context = self.add_context()
+            evidence.write_text('currency,amount\nEUR,42\n')
+            context['evidence'][0]['sha256'] = runs.digest(evidence); runs.write(file, context)
+            item['preparation_context']['sha256'] = runs.digest(file)
+        else:
+            source_key = 'task-design.json' if source_kind == 'role-json' else 'output-schema.json'
+            policy = runs.read(item['policy'])
+            policy['generated_materials']['ledger'] = {'file': 'materials/ledger.txt', 'format': 'txt', 'line_pattern': '.*'}
+            runs.write(item['policy'], policy)
+        self.init(); real_complete = self.complete
+        def copied(directory, role, settings, package):
+            real_complete(directory, role, settings, package)
+            if role != 'material_preparation': return
+            output = directory/'output'; original = directory/'input'/source_key
+            relative = 'materials/ledger.csv' if source_kind == 'context' else 'materials/ledger.txt'
+            material = output/'artifacts'/relative; material.write_bytes(original.read_bytes())
+            value = runs.read(output/'material-preparation.json')
+            value['materials'][0].update(file=relative, sha256=runs.digest(material), bytes=material.stat().st_size)
+            runs.write(output/'material-preparation.json', value); runs.write(output/'artifacts/material-preparation.json', value)
+        with patch.object(self, 'complete', side_effect=copied):
+            for _ in range(5): state = self.tick()
+        self.assertEqual(state['packages']['package-1']['phase'], 'held')
+        self.assertIn('renamed copy of private', state['packages']['package-1']['reason'])
+        self.assertEqual(list((self.queue/'inbox').iterdir()), [])
+        output = self.directory/'package-1/preparation/output'
+        proof = runs.read(output/'role-collection-proof.json')
+        self.assertTrue(proof['native_turn_completed'])
+        copied_hash = runs.read(output/'material-preparation.json')['materials'][0]['sha256']
+        self.assertEqual(proof['private_input_files'][source_key], copied_hash)
+
+    def test_private_context_csv_cannot_be_renamed_into_valid_execution_material(self):
+        self.private_copy('context')
+
+    def test_private_role_json_cannot_be_renamed_into_execution_material(self):
+        self.private_copy('role-json')
+
+    def test_private_schema_cannot_be_renamed_into_execution_material(self):
+        self.private_copy('schema')
+
+    def test_matching_ordinary_original_csv_is_not_classified_as_private_control(self):
+        self.fixture(packages=1)
+        packet = Path(self.plan['packages'][0]['design_input'])
+        original = packet/'business-original.csv'; original.write_text('currency,amount\nEUR,12.5\n')
+        self.init()
+        for _ in range(5): state = self.tick()
+        self.assertEqual(state['packages']['package-1']['phase'], 'submitted')
+        design = self.directory/'package-1/design/output'
+        proof = runs.read(design/'role-collection-proof.json')
+        self.assertIn('business-original.csv', proof['input_files'])
+        self.assertNotIn('business-original.csv', proof['private_input_files'])
+        job = next((self.queue/'inbox').iterdir()); config = runs.read(job/'handoff.json')['members'][0]['config']
+        self.assertEqual((Path(config['attachments'])/'ledger.csv').read_bytes(), original.read_bytes())
+
+    def test_explicit_approved_raw_registry_preserves_its_legitimate_material(self):
+        self.fixture(packages=1); file, evidence, context = self.add_context()
+        evidence.write_text('currency,amount\nEUR,12.5\n'); context['evidence'][0]['sha256'] = runs.digest(evidence)
+        runs.write(file, context); item = self.plan['packages'][0]
+        item['preparation_context']['sha256'] = runs.digest(file)
+        original = self.root/'approved-original/ledger.csv'; original.parent.mkdir(); original.write_bytes(evidence.read_bytes())
+        policy = runs.read(item['policy']); policy['generated_materials'] = {}
+        policy['materials'] = {'ledger': {'path': str(original), 'sha256': runs.digest(original), 'audience': 'execution', 'kind': 'raw_data'}}
+        runs.write(item['policy'], policy); self.init(); real_complete = self.complete
+        def approved(directory, role, settings, package):
+            real_complete(directory, role, settings, package)
+            if role != 'material_preparation': return
+            output = directory/'output'; value = runs.read(output/'material-preparation.json'); value['materials'] = []
+            runs.write(output/'material-preparation.json', value); runs.write(output/'artifacts/material-preparation.json', value)
+        with patch.object(self, 'complete', side_effect=approved):
+            for _ in range(5): state = self.tick()
+        self.assertEqual(state['packages']['package-1']['phase'], 'submitted')
+        job = next((self.queue/'inbox').iterdir()); config = runs.read(job/'handoff.json')['members'][0]['config']
+        self.assertEqual((Path(config['attachments'])/'ledger.csv').read_bytes(), original.read_bytes())
+
 
 if __name__ == '__main__': unittest.main()

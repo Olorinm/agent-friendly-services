@@ -4,7 +4,7 @@
 
 从用户要拿到的结果出发，写简短、自然的委托。必要原始材料、允许使用的资源与授权范围分别说明；不要把日志、Token、工具调用次数、测评证据格式或调度安排变成用户需求。完成条件逐项对应用户可见要求，允许不同实现，用实际服务响应与交付物判断；同期其他服务结果只用于发现疑点，不按多数判对错。
 
-同属子类不代表每个服务都适用每道题。逐个引用已有能力、地域、入口与免费适用资料，标记 `applicable`、`not_applicable` 或 `unknown`，不能靠类别名补全适用性。缺官方依据、授权、账号、材料或验收方法时保持 `draft` 或 `held`，说明缺口。不要为某家服务容易完成而反向改题。
+同属子类不代表每个服务都适用每道题。逐个引用已有能力、地域、入口与免费适用资料，在描述性 `applicability` 中说明适用、不适用或未知，不能靠类别名补全适用性。缺官方依据、授权、账号、材料或验收方法时整包保持 `held`，说明缺口；不另造状态值或题目字段。不要为某家服务容易完成而反向改题。
 
 默认可设计并明确标注合成数据；真实服务返回、服务状态、身份、账号、费用和独立媒体核验不能用合成内容代替。保留已提供的稳定任务 ID 和版本；修改用户目标、材料或完成要求时提出新版本，不覆盖旧定义。冻结日期与滚动业务日期分别记录。执行附件使用 `materials/<文件名>`，独立参考与判定办法另交准备者，不能混入执行附件。
 
@@ -12,11 +12,15 @@
 
 在工作目录写 `task-design.json`，只使用 JSON 数据，不要求后续角色运行生成代码：
 
+先读取本次输入的 `output-schema.json`。它与总控消费者使用同一份字段与类型定义；所有对象层级都禁止新增未列字段。下列说明不能替代该 schema。`blockers` 必须是字符串数组，不能写对象；`ready` 对应 `[]`，`held` 必须有至少一条具体原因。任务的 `version` 只放在 `tasks[]` 内，不另造同义字段。可选描述性元数据允许结构化 JSON，但不赋予派发权限。
+
 - `schema_version`: `1`；`role`: `task_design`；`status`: `ready` 或 `held`；`package_id`: 总控分配的包标识。
 - `tasks`: 数组，每项含 `id`、`version`、`description`（用户委托）、`inputs`（用户可见原始输入说明）、`expected_output`、`success`、`failure`、`material_ids`、`applicable_target_ids`。
 - `success`、`failure` 只写与可见委托对应、可依据实际响应核对的条件，不能隐藏新增用户要求；必要的需求来源、适用性理由可另附 `demand_sources` 和 `applicability`，引用本次已有资料。
 - `material_ids`: 引用总控已批准的素材 ID；需要准备的合成素材须由总控事先允许本次生成，按 `material_requirements` 逐项声明 `id`、`format`（`csv`、`json` 或 `txt`）、`description`、`synthetic: true`。不要输出服务查询结果或答案。
 - `applicable_target_ids`: 只能选本次总控允许的目标 ID；不新增服务、入口、账号、凭据、命令、路径、环境、预算或配置。适用性未知的目标不放进此列表，说明阻碍。
 - `blockers`: 整体未解决项数组；有必要缺口时 `status` 为 `held` 并写非空理由，缺失事实用 `null` 或 `unknown`，不能用零表示。
+
+必填字段类型：`schema_version` 是整数 `1`；`status`、`package_id` 是字符串；`tasks` 是对象数组。每题的 `id`、`version`、`description`、`inputs`、`expected_output`、`success`、`failure` 都是非空字符串；`material_ids`、`applicable_target_ids` 是不重复的字符串数组。没有可用任务的真实 `held` 可以输出 `tasks: []`，不能为填满字段编题。`material_requirements` 若存在是对象数组，`synthetic` 为布尔值 `true`。
 
 最终答复简述产出位置、任务范围和阻碍。JSON 的 `ready` 仅表示设计材料可交接，仍由总控机械检查、冻结和准入，不表示任何服务已通过测试。
