@@ -49,7 +49,25 @@ When only approved original material IDs are needed, the preparer is told to emi
 
 A collected preparation immediately releases its worker. Waiting for access never occupies a preparation slot. Original free-only qualification and exact reference holds remain binding; a model-written `ready` or descriptive reference cannot clear them. A target whose access is still running remains `waiting_access`; an actually ready target can proceed independently. The default `posthoc_audit` submits each slot as a standalone run, selects a physical idle/least-pending grader from the approved pool just before submission, and freezes that selection. Same task/round grouping remains in private dispatch metadata for later independent source/disagreement audit; no other grades enter a grader packet. Optional `comparison_barrier` retains the existing all-executions-first comparison behavior and its possible throughput delay.
 
-Approved execution lanes and their account/write locks are preserved. This first version rejects `execution_pool`; it does **not** solve serialization within one execution lane, automatically add containers or remove quota/account locks.
+Approved nonpooled execution lanes retain their original behavior and account/write locks. A controller can opt an explicitly anonymous read-only business target into a small execution pool:
+
+```json
+{
+  "config": "<full original-task qualification/template config object>",
+  "execution_pool_policy": {"mode": "readonly_anonymous", "max_active_per_target": 2},
+  "execution_pool": [
+    {"id": "lane-a", "config": "<full lane-a business config object>", "depends_on": ["lane-a-access-job"]},
+    {"id": "lane-b", "config": "<full lane-b business config object>", "depends_on": ["lane-b-access-job"]}
+  ]
+}
+```
+
+All three `config` placeholders above are controller-owned objects, not strings in the actual input. The route must document `auth: none`, and the template and each lane must explicitly declare `service_credentials.provided: false`. The mode declaration is the controller's approval of the task's read-only scope; the producer does not infer that scope from prose. Each lane preserves the task, monetary authorization, independent reference bytes, preflight, model, harness, effort, time/request guards and all template resource locks. It must use a distinct physical executor, its own completed access prerequisite, and the corresponding frozen environment/runtime. A lane's access proof cannot be transferred to another runtime; the original pipeline checks that binding again before execution. Actual baseline/source readiness remains the responsibility of each native access result and the runtime adapter; simply listing a lane does not provision or validate a container.
+
+Pool lanes must share the exact service/route `credential_scope` and `quota_endpoints`; this produces the same existing `route_cooldown` scope and does not multiply an anonymous IP quota. The existing binding requires `quota_resource_locks` to be a subset of that lane's `resource_locks`. For an approved anonymous read-only template without mutable account state, both can be empty: shared `credential_scope` still carries cooldowns, without serializing entire model sessions. The producer never removes a supplied account/write/resource lock. A shared lock may intentionally prevent parallel selection. Authenticated or write workloads must keep the existing single-lane path.
+
+Immediately before submission, under the same queue gate, the producer chooses an actually idle approved lane. Unstarted queued work reserves it too; a known unconfirmed stop keeps it occupied. Completed execution releases its lane while its independent grader may still run. At most the declared one or two pending/active executions may share that quota family; when every eligible lane is busy, the slot remains `waiting_runtime` and the preparation worker is already free. A known family cooldown holds all pool lanes. No runtime is created, credential replaced or limit bypassed. The chosen lane/access/runtime/environment and grader are recorded before submission; an already compiled/submitted slot is never reassigned. Pool mode uses `posthoc_audit`, retaining immediate standalone grading and later cross-source auditing. The original single-lane and explicit comparison-barrier paths are unchanged.
+
 
 ```sh
 python3 /new-release/scripts/registered_task_producer.py init /private/producer \

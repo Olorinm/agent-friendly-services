@@ -23,7 +23,7 @@ TERMINAL = {'submitted', 'held'}
 def libraries(base):
     global B
     base = Path(base).resolve(); sys.path.insert(0, str(base/'scripts'))
-    names = ('pipeline', 'task_queue', 'role_handoff', 'work_package', 'role_contract', 'preparation_context', 'admission')
+    names = ('pipeline', 'task_queue', 'role_handoff', 'work_package', 'role_contract', 'preparation_context', 'admission', 'route_cooldown')
     loaded = {name: importlib.import_module(name) for name in names}
     if any(Path(module.__file__).resolve().parent != base/'scripts' for module in loaded.values()):
         raise ValueError('Mixed base libraries; use a fresh process with the explicit base source root')
@@ -118,7 +118,7 @@ def init(directory, plan_path, base_source_root):
     if not graders or len(set(physical)) != len(physical): raise ValueError('Distinct preparation/grading physical runtimes required')
     for relative in ('scripts/pipeline.py', 'scripts/task_queue.py', 'scripts/role_handoff.py', 'scripts/work_package.py',
                      'scripts/role_contract.py', 'scripts/preparation_context.py', 'scripts/admission.py',
-                     'scripts/access_readiness.py', 'scripts/codex-service-trial.py', 'scripts/roles/material_preparation/AGENTS.md',
+                     'scripts/access_readiness.py', 'scripts/route_cooldown.py', 'scripts/codex-service-trial.py', 'scripts/roles/material_preparation/AGENTS.md',
                      'generated/catalog.json', 'data/pricing/litellm.json'):
         source(B.root/relative, hashes)
     directory = Path(directory).resolve()
@@ -138,6 +138,118 @@ def init(directory, plan_path, base_source_root):
     return directory
 
 
+def target_lanes(target):
+    """Return only controller-approved configurations; model output never selects lanes."""
+    pool = target.get('execution_pool')
+    if pool is None:
+        return [{'id': 'default', 'config': target['config'], 'depends_on': target.get('depends_on', [])}]
+    if not isinstance(pool, list) or not pool:
+        raise ValueError('Execution pool must contain approved lane objects')
+    return pool
+
+
+def validate_pool(target):
+    if 'execution_pool' not in target:
+        return
+    p = B.work_package; q = B.task_queue; base = target['config']
+    policy = target.get('execution_pool_policy', {})
+    p.keys(policy, ('mode', 'max_active_per_target'), ('mode', 'max_active_per_target'))
+    if (policy['mode'] != 'readonly_anonymous' or type(policy['max_active_per_target']) is not int
+            or not 1 <= policy['max_active_per_target'] <= 2):
+        raise ValueError('Execution pools require explicit readonly_anonymous scope and a maximum of one or two active lanes')
+    route = B.pipeline.module('pool_route', 'codex-service-trial.py').select_route(
+        B.pipeline.read(B.pipeline.ROOT/'generated/catalog.json'), base['service'], base['route'])
+    if route.get('auth', {}).get('value') != 'none' or base.get('service_credentials', {}).get('provided') is not False:
+        raise ValueError('Execution pools cannot use account credentials or undocumented anonymous access')
+    scope = base['execution'].get('credential_scope')
+    if not isinstance(scope, str) or not scope.strip():
+        raise ValueError('Anonymous pool requires one explicit shared quota credential_scope')
+    expected = q.cooldowns.binding(base, route)
+    seen_ids = set(); seen_runtime = set(); seen_access = set()
+    fixed = ('model', 'reasoning_effort', 'harness', 'seconds', 'max_model_requests', 'closure_fraction', 'deadline_epoch')
+    for lane in target_lanes(target):
+        p.keys(lane, ('id', 'config', 'depends_on'), ('id', 'config', 'depends_on'))
+        name = p.identity(lane['id']); cfg = lane['config']; execution = cfg['execution']
+        if name in seen_ids: raise ValueError('Duplicate execution lane ID')
+        seen_ids.add(name)
+        if (cfg.get('phase') != 'business' or cfg.get('service_credentials', {}).get('provided') is not False
+                or any(cfg.get(key) != base.get(key) for key in ('service', 'route', 'task_file', 'task', 'trial_protocol', 'resource_authorization', 'preflight'))
+                or any(execution.get(key) != base['execution'].get(key) for key in fixed)):
+            raise ValueError('Pool lane must preserve the approved task, anonymous scope and model/tool budgets')
+        if not set(base['execution'].get('resource_locks', [])).issubset(execution.get('resource_locks', [])):
+            raise ValueError('Execution pool cannot remove approved account/write/resource locks')
+        if q.cooldowns.binding(cfg, route) != expected:
+            raise ValueError('All pool lanes must share the exact service/route quota family and endpoints')
+        physical = q.runtime_identity(execution)
+        if physical in seen_runtime or cfg.get('depends_on') in seen_access:
+            raise ValueError('Every pool lane needs a distinct physical runtime and its own access prerequisite')
+        seen_runtime.add(physical); seen_access.add(cfg.get('depends_on'))
+        if (not isinstance(cfg.get('environment_id'), str) or not cfg['environment_id'].strip()
+                or not isinstance(cfg.get('depends_on'), str) or not Path(cfg['depends_on']).is_absolute()
+                or not isinstance(lane['depends_on'], list) or not lane['depends_on']
+                or any(not isinstance(value, str) or not value for value in lane['depends_on'])):
+            raise ValueError('Each pool lane needs its own frozen environment/access dependency')
+        if bool(cfg.get('reference')) != bool(base.get('reference')) or (cfg.get('reference') and B.pipeline.digest(cfg['reference']) != B.pipeline.digest(base['reference'])):
+            raise ValueError('Pool lanes cannot change the original independent reference or its hard holds')
+
+
+def execution_load(plan):
+    """Pending starts reserve a lane too; collected execution releases it before grading."""
+    q = B.task_queue; r = B.pipeline; directory = Path(plan['queue']); state = r.read(directory/'state.json')
+    handoffs = {r.read(path)['id']: r.read(path) for path in (directory/'inbox').glob('*/handoff.json')}
+    handoffs.update({key: job['handoff'] for key, job in state.get('jobs', {}).items()})
+    occupied = set(); families = {}; locks = set()
+    for identity, handoff in handoffs.items():
+        for member in handoff['members']:
+            path = Path(member['directory']); observed = r.read(path/'state.json') if (path/'state.json').exists() else {}
+            phase = observed.get('phase')
+            if (phase in ('execution_collected', 'reviewed', 'recorded', 'preflight_blocked')
+                    or isinstance(phase, str) and phase.startswith('grading_')
+                    or phase == 'stopped' and observed.get('stop_confirmed') is True):
+                continue
+            owner = state.get('jobs', {}).get(identity, {})
+            if (not observed and owner.get('phase') in ('blocked', 'preflight_blocked')
+                    and owner.get('prepared') is False):
+                continue  # Preparation never dispatched this member.
+            # A missing run state or unconfirmed stop is uncertainty, not an idle
+            # container, even when the queue labels the owner needs_attention.
+            cfg = member['config']; physical = q.runtime_identity(cfg['execution']); occupied.add(physical)
+            locks.update(cfg['execution'].get('resource_locks', []))
+            family = q.inputs(cfg)['quota_binding']['scope_id']; families[family] = families.get(family, 0)+1
+    return occupied, families, locks
+
+
+def lane_access(lane):
+    """Never transfer one lane's access result to another runtime/environment."""
+    cfg = lane['config']; r = B.pipeline; q = B.task_queue
+    if cfg['phase'] != 'business': return 'ready', None
+    from access_readiness import PROTOCOL, decision
+    access = Path(cfg['depends_on']); phase = r.read(access/'state.json')['phase'] if (access/'state.json').exists() else 'waiting'
+    if phase not in q.DONE | {'recorded'}: return 'pending', 'Access still pending'
+    ok, reason = decision(access, PROTOCOL)
+    if not ok: return 'held', reason
+    prior = r.read(access/'config.json')
+    if (any(prior.get(key) != cfg.get(key) for key in ('service', 'route', 'environment_id'))
+            or prior['execution']['runtime'] != cfg['execution']['runtime']
+            or q.runtime_identity(prior['execution']) != q.runtime_identity(cfg['execution'])):
+        return 'held', 'Access prerequisite belongs to another execution lane/environment'
+    return 'ready', None
+
+
+def choose_lane(target, candidates, plan):
+    occupied, families, locks = execution_load(plan)
+    if 'execution_pool' not in target: return candidates[0] if candidates else None
+    maximum = target['execution_pool_policy']['max_active_per_target']
+    for lane in candidates:
+        cfg = lane['config']; binding = B.task_queue.inputs(cfg)['quota_binding']
+        cooldown = B.task_queue.cooldowns.hold(B.pipeline.read(Path(plan['queue'])/'state.json'), binding, time.time())
+        if (cooldown is None and B.task_queue.runtime_identity(cfg['execution']) not in occupied
+                and families.get(binding['scope_id'], 0) < maximum
+                and not locks.intersection(cfg['execution'].get('resource_locks', []))):
+            return lane
+    return None
+
+
 def enqueue(directory, item_path):
     directory = Path(directory); r = B.pipeline; p = B.work_package
     with B.task_queue.lock(directory/'.lock', blocking=True):
@@ -154,19 +266,21 @@ def enqueue(directory, item_path):
         for name in list(item.get('materials', {}))+list(item.get('generated_materials', {}))+item.get('material_ids', []): p.identity(name)
         if any(name not in item.get('materials', {}) and name not in item.get('generated_materials', {}) for name in item.get('material_ids', [])): raise ValueError('Unapproved original material ID')
         for target_id, target in item['targets'].items():
-            if target.get('execution_pool'): raise ValueError('Execution pools are not supported by this first version; use an explicit approved lane')
-            p.identity(target_id); cfg = target['config']
+            p.identity(target_id); validate_pool(target)
+            if 'execution_pool' in target and item.get('peer_policy', 'posthoc_audit') != 'posthoc_audit':
+                raise ValueError('Execution pools require posthoc_audit independent grading')
             from access_readiness import PROTOCOL
-            if cfg.get('trial_protocol') != PROTOCOL: raise ValueError('Registered producer requires the current access-readiness protocol')
-            if (cfg.get('task_file'), cfg.get('task')) != (item['task_file'], item['task_id']):
-                raise ValueError('Controller config must preserve the original registered task')
-            if B.task_queue.runtime_identity(cfg['execution']) in worker_physical | grader_physical:
-                raise ValueError('Executor cannot share a preparation or grader container')
-            for role in ('execution', 'grading'):
-                adapter = B.task_queue.adapter_config(cfg[role])
-                if adapter is not None: source(adapter, hashes)
-            if cfg.get('reference'): source(cfg['reference'], hashes)
-            if cfg.get('attachments'): raise ValueError('Use approved original material registry instead of config attachments')
+            for cfg in [target['config']]+[lane['config'] for lane in target_lanes(target)]:
+                if cfg.get('trial_protocol') != PROTOCOL: raise ValueError('Registered producer requires the current access-readiness protocol')
+                if (cfg.get('task_file'), cfg.get('task')) != (item['task_file'], item['task_id']):
+                    raise ValueError('Controller config must preserve the original registered task')
+                if B.task_queue.runtime_identity(cfg['execution']) in worker_physical | grader_physical:
+                    raise ValueError('Executor cannot share a preparation or grader container')
+                for role in ('execution', 'grading'):
+                    adapter = B.task_queue.adapter_config(cfg[role])
+                    if adapter is not None: source(adapter, hashes)
+                if cfg.get('reference'): source(cfg['reference'], hashes)
+                if cfg.get('attachments'): raise ValueError('Use approved original material registry instead of config attachments')
         for material in item.get('materials', {}).values():
             path = source(material['path'], hashes)
             if r.digest(path) != material['sha256'] or material.get('audience') not in ('execution', 'grading') or material.get('kind') != 'raw_data':
@@ -175,8 +289,10 @@ def enqueue(directory, item_path):
         for other in state['items']:
             prior = r.read(directory/'backlog'/other/'item.json')
             if (prior['task_sha256'] == item['task_sha256'] and set(prior['rounds']).intersection(rounds)
-                    and {(x['config']['service'], x['config']['route'], x['config'].get('environment_id')) for x in prior['targets'].values()}
-                    .intersection((x['config']['service'], x['config']['route'], x['config'].get('environment_id')) for x in item['targets'].values())):
+                    and {(lane['config']['service'], lane['config']['route'], lane['config'].get('environment_id'))
+                         for target in prior['targets'].values() for lane in target_lanes(target)}
+                    .intersection((lane['config']['service'], lane['config']['route'], lane['config'].get('environment_id'))
+                                  for target in item['targets'].values() for lane in target_lanes(target))):
                 raise ValueError('Duplicate existing task/route/round/condition in backlog')
         root = directory/'backlog'/identity
         write(root/'item.json', item); write(root/'sources.json', hashes)
@@ -308,20 +424,21 @@ def submit_ready(directory, identity, row, plan):
                     raise ValueError('Original mandatory reference missing; preparation prose cannot waive this hold')
                 B.admission.plan(cfg, current_task(item), original_reference if reference_bytes else None, reference_bytes, (r.ROOT/'scripts/roles/execution/AGENTS.md').read_bytes(), PROTOCOL)
             except ValueError as error: held.append({'target': key, 'reason': str(error)}); continue
-            if cfg['phase'] == 'business':
-                access = Path(cfg['depends_on']); phase = r.read(access/'state.json')['phase'] if (access/'state.json').exists() else 'waiting'
-                if phase not in q.DONE | {'recorded'}: pending.append(key); continue
-                ok, reason = decision(access, PROTOCOL)
-                if not ok: held.append({'target': key, 'reason': reason}); continue
-            ready_targets[key] = target
+            eligible = []
+            for lane in target_lanes(target):
+                status, reason = lane_access(lane)
+                if status == 'ready': eligible.append(lane)
+                elif status == 'pending': pending.append({'target': key, 'lane': lane['id'], 'reason': reason})
+                else: held.append({'target': key, 'lane': lane['id'], 'reason': reason})
+            if eligible: ready_targets[key] = eligible
         barrier = item.get('peer_policy', 'posthoc_audit') == 'comparison_barrier'
         row.update(waiting_targets=pending, held_targets=held, peer_policy=item.get('peer_policy', 'posthoc_audit'))
         if barrier and pending: row['phase'] = 'waiting_access'; return
         counts, active = grade_load(plan); graders = [r.read(p) for p in plan['grading_settings']]
-        submitted = row.setdefault('submitted_specs', [])
+        submitted = row.setdefault('submitted_specs', []); deferred = []
         for number in item['rounds']:
             assignments = {a['target_id']: a for a in payload['assignments'] if a['round'] == number}
-            chosen = [(key, target) for key, target in ready_targets.items() if assignments[key]['status'] == 'ready']
+            chosen = [(key, item['targets'][key]) for key in ready_targets if assignments[key]['status'] == 'ready']
             held.extend({'target': key, 'round': number, 'reason': assignments[key]['blockers']} for key in ready_targets if assignments[key]['status'] != 'ready')
             batches = [chosen] if barrier and chosen else [[value] for value in chosen]
             for batch in batches:
@@ -332,8 +449,18 @@ def submit_ready(directory, identity, row, plan):
                     for path, sha in compilation['files'].items():
                         if r.digest(path) != sha: raise ValueError('Frozen dispatch bytes changed')
                 else:
-                    members = []; deps = []; used = set(); files = {}
+                    selected = []
                     for key, target in batch:
+                        lane = choose_lane(target, ready_targets[key], plan)
+                        if lane is None:
+                            deferred.append({'target': key, 'round': number, 'reason': 'No idle approved execution lane, target cap reached or shared cooldown active'})
+                            continue
+                        selected.append((key, lane))
+                    if len(selected) != len(batch): continue
+                    members = []; deps = []; used = set(); files = {}; lane_bindings = []
+                    for key, target in selected:
+                        lane_bindings.append({'target': key, 'lane_id': target['id'], 'environment_id': target['config']['environment_id'],
+                                              'execution_runtime': target['config']['execution']['runtime'], 'access_run': target['config'].get('depends_on')})
                         options = [g for g in graders if q.runtime_identity(g) not in used]
                         if not options: raise ValueError('Grading pool smaller than selected comparison')
                         grader = min(options, key=lambda g: (q.runtime_identity(g) in active, counts.get(q.runtime_identity(g), 0), g['runtime']))
@@ -361,11 +488,19 @@ def submit_ready(directory, identity, row, plan):
                     if len(members)>1: spec.update(directory=str(r.ROOT/'data/experiments/results'/dispatch_id), members=members)
                     else: spec.update(members[0])
                     file = root/'compiled'/(dispatch_id+'.spec.json'); write(file, spec); files[str(file)] = r.digest(file)
-                    compilation = {'spec': str(file), 'files': files, 'batch': {'task_sha256': item['task_sha256'], 'round': number, 'peer_policy': item.get('peer_policy', 'posthoc_audit'), 'targets': [key for key, _ in batch]}, 'source_kind': 'registered_task'}
+                    compilation = {'spec': str(file), 'files': files, 'batch': {'task_sha256': item['task_sha256'], 'round': number, 'peer_policy': item.get('peer_policy', 'posthoc_audit'), 'targets': [key for key, _ in batch]}, 'execution_lanes': lane_bindings, 'source_kind': 'registered_task'}
                     write(record, compilation)
                 ensure_submit(plan, Path(compilation['spec']))
                 if compilation['spec'] not in submitted: submitted.append(compilation['spec'])
-        row.update(phase='waiting_access' if pending else 'submitted' if submitted else 'held', submitted_jobs=len(submitted), held_targets=held)
+        if not barrier:
+            # Access still pending on an unused optional lane does not keep a fully
+            # submitted target alive; every remaining slot keeps its original ID.
+            unfinished = {key for key in item['targets'] if any(
+                str(root/'compiled'/(identity+'-'+key+'-r'+str(number)+'.spec.json')) not in submitted
+                for number in item['rounds'])}
+            pending = [value for value in pending if value['target'] in unfinished]
+        row.update(phase='waiting_runtime' if deferred else 'waiting_access' if pending else 'submitted' if submitted else 'held',
+                   submitted_jobs=len(submitted), waiting_targets=pending, waiting_execution=deferred, held_targets=held)
 
 
 def settle(job, row, reason):
@@ -420,7 +555,7 @@ def tick(directory, halt=False):
             r.write(directory/'state.json', state)
         if not halt:
             for identity, row in state['items'].items():
-                if row['phase'] in ('ready_to_submit', 'waiting_access'):
+                if row['phase'] in ('ready_to_submit', 'waiting_access', 'waiting_runtime'):
                     try: submit_ready(directory, identity, row, plan)
                     except Exception as error: row.update(phase='held', reason=str(error), preparation_collected=True)
                     r.write(directory/'state.json', state)

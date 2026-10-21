@@ -208,3 +208,124 @@ class RegisteredProducerTests(unittest.TestCase):
         self.assertEqual(state['items']['package-1']['phase'],'waiting_access')
         self.assertTrue((self.queue/'inbox/package-1-ready-api-r1/ready.json').exists())
         self.assertEqual(runs.read(self.queue/'inbox/package-1-ready-api-r1/handoff.json')['kind'],'run')
+
+    def fixture_execution_pool(self, rounds=(1,2,3), maximum=2):
+        self.fixture_registered(count=2)
+        path=self.entry_paths[0];item=runs.read(path);item['rounds']=list(rounds)
+        target=item['targets']['approved-api'];base=target['config'];base['phase']='business'
+        base['service_credentials']={'provided':False,'source':'none; approved anonymous read-only fixture'}
+        base['execution'].update(credential_scope='one-real-anonymous-ip-family',quota_endpoints=['https://example.com/'],quota_resource_locks=[],resource_locks=[])
+        adapter=self.root/'execution-pool-adapter.json'
+        runs.write(adapter,{'host':'fixture-pool-host','containers':{'lane-a':'pool-container-a','lane-b':'pool-container-b'}})
+        base['execution']['commands']={op:['python3',str(ROOT/'scripts/runners/opencode/adapter.py'),'--config',str(adapter),op,'{request}'] for op in ('start','status','collect','stop','preflight')}
+        catalog=runs.read(self.root/'generated/catalog.json');catalog['services'][0]['catalog']['routes'][0]['auth']={'value':'none'};runs.write(self.root/'generated/catalog.json',catalog)
+        lanes=[]
+        for name in ('a','b'):
+            cfg=deepcopy(base);cfg['execution']['runtime']='lane-'+name;cfg['environment_id']='pool-environment-'+name;access=self.root/('pool-access-'+name);cfg['depends_on']=str(access)
+            self.ready_lane_access(access,cfg)
+            lanes.append({'id':'lane-'+name,'config':cfg,'depends_on':['pool-access-'+name]})
+        target['config']=deepcopy(lanes[0]['config']);target['execution_pool']=lanes
+        target['execution_pool_policy']={'mode':'readonly_anonymous','max_active_per_target':maximum}
+        runs.write(path,item)
+        return path,item,adapter
+
+    def ready_lane_access(self,access,cfg):
+        prior=deepcopy(cfg);prior['phase']='access';prior.pop('depends_on',None);runs.write(access/'config.json',prior)
+        assessment={'status':'completed','outcome':{'service_execution':'completed'},'access_readiness':{
+            name:{'status':'ready','evidence':'Synthetic controller-bound access proof; no model or service query.'} for name in ('service_call','authorization','reusable_state','isolation')}}
+        runs.write(access/'grading/assessment.json',assessment)
+        runs.write(access/'state.json',{'phase':'reviewed','record_hashes':{'grading/assessment.json':runs.digest(access/'grading/assessment.json')}})
+
+    def pool_handoffs(self):
+        return [runs.read(p/'handoff.json') for p in sorted((self.queue/'inbox').glob('package-1-approved-api-r*'))]
+
+    def test_two_idle_lanes_frozen_before_submit_third_round_waits_then_collected_lane_reused(self):
+        self.fixture_execution_pool();self.init_registered();self.advance_registered();state=self.advance_registered()
+        self.assertEqual(state['items']['package-1']['phase'],'waiting_runtime')
+        first=self.pool_handoffs();self.assertEqual(len(first),2)
+        self.assertEqual({h['members'][0]['config']['execution']['runtime'] for h in first},{'lane-a','lane-b'})
+        self.assertTrue(all(h['kind']=='run' for h in first))
+        before={h['id']:deepcopy(h) for h in first}
+        completed=Path(first[0]['members'][0]['directory']);runs.write(completed/'state.json',{'phase':'execution_collected'})
+        state=self.advance_registered();self.assertEqual(state['items']['package-1']['phase'],'submitted')
+        after=self.pool_handoffs();self.assertEqual(len(after),3)
+        self.assertEqual({h['id']:h for h in after if h['id'] in before},before)
+        for h in after:
+            cfg=h['members'][0]['config'];prior=runs.read(Path(cfg['depends_on'])/'config.json')
+            self.assertEqual((cfg['environment_id'],cfg['execution']['runtime']),(prior['environment_id'],prior['execution']['runtime']))
+
+    def test_pool_requires_explicit_anonymous_readonly_policy(self):
+        path,item,_=self.fixture_execution_pool();item['targets']['approved-api']['execution_pool_policy']['mode']='account_write';runs.write(path,item)
+        with self.assertRaisesRegex(ValueError,'readonly_anonymous'):self.init_registered()
+
+    def test_pool_rejects_provided_account_or_unknown_catalog_auth(self):
+        path,item,_=self.fixture_execution_pool();item['targets']['approved-api']['config']['service_credentials']['provided']=True;runs.write(path,item)
+        with self.assertRaisesRegex(ValueError,'account credentials'):self.init_registered()
+
+    def test_pool_may_not_remove_template_account_or_write_locks(self):
+        path,item,_=self.fixture_execution_pool();item['targets']['approved-api']['config']['execution']['resource_locks']=['approved-account-lock'];runs.write(path,item)
+        with self.assertRaisesRegex(ValueError,'cannot remove'):self.init_registered()
+
+    def test_pool_lanes_cannot_multiply_family_quota_by_renaming_credential_scope(self):
+        path,item,_=self.fixture_execution_pool();item['targets']['approved-api']['execution_pool'][1]['config']['execution']['credential_scope']='invented-second-quota';runs.write(path,item)
+        with self.assertRaisesRegex(ValueError,'quota family'):self.init_registered()
+
+    def test_pool_rejects_duplicate_physical_runtime_even_with_new_logical_id(self):
+        path,item,adapter=self.fixture_execution_pool();cfg=runs.read(adapter);cfg['containers']['lane-b']='pool-container-a';runs.write(adapter,cfg)
+        with self.assertRaisesRegex(ValueError,'distinct physical'):self.init_registered()
+
+    def test_pool_each_lane_needs_its_own_access_prerequisite(self):
+        path,item,_=self.fixture_execution_pool();lanes=item['targets']['approved-api']['execution_pool'];lanes[1]['config']['depends_on']=lanes[0]['config']['depends_on'];runs.write(path,item)
+        with self.assertRaisesRegex(ValueError,'own access'):self.init_registered()
+
+    def test_ready_access_on_other_lane_is_not_transferred(self):
+        path,item,_=self.fixture_execution_pool(rounds=(1,));lane=item['targets']['approved-api']['execution_pool'][0];prior=runs.read(Path(lane['config']['depends_on'])/'config.json');prior['execution']['runtime']='lane-b';runs.write(Path(lane['config']['depends_on'])/'config.json',prior)
+        self.init_registered();self.advance_registered();state=self.advance_registered()
+        handoff=self.pool_handoffs()[0]
+        self.assertEqual(handoff['members'][0]['config']['execution']['runtime'],'lane-b')
+        self.assertTrue(any('another execution lane' in x['reason'] for x in state['items']['package-1']['held_targets']))
+
+    def test_pending_access_on_one_lane_does_not_block_other_ready_lane(self):
+        path,item,_=self.fixture_execution_pool(rounds=(1,));access=Path(item['targets']['approved-api']['execution_pool'][0]['config']['depends_on']);runs.write(access/'state.json',{'phase':'execution_running'})
+        self.init_registered();self.advance_registered();state=self.advance_registered()
+        self.assertEqual(self.pool_handoffs()[0]['members'][0]['config']['execution']['runtime'],'lane-b')
+        self.assertEqual(state['items']['package-1']['phase'],'submitted')
+
+    def test_max_active_one_defers_second_idle_lane_without_changing_its_quota(self):
+        self.fixture_execution_pool(rounds=(1,2),maximum=1);self.init_registered();self.advance_registered();state=self.advance_registered()
+        self.assertEqual(len(self.pool_handoffs()),1);self.assertEqual(state['items']['package-1']['phase'],'waiting_runtime')
+
+    def test_shared_cooldown_blocks_all_idle_lanes_and_remains_controller_owned(self):
+        path,item,_=self.fixture_execution_pool(rounds=(1,));self.init_registered()
+        cfg=item['targets']['approved-api']['config'];binding=queue.inputs(cfg)['quota_binding'];state=runs.read(self.queue/'state.json')
+        queue.cooldowns.register(state,{'observation_id':'shared-scope-fixture','scope_id':binding['scope_id'],'binding_sha256':binding['binding_sha256'],'kind':'quota','until':None,'confidence':'captured_transport_signal','source':{'sha256':'a'*64}})
+        runs.write(self.queue/'state.json',state)
+        self.advance_registered();state=self.advance_registered()
+        self.assertFalse(self.pool_handoffs());self.assertEqual(state['items']['package-1']['phase'],'waiting_runtime')
+        self.assertIn('shared-scope-fixture',runs.read(self.queue/'state.json')['route_cooldowns']['observations'])
+
+    def test_pool_lane_source_drift_blocks_new_prep_and_leaves_existing_bindings(self):
+        _,_,adapter=self.fixture_execution_pool();self.init_registered();cfg=runs.read(adapter);cfg['containers']['lane-a']='unapproved-container';runs.write(adapter,cfg)
+        state=self.advance_registered();self.assertEqual(state['phase'],'stopped');self.assertFalse(self.operations)
+
+    def test_pool_rejects_grader_or_preparation_container_as_executor(self):
+        path,item,adapter=self.fixture_execution_pool();settings=runs.read(self.registered_plan['preparation_settings'][0]);prep=queue.runtime_identity(settings);cfg=runs.read(adapter);cfg['host']=prep[0];cfg['containers']['lane-b']=prep[1];runs.write(adapter,cfg)
+        with self.assertRaisesRegex(ValueError,'share a preparation'):self.init_registered()
+
+    def test_duplicate_pool_slots_cannot_hide_behind_an_unused_template_environment(self):
+        _,item,_=self.fixture_execution_pool();other=deepcopy(item);other['id']='package-2'
+        other['targets']['approved-api']['config']['environment_id']='unused-template-environment'
+        runs.write(self.entry_paths[1],other)
+        with self.assertRaisesRegex(ValueError,'Duplicate existing task/route/round'):self.init_registered()
+
+    def test_missing_state_of_attention_owner_does_not_free_its_execution_lane(self):
+        self.fixture_execution_pool(rounds=(1,2));self.init_registered();self.advance_registered();self.advance_registered()
+        handoff=self.pool_handoffs()[0];state=runs.read(self.queue/'state.json');state['jobs'][handoff['id']]={'handoff':handoff,'phase':'needs_attention','prepared':True};runs.write(self.queue/'state.json',state)
+        occupied,_,_=producer.execution_load(self.registered_plan)
+        self.assertIn(queue.runtime_identity(handoff['members'][0]['config']['execution']),occupied)
+
+    def test_unconfirmed_execution_stop_keeps_lane_reserved(self):
+        self.fixture_execution_pool(rounds=(1,2));self.init_registered();self.advance_registered();self.advance_registered()
+        handoff=self.pool_handoffs()[0];path=Path(handoff['members'][0]['directory']);runs.write(path/'state.json',{'phase':'stopped','stop_confirmed':False})
+        occupied,_,_=producer.execution_load(self.registered_plan)
+        self.assertIn(queue.runtime_identity(handoff['members'][0]['config']['execution']),occupied)
