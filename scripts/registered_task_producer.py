@@ -17,7 +17,7 @@ import time
 
 B = None
 STOP = False
-TERMINAL = {'submitted', 'held'}
+TERMINAL = {'submitted', 'partial_submitted', 'held'}
 
 
 def libraries(base):
@@ -118,7 +118,8 @@ def init(directory, plan_path, base_source_root):
     if not graders or len(set(physical)) != len(physical): raise ValueError('Distinct preparation/grading physical runtimes required')
     for relative in ('scripts/pipeline.py', 'scripts/task_queue.py', 'scripts/role_handoff.py', 'scripts/work_package.py',
                      'scripts/role_contract.py', 'scripts/preparation_context.py', 'scripts/admission.py',
-                     'scripts/access_readiness.py', 'scripts/route_cooldown.py', 'scripts/codex-service-trial.py', 'scripts/roles/material_preparation/AGENTS.md',
+                     'scripts/access_readiness.py', 'scripts/route_cooldown.py', 'scripts/codex-service-trial.py',
+                     'scripts/runners/opencode/network_preflight.py', 'scripts/roles/material_preparation/AGENTS.md',
                      'generated/catalog.json', 'data/pricing/litellm.json'):
         source(B.root/relative, hashes)
     directory = Path(directory).resolve()
@@ -224,6 +225,7 @@ def lane_access(lane):
     cfg = lane['config']; r = B.pipeline; q = B.task_queue
     if cfg['phase'] != 'business': return 'ready', None
     from access_readiness import PROTOCOL, decision
+    if not cfg.get('depends_on'): return 'held', 'Business preparation needs an explicit access prerequisite'
     access = Path(cfg['depends_on']); phase = r.read(access/'state.json')['phase'] if (access/'state.json').exists() else 'waiting'
     if phase not in q.DONE | {'recorded'}: return 'pending', 'Access still pending'
     ok, reason = decision(access, PROTOCOL)
@@ -234,6 +236,55 @@ def lane_access(lane):
             or q.runtime_identity(prior['execution']) != q.runtime_identity(cfg['execution'])):
         return 'held', 'Access prerequisite belongs to another execution lane/environment'
     return 'ready', None
+
+
+def preparation_dependencies(directory, state, item):
+    """Read existing access proofs before spending a preparation model session."""
+    r = B.pipeline; q = B.task_queue; ready = []; pending = []; held = []
+    queue_dir = Path(state['frozen_plan']['queue'])
+    queued_runs = {member['directory'] for path in (queue_dir/'inbox').glob('*/handoff.json')
+                   if (path.parent/'ready.json').exists() for member in r.read(path)['members']}
+    for key, target in item['targets'].items():
+        eligible = False; waiting = []; blocked = []
+        for lane in target_lanes(target):
+            status, reason = lane_access(lane)
+            cfg = lane['config']
+            if status == 'pending':
+                # A native access preparer may have held before any queue/run
+                # existed. Match its exact declared run and execution scope;
+                # another service, lane or environment cannot hold this one.
+                for identity, owner in state['items'].items():
+                    if owner['phase'] != 'held' and not owner.get('held_targets'): continue
+                    prior = r.read(directory/'backlog'/identity/'item.json')
+                    for name, candidate in prior['targets'].items():
+                        access_cfg = candidate['config']
+                        paths = {str(r.ROOT/'data/experiments/results'/(identity+'-'+name+'-r'+str(n))): n for n in prior['rounds']}
+                        number = paths.get(cfg.get('depends_on'))
+                        matches = [detail for detail in owner.get('held_targets', []) if detail.get('target') == name
+                                   and detail.get('round', number) == number]
+                        queued = cfg.get('depends_on') in queued_runs
+                        if (access_cfg.get('phase') == 'access' and number is not None and not queued
+                                and (owner['phase'] == 'held' or matches)
+                                and all(access_cfg.get(k) == cfg.get(k) for k in ('service', 'route', 'environment_id'))
+                                and q.runtime_identity(access_cfg['execution']) == q.runtime_identity(cfg['execution'])):
+                            status = 'held'; reason = {'access_item': identity, 'reason': matches or owner.get('reason', 'Access preparation held')}
+            detail = {'target': key, 'lane': lane['id'], 'reason': reason}
+            if status == 'ready': eligible = True
+            elif status == 'pending': waiting.append(detail)
+            else: blocked.append(detail)
+        if eligible: ready.append(key)
+        else: pending.extend(waiting); held.extend(blocked)
+    return ready, pending, held
+
+
+def preparation_item(root, item):
+    """The native input fixes the selected subset; never prune collected output."""
+    boundary = B.pipeline.read(role_job(root)/'input/preparation-boundary.json')
+    selected = list(boundary['targets'])
+    if not selected or not set(selected).issubset(item['targets']):
+        raise ValueError('Frozen preparation targets differ from the registered item')
+    value = deepcopy(item); value['targets'] = {key: value['targets'][key] for key in selected}
+    return value
 
 
 def choose_lane(target, candidates, plan):
@@ -274,6 +325,13 @@ def enqueue(directory, item_path):
                 if cfg.get('trial_protocol') != PROTOCOL: raise ValueError('Registered producer requires the current access-readiness protocol')
                 if (cfg.get('task_file'), cfg.get('task')) != (item['task_file'], item['task_id']):
                     raise ValueError('Controller config must preserve the original registered task')
+                if not cfg.get('preflight'):
+                    raise ValueError('Registered controller config needs an explicit bounded preflight plan')
+                r.module('registered_network_preflight', 'runners/opencode/network_preflight.py').validate(cfg['preflight'])
+                command = cfg['execution']['commands'].get('preflight')
+                if (not isinstance(command, list) or not command or any(not isinstance(arg, str) for arg in command)
+                        or not any('{request}' in arg for arg in command)):
+                    raise ValueError('Registered preflight plan requires an execution adapter preflight command')
                 if B.task_queue.runtime_identity(cfg['execution']) in worker_physical | grader_physical:
                     raise ValueError('Executor cannot share a preparation or grader container')
                 for role in ('execution', 'grading'):
@@ -318,7 +376,9 @@ def verify(directory, state):
     return state['frozen_plan']
 
 
-def packet(root, item):
+def packet(root, item, selected=None):
+    if selected is not None:
+        item = deepcopy(item); item['targets'] = {key: item['targets'][key] for key in selected}
     r = B.pipeline; task = current_task(item); inputs = root/'preparation-input'; inputs.mkdir(mode=0o700)
     (inputs/'AGENTS.md').write_bytes((B.role_handoff.HERE/'roles/material_preparation/AGENTS.md').read_bytes())
     projection = {'schema_version': 1, 'source_kind': 'registered_task', 'role': 'registered_task', 'package_id': item['id'],
@@ -344,6 +404,7 @@ def prepared(root, item):
     r = B.pipeline; w = B.work_package; output = role_job(root)/'output'
     binding = {'directory': str(output), 'receipt_sha256': r.digest(output/'receipt.json'), 'proof_sha256': r.digest(output/'role-collection-proof.json')}
     w.collection({'preparer_collection': binding}, result_path=output/'material-preparation.json')
+    item = preparation_item(root, item)
     payload = r.read(output/'material-preparation.json'); B.role_contract.validate('material_preparation', payload); w.status(payload)
     if payload.get('role') != 'material_preparation' or payload['package_id'] != item['id'] or payload['designer_sha256'] != r.digest(root/'preparation-input/task-design.json'):
         raise ValueError('Native preparer did not bind registered-task projection')
@@ -411,6 +472,7 @@ def ensure_submit(plan, spec):
 
 def submit_ready(directory, identity, row, plan):
     r = B.pipeline; q = B.task_queue; root = directory/'backlog'/identity; item = r.read(root/'item.json'); payload, materials, references, proof = prepared(root, item)
+    item = preparation_item(root, item)
     if payload['status'] == 'held': row.update(phase='held', reason=payload['blockers']); return
     with q.lock(Path(plan['queue'])/'.gate.lock', blocking=True):
         if time.time() >= plan['deadline_epoch'] or q.storage_hold(Path(plan['queue']), r.read(Path(plan['queue'])/'policy.json')): return
@@ -512,7 +574,14 @@ def submit_ready(directory, identity, row, plan):
                 str(root/'compiled'/(identity+'-'+key+'-r'+str(number)+'.spec.json')) not in submitted
                 for number in item['rounds'])}
             pending = [value for value in pending if value['target'] in unfinished]
-        row.update(phase='waiting_runtime' if deferred else 'waiting_access' if pending else 'submitted' if submitted else 'held',
+        remaining = row.setdefault('remaining_targets', [])
+        for detail in held:
+            # A failed optional pool lane does not make an otherwise fully
+            # submitted target partial. Native assignment/target holds do.
+            if (detail.get('round') is not None or detail['target'] not in ready_targets) and detail not in remaining:
+                remaining.append(detail)
+        row.update(phase='waiting_runtime' if deferred else 'waiting_access' if pending else
+                   'partial_submitted' if submitted and row.get('remaining_targets') else 'submitted' if submitted else 'held',
                    submitted_jobs=len(submitted), waiting_targets=pending, waiting_execution=deferred, held_targets=held)
 
 
@@ -572,16 +641,33 @@ def tick(directory, halt=False):
                     try: submit_ready(directory, identity, row, plan)
                     except Exception as error: row.update(phase='held', reason=str(error), preparation_collected=True)
                     r.write(directory/'state.json', state)
-            for identity, row in state['items'].items():
-                if row['phase'] != 'waiting': continue
+            # Fresh access, including a new explicitly approved context version,
+            # precedes business backlog. Sorting is stable within each phase.
+            waiting = [(identity, row, r.read(directory/'backlog'/identity/'item.json'))
+                       for identity, row in state['items'].items() if row['phase'] in ('waiting', 'waiting_preparation_access')]
+            waiting.sort(key=lambda entry: any(lane['config'].get('phase') == 'business'
+                         for target in entry[2]['targets'].values() for lane in target_lanes(target)))
+            for identity, row, item in waiting:
+                try: selected, pending, held = preparation_dependencies(directory, state, item)
+                except Exception as error:
+                    row.update(phase='held', reason='Controller access prerequisite error: '+str(error)); continue
+                row['preparation_dependencies'] = {'ready_targets': selected, 'waiting_targets': pending, 'held_targets': held}
+                if not selected:
+                    row.update(phase='waiting_preparation_access' if pending else 'held',
+                               reason='Business preparation awaits validated access' if pending else 'Business preparation dependency held',
+                               remaining_targets=pending+held)
+                    continue
+                if row['phase'] == 'waiting_preparation_access': row['phase'] = 'waiting'
                 busy = {x.get('worker') for x in state['items'].values() if x['phase'] in ('preparing', 'attention')}
                 free = [n for n in range(2) if n not in busy]
                 if not free or q.storage_hold(Path(plan['queue']), r.read(Path(plan['queue'])/'policy.json')): continue
                 worker = free[0]; settings = r.read(plan['preparation_settings'][worker])
                 if time.time()+settings['seconds']+20 >= plan['deadline_epoch']: row.update(phase='held', reason='No complete preparation role window'); continue
-                root = directory/'backlog'/identity; row.update(phase='preparing', worker=worker); r.write(directory/'state.json', state)
+                root = directory/'backlog'/identity
+                row.update(phase='preparing', worker=worker, selected_preparation_targets=selected, remaining_targets=pending+held)
+                row.pop('reason', None); r.write(directory/'state.json', state)
                 try:
-                    inputs = packet(root, r.read(root/'item.json')); roles.prepare(role_job(root), 'material_preparation', inputs, plan['preparation_settings'][worker])
+                    inputs = packet(root, item, selected); roles.prepare(role_job(root), 'material_preparation', inputs, plan['preparation_settings'][worker])
                     result = advance_role(role_job(root), plan)
                     if result['phase'] in ('uncertain_start', 'starting', 'needs_attention'): settle(role_job(root), row, 'Uncertain preparation start')
                     elif result['phase'] in ('held', 'stopped'): row.update(phase='held', reason=result.get('reason'))

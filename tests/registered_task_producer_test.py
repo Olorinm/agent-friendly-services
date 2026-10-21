@@ -28,6 +28,7 @@ class RegisteredProducerTests(unittest.TestCase):
             cfg=deepcopy(self.config);cfg['trial_protocol']='afs-20261013'
             cfg['preflight']=[{'url':'https://example.com','method':'HEAD'}]
             cfg['execution']['max_model_requests']=10
+            cfg['execution']['commands']['preflight']=['fixture-execution-preflight','{request}']
             if waiting_access and index==0:
                 cfg.update(phase='business',depends_on=str(self.root/'missing-access'))
             task,_=runs.module('registered_fixture_task','codex-service-trial.py').select_task(self.root/'tasks.md','access')
@@ -53,6 +54,13 @@ class RegisteredProducerTests(unittest.TestCase):
             p=Path(directory)/'output/material-preparation.json';value=runs.read(p)
             boundary=runs.read(Path(directory)/'input/preparation-boundary.json')
             value['assignments']=[{'task_id':'access','target_id':target,'round':number,'status':'ready','blockers':[]} for target in boundary['targets'] for number in boundary['rounds']]
+            if package in getattr(self,'held_preparations',set()):
+                value.update(status='held',blockers=['Independent prerequisite evidence is missing'])
+                for assignment in value['assignments']:
+                    assignment.update(status='held',blockers=['Independent prerequisite evidence is missing'])
+            for assignment in value['assignments']:
+                if assignment['target_id'] in getattr(self,'held_assignments',{}).get(package,set()):
+                    assignment.update(status='held',blockers=['This target lacks independent authorization evidence'])
             if getattr(self,'original_mode',None)=='empty':value['materials']=[]
             if getattr(self,'original_mode',None)=='changed':
                 material=Path(directory)/'output/artifacts/materials/ledger.csv';material.write_text('currency,amount\nEUR,99\n');value['materials'][0].update(sha256=runs.digest(material),bytes=material.stat().st_size)
@@ -82,13 +90,90 @@ class RegisteredProducerTests(unittest.TestCase):
         self.assertEqual(starts,len([x for x in self.operations if x[2]=='start']))
         self.assertEqual(len(list((self.queue/'inbox').glob('*/ready.json'))),2)
 
-    def test_collected_package_waiting_access_releases_worker_and_other_targets_submit(self):
+    def test_pending_business_does_not_spend_preparation_worker_and_access_keeps_progressing(self):
         self.fixture_registered(count=3,waiting_access=True);self.init_registered()
         self.advance_registered();state=self.advance_registered()
-        self.assertEqual(state['items']['package-1']['phase'],'waiting_access')
-        self.assertEqual(state['items']['package-3']['phase'],'preparing')
-        self.assertTrue(state['items']['package-1']['worker_released'])
+        self.assertEqual(state['items']['package-1']['phase'],'waiting_preparation_access')
+        self.assertEqual(state['items']['package-3']['phase'],'submitted')
+        self.assertFalse(any(x[0]=='package-1' for x in self.operations))
+        self.assertFalse(producer.role_job(self.registered_dir/'backlog/package-1').exists())
         self.assertEqual(state['items']['package-2']['phase'],'submitted')
+
+    def test_waiting_business_automatically_prepares_after_its_exact_access_becomes_ready(self):
+        self.fixture_registered(count=2,waiting_access=True);self.init_registered();self.advance_registered()
+        cfg=runs.read(self.entry_paths[0])['targets']['approved-api']['config']
+        self.ready_lane_access(Path(cfg['depends_on']),cfg)
+        self.advance_registered();state=self.advance_registered()
+        self.assertEqual(state['items']['package-1']['phase'],'submitted')
+        self.assertEqual(self.operations.count(('package-1','material_preparation','start')),1)
+
+    def test_validated_but_not_ready_access_holds_business_without_a_preparation_call(self):
+        self.fixture_registered(count=2,waiting_access=True)
+        cfg=runs.read(self.entry_paths[0])['targets']['approved-api']['config'];access=Path(cfg['depends_on'])
+        self.ready_lane_access(access,cfg);review=runs.read(access/'grading/assessment.json')
+        review['access_readiness']['authorization']['status']='unknown';runs.write(access/'grading/assessment.json',review)
+        status=runs.read(access/'state.json');status['record_hashes']['grading/assessment.json']=runs.digest(access/'grading/assessment.json');runs.write(access/'state.json',status)
+        self.init_registered();state=self.advance_registered()
+        self.assertEqual(state['items']['package-1']['phase'],'held')
+        self.assertIn('authorization',state['items']['package-1']['preparation_dependencies']['held_targets'][0]['reason'])
+        self.assertFalse(any(x[0]=='package-1' for x in self.operations))
+
+    def test_access_preparation_held_before_queue_run_also_holds_its_exact_business_dependency(self):
+        self.fixture_registered(count=2);self.held_preparations={'package-1'}
+        source=runs.read(self.entry_paths[0]);item=runs.read(self.entry_paths[1]);cfg=item['targets']['approved-api']['config']
+        cfg.update(phase='business',environment_id=source['targets']['approved-api']['config']['environment_id'],
+                   depends_on=str(self.root/'data/experiments/results/package-1-approved-api-r1'))
+        item['rounds']=[2];runs.write(self.entry_paths[1],item)
+        self.init_registered();self.advance_registered();state=self.advance_registered()
+        self.assertEqual(state['items']['package-2']['phase'],'held')
+        detail=state['items']['package-2']['preparation_dependencies']['held_targets'][0]
+        self.assertEqual(detail['reason']['access_item'],'package-1')
+        self.assertFalse(any(x[0]=='package-2' for x in self.operations))
+
+    def test_partial_access_assignment_hold_does_not_hide_behind_submitted_sibling(self):
+        self.fixture_registered(count=3);self.held_assignments={'package-1':{'held-api'}}
+        access=runs.read(self.entry_paths[0]);other=deepcopy(access['targets']['approved-api']['config']);other['environment_id']='other-access-condition'
+        access['targets']['held-api']={'config':other};runs.write(self.entry_paths[0],access)
+        for path,name in [(self.entry_paths[1],'approved-api'),(self.entry_paths[2],'held-api')]:
+            item=runs.read(path);cfg=item['targets']['approved-api']['config'];cfg.update(
+                phase='business',environment_id=access['targets'][name]['config']['environment_id'],
+                depends_on=str(self.root/'data/experiments/results'/('package-1-'+name+'-r1')))
+            item['rounds']=[2];runs.write(path,item)
+        self.init_registered();self.advance_registered();state=self.advance_registered()
+        self.assertEqual(state['items']['package-1']['phase'],'partial_submitted')
+        self.assertEqual(state['items']['package-1']['remaining_targets'][0]['target'],'held-api')
+        self.assertEqual(state['items']['package-2']['phase'],'waiting_preparation_access')
+        self.assertEqual(state['items']['package-3']['phase'],'held')
+        self.assertTrue((self.queue/'inbox/package-1-approved-api-r1/ready.json').exists())
+        self.assertFalse(any(x[0] in ('package-2','package-3') for x in self.operations))
+
+    def test_new_access_has_priority_over_earlier_business_with_ready_access(self):
+        self.fixture_registered(count=3,waiting_access=True)
+        cfg=runs.read(self.entry_paths[0])['targets']['approved-api']['config'];self.ready_lane_access(Path(cfg['depends_on']),cfg)
+        self.init_registered();state=self.advance_registered()
+        self.assertEqual([p for p,role,op in self.operations if op=='start'],['package-2','package-3'])
+        self.assertEqual(state['items']['package-1']['phase'],'waiting')
+
+    def test_missing_preflight_is_rejected_at_intake_before_any_model(self):
+        self.fixture_registered(count=2);item=runs.read(self.entry_paths[0]);item['targets']['approved-api']['config'].pop('preflight')
+        runs.write(self.entry_paths[0],item)
+        with self.assertRaisesRegex(ValueError,'bounded preflight'):self.init_registered()
+        self.assertFalse(self.operations)
+
+    def test_invalid_preflight_or_missing_execution_command_is_rejected_before_any_model(self):
+        for mutation in ('unsafe-url','method','statuses','command','missing-request'):
+            with self.subTest(mutation=mutation):
+                # A new fixture is required because init seals the queue owner.
+                self.setUp()
+                self.fixture_registered(count=2);item=runs.read(self.entry_paths[0]);cfg=item['targets']['approved-api']['config']
+                if mutation=='unsafe-url':cfg['preflight'][0]['url']='http://example.com'
+                elif mutation=='method':cfg['preflight'][0]['method']='POST'
+                elif mutation=='statuses':cfg['preflight'][0]['accepted_statuses']=[True]
+                elif mutation=='command':cfg['execution']['commands'].pop('preflight')
+                else:cfg['execution']['commands']['preflight']=['fixture-preflight-without-request']
+                runs.write(self.entry_paths[0],item)
+                with self.assertRaisesRegex(ValueError,'[Pp]reflight'):self.init_registered()
+                self.assertFalse(self.operations)
 
     def test_missing_or_unknown_original_free_qualification_cannot_be_repaired_by_ready_prose(self):
         self.fixture_registered(count=2)
@@ -205,9 +290,22 @@ class RegisteredProducerTests(unittest.TestCase):
         item['targets']['ready-api']={'config':cfg};runs.write(path,item)
         catalog=runs.read(self.root/'generated/catalog.json');catalog['services'].append({'id':'fixture-a','catalog':{'routes':[{'id':'api','entry_url':'https://example.com'}]}});runs.write(self.root/'generated/catalog.json',catalog)
         self.init_registered();self.advance_registered();state=self.advance_registered()
-        self.assertEqual(state['items']['package-1']['phase'],'waiting_access')
+        self.assertEqual(state['items']['package-1']['phase'],'partial_submitted')
+        self.assertEqual(state['items']['package-1']['selected_preparation_targets'],['ready-api'])
+        self.assertEqual(state['items']['package-1']['remaining_targets'][0]['target'],'approved-api')
+        packet=self.registered_dir/'backlog/package-1/preparation-input'
+        self.assertEqual(set(runs.read(packet/'preparation-boundary.json')['targets']),{'ready-api'})
+        projection=runs.read(packet/'task-design.json')
+        self.assertEqual(projection['tasks'][0]['applicable_target_ids'],['ready-api'])
         self.assertTrue((self.queue/'inbox/package-1-ready-api-r1/ready.json').exists())
         self.assertEqual(runs.read(self.queue/'inbox/package-1-ready-api-r1/handoff.json')['kind'],'run')
+        starts=len([x for x in self.operations if x[2]=='start'])
+        cfg=runs.read(path)['targets']['approved-api']['config'];self.ready_lane_access(Path(cfg['depends_on']),cfg)
+        state=self.advance_registered();self.assertEqual(state['items']['package-1']['phase'],'partial_submitted')
+        self.assertEqual(starts,len([x for x in self.operations if x[2]=='start']))
+        self.assertFalse((self.queue/'inbox/package-1-approved-api-r1').exists())
+        state=self.advance_registered(halt=True)
+        self.assertEqual(state['items']['package-1']['phase'],'partial_submitted')
 
     def fixture_execution_pool(self, rounds=(1,2,3), maximum=2):
         self.fixture_registered(count=2)
