@@ -373,6 +373,32 @@ class RoleProducerTests(unittest.TestCase):
         self.assertEqual([p.name for p in attached.iterdir()], ['ledger.csv'])
         self.assertFalse((attached/'controller-context.json').exists())
 
+    def test_preparation_packet_includes_real_public_runtime_limits_without_private_environment(self):
+        self.fixture(packages=1)
+        item = self.plan['packages'][0]; policy = runs.read(item['policy'])
+        config = policy['targets']['approved-api']['config']
+        config['execution'].update(seconds=900, max_model_requests=60, closure_fraction=0.85,
+                                   deadline_epoch=self.deadline)
+        config['environment'] = 'NEVER-COPY-PRIVATE-ENVIRONMENT'
+        config['execution']['internal_debug'] = {'service_key': 'NEVER-COPY-RUNTIME-SECRET'}
+        runs.write(item['policy'], policy)
+        self.init(); self.tick(); self.tick()
+        packet = self.directory/'package-1/preparation/input'
+        target = runs.read(packet/'preparation-boundary.json')['targets']['approved-api']
+        self.assertEqual(target['execution_limits'], {'seconds': 900, 'max_model_requests': 60,
+            'closure_fraction': 0.85, 'deadline_epoch': config['execution']['deadline_epoch']})
+        self.assertEqual(target['grading_limits']['seconds'], config['grading']['seconds'])
+        raw = b'\n'.join(p.read_bytes() for p in packet.rglob('*') if p.is_file())
+        self.assertNotIn(b'NEVER-COPY-PRIVATE-ENVIRONMENT', raw)
+        self.assertNotIn(b'NEVER-COPY-RUNTIME-SECRET', raw)
+
+    def test_public_runtime_projection_rejects_nonfinite_and_non_numeric_values(self):
+        import preparation_context
+        for value in (True, -1, float('nan'), float('inf'), 'NEVER-COPY-SECRET'):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, 'public runtime limit'):
+                    preparation_context.public_limits({'seconds': value})
+
     def test_selected_preparation_evidence_drift_halts_before_any_role_start(self):
         self.fixture(packages=1); _, evidence, _ = self.add_context(); self.init()
         evidence.write_text('changed after freeze')

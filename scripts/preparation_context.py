@@ -5,6 +5,7 @@ are copied. The controller still reviews evidence content and applicability;
 hashes establish bytes, not the truth of an assertion.
 """
 from copy import deepcopy
+import math
 from pathlib import Path
 import re
 
@@ -67,6 +68,20 @@ def fee(value):
     return {key: deepcopy(value[key]) for key in ('status', 'scope', 'source_urls', 'amount') if key in value}
 
 
+def public_limits(settings):
+    """Share numeric task prerequisites, never commands, paths or runner secrets."""
+    result = {}
+    for key in ('seconds', 'max_model_requests', 'deadline_epoch', 'closure_fraction'):
+        if key not in settings: continue
+        value = settings[key]
+        valid = (type(value) in (int, float) and math.isfinite(value) and value > 0
+                 and (key != 'closure_fraction' or value < 1)
+                 and (key not in ('seconds', 'max_model_requests') or type(value) is int))
+        if not valid: raise ValueError('Preparation public runtime limit is invalid: '+key)
+        result[key] = value
+    return result
+
+
 def target_facts(config, catalog):
     """Field projection only; unknown qualification is never upgraded to ready."""
     service, route = config['service'], config['route']
@@ -74,6 +89,9 @@ def target_facts(config, catalog):
     selected_route = parser.select_route(catalog, service, route)
     result = {'service': service, 'route': route,
               **{key: selected_route[key] for key in ('entry_url', 'docs') if key in selected_route}}
+    for role in ('execution', 'grading'):
+        limits = public_limits(config.get(role, {}))
+        if limits: result[role+'_limits'] = limits
     authorization = config.get('resource_authorization')
     if authorization is not None:
         if not isinstance(authorization, dict) or authorization.get('service') != service or authorization.get('route') != route:
