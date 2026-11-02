@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-10-26T11:58:07.658Z",
+  "checked_at": "2026-11-02T14:20:30.983Z",
   "total": 1605,
-  "ok": 1496,
+  "ok": 1494,
   "inconclusive": 79,
-  "broken": 30,
+  "broken": 32,
   "results": [
     {
       "url": "https://about.gitlab.com/pricing/",
@@ -331,8 +331,8 @@
     },
     {
       "url": "https://airtable.com/signup",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 403,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -586,8 +586,8 @@
     },
     {
       "url": "https://api.cloudflare.com/client/v4/",
-      "class": "inconclusive",
-      "status": 400,
+      "class": "broken",
+      "status": 404,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -616,8 +616,8 @@
     },
     {
       "url": "https://api.crossref.org/works",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -849,9 +849,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/api-docs/graph",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.sources.graph-docs.url",
@@ -860,9 +860,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/graph/v1",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.routes.public-graph-api.entry_url"
@@ -870,9 +870,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/graph/v1/swagger.json",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 429,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.sources.graph-schema.url"
@@ -1212,9 +1212,9 @@
     },
     {
       "url": "https://archive-api.open-meteo.com/v1/archive",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "open-meteo:catalog.routes.archive-api.entry_url"
@@ -2301,7 +2301,7 @@
       "url": "https://developer.squareup.com/docs/devtools/sandbox/overview",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "square:catalog.sources.testing.url"
@@ -2311,7 +2311,7 @@
       "url": "https://developer.squareup.com/reference/square/checkout-api/CreatePaymentLink",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "square:entrypoints.docs",
@@ -7278,8 +7278,8 @@
     },
     {
       "url": "https://finnhub.io/docs/api/quote",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -8087,9 +8087,9 @@
     },
     {
       "url": "https://github.com/mistralai/platform-docs-public",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mistral:entrypoints.openapi"
@@ -9996,8 +9996,8 @@
     },
     {
       "url": "https://mcp.dodopayments.com/sse",
-      "class": "inconclusive",
-      "status": 401,
+      "class": "broken",
+      "status": 404,
       "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
@@ -11519,8 +11519,8 @@
     {
       "url": "https://platform.minimax.io",
       "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "status": 307,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "minimax:entrypoints.signup",
@@ -13846,7 +13846,7 @@
       "url": "https://tracefour.com/",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "tracefour:homepage"
@@ -13856,7 +13856,7 @@
       "url": "https://tracefour.com/api-docs",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "tracefour:catalog.sources.docs.url",
@@ -13867,7 +13867,7 @@
       "url": "https://tracefour.com/api-docs/congress-trading-api",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "tracefour:catalog.sources.congress.url"
@@ -13877,7 +13877,7 @@
       "url": "https://tracefour.com/api-docs/mcp",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "tracefour:catalog.sources.mcp.url",
@@ -14699,7 +14699,7 @@
       "url": "https://www.bargo.ai/free-apis/congress",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "bargo-congress:homepage",
@@ -14723,7 +14723,7 @@
       "url": "https://www.bargo.ai/free-apis/congress/openapi.json",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "bargo-congress:catalog.sources.openapi.url"
@@ -15565,9 +15565,9 @@
     },
     {
       "url": "https://www.guerrillamail.com/",
-      "class": "broken",
-      "status": null,
-      "detail": "connect ECONNREFUSED 178.162.170.166:443",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "guerrilla-mail:homepage"
@@ -15575,9 +15575,9 @@
     },
     {
       "url": "https://www.guerrillamail.com/GuerrillaMailAPI.html",
-      "class": "broken",
-      "status": null,
-      "detail": "connect ECONNREFUSED 178.162.170.166:443",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "guerrilla-mail:catalog.sources.docs.url",
