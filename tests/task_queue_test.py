@@ -299,5 +299,19 @@ class QueueTests(unittest.TestCase):
         runs.write(path/'config.json',cfg)
         with self.assertRaisesRegex(ValueError,'independent Codex'):queue.ceiling(path,'execution')
 
+    def test_chatgpt_grader_accepts_only_explicit_supported_frozen_effort(self):
+        file = self.root/'codex.adapter.json';runs.write(file,{'billing_mode':'chatgpt'})
+        setting = copy.deepcopy(self.config['grading'])
+        setting.update(model='gpt-6.1-sol', billing_mode='chatgpt', harness={'name':'codex','version':'fixture','mode':'noninteractive'})
+        setting['commands']['start']=['python3',str(self.root/'scripts/runners/codex/adapter.py'),
+                                     '--config',str(file),'start','{request}']
+        for effort in ('medium','high'):
+            setting['reasoning_effort']=effort
+            self.assertTrue(queue.chatgpt_grader(setting))
+            self.assertEqual(setting['reasoning_effort'],effort)
+        for effort in ('low','unknown',None):
+            setting['reasoning_effort']=effort
+            with self.assertRaisesRegex(ValueError,'frozen effort'):queue.chatgpt_grader(setting)
+
 
 if __name__ == '__main__': unittest.main()
