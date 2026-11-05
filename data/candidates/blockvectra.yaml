@@ -1,0 +1,118 @@
+id: blockvectra
+name: BlockVectra
+category: financial-data
+homepage: https://blockvectra.com/
+summary: >-
+  Indexed blockchain data, including daily DEX token prices, through an API and hosted MCP server.
+  Data requests require an API key; documentation and discovery tools are keyless.
+submitted_by: vendor
+tags:
+  - crypto
+  - blockchain
+catalog:
+  version: 1
+  classifications:
+    - financial-data/prices
+  sources:
+    data-reference:
+      url: https://docs.blockvectra.com/md/en/api/data.md
+      checked_on: '2026-11-05'
+      kind: official_docs
+      notes: >-
+        Documents daily DEX token prices, API-key authentication, CU metering, dataset coverage and
+        freshness. A documented endpoint does not establish data for an arbitrary pair or date.
+    mcp-guide:
+      url: https://docs.blockvectra.com/md/en/guides/mcp-server.md
+      checked_on: '2026-11-05'
+      kind: official_docs
+    signup-guide:
+      url: https://docs.blockvectra.com/md/en/guides/programmatic-signup.md
+      checked_on: '2026-11-05'
+      kind: official_docs
+      notes: >-
+        Describes wallet-signature signup, API-key creation and an initial free CU allowance.
+        Published onboarding instructions were read; no account was created for this submission.
+  routes:
+    - id: indexed-data-api
+      interface: api
+      maintainer: official
+      entry_url: https://api.blockvectra.com/v1/data
+      docs: https://docs.blockvectra.com/md/en/api/data.md
+      evidence: [data-reference, signup-guide]
+      availability:
+        value: self_serve
+        evidence: [signup-guide]
+      personal_access:
+        value: documented
+        evidence: [signup-guide]
+      auth:
+        value: api_key
+        evidence: [data-reference]
+        notes: Send the key in the x-api-key header, not the URL.
+      capabilities:
+        prices.history:
+          value: documented
+          evidence: [data-reference]
+          notes: Daily DEX prices at /{chain}/dex/prices; not exchange-wide price coverage.
+      requirements:
+        platform_account:
+          value: required
+          evidence: [signup-guide]
+        prepayment:
+          value: not_required
+          evidence: [signup-guide]
+          notes: An initial free CU allowance is documented; exhausted credits can require funding.
+      notes: >-
+        Programmatic signup requires an Ethereum EOA wallet signature. Check the selected chain's
+        dataset coverage and freshness before choosing a pair and UTC date. Metering uses Compute
+        Units, not one uniform price per request; current weights and allowances are published by
+        GET /v1/plans. No numerical cost or task outcome was measured for this catalog entry.
+    - id: keyed-data-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://docs.blockvectra.com/mcp
+      docs: https://docs.blockvectra.com/md/en/guides/mcp-server.md
+      via: indexed-data-api
+      evidence: [mcp-guide, data-reference]
+      availability:
+        value: self_serve
+        evidence: [mcp-guide, signup-guide]
+      personal_access:
+        value: documented
+        evidence: [mcp-guide, signup-guide]
+      auth:
+        value: api_key
+        evidence: [mcp-guide]
+        notes: data_api_get requires an API key in the client's HTTP headers.
+      notes: >-
+        Streamable HTTP MCP accepts JSON-RPC over POST; browser GET is not a functional test.
+        data_api_get sends indexed Data API GET requests under the same coverage and billing rules.
+        This candidate does not establish successful price retrieval through MCP.
+    - id: keyless-docs-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://docs.blockvectra.com/mcp
+      docs: https://docs.blockvectra.com/md/en/guides/mcp-server.md
+      evidence: [mcp-guide]
+      availability:
+        value: self_serve
+        evidence: [mcp-guide]
+      personal_access:
+        value: documented
+        evidence: [mcp-guide]
+      auth:
+        value: none
+        evidence: [mcp-guide]
+      notes: >-
+        The same server exposes keyless documentation, chain discovery and pricing tools. These do
+        not grant keyless indexed prices. Keyless RPC separately follows each chain's public method
+        policy; connecting to MCP is not evidence of financial-data task completion.
+  notes:
+    - >-
+      Vendor-submitted candidate based on published documentation only. No benchmark, signup,
+      business API request, price-quality comparison or cost measurement was performed here.
+    - >-
+      Prices refer to on-chain DEX token data, not off-chain equity prices. Chain, token, quote,
+      observation date, coverage and freshness must match the task; an empty result does not
+      establish a complete historical series. No whole-history or wallet-balance accuracy claim
+      is made by this listing.
