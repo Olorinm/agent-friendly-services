@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-02T14:20:30.983Z",
+  "checked_at": "2026-11-09T14:47:04.392Z",
   "total": 1605,
-  "ok": 1494,
-  "inconclusive": 79,
+  "ok": 1496,
+  "inconclusive": 77,
   "broken": 32,
   "results": [
     {
@@ -849,9 +849,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/api-docs/graph",
-      "class": "inconclusive",
-      "status": 429,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.sources.graph-docs.url",
@@ -860,9 +860,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/graph/v1",
-      "class": "inconclusive",
-      "status": 429,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.routes.public-graph-api.entry_url"
@@ -870,9 +870,9 @@
     },
     {
       "url": "https://api.semanticscholar.org/graph/v1/swagger.json",
-      "class": "inconclusive",
-      "status": 429,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "semantic-scholar:catalog.sources.graph-schema.url"
@@ -1212,9 +1212,9 @@
     },
     {
       "url": "https://archive-api.open-meteo.com/v1/archive",
-      "class": "broken",
-      "status": 503,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "open-meteo:catalog.routes.archive-api.entry_url"
@@ -4595,9 +4595,9 @@
     },
     {
       "url": "https://docs.gitlab.com/api/openapi/openapi_interactive",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "gitlab:entrypoints.openapi"
@@ -7278,8 +7278,8 @@
     },
     {
       "url": "https://finnhub.io/docs/api/quote",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -9673,9 +9673,9 @@
     },
     {
       "url": "https://linear.app/docs/mcp",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "inconclusive",
+      "status": 406,
+      "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
         "linear:entrypoints.mcp_official"
@@ -10046,9 +10046,9 @@
     },
     {
       "url": "https://mcp.kiwi.com",
-      "class": "inconclusive",
-      "status": 405,
-      "method": "HEAD",
+      "class": "ok",
+      "status": 200,
+      "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
         "kiwi:catalog.routes.search-mcp.entry_url"
@@ -11968,7 +11968,7 @@
       "url": "https://razorpay.com/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "razorpay:homepage"
@@ -13814,7 +13814,7 @@
       "url": "https://temp-mail.org/en/api/",
       "class": "ok",
       "status": 200,
-      "method": "GET",
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "temp-mail:catalog.sources.docs.url",
