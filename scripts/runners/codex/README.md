@@ -1,7 +1,8 @@
-# Independent cloud Codex grading
+# Independent cloud Codex roles
 
-This adapter runs **Codex CLI 0.162.0 / `gpt-6.1-sol` / high** in a dedicated
-Docker grader. Execution can continue with OpenCode and DeepSeek: the two roles
+This adapter runs **Codex CLI 0.162.0 / `gpt-6.1-sol` / explicitly selected medium or high** in a dedicated
+Docker container. It accepts task-design, material-preparation and independent
+grading roles. Execution can continue with OpenCode and DeepSeek: the roles
 have separate model, harness, runtime and usage records. Changing the grader
 creates a new trial protocol; it does not rewrite historical assessments.
 
@@ -16,8 +17,15 @@ has resource limits, no published ports, host mounts or Docker socket.
 
 Use the same SSH or local transport as the OpenCode adapter. Select the ChatGPT
 login explicitly, following [Codex headless authentication](https://learn.chatgpt.com/docs/auth).
-The selected account must have access to Sol/high. This adapter refuses API-key
+The selected account must have access to Sol at the frozen reasoning effort. This adapter refuses API-key
 fallback. Never put the login file, connection settings or raw rollouts in Git.
+
+Design and preparation use separate fresh sessions with their own role inputs
+and captured `task-design.json` or `material-preparation.json`; those outputs are
+never interpreted as assessments. The producer reserves separate preparation
+runtimes from execution and grading. See [work packages](../../../docs/work-packages.md)
+for automatic collection verification and queue submission. Previous high-effort
+grading settings remain valid; selecting medium is an explicit new cohort.
 
 Example private adapter configuration (replace the placeholders):
 
