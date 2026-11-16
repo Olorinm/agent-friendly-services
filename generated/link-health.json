@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-09T14:47:04.392Z",
+  "checked_at": "2026-11-16T14:23:06.601Z",
   "total": 1605,
   "ok": 1496,
   "inconclusive": 77,
@@ -596,9 +596,9 @@
     },
     {
       "url": "https://api.cogdepot.com",
-      "class": "broken",
-      "status": 404,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "cog-depot:catalog.routes.marketplace-api.entry_url"
@@ -606,9 +606,9 @@
     },
     {
       "url": "https://api.cogdepot.com/a2a",
-      "class": "inconclusive",
-      "status": 405,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "cog-depot:catalog.routes.marketplace-a2a.entry_url"
@@ -616,8 +616,8 @@
     },
     {
       "url": "https://api.crossref.org/works",
-      "class": "ok",
-      "status": 200,
+      "class": "inconclusive",
+      "status": 429,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -4656,9 +4656,9 @@
     },
     {
       "url": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": 404,
+      "method": "GET",
       "accept": "application/json, text/event-stream",
       "sources": [
         "gitlab:entrypoints.mcp_official"
@@ -13814,7 +13814,7 @@
       "url": "https://temp-mail.org/en/api/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "temp-mail:catalog.sources.docs.url",
