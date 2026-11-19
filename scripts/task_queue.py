@@ -124,10 +124,10 @@ def adapter_config(settings):
 def chatgpt_grader(settings):
     if settings.get('billing_mode') != 'chatgpt': return False
     adapter = str((runs.ROOT/'scripts/runners/codex/adapter.py').resolve())
-    if (settings.get('model') != 'gpt-6.1-sol' or settings.get('reasoning_effort') != 'high'
+    if (settings.get('model') != 'gpt-6.1-sol' or settings.get('reasoning_effort') not in ('medium', 'high')
             or settings.get('harness', {}).get('name') != 'codex'
             or not any(str(Path(arg).resolve()) == adapter for arg in settings['commands']['start'] if not arg.startswith('-'))):
-        raise ValueError('ChatGPT billing requires the independent Codex Sol/high adapter')
+        raise ValueError('ChatGPT billing requires the independent Codex Sol medium/high adapter with frozen effort')
     config = runs.read(adapter_config(settings))
     if config.get('billing_mode') != 'chatgpt': raise ValueError('Adapter account billing differs from frozen role')
     return True

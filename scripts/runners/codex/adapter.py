@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pipeline start/status/collect/stop for isolated cloud Codex grading."""
+"""Pipeline operations for isolated Codex design, preparation and grading roles."""
 import argparse
 import hashlib
 import io
@@ -17,6 +17,14 @@ from runtime_status import query
 from assessment import normalize as normalize_assessment
 
 FILES = ('worker.py', 'normalize.py', 'artifact_capture.py', 'session_usage.py')
+ROLES = ('task_design', 'material_preparation', 'grading')
+EFFORTS = ('medium', 'high')
+
+
+def validate_request(request):
+    if (request.get('role') not in ROLES or request.get('model') != 'gpt-6.1-sol'
+            or request.get('reasoning_effort') not in EFFORTS):
+        raise ValueError('Codex requires an explicit design/preparation/grading role and GPT-6.1 Sol medium/high')
 
 # Controller-only preparation, before any uid 1000 worker can read the import.
 # Materialized input bytes are unchanged; imported owners/modes are not trusted.
@@ -109,11 +117,10 @@ def main():
     parser.add_argument('request', type=Path)
     args = parser.parse_args()
     config = load(args.config); request = json.loads(args.request.read_text())
-    if request['role'] != 'grading' or request['model'] != 'gpt-6.1-sol' or request['reasoning_effort'] != 'high':
-        raise ValueError('Codex adapter accepts only independent GPT-6.1 Sol/high grading')
+    validate_request(request)
     if config.get('billing_mode') != 'chatgpt': raise ValueError('Explicit ChatGPT account billing required')
     container = config['containers'][request['runtime']]
-    run = (request.get('handle') if args.operation != 'start' else None) or request['run_id']+'-grading'
+    run = (request.get('handle') if args.operation != 'start' else None) or request['run_id']+'-'+request['role']
     if not re.fullmatch(r'[A-Za-z0-9._-]+', run): raise ValueError('Invalid run name')
     remote = config['remote_root']+'/runs/'+run
     private = '/run/afs/'+run
@@ -152,7 +159,7 @@ def main():
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(tar.extractfile(member).read()); target.chmod(0o600)
         assessment = output/'assessment.json'
-        if assessment.is_file():
+        if request['role'] == 'grading' and assessment.is_file():
             (output/'assessment.raw.json').write_bytes(assessment.read_bytes())
             normalized, changes = normalize_assessment(json.loads(assessment.read_text()))
             if changes:
