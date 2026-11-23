@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-16T14:23:06.601Z",
+  "checked_at": "2026-11-23T16:56:56.524Z",
   "total": 1605,
-  "ok": 1496,
-  "inconclusive": 77,
+  "ok": 1500,
+  "inconclusive": 73,
   "broken": 32,
   "results": [
     {
@@ -616,8 +616,8 @@
     },
     {
       "url": "https://api.crossref.org/works",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -1122,9 +1122,9 @@
     },
     {
       "url": "https://app.fireworks.ai",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": null,
+      "detail": "Headers Overflow Error",
       "accept": "*/*",
       "sources": [
         "fireworks:entrypoints.signup",
@@ -4595,9 +4595,9 @@
     },
     {
       "url": "https://docs.gitlab.com/api/openapi/openapi_interactive",
-      "class": "broken",
-      "status": 404,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "gitlab:entrypoints.openapi"
@@ -4656,9 +4656,9 @@
     },
     {
       "url": "https://docs.gitlab.com/user/gitlab_duo/model_context_protocol/mcp_server",
-      "class": "broken",
-      "status": 404,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "application/json, text/event-stream",
       "sources": [
         "gitlab:entrypoints.mcp_official"
@@ -4838,7 +4838,7 @@
       "url": "https://docs.mail.tm/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.docs.url",
@@ -4849,7 +4849,7 @@
       "url": "https://docs.mail.tm/api/accounts",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.accounts.url"
@@ -4859,7 +4859,7 @@
       "url": "https://docs.mail.tm/api/messages",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.messages.url"
@@ -4869,7 +4869,7 @@
       "url": "https://docs.mail.tm/getting-started/authentication",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.authentication.url"
@@ -7278,8 +7278,8 @@
     },
     {
       "url": "https://finnhub.io/docs/api/quote",
-      "class": "inconclusive",
-      "status": 429,
+      "class": "ok",
+      "status": 200,
       "method": "GET",
       "accept": "*/*",
       "sources": [
@@ -7586,7 +7586,7 @@
       "url": "https://geocode.maps.co/docs/endpoints/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "geocode-maps-co:catalog.sources.endpoints.url"
@@ -7858,9 +7858,9 @@
     },
     {
       "url": "https://github.com/exa-labs/exa-mcp-server/blob/e9c3b0126a3373eb1aeaca162e84d0791ff4c7f7/src/tools/webFetch.ts",
-      "class": "ok",
-      "status": 200,
-      "method": "HEAD",
+      "class": "broken",
+      "status": 503,
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "exa:catalog.sources.mcp-web-fetch.url"
@@ -9811,7 +9811,7 @@
       "url": "https://mail.tm/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:homepage"
@@ -9821,7 +9821,7 @@
       "url": "https://mail.tm/en/faq/",
       "class": "ok",
       "status": 200,
-      "method": "HEAD",
+      "method": "GET",
       "accept": "*/*",
       "sources": [
         "mail-tm:catalog.sources.faq.url"
@@ -10992,9 +10992,9 @@
     },
     {
       "url": "https://openai.com",
-      "class": "inconclusive",
-      "status": 403,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "openai:homepage"
@@ -11656,9 +11656,9 @@
     },
     {
       "url": "https://platform.openai.com/signup",
-      "class": "inconclusive",
-      "status": 403,
-      "method": "GET",
+      "class": "ok",
+      "status": 200,
+      "method": "HEAD",
       "accept": "*/*",
       "sources": [
         "openai:entrypoints.signup",
