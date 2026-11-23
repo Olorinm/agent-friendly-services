@@ -1,0 +1,79 @@
+id: agent-qa
+name: agent-qa
+category: developer-tools
+homepage: https://vostride.com
+summary: >-
+  AI QA agent for plain-English web, Android and iOS tests, with persistent
+  memidex memory and self-improvement from validated run evidence.
+submitted_by: vendor
+tags: [testing, qa, web, android, ios, mcp]
+entrypoints:
+  docs: https://vostride.com/docs/agent-qa
+  agent_docs: https://vostride.com/docs/agent-qa/agent-quickstart
+  llms_txt: https://vostride.com/llms.txt
+  cli: https://vostride.com/docs/agent-qa/quickstart
+  mcp_docs: https://vostride.com/docs/agent-qa/mcp
+catalog:
+  version: 1
+  classifications: [developer-tools]
+  sources:
+    overview:
+      url: https://vostride.com/docs/agent-qa
+      checked_on: "2026-11-06"
+      kind: official_docs
+    quickstart:
+      url: https://vostride.com/docs/agent-qa/quickstart
+      checked_on: "2026-11-06"
+      kind: official_docs
+    mcp:
+      url: https://vostride.com/docs/agent-qa/mcp
+      checked_on: "2026-11-06"
+      kind: official_docs
+    learning:
+      url: https://vostride.com/docs/agent-qa/self-improvement
+      checked_on: "2026-11-06"
+      kind: official_docs
+    license-and-costs:
+      url: https://vostride.com/llms.txt
+      checked_on: "2026-11-06"
+      kind: official_docs
+      notes: No paid tier for FSL-permitted use; model inference and execution infrastructure are user supplied.
+  routes:
+    - id: local-cli
+      interface: cli
+      maintainer: official
+      entry_url: https://www.npmjs.com/package/agent-qa
+      docs: https://vostride.com/docs/agent-qa/quickstart
+      evidence: [quickstart]
+      availability:
+        value: self_serve
+        evidence: [quickstart]
+      notes: >-
+        Local npm installation requires Node.js 24 or newer, a configured model,
+        and browser or mobile execution infrastructure. Model access may use a
+        subscription, provider credentials or a compatible local endpoint.
+    - id: local-mcp
+      interface: mcp
+      maintainer: official
+      entry_url: https://www.npmjs.com/package/agent-qa
+      docs: https://vostride.com/docs/agent-qa/mcp
+      evidence: [mcp]
+      via: local-cli
+      availability:
+        value: self_serve
+        evidence: [mcp]
+      notes: >-
+        Runs in the user's project over stdio or loopback HTTP and shares local
+        configuration. Provides test authoring, execution, evidence and knowledge
+        tools. The hosted vostride documentation MCP only reads docs and does
+        not execute tests.
+  notes:
+    - >-
+      Documentation-backed candidate only; no installation, onboarding or task
+      execution was performed for this submission.
+    - >-
+      Classified under Developer Tools because the documented purpose is
+      application UI testing; no existing child category covers this scope.
+    - >-
+      FSL-1.1-ALv2 applies. Model inference and execution infrastructure may cost
+      money; no measured operating cost or performance result is claimed.
